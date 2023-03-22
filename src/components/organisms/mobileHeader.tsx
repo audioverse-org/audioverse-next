@@ -1,11 +1,5 @@
 import { useRouter } from 'next/router';
-import React, {
-	useCallback,
-	useContext,
-	useEffect,
-	useRef,
-	useState,
-} from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from '@components/molecules/button';
 import Mininav from '@components/molecules/mininav';
@@ -18,6 +12,7 @@ import MoreIcon from '../../../public/img/icons/icon-more.svg';
 import ButtonPlayback from '@components/molecules/buttonPlayback';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import styles from './mobileHeader.module.scss';
+import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
 
 const SUBNAV_HEIGHT = 32;
 const HEADER_TITLE_PADDING_TOP_DIFFERENCE = 8;
@@ -26,41 +21,6 @@ const COLLAPSING_HEIGHT =
 	SUBNAV_HEIGHT +
 	HEADER_TITLE_PADDING_TOP_DIFFERENCE +
 	HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE;
-
-function useTransitionProgress(scrollRef: React.RefObject<HTMLDivElement>) {
-	const [lastScrollTop, setLastScrollTop] = useState<number>(0);
-	const [headerSlideOffset, setHeaderSlideOffset] = useState<number>(0);
-	const [progress, setProgress] = useState<number>(0);
-
-	const listener = useCallback(() => {
-		if (isServerSide() || !scrollRef.current) return;
-
-		const scrollTop = scrollRef.current.scrollTop;
-		const isScrollingUp = scrollTop < lastScrollTop;
-
-		if (isScrollingUp && headerSlideOffset + COLLAPSING_HEIGHT < scrollTop) {
-			setHeaderSlideOffset(Math.max(lastScrollTop - COLLAPSING_HEIGHT, 0));
-		} else if (!isScrollingUp && headerSlideOffset > scrollTop) {
-			setHeaderSlideOffset(scrollTop);
-		}
-
-		const progress =
-			Math.max(Math.min(scrollTop - headerSlideOffset, COLLAPSING_HEIGHT), 0) /
-			COLLAPSING_HEIGHT;
-
-		setProgress(progress);
-		setLastScrollTop(scrollTop);
-	}, [headerSlideOffset, lastScrollTop, scrollRef]);
-
-	useEffect(() => {
-		if (isServerSide() || !scrollRef.current) return;
-		const el = scrollRef.current;
-		el.addEventListener('scroll', listener);
-		return () => el.removeEventListener('scroll', listener);
-	}, [listener, scrollRef]);
-
-	return progress;
-}
 
 export default function MobileHeader({
 	setShowingMenu,
@@ -76,7 +36,10 @@ export default function MobileHeader({
 	const playbackRecording = playbackContext.getRecording();
 	const headerRef = useRef<HTMLDivElement>(null);
 	const headerTitleRef = useRef<HTMLDivElement>(null);
-	const transitionProgress = useTransitionProgress(scrollRef);
+	const transitionProgress = useTransitionProgress(
+		scrollRef,
+		COLLAPSING_HEIGHT
+	);
 
 	useEffect(() => {
 		if (isServerSide() || !headerRef.current || !headerTitleRef.current) return;
