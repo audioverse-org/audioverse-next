@@ -14,8 +14,10 @@
 	margin-right: auto;
 	border-bottom: 0.5px solid rgba($ts-lightTone, 0.5);
 	letter-spacing: unset;
+
 	&.focused {
 		border-bottom-color: rgba($ts-dark, 0.5);
+
 		.icon {
 			color: $ts-red;
 		}
@@ -29,6 +31,10 @@
 	align-items: center;
 	padding-bottom: 8px;
 
+	svg {
+		flex: 0 0 auto;
+	}
+
 	input {
 		flex-grow: 1;
 		margin: 0;
@@ -39,6 +45,7 @@
 		outline: none;
 		appearance: none;
 		min-width: 0;
+
 		&,
 		&::placeholder {
 			font-family: $serif;
@@ -48,10 +55,12 @@
 			color: $ts-dark;
 			opacity: 1;
 		}
+
 		&::-webkit-search-cancel-button {
 			appearance: none;
 		}
 	}
+
 	a {
 		height: 24px;
 		cursor: pointer;
