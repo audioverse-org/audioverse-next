@@ -55,11 +55,11 @@ export default function MobileHeader({
 		}
 
 		const scrollTop = scrollRef.current.scrollTop;
-		const scrollingUp = scrollTop < lastScrollTop;
+		const isScrollingUp = scrollTop < lastScrollTop;
 
-		if (scrollingUp && headerSlideOffset + COLLAPSING_HEIGHT < scrollTop) {
+		if (isScrollingUp && headerSlideOffset + COLLAPSING_HEIGHT < scrollTop) {
 			setHeaderSlideOffset(Math.max(lastScrollTop - COLLAPSING_HEIGHT, 0));
-		} else if (!scrollingUp && headerSlideOffset > scrollTop) {
+		} else if (!isScrollingUp && headerSlideOffset > scrollTop) {
 			setHeaderSlideOffset(scrollTop);
 		}
 
