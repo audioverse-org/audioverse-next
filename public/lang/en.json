@@ -1963,6 +1963,12 @@
   "presentersFeed__title": {
     "string": "Sermons by {name}"
   },
+  "presentersListAll__all": {
+    "string": "All"
+  },
+  "presentersList__all": {
+    "string": "All"
+  },
   "presentersList__title": {
     "string": "All Presenters"
   },
@@ -2396,6 +2402,12 @@
   "sponsorsConferences__title": {
     "string": "Conferences by {sponsorName}"
   },
+  "sponsorsListAll__all": {
+    "string": "All"
+  },
+  "sponsorsList__all": {
+    "string": "All"
+  },
   "sponsorsList__title": {
     "string": "All Sponsors"
   },
@@ -2407,6 +2419,12 @@
   },
   "sponsors__title": {
     "string": "All Sponsors"
+  },
+  "storyAlbumList__emptyStateMessage": {
+    "string": "There are no story albums to show."
+  },
+  "storyAlbumList__emptyStateTitle": {
+    "string": "Nothing here!"
   },
   "storyAlbumList__heading": {
     "string": "All Stories"

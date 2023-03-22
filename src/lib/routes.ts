@@ -1,11 +1,19 @@
 import { Scalars } from './generated/graphql';
 
+// TODO: break file apart to improve bundling
+
+// TODO: update to improve dx, maybe something like:
+// routes.lang(ENGLISH).presenters.list('B')
+
 const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
 export const makePresenterListRoute = (
 	languageRoute: string,
 	letter?: string
 ): string => `/${languageRoute}/presenters${letter ? `/letter/${letter}` : ''}`;
+
+export const makePresenterListAllRoute = (languageRoute: string): string =>
+	`/${languageRoute}/presenters/all`;
 
 export const makePresenterRecordingsRoute = (
 	languageRoute: string,
@@ -172,6 +180,9 @@ export const makeSponsorListRoute = (
 	languageRoute: string,
 	letter?: string
 ): string => `/${languageRoute}/sponsors${letter ? `/letter/${letter}` : ''}`;
+
+export const makeSponsorListAllRoute = (languageRoute: string): string =>
+	`/${languageRoute}/sponsors/all`;
 
 export const makeSponsorTeachingsRoute = (
 	languageRoute: string,

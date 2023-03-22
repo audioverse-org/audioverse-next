@@ -1,0 +1,16 @@
+query getSponsorListAllPageData($language: Language!, $after: String) {
+	sponsors(
+		language: $language
+		orderBy: [{ field: TITLE, direction: ASC }]
+		first: 20
+		after: $after
+	) {
+		nodes {
+			...sponsorListEntry
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

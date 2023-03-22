@@ -1,14 +1,9 @@
-import {
-	act,
-	render,
-	RenderOptions,
-	RenderResult,
-} from '@testing-library/react';
+import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
-import getIntlMessages from '@lib/getIntlMessages';
+import { __awaitIntlMessages } from '@lib/getIntlMessages';
 
 export default async function renderWithProviders(
 	ui: React.ReactElement,
@@ -30,9 +25,7 @@ export default async function renderWithProviders(
 		renderOptions
 	);
 
-	await act(async () => {
-		await jest.mocked(getIntlMessages).mock.results[0]?.value;
-	});
+	await __awaitIntlMessages();
 
 	return {
 		...result,

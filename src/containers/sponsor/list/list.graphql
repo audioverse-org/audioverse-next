@@ -1,0 +1,14 @@
+fragment sponsorListEntry on Sponsor {
+	canonicalPath(useFuturePath: true)
+	title
+	image {
+		url(size: 128)
+	}
+}
+
+query getSponsorListLetterCounts($language: Language!) {
+	sponsorLetterCounts(language: $language) {
+		letter
+		count
+	}
+}

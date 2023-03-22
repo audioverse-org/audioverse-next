@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '@components/HOCs/withFailStates';
 import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetStoriesAlbumsPageDataQuery } from '@lib/generated/graphql';
@@ -11,17 +10,37 @@ import {
 	makeStoryAlbumListPage,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import EmptyState from '@components/organisms/emptyState';
 
 export type StoryAlbumsListProps = PaginatedProps<
 	NonNullable<GetStoriesAlbumsPageDataQuery['storySeasons']['nodes']>[0],
 	GetStoriesAlbumsPageDataQuery
 >;
 
-function StoryAlbumsList({
+export default function StoryAlbumsList({
 	nodes,
 	pagination,
 }: StoryAlbumsListProps): JSX.Element {
 	const language = useLanguageRoute();
+
+	if (!nodes.length) {
+		return (
+			<EmptyState
+				title={
+					<FormattedMessage
+						id="storyAlbumList__emptyStateTitle"
+						defaultMessage="Nothing here!"
+					/>
+				}
+				message={
+					<FormattedMessage
+						id="storyAlbumList__emptyStateMessage"
+						defaultMessage="There are no story albums to show."
+					/>
+				}
+			/>
+		);
+	}
 
 	return (
 		<PaginatedCardList
@@ -41,7 +60,3 @@ function StoryAlbumsList({
 		</PaginatedCardList>
 	);
 }
-
-export default withFailStates(StoryAlbumsList, {
-	useShould404: ({ nodes }) => !nodes?.length,
-});

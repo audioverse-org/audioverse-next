@@ -12,54 +12,42 @@ import StoryAlbumsList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/albums/page/[i]';
+import { buildLoader } from '@lib/test/buildLoader';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);
 
-function loadData() {
-	when(fetchApi)
-		.calledWith(GetStoriesAlbumsPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			storySeasons: {
-				nodes: [
-					{
-						id: 'the_story_id',
-						title: 'the_story_title',
-						canonicalPath: 'the_story_path',
-						contentType: SequenceContentType.StorySeason,
-						speakers: [],
-						allRecordings: {
-							aggregate: {
-								count: 0,
-							},
-						},
+const loadData = buildLoader(GetStoriesAlbumsPageDataDocument, {
+	storySeasons: {
+		nodes: [
+			{
+				id: 'the_story_id',
+				title: 'the_story_title',
+				canonicalPath: 'the_story_path',
+				contentType: SequenceContentType.StorySeason,
+				speakers: [],
+				allRecordings: {
+					aggregate: {
+						count: 0,
 					},
-				],
+				},
 			},
-		});
-}
+		],
+	},
+});
 
 describe('stories list page', () => {
 	beforeEach(() => {
 		__loadQuery({
 			language: 'en',
 		});
-	});
-
-	it('renders', async () => {
-		await renderPage();
-
-		expect(fetchApi).toBeCalledWith(
-			GetStoriesAlbumsPageDataDocument,
-			expect.anything()
-		);
+		loadData();
 	});
 
 	it('lists stories', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_story_title')).toBeInTheDocument();
+		expect(screen.getByText('the_story_title')).toBeInTheDocument();
 	});
 
 	it('generates paths', async () => {
@@ -79,55 +67,47 @@ describe('stories list page', () => {
 	});
 
 	it('includes page title', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
-
-		expect(getByText('Stories')).toBeInTheDocument();
+		expect(screen.getByText('Stories')).toBeInTheDocument();
 	});
 
 	it('includes pagination', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
-
-		expect(getByText('1')).toBeInTheDocument();
+		expect(screen.getByText('1')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
-
-		const link = getByText('1') as HTMLLinkElement;
-
-		expect(link).toHaveAttribute('href', '/en/stories/albums');
+		expect(screen.getByText('1')).toHaveAttribute('href', '/en/stories/albums');
 	});
 
-	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetStoriesAlbumsPageDataDocument, expect.anything())
-			.mockResolvedValue({
+	it('renders empty state message', async () => {
+		loadData(
+			{
 				storySeasons: {
 					nodes: [],
 				},
-			});
+			},
+			{
+				useDefaults: false,
+			}
+		);
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Nothing here!')).toBeInTheDocument();
 	});
 
 	it('links stories properly', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
+		const link = screen.getByRole('link', {
+			name: /the_story_title/,
+		});
 
-		const link = getByText('the_story_title') as HTMLLinkElement;
-
-		expect(link.parentElement?.parentElement).toHaveAttribute(
-			'href',
-			'the_story_path'
-		);
+		expect(link).toHaveAttribute('href', 'the_story_path');
 	});
 });

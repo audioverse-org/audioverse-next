@@ -1,17 +1,20 @@
 import Link from 'next/link';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
 import Heading2 from '@components/atoms/heading2';
 import RoundImage from '@components/atoms/roundImage';
-import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import { GetSponsorListPageDataQuery } from '@lib/generated/graphql';
+import {
+	GetSponsorListLetterCountsQuery,
+	SponsorListEntryFragment,
+} from '@lib/generated/graphql';
 import {
 	makeDiscoverCollectionsRoute,
+	makeSponsorListAllRoute,
 	makeSponsorListRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -19,23 +22,35 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import styles from './list.module.scss';
 
 export type SponsorsProps = {
-	sponsors: NonNullable<GetSponsorListPageDataQuery['sponsors']['nodes']>;
+	sponsors: SponsorListEntryFragment[];
 	sponsorLetterCounts: NonNullable<
-		GetSponsorListPageDataQuery['sponsorLetterCounts']
+		GetSponsorListLetterCountsQuery['sponsorLetterCounts']
 	>;
+	title?: string;
 };
 
 // TODO: replace with sponsors landing page (featured, recent, trending, etc.)
 
-function Sponsors({
+export default function Sponsors({
 	sponsors,
 	sponsorLetterCounts,
+	title,
 }: SponsorsProps): JSX.Element {
 	const language = useLanguageRoute();
-	const jumpLinks = sponsorLetterCounts.map(({ letter }) => ({
-		text: letter,
-		url: makeSponsorListRoute(language, letter),
-	}));
+	const intl = useIntl();
+	const jumpLinks = [
+		{
+			text: intl.formatMessage({
+				id: 'sponsorsList__all',
+				defaultMessage: 'All',
+			}),
+			url: makeSponsorListAllRoute(language),
+		},
+		...sponsorLetterCounts.map(({ letter }) => ({
+			text: letter,
+			url: makeSponsorListRoute(language, letter),
+		})),
+	];
 
 	return (
 		<>
@@ -50,7 +65,7 @@ function Sponsors({
 				/>
 			</Heading1>
 			<JumpBar links={jumpLinks} />
-			<Heading2>{sponsors[0].title.substring(0, 1).toUpperCase()}</Heading2>
+			{title && <Heading2>{title}</Heading2>}
 			{sponsors.map(({ canonicalPath, image, title }) => (
 				<Card className={styles.card} key={canonicalPath}>
 					<Link href={canonicalPath} legacyBehavior>
@@ -68,7 +83,3 @@ function Sponsors({
 		</>
 	);
 }
-
-export default withFailStates(Sponsors, {
-	useShould404: ({ sponsors }) => !sponsors?.length,
-});

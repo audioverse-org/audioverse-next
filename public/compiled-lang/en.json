@@ -4127,6 +4127,18 @@
       "value": "name"
     }
   ],
+  "presentersListAll__all": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "presentersList__all": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
   "presentersList__title": [
     {
       "type": 0,
@@ -5057,6 +5069,18 @@
       "value": "sponsorName"
     }
   ],
+  "sponsorsListAll__all": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "sponsorsList__all": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
   "sponsorsList__title": [
     {
       "type": 0,
@@ -5087,6 +5111,18 @@
     {
       "type": 0,
       "value": "All Sponsors"
+    }
+  ],
+  "storyAlbumList__emptyStateMessage": [
+    {
+      "type": 0,
+      "value": "There are no story albums to show."
+    }
+  ],
+  "storyAlbumList__emptyStateTitle": [
+    {
+      "type": 0,
+      "value": "Nothing here!"
     }
   ],
   "storyAlbumList__heading": [

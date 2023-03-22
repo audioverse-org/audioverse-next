@@ -1,4 +1,4 @@
-@import '../../styles/common';
+@import '/src/styles/common';
 
 .back {
 	margin-top: 8px;
@@ -13,11 +13,14 @@
 	padding: 16px;
 	background-color: $ts-lightTone;
 	transition-duration: $transition-medium;
+
 	&:hover {
 		background-color: $ts-darkened-lightTone;
 	}
+
 	display: flex;
 	align-items: center;
+
 	&:hover {
 		color: $ts-dark;
 	}
