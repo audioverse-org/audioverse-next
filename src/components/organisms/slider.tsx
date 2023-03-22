@@ -36,10 +36,11 @@ export default function Slider({
 	}
 
 	const array = React.Children.toArray(children);
-	const pages = Math.ceil(array.length / perSlide);
+	const pageCount = Math.ceil(array.length / perSlide);
+	const pageIndices = Array.from(new Array(pageCount).keys());
 
 	const pageLeft = () => setDelta(Math.max(0, delta - 1));
-	const pageRight = () => setDelta(Math.min(pages - 1, delta + 1));
+	const pageRight = () => setDelta(Math.min(pageCount - 1, delta + 1));
 
 	const buttonType = dark ? 'secondaryInverse' : 'secondary';
 
@@ -83,7 +84,7 @@ export default function Slider({
 					})}
 					className={styles.dots}
 				>
-					{Array.from(new Array(pages).keys()).map((i) => (
+					{pageIndices.map((i) => (
 						<li
 							key={i}
 							className={`${styles.dot} ${i === delta && styles.active}`}
