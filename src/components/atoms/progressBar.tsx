@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import styles from './progressBar.module.scss';

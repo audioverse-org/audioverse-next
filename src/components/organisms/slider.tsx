@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { CSSProperties, ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
