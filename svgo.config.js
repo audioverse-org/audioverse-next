@@ -1,3 +1,12 @@
 module.exports = {
-	plugins: ['preset-default'],
+	plugins: [
+		{
+			name: 'preset-default',
+			params: {
+				overrides: {
+					sortAttrs: false,
+				},
+			},
+		},
+	],
 };

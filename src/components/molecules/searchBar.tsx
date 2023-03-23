@@ -13,17 +13,21 @@ import styles from './searchBar.module.scss';
 export default function SearchBar({
 	className,
 	inputClassName,
+	filtersClassName,
 	term,
 	onTermChange,
 	entityType,
 	onEntityTypeChange,
+	IconClear = IconExit,
 }: {
 	term: string | undefined;
 	onTermChange: (term: string | undefined) => void;
 	className?: string;
 	inputClassName?: string;
+	filtersClassName?: string;
 	entityType: EntityFilterId;
 	onEntityTypeChange: (entityType: EntityFilterId) => void;
+	IconClear?: React.ComponentType;
 }): JSX.Element {
 	const intl = useIntl();
 	const [isFocused, setIsFocused] = useState(false);
@@ -58,7 +62,7 @@ export default function SearchBar({
 				/>
 				{term && (
 					<button className={styles.clear} onClick={() => onTermChange('')}>
-						<IconExit width={24} height={24} />
+						<IconClear />
 					</button>
 				)}
 			</div>
@@ -69,7 +73,7 @@ export default function SearchBar({
 				/>
 			</button>
 			<Mininav
-				className={styles.filters}
+				className={clsx(styles.filters, filtersClassName)}
 				theme="light"
 				items={Object.entries(filters).map(([id, { heading }]) => ({
 					id,

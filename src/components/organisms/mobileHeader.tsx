@@ -15,6 +15,7 @@ import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
 import SearchBar from '@components/molecules/searchBar';
 import clsx from 'clsx';
 import { EntityFilterId } from './searchResults.filters';
+import IconExitSmall from '../../../public/img/icons/icon-exit-small.svg';
 
 type Transition = [number, number];
 
@@ -100,10 +101,13 @@ export default function MobileHeader({
 					styles.search,
 					term !== undefined && styles.searchActive
 				)}
+				inputClassName={styles.searchInput}
+				filtersClassName={styles.searchFilters}
 				term={term}
 				onTermChange={onTermChange}
 				entityType={entityType}
 				onEntityTypeChange={onEntityTypeChange}
+				IconClear={IconExitSmall}
 			/>
 		</div>
 	);
