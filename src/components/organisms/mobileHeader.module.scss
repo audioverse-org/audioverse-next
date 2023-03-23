@@ -7,13 +7,14 @@
     flex-direction: column;
     z-index: 10;
     background: $ts-cream;
+    padding-bottom: 8px;
 }
 
 .mobileHeaderTitle {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px calc(24px + env(safe-area-inset-right)) 22px calc(24px + env(safe-area-inset-left));
+    padding: 24px calc(24px + env(safe-area-inset-right)) 14px calc(24px + env(safe-area-inset-left));
     z-index: 1;
     background: $ts-cream;
 
@@ -26,19 +27,14 @@
     }
 }
 
-.mobileSubnavWrapper {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: $ts-cream;
-}
-
 .mobileSubnav {
     display: flex;
     align-items: center;
     position: relative;
-    margin: 0 calc(24px + env(safe-area-inset-right)) 8px calc(24px + env(safe-area-inset-left));
+    background: $ts-cream;
+    margin: 0 calc(24px + env(safe-area-inset-right)) 0 calc(24px + env(safe-area-inset-left));
+    overflow: hidden;
+    align-items: end;
 }
 
 .mobileSubnavItems {

@@ -14,7 +14,7 @@ import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import styles from './mobileHeader.module.scss';
 import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
 
-const SUBNAV_HEIGHT = 32;
+const SUBNAV_HEIGHT = 24;
 const HEADER_TITLE_PADDING_TOP_DIFFERENCE = 8;
 const HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE = 6;
 const COLLAPSING_HEIGHT =
@@ -34,7 +34,7 @@ export default function MobileHeader({
 	const navigationItems = useNavigationItems();
 	const playbackContext = useContext(PlaybackContext);
 	const playbackRecording = playbackContext.getRecording();
-	const headerRef = useRef<HTMLDivElement>(null);
+	const subnavRef = useRef<HTMLDivElement>(null);
 	const headerTitleRef = useRef<HTMLDivElement>(null);
 	const transitionProgress = useTransitionProgress(
 		scrollRef,
@@ -42,21 +42,21 @@ export default function MobileHeader({
 	);
 
 	useEffect(() => {
-		if (isServerSide() || !headerRef.current || !headerTitleRef.current) return;
+		if (isServerSide() || !subnavRef.current || !headerTitleRef.current) return;
 
 		const titlePaddingTop =
 			24 - transitionProgress * HEADER_TITLE_PADDING_TOP_DIFFERENCE;
 		const titlePaddingBottom =
-			22 - transitionProgress * HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE;
-		const headerPaddingBottom = (1 - transitionProgress) * SUBNAV_HEIGHT;
+			14 - transitionProgress * HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE;
+		const subnavHeight = (1 - transitionProgress) * SUBNAV_HEIGHT;
 
 		headerTitleRef.current.style.paddingTop = `${titlePaddingTop}px`;
 		headerTitleRef.current.style.paddingBottom = `${titlePaddingBottom}px`;
-		headerRef.current.style.paddingBottom = `${headerPaddingBottom}px`;
+		subnavRef.current.style.height = `${subnavHeight}px`;
 	}, [transitionProgress]);
 
 	return (
-		<div className={styles.mobileHeader} ref={headerRef}>
+		<div className={styles.mobileHeader}>
 			<div className={styles.mobileHeaderTitle} ref={headerTitleRef}>
 				<Header />
 				<Button
@@ -71,29 +71,27 @@ export default function MobileHeader({
 				/>
 				{playbackRecording && <ButtonPlayback />}
 			</div>
-			<div className={styles.mobileSubnavWrapper}>
-				<div className={styles.mobileSubnav}>
-					<Mininav
-						items={navigationItems.slice(0, -2).map((item) => ({
-							id: item.key,
-							label: item.label,
-							url: item.href,
-							isActive: item.href === asPath,
-						}))}
-						compact
-						className={styles.mobileSubnavItems}
-					/>
-					{/* TODO: Use a button instead of anchor element to improve accessibility */}
-					<a
-						className={styles.mobileHeaderMore}
-						onClick={(e) => {
-							e.preventDefault();
-							setShowingMenu(true);
-						}}
-					>
-						<MoreIcon />
-					</a>
-				</div>
+			<div className={styles.mobileSubnav} ref={subnavRef}>
+				<Mininav
+					items={navigationItems.slice(0, -2).map((item) => ({
+						id: item.key,
+						label: item.label,
+						url: item.href,
+						isActive: item.href === asPath,
+					}))}
+					compact
+					className={styles.mobileSubnavItems}
+				/>
+				{/* TODO: Use a button instead of anchor element to improve accessibility */}
+				<a
+					className={styles.mobileHeaderMore}
+					onClick={(e) => {
+						e.preventDefault();
+						setShowingMenu(true);
+					}}
+				>
+					<MoreIcon />
+				</a>
 			</div>
 		</div>
 	);
