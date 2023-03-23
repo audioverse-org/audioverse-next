@@ -38,8 +38,7 @@ export default function MobileHeader({
 	const { asPath } = useRouter();
 	const languageRoute = useLanguageRoute();
 	const navigationItems = useNavigationItems();
-	const playbackContext = useContext(PlaybackContext);
-	const playbackRecording = playbackContext.getRecording();
+	const { getRecording } = useContext(PlaybackContext);
 	const transitionProgress = useTransitionProgress(
 		scrollRef,
 		COLLAPSING_HEIGHT
@@ -65,7 +64,7 @@ export default function MobileHeader({
 					}
 					href={makeDonateRoute(languageRoute)}
 				/>
-				{playbackRecording && <ButtonPlayback />}
+				{getRecording() && <ButtonPlayback />}
 			</div>
 			<div
 				className={styles.subnav}
