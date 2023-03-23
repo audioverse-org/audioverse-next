@@ -13,14 +13,18 @@
     z-index: 10;
 }
 
+.wrapper {
+    background: $ts-cream;
+    padding-bottom: 8px;
+
+    @include hpad();
+}
+
 .title {
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 1;
-    background: $ts-cream;
-
-    @include hpad();
 
     > :first-child {
         margin-right: 16px;
@@ -35,8 +39,6 @@
     position: relative;
     overflow: hidden;
     background: $ts-cream;
-
-    @include hpad();
 }
 
 .subnavItems {
@@ -53,7 +55,7 @@
 }
 
 .search {
-    padding-top: 24px;
+    padding-top: 14px;
 
     > :first-child {
         @include hpad();

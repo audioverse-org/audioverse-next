@@ -8,7 +8,7 @@
 .input {
 	margin-left: auto;
 	margin-right: auto;
-	border-bottom: 0.5px solid rgba($ts-lightTone, 0.5);
+	border-bottom: 0.5px solid $ts-lightTone;
 	letter-spacing: unset;
 	flex-grow: 1;
 	display: flex;

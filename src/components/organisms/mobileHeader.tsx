@@ -54,44 +54,47 @@ export default function MobileHeader({
 
 	return (
 		<div className={styles.base}>
-			<div
-				className={styles.title}
-				style={{
-					paddingTop: px(progress, TITLE_PAD_TOP),
-					paddingBottom: px(progress, TITLE_PAD_BOTTOM),
-				}}
-			>
-				<Header />
-				<Button
-					type="super"
-					text={
-						<FormattedMessage
-							id="andNavigation__donate"
-							defaultMessage="Donate"
-						/>
-					}
-					href={makeDonateRoute(lang)}
-				/>
-				{getRecording() && <ButtonPlayback />}
+			<div className={styles.wrapper}>
+				<div
+					className={styles.title}
+					style={{
+						paddingTop: px(progress, TITLE_PAD_TOP),
+						paddingBottom: px(progress, TITLE_PAD_BOTTOM),
+					}}
+				>
+					<Header />
+					<Button
+						type="super"
+						text={
+							<FormattedMessage
+								id="andNavigation__donate"
+								defaultMessage="Donate"
+							/>
+						}
+						href={makeDonateRoute(lang)}
+					/>
+					{getRecording() && <ButtonPlayback />}
+				</div>
+				<div
+					className={styles.subnav}
+					style={{ height: px(progress, SUBNAV_HEIGHT) }}
+				>
+					<Mininav
+						items={navItems.slice(0, -2).map((item) => ({
+							id: item.key,
+							label: item.label,
+							url: item.href,
+							isActive: item.href === asPath,
+						}))}
+						compact
+						className={styles.subnavItems}
+					/>
+					<button className={styles.more} onClick={() => setShowingMenu(true)}>
+						<MoreIcon />
+					</button>
+				</div>
 			</div>
-			<div
-				className={styles.subnav}
-				style={{ height: px(progress, SUBNAV_HEIGHT) }}
-			>
-				<Mininav
-					items={navItems.slice(0, -2).map((item) => ({
-						id: item.key,
-						label: item.label,
-						url: item.href,
-						isActive: item.href === asPath,
-					}))}
-					compact
-					className={styles.subnavItems}
-				/>
-				<button className={styles.more} onClick={() => setShowingMenu(true)}>
-					<MoreIcon />
-				</button>
-			</div>
+
 			<SearchBar
 				className={clsx(
 					styles.search,
