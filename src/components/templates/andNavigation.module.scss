@@ -16,3 +16,13 @@
 
 	@include content-horizontal-padding();
 }
+
+.search {
+	display: none;
+}
+
+@media (min-width: $breakpoint-lg) {
+	.search {
+		display: block;
+	}
+}

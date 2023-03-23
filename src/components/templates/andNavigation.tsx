@@ -26,7 +26,12 @@ export default function AndNavigation({
 
 	return (
 		<>
-			<MobileHeader scrollRef={scrollRef} setShowingMenu={setShowingMenu} />
+			<MobileHeader
+				scrollRef={scrollRef}
+				setShowingMenu={setShowingMenu}
+				term={term}
+				onTermChange={(t) => setTerm(t)}
+			/>
 
 			<div className={styles.base}>
 				<Drawer
@@ -37,7 +42,11 @@ export default function AndNavigation({
 				/>
 				<div ref={scrollRef} className={styles.content}>
 					<LanguageAlternativesAlert />
-					<SearchBar term={term} onChange={(v) => setTerm(v)} />
+					<SearchBar
+						className={styles.search}
+						term={term}
+						onChange={(v) => setTerm(v)}
+					/>
 					{term === undefined ? children : <SearchResults term={term} />}
 					<Footer scrollRef={scrollRef} />
 				</div>

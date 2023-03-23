@@ -6,10 +6,11 @@
     display: flex;
     flex-direction: column;
     z-index: 10;
-    background: $ts-cream;
-    padding-bottom: 8px;
-    padding-left: calc(24px + env(safe-area-inset-left));
-    padding-right: calc(24px + env(safe-area-inset-right));
+
+    >* {
+        padding-left: calc(24px + env(safe-area-inset-left));
+        padding-right: calc(24px + env(safe-area-inset-right));
+    }
 }
 
 .title {
@@ -17,6 +18,7 @@
     align-items: center;
     justify-content: space-between;
     z-index: 1;
+    background: $ts-cream;
 
     > :first-child {
         margin-right: 16px;
@@ -30,6 +32,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
+    background: $ts-cream;
 }
 
 .subnavItems {
@@ -43,6 +46,15 @@
     height: 24px;
     padding: 0;
     border: none;
+}
+
+.search {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.searchActive {
+    background: $ts-cream;
 }
 
 @media (min-width: $breakpoint-lg) {

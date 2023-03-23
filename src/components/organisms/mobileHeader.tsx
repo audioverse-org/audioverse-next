@@ -12,12 +12,14 @@ import ButtonPlayback from '@components/molecules/buttonPlayback';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import styles from './mobileHeader.module.scss';
 import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
+import SearchBar from '@components/molecules/searchBar';
+import clsx from 'clsx';
 
 type Transition = [number, number];
 
 const SUBNAV_HEIGHT: Transition = [24, 0];
 const TITLE_PAD_TOP: Transition = [24, 16];
-const TITLE_PAD_BOTTOM: Transition = [14, 8];
+const TITLE_PAD_BOTTOM: Transition = [22, 16];
 
 const COLLAPSING_HEIGHT = [
 	SUBNAV_HEIGHT,
@@ -31,9 +33,13 @@ const px = (progress: number, [s, e]: Transition) =>
 export default function MobileHeader({
 	setShowingMenu,
 	scrollRef,
+	term,
+	onTermChange,
 }: {
 	setShowingMenu: (showingMenu: boolean) => void;
 	scrollRef: React.RefObject<HTMLDivElement>;
+	term?: string;
+	onTermChange: (term: string | undefined) => void;
 }): JSX.Element {
 	const { asPath } = useRouter();
 	const lang = useLanguageRoute();
@@ -81,6 +87,14 @@ export default function MobileHeader({
 					<MoreIcon />
 				</button>
 			</div>
+			<SearchBar
+				className={clsx(
+					styles.search,
+					term !== undefined && styles.searchActive
+				)}
+				term={term}
+				onChange={onTermChange}
+			/>
 		</div>
 	);
 }

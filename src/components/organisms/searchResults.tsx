@@ -70,16 +70,7 @@ export default function Search({ term }: { term?: string }): JSX.Element {
 	return (
 		<>
 			<SearchHead term={term} />
-			<Mininav
-				className={styles.filters}
-				theme="light"
-				items={Object.entries(filters).map(([id, { heading }]) => ({
-					id,
-					label: heading,
-					isActive: tab === id,
-					onClick: () => setTab(id),
-				}))}
-			/>
+
 			{isLoading && <LoadingCards />}
 			{!isLoading && (
 				<>

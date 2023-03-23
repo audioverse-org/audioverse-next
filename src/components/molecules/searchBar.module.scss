@@ -1,12 +1,11 @@
 @import '../../styles/common';
 
 .base {
-	flex-grow: 1;
 	display: flex;
-	min-width: 0;
+	flex-wrap: wrap;
 }
 
-.inner {
+.input {
 	flex-grow: 1;
 	display: flex;
 	min-width: 0;
@@ -15,16 +14,6 @@
 	border-bottom: 0.5px solid rgba($ts-lightTone, 0.5);
 	letter-spacing: unset;
 
-	&.focused {
-		border-bottom-color: rgba($ts-dark, 0.5);
-
-		.icon {
-			color: $ts-red;
-		}
-	}
-}
-
-.inputWrapper {
 	flex-grow: 1;
 	display: flex;
 	min-width: 0;
@@ -65,6 +54,14 @@
 		height: 24px;
 		cursor: pointer;
 	}
+
+	&.focused {
+		border-bottom-color: rgba($ts-dark, 0.5);
+
+		.icon {
+			color: $ts-red;
+		}
+	}
 }
 
 .icon,
@@ -82,7 +79,8 @@
 	cursor: pointer;
 }
 
-.base button {
+.clear,
+.cancel {
 	margin: 0;
 	padding: 0;
 	background: none;
@@ -90,7 +88,7 @@
 	cursor: pointer;
 }
 
-.base button.cancel {
+.cancel {
 	font-family: Inter;
 	font-size: 12px;
 	font-weight: 700;
@@ -100,6 +98,16 @@
 	margin-left: 28px;
 }
 
-.hide {
-	display: none;
+.filters {
+	min-width: 0;
+	flex: 0 0 100%;
+	overflow-x: scroll;
+}
+
+.inactive {
+
+	.cancel,
+	.filters {
+		display: none;
+	}
 }
