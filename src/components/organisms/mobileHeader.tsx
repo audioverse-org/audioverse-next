@@ -81,16 +81,9 @@ export default function MobileHeader({
 					compact
 					className={styles.subnavItems}
 				/>
-				{/* TODO: Use a button instead of anchor element to improve accessibility */}
-				<a
-					className={styles.more}
-					onClick={(e) => {
-						e.preventDefault();
-						setShowingMenu(true);
-					}}
-				>
+				<button className={styles.more} onClick={() => setShowingMenu(true)}>
 					<MoreIcon />
-				</a>
+				</button>
 			</div>
 		</div>
 	);
