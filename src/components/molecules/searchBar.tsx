@@ -1,4 +1,7 @@
-import { filters } from '@components/organisms/searchResults.filters';
+import {
+	EntityFilterId,
+	filters,
+} from '@components/organisms/searchResults.filters';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -10,17 +13,18 @@ import styles from './searchBar.module.scss';
 export default function SearchBar({
 	className,
 	term,
-	onChange,
+	onTermChange,
+	entityType,
+	onEntityTypeChange,
 }: {
 	term: string | undefined;
-	onChange: (term: string | undefined) => void;
+	onTermChange: (term: string | undefined) => void;
 	className?: string;
+	entityType: EntityFilterId;
+	onEntityTypeChange: (entityType: EntityFilterId) => void;
 }): JSX.Element {
 	const intl = useIntl();
 	const [isFocused, setIsFocused] = useState(false);
-
-	const tab = undefined;
-	const setTab = () => undefined;
 
 	return (
 		<div className={clsx(styles.base, term ?? styles.inactive, className)}>
@@ -31,7 +35,7 @@ export default function SearchBar({
 					type="search"
 					autoComplete="off"
 					value={term ?? ''}
-					onChange={({ target }) => onChange(target.value)}
+					onChange={({ target }) => onTermChange(target.value)}
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => setIsFocused(false)}
 					placeholder={
@@ -49,14 +53,14 @@ export default function SearchBar({
 						className={styles.clear}
 						onClick={(e) => {
 							e.preventDefault();
-							onChange('');
+							onTermChange('');
 						}}
 					>
 						<IconExit width={24} height={24} />
 					</button>
 				)}
 			</div>
-			<button className={styles.cancel} onClick={() => onChange(undefined)}>
+			<button className={styles.cancel} onClick={() => onTermChange(undefined)}>
 				<FormattedMessage
 					id="molecule-searchBar__cancel"
 					defaultMessage="Cancel"
@@ -68,8 +72,8 @@ export default function SearchBar({
 				items={Object.entries(filters).map(([id, { heading }]) => ({
 					id,
 					label: heading,
-					isActive: tab === id,
-					onClick: () => setTab(id),
+					isActive: entityType === id,
+					onClick: () => onEntityTypeChange(id),
 				}))}
 			/>
 		</div>

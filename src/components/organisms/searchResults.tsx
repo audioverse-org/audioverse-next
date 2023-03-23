@@ -10,10 +10,9 @@ import LoadingCards from '@components/molecules/loadingCards';
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 import styles from './searchResults.module.scss';
 import Head from 'next/head';
-import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
 import useSearch from './searchResults.useResults';
-import { EntityFilterId, filters } from './searchResults.filters';
+import { EntityFilterId } from './searchResults.filters';
 import isServerSide from '@lib/isServerSide';
 
 function SearchHead({ term }: { term?: string }): JSX.Element {
@@ -56,16 +55,26 @@ function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 	return isIntersecting;
 }
 
-export default function Search({ term }: { term?: string }): JSX.Element {
-	const [tab, setTab] = useState<EntityFilterId>('all');
+export default function Search({
+	term,
+	entityType,
+	onEntityTypeChange,
+}: {
+	term?: string;
+	entityType: EntityFilterId;
+	onEntityTypeChange: (entityType: EntityFilterId) => void;
+}): JSX.Element {
 	const q = useQueryString('q');
-	const { visible, loadMore, isLoading } = useSearch(tab, term || q || '');
+	const { visible, loadMore, isLoading } = useSearch(
+		entityType,
+		term || q || ''
+	);
 	const endRef = useRef<HTMLDivElement>(null);
 	const endReached = useOnScreen(endRef);
 
 	useEffect(() => {
-		tab !== 'all' && endReached && !isLoading && loadMore();
-	}, [tab, endReached, isLoading, loadMore]);
+		entityType !== 'all' && endReached && !isLoading && loadMore();
+	}, [entityType, endReached, isLoading, loadMore]);
 
 	return (
 		<>
@@ -75,7 +84,7 @@ export default function Search({ term }: { term?: string }): JSX.Element {
 			{!isLoading && (
 				<>
 					{visible.map((s) => {
-						const nodes = tab === 'all' ? s.nodes.slice(0, 3) : s.nodes;
+						const nodes = entityType === 'all' ? s.nodes.slice(0, 3) : s.nodes;
 						return (
 							<div className={styles.section} key={s.id}>
 								<LineHeading variant="overline">{s.heading}</LineHeading>
@@ -84,13 +93,13 @@ export default function Search({ term }: { term?: string }): JSX.Element {
 										<CardInferred key={e.id} entity={e} />
 									))}
 								</CardGroup>
-								{s.hasNextPage && tab === 'all' && (
+								{s.hasNextPage && entityType === 'all' && (
 									<Button
 										type="secondary"
 										text={s.seeAll}
 										IconRight={ForwardIcon}
 										className={styles.seeAllButton}
-										onClick={() => setTab(s.id)}
+										onClick={() => onEntityTypeChange(s.id)}
 									/>
 								)}
 							</div>

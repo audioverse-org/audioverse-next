@@ -14,6 +14,7 @@ import styles from './mobileHeader.module.scss';
 import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
 import SearchBar from '@components/molecules/searchBar';
 import clsx from 'clsx';
+import { EntityFilterId } from './searchResults.filters';
 
 type Transition = [number, number];
 
@@ -35,11 +36,15 @@ export default function MobileHeader({
 	scrollRef,
 	term,
 	onTermChange,
+	entityType,
+	onEntityTypeChange,
 }: {
 	setShowingMenu: (showingMenu: boolean) => void;
 	scrollRef: React.RefObject<HTMLDivElement>;
 	term?: string;
 	onTermChange: (term: string | undefined) => void;
+	entityType: EntityFilterId;
+	onEntityTypeChange: (entityType: EntityFilterId) => void;
 }): JSX.Element {
 	const { asPath } = useRouter();
 	const lang = useLanguageRoute();
@@ -93,7 +98,9 @@ export default function MobileHeader({
 					term !== undefined && styles.searchActive
 				)}
 				term={term}
-				onChange={onTermChange}
+				onTermChange={onTermChange}
+				entityType={entityType}
+				onEntityTypeChange={onEntityTypeChange}
 			/>
 		</div>
 	);

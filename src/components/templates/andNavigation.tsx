@@ -7,6 +7,7 @@ import MobileHeader from '@components/organisms/mobileHeader';
 import Drawer from '@components/organisms/drawer';
 import SearchResults from '@containers/search';
 import Footer from '@components/organisms/footer';
+import { EntityFilterId } from '@components/organisms/searchResults.filters';
 
 export default function AndNavigation({
 	children,
@@ -19,6 +20,7 @@ export default function AndNavigation({
 	} = useRouter();
 	const param = q?.toString();
 	const [term, setTerm] = useState<string | undefined>(param);
+	const [entityType, setEntityType] = useState<EntityFilterId>('all');
 	const [showingMenu, setShowingMenu] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -31,6 +33,8 @@ export default function AndNavigation({
 				setShowingMenu={setShowingMenu}
 				term={term}
 				onTermChange={(t) => setTerm(t)}
+				entityType={entityType}
+				onEntityTypeChange={setEntityType}
 			/>
 
 			<div className={styles.base}>
@@ -45,9 +49,19 @@ export default function AndNavigation({
 					<SearchBar
 						className={styles.search}
 						term={term}
-						onChange={(v) => setTerm(v)}
+						onTermChange={(v) => setTerm(v)}
+						entityType={entityType}
+						onEntityTypeChange={setEntityType}
 					/>
-					{term === undefined ? children : <SearchResults term={term} />}
+					{term === undefined ? (
+						children
+					) : (
+						<SearchResults
+							term={term}
+							entityType={entityType}
+							onEntityTypeChange={setEntityType}
+						/>
+					)}
 					<Footer scrollRef={scrollRef} />
 				</div>
 			</div>
