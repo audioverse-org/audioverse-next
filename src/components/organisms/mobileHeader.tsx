@@ -35,14 +35,14 @@ export default function MobileHeader({
 	const playbackContext = useContext(PlaybackContext);
 	const playbackRecording = playbackContext.getRecording();
 	const subnavRef = useRef<HTMLDivElement>(null);
-	const headerTitleRef = useRef<HTMLDivElement>(null);
+	const titleRef = useRef<HTMLDivElement>(null);
 	const transitionProgress = useTransitionProgress(
 		scrollRef,
 		COLLAPSING_HEIGHT
 	);
 
 	useEffect(() => {
-		if (isServerSide() || !subnavRef.current || !headerTitleRef.current) return;
+		if (isServerSide() || !subnavRef.current || !titleRef.current) return;
 
 		const titlePaddingTop =
 			24 - transitionProgress * HEADER_TITLE_PADDING_TOP_DIFFERENCE;
@@ -50,14 +50,14 @@ export default function MobileHeader({
 			14 - transitionProgress * HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE;
 		const subnavHeight = (1 - transitionProgress) * SUBNAV_HEIGHT;
 
-		headerTitleRef.current.style.paddingTop = `${titlePaddingTop}px`;
-		headerTitleRef.current.style.paddingBottom = `${titlePaddingBottom}px`;
+		titleRef.current.style.paddingTop = `${titlePaddingTop}px`;
+		titleRef.current.style.paddingBottom = `${titlePaddingBottom}px`;
 		subnavRef.current.style.height = `${subnavHeight}px`;
 	}, [transitionProgress]);
 
 	return (
 		<div className={styles.mobileHeader}>
-			<div className={styles.mobileHeaderTitle} ref={headerTitleRef}>
+			<div className={styles.mobileHeaderTitle} ref={titleRef}>
 				<Header />
 				<Button
 					type="super"
