@@ -21,7 +21,7 @@ function useScrollTop(scrollRef: React.RefObject<HTMLDivElement>) {
 
 export function useTransitionProgress(
 	scrollRef: React.RefObject<HTMLDivElement>,
-	scrollDistance: number
+	transitionLength: number
 ) {
 	const [lastScrollTop, setLastScrollTop] = useState<number>(0);
 	const [startPosition, setStartPosition] = useState<number>(0);
@@ -33,22 +33,22 @@ export function useTransitionProgress(
 
 		const isScrollingUp = scrollTop < lastScrollTop;
 
-		if (isScrollingUp && startPosition + scrollDistance < scrollTop) {
-			setStartPosition(Math.max(lastScrollTop - scrollDistance, 0));
+		if (isScrollingUp && startPosition + transitionLength < scrollTop) {
+			setStartPosition(Math.max(lastScrollTop - transitionLength, 0));
 		} else if (!isScrollingUp && startPosition > scrollTop) {
 			setStartPosition(scrollTop);
 		}
 
 		const distanceScrolled = scrollTop - startPosition;
 		const clampedDistance = Math.max(
-			Math.min(distanceScrolled, scrollDistance),
+			Math.min(distanceScrolled, transitionLength),
 			0
 		);
-		const progress = clampedDistance / scrollDistance;
+		const progress = clampedDistance / transitionLength;
 
 		setProgress(progress);
 		setLastScrollTop(scrollTop);
-	}, [lastScrollTop, scrollTop, startPosition, scrollDistance]);
+	}, [lastScrollTop, scrollTop, startPosition, transitionLength]);
 
 	return progress;
 }
