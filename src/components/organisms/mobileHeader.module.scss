@@ -25,7 +25,7 @@
         flex-grow: 1;
     }
 
-    > :nth-child(n + 2) {
+    > :last-child {
         margin-left: 16px;
     }
 }
