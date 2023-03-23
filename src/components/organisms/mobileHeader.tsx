@@ -36,21 +36,18 @@ export default function MobileHeader({
 	scrollRef: React.RefObject<HTMLDivElement>;
 }): JSX.Element {
 	const { asPath } = useRouter();
-	const languageRoute = useLanguageRoute();
-	const navigationItems = useNavigationItems();
+	const lang = useLanguageRoute();
+	const navItems = useNavigationItems();
 	const { getRecording } = useContext(PlaybackContext);
-	const transitionProgress = useTransitionProgress(
-		scrollRef,
-		COLLAPSING_HEIGHT
-	);
+	const progress = useTransitionProgress(scrollRef, COLLAPSING_HEIGHT);
 
 	return (
 		<div className={styles.base}>
 			<div
 				className={styles.title}
 				style={{
-					paddingTop: px(transitionProgress, TITLE_PAD_TOP),
-					paddingBottom: px(transitionProgress, TITLE_PAD_BOTTOM),
+					paddingTop: px(progress, TITLE_PAD_TOP),
+					paddingBottom: px(progress, TITLE_PAD_BOTTOM),
 				}}
 			>
 				<Header />
@@ -62,16 +59,16 @@ export default function MobileHeader({
 							defaultMessage="Donate"
 						/>
 					}
-					href={makeDonateRoute(languageRoute)}
+					href={makeDonateRoute(lang)}
 				/>
 				{getRecording() && <ButtonPlayback />}
 			</div>
 			<div
 				className={styles.subnav}
-				style={{ height: px(transitionProgress, SUBNAV_HEIGHT) }}
+				style={{ height: px(progress, SUBNAV_HEIGHT) }}
 			>
 				<Mininav
-					items={navigationItems.slice(0, -2).map((item) => ({
+					items={navItems.slice(0, -2).map((item) => ({
 						id: item.key,
 						label: item.label,
 						url: item.href,
