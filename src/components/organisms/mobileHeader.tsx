@@ -56,8 +56,8 @@ export default function MobileHeader({
 	}, [transitionProgress]);
 
 	return (
-		<div className={styles.mobileHeader}>
-			<div className={styles.mobileHeaderTitle} ref={titleRef}>
+		<div className={styles.base}>
+			<div className={styles.title} ref={titleRef}>
 				<Header />
 				<Button
 					type="super"
@@ -71,7 +71,7 @@ export default function MobileHeader({
 				/>
 				{playbackRecording && <ButtonPlayback />}
 			</div>
-			<div className={styles.mobileSubnav} ref={subnavRef}>
+			<div className={styles.subnav} ref={subnavRef}>
 				<Mininav
 					items={navigationItems.slice(0, -2).map((item) => ({
 						id: item.key,
@@ -80,11 +80,11 @@ export default function MobileHeader({
 						isActive: item.href === asPath,
 					}))}
 					compact
-					className={styles.mobileSubnavItems}
+					className={styles.subnavItems}
 				/>
 				{/* TODO: Use a button instead of anchor element to improve accessibility */}
 				<a
-					className={styles.mobileHeaderMore}
+					className={styles.more}
 					onClick={(e) => {
 						e.preventDefault();
 						setShowingMenu(true);

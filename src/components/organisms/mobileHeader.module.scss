@@ -1,6 +1,6 @@
 @import '../../styles/common';
 
-.mobileHeader {
+.base {
     position: sticky;
     top: 0;
     display: flex;
@@ -10,7 +10,7 @@
     padding-bottom: 8px;
 }
 
-.mobileHeaderTitle {
+.title {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,7 +27,7 @@
     }
 }
 
-.mobileSubnav {
+.subnav {
     display: flex;
     align-items: center;
     position: relative;
@@ -37,21 +37,21 @@
     align-items: end;
 }
 
-.mobileSubnavItems {
+.subnavItems {
     height: 24px;
     margin-right: 16px;
     flex-wrap: wrap;
     overflow: hidden;
 }
 
-.mobileHeaderMore {
+.more {
     position: absolute;
     right: 0;
     height: 24px;
 }
 
 @media (min-width: $breakpoint-lg) {
-    .mobileHeader {
+    .base {
         display: none;
     }
 }
