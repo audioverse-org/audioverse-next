@@ -12,6 +12,7 @@ import styles from './searchBar.module.scss';
 
 export default function SearchBar({
 	className,
+	inputClassName,
 	term,
 	onTermChange,
 	entityType,
@@ -20,6 +21,7 @@ export default function SearchBar({
 	term: string | undefined;
 	onTermChange: (term: string | undefined) => void;
 	className?: string;
+	inputClassName?: string;
 	entityType: EntityFilterId;
 	onEntityTypeChange: (entityType: EntityFilterId) => void;
 }): JSX.Element {
@@ -28,7 +30,13 @@ export default function SearchBar({
 
 	return (
 		<div className={clsx(styles.base, term ?? styles.inactive, className)}>
-			<div className={clsx(styles.input, isFocused && styles.focused)}>
+			<div
+				className={clsx(
+					styles.input,
+					isFocused && styles.focused,
+					inputClassName
+				)}
+			>
 				<IconSearch width={24} height={24} />
 				<input
 					name="q"
@@ -49,13 +57,7 @@ export default function SearchBar({
 					}
 				/>
 				{term && (
-					<button
-						className={styles.clear}
-						onClick={(e) => {
-							e.preventDefault();
-							onTermChange('');
-						}}
-					>
+					<button className={styles.clear} onClick={() => onTermChange('')}>
 						<IconExit width={24} height={24} />
 					</button>
 				)}

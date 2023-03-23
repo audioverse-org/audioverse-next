@@ -57,7 +57,7 @@
 .search {
     padding-top: 14px;
 
-    > :first-child {
+    >* {
         @include hpad();
     }
 }

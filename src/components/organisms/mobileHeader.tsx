@@ -20,7 +20,7 @@ type Transition = [number, number];
 
 const SUBNAV_HEIGHT: Transition = [24, 0];
 const TITLE_PAD_TOP: Transition = [24, 16];
-const TITLE_PAD_BOTTOM: Transition = [22, 16];
+const TITLE_PAD_BOTTOM: Transition = [14, 8];
 
 const COLLAPSING_HEIGHT = [
 	SUBNAV_HEIGHT,
