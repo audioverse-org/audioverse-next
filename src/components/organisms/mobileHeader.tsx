@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from '@components/molecules/button';
 import Mininav from '@components/molecules/mininav';
 import Header from '@components/organisms/header';
-import isServerSide from '@lib/isServerSide';
 import { makeDonateRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useNavigationItems } from '@lib/useNavigationItems';
@@ -14,13 +13,20 @@ import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import styles from './mobileHeader.module.scss';
 import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
 
-const SUBNAV_HEIGHT = 24;
-const TITLE_PADDING_TOP_DIFFERENCE = 8;
-const TITLE_PADDING_BOTTOM_DIFFERENCE = 6;
-const COLLAPSING_HEIGHT =
-	SUBNAV_HEIGHT +
-	TITLE_PADDING_TOP_DIFFERENCE +
-	TITLE_PADDING_BOTTOM_DIFFERENCE;
+type Transition = [number, number];
+
+const SUBNAV_HEIGHT: Transition = [24, 0];
+const TITLE_PAD_TOP: Transition = [24, 16];
+const TITLE_PAD_BOTTOM: Transition = [14, 8];
+
+const COLLAPSING_HEIGHT = [
+	SUBNAV_HEIGHT,
+	TITLE_PAD_TOP,
+	TITLE_PAD_BOTTOM,
+].reduce((acc, [s, e]) => acc + (s - e), 0);
+
+const px = (progress: number, [s, e]: Transition) =>
+	`${s + (e - s) * progress}px`;
 
 export default function MobileHeader({
 	setShowingMenu,
@@ -34,29 +40,20 @@ export default function MobileHeader({
 	const navigationItems = useNavigationItems();
 	const playbackContext = useContext(PlaybackContext);
 	const playbackRecording = playbackContext.getRecording();
-	const subnavRef = useRef<HTMLDivElement>(null);
-	const titleRef = useRef<HTMLDivElement>(null);
 	const transitionProgress = useTransitionProgress(
 		scrollRef,
 		COLLAPSING_HEIGHT
 	);
 
-	useEffect(() => {
-		if (isServerSide() || !subnavRef.current || !titleRef.current) return;
-
-		const paddingTop = 24 - transitionProgress * TITLE_PADDING_TOP_DIFFERENCE;
-		const paddingBottom =
-			14 - transitionProgress * TITLE_PADDING_BOTTOM_DIFFERENCE;
-		const height = (1 - transitionProgress) * SUBNAV_HEIGHT;
-
-		titleRef.current.style.paddingTop = `${paddingTop}px`;
-		titleRef.current.style.paddingBottom = `${paddingBottom}px`;
-		subnavRef.current.style.height = `${height}px`;
-	}, [transitionProgress]);
-
 	return (
 		<div className={styles.base}>
-			<div className={styles.title} ref={titleRef}>
+			<div
+				className={styles.title}
+				style={{
+					paddingTop: px(transitionProgress, TITLE_PAD_TOP),
+					paddingBottom: px(transitionProgress, TITLE_PAD_BOTTOM),
+				}}
+			>
 				<Header />
 				<Button
 					type="super"
@@ -70,7 +67,10 @@ export default function MobileHeader({
 				/>
 				{playbackRecording && <ButtonPlayback />}
 			</div>
-			<div className={styles.subnav} ref={subnavRef}>
+			<div
+				className={styles.subnav}
+				style={{ height: px(transitionProgress, SUBNAV_HEIGHT) }}
+			>
 				<Mininav
 					items={navigationItems.slice(0, -2).map((item) => ({
 						id: item.key,
