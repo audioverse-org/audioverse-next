@@ -1,6 +1,5 @@
 import { filters } from '@components/organisms/searchResults.filters';
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import IconExit from '../../../public/img/icons/icon-exit.svg';
@@ -19,7 +18,6 @@ export default function SearchBar({
 }): JSX.Element {
 	const intl = useIntl();
 	const [isFocused, setIsFocused] = useState(false);
-	const { pathname } = useRouter();
 
 	const tab = undefined;
 	const setTab = () => undefined;
