@@ -15,12 +15,12 @@ import styles from './mobileHeader.module.scss';
 import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
 
 const SUBNAV_HEIGHT = 24;
-const HEADER_TITLE_PADDING_TOP_DIFFERENCE = 8;
-const HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE = 6;
+const TITLE_PADDING_TOP_DIFFERENCE = 8;
+const TITLE_PADDING_BOTTOM_DIFFERENCE = 6;
 const COLLAPSING_HEIGHT =
 	SUBNAV_HEIGHT +
-	HEADER_TITLE_PADDING_TOP_DIFFERENCE +
-	HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE;
+	TITLE_PADDING_TOP_DIFFERENCE +
+	TITLE_PADDING_BOTTOM_DIFFERENCE;
 
 export default function MobileHeader({
 	setShowingMenu,
@@ -44,15 +44,14 @@ export default function MobileHeader({
 	useEffect(() => {
 		if (isServerSide() || !subnavRef.current || !titleRef.current) return;
 
-		const titlePaddingTop =
-			24 - transitionProgress * HEADER_TITLE_PADDING_TOP_DIFFERENCE;
-		const titlePaddingBottom =
-			14 - transitionProgress * HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE;
-		const subnavHeight = (1 - transitionProgress) * SUBNAV_HEIGHT;
+		const paddingTop = 24 - transitionProgress * TITLE_PADDING_TOP_DIFFERENCE;
+		const paddingBottom =
+			14 - transitionProgress * TITLE_PADDING_BOTTOM_DIFFERENCE;
+		const height = (1 - transitionProgress) * SUBNAV_HEIGHT;
 
-		titleRef.current.style.paddingTop = `${titlePaddingTop}px`;
-		titleRef.current.style.paddingBottom = `${titlePaddingBottom}px`;
-		subnavRef.current.style.height = `${subnavHeight}px`;
+		titleRef.current.style.paddingTop = `${paddingTop}px`;
+		titleRef.current.style.paddingBottom = `${paddingBottom}px`;
+		subnavRef.current.style.height = `${height}px`;
 	}, [transitionProgress]);
 
 	return (
