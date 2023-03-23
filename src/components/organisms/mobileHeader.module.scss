@@ -23,10 +23,7 @@
 
     > :first-child {
         flex-grow: 1;
-    }
-
-    > :last-child {
-        margin-left: 16px;
+        margin-right: 16px;
     }
 }
 
