@@ -27,6 +27,12 @@ export default function AndNavigation({
 
 	useEffect(() => setTerm(param), [param, pathname]);
 
+	// TODO: Persist scroll position on a per-tab basis to
+	// prevent losing the user's place when switching tabs.
+	useEffect(() => {
+		if (scrollRef.current) scrollRef.current.scrollTop = 0;
+	}, [term, entityType]);
+
 	return (
 		<>
 			<MobileHeader
