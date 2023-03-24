@@ -21,12 +21,15 @@
 	margin-bottom: 24px;
 }
 
-.searchActive {
+.searchActive,
+.hideMobileSearch {
 	display: none;
 }
 
 @media (min-width: $breakpoint-lg) {
-	.searchActive {
+
+	.searchActive,
+	.hideMobileSearch {
 		display: flex;
 	}
 }

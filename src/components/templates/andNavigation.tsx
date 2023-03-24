@@ -38,9 +38,11 @@ export default function AndNavigation({
 		if (scrollRef.current) scrollRef.current.scrollTop = 0;
 	}, [term, entityType]);
 
-	useEffect(() => {
-		setEntityType(contextualFilterId);
-	}, [contextualFilterId]);
+	useEffect(() => setEntityType(contextualFilterId), [contextualFilterId]);
+
+	const hideMobileSearch =
+		contextualFilterId === 'all' &&
+		!['/[language]/discover', '/[language]'].includes(pathname);
 
 	return (
 		<>
@@ -65,7 +67,8 @@ export default function AndNavigation({
 					<SearchBar
 						className={clsx(
 							styles.search,
-							term !== undefined && styles.searchActive
+							term !== undefined && styles.searchActive,
+							hideMobileSearch && styles.hideMobileSearch
 						)}
 						term={term}
 						onTermChange={(v) => setTerm(v)}
