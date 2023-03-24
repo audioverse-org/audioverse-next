@@ -3,7 +3,7 @@ import {
 	filters,
 } from '@components/organisms/searchResults.filters';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import IconExit from '../../../public/img/icons/icon-exit.svg';
 import IconSearch from '../../../public/img/icons/icon-search.svg';
@@ -19,18 +19,40 @@ export default function SearchBar({
 	entityType,
 	onEntityTypeChange,
 	IconClear = IconExit,
+	onSubmit,
 }: {
 	term: string | undefined;
 	onTermChange: (term: string | undefined) => void;
 	className?: string;
 	inputClassName?: string;
 	filtersClassName?: string;
-	entityType: EntityFilterId;
-	onEntityTypeChange: (entityType: EntityFilterId) => void;
+	entityType?: EntityFilterId;
+	onEntityTypeChange?: (entityType: EntityFilterId) => void;
 	IconClear?: React.ComponentType;
+	onSubmit?: () => void;
 }): JSX.Element {
 	const intl = useIntl();
 	const [isFocused, setIsFocused] = useState(false);
+
+	const handleSubmit = useCallback(
+		(e) => {
+			if (e.key === 'Enter') {
+				onSubmit?.();
+			}
+		},
+		[onSubmit]
+	);
+
+	useEffect(() => {
+		if (isFocused) {
+			document.addEventListener('keydown', handleSubmit);
+		} else {
+			document.removeEventListener('keydown', handleSubmit);
+		}
+		return () => {
+			document.removeEventListener('keydown', handleSubmit);
+		};
+	}, [isFocused, handleSubmit]);
 
 	return (
 		<div className={clsx(styles.base, term ?? styles.inactive, className)}>
@@ -72,16 +94,18 @@ export default function SearchBar({
 					defaultMessage="Cancel"
 				/>
 			</button>
-			<Mininav
-				className={clsx(styles.filters, filtersClassName)}
-				theme="light"
-				items={Object.entries(filters).map(([id, { heading }]) => ({
-					id,
-					label: heading,
-					isActive: entityType === id,
-					onClick: () => onEntityTypeChange(id),
-				}))}
-			/>
+			{entityType && onEntityTypeChange && (
+				<Mininav
+					className={clsx(styles.filters, filtersClassName)}
+					theme="light"
+					items={Object.entries(filters).map(([id, { heading }]) => ({
+						id,
+						label: heading,
+						isActive: entityType === id,
+						onClick: () => onEntityTypeChange(id),
+					}))}
+				/>
+			)}
 		</div>
 	);
 }

@@ -83,7 +83,11 @@ const Navigation = ({
 					</a>
 				</div>
 				<div className={clsx(styles.mobileRow, styles.mobileSearch)}>
-					<SearchBar term={searchTerm} onTermChange={onSearchChange} />
+					<SearchBar
+						term={searchTerm}
+						onTermChange={onSearchChange}
+						onSubmit={onExit}
+					/>
 				</div>
 			</div>
 			<div className={styles.slider}>
