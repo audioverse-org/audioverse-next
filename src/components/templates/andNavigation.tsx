@@ -45,7 +45,7 @@ export default function AndNavigation({
 		!['/[language]/discover', '/[language]'].includes(pathname);
 
 	return (
-		<>
+		<div className={styles.base}>
 			<MobileHeader
 				scrollRef={scrollRef}
 				setShowingMenu={setShowingMenu}
@@ -54,39 +54,36 @@ export default function AndNavigation({
 				entityType={entityType}
 				onEntityTypeChange={setEntityType}
 			/>
-
-			<div className={styles.base}>
-				<Drawer
-					showingMenu={showingMenu}
-					onExit={() => setShowingMenu(false)}
-					onSearchChange={(v) => setTerm(v)}
-					searchTerm={term}
+			<Drawer
+				showingMenu={showingMenu}
+				onExit={() => setShowingMenu(false)}
+				onSearchChange={(v) => setTerm(v)}
+				searchTerm={term}
+			/>
+			<div ref={scrollRef} className={styles.content}>
+				<LanguageAlternativesAlert />
+				<SearchBar
+					className={clsx(
+						styles.search,
+						term !== undefined && styles.searchActive,
+						hideMobileSearch && styles.hideMobileSearch
+					)}
+					term={term}
+					onTermChange={(v) => setTerm(v)}
+					entityType={entityType}
+					onEntityTypeChange={setEntityType}
 				/>
-				<div ref={scrollRef} className={styles.content}>
-					<LanguageAlternativesAlert />
-					<SearchBar
-						className={clsx(
-							styles.search,
-							term !== undefined && styles.searchActive,
-							hideMobileSearch && styles.hideMobileSearch
-						)}
+				{term === undefined ? (
+					children
+				) : (
+					<SearchResults
 						term={term}
-						onTermChange={(v) => setTerm(v)}
 						entityType={entityType}
 						onEntityTypeChange={setEntityType}
 					/>
-					{term === undefined ? (
-						children
-					) : (
-						<SearchResults
-							term={term}
-							entityType={entityType}
-							onEntityTypeChange={setEntityType}
-						/>
-					)}
-					<Footer scrollRef={scrollRef} />
-				</div>
+				)}
+				<Footer scrollRef={scrollRef} />
 			</div>
-		</>
+		</div>
 	);
 }

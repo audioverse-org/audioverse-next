@@ -2,16 +2,18 @@
 
 .base {
 	display: flex;
+	flex-direction: column;
 	align-items: stretch;
 	flex-grow: 1;
 	background: $ts-white;
+	height: 100vh;
 }
 
 .content {
-	flex: 0 1 100vw;
+	min-height: 0;
+	flex: 1 1 auto;
 	padding-top: 24px;
 	padding-bottom: 96px;
-	height: 100vh;
 	overflow: scroll;
 
 	@include content-horizontal-padding();
@@ -27,6 +29,13 @@
 }
 
 @media (min-width: $breakpoint-lg) {
+	.base {
+		flex-direction: row;
+	}
+
+	.content {
+		flex: 0 1 100vw;
+	}
 
 	.searchActive,
 	.hideMobileSearch {
