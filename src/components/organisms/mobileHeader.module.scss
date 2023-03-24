@@ -55,19 +55,7 @@
 }
 
 .search {
-    background: $ts-white;
-    padding-top: 14px;
-
-    .searchInput {
-        @include hpad();
-    }
-}
-
-.searchFilters {
-    padding-top: 8px;
-}
-
-.searchActive {
+    display: none;
     background: $ts-cream;
     padding-top: 8px;
 
@@ -95,6 +83,14 @@
     >button {
         margin-left: 8px;
     }
+}
+
+.searchActive {
+    display: flex;
+}
+
+.searchFilters {
+    padding-top: 8px;
 }
 
 @media (min-width: $breakpoint-lg) {

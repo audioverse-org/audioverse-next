@@ -108,6 +108,7 @@ export default function MobileHeader({
 				entityType={entityType}
 				onEntityTypeChange={onEntityTypeChange}
 				IconClear={IconExitSmall}
+				stealFocus={true}
 			/>
 		</div>
 	);

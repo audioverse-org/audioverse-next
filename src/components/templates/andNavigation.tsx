@@ -8,6 +8,7 @@ import Drawer from '@components/organisms/drawer';
 import SearchResults from '@containers/search';
 import Footer from '@components/organisms/footer';
 import { EntityFilterId } from '@components/organisms/searchResults.filters';
+import clsx from 'clsx';
 
 export default function AndNavigation({
 	children,
@@ -47,7 +48,10 @@ export default function AndNavigation({
 				<div ref={scrollRef} className={styles.content}>
 					<LanguageAlternativesAlert />
 					<SearchBar
-						className={styles.search}
+						className={clsx(
+							styles.search,
+							term !== undefined && styles.searchActive
+						)}
 						term={term}
 						onTermChange={(v) => setTerm(v)}
 						entityType={entityType}

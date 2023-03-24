@@ -18,12 +18,9 @@
 }
 
 .search {
-	display: none;
 	margin-bottom: 24px;
 }
 
-@media (min-width: $breakpoint-lg) {
-	.search {
-		display: flex;
-	}
+.searchActive {
+	display: none;
 }

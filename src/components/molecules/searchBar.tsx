@@ -20,6 +20,7 @@ export default function SearchBar({
 	onEntityTypeChange,
 	IconClear = IconExit,
 	onSubmit,
+	stealFocus,
 }: {
 	term: string | undefined;
 	onTermChange: (term: string | undefined) => void;
@@ -30,16 +31,15 @@ export default function SearchBar({
 	onEntityTypeChange?: (entityType: EntityFilterId) => void;
 	IconClear?: React.ComponentType;
 	onSubmit?: () => void;
+	stealFocus?: boolean;
 }): JSX.Element {
 	const intl = useIntl();
 	const [isFocused, setIsFocused] = useState(false);
+	const [lastTerm, setLastTerm] = useState(term);
+	const inputRef = React.useRef<HTMLInputElement>(null);
 
 	const handleSubmit = useCallback(
-		(e) => {
-			if (e.key === 'Enter') {
-				onSubmit?.();
-			}
-		},
+		(e) => e.key === 'Enter' && onSubmit?.(),
 		[onSubmit]
 	);
 
@@ -53,6 +53,18 @@ export default function SearchBar({
 			document.removeEventListener('keydown', handleSubmit);
 		};
 	}, [isFocused, handleSubmit]);
+
+	useEffect(() => {
+		if (
+			stealFocus &&
+			!isFocused &&
+			lastTerm === undefined &&
+			term !== undefined
+		) {
+			inputRef.current?.focus();
+		}
+		setLastTerm(term);
+	}, [term, lastTerm, isFocused, stealFocus]);
 
 	return (
 		<div className={clsx(styles.base, term ?? styles.inactive, className)}>
@@ -81,6 +93,7 @@ export default function SearchBar({
 									description: 'search bar label',
 							  })
 					}
+					ref={inputRef}
 				/>
 				{term && (
 					<button className={styles.clear} onClick={() => onTermChange('')}>
