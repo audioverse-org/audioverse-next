@@ -14,15 +14,6 @@ import {
 import React from 'react';
 import { SetRequired } from 'type-fest';
 
-// Presenters;
-// Teachings;
-// Series;
-// Audiobooks;
-// Sponsors;
-// Conferences;
-// Music;
-// Stories;
-
 type EntityUnion =
 	| CardPersonFragment
 	| CardRecordingFragment
