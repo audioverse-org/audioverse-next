@@ -46,7 +46,7 @@ function isInnerData(d: unknown): d is InnerData {
 }
 
 function reduceNodes(result: QueryResult): InferrableEntity[] {
-	const pages: OuterData[] = result.data?.pages || [];
+	const pages: OuterData[] = result?.data?.pages || [];
 	const values: (InnerData | string)[] = pages.flatMap((p) => Object.values(p));
 	const datas: InnerData[] = values.filter(isInnerData);
 	return datas.map((d) => d.nodes || []).flat();
@@ -56,7 +56,7 @@ function getNextPageParam(lastPage: OuterData) {
 	const d = Object.values(lastPage).find(isInnerData);
 	if (!d) return undefined;
 	const p = d.pageInfo;
-	return p.hasNextPage ? p.endCursor : undefined;
+	return p?.hasNextPage ? p?.endCursor : undefined;
 }
 
 export default function useResults(
@@ -108,7 +108,7 @@ export default function useResults(
 		...filters[k],
 		id: k,
 		nodes: reduceNodes(r),
-		hasNextPage: r.hasNextPage || false,
+		hasNextPage: r?.hasNextPage || false,
 	}));
 
 	return {

@@ -1,5 +1,4 @@
 import { __loadQuery } from 'next/router';
-import React from 'react';
 
 import {
 	GetSearchAudiobooksDocument,
@@ -20,7 +19,6 @@ import {
 	GetSearchStoryProgramsQuery,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
@@ -28,11 +26,16 @@ import Search, {
 
 import { screen, waitFor } from '@testing-library/react';
 import { buildLoader } from '@lib/test/buildLoader';
-import userEvent from '@testing-library/user-event';
+import { buildRenderer } from '@lib/test/buildRenderer';
 
 jest.mock('next/head');
 
-const renderPage = () => renderWithProviders(<Search />);
+const renderPage = buildRenderer(Search, {
+	defaultProps: {
+		entityType: 'all',
+		onEntityTypeChange: () => undefined,
+	},
+});
 
 const empty = {
 	aggregate: {
@@ -167,11 +170,11 @@ describe('search', () => {
 			},
 		});
 
-		await renderPage();
-
-		await screen.findByText('the_recording_title');
-
-		userEvent.click(screen.getByRole('button', { name: 'Presenters' }));
+		await renderPage({
+			props: {
+				entityType: 'presenters',
+			},
+		});
 
 		expect(screen.queryByText('the_recording_title')).not.toBeInTheDocument();
 	});
@@ -205,9 +208,11 @@ describe('search', () => {
 			},
 		});
 
-		await renderPage();
-
-		userEvent.click(screen.getByRole('button', { name: 'Teachings' }));
+		await renderPage({
+			props: {
+				entityType: 'teachings',
+			},
+		});
 
 		await screen.findByText('the_recording_title');
 	});

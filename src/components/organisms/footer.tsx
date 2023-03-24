@@ -19,11 +19,9 @@ export default function Footer({
 		const currentFooterRef = footerRef.current;
 		const currentScrollRef = scrollRef.current;
 
-		console.log('footer maybe');
 		if (!currentFooterRef || !currentScrollRef || isServerSide()) {
 			return;
 		}
-		console.log('footer');
 
 		const fn = () => {
 			const scrollHeight = currentScrollRef.scrollHeight;
