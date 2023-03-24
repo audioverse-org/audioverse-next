@@ -24,3 +24,9 @@
 .searchActive {
 	display: none;
 }
+
+@media (min-width: $breakpoint-lg) {
+	.searchActive {
+		display: flex;
+	}
+}

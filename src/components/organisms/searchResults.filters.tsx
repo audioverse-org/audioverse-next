@@ -10,6 +10,7 @@ import {
 	GetSearchSponsorsDocument,
 	GetSearchStoryProgramsDocument,
 } from '@lib/generated/graphql';
+import { useRouter } from 'next/router';
 
 export type EntityFilter = {
 	heading: JSX.Element;
@@ -18,6 +19,16 @@ export type EntityFilter = {
 };
 
 export type EntityFilterId = keyof typeof filters;
+
+export function useContextualFilterId(): EntityFilterId {
+	const { pathname } = useRouter();
+	const filterIds = Object.keys(filters) as EntityFilterId[];
+	const filterId = filterIds.find((id) =>
+		pathname.match(`/\\[language\\]\\/${id}/`)
+	);
+
+	return filterId || 'all';
+}
 
 export const filters: Record<string, EntityFilter> = {
 	all: {

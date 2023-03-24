@@ -7,7 +7,10 @@ import MobileHeader from '@components/organisms/mobileHeader';
 import Drawer from '@components/organisms/drawer';
 import SearchResults from '@containers/search';
 import Footer from '@components/organisms/footer';
-import { EntityFilterId } from '@components/organisms/searchResults.filters';
+import {
+	EntityFilterId,
+	useContextualFilterId,
+} from '@components/organisms/searchResults.filters';
 import clsx from 'clsx';
 
 export default function AndNavigation({
@@ -20,8 +23,10 @@ export default function AndNavigation({
 		pathname,
 	} = useRouter();
 	const param = q?.toString();
+	const contextualFilterId = useContextualFilterId();
 	const [term, setTerm] = useState<string | undefined>(param);
-	const [entityType, setEntityType] = useState<EntityFilterId>('all');
+	const [entityType, setEntityType] =
+		useState<EntityFilterId>(contextualFilterId);
 	const [showingMenu, setShowingMenu] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -32,6 +37,10 @@ export default function AndNavigation({
 	useEffect(() => {
 		if (scrollRef.current) scrollRef.current.scrollTop = 0;
 	}, [term, entityType]);
+
+	useEffect(() => {
+		setEntityType(contextualFilterId);
+	}, [contextualFilterId]);
 
 	return (
 		<>
