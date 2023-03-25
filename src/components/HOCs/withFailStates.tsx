@@ -7,8 +7,8 @@ import NotFoundBase from '@components/organisms/notFound';
 type WithFailStateOptions<P> = {
 	useShould404?: (props: P) => boolean;
 	useIsLoading?: (props: P) => boolean;
-	Loading?: () => JSX.Element;
-	NotFound?: () => JSX.Element;
+	Loading?: (props: P) => JSX.Element;
+	NotFound?: (props: P) => JSX.Element;
 };
 
 const withFailStates = <P,>(
@@ -28,11 +28,11 @@ const withFailStates = <P,>(
 		const isLoading = useIsLoading(props);
 
 		if (!isFallback && should404) {
-			return <NotFound />;
+			return <NotFound {...(props as Must<P>)} />;
 		}
 
 		if (isFallback || isLoading) {
-			return <Loading />;
+			return <Loading {...(props as Must<P>)} />;
 		}
 
 		return <Component {...(props as Must<P>)} />;

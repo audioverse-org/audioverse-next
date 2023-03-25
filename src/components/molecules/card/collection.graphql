@@ -1,4 +1,5 @@
 fragment cardCollection on Collection {
+	__typename
 	id
 	canonicalPath(useFuturePath: true)
 	collectionContentType: contentType

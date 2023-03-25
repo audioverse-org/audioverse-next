@@ -1,4 +1,5 @@
 fragment cardSponsor on Sponsor {
+	__typename
 	id
 	title
 	canonicalPath(useFuturePath: true)

@@ -17,14 +17,19 @@ const ActiveLink = ({
 	activeClassName,
 	...props
 }: ActiveLinkProps): JSX.Element => {
-	const router = useRouter();
-	const asPath = router.asPath.replace(/\?.*/, '');
-	const isActive = asPath === props.href || asPath === props.as;
-	const classes = isActive ? clsx(className, activeClassName) : className;
+	const { asPath } = useRouter();
+	// TODO: See if useRouter exposes a prop for the current path without the query string
+	// to avoid the need for this regex
+	// https://nextjs.org/docs/api-reference/next/router#router-object
+	const p = asPath.replace(/\?.*/, '');
+	const isActive = p === props.href || p === props.as;
 
 	return (
 		<Link {...props} legacyBehavior>
-			<a className={classes || ''} aria-current={isActive ? 'page' : false}>
+			<a
+				className={clsx(className, isActive && activeClassName)}
+				aria-current={isActive ? 'page' : false}
+			>
 				{children}
 			</a>
 		</Link>

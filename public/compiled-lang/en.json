@@ -3533,6 +3533,12 @@
       "value": "Remove Album"
     }
   ],
+  "molecule-searchBar__cancel": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
   "molecule-searchBar__label": [
     {
       "type": 0,
@@ -4573,47 +4579,67 @@
       "value": "All Matching Teachings"
     }
   ],
+  "search__allHeading": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "search__booksHeading": [
+    {
+      "type": 0,
+      "value": "Audiobooks"
+    }
+  ],
+  "search__booksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Audiobooks"
+    }
+  ],
   "search__conferencesHeading": [
     {
       "type": 0,
       "value": "Conferences"
     }
   ],
-  "search__conferencesSeeAllMatching": [
+  "search__conferencesSeeAll": [
     {
       "type": 0,
       "value": "See All Matching Conferences"
     }
   ],
-  "search__personsHeading": [
+  "search__musicHeading": [
+    {
+      "type": 0,
+      "value": "Music"
+    }
+  ],
+  "search__musicSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Music"
+    }
+  ],
+  "search__presentersHeading": [
     {
       "type": 0,
       "value": "Presenters"
     }
   ],
-  "search__personsSeeAllMatching": [
+  "search__presentersSeeAll": [
     {
       "type": 0,
       "value": "See All Matching Presenters"
     }
   ],
-  "search__resultsCount": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": " Results"
-    }
-  ],
-  "search__sequencesHeading": [
+  "search__seriesHeading": [
     {
       "type": 0,
       "value": "Series"
     }
   ],
-  "search__sequencesSeeAllMatching": [
+  "search__seriesSeeAll": [
     {
       "type": 0,
       "value": "See All Matching Series"
@@ -4625,10 +4651,22 @@
       "value": "Sponsors"
     }
   ],
-  "search__sponsorsSeeAllMatching": [
+  "search__sponsorsSeeAll": [
     {
       "type": 0,
       "value": "See All Matching Sponsors"
+    }
+  ],
+  "search__storiesHeading": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "search__storiesSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Stories"
     }
   ],
   "search__teachingsHeading": [
@@ -4637,7 +4675,7 @@
       "value": "Teachings"
     }
   ],
-  "search__teachingsSeeAllMatching": [
+  "search__teachingsSeeAll": [
     {
       "type": 0,
       "value": "See All Matching Teachings"

@@ -31,8 +31,8 @@ const Navigation = ({
 	onSearchChange,
 }: {
 	onExit: () => void;
-	searchTerm: string;
-	onSearchChange: (term: string) => void;
+	searchTerm: string | undefined;
+	onSearchChange: (term: string | undefined) => void;
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	const intl = useIntl();
@@ -83,7 +83,11 @@ const Navigation = ({
 					</a>
 				</div>
 				<div className={clsx(styles.mobileRow, styles.mobileSearch)}>
-					<SearchBar term={searchTerm} onChange={onSearchChange} />
+					<SearchBar
+						term={searchTerm}
+						onTermChange={onSearchChange}
+						onSubmit={onExit}
+					/>
 				</div>
 			</div>
 			<div className={styles.slider}>

@@ -1666,6 +1666,9 @@
   "molecule-cardRecordingSequenceHat__removeStoryAlbum": {
     "string": "Remove Album"
   },
+  "molecule-searchBar__cancel": {
+    "string": "Cancel"
+  },
   "molecule-searchBar__label": {
     "comment": "search bar label",
     "string": "Search"
@@ -2188,37 +2191,55 @@
   "searchTeachings__heading": {
     "string": "All Matching Teachings"
   },
+  "search__allHeading": {
+    "string": "All"
+  },
+  "search__booksHeading": {
+    "string": "Audiobooks"
+  },
+  "search__booksSeeAll": {
+    "string": "See All Matching Audiobooks"
+  },
   "search__conferencesHeading": {
     "string": "Conferences"
   },
-  "search__conferencesSeeAllMatching": {
+  "search__conferencesSeeAll": {
     "string": "See All Matching Conferences"
   },
-  "search__personsHeading": {
+  "search__musicHeading": {
+    "string": "Music"
+  },
+  "search__musicSeeAll": {
+    "string": "See All Matching Music"
+  },
+  "search__presentersHeading": {
     "string": "Presenters"
   },
-  "search__personsSeeAllMatching": {
+  "search__presentersSeeAll": {
     "string": "See All Matching Presenters"
   },
-  "search__resultsCount": {
-    "string": "{count} Results"
-  },
-  "search__sequencesHeading": {
+  "search__seriesHeading": {
     "string": "Series"
   },
-  "search__sequencesSeeAllMatching": {
+  "search__seriesSeeAll": {
     "string": "See All Matching Series"
   },
   "search__sponsorsHeading": {
     "string": "Sponsors"
   },
-  "search__sponsorsSeeAllMatching": {
+  "search__sponsorsSeeAll": {
     "string": "See All Matching Sponsors"
+  },
+  "search__storiesHeading": {
+    "string": "Stories"
+  },
+  "search__storiesSeeAll": {
+    "string": "See All Matching Stories"
   },
   "search__teachingsHeading": {
     "string": "Teachings"
   },
-  "search__teachingsSeeAllMatching": {
+  "search__teachingsSeeAll": {
     "string": "See All Matching Teachings"
   },
   "search__title": {

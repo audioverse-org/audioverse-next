@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import styles from './progressBar.module.scss';
@@ -18,10 +18,6 @@ export default function ProgressBar({
 	className,
 }: ProgressBarProps): JSX.Element {
 	const intl = useIntl();
-	const cssProps = {
-		'--progress': `${progress * 100}%`,
-		'--buffered': `${(bufferedProgress || 0) * 100}%`,
-	} as CSSProperties;
 	return (
 		<span
 			className={clsx(
@@ -29,7 +25,10 @@ export default function ProgressBar({
 				className,
 				!setProgress && styles.pointerDisabled
 			)}
-			style={cssProps}
+			style={{
+				'--progress': `${progress * 100}%`,
+				'--buffered': `${(bufferedProgress || 0) * 100}%`,
+			}}
 		>
 			<input
 				type="range"

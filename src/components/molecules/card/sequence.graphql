@@ -1,4 +1,5 @@
 fragment cardSequence on Sequence {
+	__typename
 	id
 	title
 	canonicalPath(useFuturePath: true)
