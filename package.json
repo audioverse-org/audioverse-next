@@ -85,7 +85,7 @@
     "@types/cookie": "^0.4.1",
     "@types/he": "^1.1.2",
     "@types/jest-when": "^3.5.0",
-    "@types/js-cookie": "^3.0.2",
+    "@types/js-cookie": "^3.0.3",
     "@types/lodash": "^4.14.178",
     "@types/node-forge": "^1.0.0",
     "@types/react": "^17.0.39",
