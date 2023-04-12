@@ -2,10 +2,11 @@ import node from './primatives/node';
 import paginatedNode from './primatives/paginatedNode';
 
 const teachings = (r: string) => ({
-	filter: (filter = 'all') => paginatedNode(`${r}/${filter}`),
-	all: {
-		feed: node(`${r}/all/feed.xml`),
-	},
+	all: paginatedNode(`${r}/all`, (r) => ({
+		feed: node(`${r}/feed.xml`),
+	})),
+	audio: paginatedNode(`${r}/audio`),
+	video: paginatedNode(`${r}/video`),
 	trending: {
 		filter: (filter = 'all') => node(`${r}/trending/${filter}`),
 	},

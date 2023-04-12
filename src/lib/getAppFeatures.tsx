@@ -1,11 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
+import root, {
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
 	makeLibraryRoute,
-	makeSermonListRoute,
 } from '@lib/routes';
 
 export type IAppFeature = {
@@ -60,7 +59,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="View Recent Content"
 				/>
 			),
-			url: makeSermonListRoute(languageRoute),
+			url: root.lang(languageRoute).teachings.all.get(),
 			backgroundColor: '#325763',
 		},
 		{
@@ -126,7 +125,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="Find Content to Download"
 				/>
 			),
-			url: makeSermonListRoute(languageRoute),
+			url: root.lang(languageRoute).teachings.all.get(),
 			backgroundColor: '#CDD9E3',
 		},
 	].map((item, index) => ({

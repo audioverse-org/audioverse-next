@@ -9,10 +9,9 @@ import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
-import {
+import root, {
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
-	makeSermonListRoute,
 	makeStoryAlbumListPage,
 	makeTrendingSermonRoute,
 } from '@lib/routes';
@@ -50,7 +49,7 @@ export default function Discover({
 					defaultMessage="See All Teachings"
 				/>
 			),
-			url: makeSermonListRoute(languageRoute, 'all', 1),
+			url: root.lang(languageRoute).teachings.all.get(),
 		},
 		{
 			heading: (
