@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeSongAlbumFeedRoute = (
-	languageRoute: string,
-	albumId: Scalars['ID']
-): string => root.lang(languageRoute).songs.albums.id(albumId).feed.get();
-
 export const makeBibleMusicRoute = (
 	languageRoute: string,
 	bookName: string

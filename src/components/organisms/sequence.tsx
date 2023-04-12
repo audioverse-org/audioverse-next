@@ -22,7 +22,7 @@ import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { formatDateRange } from '@lib/date';
 import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
-import root, { makeSongAlbumFeedRoute } from '@lib/routes';
+import root from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -61,7 +61,8 @@ export function Sequence({
 			case SequenceContentType.BibleBook:
 				return () => undefined;
 			case SequenceContentType.MusicAlbum:
-				return makeSongAlbumFeedRoute;
+				return (l: string, id: string | number) =>
+					root.lang(l).songs.albums.id(id).feed.get();
 			case SequenceContentType.Series:
 				return (l: string, id: string | number) =>
 					root.lang(l).series.id(id).feed.get();
