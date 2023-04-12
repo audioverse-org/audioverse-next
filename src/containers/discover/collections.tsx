@@ -13,7 +13,6 @@ import { GetDiscoverCollectionsPageDataQuery } from '@lib/generated/graphql';
 import root, {
 	makeAudiobookListRoute,
 	makeConferenceListRoute,
-	makeSeriesListRoute,
 	makeSongAlbumsListRoute,
 	makeSponsorListRoute,
 	makeStoryAlbumListPage,
@@ -153,7 +152,7 @@ export default function DiscoverCollections({
 					<CardSequence sequence={s} key={s.canonicalPath} />
 				))}
 			</CardGroup>
-			{makeSeeAllButton(makeSeriesListRoute(language, 1))}
+			{makeSeeAllButton(root.lang(language).series.get())}
 		</div>
 	);
 }

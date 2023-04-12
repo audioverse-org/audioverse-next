@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeSeriesListRoute = (
-	languageRoute: string,
-	page: string | number = 1
-): string => root.lang(languageRoute).series.page(page).get();
-
 export const makeSermonListRoute = (
 	languageRoute: string,
 	filter = 'all',
