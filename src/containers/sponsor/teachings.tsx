@@ -13,7 +13,7 @@ import {
 	SponsorPivotFragment,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorFeedRoute, makeSponsorTeachingsRoute } from '@lib/routes';
+import root, { makeSponsorTeachingsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import SponsorPivot from './pivot';
@@ -37,7 +37,9 @@ function SponsorTeachings({
 	const languageRoute = useLanguageRoute();
 	return (
 		<SponsorPivot {...{ sponsor }}>
-			<RssAlternate url={makeSponsorFeedRoute(languageRoute, sponsor.id)} />
+			<RssAlternate
+				url={root.lang(languageRoute).sponsors.id(sponsor.id).feed.get()}
+			/>
 			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
 					id="sponsorTeachingsDetail__heading"

@@ -24,9 +24,8 @@ import Tease from '@components/molecules/tease';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
-import {
+import root, {
 	makeSponsorConferencesRoute,
-	makeSponsorFeedRoute,
 	makeSponsorSeriesRoute,
 	makeSponsorTeachingsRoute,
 } from '@lib/routes';
@@ -139,7 +138,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 						emailSubject={title}
 						light
 						triggerClassName={styles.iconButton}
-						rssUrl={makeSponsorFeedRoute(languageRoute, id)}
+						rssUrl={root.lang(languageRoute).sponsors.id(id).feed.get()}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
