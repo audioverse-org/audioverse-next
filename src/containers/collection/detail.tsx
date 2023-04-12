@@ -26,8 +26,7 @@ import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
-import {
-	makeCollectionFeedRoute,
+import root, {
 	makeCollectionPresentersRoute,
 	makeCollectionSequencesRoute,
 	makeCollectionTeachingsRoute,
@@ -165,7 +164,7 @@ function CollectionDetail({
 							emailSubject={title}
 							light
 							triggerClassName={styles.iconButton}
-							rssUrl={makeCollectionFeedRoute(lang, id)}
+							rssUrl={root.lang(lang).conferences.id(id).feed.get()}
 						/>
 						<ButtonFavorite
 							isFavorited={!!isFavorited}
