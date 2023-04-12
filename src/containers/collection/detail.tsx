@@ -26,7 +26,7 @@ import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
-import root, { makeCollectionTeachingsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -222,7 +222,7 @@ function CollectionDetail({
 					{recordings.pageInfo.hasNextPage && (
 						<Button
 							type="secondaryInverse"
-							href={makeCollectionTeachingsRoute(lang, id)}
+							href={root.lang(lang).conferences.id(id).teachings.get()}
 							text={intl.formatMessage({
 								id: 'collectionDetail__teachingsAllLabel',
 								defaultMessage: 'See All Individual Teachings',
