@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeSeriesFeedRoute = (
-	languageRoute: string,
-	seriesId: Scalars['ID']
-): string => root.lang(languageRoute).series.id(seriesId).feed.get();
-
 export const makeSeriesListRoute = (
 	languageRoute: string,
 	page: string | number = 1

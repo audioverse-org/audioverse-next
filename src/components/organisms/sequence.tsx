@@ -22,9 +22,8 @@ import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { formatDateRange } from '@lib/date';
 import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
-import {
+import root, {
 	makeAudiobookFeedRoute,
-	makeSeriesFeedRoute,
 	makeSongAlbumFeedRoute,
 	makeStoryAlbumFeedRoute,
 } from '@lib/routes';
@@ -67,7 +66,8 @@ export function Sequence({
 			case SequenceContentType.MusicAlbum:
 				return makeSongAlbumFeedRoute;
 			case SequenceContentType.Series:
-				return makeSeriesFeedRoute;
+				return (l: string, id: string | number) =>
+					root.lang(l).series.id(id).feed.get();
 			case SequenceContentType.StorySeason:
 				return makeStoryAlbumFeedRoute;
 			default:
