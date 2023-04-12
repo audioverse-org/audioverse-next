@@ -28,7 +28,6 @@ import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
 import root, {
 	makeCollectionPresentersRoute,
-	makeCollectionSequencesRoute,
 	makeCollectionTeachingsRoute,
 } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
@@ -195,7 +194,7 @@ function CollectionDetail({
 					{sequences.pageInfo.hasNextPage && (
 						<Button
 							type="secondaryInverse"
-							href={makeCollectionSequencesRoute(lang, id)}
+							href={root.lang(lang).conferences.id(id).sequences.get()}
 							text={intl.formatMessage({
 								id: 'collectionDetail__seriesAllLabel',
 								defaultMessage: 'See All Series',

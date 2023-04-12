@@ -48,17 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeCollectionSequencesRoute = (
-	languageRoute: string,
-	conferenceId: Scalars['ID'],
-	page: string | number = 1
-): string =>
-	root
-		.lang(languageRoute)
-		.conferences.id(conferenceId)
-		.sequences.page(page)
-		.get();
-
 export const makeCollectionPresentersRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID'],
