@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
-import React, { CSSProperties, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import ButtonDownload from '@components/molecules/buttonDownload';
@@ -144,12 +144,10 @@ const Player = ({
 					<div className={styles.controlGrow}>
 						<div
 							className={styles.waves}
-							style={
-								{
-									'--progress': `${session.progress * 100}%`,
-									'--buffered': `${session.bufferedProgress * 100}%`,
-								} as CSSProperties
-							}
+							style={{
+								'--progress': `${session.progress * 100}%`,
+								'--buffered': `${session.bufferedProgress * 100}%`,
+							}}
 						>
 							<input
 								type="range"

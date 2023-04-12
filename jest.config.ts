@@ -1,7 +1,9 @@
-const tsconfig = require('./tsconfig.json');
-const moduleNameMapper = require('tsconfig-paths-jest')(tsconfig);
+import getJestMappersFromTSConfig from 'tsconfig-paths-jest-mapper';
+import type { Config } from '@jest/types';
 
-module.exports = {
+const moduleNameMapper = getJestMappersFromTSConfig('');
+
+const config: Config.InitialOptions = {
 	testEnvironment: 'jsdom',
 	moduleNameMapper: {
 		'\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
@@ -20,3 +22,5 @@ module.exports = {
 	setupFiles: ['jest-date-mock'],
 	setupFilesAfterEnv: ['<rootDir>/testSetup.ts'],
 };
+
+export default config;

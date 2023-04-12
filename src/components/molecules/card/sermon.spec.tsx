@@ -89,23 +89,4 @@ describe('card sermon', () => {
 
 		expect(getByLabelText('Favorite')).toBeInTheDocument();
 	});
-
-	// it('displays progress bar when recording starts playing', async () => {
-	// 	const { getByLabelText, getAllByLabelText } = await renderComponent({
-	// 		props: {
-	// 			recording: {
-	// 				id: 'the_sermon_id',
-	// 			},
-	// 			progress: 0,
-	// 		},
-	// 	});
-	//
-	// 	console.log('clicking play');
-	//
-	// 	userEvent.click(getByLabelText('play'));
-	//
-	// 	await waitFor(() => {
-	// 		expect(getAllByLabelText('progress')).toHaveLength(2);
-	// 	});
-	// });
 });

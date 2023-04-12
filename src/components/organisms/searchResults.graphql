@@ -1,0 +1,174 @@
+query getSearchRecordings(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	sermons(language: $language, search: $term, first: $first, after: $after) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardRecording
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
+
+query getSearchSeries(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	serieses(language: $language, search: $term, first: $first, after: $after) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardSequence
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
+
+query getSearchConferences(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	conferences(
+		language: $language
+		search: $term
+		first: $first
+		after: $after
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardCollection
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
+
+query getSearchSponsors(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	sponsors(language: $language, search: $term, first: $first, after: $after) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardSponsor
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
+
+query getSearchPersons(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	persons(language: $language, search: $term, first: $first, after: $after) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardPerson
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
+
+query getSearchAudiobooks(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	audiobooks(language: $language, search: $term, first: $first, after: $after) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardSequence
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
+
+query getSearchMusicTracks(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	musicTracks(
+		language: $language
+		search: $term
+		first: $first
+		after: $after
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardRecording
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
+
+query getSearchStoryPrograms(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	storyPrograms(
+		language: $language
+		search: $term
+		first: $first
+		after: $after
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardCollection
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

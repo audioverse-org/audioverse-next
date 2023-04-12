@@ -1,33 +1,24 @@
 @import '../../styles/common';
 
 .base {
-	flex-grow: 1;
 	display: flex;
-	min-width: 0;
+	flex-wrap: wrap;
 }
 
-.inner {
-	flex-grow: 1;
-	display: flex;
-	min-width: 0;
+.input {
 	margin-left: auto;
 	margin-right: auto;
-	border-bottom: 0.5px solid rgba($ts-lightTone, 0.5);
+	border-bottom: 0.5px solid $ts-lightTone;
 	letter-spacing: unset;
-	&.focused {
-		border-bottom-color: rgba($ts-dark, 0.5);
-		.icon {
-			color: $ts-red;
-		}
-	}
-}
-
-.inputWrapper {
 	flex-grow: 1;
 	display: flex;
 	min-width: 0;
 	align-items: center;
 	padding-bottom: 8px;
+
+	svg {
+		flex: 0 0 auto;
+	}
 
 	input {
 		flex-grow: 1;
@@ -39,6 +30,7 @@
 		outline: none;
 		appearance: none;
 		min-width: 0;
+
 		&,
 		&::placeholder {
 			font-family: $serif;
@@ -48,13 +40,23 @@
 			color: $ts-dark;
 			opacity: 1;
 		}
+
 		&::-webkit-search-cancel-button {
 			appearance: none;
 		}
 	}
+
 	a {
 		height: 24px;
 		cursor: pointer;
+	}
+
+	&.focused {
+		border-bottom-color: rgba($ts-dark, 0.5);
+
+		.icon {
+			color: $ts-red;
+		}
 	}
 }
 
@@ -73,8 +75,38 @@
 	cursor: pointer;
 }
 
-@media (min-width: $breakpoint-lg) {
-	.clearHidden.clearHidden {
+.clear,
+.cancel {
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.cancel {
+	font-family: Inter;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 15px;
+	letter-spacing: 0em;
+	text-align: left;
+	margin-left: 28px;
+}
+
+.filters {
+	min-width: 0;
+	flex: 0 0 100%;
+	overflow-x: scroll;
+	padding-bottom: 8px;
+	padding-top: 16px;
+	margin-bottom: 0;
+}
+
+.inactive {
+
+	.cancel,
+	.filters {
 		display: none;
 	}
 }

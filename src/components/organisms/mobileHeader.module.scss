@@ -1,61 +1,100 @@
 @import '../../styles/common';
 
-.mobileHeader {
+@mixin hpad() {
+    padding-left: calc(24px + env(safe-area-inset-left));
+    padding-right: calc(24px + env(safe-area-inset-right));
+}
+
+.base {
     position: sticky;
     top: 0;
     display: flex;
     flex-direction: column;
     z-index: 10;
-    background: $ts-cream;
 }
 
-.mobileHeaderTitle {
+.wrapper {
+    background: $ts-cream;
+    padding-bottom: 8px;
+
+    @include hpad();
+}
+
+.title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px calc(24px + env(safe-area-inset-right)) 22px calc(24px + env(safe-area-inset-left));
     z-index: 1;
-    background: $ts-cream;
 
     > :first-child {
-        flex-grow: 1;
-    }
-
-    > :nth-child(n + 2) {
-        margin-left: 16px;
+        margin-right: 16px;
     }
 }
 
-.mobileSubnavWrapper {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.subnav {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
     background: $ts-cream;
 }
 
-.mobileSubnav {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin: 0 calc(24px + env(safe-area-inset-right)) 8px calc(24px + env(safe-area-inset-left));
-}
-
-.mobileSubnavItems {
+.subnavItems {
     height: 24px;
     margin-right: 16px;
     flex-wrap: wrap;
     overflow: hidden;
 }
 
-.mobileHeaderMore {
-    position: absolute;
-    right: 0;
+.more {
     height: 24px;
+    padding: 0;
+    border: none;
+}
+
+.search {
+    display: none;
+    background: $ts-cream;
+    padding-top: 8px;
+
+    @include hpad();
+
+    .searchInput {
+        background: $ts-white;
+        border-bottom: none;
+        border-radius: 4px;
+        padding: 4px 12px 4px 8px;
+        height: 32px;
+
+        >svg {
+            color: $ts-red;
+        }
+
+        input,
+        input::placeholder {
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+        }
+    }
+
+    >button {
+        margin-left: 8px;
+    }
+}
+
+.searchActive {
+    display: flex;
+}
+
+.searchFilters {
+    padding-top: 8px;
 }
 
 @media (min-width: $breakpoint-lg) {
-    .mobileHeader {
+    .base {
         display: none;
     }
 }

@@ -1,6 +1,11 @@
 overwrite: true
 schema: 'https://graphql-staging.audioverse.org/graphql'
 documents: 'src/**/*.graphql'
+extensions:
+  endpoints:
+    default:
+      url: 'https://graphql-staging.audioverse.org/graphql'
+      introspect: true
 generates:
   ./schema.graphql:
     plugins:

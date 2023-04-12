@@ -58,3 +58,15 @@
 .miniNavActive.miniNavActive {
 	border-bottom-color: $ts-red;
 }
+
+.light {
+	.button {
+		color: $ts-midTone;
+		&:hover {
+			color: $ts-red;
+		}
+	}
+	.miniNavActive {
+		color: $ts-dark;
+	}
+}

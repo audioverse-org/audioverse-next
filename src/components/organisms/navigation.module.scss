@@ -6,13 +6,16 @@
 	flex-direction: column;
 	flex-grow: 1;
 	overflow-y: scroll;
+
 	h1 {
 		margin-top: 0;
 	}
+
 	ul {
 		margin: 0;
 		padding-left: 0;
 	}
+
 	li {
 		list-style-type: none;
 		height: 32px;
@@ -21,37 +24,46 @@
 		font-weight: 400;
 		display: flex;
 		align-items: center;
+
 		.icon {
 			margin-right: 8px;
 			display: flex;
 			width: 24px;
 			color: $ts-dark;
+
 			svg {
 				@include fadeIn($transition-quick);
 			}
 		}
+
 		.label {
 			flex-grow: 1;
 		}
+
 		.navLink {
 			flex-grow: 1;
 			text-decoration: none;
 			display: flex;
 			align-items: center;
 			color: $ts-midTone;
+
 			*:not(svg) {
 				transition: none; // FIX: https://stackoverflow.com/a/40512935
 			}
 		}
 	}
+
 	.navLink:hover {
+
 		&,
 		.icon {
 			color: $ts-red;
 		}
 	}
+
 	@media (min-width: $breakpoint-lg) {
 		.navLink.active {
+
 			&,
 			.icon,
 			.iconDisclosure {
@@ -72,6 +84,7 @@
 	color: $ts-dark;
 	transform: rotate(-90deg);
 	cursor: pointer;
+
 	&:hover {
 		background: $ts-darkened-white;
 	}
@@ -88,14 +101,20 @@
 	padding-left: 24px;
 	padding-right: 24px;
 }
+
 .mobileRow {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 24px;
 }
+
 .mobileSearch {
 	margin-bottom: 0;
+
+	>div {
+		flex-grow: 1;
+	}
 }
 
 .languageButton,
@@ -112,6 +131,7 @@
 	position: relative;
 	overflow: hidden;
 }
+
 .sliderColumns {
 	position: absolute;
 	left: 0;
@@ -119,13 +139,16 @@
 	bottom: 0;
 	display: flex;
 	width: 100%;
-	> * {
+
+	>* {
 		flex: 0 0 100%;
 		display: flex;
 		flex-direction: column;
 		padding: 24px 24px 0;
 	}
+
 	transition: left $transition-medium;
+
 	&.in {
 		left: -100%;
 	}
@@ -138,11 +161,13 @@
 	padding-bottom: 2px;
 	color: $ts-midTone;
 }
+
 .accountWithAvatar {
 	flex-grow: 1;
 	display: flex;
 	align-items: center;
 	margin-bottom: 8px;
+
 	.iconDisclosure {
 		display: inline-block;
 		margin-left: 8px;
@@ -151,25 +176,31 @@
 		transform: rotate(-90deg);
 		flex: 0 0 18px;
 	}
+
 	&:hover {
 		text-decoration: none;
+
 		.iconDisclosure {
 			color: $ts-red;
 		}
+
 		.accountName {
 			border-color: $ts-red;
 		}
 	}
 }
+
 .account,
 .accountWithAvatar {
 	*:not(svg) {
 		transition: none; // FIX: https://stackoverflow.com/a/40512935
 	}
 }
+
 .accountAvatar {
 	margin-right: 4px;
 }
+
 .accountName {
 	text-decoration: underline;
 	line-height: 1.3;
@@ -180,10 +211,12 @@
 	align-items: center;
 	margin-bottom: 24px;
 	color: $ts-midTone;
-	> svg {
+
+	>svg {
 		transform: rotate(90deg);
 		margin-right: 4px;
 	}
+
 	&:hover {
 		text-decoration: none;
 	}
@@ -194,6 +227,7 @@
 		margin-bottom: 16px;
 		font-size: 17px;
 		height: auto;
+
 		.icon {
 			width: 16px;
 			display: flex;
@@ -212,24 +246,29 @@
 }
 
 @media (min-width: $breakpoint-lg) {
+
 	.mobileHeader,
 	.mobileRow {
 		display: none;
 	}
+
 	.header {
 		position: relative;
 		overflow: hidden;
 	}
-	.sliderColumns > * {
+
+	.sliderColumns>* {
 		padding-top: 0;
 		padding-left: 32px;
 		padding-right: 22px;
 		flex-basis: 100%;
 	}
+
 	.account {
 		margin-top: 16px;
 		margin-bottom: 32px;
 	}
+
 	.desktopDonate {
 		display: inherit;
 		align-self: flex-start;

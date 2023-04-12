@@ -17,7 +17,7 @@ export default function All(props: PresentersProps) {
 	const language = useLanguageId();
 
 	const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery(
-		['sponsors'],
+		['presenters'],
 		({ pageParam = null }) =>
 			fetchApi(GetPresenterListAllPageDataDocument, {
 				variables: {

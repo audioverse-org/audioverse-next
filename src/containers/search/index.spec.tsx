@@ -1,26 +1,128 @@
 import { __loadQuery } from 'next/router';
-import React from 'react';
 
-import { Language } from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
+import {
+	GetSearchAudiobooksDocument,
+	GetSearchAudiobooksQuery,
+	GetSearchConferencesDocument,
+	GetSearchConferencesQuery,
+	GetSearchMusicTracksDocument,
+	GetSearchMusicTracksQuery,
+	GetSearchPersonsDocument,
+	GetSearchPersonsQuery,
+	GetSearchRecordingsDocument,
+	GetSearchRecordingsQuery,
+	GetSearchSeriesDocument,
+	GetSearchSeriesQuery,
+	GetSearchSponsorsDocument,
+	GetSearchSponsorsQuery,
+	GetSearchStoryProgramsDocument,
+	GetSearchStoryProgramsQuery,
+	RecordingContentType,
+} from '@lib/generated/graphql';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/search';
 
 import { screen, waitFor } from '@testing-library/react';
+import { buildLoader } from '@lib/test/buildLoader';
+import { buildRenderer } from '@lib/test/buildRenderer';
 
 jest.mock('next/head');
 
-const renderPage = async () => {
-	return renderWithProviders(<Search language={Language.English} />, undefined);
+const renderPage = buildRenderer(Search, {
+	defaultProps: {
+		entityType: 'all',
+		onEntityTypeChange: () => undefined,
+	},
+});
+
+const empty = {
+	aggregate: {
+		count: 0,
+	},
+	nodes: [],
+	pageInfo: {
+		hasNextPage: false,
+		endCursor: null,
+	},
 };
 
-describe('search', () => {
-	it('renders', async () => {
-		__loadQuery();
+const loadRecordings = buildLoader<GetSearchRecordingsQuery>(
+	GetSearchRecordingsDocument,
+	{
+		sermons: empty,
+	}
+);
 
-		await renderPage();
+const loadSeries = buildLoader<GetSearchSeriesQuery>(GetSearchSeriesDocument, {
+	serieses: empty,
+});
+
+const loadConferences = buildLoader<GetSearchConferencesQuery>(
+	GetSearchConferencesDocument,
+	{
+		conferences: empty,
+	}
+);
+
+const loadSponsors = buildLoader<GetSearchSponsorsQuery>(
+	GetSearchSponsorsDocument,
+	{
+		sponsors: empty,
+	}
+);
+
+const loadPersons = buildLoader<GetSearchPersonsQuery>(
+	GetSearchPersonsDocument,
+	{
+		persons: empty,
+	}
+);
+
+const loadAudiobooks = buildLoader<GetSearchAudiobooksQuery>(
+	GetSearchAudiobooksDocument,
+	{
+		audiobooks: empty,
+	}
+);
+
+const loadMusicTracks = buildLoader<GetSearchMusicTracksQuery>(
+	GetSearchMusicTracksDocument,
+	{
+		musicTracks: empty,
+	}
+);
+
+const loadStoryPrograms = buildLoader<GetSearchStoryProgramsQuery>(
+	GetSearchStoryProgramsDocument,
+	{
+		storyPrograms: empty,
+	}
+);
+
+describe('search', () => {
+	beforeEach(() => {
+		__loadQuery({
+			q: 'test',
+		});
+		loadRecordings();
+		loadSeries();
+		loadConferences();
+		loadSponsors();
+		loadPersons();
+		loadAudiobooks();
+		loadMusicTracks();
+		loadStoryPrograms();
+
+		// IntersectionObserver isn't available in test environment
+		const mockIntersectionObserver = jest.fn();
+		mockIntersectionObserver.mockReturnValue({
+			observe: () => null,
+			unobserve: () => null,
+			disconnect: () => null,
+		});
+		window.IntersectionObserver = mockIntersectionObserver;
 	});
 
 	it('registers search paths', async () => {
@@ -40,10 +142,6 @@ describe('search', () => {
 	});
 
 	it('includes search term in title', async () => {
-		__loadQuery({
-			q: 'test',
-		});
-
 		await renderPage();
 
 		await waitFor(() => {
@@ -51,5 +149,71 @@ describe('search', () => {
 				'Search | "test" | AudioVerse'
 			);
 		});
+	});
+
+	it('filters to presenters', async () => {
+		loadRecordings({
+			sermons: {
+				aggregate: {
+					count: 1,
+				},
+				nodes: [
+					{
+						__typename: 'Recording',
+						id: 'recording',
+						title: 'the_recording_title',
+						recordingContentType: RecordingContentType.Sermon,
+						persons: [],
+						canonicalPath: '/en/recordings/recording',
+					},
+				],
+			},
+		});
+
+		await renderPage({
+			props: {
+				entityType: 'presenters',
+			},
+		});
+
+		expect(screen.queryByText('the_recording_title')).not.toBeInTheDocument();
+	});
+
+	it('does not show empty sections on all tab', async () => {
+		await renderPage();
+
+		expect(
+			screen.queryByRole('heading', {
+				name: 'Presenters',
+			})
+		).not.toBeInTheDocument();
+	});
+
+	it('shows teachings on teachings tab', async () => {
+		loadRecordings({
+			sermons: {
+				aggregate: {
+					count: 1,
+				},
+				nodes: [
+					{
+						__typename: 'Recording',
+						id: 'recording',
+						title: 'the_recording_title',
+						recordingContentType: RecordingContentType.Sermon,
+						persons: [],
+						canonicalPath: '/en/recordings/recording',
+					},
+				],
+			},
+		});
+
+		await renderPage({
+			props: {
+				entityType: 'teachings',
+			},
+		});
+
+		await screen.findByText('the_recording_title');
 	});
 });
