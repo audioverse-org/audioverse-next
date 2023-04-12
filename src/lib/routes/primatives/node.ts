@@ -1,8 +1,10 @@
 import getter, { Getter } from './getter';
 
+type Extender<T> = (r: string) => T;
+
 const node = <T>(
 	r: string,
-	extend: (r: string) => T = () => ({} as T)
+	extend: Extender<T> = () => ({} as T)
 ): {
 	get: Getter;
 } & T => ({

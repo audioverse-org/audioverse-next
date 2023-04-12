@@ -1,133 +1,22 @@
 import { Scalars } from './generated/graphql';
-import node from './routes/node';
-import paginatedNode from './routes/paginatedNode';
-import slug from './routes/slug';
-
-const presenters = (r: string) => ({
-	letter: (letter: string) => node(`${r}/letter/${letter}`),
-	all: node(`${r}/all`),
-	id: (personId: Scalars['ID']) =>
-		node(`${r}/${personId}`, (r) => ({
-			teachings: paginatedNode(`${r}/teachings`),
-			feed: node(`${r}/feed.xml`),
-			top: node(`${r}/top`),
-			sequences: paginatedNode(`${r}/sequences`),
-			appears: paginatedNode(`${r}/appears`),
-		})),
-});
-
-const series = (r: string) => ({
-	id: (seriesId: Scalars['ID']) => ({
-		feed: node(`${r}/${seriesId}/feed.xml`),
-	}),
-});
-
-const teachings = (r: string) => ({
-	filter: (filter = 'all') => paginatedNode(`${r}/${filter}`),
-	all: {
-		feed: node(`${r}/all/feed.xml`),
-	},
-	trending: {
-		filter: (filter = 'all') => node(`${r}/trending/${filter}`),
-	},
-});
-
-const bibles = (r: string) => ({
-	versionId: (versionId: Scalars['ID']) => node(`${r}/${versionId}`),
-	bookId: (bookId: Scalars['ID']) =>
-		node(`${r}/${bookId}`, (r) => ({
-			chapterNumber: (chapterNumber: Scalars['ID']) =>
-				node(`${r}/${chapterNumber}`),
-		})),
-});
-
-const books = (r: string) => ({
-	id: (bookId: Scalars['ID']) =>
-		node(`${r}/${bookId}`, (r) => ({
-			feed: node(`${r}/feed.xml`),
-		})),
-});
-
-const stories = (r: string) => ({
-	albums: paginatedNode(`${r}/albums`, (r) => ({
-		id: (albumId: Scalars['ID']) => ({
-			feed: node(`${r}/${albumId}/feed.xml`),
-		}),
-	})),
-});
-
-const songs = (r: string) => ({
-	albums: node(`${r}/albums`, (r) => ({
-		id: (albumId: Scalars['ID']) => ({
-			feed: node(`${r}/${albumId}/feed.xml`),
-		}),
-	})),
-	book: (bookName: string) =>
-		node(`${r}/book/${slug(bookName)}`, (r) => ({
-			track: (canonicalPath: string) =>
-				node(`${r}/${canonicalPath.split('/').slice(3).join('/')}`),
-		})),
-});
-
-const conferences = (r: string) => ({
-	id: (conferenceId: Scalars['ID']) =>
-		node(`${r}/${conferenceId}`, (r) => ({
-			feed: node(`${r}/feed.xml`),
-			sequences: paginatedNode(`${r}/sequences`),
-			presenters: paginatedNode(`${r}/presenters`),
-			teachings: paginatedNode(`${r}/teachings`),
-		})),
-});
-
-const sponsors = (r: string) => ({
-	id: (sponsorId: Scalars['ID']) =>
-		node(`${r}/${sponsorId}`, (r) => ({
-			feed: node(`${r}/feed.xml`),
-			teachings: paginatedNode(`${r}/teachings`),
-			conferences: paginatedNode(`${r}/conferences`),
-			series: paginatedNode(`${r}/series`),
-		})),
-	letter: (letter: string) => node(`${r}/letter/${letter}`),
-	all: node(`${r}/all`),
-});
-
-const contact = (r: string) => ({
-	testimonies: node(`${r}/testimonies`),
-	subpath: (subpath: string) => node(`${r}${subpath}`),
-});
-
-const library = (r: string) => ({
-	playlist: (playlistId: Scalars['ID']) => node(`${r}/playlist/${playlistId}`),
-	subpath: (subpath: string) => node(`${r}${subpath}`),
-});
-
-const about = (r: string) => ({
-	id: (pageId: number) => node(`${r}/${pageId}`),
-});
-
-const account = (r: string) => ({
-	login: node(`${r}/login`),
-	logout: node(`${r}/logout`),
-	register: node(`${r}/register`),
-	profile: node(`${r}/profile`),
-	preferences: node(`${r}/preferences`),
-});
-
-const discover = (r: string) => ({
-	collections: node(`${r}/collections`),
-});
-
-const search = (r: string) => ({
-	collections: paginatedNode(`${r}/collections`),
-	persons: paginatedNode(`${r}/persons`),
-	sequences: paginatedNode(`${r}/sequences`),
-	sponsors: paginatedNode(`${r}/sponsors`),
-	teachings: paginatedNode(`${r}/teachings`),
-});
-
-const releases = (r: string) => ({
-	id: (releaseId: Scalars['ID']) => node(`${r}/${releaseId}`),
-});
+import about from './routes/about';
+import account from './routes/account';
+import discover from './routes/discover';
+import presenters from './routes/presenters';
+import node from './routes/primatives/node';
+import paginatedNode from './routes/primatives/paginatedNode';
+import releases from './routes/releases';
+import search from './routes/search';
+import library from './routes/library';
+import contact from './routes/contact';
+import sponsors from './routes/sponsors';
+import conferences from './routes/conferences';
+import songs from './routes/songs';
+import stories from './routes/stories';
+import books from './routes/books';
+import bibles from './routes/bibles';
+import teachings from './routes/teachings';
+import series from './routes/series';
 
 const root = {
 	lang: (languageRoute: string) =>
