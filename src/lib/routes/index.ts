@@ -48,17 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeSponsorListRoute = (
-	languageRoute: string,
-	letter?: string
-): string =>
-	letter
-		? root.lang(languageRoute).sponsors.letter(letter).get()
-		: root.lang(languageRoute).sponsors.get();
-
-export const makeSponsorListAllRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).sponsors.all.get();
-
 export const makeSponsorTeachingsRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],

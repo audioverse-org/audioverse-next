@@ -15,7 +15,6 @@ import root, {
 	makeDonateRoute,
 	makeLibraryRoute,
 	makeLogoutRoute,
-	makeSponsorListRoute,
 	makeTestimoniesRoute,
 	makeTestimonySubmitRoute,
 } from '@lib/routes';
@@ -168,7 +167,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'sponsors',
-					href: makeSponsorListRoute(languageRoute),
+					href: root.lang(languageRoute).sponsors.get(),
 					Icon: iconMap.fa_user_plus_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-sponsors`,
