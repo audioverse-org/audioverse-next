@@ -9,10 +9,7 @@ import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
-import root, {
-	makeBlogPostListRoute,
-	makeConferenceListRoute,
-} from '@lib/routes';
+import root, { makeBlogPostListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
@@ -144,7 +141,7 @@ export default function Discover({
 					defaultMessage="See All Conferences"
 				/>
 			),
-			url: makeConferenceListRoute(languageRoute),
+			url: root.lang(languageRoute).conferences.get(),
 		},
 	];
 

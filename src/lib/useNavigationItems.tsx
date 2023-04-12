@@ -9,7 +9,6 @@ import root, {
 	makeAboutPage,
 	makeAccountProfileRoute,
 	makeBlogPostListRoute,
-	makeConferenceListRoute,
 	makeContactRoute,
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
@@ -178,7 +177,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'conferences',
-					href: makeConferenceListRoute(languageRoute),
+					href: root.lang(languageRoute).conferences.get(),
 					Icon: iconMap.fa_calendar,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-conferences`,

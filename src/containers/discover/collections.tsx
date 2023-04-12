@@ -10,10 +10,7 @@ import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
 import CardGroup from '@components/molecules/cardGroup';
 import { GetDiscoverCollectionsPageDataQuery } from '@lib/generated/graphql';
-import root, {
-	makeConferenceListRoute,
-	makeSponsorListRoute,
-} from '@lib/routes';
+import root, { makeSponsorListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
@@ -101,7 +98,7 @@ export default function DiscoverCollections({
 					<CardCollection collection={n} key={n.canonicalPath} />
 				))}
 			</CardGroup>
-			{makeSeeAllButton(makeConferenceListRoute(language, 1))}
+			{makeSeeAllButton(root.lang(language).conferences.get())}
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_sponsorsHeading"

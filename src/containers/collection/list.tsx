@@ -6,10 +6,7 @@ import CardCollection from '@components/molecules/card/collection';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetCollectionListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makeConferenceListRoute,
-	makeDiscoverCollectionsRoute,
-} from '@lib/routes';
+import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type CollectionListProps = PaginatedProps<
@@ -35,7 +32,7 @@ function CollectionList({
 					defaultMessage="All Conferences"
 				/>
 			}
-			makeRoute={makeConferenceListRoute}
+			makeRoute={(l, i) => root.lang(l).conferences.page(i).get()}
 		>
 			{nodes.map((node) => (
 				<CardCollection collection={node} key={node.canonicalPath} />
