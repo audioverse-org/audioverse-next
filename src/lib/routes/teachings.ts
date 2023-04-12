@@ -7,9 +7,11 @@ const teachings = (r: string) => ({
 	})),
 	audio: paginatedNode(`${r}/audio`),
 	video: paginatedNode(`${r}/video`),
-	trending: {
-		filter: (filter = 'all') => node(`${r}/trending/${filter}`),
-	},
+	trending: node(`${r}/trending`, (r) => ({
+		all: paginatedNode(`${r}/all`),
+		audio: paginatedNode(`${r}/audio`),
+		video: paginatedNode(`${r}/video`),
+	})),
 });
 
 export default teachings;

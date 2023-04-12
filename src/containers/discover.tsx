@@ -13,7 +13,6 @@ import root, {
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
 	makeStoryAlbumListPage,
-	makeTrendingSermonRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -67,7 +66,7 @@ export default function Discover({
 					defaultMessage="See All Trending Teachings"
 				/>
 			),
-			url: makeTrendingSermonRoute(languageRoute),
+			url: root.lang(languageRoute).teachings.trending.get(),
 		},
 		{
 			heading: (
