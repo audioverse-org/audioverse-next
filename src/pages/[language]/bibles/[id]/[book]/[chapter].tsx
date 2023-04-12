@@ -8,7 +8,7 @@ import { IBaseProps } from '@containers/base';
 import Book, { BookProps } from '@containers/bible/book';
 import { getBible, getBibleBookChapters, getBibles } from '@lib/api/bibleBrain';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { makeBibleBookRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default Book;
 
@@ -62,7 +62,11 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		paths: (response || [])
 			.map((version) =>
 				(version.books || []).map(({ book_id }) =>
-					makeBibleBookRoute(LANGUAGES.ENGLISH.base_url, book_id)
+					root
+						.lang(LANGUAGES.ENGLISH.base_url)
+						.bibles.bookId(book_id)
+						.chapterNumber(1)
+						.get()
 				)
 			)
 			.flat(2),

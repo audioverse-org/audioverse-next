@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import { IBibleBook } from '@lib/api/bibleBrain';
-import { makeBibleBookRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import BibleVersionTypeLockup from '../bibleVersionTypeLockup';
@@ -55,7 +55,12 @@ export default function CardBibleBook({
 		</>
 	);
 
-	const linkUrl = makeBibleBookRoute(languageRoute, id);
+	const linkUrl = root
+		.lang(languageRoute)
+		.bibles.bookId(id)
+		.chapterNumber(1)
+		.get();
+
 	return (
 		<Card className={styles.card}>
 			{isOptionalLink ? (
