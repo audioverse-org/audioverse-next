@@ -28,7 +28,7 @@ import {
 	RecordingContentType,
 	SequenceNavFragment,
 } from '@lib/generated/graphql';
-import { makeBibleBookRoute, makeBibleVersionRoute } from '@lib/routes';
+import root, { makeBibleBookRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
@@ -189,7 +189,10 @@ function BookInner({
 
 	return (
 		<Tease>
-			<Link href={makeBibleVersionRoute(languageRoute, id)} legacyBehavior>
+			<Link
+				href={root.lang(languageRoute).bibles.versionId(id).get()}
+				legacyBehavior
+			>
 				<a className={styles.hat}>
 					<BibleVersionTypeLockup
 						unpadded={true}

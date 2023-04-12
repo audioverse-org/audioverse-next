@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeBibleVersionRoute = (
-	languageRoute: string,
-	versionId: Scalars['ID']
-): string => root.lang(languageRoute).bibles.versionId(versionId).get();
-
 export const makeBibleBookRoute = (
 	languageRoute: string,
 	bookId: Scalars['ID'],

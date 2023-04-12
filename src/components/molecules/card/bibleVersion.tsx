@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import { IBibleVersion } from '@lib/api/bibleBrain';
-import { makeBibleVersionRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useHover from '@lib/useHover';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -28,7 +28,10 @@ export default function CardBibleVersion({ version }: Props): JSX.Element {
 
 	return (
 		<Card>
-			<Link href={makeBibleVersionRoute(languageRoute, id)} legacyBehavior>
+			<Link
+				href={root.lang(languageRoute).bibles.versionId(id).get()}
+				legacyBehavior
+			>
 				<a className={clsx(styles.column, isSubHovered && styles.otherHovered)}>
 					<BibleVersionTypeLockup />
 					<Heading2 className={styles.title}>{title}</Heading2>
