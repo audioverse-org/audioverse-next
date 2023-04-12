@@ -27,7 +27,6 @@ import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
 import root, {
 	makePresenterAlsoAppearsInRoute,
 	makePresenterSequencesRoute,
-	makePresenterTopRecordingsRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -235,7 +234,7 @@ function PresenterDetail({
 					{recentRecordings.pageInfo.hasNextPage && (
 						<Button
 							type="secondary"
-							href={makePresenterTopRecordingsRoute(lang, id)}
+							href={root.lang(lang).presenters.id(id).top.get()}
 							text={intl.formatMessage({
 								id: 'presenterDetail__topAllLabel',
 								defaultMessage: 'See More Most Listened',
