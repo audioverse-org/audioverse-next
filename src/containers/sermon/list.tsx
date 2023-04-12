@@ -8,7 +8,7 @@ import RssAlternate from '@components/molecules/rssAlternate';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSermonListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeDiscoverRoute, makeSermonsFeedRoute } from '@lib/routes';
+import root, { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SermonListProps = PaginatedProps<
@@ -39,7 +39,7 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 				/>
 			}
 		>
-			<RssAlternate url={makeSermonsFeedRoute(language)} />
+			<RssAlternate url={root.lang(language).teachings.all.feed.get()} />
 			{nodes.map((node) => (
 				<CardRecording recording={node} key={node.canonicalPath} />
 			))}

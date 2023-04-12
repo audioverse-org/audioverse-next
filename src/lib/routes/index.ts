@@ -48,9 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeSermonsFeedRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).teachings.all.feed.get();
-
 export const makeTrendingSermonRoute = (
 	languageRoute: string,
 	filter = 'all'
