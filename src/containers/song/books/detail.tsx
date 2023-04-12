@@ -17,7 +17,7 @@ import {
 	GetSongBooksDetailPageDataQuery,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import root, { makeBibleMusicTrackRoute } from '@lib/routes';
+import root from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -84,11 +84,11 @@ function SongBooksDetail({
 					<CardSong
 						song={{
 							...musicTrack,
-							canonicalPath: makeBibleMusicTrackRoute(
-								languageRoute,
-								book,
-								musicTrack.canonicalPath
-							),
+							canonicalPath: root
+								.lang(languageRoute)
+								.songs.book(book)
+								.track(musicTrack.canonicalPath)
+								.get(),
 						}}
 						key={musicTrack.canonicalPath}
 					/>

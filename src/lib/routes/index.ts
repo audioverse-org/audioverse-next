@@ -48,13 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeBibleMusicTrackRoute = (
-	languageRoute: string,
-	bookName: string,
-	trackCanonicalPath: string
-): string =>
-	root.lang(languageRoute).songs.book(bookName).track(trackCanonicalPath).get();
-
 export const makeCollectionFeedRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID']

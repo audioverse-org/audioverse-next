@@ -10,7 +10,7 @@ import {
 	CardRecordingFragment,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import root, { makeBibleMusicTrackRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useHover from '@lib/useHover';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -70,11 +70,11 @@ export default function CardSongBook({
 							<TeaseRecordingStack
 								recordings={recordings.map((r) => ({
 									...r,
-									canonicalPath: makeBibleMusicTrackRoute(
-										languageRoute,
-										book,
-										r.canonicalPath
-									),
+									canonicalPath: root
+										.lang(languageRoute)
+										.songs.book(book)
+										.track(r.canonicalPath)
+										.get(),
 								}))}
 								theme="song"
 								isOptionalLink
