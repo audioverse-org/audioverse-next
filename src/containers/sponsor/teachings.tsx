@@ -13,7 +13,7 @@ import {
 	SponsorPivotFragment,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeSponsorTeachingsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import SponsorPivot from './pivot';
@@ -54,7 +54,11 @@ function SponsorTeachings({
 			<Pagination
 				{...pagination}
 				makeRoute={(languageRoute, pageIndex) =>
-					makeSponsorTeachingsRoute(languageRoute, sponsor.id, pageIndex)
+					root
+						.lang(languageRoute)
+						.sponsors.id(sponsor.id)
+						.teachings.page(pageIndex)
+						.get()
 				}
 			/>
 		</SponsorPivot>

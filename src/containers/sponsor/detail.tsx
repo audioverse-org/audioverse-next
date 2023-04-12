@@ -27,7 +27,6 @@ import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
 import root, {
 	makeSponsorConferencesRoute,
 	makeSponsorSeriesRoute,
-	makeSponsorTeachingsRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -170,7 +169,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					</CardGroup>
 					<Button
 						type="secondary"
-						href={makeSponsorTeachingsRoute(languageRoute, id)}
+						href={root.lang(languageRoute).sponsors.id(id).teachings.get()}
 						text={intl.formatMessage({
 							id: 'sponsorDetail__recentAllLabel',
 							defaultMessage: 'See All Recent Teachings',
