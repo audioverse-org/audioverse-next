@@ -24,10 +24,7 @@ import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
-import root, {
-	makePresenterAlsoAppearsInRoute,
-	makePresenterSequencesRoute,
-} from '@lib/routes';
+import root, { makePresenterAlsoAppearsInRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
@@ -262,7 +259,7 @@ function PresenterDetail({
 					{sequences.pageInfo.hasNextPage && (
 						<Button
 							type="secondary"
-							href={makePresenterSequencesRoute(lang, id)}
+							href={root.lang(lang).presenters.id(id).sequences.get()}
 							text={intl.formatMessage({
 								id: 'presenterDetail__seriesAllLabel',
 								defaultMessage: 'See All Series',
