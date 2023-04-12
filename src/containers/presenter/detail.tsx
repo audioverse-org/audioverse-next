@@ -26,7 +26,6 @@ import { BaseColors } from '@lib/constants';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
 import root, {
 	makePresenterAlsoAppearsInRoute,
-	makePresenterFeedRoute,
 	makePresenterSequencesRoute,
 	makePresenterTopRecordingsRoute,
 } from '@lib/routes';
@@ -162,7 +161,7 @@ function PresenterDetail({
 						emailSubject={name}
 						light
 						triggerClassName={styles.iconButton}
-						rssUrl={makePresenterFeedRoute(lang, id)}
+						rssUrl={root.lang(lang).presenters.id(id).feed.get()}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
