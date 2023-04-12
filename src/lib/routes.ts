@@ -1,58 +1,7 @@
 import { Scalars } from './generated/graphql';
-
-// TODO: break file apart to improve bundling
-
-// TODO: update to improve dx, maybe something like:
-// routes.lang(ENGLISH).presenters.list('B')
-
-type GetterOptions = {
-	params?: Record<string, string>;
-};
-
-type Getter = (options?: GetterOptions) => string;
-
-const getter =
-	(r: string): Getter =>
-	({ params }: GetterOptions = {}) => {
-		if (!params) return r;
-		const paramKeys = Object.keys(params);
-		if (!paramKeys.length) return r;
-		const filteredKeys = paramKeys.filter((k) => !!params[k]);
-		if (!filteredKeys.length) return r;
-		const filteredParams = filteredKeys.reduce(
-			(acc, k) => ({ ...acc, [k]: params[k] }),
-			{}
-		);
-		const query = new URLSearchParams(filteredParams);
-		return `${r}?${query.toString()}`;
-	};
-
-const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
-
-const node = <T>(
-	r: string,
-	extend: (r: string) => T = () => ({} as T)
-): {
-	get: Getter;
-} & T => ({
-	get: getter(r),
-	...extend(r),
-});
-
-const paginatedNode = <T>(
-	r: string,
-	extend: (r: string) => T = () => ({} as T)
-): {
-	get: Getter;
-	page: (page: string | number) => {
-		get: Getter;
-	};
-} & T =>
-	node(r, (r) => ({
-		page: (page: string | number = 1) =>
-			node(Number(page) > 1 ? `${r}/page/${page}` : r),
-		...extend(r),
-	}));
+import node from './routes/node';
+import paginatedNode from './routes/paginatedNode';
+import slug from './routes/slug';
 
 const presenters = (r: string) => ({
 	letter: (letter: string) => node(`${r}/letter/${letter}`),
