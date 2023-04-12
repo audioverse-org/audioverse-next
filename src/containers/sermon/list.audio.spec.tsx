@@ -51,6 +51,6 @@ describe('sermon audio list page', () => {
 		const { getByText } = await renderPage();
 		const link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/teachings/audio/page/1');
+		expect(link.href).toContain('/en/teachings/audio');
 	});
 });

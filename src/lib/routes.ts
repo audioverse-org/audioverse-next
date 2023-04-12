@@ -5,15 +5,37 @@ import { Scalars } from './generated/graphql';
 // TODO: update to improve dx, maybe something like:
 // routes.lang(ENGLISH).presenters.list('B')
 
+type GetterOptions = {
+	params?: Record<string, string>;
+};
+
+type Getter = (options?: GetterOptions) => string;
+
+const getter =
+	(r: string): Getter =>
+	({ params }: GetterOptions = {}) => {
+		if (!params) return r;
+		const paramKeys = Object.keys(params);
+		if (!paramKeys.length) return r;
+		const filteredKeys = paramKeys.filter((k) => !!params[k]);
+		if (!filteredKeys.length) return r;
+		const filteredParams = filteredKeys.reduce(
+			(acc, k) => ({ ...acc, [k]: params[k] }),
+			{}
+		);
+		const query = new URLSearchParams(filteredParams);
+		return `${r}?${query.toString()}`;
+	};
+
 const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
 const node = <T>(
 	r: string,
 	extend: (r: string) => T = () => ({} as T)
 ): {
-	get: () => string;
+	get: Getter;
 } & T => ({
-	get: () => r,
+	get: getter(r),
 	...extend(r),
 });
 
@@ -21,15 +43,14 @@ const paginatedNode = <T>(
 	r: string,
 	extend: (r: string) => T = () => ({} as T)
 ): {
-	get: () => string;
+	get: Getter;
 	page: (page: string | number) => {
-		get: () => string;
+		get: Getter;
 	};
 } & T =>
 	node(r, (r) => ({
-		page: (page: string | number = 1) => ({
-			get: () => `${r}/page/${page}`,
-		}),
+		page: (page: string | number = 1) =>
+			node(Number(page) > 1 ? `${r}/page/${page}` : r),
 		...extend(r),
 	}));
 
@@ -78,17 +99,110 @@ const books = (r: string) => ({
 		})),
 });
 
+const stories = (r: string) => ({
+	albums: paginatedNode(`${r}/albums`, (r) => ({
+		id: (albumId: Scalars['ID']) => ({
+			feed: node(`${r}/${albumId}/feed.xml`),
+		}),
+	})),
+});
+
+const songs = (r: string) => ({
+	albums: node(`${r}/albums`, (r) => ({
+		id: (albumId: Scalars['ID']) => ({
+			feed: node(`${r}/${albumId}/feed.xml`),
+		}),
+	})),
+	book: (bookName: string) =>
+		node(`${r}/book/${slug(bookName)}`, (r) => ({
+			track: (canonicalPath: string) =>
+				node(`${r}/${canonicalPath.split('/').slice(3).join('/')}`),
+		})),
+});
+
+const conferences = (r: string) => ({
+	id: (conferenceId: Scalars['ID']) =>
+		node(`${r}/${conferenceId}`, (r) => ({
+			feed: node(`${r}/feed.xml`),
+			sequences: paginatedNode(`${r}/sequences`),
+			presenters: paginatedNode(`${r}/presenters`),
+			teachings: paginatedNode(`${r}/teachings`),
+		})),
+});
+
+const sponsors = (r: string) => ({
+	id: (sponsorId: Scalars['ID']) =>
+		node(`${r}/${sponsorId}`, (r) => ({
+			feed: node(`${r}/feed.xml`),
+			teachings: paginatedNode(`${r}/teachings`),
+			conferences: paginatedNode(`${r}/conferences`),
+			series: paginatedNode(`${r}/series`),
+		})),
+	letter: (letter: string) => node(`${r}/letter/${letter}`),
+	all: node(`${r}/all`),
+});
+
+const contact = (r: string) => ({
+	testimonies: node(`${r}/testimonies`),
+	subpath: (subpath: string) => node(`${r}${subpath}`),
+});
+
+const library = (r: string) => ({
+	playlist: (playlistId: Scalars['ID']) => node(`${r}/playlist/${playlistId}`),
+	subpath: (subpath: string) => node(`${r}${subpath}`),
+});
+
+const about = (r: string) => ({
+	id: (pageId: number) => node(`${r}/${pageId}`),
+});
+
+const account = (r: string) => ({
+	login: node(`${r}/login`),
+	logout: node(`${r}/logout`),
+	register: node(`${r}/register`),
+	profile: node(`${r}/profile`),
+	preferences: node(`${r}/preferences`),
+});
+
+const discover = (r: string) => ({
+	collections: node(`${r}/collections`),
+});
+
+const search = (r: string) => ({
+	collections: paginatedNode(`${r}/collections`),
+	persons: paginatedNode(`${r}/persons`),
+	sequences: paginatedNode(`${r}/sequences`),
+	sponsors: paginatedNode(`${r}/sponsors`),
+	teachings: paginatedNode(`${r}/teachings`),
+});
+
+const releases = (r: string) => ({
+	id: (releaseId: Scalars['ID']) => node(`${r}/${releaseId}`),
+});
+
 const root = {
-	lang: (languageRoute: string) => {
-		const r = `/${languageRoute}`;
-		return {
+	lang: (languageRoute: string) =>
+		node(`/${languageRoute}`, (r) => ({
 			presenters: node(`${r}/presenters`, presenters),
 			series: paginatedNode(`${r}/series`, series),
 			teachings: node(`${r}/teachings`, teachings),
 			bibles: node(`${r}/bibles`, bibles),
 			books: paginatedNode(`${r}/books`, books),
-		};
-	},
+			stories: node(`${r}/stories`, stories),
+			songs: node(`${r}/songs`, songs),
+			conferences: paginatedNode(`${r}/conferences`, conferences),
+			sponsors: node(`${r}/sponsors`, sponsors),
+			testimonies: paginatedNode(`${r}/testimonies`),
+			contact: node(`${r}/contact`, contact),
+			library: node(`${r}/library`, library),
+			blog: paginatedNode(`${r}/blog`),
+			about: node(`${r}/about`, about),
+			account: node(`${r}/account`, account),
+			give: node(`${r}/give`),
+			discover: node(`${r}/discover`, discover),
+			search: node(`${r}/search`, search),
+			releases: node(`${r}/releases`, releases),
+		})),
 };
 
 export default root;
@@ -111,13 +225,7 @@ export const makePresenterRecordingsRoute = (
 	personId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	page > 1
-		? root
-				.lang(languageRoute)
-				.presenters.id(personId)
-				.teachings.page(page)
-				.get()
-		: root.lang(languageRoute).presenters.id(personId).teachings.get();
+	root.lang(languageRoute).presenters.id(personId).teachings.page(page).get();
 
 export const makePresenterFeedRoute = (
 	languageRoute: string,
@@ -134,22 +242,14 @@ export const makePresenterSequencesRoute = (
 	personId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	page > 1
-		? root
-				.lang(languageRoute)
-				.presenters.id(personId)
-				.sequences.page(page)
-				.get()
-		: root.lang(languageRoute).presenters.id(personId).sequences.get();
+	root.lang(languageRoute).presenters.id(personId).sequences.page(page).get();
 
 export const makePresenterAlsoAppearsInRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	page > 1
-		? root.lang(languageRoute).presenters.id(personId).appears.page(page).get()
-		: root.lang(languageRoute).presenters.id(personId).appears.get();
+	root.lang(languageRoute).presenters.id(personId).appears.page(page).get();
 
 export const makeSeriesFeedRoute = (
 	languageRoute: string,
@@ -159,10 +259,7 @@ export const makeSeriesFeedRoute = (
 export const makeSeriesListRoute = (
 	languageRoute: string,
 	page: string | number = 1
-): string =>
-	page > 1
-		? root.lang(languageRoute).series.page(page).get()
-		: root.lang(languageRoute).series.get();
+): string => root.lang(languageRoute).series.page(page).get();
 
 export const makeSermonListRoute = (
 	languageRoute: string,
@@ -205,219 +302,266 @@ export const makeAudiobookFeedRoute = (
 export const makeAudiobookListRoute = (
 	languageRoute: string,
 	page: string | number = 1
-): string =>
-	page > 1
-		? root.lang(languageRoute).books.page(page).get()
-		: root.lang(languageRoute).books.get();
+): string => root.lang(languageRoute).books.page(page).get();
 
 export const makeStoryAlbumFeedRoute = (
 	languageRoute: string,
 	storyAlbumId: Scalars['ID']
-): string => `/${languageRoute}/stories/albums/${storyAlbumId}/feed.xml`;
+): string =>
+	root.lang(languageRoute).stories.albums.id(storyAlbumId).feed.get();
 
 export const makeStoryAlbumListPage = (
 	languageRoute: string,
 	page: string | number = 1
-): string =>
-	`/${languageRoute}/stories/albums${page > 1 ? `/page/${page}` : ''}`;
+): string => root.lang(languageRoute).stories.albums.page(page).get();
 
 export const makeSongAlbumsListRoute = (languageRoute: string): string =>
-	`/${languageRoute}/songs/albums`;
+	root.lang(languageRoute).songs.albums.get();
 
 export const makeSongAlbumFeedRoute = (
 	languageRoute: string,
 	albumId: Scalars['ID']
-): string => `/${languageRoute}/songs/albums/${albumId}/feed.xml`;
+): string => root.lang(languageRoute).songs.albums.id(albumId).feed.get();
 
 export const makeBibleMusicRoute = (
 	languageRoute: string,
 	bookName: string
-): string => `/${languageRoute}/songs/book/${slug(bookName)}`;
+): string => root.lang(languageRoute).songs.book(bookName).get();
 
 export const makeBibleMusicTrackRoute = (
 	languageRoute: string,
 	bookName: string,
 	trackCanonicalPath: string
 ): string =>
-	`/${languageRoute}/songs/book/${slug(bookName)}/${trackCanonicalPath
-		.split('/')
-		.slice(3)
-		.join('/')}`;
+	root.lang(languageRoute).songs.book(bookName).track(trackCanonicalPath).get();
 
 export const makeCollectionFeedRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID']
-): string => `/${languageRoute}/conferences/${conferenceId}/feed.xml`;
+): string => root.lang(languageRoute).conferences.id(conferenceId).feed.get();
 
 export const makeCollectionSequencesRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/conferences/${conferenceId}/sequences${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	root
+		.lang(languageRoute)
+		.conferences.id(conferenceId)
+		.sequences.page(page)
+		.get();
 
 export const makeCollectionPresentersRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/conferences/${conferenceId}/presenters${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	root
+		.lang(languageRoute)
+		.conferences.id(conferenceId)
+		.presenters.page(page)
+		.get();
 
 export const makeCollectionTeachingsRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/conferences/${conferenceId}/teachings${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	root
+		.lang(languageRoute)
+		.conferences.id(conferenceId)
+		.teachings.page(page)
+		.get();
 
 export const makeConferenceListRoute = (
 	languageRoute: string,
 	page: string | number = 1
-): string => `/${languageRoute}/conferences${page > 1 ? `/page/${page}` : ''}`;
+): string => root.lang(languageRoute).conferences.page(page).get();
 
 export const makeSponsorFeedRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID']
-): string => `/${languageRoute}/sponsors/${sponsorId}/feed.xml`;
+): string => root.lang(languageRoute).sponsors.id(sponsorId).feed.get();
 
 export const makeSponsorListRoute = (
 	languageRoute: string,
 	letter?: string
-): string => `/${languageRoute}/sponsors${letter ? `/letter/${letter}` : ''}`;
+): string =>
+	letter
+		? root.lang(languageRoute).sponsors.letter(letter).get()
+		: root.lang(languageRoute).sponsors.get();
 
 export const makeSponsorListAllRoute = (languageRoute: string): string =>
-	`/${languageRoute}/sponsors/all`;
+	root.lang(languageRoute).sponsors.all.get();
 
 export const makeSponsorTeachingsRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/sponsors/${sponsorId}/teachings${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	root.lang(languageRoute).sponsors.id(sponsorId).teachings.page(page).get();
 
 export const makeSponsorConferencesRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/sponsors/${sponsorId}/conferences${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	root.lang(languageRoute).sponsors.id(sponsorId).conferences.page(page).get();
 
 export const makeSponsorSeriesRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/sponsors/${sponsorId}/series${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	root.lang(languageRoute).sponsors.id(sponsorId).series.page(page).get();
 
 export const makeTestimoniesRoute = (
 	languageRoute: string,
 	page: string | number = 1
-): string => `/${languageRoute}/testimonies${page > 1 ? `/page/${page}` : ''}`;
+): string => root.lang(languageRoute).testimonies.page(page).get();
 
 export const makeTestimonySubmitRoute = (languageRoute: string): string =>
-	`/${languageRoute}/contact/testimonies`;
+	root.lang(languageRoute).testimonies.get();
 
 export const makePlaylistDetailRoute = (
 	languageRoute: string,
 	playlistId: Scalars['ID']
-): string => `/${languageRoute}/library/playlist/${playlistId}`;
+): string => root.lang(languageRoute).library.playlist(playlistId).get();
 
 export const makeBlogPostListRoute = (
 	languageRoute: string,
 	page: string | number = 1
-): string => `/${languageRoute}/blog${page > 1 ? `/page/${page}` : ''}`;
+): string => root.lang(languageRoute).blog.page(page).get();
 
 export const makeAboutPage = (languageRoute: string, pageId: number): string =>
-	`/${languageRoute}/about/${pageId}`;
+	root.lang(languageRoute).about.id(pageId).get();
 
 export const makeContactRoute = (
 	languageRoute: string,
 	subpath = '/general'
-): string => `/${languageRoute}/contact${subpath}`;
+): string => root.lang(languageRoute).contact.subpath(subpath).get();
 
 export const makeLoginRoute = (
 	languageRoute: string,
-	redirectUrl?: string
+	redirectUrl = ''
 ): string =>
-	`/${languageRoute}/account/login${redirectUrl ? `?back=${redirectUrl}` : ''}`;
+	root.lang(languageRoute).account.login.get({
+		params: {
+			back: redirectUrl,
+		},
+	});
 
 export const makeLogoutRoute = (languageRoute: string): string =>
-	`/${languageRoute}/account/logout`;
+	root.lang(languageRoute).account.logout.get();
 
 export const makeRegisterRoute = (
 	languageRoute: string,
-	redirectUrl?: string
+	redirectUrl = ''
 ): string =>
-	`/${languageRoute}/account/register${
-		redirectUrl ? `?back=${redirectUrl}` : ''
-	}`;
+	root.lang(languageRoute).account.register.get({
+		params: {
+			back: redirectUrl,
+		},
+	});
 
 export const makeAccountProfileRoute = (languageRoute: string): string =>
-	`/${languageRoute}/account/profile`;
+	root.lang(languageRoute).account.profile.get();
 
 export const makeAccountPreferencesRoute = (languageRoute: string): string =>
-	`/${languageRoute}/account/preferences`;
+	root.lang(languageRoute).account.preferences.get();
 
 export const makeLibraryRoute = (languageRoute: string, subpath = ''): string =>
-	`/${languageRoute}/library${subpath ? `/${subpath}` : ''}`;
+	root.lang(languageRoute).library.subpath(subpath).get();
 
 export const makeDonateRoute = (languageRoute: string): string =>
-	`/${languageRoute}/give`;
+	root.lang(languageRoute).give.get();
 
 export const makeDiscoverRoute = (languageRoute: string): string =>
-	`/${languageRoute}/discover`;
+	root.lang(languageRoute).discover.get();
 
 export const makeDiscoverCollectionsRoute = (languageRoute: string): string =>
-	`/${languageRoute}/discover/collections`;
+	root.lang(languageRoute).discover.collections.get();
 
 export const makeSearchRoute = (languageRoute: string, term = ''): string =>
-	`/${languageRoute}/search${term ? `?q=${term}` : ''}`;
+	root.lang(languageRoute).search.get({
+		params: {
+			q: term,
+		},
+	});
 
 export const makeSearchCollectionsRoute = (
 	languageRoute: string,
 	term: string,
 	page: string | number = 1
-): string => `/${languageRoute}/search/collections/page/${page}?q=${term}`;
+): string =>
+	root
+		.lang(languageRoute)
+		.search.collections.page(page)
+		.get({
+			params: {
+				q: term,
+			},
+		});
 
 export const makeSearchPersonsRoute = (
 	languageRoute: string,
 	term: string,
 	page: string | number = 1
-): string => `/${languageRoute}/search/persons/page/${page}?q=${term}`;
+): string =>
+	root
+		.lang(languageRoute)
+		.search.persons.page(page)
+		.get({
+			params: {
+				q: term,
+			},
+		});
 
 export const makeSearchSequencesRoute = (
 	languageRoute: string,
 	term: string,
 	page: string | number = 1
-): string => `/${languageRoute}/search/sequences/page/${page}?q=${term}`;
+): string =>
+	root
+		.lang(languageRoute)
+		.search.sequences.page(page)
+		.get({
+			params: {
+				q: term,
+			},
+		});
 
 export const makeSearchSponsorsRoute = (
 	languageRoute: string,
 	term: string,
 	page: string | number = 1
-): string => `/${languageRoute}/search/sponsors/page/${page}?q=${term}`;
+): string =>
+	root
+		.lang(languageRoute)
+		.search.sponsors.page(page)
+		.get({
+			params: {
+				q: term,
+			},
+		});
 
 export const makeSearchTeachingsRoute = (
 	languageRoute: string,
 	term: string,
 	page: string | number = 1
-): string => `/${languageRoute}/search/teachings/page/${page}?q=${term}`;
+): string =>
+	root
+		.lang(languageRoute)
+		.search.teachings.page(page)
+		.get({
+			params: {
+				q: term,
+			},
+		});
 
 export const makeReleaseRoute = (
 	languageRoute: string,
 	releaseId: Scalars['ID']
-): string => `/${languageRoute}/releases/${releaseId}`;
+): string => root.lang(languageRoute).releases.id(releaseId).get();
 
 export const isRedirectRouteAllowed = (route: string) => route.startsWith('/');

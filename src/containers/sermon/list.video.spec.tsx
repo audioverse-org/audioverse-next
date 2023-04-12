@@ -67,6 +67,6 @@ describe('sermon video list page', () => {
 		const { getByText } = await renderPage();
 		const link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/teachings/video/page/1');
+		expect(link.href).toContain('/en/teachings/video');
 	});
 });
