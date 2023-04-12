@@ -24,10 +24,7 @@ import Tease from '@components/molecules/tease';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
-import root, {
-	makeSponsorConferencesRoute,
-	makeSponsorSeriesRoute,
-} from '@lib/routes';
+import root, { makeSponsorSeriesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
@@ -223,7 +220,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					</CardGroup>
 					<Button
 						type="secondary"
-						href={makeSponsorConferencesRoute(languageRoute, id)}
+						href={root.lang(languageRoute).sponsors.id(id).conferences.get()}
 						text={intl.formatMessage({
 							id: 'sponsorDetail__conferencesAllLabel',
 							defaultMessage: 'See All Conferences',
