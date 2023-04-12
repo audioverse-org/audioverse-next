@@ -48,12 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeStoryAlbumFeedRoute = (
-	languageRoute: string,
-	storyAlbumId: Scalars['ID']
-): string =>
-	root.lang(languageRoute).stories.albums.id(storyAlbumId).feed.get();
-
 export const makeStoryAlbumListPage = (
 	languageRoute: string,
 	page: string | number = 1

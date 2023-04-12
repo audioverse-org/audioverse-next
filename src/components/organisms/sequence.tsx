@@ -22,10 +22,7 @@ import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { formatDateRange } from '@lib/date';
 import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
-import root, {
-	makeSongAlbumFeedRoute,
-	makeStoryAlbumFeedRoute,
-} from '@lib/routes';
+import root, { makeSongAlbumFeedRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -69,7 +66,8 @@ export function Sequence({
 				return (l: string, id: string | number) =>
 					root.lang(l).series.id(id).feed.get();
 			case SequenceContentType.StorySeason:
-				return makeStoryAlbumFeedRoute;
+				return (l: string, id: string | number) =>
+					root.lang(l).stories.albums.id(id).feed.get();
 			default:
 				throw new UnreachableCaseError(contentType);
 		}
