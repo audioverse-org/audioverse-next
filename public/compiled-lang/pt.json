@@ -4607,6 +4607,12 @@
       "value": "Todos Ensinamentos correspondentes"
     }
   ],
+  "search__booksHeading": [
+    {
+      "type": 0,
+      "value": "Audiolivros"
+    }
+  ],
   "search__conferencesHeading": [
     {
       "type": 0,
@@ -4619,6 +4625,12 @@
       "value": "Ver todos Congressos correspondentes."
     }
   ],
+  "search__musicHeading": [
+    {
+      "type": 0,
+      "value": "Musica"
+    }
+  ],
   "search__personsHeading": [
     {
       "type": 0,
@@ -4629,6 +4641,12 @@
     {
       "type": 0,
       "value": "Ver todos Oradores correspondentes"
+    }
+  ],
+  "search__presentersHeading": [
+    {
+      "type": 0,
+      "value": "Oradores"
     }
   ],
   "search__resultsCount": [
@@ -4663,6 +4681,12 @@
     {
       "type": 0,
       "value": "Ver todos Patrocinadores correspondentes"
+    }
+  ],
+  "search__storiesHeading": [
+    {
+      "type": 0,
+      "value": "Historias"
     }
   ],
   "search__teachingsHeading": [

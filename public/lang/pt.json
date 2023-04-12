@@ -7395,7 +7395,21 @@
 		"string": "Ensinamentos em alta"
 
 
+	},
+
+	"search__presentersHeading": {
+		"string": "Oradores"
+	},
+	"search__musicHeading": {
+		"string": "Musica"
+	},
+	"search__booksHeading": {
+		"string": "Audiolivros"
+	},
+	"search__storiesHeading": {
+		"string": "Historias"
 	}
+	
 
 
 }
