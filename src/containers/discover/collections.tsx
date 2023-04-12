@@ -12,7 +12,6 @@ import CardGroup from '@components/molecules/cardGroup';
 import { GetDiscoverCollectionsPageDataQuery } from '@lib/generated/graphql';
 import root, {
 	makeConferenceListRoute,
-	makeSongAlbumsListRoute,
 	makeSponsorListRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -138,7 +137,7 @@ export default function DiscoverCollections({
 					<CardSequence sequence={n} key={n.canonicalPath} />
 				))}
 			</CardGroup>
-			{makeSeeAllButton(makeSongAlbumsListRoute(language))}
+			{makeSeeAllButton(root.lang(language).songs.albums.get())}
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_seriesHeading"

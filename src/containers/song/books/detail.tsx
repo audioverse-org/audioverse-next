@@ -17,10 +17,9 @@ import {
 	GetSongBooksDetailPageDataQuery,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import {
+import root, {
 	makeBibleMusicRoute,
 	makeBibleMusicTrackRoute,
-	makeSongAlbumsListRoute,
 } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -49,7 +48,7 @@ function SongBooksDetail({
 			<ContentWidthLimiter>
 				<ButtonBack
 					type="secondary"
-					backUrl={makeSongAlbumsListRoute(languageRoute)}
+					backUrl={root.lang(languageRoute).songs.albums.get()}
 					className={styles.back}
 				/>
 				<SequenceTypeLockup contentType={SequenceContentType.MusicAlbum} />

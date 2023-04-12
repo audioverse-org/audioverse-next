@@ -16,7 +16,6 @@ import root, {
 	makeDonateRoute,
 	makeLibraryRoute,
 	makeLogoutRoute,
-	makeSongAlbumsListRoute,
 	makeSponsorListRoute,
 	makeTestimoniesRoute,
 	makeTestimonySubmitRoute,
@@ -215,7 +214,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'songs',
-					href: makeSongAlbumsListRoute(languageRoute),
+					href: root.lang(languageRoute).songs.albums.get(),
 					Icon: iconMap.fa_music,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-songs`,
