@@ -48,13 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makePresenterAlsoAppearsInRoute = (
-	languageRoute: string,
-	personId: Scalars['ID'],
-	page: string | number = 1
-): string =>
-	root.lang(languageRoute).presenters.id(personId).appears.page(page).get();
-
 export const makeSeriesFeedRoute = (
 	languageRoute: string,
 	seriesId: Scalars['ID']

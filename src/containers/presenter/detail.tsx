@@ -24,7 +24,7 @@ import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
-import root, { makePresenterAlsoAppearsInRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
@@ -289,7 +289,7 @@ function PresenterDetail({
 					{collections.pageInfo.hasNextPage && (
 						<Button
 							type="secondary"
-							href={makePresenterAlsoAppearsInRoute(lang, id)}
+							href={root.lang(lang).presenters.id(id).appears.get()}
 							text={intl.formatMessage({
 								id: 'presenterDetail__speakersAllLabel',
 								defaultMessage: 'See All Also Appears In',

@@ -12,7 +12,7 @@ import {
 	PresenterPivotFragment,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterAlsoAppearsInRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 import PresenterPivot from './pivot';
 
@@ -46,7 +46,11 @@ function PresenterAppears({
 			<Pagination
 				{...pagination}
 				makeRoute={(languageRoute, pageIndex) =>
-					makePresenterAlsoAppearsInRoute(languageRoute, person?.id, pageIndex)
+					root
+						.lang(languageRoute)
+						.presenters.id(person.id)
+						.appears.page(pageIndex)
+						.get()
 				}
 			/>
 		</PresenterPivot>
