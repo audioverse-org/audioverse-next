@@ -1,46 +1,47 @@
-import { Scalars } from './generated/graphql';
-import about from './routes/about';
-import account from './routes/account';
-import discover from './routes/discover';
-import presenters from './routes/presenters';
-import node from './routes/primatives/node';
-import paginatedNode from './routes/primatives/paginatedNode';
-import releases from './routes/releases';
-import search from './routes/search';
-import library from './routes/library';
-import contact from './routes/contact';
-import sponsors from './routes/sponsors';
-import conferences from './routes/conferences';
-import songs from './routes/songs';
-import stories from './routes/stories';
-import books from './routes/books';
-import bibles from './routes/bibles';
-import teachings from './routes/teachings';
-import series from './routes/series';
+import { Scalars } from '../generated/graphql';
+import about from './about';
+import account from './account';
+import discover from './discover';
+import presenters from './presenters';
+import node from './primatives/node';
+import paginatedNode from './primatives/paginatedNode';
+import releases from './releases';
+import search from './search';
+import library from './library';
+import contact from './contact';
+import sponsors from './sponsors';
+import conferences from './conferences';
+import songs from './songs';
+import stories from './stories';
+import books from './books';
+import bibles from './bibles';
+import teachings from './teachings';
+import series from './series';
+
+const namespaces = (r: string) => ({
+	about: node(`${r}/about`, about),
+	account: node(`${r}/account`, account),
+	bibles: node(`${r}/bibles`, bibles),
+	blog: paginatedNode(`${r}/blog`),
+	books: paginatedNode(`${r}/books`, books),
+	conferences: paginatedNode(`${r}/conferences`, conferences),
+	contact: node(`${r}/contact`, contact),
+	discover: node(`${r}/discover`, discover),
+	give: node(`${r}/give`),
+	library: node(`${r}/library`, library),
+	presenters: node(`${r}/presenters`, presenters),
+	releases: node(`${r}/releases`, releases),
+	search: node(`${r}/search`, search),
+	series: paginatedNode(`${r}/series`, series),
+	songs: node(`${r}/songs`, songs),
+	sponsors: node(`${r}/sponsors`, sponsors),
+	stories: node(`${r}/stories`, stories),
+	teachings: node(`${r}/teachings`, teachings),
+	testimonies: paginatedNode(`${r}/testimonies`),
+});
 
 const root = {
-	lang: (languageRoute: string) =>
-		node(`/${languageRoute}`, (r) => ({
-			presenters: node(`${r}/presenters`, presenters),
-			series: paginatedNode(`${r}/series`, series),
-			teachings: node(`${r}/teachings`, teachings),
-			bibles: node(`${r}/bibles`, bibles),
-			books: paginatedNode(`${r}/books`, books),
-			stories: node(`${r}/stories`, stories),
-			songs: node(`${r}/songs`, songs),
-			conferences: paginatedNode(`${r}/conferences`, conferences),
-			sponsors: node(`${r}/sponsors`, sponsors),
-			testimonies: paginatedNode(`${r}/testimonies`),
-			contact: node(`${r}/contact`, contact),
-			library: node(`${r}/library`, library),
-			blog: paginatedNode(`${r}/blog`),
-			about: node(`${r}/about`, about),
-			account: node(`${r}/account`, account),
-			give: node(`${r}/give`),
-			discover: node(`${r}/discover`, discover),
-			search: node(`${r}/search`, search),
-			releases: node(`${r}/releases`, releases),
-		})),
+	lang: (languageRoute: string) => node(`/${languageRoute}`, namespaces),
 };
 
 export default root;
