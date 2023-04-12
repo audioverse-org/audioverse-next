@@ -17,10 +17,7 @@ import {
 	GetSongBooksDetailPageDataQuery,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import root, {
-	makeBibleMusicRoute,
-	makeBibleMusicTrackRoute,
-} from '@lib/routes';
+import root, { makeBibleMusicTrackRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -38,10 +35,10 @@ function SongBooksDetail({
 	musicTracks,
 }: SongBooksDetailProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	const shareUrl = `https://www.audioverse.org${makeBibleMusicRoute(
-		languageRoute,
-		book
-	)}`;
+	const shareUrl = `https://www.audioverse.org${root
+		.lang(languageRoute)
+		.songs.book(book)
+		.get()}`;
 
 	return (
 		<Tease className={styles.container}>

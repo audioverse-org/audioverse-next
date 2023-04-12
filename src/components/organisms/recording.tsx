@@ -31,7 +31,7 @@ import {
 	TeaseRecordingFragment,
 } from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
-import { makeBibleMusicRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
@@ -324,7 +324,7 @@ export function Recording({
 				makeHat(
 					SequenceContentType.MusicAlbum,
 					startCase(overrideSequence.book),
-					makeBibleMusicRoute(languageRoute, overrideSequence.book)
+					root.lang(languageRoute).songs.book(overrideSequence.book).get()
 				)
 			) : (
 				recording.sequence &&

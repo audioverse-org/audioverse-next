@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeBibleMusicRoute = (
-	languageRoute: string,
-	bookName: string
-): string => root.lang(languageRoute).songs.book(bookName).get();
-
 export const makeBibleMusicTrackRoute = (
 	languageRoute: string,
 	bookName: string,

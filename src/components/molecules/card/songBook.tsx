@@ -10,7 +10,7 @@ import {
 	CardRecordingFragment,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { makeBibleMusicRoute, makeBibleMusicTrackRoute } from '@lib/routes';
+import root, { makeBibleMusicTrackRoute } from '@lib/routes';
 import useHover from '@lib/useHover';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -38,7 +38,10 @@ export default function CardSongBook({
 
 	return (
 		<CardWithTheme {...{ theme }}>
-			<Link href={makeBibleMusicRoute(languageRoute, book)} legacyBehavior>
+			<Link
+				href={root.lang(languageRoute).songs.book(book).get()}
+				legacyBehavior
+			>
 				<a
 					className={clsx(
 						styles.container,
