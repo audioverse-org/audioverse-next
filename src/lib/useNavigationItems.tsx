@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
-import {
+import root, {
 	makeAboutPage,
 	makeAccountProfileRoute,
 	makeAudiobookListRoute,
@@ -18,7 +18,6 @@ import {
 	makeDonateRoute,
 	makeLibraryRoute,
 	makeLogoutRoute,
-	makePresenterListRoute,
 	makeSongAlbumsListRoute,
 	makeSponsorListRoute,
 	makeStoryAlbumListPage,
@@ -192,7 +191,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'presenter',
-					href: makePresenterListRoute(languageRoute),
+					href: root.lang(languageRoute).presenters.get(),
 					Icon: iconMap.fa_user_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-presenters`,
@@ -283,7 +282,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'presenters',
-			href: makePresenterListRoute(languageRoute),
+			href: root.lang(languageRoute).presenters.get(),
 			Icon: iconMap.icon_account,
 			label: intl.formatMessage({
 				id: `header__navItemPresenters`,

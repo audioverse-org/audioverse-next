@@ -48,14 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makePresenterListRoute = (
-	languageRoute: string,
-	letter?: string
-): string =>
-	letter
-		? root.lang(languageRoute).presenters.letter(letter).get()
-		: root.lang(languageRoute).presenters.get();
-
 export const makePresenterListAllRoute = (languageRoute: string): string =>
 	root.lang(languageRoute).presenters.all.get();
 
