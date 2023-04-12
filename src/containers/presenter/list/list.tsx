@@ -12,10 +12,7 @@ import {
 	GetPersonListLetterCountsQuery,
 	PresenterListEntryFragment,
 } from '@lib/generated/graphql';
-import root, {
-	makeDiscoverCollectionsRoute,
-	makePresenterListAllRoute,
-} from '@lib/routes';
+import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
@@ -40,7 +37,7 @@ export default function Presenters({
 				id: 'presentersList__all',
 				defaultMessage: 'All',
 			}),
-			url: makePresenterListAllRoute(language),
+			url: root.lang(language).presenters.all.get(),
 		},
 		...personLetterCounts.map(({ letter }) => ({
 			text: letter,

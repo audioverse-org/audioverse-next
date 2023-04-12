@@ -48,9 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makePresenterListAllRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).presenters.all.get();
-
 export const makePresenterRecordingsRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
