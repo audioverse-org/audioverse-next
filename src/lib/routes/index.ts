@@ -48,13 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makePresenterRecordingsRoute = (
-	languageRoute: string,
-	personId: Scalars['ID'],
-	page: string | number = 1
-): string =>
-	root.lang(languageRoute).presenters.id(personId).teachings.page(page).get();
-
 export const makePresenterFeedRoute = (
 	languageRoute: string,
 	personId: Scalars['ID']

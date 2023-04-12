@@ -24,10 +24,9 @@ import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
-import {
+import root, {
 	makePresenterAlsoAppearsInRoute,
 	makePresenterFeedRoute,
-	makePresenterRecordingsRoute,
 	makePresenterSequencesRoute,
 	makePresenterTopRecordingsRoute,
 } from '@lib/routes';
@@ -210,7 +209,7 @@ function PresenterDetail({
 					{recentRecordings.pageInfo.hasNextPage && (
 						<Button
 							type="secondary"
-							href={makePresenterRecordingsRoute(lang, id)}
+							href={root.lang(lang).presenters.id(id).teachings.get()}
 							text={intl.formatMessage({
 								id: 'presenterDetail__recentAllLabel',
 								defaultMessage: 'See All Recent',
