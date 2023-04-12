@@ -23,7 +23,6 @@ import { formatDateRange } from '@lib/date';
 import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import root, {
-	makeAudiobookFeedRoute,
 	makeSongAlbumFeedRoute,
 	makeStoryAlbumFeedRoute,
 } from '@lib/routes';
@@ -60,7 +59,8 @@ export function Sequence({
 	const rssUrl = (() => {
 		switch (contentType) {
 			case SequenceContentType.Audiobook:
-				return makeAudiobookFeedRoute;
+				return (l: string, id: string | number) =>
+					root.lang(l).books.id(id).feed.get();
 			case SequenceContentType.BibleBook:
 				return () => undefined;
 			case SequenceContentType.MusicAlbum:

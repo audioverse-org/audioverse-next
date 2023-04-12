@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeAudiobookFeedRoute = (
-	languageRoute: string,
-	bookId: Scalars['ID']
-): string => root.lang(languageRoute).books.id(bookId).feed.get();
-
 export const makeAudiobookListRoute = (
 	languageRoute: string,
 	page: string | number = 1
