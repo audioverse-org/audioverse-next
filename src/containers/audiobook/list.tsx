@@ -6,10 +6,7 @@ import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetAudiobookListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makeAudiobookListRoute,
-	makeDiscoverCollectionsRoute,
-} from '@lib/routes';
+import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type AudiobooksListProps = PaginatedProps<
@@ -32,7 +29,7 @@ export function AudiobooksList({
 					defaultMessage="All Audiobooks"
 				/>
 			}
-			makeRoute={makeAudiobookListRoute}
+			makeRoute={(l, i) => root.lang(l).books.page(i).get()}
 		>
 			{nodes.map((node) => (
 				<CardSequence sequence={node} key={node.canonicalPath} />

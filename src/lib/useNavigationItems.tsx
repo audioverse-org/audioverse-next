@@ -8,7 +8,6 @@ import LanguageButton from '@components/molecules/languageButton';
 import root, {
 	makeAboutPage,
 	makeAccountProfileRoute,
-	makeAudiobookListRoute,
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
 	makeContactRoute,
@@ -208,7 +207,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'books',
-					href: makeAudiobookListRoute(languageRoute),
+					href: root.lang(languageRoute).books.get(),
 					Icon: iconMap.fa_book,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-books`,
