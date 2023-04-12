@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeStoryAlbumListPage = (
-	languageRoute: string,
-	page: string | number = 1
-): string => root.lang(languageRoute).stories.albums.page(page).get();
-
 export const makeSongAlbumsListRoute = (languageRoute: string): string =>
 	root.lang(languageRoute).songs.albums.get();
 

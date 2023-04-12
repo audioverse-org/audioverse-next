@@ -12,7 +12,6 @@ import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
 import root, {
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
-	makeStoryAlbumListPage,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -118,7 +117,7 @@ export default function Discover({
 					defaultMessage="See All Stories"
 				/>
 			),
-			url: makeStoryAlbumListPage(languageRoute),
+			url: root.lang(languageRoute).stories.albums.get(),
 		},
 		{
 			heading: (

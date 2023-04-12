@@ -18,7 +18,6 @@ import root, {
 	makeLogoutRoute,
 	makeSongAlbumsListRoute,
 	makeSponsorListRoute,
-	makeStoryAlbumListPage,
 	makeTestimoniesRoute,
 	makeTestimonySubmitRoute,
 } from '@lib/routes';
@@ -198,7 +197,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'stories',
-					href: makeStoryAlbumListPage(languageRoute),
+					href: root.lang(languageRoute).stories.albums.get(),
 					Icon: iconMap.fa_feather,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-stories`,

@@ -14,7 +14,6 @@ import root, {
 	makeConferenceListRoute,
 	makeSongAlbumsListRoute,
 	makeSponsorListRoute,
-	makeStoryAlbumListPage,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -127,7 +126,7 @@ export default function DiscoverCollections({
 					<CardSequence sequence={n} key={n.canonicalPath} />
 				))}
 			</CardGroup>
-			{makeSeeAllButton(makeStoryAlbumListPage(language, 1))}
+			{makeSeeAllButton(root.lang(language).stories.albums.get())}
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_scriptureSongsHeading"
