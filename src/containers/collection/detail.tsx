@@ -26,10 +26,7 @@ import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
-import root, {
-	makeCollectionPresentersRoute,
-	makeCollectionTeachingsRoute,
-} from '@lib/routes';
+import root, { makeCollectionTeachingsRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -253,7 +250,7 @@ function CollectionDetail({
 					{persons.pageInfo.hasNextPage && (
 						<Button
 							type="secondaryInverse"
-							href={makeCollectionPresentersRoute(lang, id)}
+							href={root.lang(lang).conferences.id(id).presenters.get()}
 							text={intl.formatMessage({
 								id: 'collectionDetail__presentersAllLabel',
 								defaultMessage: 'See All Presenters',
