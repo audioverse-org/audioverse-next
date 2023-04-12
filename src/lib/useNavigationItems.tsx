@@ -9,7 +9,6 @@ import root, {
 	makeAboutPage,
 	makeAccountProfileRoute,
 	makeAudiobookListRoute,
-	makeBibleListRoute,
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
 	makeContactRoute,
@@ -231,7 +230,7 @@ export function useNavigationItems(): INavigationItem[] {
 			? [
 					{
 						key: 'bibles',
-						href: makeBibleListRoute(languageRoute),
+						href: root.lang(languageRoute).bibles.get(),
 						Icon: iconMap.icon_bible,
 						label: intl.formatMessage({
 							id: `header__navItemBible`,

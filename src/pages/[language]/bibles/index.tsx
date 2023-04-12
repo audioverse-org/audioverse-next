@@ -11,7 +11,7 @@ import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getAudiobibleVersionsData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { makeBibleListRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default Versions;
 
@@ -52,7 +52,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
-		paths: [makeBibleListRoute(LANGUAGES.ENGLISH.base_url)],
+		paths: [root.lang(LANGUAGES.ENGLISH.base_url).bibles.get()],
 		fallback: false,
 	};
 }
