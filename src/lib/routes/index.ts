@@ -48,9 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeAccountProfileRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).account.profile.get();
-
 export const makeAccountPreferencesRoute = (languageRoute: string): string =>
 	root.lang(languageRoute).account.preferences.get();
 

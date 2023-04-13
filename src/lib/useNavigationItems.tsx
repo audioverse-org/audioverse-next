@@ -6,7 +6,6 @@ import { useIntl } from 'react-intl';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import root, {
-	makeAccountProfileRoute,
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
@@ -539,7 +538,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'profile',
-					href: makeAccountProfileRoute(languageRoute),
+					href: root.lang(languageRoute).account.profile.get(),
 					Icon: iconMap.fa_user_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemUser-profile`,
