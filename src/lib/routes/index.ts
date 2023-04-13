@@ -1,4 +1,3 @@
-import { Scalars } from '../generated/graphql';
 import about from './about';
 import account from './account';
 import discover from './discover';
@@ -47,10 +46,5 @@ const root = {
 export default root;
 
 // LEGACY:
-
-export const makeReleaseRoute = (
-	languageRoute: string,
-	releaseId: Scalars['ID']
-): string => root.lang(languageRoute).releases.id(releaseId).get();
 
 export const isRedirectRouteAllowed = (route: string) => route.startsWith('/');
