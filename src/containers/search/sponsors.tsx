@@ -7,7 +7,7 @@ import CardSponsor from '@components/molecules/card/sponsor';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSearchResultsSponsorsQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeSearchSponsorsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SearchSponsorsProps = PaginatedProps<
@@ -34,7 +34,16 @@ function SearchSponsors({ nodes, pagination }: SearchSponsorsProps) {
 					defaultMessage="All Matching Sponsors"
 				/>
 			}
-			makeRoute={(lang, page) => makeSearchSponsorsRoute(lang, term, page)}
+			makeRoute={(lang, page) =>
+				root
+					.lang(lang)
+					.search.sponsors.page(page)
+					.get({
+						params: {
+							q: term,
+						},
+					})
+			}
 		>
 			{nodes.map((node) => (
 				<CardSponsor sponsor={node} key={node.canonicalPath} />

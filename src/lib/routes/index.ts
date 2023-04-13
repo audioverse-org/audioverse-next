@@ -48,20 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeSearchSponsorsRoute = (
-	languageRoute: string,
-	term: string,
-	page: string | number = 1
-): string =>
-	root
-		.lang(languageRoute)
-		.search.sponsors.page(page)
-		.get({
-			params: {
-				q: term,
-			},
-		});
-
 export const makeSearchTeachingsRoute = (
 	languageRoute: string,
 	term: string,
