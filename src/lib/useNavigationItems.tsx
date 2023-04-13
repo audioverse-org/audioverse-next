@@ -6,7 +6,6 @@ import { useIntl } from 'react-intl';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import root, {
-	makeAboutPage,
 	makeAccountProfileRoute,
 	makeContactRoute,
 	makeDiscoverCollectionsRoute,
@@ -282,7 +281,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'story',
-			href: makeAboutPage(languageRoute, 1),
+			href: root.lang(languageRoute).about.id(1).get(),
 			Icon: iconMap.icon_our_story,
 			label: intl.formatMessage({
 				id: `header__navItemStory`,
@@ -291,7 +290,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'about',
-					href: makeAboutPage(languageRoute, 1),
+					href: root.lang(languageRoute).about.id(1).get(),
 					Icon: iconMap.fa_seedling,
 					label: intl.formatMessage({
 						id: `header__navItemStory`,
@@ -300,7 +299,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'meettheteam',
-					href: makeAboutPage(languageRoute, 13),
+					href: root.lang(languageRoute).about.id(13).get(),
 					Icon: iconMap.fa_users_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-team`,
@@ -309,7 +308,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'purpose',
-					href: makeAboutPage(languageRoute, 7),
+					href: root.lang(languageRoute).about.id(7).get(),
 					Icon: iconMap.fa_bullseye_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-purpose`,
@@ -318,7 +317,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'spiritofav',
-					href: makeAboutPage(languageRoute, 12),
+					href: root.lang(languageRoute).about.id(12).get(),
 					Icon: iconMap.fa_fire_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-spiritOfAudioVerse`,
@@ -488,7 +487,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'legal',
-					href: makeAboutPage(languageRoute, 3),
+					href: root.lang(languageRoute).about.id(3).get(),
 					Icon: iconMap.fa_landmark_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-legal`,
@@ -497,7 +496,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'privacy',
-					href: makeAboutPage(languageRoute, 4),
+					href: root.lang(languageRoute).about.id(4).get(),
 					Icon: iconMap.fa_lock_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-privacy`,
@@ -506,7 +505,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'terms',
-					href: makeAboutPage(languageRoute, 5),
+					href: root.lang(languageRoute).about.id(5).get(),
 					Icon: iconMap.fa_newspaper_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-terms`,

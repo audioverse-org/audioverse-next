@@ -48,9 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeAboutPage = (languageRoute: string, pageId: number): string =>
-	root.lang(languageRoute).about.id(pageId).get();
-
 export const makeContactRoute = (
 	languageRoute: string,
 	subpath = '/general'
