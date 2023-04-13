@@ -8,7 +8,7 @@ import Pagination from '@components/molecules/pagination';
 import AboutNav from '@components/organisms/aboutNav';
 import { GetTestimoniesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeTestimonySubmitRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './testimonies.module.scss';
@@ -49,7 +49,7 @@ export default function Testimonies({
 						defaultMessage="Share your story"
 					/>
 				}
-				href={makeTestimonySubmitRoute(languageRoute)}
+				href={root.lang(languageRoute).contact.testimonies.get()}
 			/>
 			<ContentWidthLimiter>
 				<hr className={styles.rule} />

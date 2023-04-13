@@ -48,9 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeTestimonySubmitRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).contact.testimonies.get();
-
 export const makePlaylistDetailRoute = (
 	languageRoute: string,
 	playlistId: Scalars['ID']
