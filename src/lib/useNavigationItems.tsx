@@ -8,7 +8,6 @@ import LanguageButton from '@components/molecules/languageButton';
 import root, {
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
-	makeDonateRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -340,7 +339,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'donate',
-					href: makeDonateRoute(languageRoute),
+					href: root.lang(languageRoute).give.get(),
 					Icon: iconMap.fa_heart_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-donate`,

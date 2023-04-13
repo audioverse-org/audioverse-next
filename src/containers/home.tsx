@@ -20,7 +20,7 @@ import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
-import root, { makeDiscoverRoute, makeDonateRoute } from '@lib/routes';
+import root, { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/icons/fa-bell.svg';
@@ -432,7 +432,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							</p>
 							<Button
 								type="super"
-								href={makeDonateRoute(languageRoute)}
+								href={root.lang(languageRoute).give.get()}
 								text={
 									<FormattedMessage
 										id="homePage__supportSectionCTA"

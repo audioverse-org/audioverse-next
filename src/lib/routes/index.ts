@@ -48,9 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeDonateRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).give.get();
-
 export const makeDiscoverRoute = (languageRoute: string): string =>
 	root.lang(languageRoute).discover.get();
 
