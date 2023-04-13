@@ -7,7 +7,7 @@ import CardPerson from '@components/molecules/card/person';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSearchResultsPersonsQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeSearchPersonsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SearchPersonsProps = PaginatedProps<
@@ -34,7 +34,16 @@ function SearchPersons({ nodes, pagination }: SearchPersonsProps) {
 					defaultMessage="All Matching Persons"
 				/>
 			}
-			makeRoute={(lang, page) => makeSearchPersonsRoute(lang, term, page)}
+			makeRoute={(lang, page) =>
+				root
+					.lang(lang)
+					.search.persons.page(page)
+					.get({
+						params: {
+							q: term,
+						},
+					})
+			}
 		>
 			{nodes.map((node) => (
 				<CardPerson person={node} key={node.canonicalPath} />
