@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makePlaylistDetailRoute = (
-	languageRoute: string,
-	playlistId: Scalars['ID']
-): string => root.lang(languageRoute).library.playlist(playlistId).get();
-
 export const makeBlogPostListRoute = (
 	languageRoute: string,
 	page: string | number = 1
