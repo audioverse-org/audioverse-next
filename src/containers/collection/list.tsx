@@ -6,7 +6,7 @@ import CardCollection from '@components/molecules/card/collection';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetCollectionListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type CollectionListProps = PaginatedProps<
@@ -25,7 +25,7 @@ function CollectionList({
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={makeDiscoverCollectionsRoute(language)}
+			backUrl={root.lang(language).discover.collections.get()}
 			heading={
 				<FormattedMessage
 					id="conferenceListPage__title"

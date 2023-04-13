@@ -12,7 +12,7 @@ import {
 	GetSponsorListLetterCountsQuery,
 	SponsorListEntryFragment,
 } from '@lib/generated/graphql';
-import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
@@ -51,7 +51,7 @@ export default function Sponsors({
 	return (
 		<>
 			<ButtonBack
-				backUrl={makeDiscoverCollectionsRoute(language)}
+				backUrl={root.lang(language).discover.collections.get()}
 				className={styles.back}
 			/>
 			<Heading1 className={styles.heading}>

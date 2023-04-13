@@ -5,7 +5,7 @@ import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetStoriesAlbumsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import EmptyState from '@components/organisms/emptyState';
 
@@ -42,7 +42,7 @@ export default function StoryAlbumsList({
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={makeDiscoverCollectionsRoute(language)}
+			backUrl={root.lang(language).discover.collections.get()}
 			heading={
 				<FormattedMessage
 					id="storyAlbumList__heading"

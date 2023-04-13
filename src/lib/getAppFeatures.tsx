@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export type IAppFeature = {
 	heading: JSX.Element;
@@ -77,7 +77,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="Explore Cards"
 				/>
 			),
-			url: makeDiscoverCollectionsRoute(languageRoute),
+			url: root.lang(languageRoute).discover.collections.get(),
 			backgroundColor: '#6B7680',
 		},
 		{

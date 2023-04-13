@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
-import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type INavigationItem = {
@@ -136,7 +136,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'collections',
-			href: makeDiscoverCollectionsRoute(languageRoute),
+			href: root.lang(languageRoute).discover.collections.get(),
 			Icon: iconMap.icon_collections,
 			label: intl.formatMessage({
 				id: `header__navItemBrowse`,
@@ -146,7 +146,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'all',
-					href: makeDiscoverCollectionsRoute(languageRoute),
+					href: root.lang(languageRoute).discover.collections.get(),
 					Icon: iconMap.fa_list_alt,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-all`,

@@ -10,7 +10,7 @@ import CardGroup from '@components/molecules/cardGroup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Mininav from '@components/molecules/mininav';
 import { GetSongAlbumsListPageDataQuery } from '@lib/generated/graphql';
-import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
@@ -28,7 +28,7 @@ function SongAlbumList({
 		<>
 			<ContentWidthLimiter>
 				<ButtonBack
-					backUrl={makeDiscoverCollectionsRoute(languageRoute)}
+					backUrl={root.lang(languageRoute).discover.collections.get()}
 					className={styles.backButton}
 				/>
 				<Heading1>
