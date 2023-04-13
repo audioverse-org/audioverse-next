@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Mininav from '@components/molecules/mininav';
-import root, { makeAccountPreferencesRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 type Props = {
@@ -33,7 +33,7 @@ export default function AccountNav({ current }: Props): JSX.Element {
 							defaultMessage="Preferences"
 						/>
 					),
-					url: makeAccountPreferencesRoute(languageRoute),
+					url: root.lang(languageRoute).account.preferences.get(),
 					isActive: current === 'preferences',
 				},
 			]}
