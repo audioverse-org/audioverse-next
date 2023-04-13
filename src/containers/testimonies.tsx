@@ -8,7 +8,7 @@ import Pagination from '@components/molecules/pagination';
 import AboutNav from '@components/organisms/aboutNav';
 import { GetTestimoniesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeTestimoniesRoute, makeTestimonySubmitRoute } from '@lib/routes';
+import root, { makeTestimonySubmitRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './testimonies.module.scss';
@@ -77,7 +77,7 @@ export default function Testimonies({
 				<Pagination
 					current={pagination.current}
 					total={pagination.total}
-					makeRoute={makeTestimoniesRoute}
+					makeRoute={(l, i) => root.lang(l).testimonies.page(i).get()}
 				/>
 			</ContentWidthLimiter>
 		</div>

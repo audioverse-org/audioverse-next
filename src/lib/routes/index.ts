@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeTestimoniesRoute = (
-	languageRoute: string,
-	page: string | number = 1
-): string => root.lang(languageRoute).testimonies.page(page).get();
-
 export const makeTestimonySubmitRoute = (languageRoute: string): string =>
 	root.lang(languageRoute).testimonies.get();
 

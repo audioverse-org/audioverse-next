@@ -20,12 +20,11 @@ import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
-import {
+import root, {
 	makeBlogPostListRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
-	makeTestimoniesRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -265,7 +264,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 											a: function a(chunks: string) {
 												return (
 													<Link
-														href={makeTestimoniesRoute(languageRoute)}
+														href={root.lang(languageRoute).testimonies.get()}
 														legacyBehavior
 													>
 														<a className="decorated">{chunks}</a>

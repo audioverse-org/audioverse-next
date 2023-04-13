@@ -15,7 +15,6 @@ import root, {
 	makeDonateRoute,
 	makeLibraryRoute,
 	makeLogoutRoute,
-	makeTestimoniesRoute,
 	makeTestimonySubmitRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -339,7 +338,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'testimonials',
-					href: makeTestimoniesRoute(languageRoute),
+					href: root.lang(languageRoute).testimonies.get(),
 					Icon: iconMap.fa_comment_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-testimonials`,

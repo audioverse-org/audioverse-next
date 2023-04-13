@@ -5,7 +5,7 @@ import Heading1 from '@components/atoms/heading1';
 import Button from '@components/molecules/button';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import AboutNav from '@components/organisms/aboutNav';
-import { makeAboutPage, makeTestimoniesRoute } from '@lib/routes';
+import root, { makeAboutPage } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
@@ -136,7 +136,7 @@ export default function SpiritOfAv(): JSX.Element {
 									defaultMessage="Testimonials"
 								/>
 							}
-							href={makeTestimoniesRoute(languageRoute)}
+							href={root.lang(languageRoute).testimonies.get()}
 						/>
 						<Button
 							type="secondary"
