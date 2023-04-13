@@ -9,7 +9,7 @@ import Contact, { ContactProps } from '@containers/contact';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import root, { makeContactRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default Contact;
 
@@ -34,8 +34,8 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes()
 			.map((base_url) => [
-				makeContactRoute(base_url, '/general'),
-				makeContactRoute(base_url, '/support'),
+				root.lang(base_url).contact.general.get(),
+				root.lang(base_url).contact.support.get(),
 				root.lang(base_url).contact.testimonies.get(),
 			])
 			.flat(),

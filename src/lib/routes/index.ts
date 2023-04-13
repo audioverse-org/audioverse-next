@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeContactRoute = (
-	languageRoute: string,
-	subpath = '/general'
-): string => root.lang(languageRoute).contact.subpath(subpath).get();
-
 export const makeLoginRoute = (
 	languageRoute: string,
 	redirectUrl = ''

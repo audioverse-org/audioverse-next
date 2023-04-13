@@ -7,7 +7,6 @@ import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import root, {
 	makeAccountProfileRoute,
-	makeContactRoute,
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
@@ -355,7 +354,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'contact',
-			href: makeContactRoute(languageRoute),
+			href: root.lang(languageRoute).contact.get(),
 			Icon: iconMap.icon_contact,
 			label: intl.formatMessage({
 				id: `header__navItemContact`,
@@ -364,7 +363,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'general',
-					href: makeContactRoute(languageRoute, '/general'),
+					href: root.lang(languageRoute).contact.general.get(),
 					Icon: iconMap.fa_inbox,
 					label: intl.formatMessage({
 						id: `header__navItemContact-general`,
@@ -373,7 +372,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'support',
-					href: makeContactRoute(languageRoute, '/support'),
+					href: root.lang(languageRoute).contact.support.get(),
 					Icon: iconMap.fa_comment_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemContact-support`,
