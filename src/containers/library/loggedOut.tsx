@@ -5,7 +5,7 @@ import Alert from '@components/atoms/alert';
 import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
 import LibraryNav from '@components/organisms/libraryNav';
-import root, { makeLibraryRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import baseStyles from './base.module.scss';
@@ -40,7 +40,7 @@ export default function LibraryLoggedOut(): JSX.Element {
 					}
 					href={root.lang(languageRoute).account.register.get({
 						params: {
-							back: makeLibraryRoute(languageRoute),
+							back: root.lang(languageRoute).library.get(),
 						},
 					})}
 				/>

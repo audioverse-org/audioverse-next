@@ -3,7 +3,8 @@ import node from './primatives/node';
 
 const library = (r: string) => ({
 	playlist: (playlistId: Scalars['ID']) => node(`${r}/playlist/${playlistId}`),
-	subpath: (subpath: string) => node(`${r}${subpath}`),
+	playlists: node(`${r}/playlists`),
+	history: node(`${r}/history`),
 });
 
 export default library;

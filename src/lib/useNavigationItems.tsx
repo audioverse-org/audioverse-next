@@ -9,7 +9,6 @@ import root, {
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
-	makeLibraryRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -230,7 +229,7 @@ export function useNavigationItems(): INavigationItem[] {
 			: []),
 		{
 			key: 'library',
-			href: makeLibraryRoute(languageRoute),
+			href: root.lang(languageRoute).library.get(),
 			Icon: iconMap.icon_books,
 			label: intl.formatMessage({
 				id: `header__navItemLibrary`,
@@ -240,7 +239,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'saved',
-					href: makeLibraryRoute(languageRoute),
+					href: root.lang(languageRoute).library.get(),
 					Icon: iconMap.fa_bookmark,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-listenLater`,
@@ -249,7 +248,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'playlists',
-					href: makeLibraryRoute(languageRoute, 'playlists'),
+					href: root.lang(languageRoute).library.playlists.get(),
 					Icon: iconMap.fa_stream,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-playlists`,
@@ -258,7 +257,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'history',
-					href: makeLibraryRoute(languageRoute, 'history'),
+					href: root.lang(languageRoute).library.history.get(),
 					Icon: iconMap.fa_history,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-history`,

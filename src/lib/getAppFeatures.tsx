@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import root, {
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
-	makeLibraryRoute,
 } from '@lib/routes';
 
 export type IAppFeature = {
@@ -103,7 +102,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="Explore Library"
 				/>
 			),
-			url: makeLibraryRoute(languageRoute),
+			url: root.lang(languageRoute).library.get(),
 			backgroundColor: '#EFEBEB',
 		},
 		{

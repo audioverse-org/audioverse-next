@@ -9,7 +9,7 @@ import Button from '@components/molecules/button';
 import Dropdown from '@components/molecules/dropdown';
 import Mininav from '@components/molecules/mininav';
 import { SORT_MAP } from '@containers/library';
-import { makeLibraryRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconFilter from '../../../public/img/icons/icon-filter-light.svg';
@@ -306,7 +306,7 @@ export default function LibraryNav({
 				items={navItems.map(([label, slug]) => ({
 					id: slug,
 					label,
-					url: makeLibraryRoute(languageRoute, slug),
+					url: root.lang(languageRoute).library.get() + slug,
 					isActive: slug === currentNavHref,
 				}))}
 				disabled={disabled}
