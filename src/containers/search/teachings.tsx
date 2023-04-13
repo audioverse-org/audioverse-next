@@ -7,7 +7,7 @@ import CardRecording from '@components/molecules/card/recording';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSearchResultsRecordingsQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeSearchTeachingsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SearchTeachingsProps = PaginatedProps<
@@ -34,7 +34,16 @@ function SearchTeachings({ nodes, pagination }: SearchTeachingsProps) {
 					defaultMessage="All Matching Teachings"
 				/>
 			}
-			makeRoute={(lang, page) => makeSearchTeachingsRoute(lang, term, page)}
+			makeRoute={(lang, page) =>
+				root
+					.lang(lang)
+					.search.teachings.page(page)
+					.get({
+						params: {
+							q: term,
+						},
+					})
+			}
 		>
 			{nodes.map((node) => (
 				<CardRecording recording={node} key={node.canonicalPath} />

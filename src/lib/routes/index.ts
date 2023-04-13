@@ -48,20 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeSearchTeachingsRoute = (
-	languageRoute: string,
-	term: string,
-	page: string | number = 1
-): string =>
-	root
-		.lang(languageRoute)
-		.search.teachings.page(page)
-		.get({
-			params: {
-				q: term,
-			},
-		});
-
 export const makeReleaseRoute = (
 	languageRoute: string,
 	releaseId: Scalars['ID']
