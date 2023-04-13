@@ -5,10 +5,7 @@ import { useIntl } from 'react-intl';
 
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
-import root, {
-	makeDiscoverCollectionsRoute,
-	makeDiscoverRoute,
-} from '@lib/routes';
+import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type INavigationItem = {
@@ -129,7 +126,7 @@ export function useNavigationItems(): INavigationItem[] {
 	return [
 		{
 			key: 'discover',
-			href: makeDiscoverRoute(languageRoute),
+			href: root.lang(languageRoute).discover.get(),
 			Icon: iconMap.icon_search,
 			label: intl.formatMessage({
 				id: `header__navItemDiscover`,

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Alert from '@components/atoms/alert';
 import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
-import { makeDiscoverRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './emptyState.module.scss';
@@ -30,7 +30,7 @@ export default function EmptyState({ title, message }: Props): JSX.Element {
 						defaultMessage="Go to Discover"
 					/>
 				}
-				href={makeDiscoverRoute(languageRoute)}
+				href={root.lang(languageRoute).discover.get()}
 			/>
 		</Alert>
 	);

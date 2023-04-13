@@ -48,9 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeDiscoverRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).discover.get();
-
 export const makeDiscoverCollectionsRoute = (languageRoute: string): string =>
 	root.lang(languageRoute).discover.collections.get();
 

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
-import root, { isRedirectRouteAllowed, makeDiscoverRoute } from '@lib/routes';
+import root, { isRedirectRouteAllowed } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import Icon from '../../../public/img/icons/icon-info.svg';
@@ -25,7 +25,7 @@ export default function ButtonGuest({
 	const redirectRoute =
 		backRoute && isRedirectRouteAllowed(backRoute)
 			? backRoute
-			: makeDiscoverRoute(language);
+			: root.lang(language).discover.get();
 
 	return (
 		<>

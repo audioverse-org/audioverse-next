@@ -8,7 +8,7 @@ import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import RecordingHasVideoFilter from '@components/molecules/recordingHasVideoFilter';
 import { GetTrendingTeachingsPageDataQuery } from '@lib/generated/graphql';
-import root, { makeDiscoverRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './trending.module.scss';
@@ -26,7 +26,7 @@ function TeachingsTrending({
 		<div>
 			<div className={styles.filterRow}>
 				<ButtonBack
-					backUrl={makeDiscoverRoute(languageRoute)}
+					backUrl={root.lang(languageRoute).discover.get()}
 					className={styles.back}
 				/>
 				<RecordingHasVideoFilter

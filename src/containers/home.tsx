@@ -20,7 +20,7 @@ import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
-import root, { makeDiscoverRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/icons/fa-bell.svg';
@@ -72,7 +72,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							<div className={styles.primaryCtas}>
 								<Button
 									type="super"
-									href={makeDiscoverRoute(languageRoute)}
+									href={root.lang(languageRoute).discover.get()}
 									text={
 										<FormattedMessage
 											id="homePage__DiscoverAudioButtonLabel"
@@ -129,7 +129,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 										a: function a(chunks: string) {
 											return (
 												<Link
-													href={makeDiscoverRoute(languageRoute)}
+													href={root.lang(languageRoute).discover.get()}
 													legacyBehavior
 												>
 													<a className="decorated">{chunks}</a>

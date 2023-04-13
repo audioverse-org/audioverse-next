@@ -1,10 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import root, {
-	makeDiscoverCollectionsRoute,
-	makeDiscoverRoute,
-} from '@lib/routes';
+import root, { makeDiscoverCollectionsRoute } from '@lib/routes';
 
 export type IAppFeature = {
 	heading: JSX.Element;
@@ -36,7 +33,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="Discover Audio"
 				/>
 			),
-			url: makeDiscoverRoute(languageRoute),
+			url: root.lang(languageRoute).discover.get(),
 			backgroundColor: '#FF6E6E',
 		},
 		{

@@ -5,7 +5,7 @@ import withAuthGuard from '@components/HOCs/withAuthGuard';
 import SocialLogin from '@components/molecules/socialLogin';
 import RegisterForm from '@components/organisms/registerForm';
 import AndOnboarding from '@components/templates/andOnboarding';
-import root, { makeDiscoverRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import LoginRedirect from './loginRedirect';
@@ -26,7 +26,7 @@ function Register(): JSX.Element {
 						})
 					)
 				}
-				onSuccess={() => router.push(makeDiscoverRoute(languageRoute))}
+				onSuccess={() => router.push(root.lang(languageRoute).discover.get())}
 			/>
 		</AndOnboarding>
 	);
