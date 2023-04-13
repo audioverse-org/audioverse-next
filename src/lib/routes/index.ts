@@ -45,6 +45,7 @@ const root = {
 
 export default root;
 
-// LEGACY:
-
+// TODO:
+// Make it clearer why this is needed
+// Reassess if this is the right place for this function
 export const isRedirectRouteAllowed = (route: string) => route.startsWith('/');
