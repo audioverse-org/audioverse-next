@@ -48,13 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeSearchRoute = (languageRoute: string, term = ''): string =>
-	root.lang(languageRoute).search.get({
-		params: {
-			q: term,
-		},
-	});
-
 export const makeSearchCollectionsRoute = (
 	languageRoute: string,
 	term: string,

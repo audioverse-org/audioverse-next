@@ -7,7 +7,7 @@ import CardCollection from '@components/molecules/card/collection';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSearchResultsCollectionsQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSearchCollectionsRoute, makeSearchRoute } from '@lib/routes';
+import root, { makeSearchCollectionsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SearchCollectionsProps = PaginatedProps<
@@ -23,7 +23,11 @@ function SearchCollections({ nodes, pagination }: SearchCollectionsProps) {
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={makeSearchRoute(languageRoute, term)}
+			backUrl={root.lang(languageRoute).search.get({
+				params: {
+					q: term,
+				},
+			})}
 			heading={
 				<FormattedMessage
 					id="searchCollections__heading"

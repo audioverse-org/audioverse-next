@@ -7,7 +7,7 @@ import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSearchResultsSequencesQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSearchRoute, makeSearchSequencesRoute } from '@lib/routes';
+import root, { makeSearchSequencesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SearchSequencesProps = PaginatedProps<
@@ -23,7 +23,11 @@ function SearchSequences({ nodes, pagination }: SearchSequencesProps) {
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={makeSearchRoute(languageRoute, term)}
+			backUrl={root.lang(languageRoute).search.get({
+				params: {
+					q: term,
+				},
+			})}
 			heading={
 				<FormattedMessage
 					id="searchSequences__heading"
