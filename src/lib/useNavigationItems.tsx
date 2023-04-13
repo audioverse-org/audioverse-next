@@ -11,7 +11,6 @@ import root, {
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeLibraryRoute,
-	makeLogoutRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -549,7 +548,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'logout',
-					href: makeLogoutRoute(languageRoute),
+					href: root.lang(languageRoute).account.logout.get(),
 					onClick: ({ popSubmenu }) => popSubmenu(),
 					Icon: iconMap.icon_sign_out,
 					label: intl.formatMessage({

@@ -14,7 +14,7 @@ import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { getSessionToken, setSessionToken } from '@lib/cookies';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
-import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
+import root, { makeDonateRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useNavigationItems } from '@lib/useNavigationItems';
 import { INavigationItem } from '@lib/useNavigationItems';
@@ -157,7 +157,11 @@ const Navigation = ({
 								</>
 							) : (
 								<Link
-									href={makeLoginRoute(languageRoute, router.asPath)}
+									href={root.lang(languageRoute).account.login.get({
+										params: {
+											back: router.asPath,
+										},
+									})}
 									legacyBehavior
 								>
 									<a className="decorated">

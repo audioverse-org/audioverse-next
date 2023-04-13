@@ -6,10 +6,9 @@ import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
-import {
+import root, {
 	isRedirectRouteAllowed,
 	makeDiscoverRoute,
-	makeLoginRoute,
 	makeRegisterRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -78,7 +77,11 @@ export default function ButtonGuest({
 						/>
 						<Button
 							onClick={() => setIsGuestModalOpen(false)}
-							href={makeLoginRoute(language, redirectRoute)}
+							href={root.lang(language).account.login.get({
+								params: {
+									back: redirectRoute,
+								},
+							})}
 							type="primary"
 							text={
 								<FormattedMessage

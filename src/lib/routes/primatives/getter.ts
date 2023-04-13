@@ -1,5 +1,7 @@
+import { NextParsedUrlQuery } from 'next/dist/server/request-meta';
+
 export type GetterOptions = {
-	params?: Record<string, string>;
+	params?: NextParsedUrlQuery;
 };
 
 export type Getter = (options?: GetterOptions) => string;

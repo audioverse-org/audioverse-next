@@ -48,19 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeLoginRoute = (
-	languageRoute: string,
-	redirectUrl = ''
-): string =>
-	root.lang(languageRoute).account.login.get({
-		params: {
-			back: redirectUrl,
-		},
-	});
-
-export const makeLogoutRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).account.logout.get();
-
 export const makeRegisterRoute = (
 	languageRoute: string,
 	redirectUrl = ''
