@@ -48,11 +48,6 @@ export default root;
 
 // LEGACY:
 
-export const makeBlogPostListRoute = (
-	languageRoute: string,
-	page: string | number = 1
-): string => root.lang(languageRoute).blog.page(page).get();
-
 export const makeAboutPage = (languageRoute: string, pageId: number): string =>
 	root.lang(languageRoute).about.id(pageId).get();
 

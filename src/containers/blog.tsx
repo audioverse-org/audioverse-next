@@ -6,7 +6,7 @@ import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import { GetBlogPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeBlogPostListRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export type BlogProps = PaginatedProps<
 	NonNullable<GetBlogPageDataQuery['blogPosts']['nodes']>[0],
@@ -24,7 +24,9 @@ function Blog({ nodes: blogPosts, pagination }: BlogProps): JSX.Element {
 			<Pagination
 				current={pagination.current}
 				total={pagination.total}
-				makeRoute={makeBlogPostListRoute}
+				makeRoute={(languageRoute, pageIndex) =>
+					root.lang(languageRoute).blog.page(pageIndex).get()
+				}
 			/>
 		</>
 	);

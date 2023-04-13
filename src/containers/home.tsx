@@ -21,7 +21,6 @@ import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import root, {
-	makeBlogPostListRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
@@ -218,7 +217,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 											defaultMessage="See All Blog Posts"
 										/>
 									}
-									href={makeBlogPostListRoute(languageRoute)}
+									href={root.lang(languageRoute).blog.get()}
 								/>
 							</div>
 						</div>

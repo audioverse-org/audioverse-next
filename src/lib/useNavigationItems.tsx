@@ -8,7 +8,6 @@ import LanguageButton from '@components/molecules/languageButton';
 import root, {
 	makeAboutPage,
 	makeAccountProfileRoute,
-	makeBlogPostListRoute,
 	makeContactRoute,
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
@@ -328,7 +327,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'blog',
-					href: makeBlogPostListRoute(languageRoute),
+					href: root.lang(languageRoute).blog.get(),
 					Icon: iconMap.fa_align_left,
 					label: intl.formatMessage({
 						id: `header__navItemStory-blog`,
