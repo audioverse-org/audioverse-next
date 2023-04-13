@@ -7,7 +7,7 @@ import CardCollection from '@components/molecules/card/collection';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSearchResultsCollectionsQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root, { makeSearchCollectionsRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SearchCollectionsProps = PaginatedProps<
@@ -34,7 +34,16 @@ function SearchCollections({ nodes, pagination }: SearchCollectionsProps) {
 					defaultMessage="All Matching Collections"
 				/>
 			}
-			makeRoute={(lang, page) => makeSearchCollectionsRoute(lang, term, page)}
+			makeRoute={(lang, page) =>
+				root
+					.lang(lang)
+					.search.collections.page(page)
+					.get({
+						params: {
+							q: term,
+						},
+					})
+			}
 		>
 			{nodes.map((node) => (
 				<CardCollection collection={node} key={node.canonicalPath} />
