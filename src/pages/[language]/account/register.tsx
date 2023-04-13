@@ -10,7 +10,7 @@ import { REVALIDATE } from '@lib/constants';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeRegisterRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default Register;
 
@@ -34,7 +34,9 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
-		paths: getLanguageRoutes().map((base_url) => makeRegisterRoute(base_url)),
+		paths: getLanguageRoutes().map((base_url) =>
+			root.lang(base_url).account.register.get()
+		),
 		fallback: false,
 	};
 }

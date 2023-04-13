@@ -20,11 +20,7 @@ import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
-import root, {
-	makeDiscoverRoute,
-	makeDonateRoute,
-	makeRegisterRoute,
-} from '@lib/routes';
+import root, { makeDiscoverRoute, makeDonateRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/icons/fa-bell.svg';
@@ -87,7 +83,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								{!isLoggedIn && (
 									<Button
 										type="primaryInverse"
-										href={makeRegisterRoute(languageRoute)}
+										href={root.lang(languageRoute).account.register.get()}
 										text={
 											<FormattedMessage
 												id="homePage__CreateAccountButtonLabel"
