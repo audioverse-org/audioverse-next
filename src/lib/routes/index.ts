@@ -49,7 +49,7 @@ export default root;
 // LEGACY:
 
 export const makeTestimonySubmitRoute = (languageRoute: string): string =>
-	root.lang(languageRoute).testimonies.get();
+	root.lang(languageRoute).contact.testimonies.get();
 
 export const makePlaylistDetailRoute = (
 	languageRoute: string,
