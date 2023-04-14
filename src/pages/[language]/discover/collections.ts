@@ -24,32 +24,11 @@ export async function getStaticProps({
 > {
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
+	const data = await getDiscoverCollectionsPageData({ language });
+
 	return {
 		props: {
-			...(await getDiscoverCollectionsPageData({ language }).catch(() => ({
-				audiobooks: {
-					nodes: [],
-				},
-				conferences: {
-					nodes: [],
-				},
-				musicAlbums: {
-					nodes: [],
-				},
-				persons: {
-					nodes: [],
-				},
-				websiteFeaturedCollection: null,
-				serieses: {
-					nodes: [],
-				},
-				sponsors: {
-					nodes: [],
-				},
-				storySeasons: {
-					nodes: [],
-				},
-			}))),
+			...data,
 			title: intl.formatMessage({
 				id: 'discoverCollections__title',
 				defaultMessage: 'Discover Collections',

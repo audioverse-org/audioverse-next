@@ -22,28 +22,11 @@ export async function getStaticProps({
 > {
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
+	const data = await getDiscoverPageData({ language });
+
 	return {
 		props: {
-			...(await getDiscoverPageData({ language }).catch(() => ({
-				conferences: {
-					nodes: [],
-				},
-				recentTeachings: {
-					nodes: [],
-				},
-				featuredTeachings: {
-					nodes: [],
-				},
-				storySeasons: {
-					nodes: [],
-				},
-				trendingTeachings: {
-					nodes: [],
-				},
-				blogPosts: {
-					nodes: [],
-				},
-			}))),
+			...data,
 			title: intl.formatMessage({
 				id: 'discover__title',
 				defaultMessage: 'Discover',
