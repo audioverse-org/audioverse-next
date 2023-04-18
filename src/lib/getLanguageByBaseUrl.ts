@@ -7,8 +7,8 @@ export default function getLanguageByBaseUrl(
 	fallback: string | null = null
 ): LanguageConfiguration | undefined {
 	return (
-		find(LANGUAGES, (l) => l.base_url === base_url) ||
-		find(LANGUAGES, (l) => l.base_url === fallback) ||
+		find(LANGUAGES, (l) => l.base_urls.includes(base_url)) ||
+		find(LANGUAGES, (l) => l.base_urls.includes(fallback || '')) ||
 		undefined
 	);
 }

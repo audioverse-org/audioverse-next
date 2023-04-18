@@ -7,7 +7,9 @@ import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 
 describe('getNumberedStaticPaths', () => {
 	it('enforces list render limit', async () => {
-		const languageCount = Object.keys(LANGUAGES).length;
+		const languageCount = Object.values(LANGUAGES)
+			.map((c) => c.base_urls)
+			.flat().length;
 		const expected = LIST_PRERENDER_LIMIT * languageCount;
 
 		const result = await getNumberedStaticPaths(

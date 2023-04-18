@@ -11,9 +11,8 @@ export function getLanguageIdByRoute(
 	route: string | undefined,
 	fallback: SupportedLanguages = Language.English
 ): SupportedLanguages {
-	const id = findKey(
-		LANGUAGES,
-		(l: LanguageConfiguration) => l.base_url === route
+	const id = findKey(LANGUAGES, (l: LanguageConfiguration) =>
+		l.base_urls.includes(route || '')
 	) as SupportedLanguages;
 
 	return id || fallback;
