@@ -7,7 +7,7 @@ import Button from '@components/molecules/button';
 import Input from '@components/molecules/form/input';
 import { login } from '@lib/api/login';
 import { useResetPasswordMutation } from '@lib/generated/graphql';
-import { makeDiscoverRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
 
@@ -43,7 +43,7 @@ function Reset(): JSX.Element {
 				setIsLoggingIn(true);
 				try {
 					await login(email, password);
-					return router.push(makeDiscoverRoute(languageRoute));
+					return router.push(root.lang(languageRoute).discover.get());
 				} catch {
 					setErrors([
 						intl.formatMessage({

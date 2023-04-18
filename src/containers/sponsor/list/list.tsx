@@ -12,11 +12,7 @@ import {
 	GetSponsorListLetterCountsQuery,
 	SponsorListEntryFragment,
 } from '@lib/generated/graphql';
-import {
-	makeDiscoverCollectionsRoute,
-	makeSponsorListAllRoute,
-	makeSponsorListRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
@@ -44,18 +40,18 @@ export default function Sponsors({
 				id: 'sponsorsList__all',
 				defaultMessage: 'All',
 			}),
-			url: makeSponsorListAllRoute(language),
+			url: root.lang(language).sponsors.all.get(),
 		},
 		...sponsorLetterCounts.map(({ letter }) => ({
 			text: letter,
-			url: makeSponsorListRoute(language, letter),
+			url: root.lang(language).sponsors.letter(letter).get(),
 		})),
 	];
 
 	return (
 		<>
 			<ButtonBack
-				backUrl={makeDiscoverCollectionsRoute(language)}
+				backUrl={root.lang(language).discover.collections.get()}
 				className={styles.back}
 			/>
 			<Heading1 className={styles.heading}>

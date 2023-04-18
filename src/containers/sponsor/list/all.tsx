@@ -5,6 +5,7 @@ import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSponsorListAllPageDataDocument,
 	GetSponsorListAllPageDataQuery,
+	Maybe,
 } from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
 import useOnScreen from '@lib/hooks/useOnScreen';
@@ -28,8 +29,10 @@ export default function AllSponsors(props: Props) {
 				},
 			}),
 		{
-			getNextPageParam: ({ sponsors }: GetSponsorListAllPageDataQuery) =>
-				sponsors.pageInfo.hasNextPage ? sponsors.pageInfo.endCursor : undefined,
+			getNextPageParam: (lastPage: Maybe<GetSponsorListAllPageDataQuery>) =>
+				lastPage?.sponsors.pageInfo.hasNextPage
+					? lastPage.sponsors.pageInfo.endCursor
+					: undefined,
 		}
 	);
 
@@ -40,7 +43,7 @@ export default function AllSponsors(props: Props) {
 		fetchNextPage();
 	}, [hasNextPage, hasReachedEnd, fetchNextPage, isLoading]);
 
-	const sponsors = data?.pages.flatMap((p) => p.sponsors.nodes || []) || [];
+	const sponsors = data?.pages.flatMap((p) => p?.sponsors.nodes || []) || [];
 
 	return (
 		<>

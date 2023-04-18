@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { useLogout } from '@lib/api/useLogout';
-import { makeDiscoverRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export default function Logout(): JSX.Element {
@@ -15,7 +15,7 @@ export default function Logout(): JSX.Element {
 
 	useEffect(() => {
 		if (loggedOut) {
-			router.push(makeDiscoverRoute(languageRoute));
+			router.push(root.lang(languageRoute).discover.get());
 		}
 	}, [loggedOut, router, languageRoute]);
 

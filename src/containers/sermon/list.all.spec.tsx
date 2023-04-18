@@ -100,8 +100,8 @@ describe('sermons list page', () => {
 		loadSermonListPagePathsData(LIST_PRERENDER_LIMIT * ENTRIES_PER_PAGE);
 
 		const result = await getStaticPaths();
-
 		const expected = LIST_PRERENDER_LIMIT * Object.keys(LANGUAGES).length;
+
 		expect(result.paths.length).toBe(expected);
 	});
 
@@ -193,12 +193,14 @@ describe('sermons list page', () => {
 	});
 
 	it('links pagination properly', async () => {
-		loadSermonListData();
+		loadSermonListData({
+			count: ENTRIES_PER_PAGE * 2,
+		});
 
 		const { getByText } = await renderPage(),
-			link = getByText('1') as HTMLAnchorElement;
+			link = getByText('2') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/teachings/all/page/1');
+		expect(link.href).toContain('/en/teachings/all/page/2');
 	});
 
 	it('revalidates static pages', async () => {
@@ -220,7 +222,7 @@ describe('sermons list page', () => {
 
 		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
 			'href',
-			'/en/teachings/all/page/1'
+			'/en/teachings/all'
 		);
 	});
 
@@ -234,7 +236,7 @@ describe('sermons list page', () => {
 
 		expect(screen.getByRole('link', { name: 'Todo' })).toHaveAttribute(
 			'href',
-			'/es/teachings/all/page/1'
+			'/es/teachings/all'
 		);
 	});
 
@@ -247,7 +249,7 @@ describe('sermons list page', () => {
 
 		const link = await screen.findByRole('link', { name: 'Video' });
 
-		expect(link).toHaveAttribute('href', '/en/teachings/video/page/1');
+		expect(link).toHaveAttribute('href', '/en/teachings/video');
 	});
 
 	it('links Audio button', async () => {
@@ -259,13 +261,13 @@ describe('sermons list page', () => {
 
 		expect(
 			await screen.findByRole('link', { name: 'Audio only' })
-		).toHaveAttribute('href', '/en/teachings/audio/page/1');
+		).toHaveAttribute('href', '/en/teachings/audio');
 	});
 
 	it('does not include video paths', async () => {
 		const result = await getStaticPaths();
 
-		expect(result.paths).not.toContain('/en/teachings/video/page/1');
+		expect(result.paths).not.toContain('/en/teachings/video');
 	});
 
 	it('localizes pagination', async () => {
@@ -275,7 +277,7 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/es/teachings/all/page/1');
+		expect(link.href).toContain('/es/teachings/all');
 	});
 
 	it('sets rss head link', async () => {

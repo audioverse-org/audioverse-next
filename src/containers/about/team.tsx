@@ -10,7 +10,7 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import TypeLockup from '@components/molecules/typeLockup';
 import AboutNav from '@components/organisms/aboutNav';
 import { BaseColors } from '@lib/constants';
-import { makeAboutPage } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconUser from '../../../public/img/icons/fa-user-light.svg';
@@ -290,7 +290,7 @@ export default function Team(): JSX.Element {
 									defaultMessage="Our Purpose"
 								/>
 							}
-							href={makeAboutPage(languageRoute, 7)}
+							href={root.lang(languageRoute).about.id(7).get()}
 						/>
 						<Button
 							type="secondary"
@@ -301,7 +301,7 @@ export default function Team(): JSX.Element {
 									defaultMessage="Our Story"
 								/>
 							}
-							href={makeAboutPage(languageRoute, 1)}
+							href={root.lang(languageRoute).about.id(1).get()}
 						/>
 					</div>
 				</div>

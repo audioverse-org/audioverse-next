@@ -1,12 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-	makeDiscoverCollectionsRoute,
-	makeDiscoverRoute,
-	makeLibraryRoute,
-	makeSermonListRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 
 export type IAppFeature = {
 	heading: JSX.Element;
@@ -38,7 +33,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="Discover Audio"
 				/>
 			),
-			url: makeDiscoverRoute(languageRoute),
+			url: root.lang(languageRoute).discover.get(),
 			backgroundColor: '#FF6E6E',
 		},
 		{
@@ -60,7 +55,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="View Recent Content"
 				/>
 			),
-			url: makeSermonListRoute(languageRoute),
+			url: root.lang(languageRoute).teachings.all.get(),
 			backgroundColor: '#325763',
 		},
 		{
@@ -82,7 +77,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="Explore Cards"
 				/>
 			),
-			url: makeDiscoverCollectionsRoute(languageRoute),
+			url: root.lang(languageRoute).discover.collections.get(),
 			backgroundColor: '#6B7680',
 		},
 		{
@@ -104,7 +99,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="Explore Library"
 				/>
 			),
-			url: makeLibraryRoute(languageRoute),
+			url: root.lang(languageRoute).library.get(),
 			backgroundColor: '#EFEBEB',
 		},
 		{
@@ -126,7 +121,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 					defaultMessage="Find Content to Download"
 				/>
 			),
-			url: makeSermonListRoute(languageRoute),
+			url: root.lang(languageRoute).teachings.all.get(),
 			backgroundColor: '#CDD9E3',
 		},
 	].map((item, index) => ({

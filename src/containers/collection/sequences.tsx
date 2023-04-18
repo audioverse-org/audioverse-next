@@ -12,7 +12,7 @@ import {
 	GetCollectionSequencesPageDataQuery,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeCollectionSequencesRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 import CollectionPivot from './pivot';
 
@@ -50,7 +50,11 @@ function CollectionSequences({
 			<Pagination
 				{...pagination}
 				makeRoute={(languageRoute, pageIndex) =>
-					makeCollectionSequencesRoute(languageRoute, collection.id, pageIndex)
+					root
+						.lang(languageRoute)
+						.conferences.id(collection.id)
+						.sequences.page(pageIndex)
+						.get()
 				}
 				useInverse
 			/>

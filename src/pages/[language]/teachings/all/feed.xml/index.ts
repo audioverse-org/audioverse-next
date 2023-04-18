@@ -5,7 +5,7 @@ import { getSermonListFeedData } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
-import { makeSermonListRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default (): void => void 0;
 
@@ -30,10 +30,13 @@ export async function getServerSideProps({
 		sendRSSHeaders(res);
 		const intl = await getIntl(languageRoute);
 		const language = LANGUAGES[languageId].display_name;
+		const link = `https://www.audioverse.org${root
+			.lang(languageRoute)
+			.teachings.all.get()}`;
 		const feed = await generateFeed(
 			languageRoute,
 			{
-				link: `https://www.audioverse.org${makeSermonListRoute(languageRoute)}`,
+				link,
 				title: intl.formatMessage(
 					{
 						id: 'teachingsFeed__title',

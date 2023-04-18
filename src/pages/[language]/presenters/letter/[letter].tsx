@@ -14,7 +14,7 @@ import {
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';
-import { makePresenterListRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default Presenters;
 
@@ -52,11 +52,11 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const keys = getLanguageIds();
 	const pathSets = await Promise.all(
 		keys.map(async (language) => {
-			const { personLetterCounts } = await getPersonListLetterCounts({
+			const { personLetterCounts = [] } = await getPersonListLetterCounts({
 				language,
 			});
-			return (personLetterCounts || []).map(({ letter }) =>
-				makePresenterListRoute(LANGUAGES[language].base_url, letter)
+			return personLetterCounts.map(({ letter }) =>
+				root.lang(LANGUAGES[language].base_url).presenters.letter(letter).get()
 			);
 		})
 	);

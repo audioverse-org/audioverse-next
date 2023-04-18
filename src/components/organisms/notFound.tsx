@@ -8,7 +8,7 @@ import Button from '@components/molecules/button';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import { GetNotFoundPageDataQuery } from '@lib/generated/graphql';
-import { makeDiscoverRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './notFound.module.scss';
@@ -43,7 +43,7 @@ export default function NotFound(props: NotFoundProps): JSX.Element {
 							defaultMessage="Go back to Discover"
 						/>
 					}
-					href={makeDiscoverRoute(languageRoute)}
+					href={root.lang(languageRoute).discover.get()}
 				/>
 			</Alert>
 			{props?.websiteRecentRecordings && (

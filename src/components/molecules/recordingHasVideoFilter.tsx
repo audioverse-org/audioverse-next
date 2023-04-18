@@ -13,7 +13,11 @@ import styles from './recordingHasVideoFilter.module.scss';
 
 type Props = {
 	filter: string;
-	makeRoute: (languageRoute: string, filter: string, page: number) => string;
+	makeRoute: (
+		languageRoute: string,
+		filter: 'all' | 'audio' | 'video',
+		page: number
+	) => string;
 };
 
 export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {

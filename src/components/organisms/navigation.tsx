@@ -14,7 +14,7 @@ import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { getSessionToken, setSessionToken } from '@lib/cookies';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
-import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useNavigationItems } from '@lib/useNavigationItems';
 import { INavigationItem } from '@lib/useNavigationItems';
@@ -123,7 +123,7 @@ const Navigation = ({
 									defaultMessage="Donate"
 								/>
 							}
-							href={makeDonateRoute(languageRoute)}
+							href={root.lang(languageRoute).give.get()}
 							className={styles.desktopDonate}
 						/>
 
@@ -157,7 +157,11 @@ const Navigation = ({
 								</>
 							) : (
 								<Link
-									href={makeLoginRoute(languageRoute, router.asPath)}
+									href={root.lang(languageRoute).account.login.get({
+										params: {
+											back: router.asPath,
+										},
+									})}
 									legacyBehavior
 								>
 									<a className="decorated">

@@ -12,7 +12,7 @@ import { getTrendingTeachingsPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeTrendingSermonRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default TrendingTeachings;
 
@@ -61,7 +61,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const baseRoutes = getLanguageRoutes();
 	return {
-		paths: baseRoutes.map((l) => makeTrendingSermonRoute(l)),
+		paths: baseRoutes.map((l) => root.lang(l).teachings.trending.all.get()),
 		fallback: false,
 	};
 }

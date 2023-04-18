@@ -8,7 +8,7 @@ import { IBaseProps } from '@containers/base';
 import TrendingTeachings from '@containers/sermon/trending';
 import { TrendingTeachingsProps } from '@containers/sermon/trending';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeTrendingSermonRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 import { trendingStaticProps } from './all';
 
@@ -25,7 +25,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const baseRoutes = getLanguageRoutes();
 	return {
-		paths: baseRoutes.map((l) => makeTrendingSermonRoute(l, 'video')),
+		paths: baseRoutes.map((l) => root.lang(l).teachings.trending.video.get()),
 		fallback: false,
 	};
 }

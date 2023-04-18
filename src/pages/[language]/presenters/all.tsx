@@ -6,7 +6,7 @@ import {
 } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makePresenterListAllRoute } from '@lib/routes';
+import root from '@lib/routes';
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
 export default All;
@@ -26,7 +26,7 @@ export async function getStaticProps({
 
 export function getStaticPaths() {
 	return {
-		paths: getLanguageRoutes().map(makePresenterListAllRoute),
+		paths: getLanguageRoutes().map((l) => root.lang(l).presenters.all.get()),
 		fallback: 'blocking',
 	};
 }

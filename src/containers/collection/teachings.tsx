@@ -12,7 +12,7 @@ import {
 	GetCollectionTeachingsPageDataQuery,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeCollectionTeachingsRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 import CollectionPivot from './pivot';
 
@@ -50,7 +50,11 @@ function CollectionTeachings({
 			<Pagination
 				{...pagination}
 				makeRoute={(languageRoute, pageIndex) =>
-					makeCollectionTeachingsRoute(languageRoute, collection.id, pageIndex)
+					root
+						.lang(languageRoute)
+						.conferences.id(collection.id)
+						.teachings.page(pageIndex)
+						.get()
 				}
 				useInverse
 			/>

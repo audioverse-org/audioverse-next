@@ -20,13 +20,7 @@ import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
-import {
-	makeBlogPostListRoute,
-	makeDiscoverRoute,
-	makeDonateRoute,
-	makeRegisterRoute,
-	makeTestimoniesRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/icons/fa-bell.svg';
@@ -78,7 +72,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							<div className={styles.primaryCtas}>
 								<Button
 									type="super"
-									href={makeDiscoverRoute(languageRoute)}
+									href={root.lang(languageRoute).discover.get()}
 									text={
 										<FormattedMessage
 											id="homePage__DiscoverAudioButtonLabel"
@@ -89,7 +83,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								{!isLoggedIn && (
 									<Button
 										type="primaryInverse"
-										href={makeRegisterRoute(languageRoute)}
+										href={root.lang(languageRoute).account.register.get()}
 										text={
 											<FormattedMessage
 												id="homePage__CreateAccountButtonLabel"
@@ -135,7 +129,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 										a: function a(chunks: string) {
 											return (
 												<Link
-													href={makeDiscoverRoute(languageRoute)}
+													href={root.lang(languageRoute).discover.get()}
 													legacyBehavior
 												>
 													<a className="decorated">{chunks}</a>
@@ -219,7 +213,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 											defaultMessage="See All Blog Posts"
 										/>
 									}
-									href={makeBlogPostListRoute(languageRoute)}
+									href={root.lang(languageRoute).blog.get()}
 								/>
 							</div>
 						</div>
@@ -265,7 +259,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 											a: function a(chunks: string) {
 												return (
 													<Link
-														href={makeTestimoniesRoute(languageRoute)}
+														href={root.lang(languageRoute).testimonies.get()}
 														legacyBehavior
 													>
 														<a className="decorated">{chunks}</a>
@@ -438,7 +432,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							</p>
 							<Button
 								type="super"
-								href={makeDonateRoute(languageRoute)}
+								href={root.lang(languageRoute).give.get()}
 								text={
 									<FormattedMessage
 										id="homePage__supportSectionCTA"

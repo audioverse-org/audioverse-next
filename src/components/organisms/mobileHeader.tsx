@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Button from '@components/molecules/button';
 import Mininav from '@components/molecules/mininav';
 import Header from '@components/organisms/header';
-import { makeDonateRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useNavigationItems } from '@lib/useNavigationItems';
 import MoreIcon from '../../../public/img/icons/icon-more.svg';
@@ -72,7 +72,7 @@ export default function MobileHeader({
 								defaultMessage="Donate"
 							/>
 						}
-						href={makeDonateRoute(lang)}
+						href={root.lang(lang).give.get()}
 					/>
 					{getRecording() && <ButtonPlayback />}
 				</div>
