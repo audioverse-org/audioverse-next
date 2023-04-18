@@ -18,7 +18,7 @@ import {
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
 } from '@lib/generated/graphql';
-import { makeDiscoverRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './profile.module.scss';
@@ -88,7 +88,7 @@ function Profile(): JSX.Element {
 		onSuccess: async () => {
 			clearSessionToken();
 			resetUserQueries(queryClient);
-			router.push(makeDiscoverRoute(languageRoute));
+			router.push(root.lang(languageRoute).discover.get());
 		},
 	});
 

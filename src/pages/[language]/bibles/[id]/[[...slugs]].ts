@@ -14,7 +14,7 @@ import {
 	getAudiobibleVersionsData,
 	Language,
 } from '@lib/generated/graphql';
-import { makeBibleVersionRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default Version;
 
@@ -77,11 +77,11 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const response = await getBibles();
+	const response = (await getBibles()) || [];
 	const paths = [];
 	paths.push(
-		...(response || []).map(({ id }) =>
-			makeBibleVersionRoute(LANGUAGES.ENGLISH.base_url, id)
+		...response.map(({ id }) =>
+			root.lang(LANGUAGES.ENGLISH.base_url).bibles.versionId(id).get()
 		)
 	);
 	const apiBibles = await getAudiobibleVersionsData({

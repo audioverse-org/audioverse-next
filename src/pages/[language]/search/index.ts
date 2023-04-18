@@ -10,7 +10,7 @@ import { REVALIDATE } from '@lib/constants';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeSearchRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default Search;
 
@@ -35,7 +35,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const baseRoutes = getLanguageRoutes();
 	return {
-		paths: baseRoutes.map((l) => makeSearchRoute(l)),
+		paths: baseRoutes.map((l) => root.lang(l).search.get()),
 		fallback: 'blocking',
 	};
 }

@@ -10,7 +10,7 @@ import Button from '@components/molecules/button';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import AboutNav from '@components/organisms/aboutNav';
 import { BaseColors } from '@lib/constants';
-import { makeAboutPage } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
@@ -146,7 +146,7 @@ export default function Purpose(): JSX.Element {
 								/>
 							}
 							IconRight={IconForward}
-							href={makeAboutPage(languageRoute, 12)}
+							href={root.lang(languageRoute).about.id(12).get()}
 						/>
 						<Button
 							type="secondary"
@@ -157,7 +157,7 @@ export default function Purpose(): JSX.Element {
 								/>
 							}
 							IconLeft={IconBack}
-							href={makeAboutPage(languageRoute, 13)}
+							href={root.lang(languageRoute).about.id(13).get()}
 						/>
 					</div>
 				</div>

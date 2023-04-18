@@ -5,26 +5,7 @@ import { useIntl } from 'react-intl';
 
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
-import {
-	makeAboutPage,
-	makeAccountProfileRoute,
-	makeAudiobookListRoute,
-	makeBibleListRoute,
-	makeBlogPostListRoute,
-	makeConferenceListRoute,
-	makeContactRoute,
-	makeDiscoverCollectionsRoute,
-	makeDiscoverRoute,
-	makeDonateRoute,
-	makeLibraryRoute,
-	makeLogoutRoute,
-	makePresenterListRoute,
-	makeSongAlbumsListRoute,
-	makeSponsorListRoute,
-	makeStoryAlbumListPage,
-	makeTestimoniesRoute,
-	makeTestimonySubmitRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type INavigationItem = {
@@ -145,7 +126,7 @@ export function useNavigationItems(): INavigationItem[] {
 	return [
 		{
 			key: 'discover',
-			href: makeDiscoverRoute(languageRoute),
+			href: root.lang(languageRoute).discover.get(),
 			Icon: iconMap.icon_search,
 			label: intl.formatMessage({
 				id: `header__navItemDiscover`,
@@ -155,7 +136,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'collections',
-			href: makeDiscoverCollectionsRoute(languageRoute),
+			href: root.lang(languageRoute).discover.collections.get(),
 			Icon: iconMap.icon_collections,
 			label: intl.formatMessage({
 				id: `header__navItemBrowse`,
@@ -165,7 +146,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'all',
-					href: makeDiscoverCollectionsRoute(languageRoute),
+					href: root.lang(languageRoute).discover.collections.get(),
 					Icon: iconMap.fa_list_alt,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-all`,
@@ -174,7 +155,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'sponsors',
-					href: makeSponsorListRoute(languageRoute),
+					href: root.lang(languageRoute).sponsors.get(),
 					Icon: iconMap.fa_user_plus_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-sponsors`,
@@ -183,7 +164,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'conferences',
-					href: makeConferenceListRoute(languageRoute),
+					href: root.lang(languageRoute).conferences.get(),
 					Icon: iconMap.fa_calendar,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-conferences`,
@@ -192,7 +173,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'presenter',
-					href: makePresenterListRoute(languageRoute),
+					href: root.lang(languageRoute).presenters.get(),
 					Icon: iconMap.fa_user_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-presenters`,
@@ -201,7 +182,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'stories',
-					href: makeStoryAlbumListPage(languageRoute),
+					href: root.lang(languageRoute).stories.albums.get(),
 					Icon: iconMap.fa_feather,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-stories`,
@@ -210,7 +191,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'books',
-					href: makeAudiobookListRoute(languageRoute),
+					href: root.lang(languageRoute).books.get(),
 					Icon: iconMap.fa_book,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-books`,
@@ -219,7 +200,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'songs',
-					href: makeSongAlbumsListRoute(languageRoute),
+					href: root.lang(languageRoute).songs.albums.get(),
 					Icon: iconMap.fa_music,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-songs`,
@@ -232,7 +213,7 @@ export function useNavigationItems(): INavigationItem[] {
 			? [
 					{
 						key: 'bibles',
-						href: makeBibleListRoute(languageRoute),
+						href: root.lang(languageRoute).bibles.get(),
 						Icon: iconMap.icon_bible,
 						label: intl.formatMessage({
 							id: `header__navItemBible`,
@@ -244,7 +225,7 @@ export function useNavigationItems(): INavigationItem[] {
 			: []),
 		{
 			key: 'library',
-			href: makeLibraryRoute(languageRoute),
+			href: root.lang(languageRoute).library.get(),
 			Icon: iconMap.icon_books,
 			label: intl.formatMessage({
 				id: `header__navItemLibrary`,
@@ -254,7 +235,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'saved',
-					href: makeLibraryRoute(languageRoute),
+					href: root.lang(languageRoute).library.get(),
 					Icon: iconMap.fa_bookmark,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-listenLater`,
@@ -263,7 +244,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'playlists',
-					href: makeLibraryRoute(languageRoute, 'playlists'),
+					href: root.lang(languageRoute).library.playlists.get(),
 					Icon: iconMap.fa_stream,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-playlists`,
@@ -272,7 +253,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'history',
-					href: makeLibraryRoute(languageRoute, 'history'),
+					href: root.lang(languageRoute).library.history.get(),
 					Icon: iconMap.fa_history,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-history`,
@@ -283,7 +264,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'presenters',
-			href: makePresenterListRoute(languageRoute),
+			href: root.lang(languageRoute).presenters.get(),
 			Icon: iconMap.icon_account,
 			label: intl.formatMessage({
 				id: `header__navItemPresenters`,
@@ -292,7 +273,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'story',
-			href: makeAboutPage(languageRoute, 1),
+			href: root.lang(languageRoute).about.id(1).get(),
 			Icon: iconMap.icon_our_story,
 			label: intl.formatMessage({
 				id: `header__navItemStory`,
@@ -301,7 +282,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'about',
-					href: makeAboutPage(languageRoute, 1),
+					href: root.lang(languageRoute).about.id(1).get(),
 					Icon: iconMap.fa_seedling,
 					label: intl.formatMessage({
 						id: `header__navItemStory`,
@@ -310,7 +291,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'meettheteam',
-					href: makeAboutPage(languageRoute, 13),
+					href: root.lang(languageRoute).about.id(13).get(),
 					Icon: iconMap.fa_users_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-team`,
@@ -319,7 +300,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'purpose',
-					href: makeAboutPage(languageRoute, 7),
+					href: root.lang(languageRoute).about.id(7).get(),
 					Icon: iconMap.fa_bullseye_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-purpose`,
@@ -328,7 +309,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'spiritofav',
-					href: makeAboutPage(languageRoute, 12),
+					href: root.lang(languageRoute).about.id(12).get(),
 					Icon: iconMap.fa_fire_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-spiritOfAudioVerse`,
@@ -337,7 +318,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'blog',
-					href: makeBlogPostListRoute(languageRoute),
+					href: root.lang(languageRoute).blog.get(),
 					Icon: iconMap.fa_align_left,
 					label: intl.formatMessage({
 						id: `header__navItemStory-blog`,
@@ -346,7 +327,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'testimonials',
-					href: makeTestimoniesRoute(languageRoute),
+					href: root.lang(languageRoute).testimonies.get(),
 					Icon: iconMap.fa_comment_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-testimonials`,
@@ -355,7 +336,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'donate',
-					href: makeDonateRoute(languageRoute),
+					href: root.lang(languageRoute).give.get(),
 					Icon: iconMap.fa_heart_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-donate`,
@@ -366,7 +347,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'contact',
-			href: makeContactRoute(languageRoute),
+			href: root.lang(languageRoute).contact.get(),
 			Icon: iconMap.icon_contact,
 			label: intl.formatMessage({
 				id: `header__navItemContact`,
@@ -375,7 +356,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'general',
-					href: makeContactRoute(languageRoute, '/general'),
+					href: root.lang(languageRoute).contact.general.get(),
 					Icon: iconMap.fa_inbox,
 					label: intl.formatMessage({
 						id: `header__navItemContact-general`,
@@ -384,7 +365,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'support',
-					href: makeContactRoute(languageRoute, '/support'),
+					href: root.lang(languageRoute).contact.support.get(),
 					Icon: iconMap.fa_comment_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemContact-support`,
@@ -393,7 +374,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'testimony',
-					href: makeTestimonySubmitRoute(languageRoute),
+					href: root.lang(languageRoute).contact.testimonies.get(),
 					Icon: iconMap.fa_comment_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemContact-testimonial`,
@@ -498,7 +479,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'legal',
-					href: makeAboutPage(languageRoute, 3),
+					href: root.lang(languageRoute).about.id(3).get(),
 					Icon: iconMap.fa_landmark_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-legal`,
@@ -507,7 +488,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'privacy',
-					href: makeAboutPage(languageRoute, 4),
+					href: root.lang(languageRoute).about.id(4).get(),
 					Icon: iconMap.fa_lock_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-privacy`,
@@ -516,7 +497,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'terms',
-					href: makeAboutPage(languageRoute, 5),
+					href: root.lang(languageRoute).about.id(5).get(),
 					Icon: iconMap.fa_newspaper_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-terms`,
@@ -552,7 +533,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'profile',
-					href: makeAccountProfileRoute(languageRoute),
+					href: root.lang(languageRoute).account.profile.get(),
 					Icon: iconMap.fa_user_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemUser-profile`,
@@ -561,7 +542,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'logout',
-					href: makeLogoutRoute(languageRoute),
+					href: root.lang(languageRoute).account.logout.get(),
 					onClick: ({ popSubmenu }) => popSubmenu(),
 					Icon: iconMap.icon_sign_out,
 					label: intl.formatMessage({

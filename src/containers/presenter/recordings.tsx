@@ -13,10 +13,7 @@ import {
 	PresenterPivotFragment,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makePresenterFeedRoute,
-	makePresenterRecordingsRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import PresenterPivot from './pivot';
@@ -42,7 +39,9 @@ function PresenterRecordings({
 	const languageRoute = useLanguageRoute();
 	return (
 		<PresenterPivot {...{ person }}>
-			<RssAlternate url={makePresenterFeedRoute(languageRoute, person.id)} />
+			<RssAlternate
+				url={root.lang(languageRoute).presenters.id(person.id).feed.get()}
+			/>
 			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
 					id="presenterRecordingsDetail__heading"
@@ -57,7 +56,11 @@ function PresenterRecordings({
 			<Pagination
 				{...pagination}
 				makeRoute={(languageRoute, pageIndex) =>
-					makePresenterRecordingsRoute(languageRoute, person.id, pageIndex)
+					root
+						.lang(languageRoute)
+						.presenters.id(person.id)
+						.teachings.page(pageIndex)
+						.get()
 				}
 			/>
 		</PresenterPivot>

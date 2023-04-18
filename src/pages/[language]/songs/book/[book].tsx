@@ -14,7 +14,7 @@ import { getSongBooksDetailPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeBibleMusicRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default SongBookDetail;
 
@@ -53,7 +53,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const routes = getLanguageRoutes();
 	const sets = routes.map((r) =>
-		BIBLE_BOOKS.map((b) => makeBibleMusicRoute(r, b))
+		BIBLE_BOOKS.map((b) => root.lang(r).songs.book(b).get())
 	);
 
 	return {

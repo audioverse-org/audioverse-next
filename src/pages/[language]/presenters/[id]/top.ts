@@ -14,7 +14,7 @@ import {
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { makePresenterTopRecordingsRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default PresenterTop;
 
@@ -62,7 +62,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,
-		(languageRoute, node) =>
-			makePresenterTopRecordingsRoute(languageRoute, node.id)
+		(l, { id }) => root.lang(l).presenters.id(id).top.get()
 	);
 }

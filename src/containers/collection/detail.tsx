@@ -26,12 +26,7 @@ import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
-import {
-	makeCollectionFeedRoute,
-	makeCollectionPresentersRoute,
-	makeCollectionSequencesRoute,
-	makeCollectionTeachingsRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -165,7 +160,7 @@ function CollectionDetail({
 							emailSubject={title}
 							light
 							triggerClassName={styles.iconButton}
-							rssUrl={makeCollectionFeedRoute(lang, id)}
+							rssUrl={root.lang(lang).conferences.id(id).feed.get()}
 						/>
 						<ButtonFavorite
 							isFavorited={!!isFavorited}
@@ -196,7 +191,7 @@ function CollectionDetail({
 					{sequences.pageInfo.hasNextPage && (
 						<Button
 							type="secondaryInverse"
-							href={makeCollectionSequencesRoute(lang, id)}
+							href={root.lang(lang).conferences.id(id).sequences.get()}
 							text={intl.formatMessage({
 								id: 'collectionDetail__seriesAllLabel',
 								defaultMessage: 'See All Series',
@@ -227,7 +222,7 @@ function CollectionDetail({
 					{recordings.pageInfo.hasNextPage && (
 						<Button
 							type="secondaryInverse"
-							href={makeCollectionTeachingsRoute(lang, id)}
+							href={root.lang(lang).conferences.id(id).teachings.get()}
 							text={intl.formatMessage({
 								id: 'collectionDetail__teachingsAllLabel',
 								defaultMessage: 'See All Individual Teachings',
@@ -255,7 +250,7 @@ function CollectionDetail({
 					{persons.pageInfo.hasNextPage && (
 						<Button
 							type="secondaryInverse"
-							href={makeCollectionPresentersRoute(lang, id)}
+							href={root.lang(lang).conferences.id(id).presenters.get()}
 							text={intl.formatMessage({
 								id: 'collectionDetail__presentersAllLabel',
 								defaultMessage: 'See All Presenters',

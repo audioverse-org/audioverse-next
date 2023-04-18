@@ -448,6 +448,11 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/contact',
+					destination: '/:lang/contact/general',
+					permanent: false,
+				},
+				{
 					source: '/:lang/feedback',
 					destination: '/:lang/contact/general',
 					permanent: false,

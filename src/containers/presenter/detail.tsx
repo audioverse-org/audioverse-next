@@ -24,13 +24,7 @@ import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
-import {
-	makePresenterAlsoAppearsInRoute,
-	makePresenterFeedRoute,
-	makePresenterRecordingsRoute,
-	makePresenterSequencesRoute,
-	makePresenterTopRecordingsRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
@@ -163,7 +157,7 @@ function PresenterDetail({
 						emailSubject={name}
 						light
 						triggerClassName={styles.iconButton}
-						rssUrl={makePresenterFeedRoute(lang, id)}
+						rssUrl={root.lang(lang).presenters.id(id).feed.get()}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
@@ -210,7 +204,7 @@ function PresenterDetail({
 					{recentRecordings.pageInfo.hasNextPage && (
 						<Button
 							type="secondary"
-							href={makePresenterRecordingsRoute(lang, id)}
+							href={root.lang(lang).presenters.id(id).teachings.get()}
 							text={intl.formatMessage({
 								id: 'presenterDetail__recentAllLabel',
 								defaultMessage: 'See All Recent',
@@ -237,7 +231,7 @@ function PresenterDetail({
 					{recentRecordings.pageInfo.hasNextPage && (
 						<Button
 							type="secondary"
-							href={makePresenterTopRecordingsRoute(lang, id)}
+							href={root.lang(lang).presenters.id(id).top.get()}
 							text={intl.formatMessage({
 								id: 'presenterDetail__topAllLabel',
 								defaultMessage: 'See More Most Listened',
@@ -265,7 +259,7 @@ function PresenterDetail({
 					{sequences.pageInfo.hasNextPage && (
 						<Button
 							type="secondary"
-							href={makePresenterSequencesRoute(lang, id)}
+							href={root.lang(lang).presenters.id(id).sequences.get()}
 							text={intl.formatMessage({
 								id: 'presenterDetail__seriesAllLabel',
 								defaultMessage: 'See All Series',
@@ -295,7 +289,7 @@ function PresenterDetail({
 					{collections.pageInfo.hasNextPage && (
 						<Button
 							type="secondary"
-							href={makePresenterAlsoAppearsInRoute(lang, id)}
+							href={root.lang(lang).presenters.id(id).appears.get()}
 							text={intl.formatMessage({
 								id: 'presenterDetail__speakersAllLabel',
 								defaultMessage: 'See All Also Appears In',

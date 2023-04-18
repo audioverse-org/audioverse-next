@@ -17,11 +17,7 @@ import {
 	GetSongBooksDetailPageDataQuery,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import {
-	makeBibleMusicRoute,
-	makeBibleMusicTrackRoute,
-	makeSongAlbumsListRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -39,17 +35,17 @@ function SongBooksDetail({
 	musicTracks,
 }: SongBooksDetailProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	const shareUrl = `https://www.audioverse.org${makeBibleMusicRoute(
-		languageRoute,
-		book
-	)}`;
+	const shareUrl = `https://www.audioverse.org${root
+		.lang(languageRoute)
+		.songs.book(book)
+		.get()}`;
 
 	return (
 		<Tease className={styles.container}>
 			<ContentWidthLimiter>
 				<ButtonBack
 					type="secondary"
-					backUrl={makeSongAlbumsListRoute(languageRoute)}
+					backUrl={root.lang(languageRoute).songs.albums.get()}
 					className={styles.back}
 				/>
 				<SequenceTypeLockup contentType={SequenceContentType.MusicAlbum} />
@@ -88,11 +84,11 @@ function SongBooksDetail({
 					<CardSong
 						song={{
 							...musicTrack,
-							canonicalPath: makeBibleMusicTrackRoute(
-								languageRoute,
-								book,
-								musicTrack.canonicalPath
-							),
+							canonicalPath: root
+								.lang(languageRoute)
+								.songs.book(book)
+								.track(musicTrack.canonicalPath)
+								.get(),
 						}}
 						key={musicTrack.canonicalPath}
 					/>

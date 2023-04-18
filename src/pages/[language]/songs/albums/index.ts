@@ -13,7 +13,7 @@ import { getSongAlbumsListPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeSongAlbumsListRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default StoryAlbumsList;
 
@@ -44,7 +44,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes().map((base_url) =>
-			makeSongAlbumsListRoute(base_url)
+			root.lang(base_url).songs.albums.get()
 		),
 		fallback: false,
 	};

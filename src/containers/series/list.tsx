@@ -6,7 +6,7 @@ import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSeriesListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeDiscoverCollectionsRoute, makeSeriesListRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SeriesListProps = PaginatedProps<
@@ -20,14 +20,14 @@ function SeriesList({ nodes, pagination }: SeriesListProps): JSX.Element {
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={makeDiscoverCollectionsRoute(language)}
+			backUrl={root.lang(language).discover.collections.get()}
 			heading={
 				<FormattedMessage
 					id="seriesList__heading"
 					defaultMessage="All Series"
 				/>
 			}
-			makeRoute={makeSeriesListRoute}
+			makeRoute={(l, i) => root.lang(l).series.page(i).get()}
 		>
 			{nodes.map((node) => (
 				<CardSequence sequence={node} key={node.canonicalPath} />

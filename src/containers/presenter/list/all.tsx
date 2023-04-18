@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import {
 	GetPresenterListAllPageDataDocument,
 	GetPresenterListAllPageDataQuery,
+	Maybe,
 } from '@lib/generated/graphql';
 import { useInfiniteQuery } from 'react-query';
 import useOnScreen from '@lib/hooks/useOnScreen';
@@ -26,8 +27,10 @@ export default function All(props: PresentersProps) {
 				},
 			}),
 		{
-			getNextPageParam: ({ persons }: GetPresenterListAllPageDataQuery) =>
-				persons.pageInfo.hasNextPage ? persons.pageInfo.endCursor : undefined,
+			getNextPageParam: (lastPage: Maybe<GetPresenterListAllPageDataQuery>) =>
+				lastPage?.persons.pageInfo.hasNextPage
+					? lastPage.persons.pageInfo.endCursor
+					: undefined,
 		}
 	);
 
@@ -38,7 +41,7 @@ export default function All(props: PresentersProps) {
 		fetchNextPage();
 	}, [hasNextPage, hasReachedEnd, fetchNextPage, isLoading]);
 
-	const persons = data?.pages.flatMap((p) => p.persons.nodes || []) || [];
+	const persons = data?.pages.flatMap((p) => p?.persons.nodes || []) || [];
 
 	return (
 		<>

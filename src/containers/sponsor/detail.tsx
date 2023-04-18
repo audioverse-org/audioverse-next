@@ -24,12 +24,7 @@ import Tease from '@components/molecules/tease';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
-import {
-	makeSponsorConferencesRoute,
-	makeSponsorFeedRoute,
-	makeSponsorSeriesRoute,
-	makeSponsorTeachingsRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
@@ -139,7 +134,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 						emailSubject={title}
 						light
 						triggerClassName={styles.iconButton}
-						rssUrl={makeSponsorFeedRoute(languageRoute, id)}
+						rssUrl={root.lang(languageRoute).sponsors.id(id).feed.get()}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
@@ -171,7 +166,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					</CardGroup>
 					<Button
 						type="secondary"
-						href={makeSponsorTeachingsRoute(languageRoute, id)}
+						href={root.lang(languageRoute).sponsors.id(id).teachings.get()}
 						text={intl.formatMessage({
 							id: 'sponsorDetail__recentAllLabel',
 							defaultMessage: 'See All Recent Teachings',
@@ -197,7 +192,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					</CardGroup>
 					<Button
 						type="secondary"
-						href={makeSponsorSeriesRoute(languageRoute, id)}
+						href={root.lang(languageRoute).sponsors.id(id).series.get()}
 						text={intl.formatMessage({
 							id: 'sponsorDetail__seriesAllLabel',
 							defaultMessage: 'See All Series',
@@ -225,7 +220,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					</CardGroup>
 					<Button
 						type="secondary"
-						href={makeSponsorConferencesRoute(languageRoute, id)}
+						href={root.lang(languageRoute).sponsors.id(id).conferences.get()}
 						text={intl.formatMessage({
 							id: 'sponsorDetail__conferencesAllLabel',
 							defaultMessage: 'See All Conferences',

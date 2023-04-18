@@ -6,12 +6,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
-import {
-	isRedirectRouteAllowed,
-	makeDiscoverRoute,
-	makeLoginRoute,
-	makeRegisterRoute,
-} from '@lib/routes';
+import root, { isRedirectRouteAllowed } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import Icon from '../../../public/img/icons/icon-info.svg';
@@ -30,7 +25,7 @@ export default function ButtonGuest({
 	const redirectRoute =
 		backRoute && isRedirectRouteAllowed(backRoute)
 			? backRoute
-			: makeDiscoverRoute(language);
+			: root.lang(language).discover.get();
 
 	return (
 		<>
@@ -67,7 +62,11 @@ export default function ButtonGuest({
 					<>
 						<Button
 							onClick={() => setIsGuestModalOpen(false)}
-							href={makeRegisterRoute(language, redirectRoute)}
+							href={root.lang(language).account.register.get({
+								params: {
+									back: redirectRoute,
+								},
+							})}
 							type="super"
 							text={
 								<FormattedMessage
@@ -78,7 +77,11 @@ export default function ButtonGuest({
 						/>
 						<Button
 							onClick={() => setIsGuestModalOpen(false)}
-							href={makeLoginRoute(language, redirectRoute)}
+							href={root.lang(language).account.login.get({
+								params: {
+									back: redirectRoute,
+								},
+							})}
 							type="primary"
 							text={
 								<FormattedMessage

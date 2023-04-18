@@ -12,7 +12,7 @@ import {
 	getMediaReleaseFormsPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeReleaseRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default ReleaseDetail;
 
@@ -41,6 +41,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getMediaReleaseFormsPathsData,
 		(d) => d.mediaReleaseForms.nodes,
-		(l, { id }) => makeReleaseRoute(l, id)
+		(l, { id }) => root.lang(l).releases.id(id).get()
 	);
 }

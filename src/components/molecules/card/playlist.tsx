@@ -6,7 +6,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
 import { CardPlaylistFragment } from '@lib/generated/graphql';
-import { makePlaylistDetailRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ListIcon from '../../../../public/img/icons/fa-list.svg';
@@ -28,7 +28,10 @@ export default function CardPlaylist({ playlist }: Props): JSX.Element {
 	const theme = 'playlistItem';
 	return (
 		<CardWithTheme {...{ theme }}>
-			<Link href={makePlaylistDetailRoute(languageRoute, id)} legacyBehavior>
+			<Link
+				href={root.lang(languageRoute).library.playlist(id).get()}
+				legacyBehavior
+			>
 				<a className={styles.container}>
 					<div className={styles.stretch}>
 						<TypeLockup

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import AndOnboarding from '@components/templates/andOnboarding';
-import { makeRegisterRoute } from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import LoginForm from './loginForm';
@@ -17,7 +17,11 @@ export default function Login(): JSX.Element {
 			<LoginForm
 				showRegister={() =>
 					router.push(
-						makeRegisterRoute(languageRoute, router.query.back as string)
+						root.lang(languageRoute).account.register.get({
+							params: {
+								back: router.query.back,
+							},
+						})
 					)
 				}
 			/>

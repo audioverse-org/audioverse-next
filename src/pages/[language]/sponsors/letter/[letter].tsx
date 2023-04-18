@@ -14,7 +14,7 @@ import {
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';
-import { makeSponsorListRoute } from '@lib/routes';
+import root from '@lib/routes';
 
 export default Sponsors;
 
@@ -56,7 +56,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 				language,
 			});
 			return (sponsorLetterCounts || []).map(({ letter }) =>
-				makeSponsorListRoute(LANGUAGES[language].base_url, letter)
+				root.lang(LANGUAGES[language].base_url).sponsors.letter(letter).get()
 			);
 		})
 	);

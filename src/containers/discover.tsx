@@ -9,13 +9,7 @@ import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
-import {
-	makeBlogPostListRoute,
-	makeConferenceListRoute,
-	makeSermonListRoute,
-	makeStoryAlbumListPage,
-	makeTrendingSermonRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
@@ -50,7 +44,7 @@ export default function Discover({
 					defaultMessage="See All Teachings"
 				/>
 			),
-			url: makeSermonListRoute(languageRoute, 'all', 1),
+			url: root.lang(languageRoute).teachings.all.get(),
 		},
 		{
 			heading: (
@@ -68,7 +62,7 @@ export default function Discover({
 					defaultMessage="See All Trending Teachings"
 				/>
 			),
-			url: makeTrendingSermonRoute(languageRoute),
+			url: root.lang(languageRoute).teachings.trending.get(),
 		},
 		{
 			heading: (
@@ -98,7 +92,7 @@ export default function Discover({
 					defaultMessage="See All Blog Posts"
 				/>
 			),
-			url: makeBlogPostListRoute(languageRoute),
+			url: root.lang(languageRoute).blog.get(),
 		},
 		{
 			heading: (
@@ -120,7 +114,7 @@ export default function Discover({
 					defaultMessage="See All Stories"
 				/>
 			),
-			url: makeStoryAlbumListPage(languageRoute),
+			url: root.lang(languageRoute).stories.albums.get(),
 		},
 		{
 			heading: (
@@ -147,7 +141,7 @@ export default function Discover({
 					defaultMessage="See All Conferences"
 				/>
 			),
-			url: makeConferenceListRoute(languageRoute),
+			url: root.lang(languageRoute).conferences.get(),
 		},
 	];
 

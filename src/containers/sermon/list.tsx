@@ -8,17 +8,13 @@ import RssAlternate from '@components/molecules/rssAlternate';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSermonListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makeDiscoverRoute,
-	makeSermonListRoute,
-	makeSermonsFeedRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SermonListProps = PaginatedProps<
 	NonNullable<GetSermonListPageDataQuery['sermons']['nodes']>[0],
 	GetSermonListPageDataQuery
-> & { filter: string };
+> & { filter: 'all' | 'audio' | 'video' };
 
 function SermonList({ nodes, pagination, filter }: SermonListProps) {
 	const language = useLanguageRoute();
@@ -26,22 +22,24 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={makeDiscoverRoute(language)}
+			backUrl={root.lang(language).discover.get()}
 			heading={
 				<FormattedMessage
 					id="sermonList__heading"
 					defaultMessage="All Teachings"
 				/>
 			}
-			makeRoute={(lang, page) => makeSermonListRoute(lang, filter, page)}
+			makeRoute={(l, i) => root.lang(l).teachings[filter].page(i).get()}
 			filter={
 				<RecordingHasVideoFilter
 					filter={filter}
-					makeRoute={makeSermonListRoute}
+					makeRoute={(l: string, f: 'all' | 'audio' | 'video', i: number) =>
+						root.lang(l).teachings[f].page(i).get()
+					}
 				/>
 			}
 		>
-			<RssAlternate url={makeSermonsFeedRoute(language)} />
+			<RssAlternate url={root.lang(language).teachings.all.feed.get()} />
 			{nodes.map((node) => (
 				<CardRecording recording={node} key={node.canonicalPath} />
 			))}

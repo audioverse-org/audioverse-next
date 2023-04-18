@@ -10,10 +10,7 @@ import CardGroup from '@components/molecules/cardGroup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Mininav from '@components/molecules/mininav';
 import { GetSongAlbumsListPageDataQuery } from '@lib/generated/graphql';
-import {
-	makeBibleMusicTrackRoute,
-	makeDiscoverCollectionsRoute,
-} from '@lib/routes';
+import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
@@ -31,7 +28,7 @@ function SongAlbumList({
 		<>
 			<ContentWidthLimiter>
 				<ButtonBack
-					backUrl={makeDiscoverCollectionsRoute(languageRoute)}
+					backUrl={root.lang(languageRoute).discover.collections.get()}
 					className={styles.backButton}
 				/>
 				<Heading1>
@@ -94,11 +91,11 @@ function SongAlbumList({
 						book={n.name}
 						recordings={n.recordings.nodes?.map((r) => ({
 							...r,
-							canonicalPath: makeBibleMusicTrackRoute(
-								languageRoute,
-								n.name,
-								r.canonicalPath
-							),
+							canonicalPath: root
+								.lang(languageRoute)
+								.songs.book(n.name)
+								.track(r.canonicalPath)
+								.get(),
 						}))}
 						recordingCount={n.recordings.aggregate?.count}
 						key={n.id}
