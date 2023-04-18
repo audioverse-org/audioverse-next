@@ -81,12 +81,18 @@ export default function MobileHeader({
 					style={{ height: px(progress, SUBNAV_HEIGHT) }}
 				>
 					<Mininav
-						items={navItems.slice(0, -2).map((item) => ({
-							id: item.key,
-							label: item.label,
-							url: item.href,
-							isActive: item.href === asPath,
-						}))}
+						items={navItems.slice(0, -2).map((item) => {
+							if (!item.href) {
+								throw new Error(`Missing href for ${item.label}`);
+							}
+
+							return {
+								id: item.key,
+								label: item.label,
+								url: item.href,
+								isActive: item.href === asPath,
+							};
+						})}
 						compact
 						className={styles.subnavItems}
 					/>

@@ -23,7 +23,7 @@ type OuterData = {
 
 type QueryResult = InfiniteQueryObserverResult<OuterData>;
 
-type AugmentedFilter = EntityFilter & {
+export type AugmentedFilter = EntityFilter & {
 	id: EntityFilterId;
 	nodes: InferrableEntity[];
 	hasNextPage: boolean;
@@ -46,13 +46,14 @@ function isInnerData(d: unknown): d is InnerData {
 }
 
 function reduceNodes(result: QueryResult): InferrableEntity[] {
-	const pages: OuterData[] = result?.data?.pages || [];
+	const pages: OuterData[] = result?.data?.pages.filter((p) => !!p) || [];
 	const values: (InnerData | string)[] = pages.flatMap((p) => Object.values(p));
 	const datas: InnerData[] = values.filter(isInnerData);
 	return datas.map((d) => d.nodes || []).flat();
 }
 
 function getNextPageParam(lastPage: OuterData) {
+	if (!isObject(lastPage)) return undefined;
 	const d = Object.values(lastPage).find(isInnerData);
 	if (!d) return undefined;
 	const p = d.pageInfo;

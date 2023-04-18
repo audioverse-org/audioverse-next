@@ -11,9 +11,10 @@ import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 import styles from './searchResults.module.scss';
 import Head from 'next/head';
 import { useQueryString } from '@lib/useQueryString';
-import useSearch from './searchResults.useResults';
+import useSearch, { AugmentedFilter } from './searchResults.useResults';
 import { EntityFilterId } from './searchResults.filters';
 import isServerSide from '@lib/isServerSide';
+import { CardRecordingFragment } from '../../lib/generated/graphql';
 
 function SearchHead({ term }: { term?: string }): JSX.Element {
 	// WORKAROUND: We can't use the <FormattedMessage> component here because
@@ -55,6 +56,38 @@ function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 	return isIntersecting;
 }
 
+function Section({
+	section,
+	entityType,
+	onEntityTypeChange,
+}: {
+	section: AugmentedFilter;
+	entityType: EntityFilterId;
+	onEntityTypeChange: (entityType: EntityFilterId) => void;
+}) {
+	const s = section;
+	const nodes = entityType === 'all' ? s.nodes.slice(0, 3) : s.nodes;
+	return (
+		<div className={styles.section}>
+			<LineHeading variant="overline">{s.heading}</LineHeading>
+			<CardGroup>
+				{nodes.map((e: InferrableEntity) => (
+					<CardInferred key={e.id} entity={e} />
+				))}
+			</CardGroup>
+			{s.hasNextPage && entityType === 'all' && (
+				<Button
+					type="secondary"
+					text={s.seeAll}
+					IconRight={ForwardIcon}
+					className={styles.seeAllButton}
+					onClick={() => onEntityTypeChange(s.id)}
+				/>
+			)}
+		</div>
+	);
+}
+
 export default function Search({
 	term,
 	entityType,
@@ -76,6 +109,18 @@ export default function Search({
 		entityType !== 'all' && endReached && !isLoading && loadMore();
 	}, [entityType, endReached, isLoading, loadMore]);
 
+	const hasExactTeaching = visible
+		.find((s) => s.id === 'teachings')
+		?.nodes.slice(0, 3)
+		.find((e: InferrableEntity) => {
+			if (e.__typename !== 'Recording') return false;
+			const recording = e as CardRecordingFragment;
+			const title = recording.title.toLowerCase();
+			const query = (term || q || '').toLowerCase();
+			return title === query;
+		});
+	const shouldHoistTeachings = hasExactTeaching && entityType === 'all';
+
 	return (
 		<>
 			<SearchHead term={term} />
@@ -83,26 +128,27 @@ export default function Search({
 			{isLoading && <LoadingCards />}
 			{!isLoading && (
 				<>
+					{shouldHoistTeachings && (
+						<Section
+							key="teachings"
+							section={
+								visible.find((s) => s.id === 'teachings') as AugmentedFilter
+							}
+							entityType={entityType}
+							onEntityTypeChange={onEntityTypeChange}
+						/>
+					)}
 					{visible.map((s) => {
-						const nodes = entityType === 'all' ? s.nodes.slice(0, 3) : s.nodes;
+						if (s.id === 'teachings' && shouldHoistTeachings) {
+							return null;
+						}
 						return (
-							<div className={styles.section} key={s.id}>
-								<LineHeading variant="overline">{s.heading}</LineHeading>
-								<CardGroup>
-									{nodes.map((e: InferrableEntity) => (
-										<CardInferred key={e.id} entity={e} />
-									))}
-								</CardGroup>
-								{s.hasNextPage && entityType === 'all' && (
-									<Button
-										type="secondary"
-										text={s.seeAll}
-										IconRight={ForwardIcon}
-										className={styles.seeAllButton}
-										onClick={() => onEntityTypeChange(s.id)}
-									/>
-								)}
-							</div>
+							<Section
+								key={s.id}
+								section={s}
+								entityType={entityType}
+								onEntityTypeChange={onEntityTypeChange}
+							/>
 						);
 					})}
 					<div ref={endRef} />

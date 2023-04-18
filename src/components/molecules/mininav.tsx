@@ -2,8 +2,6 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import React, { MouseEvent } from 'react';
 
-import Heading6 from '@components/atoms/heading6';
-
 import styles from './mininav.module.scss';
 
 const Theme = {
@@ -11,14 +9,26 @@ const Theme = {
 	light: styles.light,
 };
 
+type ItemBase = {
+	id: string;
+	label: JSX.Element | string;
+	isActive?: boolean;
+};
+
+type ItemLink = ItemBase & {
+	url: string;
+	onClick?: never;
+};
+
+type ItemButton = ItemBase & {
+	url?: never;
+	onClick: (e: MouseEvent) => void;
+};
+
+type Item = ItemLink | ItemButton;
+
 type Props = {
-	items: {
-		id: string;
-		label: JSX.Element | string;
-		isActive?: boolean;
-		url?: string;
-		onClick?: (e: MouseEvent) => void;
-	}[];
+	items: Item[];
 	compact?: boolean;
 	disabled?: boolean;
 	className?: string;
@@ -44,19 +54,14 @@ export default function Mininav({
 		>
 			{items.map(({ label, url, onClick, isActive, id }) => {
 				return url ? (
-					<Heading6
-						sans
-						uppercase
-						loose
-						large
-						unpadded
+					<div
 						key={id}
-						className={clsx(isActive && styles.miniNavActive)}
+						className={clsx(styles.button, isActive && styles.miniNavActive)}
 					>
 						<Link href={url} legacyBehavior>
-							<a onClick={onClick}>{label}</a>
+							<a>{label}</a>
 						</Link>
-					</Heading6>
+					</div>
 				) : (
 					<button
 						key={id}
