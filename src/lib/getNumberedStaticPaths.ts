@@ -1,4 +1,3 @@
-import range from 'lodash/range';
 import { GetStaticPathsResult } from 'next';
 
 import {
@@ -22,11 +21,12 @@ const makeLanguagePaths = async <T>(
 	const data = await getter({ language });
 	const entryCount = parseCount(data) || 0;
 	const pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE);
-	const limit = Math.min(pageCount, LIST_PRERENDER_LIMIT) + 1;
+	const limit = Math.min(pageCount, LIST_PRERENDER_LIMIT);
 	const bases = LANGUAGES[language].base_urls;
+	const range = [...Array(limit).keys()].map((x) => x + 1);
 
 	return bases
-		.map((b) => range(1, limit).map((x) => `/${b}/${innerSegment}/page/${x}`))
+		.map((b) => range.map((x) => `/${b}/${innerSegment}/page/${x}`))
 		.flat();
 };
 
