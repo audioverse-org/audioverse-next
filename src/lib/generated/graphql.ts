@@ -6670,7 +6670,7 @@ export type GetPresenterListLetterPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetPresenterListLetterPageDataQuery = { __typename?: 'Query', persons: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null }> | null } };
+export type GetPresenterListLetterPageDataQuery = { __typename?: 'Query', persons: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null }> | null }, personLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
 
 export type PresenterListEntryFragment = { __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null };
 
@@ -8371,7 +8371,7 @@ export const useGetPresenterListAllPageDataQuery = <
       options
     );
 export const GetPresenterListLetterPageDataDocument = `
-query getPresenterListLetterPageData($language:Language!$startsWith:String){persons(language:$language startsWith:$startsWith first:1500 orderBy:[{field:NAME direction:ASC}]){nodes{...presenterListEntry}}}
+query getPresenterListLetterPageData($language:Language!$startsWith:String){persons(language:$language startsWith:$startsWith first:1500 orderBy:[{field:NAME direction:ASC}]){nodes{...presenterListEntry}}personLetterCounts(language:$language){letter count}}
 ${PresenterListEntryFragmentDoc}`;
 export const useGetPresenterListLetterPageDataQuery = <
       TData = GetPresenterListLetterPageDataQuery,
