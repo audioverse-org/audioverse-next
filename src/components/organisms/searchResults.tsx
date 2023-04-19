@@ -93,13 +93,9 @@ const normalize = (s: string) =>
 const isRecording = (e: InferrableEntity): e is CardRecordingFragment =>
 	e.__typename === 'Recording';
 
-function hasExactMatch(
-	sections: AugmentedFilter[],
-	term: string,
-	type: EntityFilterId
-): boolean {
+function hasExactMatch(term: string, sections: AugmentedFilter[]): boolean {
 	return !!sections
-		.find((s) => s.id === type)
+		.find((s) => s.id === 'teachings')
 		?.nodes.slice(0, 3)
 		.find((e) => isRecording(e) && normalize(e.title) === normalize(term));
 }
@@ -118,7 +114,7 @@ export default function Search({
 	const { visible, loadMore, isLoading } = useSearch(entityType, t);
 	const endRef = useRef<HTMLDivElement>(null);
 	const endReached = useOnScreen(endRef);
-	const hasExactTeaching = hasExactMatch(visible, t, 'teachings');
+	const hasExactTeaching = hasExactMatch(t, visible);
 	const shouldHoistTeachings = hasExactTeaching && entityType === 'all';
 
 	useEffect(() => {
