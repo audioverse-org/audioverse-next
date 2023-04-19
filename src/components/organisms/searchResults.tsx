@@ -130,8 +130,9 @@ export default function Search({
 		<>
 			<SearchHead term={t} />
 
-			{isLoading && <LoadingCards />}
-			{!isLoading && (
+			{isLoading ? (
+				<LoadingCards />
+			) : (
 				<>
 					{shouldHoistTeachings && (
 						<Section
