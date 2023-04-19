@@ -87,6 +87,24 @@ function Section({
 	);
 }
 
+function hasExactMatch(
+	sections: AugmentedFilter[],
+	term: string,
+	type: EntityFilterId
+) {
+	return sections
+		.find((s) => s.id === type)
+		?.nodes.slice(0, 3)
+		.find((e: InferrableEntity) => {
+			if (e.__typename !== 'Recording') return false;
+			const recording = e as CardRecordingFragment;
+			const regex = /[\p{P}\p{S}\s]/gu;
+			const title = recording.title.replace(regex, '').toLowerCase();
+			const query = term.replace(regex, '').toLowerCase();
+			return title === query;
+		});
+}
+
 export default function Search({
 	term,
 	entityType,
@@ -101,23 +119,12 @@ export default function Search({
 	const { visible, loadMore, isLoading } = useSearch(entityType, t);
 	const endRef = useRef<HTMLDivElement>(null);
 	const endReached = useOnScreen(endRef);
+	const hasExactTeaching = hasExactMatch(visible, t, 'teachings');
+	const shouldHoistTeachings = hasExactTeaching && entityType === 'all';
 
 	useEffect(() => {
 		if (entityType !== 'all' && endReached && !isLoading) loadMore();
 	}, [entityType, endReached, isLoading, loadMore]);
-
-	const hasExactTeaching = visible
-		.find((s) => s.id === 'teachings')
-		?.nodes.slice(0, 3)
-		.find((e: InferrableEntity) => {
-			if (e.__typename !== 'Recording') return false;
-			const recording = e as CardRecordingFragment;
-			const regex = /[\p{P}\p{S}\s]/gu;
-			const title = recording.title.replace(regex, '').toLowerCase();
-			const query = t.replace(regex, '').toLowerCase();
-			return title === query;
-		});
-	const shouldHoistTeachings = hasExactTeaching && entityType === 'all';
 
 	return (
 		<>
