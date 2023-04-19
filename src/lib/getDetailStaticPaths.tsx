@@ -1,5 +1,3 @@
-import flatten from 'lodash/flatten';
-import values from 'lodash/values';
 import { GetStaticPathsResult } from 'next';
 
 import {
@@ -20,7 +18,7 @@ export async function getDetailStaticPaths<DATA, NODE>(
 	parseNodes: (data: DATA) => NODE[] | null | undefined,
 	pathMapper: (languageRoute: string, node: NODE) => string
 ): Promise<GetStaticPathsResult> {
-	const languages = values(Language).filter(
+	const languages = Object.values(Language).filter(
 		(l) => l !== Language.Nordic
 	) as SupportedLanguages[];
 
@@ -38,7 +36,7 @@ export async function getDetailStaticPaths<DATA, NODE>(
 	const pathSets = await Promise.all(pathSetPromises);
 
 	return {
-		paths: flatten(pathSets),
+		paths: pathSets.flat(),
 		fallback: 'blocking',
 	};
 }
