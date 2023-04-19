@@ -176,13 +176,15 @@ export async function getBibleBookChapters(
 		bibleId: 'ENGKJVC',
 		bookId: `ENGKJVC-${bookIdMap[bookId]}`,
 	});
-	const textByChapterNumber = (result.audiobible?.book.chapters || []).reduce(
-		(carry, chapter) => {
-			const matches = chapter.text.match(/<p>.+<\/p>/) || [];
-			carry[+(chapter.id + '').split('-')[2]] = matches[0];
+	const chapters = result.audiobible?.book.chapters || [];
+	const textByChapterNumber = chapters.reduce<Record<number, string>>(
+		(carry, { text, id }) => {
+			const matches = text.match(/<p>.+<\/p>/) || [];
+			const key = +id.toString().split('-')[2];
+			carry[key] = matches[0] || '';
 			return carry;
 		},
-		{} as Record<number, string>
+		{}
 	);
 
 	return sortBy(
