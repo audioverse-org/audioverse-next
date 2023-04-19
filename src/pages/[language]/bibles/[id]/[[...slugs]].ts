@@ -81,7 +81,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const paths = [];
 	paths.push(
 		...response.map(({ id }) =>
-			root.lang(LANGUAGES.ENGLISH.base_url).bibles.versionId(id).get()
+			root.lang(LANGUAGES.ENGLISH.base_urls[0]).bibles.versionId(id).get()
 		)
 	);
 	const apiBibles = await getAudiobibleVersionsData({

@@ -53,7 +53,7 @@ export default function LanguageButton({
 								onClick={(e) => {
 									e.preventDefault();
 									handleClose();
-									onClick(LANGUAGES[id].base_url);
+									onClick(LANGUAGES[id].base_urls[0]);
 								}}
 							>
 								{LANGUAGES[id].display_name}

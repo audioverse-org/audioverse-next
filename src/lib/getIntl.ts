@@ -7,7 +7,7 @@ import handleIntlError from '@lib/handleIntlError';
 export default async function getIntl(
 	languageRoute: string
 ): Promise<IntlShape> {
-	const locale = getLanguageByBaseUrl(languageRoute)?.base_url || 'en';
+	const locale = getLanguageByBaseUrl(languageRoute)?.base_urls[0] || 'en';
 	const messages = await getIntlMessages(languageRoute);
 
 	return createIntl({

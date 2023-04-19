@@ -24,9 +24,11 @@ const makeLanguagePaths = async <T>(
 	const entryCount = parseCount(data) || 0;
 	const pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE);
 	const limit = Math.min(pageCount, LIST_PRERENDER_LIMIT) + 1;
-	const base = LANGUAGES[language].base_url;
+	const bases = LANGUAGES[language].base_urls;
 
-	return range(1, limit).map((x) => `/${base}/${innerSegment}/page/${x}`);
+	return bases
+		.map((b) => range(1, limit).map((x) => `/${b}/${innerSegment}/page/${x}`))
+		.flat();
 };
 
 export const getNumberedStaticPaths = async <T>(
