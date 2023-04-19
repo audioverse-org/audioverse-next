@@ -1,4 +1,3 @@
-import flatten from 'lodash/flatten';
 import range from 'lodash/range';
 import { GetStaticPathsResult } from 'next';
 
@@ -41,7 +40,7 @@ export const getNumberedStaticPaths = async <T>(
 		makeLanguagePaths(k, innerSegment, getter, parseCount)
 	);
 	const pathSets = await Promise.all(pathSetPromises);
-	const paths = flatten(pathSets);
+	const paths = pathSets.flat();
 
 	return {
 		paths,
