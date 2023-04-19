@@ -274,7 +274,9 @@ describe('register page', () => {
 		userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(getByText('300: FAILED')).toBeInTheDocument();
+			expect(
+				getByText('300: Failed to login with Facebook')
+			).toBeInTheDocument();
 		});
 	});
 

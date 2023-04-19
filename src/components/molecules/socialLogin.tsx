@@ -1,4 +1,3 @@
-import get from 'lodash/get';
 import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useGoogleLogin } from 'react-google-login';
@@ -15,6 +14,10 @@ import useDidUnmount from '@lib/useDidUnmount';
 
 import Button from './button';
 import styles from './socialLogin.module.scss';
+import {
+	ReactFacebookFailureResponse,
+	ReactFacebookLoginInfo,
+} from 'react-facebook-login';
 
 export default function SocialLogin({
 	isRegister,
@@ -51,10 +54,16 @@ export default function SocialLogin({
 			// TODO: Figure out error format and display it
 		},
 		onSuccess: (response) => {
-			const socialId = get(response, 'googleId');
-			const socialToken = get(response, 'accessToken');
-			const givenName = get(response, 'profileObj.givenName');
-			const surname = get(response, 'profileObj.familyName');
+			if (!('googleId' in response)) {
+				// response is of type GoogleLoginResponseOffline
+				// TODO: set error message
+				return;
+			}
+
+			const socialId = response.googleId;
+			const socialToken = response.accessToken;
+			const givenName = response.profileObj.givenName;
+			const surname = response.profileObj.familyName;
 
 			mutateSocial({
 				socialName: UserSocialServiceName.Google,
@@ -110,19 +119,19 @@ export default function SocialLogin({
 						/>
 					)}
 					callback={(response) => {
-						const name = get(response, 'name', '');
-						const [givenName, surname] = name.split(' ');
-						const socialId = get(response, 'userID');
-						const socialToken = get(response, 'accessToken');
-						const status = get(response, 'status');
-						const statusText = get(response, 'statusText');
+						const isFailure = (
+							r: ReactFacebookLoginInfo | ReactFacebookFailureResponse
+						): r is ReactFacebookFailureResponse => 'status' in r;
 
-						if (!socialToken) {
-							if (status) {
-								setErrors([`${status}: ${statusText}`]);
-							}
+						if (isFailure(response)) {
+							setErrors([`${response.status}: Failed to login with Facebook`]);
 							return;
 						}
+
+						const name = response.name || '';
+						const [givenName, surname] = name.split(' ');
+						const socialId = response.userID;
+						const socialToken = response.accessToken;
 
 						mutateSocial({
 							socialName: UserSocialServiceName.Facebook,
