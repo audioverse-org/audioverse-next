@@ -1,21 +1,21 @@
 import { ImageProps } from 'next/image';
 import React from 'react';
 
-function Image(props: ImageProps): JSX.Element {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { width, height, className, unoptimized, priority, ...rest } = props;
-
-	const atts = Object.entries(rest).reduce((acc, [k, v]) => ({
-		...acc,
-		[k.toLowerCase()]: v,
-	}));
+function Image(p: ImageProps): JSX.Element {
 	/* eslint-disable @next/next/no-img-element */
 	return (
 		<img
-			{...(atts as any)}
-			className={className}
-			width={width}
-			height={height}
+			className={p.className}
+			width={p.width}
+			height={p.height}
+			alt={p.alt}
+			src={p.src.toString()}
+			crossOrigin={p.crossOrigin}
+			decoding={p.decoding}
+			loading={p.loading}
+			referrerPolicy={p.referrerPolicy}
+			sizes={p.sizes}
+			useMap={p.useMap}
 		/>
 	);
 }
