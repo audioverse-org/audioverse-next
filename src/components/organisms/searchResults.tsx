@@ -87,6 +87,12 @@ function Section({
 	);
 }
 
+const normalize = (s: string) =>
+	s.replace(/[\p{P}\p{S}\s]/gu, '').toLowerCase();
+
+const isRecording = (e: InferrableEntity): e is CardRecordingFragment =>
+	e.__typename === 'Recording';
+
 function hasExactMatch(
 	sections: AugmentedFilter[],
 	term: string,
@@ -95,14 +101,7 @@ function hasExactMatch(
 	return !!sections
 		.find((s) => s.id === type)
 		?.nodes.slice(0, 3)
-		.find((e: InferrableEntity) => {
-			if (e.__typename !== 'Recording') return false;
-			const recording = e as CardRecordingFragment;
-			const regex = /[\p{P}\p{S}\s]/gu;
-			const title = recording.title.replace(regex, '').toLowerCase();
-			const query = term.replace(regex, '').toLowerCase();
-			return title === query;
-		});
+		.find((e) => isRecording(e) && normalize(e.title) === normalize(term));
 }
 
 export default function Search({
