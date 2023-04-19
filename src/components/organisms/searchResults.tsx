@@ -91,8 +91,8 @@ function hasExactMatch(
 	sections: AugmentedFilter[],
 	term: string,
 	type: EntityFilterId
-) {
-	return sections
+): boolean {
+	return !!sections
 		.find((s) => s.id === type)
 		?.nodes.slice(0, 3)
 		.find((e: InferrableEntity) => {
