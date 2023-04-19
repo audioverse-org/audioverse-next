@@ -103,7 +103,7 @@ export default function Search({
 	const endReached = useOnScreen(endRef);
 
 	useEffect(() => {
-		entityType !== 'all' && endReached && !isLoading && loadMore();
+		if (entityType !== 'all' && endReached && !isLoading) loadMore();
 	}, [entityType, endReached, isLoading, loadMore]);
 
 	const hasExactTeaching = visible
