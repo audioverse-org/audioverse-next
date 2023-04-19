@@ -3,7 +3,7 @@ import { Language } from './generated/graphql';
 export const ENTRIES_PER_PAGE = 12;
 
 export interface LanguageConfiguration {
-	base_url: string;
+	base_urls: string[];
 	display_name: string;
 	legacy_base_url: string;
 }
@@ -16,47 +16,47 @@ export type LanguageConfigurations = {
 
 export const LANGUAGES: LanguageConfigurations = {
 	ENGLISH: {
-		base_url: 'en',
+		base_urls: ['en'],
 		display_name: 'English',
 		legacy_base_url: 'english',
 	},
 	SPANISH: {
-		base_url: 'es',
+		base_urls: ['es'],
 		display_name: 'Español',
 		legacy_base_url: 'espanol',
 	},
 	FRENCH: {
-		base_url: 'fr',
+		base_urls: ['fr'],
 		display_name: 'Français',
 		legacy_base_url: 'francais',
 	},
 	GERMAN: {
-		base_url: 'de',
+		base_urls: ['de'],
 		display_name: 'Deutsch',
 		legacy_base_url: 'deutsch',
 	},
 	CHINESE: {
-		base_url: 'zh',
+		base_urls: ['zh'],
 		display_name: '中文',
 		legacy_base_url: 'zhongwen',
 	},
 	JAPANESE: {
-		base_url: 'ja',
+		base_urls: ['ja'],
 		display_name: '日本語',
 		legacy_base_url: 'japanese',
 	},
 	RUSSIAN: {
-		base_url: 'ru',
+		base_urls: ['ru'],
 		display_name: 'Русский',
 		legacy_base_url: 'russian',
 	},
 	NORDIC: {
-		base_url: 'no',
+		base_urls: ['no'],
 		display_name: 'Scandinavia',
 		legacy_base_url: 'no',
 	},
 	PORTUGUESE: {
-		base_url: 'pt',
+		base_urls: ['br', 'pt'],
 		display_name: 'Português',
 		legacy_base_url: 'pt',
 	},

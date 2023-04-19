@@ -52,7 +52,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
-		paths: [root.lang(LANGUAGES.ENGLISH.base_url).bibles.get()],
+		paths: [root.lang(LANGUAGES.ENGLISH.base_urls[0]).bibles.get()],
 		fallback: false,
 	};
 }

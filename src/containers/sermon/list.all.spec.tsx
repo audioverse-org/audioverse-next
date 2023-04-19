@@ -100,7 +100,11 @@ describe('sermons list page', () => {
 		loadSermonListPagePathsData(LIST_PRERENDER_LIMIT * ENTRIES_PER_PAGE);
 
 		const result = await getStaticPaths();
-		const expected = LIST_PRERENDER_LIMIT * Object.keys(LANGUAGES).length;
+		const expected =
+			LIST_PRERENDER_LIMIT *
+			Object.values(LANGUAGES)
+				.map((c) => c.base_urls)
+				.flat().length;
 
 		expect(result.paths.length).toBe(expected);
 	});

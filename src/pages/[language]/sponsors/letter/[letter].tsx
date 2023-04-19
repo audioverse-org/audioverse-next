@@ -10,10 +10,10 @@ import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
 	getSponsorListLetterCounts,
 	getSponsorListLetterPageData,
+	Language,
 } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import getLanguageIds from '@lib/getLanguageIds';
 import root from '@lib/routes';
 
 export default Sponsors;
@@ -49,19 +49,19 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const keys = getLanguageIds();
-	const pathSets = await Promise.all(
-		keys.map(async (language) => {
-			const { sponsorLetterCounts } = await getSponsorListLetterCounts({
-				language,
-			});
-			return (sponsorLetterCounts || []).map(({ letter }) =>
-				root.lang(LANGUAGES[language].base_url).sponsors.letter(letter).get()
-			);
-		})
-	);
+	const pathSets = Object.entries(LANGUAGES).map(async ([key, config]) => {
+		const { sponsorLetterCounts = [] } = await getSponsorListLetterCounts({
+			language: key as Language,
+		});
+		return sponsorLetterCounts
+			.map(({ letter }) =>
+				config.base_urls.map((b) => root.lang(b).sponsors.letter(letter).get())
+			)
+			.flat();
+	});
+
 	return {
-		paths: pathSets.flat(),
+		paths: (await Promise.all(pathSets)).flat(),
 		fallback: 'blocking',
 	};
 }
