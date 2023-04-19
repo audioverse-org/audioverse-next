@@ -21,13 +21,12 @@ function SearchHead({ term }: { term?: string }): JSX.Element {
 	// next/head renders outside of our IntlProvider. So we use useIntl() to
 	// get the intl object and format the message manually.
 	const intl = useIntl();
-	const q = useQueryString('q');
 	const title = intl.formatMessage(
 		{
 			id: 'search__titleDynamic',
 			defaultMessage: 'Search | "{term}" | AudioVerse',
 		},
-		{ term: term || q }
+		{ term }
 	);
 	return (
 		<Head>
@@ -65,23 +64,23 @@ function Section({
 	entityType: EntityFilterId;
 	onEntityTypeChange: (entityType: EntityFilterId) => void;
 }) {
-	const s = section;
-	const nodes = entityType === 'all' ? s.nodes.slice(0, 3) : s.nodes;
+	const nodes =
+		entityType === 'all' ? section.nodes.slice(0, 3) : section.nodes;
 	return (
 		<div className={styles.section}>
-			<LineHeading variant="overline">{s.heading}</LineHeading>
+			<LineHeading variant="overline">{section.heading}</LineHeading>
 			<CardGroup>
 				{nodes.map((e: InferrableEntity) => (
 					<CardInferred key={e.id} entity={e} />
 				))}
 			</CardGroup>
-			{s.hasNextPage && entityType === 'all' && (
+			{section.hasNextPage && entityType === 'all' && (
 				<Button
 					type="secondary"
-					text={s.seeAll}
+					text={section.seeAll}
 					IconRight={ForwardIcon}
 					className={styles.seeAllButton}
-					onClick={() => onEntityTypeChange(s.id)}
+					onClick={() => onEntityTypeChange(section.id)}
 				/>
 			)}
 		</div>
@@ -98,10 +97,8 @@ export default function Search({
 	onEntityTypeChange: (entityType: EntityFilterId) => void;
 }): JSX.Element {
 	const q = useQueryString('q');
-	const { visible, loadMore, isLoading } = useSearch(
-		entityType,
-		term || q || ''
-	);
+	const t = term || q || '';
+	const { visible, loadMore, isLoading } = useSearch(entityType, t);
 	const endRef = useRef<HTMLDivElement>(null);
 	const endReached = useOnScreen(endRef);
 
@@ -117,14 +114,14 @@ export default function Search({
 			const recording = e as CardRecordingFragment;
 			const regex = /[\p{P}\p{S}\s]/gu;
 			const title = recording.title.replace(regex, '').toLowerCase();
-			const query = (term || q || '').replace(regex, '').toLowerCase();
+			const query = t.replace(regex, '').toLowerCase();
 			return title === query;
 		});
 	const shouldHoistTeachings = hasExactTeaching && entityType === 'all';
 
 	return (
 		<>
-			<SearchHead term={term} />
+			<SearchHead term={t} />
 
 			{isLoading && <LoadingCards />}
 			{!isLoading && (
