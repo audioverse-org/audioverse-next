@@ -2,7 +2,6 @@ import { IncomingMessage } from 'http';
 
 import cookie from 'cookie';
 import JSCookie from 'js-cookie';
-import get from 'lodash/get';
 
 const SESSION_KEY = 'avSession';
 const LANGUAGE_KEY = 'lang';
@@ -35,7 +34,7 @@ function getCookies(req: IncomingMessage | null): {
 	[key: string]: string;
 } {
 	if (req) {
-		return cookie.parse(get(req.headers, 'cookie') || '');
+		return cookie.parse(req.headers.cookie || '');
 	}
 
 	// https://github.com/vercel/next.js/issues/2177#issuecomment-536178575

@@ -1,4 +1,3 @@
-import padStart from 'lodash/padStart';
 import { useIntl } from 'react-intl';
 
 // TODO: use more robust localization strategy
@@ -57,6 +56,8 @@ export const useFormattedDuration = (seconds: number): string => {
 	);
 };
 
+const pad = (s: string): string => (s.length < 2 ? pad(`0${s}`) : s);
+
 export const useFormattedTime = (seconds: number): string => {
 	const intl = useIntl();
 	const [h, m, s] = divideWithRunoff(Math.round(seconds), [3600, 60]);
@@ -70,8 +71,8 @@ export const useFormattedTime = (seconds: number): string => {
 				},
 				{
 					h,
-					m: padStart(m.toString(), 2, '0'),
-					s: padStart(s.toString(), 2, '0'),
+					m: pad(m.toString()),
+					s: pad(s.toString()),
 				}
 		  )
 		: intl.formatMessage(
@@ -80,6 +81,6 @@ export const useFormattedTime = (seconds: number): string => {
 					defaultMessage: '{m}:{s}',
 					description: 'time minutes and seconds',
 				},
-				{ m, s: padStart(s.toString(), 2, '0') }
+				{ m, s: pad(s.toString()) }
 		  );
 };

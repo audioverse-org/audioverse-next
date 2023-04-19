@@ -18,6 +18,6 @@ describe('getNumberedStaticPaths', () => {
 			(d) => d
 		);
 
-		expect(result.paths.length).toEqual(expected);
+		expect(result.paths).toHaveLength(expected);
 	});
 });

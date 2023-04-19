@@ -1,17 +1,13 @@
-import findKey from 'lodash/findKey';
-
-import {
-	LanguageConfiguration,
-	LANGUAGES,
-	SupportedLanguages,
-} from '@lib/constants';
+import { LANGUAGES, SupportedLanguages } from '@lib/constants';
 
 export function getLanguageIdByRouteOrLegacyRoute(
 	route: string | undefined
 ): SupportedLanguages | undefined {
-	return findKey(
-		LANGUAGES,
-		(l: LanguageConfiguration) =>
-			l.base_urls.includes(route || '') || l.legacy_base_url === route
-	) as SupportedLanguages | undefined;
+	return Object.keys(LANGUAGES)
+		.filter((k): k is SupportedLanguages => k in LANGUAGES)
+		.find(
+			(k) =>
+				LANGUAGES[k].base_urls.includes(route || '') ||
+				LANGUAGES[k].legacy_base_url === route
+		);
 }

@@ -306,7 +306,7 @@ export default function LibraryNav({
 				items={navItems.map(([label, slug]) => ({
 					id: slug,
 					label,
-					url: root.lang(languageRoute).library.get() + slug,
+					url: root.lang(languageRoute).library.get() + `/${slug}`,
 					isActive: slug === currentNavHref,
 				}))}
 				disabled={disabled}

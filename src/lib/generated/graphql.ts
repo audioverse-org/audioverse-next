@@ -7231,16 +7231,6 @@ export type SponsorUnfavoriteMutationVariables = Exact<{
 
 export type SponsorUnfavoriteMutation = { __typename?: 'Mutation', favorited: { __typename?: 'SuccessPayload', success: boolean } };
 
-export type AddPlaylistMutationVariables = Exact<{
-  language: Language;
-  title: Scalars['String'];
-  isPublic: Scalars['Boolean'];
-  recordingIds: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-}>;
-
-
-export type AddPlaylistMutation = { __typename?: 'Mutation', playlistAdd: { __typename?: 'UserPlaylist', id: string | number } };
-
 export type GenerateFeedFragment = { __typename?: 'Recording', id: string | number, title: string, contentType: RecordingContentType, description: string | null, publishDate: string | null, audioFiles: Array<{ __typename?: 'AudioFile', id: string | number, url: string, filesize: string, duration: number, mimeType: string, bitrate: number }>, videoFiles: Array<{ __typename?: 'VideoFile', id: string | number, url: string, filesize: string, duration: number, mimeType: string, bitrate: number, container: string }>, persons: Array<{ __typename?: 'Person', name: string }>, sequence: { __typename?: 'Sequence', title: string } | null, sponsor: { __typename?: 'Sponsor', title: string } | null };
 
 export type BookFeedDescriptionFragment = { __typename?: 'Sequence', title: string, recordings: { __typename?: 'RecordingConnection', nodes: Array<{ __typename?: 'Recording', authors: Array<{ __typename?: 'Person', name: string }>, narrators: Array<{ __typename?: 'Person', name: string }> }> | null } };
@@ -9519,18 +9509,6 @@ export const useSponsorUnfavoriteMutation = <
       (variables?: SponsorUnfavoriteMutationVariables) => graphqlFetcher<SponsorUnfavoriteMutation, SponsorUnfavoriteMutationVariables>(SponsorUnfavoriteDocument, variables)(),
       options
     );
-export const AddPlaylistDocument = `
-mutation addPlaylist($language:Language!$title:String!$isPublic:Boolean!$recordingIds:[ID!]){playlistAdd(input:{language:$language title:$title isPublic:$isPublic recordingIds:$recordingIds}){id}}
-`;
-export const useAddPlaylistMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<AddPlaylistMutation, TError, AddPlaylistMutationVariables, TContext>) =>
-    useMutation<AddPlaylistMutation, TError, AddPlaylistMutationVariables, TContext>(
-      ['addPlaylist'],
-      (variables?: AddPlaylistMutationVariables) => graphqlFetcher<AddPlaylistMutation, AddPlaylistMutationVariables>(AddPlaylistDocument, variables)(),
-      options
-    );
 import { fetchApi } from '@lib/api/fetchApi' 
 
 export async function getWithAuthGuardData<T>(
@@ -10335,10 +10313,4 @@ export async function sponsorUnfavorite<T>(
 	variables: ExactAlt<T, SponsorUnfavoriteMutationVariables>
 ): Promise<SponsorUnfavoriteMutation> {
 	return fetchApi(SponsorUnfavoriteDocument, { variables });
-}
-
-export async function addPlaylist<T>(
-	variables: ExactAlt<T, AddPlaylistMutationVariables>
-): Promise<AddPlaylistMutation> {
-	return fetchApi(AddPlaylistDocument, { variables });
 }

@@ -1,5 +1,3 @@
-import find from 'lodash/find';
-
 import { IBaseProps } from '@containers/base';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
@@ -39,15 +37,20 @@ export async function getPaginatedStaticProps<T, N>(
 		language: Language.English,
 		i: '1',
 	};
-	if (!find(LANGUAGES, (l) => l.base_urls.includes(languageRoute || ''))) {
+	const languageConfig = Object.values(LANGUAGES).find((l) =>
+		l.base_urls.includes(languageRoute || '')
+	);
+
+	if (!languageConfig) {
 		return formatPaginatedStaticProps(null as unknown as T, [], 0, +pageIndex);
 	}
+
 	const data = await getPaginatedData(pageIndex, getter, {
 		language: getLanguageIdByRoute(languageRoute),
 	});
 	const nodes = (data && parseNodes(data)) || [];
 	const count = (data && parseCount(data)) || 0;
-	const extraProps = (parseExtraProps && parseExtraProps(data)) || {};
+	const extraProps = parseExtraProps?.(data) || {};
 
 	return formatPaginatedStaticProps(data, nodes, count, +pageIndex, extraProps);
 }

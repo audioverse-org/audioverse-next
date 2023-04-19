@@ -9,7 +9,6 @@ import useHelpScoutLabels from '@lib/useHelpScoutLabels';
 import IconQuestionCircle from '@public/img/icons/icon-question-circle.svg';
 
 import { Beacon } from '../../types/window';
-import mapValues from 'lodash/mapValues';
 
 const BEACON_ID = 'e73e9329-30be-4766-99bb-6bfdd739e316';
 
@@ -46,14 +45,18 @@ export default function HelpWidget(): JSX.Element {
 
 	useEffect(() => {
 		const d = data?.me?.user;
-		if (!d) {
-			return;
-		}
 
-		doBeacon(
-			'session-data',
-			mapValues(d, (v) => v?.toString() || 'undefined')
+		if (!d) return;
+
+		const sessionData = Object.entries(d).reduce(
+			(acc, [k, v]) => ({
+				...acc,
+				[k]: v?.toString() || 'undefined',
+			}),
+			{}
 		);
+
+		doBeacon('session-data', sessionData);
 
 		doBeacon('prefill', {
 			name: d.name,
