@@ -12,6 +12,6 @@ export function getLanguageIdByRouteOrLegacyRoute(
 	return findKey(
 		LANGUAGES,
 		(l: LanguageConfiguration) =>
-			l.base_url === route || l.legacy_base_url === route
+			l.base_urls.includes(route || '') || l.legacy_base_url === route
 	) as SupportedLanguages | undefined;
 }

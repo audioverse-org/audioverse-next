@@ -10,10 +10,10 @@ import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
 	getPersonListLetterCounts,
 	getPresenterListLetterPageData,
+	Language,
 } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import getLanguageIds from '@lib/getLanguageIds';
 import root from '@lib/routes';
 
 export default Presenters;
@@ -49,19 +49,21 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const keys = getLanguageIds();
-	const pathSets = await Promise.all(
-		keys.map(async (language) => {
-			const { personLetterCounts = [] } = await getPersonListLetterCounts({
-				language,
-			});
-			return personLetterCounts.map(({ letter }) =>
-				root.lang(LANGUAGES[language].base_url).presenters.letter(letter).get()
-			);
-		})
-	);
+	const pathSets = Object.entries(LANGUAGES).map(async ([key, config]) => {
+		const { personLetterCounts = [] } = await getPersonListLetterCounts({
+			language: key as Language,
+		});
+		return personLetterCounts
+			.map(({ letter }) =>
+				config.base_urls.map((b) =>
+					root.lang(b).presenters.letter(letter).get()
+				)
+			)
+			.flat();
+	});
+
 	return {
-		paths: pathSets.flat(),
+		paths: (await Promise.all(pathSets)).flat(),
 		fallback: 'blocking',
 	};
 }

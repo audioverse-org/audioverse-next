@@ -39,7 +39,7 @@ export async function getPaginatedStaticProps<T, N>(
 		language: Language.English,
 		i: '1',
 	};
-	if (!find(LANGUAGES, (l) => l.base_url === languageRoute)) {
+	if (!find(LANGUAGES, (l) => l.base_urls.includes(languageRoute || ''))) {
 		return formatPaginatedStaticProps(null as unknown as T, [], 0, +pageIndex);
 	}
 	const data = await getPaginatedData(pageIndex, getter, {

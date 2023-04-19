@@ -63,7 +63,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 			.map((version) =>
 				(version.books || []).map(({ book_id }) =>
 					root
-						.lang(LANGUAGES.ENGLISH.base_url)
+						.lang(LANGUAGES.ENGLISH.base_urls[0])
 						.bibles.bookId(book_id)
 						.chapterNumber(1)
 						.get()
