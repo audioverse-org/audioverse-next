@@ -113,4 +113,24 @@ describe('AndNavigation', () => {
 			Node.DOCUMENT_POSITION_FOLLOWING
 		);
 	});
+
+	it('ignores punctuation when hoisting teachings', async () => {
+		await renderTemplate();
+
+		const searchInputs = screen.getAllByPlaceholderText('Search');
+		const search = searchInputs[0];
+
+		userEvent.type(search, 'test!');
+
+		const teachingsHeading = await screen.findByRole('heading', {
+			name: 'Teachings',
+		});
+		const presentersHeading = await screen.findByRole('heading', {
+			name: 'Presenters',
+		});
+
+		expect(teachingsHeading.compareDocumentPosition(presentersHeading)).toBe(
+			Node.DOCUMENT_POSITION_FOLLOWING
+		);
+	});
 });

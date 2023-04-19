@@ -115,8 +115,9 @@ export default function Search({
 		.find((e: InferrableEntity) => {
 			if (e.__typename !== 'Recording') return false;
 			const recording = e as CardRecordingFragment;
-			const title = recording.title.toLowerCase();
-			const query = (term || q || '').toLowerCase();
+			const regex = /[\p{P}\p{S}\s]/gu;
+			const title = recording.title.replace(regex, '').toLowerCase();
+			const query = (term || q || '').replace(regex, '').toLowerCase();
 			return title === query;
 		});
 	const shouldHoistTeachings = hasExactTeaching && entityType === 'all';
