@@ -572,6 +572,10 @@ module.exports = withBundleAnalyzer(
 					destination: '/:lang/stories/albums/page/1',
 				},
 				{
+					source: '/:lang/teachings/all',
+					destination: '/:lang/teachings/all/page/1',
+				},
+				{
 					source: '/:lang/testimonies',
 					destination: '/:lang/testimonies/page/1',
 				},
