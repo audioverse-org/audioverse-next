@@ -1,4 +1,3 @@
-import uniq from 'lodash/uniq';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import {
@@ -17,9 +16,9 @@ export const formatBooksDescription = async (
 	sequence: BookFeedDescriptionFragment
 ): Promise<string> => {
 	const intl = await getIntl(languageRoute);
-	const getPersonNameString = (persons: { name: string }[]) => {
-		return uniq(persons.map(({ name }) => name)).join(', ');
-	};
+	const formatNameString = (persons: { name: string }[]) =>
+		[...new Set(persons.map((p) => p.name))].join(', ');
+	const recordings = sequence.recordings.nodes || [];
 	return intl.formatMessage(
 		{
 			id: 'storyAlbumsFeed__description',
@@ -27,16 +26,16 @@ export const formatBooksDescription = async (
 		},
 		{
 			title: sequence.title,
-			authors: getPersonNameString(
-				(sequence.recordings.nodes || []).reduce(
+			authors: formatNameString(
+				recordings.reduce<{ name: string }[]>(
 					(carry, { authors }) => [...carry, ...authors],
-					[] as { name: string }[]
+					[]
 				)
 			),
-			narrators: getPersonNameString(
-				(sequence.recordings.nodes || []).reduce(
+			narrators: formatNameString(
+				recordings.reduce<{ name: string }[]>(
 					(carry, { narrators }) => [...carry, ...narrators],
-					[] as { name: string }[]
+					[]
 				)
 			),
 		}
@@ -57,6 +56,7 @@ export async function getServerSideProps({
 	}).catch(() => ({
 		sequence: null,
 	}));
+
 	if (
 		!sequence ||
 		sequence.language !== getLanguageIdByRouteOrLegacyRoute(languageRoute) ||
