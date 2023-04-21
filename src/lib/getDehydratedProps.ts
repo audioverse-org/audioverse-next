@@ -15,14 +15,14 @@ export default async function getDehydratedProps<
 	queryPairs: [string, () => Promise<unknown>][],
 	otherProps?: T
 ): Promise<DehydratedProps<T>> {
-	const queryClient = new QueryClient();
+	const client = new QueryClient();
 
-	await Promise.all(queryPairs.map((p) => queryClient.prefetchQuery(...p)));
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
 
 	return {
 		props: {
 			...(otherProps as T),
-			dehydratedState: dehydrate(queryClient),
+			dehydratedState: dehydrate(client),
 		},
 	};
 }
