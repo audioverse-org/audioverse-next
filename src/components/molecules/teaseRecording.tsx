@@ -4,29 +4,28 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading3 from '@components/atoms/heading3';
-import Heading6 from '@components/atoms/heading6';
-import ProgressBar from '@components/atoms/progressBar';
-import { useIsRecordingFavorited } from '@lib/api/useIsRecordingFavorited';
-import { BaseColors } from '@lib/constants';
-import { useFormattedDuration } from '@lib/time';
-import usePlaybackSession from '@lib/usePlaybackSession';
+import Heading2 from '~components/atoms/heading2';
+import Heading3 from '~components/atoms/heading3';
+import Heading6 from '~components/atoms/heading6';
+import ProgressBar from '~components/atoms/progressBar';
+import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
+import { useIsRecordingFavorited } from '~lib/api/useIsRecordingFavorited';
+import { BaseColors } from '~lib/constants';
+import { useFormattedDuration } from '~lib/time';
+import usePlaybackSession from '~lib/usePlaybackSession';
+import { RecordingContentType } from '~src/__generated__/graphql';
 
 import IconClosure from '../../../public/img/icons/icon-closure.svg';
 import IconDisclosure from '../../../public/img/icons/icon-disclosure.svg';
 import IconListeningAnimated from '../../../public/img/icons/icon-listening-animated.svg';
 import IconPlay from '../../../public/img/icons/icon-play.svg';
 import SuccessIcon from '../../../public/img/icons/icon-success-light.svg';
-
+import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';
 import IconButton from './iconButton';
 import PersonLockup from './personLockup';
 import styles from './teaseRecording.module.scss';
-import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
-import { RecordingContentType } from '@src/__generated__/graphql';
-import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 
 const isThemeDark = (theme: CardTheme): boolean =>
 	['audiobookTrack', 'story', 'topic'].includes(theme);

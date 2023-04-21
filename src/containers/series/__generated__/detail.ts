@@ -9,7 +9,7 @@ import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__gener
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSeriesDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -110,7 +110,7 @@ export const useGetSeriesDetailPathsDataQuery = <
       graphqlFetcher<GetSeriesDetailPathsDataQuery, GetSeriesDetailPathsDataQueryVariables>(GetSeriesDetailPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSeriesDetailPageData<T>(
 	variables: ExactAlt<T, GetSeriesDetailPageDataQueryVariables>

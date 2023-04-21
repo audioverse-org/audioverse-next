@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterTopPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
   offset: Types.InputMaybe<Types.Scalars['Int']>;
@@ -58,7 +58,7 @@ export const useGetPresenterTopPageDataQuery = <
       graphqlFetcher<GetPresenterTopPageDataQuery, GetPresenterTopPageDataQueryVariables>(GetPresenterTopPageDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterTopPageData<T>(
 	variables: ExactAlt<T, GetPresenterTopPageDataQueryVariables>

@@ -1,14 +1,16 @@
-import userEvent from '@testing-library/user-event';
-import { buildRenderer } from '../../lib/test/buildRenderer';
-import AndNavigation from './andNavigation';
 import { screen } from '@testing-library/react';
-import { buildLoader } from '../../lib/test/buildLoader';
-import { CardPersonFragment } from '@components/molecules/card/__generated__/person';
-import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
+import userEvent from '@testing-library/user-event';
+
+import { CardPersonFragment } from '~components/molecules/card/__generated__/person';
+import { CardRecordingFragment } from '~components/molecules/card/__generated__/recording';
 import {
 	GetSearchPersonsDocument,
 	GetSearchRecordingsDocument,
-} from '@components/organisms/__generated__/searchResults';
+} from '~components/organisms/__generated__/searchResults';
+
+import { buildLoader } from '../../lib/test/buildLoader';
+import { buildRenderer } from '../../lib/test/buildRenderer';
+import AndNavigation from './andNavigation';
 
 const renderTemplate = buildRenderer(AndNavigation);
 

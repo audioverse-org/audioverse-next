@@ -1,6 +1,8 @@
-import withFailStates from '@components/HOCs/withFailStates';
-import Presenters, { PresentersProps } from './list';
 import React from 'react';
+
+import withFailStates from '~components/HOCs/withFailStates';
+
+import Presenters, { PresentersProps } from './list';
 
 export type { PresentersProps } from './list';
 

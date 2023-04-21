@@ -1,12 +1,11 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { LANGUAGES } from '@lib/constants';
-
-import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
-import root from '@lib/routes';
-import { getSermonListFeedData } from '@containers/sermon/__generated__/list';
+import { getSermonListFeedData } from '~containers/sermon/__generated__/list';
+import { LANGUAGES } from '~lib/constants';
+import { generateFeed, sendRSSHeaders } from '~lib/generateFeed';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
+import root from '~lib/routes';
 
 export default (): void => void 0;
 

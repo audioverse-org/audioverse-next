@@ -10,7 +10,7 @@ import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/p
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoryDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -76,7 +76,7 @@ export const useGetStoryDetailStaticPathsQuery = <
       graphqlFetcher<GetStoryDetailStaticPathsQuery, GetStoryDetailStaticPathsQueryVariables>(GetStoryDetailStaticPathsDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getStoryDetailData<T>(
 	variables: ExactAlt<T, GetStoryDetailDataQueryVariables>

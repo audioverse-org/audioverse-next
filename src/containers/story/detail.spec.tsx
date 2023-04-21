@@ -1,17 +1,18 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import Story, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/stories/[id]/[[...slugs]]';
+} from '~pages/[language]/stories/[id]/[[...slugs]]';
+import { Language, RecordingContentType } from '~src/__generated__/graphql';
+
 import {
 	GetStoryDetailDataDocument,
 	GetStoryDetailStaticPathsDocument,
 } from './__generated__/detail';
-import { Language, RecordingContentType } from '@src/__generated__/graphql';
 
 const renderPage = buildStaticRenderer(Story, getStaticProps);
 

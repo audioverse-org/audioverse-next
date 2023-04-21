@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useMutation, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type LoginMutationVariables = Types.Exact<{
   email: Types.Scalars['String'];
   password: Types.Scalars['String'];
@@ -32,7 +32,7 @@ export const useLoginMutation = <
       (variables?: LoginMutationVariables) => graphqlFetcher<LoginMutation, LoginMutationVariables>(LoginDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function login<T>(
 	variables: ExactAlt<T, LoginMutationVariables>

@@ -10,7 +10,7 @@ import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__gen
 import { GenerateFeedFragmentDoc } from '../../../../lib/__generated__/generateFeed';
 import { BookFeedDescriptionFragmentDoc } from '../../../../pages/[language]/books/[id]/feed.xml/__generated__/bookFeedDescription';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoryAlbumDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -114,7 +114,7 @@ export const useGetStoryAlbumDetailPathsDataQuery = <
       graphqlFetcher<GetStoryAlbumDetailPathsDataQuery, GetStoryAlbumDetailPathsDataQueryVariables>(GetStoryAlbumDetailPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getStoryAlbumDetailPageData<T>(
 	variables: ExactAlt<T, GetStoryAlbumDetailPageDataQueryVariables>

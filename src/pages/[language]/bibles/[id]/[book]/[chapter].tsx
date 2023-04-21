@@ -4,11 +4,11 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Book, { BookProps } from '@containers/bible/book';
-import { getBible, getBibleBookChapters, getBibles } from '@lib/api/bibleBrain';
-import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import root from '@lib/routes';
+import { IBaseProps } from '~containers/base';
+import Book, { BookProps } from '~containers/bible/book';
+import { getBible, getBibleBookChapters, getBibles } from '~lib/api/bibleBrain';
+import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import root from '~lib/routes';
 
 export default Book;
 

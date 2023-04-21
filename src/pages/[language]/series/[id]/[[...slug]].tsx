@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { IBaseProps } from '~containers/base';
 import {
 	getSeriesDetailPageData,
 	getSeriesDetailPathsData,
-} from '@containers/series/__generated__/detail';
+} from '~containers/series/__generated__/detail';
+import SeriesDetail, { SeriesDetailProps } from '~containers/series/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default SeriesDetail;
 

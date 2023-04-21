@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useMutation, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type RecordingFavoriteMutationVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -26,7 +26,7 @@ export const useRecordingFavoriteMutation = <
       (variables?: RecordingFavoriteMutationVariables) => graphqlFetcher<RecordingFavoriteMutation, RecordingFavoriteMutationVariables>(RecordingFavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function recordingFavorite<T>(
 	variables: ExactAlt<T, RecordingFavoriteMutationVariables>

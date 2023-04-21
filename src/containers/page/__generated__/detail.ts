@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCustomDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -63,7 +63,7 @@ export const useGetCustomDetailPageStaticPathsQuery = <
       graphqlFetcher<GetCustomDetailPageStaticPathsQuery, GetCustomDetailPageStaticPathsQueryVariables>(GetCustomDetailPageStaticPathsDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getCustomDetailPageData<T>(
 	variables: ExactAlt<T, GetCustomDetailPageDataQueryVariables>

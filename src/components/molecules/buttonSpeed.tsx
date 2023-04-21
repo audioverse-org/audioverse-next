@@ -2,14 +2,13 @@ import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@lib/constants';
-
-import usePlaybackSession from '@lib/usePlaybackSession';
+import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
+import { BaseColors } from '~lib/constants';
+import usePlaybackSession from '~lib/usePlaybackSession';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonSpeed.module.scss';
 import CircleButton from './circleButton';
-import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
 
 export default function ButtonSpeed({
 	recording,

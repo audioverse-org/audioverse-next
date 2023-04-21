@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Story, { StoryDetailProps } from '@containers/story/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { IBaseProps } from '~containers/base';
 import {
 	getStoryDetailData,
 	getStoryDetailStaticPaths,
-} from '@containers/story/__generated__/detail';
+} from '~containers/story/__generated__/detail';
+import Story, { StoryDetailProps } from '~containers/story/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default Story;
 

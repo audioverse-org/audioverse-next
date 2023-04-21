@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import About, { AboutProps } from '@containers/about';
-import { IBaseProps } from '@containers/base';
-import { REVALIDATE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import About, { AboutProps } from '~containers/about';
 import {
 	getAboutPageData,
 	getAboutStaticPaths,
-} from '@containers/about/__generated__';
-import { PageType } from '@src/__generated__/graphql';
+} from '~containers/about/__generated__';
+import { IBaseProps } from '~containers/base';
+import { REVALIDATE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import { PageType } from '~src/__generated__/graphql';
 
 export default About;
 

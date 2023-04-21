@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { useGoogleLogin } from 'react-google-login';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { useQueryClient } from 'react-query';
-import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
-import { setSessionToken } from '@lib/cookies';
-import useDidUnmount from '@lib/useDidUnmount';
-import Button from './button';
-import styles from './socialLogin.module.scss';
 import {
 	ReactFacebookFailureResponse,
 	ReactFacebookLoginInfo,
 } from 'react-facebook-login';
-import { useRegisterSocialMutation } from '@containers/account/__generated__/register';
-import { UserSocialServiceName } from '@src/__generated__/graphql';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { useGoogleLogin } from 'react-google-login';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useQueryClient } from 'react-query';
+
+import { useRegisterSocialMutation } from '~containers/account/__generated__/register';
+import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '~lib/constants';
+import { setSessionToken } from '~lib/cookies';
+import useDidUnmount from '~lib/useDidUnmount';
+import { UserSocialServiceName } from '~src/__generated__/graphql';
+
+import Button from './button';
+import styles from './socialLogin.module.scss';
 
 export default function SocialLogin({
 	isRegister,

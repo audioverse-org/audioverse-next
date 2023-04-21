@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Login from '@components/molecules/login';
-import { getCurrentRequest } from '@lib/api/storeRequest';
-import { getSessionToken } from '@lib/cookies';
+import Login from '~components/molecules/login';
+import { getCurrentRequest } from '~lib/api/storeRequest';
+import { getSessionToken } from '~lib/cookies';
+
 import { useGetWithAuthGuardDataQuery } from './__generated__/withAuthGuard';
 
 function withAuthGuard<P>(

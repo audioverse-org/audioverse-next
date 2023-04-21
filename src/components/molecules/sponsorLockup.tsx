@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 import { SponsorLockupFragment } from './__generated__/sponsorLockup';
+import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 
 type Props = {
 	sponsor: SponsorLockupFragment;

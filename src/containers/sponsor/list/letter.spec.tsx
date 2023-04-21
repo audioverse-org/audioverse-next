@@ -1,14 +1,15 @@
+import { screen } from '@testing-library/react';
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/letter/[letter]';
-import { buildLoader } from '@lib/test/buildLoader';
-import { screen } from '@testing-library/react';
+} from '~pages/[language]/sponsors/letter/[letter]';
+
 import { GetSponsorListLetterPageDataDocument } from './__generated__/letter';
 import { GetSponsorListLetterCountsDocument } from './__generated__/list';
 

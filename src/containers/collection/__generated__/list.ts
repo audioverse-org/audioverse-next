@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   offset: Types.InputMaybe<Types.Scalars['Int']>;
@@ -70,7 +70,7 @@ export const useGetCollectionListPathsDataQuery = <
       graphqlFetcher<GetCollectionListPathsDataQuery, GetCollectionListPathsDataQueryVariables>(GetCollectionListPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getCollectionListPageData<T>(
 	variables: ExactAlt<T, GetCollectionListPageDataQueryVariables>

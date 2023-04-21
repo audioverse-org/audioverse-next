@@ -1,13 +1,17 @@
 import { __loadQuery } from 'next/router';
 
-import { loadSermonListData } from '@containers/sermon/list.all.spec';
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import { getStaticPaths } from '@pages/[language]/teachings/audio/page/[i]';
+import { loadSermonListData } from '~containers/sermon/list.all.spec';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import SermonList, {
+	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/teachings/audio/page/[i]';
-import { GetSermonListPageDataDocument, GetSermonListPagePathsDataDocument } from './__generated__/list';
+} from '~pages/[language]/teachings/audio/page/[i]';
+
+import {
+	GetSermonListPageDataDocument,
+	GetSermonListPagePathsDataDocument,
+} from './__generated__/list';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 

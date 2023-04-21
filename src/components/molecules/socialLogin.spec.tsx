@@ -3,11 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import React from 'react';
 
-import SocialLogin from '@components/molecules/socialLogin';
-import { fetchApi } from '@lib/api/fetchApi';
-
-import renderWithProviders from '@lib/test/renderWithProviders';
-import { RegisterSocialDocument } from '@containers/account/__generated__/register';
+import SocialLogin from '~components/molecules/socialLogin';
+import { RegisterSocialDocument } from '~containers/account/__generated__/register';
+import { fetchApi } from '~lib/api/fetchApi';
+import renderWithProviders from '~lib/test/renderWithProviders';
 
 describe('social login', () => {
 	it('does not run onSuccess callback if errors', async () => {

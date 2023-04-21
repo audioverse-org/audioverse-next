@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useMutation, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type ResetPasswordMutationVariables = Types.Exact<{
   token: Types.Scalars['String'];
   password: Types.Scalars['String'];
@@ -30,7 +30,7 @@ export const useResetPasswordMutation = <
       (variables?: ResetPasswordMutationVariables) => graphqlFetcher<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function resetPassword<T>(
 	variables: ExactAlt<T, ResetPasswordMutationVariables>

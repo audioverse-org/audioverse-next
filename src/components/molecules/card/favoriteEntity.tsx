@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { UnreachableCaseError } from '@lib/typeHelpers';
+import { UnreachableCaseError } from '~lib/typeHelpers';
 
+import { CardFavoriteEntityFragment } from './__generated__/favoriteEntity';
 import CardCollection from './collection';
 import CardPerson from './person';
 import CardRecording from './recording';
 import CardRecordingStack from './recordingStack';
 import CardSequence from './sequence';
 import CardSponsor from './sponsor';
-import { CardFavoriteEntityFragment } from './__generated__/favoriteEntity';
 
 interface CardEntityProps {
 	entity: CardFavoriteEntityFragment;

@@ -1,9 +1,9 @@
 import { waitFor } from '@testing-library/react';
 import { __mockedRouter } from 'next/router';
 
-import { buildRenderer } from '@lib/test/buildRenderer';
-import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
-import Login from '@pages/[language]/account/login';
+import { buildRenderer } from '~lib/test/buildRenderer';
+import { loadAuthGuardData } from '~lib/test/loadAuthGuardData';
+import Login from '~pages/[language]/account/login';
 
 const renderPage = buildRenderer(Login);
 

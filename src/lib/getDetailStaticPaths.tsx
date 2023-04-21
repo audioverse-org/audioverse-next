@@ -4,8 +4,8 @@ import {
 	DETAIL_PRERENDER_LIMIT,
 	LANGUAGES,
 	SupportedLanguages,
-} from '@lib/constants';
-import { Language } from '@src/__generated__/graphql';
+} from '~lib/constants';
+import { Language } from '~src/__generated__/graphql';
 
 type Getter<DATA> = (variables: {
 	language: SupportedLanguages;

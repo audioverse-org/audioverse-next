@@ -4,17 +4,17 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import AudiobookDetail, {
-	AudiobookDetailProps,
-} from '@containers/audiobook/detail';
-import { IBaseProps } from '@containers/base';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import {
 	getAudiobookDetailPageData,
 	getAudiobookDetailPathsData,
-} from '@containers/audiobook/__generated__/detail';
+} from '~containers/audiobook/__generated__/detail';
+import AudiobookDetail, {
+	AudiobookDetailProps,
+} from '~containers/audiobook/detail';
+import { IBaseProps } from '~containers/base';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default AudiobookDetail;
 

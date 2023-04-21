@@ -4,16 +4,16 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import SponsorConferences, {
-	SponsorConferencesProps,
-} from '@containers/sponsor/conferences';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import {
 	getSponsorConferencesPageData,
 	getSponsorConferencesPathsData,
-} from '@containers/sponsor/__generated__/conferences';
+} from '~containers/sponsor/__generated__/conferences';
+import SponsorConferences, {
+	SponsorConferencesProps,
+} from '~containers/sponsor/conferences';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import getIntl from '~lib/getIntl';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default SponsorConferences;
 

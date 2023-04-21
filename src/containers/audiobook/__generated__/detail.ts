@@ -10,7 +10,7 @@ import { AndMiniplayerFragmentDoc } from '../../../components/templates/__genera
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
 import { BookFeedDescriptionFragmentDoc } from '../../../pages/[language]/books/[id]/feed.xml/__generated__/bookFeedDescription';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -115,7 +115,7 @@ export const useGetAudiobookDetailPathsDataQuery = <
       graphqlFetcher<GetAudiobookDetailPathsDataQuery, GetAudiobookDetailPathsDataQueryVariables>(GetAudiobookDetailPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobookDetailPageData<T>(
 	variables: ExactAlt<T, GetAudiobookDetailPageDataQueryVariables>

@@ -1,10 +1,12 @@
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { screen } from '@testing-library/react';
+
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/all';
-import { screen } from '@testing-library/react';
+} from '~pages/[language]/sponsors/all';
+
 import { GetSponsorListLetterCountsDocument } from './__generated__/list';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);

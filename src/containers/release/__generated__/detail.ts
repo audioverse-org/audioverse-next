@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetMediaReleaseFormsPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -93,7 +93,7 @@ export const useSubmitMediaReleaseFormMutation = <
       (variables?: SubmitMediaReleaseFormMutationVariables) => graphqlFetcher<SubmitMediaReleaseFormMutation, SubmitMediaReleaseFormMutationVariables>(SubmitMediaReleaseFormDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getMediaReleaseFormsPageData<T>(
 	variables: ExactAlt<T, GetMediaReleaseFormsPageDataQueryVariables>

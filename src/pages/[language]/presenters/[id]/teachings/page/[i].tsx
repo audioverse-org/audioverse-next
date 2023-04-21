@@ -4,14 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { getPresenterDetailPathsData } from '~containers/presenter/__generated__/detail';
+import { getPresenterRecordingsPageData } from '~containers/presenter/__generated__/recordings';
 import PresenterRecordings, {
 	PresenterRecordingsProps,
-} from '@containers/presenter/recordings';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import { getPresenterDetailPathsData } from '@containers/presenter/__generated__/detail';
-import { getPresenterRecordingsPageData } from '@containers/presenter/__generated__/recordings';
+} from '~containers/presenter/recordings';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import getIntl from '~lib/getIntl';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default PresenterRecordings;
 

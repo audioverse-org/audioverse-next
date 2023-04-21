@@ -3,8 +3,8 @@ import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
-import MyApp from '@pages/_app';
-import { __awaitIntlMessages } from '@lib/getIntlMessages';
+import { __awaitIntlMessages } from '~lib/getIntlMessages';
+import MyApp from '~pages/_app';
 
 const renderApp = async (component: any, props: any) => {
 	const view = render(<MyApp Component={component} pageProps={props} />);

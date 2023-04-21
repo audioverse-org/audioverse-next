@@ -1,13 +1,14 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import SponsorConferences, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
+} from '~pages/[language]/sponsors/[id]/conferences/page/[i]';
+
 import {
 	GetSponsorConferencesPageDataDocument,
 	GetSponsorConferencesPathsDataDocument,

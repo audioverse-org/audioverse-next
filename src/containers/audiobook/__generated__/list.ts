@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   first?: Types.InputMaybe<Types.Scalars['Int']>;
@@ -72,7 +72,7 @@ export const useGetAudiobookListPathsDataQuery = <
       graphqlFetcher<GetAudiobookListPathsDataQuery, GetAudiobookListPathsDataQueryVariables>(GetAudiobookListPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobookListPageData<T>(
 	variables: ExactAlt<T, GetAudiobookListPageDataQueryVariables>

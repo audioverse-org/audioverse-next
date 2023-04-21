@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import AndMiniplayer from '@components/templates/andMiniplayer';
+import AndMiniplayer from '~components/templates/andMiniplayer';
 import AndPlaybackContext, {
 	PlaybackContext,
 	PlaybackContextType,
-} from '@components/templates/andPlaybackContext';
-
-import { buildRenderer } from '@lib/test/buildRenderer';
-import setPlayerMock from '@lib/test/setPlayerMock';
-import { SequenceContentType } from '@src/__generated__/graphql';
+} from '~components/templates/andPlaybackContext';
+import { buildRenderer } from '~lib/test/buildRenderer';
+import setPlayerMock from '~lib/test/setPlayerMock';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 

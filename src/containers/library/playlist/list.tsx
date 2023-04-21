@@ -2,20 +2,19 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import InfoBox from '@components/atoms/infoBox';
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import CardPlaylist from '@components/molecules/card/playlist';
-import CardMasonry from '@components/molecules/cardMasonry';
-import LoadingCards from '@components/molecules/loadingCards';
-import EmptyState from '@components/organisms/emptyState';
-import LibraryNav from '@components/organisms/libraryNav';
+import InfoBox from '~components/atoms/infoBox';
+import withAuthGuard from '~components/HOCs/withAuthGuard';
+import CardPlaylist from '~components/molecules/card/playlist';
+import CardMasonry from '~components/molecules/cardMasonry';
+import LoadingCards from '~components/molecules/loadingCards';
+import EmptyState from '~components/organisms/emptyState';
+import LibraryNav from '~components/organisms/libraryNav';
+import { Language } from '~src/__generated__/graphql';
 
 import baseStyles from '../base.module.scss';
 import LibraryLoggedOut from '../loggedOut';
-
-import styles from './list.module.scss';
 import { useGetLibraryPlaylistsDataQuery } from './__generated__/list';
-import { Language } from '@src/__generated__/graphql';
+import styles from './list.module.scss';
 
 export type ILibraryPlaylistsProps = {
 	language: Language;

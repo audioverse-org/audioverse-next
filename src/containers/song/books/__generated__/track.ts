@@ -10,7 +10,7 @@ import { PlayerFragmentDoc } from '../../../../components/molecules/__generated_
 import { ButtonDownloadFragmentDoc } from '../../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../../components/molecules/__generated__/buttonShareRecording';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBookSongDetailDataQueryVariables = Types.Exact<{
   language: Types.Language;
   id: Types.Scalars['ID'];
@@ -59,7 +59,7 @@ export const useGetBookSongDetailDataQuery = <
       graphqlFetcher<GetBookSongDetailDataQuery, GetBookSongDetailDataQueryVariables>(GetBookSongDetailDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getBookSongDetailData<T>(
 	variables: ExactAlt<T, GetBookSongDetailDataQueryVariables>

@@ -4,17 +4,17 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import StoryAlbumDetail, {
-	StoryAlbumDetailProps,
-} from '@containers/story/albums/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { IBaseProps } from '~containers/base';
 import {
 	getStoryAlbumDetailPageData,
 	getStoryAlbumDetailPathsData,
-} from '@containers/story/albums/__generated__/detail';
+} from '~containers/story/albums/__generated__/detail';
+import StoryAlbumDetail, {
+	StoryAlbumDetailProps,
+} from '~containers/story/albums/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default StoryAlbumDetail;
 

@@ -4,13 +4,12 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Button from '@components/molecules/button';
-import Modal from '@components/organisms/modal';
-import root, { isRedirectRouteAllowed } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Button from '~components/molecules/button';
+import Modal from '~components/organisms/modal';
+import root, { isRedirectRouteAllowed } from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
 import Icon from '../../../public/img/icons/icon-info.svg';
-
 import styles from './buttonGuest.module.scss';
 
 export default function ButtonGuest({

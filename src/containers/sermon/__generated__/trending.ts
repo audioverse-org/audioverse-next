@@ -7,7 +7,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetTrendingTeachingsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   hasVideo: Types.InputMaybe<Types.Scalars['Boolean']>;
@@ -50,7 +50,7 @@ export const useGetTrendingTeachingsPageDataQuery = <
       graphqlFetcher<GetTrendingTeachingsPageDataQuery, GetTrendingTeachingsPageDataQueryVariables>(GetTrendingTeachingsPageDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getTrendingTeachingsPageData<T>(
 	variables: ExactAlt<T, GetTrendingTeachingsPageDataQueryVariables>

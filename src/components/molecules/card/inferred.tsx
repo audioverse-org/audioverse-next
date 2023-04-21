@@ -1,16 +1,18 @@
-import CardPerson from './person';
-import CardRecording from './recording';
-import CardSequence from './sequence';
-import CardCollection from './collection';
-import CardSponsor from './sponsor';
 import React from 'react';
 import { SetRequired } from 'type-fest';
-import { CollectionContentType } from '@src/__generated__/graphql';
+
+import { CollectionContentType } from '~src/__generated__/graphql';
+
 import { CardCollectionFragment } from './__generated__/collection';
 import { CardPersonFragment } from './__generated__/person';
 import { CardRecordingFragment } from './__generated__/recording';
 import { CardSequenceFragment } from './__generated__/sequence';
 import { CardSponsorFragment } from './__generated__/sponsor';
+import CardCollection from './collection';
+import CardPerson from './person';
+import CardRecording from './recording';
+import CardSequence from './sequence';
+import CardSponsor from './sponsor';
 
 type EntityUnion =
 	| CardPersonFragment

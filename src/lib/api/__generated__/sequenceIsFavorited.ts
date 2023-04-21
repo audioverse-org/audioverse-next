@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SequenceIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -35,7 +35,7 @@ export const useSequenceIsFavoritedQuery = <
       graphqlFetcher<SequenceIsFavoritedQuery, SequenceIsFavoritedQueryVariables>(SequenceIsFavoritedDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function sequenceIsFavorited<T>(
 	variables: ExactAlt<T, SequenceIsFavoritedQueryVariables>

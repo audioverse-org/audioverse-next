@@ -1,7 +1,7 @@
 import * as Types from '../../__generated__/graphql';
 
 import { useMutation, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SubmitContactPageMutationVariables = Types.Exact<{
   language: Types.Language;
   recipient: Types.PageContactRecipient;
@@ -33,7 +33,7 @@ export const useSubmitContactPageMutation = <
       (variables?: SubmitContactPageMutationVariables) => graphqlFetcher<SubmitContactPageMutation, SubmitContactPageMutationVariables>(SubmitContactPageDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function submitContactPage<T>(
 	variables: ExactAlt<T, SubmitContactPageMutationVariables>

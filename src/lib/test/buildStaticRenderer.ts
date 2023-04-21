@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import { ComponentType } from 'react';
 
-import { buildRenderer, Renderer } from '@lib/test/buildRenderer';
+import { buildRenderer, Renderer } from '~lib/test/buildRenderer';
 
 export function buildStaticRenderer<
 	C extends ComponentType<any>,

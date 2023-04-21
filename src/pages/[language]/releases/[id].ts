@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import ReleaseDetail, { ReleaseDetailProps } from '@containers/release/detail';
-import { REVALIDATE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import root from '@lib/routes';
+import { IBaseProps } from '~containers/base';
 import {
 	getMediaReleaseFormsPageData,
 	getMediaReleaseFormsPathsData,
-} from '@containers/release/__generated__/detail';
+} from '~containers/release/__generated__/detail';
+import ReleaseDetail, { ReleaseDetailProps } from '~containers/release/detail';
+import { REVALIDATE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import root from '~lib/routes';
 
 export default ReleaseDetail;
 

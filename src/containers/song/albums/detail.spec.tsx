@@ -1,17 +1,18 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/songs/albums/[id]/[[...slugs]]';
+} from '~pages/[language]/songs/albums/[id]/[[...slugs]]';
+import { SequenceContentType } from '~src/__generated__/graphql';
+
 import {
 	GetSongAlbumsDetailPageDataDocument,
 	GetSongAlbumsDetailPathsDataDocument,
 } from './__generated__/detail';
-import { SequenceContentType } from '@src/__generated__/graphql';
 
 const renderPage = buildStaticRenderer(Song, getStaticProps);
 

@@ -1,11 +1,10 @@
 import React from 'react';
 
 import TeaseRecording from '../teaseRecording';
-
+import { CardRecordingFragment } from './__generated__/recording';
 import CardWithTheme from './base/withTheme';
 import CardHatSermon from './hat/sermon';
 import CardHatSponsor from './hat/sponsor';
-import { CardRecordingFragment } from './__generated__/recording';
 
 export interface CardSermonProps {
 	recording: CardRecordingFragment;

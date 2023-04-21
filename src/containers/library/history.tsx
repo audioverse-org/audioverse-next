@@ -2,24 +2,24 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useInfiniteQuery } from 'react-query';
 
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import Button from '@components/molecules/button';
-import CardRecording from '@components/molecules/card/recording';
-import CardGroup from '@components/molecules/cardGroup';
-import LoadingCards from '@components/molecules/loadingCards';
-import EmptyState from '@components/organisms/emptyState';
-import LibraryNav from '@components/organisms/libraryNav';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import withAuthGuard from '~components/HOCs/withAuthGuard';
+import Button from '~components/molecules/button';
+import CardRecording from '~components/molecules/card/recording';
+import CardGroup from '~components/molecules/cardGroup';
+import LoadingCards from '~components/molecules/loadingCards';
+import EmptyState from '~components/organisms/emptyState';
+import LibraryNav from '~components/organisms/libraryNav';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
+import { Language } from '~src/__generated__/graphql';
 
-import baseStyles from './base.module.scss';
-import styles from './history.module.scss';
-import LibraryLoggedOut from './loggedOut';
-import { Language } from '@src/__generated__/graphql';
 import {
 	GetLibraryHistoryPageDataDocument,
 	GetLibraryHistoryPageDataQuery,
 	GetLibraryHistoryPageDataQueryVariables,
 } from './__generated__/history';
+import baseStyles from './base.module.scss';
+import styles from './history.module.scss';
+import LibraryLoggedOut from './loggedOut';
 
 export const getLibraryHistoryPageDataDefaultVariables = (
 	language: Language

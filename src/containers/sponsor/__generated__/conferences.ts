@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { SponsorPivotFragmentDoc } from './pivot';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorConferencesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   id: Types.Scalars['ID'];
@@ -78,7 +78,7 @@ export const useGetSponsorConferencesPathsDataQuery = <
       graphqlFetcher<GetSponsorConferencesPathsDataQuery, GetSponsorConferencesPathsDataQueryVariables>(GetSponsorConferencesPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorConferencesPageData<T>(
 	variables: ExactAlt<T, GetSponsorConferencesPageDataQueryVariables>

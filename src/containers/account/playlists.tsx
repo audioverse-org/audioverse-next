@@ -2,10 +2,11 @@ import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import Checkbox from '@components/molecules/form/checkbox';
-import Input from '@components/molecules/form/input';
-import { useLanguageId } from '@lib/useLanguageId';
+import withAuthGuard from '~components/HOCs/withAuthGuard';
+import Checkbox from '~components/molecules/form/checkbox';
+import Input from '~components/molecules/form/input';
+import { useLanguageId } from '~lib/useLanguageId';
+
 import {
 	useAddAccountPlaylistMutation,
 	useGetAccountPlaylistsPageDataQuery,

@@ -3,36 +3,35 @@ import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
-import BibleVersionTypeLockup from '@components/molecules/bibleVersionTypeLockup';
-import Button from '@components/molecules/button';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
+import Heading1 from '~components/atoms/heading1';
+import LineHeading from '~components/atoms/lineHeading';
+import withFailStates from '~components/HOCs/withFailStates';
+import { PlayerFragment } from '~components/molecules/__generated__/player';
+import { SequenceNavFragment } from '~components/molecules/__generated__/sequenceNav';
+import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
+import Button from '~components/molecules/button';
+import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
-} from '@components/molecules/definitionList';
-import Player from '@components/molecules/player';
-import SequenceNav from '@components/molecules/sequenceNav';
-import Tease from '@components/molecules/tease';
-import TeaseRecording from '@components/molecules/teaseRecording';
-import { PlaybackContext } from '@components/templates/andPlaybackContext';
+} from '~components/molecules/definitionList';
+import Player from '~components/molecules/player';
+import SequenceNav from '~components/molecules/sequenceNav';
+import Tease from '~components/molecules/tease';
+import TeaseRecording from '~components/molecules/teaseRecording';
+import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import {
 	IBibleBook,
 	IBibleBookChapter,
 	IBibleVersion,
-} from '@lib/api/bibleBrain';
-import { BaseColors } from '@lib/constants';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '~lib/api/bibleBrain';
+import { BaseColors } from '~lib/constants';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
+import { RecordingContentType } from '~src/__generated__/graphql';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
 import IconBlog from '../../../public/img/icons/icon-blog-light-small.svg';
-
 import styles from './book.module.scss';
-import { PlayerFragment } from '@components/molecules/__generated__/player';
-import { SequenceNavFragment } from '@components/molecules/__generated__/sequenceNav';
-import { RecordingContentType } from '@src/__generated__/graphql';
 
 export interface BookProps {
 	version: IBibleVersion;

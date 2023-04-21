@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import SongDetail, { SongDetailProps } from '@containers/song/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { IBaseProps } from '~containers/base';
 import {
 	getSongDetailData,
 	getSongDetailStaticPaths,
-} from '@containers/song/__generated__/detail';
+} from '~containers/song/__generated__/detail';
+import SongDetail, { SongDetailProps } from '~containers/song/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default SongDetail;
 

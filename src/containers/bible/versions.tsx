@@ -1,17 +1,17 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import withFailStates from '@components/HOCs/withFailStates';
-import CardBibleVersion from '@components/molecules/card/bibleVersion';
-import CardCollection from '@components/molecules/card/collection';
-import CardMasonry from '@components/molecules/cardMasonry';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import Tease from '@components/molecules/tease';
-import { IBibleVersion } from '@lib/api/bibleBrain';
+import Heading1 from '~components/atoms/heading1';
+import withFailStates from '~components/HOCs/withFailStates';
+import CardBibleVersion from '~components/molecules/card/bibleVersion';
+import CardCollection from '~components/molecules/card/collection';
+import CardMasonry from '~components/molecules/cardMasonry';
+import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
+import Tease from '~components/molecules/tease';
+import { IBibleVersion } from '~lib/api/bibleBrain';
 
-import styles from './versions.module.scss';
 import { GetAudiobibleVersionsDataQuery } from './__generated__/versions';
+import styles from './versions.module.scss';
 
 export interface VersionsProps {
 	versions: Array<

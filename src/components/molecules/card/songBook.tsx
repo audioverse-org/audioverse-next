@@ -4,19 +4,18 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import root from '@lib/routes';
-import useHover from '@lib/useHover';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading2 from '~components/atoms/heading2';
+import Heading6 from '~components/atoms/heading6';
+import root from '~lib/routes';
+import useHover from '~lib/useHover';
+import useLanguageRoute from '~lib/useLanguageRoute';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 import SequenceTypeLockup from '../sequenceTypeLockup';
 import TeaseRecordingStack from '../teaseRecordingStack';
-
+import { CardRecordingFragment } from './__generated__/recording';
 import CardWithTheme from './base/withTheme';
 import styles from './songBook.module.scss';
-import { SequenceContentType } from '@src/__generated__/graphql';
-import { CardRecordingFragment } from './__generated__/recording';
 
 interface CardSongProps {
 	book: string;

@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useMutation, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SequenceUnfavoriteMutationVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -26,7 +26,7 @@ export const useSequenceUnfavoriteMutation = <
       (variables?: SequenceUnfavoriteMutationVariables) => graphqlFetcher<SequenceUnfavoriteMutation, SequenceUnfavoriteMutationVariables>(SequenceUnfavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function sequenceUnfavorite<T>(
 	variables: ExactAlt<T, SequenceUnfavoriteMutationVariables>

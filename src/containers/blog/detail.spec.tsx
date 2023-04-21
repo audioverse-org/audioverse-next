@@ -1,18 +1,19 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import BlogPostDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/blog/[id]/[[...slugs]]';
+} from '~pages/[language]/blog/[id]/[[...slugs]]';
+import { Language } from '~src/__generated__/graphql';
+
 import {
 	GetBlogDetailDataDocument,
 	GetBlogDetailStaticPathsDocument,
 } from './__generated__/detail';
-import { Language } from '@src/__generated__/graphql';
 
 const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps);
 

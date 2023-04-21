@@ -1,18 +1,18 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
-import CardCollection from '@components/molecules/card/collection';
-import CardGroup from '@components/molecules/cardGroup';
-import Pagination from '@components/molecules/pagination';
-import { BaseColors } from '@lib/constants';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root from '@lib/routes';
+import LineHeading from '~components/atoms/lineHeading';
+import withFailStates from '~components/HOCs/withFailStates';
+import CardCollection from '~components/molecules/card/collection';
+import CardGroup from '~components/molecules/cardGroup';
+import Pagination from '~components/molecules/pagination';
+import { BaseColors } from '~lib/constants';
+import { PaginatedProps } from '~lib/getPaginatedStaticProps';
+import root from '~lib/routes';
 
-import SponsorPivot from './pivot';
 import { GetSponsorConferencesPageDataQuery } from './__generated__/conferences';
 import { SponsorPivotFragment } from './__generated__/pivot';
+import SponsorPivot from './pivot';
 
 export type SponsorConferencesProps = PaginatedProps<
 	NonNullable<GetSponsorConferencesPageDataQuery['collections']['nodes']>[0],

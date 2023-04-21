@@ -2,7 +2,7 @@ import * as Types from '../../../../__generated__/graphql';
 
 import { PresenterListEntryFragmentDoc } from './list';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterListLetterPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   startsWith: Types.InputMaybe<Types.Scalars['String']>;
@@ -42,7 +42,7 @@ export const useGetPresenterListLetterPageDataQuery = <
       graphqlFetcher<GetPresenterListLetterPageDataQuery, GetPresenterListLetterPageDataQueryVariables>(GetPresenterListLetterPageDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterListLetterPageData<T>(
 	variables: ExactAlt<T, GetPresenterListLetterPageDataQueryVariables>

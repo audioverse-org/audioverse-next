@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { getSequenceTypeTheme } from '@lib/getSequenceType';
+import { getSequenceTypeTheme } from '~lib/getSequenceType';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 import TypeLockup from './typeLockup';
-import { SequenceContentType } from '@src/__generated__/graphql';
 
 type Props = {
 	contentType: SequenceContentType;

@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '@components/HOCs/withFailStates';
-import CardSponsor from '@components/molecules/card/sponsor';
-import PaginatedCardList from '@components/organisms/paginatedCardList';
+import withFailStates from '~components/HOCs/withFailStates';
+import CardSponsor from '~components/molecules/card/sponsor';
+import PaginatedCardList from '~components/organisms/paginatedCardList';
+import { PaginatedProps } from '~lib/getPaginatedStaticProps';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
 import { GetSearchResultsSponsorsQuery } from './__generated__/sponsors';
 
 export type SearchSponsorsProps = PaginatedProps<

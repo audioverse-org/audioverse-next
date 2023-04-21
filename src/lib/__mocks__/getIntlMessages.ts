@@ -1,7 +1,7 @@
 import { act } from '@testing-library/react';
 import { ResolvedIntlConfig } from 'react-intl';
 
-declare module '@lib/getIntlMessages' {
+declare module '~lib/getIntlMessages' {
 	export function __awaitIntlMessages(): Promise<
 		ResolvedIntlConfig['messages']
 	>;

@@ -7,7 +7,7 @@ import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSongBooksDetailPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   book: Types.Scalars['String'];
@@ -48,7 +48,7 @@ export const useGetSongBooksDetailPageDataQuery = <
       graphqlFetcher<GetSongBooksDetailPageDataQuery, GetSongBooksDetailPageDataQueryVariables>(GetSongBooksDetailPageDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSongBooksDetailPageData<T>(
 	variables: ExactAlt<T, GetSongBooksDetailPageDataQueryVariables>

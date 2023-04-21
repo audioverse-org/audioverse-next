@@ -1,8 +1,8 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
-import { getSeriesFeedData } from '@containers/series/__generated__/detail';
+import { getSeriesFeedData } from '~containers/series/__generated__/detail';
+import { generateFeed, sendRSSHeaders } from '~lib/generateFeed';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default (): void => void 0;
 

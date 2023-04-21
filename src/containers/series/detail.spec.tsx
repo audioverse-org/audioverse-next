@@ -1,22 +1,23 @@
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { fetchApi } from '~lib/api/fetchApi';
+import { DETAIL_PRERENDER_LIMIT } from '~lib/constants';
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/series/[id]/[[...slug]]';
-import { DETAIL_PRERENDER_LIMIT } from '@lib/constants';
-import {
-	GetSeriesDetailPageDataDocument,
-	GetSeriesDetailPathsDataDocument,
-} from './__generated__/detail';
+} from '~pages/[language]/series/[id]/[[...slug]]';
 import {
 	Language,
 	RecordingContentType,
 	SequenceContentType,
-} from '@src/__generated__/graphql';
+} from '~src/__generated__/graphql';
+
+import {
+	GetSeriesDetailPageDataDocument,
+	GetSeriesDetailPathsDataDocument,
+} from './__generated__/detail';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 

@@ -1,13 +1,13 @@
 import { act, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { __loadRouter, __mockedRouter } from 'next/router';
 import Script from 'next/script';
 
-import HelpWidget from '@components/molecules/helpWidget';
+import HelpWidget from '~components/molecules/helpWidget';
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildRenderer } from '~lib/test/buildRenderer';
+import filterByExpectation from '~lib/test/getMatchingCall';
 
-import { buildRenderer } from '@lib/test/buildRenderer';
-import filterByExpectation from '@lib/test/getMatchingCall';
-import { buildLoader } from '@lib/test/buildLoader';
-import userEvent from '@testing-library/user-event';
 import { GetHelpWidgetDataDocument } from './__generated__/helpWidget';
 
 jest.mock('next/script');

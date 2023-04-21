@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetProfileDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
@@ -105,7 +105,7 @@ export const useDeleteAccountMutation = <
       (variables?: DeleteAccountMutationVariables) => graphqlFetcher<DeleteAccountMutation, DeleteAccountMutationVariables>(DeleteAccountDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getProfileData<T>(
 	variables: ExactAlt<T, GetProfileDataQueryVariables>

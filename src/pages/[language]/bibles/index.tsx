@@ -4,15 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Versions, { VersionsProps } from '@containers/bible/versions';
-import { getBibles } from '@lib/api/bibleBrain';
-import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import root from '@lib/routes';
-import { getAudiobibleVersionsData } from '@containers/bible/__generated__/versions';
+import { IBaseProps } from '~containers/base';
+import { getAudiobibleVersionsData } from '~containers/bible/__generated__/versions';
+import Versions, { VersionsProps } from '~containers/bible/versions';
+import { getBibles } from '~lib/api/bibleBrain';
+import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import root from '~lib/routes';
 
 export default Versions;
 

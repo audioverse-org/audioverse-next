@@ -13,7 +13,7 @@ import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__
 import { CardSponsorFragmentDoc } from '../../../components/molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../../components/molecules/card/__generated__/person';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverCollectionsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
 }>;
@@ -115,7 +115,7 @@ export const useGetDiscoverCollectionsPageDataQuery = <
       graphqlFetcher<GetDiscoverCollectionsPageDataQuery, GetDiscoverCollectionsPageDataQueryVariables>(GetDiscoverCollectionsPageDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getDiscoverCollectionsPageData<T>(
 	variables: ExactAlt<T, GetDiscoverCollectionsPageDataQueryVariables>

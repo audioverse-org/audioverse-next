@@ -1,6 +1,8 @@
 import { QueryClient } from 'react-query';
+
+import { setSessionToken } from '~lib/cookies';
+
 import { login as _login } from './__generated__/login';
-import { setSessionToken } from '@lib/cookies';
 
 export const USER_SESSION_QUERY_KEYS = [
 	['getWithAuthGuardData'],

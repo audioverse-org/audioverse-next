@@ -1,10 +1,9 @@
-import { IBaseProps } from '@containers/base';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
-
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getPaginatedData, PaginatedGetter } from '@lib/getPaginatedData';
-import getPaginationPageCount from '@lib/getPaginationPageCount';
-import { Language } from '@src/__generated__/graphql';
+import { IBaseProps } from '~containers/base';
+import { LANGUAGES, REVALIDATE } from '~lib/constants';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getPaginatedData, PaginatedGetter } from '~lib/getPaginatedData';
+import getPaginationPageCount from '~lib/getPaginationPageCount';
+import { Language } from '~src/__generated__/graphql';
 
 export interface PaginationData {
 	total: number;

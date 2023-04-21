@@ -1,5 +1,6 @@
-import withFailStates from '@components/HOCs/withFailStates';
-import { Sequence } from '@components/organisms/sequence';
+import withFailStates from '~components/HOCs/withFailStates';
+import { Sequence } from '~components/organisms/sequence';
+
 import { GetAudiobookDetailPageDataQuery } from './__generated__/detail';
 
 export interface AudiobookDetailProps {

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Slider from '@components/organisms/slider';
+import Slider from '~components/organisms/slider';
 
-import styles from './testimonies.module.scss';
 import { TestimoniesFragment } from './__generated__/testimonies';
+import styles from './testimonies.module.scss';
 
 interface TestimoniesProps {
 	testimonies: TestimoniesFragment[];

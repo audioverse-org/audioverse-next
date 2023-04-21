@@ -1,20 +1,18 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading6 from '@components/atoms/heading6';
-import withFailStates from '@components/HOCs/withFailStates';
-import PersonLockup from '@components/molecules/personLockup';
-import Player from '@components/molecules/player';
-import AndMiniplayer from '@components/templates/andMiniplayer';
-
-import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
-import { getSequenceTypeTheme } from '@lib/getSequenceType';
+import Heading1 from '~components/atoms/heading1';
+import Heading6 from '~components/atoms/heading6';
+import withFailStates from '~components/HOCs/withFailStates';
+import PersonLockup from '~components/molecules/personLockup';
+import Player from '~components/molecules/player';
+import AndMiniplayer from '~components/templates/andMiniplayer';
+import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
+import { getSequenceTypeTheme } from '~lib/getSequenceType';
 
 import Logo from '../../../public/img/logo-small.svg';
-
-import styles from './embed.module.scss';
 import { GetSermonDetailDataQuery } from './__generated__/detail';
+import styles from './embed.module.scss';
 
 export interface SermonEmbedProps {
 	recording: GetSermonDetailDataQuery['sermon'];

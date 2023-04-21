@@ -4,11 +4,11 @@ import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import Login from '@components/molecules/login';
-import { fetchApi } from '@lib/api/fetchApi';
+import Login from '~components/molecules/login';
+import { fetchApi } from '~lib/api/fetchApi';
+import renderWithProviders from '~lib/test/renderWithProviders';
+import withMutedReactQueryLogger from '~lib/test/withMutedReactQueryLogger';
 
-import renderWithProviders from '@lib/test/renderWithProviders';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import { LoginForgotPasswordDocument } from './__generated__/login';
 
 function loadForgotPasswordResponse({

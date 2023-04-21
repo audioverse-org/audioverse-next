@@ -9,7 +9,7 @@ import { AndMiniplayerFragmentDoc } from '../../../components/templates/__genera
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
   language: Types.Language;
@@ -169,7 +169,7 @@ export const useGetPresenterDetailPathsDataQuery = <
       graphqlFetcher<GetPresenterDetailPathsDataQuery, GetPresenterDetailPathsDataQueryVariables>(GetPresenterDetailPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterDetailPageData<T>(
 	variables: ExactAlt<T, GetPresenterDetailPageDataQueryVariables>

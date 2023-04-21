@@ -1,22 +1,20 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '@components/atoms/lineHeading';
-import Button from '@components/molecules/button';
-import CardCollection from '@components/molecules/card/collection';
-import CardFavoriteEntity from '@components/molecules/card/favoriteEntity';
-import CardPerson from '@components/molecules/card/person';
-import CardSequence from '@components/molecules/card/sequence';
-import CardSponsor from '@components/molecules/card/sponsor';
-import CardGroup from '@components/molecules/cardGroup';
-
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import LineHeading from '~components/atoms/lineHeading';
+import Button from '~components/molecules/button';
+import CardCollection from '~components/molecules/card/collection';
+import CardFavoriteEntity from '~components/molecules/card/favoriteEntity';
+import CardPerson from '~components/molecules/card/person';
+import CardSequence from '~components/molecules/card/sequence';
+import CardSponsor from '~components/molecules/card/sponsor';
+import CardGroup from '~components/molecules/cardGroup';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
-
-import styles from './collections.module.scss';
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
+import styles from './collections.module.scss';
 
 export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 

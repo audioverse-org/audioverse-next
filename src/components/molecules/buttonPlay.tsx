@@ -2,18 +2,16 @@ import clsx from 'clsx';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { BaseColors } from '@lib/constants';
-
-import usePlaybackSession from '@lib/usePlaybackSession';
+import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
+import { BaseColors } from '~lib/constants';
+import usePlaybackSession from '~lib/usePlaybackSession';
 
 import IconPauseLarge from '../../../public/img/icons/icon-pause-large.svg';
 import IconPause from '../../../public/img/icons/icon-pause-medium.svg';
 import IconPlayLarge from '../../../public/img/icons/icon-play-large.svg';
 import IconPlay from '../../../public/img/icons/icon-play-medium.svg';
-
 import styles from './buttonPlay.module.scss';
 import IconButton from './iconButton';
-import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
 
 export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
 	[

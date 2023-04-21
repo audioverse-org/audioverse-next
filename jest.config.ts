@@ -1,5 +1,5 @@
-import getJestMappersFromTSConfig from 'tsconfig-paths-jest-mapper';
 import type { Config } from '@jest/types';
+import getJestMappersFromTSConfig from 'tsconfig-paths-jest-mapper';
 
 const moduleNameMapper = getJestMappersFromTSConfig('');
 

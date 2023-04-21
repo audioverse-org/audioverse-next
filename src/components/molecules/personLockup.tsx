@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 import { PersonLockupFragment } from './__generated__/personLockup';
+import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 
 type Props = {
 	person: PersonLockupFragment;

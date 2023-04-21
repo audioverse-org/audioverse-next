@@ -3,37 +3,35 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import HorizontalRule from '@components/atoms/horizontalRule';
-import InherentSizeImage from '@components/atoms/inherentSizeImage';
-import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
-import Button from '@components/molecules/button';
-import ButtonFavorite from '@components/molecules/buttonFavorite';
-import ButtonShare from '@components/molecules/buttonShare';
-import CardPerson from '@components/molecules/card/person';
-import CardRecording from '@components/molecules/card/recording';
-import CardSequence from '@components/molecules/card/sequence';
-import CardGroup from '@components/molecules/cardGroup';
-import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
+import Heading2 from '~components/atoms/heading2';
+import Heading6 from '~components/atoms/heading6';
+import HorizontalRule from '~components/atoms/horizontalRule';
+import InherentSizeImage from '~components/atoms/inherentSizeImage';
+import LineHeading from '~components/atoms/lineHeading';
+import withFailStates from '~components/HOCs/withFailStates';
+import Button from '~components/molecules/button';
+import ButtonFavorite from '~components/molecules/buttonFavorite';
+import ButtonShare from '~components/molecules/buttonShare';
+import CardPerson from '~components/molecules/card/person';
+import CardRecording from '~components/molecules/card/recording';
+import CardSequence from '~components/molecules/card/sequence';
+import CardGroup from '~components/molecules/cardGroup';
+import CollectionTypeLockup from '~components/molecules/collectionTypeLockup';
 import DefinitionList, {
 	IDefinitionListTerm,
-} from '@components/molecules/definitionList';
-import SponsorLockup from '@components/molecules/sponsorLockup';
-import Tease from '@components/molecules/tease';
-import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
-import { BaseColors } from '@lib/constants';
-import { formatDateRange } from '@lib/date';
-
-import root from '@lib/routes';
-import { useFormattedDuration } from '@lib/time';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '~components/molecules/definitionList';
+import SponsorLockup from '~components/molecules/sponsorLockup';
+import Tease from '~components/molecules/tease';
+import { useIsCollectionFavorited } from '~lib/api/useIsCollectionFavorited';
+import { BaseColors } from '~lib/constants';
+import { formatDateRange } from '~lib/date';
+import root from '~lib/routes';
+import { useFormattedDuration } from '~lib/time';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
-
-import styles from './detail.module.scss';
 import { GetCollectionDetailPageDataQuery } from './__generated__/detail';
+import styles from './detail.module.scss';
 
 export type CollectionDetailProps = GetCollectionDetailPageDataQuery;
 

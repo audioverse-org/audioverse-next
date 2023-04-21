@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CardFavoriteEntity from './favoriteEntity';
 import { CardFavoriteFragment } from './__generated__/favorite';
+import CardFavoriteEntity from './favoriteEntity';
 
 interface CardEntityProps {
 	favorite: CardFavoriteFragment;

@@ -1,5 +1,5 @@
-import { fetchApi } from '@lib/api/fetchApi';
-import { Scalars } from '@src/__generated__/graphql';
+import { fetchApi } from '~lib/api/fetchApi';
+import { Scalars } from '~src/__generated__/graphql';
 
 const mutationAdd = `
 mutation($recordingId: ID!, $playlistId: ID!) {

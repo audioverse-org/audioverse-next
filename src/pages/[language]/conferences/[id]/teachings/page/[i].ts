@@ -4,14 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { getCollectionDetailPathsData } from '~containers/collection/__generated__/detail';
+import { getCollectionTeachingsPageData } from '~containers/collection/__generated__/teachings';
 import CollectionTeachings, {
 	CollectionTeachingsProps,
-} from '@containers/collection/teachings';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import { getCollectionDetailPathsData } from '@containers/collection/__generated__/detail';
-import { getCollectionTeachingsPageData } from '@containers/collection/__generated__/teachings';
+} from '~containers/collection/teachings';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import getIntl from '~lib/getIntl';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default CollectionTeachings;
 

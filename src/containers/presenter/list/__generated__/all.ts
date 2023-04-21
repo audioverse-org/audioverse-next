@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterListAllPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   after: Types.InputMaybe<Types.Scalars['String']>;
@@ -51,7 +51,7 @@ export const useGetPresenterListAllPageDataQuery = <
       graphqlFetcher<GetPresenterListAllPageDataQuery, GetPresenterListAllPageDataQueryVariables>(GetPresenterListAllPageDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterListAllPageData<T>(
 	variables: ExactAlt<T, GetPresenterListAllPageDataQueryVariables>

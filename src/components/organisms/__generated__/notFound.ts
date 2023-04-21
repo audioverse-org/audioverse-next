@@ -7,7 +7,7 @@ import { CardHatSponsorFragmentDoc } from '../../molecules/card/hat/__generated_
 import { TeaseRecordingFragmentDoc } from '../../molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../templates/__generated__/andMiniplayer';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetNotFoundPageDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
@@ -40,7 +40,7 @@ export const useGetNotFoundPageDataQuery = <
       graphqlFetcher<GetNotFoundPageDataQuery, GetNotFoundPageDataQueryVariables>(GetNotFoundPageDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getNotFoundPageData<T>(
 	variables: ExactAlt<T, GetNotFoundPageDataQueryVariables>

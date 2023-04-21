@@ -1,15 +1,15 @@
 import { useQueryClient } from 'react-query';
 
-import { setSequenceFavorited } from '@lib/api/setSequenceFavorited';
-import { getSessionToken } from '@lib/cookies';
+import { setSequenceFavorited } from '~lib/api/setSequenceFavorited';
+import { getSessionToken } from '~lib/cookies';
+import { Scalars } from '~src/__generated__/graphql';
 
-import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
-import { RECORDING_FAVORITED_QUERY_KEY_PREFIX } from './useIsRecordingFavorited';
-import { Scalars } from '@src/__generated__/graphql';
 import {
 	SequenceIsFavoritedQuery,
 	useSequenceIsFavoritedQuery,
 } from './__generated__/sequenceIsFavorited';
+import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
+import { RECORDING_FAVORITED_QUERY_KEY_PREFIX } from './useIsRecordingFavorited';
 
 interface IUseIsSequenceFavoritedResult extends IUseIsFavoritedResult {
 	recordingsFavoritedCount: number | undefined;

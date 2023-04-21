@@ -1,20 +1,22 @@
+import Head from 'next/head';
 import React, { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import LineHeading from '@components/atoms/lineHeading';
-import Button from '@components/molecules/button';
+
+import LineHeading from '~components/atoms/lineHeading';
+import Button from '~components/molecules/button';
+import { CardRecordingFragment } from '~components/molecules/card/__generated__/recording';
 import CardInferred, {
 	InferrableEntity,
-} from '@components/molecules/card/inferred';
-import CardGroup from '@components/molecules/cardGroup';
-import LoadingCards from '@components/molecules/loadingCards';
+} from '~components/molecules/card/inferred';
+import CardGroup from '~components/molecules/cardGroup';
+import LoadingCards from '~components/molecules/loadingCards';
+import isServerSide from '~lib/isServerSide';
+import { useQueryString } from '~lib/useQueryString';
+
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
-import styles from './searchResults.module.scss';
-import Head from 'next/head';
-import { useQueryString } from '@lib/useQueryString';
-import useSearch, { AugmentedFilter } from './searchResults.useResults';
 import { EntityFilterId } from './searchResults.filters';
-import isServerSide from '@lib/isServerSide';
-import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
+import styles from './searchResults.module.scss';
+import useSearch, { AugmentedFilter } from './searchResults.useResults';
 
 function SearchHead({ term }: { term?: string }): JSX.Element {
 	// WORKAROUND: We can't use the <FormattedMessage> component here because

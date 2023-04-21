@@ -1,24 +1,23 @@
+import 'video.js/dist/video-js.css';
+
 import Slider from '@material-ui/core/Slider';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useContext } from 'react';
 import { useIntl } from 'react-intl';
 
-import ButtonNudge from '@components/molecules/buttonNudge';
-import ButtonPlay from '@components/molecules/buttonPlay';
-import RecordingProgressBar from '@components/molecules/recordingProgressBar';
-import { PlaybackContext } from '@components/templates/andPlaybackContext';
-import { BaseColors } from '@lib/constants';
-
-import { getSequenceTypeTheme } from '@lib/getSequenceType';
-import { useFormattedTime } from '@lib/time';
+import ButtonNudge from '~components/molecules/buttonNudge';
+import ButtonPlay from '~components/molecules/buttonPlay';
+import RecordingProgressBar from '~components/molecules/recordingProgressBar';
+import { PlaybackContext } from '~components/templates/andPlaybackContext';
+import { BaseColors } from '~lib/constants';
+import { getSequenceTypeTheme } from '~lib/getSequenceType';
+import { useFormattedTime } from '~lib/time';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 import IconVolumeHigh from '../../../public/img/icons/icon-volume-high.svg';
 import IconVolumeLow from '../../../public/img/icons/icon-volume-low.svg';
-
-import 'video.js/dist/video-js.css';
 import styles from './miniplayer.module.scss';
-import { SequenceContentType } from '@src/__generated__/graphql';
 
 export default function Miniplayer(): JSX.Element | null {
 	const intl = useIntl();

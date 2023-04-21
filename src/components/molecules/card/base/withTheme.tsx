@@ -1,7 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
 import Card from '..';
-
 import WithCardTheme, { ExtendedCardTheme } from './withCardTheme';
 
 interface Props {

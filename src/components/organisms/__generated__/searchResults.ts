@@ -11,7 +11,7 @@ import { CardCollectionFragmentDoc } from '../../molecules/card/__generated__/co
 import { CardSponsorFragmentDoc } from '../../molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../molecules/card/__generated__/person';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchRecordingsQueryVariables = Types.Exact<{
   language: Types.Language;
   term: Types.Scalars['String'];
@@ -329,7 +329,7 @@ export const useGetSearchStoryProgramsQuery = <
       graphqlFetcher<GetSearchStoryProgramsQuery, GetSearchStoryProgramsQueryVariables>(GetSearchStoryProgramsDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSearchRecordings<T>(
 	variables: ExactAlt<T, GetSearchRecordingsQueryVariables>

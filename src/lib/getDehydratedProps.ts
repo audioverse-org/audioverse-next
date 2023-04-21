@@ -1,6 +1,5 @@
 import { GetServerSidePropsResult } from 'next';
-import { QueryClient } from 'react-query';
-import { dehydrate, DehydratedState } from 'react-query';
+import { dehydrate,DehydratedState,QueryClient  } from 'react-query';
 
 export type DehydratedProps<T = Record<string, unknown>> =
 	GetServerSidePropsResult<

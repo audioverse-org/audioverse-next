@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type PresenterListEntryFragment = { __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null };
 
 export type GetPersonListLetterCountsQueryVariables = Types.Exact<{
@@ -42,7 +42,7 @@ export const useGetPersonListLetterCountsQuery = <
       graphqlFetcher<GetPersonListLetterCountsQuery, GetPersonListLetterCountsQueryVariables>(GetPersonListLetterCountsDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPersonListLetterCounts<T>(
 	variables: ExactAlt<T, GetPersonListLetterCountsQueryVariables>

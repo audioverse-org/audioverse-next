@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import SponsorDetail, { SponsorDetailProps } from '@containers/sponsor/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { IBaseProps } from '~containers/base';
 import {
 	getSponsorDetailPageData,
 	getSponsorDetailPathsData,
-} from '@containers/sponsor/__generated__/detail';
+} from '~containers/sponsor/__generated__/detail';
+import SponsorDetail, { SponsorDetailProps } from '~containers/sponsor/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default SponsorDetail;
 

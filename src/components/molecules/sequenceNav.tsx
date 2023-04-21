@@ -3,10 +3,9 @@ import { useIntl } from 'react-intl';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
 import IconForward from '../../../public/img/icons/icon-forward-light.svg';
-
+import { SequenceNavFragment } from './__generated__/sequenceNav';
 import Button from './button';
 import styles from './sequenceNav.module.scss';
-import { SequenceNavFragment } from './__generated__/sequenceNav';
 
 export default function SequenceNav({
 	recording: { sequencePreviousRecording, sequenceNextRecording },

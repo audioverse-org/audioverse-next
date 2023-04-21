@@ -4,7 +4,7 @@ import { CollectionPivotFragmentDoc } from './pivot';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionSequencesPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
   offset: Types.InputMaybe<Types.Scalars['Int']>;
@@ -49,7 +49,7 @@ export const useGetCollectionSequencesPageDataQuery = <
       graphqlFetcher<GetCollectionSequencesPageDataQuery, GetCollectionSequencesPageDataQueryVariables>(GetCollectionSequencesPageDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getCollectionSequencesPageData<T>(
 	variables: ExactAlt<T, GetCollectionSequencesPageDataQueryVariables>

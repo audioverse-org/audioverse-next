@@ -4,15 +4,16 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import ProgressBar from '@components/atoms/progressBar';
-import Card from '@components/molecules/card';
-import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
-import { BaseColors } from '@lib/constants';
-import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
-import { useFormattedDuration } from '@lib/time';
-import useHover from '@lib/useHover';
+import Heading2 from '~components/atoms/heading2';
+import Heading6 from '~components/atoms/heading6';
+import ProgressBar from '~components/atoms/progressBar';
+import Card from '~components/molecules/card';
+import { useIsSequenceFavorited } from '~lib/api/useIsSequenceFavorited';
+import { BaseColors } from '~lib/constants';
+import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
+import { useFormattedDuration } from '~lib/time';
+import useHover from '~lib/useHover';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 import BookIcon from '../../../../public/img/icons/fa-book-light.svg';
 import FeatherIcon from '../../../../public/img/icons/fa-feather-light.svg';
@@ -25,11 +26,9 @@ import ButtonFavorite from '../buttonFavorite';
 import PersonLockup from '../personLockup';
 import TeaseRecordingStack from '../teaseRecordingStack';
 import TypeLockup from '../typeLockup';
-
-import styles from './sequence.module.scss';
-import { SequenceContentType } from '@src/__generated__/graphql';
 import { CardRecordingFragment } from './__generated__/recording';
 import { CardSequenceFragment } from './__generated__/sequence';
+import styles from './sequence.module.scss';
 
 interface CardCollectionProps {
 	sequence: CardSequenceFragment;

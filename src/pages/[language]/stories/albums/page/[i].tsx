@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import StoryAlbumsList, {
-	StoryAlbumsListProps,
-} from '@containers/story/albums/list';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import {
 	getStoriesAlbumsPageData,
 	getStoriesAlbumsPathData,
-} from '@containers/story/albums/__generated__/list';
+} from '~containers/story/albums/__generated__/list';
+import StoryAlbumsList, {
+	StoryAlbumsListProps,
+} from '~containers/story/albums/list';
+import { getNumberedStaticPaths } from '~lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default StoryAlbumsList;
 

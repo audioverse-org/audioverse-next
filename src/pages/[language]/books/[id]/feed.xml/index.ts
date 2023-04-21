@@ -1,11 +1,12 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { getAudiobookFeedData } from '~containers/audiobook/__generated__/detail';
+import { generateFeed, sendRSSHeaders } from '~lib/generateFeed';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
+import { SequenceContentType } from '~src/__generated__/graphql';
+
 import { BookFeedDescriptionFragment } from './__generated__/bookFeedDescription';
-import { getAudiobookFeedData } from '@containers/audiobook/__generated__/detail';
-import { SequenceContentType } from '@src/__generated__/graphql';
 
 export default (): void => void 0;
 

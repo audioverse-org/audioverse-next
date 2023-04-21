@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsSequencesQueryVariables = Types.Exact<{
   language: Types.Language;
   term: Types.Scalars['String'];
@@ -40,7 +40,7 @@ export const useGetSearchResultsSequencesQuery = <
       graphqlFetcher<GetSearchResultsSequencesQuery, GetSearchResultsSequencesQueryVariables>(GetSearchResultsSequencesDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSearchResultsSequences<T>(
 	variables: ExactAlt<T, GetSearchResultsSequencesQueryVariables>

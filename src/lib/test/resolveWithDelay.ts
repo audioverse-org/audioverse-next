@@ -1,4 +1,4 @@
-import { sleep } from '@lib/sleep';
+import { sleep } from '~lib/sleep';
 
 export function resolveWithDelay(
 	mock: jest.SpyInstance,

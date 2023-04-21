@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type AndMiniplayerFragment = { __typename?: 'Recording', id: string | number, title: string, canonicalPath: string, duration: number, sequence: { __typename?: 'Sequence', title: string, contentType: Types.SequenceContentType } | null, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> };
 
 export type GetRecordingPlaybackProgressQueryVariables = Types.Exact<{
@@ -97,7 +97,7 @@ export const useRecordingPlaybackProgressSetMutation = <
       (variables?: RecordingPlaybackProgressSetMutationVariables) => graphqlFetcher<RecordingPlaybackProgressSetMutation, RecordingPlaybackProgressSetMutationVariables>(RecordingPlaybackProgressSetDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getRecordingPlaybackProgress<T>(
 	variables: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>

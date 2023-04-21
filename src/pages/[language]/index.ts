@@ -4,13 +4,12 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Home, { HomeProps } from '@containers/home';
-import { REVALIDATE } from '@lib/constants';
-
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { getValidLanguage } from '@lib/getValidLanguage';
-import { getHomeStaticProps } from '@containers/__generated__/home';
+import { getHomeStaticProps } from '~containers/__generated__/home';
+import { IBaseProps } from '~containers/base';
+import Home, { HomeProps } from '~containers/home';
+import { REVALIDATE } from '~lib/constants';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import { getValidLanguage } from '~lib/getValidLanguage';
 
 export default Home;
 

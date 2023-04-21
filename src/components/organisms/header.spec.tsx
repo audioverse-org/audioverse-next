@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Header from '@components/organisms/header';
-import renderWithProviders from '@lib/test/renderWithProviders';
+import Header from '~components/organisms/header';
+import renderWithProviders from '~lib/test/renderWithProviders';
 
-jest.mock('@lib/api/fetchApi');
+jest.mock('~lib/api/fetchApi');
 
 const renderHeader = async () => {
 	return renderWithProviders(<Header />, undefined);

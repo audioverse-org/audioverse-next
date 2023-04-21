@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Sponsors, { SponsorsProps } from '@containers/sponsor/list/letter';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import root from '@lib/routes';
-import { getSponsorListLetterPageData } from '@containers/sponsor/list/__generated__/letter';
-import { Language } from '@src/__generated__/graphql';
-import { getSponsorListLetterCounts } from '@containers/sponsor/list/__generated__/list';
+import { IBaseProps } from '~containers/base';
+import { getSponsorListLetterPageData } from '~containers/sponsor/list/__generated__/letter';
+import { getSponsorListLetterCounts } from '~containers/sponsor/list/__generated__/list';
+import Sponsors, { SponsorsProps } from '~containers/sponsor/list/letter';
+import { LANGUAGES, REVALIDATE } from '~lib/constants';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import root from '~lib/routes';
+import { Language } from '~src/__generated__/graphql';
 
 export default Sponsors;
 

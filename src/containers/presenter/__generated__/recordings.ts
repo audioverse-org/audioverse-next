@@ -9,7 +9,7 @@ import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__gener
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterRecordingsPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
   offset: Types.InputMaybe<Types.Scalars['Int']>;
@@ -95,7 +95,7 @@ export const useGetPresenterRecordingsFeedDataQuery = <
       graphqlFetcher<GetPresenterRecordingsFeedDataQuery, GetPresenterRecordingsFeedDataQueryVariables>(GetPresenterRecordingsFeedDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterRecordingsPageData<T>(
 	variables: ExactAlt<T, GetPresenterRecordingsPageDataQueryVariables>

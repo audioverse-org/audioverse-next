@@ -5,10 +5,9 @@ import {
 	LANGUAGES,
 	LIST_PRERENDER_LIMIT,
 	SupportedLanguages,
-} from '@lib/constants';
-
-import getLanguageIds from '@lib/getLanguageIds';
-import { Language } from '@src/__generated__/graphql';
+} from '~lib/constants';
+import getLanguageIds from '~lib/getLanguageIds';
+import { Language } from '~src/__generated__/graphql';
 
 type Getter<T> = (variables: { language: Language }) => Promise<T>;
 type Parser<T> = (data: T) => number | null | undefined;

@@ -4,17 +4,16 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading6 from '@components/atoms/heading6';
-import Button from '@components/molecules/button';
-import Dropdown from '@components/molecules/dropdown';
-import Mininav from '@components/molecules/mininav';
-import { SORT_MAP } from '@containers/library/library';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading6 from '~components/atoms/heading6';
+import Button from '~components/molecules/button';
+import Dropdown from '~components/molecules/dropdown';
+import Mininav from '~components/molecules/mininav';
+import { SORT_MAP } from '~containers/library/library';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
 import IconFilter from '../../../public/img/icons/icon-filter-light.svg';
 import IconSort from '../../../public/img/icons/icon-sort-light.svg';
-
 import styles from './libraryNav.module.scss';
 
 type Props = {

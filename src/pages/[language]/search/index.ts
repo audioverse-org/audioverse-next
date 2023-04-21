@@ -4,13 +4,13 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Search from '@containers/search';
-import { REVALIDATE } from '@lib/constants';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import root from '@lib/routes';
+import { IBaseProps } from '~containers/base';
+import Search from '~containers/search';
+import { REVALIDATE } from '~lib/constants';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import root from '~lib/routes';
 
 export default Search;
 

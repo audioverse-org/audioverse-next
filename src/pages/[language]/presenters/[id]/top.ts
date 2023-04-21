@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import PresenterTop, { PresenterTopProps } from '@containers/presenter/top';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import root from '@lib/routes';
-import { getPresenterDetailPathsData } from '@containers/presenter/__generated__/detail';
-import { getPresenterTopPageData } from '@containers/presenter/__generated__/top';
+import { IBaseProps } from '~containers/base';
+import { getPresenterDetailPathsData } from '~containers/presenter/__generated__/detail';
+import { getPresenterTopPageData } from '~containers/presenter/__generated__/top';
+import PresenterTop, { PresenterTopProps } from '~containers/presenter/top';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import root from '~lib/routes';
 
 export default PresenterTop;
 

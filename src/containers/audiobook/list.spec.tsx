@@ -2,14 +2,15 @@ import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { ENTRIES_PER_PAGE } from '@lib/constants';
-import renderWithProviders from '@lib/test/renderWithProviders';
+import { fetchApi } from '~lib/api/fetchApi';
+import { ENTRIES_PER_PAGE } from '~lib/constants';
+import renderWithProviders from '~lib/test/renderWithProviders';
 import AudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/books/page/[i]';
-import { SequenceContentType } from '@src/__generated__/graphql';
+} from '~pages/[language]/books/page/[i]';
+import { SequenceContentType } from '~src/__generated__/graphql';
+
 import {
 	GetAudiobookListPageDataDocument,
 	GetAudiobookListPageDataQuery,

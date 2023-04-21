@@ -14,20 +14,20 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
-import Player, { PlayerProps } from '@components/molecules/player';
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
-import { BaseColors } from '@lib/constants';
+import Player, { PlayerProps } from '~components/molecules/player';
+import AndMiniplayer from '~components/templates/andMiniplayer';
+import AndPlaybackContext from '~components/templates/andPlaybackContext';
+import { recordingIsFavorited } from '~lib/api/recordingIsFavorited';
+import { BaseColors } from '~lib/constants';
+import { buildRenderer } from '~lib/test/buildRenderer';
+import renderWithProviders from '~lib/test/renderWithProviders';
+import setPlayerMock, { mockVideojs } from '~lib/test/setPlayerMock';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
-import { buildRenderer } from '@lib/test/buildRenderer';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
 import { PlayerFragment } from './__generated__/player';
-import { SequenceContentType } from '@src/__generated__/graphql';
 
 jest.mock('video.js');
-jest.mock('@lib/api/recordingIsFavorited');
+jest.mock('~lib/api/recordingIsFavorited');
 
 const mockRecordingIsFavorited = recordingIsFavorited as jest.Mock;
 

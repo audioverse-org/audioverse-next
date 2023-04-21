@@ -1,7 +1,7 @@
 import * as Types from '../../__generated__/graphql';
 
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetTestimoniesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   offset: Types.InputMaybe<Types.Scalars['Int']>;
@@ -71,7 +71,7 @@ export const useGetTestimoniesPathsDataQuery = <
       graphqlFetcher<GetTestimoniesPathsDataQuery, GetTestimoniesPathsDataQueryVariables>(GetTestimoniesPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getTestimoniesPageData<T>(
 	variables: ExactAlt<T, GetTestimoniesPageDataQueryVariables>

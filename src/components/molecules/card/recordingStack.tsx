@@ -1,15 +1,15 @@
 import React from 'react';
 
-import TeaseRecordingStack from '../teaseRecordingStack';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
+import TeaseRecordingStack from '../teaseRecordingStack';
+import { CardRecordingStackFragment } from './__generated__/recordingStack';
 import CardWithTheme from './base/withTheme';
 import CardHatAudiobook from './hat/audiobook';
 import CardHatBibleBook from './hat/bibleBook';
 import CardHatSermon from './hat/sermon';
 import CardHatSong from './hat/song';
 import CardHatStory from './hat/story';
-import { SequenceContentType } from '@src/__generated__/graphql';
-import { CardRecordingStackFragment } from './__generated__/recordingStack';
 
 export interface Props {
 	sequence: CardRecordingStackFragment;

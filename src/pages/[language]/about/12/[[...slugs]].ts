@@ -4,13 +4,13 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import SpiritOfAv from '@containers/about/spirit';
-import { IBaseProps } from '@containers/base';
-import { REVALIDATE } from '@lib/constants';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import root from '@lib/routes';
+import SpiritOfAv from '~containers/about/spirit';
+import { IBaseProps } from '~containers/base';
+import { REVALIDATE } from '~lib/constants';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import root from '~lib/routes';
 
 export default SpiritOfAv;
 

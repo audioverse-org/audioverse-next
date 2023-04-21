@@ -1,9 +1,9 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Mininav from '@components/molecules/mininav';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Mininav from '~components/molecules/mininav';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
 type Props = {
 	current: 'profile' | 'preferences';

@@ -1,13 +1,13 @@
 import React, { PropsWithChildren } from 'react';
 
-import Heading2 from '@components/atoms/heading2';
-import ButtonBack from '@components/molecules/buttonBack';
-import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import Tease from '@components/molecules/tease';
+import Heading2 from '~components/atoms/heading2';
+import ButtonBack from '~components/molecules/buttonBack';
+import CollectionTypeLockup from '~components/molecules/collectionTypeLockup';
+import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
+import Tease from '~components/molecules/tease';
 
-import styles from './pivot.module.scss';
 import { CollectionPivotFragment } from './__generated__/pivot';
+import styles from './pivot.module.scss';
 
 type Props = {
 	collection: CollectionPivotFragment;

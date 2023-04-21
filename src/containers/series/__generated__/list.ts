@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSeriesListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
   offset: Types.InputMaybe<Types.Scalars['Int']>;
@@ -72,7 +72,7 @@ export const useGetSeriesListPathsDataQuery = <
       graphqlFetcher<GetSeriesListPathsDataQuery, GetSeriesListPathsDataQueryVariables>(GetSeriesListPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSeriesListPageData<T>(
 	variables: ExactAlt<T, GetSeriesListPageDataQueryVariables>

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import forge from 'node-forge';
 
-import { getSessionToken } from '@lib/cookies';
+import { getSessionToken } from '~lib/cookies';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	const path = (req.query.slugs as string[])

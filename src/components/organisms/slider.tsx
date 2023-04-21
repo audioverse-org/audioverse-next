@@ -2,11 +2,10 @@ import clsx from 'clsx';
 import React, { ReactNode, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import Button from '@components/molecules/button';
+import Button from '~components/molecules/button';
 
 import ArrowLeft from '../../../public/img/icons/icon-back-light.svg';
 import ArrowRight from '../../../public/img/icons/icon-forward-light.svg';
-
 import styles from './slider.module.scss';
 
 interface SliderProps {

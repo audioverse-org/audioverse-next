@@ -5,7 +5,7 @@ import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__ge
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
 import { PersonLockupFragmentDoc } from '../../../../components/molecules/__generated__/personLockup';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryPlaylistsDataQueryVariables = Types.Exact<{
   language: Types.Language;
   offset: Types.InputMaybe<Types.Scalars['Int']>;
@@ -52,7 +52,7 @@ export const useGetLibraryPlaylistsDataQuery = <
       graphqlFetcher<GetLibraryPlaylistsDataQuery, GetLibraryPlaylistsDataQueryVariables>(GetLibraryPlaylistsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getLibraryPlaylistsData<T>(
 	variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>

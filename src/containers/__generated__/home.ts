@@ -10,7 +10,7 @@ import { TestimoniesFragmentDoc } from '../../components/organisms/__generated__
 import { CardPostFragmentDoc } from '../../components/molecules/card/__generated__/post';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/__generated__/sequence';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetHomeStaticPropsQueryVariables = Types.Exact<{
   language: Types.Language;
 }>;
@@ -71,7 +71,7 @@ export const useGetHomeStaticPropsQuery = <
       graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getHomeStaticProps<T>(
 	variables: ExactAlt<T, GetHomeStaticPropsQueryVariables>

@@ -1,21 +1,21 @@
 import about from './about';
 import account from './account';
+import bibles from './bibles';
+import books from './books';
+import conferences from './conferences';
+import contact from './contact';
 import discover from './discover';
+import library from './library';
 import presenters from './presenters';
 import node from './primatives/node';
 import paginatedNode from './primatives/paginatedNode';
 import releases from './releases';
 import search from './search';
-import library from './library';
-import contact from './contact';
-import sponsors from './sponsors';
-import conferences from './conferences';
-import songs from './songs';
-import stories from './stories';
-import books from './books';
-import bibles from './bibles';
-import teachings from './teachings';
 import series from './series';
+import songs from './songs';
+import sponsors from './sponsors';
+import stories from './stories';
+import teachings from './teachings';
 
 const namespaces = (r: string) => ({
 	about: node(`${r}/about`, about),

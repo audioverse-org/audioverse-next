@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsCollectionsQueryVariables = Types.Exact<{
   language: Types.Language;
   term: Types.Scalars['String'];
@@ -38,7 +38,7 @@ export const useGetSearchResultsCollectionsQuery = <
       graphqlFetcher<GetSearchResultsCollectionsQuery, GetSearchResultsCollectionsQueryVariables>(GetSearchResultsCollectionsDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSearchResultsCollections<T>(
 	variables: ExactAlt<T, GetSearchResultsCollectionsQueryVariables>

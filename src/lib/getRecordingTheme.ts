@@ -1,7 +1,7 @@
-import { CardTheme } from '@components/molecules/card/base/withCardTheme';
+import { CardTheme } from '~components/molecules/card/base/withCardTheme';
+import { RecordingContentType } from '~src/__generated__/graphql';
 
 import { BaseColors } from './constants';
-import { RecordingContentType } from '@src/__generated__/graphql';
 
 type ISequenceTypeTheme = {
 	accentColor: BaseColors.RED | BaseColors.SALMON;

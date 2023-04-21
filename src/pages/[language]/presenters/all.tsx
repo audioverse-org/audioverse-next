@@ -1,13 +1,14 @@
+import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
+
 import {
 	getPersonListLetterCounts,
 	GetPersonListLetterCountsQuery,
-} from '@containers/presenter/list/__generated__/list';
-import All from '@containers/presenter/list/all';
-import { REVALIDATE } from '@lib/constants';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import root from '@lib/routes';
-import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
+} from '~containers/presenter/list/__generated__/list';
+import All from '~containers/presenter/list/all';
+import { REVALIDATE } from '~lib/constants';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import root from '~lib/routes';
 
 export default All;
 

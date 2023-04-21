@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetHelpWidgetDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
@@ -43,7 +43,7 @@ export const useGetHelpWidgetDataQuery = <
       graphqlFetcher<GetHelpWidgetDataQuery, GetHelpWidgetDataQueryVariables>(GetHelpWidgetDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getHelpWidgetData<T>(
 	variables: ExactAlt<T, GetHelpWidgetDataQueryVariables>

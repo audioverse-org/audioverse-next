@@ -3,13 +3,14 @@ import { __loadQuery, __mockedRouter } from 'next/router';
 import {
 	loadSermonListData,
 	loadSermonListPagePathsData,
-} from '@containers/sermon/list.all.spec';
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import { getStaticPaths } from '@pages/[language]/teachings/video/page/[i]';
+} from '~containers/sermon/list.all.spec';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import SermonList, {
+	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/teachings/video/page/[i]';
+} from '~pages/[language]/teachings/video/page/[i]';
+
 import {
 	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,

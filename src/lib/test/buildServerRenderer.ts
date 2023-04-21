@@ -1,7 +1,7 @@
 import { GetServerSidePropsResult } from 'next';
 import { ComponentType } from 'react';
 
-import { buildRenderer, Renderer } from '@lib/test/buildRenderer';
+import { buildRenderer, Renderer } from '~lib/test/buildRenderer';
 
 export function buildServerRenderer<
 	C extends ComponentType<any>,

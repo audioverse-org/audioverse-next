@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardPostFragmentDoc } from '../../../components/molecules/card/__generated__/post';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBlogDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
   language: Types.Language;
@@ -80,7 +80,7 @@ export const useGetBlogDetailStaticPathsQuery = <
       graphqlFetcher<GetBlogDetailStaticPathsQuery, GetBlogDetailStaticPathsQueryVariables>(GetBlogDetailStaticPathsDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getBlogDetailData<T>(
 	variables: ExactAlt<T, GetBlogDetailDataQueryVariables>

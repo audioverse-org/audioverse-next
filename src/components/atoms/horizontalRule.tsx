@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { BaseColors } from '@lib/constants';
+import { BaseColors } from '~lib/constants';
 
 import baseColors from './baseColors.module.scss';
 import styles from './horizontalRule.module.scss';

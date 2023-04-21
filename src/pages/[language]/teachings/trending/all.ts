@@ -4,16 +4,16 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import TrendingTeachings from '@containers/sermon/trending';
-import { TrendingTeachingsProps } from '@containers/sermon/trending';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import root from '@lib/routes';
-import { getTrendingTeachingsPageData } from '@containers/sermon/__generated__/trending';
+import { IBaseProps } from '~containers/base';
+import { getTrendingTeachingsPageData } from '~containers/sermon/__generated__/trending';
+import TrendingTeachings, {
+	TrendingTeachingsProps,
+} from '~containers/sermon/trending';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import root from '~lib/routes';
 
 export default TrendingTeachings;
 

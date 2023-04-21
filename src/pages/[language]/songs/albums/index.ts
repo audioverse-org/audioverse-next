@@ -4,17 +4,16 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
+import { IBaseProps } from '~containers/base';
+import { getSongAlbumsListPageData } from '~containers/song/albums/__generated__/list';
 import StoryAlbumsList, {
 	SongAlbumsListProps,
-} from '@containers/song/albums/list';
-import { REVALIDATE } from '@lib/constants';
-
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import root from '@lib/routes';
-import { getSongAlbumsListPageData } from '@containers/song/albums/__generated__/list';
+} from '~containers/song/albums/list';
+import { REVALIDATE } from '~lib/constants';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import root from '~lib/routes';
 
 export default StoryAlbumsList;
 

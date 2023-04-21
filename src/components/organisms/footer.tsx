@@ -1,11 +1,12 @@
-import Heading3 from '@components/atoms/heading3';
-import { FormattedMessage } from 'react-intl';
 import Image from 'next/legacy/image';
-import { useEffect, useRef } from 'react';
-import isServerSide from '@lib/isServerSide';
-import React from 'react';
-import styles from './footer.module.scss';
 import { useRouter } from 'next/router';
+import React, { useEffect, useRef } from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import Heading3 from '~components/atoms/heading3';
+import isServerSide from '~lib/isServerSide';
+
+import styles from './footer.module.scss';
 
 export default function Footer({
 	scrollRef,

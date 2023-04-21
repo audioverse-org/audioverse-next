@@ -34,7 +34,7 @@ generates:
       - 'typescript-react-query'
       - 'graphql-plugin-getters.js'
     config:
-      fetcher: '@lib/api/graphqlFetcher#graphqlFetcher'
+      fetcher: '~lib/api/graphqlFetcher#graphqlFetcher'
       dedupeFragments: true
       avoidOptionals: true
       defaultScalarType: unknown

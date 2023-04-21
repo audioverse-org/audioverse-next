@@ -4,9 +4,10 @@ import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import Register from '@pages/[language]/account/register';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildRenderer } from '~lib/test/buildRenderer';
+import Register from '~pages/[language]/account/register';
+
 import {
 	RegisterDocument,
 	RegisterSocialDocument,

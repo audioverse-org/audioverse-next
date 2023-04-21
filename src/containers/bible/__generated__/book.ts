@@ -10,7 +10,7 @@ import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/p
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobibleBookDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
 }>;
@@ -75,7 +75,7 @@ export const useGetAudiobibleBookPathsDataQuery = <
       graphqlFetcher<GetAudiobibleBookPathsDataQuery, GetAudiobibleBookPathsDataQueryVariables>(GetAudiobibleBookPathsDataDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobibleBookDetailData<T>(
 	variables: ExactAlt<T, GetAudiobibleBookDetailDataQueryVariables>

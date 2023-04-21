@@ -1,13 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '@components/HOCs/withFailStates';
-import CardSequence from '@components/molecules/card/sequence';
-import PaginatedCardList from '@components/organisms/paginatedCardList';
+import withFailStates from '~components/HOCs/withFailStates';
+import CardSequence from '~components/molecules/card/sequence';
+import PaginatedCardList from '~components/organisms/paginatedCardList';
+import { PaginatedProps } from '~lib/getPaginatedStaticProps';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
 import { GetAudiobookListPageDataQuery } from './__generated__/list';
 
 export type AudiobooksListProps = PaginatedProps<

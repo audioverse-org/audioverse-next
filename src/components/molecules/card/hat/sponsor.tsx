@@ -2,18 +2,16 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import RoundImage from '@components/atoms/roundImage';
-import Button from '@components/molecules/button';
-import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
+import Heading2 from '~components/atoms/heading2';
+import RoundImage from '~components/atoms/roundImage';
+import Button from '~components/molecules/button';
+import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 
 import HatIcon from '../../../../../public/img/icons/fa-user-plus.svg';
 import IconLike from '../../../../../public/img/icons/icon-like-light.svg';
-
-import styles from './sponsor.module.scss';
-
-import CardHat from '.';
 import { CardRecordingFragment } from '../__generated__/recording';
+import CardHat from '.';
+import styles from './sponsor.module.scss';
 
 interface Props {
 	sponsor: NonNullable<CardRecordingFragment['sponsor']>;

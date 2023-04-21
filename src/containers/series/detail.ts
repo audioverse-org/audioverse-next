@@ -1,5 +1,6 @@
-import withFailStates from '@components/HOCs/withFailStates';
-import { Sequence } from '@components/organisms/sequence';
+import withFailStates from '~components/HOCs/withFailStates';
+import { Sequence } from '~components/organisms/sequence';
+
 import { GetSeriesDetailPageDataQuery } from './__generated__/detail';
 
 export interface SeriesDetailProps {

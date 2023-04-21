@@ -1,11 +1,13 @@
-import { PlaybackContext } from '@components/templates/andPlaybackContext';
-import IconButton from '@components/molecules/iconButton';
-import React, { useContext } from 'react';
-import IconListeningAnimated from '../../../public/img/icons/icon-listening-animated.svg';
-import IconListening from '../../../public/img/icons/icon-listening.svg';
-import { BaseColors } from '@lib/constants';
-import { useIntl } from 'react-intl';
 import { useRouter } from 'next/router';
+import React, { useContext } from 'react';
+import { useIntl } from 'react-intl';
+
+import IconButton from '~components/molecules/iconButton';
+import { PlaybackContext } from '~components/templates/andPlaybackContext';
+import { BaseColors } from '~lib/constants';
+
+import IconListening from '../../../public/img/icons/icon-listening.svg';
+import IconListeningAnimated from '../../../public/img/icons/icon-listening-animated.svg';
 
 export default function ButtonPlayback(): JSX.Element {
 	const context = useContext(PlaybackContext);

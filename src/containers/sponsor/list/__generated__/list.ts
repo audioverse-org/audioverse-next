@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SponsorListEntryFragment = { __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null };
 
 export type GetSponsorListLetterCountsQueryVariables = Types.Exact<{
@@ -40,7 +40,7 @@ export const useGetSponsorListLetterCountsQuery = <
       graphqlFetcher<GetSponsorListLetterCountsQuery, GetSponsorListLetterCountsQueryVariables>(GetSponsorListLetterCountsDocument, variables),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorListLetterCounts<T>(
 	variables: ExactAlt<T, GetSponsorListLetterCountsQueryVariables>

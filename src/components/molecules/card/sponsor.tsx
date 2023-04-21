@@ -3,19 +3,18 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import RoundImage from '@components/atoms/roundImage';
-import Card from '@components/molecules/card';
-import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
-import { BaseColors } from '@lib/constants';
+import Heading2 from '~components/atoms/heading2';
+import Heading6 from '~components/atoms/heading6';
+import RoundImage from '~components/atoms/roundImage';
+import Card from '~components/molecules/card';
+import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
+import { BaseColors } from '~lib/constants';
 
 import UserPlusIcon from '../../../../public/img/icons/fa-user-plus.svg';
 import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
-
-import styles from './sponsor.module.scss';
 import { CardSponsorFragment } from './__generated__/sponsor';
+import styles from './sponsor.module.scss';
 
 interface CardSponsorProps {
 	sponsor: CardSponsorFragment;

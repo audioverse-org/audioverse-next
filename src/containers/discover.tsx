@@ -1,21 +1,19 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '@components/atoms/lineHeading';
-import Button from '@components/molecules/button';
-import CardCollection from '@components/molecules/card/collection';
-import CardPost from '@components/molecules/card/post';
-import CardRecording from '@components/molecules/card/recording';
-import CardSequence from '@components/molecules/card/sequence';
-import CardGroup from '@components/molecules/cardGroup';
-
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import LineHeading from '~components/atoms/lineHeading';
+import Button from '~components/molecules/button';
+import CardCollection from '~components/molecules/card/collection';
+import CardPost from '~components/molecules/card/post';
+import CardRecording from '~components/molecules/card/recording';
+import CardSequence from '~components/molecules/card/sequence';
+import CardGroup from '~components/molecules/cardGroup';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
-
-import styles from './discover.module.scss';
 import { GetDiscoverPageDataQuery } from './__generated__/discover';
+import styles from './discover.module.scss';
 
 export type DiscoverProps = GetDiscoverPageDataQuery;
 

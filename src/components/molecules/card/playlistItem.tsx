@@ -1,9 +1,8 @@
 import React from 'react';
 
 import TeaseRecording from '../teaseRecording';
-
-import CardWithTheme from './base/withTheme';
 import { CardRecordingFragment } from './__generated__/recording';
+import CardWithTheme from './base/withTheme';
 
 interface Props {
 	recording: CardRecordingFragment;

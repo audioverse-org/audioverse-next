@@ -1,16 +1,16 @@
+import Link from 'next/link';
 import React, { SyntheticEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading2 from '@components/atoms/heading2';
-import HorizontalRule from '@components/atoms/horizontalRule';
-import Button from '@components/molecules/button';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import AboutNav from '@components/organisms/aboutNav';
-import { BaseColors } from '@lib/constants';
+import Heading1 from '~components/atoms/heading1';
+import Heading2 from '~components/atoms/heading2';
+import HorizontalRule from '~components/atoms/horizontalRule';
+import Button from '~components/molecules/button';
+import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
+import AboutNav from '~components/organisms/aboutNav';
+import { BaseColors } from '~lib/constants';
 
 import styles from './give.module.scss';
-import Link from 'next/link';
 
 export default function Blog(): JSX.Element {
 	return (

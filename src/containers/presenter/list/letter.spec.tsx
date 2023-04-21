@@ -1,13 +1,14 @@
+import { screen } from '@testing-library/react';
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import Presenters, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/presenters/letter/[letter]';
-import { screen } from '@testing-library/react';
+} from '~pages/[language]/presenters/letter/[letter]';
+
 import { GetPresenterListLetterPageDataDocument } from './__generated__/letter';
 import { GetPersonListLetterCountsDocument } from './__generated__/list';
 
