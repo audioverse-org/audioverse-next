@@ -6,13 +6,27 @@ import getIntl from '~lib/getIntl';
 import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
 import { SequenceContentType } from '~src/__generated__/graphql';
 
-import { BookFeedDescriptionFragment } from './__generated__/bookFeedDescription';
-
 export default (): void => void 0;
+
+type BookFeedDescription = {
+	title: string;
+	recordings: {
+		nodes:
+			| {
+					authors: {
+						name: string;
+					}[];
+					narrators: {
+						name: string;
+					}[];
+			  }[]
+			| null;
+	};
+};
 
 export const formatBooksDescription = async (
 	languageRoute: string,
-	sequence: BookFeedDescriptionFragment
+	sequence: BookFeedDescription
 ): Promise<string> => {
 	const intl = await getIntl(languageRoute);
 	const formatNameString = (persons: { name: string }[]) =>

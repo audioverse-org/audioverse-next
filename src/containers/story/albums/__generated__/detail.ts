@@ -8,7 +8,6 @@ import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../../lib/__generated__/generateFeed';
-import { BookFeedDescriptionFragmentDoc } from '../../../../pages/[language]/books/[id]/feed.xml/__generated__/bookFeedDescription';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoryAlbumDetailPageDataQueryVariables = Types.Exact<{
@@ -73,14 +72,18 @@ export const GetStoryAlbumFeedDataDocument = `
     recordings(first: 25) {
       nodes {
         ...generateFeed
+        authors: persons(role: WRITER) {
+          name
+        }
+        narrators: persons(role: SPEAKER) {
+          name
+        }
       }
     }
     language
-    ...bookFeedDescription
   }
 }
-    ${GenerateFeedFragmentDoc}
-${BookFeedDescriptionFragmentDoc}`;
+    ${GenerateFeedFragmentDoc}`;
 export const useGetStoryAlbumFeedDataQuery = <
       TData = GetStoryAlbumFeedDataQuery,
       TError = unknown

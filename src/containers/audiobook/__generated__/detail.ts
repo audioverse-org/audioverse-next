@@ -8,7 +8,6 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { BookFeedDescriptionFragmentDoc } from '../../../pages/[language]/books/[id]/feed.xml/__generated__/bookFeedDescription';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookDetailPageDataQueryVariables = Types.Exact<{
@@ -75,13 +74,17 @@ export const GetAudiobookFeedDataDocument = `
     recordings(first: 25) {
       nodes {
         ...generateFeed
+        authors: persons(role: WRITER) {
+          name
+        }
+        narrators: persons(role: SPEAKER) {
+          name
+        }
       }
     }
-    ...bookFeedDescription
   }
 }
-    ${GenerateFeedFragmentDoc}
-${BookFeedDescriptionFragmentDoc}`;
+    ${GenerateFeedFragmentDoc}`;
 export const useGetAudiobookFeedDataQuery = <
       TData = GetAudiobookFeedDataQuery,
       TError = unknown
