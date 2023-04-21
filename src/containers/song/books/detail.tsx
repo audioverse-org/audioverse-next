@@ -13,15 +13,13 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import { BaseColors } from '@lib/constants';
-import {
-	GetSongBooksDetailPageDataQuery,
-	SequenceContentType,
-} from '@lib/generated/graphql';
 import root from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './detail.module.scss';
+import { SequenceContentType } from '@src/__generated__/graphql';
+import { GetSongBooksDetailPageDataQuery } from './__generated__/detail';
 
 export type SongBooksDetailProps = {
 	book: string;

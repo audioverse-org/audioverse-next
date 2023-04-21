@@ -1,5 +1,14 @@
 import { __loadQuery } from 'next/router';
 
+import Search, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/search';
+
+import { screen, waitFor } from '@testing-library/react';
+import { buildLoader } from '@lib/test/buildLoader';
+import { buildRenderer } from '@lib/test/buildRenderer';
+import { RecordingContentType } from '@src/__generated__/graphql';
 import {
 	GetSearchAudiobooksDocument,
 	GetSearchAudiobooksQuery,
@@ -17,16 +26,7 @@ import {
 	GetSearchSponsorsQuery,
 	GetSearchStoryProgramsDocument,
 	GetSearchStoryProgramsQuery,
-	RecordingContentType,
-} from '@lib/generated/graphql';
-import Search, {
-	getStaticPaths,
-	getStaticProps,
-} from '@pages/[language]/search';
-
-import { screen, waitFor } from '@testing-library/react';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildRenderer } from '@lib/test/buildRenderer';
+} from '@components/organisms/__generated__/searchResults';
 
 jest.mock('next/head');
 

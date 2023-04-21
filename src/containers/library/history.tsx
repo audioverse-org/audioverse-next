@@ -10,16 +10,16 @@ import LoadingCards from '@components/molecules/loadingCards';
 import EmptyState from '@components/organisms/emptyState';
 import LibraryNav from '@components/organisms/libraryNav';
 import { graphqlFetcher } from '@lib/api/graphqlFetcher';
-import {
-	GetLibraryHistoryPageDataDocument,
-	GetLibraryHistoryPageDataQuery,
-	GetLibraryHistoryPageDataQueryVariables,
-	Language,
-} from '@lib/generated/graphql';
 
 import baseStyles from './base.module.scss';
 import styles from './history.module.scss';
 import LibraryLoggedOut from './loggedOut';
+import { Language } from '@src/__generated__/graphql';
+import {
+	GetLibraryHistoryPageDataDocument,
+	GetLibraryHistoryPageDataQuery,
+	GetLibraryHistoryPageDataQueryVariables,
+} from './__generated__/history';
 
 export const getLibraryHistoryPageDataDefaultVariables = (
 	language: Language

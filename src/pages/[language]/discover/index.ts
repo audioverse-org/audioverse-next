@@ -7,11 +7,12 @@ import {
 import { IBaseProps } from '@containers/base';
 import Discover, { DiscoverProps } from '@containers/discover';
 import { REVALIDATE } from '@lib/constants';
-import { getDiscoverPageData } from '@lib/generated/graphql';
+
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import root from '@lib/routes';
+import { getDiscoverPageData } from '@containers/__generated__/discover';
 
 export default Discover;
 

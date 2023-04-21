@@ -1,4 +1,4 @@
-import { getBibleBookContent } from '@lib/generated/graphql';
+import { getBibleBookContent } from './__generated__/bibleContent';
 import getResponse from './bibleBrain.getResponse';
 
 export interface IBibleVersion {

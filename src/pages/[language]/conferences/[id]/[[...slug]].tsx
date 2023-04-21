@@ -9,12 +9,12 @@ import CollectionDetail, {
 	CollectionDetailProps,
 } from '@containers/collection/detail';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import {
 	getCollectionDetailPageData,
 	getCollectionDetailPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@containers/collection/__generated__/detail';
 
 export default CollectionDetail;
 

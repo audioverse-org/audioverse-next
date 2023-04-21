@@ -7,13 +7,13 @@ import {
 import SponsorTeachings, {
 	SponsorTeachingsProps,
 } from '@containers/sponsor/teachings';
-import {
-	getSponsorTeachingsPageData,
-	getSponsorTeachingsPathsData,
-} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getSponsorTeachingsPageData,
+	getSponsorTeachingsPathsData,
+} from '@containers/sponsor/__generated__/teachings';
 
 export default SponsorTeachings;
 

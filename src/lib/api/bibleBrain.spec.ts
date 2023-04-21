@@ -1,5 +1,5 @@
-import { GetBibleBookContentDocument } from '../generated/graphql';
 import { buildLoader } from '../test/buildLoader';
+import { GetBibleBookContentDocument } from './__generated__/bibleContent';
 import { getBibleBookChapters } from './bibleBrain';
 import getResponse from './bibleBrain.getResponse';
 

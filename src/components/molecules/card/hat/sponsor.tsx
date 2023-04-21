@@ -6,7 +6,6 @@ import Heading2 from '@components/atoms/heading2';
 import RoundImage from '@components/atoms/roundImage';
 import Button from '@components/molecules/button';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
-import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../../public/img/icons/fa-user-plus.svg';
 import IconLike from '../../../../../public/img/icons/icon-like-light.svg';
@@ -14,6 +13,7 @@ import IconLike from '../../../../../public/img/icons/icon-like-light.svg';
 import styles from './sponsor.module.scss';
 
 import CardHat from '.';
+import { CardRecordingFragment } from '../__generated__/recording';
 
 interface Props {
 	sponsor: NonNullable<CardRecordingFragment['sponsor']>;

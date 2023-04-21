@@ -23,6 +23,7 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"paths": {
+			"@src/*": ["src/*"],
 			"@lib/*": ["src/lib/*"],
 			"@components/*": ["src/components/*"],
 			"@containers/*": ["src/containers/*"],

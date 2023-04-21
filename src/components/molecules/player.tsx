@@ -13,7 +13,7 @@ import ButtonSpeed from '@components/molecules/buttonSpeed';
 import PlaybackTimes from '@components/molecules/playbackTimes';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment, PlayerFragment } from '@lib/generated/graphql';
+
 import hasVideo from '@lib/hasVideo';
 import useGlobalSpaceDown from '@lib/useGlobalSpaceDown';
 import usePlaybackSession from '@lib/usePlaybackSession';
@@ -27,6 +27,8 @@ import IconPlay from '../../../public/img/icons/icon-play-large.svg';
 import CircleButton from './circleButton';
 import styles from './player.module.scss';
 import RecordingButtonFavorite from './recordingButtonFavorite';
+import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
+import { PlayerFragment } from './__generated__/player';
 
 export interface PlayerProps {
 	recording: PlayerFragment;

@@ -7,14 +7,12 @@ import {
 import { IBaseProps } from '@containers/base';
 import PresenterTop, { PresenterTopProps } from '@containers/presenter/top';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import {
-	getPresenterDetailPathsData,
-	getPresenterTopPageData,
-} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import root from '@lib/routes';
+import { getPresenterDetailPathsData } from '@containers/presenter/__generated__/detail';
+import { getPresenterTopPageData } from '@containers/presenter/__generated__/top';
 
 export default PresenterTop;
 

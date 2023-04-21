@@ -6,14 +6,14 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import SermonList, { SermonListProps } from '@containers/sermon/list';
-import {
-	getSermonListPageData,
-	getSermonListPagePathsData,
-} from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getSermonListPageData,
+	getSermonListPagePathsData,
+} from '@containers/sermon/__generated__/list';
 
 export default SermonList;
 

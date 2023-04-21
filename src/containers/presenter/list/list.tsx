@@ -8,14 +8,14 @@ import RoundImage from '@components/atoms/roundImage';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import {
-	GetPersonListLetterCountsQuery,
-	PresenterListEntryFragment,
-} from '@lib/generated/graphql';
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
+import {
+	GetPersonListLetterCountsQuery,
+	PresenterListEntryFragment,
+} from './__generated__/list';
 
 export type PresentersProps = {
 	persons: PresenterListEntryFragment[];

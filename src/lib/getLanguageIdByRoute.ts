@@ -1,5 +1,5 @@
 import { LANGUAGES, SupportedLanguages } from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
+import { Language } from '@src/__generated__/graphql';
 
 export function getLanguageIdByRoute(
 	route: string | undefined,

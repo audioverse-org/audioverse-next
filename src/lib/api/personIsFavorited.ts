@@ -1,7 +1,5 @@
-import {
-	personIsFavorited as _personIsFavorited,
-	Scalars,
-} from '@lib/generated/graphql';
+import { personIsFavorited as _personIsFavorited } from './__generated__/personIsFavorited';
+import { Scalars } from '@src/__generated__/graphql';
 
 export function personIsFavorited(id: Scalars['ID']): Promise<boolean> {
 	return _personIsFavorited({ id }).then(

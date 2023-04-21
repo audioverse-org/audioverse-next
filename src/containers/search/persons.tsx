@@ -5,10 +5,11 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardPerson from '@components/molecules/card/person';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSearchResultsPersonsQuery } from '@lib/generated/graphql';
+
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { GetSearchResultsPersonsQuery } from './__generated__/persons';
 
 export type SearchPersonsProps = PaginatedProps<
 	NonNullable<GetSearchResultsPersonsQuery['persons']['nodes']>[0],

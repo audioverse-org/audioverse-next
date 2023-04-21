@@ -7,12 +7,12 @@ import {
 import { IBaseProps } from '@containers/base';
 import ReleaseDetail, { ReleaseDetailProps } from '@containers/release/detail';
 import { REVALIDATE } from '@lib/constants';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import root from '@lib/routes';
 import {
 	getMediaReleaseFormsPageData,
 	getMediaReleaseFormsPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import root from '@lib/routes';
+} from '@containers/release/__generated__/detail';
 
 export default ReleaseDetail;
 

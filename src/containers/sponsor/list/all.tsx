@@ -2,14 +2,14 @@ import Sponsors, { SponsorsProps } from './list';
 import React, { useEffect, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSponsorListAllPageDataDocument,
-	GetSponsorListAllPageDataQuery,
-	Maybe,
-} from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
 import useOnScreen from '@lib/hooks/useOnScreen';
 import { useIntl } from 'react-intl';
+import {
+	GetSponsorListAllPageDataDocument,
+	GetSponsorListAllPageDataQuery,
+} from './__generated__/all';
+import { Maybe } from '@src/__generated__/graphql';
 
 type Props = Omit<SponsorsProps, 'sponsors'>;
 

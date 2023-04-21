@@ -10,11 +10,6 @@ import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { BaseColors } from '@lib/constants';
-import {
-	CardRecordingFragment,
-	CardSequenceFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';
@@ -32,6 +27,9 @@ import TeaseRecordingStack from '../teaseRecordingStack';
 import TypeLockup from '../typeLockup';
 
 import styles from './sequence.module.scss';
+import { SequenceContentType } from '@src/__generated__/graphql';
+import { CardRecordingFragment } from './__generated__/recording';
+import { CardSequenceFragment } from './__generated__/sequence';
 
 interface CardCollectionProps {
 	sequence: CardSequenceFragment;

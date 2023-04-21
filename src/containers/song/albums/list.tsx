@@ -9,11 +9,12 @@ import CardSongBook from '@components/molecules/card/songBook';
 import CardGroup from '@components/molecules/cardGroup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Mininav from '@components/molecules/mininav';
-import { GetSongAlbumsListPageDataQuery } from '@lib/generated/graphql';
+
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
+import { GetSongAlbumsListPageDataQuery } from './__generated__/list';
 
 export type SongAlbumsListProps = GetSongAlbumsListPageDataQuery;
 

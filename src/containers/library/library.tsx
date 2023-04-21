@@ -8,19 +8,21 @@ import CardMasonry from '@components/molecules/cardMasonry';
 import LoadingCards from '@components/molecules/loadingCards';
 import EmptyState from '@components/organisms/emptyState';
 import LibraryNav from '@components/organisms/libraryNav';
+
+import baseStyles from './base.module.scss';
+import LibraryLoggedOut from './loggedOut';
 import {
 	FavoritableCatalogEntityType,
 	FavoritesSortableField,
-	GetLibraryDataQueryVariables,
 	Language,
 	OrderByDirection,
 	RecordingContentType,
 	RecordingViewerPlaybackStatus,
+} from '@src/__generated__/graphql';
+import {
+	GetLibraryDataQueryVariables,
 	useGetLibraryDataQuery,
-} from '@lib/generated/graphql';
-
-import baseStyles from './base.module.scss';
-import LibraryLoggedOut from './loggedOut';
+} from './__generated__/library';
 
 export const SORT_MAP = {
 	new: [FavoritesSortableField.FavoritedAt, OrderByDirection.Desc],

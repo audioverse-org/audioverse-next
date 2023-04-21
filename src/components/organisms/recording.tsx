@@ -24,12 +24,6 @@ import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import { formatLongDateTime, parseRelativeDate } from '@lib/date';
-import {
-	RecordingContentType,
-	RecordingFragment,
-	SequenceContentType,
-	TeaseRecordingFragment,
-} from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -40,6 +34,12 @@ import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-smal
 import IconDownload from '../../../public/img/icons/icon-download.svg';
 
 import styles from './recording.module.scss';
+import { TeaseRecordingFragment } from '@components/molecules/__generated__/teaseRecording';
+import {
+	RecordingContentType,
+	SequenceContentType,
+} from '@src/__generated__/graphql';
+import { RecordingFragment } from './__generated__/recording';
 
 interface RecordingProps {
 	recording: RecordingFragment;

@@ -4,8 +4,9 @@ import SearchCollections, {
 	SearchCollectionsProps,
 } from '@containers/search/collections';
 import { storeRequest } from '@lib/api/storeRequest';
-import { getSearchResultsCollections } from '@lib/generated/graphql';
+
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { getSearchResultsCollections } from '@containers/search/__generated__/collections';
 
 export default SearchCollections;
 

@@ -1,11 +1,12 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import { LANGUAGES } from '@lib/constants';
-import { getSermonListFeedData } from '@lib/generated/graphql';
+
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import root from '@lib/routes';
+import { getSermonListFeedData } from '@containers/sermon/__generated__/list';
 
 export default (): void => void 0;
 

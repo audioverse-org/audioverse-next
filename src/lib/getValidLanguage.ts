@@ -1,5 +1,5 @@
+import { Language } from '@src/__generated__/graphql';
 import { LANGUAGES } from './constants';
-import { Language } from './generated/graphql';
 
 const isLangKey = (key: string): key is Language => {
 	return Object.values(Language).includes(key as Language);

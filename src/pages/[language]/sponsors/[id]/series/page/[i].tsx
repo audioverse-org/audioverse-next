@@ -5,13 +5,13 @@ import {
 } from 'next';
 
 import SponsorSeries, { SponsorSeriesProps } from '@containers/sponsor/series';
-import {
-	getSponsorSeriesPageData,
-	getSponsorSeriesPathsData,
-} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getSponsorSeriesPageData,
+	getSponsorSeriesPathsData,
+} from '@containers/sponsor/__generated__/series';
 
 export default SponsorSeries;
 

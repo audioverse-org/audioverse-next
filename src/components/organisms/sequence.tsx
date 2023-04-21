@@ -20,7 +20,7 @@ import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { formatDateRange } from '@lib/date';
-import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
+
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import root from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
@@ -28,6 +28,8 @@ import { UnreachableCaseError } from '@lib/typeHelpers';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './sequence.module.scss';
+import { SequenceContentType } from '@src/__generated__/graphql';
+import { SequenceFragment } from './__generated__/sequence';
 
 export function Sequence({
 	sequence,

@@ -9,12 +9,12 @@ import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
-import { CardPersonFragment } from '@lib/generated/graphql';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonTypeLockup from '../personTypeLockup';
 
 import styles from './person.module.scss';
+import { CardPersonFragment } from './__generated__/person';
 
 interface CardCollectionProps {
 	person: CardPersonFragment;

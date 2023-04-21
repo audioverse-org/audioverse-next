@@ -2,10 +2,6 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSponsorListLetterCountsDocument,
-	GetSponsorListLetterPageDataDocument,
-} from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Sponsors, {
 	getStaticPaths,
@@ -13,6 +9,8 @@ import Sponsors, {
 } from '@pages/[language]/sponsors/letter/[letter]';
 import { buildLoader } from '@lib/test/buildLoader';
 import { screen } from '@testing-library/react';
+import { GetSponsorListLetterPageDataDocument } from './__generated__/letter';
+import { GetSponsorListLetterCountsDocument } from './__generated__/list';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 

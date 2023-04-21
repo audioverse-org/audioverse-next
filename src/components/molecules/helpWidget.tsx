@@ -4,11 +4,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
-import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
+
 import useHelpScoutLabels from '@lib/useHelpScoutLabels';
 import IconQuestionCircle from '@public/img/icons/icon-question-circle.svg';
 
 import { Beacon } from '../../types/window';
+import { useGetHelpWidgetDataQuery } from './__generated__/helpWidget';
 
 const BEACON_ID = 'e73e9329-30be-4766-99bb-6bfdd739e316';
 

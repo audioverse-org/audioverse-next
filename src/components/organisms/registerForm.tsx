@@ -5,9 +5,9 @@ import Button from '@components/molecules/button';
 import ButtonGuest from '@components/molecules/buttonGuest';
 import Input from '@components/molecules/form/input';
 import { setSessionToken } from '@lib/cookies';
-import { useRegisterMutation } from '@lib/generated/graphql';
 
 import styles from './registerForm.module.scss';
+import { useRegisterMutation } from '@containers/account/__generated__/register';
 
 type Props = {
 	showLogin: () => void;

@@ -9,8 +9,9 @@ import SongBookTrack, {
 	SongBookTrackProps,
 } from '@containers/song/books/track';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getBookSongDetailData } from '@lib/generated/graphql';
+
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getBookSongDetailData } from '@containers/song/books/__generated__/track';
 
 export default SongBookTrack;
 

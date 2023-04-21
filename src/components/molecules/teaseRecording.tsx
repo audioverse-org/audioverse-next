@@ -10,11 +10,6 @@ import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import { useIsRecordingFavorited } from '@lib/api/useIsRecordingFavorited';
 import { BaseColors } from '@lib/constants';
-import {
-	AndMiniplayerFragment,
-	RecordingContentType,
-	TeaseRecordingFragment,
-} from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
@@ -29,6 +24,9 @@ import { CardTheme } from './card/base/withCardTheme';
 import IconButton from './iconButton';
 import PersonLockup from './personLockup';
 import styles from './teaseRecording.module.scss';
+import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
+import { RecordingContentType } from '@src/__generated__/graphql';
+import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 
 const isThemeDark = (theme: CardTheme): boolean =>
 	['audiobookTrack', 'story', 'topic'].includes(theme);

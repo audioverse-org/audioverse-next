@@ -11,15 +11,17 @@ import Button from '@components/molecules/button';
 import Checkbox from '@components/molecules/form/checkbox';
 import Select from '@components/molecules/form/select';
 import AccountNav from '@components/organisms/accountNav';
+
+import styles from './preferences.module.scss';
 import {
 	Language,
 	RecordingQuality,
 	Timezone,
+} from '@src/__generated__/graphql';
+import {
 	useGetAccountPreferencesDataQuery,
 	useUpdateAccountPreferencesMutation,
-} from '@lib/generated/graphql';
-
-import styles from './preferences.module.scss';
+} from './__generated__/preferences';
 
 function Profile(): JSX.Element {
 	const queryClient = useQueryClient();

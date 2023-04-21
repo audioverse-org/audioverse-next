@@ -8,15 +8,13 @@ import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
-import {
-	GetPresenterRecordingsPageDataQuery,
-	PresenterPivotFragment,
-} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import PresenterPivot from './pivot';
+import { GetPresenterRecordingsPageDataQuery } from './__generated__/recordings';
+import { PresenterPivotFragment } from './__generated__/pivot';
 
 export type PresenterRecordingsProps = PaginatedProps<
 	NonNullable<

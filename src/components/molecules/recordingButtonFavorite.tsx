@@ -2,9 +2,9 @@ import React from 'react';
 
 import { useIsRecordingFavorited } from '@lib/api/useIsRecordingFavorited';
 import { BaseColors } from '@lib/constants';
-import { Scalars } from '@lib/generated/graphql';
 
 import ButtonFavorite from './buttonFavorite';
+import { Scalars } from '@src/__generated__/graphql';
 
 export default function RecordingButtonFavorite({
 	id,

@@ -14,14 +14,15 @@ import type { VideoJsPlayer } from 'video.js';
 import type * as VideoJs from 'video.js';
 
 import { getSessionToken } from '@lib/cookies';
+
+import hasVideo from '@lib/hasVideo';
+import { Scalars } from '@src/__generated__/graphql';
 import {
 	AndMiniplayerFragment,
 	GetRecordingPlaybackProgressQuery,
 	recordingPlaybackProgressSet,
 	RecordingPlaybackProgressSetMutationVariables,
-	Scalars,
-} from '@lib/generated/graphql';
-import hasVideo from '@lib/hasVideo';
+} from './__generated__/andMiniplayer';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js

@@ -1,4 +1,3 @@
-import { GetSponsorListLetterCountsDocument } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Sponsors, {
@@ -6,6 +5,7 @@ import Sponsors, {
 	getStaticProps,
 } from '@pages/[language]/sponsors/all';
 import { screen } from '@testing-library/react';
+import { GetSponsorListLetterCountsDocument } from './__generated__/list';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 

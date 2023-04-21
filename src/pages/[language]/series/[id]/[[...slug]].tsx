@@ -7,12 +7,12 @@ import {
 import { IBaseProps } from '@containers/base';
 import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import {
 	getSeriesDetailPageData,
 	getSeriesDetailPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@containers/series/__generated__/detail';
 
 export default SeriesDetail;
 

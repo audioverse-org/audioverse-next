@@ -23,13 +23,14 @@ import SponsorTypeLockup from '@components/molecules/sponsorTypeLockup';
 import Tease from '@components/molecules/tease';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
-import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
+
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
+import { GetSponsorDetailPageDataQuery } from './__generated__/detail';
 
 export type SponsorDetailProps = GetSponsorDetailPageDataQuery;
 

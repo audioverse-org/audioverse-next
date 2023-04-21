@@ -1,15 +1,15 @@
 import List, { PresentersProps } from './list';
 import React, { useEffect, useRef } from 'react';
-import {
-	GetPresenterListAllPageDataDocument,
-	GetPresenterListAllPageDataQuery,
-	Maybe,
-} from '@lib/generated/graphql';
 import { useInfiniteQuery } from 'react-query';
 import useOnScreen from '@lib/hooks/useOnScreen';
 import { fetchApi } from '@lib/api/fetchApi';
 import { useLanguageId } from '@lib/useLanguageId';
 import { useIntl } from 'react-intl';
+import {
+	GetPresenterListAllPageDataDocument,
+	GetPresenterListAllPageDataQuery,
+} from './__generated__/all';
+import { Maybe } from '@src/__generated__/graphql';
 
 export default function All(props: PresentersProps) {
 	const endRef = useRef<HTMLDivElement>(null);

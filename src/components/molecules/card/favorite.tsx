@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { CardFavoriteFragment } from '@lib/generated/graphql';
-
 import CardFavoriteEntity from './favoriteEntity';
+import { CardFavoriteFragment } from './__generated__/favorite';
 
 interface CardEntityProps {
 	favorite: CardFavoriteFragment;

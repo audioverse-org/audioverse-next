@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Heading2 from '@components/atoms/heading2';
-import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../../public/img/icons/fa-book-light.svg';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
@@ -9,6 +8,7 @@ import CardRecordingSequenceHat from '../recordingSequenceHat';
 import styles from './bibleBook.module.scss';
 
 import CardHat from '.';
+import { CardRecordingFragment } from '../__generated__/recording';
 
 interface Props {
 	sequence: NonNullable<CardRecordingFragment['sequence']>;

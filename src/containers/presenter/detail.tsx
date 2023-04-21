@@ -23,13 +23,14 @@ import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
-import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
+
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
+import { GetPresenterDetailPageDataQuery } from './__generated__/detail';
 
 export type PresenterDetailProps = GetPresenterDetailPageDataQuery;
 

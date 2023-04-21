@@ -5,8 +5,9 @@ import React from 'react';
 
 import SocialLogin from '@components/molecules/socialLogin';
 import { fetchApi } from '@lib/api/fetchApi';
-import { RegisterSocialDocument } from '@lib/generated/graphql';
+
 import renderWithProviders from '@lib/test/renderWithProviders';
+import { RegisterSocialDocument } from '@containers/account/__generated__/register';
 
 describe('social login', () => {
 	it('does not run onSuccess callback if errors', async () => {

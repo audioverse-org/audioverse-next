@@ -3,7 +3,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
+
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconJumpBackMedium from '../../../public/img/icons/icon-jump-back-medium.svg';
@@ -14,6 +14,7 @@ import IconJumpForward from '../../../public/img/icons/icon-jump-forward.svg';
 import styles from './buttonNudge.module.scss';
 import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
+import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
 
 export default function ButtonNudge({
 	recording,

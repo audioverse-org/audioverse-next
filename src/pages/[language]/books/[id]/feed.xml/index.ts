@@ -1,13 +1,11 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import {
-	BookFeedDescriptionFragment,
-	getAudiobookFeedData,
-	SequenceContentType,
-} from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { BookFeedDescriptionFragment } from './__generated__/bookFeedDescription';
+import { getAudiobookFeedData } from '@containers/audiobook/__generated__/detail';
+import { SequenceContentType } from '@src/__generated__/graphql';
 
 export default (): void => void 0;
 

@@ -5,15 +5,15 @@ import {
 	loadSermonListPagePathsData,
 } from '@containers/sermon/list.all.spec';
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSermonListPageDataDocument,
-	GetSermonListPagePathsDataDocument,
-} from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import { getStaticPaths } from '@pages/[language]/teachings/video/page/[i]';
 import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/teachings/video/page/[i]';
+import {
+	GetSermonListPageDataDocument,
+	GetSermonListPagePathsDataDocument,
+} from './__generated__/list';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 

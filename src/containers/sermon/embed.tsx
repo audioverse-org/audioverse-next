@@ -7,13 +7,14 @@ import withFailStates from '@components/HOCs/withFailStates';
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
+
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 
 import Logo from '../../../public/img/logo-small.svg';
 
 import styles from './embed.module.scss';
+import { GetSermonDetailDataQuery } from './__generated__/detail';
 
 export interface SermonEmbedProps {
 	recording: GetSermonDetailDataQuery['sermon'];

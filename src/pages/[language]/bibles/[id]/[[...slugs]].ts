@@ -8,13 +8,10 @@ import { IBaseProps } from '@containers/base';
 import Version, { VersionProps } from '@containers/bible/version';
 import { getBible, getBibles } from '@lib/api/bibleBrain';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import {
-	CollectionContentType,
-	getAudiobibleVersionData,
-	getAudiobibleVersionsData,
-	Language,
-} from '@lib/generated/graphql';
 import root from '@lib/routes';
+import { getAudiobibleVersionsData } from '@containers/bible/__generated__/versions';
+import { CollectionContentType, Language } from '@src/__generated__/graphql';
+import { getAudiobibleVersionData } from '@containers/bible/__generated__/version';
 
 export default Version;
 

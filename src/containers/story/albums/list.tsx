@@ -3,11 +3,12 @@ import { FormattedMessage } from 'react-intl';
 
 import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetStoriesAlbumsPageDataQuery } from '@lib/generated/graphql';
+
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import EmptyState from '@components/organisms/emptyState';
+import { GetStoriesAlbumsPageDataQuery } from './__generated__/list';
 
 export type StoryAlbumsListProps = PaginatedProps<
 	NonNullable<GetStoriesAlbumsPageDataQuery['storySeasons']['nodes']>[0],

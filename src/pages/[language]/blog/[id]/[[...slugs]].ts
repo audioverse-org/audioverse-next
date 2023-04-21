@@ -7,12 +7,9 @@ import {
 import { IBaseProps } from '@containers/base';
 import BlogPostDetail, { BlogPostDetailProps } from '@containers/blog/detail';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import {
-	getBlogDetailData,
-	getBlogDetailStaticPaths,
-} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getBlogDetailData, getBlogDetailStaticPaths } from '@containers/blog/__generated__/detail';
 
 export default BlogPostDetail;
 

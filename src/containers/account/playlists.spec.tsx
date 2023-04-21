@@ -5,15 +5,15 @@ import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	AddAccountPlaylistDocument,
-	GetAccountPlaylistsPageDataDocument,
-} from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 
 import Playlists from './playlists';
+import {
+	AddAccountPlaylistDocument,
+	GetAccountPlaylistsPageDataDocument,
+} from './__generated__/playlists';
 
 const renderPage = buildRenderer(Playlists);
 

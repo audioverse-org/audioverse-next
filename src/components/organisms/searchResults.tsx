@@ -14,7 +14,7 @@ import { useQueryString } from '@lib/useQueryString';
 import useSearch, { AugmentedFilter } from './searchResults.useResults';
 import { EntityFilterId } from './searchResults.filters';
 import isServerSide from '@lib/isServerSide';
-import { CardRecordingFragment } from '../../lib/generated/graphql';
+import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
 
 function SearchHead({ term }: { term?: string }): JSX.Element {
 	// WORKAROUND: We can't use the <FormattedMessage> component here because

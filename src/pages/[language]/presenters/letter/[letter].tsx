@@ -7,14 +7,12 @@ import {
 import { IBaseProps } from '@containers/base';
 import Presenters, { PresentersProps } from '@containers/presenter/list/letter';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
-import {
-	getPersonListLetterCounts,
-	getPresenterListLetterPageData,
-	Language,
-} from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import root from '@lib/routes';
+import { getPresenterListLetterPageData } from '@containers/presenter/list/__generated__/letter';
+import { getPersonListLetterCounts } from '@containers/presenter/list/__generated__/list';
+import { Language } from '@src/__generated__/graphql';
 
 export default Presenters;
 

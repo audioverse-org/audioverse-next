@@ -16,14 +16,14 @@ import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
 import { Recording } from '@components/organisms/recording';
-import {
-	RecordingContentType,
-	RecordingFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import MyApp from '@pages/_app';
 import { __awaitIntlMessages } from '@lib/getIntlMessages';
+import { RecordingFragment } from '@components/organisms/__generated__/recording';
+import {
+	RecordingContentType,
+	SequenceContentType,
+} from '@src/__generated__/graphql';
 
 const sequence = {
 	id: 'the_sequence_id',

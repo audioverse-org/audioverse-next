@@ -8,7 +8,7 @@ import ListIcon from '../../public/img/icons/fa-list-alt.svg';
 import SongIcon from '../../public/img/icons/fa-music-light.svg';
 
 import { BaseColors } from './constants';
-import { SequenceContentType } from './generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 
 type ISequenceTypeTheme = {
 	backgroundColor:

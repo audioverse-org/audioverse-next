@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import Library, { ILibraryProps } from '@containers/library';
+import Library, { ILibraryProps } from '@containers/library/library';
 import { storeRequest } from '@lib/api/storeRequest';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 

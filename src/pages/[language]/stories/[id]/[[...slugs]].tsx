@@ -7,12 +7,12 @@ import {
 import { IBaseProps } from '@containers/base';
 import Story, { StoryDetailProps } from '@containers/story/detail';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import {
 	getStoryDetailData,
 	getStoryDetailStaticPaths,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@containers/story/__generated__/detail';
 
 export default Story;
 

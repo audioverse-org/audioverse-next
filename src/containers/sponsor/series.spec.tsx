@@ -2,17 +2,17 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSponsorSeriesPageDataDocument,
-	GetSponsorSeriesPathsDataDocument,
-	SequenceContentType,
-} from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SponsorSeries, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/series/page/[i]';
+import {
+	GetSponsorSeriesPageDataDocument,
+	GetSponsorSeriesPathsDataDocument,
+} from './__generated__/series';
+import { SequenceContentType } from '@src/__generated__/graphql';
 
 const renderPage = buildStaticRenderer(SponsorSeries, getStaticProps);
 

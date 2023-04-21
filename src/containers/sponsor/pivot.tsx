@@ -6,9 +6,9 @@ import ButtonBack from '@components/molecules/buttonBack';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import SponsorTypeLockup from '@components/molecules/sponsorTypeLockup';
 import Tease from '@components/molecules/tease';
-import { SponsorPivotFragment } from '@lib/generated/graphql';
 
 import styles from './pivot.module.scss';
+import { SponsorPivotFragment } from './__generated__/pivot';
 
 type Props = {
 	sponsor: SponsorPivotFragment;

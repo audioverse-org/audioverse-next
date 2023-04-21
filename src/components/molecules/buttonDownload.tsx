@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
-import { ButtonDownloadFragment } from '@lib/generated/graphql';
+
 import { readableBytes } from '@lib/readableBytes';
 
 import IconDownload from '../../../public/img/icons/icon-download.svg';
@@ -12,6 +12,7 @@ import styles from './buttonDownload.module.scss';
 import { isBackgroundColorDark } from './buttonPlay';
 import Dropdown from './dropdown';
 import IconButton from './iconButton';
+import { ButtonDownloadFragment } from './__generated__/buttonDownload';
 
 export default function ButtonDownload({
 	recording,

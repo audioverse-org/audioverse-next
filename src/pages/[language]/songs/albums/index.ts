@@ -9,11 +9,12 @@ import StoryAlbumsList, {
 	SongAlbumsListProps,
 } from '@containers/song/albums/list';
 import { REVALIDATE } from '@lib/constants';
-import { getSongAlbumsListPageData } from '@lib/generated/graphql';
+
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import root from '@lib/routes';
+import { getSongAlbumsListPageData } from '@containers/song/albums/__generated__/list';
 
 export default StoryAlbumsList;
 

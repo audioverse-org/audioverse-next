@@ -1,4 +1,4 @@
-import { Language } from './generated/graphql';
+import { Language } from '@src/__generated__/graphql';
 import { getLanguageIdByRoute } from './getLanguageIdByRoute';
 
 describe('getLanguageIdByRoute', () => {

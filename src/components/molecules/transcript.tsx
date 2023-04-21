@@ -3,9 +3,9 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Alert from '@components/atoms/alert';
-import { RecordingContentType } from '@lib/generated/graphql';
 
 import styles from './transcript.module.scss';
+import { RecordingContentType } from '@src/__generated__/graphql';
 
 // @see https://stackoverflow.com/a/37400795/168581
 function splitText(text: string): string[] {

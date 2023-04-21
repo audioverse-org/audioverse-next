@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { CardRecordingFragment } from '@lib/generated/graphql';
-
 import HatIcon from '../../../../public/img/icons/fa-layer-group.svg';
 import TeaseRecording from '../teaseRecording';
 
 import CardWithTheme from './base/withTheme';
 import CardHat from './hat';
+import { CardRecordingFragment } from './__generated__/recording';
 
 interface CardTopicProps {
 	topicRecording: CardRecordingFragment;

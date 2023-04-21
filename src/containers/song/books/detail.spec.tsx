@@ -2,15 +2,13 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSongBooksDetailPageDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/book/[book]';
+import { GetSongBooksDetailPageDataDocument } from './__generated__/detail';
+import { RecordingContentType } from '@src/__generated__/graphql';
 
 const renderPage = buildStaticRenderer(Song, getStaticProps);
 

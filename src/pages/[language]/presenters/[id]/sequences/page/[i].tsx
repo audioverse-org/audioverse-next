@@ -7,13 +7,11 @@ import {
 import PresenterSequences, {
 	PresenterSequencesProps,
 } from '@containers/presenter/sequences';
-import {
-	getPresenterDetailPathsData,
-	getPresenterSequencesPageData,
-} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { getPresenterDetailPathsData } from '@containers/presenter/__generated__/detail';
+import { getPresenterSequencesPageData } from '@containers/presenter/__generated__/sequences';
 
 export default PresenterSequences;
 

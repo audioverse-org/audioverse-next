@@ -1,9 +1,9 @@
-import All from '@containers/presenter/list/all';
-import { REVALIDATE } from '@lib/constants';
 import {
 	getPersonListLetterCounts,
 	GetPersonListLetterCountsQuery,
-} from '@lib/generated/graphql';
+} from '@containers/presenter/list/__generated__/list';
+import All from '@containers/presenter/list/all';
+import { REVALIDATE } from '@lib/constants';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import root from '@lib/routes';

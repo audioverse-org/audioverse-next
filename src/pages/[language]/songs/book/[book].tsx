@@ -10,11 +10,12 @@ import SongBookDetail, {
 	SongBooksDetailProps,
 } from '@containers/song/books/detail';
 import { BIBLE_BOOKS, REVALIDATE } from '@lib/constants';
-import { getSongBooksDetailPageData } from '@lib/generated/graphql';
+
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import root from '@lib/routes';
+import { getSongBooksDetailPageData } from '@containers/song/books/__generated__/detail';
 
 export default SongBookDetail;
 

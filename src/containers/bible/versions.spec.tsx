@@ -1,13 +1,14 @@
 import React from 'react';
 
 import * as bibleBrain from '@lib/api/bibleBrain';
-import { GetAudiobibleVersionsDataDocument } from '@lib/generated/graphql';
+
 import { buildLoader } from '@lib/test/buildLoader';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Versions, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles';
+import { GetAudiobibleVersionsDataDocument } from './__generated__/versions';
 
 jest.mock('@lib/api/bibleBrain');
 

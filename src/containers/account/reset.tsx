@@ -6,7 +6,7 @@ import Alert from '@components/atoms/alert';
 import Button from '@components/molecules/button';
 import Input from '@components/molecules/form/input';
 import { login } from '@lib/api/login';
-import { useResetPasswordMutation } from '@lib/generated/graphql';
+
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
@@ -14,6 +14,7 @@ import { useQueryString } from '@lib/useQueryString';
 import LogoLarge from '../../../public/img/logo-large.svg';
 
 import styles from './reset.module.scss';
+import { useResetPasswordMutation } from './__generated__/reset';
 
 function Reset(): JSX.Element {
 	const router = useRouter();

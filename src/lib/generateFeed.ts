@@ -6,12 +6,9 @@ import he from 'he';
 import { GetServerSidePropsContext } from 'next';
 import striptags from 'striptags';
 
-import {
-	GenerateFeedFragment,
-	RecordingContentType,
-} from '@lib/generated/graphql';
-
 import getIntl from './getIntl';
+import { RecordingContentType } from '@src/__generated__/graphql';
+import { GenerateFeedFragment } from './__generated__/generateFeed';
 
 export const sendRSSHeaders = (res: GetServerSidePropsContext['res']) => {
 	res.setHeader('Content-Type', 'text/xml');

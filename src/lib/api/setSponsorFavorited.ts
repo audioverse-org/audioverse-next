@@ -1,4 +1,5 @@
-import { sponsorFavorite, sponsorUnfavorite } from '@lib/generated/graphql';
+import { sponsorFavorite } from './__generated__/sponsorFavorite';
+import { sponsorUnfavorite } from './__generated__/sponsorUnfavorite';
 
 export async function setSponsorFavorited(
 	id: number | string,

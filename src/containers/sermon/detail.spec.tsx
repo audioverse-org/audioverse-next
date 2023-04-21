@@ -17,13 +17,6 @@ import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { SermonDetailProps } from '@containers/sermon/detail';
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSermonDetailDataDocument,
-	GetSermonDetailStaticPathsDocument,
-	Language,
-	RecordingContentType,
-	SequenceContentType,
-} from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock from '@lib/test/setPlayerMock';
@@ -32,6 +25,15 @@ import SermonDetail, {
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
 import { DETAIL_PRERENDER_LIMIT } from '@lib/constants';
+import {
+	Language,
+	RecordingContentType,
+	SequenceContentType,
+} from '@src/__generated__/graphql';
+import {
+	GetSermonDetailDataDocument,
+	GetSermonDetailStaticPathsDocument,
+} from './__generated__/detail';
 
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');

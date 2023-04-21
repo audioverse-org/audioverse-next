@@ -17,9 +17,9 @@ import DefinitionList, {
 import Tease from '@components/molecules/tease';
 import { IBibleVersion } from '@lib/api/bibleBrain';
 import { BaseColors } from '@lib/constants';
-import { GetAudiobibleVersionDataQuery } from '@lib/generated/graphql';
 
 import styles from './version.module.scss';
+import { GetAudiobibleVersionDataQuery } from './__generated__/version';
 
 export interface VersionProps {
 	version: IBibleVersion | GetAudiobibleVersionDataQuery['collection'];

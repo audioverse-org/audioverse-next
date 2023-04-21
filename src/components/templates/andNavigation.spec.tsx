@@ -3,12 +3,12 @@ import { buildRenderer } from '../../lib/test/buildRenderer';
 import AndNavigation from './andNavigation';
 import { screen } from '@testing-library/react';
 import { buildLoader } from '../../lib/test/buildLoader';
+import { CardPersonFragment } from '@components/molecules/card/__generated__/person';
+import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
 import {
-	CardPersonFragment,
-	CardRecordingFragment,
 	GetSearchPersonsDocument,
 	GetSearchRecordingsDocument,
-} from '../../lib/generated/graphql';
+} from '@components/organisms/__generated__/searchResults';
 
 const renderTemplate = buildRenderer(AndNavigation);
 

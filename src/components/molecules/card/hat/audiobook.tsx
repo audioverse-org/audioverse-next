@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
-import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../../public/img/icons/fa-book-light.svg';
 import PersonLockup from '../../personLockup';
@@ -13,6 +12,7 @@ import CardRecordingSequenceHat from '../recordingSequenceHat';
 import styles from './audiobook.module.scss';
 
 import CardHat from '.';
+import { CardRecordingFragment } from '../__generated__/recording';
 
 interface Props {
 	sequence: NonNullable<CardRecordingFragment['sequence']>;

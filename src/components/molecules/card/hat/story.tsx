@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
 import RoundImage from '@components/atoms/roundImage';
-import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../../public/img/icons/fa-feather-light.svg';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
@@ -11,6 +10,7 @@ import CardRecordingSequenceHat from '../recordingSequenceHat';
 import styles from './story.module.scss';
 
 import CardHat from '.';
+import { CardRecordingFragment } from '../__generated__/recording';
 
 interface Props {
 	sequence: NonNullable<CardRecordingFragment['sequence']>;

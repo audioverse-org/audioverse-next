@@ -1,10 +1,5 @@
 import React from 'react';
 
-import {
-	CardRecordingStackFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
-
 import TeaseRecordingStack from '../teaseRecordingStack';
 
 import CardWithTheme from './base/withTheme';
@@ -13,6 +8,8 @@ import CardHatBibleBook from './hat/bibleBook';
 import CardHatSermon from './hat/sermon';
 import CardHatSong from './hat/song';
 import CardHatStory from './hat/story';
+import { SequenceContentType } from '@src/__generated__/graphql';
+import { CardRecordingStackFragment } from './__generated__/recordingStack';
 
 export interface Props {
 	sequence: CardRecordingStackFragment;

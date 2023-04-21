@@ -23,11 +23,6 @@ import {
 	IBibleVersion,
 } from '@lib/api/bibleBrain';
 import { BaseColors } from '@lib/constants';
-import {
-	PlayerFragment,
-	RecordingContentType,
-	SequenceNavFragment,
-} from '@lib/generated/graphql';
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -35,6 +30,9 @@ import IconBack from '../../../public/img/icons/icon-back-light.svg';
 import IconBlog from '../../../public/img/icons/icon-blog-light-small.svg';
 
 import styles from './book.module.scss';
+import { PlayerFragment } from '@components/molecules/__generated__/player';
+import { SequenceNavFragment } from '@components/molecules/__generated__/sequenceNav';
+import { RecordingContentType } from '@src/__generated__/graphql';
 
 export interface BookProps {
 	version: IBibleVersion;

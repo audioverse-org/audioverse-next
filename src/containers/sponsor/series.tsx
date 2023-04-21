@@ -7,14 +7,12 @@ import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import { BaseColors } from '@lib/constants';
-import {
-	GetSponsorSeriesPageDataQuery,
-	SponsorPivotFragment,
-} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import root from '@lib/routes';
 
 import SponsorPivot from './pivot';
+import { SponsorPivotFragment } from './__generated__/pivot';
+import { GetSponsorSeriesPageDataQuery } from './__generated__/series';
 
 export type SponsorSeriesProps = PaginatedProps<
 	NonNullable<GetSponsorSeriesPageDataQuery['sequences']['nodes']>[0],

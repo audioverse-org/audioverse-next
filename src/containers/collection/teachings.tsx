@@ -7,14 +7,12 @@ import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import { BaseColors } from '@lib/constants';
-import {
-	CollectionPivotFragment,
-	GetCollectionTeachingsPageDataQuery,
-} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import root from '@lib/routes';
 
 import CollectionPivot from './pivot';
+import { CollectionPivotFragment } from './__generated__/pivot';
+import { GetCollectionTeachingsPageDataQuery } from './__generated__/teachings';
 
 export type CollectionTeachingsProps = PaginatedProps<
 	NonNullable<

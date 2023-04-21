@@ -8,7 +8,7 @@ import Heading6 from '@components/atoms/heading6';
 import Button from '@components/molecules/button';
 import Dropdown from '@components/molecules/dropdown';
 import Mininav from '@components/molecules/mininav';
-import { SORT_MAP } from '@containers/library';
+import { SORT_MAP } from '@containers/library/library';
 import root from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

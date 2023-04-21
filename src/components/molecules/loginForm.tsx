@@ -6,12 +6,12 @@ import { useQueryClient } from 'react-query';
 import Alert from '@components/atoms/alert';
 import Modal from '@components/organisms/modal';
 import { login, refetchUserQueries } from '@lib/api/login';
-import { useLoginForgotPasswordMutation } from '@lib/generated/graphql';
 
 import Button from './button';
 import ButtonGuest from './buttonGuest';
 import Input from './form/input';
 import styles from './loginForm.module.scss';
+import { useLoginForgotPasswordMutation } from './__generated__/login';
 
 type Props = {
 	showRegister: () => void;

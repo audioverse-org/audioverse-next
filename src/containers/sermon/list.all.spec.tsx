@@ -10,16 +10,16 @@ import {
 	LANGUAGES,
 	LIST_PRERENDER_LIMIT,
 } from '@lib/constants';
-import {
-	GetSermonListPageDataDocument,
-	GetSermonListPagePathsDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/all/page/[i]';
+import { RecordingContentType } from '@src/__generated__/graphql';
+import {
+	GetSermonListPageDataDocument,
+	GetSermonListPagePathsDataDocument,
+} from './__generated__/list';
 
 jest.mock('next/head');
 

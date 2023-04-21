@@ -7,12 +7,12 @@ import {
 import { IBaseProps } from '@containers/base';
 import SponsorDetail, { SponsorDetailProps } from '@containers/sponsor/detail';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import {
 	getSponsorDetailPageData,
 	getSponsorDetailPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@containers/sponsor/__generated__/detail';
 
 export default SponsorDetail;
 
