@@ -1,19 +1,19 @@
 import { CodegenPlugin, Types } from '@graphql-codegen/plugin-helpers';
 import { DefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 
-function generateCodeSnippets(
+function generateCodeSnippets<T extends DefinitionNode>(
 	documents: Types.DocumentFile[],
 	shouldProcess: (def: DefinitionNode) => boolean,
-	makeSnippet: (def: DefinitionNode) => string
+	makeSnippet: (def: T) => string
 ) {
 	return documents
 		.map((doc) => {
-			return doc.document.definitions
-				.filter(shouldProcess)
+			return doc.document?.definitions
+				.filter((def): def is T => shouldProcess(def))
 				.map(makeSnippet)
 				.join('\n');
 		})
-		.filter((x) => !!x.length)
+		.filter((x) => !!x?.length)
 		.join('\n');
 }
 
@@ -34,16 +34,18 @@ export async function ${fnName}<T>(
 }`;
 
 const plugin: CodegenPlugin = {
-	plugin: (schema, documents, config, info) => {
-		const result = generateCodeSnippets(
+	plugin: (schema, documents) => {
+		const result = generateCodeSnippets<OperationDefinitionNode>(
 			documents,
 			(def): def is OperationDefinitionNode =>
 				def.kind === Kind.OPERATION_DEFINITION,
 			(def: OperationDefinitionNode) => {
-				console.log(def.kind);
+				if (!def.name) {
+					throw new Error('Could not find node name');
+				}
 				const capitalName = capitalize(def.name.value);
 				const capitalType = capitalize(def.operation);
-				const fnName = def.name.value;
+				const fnName = def.name?.value;
 				const varType = `${capitalName}${capitalType}Variables`;
 				const returnType = `${capitalName}${capitalType}`;
 				const docName = `${capitalName}Document`;
