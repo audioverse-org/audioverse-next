@@ -1,4 +1,11 @@
-function generateCodeSnippets(documents, shouldProcess, makeSnippet) {
+import { CodegenPlugin, Types } from '@graphql-codegen/plugin-helpers';
+import { DefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
+
+function generateCodeSnippets(
+	documents: Types.DocumentFile[],
+	shouldProcess: (def: DefinitionNode) => boolean,
+	makeSnippet: (def: DefinitionNode) => string
+) {
 	return documents
 		.map((doc) => {
 			return doc.document.definitions
@@ -10,23 +17,30 @@ function generateCodeSnippets(documents, shouldProcess, makeSnippet) {
 		.join('\n');
 }
 
-function capitalize(string) {
+function capitalize(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const template = (fnName, varType, returnType, docName) => `
+const template = (
+	fnName: string,
+	varType: string,
+	returnType: string,
+	docName: string
+) => `
 export async function ${fnName}<T>(
 	variables: ExactAlt<T, ${varType}>
 ): Promise<${returnType}> {
 	return fetchApi(${docName}, { variables });
 }`;
 
-module.exports = {
+const plugin: CodegenPlugin = {
 	plugin: (schema, documents, config, info) => {
 		const result = generateCodeSnippets(
 			documents,
-			(def) => def.kind !== 'FragmentDefinition',
-			(def) => {
+			(def): def is OperationDefinitionNode =>
+				def.kind === Kind.OPERATION_DEFINITION,
+			(def: OperationDefinitionNode) => {
+				console.log(def.kind);
 				const capitalName = capitalize(def.name.value);
 				const capitalType = capitalize(def.operation);
 				const fnName = def.name.value;
@@ -43,3 +57,5 @@ module.exports = {
 		return `import { fetchApi } from '~lib/api/fetchApi' \n${result}`;
 	},
 };
+
+module.exports = plugin;

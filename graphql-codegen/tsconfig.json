@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "es6",
+        "lib": [
+            "es2017",
+            "es2019",
+            "dom"
+        ],
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "skipLibCheck": true
+    },
+    "exclude": [
+        "./*.js"
+    ],
+    "include": [
+        "*.ts"
+    ]
+}

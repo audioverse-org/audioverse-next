@@ -32,7 +32,7 @@ generates:
     plugins:
       - 'typescript-operations'
       - 'typescript-react-query'
-      - 'graphql-plugin-getters.js'
+      - 'graphql-codegen/dist/graphql-plugin-getters.js'
     config:
       fetcher: '~lib/api/graphqlFetcher#graphqlFetcher'
       dedupeFragments: true
