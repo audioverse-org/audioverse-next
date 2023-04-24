@@ -1,78 +1,20 @@
-import throttle from 'lodash/throttle';
 import Script from 'next/script';
 import React, {
 	MutableRefObject,
 	ReactNode,
-	useCallback,
 	useEffect,
-	useMemo,
+	useReducer,
 	useRef,
-	useState,
 } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import type { VideoJsPlayer } from 'video.js';
-import type * as VideoJs from 'video.js';
-
-import { getSessionToken } from '@lib/cookies';
 import {
 	AndMiniplayerFragment,
 	GetRecordingPlaybackProgressQuery,
-	recordingPlaybackProgressSet,
-	RecordingPlaybackProgressSetMutationVariables,
 	Scalars,
 } from '@lib/generated/graphql';
-import hasVideo from '@lib/hasVideo';
-
-// Source:
-// https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
-
-// If this solution becomes unviable, for instance, due to needing to
-// update more props than just sources, this alternative approach may work:
-// https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
-
-interface Playable extends VideoJs.default.Tech.SourceObject {
-	duration: number;
-	logUrl?: string | null;
-}
-
-const getFiles = (
-	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
-):
-	| AndMiniplayerFragment['audioFiles']
-	| AndMiniplayerFragment['videoFiles']
-	| AndMiniplayerFragment['videoStreams'] => {
-	if (!recording) return [];
-
-	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
-
-	if (prefersAudio) return audioFiles;
-	if (videoStreams.length > 0) return videoStreams;
-	if (videoFiles.length > 0) return videoFiles;
-
-	return audioFiles;
-};
-
-export const getSources = (
-	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
-): Playable[] => {
-	const files = getFiles(recording, prefersAudio) || [];
-
-	return files.map((f) => ({
-		src: f.url,
-		type: f.mimeType,
-		duration: f.duration,
-		logUrl: 'logUrl' in f ? f.logUrl : undefined,
-	}));
-};
-
-export const shouldLoadRecordingPlaybackProgress = (
-	recording: AndMiniplayerFragment | null | undefined
-) =>
-	!!recording?.id &&
-	!(recording.id + '').includes('/') && // Bible ids
-	!!getSessionToken();
+import { initialState, reducer } from './andPlaybackContext.reducer';
+import getSources, { Playable } from '@lib/getSources';
 
 export type PlaybackContextType = {
 	player: () => VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
@@ -87,7 +29,7 @@ export type PlaybackContextType = {
 	getPrefersAudio: () => boolean;
 	getProgress: () => number;
 	getBufferedProgress: () => number;
-	setProgress: (p: number, updatePlayer?: boolean) => void;
+	setProgress: (p: number) => void;
 	getRecording: () => AndMiniplayerFragment | undefined;
 	loadRecording: (
 		recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
@@ -99,10 +41,9 @@ export type PlaybackContextType = {
 	setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => void;
 	unsetVideoHandler: (id: Scalars['ID']) => void;
 	hasPlayer: () => boolean;
-	hasVideo: () => boolean;
 	supportsFullscreen: () => boolean;
 	isShowingVideo: () => boolean;
-	getVideoLocation: () => 'miniplayer' | 'portal' | null;
+	getVideoLocation: () => 'miniplayer' | 'portal' | undefined;
 	getVolume: () => number;
 	setVolume: (v: number) => void;
 	setSpeed: (s: number) => void;
@@ -118,7 +59,8 @@ export type PlaybackContextType = {
 	};
 	_setRecording: (
 		recording: AndMiniplayerFragment,
-		prefersAudio?: boolean
+		prefersAudio?: boolean,
+		onLoad?: (c: PlaybackContextType) => void
 	) => void;
 };
 
@@ -139,9 +81,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setVideoHandler: () => undefined,
 	unsetVideoHandler: () => undefined,
 	hasPlayer: () => false,
-	hasVideo: () => false,
 	isShowingVideo: () => false,
-	getVideoLocation: () => null,
+	getVideoLocation: () => undefined,
 	getRecording: () => undefined,
 	getVolume: () => 100,
 	setVolume: () => undefined,
@@ -161,209 +102,121 @@ interface AndMiniplayerProps {
 	children: ReactNode;
 }
 
-const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
-
-type VideoJsType = typeof VideoJs;
-type Airplay = { default: (vjs: unknown) => unknown };
-type Chromecast = {
-	default: (vjs: unknown, options: Record<string, unknown>) => unknown;
-};
-
 export default function AndPlaybackContext({
 	children,
 }: AndMiniplayerProps): JSX.Element {
-	const videoRef = useRef<HTMLDivElement>(null);
-	const videoElRef = useRef<HTMLVideoElement>(null);
-	const originRef = useRef<HTMLDivElement>(null);
-
-	const [videojs] = useState<Promise<VideoJsType>>(() => import('video.js'));
-	const [airplay] = useState<Promise<Airplay>>(
-		() => import('@silvermine/videojs-airplay')
-	);
-	const [chromecast] = useState<Promise<Chromecast>>(
-		() => import('@silvermine/videojs-chromecast')
-	);
-
-	const [sourceRecordings, setSourceRecordings] =
-		useState<AndMiniplayerFragment[]>();
-	const [recording, setRecording] = useState<AndMiniplayerFragment>();
-	const [progress, _setProgress] = useState<number>(0);
-	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
-	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
-	const playerRef = useRef<VideoJsPlayer>();
-	const progressRef = useRef<number>(0);
-	const [isPaused, setIsPaused] = useState<boolean>(true);
-	const [prefersAudio, setPrefersAudio] = useState(false);
-	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
-	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
-	const videoHandlerIdRef = useRef<Scalars['ID']>();
-	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
-	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
-
+	const [state, dispatch] = useReducer(reducer, initialState);
 	const queryClient = useQueryClient();
 
-	const { mutate: updateProgress } = useMutation(
-		({
-			percentage,
-		}: Pick<RecordingPlaybackProgressSetMutationVariables, 'percentage'>) => {
-			if (!getSessionToken() || !recording) {
-				return Promise.resolve() as Promise<unknown>;
-			}
-			return recordingPlaybackProgressSet({
-				id: recording.id,
-				percentage,
-			});
-		}
-	);
+	// HTML Refs
+	const videoRef = useRef<HTMLDivElement>(null); // 2
+	const videoElRef = useRef<HTMLVideoElement>(null); // 2
+	const originRef = useRef<HTMLDivElement>(null); // 2
 
-	const sourcesRef = useRef<Playable[]>([]);
-	useEffect(() => {
-		if (!recording) return;
-		sourcesRef.current = getSources(recording, prefersAudio);
-	}, [recording, prefersAudio]);
+	// Refs
+	const onLoadRef = useRef<(c: PlaybackContextType) => void>(); // 4
+	const sourcesRef = useRef<Playable[]>([]); // 3
+	const videoHandlerIdRef = useRef<Scalars['ID']>(); // 2
+	const playerRef = useRef<VideoJsPlayer>(); // 8
 
+	// Computed
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
-	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
-	useEffect(() => {
-		let newBufferedProgress = +Math.max(
-			bufferedProgress, // Don't ever reduce the buffered amount
-			progress, // We've always buffered as much as we're playing
-			(playerBufferedEnd || 0) / duration // Actually compute current buffered progress
-		).toFixed(2);
-		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
-		setBufferedProgress(newBufferedProgress);
-	}, [bufferedProgress, playerBufferedEnd, progress, duration]);
 
-	const throttledUpdateProgress = useMemo(
-		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
-		[updateProgress]
-	);
-	const setProgress = useCallback(
-		(p: number) => {
-			throttledUpdateProgress({
-				percentage: p,
+	useEffect(() => {
+		if (!state.player) return;
+		state.player.on('timeupdate', () => {
+			if (!state.player) return;
+			const t = state.player.currentTime();
+			const d = state.player.duration();
+			const p = d ? t / d : 0;
+			dispatch({
+				type: 'SET_PROGRESS',
+				payload: p,
 			});
-			_setProgress(p);
-		},
-		[throttledUpdateProgress]
-	);
-
-	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
+		});
+	}, [state.player]);
 
 	useEffect(() => {
-		progressRef.current = progress;
-	}, [progress]);
+		if (!state.recording) return;
+		sourcesRef.current = getSources(state.recording, state.prefersAudio);
+	}, [state.recording, state.prefersAudio]);
 
-	const recordingRef = useRef<AndMiniplayerFragment>();
+	useEffect(() => {
+		dispatch({
+			type: 'SET_BUFFERED_PROGRESS',
+			payload: (playerBufferedEnd || 0) / state.duration,
+		});
+	}, [
+		state.bufferedProgress,
+		playerBufferedEnd,
+		state.progress,
+		state.duration,
+	]);
+
 	const playback: PlaybackContextType = {
-		play: () => {
-			playerRef.current?.play();
-			setIsPaused(false);
-		},
-		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
-		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
-		pause: () => {
-			playerRef.current?.pause();
-			setIsPaused(true);
-		},
-		paused: () => isPaused,
-		player: () => playerRef.current,
 		getTime: () =>
-			(!onLoadRef.current && playerRef.current?.currentTime()) ||
-			progress * playback.getDuration() ||
+			(!onLoadRef.current && state.player?.currentTime()) ||
+			state.progress * playback.getDuration() ||
 			0,
-		setTime: (t: number) => {
-			if (!playerRef.current) return;
-			setProgress(t / playerRef.current.duration());
-			playerRef.current.currentTime(t);
-		},
-		setPrefersAudio: (prefersAudio: boolean) => {
-			if (!recording) return;
-			setPrefersAudio(prefersAudio);
-		},
-		getPrefersAudio: () => prefersAudio,
-		getDuration: () => {
-			return (
-				playerRef.current?.duration() ||
-				sourcesRef.current[0]?.duration ||
-				recordingRef.current?.duration ||
-				0
-			);
-		},
-		getProgress: () => progress,
-		getBufferedProgress: () => bufferedProgress,
-		setProgress: (p: number, updatePlayer = true) => {
-			setProgress(p);
+		getDuration: () =>
+			state.player?.duration() ||
+			sourcesRef.current[0]?.duration ||
+			state.recording?.duration ||
+			0,
+		setProgress: (p: number) => {
+			dispatch({ type: 'SET_PROGRESS', payload: p });
 			const duration = playback.getDuration();
-			if (!playerRef.current || !duration || isNaN(duration) || !updatePlayer)
-				return;
+			if (!playerRef.current || !duration || isNaN(duration)) return;
 			playerRef.current.currentTime(p * duration);
 		},
-		getRecording: () => recording,
 		loadRecording: (
 			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 			options = {}
 		) => {
 			const { onLoad, prefersAudio } = options;
 			onLoadRef.current = onLoad;
+
 			const recordingsArray = Array.isArray(recordingOrRecordings)
 				? recordingOrRecordings
 				: [recordingOrRecordings];
-			setSourceRecordings(recordingsArray);
+			dispatch({ type: 'SET_RECORDINGS', payload: recordingsArray });
 			const newRecording = recordingsArray[0];
-			setRecording(newRecording);
-			recordingRef.current = newRecording;
+
 			if (typeof prefersAudio === 'boolean') {
-				setPrefersAudio(prefersAudio);
+				dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
 			}
-			if (videoHandlerId && newRecording.id !== videoHandlerId) {
-				playback.unsetVideoHandler(videoHandlerId);
+			if (state.videoHandlerId && newRecording.id !== state.videoHandlerId) {
+				playback.unsetVideoHandler(state.videoHandlerId);
 			}
 
-			playback._setRecording(newRecording, prefersAudio);
+			playback._setRecording(newRecording, prefersAudio, onLoad);
 		},
 		setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
-			setVideoHandlerId(id);
 			videoHandlerIdRef.current = id;
-			setVideoHandler(() => handler);
+			dispatch({
+				type: 'SET_VIDEO_HANDLER',
+				payload: {
+					id,
+					handler,
+				},
+			});
 		},
 		unsetVideoHandler: (id: Scalars['ID']) => {
 			if (id !== videoHandlerIdRef.current) return;
-			setVideoHandlerId(undefined);
-			setVideoHandler(undefined);
-		},
-		hasPlayer: () => !!playerRef.current,
-		hasVideo: () => !!recording && hasVideo(recording),
-		isShowingVideo: () => isShowingVideo,
-		getVideoLocation: () => {
-			if (!isShowingVideo) return null;
-
-			if (videoHandler) return 'portal';
-
-			return 'miniplayer';
-		},
-		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
-		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
-		setVolume: (volume: number) => {
-			setVolume(volume);
-			playerRef.current?.volume(volume / 100);
-		},
-		getSpeed: () => _speed,
-		setSpeed: (s: number) => {
-			playerRef.current?.playbackRate(s);
-			playerRef.current?.defaultPlaybackRate(s);
-			_setSpeed(s);
+			dispatch({ type: 'SET_VIDEO_HANDLER', payload: undefined });
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
-			if (sourceRecordings && sourceRecordings.length > 1) {
-				setRecording(sourceRecordings[1]);
-				setSourceRecordings(sourceRecordings?.slice(1));
+			if (state.sourceRecordings.length > 1) {
+				dispatch({ type: 'ADVANCE' });
 				onLoadRef.current = () => playback.play();
-				playback._setRecording(sourceRecordings[1], prefersAudio);
+				playback._setRecording(
+					state.sourceRecordings[1],
+					state.prefersAudio,
+					() => playback.play()
+				);
 			}
 		},
-		setIsPaused: (paused) => setIsPaused(paused),
 		getRefs: () => ({
 			origin: originRef,
 			video: videoRef,
@@ -371,7 +224,8 @@ export default function AndPlaybackContext({
 		}),
 		_setRecording: (
 			recording: AndMiniplayerFragment,
-			prefersAudio: boolean | undefined
+			prefersAudio: boolean | undefined,
+			onLoad?: (playback: PlaybackContextType) => void
 		) => {
 			const currentVideoEl = videoElRef.current;
 			if (!currentVideoEl) return;
@@ -390,105 +244,95 @@ export default function AndPlaybackContext({
 					});
 				}
 
-				setIsPaused(true);
+				dispatch({ type: 'PAUSE' });
+
 				const serverProgress =
 					queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
 						'getRecordingPlaybackProgress',
 						{ id: recording.id },
 					]);
+
 				const progress =
 					serverProgress?.recording?.viewerPlaybackSession
 						?.positionPercentage || 0;
-				_setProgress(progress);
 
-				setBufferedProgress(0);
+				dispatch({ type: 'SET_PROGRESS', payload: progress });
+				dispatch({ type: 'SET_BUFFERED_PROGRESS', payload: 0 });
 
 				playerRef.current?.currentTime(progress * playback.getDuration());
 
-				onLoadRef.current && onLoadRef.current(playback);
+				onLoad && onLoad(playback);
 				onLoadRef.current = undefined;
-			};
-
-			const options: VideoJs.VideoJsPlayerOptions = {
-				poster: '/img/poster.jpg',
-				controls: false,
-				preload: 'auto',
-				defaultVolume: 1,
-				sources,
-				techOrder: ['chromecast', 'html5'],
-				plugins: {
-					chromecast: {
-						addButtonToControlBar: true, // Use custom designed button
-					},
-					airPlay: {
-						addButtonToControlBar: true, // Use custom designed button
-					},
-				},
 			};
 
 			if (playerRef.current) {
 				playerRef.current.src(sources);
 				resetPlayer();
 			} else {
-				videojs.then(async (v) => {
-					(await airplay).default(v.default);
-					(await chromecast).default(v.default, {
+				state.videojs.then(async (v) => {
+					(await state.airplay).default(v.default);
+					(await state.chromecast).default(v.default, {
 						preloadWebComponents: true,
 					});
-					const p = v.default(currentVideoEl, options);
-					p.on('fullscreenchange', () => {
-						p.controls(p.isFullscreen());
-					});
+					const o = { ...state.options, sources };
+					const p = v.default(currentVideoEl, o);
 					playerRef.current = p;
+					dispatch({ type: 'SET_PLAYER', payload: p });
 					resetPlayer();
 				});
 			}
 		},
+
+		// DONE
+		play: () => dispatch({ type: 'PLAY' }),
+		isShowingVideo: () => state.isShowingVideo,
+		getVideoLocation: () => state.videoLocation,
+		setIsPaused: (paused) => dispatch({ type: paused ? 'PAUSE' : 'PLAY' }),
+		getRecording: () => state.recording,
+		setPrefersAudio: (pref: boolean) =>
+			dispatch({ type: 'SET_PREFERS_AUDIO', payload: pref }),
+		getPrefersAudio: () => state.prefersAudio,
+		paused: () => state.paused,
+		getProgress: () => state.progress,
+		getSpeed: () => state.speed,
+		getBufferedProgress: () => state.bufferedProgress,
+		pause: () => dispatch({ type: 'PAUSE' }),
+		player: () => state.player,
+		hasPlayer: () => !!state.player,
+		supportsFullscreen: () => state.player?.supportsFullScreen() || false,
+		getVolume: () => (state.player?.volume() ?? 1) * 100,
+		setVolume: (volume: number) =>
+			dispatch({ type: 'SET_VOLUME', payload: volume }),
+		chromecastTrigger: () => dispatch({ type: 'TRIGGER_CHROMECAST' }),
+		airPlayTrigger: () => dispatch({ type: 'TRIGGER_AIRPLAY' }),
+		setSpeed: (s: number) => dispatch({ type: 'SET_SPEED', payload: s }),
+		setTime: (t: number) => dispatch({ type: 'SET_TIME', payload: t }),
 	};
 
 	useEffect(() => {
 		const video = videoRef.current;
 
-		if (!video) {
+		if (!video) return;
+
+		if (state.videoHandler) {
+			// Move the video on the next tick to avoid FOPV (flash-of-previous-video ;))
+			setTimeout(() => state.videoHandler?.(video), 0);
 			return;
 		}
 
-		if (videoHandler) {
-			setTimeout(() => {
-				// Move the video on the next tick to avoid FOPV (flash-of-previous-video ;))
-				videoHandler(video);
-			}, 0);
-			return;
+		const destination = state.isShowingVideo
+			? document.getElementById('mini-player')
+			: originRef.current;
+
+		if (destination && destination !== video.parentElement) {
+			destination.appendChild(video);
 		}
-
-		function findDestination() {
-			if (isShowingVideo) {
-				// TODO: use ref instead of ID
-				return document.getElementById('mini-player');
-			}
-
-			return originRef.current;
-		}
-
-		const destination = findDestination();
-
-		if (!destination) {
-			return;
-		}
-
-		if (destination === video.parentElement) {
-			return;
-		}
-
-		destination.appendChild(video);
-	}, [videoHandlerId, videoHandler, isShowingVideo]);
+	}, [state.videoHandlerId, state.videoHandler, state.isShowingVideo]);
 
 	return (
-		<>
+		<PlaybackContext.Provider value={playback}>
 			<Script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" />
-			<PlaybackContext.Provider value={playback}>
-				{children}
-			</PlaybackContext.Provider>
-		</>
+			{children}
+		</PlaybackContext.Provider>
 	);
 }
