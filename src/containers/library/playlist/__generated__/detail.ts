@@ -85,6 +85,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getLibraryPlaylistPageData', () => getLibraryPlaylistPageData(vars.getLibraryPlaylistPageData)],
+		['getLibraryPlaylistPageData.infinite', () => getLibraryPlaylistPageData(vars.getLibraryPlaylistPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -123,6 +123,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getSeriesListPageData', () => getSeriesListPageData(vars.getSeriesListPageData)],
+		['getSeriesListPageData.infinite', () => getSeriesListPageData(vars.getSeriesListPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -134,6 +134,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getRecordingPlaybackProgress', () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress)],
+		['getRecordingPlaybackProgress.infinite', () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -61,6 +61,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getWithAuthGuardData', () => getWithAuthGuardData(vars.getWithAuthGuardData)],
+		['getWithAuthGuardData.infinite', () => getWithAuthGuardData(vars.getWithAuthGuardData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

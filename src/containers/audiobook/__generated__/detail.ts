@@ -190,7 +190,9 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getAudiobookDetailPageData', () => getAudiobookDetailPageData(vars.getAudiobookDetailPageData)],
+		['getAudiobookDetailPageData.infinite', () => getAudiobookDetailPageData(vars.getAudiobookDetailPageData)],
 		['getAudiobookFeedData', () => getAudiobookFeedData(vars.getAudiobookFeedData)],
+		['getAudiobookFeedData.infinite', () => getAudiobookFeedData(vars.getAudiobookFeedData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -7,7 +7,11 @@ const template = (queryNames: string[]) => {
 		.join(',\n\t\t');
 
 	const queryPairs = queryNames
-		.map((n) => `['${n}', () => ${n}(vars.${n})],`)
+		.map((n) => [
+			`['${n}', () => ${n}(vars.${n})],`,
+			`['${n}.infinite', () => ${n}(vars.${n})],`,
+		])
+		.flat()
 		.join('\n\t\t');
 
 	return `

@@ -102,6 +102,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getHomeStaticProps', () => getHomeStaticProps(vars.getHomeStaticProps)],
+		['getHomeStaticProps.infinite', () => getHomeStaticProps(vars.getHomeStaticProps)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

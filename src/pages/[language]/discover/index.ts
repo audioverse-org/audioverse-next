@@ -3,7 +3,9 @@ import {
 	GetStaticPropsContext,
 	GetStaticPropsResult,
 } from 'next';
+import { dehydrate, DehydratedState } from 'react-query';
 
+import { prefetchQueries } from '~containers/__generated__/discover';
 import { IBaseProps } from '~containers/base';
 import Discover from '~containers/discover';
 import { REVALIDATE } from '~lib/constants';
@@ -17,10 +19,22 @@ export default Discover;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string }>): Promise<
-	GetStaticPropsResult<IBaseProps>
+	GetStaticPropsResult<
+		{
+			dehydratedState: DehydratedState;
+		} & IBaseProps
+	>
 > {
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
+	const client = await prefetchQueries({
+		getDiscoverRecentTeachings: { language, first: 6, after: null },
+		getDiscoverTrendingTeachings: { language, first: 6, after: null },
+		getDiscoverFeaturedTeachings: { language, first: 3, after: null },
+		getDiscoverStorySeasons: { language, first: 3, after: null },
+		getDiscoverConferences: { language, first: 3, after: null },
+		getDiscoverBlogPosts: { language, first: 3, after: null },
+	});
 
 	return {
 		props: {
@@ -28,6 +42,7 @@ export async function getStaticProps({
 				id: 'discover__title',
 				defaultMessage: 'Discover',
 			}),
+			dehydratedState: dehydrate(client),
 		},
 		revalidate: REVALIDATE,
 	};

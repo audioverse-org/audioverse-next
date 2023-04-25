@@ -431,11 +431,17 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getDiscoverRecentTeachings', () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings)],
+		['getDiscoverRecentTeachings.infinite', () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings)],
 		['getDiscoverTrendingTeachings', () => getDiscoverTrendingTeachings(vars.getDiscoverTrendingTeachings)],
+		['getDiscoverTrendingTeachings.infinite', () => getDiscoverTrendingTeachings(vars.getDiscoverTrendingTeachings)],
 		['getDiscoverFeaturedTeachings', () => getDiscoverFeaturedTeachings(vars.getDiscoverFeaturedTeachings)],
+		['getDiscoverFeaturedTeachings.infinite', () => getDiscoverFeaturedTeachings(vars.getDiscoverFeaturedTeachings)],
 		['getDiscoverStorySeasons', () => getDiscoverStorySeasons(vars.getDiscoverStorySeasons)],
+		['getDiscoverStorySeasons.infinite', () => getDiscoverStorySeasons(vars.getDiscoverStorySeasons)],
 		['getDiscoverConferences', () => getDiscoverConferences(vars.getDiscoverConferences)],
+		['getDiscoverConferences.infinite', () => getDiscoverConferences(vars.getDiscoverConferences)],
 		['getDiscoverBlogPosts', () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts)],
+		['getDiscoverBlogPosts.infinite', () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

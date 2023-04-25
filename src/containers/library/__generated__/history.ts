@@ -92,6 +92,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getLibraryHistoryPageData', () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData)],
+		['getLibraryHistoryPageData.infinite', () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

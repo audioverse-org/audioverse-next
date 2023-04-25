@@ -507,13 +507,21 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getSearchRecordings', () => getSearchRecordings(vars.getSearchRecordings)],
+		['getSearchRecordings.infinite', () => getSearchRecordings(vars.getSearchRecordings)],
 		['getSearchSeries', () => getSearchSeries(vars.getSearchSeries)],
+		['getSearchSeries.infinite', () => getSearchSeries(vars.getSearchSeries)],
 		['getSearchConferences', () => getSearchConferences(vars.getSearchConferences)],
+		['getSearchConferences.infinite', () => getSearchConferences(vars.getSearchConferences)],
 		['getSearchSponsors', () => getSearchSponsors(vars.getSearchSponsors)],
+		['getSearchSponsors.infinite', () => getSearchSponsors(vars.getSearchSponsors)],
 		['getSearchPersons', () => getSearchPersons(vars.getSearchPersons)],
+		['getSearchPersons.infinite', () => getSearchPersons(vars.getSearchPersons)],
 		['getSearchAudiobooks', () => getSearchAudiobooks(vars.getSearchAudiobooks)],
+		['getSearchAudiobooks.infinite', () => getSearchAudiobooks(vars.getSearchAudiobooks)],
 		['getSearchMusicTracks', () => getSearchMusicTracks(vars.getSearchMusicTracks)],
+		['getSearchMusicTracks.infinite', () => getSearchMusicTracks(vars.getSearchMusicTracks)],
 		['getSearchStoryPrograms', () => getSearchStoryPrograms(vars.getSearchStoryPrograms)],
+		['getSearchStoryPrograms.infinite', () => getSearchStoryPrograms(vars.getSearchStoryPrograms)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

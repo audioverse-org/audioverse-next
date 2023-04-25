@@ -66,6 +66,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getBibleBookContent', () => getBibleBookContent(vars.getBibleBookContent)],
+		['getBibleBookContent.infinite', () => getBibleBookContent(vars.getBibleBookContent)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

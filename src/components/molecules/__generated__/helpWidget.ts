@@ -74,6 +74,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getHelpWidgetData', () => getHelpWidgetData(vars.getHelpWidgetData)],
+		['getHelpWidgetData.infinite', () => getHelpWidgetData(vars.getHelpWidgetData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

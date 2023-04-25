@@ -69,6 +69,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getSearchResultsPersons', () => getSearchResultsPersons(vars.getSearchResultsPersons)],
+		['getSearchResultsPersons.infinite', () => getSearchResultsPersons(vars.getSearchResultsPersons)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

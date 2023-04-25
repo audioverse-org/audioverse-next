@@ -60,6 +60,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['personIsFavorited', () => personIsFavorited(vars.personIsFavorited)],
+		['personIsFavorited.infinite', () => personIsFavorited(vars.personIsFavorited)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

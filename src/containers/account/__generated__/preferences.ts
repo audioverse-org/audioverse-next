@@ -110,6 +110,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
 		['getAccountPreferencesData', () => getAccountPreferencesData(vars.getAccountPreferencesData)],
+		['getAccountPreferencesData.infinite', () => getAccountPreferencesData(vars.getAccountPreferencesData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
