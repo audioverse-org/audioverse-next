@@ -34,7 +34,7 @@ import styles from './discover.module.scss';
 
 type SectionProps = {
 	heading: JSX.Element | string;
-	cards: JSX.Element[] | undefined;
+	children: JSX.Element[] | undefined;
 };
 
 type SectionPropsWithButton = SectionProps & {
@@ -43,14 +43,14 @@ type SectionPropsWithButton = SectionProps & {
 };
 
 function Section(props: SectionProps | SectionPropsWithButton): JSX.Element {
-	const { heading, cards } = props;
+	const { heading, children } = props;
 	const seeAll = 'seeAll' in props ? props.seeAll : undefined;
 	const url = 'url' in props ? props.url : undefined;
 
 	return (
 		<div>
 			<LineHeading>{heading}</LineHeading>
-			<CardGroup>{cards}</CardGroup>
+			<CardGroup>{children}</CardGroup>
 			{seeAll ? (
 				<Button
 					type="secondary"
@@ -169,9 +169,6 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Teachings"
 					/>
 				}
-				cards={recentTeachings.map((r) => (
-					<CardRecording recording={r} key={r.canonicalPath} />
-				))}
 				seeAll={
 					<FormattedMessage
 						id="discover__recentTeachingsSeeAll"
@@ -179,7 +176,11 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).teachings.all.get()}
-			/>
+			>
+				{recentTeachings.map((r) => (
+					<CardRecording recording={r} key={r.canonicalPath} />
+				))}
+			</Section>
 
 			<Section
 				heading={
@@ -188,9 +189,6 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Trending Teachings"
 					/>
 				}
-				cards={trendingTeachings.map((r) => (
-					<CardRecording recording={r} key={r.canonicalPath} />
-				))}
 				seeAll={
 					<FormattedMessage
 						id="discover__trendingTeachingsSeeAll"
@@ -198,7 +196,11 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).teachings.trending.get()}
-			/>
+			>
+				{trendingTeachings.map((r) => (
+					<CardRecording recording={r} key={r.canonicalPath} />
+				))}
+			</Section>
 
 			<Section
 				heading={
@@ -207,10 +209,11 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Featured Teachings"
 					/>
 				}
-				cards={featuredTeachings.map((r) => (
+			>
+				{featuredTeachings.map((r) => (
 					<CardRecording recording={r} key={r.canonicalPath} />
 				))}
-			/>
+			</Section>
 
 			<Section
 				heading={
@@ -219,9 +222,6 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Blog Posts"
 					/>
 				}
-				cards={blogPosts.map((p) => (
-					<CardPost post={p} key={p.canonicalPath} />
-				))}
 				seeAll={
 					<FormattedMessage
 						id="discover__recentBlogSeeAll"
@@ -229,7 +229,11 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).blog.get()}
-			/>
+			>
+				{blogPosts.map((p) => (
+					<CardPost post={p} key={p.canonicalPath} />
+				))}
+			</Section>
 
 			<Section
 				heading={
@@ -238,13 +242,6 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Stories"
 					/>
 				}
-				cards={storySeasons.map((s) => (
-					<CardSequence
-						sequence={s}
-						recordings={s.recordings.nodes}
-						key={s.canonicalPath}
-					/>
-				))}
 				seeAll={
 					<FormattedMessage
 						id="discover__storiesSeeAll"
@@ -252,7 +249,15 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).stories.albums.get()}
-			/>
+			>
+				{storySeasons.map((s) => (
+					<CardSequence
+						sequence={s}
+						recordings={s.recordings.nodes}
+						key={s.canonicalPath}
+					/>
+				))}
+			</Section>
 
 			<Section
 				heading={
@@ -261,14 +266,6 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Conferences"
 					/>
 				}
-				cards={conferences.map((c) => (
-					<CardCollection
-						collection={c}
-						sequences={c.sequences.nodes}
-						recordings={!c.sequences.nodes?.length ? c.recordings.nodes : null}
-						key={c.canonicalPath}
-					/>
-				))}
 				seeAll={
 					<FormattedMessage
 						id="discover__conferencesSeeAll"
@@ -276,7 +273,16 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).conferences.get()}
-			/>
+			>
+				{conferences.map((c) => (
+					<CardCollection
+						collection={c}
+						sequences={c.sequences.nodes}
+						recordings={!c.sequences.nodes?.length ? c.recordings.nodes : null}
+						key={c.canonicalPath}
+					/>
+				))}
+			</Section>
 		</>
 	);
 }
