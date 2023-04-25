@@ -137,10 +137,11 @@ export default function Discover(): JSX.Element {
 
 	const trendingTeachings = useInfiniteDiscoverQuery<
 		GetDiscoverTrendingTeachingsQuery,
-		{
-			recording: CardRecordingFragment;
-		}
-	>(useInfiniteGetDiscoverTrendingTeachingsQuery, (p) => p.trendingTeachings);
+		CardRecordingFragment
+	>(useInfiniteGetDiscoverTrendingTeachingsQuery, (p) => ({
+		...p.trendingTeachings,
+		nodes: p.trendingTeachings.nodes?.map((n) => n.recording) || null,
+	}));
 
 	const featuredTeachings = useInfiniteDiscoverQuery<
 		GetDiscoverFeaturedTeachingsQuery,
@@ -182,8 +183,8 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Teachings"
 					/>
 				}
-				cards={recentTeachings.map((recording) => (
-					<CardRecording recording={recording} key={recording.canonicalPath} />
+				cards={recentTeachings.map((r) => (
+					<CardRecording recording={r} key={r.canonicalPath} />
 				))}
 				seeAll={
 					<FormattedMessage
@@ -201,8 +202,8 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Trending Teachings"
 					/>
 				}
-				cards={trendingTeachings.map(({ recording }) => (
-					<CardRecording recording={recording} key={recording.canonicalPath} />
+				cards={trendingTeachings.map((r) => (
+					<CardRecording recording={r} key={r.canonicalPath} />
 				))}
 				seeAll={
 					<FormattedMessage
@@ -220,8 +221,8 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Featured Teachings"
 					/>
 				}
-				cards={featuredTeachings.map((recording) => (
-					<CardRecording recording={recording} key={recording.canonicalPath} />
+				cards={featuredTeachings.map((r) => (
+					<CardRecording recording={r} key={r.canonicalPath} />
 				))}
 			/>
 
@@ -232,8 +233,8 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Blog Posts"
 					/>
 				}
-				cards={blogPosts.map((post) => (
-					<CardPost post={post} key={post.canonicalPath} />
+				cards={blogPosts.map((p) => (
+					<CardPost post={p} key={p.canonicalPath} />
 				))}
 				seeAll={
 					<FormattedMessage
@@ -251,11 +252,11 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Stories"
 					/>
 				}
-				cards={storySeasons.map((sequence) => (
+				cards={storySeasons.map((s) => (
 					<CardSequence
-						sequence={sequence}
-						recordings={sequence.recordings.nodes}
-						key={sequence.canonicalPath}
+						sequence={s}
+						recordings={s.recordings.nodes}
+						key={s.canonicalPath}
 					/>
 				))}
 				seeAll={
@@ -274,16 +275,12 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Conferences"
 					/>
 				}
-				cards={conferences.map((conference) => (
+				cards={conferences.map((c) => (
 					<CardCollection
-						collection={conference}
-						sequences={conference.sequences.nodes}
-						recordings={
-							!conference.sequences.nodes?.length
-								? conference.recordings.nodes
-								: null
-						}
-						key={conference.canonicalPath}
+						collection={c}
+						sequences={c.sequences.nodes}
+						recordings={!c.sequences.nodes?.length ? c.recordings.nodes : null}
+						key={c.canonicalPath}
 					/>
 				))}
 				seeAll={
