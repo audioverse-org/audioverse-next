@@ -10,19 +10,29 @@ import CardPost from '~components/molecules/card/post';
 import CardRecording from '~components/molecules/card/recording';
 import CardSequence from '~components/molecules/card/sequence';
 import CardGroup from '~components/molecules/cardGroup';
-import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import { Language } from '~src/__generated__/graphql';
+import { CardCollectionFragment } from '~src/components/molecules/card/__generated__/collection';
+import { CardPostFragment } from '~src/components/molecules/card/__generated__/post';
+import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
+import { CardSequenceFragment } from '~src/components/molecules/card/__generated__/sequence';
+import { useLanguageId } from '~src/lib/useLanguageId';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
 import {
+	GetDiscoverBlogPostsQuery,
+	GetDiscoverConferencesQuery,
+	GetDiscoverFeaturedTeachingsQuery,
 	GetDiscoverRecentTeachingsQuery,
-	useGetDiscoverBlogPostsQuery,
-	useGetDiscoverConferencesQuery,
-	useGetDiscoverFeaturedTeachingsQuery,
-	useGetDiscoverStorySeasonsQuery,
-	useGetDiscoverTrendingTeachingsQuery,
+	GetDiscoverStorySeasonsQuery,
+	GetDiscoverTrendingTeachingsQuery,
+	useInfiniteGetDiscoverBlogPostsQuery,
+	useInfiniteGetDiscoverConferencesQuery,
+	useInfiniteGetDiscoverFeaturedTeachingsQuery,
 	useInfiniteGetDiscoverRecentTeachingsQuery,
+	useInfiniteGetDiscoverStorySeasonsQuery,
+	useInfiniteGetDiscoverTrendingTeachingsQuery,
 } from './__generated__/discover';
 import styles from './discover.module.scss';
 
@@ -74,87 +84,94 @@ function reduceNodes<T, N>(
 	);
 }
 
-export default function Discover(): JSX.Element {
-	const languageRoute = useLanguageRoute();
-	const languageId = getLanguageIdByRoute(languageRoute);
+function useInfiniteDiscoverQuery<T, N>(
+	useQueryFn: (
+		vars: {
+			language: Language;
+			first: number;
+			after: string | null;
+		},
+		options: {
+			getNextPageParam: (lastPage: Maybe<T>) => unknown;
+		}
+	) => UseInfiniteQueryResult<T>,
+	select: (p: T) => {
+		nodes: N[] | null;
+		pageInfo: {
+			hasNextPage: boolean;
+			endCursor: string | null;
+		};
+	},
+	first = 3
+) {
+	const language = useLanguageId();
 
-	const recentTeachingsQuery = useInfiniteGetDiscoverRecentTeachingsQuery(
+	const result = useQueryFn(
 		{
-			language: languageId,
-			first: 6,
+			language,
+			first,
 			after: null,
 		},
 		{
-			getNextPageParam: (lastPage: Maybe<GetDiscoverRecentTeachingsQuery>) =>
-				lastPage?.recentTeachings.pageInfo.hasNextPage
+			getNextPageParam: (lastPage: Maybe<T>) =>
+				lastPage && select(lastPage).pageInfo.hasNextPage
 					? {
-							language: languageId,
+							language,
 							first: 6,
-							after: lastPage?.recentTeachings.pageInfo.endCursor,
+							after: select(lastPage).pageInfo.endCursor,
 					  }
 					: undefined,
 		}
 	);
 
-	const recentTeachings = reduceNodes(
-		recentTeachingsQuery,
-		(p) => p.recentTeachings.nodes
-	);
+	return reduceNodes(result, (p) => select(p).nodes);
+}
 
-	const trendingTeachings = useGetDiscoverTrendingTeachingsQuery(
-		{
-			language: languageId,
-			first: 6,
-			after: null,
-		},
-		{
-			select: (d) => d.trendingTeachings.nodes,
-		}
-	);
+export default function Discover(): JSX.Element {
+	const languageRoute = useLanguageRoute();
 
-	const featuredTeachings = useGetDiscoverFeaturedTeachingsQuery(
-		{
-			language: languageId,
-			first: 3,
-			after: null,
-		},
-		{
-			select: (d) => d.featuredTeachings.nodes,
-		}
-	);
+	const recentTeachings = useInfiniteDiscoverQuery<
+		GetDiscoverRecentTeachingsQuery,
+		CardRecordingFragment
+	>(useInfiniteGetDiscoverRecentTeachingsQuery, (p) => p.recentTeachings);
 
-	const blogPosts = useGetDiscoverBlogPostsQuery(
+	const trendingTeachings = useInfiniteDiscoverQuery<
+		GetDiscoverTrendingTeachingsQuery,
 		{
-			language: languageId,
-			first: 3,
-			after: null,
-		},
-		{
-			select: (d) => d.blogPosts.nodes,
+			recording: CardRecordingFragment;
 		}
-	);
+	>(useInfiniteGetDiscoverTrendingTeachingsQuery, (p) => p.trendingTeachings);
 
-	const storySeasons = useGetDiscoverStorySeasonsQuery(
-		{
-			language: languageId,
-			first: 3,
-			after: null,
-		},
-		{
-			select: (d) => d.storySeasons.nodes,
-		}
-	);
+	const featuredTeachings = useInfiniteDiscoverQuery<
+		GetDiscoverFeaturedTeachingsQuery,
+		CardRecordingFragment
+	>(useInfiniteGetDiscoverFeaturedTeachingsQuery, (p) => p.featuredTeachings);
 
-	const conferences = useGetDiscoverConferencesQuery(
-		{
-			language: languageId,
-			first: 3,
-			after: null,
-		},
-		{
-			select: (d) => d.conferences.nodes,
+	const blogPosts = useInfiniteDiscoverQuery<
+		GetDiscoverBlogPostsQuery,
+		CardPostFragment
+	>(useInfiniteGetDiscoverBlogPostsQuery, (p) => p.blogPosts);
+
+	const storySeasons = useInfiniteDiscoverQuery<
+		GetDiscoverStorySeasonsQuery,
+		CardSequenceFragment & {
+			recordings: {
+				nodes: CardRecordingFragment[] | null;
+			};
 		}
-	);
+	>(useInfiniteGetDiscoverStorySeasonsQuery, (p) => p.storySeasons);
+
+	const conferences = useInfiniteDiscoverQuery<
+		GetDiscoverConferencesQuery,
+		CardCollectionFragment & {
+			sequences: {
+				nodes: CardSequenceFragment[] | null;
+			};
+			recordings: {
+				nodes: CardRecordingFragment[] | null;
+			};
+		}
+	>(useInfiniteGetDiscoverConferencesQuery, (p) => p.conferences);
 
 	return (
 		<>
@@ -184,7 +201,7 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Trending Teachings"
 					/>
 				}
-				cards={trendingTeachings.data?.map(({ recording }) => (
+				cards={trendingTeachings.map(({ recording }) => (
 					<CardRecording recording={recording} key={recording.canonicalPath} />
 				))}
 				seeAll={
@@ -203,7 +220,7 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Featured Teachings"
 					/>
 				}
-				cards={featuredTeachings.data?.map((recording) => (
+				cards={featuredTeachings.map((recording) => (
 					<CardRecording recording={recording} key={recording.canonicalPath} />
 				))}
 			/>
@@ -215,7 +232,7 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Blog Posts"
 					/>
 				}
-				cards={blogPosts.data?.map((post) => (
+				cards={blogPosts.map((post) => (
 					<CardPost post={post} key={post.canonicalPath} />
 				))}
 				seeAll={
@@ -234,7 +251,7 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Stories"
 					/>
 				}
-				cards={storySeasons.data?.map((sequence) => (
+				cards={storySeasons.map((sequence) => (
 					<CardSequence
 						sequence={sequence}
 						recordings={sequence.recordings.nodes}
@@ -257,7 +274,7 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Conferences"
 					/>
 				}
-				cards={conferences.data?.map((conference) => (
+				cards={conferences.map((conference) => (
 					<CardCollection
 						collection={conference}
 						sequences={conference.sequences.nodes}
