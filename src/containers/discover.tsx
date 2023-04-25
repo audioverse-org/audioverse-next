@@ -95,7 +95,7 @@ function useInfiniteDiscoverQuery<T, N>(
 			getNextPageParam: (lastPage: Maybe<T>) => unknown;
 		}
 	) => UseInfiniteQueryResult<T>,
-	select: (p: T) => {
+	select: (page: T) => {
 		nodes: Maybe<N[]>;
 		pageInfo: {
 			hasNextPage: boolean;
@@ -105,26 +105,25 @@ function useInfiniteDiscoverQuery<T, N>(
 	first = 3
 ) {
 	const language = useLanguageId();
-
-	const result = useQueryFn(
+	const r = useQueryFn(
 		{
 			language,
 			first,
 			after: null,
 		},
 		{
-			getNextPageParam: (lastPage: Maybe<T>) =>
-				lastPage && select(lastPage).pageInfo.hasNextPage
+			getNextPageParam: (last: Maybe<T>) =>
+				last && select(last).pageInfo.hasNextPage
 					? {
 							language,
 							first: 6,
-							after: select(lastPage).pageInfo.endCursor,
+							after: select(last).pageInfo.endCursor,
 					  }
 					: undefined,
 		}
 	);
 
-	return reduceNodes(result, (p) => select(p).nodes);
+	return reduceNodes(r, (p) => select(p).nodes);
 }
 
 export default function Discover(): JSX.Element {
