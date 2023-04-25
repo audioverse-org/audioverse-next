@@ -13,10 +13,6 @@ import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { InputMaybe, Language } from '~src/__generated__/graphql';
-import { CardCollectionFragment } from '~src/components/molecules/card/__generated__/collection';
-import { CardPostFragment } from '~src/components/molecules/card/__generated__/post';
-import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
-import { CardSequenceFragment } from '~src/components/molecules/card/__generated__/sequence';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
@@ -129,53 +125,40 @@ function useInfiniteDiscoverQuery<T, N>(
 export default function Discover(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
-	const recentTeachings = useInfiniteDiscoverQuery<
-		GetDiscoverRecentTeachingsQuery,
-		CardRecordingFragment
-	>(useInfiniteGetDiscoverRecentTeachingsQuery, (p) => p.recentTeachings, 6);
+	const recentTeachings = useInfiniteDiscoverQuery(
+		useInfiniteGetDiscoverRecentTeachingsQuery,
+		(p: GetDiscoverRecentTeachingsQuery) => p.recentTeachings,
+		6
+	);
 
-	const trendingTeachings = useInfiniteDiscoverQuery<
-		GetDiscoverTrendingTeachingsQuery,
-		CardRecordingFragment
-	>(
+	const trendingTeachings = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverTrendingTeachingsQuery,
-		(p) => ({
+		(p: GetDiscoverTrendingTeachingsQuery) => ({
 			...p.trendingTeachings,
 			nodes: p.trendingTeachings.nodes?.map((n) => n.recording) || null,
 		}),
 		6
 	);
 
-	const featuredTeachings = useInfiniteDiscoverQuery<
-		GetDiscoverFeaturedTeachingsQuery,
-		CardRecordingFragment
-	>(useInfiniteGetDiscoverFeaturedTeachingsQuery, (p) => p.featuredTeachings);
+	const featuredTeachings = useInfiniteDiscoverQuery(
+		useInfiniteGetDiscoverFeaturedTeachingsQuery,
+		(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings
+	);
 
-	const blogPosts = useInfiniteDiscoverQuery<
-		GetDiscoverBlogPostsQuery,
-		CardPostFragment
-	>(useInfiniteGetDiscoverBlogPostsQuery, (p) => p.blogPosts);
+	const blogPosts = useInfiniteDiscoverQuery(
+		useInfiniteGetDiscoverBlogPostsQuery,
+		(p: GetDiscoverBlogPostsQuery) => p.blogPosts
+	);
 
-	const storySeasons = useInfiniteDiscoverQuery<
-		GetDiscoverStorySeasonsQuery,
-		CardSequenceFragment & {
-			recordings: {
-				nodes: Maybe<CardRecordingFragment[]>;
-			};
-		}
-	>(useInfiniteGetDiscoverStorySeasonsQuery, (p) => p.storySeasons);
+	const storySeasons = useInfiniteDiscoverQuery(
+		useInfiniteGetDiscoverStorySeasonsQuery,
+		(p: GetDiscoverStorySeasonsQuery) => p.storySeasons
+	);
 
-	const conferences = useInfiniteDiscoverQuery<
-		GetDiscoverConferencesQuery,
-		CardCollectionFragment & {
-			sequences: {
-				nodes: Maybe<CardSequenceFragment[]>;
-			};
-			recordings: {
-				nodes: Maybe<CardRecordingFragment[]>;
-			};
-		}
-	>(useInfiniteGetDiscoverConferencesQuery, (p) => p.conferences);
+	const conferences = useInfiniteDiscoverQuery(
+		useInfiniteGetDiscoverConferencesQuery,
+		(p: GetDiscoverConferencesQuery) => p.conferences
+	);
 
 	return (
 		<>
