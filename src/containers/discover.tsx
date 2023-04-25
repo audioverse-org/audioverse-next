@@ -12,7 +12,7 @@ import CardSequence from '~components/molecules/card/sequence';
 import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
-import { Language } from '~src/__generated__/graphql';
+import { InputMaybe, Language } from '~src/__generated__/graphql';
 import { CardCollectionFragment } from '~src/components/molecules/card/__generated__/collection';
 import { CardPostFragment } from '~src/components/molecules/card/__generated__/post';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
@@ -72,7 +72,7 @@ function Section(props: SectionProps | SectionPropsWithButton): JSX.Element {
 
 function reduceNodes<T, N>(
 	result: UseInfiniteQueryResult<T>,
-	select: (page: T) => N[] | null
+	select: (page: T) => Maybe<N[]>
 ): N[] {
 	return (
 		result.data?.pages?.reduce<N[]>((acc, p) => {
@@ -89,17 +89,17 @@ function useInfiniteDiscoverQuery<T, N>(
 		vars: {
 			language: Language;
 			first: number;
-			after: string | null;
+			after: InputMaybe<string>;
 		},
 		options: {
 			getNextPageParam: (lastPage: Maybe<T>) => unknown;
 		}
 	) => UseInfiniteQueryResult<T>,
 	select: (p: T) => {
-		nodes: N[] | null;
+		nodes: Maybe<N[]>;
 		pageInfo: {
 			hasNextPage: boolean;
-			endCursor: string | null;
+			endCursor: Maybe<string>;
 		};
 	},
 	first = 3
@@ -157,7 +157,7 @@ export default function Discover(): JSX.Element {
 		GetDiscoverStorySeasonsQuery,
 		CardSequenceFragment & {
 			recordings: {
-				nodes: CardRecordingFragment[] | null;
+				nodes: Maybe<CardRecordingFragment[]>;
 			};
 		}
 	>(useInfiniteGetDiscoverStorySeasonsQuery, (p) => p.storySeasons);
@@ -166,10 +166,10 @@ export default function Discover(): JSX.Element {
 		GetDiscoverConferencesQuery,
 		CardCollectionFragment & {
 			sequences: {
-				nodes: CardSequenceFragment[] | null;
+				nodes: Maybe<CardSequenceFragment[]>;
 			};
 			recordings: {
-				nodes: CardRecordingFragment[] | null;
+				nodes: Maybe<CardRecordingFragment[]>;
 			};
 		}
 	>(useInfiniteGetDiscoverConferencesQuery, (p) => p.conferences);
