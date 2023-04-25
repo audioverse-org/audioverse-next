@@ -1,7 +1,5 @@
-import {
-	collectionFavorite,
-	collectionUnfavorite,
-} from '@lib/generated/graphql';
+import { collectionFavorite } from './__generated__/collectionFavorite';
+import { collectionUnfavorite } from './__generated__/collectionUnfavorite';
 
 export async function setCollectionFavorited(
 	id: number | string,

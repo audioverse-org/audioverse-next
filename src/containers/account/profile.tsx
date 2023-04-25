@@ -3,24 +3,24 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading2 from '@components/atoms/heading2';
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import Button from '@components/molecules/button';
-import Checkbox from '@components/molecules/form/checkbox';
-import Input from '@components/molecules/form/input';
-import AccountNav from '@components/organisms/accountNav';
-import Modal from '@components/organisms/modal';
-import { refetchUserQueries, resetUserQueries } from '@lib/api/login';
-import { clearSessionToken } from '@lib/cookies';
+import Heading1 from '~components/atoms/heading1';
+import Heading2 from '~components/atoms/heading2';
+import withAuthGuard from '~components/HOCs/withAuthGuard';
+import Button from '~components/molecules/button';
+import Checkbox from '~components/molecules/form/checkbox';
+import Input from '~components/molecules/form/input';
+import AccountNav from '~components/organisms/accountNav';
+import Modal from '~components/organisms/modal';
+import { refetchUserQueries, resetUserQueries } from '~lib/api/login';
+import { clearSessionToken } from '~lib/cookies';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
+
 import {
 	useDeleteAccountMutation,
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
-} from '@lib/generated/graphql';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-
+} from './__generated__/profile';
 import styles from './profile.module.scss';
 
 function Profile(): JSX.Element {

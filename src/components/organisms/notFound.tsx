@@ -1,16 +1,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Alert from '@components/atoms/alert';
-import Heading1 from '@components/atoms/heading1';
-import Heading2 from '@components/atoms/heading2';
-import Button from '@components/molecules/button';
-import CardRecording from '@components/molecules/card/recording';
-import CardGroup from '@components/molecules/cardGroup';
-import { GetNotFoundPageDataQuery } from '@lib/generated/graphql';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Alert from '~components/atoms/alert';
+import Heading1 from '~components/atoms/heading1';
+import Heading2 from '~components/atoms/heading2';
+import Button from '~components/molecules/button';
+import CardRecording from '~components/molecules/card/recording';
+import CardGroup from '~components/molecules/cardGroup';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
+import { GetNotFoundPageDataQuery } from './__generated__/notFound';
 import styles from './notFound.module.scss';
 
 export type NotFoundProps = Partial<GetNotFoundPageDataQuery>;

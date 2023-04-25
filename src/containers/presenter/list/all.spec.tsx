@@ -1,14 +1,14 @@
-import {
-	GetPersonListLetterCountsDocument,
-	GetPresenterListAllPageDataDocument,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { screen } from '@testing-library/react';
+
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import All, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/presenters/all';
-import { screen } from '@testing-library/react';
+} from '~pages/[language]/presenters/all';
+
+import { GetPresenterListAllPageDataDocument } from './__generated__/all';
+import { GetPersonListLetterCountsDocument } from './__generated__/list';
 
 const renderPage = buildStaticRenderer(All, getStaticProps);
 

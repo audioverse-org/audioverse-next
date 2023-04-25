@@ -4,16 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { getPresenterDetailPathsData } from '~containers/presenter/__generated__/detail';
+import { getPresenterSequencesPageData } from '~containers/presenter/__generated__/sequences';
 import PresenterSequences, {
 	PresenterSequencesProps,
-} from '@containers/presenter/sequences';
-import {
-	getPresenterDetailPathsData,
-	getPresenterSequencesPageData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/presenter/sequences';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import getIntl from '~lib/getIntl';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default PresenterSequences;
 

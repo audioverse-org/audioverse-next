@@ -1,11 +1,11 @@
 import clsx from 'clsx';
+import { Router } from 'next/router';
 import React, { useEffect } from 'react';
 
-import Header from '@components/organisms/header';
-import Navigation from '@components/organisms/navigation';
+import Header from '~components/organisms/header';
+import Navigation from '~components/organisms/navigation';
 
 import styles from './drawer.module.scss';
-import { Router } from 'next/router';
 
 export default function Drawer({
 	showingMenu,

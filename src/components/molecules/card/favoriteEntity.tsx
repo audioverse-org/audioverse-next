@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { CardFavoriteEntityFragment } from '@lib/generated/graphql';
-import { UnreachableCaseError } from '@lib/typeHelpers';
+import { UnreachableCaseError } from '~lib/typeHelpers';
 
+import { CardFavoriteEntityFragment } from './__generated__/favoriteEntity';
 import CardCollection from './collection';
 import CardPerson from './person';
 import CardRecording from './recording';

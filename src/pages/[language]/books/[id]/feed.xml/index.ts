@@ -1,19 +1,32 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import {
-	BookFeedDescriptionFragment,
-	getAudiobookFeedData,
-	SequenceContentType,
-} from '@lib/generated/graphql';
-import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { getAudiobookFeedData } from '~containers/audiobook/__generated__/detail';
+import { generateFeed, sendRSSHeaders } from '~lib/generateFeed';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRouteOrLegacyRoute } from '~lib/getLanguageIdByRouteOrLegacyRoute';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 export default (): void => void 0;
 
+type BookFeedDescription = {
+	title: string;
+	recordings: {
+		nodes:
+			| {
+					authors: {
+						name: string;
+					}[];
+					narrators: {
+						name: string;
+					}[];
+			  }[]
+			| null;
+	};
+};
+
 export const formatBooksDescription = async (
 	languageRoute: string,
-	sequence: BookFeedDescriptionFragment
+	sequence: BookFeedDescription
 ): Promise<string> => {
 	const intl = await getIntl(languageRoute);
 	const formatNameString = (persons: { name: string }[]) =>

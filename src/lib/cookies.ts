@@ -1,6 +1,5 @@
-import { IncomingMessage } from 'http';
-
 import cookie from 'cookie';
+import { IncomingMessage } from 'http';
 import JSCookie from 'js-cookie';
 
 const SESSION_KEY = 'avSession';

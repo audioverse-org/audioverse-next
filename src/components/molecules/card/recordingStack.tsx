@@ -1,12 +1,9 @@
 import React from 'react';
 
-import {
-	CardRecordingStackFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 import TeaseRecordingStack from '../teaseRecordingStack';
-
+import { CardRecordingStackFragment } from './__generated__/recordingStack';
 import CardWithTheme from './base/withTheme';
 import CardHatAudiobook from './hat/audiobook';
 import CardHatBibleBook from './hat/bibleBook';

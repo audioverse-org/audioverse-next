@@ -1,12 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import { CardRecordingFragment } from '@lib/generated/graphql';
+import Heading2 from '~components/atoms/heading2';
 
 import HatIcon from '../../../../../public/img/icons/fa-music-light.svg';
+import { CardRecordingFragment } from '../__generated__/recording';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
-
 import CardHat from '.';
 
 interface Props {

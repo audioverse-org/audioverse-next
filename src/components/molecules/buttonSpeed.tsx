@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
-import usePlaybackSession from '@lib/usePlaybackSession';
+import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
+import { BaseColors } from '~lib/constants';
+import usePlaybackSession from '~lib/usePlaybackSession';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonSpeed.module.scss';

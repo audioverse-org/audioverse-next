@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 
-import styles from '@components/molecules/tease.module.scss';
+import styles from '~components/molecules/tease.module.scss';
 
 interface TeaseProps {
 	children?: ReactNode;

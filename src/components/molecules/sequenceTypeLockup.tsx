@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SequenceContentType } from '@lib/generated/graphql';
-import { getSequenceTypeTheme } from '@lib/getSequenceType';
+import { getSequenceTypeTheme } from '~lib/getSequenceType';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 import TypeLockup from './typeLockup';
 

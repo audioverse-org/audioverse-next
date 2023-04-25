@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ActiveLink from '@components/atoms/activeLink';
+import ActiveLink from '~components/atoms/activeLink';
 // TODO: Split into its own SCSS module
-import styles from '@components/organisms/navigation.module.scss';
-import { INavigationItem } from '@lib/useNavigationItems';
+import styles from '~components/organisms/navigation.module.scss';
+import { INavigationItem } from '~lib/useNavigationItems';
 
 import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
 

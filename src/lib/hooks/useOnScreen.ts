@@ -1,5 +1,6 @@
 import { RefObject, useEffect, useMemo, useState } from 'react';
-import isServerSide from '@lib/isServerSide';
+
+import isServerSide from '~lib/isServerSide';
 
 export default function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 	const [isIntersecting, setIntersecting] = useState(false);

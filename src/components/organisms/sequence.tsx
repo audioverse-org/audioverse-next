@@ -3,30 +3,31 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import HorizontalRule from '@components/atoms/horizontalRule';
-import RoundImage from '@components/atoms/roundImage';
-import ButtonFavorite from '@components/molecules/buttonFavorite';
-import { isBackgroundColorDark } from '@components/molecules/buttonPlay';
-import ButtonShare from '@components/molecules/buttonShare';
-import CardRecording from '@components/molecules/card/recording';
-import CardGroup from '@components/molecules/cardGroup';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
+import Heading2 from '~components/atoms/heading2';
+import Heading6 from '~components/atoms/heading6';
+import HorizontalRule from '~components/atoms/horizontalRule';
+import RoundImage from '~components/atoms/roundImage';
+import ButtonFavorite from '~components/molecules/buttonFavorite';
+import { isBackgroundColorDark } from '~components/molecules/buttonPlay';
+import ButtonShare from '~components/molecules/buttonShare';
+import CardRecording from '~components/molecules/card/recording';
+import CardGroup from '~components/molecules/cardGroup';
+import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
-} from '@components/molecules/definitionList';
-import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
-import Tease from '@components/molecules/tease';
-import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
-import { formatDateRange } from '@lib/date';
-import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
-import { getSequenceTypeTheme } from '@lib/getSequenceType';
-import root from '@lib/routes';
-import { useFormattedDuration } from '@lib/time';
-import { UnreachableCaseError } from '@lib/typeHelpers';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '~components/molecules/definitionList';
+import SequenceTypeLockup from '~components/molecules/sequenceTypeLockup';
+import Tease from '~components/molecules/tease';
+import { useIsSequenceFavorited } from '~lib/api/useIsSequenceFavorited';
+import { formatDateRange } from '~lib/date';
+import { getSequenceTypeTheme } from '~lib/getSequenceType';
+import root from '~lib/routes';
+import { useFormattedDuration } from '~lib/time';
+import { UnreachableCaseError } from '~lib/typeHelpers';
+import useLanguageRoute from '~lib/useLanguageRoute';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
+import { SequenceFragment } from './__generated__/sequence';
 import styles from './sequence.module.scss';
 
 export function Sequence({

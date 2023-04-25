@@ -1,5 +1,7 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
 import {
 	GetSearchAudiobooksDocument,
 	GetSearchConferencesDocument,
@@ -9,8 +11,7 @@ import {
 	GetSearchSeriesDocument,
 	GetSearchSponsorsDocument,
 	GetSearchStoryProgramsDocument,
-} from '@lib/generated/graphql';
-import { useRouter } from 'next/router';
+} from './__generated__/searchResults';
 
 export type EntityFilter = {
 	heading: JSX.Element;

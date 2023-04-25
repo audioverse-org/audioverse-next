@@ -1,4 +1,4 @@
-import { LANGUAGES, SupportedLanguages } from '@lib/constants';
+import { LANGUAGES, SupportedLanguages } from '~lib/constants';
 
 export function getLanguageIdByRouteOrLegacyRoute(
 	route: string | undefined

@@ -5,16 +5,16 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
+import { IBaseProps } from '~containers/base';
+import { getSongBooksDetailPageData } from '~containers/song/books/__generated__/detail';
 import SongBookDetail, {
 	SongBooksDetailProps,
-} from '@containers/song/books/detail';
-import { BIBLE_BOOKS, REVALIDATE } from '@lib/constants';
-import { getSongBooksDetailPageData } from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import root from '@lib/routes';
+} from '~containers/song/books/detail';
+import { BIBLE_BOOKS, REVALIDATE } from '~lib/constants';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import root from '~lib/routes';
 
 export default SongBookDetail;
 

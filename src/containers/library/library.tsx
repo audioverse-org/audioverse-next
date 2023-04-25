@@ -2,23 +2,25 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import CardFavorite from '@components/molecules/card/favorite';
-import CardMasonry from '@components/molecules/cardMasonry';
-import LoadingCards from '@components/molecules/loadingCards';
-import EmptyState from '@components/organisms/emptyState';
-import LibraryNav from '@components/organisms/libraryNav';
+import withAuthGuard from '~components/HOCs/withAuthGuard';
+import CardFavorite from '~components/molecules/card/favorite';
+import CardMasonry from '~components/molecules/cardMasonry';
+import LoadingCards from '~components/molecules/loadingCards';
+import EmptyState from '~components/organisms/emptyState';
+import LibraryNav from '~components/organisms/libraryNav';
 import {
 	FavoritableCatalogEntityType,
 	FavoritesSortableField,
-	GetLibraryDataQueryVariables,
 	Language,
 	OrderByDirection,
 	RecordingContentType,
 	RecordingViewerPlaybackStatus,
-	useGetLibraryDataQuery,
-} from '@lib/generated/graphql';
+} from '~src/__generated__/graphql';
 
+import {
+	GetLibraryDataQueryVariables,
+	useGetLibraryDataQuery,
+} from './__generated__/library';
 import baseStyles from './base.module.scss';
 import LibraryLoggedOut from './loggedOut';
 

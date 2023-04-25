@@ -4,16 +4,16 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import SponsorConferences, {
-	SponsorConferencesProps,
-} from '@containers/sponsor/conferences';
 import {
 	getSponsorConferencesPageData,
 	getSponsorConferencesPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/sponsor/__generated__/conferences';
+import SponsorConferences, {
+	SponsorConferencesProps,
+} from '~containers/sponsor/conferences';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import getIntl from '~lib/getIntl';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default SponsorConferences;
 

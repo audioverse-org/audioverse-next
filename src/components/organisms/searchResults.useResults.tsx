@@ -1,7 +1,9 @@
-import { InferrableEntity } from '@components/molecules/card/inferred';
-import { useLanguageId } from '@lib/useLanguageId';
 import { InfiniteQueryObserverResult, useInfiniteQuery } from 'react-query';
-import { fetchApi } from '@lib/api/fetchApi';
+
+import { InferrableEntity } from '~components/molecules/card/inferred';
+import { fetchApi } from '~lib/api/fetchApi';
+import { useLanguageId } from '~lib/useLanguageId';
+
 import { EntityFilter, EntityFilterId, filters } from './searchResults.filters';
 
 const PAGE_SIZE = 10;

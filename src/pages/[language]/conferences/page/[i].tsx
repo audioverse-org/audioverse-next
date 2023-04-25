@@ -4,17 +4,17 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import CollectionList, {
-	CollectionListProps,
-} from '@containers/collection/list';
 import {
 	getCollectionListPageData,
 	getCollectionListPathsData,
-} from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/collection/__generated__/list';
+import CollectionList, {
+	CollectionListProps,
+} from '~containers/collection/list';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getNumberedStaticPaths } from '~lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default CollectionList;
 

@@ -4,17 +4,17 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import AudiobooksList, {
-	AudiobooksListProps,
-} from '@containers/audiobook/list';
 import {
 	getAudiobookListPageData,
 	getAudiobookListPathsData,
-} from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/audiobook/__generated__/list';
+import AudiobooksList, {
+	AudiobooksListProps,
+} from '~containers/audiobook/list';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getNumberedStaticPaths } from '~lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default AudiobooksList;
 

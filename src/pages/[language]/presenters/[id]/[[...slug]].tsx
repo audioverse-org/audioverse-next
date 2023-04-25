@@ -4,17 +4,17 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import PresenterDetail, {
-	PresenterDetailProps,
-} from '@containers/presenter/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { IBaseProps } from '~containers/base';
 import {
 	getPresenterDetailPageData,
 	getPresenterDetailPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+} from '~containers/presenter/__generated__/detail';
+import PresenterDetail, {
+	PresenterDetailProps,
+} from '~containers/presenter/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 
 export default PresenterDetail;
 

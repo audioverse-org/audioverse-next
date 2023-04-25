@@ -4,12 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import Blog, { BlogProps } from '@containers/blog';
-import { getBlogPageData, getBlogPathsData } from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getBlogPageData,
+	getBlogPathsData,
+} from '~containers/__generated__/blog';
+import Blog, { BlogProps } from '~containers/blog';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getNumberedStaticPaths } from '~lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default Blog;
 

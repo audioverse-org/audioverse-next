@@ -4,15 +4,15 @@ import Cookies from 'js-cookie';
 import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildRenderer } from '~lib/test/buildRenderer';
+import { loadAuthGuardData } from '~lib/test/loadAuthGuardData';
+
 import {
 	AddAccountPlaylistDocument,
 	GetAccountPlaylistsPageDataDocument,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
-
+} from './__generated__/playlists';
 import Playlists from './playlists';
 
 const renderPage = buildRenderer(Playlists);

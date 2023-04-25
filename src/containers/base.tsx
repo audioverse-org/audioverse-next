@@ -8,12 +8,12 @@ import {
 	QueryClientProvider,
 } from 'react-query';
 
-import withIntl from '@components/HOCs/withIntl';
-import LoadingIndicator from '@components/molecules/loadingIndicator';
-import AndGlobalModals from '@components/templates/andGlobalModals';
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndNavigation from '@components/templates/andNavigation';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
+import withIntl from '~components/HOCs/withIntl';
+import LoadingIndicator from '~components/molecules/loadingIndicator';
+import AndGlobalModals from '~components/templates/andGlobalModals';
+import AndMiniplayer from '~components/templates/andMiniplayer';
+import AndNavigation from '~components/templates/andNavigation';
+import AndPlaybackContext from '~components/templates/andPlaybackContext';
 
 import styles from './base.module.scss';
 

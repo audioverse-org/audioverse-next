@@ -2,19 +2,19 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading2 from '@components/atoms/heading2';
-import RoundImage from '@components/atoms/roundImage';
-import ButtonBack from '@components/molecules/buttonBack';
-import Card from '@components/molecules/card';
-import JumpBar from '@components/molecules/jumpBar';
+import Heading1 from '~components/atoms/heading1';
+import Heading2 from '~components/atoms/heading2';
+import RoundImage from '~components/atoms/roundImage';
+import ButtonBack from '~components/molecules/buttonBack';
+import Card from '~components/molecules/card';
+import JumpBar from '~components/molecules/jumpBar';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
+
 import {
 	GetSponsorListLetterCountsQuery,
 	SponsorListEntryFragment,
-} from '@lib/generated/graphql';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-
+} from './__generated__/list';
 import styles from './list.module.scss';
 
 export type SponsorsProps = {

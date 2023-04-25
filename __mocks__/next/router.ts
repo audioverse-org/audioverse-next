@@ -1,6 +1,5 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import Router_, { NextRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 
 const Router: typeof Router_ = {
 	events: {

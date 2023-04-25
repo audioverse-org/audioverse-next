@@ -1,3 +1,4 @@
+import { screen, waitFor } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
 import {
@@ -17,16 +18,14 @@ import {
 	GetSearchSponsorsQuery,
 	GetSearchStoryProgramsDocument,
 	GetSearchStoryProgramsQuery,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+} from '~components/organisms/__generated__/searchResults';
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildRenderer } from '~lib/test/buildRenderer';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/search';
-
-import { screen, waitFor } from '@testing-library/react';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildRenderer } from '@lib/test/buildRenderer';
+} from '~pages/[language]/search';
+import { RecordingContentType } from '~src/__generated__/graphql';
 
 jest.mock('next/head');
 

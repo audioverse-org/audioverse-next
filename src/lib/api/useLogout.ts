@@ -1,7 +1,7 @@
 import { useQueryClient } from 'react-query';
 
-import { clearSessionToken } from '@lib/cookies';
-import isServerSide from '@lib/isServerSide';
+import { clearSessionToken } from '~lib/cookies';
+import isServerSide from '~lib/isServerSide';
 
 import { resetUserQueries } from './login';
 

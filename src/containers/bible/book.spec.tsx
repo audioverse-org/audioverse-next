@@ -4,18 +4,18 @@ import { __loadRouter } from 'next/router';
 import React from 'react';
 import videojs from 'video.js';
 
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import { BookProps } from '@containers/bible/book';
-import * as bibleBrain from '@lib/api/bibleBrain';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import setPlayerMock from '@lib/test/setPlayerMock';
+import AndMiniplayer from '~components/templates/andMiniplayer';
+import AndPlaybackContext from '~components/templates/andPlaybackContext';
+import { BookProps } from '~containers/bible/book';
+import * as bibleBrain from '~lib/api/bibleBrain';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
+import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/bibles/[id]/[book]/[chapter]';
+} from '~pages/[language]/bibles/[id]/[book]/[chapter]';
 
-jest.mock('@lib/api/bibleBrain');
+jest.mock('~lib/api/bibleBrain');
 jest.mock('video.js');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {

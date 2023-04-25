@@ -1,13 +1,12 @@
 import React, { ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Slider from '@components/organisms/slider';
-import { getAppFeatures } from '@lib/getAppFeatures';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading1 from '~components/atoms/heading1';
+import Slider from '~components/organisms/slider';
+import { getAppFeatures } from '~lib/getAppFeatures';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
 import LogoLarge from '../../../public/img/logo-large.svg';
-
 import styles from './andOnboarding.module.scss';
 
 export default function AndOnboarding({

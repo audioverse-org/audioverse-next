@@ -3,13 +3,15 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
-import { sleep } from '@lib/sleep';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import Reset from '@pages/[language]/account/reset';
-import loadControlledPromise from '@lib/test/loadControlledPromise';
+import { LoginDocument } from '~lib/api/__generated__/login';
+import { fetchApi } from '~lib/api/fetchApi';
+import { sleep } from '~lib/sleep';
+import { buildRenderer } from '~lib/test/buildRenderer';
+import loadControlledPromise from '~lib/test/loadControlledPromise';
+import withMutedReactQueryLogger from '~lib/test/withMutedReactQueryLogger';
+import Reset from '~pages/[language]/account/reset';
+
+import { ResetPasswordDocument } from './__generated__/reset';
 
 const renderPage = buildRenderer(Reset);
 

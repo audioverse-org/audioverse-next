@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import SeriesList, { SeriesListProps } from '@containers/series/list';
 import {
 	getSeriesListPageData,
 	getSeriesListPathsData,
-} from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/series/__generated__/list';
+import SeriesList, { SeriesListProps } from '~containers/series/list';
+import getIntl from '~lib/getIntl';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getNumberedStaticPaths } from '~lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default SeriesList;
 

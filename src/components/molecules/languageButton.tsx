@@ -1,15 +1,14 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { LANGUAGES } from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import getLanguageIds from '@lib/getLanguageIds';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import { LANGUAGES } from '~lib/constants';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import getLanguageIds from '~lib/getLanguageIds';
+import useLanguageRoute from '~lib/useLanguageRoute';
+import { Language } from '~src/__generated__/graphql';
 
 import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
 import IconLanguage from '../../../public/img/icons/icon-language-light.svg';
-
 import Button, { IButtonType } from './button';
 import Dropdown from './dropdown';
 import styles from './languageButton.module.scss';

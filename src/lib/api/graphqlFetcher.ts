@@ -1,4 +1,4 @@
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi } from '~lib/api/fetchApi';
 
 export function graphqlFetcher<
 	TData,

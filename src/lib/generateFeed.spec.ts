@@ -1,6 +1,7 @@
 import { advanceTo } from 'jest-date-mock';
 
-import { RecordingContentType } from './generated/graphql';
+import { RecordingContentType } from '~src/__generated__/graphql';
+
 import { generateFeed } from './generateFeed';
 
 describe('generateFeed', () => {

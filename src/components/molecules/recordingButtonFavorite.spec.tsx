@@ -4,16 +4,16 @@ import Cookie from 'js-cookie';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
-import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
-import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
-import { BaseColors } from '@lib/constants';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import loadControlledPromise from '@lib/test/loadControlledPromise';
+import RecordingButtonFavorite from '~components/molecules/recordingButtonFavorite';
+import { recordingIsFavorited } from '~lib/api/recordingIsFavorited';
+import { setRecordingFavorited } from '~lib/api/setRecordingFavorited';
+import { BaseColors } from '~lib/constants';
+import loadControlledPromise from '~lib/test/loadControlledPromise';
+import renderWithProviders from '~lib/test/renderWithProviders';
+import withMutedReactQueryLogger from '~lib/test/withMutedReactQueryLogger';
 
-jest.mock('@lib/api/recordingIsFavorited');
-jest.mock('@lib/api/setRecordingFavorited');
+jest.mock('~lib/api/recordingIsFavorited');
+jest.mock('~lib/api/setRecordingFavorited');
 jest.mock('js-cookie');
 
 const renderComponent = async () => {

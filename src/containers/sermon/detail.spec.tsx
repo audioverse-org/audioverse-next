@@ -13,28 +13,31 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import { SermonDetailProps } from '@containers/sermon/detail';
-import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSermonDetailDataDocument,
-	GetSermonDetailStaticPathsDocument,
-	Language,
-	RecordingContentType,
-	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import setPlayerMock from '@lib/test/setPlayerMock';
+import AndMiniplayer from '~components/templates/andMiniplayer';
+import AndPlaybackContext from '~components/templates/andPlaybackContext';
+import { SermonDetailProps } from '~containers/sermon/detail';
+import { fetchApi } from '~lib/api/fetchApi';
+import { DETAIL_PRERENDER_LIMIT } from '~lib/constants';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
+import renderWithProviders from '~lib/test/renderWithProviders';
+import setPlayerMock from '~lib/test/setPlayerMock';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/teachings/[id]/[[...slug]]';
-import { DETAIL_PRERENDER_LIMIT } from '@lib/constants';
+} from '~pages/[language]/teachings/[id]/[[...slug]]';
+import {
+	Language,
+	RecordingContentType,
+	SequenceContentType,
+} from '~src/__generated__/graphql';
+
+import {
+	GetSermonDetailDataDocument,
+	GetSermonDetailStaticPathsDocument,
+} from './__generated__/detail';
 
 jest.mock('video.js');
-jest.mock('@lib/api/fetchApi');
+jest.mock('~lib/api/fetchApi');
 // WORKAROUND: https://github.com/vercel/next.js/issues/16864#issuecomment-702069418
 
 function loadSermonDetailPathsData() {

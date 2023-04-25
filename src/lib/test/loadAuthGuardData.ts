@@ -1,8 +1,8 @@
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { GetWithAuthGuardDataDocument } from '@lib/generated/graphql';
+import { GetWithAuthGuardDataDocument } from '~components/HOCs/__generated__/withAuthGuard';
+import { fetchApi } from '~lib/api/fetchApi';
 
 export function loadAuthGuardData(email: any = 'the_email'): void {
 	Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });

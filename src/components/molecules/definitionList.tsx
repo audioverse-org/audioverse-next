@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import Heading6 from '@components/atoms/heading6';
-import { BaseColors } from '@lib/constants';
+import Heading6 from '~components/atoms/heading6';
+import { BaseColors } from '~lib/constants';
 
 import baseColorStyles from '../atoms/baseColors.module.scss';
-
 import styles from './definitionList.module.scss';
 
 export type IDefinitionListTerm = {

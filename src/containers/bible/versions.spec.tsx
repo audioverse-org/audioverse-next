@@ -1,15 +1,16 @@
 import React from 'react';
 
-import * as bibleBrain from '@lib/api/bibleBrain';
-import { GetAudiobibleVersionsDataDocument } from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import renderWithProviders from '@lib/test/renderWithProviders';
+import * as bibleBrain from '~lib/api/bibleBrain';
+import { buildLoader } from '~lib/test/buildLoader';
+import renderWithProviders from '~lib/test/renderWithProviders';
 import Versions, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/bibles';
+} from '~pages/[language]/bibles';
 
-jest.mock('@lib/api/bibleBrain');
+import { GetAudiobibleVersionsDataDocument } from './__generated__/versions';
+
+jest.mock('~lib/api/bibleBrain');
 
 async function renderPage() {
 	const { props } = (await getStaticProps({})) as any;

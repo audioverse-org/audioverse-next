@@ -1,15 +1,17 @@
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { screen } from '@testing-library/react';
+import { __loadQuery } from 'next/router';
+
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import CustomPageDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/page/[id]/[[...slugs]]';
-import { buildLoader } from '@lib/test/buildLoader';
+} from '~pages/[language]/page/[id]/[[...slugs]]';
+
 import {
 	GetCustomDetailPageDataDocument,
 	GetCustomDetailPageStaticPathsDocument,
-} from '@lib/generated/graphql';
-import { screen } from '@testing-library/react';
-import { __loadQuery } from 'next/router';
+} from './__generated__/detail';
 
 const renderPage = buildStaticRenderer(CustomPageDetail, getStaticProps);
 const loadData = buildLoader(GetCustomDetailPageDataDocument, {

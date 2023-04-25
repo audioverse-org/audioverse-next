@@ -10,18 +10,18 @@ import React, {
 	useState,
 } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import type { VideoJsPlayer } from 'video.js';
 import type * as VideoJs from 'video.js';
 
-import { getSessionToken } from '@lib/cookies';
+import { getSessionToken } from '~lib/cookies';
+import hasVideo from '~lib/hasVideo';
+import { Scalars } from '~src/__generated__/graphql';
+
 import {
 	AndMiniplayerFragment,
 	GetRecordingPlaybackProgressQuery,
 	recordingPlaybackProgressSet,
 	RecordingPlaybackProgressSetMutationVariables,
-	Scalars,
-} from '@lib/generated/graphql';
-import hasVideo from '@lib/hasVideo';
+} from './__generated__/andMiniplayer';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -75,7 +75,7 @@ export const shouldLoadRecordingPlaybackProgress = (
 	!!getSessionToken();
 
 export type PlaybackContextType = {
-	player: () => VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
+	player: () => VideoJs.VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
 	play: () => void;
 	chromecastTrigger: () => void;
 	airPlayTrigger: () => void;
@@ -190,7 +190,7 @@ export default function AndPlaybackContext({
 	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
-	const playerRef = useRef<VideoJsPlayer>();
+	const playerRef = useRef<VideoJs.VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);

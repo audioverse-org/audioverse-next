@@ -1,18 +1,19 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSponsorTeachingsPageDataDocument,
-	GetSponsorTeachingsPathsDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { fetchApi } from '~lib/api/fetchApi';
+import { buildLoader } from '~lib/test/buildLoader';
+import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import SponsorTeachings, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/[id]/teachings/page/[i]';
+} from '~pages/[language]/sponsors/[id]/teachings/page/[i]';
+import { RecordingContentType } from '~src/__generated__/graphql';
+
+import {
+	GetSponsorTeachingsPageDataDocument,
+	GetSponsorTeachingsPathsDataDocument,
+} from './__generated__/teachings';
 
 const renderPage = buildStaticRenderer(SponsorTeachings, getStaticProps);
 

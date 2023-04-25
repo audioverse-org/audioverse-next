@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { PlayerFragment } from '@lib/generated/graphql';
-import { useFormattedTime } from '@lib/time';
-import usePlaybackSession from '@lib/usePlaybackSession';
+import { useFormattedTime } from '~lib/time';
+import usePlaybackSession from '~lib/usePlaybackSession';
 
+import { PlayerFragment } from './__generated__/player';
 import styles from './playbackTimes.module.scss';
 
 export default function PlaybackTimes({

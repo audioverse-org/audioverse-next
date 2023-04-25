@@ -19,9 +19,14 @@ query getAudiobookFeedData($id: ID!) {
 		recordings(first: 25) {
 			nodes {
 				...generateFeed
+				authors: persons(role: WRITER) {
+					name
+				}
+				narrators: persons(role: SPEAKER) {
+					name
+				}
 			}
 		}
-		...bookFeedDescription
 	}
 }
 

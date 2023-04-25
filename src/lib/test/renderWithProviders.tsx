@@ -2,8 +2,8 @@ import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import withIntl from '@components/HOCs/withIntl';
-import { __awaitIntlMessages } from '@lib/getIntlMessages';
+import withIntl from '~components/HOCs/withIntl';
+import { __awaitIntlMessages } from '~lib/getIntlMessages';
 
 export default async function renderWithProviders(
 	ui: React.ReactElement,

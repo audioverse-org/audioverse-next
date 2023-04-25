@@ -23,11 +23,12 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"paths": {
-			"@lib/*": ["src/lib/*"],
-			"@components/*": ["src/components/*"],
-			"@containers/*": ["src/containers/*"],
-			"@pages/*": ["src/pages/*"],
-			"@public/*": ["public/*"]
+			"~src/*": ["src/*"],
+			"~lib/*": ["src/lib/*"],
+			"~components/*": ["src/components/*"],
+			"~containers/*": ["src/containers/*"],
+			"~pages/*": ["src/pages/*"],
+			"~public/*": ["public/*"]
 		},
 		"incremental": true
 	},

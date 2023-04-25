@@ -1,17 +1,18 @@
-import Sponsors from '@containers/sponsor/list/all';
-import { REVALIDATE } from '@lib/constants';
-import {
-	getSponsorListLetterCounts,
-	GetSponsorListLetterCountsQuery,
-} from '@lib/generated/graphql';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import root from '@lib/routes';
 import {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
 	GetStaticPropsResult,
 } from 'next';
+
+import {
+	getSponsorListLetterCounts,
+	GetSponsorListLetterCountsQuery,
+} from '~containers/sponsor/list/__generated__/list';
+import Sponsors from '~containers/sponsor/list/all';
+import { REVALIDATE } from '~lib/constants';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import root from '~lib/routes';
 
 export default Sponsors;
 

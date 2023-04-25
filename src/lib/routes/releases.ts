@@ -1,4 +1,5 @@
-import { Scalars } from '../generated/graphql';
+import { Scalars } from '~src/__generated__/graphql';
+
 import node from './primatives/node';
 
 const releases = (r: string) => ({

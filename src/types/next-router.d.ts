@@ -1,6 +1,5 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import _ from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 
 declare module 'next/router' {
 	declare const __mockedRouter: NextRouter;

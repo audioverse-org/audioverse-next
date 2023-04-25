@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import LoadingCards from '@components/molecules/loadingCards';
-import NotFoundBase from '@components/organisms/notFound';
+import LoadingCards from '~components/molecules/loadingCards';
+import NotFoundBase from '~components/organisms/notFound';
 
 type WithFailStateOptions<P> = {
 	useShould404?: (props: P) => boolean;

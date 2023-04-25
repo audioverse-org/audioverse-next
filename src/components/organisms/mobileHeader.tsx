@@ -1,21 +1,23 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Button from '@components/molecules/button';
-import Mininav from '@components/molecules/mininav';
-import Header from '@components/organisms/header';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { useNavigationItems } from '@lib/useNavigationItems';
+
+import Button from '~components/molecules/button';
+import ButtonPlayback from '~components/molecules/buttonPlayback';
+import Mininav from '~components/molecules/mininav';
+import SearchBar from '~components/molecules/searchBar';
+import Header from '~components/organisms/header';
+import { PlaybackContext } from '~components/templates/andPlaybackContext';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
+import { useNavigationItems } from '~lib/useNavigationItems';
+
+import IconExitSmall from '../../../public/img/icons/icon-exit-small.svg';
 import MoreIcon from '../../../public/img/icons/icon-more.svg';
-import ButtonPlayback from '@components/molecules/buttonPlayback';
-import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import styles from './mobileHeader.module.scss';
 import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
-import SearchBar from '@components/molecules/searchBar';
-import clsx from 'clsx';
 import { EntityFilterId } from './searchResults.filters';
-import IconExitSmall from '../../../public/img/icons/icon-exit-small.svg';
 
 type Transition = [number, number];
 

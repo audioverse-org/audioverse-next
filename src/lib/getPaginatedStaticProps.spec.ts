@@ -1,4 +1,4 @@
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 describe('getPaginatedStaticProps', () => {
 	it('defaults nodes to empty array', async () => {

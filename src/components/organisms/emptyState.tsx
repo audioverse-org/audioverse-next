@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Alert from '@components/atoms/alert';
-import Heading2 from '@components/atoms/heading2';
-import Button from '@components/molecules/button';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Alert from '~components/atoms/alert';
+import Heading2 from '~components/atoms/heading2';
+import Button from '~components/molecules/button';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
 import styles from './emptyState.module.scss';
 

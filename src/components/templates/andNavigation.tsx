@@ -1,17 +1,19 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
-import SearchBar from '@components/molecules/searchBar';
-import styles from './andNavigation.module.scss';
-import MobileHeader from '@components/organisms/mobileHeader';
-import Drawer from '@components/organisms/drawer';
-import SearchResults from '@containers/search';
-import Footer from '@components/organisms/footer';
+
+import LanguageAlternativesAlert from '~components/molecules/languageAlternativesAlert';
+import SearchBar from '~components/molecules/searchBar';
+import Drawer from '~components/organisms/drawer';
+import Footer from '~components/organisms/footer';
+import MobileHeader from '~components/organisms/mobileHeader';
 import {
 	EntityFilterId,
 	useContextualFilterId,
-} from '@components/organisms/searchResults.filters';
-import clsx from 'clsx';
+} from '~components/organisms/searchResults.filters';
+import SearchResults from '~containers/search';
+
+import styles from './andNavigation.module.scss';
 
 export default function AndNavigation({
 	children,

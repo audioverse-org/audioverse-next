@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import root from '@lib/routes';
+import root from '~lib/routes';
 
 export type IAppFeature = {
 	heading: JSX.Element;

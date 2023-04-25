@@ -1,11 +1,11 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
+import { getSearchResultsSponsors } from '~containers/search/__generated__/sponsors';
 import SearchSponsors, {
 	SearchSponsorsProps,
-} from '@containers/search/sponsors';
-import { storeRequest } from '@lib/api/storeRequest';
-import { getSearchResultsSponsors } from '@lib/generated/graphql';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/search/sponsors';
+import { storeRequest } from '~lib/api/storeRequest';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default SearchSponsors;
 

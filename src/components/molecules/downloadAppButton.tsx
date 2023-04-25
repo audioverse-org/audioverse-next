@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 
 import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
 import IconDownload from '../../../public/img/icons/icon-download-light.svg';
-
 import Button, { IButtonType } from './button';
 import styles from './downloadAppButton.module.scss';
 import Dropdown from './dropdown';

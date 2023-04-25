@@ -4,16 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { getCollectionDetailPathsData } from '~containers/collection/__generated__/detail';
+import { getCollectionTeachingsPageData } from '~containers/collection/__generated__/teachings';
 import CollectionTeachings, {
 	CollectionTeachingsProps,
-} from '@containers/collection/teachings';
-import {
-	getCollectionDetailPathsData,
-	getCollectionTeachingsPageData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/collection/teachings';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import getIntl from '~lib/getIntl';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default CollectionTeachings;
 

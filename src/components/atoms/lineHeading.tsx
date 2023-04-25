@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 
-import { BaseColors } from '@lib/constants';
+import { BaseColors } from '~lib/constants';
 
 import styles from './lineHeading.module.scss';
 

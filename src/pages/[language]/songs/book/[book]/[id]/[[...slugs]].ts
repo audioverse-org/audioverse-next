@@ -4,13 +4,13 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
+import { IBaseProps } from '~containers/base';
+import { getBookSongDetailData } from '~containers/song/books/__generated__/track';
 import SongBookTrack, {
 	SongBookTrackProps,
-} from '@containers/song/books/track';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getBookSongDetailData } from '@lib/generated/graphql';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+} from '~containers/song/books/track';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 
 export default SongBookTrack;
 

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { MasonryProps } from 'masonic';
-import React from 'react';
 import dynamic from 'next/dynamic';
+import React from 'react';
 
 import styles from './cardMasonry.module.scss';
 

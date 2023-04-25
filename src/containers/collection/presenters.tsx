@@ -1,19 +1,17 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
-import CardPerson from '@components/molecules/card/person';
-import CardGroup from '@components/molecules/cardGroup';
-import Pagination from '@components/molecules/pagination';
-import { BaseColors } from '@lib/constants';
-import {
-	CollectionPivotFragment,
-	GetCollectionPresentersPageDataQuery,
-} from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import root from '@lib/routes';
+import LineHeading from '~components/atoms/lineHeading';
+import withFailStates from '~components/HOCs/withFailStates';
+import CardPerson from '~components/molecules/card/person';
+import CardGroup from '~components/molecules/cardGroup';
+import Pagination from '~components/molecules/pagination';
+import { BaseColors } from '~lib/constants';
+import { PaginatedProps } from '~lib/getPaginatedStaticProps';
+import root from '~lib/routes';
 
+import { CollectionPivotFragment } from './__generated__/pivot';
+import { GetCollectionPresentersPageDataQuery } from './__generated__/presenters';
 import CollectionPivot from './pivot';
 
 export type CollectionPresentersProps = PaginatedProps<

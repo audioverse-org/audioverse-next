@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 
-import Heading1 from '@components/atoms/heading1';
-import ButtonBack from '@components/molecules/buttonBack';
-import CardGroup from '@components/molecules/cardGroup';
-import Pagination from '@components/molecules/pagination';
-import { PaginationData } from '@lib/getPaginatedStaticProps';
+import Heading1 from '~components/atoms/heading1';
+import ButtonBack from '~components/molecules/buttonBack';
+import CardGroup from '~components/molecules/cardGroup';
+import Pagination from '~components/molecules/pagination';
+import { PaginationData } from '~lib/getPaginatedStaticProps';
 
 import styles from './paginatedCardList.module.scss';
 

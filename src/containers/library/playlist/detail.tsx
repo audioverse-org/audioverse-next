@@ -1,26 +1,25 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import HorizontalRule from '@components/atoms/horizontalRule';
-import withFailStates from '@components/HOCs/withFailStates';
-import CardPlaylistItem from '@components/molecules/card/playlistItem';
-import CardGroup from '@components/molecules/cardGroup';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
+import Heading2 from '~components/atoms/heading2';
+import Heading6 from '~components/atoms/heading6';
+import HorizontalRule from '~components/atoms/horizontalRule';
+import withFailStates from '~components/HOCs/withFailStates';
+import CardPlaylistItem from '~components/molecules/card/playlistItem';
+import CardGroup from '~components/molecules/cardGroup';
+import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
-} from '@components/molecules/definitionList';
-import IconButton from '@components/molecules/iconButton';
-import Tease from '@components/molecules/tease';
-import TypeLockup from '@components/molecules/typeLockup';
-import { BaseColors } from '@lib/constants';
-import { formatLongDateTime } from '@lib/date';
-import { GetLibraryPlaylistPageDataQuery } from '@lib/generated/graphql';
+} from '~components/molecules/definitionList';
+import IconButton from '~components/molecules/iconButton';
+import Tease from '~components/molecules/tease';
+import TypeLockup from '~components/molecules/typeLockup';
+import { BaseColors } from '~lib/constants';
+import { formatLongDateTime } from '~lib/date';
 
 import ListIcon from '../../../../public/img/icons/fa-list.svg';
 import LikeActiveIcon from '../../../../public/img/icons/icon-like-active.svg';
-
+import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
 export type ILibraryPlaylistDetailProps = {

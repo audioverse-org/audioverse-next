@@ -13,6 +13,8 @@ module.exports = {
 		'react-hooks',
 		'lodash',
 		'@calm/react-intl',
+		'simple-import-sort',
+		'import',
 	],
 	extends: [
 		'eslint:recommended',
@@ -51,13 +53,6 @@ module.exports = {
 			},
 		],
 		'@calm/react-intl/missing-values': 2,
-		'sort-imports': [
-			'error',
-			{
-				ignoreDeclarationSort: true,
-				ignoreCase: true,
-			},
-		],
 		'@typescript-eslint/no-unused-vars': [
 			'error',
 			{
@@ -75,6 +70,10 @@ module.exports = {
 		'react-hooks/rules-of-hooks': 'error',
 		'react-hooks/exhaustive-deps': 'warn',
 		'lodash/import-scope': ['error', 'method'],
+		'simple-import-sort/imports': 'error',
+		'import/first': 'error',
+		'import/newline-after-import': 'error',
+		'import/no-duplicates': 'error',
 	},
 	settings: {
 		react: {

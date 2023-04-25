@@ -3,27 +3,27 @@ import Image from 'next/legacy/image';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import ButtonDownload from '@components/molecules/buttonDownload';
-import ButtonNudge from '@components/molecules/buttonNudge';
+import ButtonDownload from '~components/molecules/buttonDownload';
+import ButtonNudge from '~components/molecules/buttonNudge';
 import ButtonPlay, {
 	isBackgroundColorDark,
-} from '@components/molecules/buttonPlay';
-import ButtonShareRecording from '@components/molecules/buttonShareRecording';
-import ButtonSpeed from '@components/molecules/buttonSpeed';
-import PlaybackTimes from '@components/molecules/playbackTimes';
-import RecordingProgressBar from '@components/molecules/recordingProgressBar';
-import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment, PlayerFragment } from '@lib/generated/graphql';
-import hasVideo from '@lib/hasVideo';
-import useGlobalSpaceDown from '@lib/useGlobalSpaceDown';
-import usePlaybackSession from '@lib/usePlaybackSession';
+} from '~components/molecules/buttonPlay';
+import ButtonShareRecording from '~components/molecules/buttonShareRecording';
+import ButtonSpeed from '~components/molecules/buttonSpeed';
+import PlaybackTimes from '~components/molecules/playbackTimes';
+import RecordingProgressBar from '~components/molecules/recordingProgressBar';
+import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
+import { BaseColors } from '~lib/constants';
+import hasVideo from '~lib/hasVideo';
+import useGlobalSpaceDown from '~lib/useGlobalSpaceDown';
+import usePlaybackSession from '~lib/usePlaybackSession';
 
 import IconAirPlayAudio from '../../../public/img/icon-airplay-audio.svg';
 import IconChromeCast from '../../../public/img/icon-chromecast.svg';
 import IconFullscreen from '../../../public/img/icons/icon-fullscreen.svg';
 import IconPause from '../../../public/img/icons/icon-pause-large.svg';
 import IconPlay from '../../../public/img/icons/icon-play-large.svg';
-
+import { PlayerFragment } from './__generated__/player';
 import CircleButton from './circleButton';
 import styles from './player.module.scss';
 import RecordingButtonFavorite from './recordingButtonFavorite';

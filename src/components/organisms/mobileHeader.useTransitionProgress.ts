@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import isServerSide from '@lib/isServerSide';
+
+import isServerSide from '~lib/isServerSide';
 
 function useScrollTop(scrollRef: React.RefObject<HTMLDivElement>) {
 	const [scrollTop, setScrollTop] = useState<number>(0);

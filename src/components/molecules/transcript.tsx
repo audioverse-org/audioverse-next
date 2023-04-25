@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Alert from '@components/atoms/alert';
-import { RecordingContentType } from '@lib/generated/graphql';
+import Alert from '~components/atoms/alert';
+import { RecordingContentType } from '~src/__generated__/graphql';
 
 import styles from './transcript.module.scss';
 

@@ -1,11 +1,9 @@
 import React from 'react';
 
-import {
-	CardRecordingFragment,
-	RecordingContentType,
-} from '@lib/generated/graphql';
-import { UnreachableCaseError } from '@lib/typeHelpers';
+import { UnreachableCaseError } from '~lib/typeHelpers';
+import { RecordingContentType } from '~src/__generated__/graphql';
 
+import { CardRecordingFragment } from './__generated__/recording';
 import CardAudiobookTrack from './audiobookTrack';
 import CardBibleChapter from './bibleChapter';
 import CardSermon from './sermon';

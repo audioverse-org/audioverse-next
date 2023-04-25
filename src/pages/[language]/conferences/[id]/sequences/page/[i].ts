@@ -4,16 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { getCollectionDetailPathsData } from '~containers/collection/__generated__/detail';
+import { getCollectionSequencesPageData } from '~containers/collection/__generated__/sequences';
 import CollectionSequences, {
 	CollectionSequencesProps,
-} from '@containers/collection/sequences';
-import {
-	getCollectionDetailPathsData,
-	getCollectionSequencesPageData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/collection/sequences';
+import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
+import getIntl from '~lib/getIntl';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default CollectionSequences;
 

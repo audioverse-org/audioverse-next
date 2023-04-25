@@ -1,11 +1,11 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
+import { getSearchResultsCollections } from '~containers/search/__generated__/collections';
 import SearchCollections, {
 	SearchCollectionsProps,
-} from '@containers/search/collections';
-import { storeRequest } from '@lib/api/storeRequest';
-import { getSearchResultsCollections } from '@lib/generated/graphql';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '~containers/search/collections';
+import { storeRequest } from '~lib/api/storeRequest';
+import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
 export default SearchCollections;
 

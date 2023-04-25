@@ -4,26 +4,23 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import ProgressBar from '@components/atoms/progressBar';
-import Card from '@components/molecules/card';
-import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
-import { BaseColors } from '@lib/constants';
-import { formatDateRange } from '@lib/date';
-import {
-	CardCollectionFragment,
-	CardRecordingFragment,
-	CardSequenceFragment,
-	CollectionContentType,
-} from '@lib/generated/graphql';
-import { useFormattedDuration } from '@lib/time';
-import useHover from '@lib/useHover';
+import Heading2 from '~components/atoms/heading2';
+import Heading6 from '~components/atoms/heading6';
+import ProgressBar from '~components/atoms/progressBar';
+import Card from '~components/molecules/card';
+import { useIsCollectionFavorited } from '~lib/api/useIsCollectionFavorited';
+import { BaseColors } from '~lib/constants';
+import { formatDateRange } from '~lib/date';
+import { useFormattedDuration } from '~lib/time';
+import useHover from '~lib/useHover';
+import { CollectionContentType } from '~src/__generated__/graphql';
 
 import SuccessIcon from '../../../../public/img/icons/icon-success-light.svg';
 import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
-
+import { CardCollectionFragment } from './__generated__/collection';
+import { CardRecordingFragment } from './__generated__/recording';
+import { CardSequenceFragment } from './__generated__/sequence';
 import styles from './collection.module.scss';
 import CardRecording from './recording';
 import CardSequence from './sequence';

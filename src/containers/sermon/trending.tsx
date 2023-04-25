@@ -1,16 +1,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import withFailStates from '@components/HOCs/withFailStates';
-import ButtonBack from '@components/molecules/buttonBack';
-import CardRecording from '@components/molecules/card/recording';
-import CardGroup from '@components/molecules/cardGroup';
-import RecordingHasVideoFilter from '@components/molecules/recordingHasVideoFilter';
-import { GetTrendingTeachingsPageDataQuery } from '@lib/generated/graphql';
-import root from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading1 from '~components/atoms/heading1';
+import withFailStates from '~components/HOCs/withFailStates';
+import ButtonBack from '~components/molecules/buttonBack';
+import CardRecording from '~components/molecules/card/recording';
+import CardGroup from '~components/molecules/cardGroup';
+import RecordingHasVideoFilter from '~components/molecules/recordingHasVideoFilter';
+import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
 
+import { GetTrendingTeachingsPageDataQuery } from './__generated__/trending';
 import styles from './trending.module.scss';
 
 export type TrendingTeachingsProps = NonNullable<
