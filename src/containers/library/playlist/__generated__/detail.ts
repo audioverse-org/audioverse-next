@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../../../components/molecules/__gene
 import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryPlaylistPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -54,6 +54,20 @@ export const useGetLibraryPlaylistPageDataQuery = <
       graphqlFetcher<GetLibraryPlaylistPageDataQuery, GetLibraryPlaylistPageDataQueryVariables>(GetLibraryPlaylistPageDataDocument, variables),
       options
     );
+export const useInfiniteGetLibraryPlaylistPageDataQuery = <
+      TData = GetLibraryPlaylistPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetLibraryPlaylistPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetLibraryPlaylistPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetLibraryPlaylistPageDataQuery, TError, TData>(
+      ['getLibraryPlaylistPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetLibraryPlaylistPageDataQuery, GetLibraryPlaylistPageDataQueryVariables>(GetLibraryPlaylistPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getLibraryPlaylistPageData<T>(

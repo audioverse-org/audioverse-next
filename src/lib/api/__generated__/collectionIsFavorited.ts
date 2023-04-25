@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type CollectionIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -30,6 +30,20 @@ export const useCollectionIsFavoritedQuery = <
       graphqlFetcher<CollectionIsFavoritedQuery, CollectionIsFavoritedQueryVariables>(CollectionIsFavoritedDocument, variables),
       options
     );
+export const useInfiniteCollectionIsFavoritedQuery = <
+      TData = CollectionIsFavoritedQuery,
+      TError = unknown
+    >(
+      variables: CollectionIsFavoritedQueryVariables,
+      options?: UseInfiniteQueryOptions<CollectionIsFavoritedQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<CollectionIsFavoritedQuery, TError, TData>(
+      ['collectionIsFavorited.infinite', variables],
+      (metaData) => graphqlFetcher<CollectionIsFavoritedQuery, CollectionIsFavoritedQueryVariables>(CollectionIsFavoritedDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function collectionIsFavorited<T>(

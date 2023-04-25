@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterRecordingsPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -65,6 +65,20 @@ export const useGetPresenterRecordingsPageDataQuery = <
       graphqlFetcher<GetPresenterRecordingsPageDataQuery, GetPresenterRecordingsPageDataQueryVariables>(GetPresenterRecordingsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterRecordingsPageDataQuery = <
+      TData = GetPresenterRecordingsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterRecordingsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterRecordingsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterRecordingsPageDataQuery, TError, TData>(
+      ['getPresenterRecordingsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterRecordingsPageDataQuery, GetPresenterRecordingsPageDataQueryVariables>(GetPresenterRecordingsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetPresenterRecordingsFeedDataDocument = `
     query getPresenterRecordingsFeedData($id: ID!) {
   person(id: $id) {
@@ -95,6 +109,20 @@ export const useGetPresenterRecordingsFeedDataQuery = <
       graphqlFetcher<GetPresenterRecordingsFeedDataQuery, GetPresenterRecordingsFeedDataQueryVariables>(GetPresenterRecordingsFeedDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterRecordingsFeedDataQuery = <
+      TData = GetPresenterRecordingsFeedDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterRecordingsFeedDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterRecordingsFeedDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterRecordingsFeedDataQuery, TError, TData>(
+      ['getPresenterRecordingsFeedData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterRecordingsFeedDataQuery, GetPresenterRecordingsFeedDataQueryVariables>(GetPresenterRecordingsFeedDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterRecordingsPageData<T>(

@@ -9,7 +9,7 @@ import { AndMiniplayerFragmentDoc } from '../../components/templates/__generated
 import { TestimoniesFragmentDoc } from '../../components/organisms/__generated__/testimonies';
 import { CardPostFragmentDoc } from '../../components/molecules/card/__generated__/post';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/__generated__/sequence';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetHomeStaticPropsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -71,6 +71,20 @@ export const useGetHomeStaticPropsQuery = <
       graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, variables),
       options
     );
+export const useInfiniteGetHomeStaticPropsQuery = <
+      TData = GetHomeStaticPropsQuery,
+      TError = unknown
+    >(
+      variables: GetHomeStaticPropsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetHomeStaticPropsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetHomeStaticPropsQuery, TError, TData>(
+      ['getHomeStaticProps.infinite', variables],
+      (metaData) => graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getHomeStaticProps<T>(

@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../molecules/__generated__/personLoc
 import { CardHatSponsorFragmentDoc } from '../../molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetNotFoundPageDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -40,6 +40,20 @@ export const useGetNotFoundPageDataQuery = <
       graphqlFetcher<GetNotFoundPageDataQuery, GetNotFoundPageDataQueryVariables>(GetNotFoundPageDataDocument, variables),
       options
     );
+export const useInfiniteGetNotFoundPageDataQuery = <
+      TData = GetNotFoundPageDataQuery,
+      TError = unknown
+    >(
+      variables?: GetNotFoundPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetNotFoundPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetNotFoundPageDataQuery, TError, TData>(
+      variables === undefined ? ['getNotFoundPageData.infinite'] : ['getNotFoundPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetNotFoundPageDataQuery, GetNotFoundPageDataQueryVariables>(GetNotFoundPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getNotFoundPageData<T>(

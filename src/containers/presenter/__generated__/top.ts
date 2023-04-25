@@ -7,7 +7,7 @@ import { PersonLockupFragmentDoc } from '../../../components/molecules/__generat
 import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterTopPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -58,6 +58,20 @@ export const useGetPresenterTopPageDataQuery = <
       graphqlFetcher<GetPresenterTopPageDataQuery, GetPresenterTopPageDataQueryVariables>(GetPresenterTopPageDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterTopPageDataQuery = <
+      TData = GetPresenterTopPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterTopPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterTopPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterTopPageDataQuery, TError, TData>(
+      ['getPresenterTopPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterTopPageDataQuery, GetPresenterTopPageDataQueryVariables>(GetPresenterTopPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterTopPageData<T>(

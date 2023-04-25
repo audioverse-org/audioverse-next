@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSeriesDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -60,6 +60,20 @@ export const useGetSeriesDetailPageDataQuery = <
       graphqlFetcher<GetSeriesDetailPageDataQuery, GetSeriesDetailPageDataQueryVariables>(GetSeriesDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSeriesDetailPageDataQuery = <
+      TData = GetSeriesDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSeriesDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSeriesDetailPageDataQuery, TError, TData>(
+      ['getSeriesDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSeriesDetailPageDataQuery, GetSeriesDetailPageDataQueryVariables>(GetSeriesDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSeriesFeedDataDocument = `
     query getSeriesFeedData($id: ID!) {
   series(id: $id) {
@@ -89,6 +103,20 @@ export const useGetSeriesFeedDataQuery = <
       graphqlFetcher<GetSeriesFeedDataQuery, GetSeriesFeedDataQueryVariables>(GetSeriesFeedDataDocument, variables),
       options
     );
+export const useInfiniteGetSeriesFeedDataQuery = <
+      TData = GetSeriesFeedDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesFeedDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSeriesFeedDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSeriesFeedDataQuery, TError, TData>(
+      ['getSeriesFeedData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSeriesFeedDataQuery, GetSeriesFeedDataQueryVariables>(GetSeriesFeedDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSeriesDetailPathsDataDocument = `
     query getSeriesDetailPathsData($language: Language!, $first: Int) {
   serieses(language: $language, first: $first) {
@@ -110,6 +138,20 @@ export const useGetSeriesDetailPathsDataQuery = <
       graphqlFetcher<GetSeriesDetailPathsDataQuery, GetSeriesDetailPathsDataQueryVariables>(GetSeriesDetailPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetSeriesDetailPathsDataQuery = <
+      TData = GetSeriesDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesDetailPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSeriesDetailPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSeriesDetailPathsDataQuery, TError, TData>(
+      ['getSeriesDetailPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSeriesDetailPathsDataQuery, GetSeriesDetailPathsDataQueryVariables>(GetSeriesDetailPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSeriesDetailPageData<T>(

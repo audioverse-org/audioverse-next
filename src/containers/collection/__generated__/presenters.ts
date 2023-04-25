@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CollectionPivotFragmentDoc } from './pivot';
 import { CardPersonFragmentDoc } from '../../../components/molecules/card/__generated__/person';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionPresentersPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -48,6 +48,20 @@ export const useGetCollectionPresentersPageDataQuery = <
       graphqlFetcher<GetCollectionPresentersPageDataQuery, GetCollectionPresentersPageDataQueryVariables>(GetCollectionPresentersPageDataDocument, variables),
       options
     );
+export const useInfiniteGetCollectionPresentersPageDataQuery = <
+      TData = GetCollectionPresentersPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetCollectionPresentersPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCollectionPresentersPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetCollectionPresentersPageDataQuery, TError, TData>(
+      ['getCollectionPresentersPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetCollectionPresentersPageDataQuery, GetCollectionPresentersPageDataQueryVariables>(GetCollectionPresentersPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getCollectionPresentersPageData<T>(

@@ -1,5 +1,7 @@
+import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { UseInfiniteQueryResult } from 'react-query';
 
 import LineHeading from '~components/atoms/lineHeading';
 import Button from '~components/molecules/button';
@@ -14,12 +16,13 @@ import useLanguageRoute from '~lib/useLanguageRoute';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
 import {
+	GetDiscoverRecentTeachingsQuery,
 	useGetDiscoverBlogPostsQuery,
 	useGetDiscoverConferencesQuery,
 	useGetDiscoverFeaturedTeachingsQuery,
-	useGetDiscoverRecentTeachingsQuery,
 	useGetDiscoverStorySeasonsQuery,
 	useGetDiscoverTrendingTeachingsQuery,
+	useInfiniteGetDiscoverRecentTeachingsQuery,
 } from './__generated__/discover';
 import styles from './discover.module.scss';
 
@@ -27,14 +30,17 @@ type SectionProps = {
 	heading: JSX.Element | string;
 	cards: JSX.Element[] | undefined;
 };
+
 type SectionPropsWithButton = SectionProps & {
 	seeAll: JSX.Element | string;
 	url: string;
 };
+
 function Section(props: SectionProps | SectionPropsWithButton): JSX.Element {
 	const { heading, cards } = props;
 	const seeAll = 'seeAll' in props ? props.seeAll : undefined;
 	const url = 'url' in props ? props.url : undefined;
+
 	return (
 		<div>
 			<LineHeading>{heading}</LineHeading>
@@ -53,19 +59,46 @@ function Section(props: SectionProps | SectionPropsWithButton): JSX.Element {
 		</div>
 	);
 }
+
+function reduceNodes<T, N>(
+	result: UseInfiniteQueryResult<T>,
+	select: (page: T) => N[] | null
+): N[] {
+	return (
+		result.data?.pages?.reduce<N[]>((acc, p) => {
+			if (!p) return acc;
+			const n = select(p);
+			if (!n) return acc;
+			return [...acc, ...n];
+		}, []) || []
+	);
+}
+
 export default function Discover(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const languageId = getLanguageIdByRoute(languageRoute);
 
-	const recentTeachings = useGetDiscoverRecentTeachingsQuery(
+	const recentTeachingsQuery = useInfiniteGetDiscoverRecentTeachingsQuery(
 		{
 			language: languageId,
 			first: 6,
 			after: null,
 		},
 		{
-			select: (d) => d.recentTeachings.nodes,
+			getNextPageParam: (lastPage: Maybe<GetDiscoverRecentTeachingsQuery>) =>
+				lastPage?.recentTeachings.pageInfo.hasNextPage
+					? {
+							language: languageId,
+							first: 6,
+							after: lastPage?.recentTeachings.pageInfo.endCursor,
+					  }
+					: undefined,
 		}
+	);
+
+	const recentTeachings = reduceNodes(
+		recentTeachingsQuery,
+		(p) => p.recentTeachings.nodes
 	);
 
 	const trendingTeachings = useGetDiscoverTrendingTeachingsQuery(
@@ -132,7 +165,7 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Teachings"
 					/>
 				}
-				cards={recentTeachings.data?.map((recording) => (
+				cards={recentTeachings.map((recording) => (
 					<CardRecording recording={recording} key={recording.canonicalPath} />
 				))}
 				seeAll={

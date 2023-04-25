@@ -1,6 +1,6 @@
 import * as Types from '../../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SponsorListEntryFragment = { __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null };
 
@@ -40,6 +40,20 @@ export const useGetSponsorListLetterCountsQuery = <
       graphqlFetcher<GetSponsorListLetterCountsQuery, GetSponsorListLetterCountsQueryVariables>(GetSponsorListLetterCountsDocument, variables),
       options
     );
+export const useInfiniteGetSponsorListLetterCountsQuery = <
+      TData = GetSponsorListLetterCountsQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorListLetterCountsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorListLetterCountsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorListLetterCountsQuery, TError, TData>(
+      ['getSponsorListLetterCounts.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorListLetterCountsQuery, GetSponsorListLetterCountsQueryVariables>(GetSponsorListLetterCountsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorListLetterCounts<T>(

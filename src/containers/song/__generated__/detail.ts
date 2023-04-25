@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../components/molecules/__genera
 import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSongDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -55,6 +55,20 @@ export const useGetSongDetailDataQuery = <
       graphqlFetcher<GetSongDetailDataQuery, GetSongDetailDataQueryVariables>(GetSongDetailDataDocument, variables),
       options
     );
+export const useInfiniteGetSongDetailDataQuery = <
+      TData = GetSongDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongDetailDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSongDetailDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSongDetailDataQuery, TError, TData>(
+      ['getSongDetailData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSongDetailDataQuery, GetSongDetailDataQueryVariables>(GetSongDetailDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSongDetailStaticPathsDocument = `
     query getSongDetailStaticPaths($language: Language!, $first: Int) {
   musicTracks(language: $language, first: $first) {
@@ -76,6 +90,20 @@ export const useGetSongDetailStaticPathsQuery = <
       graphqlFetcher<GetSongDetailStaticPathsQuery, GetSongDetailStaticPathsQueryVariables>(GetSongDetailStaticPathsDocument, variables),
       options
     );
+export const useInfiniteGetSongDetailStaticPathsQuery = <
+      TData = GetSongDetailStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetSongDetailStaticPathsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSongDetailStaticPathsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSongDetailStaticPathsQuery, TError, TData>(
+      ['getSongDetailStaticPaths.infinite', variables],
+      (metaData) => graphqlFetcher<GetSongDetailStaticPathsQuery, GetSongDetailStaticPathsQueryVariables>(GetSongDetailStaticPathsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSongDetailData<T>(

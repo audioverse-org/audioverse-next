@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCustomDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -40,6 +40,20 @@ export const useGetCustomDetailPageDataQuery = <
       graphqlFetcher<GetCustomDetailPageDataQuery, GetCustomDetailPageDataQueryVariables>(GetCustomDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetCustomDetailPageDataQuery = <
+      TData = GetCustomDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetCustomDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCustomDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetCustomDetailPageDataQuery, TError, TData>(
+      ['getCustomDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetCustomDetailPageDataQuery, GetCustomDetailPageDataQueryVariables>(GetCustomDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetCustomDetailPageStaticPathsDocument = `
     query getCustomDetailPageStaticPaths($language: Language!, $first: Int!) {
   pages(language: $language, first: $first) {
@@ -63,6 +77,20 @@ export const useGetCustomDetailPageStaticPathsQuery = <
       graphqlFetcher<GetCustomDetailPageStaticPathsQuery, GetCustomDetailPageStaticPathsQueryVariables>(GetCustomDetailPageStaticPathsDocument, variables),
       options
     );
+export const useInfiniteGetCustomDetailPageStaticPathsQuery = <
+      TData = GetCustomDetailPageStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetCustomDetailPageStaticPathsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCustomDetailPageStaticPathsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetCustomDetailPageStaticPathsQuery, TError, TData>(
+      ['getCustomDetailPageStaticPaths.infinite', variables],
+      (metaData) => graphqlFetcher<GetCustomDetailPageStaticPathsQuery, GetCustomDetailPageStaticPathsQueryVariables>(GetCustomDetailPageStaticPathsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getCustomDetailPageData<T>(

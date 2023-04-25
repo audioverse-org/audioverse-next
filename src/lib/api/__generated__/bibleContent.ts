@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBibleBookContentQueryVariables = Types.Exact<{
   bibleId: Types.Scalars['ID'];
@@ -35,6 +35,20 @@ export const useGetBibleBookContentQuery = <
       graphqlFetcher<GetBibleBookContentQuery, GetBibleBookContentQueryVariables>(GetBibleBookContentDocument, variables),
       options
     );
+export const useInfiniteGetBibleBookContentQuery = <
+      TData = GetBibleBookContentQuery,
+      TError = unknown
+    >(
+      variables: GetBibleBookContentQueryVariables,
+      options?: UseInfiniteQueryOptions<GetBibleBookContentQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetBibleBookContentQuery, TError, TData>(
+      ['getBibleBookContent.infinite', variables],
+      (metaData) => graphqlFetcher<GetBibleBookContentQuery, GetBibleBookContentQueryVariables>(GetBibleBookContentDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getBibleBookContent<T>(

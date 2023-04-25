@@ -93,6 +93,10 @@ query getDiscoverRecentTeachings(
 		nodes {
 			...cardRecording
 		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
 	}
 }
 
@@ -112,6 +116,10 @@ query getDiscoverTrendingTeachings(
 				...cardRecording
 			}
 		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
 	}
 }
 
@@ -128,6 +136,10 @@ query getDiscoverFeaturedTeachings(
 	) {
 		nodes {
 			...cardRecording
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
 		}
 	}
 }
@@ -150,6 +162,10 @@ query getDiscoverStorySeasons(
 					...cardRecording
 				}
 			}
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
 		}
 	}
 }
@@ -185,6 +201,10 @@ query getDiscoverConferences(
 				}
 			}
 		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
 	}
 }
 
@@ -197,6 +217,10 @@ query getDiscoverBlogPosts($language: Language!, $first: Int!, $after: String) {
 	) {
 		nodes {
 			...cardPost
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
 		}
 	}
 }

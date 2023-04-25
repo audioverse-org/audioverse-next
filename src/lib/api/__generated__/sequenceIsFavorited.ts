@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SequenceIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -35,6 +35,20 @@ export const useSequenceIsFavoritedQuery = <
       graphqlFetcher<SequenceIsFavoritedQuery, SequenceIsFavoritedQueryVariables>(SequenceIsFavoritedDocument, variables),
       options
     );
+export const useInfiniteSequenceIsFavoritedQuery = <
+      TData = SequenceIsFavoritedQuery,
+      TError = unknown
+    >(
+      variables: SequenceIsFavoritedQueryVariables,
+      options?: UseInfiniteQueryOptions<SequenceIsFavoritedQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<SequenceIsFavoritedQuery, TError, TData>(
+      ['sequenceIsFavorited.infinite', variables],
+      (metaData) => graphqlFetcher<SequenceIsFavoritedQuery, SequenceIsFavoritedQueryVariables>(SequenceIsFavoritedDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function sequenceIsFavorited<T>(

@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAboutPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -40,6 +40,20 @@ export const useGetAboutPageDataQuery = <
       graphqlFetcher<GetAboutPageDataQuery, GetAboutPageDataQueryVariables>(GetAboutPageDataDocument, variables),
       options
     );
+export const useInfiniteGetAboutPageDataQuery = <
+      TData = GetAboutPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAboutPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAboutPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAboutPageDataQuery, TError, TData>(
+      ['getAboutPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAboutPageDataQuery, GetAboutPageDataQueryVariables>(GetAboutPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetAboutStaticPathsDocument = `
     query getAboutStaticPaths($language: Language!, $first: Int!) {
   pages(language: $language, first: $first) {
@@ -62,6 +76,20 @@ export const useGetAboutStaticPathsQuery = <
       graphqlFetcher<GetAboutStaticPathsQuery, GetAboutStaticPathsQueryVariables>(GetAboutStaticPathsDocument, variables),
       options
     );
+export const useInfiniteGetAboutStaticPathsQuery = <
+      TData = GetAboutStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetAboutStaticPathsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAboutStaticPathsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAboutStaticPathsQuery, TError, TData>(
+      ['getAboutStaticPaths.infinite', variables],
+      (metaData) => graphqlFetcher<GetAboutStaticPathsQuery, GetAboutStaticPathsQueryVariables>(GetAboutStaticPathsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAboutPageData<T>(

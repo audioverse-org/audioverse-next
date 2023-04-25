@@ -2,7 +2,7 @@ import * as Types from '../../../../__generated__/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../../components/molecules/__generated__/personLockup';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoriesAlbumsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -46,6 +46,20 @@ export const useGetStoriesAlbumsPageDataQuery = <
       graphqlFetcher<GetStoriesAlbumsPageDataQuery, GetStoriesAlbumsPageDataQueryVariables>(GetStoriesAlbumsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetStoriesAlbumsPageDataQuery = <
+      TData = GetStoriesAlbumsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoriesAlbumsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetStoriesAlbumsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetStoriesAlbumsPageDataQuery, TError, TData>(
+      ['getStoriesAlbumsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetStoriesAlbumsPageDataQuery, GetStoriesAlbumsPageDataQueryVariables>(GetStoriesAlbumsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetStoriesAlbumsPathDataDocument = `
     query getStoriesAlbumsPathData($language: Language!) {
   storySeasons(language: $language) {
@@ -67,6 +81,20 @@ export const useGetStoriesAlbumsPathDataQuery = <
       graphqlFetcher<GetStoriesAlbumsPathDataQuery, GetStoriesAlbumsPathDataQueryVariables>(GetStoriesAlbumsPathDataDocument, variables),
       options
     );
+export const useInfiniteGetStoriesAlbumsPathDataQuery = <
+      TData = GetStoriesAlbumsPathDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoriesAlbumsPathDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetStoriesAlbumsPathDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetStoriesAlbumsPathDataQuery, TError, TData>(
+      ['getStoriesAlbumsPathData.infinite', variables],
+      (metaData) => graphqlFetcher<GetStoriesAlbumsPathDataQuery, GetStoriesAlbumsPathDataQueryVariables>(GetStoriesAlbumsPathDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getStoriesAlbumsPageData<T>(

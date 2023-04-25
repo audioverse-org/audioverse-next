@@ -38,6 +38,10 @@ const loadRecentTeachings = buildLoader<GetDiscoverRecentTeachingsQuery>(
 					persons: [],
 				},
 			],
+			pageInfo: {
+				hasNextPage: false,
+				endCursor: null,
+			},
 		},
 	}
 );
@@ -56,6 +60,10 @@ const loadTrendingTeachings = buildLoader<GetDiscoverTrendingTeachingsQuery>(
 					},
 				},
 			],
+			pageInfo: {
+				hasNextPage: false,
+				endCursor: null,
+			},
 		},
 	}
 );
@@ -72,6 +80,10 @@ const loadFeaturedTeachings = buildLoader<GetDiscoverFeaturedTeachingsQuery>(
 					persons: [],
 				},
 			],
+			pageInfo: {
+				hasNextPage: false,
+				endCursor: null,
+			},
 		},
 	}
 );
@@ -98,6 +110,10 @@ const loadStorySeasons = buildLoader<GetDiscoverStorySeasonsQuery>(
 					},
 				},
 			],
+			pageInfo: {
+				hasNextPage: false,
+				endCursor: null,
+			},
 		},
 	}
 );
@@ -128,6 +144,10 @@ const loadConferences = buildLoader<GetDiscoverConferencesQuery>(
 					},
 				},
 			],
+			pageInfo: {
+				hasNextPage: false,
+				endCursor: null,
+			},
 		},
 	}
 );
@@ -148,6 +168,10 @@ const loadBlogPosts = buildLoader<GetDiscoverBlogPostsQuery>(
 					readingDuration: 9 * 60,
 				},
 			],
+			pageInfo: {
+				hasNextPage: false,
+				endCursor: null,
+			},
 		},
 	}
 );

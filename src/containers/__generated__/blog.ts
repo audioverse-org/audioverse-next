@@ -1,7 +1,7 @@
 import * as Types from '../../__generated__/graphql';
 
 import { CardPostFragmentDoc } from '../../components/molecules/card/__generated__/post';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBlogPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -49,6 +49,20 @@ export const useGetBlogPageDataQuery = <
       graphqlFetcher<GetBlogPageDataQuery, GetBlogPageDataQueryVariables>(GetBlogPageDataDocument, variables),
       options
     );
+export const useInfiniteGetBlogPageDataQuery = <
+      TData = GetBlogPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetBlogPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetBlogPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetBlogPageDataQuery, TError, TData>(
+      ['getBlogPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetBlogPageDataQuery, GetBlogPageDataQueryVariables>(GetBlogPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetBlogPathsDataDocument = `
     query getBlogPathsData($language: Language!) {
   blogPosts(language: $language) {
@@ -70,6 +84,20 @@ export const useGetBlogPathsDataQuery = <
       graphqlFetcher<GetBlogPathsDataQuery, GetBlogPathsDataQueryVariables>(GetBlogPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetBlogPathsDataQuery = <
+      TData = GetBlogPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetBlogPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetBlogPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetBlogPathsDataQuery, TError, TData>(
+      ['getBlogPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetBlogPathsDataQuery, GetBlogPathsDataQueryVariables>(GetBlogPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getBlogPageData<T>(

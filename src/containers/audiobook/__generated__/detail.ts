@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -60,6 +60,20 @@ export const useGetAudiobookDetailPageDataQuery = <
       graphqlFetcher<GetAudiobookDetailPageDataQuery, GetAudiobookDetailPageDataQueryVariables>(GetAudiobookDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookDetailPageDataQuery = <
+      TData = GetAudiobookDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookDetailPageDataQuery, TError, TData>(
+      ['getAudiobookDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookDetailPageDataQuery, GetAudiobookDetailPageDataQueryVariables>(GetAudiobookDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetAudiobookFeedDataDocument = `
     query getAudiobookFeedData($id: ID!) {
   sequence(id: $id) {
@@ -97,6 +111,20 @@ export const useGetAudiobookFeedDataQuery = <
       graphqlFetcher<GetAudiobookFeedDataQuery, GetAudiobookFeedDataQueryVariables>(GetAudiobookFeedDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookFeedDataQuery = <
+      TData = GetAudiobookFeedDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookFeedDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookFeedDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookFeedDataQuery, TError, TData>(
+      ['getAudiobookFeedData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookFeedDataQuery, GetAudiobookFeedDataQueryVariables>(GetAudiobookFeedDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetAudiobookDetailPathsDataDocument = `
     query getAudiobookDetailPathsData($language: Language!, $first: Int) {
   audiobooks(language: $language, first: $first) {
@@ -118,6 +146,20 @@ export const useGetAudiobookDetailPathsDataQuery = <
       graphqlFetcher<GetAudiobookDetailPathsDataQuery, GetAudiobookDetailPathsDataQueryVariables>(GetAudiobookDetailPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookDetailPathsDataQuery = <
+      TData = GetAudiobookDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookDetailPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookDetailPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookDetailPathsDataQuery, TError, TData>(
+      ['getAudiobookDetailPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookDetailPathsDataQuery, GetAudiobookDetailPathsDataQueryVariables>(GetAudiobookDetailPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobookDetailPageData<T>(

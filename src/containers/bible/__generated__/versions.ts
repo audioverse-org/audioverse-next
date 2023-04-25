@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobibleVersionsDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -49,6 +49,20 @@ export const useGetAudiobibleVersionsDataQuery = <
       graphqlFetcher<GetAudiobibleVersionsDataQuery, GetAudiobibleVersionsDataQueryVariables>(GetAudiobibleVersionsDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobibleVersionsDataQuery = <
+      TData = GetAudiobibleVersionsDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobibleVersionsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobibleVersionsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobibleVersionsDataQuery, TError, TData>(
+      ['getAudiobibleVersionsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobibleVersionsDataQuery, GetAudiobibleVersionsDataQueryVariables>(GetAudiobibleVersionsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobibleVersionsData<T>(

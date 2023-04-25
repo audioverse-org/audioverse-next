@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsCollectionsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -38,6 +38,20 @@ export const useGetSearchResultsCollectionsQuery = <
       graphqlFetcher<GetSearchResultsCollectionsQuery, GetSearchResultsCollectionsQueryVariables>(GetSearchResultsCollectionsDocument, variables),
       options
     );
+export const useInfiniteGetSearchResultsCollectionsQuery = <
+      TData = GetSearchResultsCollectionsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchResultsCollectionsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchResultsCollectionsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchResultsCollectionsQuery, TError, TData>(
+      ['getSearchResultsCollections.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchResultsCollectionsQuery, GetSearchResultsCollectionsQueryVariables>(GetSearchResultsCollectionsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSearchResultsCollections<T>(

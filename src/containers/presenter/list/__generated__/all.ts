@@ -1,6 +1,6 @@
 import * as Types from '../../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterListAllPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -51,6 +51,20 @@ export const useGetPresenterListAllPageDataQuery = <
       graphqlFetcher<GetPresenterListAllPageDataQuery, GetPresenterListAllPageDataQueryVariables>(GetPresenterListAllPageDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterListAllPageDataQuery = <
+      TData = GetPresenterListAllPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterListAllPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterListAllPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterListAllPageDataQuery, TError, TData>(
+      ['getPresenterListAllPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterListAllPageDataQuery, GetPresenterListAllPageDataQueryVariables>(GetPresenterListAllPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterListAllPageData<T>(

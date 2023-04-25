@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardPostFragmentDoc } from '../../../components/molecules/card/__generated__/post';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBlogDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -59,6 +59,20 @@ export const useGetBlogDetailDataQuery = <
       graphqlFetcher<GetBlogDetailDataQuery, GetBlogDetailDataQueryVariables>(GetBlogDetailDataDocument, variables),
       options
     );
+export const useInfiniteGetBlogDetailDataQuery = <
+      TData = GetBlogDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetBlogDetailDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetBlogDetailDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetBlogDetailDataQuery, TError, TData>(
+      ['getBlogDetailData.infinite', variables],
+      (metaData) => graphqlFetcher<GetBlogDetailDataQuery, GetBlogDetailDataQueryVariables>(GetBlogDetailDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetBlogDetailStaticPathsDocument = `
     query getBlogDetailStaticPaths($language: Language!, $first: Int) {
   blogPosts(language: $language, first: $first) {
@@ -80,6 +94,20 @@ export const useGetBlogDetailStaticPathsQuery = <
       graphqlFetcher<GetBlogDetailStaticPathsQuery, GetBlogDetailStaticPathsQueryVariables>(GetBlogDetailStaticPathsDocument, variables),
       options
     );
+export const useInfiniteGetBlogDetailStaticPathsQuery = <
+      TData = GetBlogDetailStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetBlogDetailStaticPathsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetBlogDetailStaticPathsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetBlogDetailStaticPathsQuery, TError, TData>(
+      ['getBlogDetailStaticPaths.infinite', variables],
+      (metaData) => graphqlFetcher<GetBlogDetailStaticPathsQuery, GetBlogDetailStaticPathsQueryVariables>(GetBlogDetailStaticPathsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getBlogDetailData<T>(

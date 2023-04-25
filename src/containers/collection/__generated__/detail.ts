@@ -10,7 +10,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -119,6 +119,20 @@ export const useGetCollectionDetailPageDataQuery = <
       graphqlFetcher<GetCollectionDetailPageDataQuery, GetCollectionDetailPageDataQueryVariables>(GetCollectionDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetCollectionDetailPageDataQuery = <
+      TData = GetCollectionDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetCollectionDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCollectionDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetCollectionDetailPageDataQuery, TError, TData>(
+      ['getCollectionDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetCollectionDetailPageDataQuery, GetCollectionDetailPageDataQueryVariables>(GetCollectionDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetCollectionFeedDataDocument = `
     query getCollectionFeedData($id: ID!) {
   collection(id: $id) {
@@ -151,6 +165,20 @@ export const useGetCollectionFeedDataQuery = <
       graphqlFetcher<GetCollectionFeedDataQuery, GetCollectionFeedDataQueryVariables>(GetCollectionFeedDataDocument, variables),
       options
     );
+export const useInfiniteGetCollectionFeedDataQuery = <
+      TData = GetCollectionFeedDataQuery,
+      TError = unknown
+    >(
+      variables: GetCollectionFeedDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCollectionFeedDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetCollectionFeedDataQuery, TError, TData>(
+      ['getCollectionFeedData.infinite', variables],
+      (metaData) => graphqlFetcher<GetCollectionFeedDataQuery, GetCollectionFeedDataQueryVariables>(GetCollectionFeedDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetCollectionDetailPathsDataDocument = `
     query getCollectionDetailPathsData($language: Language!, $first: Int) {
   collections(language: $language, first: $first) {
@@ -173,6 +201,20 @@ export const useGetCollectionDetailPathsDataQuery = <
       graphqlFetcher<GetCollectionDetailPathsDataQuery, GetCollectionDetailPathsDataQueryVariables>(GetCollectionDetailPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetCollectionDetailPathsDataQuery = <
+      TData = GetCollectionDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetCollectionDetailPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCollectionDetailPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetCollectionDetailPathsDataQuery, TError, TData>(
+      ['getCollectionDetailPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetCollectionDetailPathsDataQuery, GetCollectionDetailPathsDataQueryVariables>(GetCollectionDetailPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getCollectionDetailPageData<T>(

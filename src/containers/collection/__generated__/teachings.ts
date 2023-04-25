@@ -7,7 +7,7 @@ import { PersonLockupFragmentDoc } from '../../../components/molecules/__generat
 import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionTeachingsPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -58,6 +58,20 @@ export const useGetCollectionTeachingsPageDataQuery = <
       graphqlFetcher<GetCollectionTeachingsPageDataQuery, GetCollectionTeachingsPageDataQueryVariables>(GetCollectionTeachingsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetCollectionTeachingsPageDataQuery = <
+      TData = GetCollectionTeachingsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetCollectionTeachingsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCollectionTeachingsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetCollectionTeachingsPageDataQuery, TError, TData>(
+      ['getCollectionTeachingsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetCollectionTeachingsPageDataQuery, GetCollectionTeachingsPageDataQueryVariables>(GetCollectionTeachingsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getCollectionTeachingsPageData<T>(

@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SponsorIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -29,6 +29,20 @@ export const useSponsorIsFavoritedQuery = <
       graphqlFetcher<SponsorIsFavoritedQuery, SponsorIsFavoritedQueryVariables>(SponsorIsFavoritedDocument, variables),
       options
     );
+export const useInfiniteSponsorIsFavoritedQuery = <
+      TData = SponsorIsFavoritedQuery,
+      TError = unknown
+    >(
+      variables: SponsorIsFavoritedQueryVariables,
+      options?: UseInfiniteQueryOptions<SponsorIsFavoritedQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<SponsorIsFavoritedQuery, TError, TData>(
+      ['sponsorIsFavorited.infinite', variables],
+      (metaData) => graphqlFetcher<SponsorIsFavoritedQuery, SponsorIsFavoritedQueryVariables>(SponsorIsFavoritedDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function sponsorIsFavorited<T>(

@@ -1,6 +1,6 @@
 import * as Types from '../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetTestimoniesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -50,6 +50,20 @@ export const useGetTestimoniesPageDataQuery = <
       graphqlFetcher<GetTestimoniesPageDataQuery, GetTestimoniesPageDataQueryVariables>(GetTestimoniesPageDataDocument, variables),
       options
     );
+export const useInfiniteGetTestimoniesPageDataQuery = <
+      TData = GetTestimoniesPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetTestimoniesPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetTestimoniesPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetTestimoniesPageDataQuery, TError, TData>(
+      ['getTestimoniesPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetTestimoniesPageDataQuery, GetTestimoniesPageDataQueryVariables>(GetTestimoniesPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetTestimoniesPathsDataDocument = `
     query getTestimoniesPathsData($language: Language!) {
   testimonies(language: $language) {
@@ -71,6 +85,20 @@ export const useGetTestimoniesPathsDataQuery = <
       graphqlFetcher<GetTestimoniesPathsDataQuery, GetTestimoniesPathsDataQueryVariables>(GetTestimoniesPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetTestimoniesPathsDataQuery = <
+      TData = GetTestimoniesPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetTestimoniesPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetTestimoniesPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetTestimoniesPathsDataQuery, TError, TData>(
+      ['getTestimoniesPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetTestimoniesPathsDataQuery, GetTestimoniesPathsDataQueryVariables>(GetTestimoniesPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getTestimoniesPageData<T>(

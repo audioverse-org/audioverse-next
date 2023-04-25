@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetMediaReleaseFormsPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -49,6 +49,20 @@ export const useGetMediaReleaseFormsPageDataQuery = <
       graphqlFetcher<GetMediaReleaseFormsPageDataQuery, GetMediaReleaseFormsPageDataQueryVariables>(GetMediaReleaseFormsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetMediaReleaseFormsPageDataQuery = <
+      TData = GetMediaReleaseFormsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetMediaReleaseFormsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetMediaReleaseFormsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetMediaReleaseFormsPageDataQuery, TError, TData>(
+      ['getMediaReleaseFormsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetMediaReleaseFormsPageDataQuery, GetMediaReleaseFormsPageDataQueryVariables>(GetMediaReleaseFormsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetMediaReleaseFormsPathsDataDocument = `
     query getMediaReleaseFormsPathsData($language: Language!, $first: Int!) {
   mediaReleaseForms(language: $language, first: $first) {
@@ -70,6 +84,20 @@ export const useGetMediaReleaseFormsPathsDataQuery = <
       graphqlFetcher<GetMediaReleaseFormsPathsDataQuery, GetMediaReleaseFormsPathsDataQueryVariables>(GetMediaReleaseFormsPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetMediaReleaseFormsPathsDataQuery = <
+      TData = GetMediaReleaseFormsPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetMediaReleaseFormsPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetMediaReleaseFormsPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetMediaReleaseFormsPathsDataQuery, TError, TData>(
+      ['getMediaReleaseFormsPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetMediaReleaseFormsPathsDataQuery, GetMediaReleaseFormsPathsDataQueryVariables>(GetMediaReleaseFormsPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const SubmitMediaReleaseFormDocument = `
     mutation submitMediaReleaseForm($mediaReleaseFormId: ID!, $mediaReleasePerson: MediaReleasePersonCreateInput!, $comments: String!) {
   mediaReleaseCreate(

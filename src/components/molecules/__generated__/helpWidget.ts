@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetHelpWidgetDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -43,6 +43,20 @@ export const useGetHelpWidgetDataQuery = <
       graphqlFetcher<GetHelpWidgetDataQuery, GetHelpWidgetDataQueryVariables>(GetHelpWidgetDataDocument, variables),
       options
     );
+export const useInfiniteGetHelpWidgetDataQuery = <
+      TData = GetHelpWidgetDataQuery,
+      TError = unknown
+    >(
+      variables?: GetHelpWidgetDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetHelpWidgetDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetHelpWidgetDataQuery, TError, TData>(
+      variables === undefined ? ['getHelpWidgetData.infinite'] : ['getHelpWidgetData.infinite', variables],
+      (metaData) => graphqlFetcher<GetHelpWidgetDataQuery, GetHelpWidgetDataQueryVariables>(GetHelpWidgetDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getHelpWidgetData<T>(

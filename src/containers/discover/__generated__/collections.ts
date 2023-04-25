@@ -12,7 +12,7 @@ import { CardRecordingStackFragmentDoc } from '../../../components/molecules/car
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { CardSponsorFragmentDoc } from '../../../components/molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../../components/molecules/card/__generated__/person';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverCollectionsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -115,6 +115,20 @@ export const useGetDiscoverCollectionsPageDataQuery = <
       graphqlFetcher<GetDiscoverCollectionsPageDataQuery, GetDiscoverCollectionsPageDataQueryVariables>(GetDiscoverCollectionsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetDiscoverCollectionsPageDataQuery = <
+      TData = GetDiscoverCollectionsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetDiscoverCollectionsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetDiscoverCollectionsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetDiscoverCollectionsPageDataQuery, TError, TData>(
+      ['getDiscoverCollectionsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetDiscoverCollectionsPageDataQuery, GetDiscoverCollectionsPageDataQueryVariables>(GetDiscoverCollectionsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getDiscoverCollectionsPageData<T>(

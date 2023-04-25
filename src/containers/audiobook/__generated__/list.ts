@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -51,6 +51,20 @@ export const useGetAudiobookListPageDataQuery = <
       graphqlFetcher<GetAudiobookListPageDataQuery, GetAudiobookListPageDataQueryVariables>(GetAudiobookListPageDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookListPageDataQuery = <
+      TData = GetAudiobookListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookListPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookListPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookListPageDataQuery, TError, TData>(
+      ['getAudiobookListPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookListPageDataQuery, GetAudiobookListPageDataQueryVariables>(GetAudiobookListPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetAudiobookListPathsDataDocument = `
     query getAudiobookListPathsData($language: Language!) {
   audiobooks(language: $language) {
@@ -72,6 +86,20 @@ export const useGetAudiobookListPathsDataQuery = <
       graphqlFetcher<GetAudiobookListPathsDataQuery, GetAudiobookListPathsDataQueryVariables>(GetAudiobookListPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookListPathsDataQuery = <
+      TData = GetAudiobookListPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookListPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookListPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookListPathsDataQuery, TError, TData>(
+      ['getAudiobookListPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookListPathsDataQuery, GetAudiobookListPathsDataQueryVariables>(GetAudiobookListPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobookListPageData<T>(

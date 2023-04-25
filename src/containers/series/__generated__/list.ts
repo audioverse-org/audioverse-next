@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSeriesListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -51,6 +51,20 @@ export const useGetSeriesListPageDataQuery = <
       graphqlFetcher<GetSeriesListPageDataQuery, GetSeriesListPageDataQueryVariables>(GetSeriesListPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSeriesListPageDataQuery = <
+      TData = GetSeriesListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesListPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSeriesListPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSeriesListPageDataQuery, TError, TData>(
+      ['getSeriesListPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSeriesListPageDataQuery, GetSeriesListPageDataQueryVariables>(GetSeriesListPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSeriesListPathsDataDocument = `
     query getSeriesListPathsData($language: Language!) {
   serieses(language: $language) {
@@ -72,6 +86,20 @@ export const useGetSeriesListPathsDataQuery = <
       graphqlFetcher<GetSeriesListPathsDataQuery, GetSeriesListPathsDataQueryVariables>(GetSeriesListPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetSeriesListPathsDataQuery = <
+      TData = GetSeriesListPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesListPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSeriesListPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSeriesListPathsDataQuery, TError, TData>(
+      ['getSeriesListPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSeriesListPathsDataQuery, GetSeriesListPathsDataQueryVariables>(GetSeriesListPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSeriesListPageData<T>(

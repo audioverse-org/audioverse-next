@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetWithAuthGuardDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -30,6 +30,20 @@ export const useGetWithAuthGuardDataQuery = <
       graphqlFetcher<GetWithAuthGuardDataQuery, GetWithAuthGuardDataQueryVariables>(GetWithAuthGuardDataDocument, variables),
       options
     );
+export const useInfiniteGetWithAuthGuardDataQuery = <
+      TData = GetWithAuthGuardDataQuery,
+      TError = unknown
+    >(
+      variables?: GetWithAuthGuardDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetWithAuthGuardDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetWithAuthGuardDataQuery, TError, TData>(
+      variables === undefined ? ['getWithAuthGuardData.infinite'] : ['getWithAuthGuardData.infinite', variables],
+      (metaData) => graphqlFetcher<GetWithAuthGuardDataQuery, GetWithAuthGuardDataQueryVariables>(GetWithAuthGuardDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getWithAuthGuardData<T>(

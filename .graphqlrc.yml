@@ -36,6 +36,7 @@ generates:
       - 'graphql-codegen/dist/graphql-plugin-prefetch.js'
     config:
       fetcher: '~lib/api/graphqlFetcher#graphqlFetcher'
+      addInfiniteQuery: true
       dedupeFragments: true
       avoidOptionals: true
       defaultScalarType: unknown

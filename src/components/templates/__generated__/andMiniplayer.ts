@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type AndMiniplayerFragment = { __typename?: 'Recording', id: string | number, title: string, canonicalPath: string, duration: number, sequence: { __typename?: 'Sequence', title: string, contentType: Types.SequenceContentType } | null, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> };
 
@@ -74,6 +74,20 @@ export const useGetRecordingPlaybackProgressQuery = <
       graphqlFetcher<GetRecordingPlaybackProgressQuery, GetRecordingPlaybackProgressQueryVariables>(GetRecordingPlaybackProgressDocument, variables),
       options
     );
+export const useInfiniteGetRecordingPlaybackProgressQuery = <
+      TData = GetRecordingPlaybackProgressQuery,
+      TError = unknown
+    >(
+      variables: GetRecordingPlaybackProgressQueryVariables,
+      options?: UseInfiniteQueryOptions<GetRecordingPlaybackProgressQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetRecordingPlaybackProgressQuery, TError, TData>(
+      ['getRecordingPlaybackProgress.infinite', variables],
+      (metaData) => graphqlFetcher<GetRecordingPlaybackProgressQuery, GetRecordingPlaybackProgressQueryVariables>(GetRecordingPlaybackProgressDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const RecordingPlaybackProgressSetDocument = `
     mutation recordingPlaybackProgressSet($id: ID!, $percentage: Float!) {
   recordingPlaybackSessionAdvance(

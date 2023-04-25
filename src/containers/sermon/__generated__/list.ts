@@ -7,7 +7,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSermonListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -70,6 +70,20 @@ export const useGetSermonListPageDataQuery = <
       graphqlFetcher<GetSermonListPageDataQuery, GetSermonListPageDataQueryVariables>(GetSermonListPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSermonListPageDataQuery = <
+      TData = GetSermonListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSermonListPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSermonListPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSermonListPageDataQuery, TError, TData>(
+      ['getSermonListPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSermonListPageDataQuery, GetSermonListPageDataQueryVariables>(GetSermonListPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSermonListFeedDataDocument = `
     query getSermonListFeedData($language: Language!) {
   sermons(
@@ -95,6 +109,20 @@ export const useGetSermonListFeedDataQuery = <
       graphqlFetcher<GetSermonListFeedDataQuery, GetSermonListFeedDataQueryVariables>(GetSermonListFeedDataDocument, variables),
       options
     );
+export const useInfiniteGetSermonListFeedDataQuery = <
+      TData = GetSermonListFeedDataQuery,
+      TError = unknown
+    >(
+      variables: GetSermonListFeedDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSermonListFeedDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSermonListFeedDataQuery, TError, TData>(
+      ['getSermonListFeedData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSermonListFeedDataQuery, GetSermonListFeedDataQueryVariables>(GetSermonListFeedDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSermonListPagePathsDataDocument = `
     query getSermonListPagePathsData($language: Language!, $hasVideo: Boolean) {
   sermons(language: $language, hasVideo: $hasVideo) {
@@ -116,6 +144,20 @@ export const useGetSermonListPagePathsDataQuery = <
       graphqlFetcher<GetSermonListPagePathsDataQuery, GetSermonListPagePathsDataQueryVariables>(GetSermonListPagePathsDataDocument, variables),
       options
     );
+export const useInfiniteGetSermonListPagePathsDataQuery = <
+      TData = GetSermonListPagePathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSermonListPagePathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSermonListPagePathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSermonListPagePathsDataQuery, TError, TData>(
+      ['getSermonListPagePathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSermonListPagePathsDataQuery, GetSermonListPagePathsDataQueryVariables>(GetSermonListPagePathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSermonListPageData<T>(

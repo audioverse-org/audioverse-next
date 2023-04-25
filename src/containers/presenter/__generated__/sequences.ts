@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { PresenterPivotFragmentDoc } from './pivot';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterSequencesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -52,6 +52,20 @@ export const useGetPresenterSequencesPageDataQuery = <
       graphqlFetcher<GetPresenterSequencesPageDataQuery, GetPresenterSequencesPageDataQueryVariables>(GetPresenterSequencesPageDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterSequencesPageDataQuery = <
+      TData = GetPresenterSequencesPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterSequencesPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterSequencesPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterSequencesPageDataQuery, TError, TData>(
+      ['getPresenterSequencesPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterSequencesPageDataQuery, GetPresenterSequencesPageDataQueryVariables>(GetPresenterSequencesPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterSequencesPageData<T>(

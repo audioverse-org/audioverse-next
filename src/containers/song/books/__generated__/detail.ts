@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../../../components/molecules/__gene
 import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSongBooksDetailPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -48,6 +48,20 @@ export const useGetSongBooksDetailPageDataQuery = <
       graphqlFetcher<GetSongBooksDetailPageDataQuery, GetSongBooksDetailPageDataQueryVariables>(GetSongBooksDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSongBooksDetailPageDataQuery = <
+      TData = GetSongBooksDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongBooksDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSongBooksDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSongBooksDetailPageDataQuery, TError, TData>(
+      ['getSongBooksDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSongBooksDetailPageDataQuery, GetSongBooksDetailPageDataQueryVariables>(GetSongBooksDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSongBooksDetailPageData<T>(

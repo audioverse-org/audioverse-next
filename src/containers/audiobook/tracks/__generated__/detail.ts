@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../../components/molecules/__gen
 import { PlayerFragmentDoc } from '../../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookTrackDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -55,6 +55,20 @@ export const useGetAudiobookTrackDetailDataQuery = <
       graphqlFetcher<GetAudiobookTrackDetailDataQuery, GetAudiobookTrackDetailDataQueryVariables>(GetAudiobookTrackDetailDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookTrackDetailDataQuery = <
+      TData = GetAudiobookTrackDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookTrackDetailDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookTrackDetailDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookTrackDetailDataQuery, TError, TData>(
+      ['getAudiobookTrackDetailData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookTrackDetailDataQuery, GetAudiobookTrackDetailDataQueryVariables>(GetAudiobookTrackDetailDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetAudiobookTrackDetailStaticPathsDocument = `
     query getAudiobookTrackDetailStaticPaths($language: Language!, $first: Int) {
   audiobookTracks(language: $language, first: $first) {
@@ -76,6 +90,20 @@ export const useGetAudiobookTrackDetailStaticPathsQuery = <
       graphqlFetcher<GetAudiobookTrackDetailStaticPathsQuery, GetAudiobookTrackDetailStaticPathsQueryVariables>(GetAudiobookTrackDetailStaticPathsDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookTrackDetailStaticPathsQuery = <
+      TData = GetAudiobookTrackDetailStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookTrackDetailStaticPathsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookTrackDetailStaticPathsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookTrackDetailStaticPathsQuery, TError, TData>(
+      ['getAudiobookTrackDetailStaticPaths.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookTrackDetailStaticPathsQuery, GetAudiobookTrackDetailStaticPathsQueryVariables>(GetAudiobookTrackDetailStaticPathsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobookTrackDetailData<T>(

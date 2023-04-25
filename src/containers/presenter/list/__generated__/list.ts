@@ -1,6 +1,6 @@
 import * as Types from '../../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type PresenterListEntryFragment = { __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null };
 
@@ -42,6 +42,20 @@ export const useGetPersonListLetterCountsQuery = <
       graphqlFetcher<GetPersonListLetterCountsQuery, GetPersonListLetterCountsQueryVariables>(GetPersonListLetterCountsDocument, variables),
       options
     );
+export const useInfiniteGetPersonListLetterCountsQuery = <
+      TData = GetPersonListLetterCountsQuery,
+      TError = unknown
+    >(
+      variables: GetPersonListLetterCountsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPersonListLetterCountsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPersonListLetterCountsQuery, TError, TData>(
+      ['getPersonListLetterCounts.infinite', variables],
+      (metaData) => graphqlFetcher<GetPersonListLetterCountsQuery, GetPersonListLetterCountsQueryVariables>(GetPersonListLetterCountsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPersonListLetterCounts<T>(

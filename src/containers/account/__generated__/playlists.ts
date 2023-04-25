@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAccountPlaylistsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -54,6 +54,20 @@ export const useGetAccountPlaylistsPageDataQuery = <
       graphqlFetcher<GetAccountPlaylistsPageDataQuery, GetAccountPlaylistsPageDataQueryVariables>(GetAccountPlaylistsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetAccountPlaylistsPageDataQuery = <
+      TData = GetAccountPlaylistsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAccountPlaylistsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAccountPlaylistsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAccountPlaylistsPageDataQuery, TError, TData>(
+      ['getAccountPlaylistsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAccountPlaylistsPageDataQuery, GetAccountPlaylistsPageDataQueryVariables>(GetAccountPlaylistsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const AddAccountPlaylistDocument = `
     mutation addAccountPlaylist($isPublic: Boolean!, $language: Language!, $recordingIds: [ID!], $summary: String, $title: String!) {
   playlistAdd(

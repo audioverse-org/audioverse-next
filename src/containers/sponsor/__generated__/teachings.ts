@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorTeachingsPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -73,6 +73,20 @@ export const useGetSponsorTeachingsPageDataQuery = <
       graphqlFetcher<GetSponsorTeachingsPageDataQuery, GetSponsorTeachingsPageDataQueryVariables>(GetSponsorTeachingsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorTeachingsPageDataQuery = <
+      TData = GetSponsorTeachingsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorTeachingsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorTeachingsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorTeachingsPageDataQuery, TError, TData>(
+      ['getSponsorTeachingsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorTeachingsPageDataQuery, GetSponsorTeachingsPageDataQueryVariables>(GetSponsorTeachingsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSponsorTeachingsFeedDataDocument = `
     query getSponsorTeachingsFeedData($id: ID!) {
   sponsor(id: $id) {
@@ -99,6 +113,20 @@ export const useGetSponsorTeachingsFeedDataQuery = <
       graphqlFetcher<GetSponsorTeachingsFeedDataQuery, GetSponsorTeachingsFeedDataQueryVariables>(GetSponsorTeachingsFeedDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorTeachingsFeedDataQuery = <
+      TData = GetSponsorTeachingsFeedDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorTeachingsFeedDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorTeachingsFeedDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorTeachingsFeedDataQuery, TError, TData>(
+      ['getSponsorTeachingsFeedData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorTeachingsFeedDataQuery, GetSponsorTeachingsFeedDataQueryVariables>(GetSponsorTeachingsFeedDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSponsorTeachingsPathsDataDocument = `
     query getSponsorTeachingsPathsData($language: Language!, $first: Int) {
   sponsors(language: $language, first: $first) {
@@ -120,6 +148,20 @@ export const useGetSponsorTeachingsPathsDataQuery = <
       graphqlFetcher<GetSponsorTeachingsPathsDataQuery, GetSponsorTeachingsPathsDataQueryVariables>(GetSponsorTeachingsPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorTeachingsPathsDataQuery = <
+      TData = GetSponsorTeachingsPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorTeachingsPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorTeachingsPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorTeachingsPathsDataQuery, TError, TData>(
+      ['getSponsorTeachingsPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorTeachingsPathsDataQuery, GetSponsorTeachingsPathsDataQueryVariables>(GetSponsorTeachingsPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorTeachingsPageData<T>(

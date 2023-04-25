@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { PresenterListEntryFragmentDoc } from './list';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterListLetterPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -42,6 +42,20 @@ export const useGetPresenterListLetterPageDataQuery = <
       graphqlFetcher<GetPresenterListLetterPageDataQuery, GetPresenterListLetterPageDataQueryVariables>(GetPresenterListLetterPageDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterListLetterPageDataQuery = <
+      TData = GetPresenterListLetterPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterListLetterPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterListLetterPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterListLetterPageDataQuery, TError, TData>(
+      ['getPresenterListLetterPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterListLetterPageDataQuery, GetPresenterListLetterPageDataQueryVariables>(GetPresenterListLetterPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterListLetterPageData<T>(

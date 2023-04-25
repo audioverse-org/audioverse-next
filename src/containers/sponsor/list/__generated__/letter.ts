@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { SponsorListEntryFragmentDoc } from './list';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorListLetterPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -42,6 +42,20 @@ export const useGetSponsorListLetterPageDataQuery = <
       graphqlFetcher<GetSponsorListLetterPageDataQuery, GetSponsorListLetterPageDataQueryVariables>(GetSponsorListLetterPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorListLetterPageDataQuery = <
+      TData = GetSponsorListLetterPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorListLetterPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorListLetterPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorListLetterPageDataQuery, TError, TData>(
+      ['getSponsorListLetterPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorListLetterPageDataQuery, GetSponsorListLetterPageDataQueryVariables>(GetSponsorListLetterPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorListLetterPageData<T>(

@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../../components/molecules/__gen
 import { PlayerFragmentDoc } from '../../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBookSongDetailDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -59,6 +59,20 @@ export const useGetBookSongDetailDataQuery = <
       graphqlFetcher<GetBookSongDetailDataQuery, GetBookSongDetailDataQueryVariables>(GetBookSongDetailDataDocument, variables),
       options
     );
+export const useInfiniteGetBookSongDetailDataQuery = <
+      TData = GetBookSongDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetBookSongDetailDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetBookSongDetailDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetBookSongDetailDataQuery, TError, TData>(
+      ['getBookSongDetailData.infinite', variables],
+      (metaData) => graphqlFetcher<GetBookSongDetailDataQuery, GetBookSongDetailDataQueryVariables>(GetBookSongDetailDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getBookSongDetailData<T>(

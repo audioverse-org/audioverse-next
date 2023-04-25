@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type RecordingIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -29,6 +29,20 @@ export const useRecordingIsFavoritedQuery = <
       graphqlFetcher<RecordingIsFavoritedQuery, RecordingIsFavoritedQueryVariables>(RecordingIsFavoritedDocument, variables),
       options
     );
+export const useInfiniteRecordingIsFavoritedQuery = <
+      TData = RecordingIsFavoritedQuery,
+      TError = unknown
+    >(
+      variables: RecordingIsFavoritedQueryVariables,
+      options?: UseInfiniteQueryOptions<RecordingIsFavoritedQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<RecordingIsFavoritedQuery, TError, TData>(
+      ['recordingIsFavorited.infinite', variables],
+      (metaData) => graphqlFetcher<RecordingIsFavoritedQuery, RecordingIsFavoritedQueryVariables>(RecordingIsFavoritedDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function recordingIsFavorited<T>(

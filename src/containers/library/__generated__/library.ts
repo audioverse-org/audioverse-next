@@ -13,7 +13,7 @@ import { CardRecordingStackFragmentDoc } from '../../../components/molecules/car
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { CardSponsorFragmentDoc } from '../../../components/molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../../components/molecules/card/__generated__/person';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -84,6 +84,20 @@ export const useGetLibraryDataQuery = <
       graphqlFetcher<GetLibraryDataQuery, GetLibraryDataQueryVariables>(GetLibraryDataDocument, variables),
       options
     );
+export const useInfiniteGetLibraryDataQuery = <
+      TData = GetLibraryDataQuery,
+      TError = unknown
+    >(
+      variables: GetLibraryDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetLibraryDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetLibraryDataQuery, TError, TData>(
+      ['getLibraryData.infinite', variables],
+      (metaData) => graphqlFetcher<GetLibraryDataQuery, GetLibraryDataQueryVariables>(GetLibraryDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getLibraryData<T>(

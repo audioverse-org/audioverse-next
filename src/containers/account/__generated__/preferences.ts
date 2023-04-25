@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAccountPreferencesDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -48,6 +48,20 @@ export const useGetAccountPreferencesDataQuery = <
       graphqlFetcher<GetAccountPreferencesDataQuery, GetAccountPreferencesDataQueryVariables>(GetAccountPreferencesDataDocument, variables),
       options
     );
+export const useInfiniteGetAccountPreferencesDataQuery = <
+      TData = GetAccountPreferencesDataQuery,
+      TError = unknown
+    >(
+      variables?: GetAccountPreferencesDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAccountPreferencesDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAccountPreferencesDataQuery, TError, TData>(
+      variables === undefined ? ['getAccountPreferencesData.infinite'] : ['getAccountPreferencesData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAccountPreferencesDataQuery, GetAccountPreferencesDataQueryVariables>(GetAccountPreferencesDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const UpdateAccountPreferencesDocument = `
     mutation updateAccountPreferences($autoplay: Boolean!, $language: Language!, $preferredAudioQuality: RecordingQuality!, $timezone: Timezone!) {
   updateMyProfile(

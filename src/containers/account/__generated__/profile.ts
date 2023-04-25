@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetProfileDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -61,6 +61,20 @@ export const useGetProfileDataQuery = <
       graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, variables),
       options
     );
+export const useInfiniteGetProfileDataQuery = <
+      TData = GetProfileDataQuery,
+      TError = unknown
+    >(
+      variables?: GetProfileDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetProfileDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetProfileDataQuery, TError, TData>(
+      variables === undefined ? ['getProfileData.infinite'] : ['getProfileData.infinite', variables],
+      (metaData) => graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const UpdateProfileDataDocument = `
     mutation updateProfileData($email: String, $password: String, $givenName: String, $surname: String) {
   updateMyProfile(

@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../../lib/__generated__/generateFeed';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSongAlbumsDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -60,6 +60,20 @@ export const useGetSongAlbumsDetailPageDataQuery = <
       graphqlFetcher<GetSongAlbumsDetailPageDataQuery, GetSongAlbumsDetailPageDataQueryVariables>(GetSongAlbumsDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSongAlbumsDetailPageDataQuery = <
+      TData = GetSongAlbumsDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongAlbumsDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSongAlbumsDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSongAlbumsDetailPageDataQuery, TError, TData>(
+      ['getSongAlbumsDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSongAlbumsDetailPageDataQuery, GetSongAlbumsDetailPageDataQueryVariables>(GetSongAlbumsDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSongAlbumFeedDataDocument = `
     query getSongAlbumFeedData($id: ID!) {
   musicAlbum(id: $id) {
@@ -86,6 +100,20 @@ export const useGetSongAlbumFeedDataQuery = <
       graphqlFetcher<GetSongAlbumFeedDataQuery, GetSongAlbumFeedDataQueryVariables>(GetSongAlbumFeedDataDocument, variables),
       options
     );
+export const useInfiniteGetSongAlbumFeedDataQuery = <
+      TData = GetSongAlbumFeedDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongAlbumFeedDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSongAlbumFeedDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSongAlbumFeedDataQuery, TError, TData>(
+      ['getSongAlbumFeedData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSongAlbumFeedDataQuery, GetSongAlbumFeedDataQueryVariables>(GetSongAlbumFeedDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSongAlbumsDetailPathsDataDocument = `
     query getSongAlbumsDetailPathsData($language: Language!, $first: Int) {
   musicAlbums(language: $language, first: $first) {
@@ -107,6 +135,20 @@ export const useGetSongAlbumsDetailPathsDataQuery = <
       graphqlFetcher<GetSongAlbumsDetailPathsDataQuery, GetSongAlbumsDetailPathsDataQueryVariables>(GetSongAlbumsDetailPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetSongAlbumsDetailPathsDataQuery = <
+      TData = GetSongAlbumsDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongAlbumsDetailPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSongAlbumsDetailPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSongAlbumsDetailPathsDataQuery, TError, TData>(
+      ['getSongAlbumsDetailPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSongAlbumsDetailPathsDataQuery, GetSongAlbumsDetailPathsDataQueryVariables>(GetSongAlbumsDetailPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSongAlbumsDetailPageData<T>(
