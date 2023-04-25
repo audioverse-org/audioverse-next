@@ -10,13 +10,24 @@ import {
 } from '~src/__generated__/graphql';
 
 import {
-	GetDiscoverPageDataDocument,
-	GetDiscoverPageDataQuery,
+	GetDiscoverBlogPostsDocument,
+	GetDiscoverBlogPostsQuery,
+	GetDiscoverConferencesDocument,
+	GetDiscoverConferencesQuery,
+	GetDiscoverFeaturedTeachingsDocument,
+	GetDiscoverFeaturedTeachingsQuery,
+	GetDiscoverRecentTeachingsDocument,
+	GetDiscoverRecentTeachingsQuery,
+	GetDiscoverStorySeasonsDocument,
+	GetDiscoverStorySeasonsQuery,
+	GetDiscoverTrendingTeachingsDocument,
+	GetDiscoverTrendingTeachingsQuery,
 } from './__generated__/discover';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
-const loadData = buildLoader<GetDiscoverPageDataQuery>(
-	GetDiscoverPageDataDocument,
+
+const loadRecentTeachings = buildLoader<GetDiscoverRecentTeachingsQuery>(
+	GetDiscoverRecentTeachingsDocument,
 	{
 		recentTeachings: {
 			nodes: [
@@ -28,6 +39,12 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				},
 			],
 		},
+	}
+);
+
+const loadTrendingTeachings = buildLoader<GetDiscoverTrendingTeachingsQuery>(
+	GetDiscoverTrendingTeachingsDocument,
+	{
 		trendingTeachings: {
 			nodes: [
 				{
@@ -40,6 +57,12 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				},
 			],
 		},
+	}
+);
+
+const loadFeaturedTeachings = buildLoader<GetDiscoverFeaturedTeachingsQuery>(
+	GetDiscoverFeaturedTeachingsDocument,
+	{
 		featuredTeachings: {
 			nodes: [
 				{
@@ -50,6 +73,12 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				},
 			],
 		},
+	}
+);
+
+const loadStorySeasons = buildLoader<GetDiscoverStorySeasonsQuery>(
+	GetDiscoverStorySeasonsDocument,
+	{
 		storySeasons: {
 			nodes: [
 				{
@@ -70,6 +99,12 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				},
 			],
 		},
+	}
+);
+
+const loadConferences = buildLoader<GetDiscoverConferencesQuery>(
+	GetDiscoverConferencesDocument,
+	{
 		conferences: {
 			nodes: [
 				{
@@ -94,6 +129,12 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				},
 			],
 		},
+	}
+);
+
+const loadBlogPosts = buildLoader<GetDiscoverBlogPostsQuery>(
+	GetDiscoverBlogPostsDocument,
+	{
 		blogPosts: {
 			nodes: [
 				{
@@ -110,6 +151,15 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 		},
 	}
 );
+
+const loadData = () => {
+	loadRecentTeachings();
+	loadTrendingTeachings();
+	loadFeaturedTeachings();
+	loadStorySeasons();
+	loadConferences();
+	loadBlogPosts();
+};
 
 describe('discover page', () => {
 	beforeEach(() => {

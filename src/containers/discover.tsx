@@ -8,24 +8,103 @@ import CardPost from '~components/molecules/card/post';
 import CardRecording from '~components/molecules/card/recording';
 import CardSequence from '~components/molecules/card/sequence';
 import CardGroup from '~components/molecules/cardGroup';
+import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
-import { GetDiscoverPageDataQuery } from './__generated__/discover';
+import {
+	useGetDiscoverBlogPostsQuery,
+	useGetDiscoverConferencesQuery,
+	useGetDiscoverFeaturedTeachingsQuery,
+	useGetDiscoverRecentTeachingsQuery,
+	useGetDiscoverStorySeasonsQuery,
+	useGetDiscoverTrendingTeachingsQuery,
+} from './__generated__/discover';
 import styles from './discover.module.scss';
 
-export type DiscoverProps = GetDiscoverPageDataQuery;
-
-export default function Discover({
-	recentTeachings,
-	trendingTeachings,
-	featuredTeachings,
-	storySeasons,
-	conferences,
-	blogPosts,
-}: DiscoverProps): JSX.Element {
+export default function Discover(): JSX.Element {
 	const languageRoute = useLanguageRoute();
+	const languageId = getLanguageIdByRoute(languageRoute);
+
+	const recentTeachings = useGetDiscoverRecentTeachingsQuery(
+		{
+			language: languageId,
+			first: 6,
+			after: null,
+		},
+		{
+			select: (data) => {
+				return data.recentTeachings.nodes;
+			},
+		}
+	);
+
+	const trendingTeachings = useGetDiscoverTrendingTeachingsQuery(
+		{
+			language: languageId,
+			first: 6,
+			after: null,
+		},
+		{
+			select: (data) => {
+				return data.trendingTeachings.nodes;
+			},
+		}
+	);
+
+	const featuredTeachings = useGetDiscoverFeaturedTeachingsQuery(
+		{
+			language: languageId,
+			first: 3,
+			after: null,
+		},
+		{
+			select: (data) => {
+				return data.featuredTeachings.nodes;
+			},
+		}
+	);
+
+	const blogPosts = useGetDiscoverBlogPostsQuery(
+		{
+			language: languageId,
+			first: 3,
+			after: null,
+		},
+		{
+			select: (data) => {
+				return data.blogPosts.nodes;
+			},
+		}
+	);
+
+	const storySeasons = useGetDiscoverStorySeasonsQuery(
+		{
+			language: languageId,
+			first: 3,
+			after: null,
+		},
+		{
+			select: (data) => {
+				return data.storySeasons.nodes;
+			},
+		}
+	);
+
+	const conferences = useGetDiscoverConferencesQuery(
+		{
+			language: languageId,
+			first: 3,
+			after: null,
+		},
+		{
+			select: (data) => {
+				return data.conferences.nodes;
+			},
+		}
+	);
+
 	const sections = [
 		{
 			heading: (
@@ -34,7 +113,7 @@ export default function Discover({
 					defaultMessage="Recent Teachings"
 				/>
 			),
-			cards: recentTeachings.nodes?.map((recording) => (
+			cards: recentTeachings.data?.map((recording) => (
 				<CardRecording recording={recording} key={recording.canonicalPath} />
 			)),
 			seeAll: (
@@ -52,7 +131,7 @@ export default function Discover({
 					defaultMessage="Trending Teachings"
 				/>
 			),
-			cards: trendingTeachings.nodes?.map(({ recording }) => (
+			cards: trendingTeachings.data?.map(({ recording }) => (
 				<CardRecording recording={recording} key={recording.canonicalPath} />
 			)),
 			seeAll: (
@@ -70,7 +149,7 @@ export default function Discover({
 					defaultMessage="Featured Teachings"
 				/>
 			),
-			cards: featuredTeachings.nodes?.map((recording) => (
+			cards: featuredTeachings.data?.map((recording) => (
 				<CardRecording recording={recording} key={recording.canonicalPath} />
 			)),
 			url: 'featured',
@@ -82,7 +161,7 @@ export default function Discover({
 					defaultMessage="Recent Blog Posts"
 				/>
 			),
-			cards: blogPosts.nodes?.map((post) => (
+			cards: blogPosts.data?.map((post) => (
 				<CardPost post={post} key={post.canonicalPath} />
 			)),
 			seeAll: (
@@ -100,7 +179,7 @@ export default function Discover({
 					defaultMessage="Recent Stories"
 				/>
 			),
-			cards: storySeasons.nodes?.map((sequence) => (
+			cards: storySeasons.data?.map((sequence) => (
 				<CardSequence
 					sequence={sequence}
 					recordings={sequence.recordings.nodes}
@@ -122,7 +201,7 @@ export default function Discover({
 					defaultMessage="Recent Conferences"
 				/>
 			),
-			cards: conferences.nodes?.map((conference) => (
+			cards: conferences.data?.map((conference) => (
 				<CardCollection
 					collection={conference}
 					sequences={conference.sequences.nodes}
