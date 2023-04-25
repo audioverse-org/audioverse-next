@@ -49,3 +49,19 @@ export async function getSponsorListLetterPageData<T>(
 ): Promise<GetSponsorListLetterPageDataQuery> {
 	return fetchApi(GetSponsorListLetterPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getSponsorListLetterPageData: ExactAlt<T, GetSponsorListLetterPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSponsorListLetterPageData', () => getSponsorListLetterPageData(props.getSponsorListLetterPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

@@ -91,3 +91,19 @@ export async function getLibraryData<T>(
 ): Promise<GetLibraryDataQuery> {
 	return fetchApi(GetLibraryDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getLibraryData: ExactAlt<T, GetLibraryDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getLibraryData', () => getLibraryData(props.getLibraryData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

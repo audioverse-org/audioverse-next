@@ -93,3 +93,19 @@ export async function getSponsorSeriesPathsData<T>(
 ): Promise<GetSponsorSeriesPathsDataQuery> {
 	return fetchApi(GetSponsorSeriesPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getSponsorSeriesPageData: ExactAlt<T, GetSponsorSeriesPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSponsorSeriesPageData', () => getSponsorSeriesPageData(props.getSponsorSeriesPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

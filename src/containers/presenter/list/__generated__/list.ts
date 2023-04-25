@@ -49,3 +49,19 @@ export async function getPersonListLetterCounts<T>(
 ): Promise<GetPersonListLetterCountsQuery> {
 	return fetchApi(GetPersonListLetterCountsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getPersonListLetterCounts: ExactAlt<T, GetPersonListLetterCountsQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getPersonListLetterCounts', () => getPersonListLetterCounts(props.getPersonListLetterCounts)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

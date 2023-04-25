@@ -33,6 +33,7 @@ generates:
       - 'typescript-operations'
       - 'typescript-react-query'
       - 'graphql-codegen/dist/graphql-plugin-getters.js'
+      - 'graphql-codegen/dist/graphql-plugin-prefetch.js'
     config:
       fetcher: '~lib/api/graphqlFetcher#graphqlFetcher'
       dedupeFragments: true

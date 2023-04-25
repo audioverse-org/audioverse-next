@@ -108,3 +108,21 @@ export async function getPresenterRecordingsFeedData<T>(
 ): Promise<GetPresenterRecordingsFeedDataQuery> {
 	return fetchApi(GetPresenterRecordingsFeedDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getPresenterRecordingsPageData: ExactAlt<T, GetPresenterRecordingsPageDataQueryVariables>,
+		getPresenterRecordingsFeedData: ExactAlt<T, GetPresenterRecordingsFeedDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getPresenterRecordingsPageData', () => getPresenterRecordingsPageData(props.getPresenterRecordingsPageData)],
+		['getPresenterRecordingsFeedData', () => getPresenterRecordingsFeedData(props.getPresenterRecordingsFeedData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

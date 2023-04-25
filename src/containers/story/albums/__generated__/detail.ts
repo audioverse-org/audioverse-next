@@ -136,3 +136,21 @@ export async function getStoryAlbumDetailPathsData<T>(
 ): Promise<GetStoryAlbumDetailPathsDataQuery> {
 	return fetchApi(GetStoryAlbumDetailPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getStoryAlbumDetailPageData: ExactAlt<T, GetStoryAlbumDetailPageDataQueryVariables>,
+		getStoryAlbumFeedData: ExactAlt<T, GetStoryAlbumFeedDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getStoryAlbumDetailPageData', () => getStoryAlbumDetailPageData(props.getStoryAlbumDetailPageData)],
+		['getStoryAlbumFeedData', () => getStoryAlbumFeedData(props.getStoryAlbumFeedData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

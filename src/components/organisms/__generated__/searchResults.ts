@@ -378,3 +378,33 @@ export async function getSearchStoryPrograms<T>(
 ): Promise<GetSearchStoryProgramsQuery> {
 	return fetchApi(GetSearchStoryProgramsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getSearchRecordings: ExactAlt<T, GetSearchRecordingsQueryVariables>,
+		getSearchSeries: ExactAlt<T, GetSearchSeriesQueryVariables>,
+		getSearchConferences: ExactAlt<T, GetSearchConferencesQueryVariables>,
+		getSearchSponsors: ExactAlt<T, GetSearchSponsorsQueryVariables>,
+		getSearchPersons: ExactAlt<T, GetSearchPersonsQueryVariables>,
+		getSearchAudiobooks: ExactAlt<T, GetSearchAudiobooksQueryVariables>,
+		getSearchMusicTracks: ExactAlt<T, GetSearchMusicTracksQueryVariables>,
+		getSearchStoryPrograms: ExactAlt<T, GetSearchStoryProgramsQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSearchRecordings', () => getSearchRecordings(props.getSearchRecordings)],
+		['getSearchSeries', () => getSearchSeries(props.getSearchSeries)],
+		['getSearchConferences', () => getSearchConferences(props.getSearchConferences)],
+		['getSearchSponsors', () => getSearchSponsors(props.getSearchSponsors)],
+		['getSearchPersons', () => getSearchPersons(props.getSearchPersons)],
+		['getSearchAudiobooks', () => getSearchAudiobooks(props.getSearchAudiobooks)],
+		['getSearchMusicTracks', () => getSearchMusicTracks(props.getSearchMusicTracks)],
+		['getSearchStoryPrograms', () => getSearchStoryPrograms(props.getSearchStoryPrograms)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

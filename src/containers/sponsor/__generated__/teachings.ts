@@ -139,3 +139,21 @@ export async function getSponsorTeachingsPathsData<T>(
 ): Promise<GetSponsorTeachingsPathsDataQuery> {
 	return fetchApi(GetSponsorTeachingsPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getSponsorTeachingsPageData: ExactAlt<T, GetSponsorTeachingsPageDataQueryVariables>,
+		getSponsorTeachingsFeedData: ExactAlt<T, GetSponsorTeachingsFeedDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSponsorTeachingsPageData', () => getSponsorTeachingsPageData(props.getSponsorTeachingsPageData)],
+		['getSponsorTeachingsFeedData', () => getSponsorTeachingsFeedData(props.getSponsorTeachingsFeedData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

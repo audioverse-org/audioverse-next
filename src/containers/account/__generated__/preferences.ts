@@ -86,3 +86,19 @@ export async function updateAccountPreferences<T>(
 ): Promise<UpdateAccountPreferencesMutation> {
 	return fetchApi(UpdateAccountPreferencesDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getAccountPreferencesData: ExactAlt<T, GetAccountPreferencesDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getAccountPreferencesData', () => getAccountPreferencesData(props.getAccountPreferencesData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

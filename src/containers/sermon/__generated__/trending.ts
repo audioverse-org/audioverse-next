@@ -57,3 +57,19 @@ export async function getTrendingTeachingsPageData<T>(
 ): Promise<GetTrendingTeachingsPageDataQuery> {
 	return fetchApi(GetTrendingTeachingsPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getTrendingTeachingsPageData: ExactAlt<T, GetTrendingTeachingsPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getTrendingTeachingsPageData', () => getTrendingTeachingsPageData(props.getTrendingTeachingsPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

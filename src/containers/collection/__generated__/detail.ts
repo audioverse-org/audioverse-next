@@ -192,3 +192,21 @@ export async function getCollectionDetailPathsData<T>(
 ): Promise<GetCollectionDetailPathsDataQuery> {
 	return fetchApi(GetCollectionDetailPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getCollectionDetailPageData: ExactAlt<T, GetCollectionDetailPageDataQueryVariables>,
+		getCollectionFeedData: ExactAlt<T, GetCollectionFeedDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getCollectionDetailPageData', () => getCollectionDetailPageData(props.getCollectionDetailPageData)],
+		['getCollectionFeedData', () => getCollectionFeedData(props.getCollectionFeedData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

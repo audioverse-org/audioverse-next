@@ -77,3 +77,19 @@ export async function getSongAlbumsListPageData<T>(
 ): Promise<GetSongAlbumsListPageDataQuery> {
 	return fetchApi(GetSongAlbumsListPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getSongAlbumsListPageData: ExactAlt<T, GetSongAlbumsListPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSongAlbumsListPageData', () => getSongAlbumsListPageData(props.getSongAlbumsListPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

@@ -90,3 +90,19 @@ export async function getSermonDetailStaticPaths<T>(
 ): Promise<GetSermonDetailStaticPathsQuery> {
 	return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getSermonDetailData: ExactAlt<T, GetSermonDetailDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSermonDetailData', () => getSermonDetailData(props.getSermonDetailData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

@@ -36,3 +36,19 @@ export async function personIsFavorited<T>(
 ): Promise<PersonIsFavoritedQuery> {
 	return fetchApi(PersonIsFavoritedDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		personIsFavorited: ExactAlt<T, PersonIsFavoritedQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['personIsFavorited', () => personIsFavorited(props.personIsFavorited)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

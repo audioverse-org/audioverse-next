@@ -126,3 +126,21 @@ export async function getSongAlbumsDetailPathsData<T>(
 ): Promise<GetSongAlbumsDetailPathsDataQuery> {
 	return fetchApi(GetSongAlbumsDetailPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	props: {
+		getSongAlbumsDetailPageData: ExactAlt<T, GetSongAlbumsDetailPageDataQueryVariables>,
+		getSongAlbumFeedData: ExactAlt<T, GetSongAlbumFeedDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSongAlbumsDetailPageData', () => getSongAlbumsDetailPageData(props.getSongAlbumsDetailPageData)],
+		['getSongAlbumFeedData', () => getSongAlbumFeedData(props.getSongAlbumFeedData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}
