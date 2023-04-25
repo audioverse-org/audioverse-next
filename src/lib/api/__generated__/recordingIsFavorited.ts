@@ -39,13 +39,13 @@ export async function recordingIsFavorited<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		recordingIsFavorited: ExactAlt<T, RecordingIsFavoritedQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['recordingIsFavorited', () => recordingIsFavorited(props.recordingIsFavorited)],
+		['recordingIsFavorited', () => recordingIsFavorited(vars.recordingIsFavorited)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

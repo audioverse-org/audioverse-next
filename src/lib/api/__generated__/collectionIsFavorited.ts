@@ -40,13 +40,13 @@ export async function collectionIsFavorited<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		collectionIsFavorited: ExactAlt<T, CollectionIsFavoritedQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['collectionIsFavorited', () => collectionIsFavorited(props.collectionIsFavorited)],
+		['collectionIsFavorited', () => collectionIsFavorited(vars.collectionIsFavorited)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -115,13 +115,13 @@ export async function submitMediaReleaseForm<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getMediaReleaseFormsPageData: ExactAlt<T, GetMediaReleaseFormsPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getMediaReleaseFormsPageData', () => getMediaReleaseFormsPageData(props.getMediaReleaseFormsPageData)],
+		['getMediaReleaseFormsPageData', () => getMediaReleaseFormsPageData(vars.getMediaReleaseFormsPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

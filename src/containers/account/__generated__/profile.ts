@@ -127,13 +127,13 @@ export async function deleteAccount<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getProfileData: ExactAlt<T, GetProfileDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getProfileData', () => getProfileData(props.getProfileData)],
+		['getProfileData', () => getProfileData(vars.getProfileData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

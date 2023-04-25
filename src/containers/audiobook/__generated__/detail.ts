@@ -140,15 +140,15 @@ export async function getAudiobookDetailPathsData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getAudiobookDetailPageData: ExactAlt<T, GetAudiobookDetailPageDataQueryVariables>,
 		getAudiobookFeedData: ExactAlt<T, GetAudiobookFeedDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getAudiobookDetailPageData', () => getAudiobookDetailPageData(props.getAudiobookDetailPageData)],
-		['getAudiobookFeedData', () => getAudiobookFeedData(props.getAudiobookFeedData)],
+		['getAudiobookDetailPageData', () => getAudiobookDetailPageData(vars.getAudiobookDetailPageData)],
+		['getAudiobookFeedData', () => getAudiobookFeedData(vars.getAudiobookFeedData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

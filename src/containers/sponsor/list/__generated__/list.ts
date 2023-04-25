@@ -50,13 +50,13 @@ export async function getSponsorListLetterCounts<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSponsorListLetterCounts: ExactAlt<T, GetSponsorListLetterCountsQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSponsorListLetterCounts', () => getSponsorListLetterCounts(props.getSponsorListLetterCounts)],
+		['getSponsorListLetterCounts', () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

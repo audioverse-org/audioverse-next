@@ -7,12 +7,12 @@ const template = (queryNames: string[]) => {
 		.join(',\n\t\t');
 
 	const queryPairs = queryNames
-		.map((n) => `['${n}', () => ${n}(props.${n})],`)
+		.map((n) => `['${n}', () => ${n}(vars.${n})],`)
 		.join('\n\t\t');
 
 	return `
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		${queryProps}
 	},
 	client: QueryClient = new QueryClient(),

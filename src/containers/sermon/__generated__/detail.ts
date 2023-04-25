@@ -93,13 +93,13 @@ export async function getSermonDetailStaticPaths<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSermonDetailData: ExactAlt<T, GetSermonDetailDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSermonDetailData', () => getSermonDetailData(props.getSermonDetailData)],
+		['getSermonDetailData', () => getSermonDetailData(vars.getSermonDetailData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

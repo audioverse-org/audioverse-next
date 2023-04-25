@@ -86,13 +86,13 @@ export async function getCollectionListPathsData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getCollectionListPageData: ExactAlt<T, GetCollectionListPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getCollectionListPageData', () => getCollectionListPageData(props.getCollectionListPageData)],
+		['getCollectionListPageData', () => getCollectionListPageData(vars.getCollectionListPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

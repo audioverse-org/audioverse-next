@@ -71,13 +71,13 @@ export async function getLibraryHistoryPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getLibraryHistoryPageData: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getLibraryHistoryPageData', () => getLibraryHistoryPageData(props.getLibraryHistoryPageData)],
+		['getLibraryHistoryPageData', () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

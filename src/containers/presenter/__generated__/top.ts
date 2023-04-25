@@ -68,13 +68,13 @@ export async function getPresenterTopPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getPresenterTopPageData: ExactAlt<T, GetPresenterTopPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getPresenterTopPageData', () => getPresenterTopPageData(props.getPresenterTopPageData)],
+		['getPresenterTopPageData', () => getPresenterTopPageData(vars.getPresenterTopPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

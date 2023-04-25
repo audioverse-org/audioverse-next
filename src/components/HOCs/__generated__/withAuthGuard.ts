@@ -40,13 +40,13 @@ export async function getWithAuthGuardData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getWithAuthGuardData: ExactAlt<T, GetWithAuthGuardDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getWithAuthGuardData', () => getWithAuthGuardData(props.getWithAuthGuardData)],
+		['getWithAuthGuardData', () => getWithAuthGuardData(vars.getWithAuthGuardData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

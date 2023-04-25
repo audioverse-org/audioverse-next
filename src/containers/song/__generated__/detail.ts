@@ -92,13 +92,13 @@ export async function getSongDetailStaticPaths<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSongDetailData: ExactAlt<T, GetSongDetailDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSongDetailData', () => getSongDetailData(props.getSongDetailData)],
+		['getSongDetailData', () => getSongDetailData(vars.getSongDetailData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -78,13 +78,13 @@ export async function getAboutStaticPaths<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getAboutPageData: ExactAlt<T, GetAboutPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getAboutPageData', () => getAboutPageData(props.getAboutPageData)],
+		['getAboutPageData', () => getAboutPageData(vars.getAboutPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

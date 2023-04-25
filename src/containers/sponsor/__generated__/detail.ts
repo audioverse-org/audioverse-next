@@ -135,13 +135,13 @@ export async function getSponsorDetailPathsData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSponsorDetailPageData: ExactAlt<T, GetSponsorDetailPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSponsorDetailPageData', () => getSponsorDetailPageData(props.getSponsorDetailPageData)],
+		['getSponsorDetailPageData', () => getSponsorDetailPageData(vars.getSponsorDetailPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -58,13 +58,13 @@ export async function getSearchResultsRecordings<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSearchResultsRecordings: ExactAlt<T, GetSearchResultsRecordingsQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSearchResultsRecordings', () => getSearchResultsRecordings(props.getSearchResultsRecordings)],
+		['getSearchResultsRecordings', () => getSearchResultsRecordings(vars.getSearchResultsRecordings)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -50,13 +50,13 @@ export async function getNotFoundPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getNotFoundPageData: ExactAlt<T, GetNotFoundPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getNotFoundPageData', () => getNotFoundPageData(props.getNotFoundPageData)],
+		['getNotFoundPageData', () => getNotFoundPageData(vars.getNotFoundPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -96,13 +96,13 @@ export async function getBlogDetailStaticPaths<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getBlogDetailData: ExactAlt<T, GetBlogDetailDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getBlogDetailData', () => getBlogDetailData(props.getBlogDetailData)],
+		['getBlogDetailData', () => getBlogDetailData(vars.getBlogDetailData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

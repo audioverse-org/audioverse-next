@@ -88,13 +88,13 @@ export async function addAccountPlaylist<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getAccountPlaylistsPageData: ExactAlt<T, GetAccountPlaylistsPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getAccountPlaylistsPageData', () => getAccountPlaylistsPageData(props.getAccountPlaylistsPageData)],
+		['getAccountPlaylistsPageData', () => getAccountPlaylistsPageData(vars.getAccountPlaylistsPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

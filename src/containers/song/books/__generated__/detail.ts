@@ -58,13 +58,13 @@ export async function getSongBooksDetailPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSongBooksDetailPageData: ExactAlt<T, GetSongBooksDetailPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSongBooksDetailPageData', () => getSongBooksDetailPageData(props.getSongBooksDetailPageData)],
+		['getSongBooksDetailPageData', () => getSongBooksDetailPageData(vars.getSongBooksDetailPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

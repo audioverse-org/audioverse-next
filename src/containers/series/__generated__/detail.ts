@@ -132,15 +132,15 @@ export async function getSeriesDetailPathsData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSeriesDetailPageData: ExactAlt<T, GetSeriesDetailPageDataQueryVariables>,
 		getSeriesFeedData: ExactAlt<T, GetSeriesFeedDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSeriesDetailPageData', () => getSeriesDetailPageData(props.getSeriesDetailPageData)],
-		['getSeriesFeedData', () => getSeriesFeedData(props.getSeriesFeedData)],
+		['getSeriesDetailPageData', () => getSeriesDetailPageData(vars.getSeriesDetailPageData)],
+		['getSeriesFeedData', () => getSeriesFeedData(vars.getSeriesFeedData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

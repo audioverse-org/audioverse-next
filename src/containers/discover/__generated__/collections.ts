@@ -125,13 +125,13 @@ export async function getDiscoverCollectionsPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getDiscoverCollectionsPageData: ExactAlt<T, GetDiscoverCollectionsPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getDiscoverCollectionsPageData', () => getDiscoverCollectionsPageData(props.getDiscoverCollectionsPageData)],
+		['getDiscoverCollectionsPageData', () => getDiscoverCollectionsPageData(vars.getDiscoverCollectionsPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

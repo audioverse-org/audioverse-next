@@ -60,13 +60,13 @@ export async function getPresenterAppearsPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getPresenterAppearsPageData: ExactAlt<T, GetPresenterAppearsPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getPresenterAppearsPageData', () => getPresenterAppearsPageData(props.getPresenterAppearsPageData)],
+		['getPresenterAppearsPageData', () => getPresenterAppearsPageData(vars.getPresenterAppearsPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

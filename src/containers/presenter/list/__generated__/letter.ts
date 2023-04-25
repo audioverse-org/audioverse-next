@@ -52,13 +52,13 @@ export async function getPresenterListLetterPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getPresenterListLetterPageData: ExactAlt<T, GetPresenterListLetterPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getPresenterListLetterPageData', () => getPresenterListLetterPageData(props.getPresenterListLetterPageData)],
+		['getPresenterListLetterPageData', () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

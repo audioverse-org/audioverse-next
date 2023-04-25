@@ -53,13 +53,13 @@ export async function getHelpWidgetData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getHelpWidgetData: ExactAlt<T, GetHelpWidgetDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getHelpWidgetData', () => getHelpWidgetData(props.getHelpWidgetData)],
+		['getHelpWidgetData', () => getHelpWidgetData(vars.getHelpWidgetData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

@@ -142,15 +142,15 @@ export async function getSponsorTeachingsPathsData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSponsorTeachingsPageData: ExactAlt<T, GetSponsorTeachingsPageDataQueryVariables>,
 		getSponsorTeachingsFeedData: ExactAlt<T, GetSponsorTeachingsFeedDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSponsorTeachingsPageData', () => getSponsorTeachingsPageData(props.getSponsorTeachingsPageData)],
-		['getSponsorTeachingsFeedData', () => getSponsorTeachingsFeedData(props.getSponsorTeachingsFeedData)],
+		['getSponsorTeachingsPageData', () => getSponsorTeachingsPageData(vars.getSponsorTeachingsPageData)],
+		['getSponsorTeachingsFeedData', () => getSponsorTeachingsFeedData(vars.getSponsorTeachingsFeedData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

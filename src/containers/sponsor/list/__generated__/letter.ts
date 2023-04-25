@@ -52,13 +52,13 @@ export async function getSponsorListLetterPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getSponsorListLetterPageData: ExactAlt<T, GetSponsorListLetterPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getSponsorListLetterPageData', () => getSponsorListLetterPageData(props.getSponsorListLetterPageData)],
+		['getSponsorListLetterPageData', () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

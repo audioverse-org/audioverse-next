@@ -128,13 +128,13 @@ export async function getDiscoverPageData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getDiscoverPageData: ExactAlt<T, GetDiscoverPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getDiscoverPageData', () => getDiscoverPageData(props.getDiscoverPageData)],
+		['getDiscoverPageData', () => getDiscoverPageData(vars.getDiscoverPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

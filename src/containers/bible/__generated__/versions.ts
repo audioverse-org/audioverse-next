@@ -59,13 +59,13 @@ export async function getAudiobibleVersionsData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getAudiobibleVersionsData: ExactAlt<T, GetAudiobibleVersionsDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getAudiobibleVersionsData', () => getAudiobibleVersionsData(props.getAudiobibleVersionsData)],
+		['getAudiobibleVersionsData', () => getAudiobibleVersionsData(vars.getAudiobibleVersionsData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));

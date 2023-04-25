@@ -87,13 +87,13 @@ export async function getTestimoniesPathsData<T>(
 import {QueryClient} from 'react-query';
 
 export async function prefetchQueries<T>(
-	props: {
+	vars: {
 		getTestimoniesPageData: ExactAlt<T, GetTestimoniesPageDataQueryVariables>
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
 	const queryPairs: [string, () => unknown][] = [
-		['getTestimoniesPageData', () => getTestimoniesPageData(props.getTestimoniesPageData)],
+		['getTestimoniesPageData', () => getTestimoniesPageData(vars.getTestimoniesPageData)],
 	]
 
 	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
