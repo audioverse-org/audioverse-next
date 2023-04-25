@@ -119,7 +119,10 @@ function useInfiniteDiscoverQuery<T, N>(
 		}
 	);
 
-	return reduceNodes(r, (p) => select(p).nodes);
+	return {
+		...r,
+		data: reduceNodes(r, (p) => select(p).nodes),
+	};
 }
 
 export default function Discover(): JSX.Element {
@@ -177,7 +180,7 @@ export default function Discover(): JSX.Element {
 				}
 				url={root.lang(languageRoute).teachings.all.get()}
 			>
-				{recentTeachings.map((r) => (
+				{recentTeachings.data.map((r) => (
 					<CardRecording recording={r} key={r.canonicalPath} />
 				))}
 			</Section>
@@ -197,7 +200,7 @@ export default function Discover(): JSX.Element {
 				}
 				url={root.lang(languageRoute).teachings.trending.get()}
 			>
-				{trendingTeachings.map((r) => (
+				{trendingTeachings.data.map((r) => (
 					<CardRecording recording={r} key={r.canonicalPath} />
 				))}
 			</Section>
@@ -210,7 +213,7 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 			>
-				{featuredTeachings.map((r) => (
+				{featuredTeachings.data.map((r) => (
 					<CardRecording recording={r} key={r.canonicalPath} />
 				))}
 			</Section>
@@ -230,7 +233,7 @@ export default function Discover(): JSX.Element {
 				}
 				url={root.lang(languageRoute).blog.get()}
 			>
-				{blogPosts.map((p) => (
+				{blogPosts.data.map((p) => (
 					<CardPost post={p} key={p.canonicalPath} />
 				))}
 			</Section>
@@ -250,7 +253,7 @@ export default function Discover(): JSX.Element {
 				}
 				url={root.lang(languageRoute).stories.albums.get()}
 			>
-				{storySeasons.map((s) => (
+				{storySeasons.data.map((s) => (
 					<CardSequence
 						sequence={s}
 						recordings={s.recordings.nodes}
@@ -274,7 +277,7 @@ export default function Discover(): JSX.Element {
 				}
 				url={root.lang(languageRoute).conferences.get()}
 			>
-				{conferences.map((c) => (
+				{conferences.data.map((c) => (
 					<CardCollection
 						collection={c}
 						sequences={c.sequences.nodes}
