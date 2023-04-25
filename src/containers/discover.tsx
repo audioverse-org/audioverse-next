@@ -132,15 +132,19 @@ export default function Discover(): JSX.Element {
 	const recentTeachings = useInfiniteDiscoverQuery<
 		GetDiscoverRecentTeachingsQuery,
 		CardRecordingFragment
-	>(useInfiniteGetDiscoverRecentTeachingsQuery, (p) => p.recentTeachings);
+	>(useInfiniteGetDiscoverRecentTeachingsQuery, (p) => p.recentTeachings, 6);
 
 	const trendingTeachings = useInfiniteDiscoverQuery<
 		GetDiscoverTrendingTeachingsQuery,
 		CardRecordingFragment
-	>(useInfiniteGetDiscoverTrendingTeachingsQuery, (p) => ({
-		...p.trendingTeachings,
-		nodes: p.trendingTeachings.nodes?.map((n) => n.recording) || null,
-	}));
+	>(
+		useInfiniteGetDiscoverTrendingTeachingsQuery,
+		(p) => ({
+			...p.trendingTeachings,
+			nodes: p.trendingTeachings.nodes?.map((n) => n.recording) || null,
+		}),
+		6
+	);
 
 	const featuredTeachings = useInfiniteDiscoverQuery<
 		GetDiscoverFeaturedTeachingsQuery,
