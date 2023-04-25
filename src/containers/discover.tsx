@@ -23,6 +23,36 @@ import {
 } from './__generated__/discover';
 import styles from './discover.module.scss';
 
+type SectionProps = {
+	heading: JSX.Element | string;
+	cards: JSX.Element[] | undefined;
+};
+type SectionPropsWithButton = SectionProps & {
+	seeAll: JSX.Element | string;
+	url: string;
+};
+function Section(props: SectionProps | SectionPropsWithButton): JSX.Element {
+	const { heading, cards } = props;
+	const seeAll = 'seeAll' in props ? props.seeAll : undefined;
+	const url = 'url' in props ? props.url : undefined;
+	return (
+		<div>
+			<LineHeading>{heading}</LineHeading>
+			<CardGroup>{cards}</CardGroup>
+			{seeAll ? (
+				<Button
+					type="secondary"
+					text={seeAll}
+					href={url}
+					IconRight={ForwardIcon}
+					className={styles.seeAllButton}
+				/>
+			) : (
+				<div className={styles.seeAllButton} />
+			)}
+		</div>
+	);
+}
 export default function Discover(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const languageId = getLanguageIdByRoute(languageRoute);
@@ -34,9 +64,7 @@ export default function Discover(): JSX.Element {
 			after: null,
 		},
 		{
-			select: (data) => {
-				return data.recentTeachings.nodes;
-			},
+			select: (d) => d.recentTeachings.nodes,
 		}
 	);
 
@@ -47,9 +75,7 @@ export default function Discover(): JSX.Element {
 			after: null,
 		},
 		{
-			select: (data) => {
-				return data.trendingTeachings.nodes;
-			},
+			select: (d) => d.trendingTeachings.nodes,
 		}
 	);
 
@@ -60,9 +86,7 @@ export default function Discover(): JSX.Element {
 			after: null,
 		},
 		{
-			select: (data) => {
-				return data.featuredTeachings.nodes;
-			},
+			select: (d) => d.featuredTeachings.nodes,
 		}
 	);
 
@@ -73,9 +97,7 @@ export default function Discover(): JSX.Element {
 			after: null,
 		},
 		{
-			select: (data) => {
-				return data.blogPosts.nodes;
-			},
+			select: (d) => d.blogPosts.nodes,
 		}
 	);
 
@@ -86,9 +108,7 @@ export default function Discover(): JSX.Element {
 			after: null,
 		},
 		{
-			select: (data) => {
-				return data.storySeasons.nodes;
-			},
+			select: (d) => d.storySeasons.nodes,
 		}
 	);
 
@@ -99,149 +119,131 @@ export default function Discover(): JSX.Element {
 			after: null,
 		},
 		{
-			select: (data) => {
-				return data.conferences.nodes;
-			},
+			select: (d) => d.conferences.nodes,
 		}
 	);
 
-	const sections = [
-		{
-			heading: (
-				<FormattedMessage
-					id="discover_recentTeachingsHeading"
-					defaultMessage="Recent Teachings"
-				/>
-			),
-			cards: recentTeachings.data?.map((recording) => (
-				<CardRecording recording={recording} key={recording.canonicalPath} />
-			)),
-			seeAll: (
-				<FormattedMessage
-					id="discover__recentTeachingsSeeAll"
-					defaultMessage="See All Teachings"
-				/>
-			),
-			url: root.lang(languageRoute).teachings.all.get(),
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="discover_trendingTeachingsHeading"
-					defaultMessage="Trending Teachings"
-				/>
-			),
-			cards: trendingTeachings.data?.map(({ recording }) => (
-				<CardRecording recording={recording} key={recording.canonicalPath} />
-			)),
-			seeAll: (
-				<FormattedMessage
-					id="discover__trendingTeachingsSeeAll"
-					defaultMessage="See All Trending Teachings"
-				/>
-			),
-			url: root.lang(languageRoute).teachings.trending.get(),
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="discover_featuredTeachingsHeading"
-					defaultMessage="Featured Teachings"
-				/>
-			),
-			cards: featuredTeachings.data?.map((recording) => (
-				<CardRecording recording={recording} key={recording.canonicalPath} />
-			)),
-			url: 'featured',
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="discover_recentBlogHeading"
-					defaultMessage="Recent Blog Posts"
-				/>
-			),
-			cards: blogPosts.data?.map((post) => (
-				<CardPost post={post} key={post.canonicalPath} />
-			)),
-			seeAll: (
-				<FormattedMessage
-					id="discover__recentBlogSeeAll"
-					defaultMessage="See All Blog Posts"
-				/>
-			),
-			url: root.lang(languageRoute).blog.get(),
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="discover__storiesHeading"
-					defaultMessage="Recent Stories"
-				/>
-			),
-			cards: storySeasons.data?.map((sequence) => (
-				<CardSequence
-					sequence={sequence}
-					recordings={sequence.recordings.nodes}
-					key={sequence.canonicalPath}
-				/>
-			)),
-			seeAll: (
-				<FormattedMessage
-					id="discover__storiesSeeAll"
-					defaultMessage="See All Stories"
-				/>
-			),
-			url: root.lang(languageRoute).stories.albums.get(),
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="discover_conferencesHeading"
-					defaultMessage="Recent Conferences"
-				/>
-			),
-			cards: conferences.data?.map((conference) => (
-				<CardCollection
-					collection={conference}
-					sequences={conference.sequences.nodes}
-					recordings={
-						!conference.sequences.nodes?.length
-							? conference.recordings.nodes
-							: null
-					}
-					key={conference.canonicalPath}
-				/>
-			)),
-			seeAll: (
-				<FormattedMessage
-					id="discover__conferencesSeeAll"
-					defaultMessage="See All Conferences"
-				/>
-			),
-			url: root.lang(languageRoute).conferences.get(),
-		},
-	];
-
 	return (
 		<>
-			{sections.map(({ heading, cards, seeAll, url }) => (
-				<div key={url}>
-					<LineHeading>{heading}</LineHeading>
-					<CardGroup>{cards}</CardGroup>
-					{seeAll ? (
-						<Button
-							type="secondary"
-							text={seeAll}
-							href={url}
-							IconRight={ForwardIcon}
-							className={styles.seeAllButton}
-						/>
-					) : (
-						<div className={styles.seeAllButton} />
-					)}
-				</div>
-			))}
+			<Section
+				heading={
+					<FormattedMessage
+						id="discover_recentTeachingsHeading"
+						defaultMessage="Recent Teachings"
+					/>
+				}
+				cards={recentTeachings.data?.map((recording) => (
+					<CardRecording recording={recording} key={recording.canonicalPath} />
+				))}
+				seeAll={
+					<FormattedMessage
+						id="discover__recentTeachingsSeeAll"
+						defaultMessage="See All Teachings"
+					/>
+				}
+				url={root.lang(languageRoute).teachings.all.get()}
+			/>
+
+			<Section
+				heading={
+					<FormattedMessage
+						id="discover_trendingTeachingsHeading"
+						defaultMessage="Trending Teachings"
+					/>
+				}
+				cards={trendingTeachings.data?.map(({ recording }) => (
+					<CardRecording recording={recording} key={recording.canonicalPath} />
+				))}
+				seeAll={
+					<FormattedMessage
+						id="discover__trendingTeachingsSeeAll"
+						defaultMessage="See All Trending Teachings"
+					/>
+				}
+				url={root.lang(languageRoute).teachings.trending.get()}
+			/>
+
+			<Section
+				heading={
+					<FormattedMessage
+						id="discover_featuredTeachingsHeading"
+						defaultMessage="Featured Teachings"
+					/>
+				}
+				cards={featuredTeachings.data?.map((recording) => (
+					<CardRecording recording={recording} key={recording.canonicalPath} />
+				))}
+			/>
+
+			<Section
+				heading={
+					<FormattedMessage
+						id="discover_recentBlogHeading"
+						defaultMessage="Recent Blog Posts"
+					/>
+				}
+				cards={blogPosts.data?.map((post) => (
+					<CardPost post={post} key={post.canonicalPath} />
+				))}
+				seeAll={
+					<FormattedMessage
+						id="discover__recentBlogSeeAll"
+						defaultMessage="See All Blog Posts"
+					/>
+				}
+				url={root.lang(languageRoute).blog.get()}
+			/>
+
+			<Section
+				heading={
+					<FormattedMessage
+						id="discover__storiesHeading"
+						defaultMessage="Recent Stories"
+					/>
+				}
+				cards={storySeasons.data?.map((sequence) => (
+					<CardSequence
+						sequence={sequence}
+						recordings={sequence.recordings.nodes}
+						key={sequence.canonicalPath}
+					/>
+				))}
+				seeAll={
+					<FormattedMessage
+						id="discover__storiesSeeAll"
+						defaultMessage="See All Stories"
+					/>
+				}
+				url={root.lang(languageRoute).stories.albums.get()}
+			/>
+
+			<Section
+				heading={
+					<FormattedMessage
+						id="discover_conferencesHeading"
+						defaultMessage="Recent Conferences"
+					/>
+				}
+				cards={conferences.data?.map((conference) => (
+					<CardCollection
+						collection={conference}
+						sequences={conference.sequences.nodes}
+						recordings={
+							!conference.sequences.nodes?.length
+								? conference.recordings.nodes
+								: null
+						}
+						key={conference.canonicalPath}
+					/>
+				))}
+				seeAll={
+					<FormattedMessage
+						id="discover__conferencesSeeAll"
+						defaultMessage="See All Conferences"
+					/>
+				}
+				url={root.lang(languageRoute).conferences.get()}
+			/>
 		</>
 	);
 }
