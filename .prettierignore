@@ -8,3 +8,4 @@ seeds
 generated
 *.handlebars
 /.lighthouseci
+**/__generated__/**/*
