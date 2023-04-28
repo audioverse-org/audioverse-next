@@ -108,7 +108,7 @@ export async function getStoriesAlbumsPathData<T>(
 ): Promise<GetStoriesAlbumsPathDataQuery> {
 	return fetchApi(GetStoriesAlbumsPathDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -119,14 +119,12 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getStoriesAlbumsPageData', vars.getStoriesAlbumsPageData], () => getStoriesAlbumsPageData(vars.getStoriesAlbumsPageData), options),
 		client.prefetchInfiniteQuery(['getStoriesAlbumsPageData.infinite', vars.getStoriesAlbumsPageData], () => getStoriesAlbumsPageData(vars.getStoriesAlbumsPageData), options),
 		client.prefetchQuery(['getStoriesAlbumsPathData', vars.getStoriesAlbumsPathData], () => getStoriesAlbumsPathData(vars.getStoriesAlbumsPathData), options),
 		client.prefetchInfiniteQuery(['getStoriesAlbumsPathData.infinite', vars.getStoriesAlbumsPathData], () => getStoriesAlbumsPathData(vars.getStoriesAlbumsPathData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

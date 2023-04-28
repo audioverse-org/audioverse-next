@@ -416,7 +416,7 @@ export async function getDiscoverBlogPosts<T>(
 ): Promise<GetDiscoverBlogPostsQuery> {
 	return fetchApi(GetDiscoverBlogPostsDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -431,7 +431,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getDiscoverRecentTeachings', vars.getDiscoverRecentTeachings], () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings), options),
 		client.prefetchInfiniteQuery(['getDiscoverRecentTeachings.infinite', vars.getDiscoverRecentTeachings], () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings), options),
 		client.prefetchQuery(['getDiscoverTrendingTeachings', vars.getDiscoverTrendingTeachings], () => getDiscoverTrendingTeachings(vars.getDiscoverTrendingTeachings), options),
@@ -444,9 +444,7 @@ export async function prefetchQueries<T>(
 		client.prefetchInfiniteQuery(['getDiscoverConferences.infinite', vars.getDiscoverConferences], () => getDiscoverConferences(vars.getDiscoverConferences), options),
 		client.prefetchQuery(['getDiscoverBlogPosts', vars.getDiscoverBlogPosts], () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts), options),
 		client.prefetchInfiniteQuery(['getDiscoverBlogPosts.infinite', vars.getDiscoverBlogPosts], () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

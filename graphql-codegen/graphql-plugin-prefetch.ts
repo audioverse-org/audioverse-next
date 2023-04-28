@@ -23,11 +23,9 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		${expressions}
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }`;
@@ -65,7 +63,7 @@ const plugin: CodegenPlugin = {
 
 		if (!result) return '';
 
-		return `import { QueryClient, QueryKey } from 'react-query';\n${result}`;
+		return `import { QueryClient } from 'react-query';\n${result}`;
 	},
 };
 

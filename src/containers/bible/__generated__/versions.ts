@@ -70,7 +70,7 @@ export async function getAudiobibleVersionsData<T>(
 ): Promise<GetAudiobibleVersionsDataQuery> {
 	return fetchApi(GetAudiobibleVersionsDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -80,12 +80,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getAudiobibleVersionsData', vars.getAudiobibleVersionsData], () => getAudiobibleVersionsData(vars.getAudiobibleVersionsData), options),
 		client.prefetchInfiniteQuery(['getAudiobibleVersionsData.infinite', vars.getAudiobibleVersionsData], () => getAudiobibleVersionsData(vars.getAudiobibleVersionsData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

@@ -56,7 +56,7 @@ export async function sequenceIsFavorited<T>(
 ): Promise<SequenceIsFavoritedQuery> {
 	return fetchApi(SequenceIsFavoritedDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -66,12 +66,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['sequenceIsFavorited', vars.sequenceIsFavorited], () => sequenceIsFavorited(vars.sequenceIsFavorited), options),
 		client.prefetchInfiniteQuery(['sequenceIsFavorited.infinite', vars.sequenceIsFavorited], () => sequenceIsFavorited(vars.sequenceIsFavorited), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

@@ -210,7 +210,7 @@ export async function getPresenterDetailPathsData<T>(
 ): Promise<GetPresenterDetailPathsDataQuery> {
 	return fetchApi(GetPresenterDetailPathsDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -220,12 +220,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getPresenterDetailPageData', vars.getPresenterDetailPageData], () => getPresenterDetailPageData(vars.getPresenterDetailPageData), options),
 		client.prefetchInfiniteQuery(['getPresenterDetailPageData.infinite', vars.getPresenterDetailPageData], () => getPresenterDetailPageData(vars.getPresenterDetailPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

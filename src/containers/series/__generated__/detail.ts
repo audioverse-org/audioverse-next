@@ -171,7 +171,7 @@ export async function getSeriesDetailPathsData<T>(
 ): Promise<GetSeriesDetailPathsDataQuery> {
 	return fetchApi(GetSeriesDetailPathsDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -182,14 +182,12 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getSeriesDetailPageData', vars.getSeriesDetailPageData], () => getSeriesDetailPageData(vars.getSeriesDetailPageData), options),
 		client.prefetchInfiniteQuery(['getSeriesDetailPageData.infinite', vars.getSeriesDetailPageData], () => getSeriesDetailPageData(vars.getSeriesDetailPageData), options),
 		client.prefetchQuery(['getSeriesFeedData', vars.getSeriesFeedData], () => getSeriesFeedData(vars.getSeriesFeedData), options),
 		client.prefetchInfiniteQuery(['getSeriesFeedData.infinite', vars.getSeriesFeedData], () => getSeriesFeedData(vars.getSeriesFeedData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

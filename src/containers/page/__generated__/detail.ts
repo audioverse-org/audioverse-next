@@ -104,7 +104,7 @@ export async function getCustomDetailPageStaticPaths<T>(
 ): Promise<GetCustomDetailPageStaticPathsQuery> {
 	return fetchApi(GetCustomDetailPageStaticPathsDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -114,12 +114,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getCustomDetailPageData', vars.getCustomDetailPageData], () => getCustomDetailPageData(vars.getCustomDetailPageData), options),
 		client.prefetchInfiniteQuery(['getCustomDetailPageData.infinite', vars.getCustomDetailPageData], () => getCustomDetailPageData(vars.getCustomDetailPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

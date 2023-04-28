@@ -138,7 +138,7 @@ export async function deleteAccount<T>(
 ): Promise<DeleteAccountMutation> {
 	return fetchApi(DeleteAccountDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -148,12 +148,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getProfileData', vars.getProfileData], () => getProfileData(vars.getProfileData), options),
 		client.prefetchInfiniteQuery(['getProfileData.infinite', vars.getProfileData], () => getProfileData(vars.getProfileData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

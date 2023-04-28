@@ -111,7 +111,7 @@ export async function getBlogPathsData<T>(
 ): Promise<GetBlogPathsDataQuery> {
 	return fetchApi(GetBlogPathsDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -121,12 +121,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getBlogPageData', vars.getBlogPageData], () => getBlogPageData(vars.getBlogPageData), options),
 		client.prefetchInfiniteQuery(['getBlogPageData.infinite', vars.getBlogPageData], () => getBlogPageData(vars.getBlogPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

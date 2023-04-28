@@ -50,7 +50,7 @@ export async function recordingIsFavorited<T>(
 ): Promise<RecordingIsFavoritedQuery> {
 	return fetchApi(RecordingIsFavoritedDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -60,12 +60,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['recordingIsFavorited', vars.recordingIsFavorited], () => recordingIsFavorited(vars.recordingIsFavorited), options),
 		client.prefetchInfiniteQuery(['recordingIsFavorited.infinite', vars.recordingIsFavorited], () => recordingIsFavorited(vars.recordingIsFavorited), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

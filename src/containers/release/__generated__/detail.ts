@@ -140,7 +140,7 @@ export async function submitMediaReleaseForm<T>(
 ): Promise<SubmitMediaReleaseFormMutation> {
 	return fetchApi(SubmitMediaReleaseFormDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -150,12 +150,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getMediaReleaseFormsPageData', vars.getMediaReleaseFormsPageData], () => getMediaReleaseFormsPageData(vars.getMediaReleaseFormsPageData), options),
 		client.prefetchInfiniteQuery(['getMediaReleaseFormsPageData.infinite', vars.getMediaReleaseFormsPageData], () => getMediaReleaseFormsPageData(vars.getMediaReleaseFormsPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

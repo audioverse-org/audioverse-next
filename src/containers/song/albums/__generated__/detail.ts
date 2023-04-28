@@ -168,7 +168,7 @@ export async function getSongAlbumsDetailPathsData<T>(
 ): Promise<GetSongAlbumsDetailPathsDataQuery> {
 	return fetchApi(GetSongAlbumsDetailPathsDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -179,14 +179,12 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getSongAlbumsDetailPageData', vars.getSongAlbumsDetailPageData], () => getSongAlbumsDetailPageData(vars.getSongAlbumsDetailPageData), options),
 		client.prefetchInfiniteQuery(['getSongAlbumsDetailPageData.infinite', vars.getSongAlbumsDetailPageData], () => getSongAlbumsDetailPageData(vars.getSongAlbumsDetailPageData), options),
 		client.prefetchQuery(['getSongAlbumFeedData', vars.getSongAlbumFeedData], () => getSongAlbumFeedData(vars.getSongAlbumFeedData), options),
 		client.prefetchInfiniteQuery(['getSongAlbumFeedData.infinite', vars.getSongAlbumFeedData], () => getSongAlbumFeedData(vars.getSongAlbumFeedData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

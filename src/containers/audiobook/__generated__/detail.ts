@@ -179,7 +179,7 @@ export async function getAudiobookDetailPathsData<T>(
 ): Promise<GetAudiobookDetailPathsDataQuery> {
 	return fetchApi(GetAudiobookDetailPathsDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -190,14 +190,12 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getAudiobookDetailPageData', vars.getAudiobookDetailPageData], () => getAudiobookDetailPageData(vars.getAudiobookDetailPageData), options),
 		client.prefetchInfiniteQuery(['getAudiobookDetailPageData.infinite', vars.getAudiobookDetailPageData], () => getAudiobookDetailPageData(vars.getAudiobookDetailPageData), options),
 		client.prefetchQuery(['getAudiobookFeedData', vars.getAudiobookFeedData], () => getAudiobookFeedData(vars.getAudiobookFeedData), options),
 		client.prefetchInfiniteQuery(['getAudiobookFeedData.infinite', vars.getAudiobookFeedData], () => getAudiobookFeedData(vars.getAudiobookFeedData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

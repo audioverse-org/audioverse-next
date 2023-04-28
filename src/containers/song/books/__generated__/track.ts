@@ -80,7 +80,7 @@ export async function getBookSongDetailData<T>(
 ): Promise<GetBookSongDetailDataQuery> {
 	return fetchApi(GetBookSongDetailDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -90,12 +90,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getBookSongDetailData', vars.getBookSongDetailData], () => getBookSongDetailData(vars.getBookSongDetailData), options),
 		client.prefetchInfiniteQuery(['getBookSongDetailData.infinite', vars.getBookSongDetailData], () => getBookSongDetailData(vars.getBookSongDetailData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

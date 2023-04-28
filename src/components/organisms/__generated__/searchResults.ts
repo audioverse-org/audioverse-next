@@ -490,7 +490,7 @@ export async function getSearchStoryPrograms<T>(
 ): Promise<GetSearchStoryProgramsQuery> {
 	return fetchApi(GetSearchStoryProgramsDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -507,7 +507,7 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getSearchRecordings', vars.getSearchRecordings], () => getSearchRecordings(vars.getSearchRecordings), options),
 		client.prefetchInfiniteQuery(['getSearchRecordings.infinite', vars.getSearchRecordings], () => getSearchRecordings(vars.getSearchRecordings), options),
 		client.prefetchQuery(['getSearchSeries', vars.getSearchSeries], () => getSearchSeries(vars.getSearchSeries), options),
@@ -524,9 +524,7 @@ export async function prefetchQueries<T>(
 		client.prefetchInfiniteQuery(['getSearchMusicTracks.infinite', vars.getSearchMusicTracks], () => getSearchMusicTracks(vars.getSearchMusicTracks), options),
 		client.prefetchQuery(['getSearchStoryPrograms', vars.getSearchStoryPrograms], () => getSearchStoryPrograms(vars.getSearchStoryPrograms), options),
 		client.prefetchInfiniteQuery(['getSearchStoryPrograms.infinite', vars.getSearchStoryPrograms], () => getSearchStoryPrograms(vars.getSearchStoryPrograms), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

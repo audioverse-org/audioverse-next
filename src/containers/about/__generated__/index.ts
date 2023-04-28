@@ -103,7 +103,7 @@ export async function getAboutStaticPaths<T>(
 ): Promise<GetAboutStaticPathsQuery> {
 	return fetchApi(GetAboutStaticPathsDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -113,12 +113,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getAboutPageData', vars.getAboutPageData], () => getAboutPageData(vars.getAboutPageData), options),
 		client.prefetchInfiniteQuery(['getAboutPageData.infinite', vars.getAboutPageData], () => getAboutPageData(vars.getAboutPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

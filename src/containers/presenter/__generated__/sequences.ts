@@ -73,7 +73,7 @@ export async function getPresenterSequencesPageData<T>(
 ): Promise<GetPresenterSequencesPageDataQuery> {
 	return fetchApi(GetPresenterSequencesPageDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -83,12 +83,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getPresenterSequencesPageData', vars.getPresenterSequencesPageData], () => getPresenterSequencesPageData(vars.getPresenterSequencesPageData), options),
 		client.prefetchInfiniteQuery(['getPresenterSequencesPageData.infinite', vars.getPresenterSequencesPageData], () => getPresenterSequencesPageData(vars.getPresenterSequencesPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

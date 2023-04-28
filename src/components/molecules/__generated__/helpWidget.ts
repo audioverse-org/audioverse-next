@@ -64,7 +64,7 @@ export async function getHelpWidgetData<T>(
 ): Promise<GetHelpWidgetDataQuery> {
 	return fetchApi(GetHelpWidgetDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -74,12 +74,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getHelpWidgetData', vars.getHelpWidgetData], () => getHelpWidgetData(vars.getHelpWidgetData), options),
 		client.prefetchInfiniteQuery(['getHelpWidgetData.infinite', vars.getHelpWidgetData], () => getHelpWidgetData(vars.getHelpWidgetData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

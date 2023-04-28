@@ -70,7 +70,7 @@ export async function getCollectionSequencesPageData<T>(
 ): Promise<GetCollectionSequencesPageDataQuery> {
 	return fetchApi(GetCollectionSequencesPageDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -80,12 +80,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getCollectionSequencesPageData', vars.getCollectionSequencesPageData], () => getCollectionSequencesPageData(vars.getCollectionSequencesPageData), options),
 		client.prefetchInfiniteQuery(['getCollectionSequencesPageData.infinite', vars.getCollectionSequencesPageData], () => getCollectionSequencesPageData(vars.getCollectionSequencesPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

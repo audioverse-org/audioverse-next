@@ -61,7 +61,7 @@ export async function getSearchResultsSequences<T>(
 ): Promise<GetSearchResultsSequencesQuery> {
 	return fetchApi(GetSearchResultsSequencesDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -71,12 +71,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getSearchResultsSequences', vars.getSearchResultsSequences], () => getSearchResultsSequences(vars.getSearchResultsSequences), options),
 		client.prefetchInfiniteQuery(['getSearchResultsSequences.infinite', vars.getSearchResultsSequences], () => getSearchResultsSequences(vars.getSearchResultsSequences), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

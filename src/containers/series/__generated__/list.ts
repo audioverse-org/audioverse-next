@@ -113,7 +113,7 @@ export async function getSeriesListPathsData<T>(
 ): Promise<GetSeriesListPathsDataQuery> {
 	return fetchApi(GetSeriesListPathsDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -123,12 +123,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getSeriesListPageData', vars.getSeriesListPageData], () => getSeriesListPageData(vars.getSeriesListPageData), options),
 		client.prefetchInfiniteQuery(['getSeriesListPageData.infinite', vars.getSeriesListPageData], () => getSeriesListPageData(vars.getSeriesListPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }

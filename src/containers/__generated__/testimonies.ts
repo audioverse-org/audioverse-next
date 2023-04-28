@@ -112,7 +112,7 @@ export async function getTestimoniesPathsData<T>(
 ): Promise<GetTestimoniesPathsDataQuery> {
 	return fetchApi(GetTestimoniesPathsDataDocument, { variables });
 }
-import { QueryClient, QueryKey } from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -122,12 +122,10 @@ export async function prefetchQueries<T>(
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	const promises = [
+	await Promise.all([
 		client.prefetchQuery(['getTestimoniesPageData', vars.getTestimoniesPageData], () => getTestimoniesPageData(vars.getTestimoniesPageData), options),
 		client.prefetchInfiniteQuery(['getTestimoniesPageData.infinite', vars.getTestimoniesPageData], () => getTestimoniesPageData(vars.getTestimoniesPageData), options),
-	]
-
-	await Promise.all(promises);
+	]);
 	
 	return client;
 }
