@@ -103,19 +103,14 @@ type SectionProps<T> = {
 	heading: JSX.Element | string;
 	nodes: Node<T>[];
 	Card: (props: { node: Node<T> }) => JSX.Element;
+	seeAll?: {
+		label: JSX.Element | string;
+		url: string;
+	};
 };
 
-type SectionPropsWithButton<T> = SectionProps<T> & {
-	seeAll: JSX.Element | string;
-	url: string;
-};
-
-function Section<T>(
-	props: SectionProps<T> | SectionPropsWithButton<T>
-): JSX.Element {
-	const { heading, nodes, Card } = props;
-	const seeAll = 'seeAll' in props ? props.seeAll : undefined;
-	const url = 'url' in props ? props.url : undefined;
+function Section<T>(props: SectionProps<T>): JSX.Element {
+	const { heading, nodes, Card, seeAll } = props;
 
 	return (
 		<div>
@@ -128,8 +123,8 @@ function Section<T>(
 			{seeAll ? (
 				<Button
 					type="secondary"
-					text={seeAll}
-					href={url}
+					text={seeAll.label}
+					href={seeAll.url}
 					IconRight={ForwardIcon}
 					className={styles.seeAllButton}
 				/>
@@ -187,13 +182,15 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Teachings"
 					/>
 				}
-				seeAll={
-					<FormattedMessage
-						id="discover__recentTeachingsSeeAll"
-						defaultMessage="See All Teachings"
-					/>
-				}
-				url={root.lang(languageRoute).teachings.all.get()}
+				seeAll={{
+					label: (
+						<FormattedMessage
+							id="discover__recentTeachingsSeeAll"
+							defaultMessage="See All Teachings"
+						/>
+					),
+					url: root.lang(languageRoute).teachings.all.get(),
+				}}
 				nodes={recentTeachings.data}
 				Card={({ node }) => <CardRecording recording={node} />}
 			/>
@@ -205,13 +202,15 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Trending Teachings"
 					/>
 				}
-				seeAll={
-					<FormattedMessage
-						id="discover__trendingTeachingsSeeAll"
-						defaultMessage="See All Trending Teachings"
-					/>
-				}
-				url={root.lang(languageRoute).teachings.trending.get()}
+				seeAll={{
+					label: (
+						<FormattedMessage
+							id="discover__trendingTeachingsSeeAll"
+							defaultMessage="See All Trending Teachings"
+						/>
+					),
+					url: root.lang(languageRoute).teachings.trending.get(),
+				}}
 				nodes={trendingTeachings.data}
 				Card={({ node }) => <CardRecording recording={node} />}
 			/>
@@ -234,13 +233,15 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Blog Posts"
 					/>
 				}
-				seeAll={
-					<FormattedMessage
-						id="discover__recentBlogSeeAll"
-						defaultMessage="See All Blog Posts"
-					/>
-				}
-				url={root.lang(languageRoute).blog.get()}
+				seeAll={{
+					label: (
+						<FormattedMessage
+							id="discover__recentBlogSeeAll"
+							defaultMessage="See All Blog Posts"
+						/>
+					),
+					url: root.lang(languageRoute).blog.get(),
+				}}
 				nodes={blogPosts.data}
 				Card={({ node }) => <CardPost post={node} />}
 			/>
@@ -252,13 +253,15 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Stories"
 					/>
 				}
-				seeAll={
-					<FormattedMessage
-						id="discover__storiesSeeAll"
-						defaultMessage="See All Stories"
-					/>
-				}
-				url={root.lang(languageRoute).stories.albums.get()}
+				seeAll={{
+					label: (
+						<FormattedMessage
+							id="discover__storiesSeeAll"
+							defaultMessage="See All Stories"
+						/>
+					),
+					url: root.lang(languageRoute).stories.albums.get(),
+				}}
 				nodes={storySeasons.data}
 				Card={({ node }) => (
 					<CardSequence sequence={node} recordings={node.recordings.nodes} />
@@ -272,13 +275,15 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Recent Conferences"
 					/>
 				}
-				seeAll={
-					<FormattedMessage
-						id="discover__conferencesSeeAll"
-						defaultMessage="See All Conferences"
-					/>
-				}
-				url={root.lang(languageRoute).conferences.get()}
+				seeAll={{
+					label: (
+						<FormattedMessage
+							id="discover__conferencesSeeAll"
+							defaultMessage="See All Conferences"
+						/>
+					),
+					url: root.lang(languageRoute).conferences.get(),
+				}}
 				nodes={conferences.data}
 				Card={({ node }) => (
 					<CardCollection
