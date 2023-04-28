@@ -32,40 +32,6 @@ import {
 } from './__generated__/discover';
 import styles from './discover.module.scss';
 
-type SectionProps = {
-	heading: JSX.Element | string;
-	children: JSX.Element[] | undefined;
-};
-
-type SectionPropsWithButton = SectionProps & {
-	seeAll: JSX.Element | string;
-	url: string;
-};
-
-function Section(props: SectionProps | SectionPropsWithButton): JSX.Element {
-	const { heading, children } = props;
-	const seeAll = 'seeAll' in props ? props.seeAll : undefined;
-	const url = 'url' in props ? props.url : undefined;
-
-	return (
-		<div>
-			<LineHeading>{heading}</LineHeading>
-			<CardGroup>{children}</CardGroup>
-			{seeAll ? (
-				<Button
-					type="secondary"
-					text={seeAll}
-					href={url}
-					IconRight={ForwardIcon}
-					className={styles.seeAllButton}
-				/>
-			) : (
-				<div className={styles.seeAllButton} />
-			)}
-		</div>
-	);
-}
-
 function reduceNodes<T, N>(
 	result: UseInfiniteQueryResult<T>,
 	select: (page: T) => Maybe<N[]>
@@ -80,24 +46,28 @@ function reduceNodes<T, N>(
 	);
 }
 
-function useInfiniteDiscoverQuery<T, N>(
-	useQueryFn: (
-		vars: {
-			language: Language;
-			first: number;
-			after: InputMaybe<string>;
-		},
-		options: {
-			getNextPageParam: (lastPage: Maybe<T>) => unknown;
-		}
-	) => UseInfiniteQueryResult<T>,
-	select: (page: T) => {
-		nodes: Maybe<N[]>;
-		pageInfo: {
-			hasNextPage: boolean;
-			endCursor: Maybe<string>;
-		};
+type UseQueryFn<T> = (
+	vars: {
+		language: Language;
+		first: number;
+		after: InputMaybe<string>;
 	},
+	options: {
+		getNextPageParam: (lastPage: Maybe<T>) => unknown;
+	}
+) => UseInfiniteQueryResult<T>;
+
+type SectionDataSelector<T, N> = (page: T) => {
+	nodes: Maybe<N[]>;
+	pageInfo: {
+		hasNextPage: boolean;
+		endCursor: Maybe<string>;
+	};
+};
+
+function useInfiniteDiscoverQuery<T, N>(
+	useQueryFn: UseQueryFn<T>,
+	select: SectionDataSelector<T, N>,
 	first = 3
 ) {
 	const language = useLanguageId();
@@ -123,6 +93,51 @@ function useInfiniteDiscoverQuery<T, N>(
 		...r,
 		data: reduceNodes(r, (p) => select(p).nodes),
 	};
+}
+
+type Node<T> = T & {
+	canonicalPath: string;
+};
+
+type SectionProps<T> = {
+	heading: JSX.Element | string;
+	nodes: Node<T>[];
+	Card: (props: { node: Node<T> }) => JSX.Element;
+};
+
+type SectionPropsWithButton<T> = SectionProps<T> & {
+	seeAll: JSX.Element | string;
+	url: string;
+};
+
+function Section<T>(
+	props: SectionProps<T> | SectionPropsWithButton<T>
+): JSX.Element {
+	const { heading, nodes, Card } = props;
+	const seeAll = 'seeAll' in props ? props.seeAll : undefined;
+	const url = 'url' in props ? props.url : undefined;
+
+	return (
+		<div>
+			<LineHeading>{heading}</LineHeading>
+			<CardGroup>
+				{nodes.map((n) => (
+					<Card node={n} key={n.canonicalPath} />
+				))}
+			</CardGroup>
+			{seeAll ? (
+				<Button
+					type="secondary"
+					text={seeAll}
+					href={url}
+					IconRight={ForwardIcon}
+					className={styles.seeAllButton}
+				/>
+			) : (
+				<div className={styles.seeAllButton} />
+			)}
+		</div>
+	);
 }
 
 export default function Discover(): JSX.Element {
@@ -179,11 +194,9 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).teachings.all.get()}
-			>
-				{recentTeachings.data.map((r) => (
-					<CardRecording recording={r} key={r.canonicalPath} />
-				))}
-			</Section>
+				nodes={recentTeachings.data}
+				Card={({ node }) => <CardRecording recording={node} />}
+			/>
 
 			<Section
 				heading={
@@ -199,11 +212,9 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).teachings.trending.get()}
-			>
-				{trendingTeachings.data.map((r) => (
-					<CardRecording recording={r} key={r.canonicalPath} />
-				))}
-			</Section>
+				nodes={trendingTeachings.data}
+				Card={({ node }) => <CardRecording recording={node} />}
+			/>
 
 			<Section
 				heading={
@@ -212,11 +223,9 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Featured Teachings"
 					/>
 				}
-			>
-				{featuredTeachings.data.map((r) => (
-					<CardRecording recording={r} key={r.canonicalPath} />
-				))}
-			</Section>
+				nodes={featuredTeachings.data}
+				Card={({ node }) => <CardRecording recording={node} />}
+			/>
 
 			<Section
 				heading={
@@ -232,11 +241,9 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).blog.get()}
-			>
-				{blogPosts.data.map((p) => (
-					<CardPost post={p} key={p.canonicalPath} />
-				))}
-			</Section>
+				nodes={blogPosts.data}
+				Card={({ node }) => <CardPost post={node} />}
+			/>
 
 			<Section
 				heading={
@@ -252,15 +259,11 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).stories.albums.get()}
-			>
-				{storySeasons.data.map((s) => (
-					<CardSequence
-						sequence={s}
-						recordings={s.recordings.nodes}
-						key={s.canonicalPath}
-					/>
-				))}
-			</Section>
+				nodes={storySeasons.data}
+				Card={({ node }) => (
+					<CardSequence sequence={node} recordings={node.recordings.nodes} />
+				)}
+			/>
 
 			<Section
 				heading={
@@ -276,16 +279,17 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 				url={root.lang(languageRoute).conferences.get()}
-			>
-				{conferences.data.map((c) => (
+				nodes={conferences.data}
+				Card={({ node }) => (
 					<CardCollection
-						collection={c}
-						sequences={c.sequences.nodes}
-						recordings={!c.sequences.nodes?.length ? c.recordings.nodes : null}
-						key={c.canonicalPath}
+						collection={node}
+						sequences={node.sequences.nodes}
+						recordings={
+							!node.sequences.nodes?.length ? node.recordings.nodes : null
+						}
 					/>
-				))}
-			</Section>
+				)}
+			/>
 		</>
 	);
 }
