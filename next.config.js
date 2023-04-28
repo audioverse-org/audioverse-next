@@ -393,11 +393,6 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
-					source: '/:lang/teachings/trending',
-					destination: '/:lang/teachings/trending/all',
-					permanent: true,
-				},
-				{
 					source: '/:lang/sermons/recordings/:id/:slug',
 					destination: '/:lang/teachings/:id/:slug',
 					permanent: true,
@@ -574,6 +569,10 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/teachings/all',
 					destination: '/:lang/teachings/all/page/1',
+				},
+				{
+					source: '/:lang/teachings/trending',
+					destination: '/:lang/teachings/trending/all',
 				},
 				{
 					source: '/:lang/testimonies',
