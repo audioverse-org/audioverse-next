@@ -75,7 +75,7 @@ describe('profile page', () => {
 	});
 
 	it('dehydrates user', async () => {
-		(fetchApi as jest.Mock).mockResolvedValue({
+		jest.mocked(fetchApi).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'the_name',
@@ -91,7 +91,8 @@ describe('profile page', () => {
 
 		hydrate(queryClient, props.dehydratedState);
 
-		const data = queryClient.getQueryData('getProfileData');
+		const key = ['getProfileData', {}];
+		const data = queryClient.getQueryData(key);
 
 		expect(get(data, 'me.user.givenName')).toEqual('the_name');
 	});
