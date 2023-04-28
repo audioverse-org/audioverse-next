@@ -1,6 +1,13 @@
 @import '../styles/common';
 
+.section {
+	margin-bottom: 48px;
+}
+
+.section:last-child {
+	margin-bottom: 0;
+}
+
 .seeAllButton {
 	margin-top: 16px;
-	margin-bottom: 48px;
 }

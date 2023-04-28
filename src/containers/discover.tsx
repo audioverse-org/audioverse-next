@@ -113,14 +113,14 @@ function Section<T>(props: SectionProps<T>): JSX.Element {
 	const { heading, nodes, Card, seeAll } = props;
 
 	return (
-		<div>
+		<div className={styles.section}>
 			<LineHeading>{heading}</LineHeading>
 			<CardGroup>
 				{nodes.map((n) => (
 					<Card node={n} key={n.canonicalPath} />
 				))}
 			</CardGroup>
-			{seeAll ? (
+			{seeAll && (
 				<Button
 					type="secondary"
 					text={seeAll.label}
@@ -128,8 +128,6 @@ function Section<T>(props: SectionProps<T>): JSX.Element {
 					IconRight={ForwardIcon}
 					className={styles.seeAllButton}
 				/>
-			) : (
-				<div className={styles.seeAllButton} />
 			)}
 		</div>
 	);
@@ -174,7 +172,7 @@ export default function Discover(): JSX.Element {
 	);
 
 	return (
-		<>
+		<div>
 			<Section
 				heading={
 					<FormattedMessage
@@ -295,6 +293,6 @@ export default function Discover(): JSX.Element {
 					/>
 				)}
 			/>
-		</>
+		</div>
 	);
 }
