@@ -1,5 +1,7 @@
 import { GetServerSidePropsResult } from 'next';
-import { dehydrate, DehydratedState, QueryClient } from 'react-query';
+import { DehydratedState, QueryClient } from 'react-query';
+
+import serializableDehydrate from './serializableDehydrate';
 
 export type DehydratedProps<T = Record<string, unknown>> =
 	GetServerSidePropsResult<
@@ -14,7 +16,7 @@ export default async function getDehydratedProps<
 	return {
 		props: {
 			...(otherProps as T),
-			dehydratedState: dehydrate(client),
+			dehydratedState: serializableDehydrate(client),
 		},
 	};
 }
