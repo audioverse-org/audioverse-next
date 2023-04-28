@@ -89,3 +89,19 @@ export async function getStoryDetailStaticPaths<T>(
 ): Promise<GetStoryDetailStaticPathsQuery> {
 	return fetchApi(GetStoryDetailStaticPathsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getStoryDetailData: ExactAlt<T, GetStoryDetailDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getStoryDetailData', () => getStoryDetailData(vars.getStoryDetailData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

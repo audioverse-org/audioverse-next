@@ -59,3 +59,19 @@ export async function getPresenterSequencesPageData<T>(
 ): Promise<GetPresenterSequencesPageDataQuery> {
 	return fetchApi(GetPresenterSequencesPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getPresenterSequencesPageData: ExactAlt<T, GetPresenterSequencesPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getPresenterSequencesPageData', () => getPresenterSequencesPageData(vars.getPresenterSequencesPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

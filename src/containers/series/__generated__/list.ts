@@ -85,3 +85,19 @@ export async function getSeriesListPathsData<T>(
 ): Promise<GetSeriesListPathsDataQuery> {
 	return fetchApi(GetSeriesListPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getSeriesListPageData: ExactAlt<T, GetSeriesListPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSeriesListPageData', () => getSeriesListPageData(vars.getSeriesListPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

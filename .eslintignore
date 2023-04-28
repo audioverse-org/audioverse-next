@@ -1,3 +1,4 @@
 /src/lib/generated/graphql.ts
 **/__generated__/**/*
 **/*.js
+/graphql-codegen/dist

@@ -50,3 +50,19 @@ export async function getHelpWidgetData<T>(
 ): Promise<GetHelpWidgetDataQuery> {
 	return fetchApi(GetHelpWidgetDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getHelpWidgetData: ExactAlt<T, GetHelpWidgetDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getHelpWidgetData', () => getHelpWidgetData(vars.getHelpWidgetData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

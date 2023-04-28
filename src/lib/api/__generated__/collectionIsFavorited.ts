@@ -37,3 +37,19 @@ export async function collectionIsFavorited<T>(
 ): Promise<CollectionIsFavoritedQuery> {
 	return fetchApi(CollectionIsFavoritedDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		collectionIsFavorited: ExactAlt<T, CollectionIsFavoritedQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['collectionIsFavorited', () => collectionIsFavorited(vars.collectionIsFavorited)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

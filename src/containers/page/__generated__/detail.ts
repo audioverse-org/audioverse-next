@@ -76,3 +76,19 @@ export async function getCustomDetailPageStaticPaths<T>(
 ): Promise<GetCustomDetailPageStaticPathsQuery> {
 	return fetchApi(GetCustomDetailPageStaticPathsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getCustomDetailPageData: ExactAlt<T, GetCustomDetailPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getCustomDetailPageData', () => getCustomDetailPageData(vars.getCustomDetailPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

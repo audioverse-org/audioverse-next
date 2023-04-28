@@ -132,3 +132,19 @@ export async function getSponsorDetailPathsData<T>(
 ): Promise<GetSponsorDetailPathsDataQuery> {
 	return fetchApi(GetSponsorDetailPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getSponsorDetailPageData: ExactAlt<T, GetSponsorDetailPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSponsorDetailPageData', () => getSponsorDetailPageData(vars.getSponsorDetailPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

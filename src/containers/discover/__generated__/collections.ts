@@ -122,3 +122,19 @@ export async function getDiscoverCollectionsPageData<T>(
 ): Promise<GetDiscoverCollectionsPageDataQuery> {
 	return fetchApi(GetDiscoverCollectionsPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getDiscoverCollectionsPageData: ExactAlt<T, GetDiscoverCollectionsPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getDiscoverCollectionsPageData', () => getDiscoverCollectionsPageData(vars.getDiscoverCollectionsPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

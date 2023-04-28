@@ -58,3 +58,19 @@ export async function getPresenterListAllPageData<T>(
 ): Promise<GetPresenterListAllPageDataQuery> {
 	return fetchApi(GetPresenterListAllPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getPresenterListAllPageData: ExactAlt<T, GetPresenterListAllPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getPresenterListAllPageData', () => getPresenterListAllPageData(vars.getPresenterListAllPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

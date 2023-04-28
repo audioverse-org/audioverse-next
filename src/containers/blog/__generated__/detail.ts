@@ -93,3 +93,19 @@ export async function getBlogDetailStaticPaths<T>(
 ): Promise<GetBlogDetailStaticPathsQuery> {
 	return fetchApi(GetBlogDetailStaticPathsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getBlogDetailData: ExactAlt<T, GetBlogDetailDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getBlogDetailData', () => getBlogDetailData(vars.getBlogDetailData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

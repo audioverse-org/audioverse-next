@@ -42,3 +42,19 @@ export async function getBibleBookContent<T>(
 ): Promise<GetBibleBookContentQuery> {
 	return fetchApi(GetBibleBookContentDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getBibleBookContent: ExactAlt<T, GetBibleBookContentQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getBibleBookContent', () => getBibleBookContent(vars.getBibleBookContent)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

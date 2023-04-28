@@ -91,3 +91,19 @@ export async function getSponsorConferencesPathsData<T>(
 ): Promise<GetSponsorConferencesPathsDataQuery> {
 	return fetchApi(GetSponsorConferencesPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getSponsorConferencesPageData: ExactAlt<T, GetSponsorConferencesPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSponsorConferencesPageData', () => getSponsorConferencesPageData(vars.getSponsorConferencesPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

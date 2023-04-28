@@ -78,3 +78,19 @@ export async function getHomeStaticProps<T>(
 ): Promise<GetHomeStaticPropsQuery> {
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getHomeStaticProps: ExactAlt<T, GetHomeStaticPropsQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getHomeStaticProps', () => getHomeStaticProps(vars.getHomeStaticProps)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

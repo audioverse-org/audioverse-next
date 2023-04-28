@@ -55,3 +55,19 @@ export async function getCollectionPresentersPageData<T>(
 ): Promise<GetCollectionPresentersPageDataQuery> {
 	return fetchApi(GetCollectionPresentersPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getCollectionPresentersPageData: ExactAlt<T, GetCollectionPresentersPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getCollectionPresentersPageData', () => getCollectionPresentersPageData(vars.getCollectionPresentersPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

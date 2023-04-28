@@ -135,3 +135,21 @@ export async function getSermonListPagePathsData<T>(
 ): Promise<GetSermonListPagePathsDataQuery> {
 	return fetchApi(GetSermonListPagePathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getSermonListPageData: ExactAlt<T, GetSermonListPageDataQueryVariables>,
+		getSermonListFeedData: ExactAlt<T, GetSermonListFeedDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSermonListPageData', () => getSermonListPageData(vars.getSermonListPageData)],
+		['getSermonListFeedData', () => getSermonListFeedData(vars.getSermonListFeedData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

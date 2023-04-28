@@ -88,3 +88,19 @@ export async function getAudiobibleBookPathsData<T>(
 ): Promise<GetAudiobibleBookPathsDataQuery> {
 	return fetchApi(GetAudiobibleBookPathsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getAudiobibleBookDetailData: ExactAlt<T, GetAudiobibleBookDetailDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getAudiobibleBookDetailData', () => getAudiobibleBookDetailData(vars.getAudiobibleBookDetailData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

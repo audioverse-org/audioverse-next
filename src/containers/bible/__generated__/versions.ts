@@ -56,3 +56,19 @@ export async function getAudiobibleVersionsData<T>(
 ): Promise<GetAudiobibleVersionsDataQuery> {
 	return fetchApi(GetAudiobibleVersionsDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getAudiobibleVersionsData: ExactAlt<T, GetAudiobibleVersionsDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getAudiobibleVersionsData', () => getAudiobibleVersionsData(vars.getAudiobibleVersionsData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

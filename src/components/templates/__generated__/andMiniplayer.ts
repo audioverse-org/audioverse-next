@@ -110,3 +110,19 @@ export async function recordingPlaybackProgressSet<T>(
 ): Promise<RecordingPlaybackProgressSetMutation> {
 	return fetchApi(RecordingPlaybackProgressSetDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getRecordingPlaybackProgress: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getRecordingPlaybackProgress', () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

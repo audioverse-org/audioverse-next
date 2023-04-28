@@ -49,3 +49,19 @@ export async function getSponsorListAllPageData<T>(
 ): Promise<GetSponsorListAllPageDataQuery> {
 	return fetchApi(GetSponsorListAllPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getSponsorListAllPageData: ExactAlt<T, GetSponsorListAllPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSponsorListAllPageData', () => getSponsorListAllPageData(vars.getSponsorListAllPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

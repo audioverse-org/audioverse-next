@@ -36,3 +36,19 @@ export async function recordingIsFavorited<T>(
 ): Promise<RecordingIsFavoritedQuery> {
 	return fetchApi(RecordingIsFavoritedDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		recordingIsFavorited: ExactAlt<T, RecordingIsFavoritedQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['recordingIsFavorited', () => recordingIsFavorited(vars.recordingIsFavorited)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

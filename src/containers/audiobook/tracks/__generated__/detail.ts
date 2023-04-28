@@ -89,3 +89,19 @@ export async function getAudiobookTrackDetailStaticPaths<T>(
 ): Promise<GetAudiobookTrackDetailStaticPathsQuery> {
 	return fetchApi(GetAudiobookTrackDetailStaticPathsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getAudiobookTrackDetailData: ExactAlt<T, GetAudiobookTrackDetailDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getAudiobookTrackDetailData', () => getAudiobookTrackDetailData(vars.getAudiobookTrackDetailData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

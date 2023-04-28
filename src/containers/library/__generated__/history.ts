@@ -68,3 +68,19 @@ export async function getLibraryHistoryPageData<T>(
 ): Promise<GetLibraryHistoryPageDataQuery> {
 	return fetchApi(GetLibraryHistoryPageDataDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getLibraryHistoryPageData: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getLibraryHistoryPageData', () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}

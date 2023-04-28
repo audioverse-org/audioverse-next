@@ -47,3 +47,19 @@ export async function getSponsorListLetterCounts<T>(
 ): Promise<GetSponsorListLetterCountsQuery> {
 	return fetchApi(GetSponsorListLetterCountsDocument, { variables });
 }
+import {QueryClient} from 'react-query';
+
+export async function prefetchQueries<T>(
+	vars: {
+		getSponsorListLetterCounts: ExactAlt<T, GetSponsorListLetterCountsQueryVariables>
+	},
+	client: QueryClient = new QueryClient(),
+): Promise<QueryClient> {
+	const queryPairs: [string, () => unknown][] = [
+		['getSponsorListLetterCounts', () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts)],
+	]
+
+	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	
+	return client;
+}
