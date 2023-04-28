@@ -72,7 +72,7 @@ export async function getPresenterListAllPageData<T>(
 ): Promise<GetPresenterListAllPageDataQuery> {
 	return fetchApi(GetPresenterListAllPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -80,12 +80,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getPresenterListAllPageData', () => getPresenterListAllPageData(vars.getPresenterListAllPageData)],
-		['getPresenterListAllPageData.infinite', () => getPresenterListAllPageData(vars.getPresenterListAllPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getPresenterListAllPageData', vars.getPresenterListAllPageData], () => getPresenterListAllPageData(vars.getPresenterListAllPageData), options),
+		client.prefetchInfiniteQuery(['getPresenterListAllPageData.infinite', vars.getPresenterListAllPageData], () => getPresenterListAllPageData(vars.getPresenterListAllPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

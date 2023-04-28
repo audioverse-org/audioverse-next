@@ -69,7 +69,7 @@ export async function getSearchResultsRecordings<T>(
 ): Promise<GetSearchResultsRecordingsQuery> {
 	return fetchApi(GetSearchResultsRecordingsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -77,12 +77,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSearchResultsRecordings', () => getSearchResultsRecordings(vars.getSearchResultsRecordings)],
-		['getSearchResultsRecordings.infinite', () => getSearchResultsRecordings(vars.getSearchResultsRecordings)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSearchResultsRecordings', vars.getSearchResultsRecordings], () => getSearchResultsRecordings(vars.getSearchResultsRecordings), options),
+		client.prefetchInfiniteQuery(['getSearchResultsRecordings.infinite', vars.getSearchResultsRecordings], () => getSearchResultsRecordings(vars.getSearchResultsRecordings), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

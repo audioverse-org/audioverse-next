@@ -416,7 +416,7 @@ export async function getDiscoverBlogPosts<T>(
 ): Promise<GetDiscoverBlogPostsQuery> {
 	return fetchApi(GetDiscoverBlogPostsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -429,22 +429,24 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getDiscoverRecentTeachings', () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings)],
-		['getDiscoverRecentTeachings.infinite', () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings)],
-		['getDiscoverTrendingTeachings', () => getDiscoverTrendingTeachings(vars.getDiscoverTrendingTeachings)],
-		['getDiscoverTrendingTeachings.infinite', () => getDiscoverTrendingTeachings(vars.getDiscoverTrendingTeachings)],
-		['getDiscoverFeaturedTeachings', () => getDiscoverFeaturedTeachings(vars.getDiscoverFeaturedTeachings)],
-		['getDiscoverFeaturedTeachings.infinite', () => getDiscoverFeaturedTeachings(vars.getDiscoverFeaturedTeachings)],
-		['getDiscoverStorySeasons', () => getDiscoverStorySeasons(vars.getDiscoverStorySeasons)],
-		['getDiscoverStorySeasons.infinite', () => getDiscoverStorySeasons(vars.getDiscoverStorySeasons)],
-		['getDiscoverConferences', () => getDiscoverConferences(vars.getDiscoverConferences)],
-		['getDiscoverConferences.infinite', () => getDiscoverConferences(vars.getDiscoverConferences)],
-		['getDiscoverBlogPosts', () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts)],
-		['getDiscoverBlogPosts.infinite', () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getDiscoverRecentTeachings', vars.getDiscoverRecentTeachings], () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings), options),
+		client.prefetchInfiniteQuery(['getDiscoverRecentTeachings.infinite', vars.getDiscoverRecentTeachings], () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings), options),
+		client.prefetchQuery(['getDiscoverTrendingTeachings', vars.getDiscoverTrendingTeachings], () => getDiscoverTrendingTeachings(vars.getDiscoverTrendingTeachings), options),
+		client.prefetchInfiniteQuery(['getDiscoverTrendingTeachings.infinite', vars.getDiscoverTrendingTeachings], () => getDiscoverTrendingTeachings(vars.getDiscoverTrendingTeachings), options),
+		client.prefetchQuery(['getDiscoverFeaturedTeachings', vars.getDiscoverFeaturedTeachings], () => getDiscoverFeaturedTeachings(vars.getDiscoverFeaturedTeachings), options),
+		client.prefetchInfiniteQuery(['getDiscoverFeaturedTeachings.infinite', vars.getDiscoverFeaturedTeachings], () => getDiscoverFeaturedTeachings(vars.getDiscoverFeaturedTeachings), options),
+		client.prefetchQuery(['getDiscoverStorySeasons', vars.getDiscoverStorySeasons], () => getDiscoverStorySeasons(vars.getDiscoverStorySeasons), options),
+		client.prefetchInfiniteQuery(['getDiscoverStorySeasons.infinite', vars.getDiscoverStorySeasons], () => getDiscoverStorySeasons(vars.getDiscoverStorySeasons), options),
+		client.prefetchQuery(['getDiscoverConferences', vars.getDiscoverConferences], () => getDiscoverConferences(vars.getDiscoverConferences), options),
+		client.prefetchInfiniteQuery(['getDiscoverConferences.infinite', vars.getDiscoverConferences], () => getDiscoverConferences(vars.getDiscoverConferences), options),
+		client.prefetchQuery(['getDiscoverBlogPosts', vars.getDiscoverBlogPosts], () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts), options),
+		client.prefetchInfiniteQuery(['getDiscoverBlogPosts.infinite', vars.getDiscoverBlogPosts], () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

@@ -69,7 +69,7 @@ export async function getCollectionPresentersPageData<T>(
 ): Promise<GetCollectionPresentersPageDataQuery> {
 	return fetchApi(GetCollectionPresentersPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -77,12 +77,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getCollectionPresentersPageData', () => getCollectionPresentersPageData(vars.getCollectionPresentersPageData)],
-		['getCollectionPresentersPageData.infinite', () => getCollectionPresentersPageData(vars.getCollectionPresentersPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getCollectionPresentersPageData', vars.getCollectionPresentersPageData], () => getCollectionPresentersPageData(vars.getCollectionPresentersPageData), options),
+		client.prefetchInfiniteQuery(['getCollectionPresentersPageData.infinite', vars.getCollectionPresentersPageData], () => getCollectionPresentersPageData(vars.getCollectionPresentersPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

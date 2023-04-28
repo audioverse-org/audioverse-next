@@ -171,7 +171,7 @@ export async function getSeriesDetailPathsData<T>(
 ): Promise<GetSeriesDetailPathsDataQuery> {
 	return fetchApi(GetSeriesDetailPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -180,14 +180,16 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSeriesDetailPageData', () => getSeriesDetailPageData(vars.getSeriesDetailPageData)],
-		['getSeriesDetailPageData.infinite', () => getSeriesDetailPageData(vars.getSeriesDetailPageData)],
-		['getSeriesFeedData', () => getSeriesFeedData(vars.getSeriesFeedData)],
-		['getSeriesFeedData.infinite', () => getSeriesFeedData(vars.getSeriesFeedData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSeriesDetailPageData', vars.getSeriesDetailPageData], () => getSeriesDetailPageData(vars.getSeriesDetailPageData), options),
+		client.prefetchInfiniteQuery(['getSeriesDetailPageData.infinite', vars.getSeriesDetailPageData], () => getSeriesDetailPageData(vars.getSeriesDetailPageData), options),
+		client.prefetchQuery(['getSeriesFeedData', vars.getSeriesFeedData], () => getSeriesFeedData(vars.getSeriesFeedData), options),
+		client.prefetchInfiniteQuery(['getSeriesFeedData.infinite', vars.getSeriesFeedData], () => getSeriesFeedData(vars.getSeriesFeedData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

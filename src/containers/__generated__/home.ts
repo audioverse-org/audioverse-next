@@ -92,7 +92,7 @@ export async function getHomeStaticProps<T>(
 ): Promise<GetHomeStaticPropsQuery> {
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -100,12 +100,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getHomeStaticProps', () => getHomeStaticProps(vars.getHomeStaticProps)],
-		['getHomeStaticProps.infinite', () => getHomeStaticProps(vars.getHomeStaticProps)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getHomeStaticProps', vars.getHomeStaticProps], () => getHomeStaticProps(vars.getHomeStaticProps), options),
+		client.prefetchInfiniteQuery(['getHomeStaticProps.infinite', vars.getHomeStaticProps], () => getHomeStaticProps(vars.getHomeStaticProps), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

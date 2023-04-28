@@ -63,7 +63,7 @@ export async function getPresenterListLetterPageData<T>(
 ): Promise<GetPresenterListLetterPageDataQuery> {
 	return fetchApi(GetPresenterListLetterPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -71,12 +71,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getPresenterListLetterPageData', () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData)],
-		['getPresenterListLetterPageData.infinite', () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getPresenterListLetterPageData', vars.getPresenterListLetterPageData], () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData), options),
+		client.prefetchInfiniteQuery(['getPresenterListLetterPageData.infinite', vars.getPresenterListLetterPageData], () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

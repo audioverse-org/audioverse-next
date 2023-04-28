@@ -117,7 +117,7 @@ export async function getAudiobookTrackDetailStaticPaths<T>(
 ): Promise<GetAudiobookTrackDetailStaticPathsQuery> {
 	return fetchApi(GetAudiobookTrackDetailStaticPathsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -125,12 +125,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getAudiobookTrackDetailData', () => getAudiobookTrackDetailData(vars.getAudiobookTrackDetailData)],
-		['getAudiobookTrackDetailData.infinite', () => getAudiobookTrackDetailData(vars.getAudiobookTrackDetailData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getAudiobookTrackDetailData', vars.getAudiobookTrackDetailData], () => getAudiobookTrackDetailData(vars.getAudiobookTrackDetailData), options),
+		client.prefetchInfiniteQuery(['getAudiobookTrackDetailData.infinite', vars.getAudiobookTrackDetailData], () => getAudiobookTrackDetailData(vars.getAudiobookTrackDetailData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

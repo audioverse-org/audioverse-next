@@ -63,7 +63,7 @@ export async function getSponsorListLetterPageData<T>(
 ): Promise<GetSponsorListLetterPageDataQuery> {
 	return fetchApi(GetSponsorListLetterPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -71,12 +71,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorListLetterPageData', () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData)],
-		['getSponsorListLetterPageData.infinite', () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSponsorListLetterPageData', vars.getSponsorListLetterPageData], () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorListLetterPageData.infinite', vars.getSponsorListLetterPageData], () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

@@ -3,7 +3,7 @@ import {
 	GetStaticPropsContext,
 	GetStaticPropsResult,
 } from 'next';
-import { dehydrate, DehydratedState } from 'react-query';
+import { DehydratedState } from 'react-query';
 
 import { prefetchQueries } from '~containers/__generated__/discover';
 import { IBaseProps } from '~containers/base';
@@ -13,6 +13,7 @@ import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '~lib/getLanguageRoutes';
 import root from '~lib/routes';
+import serializableDehydrate from '~src/lib/serializableDehydrate';
 
 export default Discover;
 
@@ -42,7 +43,7 @@ export async function getStaticProps({
 				id: 'discover__title',
 				defaultMessage: 'Discover',
 			}),
-			dehydratedState: dehydrate(client),
+			dehydratedState: serializableDehydrate(client),
 		},
 		revalidate: REVALIDATE,
 	};

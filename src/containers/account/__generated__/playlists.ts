@@ -99,7 +99,7 @@ export async function addAccountPlaylist<T>(
 ): Promise<AddAccountPlaylistMutation> {
 	return fetchApi(AddAccountPlaylistDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -107,12 +107,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getAccountPlaylistsPageData', () => getAccountPlaylistsPageData(vars.getAccountPlaylistsPageData)],
-		['getAccountPlaylistsPageData.infinite', () => getAccountPlaylistsPageData(vars.getAccountPlaylistsPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getAccountPlaylistsPageData', vars.getAccountPlaylistsPageData], () => getAccountPlaylistsPageData(vars.getAccountPlaylistsPageData), options),
+		client.prefetchInfiniteQuery(['getAccountPlaylistsPageData.infinite', vars.getAccountPlaylistsPageData], () => getAccountPlaylistsPageData(vars.getAccountPlaylistsPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

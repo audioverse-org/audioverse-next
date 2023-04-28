@@ -118,7 +118,7 @@ export async function getSermonDetailStaticPaths<T>(
 ): Promise<GetSermonDetailStaticPathsQuery> {
 	return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -126,12 +126,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSermonDetailData', () => getSermonDetailData(vars.getSermonDetailData)],
-		['getSermonDetailData.infinite', () => getSermonDetailData(vars.getSermonDetailData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSermonDetailData', vars.getSermonDetailData], () => getSermonDetailData(vars.getSermonDetailData), options),
+		client.prefetchInfiniteQuery(['getSermonDetailData.infinite', vars.getSermonDetailData], () => getSermonDetailData(vars.getSermonDetailData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

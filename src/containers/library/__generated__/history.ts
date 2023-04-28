@@ -82,7 +82,7 @@ export async function getLibraryHistoryPageData<T>(
 ): Promise<GetLibraryHistoryPageDataQuery> {
 	return fetchApi(GetLibraryHistoryPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -90,12 +90,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getLibraryHistoryPageData', () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData)],
-		['getLibraryHistoryPageData.infinite', () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getLibraryHistoryPageData', vars.getLibraryHistoryPageData], () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData), options),
+		client.prefetchInfiniteQuery(['getLibraryHistoryPageData.infinite', vars.getLibraryHistoryPageData], () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

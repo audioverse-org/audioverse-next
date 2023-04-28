@@ -490,7 +490,7 @@ export async function getSearchStoryPrograms<T>(
 ): Promise<GetSearchStoryProgramsQuery> {
 	return fetchApi(GetSearchStoryProgramsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -505,26 +505,28 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSearchRecordings', () => getSearchRecordings(vars.getSearchRecordings)],
-		['getSearchRecordings.infinite', () => getSearchRecordings(vars.getSearchRecordings)],
-		['getSearchSeries', () => getSearchSeries(vars.getSearchSeries)],
-		['getSearchSeries.infinite', () => getSearchSeries(vars.getSearchSeries)],
-		['getSearchConferences', () => getSearchConferences(vars.getSearchConferences)],
-		['getSearchConferences.infinite', () => getSearchConferences(vars.getSearchConferences)],
-		['getSearchSponsors', () => getSearchSponsors(vars.getSearchSponsors)],
-		['getSearchSponsors.infinite', () => getSearchSponsors(vars.getSearchSponsors)],
-		['getSearchPersons', () => getSearchPersons(vars.getSearchPersons)],
-		['getSearchPersons.infinite', () => getSearchPersons(vars.getSearchPersons)],
-		['getSearchAudiobooks', () => getSearchAudiobooks(vars.getSearchAudiobooks)],
-		['getSearchAudiobooks.infinite', () => getSearchAudiobooks(vars.getSearchAudiobooks)],
-		['getSearchMusicTracks', () => getSearchMusicTracks(vars.getSearchMusicTracks)],
-		['getSearchMusicTracks.infinite', () => getSearchMusicTracks(vars.getSearchMusicTracks)],
-		['getSearchStoryPrograms', () => getSearchStoryPrograms(vars.getSearchStoryPrograms)],
-		['getSearchStoryPrograms.infinite', () => getSearchStoryPrograms(vars.getSearchStoryPrograms)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSearchRecordings', vars.getSearchRecordings], () => getSearchRecordings(vars.getSearchRecordings), options),
+		client.prefetchInfiniteQuery(['getSearchRecordings.infinite', vars.getSearchRecordings], () => getSearchRecordings(vars.getSearchRecordings), options),
+		client.prefetchQuery(['getSearchSeries', vars.getSearchSeries], () => getSearchSeries(vars.getSearchSeries), options),
+		client.prefetchInfiniteQuery(['getSearchSeries.infinite', vars.getSearchSeries], () => getSearchSeries(vars.getSearchSeries), options),
+		client.prefetchQuery(['getSearchConferences', vars.getSearchConferences], () => getSearchConferences(vars.getSearchConferences), options),
+		client.prefetchInfiniteQuery(['getSearchConferences.infinite', vars.getSearchConferences], () => getSearchConferences(vars.getSearchConferences), options),
+		client.prefetchQuery(['getSearchSponsors', vars.getSearchSponsors], () => getSearchSponsors(vars.getSearchSponsors), options),
+		client.prefetchInfiniteQuery(['getSearchSponsors.infinite', vars.getSearchSponsors], () => getSearchSponsors(vars.getSearchSponsors), options),
+		client.prefetchQuery(['getSearchPersons', vars.getSearchPersons], () => getSearchPersons(vars.getSearchPersons), options),
+		client.prefetchInfiniteQuery(['getSearchPersons.infinite', vars.getSearchPersons], () => getSearchPersons(vars.getSearchPersons), options),
+		client.prefetchQuery(['getSearchAudiobooks', vars.getSearchAudiobooks], () => getSearchAudiobooks(vars.getSearchAudiobooks), options),
+		client.prefetchInfiniteQuery(['getSearchAudiobooks.infinite', vars.getSearchAudiobooks], () => getSearchAudiobooks(vars.getSearchAudiobooks), options),
+		client.prefetchQuery(['getSearchMusicTracks', vars.getSearchMusicTracks], () => getSearchMusicTracks(vars.getSearchMusicTracks), options),
+		client.prefetchInfiniteQuery(['getSearchMusicTracks.infinite', vars.getSearchMusicTracks], () => getSearchMusicTracks(vars.getSearchMusicTracks), options),
+		client.prefetchQuery(['getSearchStoryPrograms', vars.getSearchStoryPrograms], () => getSearchStoryPrograms(vars.getSearchStoryPrograms), options),
+		client.prefetchInfiniteQuery(['getSearchStoryPrograms.infinite', vars.getSearchStoryPrograms], () => getSearchStoryPrograms(vars.getSearchStoryPrograms), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

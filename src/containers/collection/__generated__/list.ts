@@ -111,7 +111,7 @@ export async function getCollectionListPathsData<T>(
 ): Promise<GetCollectionListPathsDataQuery> {
 	return fetchApi(GetCollectionListPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -119,12 +119,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getCollectionListPageData', () => getCollectionListPageData(vars.getCollectionListPageData)],
-		['getCollectionListPageData.infinite', () => getCollectionListPageData(vars.getCollectionListPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getCollectionListPageData', vars.getCollectionListPageData], () => getCollectionListPageData(vars.getCollectionListPageData), options),
+		client.prefetchInfiniteQuery(['getCollectionListPageData.infinite', vars.getCollectionListPageData], () => getCollectionListPageData(vars.getCollectionListPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

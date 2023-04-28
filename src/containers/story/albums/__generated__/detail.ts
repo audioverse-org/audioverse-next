@@ -178,7 +178,7 @@ export async function getStoryAlbumDetailPathsData<T>(
 ): Promise<GetStoryAlbumDetailPathsDataQuery> {
 	return fetchApi(GetStoryAlbumDetailPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -187,14 +187,16 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getStoryAlbumDetailPageData', () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData)],
-		['getStoryAlbumDetailPageData.infinite', () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData)],
-		['getStoryAlbumFeedData', () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData)],
-		['getStoryAlbumFeedData.infinite', () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getStoryAlbumDetailPageData', vars.getStoryAlbumDetailPageData], () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData), options),
+		client.prefetchInfiniteQuery(['getStoryAlbumDetailPageData.infinite', vars.getStoryAlbumDetailPageData], () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData), options),
+		client.prefetchQuery(['getStoryAlbumFeedData', vars.getStoryAlbumFeedData], () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData), options),
+		client.prefetchInfiniteQuery(['getStoryAlbumFeedData.infinite', vars.getStoryAlbumFeedData], () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

@@ -61,7 +61,7 @@ export async function getSponsorListLetterCounts<T>(
 ): Promise<GetSponsorListLetterCountsQuery> {
 	return fetchApi(GetSponsorListLetterCountsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -69,12 +69,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorListLetterCounts', () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts)],
-		['getSponsorListLetterCounts.infinite', () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSponsorListLetterCounts', vars.getSponsorListLetterCounts], () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts), options),
+		client.prefetchInfiniteQuery(['getSponsorListLetterCounts.infinite', vars.getSponsorListLetterCounts], () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

@@ -51,7 +51,7 @@ export async function getWithAuthGuardData<T>(
 ): Promise<GetWithAuthGuardDataQuery> {
 	return fetchApi(GetWithAuthGuardDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -59,12 +59,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getWithAuthGuardData', () => getWithAuthGuardData(vars.getWithAuthGuardData)],
-		['getWithAuthGuardData.infinite', () => getWithAuthGuardData(vars.getWithAuthGuardData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getWithAuthGuardData', vars.getWithAuthGuardData], () => getWithAuthGuardData(vars.getWithAuthGuardData), options),
+		client.prefetchInfiniteQuery(['getWithAuthGuardData.infinite', vars.getWithAuthGuardData], () => getWithAuthGuardData(vars.getWithAuthGuardData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

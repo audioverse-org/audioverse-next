@@ -56,7 +56,7 @@ export async function getBibleBookContent<T>(
 ): Promise<GetBibleBookContentQuery> {
 	return fetchApi(GetBibleBookContentDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -64,12 +64,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getBibleBookContent', () => getBibleBookContent(vars.getBibleBookContent)],
-		['getBibleBookContent.infinite', () => getBibleBookContent(vars.getBibleBookContent)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getBibleBookContent', vars.getBibleBookContent], () => getBibleBookContent(vars.getBibleBookContent), options),
+		client.prefetchInfiniteQuery(['getBibleBookContent.infinite', vars.getBibleBookContent], () => getBibleBookContent(vars.getBibleBookContent), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

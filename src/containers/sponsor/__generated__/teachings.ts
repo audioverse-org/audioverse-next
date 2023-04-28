@@ -181,7 +181,7 @@ export async function getSponsorTeachingsPathsData<T>(
 ): Promise<GetSponsorTeachingsPathsDataQuery> {
 	return fetchApi(GetSponsorTeachingsPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -190,14 +190,16 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorTeachingsPageData', () => getSponsorTeachingsPageData(vars.getSponsorTeachingsPageData)],
-		['getSponsorTeachingsPageData.infinite', () => getSponsorTeachingsPageData(vars.getSponsorTeachingsPageData)],
-		['getSponsorTeachingsFeedData', () => getSponsorTeachingsFeedData(vars.getSponsorTeachingsFeedData)],
-		['getSponsorTeachingsFeedData.infinite', () => getSponsorTeachingsFeedData(vars.getSponsorTeachingsFeedData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSponsorTeachingsPageData', vars.getSponsorTeachingsPageData], () => getSponsorTeachingsPageData(vars.getSponsorTeachingsPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorTeachingsPageData.infinite', vars.getSponsorTeachingsPageData], () => getSponsorTeachingsPageData(vars.getSponsorTeachingsPageData), options),
+		client.prefetchQuery(['getSponsorTeachingsFeedData', vars.getSponsorTeachingsFeedData], () => getSponsorTeachingsFeedData(vars.getSponsorTeachingsFeedData), options),
+		client.prefetchInfiniteQuery(['getSponsorTeachingsFeedData.infinite', vars.getSponsorTeachingsFeedData], () => getSponsorTeachingsFeedData(vars.getSponsorTeachingsFeedData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

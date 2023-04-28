@@ -234,7 +234,7 @@ export async function getCollectionDetailPathsData<T>(
 ): Promise<GetCollectionDetailPathsDataQuery> {
 	return fetchApi(GetCollectionDetailPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -243,14 +243,16 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getCollectionDetailPageData', () => getCollectionDetailPageData(vars.getCollectionDetailPageData)],
-		['getCollectionDetailPageData.infinite', () => getCollectionDetailPageData(vars.getCollectionDetailPageData)],
-		['getCollectionFeedData', () => getCollectionFeedData(vars.getCollectionFeedData)],
-		['getCollectionFeedData.infinite', () => getCollectionFeedData(vars.getCollectionFeedData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getCollectionDetailPageData', vars.getCollectionDetailPageData], () => getCollectionDetailPageData(vars.getCollectionDetailPageData), options),
+		client.prefetchInfiniteQuery(['getCollectionDetailPageData.infinite', vars.getCollectionDetailPageData], () => getCollectionDetailPageData(vars.getCollectionDetailPageData), options),
+		client.prefetchQuery(['getCollectionFeedData', vars.getCollectionFeedData], () => getCollectionFeedData(vars.getCollectionFeedData), options),
+		client.prefetchInfiniteQuery(['getCollectionFeedData.infinite', vars.getCollectionFeedData], () => getCollectionFeedData(vars.getCollectionFeedData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

@@ -63,7 +63,7 @@ export async function getSponsorListAllPageData<T>(
 ): Promise<GetSponsorListAllPageDataQuery> {
 	return fetchApi(GetSponsorListAllPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -71,12 +71,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorListAllPageData', () => getSponsorListAllPageData(vars.getSponsorListAllPageData)],
-		['getSponsorListAllPageData.infinite', () => getSponsorListAllPageData(vars.getSponsorListAllPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSponsorListAllPageData', vars.getSponsorListAllPageData], () => getSponsorListAllPageData(vars.getSponsorListAllPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorListAllPageData.infinite', vars.getSponsorListAllPageData], () => getSponsorListAllPageData(vars.getSponsorListAllPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

@@ -121,7 +121,7 @@ export async function getSponsorSeriesPathsData<T>(
 ): Promise<GetSponsorSeriesPathsDataQuery> {
 	return fetchApi(GetSponsorSeriesPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -129,12 +129,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorSeriesPageData', () => getSponsorSeriesPageData(vars.getSponsorSeriesPageData)],
-		['getSponsorSeriesPageData.infinite', () => getSponsorSeriesPageData(vars.getSponsorSeriesPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getSponsorSeriesPageData', vars.getSponsorSeriesPageData], () => getSponsorSeriesPageData(vars.getSponsorSeriesPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorSeriesPageData.infinite', vars.getSponsorSeriesPageData], () => getSponsorSeriesPageData(vars.getSponsorSeriesPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

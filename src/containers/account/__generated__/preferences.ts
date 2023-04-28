@@ -100,7 +100,7 @@ export async function updateAccountPreferences<T>(
 ): Promise<UpdateAccountPreferencesMutation> {
 	return fetchApi(UpdateAccountPreferencesDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -108,12 +108,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getAccountPreferencesData', () => getAccountPreferencesData(vars.getAccountPreferencesData)],
-		['getAccountPreferencesData.infinite', () => getAccountPreferencesData(vars.getAccountPreferencesData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getAccountPreferencesData', vars.getAccountPreferencesData], () => getAccountPreferencesData(vars.getAccountPreferencesData), options),
+		client.prefetchInfiniteQuery(['getAccountPreferencesData.infinite', vars.getAccountPreferencesData], () => getAccountPreferencesData(vars.getAccountPreferencesData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

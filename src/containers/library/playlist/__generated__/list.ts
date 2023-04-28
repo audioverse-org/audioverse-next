@@ -73,7 +73,7 @@ export async function getLibraryPlaylistsData<T>(
 ): Promise<GetLibraryPlaylistsDataQuery> {
 	return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -81,12 +81,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getLibraryPlaylistsData', () => getLibraryPlaylistsData(vars.getLibraryPlaylistsData)],
-		['getLibraryPlaylistsData.infinite', () => getLibraryPlaylistsData(vars.getLibraryPlaylistsData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getLibraryPlaylistsData', vars.getLibraryPlaylistsData], () => getLibraryPlaylistsData(vars.getLibraryPlaylistsData), options),
+		client.prefetchInfiniteQuery(['getLibraryPlaylistsData.infinite', vars.getLibraryPlaylistsData], () => getLibraryPlaylistsData(vars.getLibraryPlaylistsData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

@@ -71,7 +71,7 @@ export async function getPresenterAppearsPageData<T>(
 ): Promise<GetPresenterAppearsPageDataQuery> {
 	return fetchApi(GetPresenterAppearsPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -79,12 +79,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getPresenterAppearsPageData', () => getPresenterAppearsPageData(vars.getPresenterAppearsPageData)],
-		['getPresenterAppearsPageData.infinite', () => getPresenterAppearsPageData(vars.getPresenterAppearsPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getPresenterAppearsPageData', vars.getPresenterAppearsPageData], () => getPresenterAppearsPageData(vars.getPresenterAppearsPageData), options),
+		client.prefetchInfiniteQuery(['getPresenterAppearsPageData.infinite', vars.getPresenterAppearsPageData], () => getPresenterAppearsPageData(vars.getPresenterAppearsPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

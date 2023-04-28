@@ -71,7 +71,7 @@ export async function getTrendingTeachingsPageData<T>(
 ): Promise<GetTrendingTeachingsPageDataQuery> {
 	return fetchApi(GetTrendingTeachingsPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -79,12 +79,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getTrendingTeachingsPageData', () => getTrendingTeachingsPageData(vars.getTrendingTeachingsPageData)],
-		['getTrendingTeachingsPageData.infinite', () => getTrendingTeachingsPageData(vars.getTrendingTeachingsPageData)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getTrendingTeachingsPageData', vars.getTrendingTeachingsPageData], () => getTrendingTeachingsPageData(vars.getTrendingTeachingsPageData), options),
+		client.prefetchInfiniteQuery(['getTrendingTeachingsPageData.infinite', vars.getTrendingTeachingsPageData], () => getTrendingTeachingsPageData(vars.getTrendingTeachingsPageData), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }

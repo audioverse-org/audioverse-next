@@ -124,7 +124,7 @@ export async function recordingPlaybackProgressSet<T>(
 ): Promise<RecordingPlaybackProgressSetMutation> {
 	return fetchApi(RecordingPlaybackProgressSetDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient, QueryKey } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -132,12 +132,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getRecordingPlaybackProgress', () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress)],
-		['getRecordingPlaybackProgress.infinite', () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress)],
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+	const promises = [
+		client.prefetchQuery(['getRecordingPlaybackProgress', vars.getRecordingPlaybackProgress], () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress), options),
+		client.prefetchInfiniteQuery(['getRecordingPlaybackProgress.infinite', vars.getRecordingPlaybackProgress], () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress), options),
 	]
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all(promises);
 	
 	return client;
 }
