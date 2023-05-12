@@ -56,7 +56,7 @@ export function buildLoader<T>(
 
 		const train = once ? __apiMockReturnValueOnce : __apiMockReturnValue;
 		const promiseController = controlled ? getController<T>(data) : undefined;
-		const payload = promiseController?.promise ?? data;
+		const payload = promiseController?.promise ?? Promise.resolve(data);
 
 		train({ data: payload, document, variables });
 
