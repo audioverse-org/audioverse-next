@@ -284,7 +284,7 @@ describe('discover page', () => {
 			}
 		);
 
-		const { promiseController } = loadRecentTeachings(
+		const { controller } = loadRecentTeachings(
 			{
 				recentTeachings: {
 					nodes: [
@@ -317,7 +317,7 @@ describe('discover page', () => {
 
 		expect(screen.getByText('recent_sermon_title_1')).toBeInTheDocument();
 
-		promiseController?.resolve();
+		controller?.resolve();
 	});
 
 	it('disables next button if no next page', async () => {
