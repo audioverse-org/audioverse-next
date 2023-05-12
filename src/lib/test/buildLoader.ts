@@ -1,31 +1,87 @@
-import { when } from 'jest-when';
 import defaultsDeep from 'lodash/defaultsDeep';
 import { PartialDeep } from 'type-fest';
 
-import { fetchApi } from '~lib/api/fetchApi';
+import {
+	__apiMockResolvedValue,
+	__apiMockResolvedValueOnce,
+	__apiMockReturnValue,
+	__apiMockReturnValueOnce,
+} from '~lib/api/fetchApi';
+
+import {
+	createControlledPromise,
+	PromiseController,
+} from './loadControlledPromise';
 
 type Options = {
 	useDefaults?: boolean;
+	once?: boolean;
+	controlled?: boolean;
+	variables?: Record<string, unknown>;
 };
+
+type Loader<T> = (
+	data?: PartialDeep<T>,
+	options?: Options
+) => { data: T; promiseController?: PromiseController<PartialDeep<T>> };
 
 export function buildLoader<T>(
 	document: string,
 	defaults: PartialDeep<T>
-): (data?: PartialDeep<T>, options?: Options) => T {
-	// TODO: Figure out how to set T to actual query return type
-	// https://spin.atomicobject.com/2017/03/15/typescript-generate-test-data/
-	// https://github.com/willryan/factory.ts/blob/master/src/sync.ts
-	// It will already accept the type manually:
-	// const loadData = buildLoader<GetHomeStaticPropsQuery>(GetHomeStaticPropsDocument, { .. })
-	// should disallow including data in defaults that isn't in type
-	return (
+): Loader<T> {
+	const loader = (
 		data: PartialDeep<T> | Record<string, never> = {},
-		{ useDefaults = true }: Options = {}
+		{
+			useDefaults = true,
+			once = false,
+			controlled = false,
+			variables,
+		}: Options = {}
 	) => {
 		if (useDefaults) defaultsDeep(data, defaults);
-		when(fetchApi)
-			.calledWith(document, expect.anything())
-			.mockResolvedValue(data);
-		return data as T;
+
+		// const onCall = when(fetchApi).calledWith(document, { variables });
+
+		// console.dir({ variables }, { depth: null });
+
+		let promiseController: PromiseController<PartialDeep<T>> | undefined =
+			undefined;
+
+		if (controlled) {
+			const c = createControlledPromise<PartialDeep<T>>();
+
+			promiseController = {
+				resolve: (data?: PartialDeep<T>) => {
+					c.resolve(data);
+				},
+				reject: (data?: PartialDeep<T>) => {
+					c.reject(data);
+				},
+				promise: c.promise,
+			};
+			if (once) {
+				__apiMockReturnValueOnce({ data: c.promise, document, variables });
+			} else {
+				__apiMockReturnValue({ data: c.promise, document, variables });
+			}
+		} else {
+			if (once) {
+				// when(fetchApi)
+				// 	.calledWith(document, variables ? { variables } : expect.anything())
+				// 	.mockResolvedValueOnce(data);
+
+				__apiMockResolvedValueOnce({ data, document, variables });
+			} else {
+				// when(fetchApi)
+				// 	.calledWith(document, variables ? { variables } : expect.anything())
+				// 	.mockResolvedValue(data);
+
+				__apiMockResolvedValue({ data, document, variables });
+			}
+		}
+
+		return { data: data as T, promiseController };
 	};
+
+	return loader;
 }

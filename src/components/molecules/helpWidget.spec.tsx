@@ -6,7 +6,7 @@ import Script from 'next/script';
 import HelpWidget from '~components/molecules/helpWidget';
 import { buildLoader } from '~lib/test/buildLoader';
 import { buildRenderer } from '~lib/test/buildRenderer';
-import filterByExpectation from '~lib/test/getMatchingCall';
+import { filterByExpectation } from '~src/lib/test/expectations';
 
 import { GetHelpWidgetDataDocument } from './__generated__/helpWidget';
 

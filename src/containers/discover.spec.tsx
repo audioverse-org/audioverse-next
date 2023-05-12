@@ -1,4 +1,5 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { __loadQuery } from 'next/router';
 
 import { buildLoader } from '~lib/test/buildLoader';
@@ -8,6 +9,7 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
+import { fetchApi } from '~src/lib/api/fetchApi';
 
 import {
 	GetDiscoverBlogPostsDocument,
@@ -26,22 +28,29 @@ import {
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 
+const base = {
+	// aggregate: {
+	// 	count: 1,
+	// },
+	pageInfo: {
+		hasNextPage: false,
+		endCursor: null,
+	},
+};
+
+const recentTeaching = {
+	title: 'recent_sermon_title',
+	canonicalPath: 'the_sermon_path',
+	recordingContentType: RecordingContentType.Sermon,
+	persons: [],
+};
+
 const loadRecentTeachings = buildLoader<GetDiscoverRecentTeachingsQuery>(
 	GetDiscoverRecentTeachingsDocument,
 	{
 		recentTeachings: {
-			nodes: [
-				{
-					title: 'the_sermon_title',
-					canonicalPath: 'the_sermon_path',
-					recordingContentType: RecordingContentType.Sermon,
-					persons: [],
-				},
-			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			nodes: [recentTeaching],
+			...base,
 		},
 	}
 );
@@ -53,17 +62,14 @@ const loadTrendingTeachings = buildLoader<GetDiscoverTrendingTeachingsQuery>(
 			nodes: [
 				{
 					recording: {
-						title: 'the_sermon_title2',
+						title: 'trending_sermon_title',
 						canonicalPath: 'the_sermon_path2',
 						recordingContentType: RecordingContentType.Sermon,
 						persons: [],
 					},
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -74,16 +80,13 @@ const loadFeaturedTeachings = buildLoader<GetDiscoverFeaturedTeachingsQuery>(
 		featuredTeachings: {
 			nodes: [
 				{
-					title: 'the_sermon_title3',
+					title: 'featured_sermon_title',
 					canonicalPath: 'the_sermon_path3',
 					recordingContentType: RecordingContentType.Sermon,
 					persons: [],
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -110,10 +113,7 @@ const loadStorySeasons = buildLoader<GetDiscoverStorySeasonsQuery>(
 					},
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -144,10 +144,7 @@ const loadConferences = buildLoader<GetDiscoverConferencesQuery>(
 					},
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -168,10 +165,7 @@ const loadBlogPosts = buildLoader<GetDiscoverBlogPostsQuery>(
 					readingDuration: 9 * 60,
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -190,15 +184,183 @@ describe('discover page', () => {
 		__loadQuery({
 			language: 'en',
 		});
+		loadData();
 	});
 
 	it('renders titles', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
+		expect(await screen.findByText('recent_sermon_title')).toBeInTheDocument();
+	});
+
+	it('handles slider next', async () => {
+		loadRecentTeachings(
+			{
+				recentTeachings: {
+					nodes: [
+						{
+							...recentTeaching,
+							title: 'recent_sermon_title_1',
+						},
+						{
+							...recentTeaching,
+							title: 'recent_sermon_title_2',
+						},
+						{
+							...recentTeaching,
+							title: 'recent_sermon_title_3',
+						},
+					],
+					pageInfo: {
+						hasNextPage: true,
+						endCursor: 'recentTeachingCursor',
+					},
+				},
+			},
+			{
+				variables: expect.objectContaining({
+					after: null,
+				}),
+			}
+		);
+		loadRecentTeachings(
+			{
+				recentTeachings: {
+					nodes: [
+						{
+							...recentTeaching,
+							title: 'recent_sermon_title_4',
+						},
+					],
+					pageInfo: {
+						hasNextPage: false,
+						endCursor: null,
+					},
+				},
+			},
+			{ variables: expect.objectContaining({ after: expect.any(String) }) }
+		);
+		await renderPage();
+
+		await screen.findByText('recent_sermon_title_1');
+
+		const nextButtons = await screen.findAllByText('next');
+
+		userEvent.click(nextButtons[0]);
+
+		expect(
+			await screen.findByText('recent_sermon_title_4')
+		).toBeInTheDocument();
+	});
+
+	it('displays last page while loading next page', async () => {
+		loadRecentTeachings(
+			{
+				recentTeachings: {
+					nodes: [
+						{
+							...recentTeaching,
+							title: 'recent_sermon_title_1',
+						},
+						{
+							...recentTeaching,
+							title: 'recent_sermon_title_2',
+						},
+						{
+							...recentTeaching,
+							title: 'recent_sermon_title_3',
+						},
+					],
+					pageInfo: {
+						hasNextPage: true,
+						endCursor: 'recentTeachingCursor',
+					},
+				},
+			},
+			{
+				variables: expect.objectContaining({
+					after: null,
+				}),
+			}
+		);
+
+		const { promiseController } = loadRecentTeachings(
+			{
+				recentTeachings: {
+					nodes: [
+						{
+							...recentTeaching,
+							title: 'recent_sermon_title_4',
+						},
+					],
+					pageInfo: {
+						hasNextPage: false,
+						endCursor: null,
+					},
+				},
+			},
+			{
+				variables: expect.objectContaining({
+					after: expect.any(String),
+				}),
+				controlled: true,
+			}
+		);
+
+		await renderPage();
+
+		await screen.findByText('recent_sermon_title_1');
+
+		const nextButtons = await screen.findAllByText('next');
+
+		userEvent.click(nextButtons[0]);
+
+		expect(screen.getByText('recent_sermon_title_1')).toBeInTheDocument();
+
+		promiseController?.resolve();
+	});
+
+	it('disables next button if no next page', async () => {
+		await renderPage();
+
+		const nextButtons = await screen.findAllByText('next');
+
+		expect(nextButtons[0]).toBeDisabled();
+	});
+
+	it('preloads pages', async () => {
+		loadRecentTeachings(
+			{
+				recentTeachings: {
+					nodes: [
+						{
+							title: 'recent_sermon_title_first',
+							canonicalPath: 'the_sermon_path',
+							recordingContentType: 'SERMON',
+							persons: [],
+						},
+					],
+					pageInfo: {
+						hasNextPage: true,
+						endCursor: 'cursor',
+					},
+				},
+			},
+			{
+				variables: expect.objectContaining({
+					after: null,
+				}),
+			}
+		);
+
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByText('the_sermon_title')).toBeInTheDocument();
+			expect(fetchApi).toBeCalledWith(GetDiscoverRecentTeachingsDocument, {
+				variables: expect.objectContaining({
+					after: 'cursor',
+				}),
+			});
 		});
 	});
 });

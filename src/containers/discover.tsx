@@ -1,5 +1,5 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { UseInfiniteQueryResult } from 'react-query';
 
@@ -71,7 +71,8 @@ function useInfiniteDiscoverQuery<T, N>(
 	first = 3
 ) {
 	const language = useLanguageId();
-	const r = useQueryFn(
+
+	return useQueryFn(
 		{
 			language,
 			first,
@@ -88,11 +89,6 @@ function useInfiniteDiscoverQuery<T, N>(
 					: undefined,
 		}
 	);
-
-	return {
-		...r,
-		data: reduceNodes(r, (p) => select(p).nodes),
-	};
 }
 
 type Node<T> = T & {
@@ -101,25 +97,46 @@ type Node<T> = T & {
 
 type SectionProps<T> = {
 	heading: JSX.Element | string;
-	nodes: Node<T>[];
+	nodes: Maybe<Node<T>[]>;
 	Card: (props: { node: Node<T> }) => JSX.Element;
 	seeAll?: {
 		label: JSX.Element | string;
 		url: string;
 	};
+	onPrev?: (() => void) | false;
+	onNext?: (() => void) | false;
 };
 
 function Section<T>(props: SectionProps<T>): JSX.Element {
-	const { heading, nodes, Card, seeAll } = props;
+	const { heading, nodes, Card, seeAll, onPrev, onNext } = props;
 
 	return (
 		<div className={styles.section}>
 			<LineHeading>{heading}</LineHeading>
 			<CardGroup>
-				{nodes.map((n) => (
+				{nodes?.map((n) => (
 					<Card node={n} key={n.canonicalPath} />
 				))}
 			</CardGroup>
+			<button
+				onClick={(e) => {
+					e.preventDefault();
+					onPrev && onPrev();
+				}}
+				disabled={!onPrev}
+			>
+				prev
+			</button>
+			<button
+				onClick={(e) => {
+					e.preventDefault();
+					onNext && onNext();
+				}}
+				disabled={!onNext}
+			>
+				next
+			</button>
+			<br />
 			{seeAll && (
 				<Button
 					type="secondary"
@@ -135,14 +152,94 @@ function Section<T>(props: SectionProps<T>): JSX.Element {
 
 export default function Discover(): JSX.Element {
 	const languageRoute = useLanguageRoute();
+	const language = useLanguageId();
 
-	const recentTeachings = useInfiniteDiscoverQuery(
-		useInfiniteGetDiscoverRecentTeachingsQuery,
-		(p: GetDiscoverRecentTeachingsQuery) => p.recentTeachings,
-		6
+	/////////////
+
+	const [recentTeachingsPageIndex, setRecentTeachingsPageIndex] = useState(0);
+	const recentTeachingsResult = useInfiniteGetDiscoverRecentTeachingsQuery(
+		{
+			language,
+			first: 6,
+			after: null,
+		},
+		{
+			getNextPageParam: (last: Maybe<GetDiscoverRecentTeachingsQuery>) =>
+				last && last.recentTeachings.pageInfo.hasNextPage
+					? {
+							language,
+							first: 6,
+							after: last.recentTeachings.pageInfo.endCursor,
+					  }
+					: undefined,
+			onSuccess: (data) => {
+				const pages = data.pages || [];
+				const lastPage = pages[pages.length - 1];
+
+				/* console.dir(
+					{ data },
+					{
+						depth: null,
+					}
+				); */
+
+				lastPage?.recentTeachings.pageInfo.hasNextPage &&
+					recentTeachingsResult.fetchNextPage();
+			},
+		}
+	);
+	const recentTeachings =
+		recentTeachingsResult.data?.pages?.[recentTeachingsPageIndex]
+			?.recentTeachings.nodes || null;
+
+	useEffect(() => {
+		// console.log({
+		// 	recentTeachingsPageIndex,
+		// });
+	}, [recentTeachingsPageIndex]);
+
+	const recentTeachingsHasNext: boolean =
+		recentTeachingsResult.data?.pages?.[recentTeachingsPageIndex]
+			?.recentTeachings.pageInfo.hasNextPage || false;
+
+	const recentTeachingsPrev =
+		recentTeachingsPageIndex > 0
+			? () => setRecentTeachingsPageIndex((i) => i - 1)
+			: undefined;
+	const recentTeachingsNext = async () => {
+		if (recentTeachingsResult.hasNextPage) {
+			await recentTeachingsResult.fetchNextPage();
+		}
+		setRecentTeachingsPageIndex((i) => i + 1);
+	};
+
+	const recentTeachingsSection = (
+		<Section
+			heading={
+				<FormattedMessage
+					id="discover_recentTeachingsHeading"
+					defaultMessage="Recent Teachings"
+				/>
+			}
+			seeAll={{
+				label: (
+					<FormattedMessage
+						id="discover__recentTeachingsSeeAll"
+						defaultMessage="See All Teachings"
+					/>
+				),
+				url: root.lang(languageRoute).teachings.all.get(),
+			}}
+			nodes={recentTeachings}
+			Card={({ node }) => <CardRecording recording={node} />}
+			onPrev={recentTeachingsPrev}
+			onNext={recentTeachingsHasNext && recentTeachingsNext}
+		/>
 	);
 
-	const trendingTeachings = useInfiniteDiscoverQuery(
+	/////////////
+
+	const trendingTeachingsResult = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverTrendingTeachingsQuery,
 		(p: GetDiscoverTrendingTeachingsQuery) => ({
 			...p.trendingTeachings,
@@ -150,48 +247,51 @@ export default function Discover(): JSX.Element {
 		}),
 		6
 	);
+	const trendingTeachings = reduceNodes(
+		trendingTeachingsResult,
+		(p: GetDiscoverTrendingTeachingsQuery) =>
+			p.trendingTeachings.nodes?.map((n) => n.recording) || null
+	);
 
-	const featuredTeachings = useInfiniteDiscoverQuery(
+	const featuredTeachingsResult = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverFeaturedTeachingsQuery,
 		(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings
 	);
+	const featuredTeachings = reduceNodes(
+		featuredTeachingsResult,
+		(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings.nodes
+	);
 
-	const blogPosts = useInfiniteDiscoverQuery(
+	const blogPostsResult = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverBlogPostsQuery,
 		(p: GetDiscoverBlogPostsQuery) => p.blogPosts
 	);
+	const blogPosts = reduceNodes(
+		blogPostsResult,
+		(p: GetDiscoverBlogPostsQuery) => p.blogPosts.nodes
+	);
 
-	const storySeasons = useInfiniteDiscoverQuery(
+	const storySeasonsResult = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverStorySeasonsQuery,
 		(p: GetDiscoverStorySeasonsQuery) => p.storySeasons
 	);
+	const storySeasons = reduceNodes(
+		storySeasonsResult,
+		(p: GetDiscoverStorySeasonsQuery) => p.storySeasons.nodes
+	);
 
-	const conferences = useInfiniteDiscoverQuery(
+	const conferencesResult = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverConferencesQuery,
 		(p: GetDiscoverConferencesQuery) => p.conferences
+	);
+	const conferences = reduceNodes(
+		conferencesResult,
+		(p: GetDiscoverConferencesQuery) => p.conferences.nodes
 	);
 
 	return (
 		<div>
-			<Section
-				heading={
-					<FormattedMessage
-						id="discover_recentTeachingsHeading"
-						defaultMessage="Recent Teachings"
-					/>
-				}
-				seeAll={{
-					label: (
-						<FormattedMessage
-							id="discover__recentTeachingsSeeAll"
-							defaultMessage="See All Teachings"
-						/>
-					),
-					url: root.lang(languageRoute).teachings.all.get(),
-				}}
-				nodes={recentTeachings.data}
-				Card={({ node }) => <CardRecording recording={node} />}
-			/>
+			{recentTeachingsSection}
 
 			<Section
 				heading={
@@ -209,7 +309,7 @@ export default function Discover(): JSX.Element {
 					),
 					url: root.lang(languageRoute).teachings.trending.get(),
 				}}
-				nodes={trendingTeachings.data}
+				nodes={trendingTeachings}
 				Card={({ node }) => <CardRecording recording={node} />}
 			/>
 
@@ -220,7 +320,7 @@ export default function Discover(): JSX.Element {
 						defaultMessage="Featured Teachings"
 					/>
 				}
-				nodes={featuredTeachings.data}
+				nodes={featuredTeachings}
 				Card={({ node }) => <CardRecording recording={node} />}
 			/>
 
@@ -240,7 +340,7 @@ export default function Discover(): JSX.Element {
 					),
 					url: root.lang(languageRoute).blog.get(),
 				}}
-				nodes={blogPosts.data}
+				nodes={blogPosts}
 				Card={({ node }) => <CardPost post={node} />}
 			/>
 
@@ -260,7 +360,7 @@ export default function Discover(): JSX.Element {
 					),
 					url: root.lang(languageRoute).stories.albums.get(),
 				}}
-				nodes={storySeasons.data}
+				nodes={storySeasons}
 				Card={({ node }) => (
 					<CardSequence sequence={node} recordings={node.recordings.nodes} />
 				)}
@@ -282,7 +382,7 @@ export default function Discover(): JSX.Element {
 					),
 					url: root.lang(languageRoute).conferences.get(),
 				}}
-				nodes={conferences.data}
+				nodes={conferences}
 				Card={({ node }) => (
 					<CardCollection
 						collection={node}
