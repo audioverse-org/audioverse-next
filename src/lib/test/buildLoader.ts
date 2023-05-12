@@ -20,17 +20,31 @@ type Options = {
 	variables?: Record<string, unknown>;
 };
 
+type PartialData<T> = PartialDeep<T> | Record<string, never>;
+
 type Loader<T> = (
-	data?: PartialDeep<T>,
+	data?: PartialData<T>,
 	options?: Options
-) => { data: T; promiseController?: PromiseController<PartialDeep<T>> };
+) => { data: T; promiseController?: PromiseController<PartialData<T>> };
+
+function getController<T>(defaults: PartialData<T>) {
+	const c = createControlledPromise<PartialData<T>>();
+
+	return {
+		resolve: (data: PartialData<T> = {}) =>
+			c.resolve(defaultsDeep(data, defaults)),
+		reject: (data: PartialData<T> = {}) =>
+			c.reject(defaultsDeep(data, defaults)),
+		promise: c.promise,
+	};
+}
 
 export function buildLoader<T>(
 	document: string,
-	defaults: PartialDeep<T>
+	defaults: PartialData<T>
 ): Loader<T> {
 	const loader = (
-		data: PartialDeep<T> | Record<string, never> = {},
+		data: PartialData<T> = {},
 		{
 			useDefaults = true,
 			once = false,
@@ -40,45 +54,11 @@ export function buildLoader<T>(
 	) => {
 		if (useDefaults) defaultsDeep(data, defaults);
 
-		// const onCall = when(fetchApi).calledWith(document, { variables });
+		const train = once ? __apiMockReturnValueOnce : __apiMockReturnValue;
+		const promiseController = controlled ? getController<T>(data) : undefined;
+		const payload = promiseController?.promise ?? data;
 
-		// console.dir({ variables }, { depth: null });
-
-		let promiseController: PromiseController<PartialDeep<T>> | undefined =
-			undefined;
-
-		if (controlled) {
-			const c = createControlledPromise<PartialDeep<T>>();
-
-			promiseController = {
-				resolve: (data?: PartialDeep<T>) => {
-					c.resolve(data);
-				},
-				reject: (data?: PartialDeep<T>) => {
-					c.reject(data);
-				},
-				promise: c.promise,
-			};
-			if (once) {
-				__apiMockReturnValueOnce({ data: c.promise, document, variables });
-			} else {
-				__apiMockReturnValue({ data: c.promise, document, variables });
-			}
-		} else {
-			if (once) {
-				// when(fetchApi)
-				// 	.calledWith(document, variables ? { variables } : expect.anything())
-				// 	.mockResolvedValueOnce(data);
-
-				__apiMockResolvedValueOnce({ data, document, variables });
-			} else {
-				// when(fetchApi)
-				// 	.calledWith(document, variables ? { variables } : expect.anything())
-				// 	.mockResolvedValue(data);
-
-				__apiMockResolvedValue({ data, document, variables });
-			}
-		}
+		train({ data: payload, document, variables });
 
 		return { data: data as T, promiseController };
 	};
