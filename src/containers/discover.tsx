@@ -175,16 +175,16 @@ export default function Discover(): JSX.Element {
 			onSuccess: (data) => {
 				const pages = data.pages || [];
 				const lastPage = pages[pages.length - 1];
+				const hasNextPage = lastPage?.recentTeachings.pageInfo.hasNextPage;
+				const leadCount = pages.length - (recentTeachingsPageIndex + 1);
 
-				/* console.dir(
-					{ data },
-					{
-						depth: null,
-					}
-				); */
+				if (!hasNextPage) return;
+				if (leadCount >= 3) {
+					console.log('leadCount >= 3');
+					return;
+				}
 
-				lastPage?.recentTeachings.pageInfo.hasNextPage &&
-					recentTeachingsResult.fetchNextPage();
+				recentTeachingsResult.fetchNextPage();
 			},
 		}
 	);

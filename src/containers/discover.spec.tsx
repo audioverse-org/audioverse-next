@@ -223,6 +223,7 @@ describe('discover page', () => {
 				}),
 			}
 		);
+
 		loadRecentTeachings(
 			{
 				recentTeachings: {
@@ -240,6 +241,7 @@ describe('discover page', () => {
 			},
 			{ variables: expect.objectContaining({ after: expect.any(String) }) }
 		);
+
 		await renderPage();
 
 		await screen.findByText('recent_sermon_title_1');
@@ -363,4 +365,47 @@ describe('discover page', () => {
 			});
 		});
 	});
+
+	it('only preloads 3 pages in advance', async () => {
+		loadRecentTeachings({
+			recentTeachings: {
+				pageInfo: {
+					hasNextPage: true,
+					endCursor: 'cursor',
+				},
+			},
+		});
+
+		await renderPage();
+
+		// expect page to render without looping forever
+	});
+
+	// it.only('does not await page load if page is already loaded', async () => {
+	// 	loadRecentTeachings({
+	// 		recentTeachings: {
+	// 			pageInfo: {
+	// 				hasNextPage: true,
+	// 				endCursor: 'cursor',
+	// 			},
+	// 		},
+	// 	});
+
+	// 	await renderPage();
+
+	// 	const { controller } = loadRecentTeachings(
+	// 		{},
+	// 		{
+	// 			controlled: true,
+	// 		}
+	// 	);
+
+	// 	const nextButtons = await screen.findAllByText('next');
+
+	// 	userEvent.click(nextButtons[0]);
+
+	// 	expect(screen.getByText('recent_sermon_title_1')).toBeInTheDocument();
+
+	// 	controller?.resolve();
+	// });
 });
