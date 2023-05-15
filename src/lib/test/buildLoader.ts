@@ -1,3 +1,4 @@
+import { when } from 'jest-when';
 import defaultsDeep from 'lodash/defaultsDeep';
 import { PartialDeep } from 'type-fest';
 
@@ -42,11 +43,19 @@ export function buildLoader<T>(
 	const fn = (d: PartialData<T> = {}, o: Options = {}) => {
 		if (o.useDefaults !== false) defaultsDeep(d, defaults);
 
-		const t = o.once ? api.__apiMockReturnValueOnce : api.__apiMockReturnValue;
+		const m = api.__apiDocumentMock(document);
 		const c = o.controlled ? getController<T>(d) : undefined;
 		const p = c?.promise ?? Promise.resolve(d);
 
-		t({ data: p, document, variables: o.variables });
+		if (o.variables && o.once) {
+			when(m).calledWith(o.variables).mockReturnValueOnce(p);
+		} else if (o.variables) {
+			when(m).calledWith(o.variables).mockReturnValue(p);
+		} else if (o.once) {
+			m.mockReturnValueOnce(p);
+		} else {
+			m.mockReturnValue(p);
+		}
 
 		return { data: d, controller: c };
 	};

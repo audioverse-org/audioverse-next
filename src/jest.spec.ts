@@ -112,4 +112,30 @@ describe('jest and helpers', () => {
 	// 		})
 	// 	).toBeTruthy();
 	// });
+
+	it('has return value precedence', () => {
+		const fn = jest.fn();
+
+		fn.mockReturnValue('return value');
+
+		expect(fn()).toEqual('return value');
+
+		fn.mockImplementation(() => 'implementation');
+
+		expect(fn()).toEqual('implementation');
+
+		fn.mockImplementationOnce(() => 'implementation once');
+
+		expect(fn()).toEqual('implementation once');
+
+		fn.mockReturnValueOnce('return value once');
+
+		expect(fn()).toEqual('return value once');
+
+		expect(fn()).toEqual('implementation');
+
+		fn.mockReturnValue('return value');
+
+		expect(fn()).toEqual('return value');
+	});
 });
