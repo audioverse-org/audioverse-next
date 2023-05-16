@@ -208,7 +208,7 @@ function InfiniteSection<T, N>({
 
 function RecentTeachings(): JSX.Element {
 	const language = useLanguageId();
-	const languageRoute = useLanguageRoute();
+	const route = useLanguageRoute();
 	const result = useInfiniteGetDiscoverRecentTeachingsQuery(
 		{
 			language,
@@ -242,11 +242,11 @@ function RecentTeachings(): JSX.Element {
 						defaultMessage="See All Teachings"
 					/>
 				),
-				url: root.lang(languageRoute).teachings.all.get(),
+				url: root.lang(route).teachings.all.get(),
 			}}
 			infiniteQueryResult={result}
-			selectNodes={(page) => page?.recentTeachings.nodes}
-			selectPageInfo={(page) => page?.recentTeachings.pageInfo}
+			selectNodes={(p) => p?.recentTeachings.nodes}
+			selectPageInfo={(p) => p?.recentTeachings.pageInfo}
 			Card={({ node }) => <CardRecording recording={node} />}
 		/>
 	);
@@ -254,7 +254,7 @@ function RecentTeachings(): JSX.Element {
 
 function TrendingTeachings(): JSX.Element {
 	const language = useLanguageId();
-	const languageRoute = useLanguageRoute();
+	const route = useLanguageRoute();
 	const result = useInfiniteGetDiscoverTrendingTeachingsQuery(
 		{
 			language,
@@ -288,13 +288,11 @@ function TrendingTeachings(): JSX.Element {
 						defaultMessage="See All Trending Teachings"
 					/>
 				),
-				url: root.lang(languageRoute).teachings.trending.get(),
+				url: root.lang(route).teachings.trending.get(),
 			}}
 			infiniteQueryResult={result}
-			selectNodes={(page) =>
-				page?.trendingTeachings.nodes?.map((n) => n.recording)
-			}
-			selectPageInfo={(page) => page?.trendingTeachings.pageInfo}
+			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
+			selectPageInfo={(p) => p?.trendingTeachings.pageInfo}
 			Card={({ node }) => <CardRecording recording={node} />}
 		/>
 	);
@@ -303,20 +301,7 @@ function TrendingTeachings(): JSX.Element {
 export default function Discover(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
-	// const trendingTeachingsResult = useInfiniteDiscoverQuery(
-	// 	useInfiniteGetDiscoverTrendingTeachingsQuery,
-	// 	(p: GetDiscoverTrendingTeachingsQuery) => ({
-	// 		...p.trendingTeachings,
-	// 		nodes: p.trendingTeachings.nodes?.map((n) => n.recording) || null,
-	// 	}),
-	// 	6
-	// );
-	// const trendingTeachings = reduceNodes(
-	// 	trendingTeachingsResult,
-	// 	(p: GetDiscoverTrendingTeachingsQuery) =>
-	// 		p.trendingTeachings.nodes?.map((n) => n.recording) || null
-	// );
-
+	// TODO: Make sure all but the first two sections only load 3 items at a time
 	const featuredTeachingsResult = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverFeaturedTeachingsQuery,
 		(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings
