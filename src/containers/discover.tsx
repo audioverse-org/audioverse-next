@@ -253,52 +253,28 @@ function RecentTeachings(): JSX.Element {
 }
 
 function TrendingTeachings(): JSX.Element {
-	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
-	const [index, setIndex] = useState(0);
-	const { data, fetchNextPage, isLoading } =
-		useInfiniteGetDiscoverTrendingTeachingsQuery(
-			{
-				language,
-				first: 6,
-				after: null,
-			},
-			{
-				getNextPageParam: (last: Maybe<GetDiscoverTrendingTeachingsQuery>) =>
-					last?.trendingTeachings.pageInfo.hasNextPage
-						? {
-								language,
-								first: 6,
-								after: last.trendingTeachings.pageInfo.endCursor,
-						  }
-						: undefined,
-			}
-		);
-
-	const pages = useMemo(() => data?.pages || [], [data?.pages]);
-	const cappedIndex = Math.min(index, pages.length - 1);
-	const currentPage = pages[cappedIndex];
-	const nodes =
-		currentPage?.trendingTeachings.nodes?.map((n) => n.recording) || null;
-	const hasNext = currentPage?.trendingTeachings.pageInfo.hasNextPage || false;
-
-	useEffect(() => {
-		const lastPage = pages[pages.length - 1];
-		const hasNextPage = lastPage?.trendingTeachings.pageInfo.hasNextPage;
-		const leadCount = pages.length - (index + 1);
-
-		if (isLoading) return;
-		if (!hasNextPage) return;
-		if (leadCount >= 3) return;
-
-		fetchNextPage();
-	}, [pages, fetchNextPage, index, isLoading]);
-
-	const prev = () => setIndex((i) => i - 1);
-	const next = () => setIndex((i) => i + 1);
+	const languageRoute = useLanguageRoute();
+	const result = useInfiniteGetDiscoverTrendingTeachingsQuery(
+		{
+			language,
+			first: 6,
+			after: null,
+		},
+		{
+			getNextPageParam: (last: Maybe<GetDiscoverTrendingTeachingsQuery>) =>
+				last?.trendingTeachings.pageInfo.hasNextPage
+					? {
+							language,
+							first: 6,
+							after: last.trendingTeachings.pageInfo.endCursor,
+					  }
+					: undefined,
+		}
+	);
 
 	return (
-		<Section
+		<InfiniteSection<GetDiscoverTrendingTeachingsQuery, CardRecordingFragment>
 			heading={
 				<FormattedMessage
 					id="discover_trendingTeachingsHeading"
@@ -314,10 +290,12 @@ function TrendingTeachings(): JSX.Element {
 				),
 				url: root.lang(languageRoute).teachings.trending.get(),
 			}}
-			nodes={nodes}
+			infiniteQueryResult={result}
+			selectNodes={(page) =>
+				page?.trendingTeachings.nodes?.map((n) => n.recording)
+			}
+			selectPageInfo={(page) => page?.trendingTeachings.pageInfo}
 			Card={({ node }) => <CardRecording recording={node} />}
-			onPrev={index > 0 && prev}
-			onNext={hasNext && next}
 		/>
 	);
 }
