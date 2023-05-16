@@ -153,8 +153,8 @@ function Section<T>(props: SectionProps<T>): JSX.Element {
 function RecentTeachings(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
-	const [recentTeachingsPageIndex, setRecentTeachingsPageIndex] = useState(0);
-	const recentTeachingsResult = useInfiniteGetDiscoverRecentTeachingsQuery(
+	const [index, setIndex] = useState(0);
+	const result = useInfiniteGetDiscoverRecentTeachingsQuery(
 		{
 			language,
 			first: 6,
@@ -173,7 +173,7 @@ function RecentTeachings(): JSX.Element {
 				const pages = data.pages || [];
 				const lastPage = pages[pages.length - 1];
 				const hasNextPage = lastPage?.recentTeachings.pageInfo.hasNextPage;
-				const leadCount = pages.length - (recentTeachingsPageIndex + 1);
+				const leadCount = pages.length - (index + 1);
 
 				if (!hasNextPage) return;
 				if (leadCount >= 3) {
@@ -181,25 +181,21 @@ function RecentTeachings(): JSX.Element {
 					return;
 				}
 
-				recentTeachingsResult.fetchNextPage();
+				result.fetchNextPage();
 			},
 		}
 	);
 
-	const cappedIndex = Math.min(
-		recentTeachingsPageIndex,
-		(recentTeachingsResult.data?.pages?.length ?? 1) - 1
-	);
+	const cappedIndex = Math.min(index, (result.data?.pages?.length ?? 1) - 1);
 
-	const recentTeachings =
-		recentTeachingsResult.data?.pages?.[cappedIndex]?.recentTeachings.nodes ||
-		null;
+	const nodes =
+		result.data?.pages?.[cappedIndex]?.recentTeachings.nodes || null;
 
 	useEffect(() => {
-		const pages = recentTeachingsResult.data?.pages || [];
+		const pages = result.data?.pages || [];
 		const lastPage = pages[pages.length - 1];
 		const hasNextPage = lastPage?.recentTeachings.pageInfo.hasNextPage;
-		const leadCount = pages.length - (recentTeachingsPageIndex + 1);
+		const leadCount = pages.length - (index + 1);
 
 		if (!hasNextPage) return;
 		if (leadCount >= 3) {
@@ -207,20 +203,15 @@ function RecentTeachings(): JSX.Element {
 			return;
 		}
 
-		recentTeachingsResult.fetchNextPage();
-	}, [recentTeachingsPageIndex, recentTeachingsResult]);
+		result.fetchNextPage();
+	}, [index, result]);
 
-	const recentTeachingsHasNext: boolean =
-		recentTeachingsResult.data?.pages?.[cappedIndex]?.recentTeachings.pageInfo
-			.hasNextPage || false;
+	const hasNext: boolean =
+		result.data?.pages?.[cappedIndex]?.recentTeachings.pageInfo.hasNextPage ||
+		false;
 
-	const recentTeachingsPrev =
-		recentTeachingsPageIndex > 0
-			? () => setRecentTeachingsPageIndex((i) => i - 1)
-			: undefined;
-	const recentTeachingsNext = () => {
-		setRecentTeachingsPageIndex((i) => i + 1);
-	};
+	const prev = () => setIndex((i) => i - 1);
+	const next = () => setIndex((i) => i + 1);
 
 	return (
 		<Section
@@ -239,10 +230,10 @@ function RecentTeachings(): JSX.Element {
 				),
 				url: root.lang(languageRoute).teachings.all.get(),
 			}}
-			nodes={recentTeachings}
+			nodes={nodes}
 			Card={({ node }) => <CardRecording recording={node} />}
-			onPrev={recentTeachingsPrev}
-			onNext={recentTeachingsHasNext && recentTeachingsNext}
+			onPrev={index > 0 && prev}
+			onNext={hasNext && next}
 		/>
 	);
 }
