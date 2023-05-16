@@ -1,7 +1,6 @@
-import { Icon } from '@material-ui/core';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React, { useEffect, useMemo, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { UseInfiniteQueryResult } from 'react-query';
 
 import LineHeading from '~components/atoms/lineHeading';
@@ -35,16 +34,18 @@ import {
 } from './__generated__/discover';
 import styles from './discover.module.scss';
 
+const PRELOAD_COUNT = 3;
+
 type Node<T> = T & {
 	canonicalPath: string;
 };
 
 type SectionProps<T, N> = {
-	heading: JSX.Element | string;
+	heading: string;
 	previous: string;
 	next: string;
 	seeAll?: {
-		label: JSX.Element | string;
+		label: string;
 		url: string;
 	};
 	infiniteQueryResult: UseInfiniteQueryResult<T>;
@@ -84,7 +85,7 @@ function Section<T, N>({
 
 		if (isLoading) return;
 		if (!hasNextPage) return;
-		if (leadCount >= 3) return;
+		if (leadCount >= PRELOAD_COUNT) return;
 
 		fetchNextPage();
 	}, [pages, fetchNextPage, index, isLoading, selectPageInfo]);
@@ -160,12 +161,10 @@ function RecentTeachings(): JSX.Element {
 
 	return (
 		<Section<GetDiscoverRecentTeachingsQuery, CardRecordingFragment>
-			heading={
-				<FormattedMessage
-					id="discover_recentTeachingsHeading"
-					defaultMessage="Recent Teachings"
-				/>
-			}
+			heading={intl.formatMessage({
+				id: 'discover_recentTeachingsHeading',
+				defaultMessage: 'Recent Teachings',
+			})}
 			previous={intl.formatMessage({
 				id: 'discover__recentTeachingsPrevious',
 				defaultMessage: 'Previous recent teachings',
@@ -175,12 +174,10 @@ function RecentTeachings(): JSX.Element {
 				defaultMessage: 'Next recent teachings',
 			})}
 			seeAll={{
-				label: (
-					<FormattedMessage
-						id="discover__recentTeachingsSeeAll"
-						defaultMessage="See All Teachings"
-					/>
-				),
+				label: intl.formatMessage({
+					id: 'discover__recentTeachingsSeeAll',
+					defaultMessage: 'See All Teachings',
+				}),
 				url: root.lang(route).teachings.all.get(),
 			}}
 			infiniteQueryResult={result}
@@ -215,12 +212,10 @@ function TrendingTeachings(): JSX.Element {
 
 	return (
 		<Section<GetDiscoverTrendingTeachingsQuery, CardRecordingFragment>
-			heading={
-				<FormattedMessage
-					id="discover_trendingTeachingsHeading"
-					defaultMessage="Trending Teachings"
-				/>
-			}
+			heading={intl.formatMessage({
+				id: 'discover_trendingTeachingsHeading',
+				defaultMessage: 'Trending Teachings',
+			})}
 			previous={intl.formatMessage({
 				id: 'discover__trendingTeachingsPrevious',
 				defaultMessage: 'Previous trending teachings',
@@ -230,12 +225,10 @@ function TrendingTeachings(): JSX.Element {
 				defaultMessage: 'Next trending teachings',
 			})}
 			seeAll={{
-				label: (
-					<FormattedMessage
-						id="discover__trendingTeachingsSeeAll"
-						defaultMessage="See All Trending Teachings"
-					/>
-				),
+				label: intl.formatMessage({
+					id: 'discover__trendingTeachingsSeeAll',
+					defaultMessage: 'See All Trending Teachings',
+				}),
 				url: root.lang(route).teachings.trending.get(),
 			}}
 			infiniteQueryResult={result}
@@ -269,12 +262,10 @@ function FeaturedTeachings(): JSX.Element {
 
 	return (
 		<Section<GetDiscoverFeaturedTeachingsQuery, CardRecordingFragment>
-			heading={
-				<FormattedMessage
-					id="discover_featuredTeachingsHeading"
-					defaultMessage="Featured Teachings"
-				/>
-			}
+			heading={intl.formatMessage({
+				id: 'discover_featuredTeachingsHeading',
+				defaultMessage: 'Featured Teachings',
+			})}
 			previous={intl.formatMessage({
 				id: 'discover__featuredTeachingsPrevious',
 				defaultMessage: 'Previous featured teachings',
@@ -315,12 +306,10 @@ function BlogPosts(): JSX.Element {
 
 	return (
 		<Section<GetDiscoverBlogPostsQuery, CardPostFragment>
-			heading={
-				<FormattedMessage
-					id="discover_recentBlogHeading"
-					defaultMessage="Recent Blog Posts"
-				/>
-			}
+			heading={intl.formatMessage({
+				id: 'discover_recentBlogHeading',
+				defaultMessage: 'Recent Blog Posts',
+			})}
 			previous={intl.formatMessage({
 				id: 'discover__recentBlogPrevious',
 				defaultMessage: 'Previous recent blog posts',
@@ -330,12 +319,10 @@ function BlogPosts(): JSX.Element {
 				defaultMessage: 'Next recent blog posts',
 			})}
 			seeAll={{
-				label: (
-					<FormattedMessage
-						id="discover__recentBlogSeeAll"
-						defaultMessage="See All Blog Posts"
-					/>
-				),
+				label: intl.formatMessage({
+					id: 'discover__recentBlogSeeAll',
+					defaultMessage: 'See All Blog Posts',
+				}),
 				url: root.lang(languageRoute).blog.get(),
 			}}
 			infiniteQueryResult={result}
@@ -374,12 +361,10 @@ function StorySeasons(): JSX.Element {
 
 	return (
 		<Section<GetDiscoverStorySeasonsQuery, StorySeason>
-			heading={
-				<FormattedMessage
-					id="discover__storiesHeading"
-					defaultMessage="Recent Stories"
-				/>
-			}
+			heading={intl.formatMessage({
+				id: 'discover__storiesHeading',
+				defaultMessage: 'Recent Stories',
+			})}
 			previous={intl.formatMessage({
 				id: 'discover__storiesPrevious',
 				defaultMessage: 'Previous recent stories',
@@ -389,12 +374,10 @@ function StorySeasons(): JSX.Element {
 				defaultMessage: 'Next recent stories',
 			})}
 			seeAll={{
-				label: (
-					<FormattedMessage
-						id="discover__storiesSeeAll"
-						defaultMessage="See All Stories"
-					/>
-				),
+				label: intl.formatMessage({
+					id: 'discover__storiesSeeAll',
+					defaultMessage: 'See All Stories',
+				}),
 				url: root.lang(languageRoute).stories.albums.get(),
 			}}
 			infiniteQueryResult={result}
@@ -435,12 +418,10 @@ function Conferences(): JSX.Element {
 
 	return (
 		<Section<GetDiscoverConferencesQuery, Conference>
-			heading={
-				<FormattedMessage
-					id="discover_conferencesHeading"
-					defaultMessage="Recent Conferences"
-				/>
-			}
+			heading={intl.formatMessage({
+				id: 'discover_conferencesHeading',
+				defaultMessage: 'Recent Conferences',
+			})}
 			previous={intl.formatMessage({
 				id: 'discover__conferencesPrevious',
 				defaultMessage: 'Previous recent conferences',
@@ -450,12 +431,10 @@ function Conferences(): JSX.Element {
 				defaultMessage: 'Next recent conferences',
 			})}
 			seeAll={{
-				label: (
-					<FormattedMessage
-						id="discover__conferencesSeeAll"
-						defaultMessage="See All Conferences"
-					/>
-				),
+				label: intl.formatMessage({
+					id: 'discover__conferencesSeeAll',
+					defaultMessage: 'See All Conferences',
+				}),
 				url: root.lang(languageRoute).conferences.get(),
 			}}
 			infiniteQueryResult={result}
