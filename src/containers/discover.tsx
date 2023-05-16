@@ -1,10 +1,9 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { UseInfiniteQueryResult } from 'react-query';
 
 import LineHeading from '~components/atoms/lineHeading';
-import Button from '~components/molecules/button';
 import CardCollection from '~components/molecules/card/collection';
 import CardPost from '~components/molecules/card/post';
 import CardRecording from '~components/molecules/card/recording';
@@ -44,10 +43,7 @@ type SectionProps<T, N> = {
 	heading: string;
 	previous: string;
 	next: string;
-	seeAll?: {
-		label: string;
-		url: string;
-	};
+	seeAllUrl?: string;
 	infiniteQueryResult: UseInfiniteQueryResult<T>;
 	selectNodes: (page?: T) => Maybe<Node<N>[]>;
 	selectPageInfo: (page?: T) =>
@@ -65,13 +61,12 @@ function Section<T, N>({
 	selectNodes,
 	selectPageInfo,
 	Card,
-	seeAll,
+	seeAllUrl,
 	previous,
 	next,
 }: SectionProps<T, N>): JSX.Element {
 	const [index, setIndex] = useState(0);
 	const { data, fetchNextPage, isLoading } = infiniteQueryResult;
-
 	const pages = useMemo(() => data?.pages || [], [data?.pages]);
 	const cappedIndex = Math.min(index, pages.length - 1);
 	const currentPage = pages[cappedIndex];
@@ -95,7 +90,14 @@ function Section<T, N>({
 
 	return (
 		<div className={styles.section}>
-			<LineHeading variant="overline">{heading}</LineHeading>
+			<LineHeading variant="overline">
+				<span>{heading}</span>
+				{seeAllUrl && (
+					<a href={seeAllUrl}>
+						<FormattedMessage id="discover__seeAll" defaultMessage="See All" />
+					</a>
+				)}
+			</LineHeading>
 			<div className={styles.sectionCarousel}>
 				<button
 					className={styles.sectionArrow}
@@ -125,14 +127,6 @@ function Section<T, N>({
 					<IconForward />
 				</button>
 			</div>
-			{seeAll && (
-				<Button
-					type="secondary"
-					text={seeAll.label}
-					href={seeAll.url}
-					className={styles.seeAllButton}
-				/>
-			)}
 		</div>
 	);
 }
@@ -173,13 +167,7 @@ function RecentTeachings(): JSX.Element {
 				id: 'discover__recentTeachingsNext',
 				defaultMessage: 'Next recent teachings',
 			})}
-			seeAll={{
-				label: intl.formatMessage({
-					id: 'discover__recentTeachingsSeeAll',
-					defaultMessage: 'See All Teachings',
-				}),
-				url: root.lang(route).teachings.all.get(),
-			}}
+			seeAllUrl={root.lang(route).teachings.all.get()}
 			infiniteQueryResult={result}
 			selectNodes={(p) => p?.recentTeachings.nodes}
 			selectPageInfo={(p) => p?.recentTeachings.pageInfo}
@@ -224,13 +212,7 @@ function TrendingTeachings(): JSX.Element {
 				id: 'discover__trendingTeachingsNext',
 				defaultMessage: 'Next trending teachings',
 			})}
-			seeAll={{
-				label: intl.formatMessage({
-					id: 'discover__trendingTeachingsSeeAll',
-					defaultMessage: 'See All Trending Teachings',
-				}),
-				url: root.lang(route).teachings.trending.get(),
-			}}
+			seeAllUrl={root.lang(route).teachings.trending.get()}
 			infiniteQueryResult={result}
 			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
 			selectPageInfo={(p) => p?.trendingTeachings.pageInfo}
@@ -318,13 +300,7 @@ function BlogPosts(): JSX.Element {
 				id: 'discover__recentBlogNext',
 				defaultMessage: 'Next recent blog posts',
 			})}
-			seeAll={{
-				label: intl.formatMessage({
-					id: 'discover__recentBlogSeeAll',
-					defaultMessage: 'See All Blog Posts',
-				}),
-				url: root.lang(languageRoute).blog.get(),
-			}}
+			seeAllUrl={root.lang(languageRoute).blog.get()}
 			infiniteQueryResult={result}
 			selectNodes={(p) => p?.blogPosts.nodes}
 			selectPageInfo={(p) => p?.blogPosts.pageInfo}
@@ -373,13 +349,7 @@ function StorySeasons(): JSX.Element {
 				id: 'discover__storiesNext',
 				defaultMessage: 'Next recent stories',
 			})}
-			seeAll={{
-				label: intl.formatMessage({
-					id: 'discover__storiesSeeAll',
-					defaultMessage: 'See All Stories',
-				}),
-				url: root.lang(languageRoute).stories.albums.get(),
-			}}
+			seeAllUrl={root.lang(languageRoute).stories.albums.get()}
 			infiniteQueryResult={result}
 			selectNodes={(p) => p?.storySeasons.nodes}
 			selectPageInfo={(p) => p?.storySeasons.pageInfo}
@@ -430,13 +400,7 @@ function Conferences(): JSX.Element {
 				id: 'discover__conferencesNext',
 				defaultMessage: 'Next recent conferences',
 			})}
-			seeAll={{
-				label: intl.formatMessage({
-					id: 'discover__conferencesSeeAll',
-					defaultMessage: 'See All Conferences',
-				}),
-				url: root.lang(languageRoute).conferences.get(),
-			}}
+			seeAllUrl={root.lang(languageRoute).conferences.get()}
 			infiniteQueryResult={result}
 			selectNodes={(p) => p?.conferences.nodes}
 			selectPageInfo={(p) => p?.conferences.pageInfo}
