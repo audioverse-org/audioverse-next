@@ -1,5 +1,5 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { UseInfiniteQueryResult } from 'react-query';
 
@@ -13,6 +13,7 @@ import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { InputMaybe, Language } from '~src/__generated__/graphql';
+import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
@@ -150,55 +151,84 @@ function Section<T>(props: SectionProps<T>): JSX.Element {
 	);
 }
 
-function RecentTeachings(): JSX.Element {
-	const languageRoute = useLanguageRoute();
-	const language = useLanguageId();
+type InfiniteSectionProps<T, N> = {
+	heading: JSX.Element | string;
+	infiniteQueryResult: UseInfiniteQueryResult<T>;
+	selectNodes: (page?: T) => Maybe<Node<N>[]>;
+	selectPageInfo: (page?: T) =>
+		| {
+				hasNextPage: boolean;
+				endCursor: Maybe<string>;
+		  }
+		| undefined;
+	Card: (props: { node: Node<N> }) => JSX.Element;
+	seeAll?: {
+		label: JSX.Element | string;
+		url: string;
+	};
+};
+
+function InfiniteSection<T, N>({
+	selectNodes,
+	selectPageInfo,
+	...props
+}: InfiniteSectionProps<T, N>): JSX.Element {
 	const [index, setIndex] = useState(0);
-	const { data, fetchNextPage, isLoading } =
-		useInfiniteGetDiscoverRecentTeachingsQuery(
-			{
-				language,
-				first: 6,
-				after: null,
-			},
-			{
-				getNextPageParam: (last: Maybe<GetDiscoverRecentTeachingsQuery>) =>
-					last && last.recentTeachings.pageInfo.hasNextPage
-						? {
-								language,
-								first: 6,
-								after: last.recentTeachings.pageInfo.endCursor,
-						  }
-						: undefined,
-			}
-		);
+	const { data, fetchNextPage, isLoading } = props.infiniteQueryResult;
+
+	const pages = useMemo(() => data?.pages || [], [data?.pages]);
+	const cappedIndex = Math.min(index, pages.length - 1);
+	const currentPage = pages[cappedIndex];
+	const { hasNextPage = false } = selectPageInfo(currentPage) || {};
 
 	useEffect(() => {
-		const pages = data?.pages || [];
 		const lastPage = pages[pages.length - 1];
-		const hasNextPage = lastPage?.recentTeachings.pageInfo.hasNextPage;
+		const { hasNextPage = false } = selectPageInfo(lastPage) || {};
 		const leadCount = pages.length - (index + 1);
 
 		if (isLoading) return;
 		if (!hasNextPage) return;
-		if (leadCount >= 3) {
-			console.log('leadCount >= 3');
-			return;
-		}
+		if (leadCount >= 3) return;
 
 		fetchNextPage();
-	}, [data?.pages, fetchNextPage, index, isLoading]);
-
-	const cappedIndex = Math.min(index, (data?.pages?.length ?? 1) - 1);
-	const nodes = data?.pages?.[cappedIndex]?.recentTeachings.nodes || null;
-	const hasNext: boolean =
-		data?.pages?.[cappedIndex]?.recentTeachings.pageInfo.hasNextPage || false;
+	}, [pages, fetchNextPage, index, isLoading, selectPageInfo]);
 
 	const prev = () => setIndex((i) => i - 1);
 	const next = () => setIndex((i) => i + 1);
 
 	return (
 		<Section
+			{...props}
+			nodes={selectNodes(currentPage)}
+			onPrev={index > 0 && prev}
+			onNext={hasNextPage && next}
+		/>
+	);
+}
+
+function RecentTeachings(): JSX.Element {
+	const language = useLanguageId();
+	const languageRoute = useLanguageRoute();
+	const result = useInfiniteGetDiscoverRecentTeachingsQuery(
+		{
+			language,
+			first: 6,
+			after: null,
+		},
+		{
+			getNextPageParam: (last: Maybe<GetDiscoverRecentTeachingsQuery>) =>
+				last?.recentTeachings.pageInfo.hasNextPage
+					? {
+							language,
+							first: 6,
+							after: last.recentTeachings.pageInfo.endCursor,
+					  }
+					: undefined,
+		}
+	);
+
+	return (
+		<InfiniteSection<GetDiscoverRecentTeachingsQuery, CardRecordingFragment>
 			heading={
 				<FormattedMessage
 					id="discover_recentTeachingsHeading"
@@ -214,6 +244,76 @@ function RecentTeachings(): JSX.Element {
 				),
 				url: root.lang(languageRoute).teachings.all.get(),
 			}}
+			infiniteQueryResult={result}
+			selectNodes={(page) => page?.recentTeachings.nodes}
+			selectPageInfo={(page) => page?.recentTeachings.pageInfo}
+			Card={({ node }) => <CardRecording recording={node} />}
+		/>
+	);
+}
+
+function TrendingTeachings(): JSX.Element {
+	const languageRoute = useLanguageRoute();
+	const language = useLanguageId();
+	const [index, setIndex] = useState(0);
+	const { data, fetchNextPage, isLoading } =
+		useInfiniteGetDiscoverTrendingTeachingsQuery(
+			{
+				language,
+				first: 6,
+				after: null,
+			},
+			{
+				getNextPageParam: (last: Maybe<GetDiscoverTrendingTeachingsQuery>) =>
+					last?.trendingTeachings.pageInfo.hasNextPage
+						? {
+								language,
+								first: 6,
+								after: last.trendingTeachings.pageInfo.endCursor,
+						  }
+						: undefined,
+			}
+		);
+
+	const pages = useMemo(() => data?.pages || [], [data?.pages]);
+	const cappedIndex = Math.min(index, pages.length - 1);
+	const currentPage = pages[cappedIndex];
+	const nodes =
+		currentPage?.trendingTeachings.nodes?.map((n) => n.recording) || null;
+	const hasNext = currentPage?.trendingTeachings.pageInfo.hasNextPage || false;
+
+	useEffect(() => {
+		const lastPage = pages[pages.length - 1];
+		const hasNextPage = lastPage?.trendingTeachings.pageInfo.hasNextPage;
+		const leadCount = pages.length - (index + 1);
+
+		if (isLoading) return;
+		if (!hasNextPage) return;
+		if (leadCount >= 3) return;
+
+		fetchNextPage();
+	}, [pages, fetchNextPage, index, isLoading]);
+
+	const prev = () => setIndex((i) => i - 1);
+	const next = () => setIndex((i) => i + 1);
+
+	return (
+		<Section
+			heading={
+				<FormattedMessage
+					id="discover_trendingTeachingsHeading"
+					defaultMessage="Trending Teachings"
+				/>
+			}
+			seeAll={{
+				label: (
+					<FormattedMessage
+						id="discover__trendingTeachingsSeeAll"
+						defaultMessage="See All Trending Teachings"
+					/>
+				),
+				url: root.lang(languageRoute).teachings.trending.get(),
+			}}
 			nodes={nodes}
 			Card={({ node }) => <CardRecording recording={node} />}
 			onPrev={index > 0 && prev}
@@ -225,19 +325,19 @@ function RecentTeachings(): JSX.Element {
 export default function Discover(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
-	const trendingTeachingsResult = useInfiniteDiscoverQuery(
-		useInfiniteGetDiscoverTrendingTeachingsQuery,
-		(p: GetDiscoverTrendingTeachingsQuery) => ({
-			...p.trendingTeachings,
-			nodes: p.trendingTeachings.nodes?.map((n) => n.recording) || null,
-		}),
-		6
-	);
-	const trendingTeachings = reduceNodes(
-		trendingTeachingsResult,
-		(p: GetDiscoverTrendingTeachingsQuery) =>
-			p.trendingTeachings.nodes?.map((n) => n.recording) || null
-	);
+	// const trendingTeachingsResult = useInfiniteDiscoverQuery(
+	// 	useInfiniteGetDiscoverTrendingTeachingsQuery,
+	// 	(p: GetDiscoverTrendingTeachingsQuery) => ({
+	// 		...p.trendingTeachings,
+	// 		nodes: p.trendingTeachings.nodes?.map((n) => n.recording) || null,
+	// 	}),
+	// 	6
+	// );
+	// const trendingTeachings = reduceNodes(
+	// 	trendingTeachingsResult,
+	// 	(p: GetDiscoverTrendingTeachingsQuery) =>
+	// 		p.trendingTeachings.nodes?.map((n) => n.recording) || null
+	// );
 
 	const featuredTeachingsResult = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverFeaturedTeachingsQuery,
@@ -278,26 +378,7 @@ export default function Discover(): JSX.Element {
 	return (
 		<div>
 			<RecentTeachings />
-
-			<Section
-				heading={
-					<FormattedMessage
-						id="discover_trendingTeachingsHeading"
-						defaultMessage="Trending Teachings"
-					/>
-				}
-				seeAll={{
-					label: (
-						<FormattedMessage
-							id="discover__trendingTeachingsSeeAll"
-							defaultMessage="See All Trending Teachings"
-						/>
-					),
-					url: root.lang(languageRoute).teachings.trending.get(),
-				}}
-				nodes={trendingTeachings}
-				Card={({ node }) => <CardRecording recording={node} />}
-			/>
+			<TrendingTeachings />
 
 			<Section
 				heading={
