@@ -1,6 +1,7 @@
+import { Icon } from '@material-ui/core';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React, { useEffect, useMemo, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { UseInfiniteQueryResult } from 'react-query';
 
 import LineHeading from '~components/atoms/lineHeading';
@@ -16,7 +17,8 @@ import { CardPostFragment } from '~src/components/molecules/card/__generated__/p
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
-import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
+import IconBack from '../../public/img/icons/icon-back-light.svg';
+import IconForward from '../../public/img/icons/icon-forward-light.svg';
 import {
 	GetDiscoverBlogPostsQuery,
 	GetDiscoverConferencesQuery,
@@ -39,6 +41,12 @@ type Node<T> = T & {
 
 type SectionProps<T, N> = {
 	heading: JSX.Element | string;
+	previous: string;
+	next: string;
+	seeAll?: {
+		label: JSX.Element | string;
+		url: string;
+	};
 	infiniteQueryResult: UseInfiniteQueryResult<T>;
 	selectNodes: (page?: T) => Maybe<Node<N>[]>;
 	selectPageInfo: (page?: T) =>
@@ -48,10 +56,6 @@ type SectionProps<T, N> = {
 		  }
 		| undefined;
 	Card: (props: { node: Node<N> }) => JSX.Element;
-	seeAll?: {
-		label: JSX.Element | string;
-		url: string;
-	};
 };
 
 function Section<T, N>({
@@ -61,6 +65,8 @@ function Section<T, N>({
 	selectPageInfo,
 	Card,
 	seeAll,
+	previous,
+	next,
 }: SectionProps<T, N>): JSX.Element {
 	const [index, setIndex] = useState(0);
 	const { data, fetchNextPage, isLoading } = infiniteQueryResult;
@@ -83,42 +89,46 @@ function Section<T, N>({
 		fetchNextPage();
 	}, [pages, fetchNextPage, index, isLoading, selectPageInfo]);
 
-	const prev = () => setIndex((i) => i - 1);
-	const next = () => setIndex((i) => i + 1);
+	const p = () => setIndex((i) => i - 1);
+	const n = () => setIndex((i) => i + 1);
 
 	return (
 		<div className={styles.section}>
-			<LineHeading>{heading}</LineHeading>
-			<CardGroup>
-				{nodes?.map((n) => (
-					<Card node={n} key={n.canonicalPath} />
-				))}
-			</CardGroup>
-			<button
-				onClick={(e) => {
-					e.preventDefault();
-					prev();
-				}}
-				disabled={index < 1}
-			>
-				prev
-			</button>
-			<button
-				onClick={(e) => {
-					e.preventDefault();
-					next();
-				}}
-				disabled={!hasNextPage}
-			>
-				next
-			</button>
-			<br />
+			<LineHeading variant="overline">{heading}</LineHeading>
+			<div className={styles.sectionCarousel}>
+				<button
+					className={styles.sectionArrow}
+					onClick={(e) => {
+						e.preventDefault();
+						p();
+					}}
+					disabled={index < 1}
+					aria-label={previous}
+				>
+					<IconBack />
+				</button>
+				<CardGroup>
+					{nodes?.map((n) => (
+						<Card node={n} key={n.canonicalPath} />
+					))}
+				</CardGroup>
+				<button
+					className={styles.sectionArrow}
+					onClick={(e) => {
+						e.preventDefault();
+						n();
+					}}
+					disabled={!hasNextPage}
+					aria-label={next}
+				>
+					<IconForward />
+				</button>
+			</div>
 			{seeAll && (
 				<Button
 					type="secondary"
 					text={seeAll.label}
 					href={seeAll.url}
-					IconRight={ForwardIcon}
 					className={styles.seeAllButton}
 				/>
 			)}
@@ -129,6 +139,7 @@ function Section<T, N>({
 function RecentTeachings(): JSX.Element {
 	const language = useLanguageId();
 	const route = useLanguageRoute();
+	const intl = useIntl();
 	const result = useInfiniteGetDiscoverRecentTeachingsQuery(
 		{
 			language,
@@ -155,6 +166,14 @@ function RecentTeachings(): JSX.Element {
 					defaultMessage="Recent Teachings"
 				/>
 			}
+			previous={intl.formatMessage({
+				id: 'discover__recentTeachingsPrevious',
+				defaultMessage: 'Previous recent teachings',
+			})}
+			next={intl.formatMessage({
+				id: 'discover__recentTeachingsNext',
+				defaultMessage: 'Next recent teachings',
+			})}
 			seeAll={{
 				label: (
 					<FormattedMessage
@@ -175,6 +194,7 @@ function RecentTeachings(): JSX.Element {
 function TrendingTeachings(): JSX.Element {
 	const language = useLanguageId();
 	const route = useLanguageRoute();
+	const intl = useIntl();
 	const result = useInfiniteGetDiscoverTrendingTeachingsQuery(
 		{
 			language,
@@ -201,6 +221,14 @@ function TrendingTeachings(): JSX.Element {
 					defaultMessage="Trending Teachings"
 				/>
 			}
+			previous={intl.formatMessage({
+				id: 'discover__trendingTeachingsPrevious',
+				defaultMessage: 'Previous trending teachings',
+			})}
+			next={intl.formatMessage({
+				id: 'discover__trendingTeachingsNext',
+				defaultMessage: 'Next trending teachings',
+			})}
 			seeAll={{
 				label: (
 					<FormattedMessage
@@ -220,6 +248,7 @@ function TrendingTeachings(): JSX.Element {
 
 function FeaturedTeachings(): JSX.Element {
 	const language = useLanguageId();
+	const intl = useIntl();
 	const result = useInfiniteGetDiscoverFeaturedTeachingsQuery(
 		{
 			language,
@@ -246,6 +275,14 @@ function FeaturedTeachings(): JSX.Element {
 					defaultMessage="Featured Teachings"
 				/>
 			}
+			previous={intl.formatMessage({
+				id: 'discover__featuredTeachingsPrevious',
+				defaultMessage: 'Previous featured teachings',
+			})}
+			next={intl.formatMessage({
+				id: 'discover__featuredTeachingsNext',
+				defaultMessage: 'Next featured teachings',
+			})}
 			infiniteQueryResult={result}
 			selectNodes={(p) => p?.featuredTeachings.nodes}
 			selectPageInfo={(p) => p?.featuredTeachings.pageInfo}
@@ -257,6 +294,7 @@ function FeaturedTeachings(): JSX.Element {
 function BlogPosts(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
+	const intl = useIntl();
 	const result = useInfiniteGetDiscoverBlogPostsQuery(
 		{
 			language,
@@ -283,6 +321,14 @@ function BlogPosts(): JSX.Element {
 					defaultMessage="Recent Blog Posts"
 				/>
 			}
+			previous={intl.formatMessage({
+				id: 'discover__recentBlogPrevious',
+				defaultMessage: 'Previous recent blog posts',
+			})}
+			next={intl.formatMessage({
+				id: 'discover__recentBlogNext',
+				defaultMessage: 'Next recent blog posts',
+			})}
 			seeAll={{
 				label: (
 					<FormattedMessage
@@ -307,6 +353,7 @@ type StorySeason = NonNullable<
 function StorySeasons(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
+	const intl = useIntl();
 	const result = useInfiniteGetDiscoverStorySeasonsQuery(
 		{
 			language,
@@ -333,6 +380,14 @@ function StorySeasons(): JSX.Element {
 					defaultMessage="Recent Stories"
 				/>
 			}
+			previous={intl.formatMessage({
+				id: 'discover__storiesPrevious',
+				defaultMessage: 'Previous recent stories',
+			})}
+			next={intl.formatMessage({
+				id: 'discover__storiesNext',
+				defaultMessage: 'Next recent stories',
+			})}
 			seeAll={{
 				label: (
 					<FormattedMessage
@@ -359,6 +414,7 @@ type Conference = NonNullable<
 function Conferences(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
+	const intl = useIntl();
 	const result = useInfiniteGetDiscoverConferencesQuery(
 		{
 			language,
@@ -385,6 +441,14 @@ function Conferences(): JSX.Element {
 					defaultMessage="Recent Conferences"
 				/>
 			}
+			previous={intl.formatMessage({
+				id: 'discover__conferencesPrevious',
+				defaultMessage: 'Previous recent conferences',
+			})}
+			next={intl.formatMessage({
+				id: 'discover__conferencesNext',
+				defaultMessage: 'Next recent conferences',
+			})}
 			seeAll={{
 				label: (
 					<FormattedMessage
@@ -402,7 +466,7 @@ function Conferences(): JSX.Element {
 					collection={node}
 					sequences={node.sequences.nodes}
 					recordings={
-						!node.sequences.nodes?.length ? node.recordings.nodes : null
+						node.sequences.nodes?.length ? null : node.recordings.nodes
 					}
 				/>
 			)}

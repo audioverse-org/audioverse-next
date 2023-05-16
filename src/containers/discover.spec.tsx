@@ -250,9 +250,9 @@ describe('discover page', () => {
 
 		await screen.findByText('recent_sermon_title_1');
 
-		const nextButtons = await screen.findAllByText('next');
+		const next = await screen.findByLabelText('Next recent teachings');
 
-		userEvent.click(nextButtons[0]);
+		userEvent.click(next);
 
 		expect(
 			await screen.findByText('recent_sermon_title_4')
@@ -317,9 +317,9 @@ describe('discover page', () => {
 
 		await screen.findByText('recent_sermon_title_1');
 
-		const nextButtons = await screen.findAllByText('next');
+		const next = await screen.findByLabelText('Next recent teachings');
 
-		userEvent.click(nextButtons[0]);
+		userEvent.click(next);
 
 		expect(screen.getByText('recent_sermon_title_1')).toBeInTheDocument();
 
@@ -329,9 +329,9 @@ describe('discover page', () => {
 	it('disables next button if no next page', async () => {
 		await renderPage();
 
-		const nextButtons = await screen.findAllByText('next');
+		const next = await screen.findByLabelText('Next recent teachings');
 
-		expect(nextButtons[0]).toBeDisabled();
+		expect(next).toBeDisabled();
 	});
 
 	it('preloads pages', async () => {
@@ -436,7 +436,7 @@ describe('discover page', () => {
 		await renderPage();
 
 		// find next button
-		const nextButtons = await screen.findAllByText('next');
+		const next = await screen.findByLabelText('Next recent teachings');
 
 		// confirm that first page is visible
 		screen.getByText('page1');
@@ -458,7 +458,7 @@ describe('discover page', () => {
 		});
 
 		// click next button
-		userEvent.click(nextButtons[0]);
+		userEvent.click(next);
 
 		// confirm that second page is visible before third page is loaded
 		expect(await screen.findByText('page2')).toBeInTheDocument();

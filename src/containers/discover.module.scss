@@ -8,6 +8,24 @@
 	margin-bottom: 0;
 }
 
+.sectionCarousel {
+	display: flex;
+}
+
+.sectionArrow {
+	cursor: pointer;
+	border: none;
+	background: transparent;
+
+	&:first-child {
+		margin-right: 16px;
+	}
+
+	&:last-child {
+		margin-left: 16px;
+	}
+}
+
 .seeAllButton {
 	margin-top: 16px;
 }
