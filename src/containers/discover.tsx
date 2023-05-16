@@ -219,15 +219,6 @@ function TrendingTeachings(): JSX.Element {
 }
 
 function FeaturedTeachings(): JSX.Element {
-	// const featuredTeachingsResult = useInfiniteDiscoverQuery(
-	// 	useInfiniteGetDiscoverFeaturedTeachingsQuery,
-	// 	(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings
-	// );
-	// const featuredTeachings = reduceNodes(
-	// 	featuredTeachingsResult,
-	// 	(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings.nodes
-	// );
-
 	const language = useLanguageId();
 	const result = useInfiniteGetDiscoverFeaturedTeachingsQuery(
 		{
@@ -265,14 +256,6 @@ function FeaturedTeachings(): JSX.Element {
 
 function BlogPosts(): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	// const blogPostsResult = useInfiniteDiscoverQuery(
-	// 	useInfiniteGetDiscoverBlogPostsQuery,
-	// 	(p: GetDiscoverBlogPostsQuery) => p.blogPosts
-	// );
-	// const blogPosts = reduceNodes(
-	// 	blogPostsResult,
-	// 	(p: GetDiscoverBlogPostsQuery) => p.blogPosts.nodes
-	// );
 	const language = useLanguageId();
 	const result = useInfiniteGetDiscoverBlogPostsQuery(
 		{
@@ -323,14 +306,6 @@ type StorySeason = NonNullable<
 
 function StorySeasons(): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	// const storySeasonsResult = useInfiniteDiscoverQuery(
-	// 	useInfiniteGetDiscoverStorySeasonsQuery,
-	// 	(p: GetDiscoverStorySeasonsQuery) => p.storySeasons
-	// );
-	// const storySeasons = reduceNodes(
-	// 	storySeasonsResult,
-	// 	(p: GetDiscoverStorySeasonsQuery) => p.storySeasons.nodes
-	// );
 	const language = useLanguageId();
 	const result = useInfiniteGetDiscoverStorySeasonsQuery(
 		{
@@ -383,14 +358,6 @@ type Conference = NonNullable<
 
 function Conferences(): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	// const conferencesResult = useInfiniteDiscoverQuery(
-	// 	useInfiniteGetDiscoverConferencesQuery,
-	// 	(p: GetDiscoverConferencesQuery) => p.conferences
-	// );
-	// const conferences = reduceNodes(
-	// 	conferencesResult,
-	// 	(p: GetDiscoverConferencesQuery) => p.conferences.nodes
-	// );
 	const language = useLanguageId();
 	const result = useInfiniteGetDiscoverConferencesQuery(
 		{
@@ -444,8 +411,6 @@ function Conferences(): JSX.Element {
 }
 
 export default function Discover(): JSX.Element {
-	// TODO: Make sure all but the first two sections only load 3 items at a time
-
 	return (
 		<div>
 			<RecentTeachings />
