@@ -12,7 +12,7 @@ import CardSequence from '~components/molecules/card/sequence';
 import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
-import { InputMaybe, Language } from '~src/__generated__/graphql';
+import { CardPostFragment } from '~src/components/molecules/card/__generated__/post';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
@@ -32,65 +32,6 @@ import {
 	useInfiniteGetDiscoverTrendingTeachingsQuery,
 } from './__generated__/discover';
 import styles from './discover.module.scss';
-
-function reduceNodes<T, N>(
-	result: UseInfiniteQueryResult<T>,
-	select: (page: T) => Maybe<N[]>
-): N[] {
-	return (
-		result.data?.pages?.reduce<N[]>((acc, p) => {
-			if (!p) return acc;
-			const n = select(p);
-			if (!n) return acc;
-			return [...acc, ...n];
-		}, []) || []
-	);
-}
-
-type UseQueryFn<T> = (
-	vars: {
-		language: Language;
-		first: number;
-		after: InputMaybe<string>;
-	},
-	options: {
-		getNextPageParam: (lastPage: Maybe<T>) => unknown;
-	}
-) => UseInfiniteQueryResult<T>;
-
-type SectionDataSelector<T, N> = (page: T) => {
-	nodes: Maybe<N[]>;
-	pageInfo: {
-		hasNextPage: boolean;
-		endCursor: Maybe<string>;
-	};
-};
-
-function useInfiniteDiscoverQuery<T, N>(
-	useQueryFn: UseQueryFn<T>,
-	select: SectionDataSelector<T, N>,
-	first = 3
-) {
-	const language = useLanguageId();
-
-	return useQueryFn(
-		{
-			language,
-			first,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<T>) =>
-				last && select(last).pageInfo.hasNextPage
-					? {
-							language,
-							first: 6,
-							after: select(last).pageInfo.endCursor,
-					  }
-					: undefined,
-		}
-	);
-}
 
 type Node<T> = T & {
 	canonicalPath: string;
@@ -277,131 +218,242 @@ function TrendingTeachings(): JSX.Element {
 	);
 }
 
-export default function Discover(): JSX.Element {
+function FeaturedTeachings(): JSX.Element {
+	// const featuredTeachingsResult = useInfiniteDiscoverQuery(
+	// 	useInfiniteGetDiscoverFeaturedTeachingsQuery,
+	// 	(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings
+	// );
+	// const featuredTeachings = reduceNodes(
+	// 	featuredTeachingsResult,
+	// 	(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings.nodes
+	// );
+
+	const language = useLanguageId();
+	const result = useInfiniteGetDiscoverFeaturedTeachingsQuery(
+		{
+			language,
+			first: 3,
+			after: null,
+		},
+		{
+			getNextPageParam: (last: Maybe<GetDiscoverFeaturedTeachingsQuery>) =>
+				last?.featuredTeachings.pageInfo.hasNextPage
+					? {
+							language,
+							first: 3,
+							after: last.featuredTeachings.pageInfo.endCursor,
+					  }
+					: undefined,
+		}
+	);
+
+	return (
+		<Section<GetDiscoverFeaturedTeachingsQuery, CardRecordingFragment>
+			heading={
+				<FormattedMessage
+					id="discover_featuredTeachingsHeading"
+					defaultMessage="Featured Teachings"
+				/>
+			}
+			infiniteQueryResult={result}
+			selectNodes={(p) => p?.featuredTeachings.nodes}
+			selectPageInfo={(p) => p?.featuredTeachings.pageInfo}
+			Card={({ node }) => <CardRecording recording={node} />}
+		/>
+	);
+}
+
+function BlogPosts(): JSX.Element {
 	const languageRoute = useLanguageRoute();
+	// const blogPostsResult = useInfiniteDiscoverQuery(
+	// 	useInfiniteGetDiscoverBlogPostsQuery,
+	// 	(p: GetDiscoverBlogPostsQuery) => p.blogPosts
+	// );
+	// const blogPosts = reduceNodes(
+	// 	blogPostsResult,
+	// 	(p: GetDiscoverBlogPostsQuery) => p.blogPosts.nodes
+	// );
+	const language = useLanguageId();
+	const result = useInfiniteGetDiscoverBlogPostsQuery(
+		{
+			language,
+			first: 3,
+			after: null,
+		},
+		{
+			getNextPageParam: (last: Maybe<GetDiscoverBlogPostsQuery>) =>
+				last?.blogPosts.pageInfo.hasNextPage
+					? {
+							language,
+							first: 3,
+							after: last.blogPosts.pageInfo.endCursor,
+					  }
+					: undefined,
+		}
+	);
 
+	return (
+		<Section<GetDiscoverBlogPostsQuery, CardPostFragment>
+			heading={
+				<FormattedMessage
+					id="discover_recentBlogHeading"
+					defaultMessage="Recent Blog Posts"
+				/>
+			}
+			seeAll={{
+				label: (
+					<FormattedMessage
+						id="discover__recentBlogSeeAll"
+						defaultMessage="See All Blog Posts"
+					/>
+				),
+				url: root.lang(languageRoute).blog.get(),
+			}}
+			infiniteQueryResult={result}
+			selectNodes={(p) => p?.blogPosts.nodes}
+			selectPageInfo={(p) => p?.blogPosts.pageInfo}
+			Card={({ node }) => <CardPost post={node} />}
+		/>
+	);
+}
+
+type StorySeason = NonNullable<
+	GetDiscoverStorySeasonsQuery['storySeasons']['nodes']
+>[0];
+
+function StorySeasons(): JSX.Element {
+	const languageRoute = useLanguageRoute();
+	// const storySeasonsResult = useInfiniteDiscoverQuery(
+	// 	useInfiniteGetDiscoverStorySeasonsQuery,
+	// 	(p: GetDiscoverStorySeasonsQuery) => p.storySeasons
+	// );
+	// const storySeasons = reduceNodes(
+	// 	storySeasonsResult,
+	// 	(p: GetDiscoverStorySeasonsQuery) => p.storySeasons.nodes
+	// );
+	const language = useLanguageId();
+	const result = useInfiniteGetDiscoverStorySeasonsQuery(
+		{
+			language,
+			first: 3,
+			after: null,
+		},
+		{
+			getNextPageParam: (last: Maybe<GetDiscoverStorySeasonsQuery>) =>
+				last?.storySeasons.pageInfo.hasNextPage
+					? {
+							language,
+							first: 3,
+							after: last.storySeasons.pageInfo.endCursor,
+					  }
+					: undefined,
+		}
+	);
+
+	return (
+		<Section<GetDiscoverStorySeasonsQuery, StorySeason>
+			heading={
+				<FormattedMessage
+					id="discover__storiesHeading"
+					defaultMessage="Recent Stories"
+				/>
+			}
+			seeAll={{
+				label: (
+					<FormattedMessage
+						id="discover__storiesSeeAll"
+						defaultMessage="See All Stories"
+					/>
+				),
+				url: root.lang(languageRoute).stories.albums.get(),
+			}}
+			infiniteQueryResult={result}
+			selectNodes={(p) => p?.storySeasons.nodes}
+			selectPageInfo={(p) => p?.storySeasons.pageInfo}
+			Card={({ node }) => (
+				<CardSequence sequence={node} recordings={node.recordings.nodes} />
+			)}
+		/>
+	);
+}
+
+type Conference = NonNullable<
+	GetDiscoverConferencesQuery['conferences']['nodes']
+>[0];
+
+function Conferences(): JSX.Element {
+	const languageRoute = useLanguageRoute();
+	// const conferencesResult = useInfiniteDiscoverQuery(
+	// 	useInfiniteGetDiscoverConferencesQuery,
+	// 	(p: GetDiscoverConferencesQuery) => p.conferences
+	// );
+	// const conferences = reduceNodes(
+	// 	conferencesResult,
+	// 	(p: GetDiscoverConferencesQuery) => p.conferences.nodes
+	// );
+	const language = useLanguageId();
+	const result = useInfiniteGetDiscoverConferencesQuery(
+		{
+			language,
+			first: 3,
+			after: null,
+		},
+		{
+			getNextPageParam: (last: Maybe<GetDiscoverConferencesQuery>) =>
+				last?.conferences.pageInfo.hasNextPage
+					? {
+							language,
+							first: 3,
+							after: last.conferences.pageInfo.endCursor,
+					  }
+					: undefined,
+		}
+	);
+
+	return (
+		<Section<GetDiscoverConferencesQuery, Conference>
+			heading={
+				<FormattedMessage
+					id="discover_conferencesHeading"
+					defaultMessage="Recent Conferences"
+				/>
+			}
+			seeAll={{
+				label: (
+					<FormattedMessage
+						id="discover__conferencesSeeAll"
+						defaultMessage="See All Conferences"
+					/>
+				),
+				url: root.lang(languageRoute).conferences.get(),
+			}}
+			infiniteQueryResult={result}
+			selectNodes={(p) => p?.conferences.nodes}
+			selectPageInfo={(p) => p?.conferences.pageInfo}
+			Card={({ node }) => (
+				<CardCollection
+					collection={node}
+					sequences={node.sequences.nodes}
+					recordings={
+						!node.sequences.nodes?.length ? node.recordings.nodes : null
+					}
+				/>
+			)}
+		/>
+	);
+}
+
+export default function Discover(): JSX.Element {
 	// TODO: Make sure all but the first two sections only load 3 items at a time
-	const featuredTeachingsResult = useInfiniteDiscoverQuery(
-		useInfiniteGetDiscoverFeaturedTeachingsQuery,
-		(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings
-	);
-	const featuredTeachings = reduceNodes(
-		featuredTeachingsResult,
-		(p: GetDiscoverFeaturedTeachingsQuery) => p.featuredTeachings.nodes
-	);
-
-	const blogPostsResult = useInfiniteDiscoverQuery(
-		useInfiniteGetDiscoverBlogPostsQuery,
-		(p: GetDiscoverBlogPostsQuery) => p.blogPosts
-	);
-	const blogPosts = reduceNodes(
-		blogPostsResult,
-		(p: GetDiscoverBlogPostsQuery) => p.blogPosts.nodes
-	);
-
-	const storySeasonsResult = useInfiniteDiscoverQuery(
-		useInfiniteGetDiscoverStorySeasonsQuery,
-		(p: GetDiscoverStorySeasonsQuery) => p.storySeasons
-	);
-	const storySeasons = reduceNodes(
-		storySeasonsResult,
-		(p: GetDiscoverStorySeasonsQuery) => p.storySeasons.nodes
-	);
-
-	const conferencesResult = useInfiniteDiscoverQuery(
-		useInfiniteGetDiscoverConferencesQuery,
-		(p: GetDiscoverConferencesQuery) => p.conferences
-	);
-	const conferences = reduceNodes(
-		conferencesResult,
-		(p: GetDiscoverConferencesQuery) => p.conferences.nodes
-	);
 
 	return (
 		<div>
 			<RecentTeachings />
 			<TrendingTeachings />
-
-			<Section
-				heading={
-					<FormattedMessage
-						id="discover_featuredTeachingsHeading"
-						defaultMessage="Featured Teachings"
-					/>
-				}
-				nodes={featuredTeachings}
-				Card={({ node }) => <CardRecording recording={node} />}
-			/>
-
-			<Section
-				heading={
-					<FormattedMessage
-						id="discover_recentBlogHeading"
-						defaultMessage="Recent Blog Posts"
-					/>
-				}
-				seeAll={{
-					label: (
-						<FormattedMessage
-							id="discover__recentBlogSeeAll"
-							defaultMessage="See All Blog Posts"
-						/>
-					),
-					url: root.lang(languageRoute).blog.get(),
-				}}
-				nodes={blogPosts}
-				Card={({ node }) => <CardPost post={node} />}
-			/>
-
-			<Section
-				heading={
-					<FormattedMessage
-						id="discover__storiesHeading"
-						defaultMessage="Recent Stories"
-					/>
-				}
-				seeAll={{
-					label: (
-						<FormattedMessage
-							id="discover__storiesSeeAll"
-							defaultMessage="See All Stories"
-						/>
-					),
-					url: root.lang(languageRoute).stories.albums.get(),
-				}}
-				nodes={storySeasons}
-				Card={({ node }) => (
-					<CardSequence sequence={node} recordings={node.recordings.nodes} />
-				)}
-			/>
-
-			<Section
-				heading={
-					<FormattedMessage
-						id="discover_conferencesHeading"
-						defaultMessage="Recent Conferences"
-					/>
-				}
-				seeAll={{
-					label: (
-						<FormattedMessage
-							id="discover__conferencesSeeAll"
-							defaultMessage="See All Conferences"
-						/>
-					),
-					url: root.lang(languageRoute).conferences.get(),
-				}}
-				nodes={conferences}
-				Card={({ node }) => (
-					<CardCollection
-						collection={node}
-						sequences={node.sequences.nodes}
-						recordings={
-							!node.sequences.nodes?.length ? node.recordings.nodes : null
-						}
-					/>
-				)}
-			/>
+			<FeaturedTeachings />
+			<BlogPosts />
+			<StorySeasons />
+			<Conferences />
 		</div>
 	);
 }
