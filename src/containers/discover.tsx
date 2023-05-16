@@ -150,12 +150,9 @@ function Section<T>(props: SectionProps<T>): JSX.Element {
 	);
 }
 
-export default function Discover(): JSX.Element {
+function RecentTeachings(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
-
-	/////////////
-
 	const [recentTeachingsPageIndex, setRecentTeachingsPageIndex] = useState(0);
 	const recentTeachingsResult = useInfiniteGetDiscoverRecentTeachingsQuery(
 		{
@@ -188,32 +185,44 @@ export default function Discover(): JSX.Element {
 			},
 		}
 	);
+
+	const cappedIndex = Math.min(
+		recentTeachingsPageIndex,
+		(recentTeachingsResult.data?.pages?.length ?? 1) - 1
+	);
+
 	const recentTeachings =
-		recentTeachingsResult.data?.pages?.[recentTeachingsPageIndex]
-			?.recentTeachings.nodes || null;
+		recentTeachingsResult.data?.pages?.[cappedIndex]?.recentTeachings.nodes ||
+		null;
 
 	useEffect(() => {
-		// console.log({
-		// 	recentTeachingsPageIndex,
-		// });
-	}, [recentTeachingsPageIndex]);
+		const pages = recentTeachingsResult.data?.pages || [];
+		const lastPage = pages[pages.length - 1];
+		const hasNextPage = lastPage?.recentTeachings.pageInfo.hasNextPage;
+		const leadCount = pages.length - (recentTeachingsPageIndex + 1);
+
+		if (!hasNextPage) return;
+		if (leadCount >= 3) {
+			console.log('leadCount >= 3');
+			return;
+		}
+
+		recentTeachingsResult.fetchNextPage();
+	}, [recentTeachingsPageIndex, recentTeachingsResult]);
 
 	const recentTeachingsHasNext: boolean =
-		recentTeachingsResult.data?.pages?.[recentTeachingsPageIndex]
-			?.recentTeachings.pageInfo.hasNextPage || false;
+		recentTeachingsResult.data?.pages?.[cappedIndex]?.recentTeachings.pageInfo
+			.hasNextPage || false;
 
 	const recentTeachingsPrev =
 		recentTeachingsPageIndex > 0
 			? () => setRecentTeachingsPageIndex((i) => i - 1)
 			: undefined;
-	const recentTeachingsNext = async () => {
-		if (recentTeachingsResult.hasNextPage) {
-			await recentTeachingsResult.fetchNextPage();
-		}
+	const recentTeachingsNext = () => {
 		setRecentTeachingsPageIndex((i) => i + 1);
 	};
 
-	const recentTeachingsSection = (
+	return (
 		<Section
 			heading={
 				<FormattedMessage
@@ -236,8 +245,10 @@ export default function Discover(): JSX.Element {
 			onNext={recentTeachingsHasNext && recentTeachingsNext}
 		/>
 	);
+}
 
-	/////////////
+export default function Discover(): JSX.Element {
+	const languageRoute = useLanguageRoute();
 
 	const trendingTeachingsResult = useInfiniteDiscoverQuery(
 		useInfiniteGetDiscoverTrendingTeachingsQuery,
@@ -291,7 +302,7 @@ export default function Discover(): JSX.Element {
 
 	return (
 		<div>
-			{recentTeachingsSection}
+			<RecentTeachings />
 
 			<Section
 				heading={

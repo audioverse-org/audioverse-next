@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { buildLoader } from '~lib/test/buildLoader';
@@ -9,7 +10,8 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
-import { fetchApi } from '~src/lib/api/fetchApi';
+import { __apiDocumentMock, fetchApi } from '~src/lib/api/fetchApi';
+import { createControlledPromise } from '~src/lib/test/loadControlledPromise';
 
 import {
 	GetDiscoverBlogPostsDocument,
@@ -45,14 +47,16 @@ const recentTeaching = {
 	persons: [],
 };
 
+const recentTeachingsDefaults = {
+	recentTeachings: {
+		nodes: [recentTeaching],
+		...base,
+	},
+};
+
 const loadRecentTeachings = buildLoader<GetDiscoverRecentTeachingsQuery>(
 	GetDiscoverRecentTeachingsDocument,
-	{
-		recentTeachings: {
-			nodes: [recentTeaching],
-			...base,
-		},
-	}
+	recentTeachingsDefaults
 );
 
 const loadTrendingTeachings = buildLoader<GetDiscoverTrendingTeachingsQuery>(
@@ -381,31 +385,98 @@ describe('discover page', () => {
 		// expect page to render without looping forever
 	});
 
-	// it.only('does not await page load if page is already loaded', async () => {
-	// 	loadRecentTeachings({
-	// 		recentTeachings: {
-	// 			pageInfo: {
-	// 				hasNextPage: true,
-	// 				endCursor: 'cursor',
-	// 			},
-	// 		},
-	// 	});
+	it('does not await page load if page is already loaded', async () => {
+		// prepare mock
+		const m = __apiDocumentMock(GetDiscoverRecentTeachingsDocument);
+		when(m).resetWhenMocks();
 
-	// 	await renderPage();
+		// load first page response
+		when(m)
+			.calledWith(
+				expect.objectContaining({
+					after: null,
+				})
+			)
+			.mockResolvedValue({
+				recentTeachings: {
+					nodes: [
+						{
+							...recentTeaching,
+							title: 'page1',
+						},
+					],
+					pageInfo: {
+						hasNextPage: true,
+						endCursor: 'cursor1',
+					},
+				},
+			});
 
-	// 	const { controller } = loadRecentTeachings(
-	// 		{},
-	// 		{
-	// 			controlled: true,
-	// 		}
-	// 	);
+		// load deferred second page response
+		const c1 = createControlledPromise();
+		when(m)
+			.calledWith(
+				expect.objectContaining({
+					after: 'cursor1',
+				})
+			)
+			.mockReturnValue(c1.promise);
 
-	// 	const nextButtons = await screen.findAllByText('next');
+		// load deferred third page response
+		const c2 = createControlledPromise();
+		when(m)
+			.calledWith(
+				expect.objectContaining({
+					after: 'cursor2',
+				})
+			)
+			.mockReturnValue(c2.promise);
 
-	// 	userEvent.click(nextButtons[0]);
+		// render page
+		await renderPage();
 
-	// 	expect(screen.getByText('recent_sermon_title_1')).toBeInTheDocument();
+		// find next button
+		const nextButtons = await screen.findAllByText('next');
 
-	// 	controller?.resolve();
-	// });
+		// confirm that first page is visible
+		screen.getByText('page1');
+
+		// resolve second page
+		c1.resolve({
+			recentTeachings: {
+				nodes: [
+					{
+						...recentTeaching,
+						title: 'page2',
+					},
+				],
+				pageInfo: {
+					hasNextPage: true,
+					endCursor: 'cursor2',
+				},
+			},
+		});
+
+		// click next button
+		userEvent.click(nextButtons[0]);
+
+		// confirm that second page is visible before third page is loaded
+		expect(await screen.findByText('page2')).toBeInTheDocument();
+
+		// resolve third page
+		c2.resolve({
+			recentTeachings: {
+				nodes: [
+					{
+						...recentTeaching,
+						title: 'page3',
+					},
+				],
+				pageInfo: {
+					hasNextPage: false,
+					endCursor: null,
+				},
+			},
+		});
+	});
 });
