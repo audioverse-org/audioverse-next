@@ -96,62 +96,7 @@ type Node<T> = T & {
 	canonicalPath: string;
 };
 
-type SectionProps<T> = {
-	heading: JSX.Element | string;
-	nodes: Maybe<Node<T>[]>;
-	Card: (props: { node: Node<T> }) => JSX.Element;
-	seeAll?: {
-		label: JSX.Element | string;
-		url: string;
-	};
-	onPrev?: (() => void) | false;
-	onNext?: (() => void) | false;
-};
-
-function Section<T>(props: SectionProps<T>): JSX.Element {
-	const { heading, nodes, Card, seeAll, onPrev, onNext } = props;
-
-	return (
-		<div className={styles.section}>
-			<LineHeading>{heading}</LineHeading>
-			<CardGroup>
-				{nodes?.map((n) => (
-					<Card node={n} key={n.canonicalPath} />
-				))}
-			</CardGroup>
-			<button
-				onClick={(e) => {
-					e.preventDefault();
-					onPrev && onPrev();
-				}}
-				disabled={!onPrev}
-			>
-				prev
-			</button>
-			<button
-				onClick={(e) => {
-					e.preventDefault();
-					onNext && onNext();
-				}}
-				disabled={!onNext}
-			>
-				next
-			</button>
-			<br />
-			{seeAll && (
-				<Button
-					type="secondary"
-					text={seeAll.label}
-					href={seeAll.url}
-					IconRight={ForwardIcon}
-					className={styles.seeAllButton}
-				/>
-			)}
-		</div>
-	);
-}
-
-type InfiniteSectionProps<T, N> = {
+type SectionProps<T, N> = {
 	heading: JSX.Element | string;
 	infiniteQueryResult: UseInfiniteQueryResult<T>;
 	selectNodes: (page?: T) => Maybe<Node<N>[]>;
@@ -168,17 +113,21 @@ type InfiniteSectionProps<T, N> = {
 	};
 };
 
-function InfiniteSection<T, N>({
+function Section<T, N>({
+	heading,
+	infiniteQueryResult,
 	selectNodes,
 	selectPageInfo,
-	...props
-}: InfiniteSectionProps<T, N>): JSX.Element {
+	Card,
+	seeAll,
+}: SectionProps<T, N>): JSX.Element {
 	const [index, setIndex] = useState(0);
-	const { data, fetchNextPage, isLoading } = props.infiniteQueryResult;
+	const { data, fetchNextPage, isLoading } = infiniteQueryResult;
 
 	const pages = useMemo(() => data?.pages || [], [data?.pages]);
 	const cappedIndex = Math.min(index, pages.length - 1);
 	const currentPage = pages[cappedIndex];
+	const nodes = selectNodes(currentPage);
 	const { hasNextPage = false } = selectPageInfo(currentPage) || {};
 
 	useEffect(() => {
@@ -197,12 +146,42 @@ function InfiniteSection<T, N>({
 	const next = () => setIndex((i) => i + 1);
 
 	return (
-		<Section
-			{...props}
-			nodes={selectNodes(currentPage)}
-			onPrev={index > 0 && prev}
-			onNext={hasNextPage && next}
-		/>
+		<div className={styles.section}>
+			<LineHeading>{heading}</LineHeading>
+			<CardGroup>
+				{nodes?.map((n) => (
+					<Card node={n} key={n.canonicalPath} />
+				))}
+			</CardGroup>
+			<button
+				onClick={(e) => {
+					e.preventDefault();
+					prev();
+				}}
+				disabled={index < 1}
+			>
+				prev
+			</button>
+			<button
+				onClick={(e) => {
+					e.preventDefault();
+					next();
+				}}
+				disabled={!hasNextPage}
+			>
+				next
+			</button>
+			<br />
+			{seeAll && (
+				<Button
+					type="secondary"
+					text={seeAll.label}
+					href={seeAll.url}
+					IconRight={ForwardIcon}
+					className={styles.seeAllButton}
+				/>
+			)}
+		</div>
 	);
 }
 
@@ -228,7 +207,7 @@ function RecentTeachings(): JSX.Element {
 	);
 
 	return (
-		<InfiniteSection<GetDiscoverRecentTeachingsQuery, CardRecordingFragment>
+		<Section<GetDiscoverRecentTeachingsQuery, CardRecordingFragment>
 			heading={
 				<FormattedMessage
 					id="discover_recentTeachingsHeading"
@@ -274,7 +253,7 @@ function TrendingTeachings(): JSX.Element {
 	);
 
 	return (
-		<InfiniteSection<GetDiscoverTrendingTeachingsQuery, CardRecordingFragment>
+		<Section<GetDiscoverTrendingTeachingsQuery, CardRecordingFragment>
 			heading={
 				<FormattedMessage
 					id="discover_trendingTeachingsHeading"
