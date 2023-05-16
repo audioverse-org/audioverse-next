@@ -1,5 +1,5 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { UseInfiniteQueryResult } from 'react-query';
 
@@ -154,61 +154,45 @@ function RecentTeachings(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
 	const [index, setIndex] = useState(0);
-	const result = useInfiniteGetDiscoverRecentTeachingsQuery(
-		{
-			language,
-			first: 6,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<GetDiscoverRecentTeachingsQuery>) =>
-				last && last.recentTeachings.pageInfo.hasNextPage
-					? {
-							language,
-							first: 6,
-							after: last.recentTeachings.pageInfo.endCursor,
-					  }
-					: undefined,
-			onSuccess: (data) => {
-				const pages = data.pages || [];
-				const lastPage = pages[pages.length - 1];
-				const hasNextPage = lastPage?.recentTeachings.pageInfo.hasNextPage;
-				const leadCount = pages.length - (index + 1);
-
-				if (!hasNextPage) return;
-				if (leadCount >= 3) {
-					console.log('leadCount >= 3');
-					return;
-				}
-
-				result.fetchNextPage();
+	const { data, fetchNextPage, isLoading } =
+		useInfiniteGetDiscoverRecentTeachingsQuery(
+			{
+				language,
+				first: 6,
+				after: null,
 			},
-		}
-	);
-
-	const cappedIndex = Math.min(index, (result.data?.pages?.length ?? 1) - 1);
-
-	const nodes =
-		result.data?.pages?.[cappedIndex]?.recentTeachings.nodes || null;
+			{
+				getNextPageParam: (last: Maybe<GetDiscoverRecentTeachingsQuery>) =>
+					last && last.recentTeachings.pageInfo.hasNextPage
+						? {
+								language,
+								first: 6,
+								after: last.recentTeachings.pageInfo.endCursor,
+						  }
+						: undefined,
+			}
+		);
 
 	useEffect(() => {
-		const pages = result.data?.pages || [];
+		const pages = data?.pages || [];
 		const lastPage = pages[pages.length - 1];
 		const hasNextPage = lastPage?.recentTeachings.pageInfo.hasNextPage;
 		const leadCount = pages.length - (index + 1);
 
+		if (isLoading) return;
 		if (!hasNextPage) return;
 		if (leadCount >= 3) {
 			console.log('leadCount >= 3');
 			return;
 		}
 
-		result.fetchNextPage();
-	}, [index, result]);
+		fetchNextPage();
+	}, [data?.pages, fetchNextPage, index, isLoading]);
 
+	const cappedIndex = Math.min(index, (data?.pages?.length ?? 1) - 1);
+	const nodes = data?.pages?.[cappedIndex]?.recentTeachings.nodes || null;
 	const hasNext: boolean =
-		result.data?.pages?.[cappedIndex]?.recentTeachings.pageInfo.hasNextPage ||
-		false;
+		data?.pages?.[cappedIndex]?.recentTeachings.pageInfo.hasNextPage || false;
 
 	const prev = () => setIndex((i) => i - 1);
 	const next = () => setIndex((i) => i + 1);
