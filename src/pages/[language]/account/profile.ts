@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { getProfileData } from '~containers/account/__generated__/profile';
+import { prefetchQueries } from '~containers/account/__generated__/profile';
 import Profile from '~containers/account/profile';
 import { storeRequest } from '~lib/api/storeRequest';
 import getDehydratedProps, { DehydratedProps } from '~lib/getDehydratedProps';
@@ -12,5 +12,9 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext): Promise<DehydratedProps> {
 	storeRequest(req);
 
-	return getDehydratedProps([['getProfileData', () => getProfileData({})]]);
+	const client = await prefetchQueries({
+		getProfileData: {},
+	});
+
+	return getDehydratedProps(client);
 }

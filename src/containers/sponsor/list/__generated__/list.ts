@@ -1,6 +1,6 @@
 import * as Types from '../../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SponsorListEntryFragment = { __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null };
 
@@ -40,6 +40,20 @@ export const useGetSponsorListLetterCountsQuery = <
       graphqlFetcher<GetSponsorListLetterCountsQuery, GetSponsorListLetterCountsQueryVariables>(GetSponsorListLetterCountsDocument, variables),
       options
     );
+export const useInfiniteGetSponsorListLetterCountsQuery = <
+      TData = GetSponsorListLetterCountsQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorListLetterCountsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorListLetterCountsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorListLetterCountsQuery, TError, TData>(
+      ['getSponsorListLetterCounts.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorListLetterCountsQuery, GetSponsorListLetterCountsQueryVariables>(GetSponsorListLetterCountsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorListLetterCounts<T>(
@@ -47,7 +61,7 @@ export async function getSponsorListLetterCounts<T>(
 ): Promise<GetSponsorListLetterCountsQuery> {
 	return fetchApi(GetSponsorListLetterCountsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -55,11 +69,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorListLetterCounts', () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSponsorListLetterCounts', vars.getSponsorListLetterCounts], () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts), options),
+		client.prefetchInfiniteQuery(['getSponsorListLetterCounts.infinite', vars.getSponsorListLetterCounts], () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts), options),
+	]);
 	
 	return client;
 }

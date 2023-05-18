@@ -13,7 +13,7 @@ import { CardRecordingStackFragmentDoc } from '../../../components/molecules/car
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { CardSponsorFragmentDoc } from '../../../components/molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../../components/molecules/card/__generated__/person';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -84,6 +84,20 @@ export const useGetLibraryDataQuery = <
       graphqlFetcher<GetLibraryDataQuery, GetLibraryDataQueryVariables>(GetLibraryDataDocument, variables),
       options
     );
+export const useInfiniteGetLibraryDataQuery = <
+      TData = GetLibraryDataQuery,
+      TError = unknown
+    >(
+      variables: GetLibraryDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetLibraryDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetLibraryDataQuery, TError, TData>(
+      ['getLibraryData.infinite', variables],
+      (metaData) => graphqlFetcher<GetLibraryDataQuery, GetLibraryDataQueryVariables>(GetLibraryDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getLibraryData<T>(
@@ -91,7 +105,7 @@ export async function getLibraryData<T>(
 ): Promise<GetLibraryDataQuery> {
 	return fetchApi(GetLibraryDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -99,11 +113,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getLibraryData', () => getLibraryData(vars.getLibraryData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getLibraryData', vars.getLibraryData], () => getLibraryData(vars.getLibraryData), options),
+		client.prefetchInfiniteQuery(['getLibraryData.infinite', vars.getLibraryData], () => getLibraryData(vars.getLibraryData), options),
+	]);
 	
 	return client;
 }

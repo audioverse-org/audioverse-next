@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -51,6 +51,20 @@ export const useGetAudiobookListPageDataQuery = <
       graphqlFetcher<GetAudiobookListPageDataQuery, GetAudiobookListPageDataQueryVariables>(GetAudiobookListPageDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookListPageDataQuery = <
+      TData = GetAudiobookListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookListPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookListPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookListPageDataQuery, TError, TData>(
+      ['getAudiobookListPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookListPageDataQuery, GetAudiobookListPageDataQueryVariables>(GetAudiobookListPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetAudiobookListPathsDataDocument = `
     query getAudiobookListPathsData($language: Language!) {
   audiobooks(language: $language) {
@@ -72,6 +86,20 @@ export const useGetAudiobookListPathsDataQuery = <
       graphqlFetcher<GetAudiobookListPathsDataQuery, GetAudiobookListPathsDataQueryVariables>(GetAudiobookListPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobookListPathsDataQuery = <
+      TData = GetAudiobookListPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookListPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobookListPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobookListPathsDataQuery, TError, TData>(
+      ['getAudiobookListPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobookListPathsDataQuery, GetAudiobookListPathsDataQueryVariables>(GetAudiobookListPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobookListPageData<T>(
@@ -85,7 +113,7 @@ export async function getAudiobookListPathsData<T>(
 ): Promise<GetAudiobookListPathsDataQuery> {
 	return fetchApi(GetAudiobookListPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -93,11 +121,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getAudiobookListPageData', () => getAudiobookListPageData(vars.getAudiobookListPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getAudiobookListPageData', vars.getAudiobookListPageData], () => getAudiobookListPageData(vars.getAudiobookListPageData), options),
+		client.prefetchInfiniteQuery(['getAudiobookListPageData.infinite', vars.getAudiobookListPageData], () => getAudiobookListPageData(vars.getAudiobookListPageData), options),
+	]);
 	
 	return client;
 }

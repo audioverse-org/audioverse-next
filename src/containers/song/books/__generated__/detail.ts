@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../../../components/molecules/__gene
 import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSongBooksDetailPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -48,6 +48,20 @@ export const useGetSongBooksDetailPageDataQuery = <
       graphqlFetcher<GetSongBooksDetailPageDataQuery, GetSongBooksDetailPageDataQueryVariables>(GetSongBooksDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSongBooksDetailPageDataQuery = <
+      TData = GetSongBooksDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongBooksDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSongBooksDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSongBooksDetailPageDataQuery, TError, TData>(
+      ['getSongBooksDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSongBooksDetailPageDataQuery, GetSongBooksDetailPageDataQueryVariables>(GetSongBooksDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSongBooksDetailPageData<T>(
@@ -55,7 +69,7 @@ export async function getSongBooksDetailPageData<T>(
 ): Promise<GetSongBooksDetailPageDataQuery> {
 	return fetchApi(GetSongBooksDetailPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -63,11 +77,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSongBooksDetailPageData', () => getSongBooksDetailPageData(vars.getSongBooksDetailPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSongBooksDetailPageData', vars.getSongBooksDetailPageData], () => getSongBooksDetailPageData(vars.getSongBooksDetailPageData), options),
+		client.prefetchInfiniteQuery(['getSongBooksDetailPageData.infinite', vars.getSongBooksDetailPageData], () => getSongBooksDetailPageData(vars.getSongBooksDetailPageData), options),
+	]);
 	
 	return client;
 }

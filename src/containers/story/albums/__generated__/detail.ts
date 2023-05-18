@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../../lib/__generated__/generateFeed';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoryAlbumDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -60,6 +60,20 @@ export const useGetStoryAlbumDetailPageDataQuery = <
       graphqlFetcher<GetStoryAlbumDetailPageDataQuery, GetStoryAlbumDetailPageDataQueryVariables>(GetStoryAlbumDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetStoryAlbumDetailPageDataQuery = <
+      TData = GetStoryAlbumDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoryAlbumDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetStoryAlbumDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetStoryAlbumDetailPageDataQuery, TError, TData>(
+      ['getStoryAlbumDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetStoryAlbumDetailPageDataQuery, GetStoryAlbumDetailPageDataQueryVariables>(GetStoryAlbumDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetStoryAlbumFeedDataDocument = `
     query getStoryAlbumFeedData($id: ID!) {
   storySeason(id: $id) {
@@ -96,6 +110,20 @@ export const useGetStoryAlbumFeedDataQuery = <
       graphqlFetcher<GetStoryAlbumFeedDataQuery, GetStoryAlbumFeedDataQueryVariables>(GetStoryAlbumFeedDataDocument, variables),
       options
     );
+export const useInfiniteGetStoryAlbumFeedDataQuery = <
+      TData = GetStoryAlbumFeedDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoryAlbumFeedDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetStoryAlbumFeedDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetStoryAlbumFeedDataQuery, TError, TData>(
+      ['getStoryAlbumFeedData.infinite', variables],
+      (metaData) => graphqlFetcher<GetStoryAlbumFeedDataQuery, GetStoryAlbumFeedDataQueryVariables>(GetStoryAlbumFeedDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetStoryAlbumDetailPathsDataDocument = `
     query getStoryAlbumDetailPathsData($language: Language!, $first: Int) {
   storySeasons(language: $language, first: $first) {
@@ -117,6 +145,20 @@ export const useGetStoryAlbumDetailPathsDataQuery = <
       graphqlFetcher<GetStoryAlbumDetailPathsDataQuery, GetStoryAlbumDetailPathsDataQueryVariables>(GetStoryAlbumDetailPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetStoryAlbumDetailPathsDataQuery = <
+      TData = GetStoryAlbumDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoryAlbumDetailPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetStoryAlbumDetailPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetStoryAlbumDetailPathsDataQuery, TError, TData>(
+      ['getStoryAlbumDetailPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetStoryAlbumDetailPathsDataQuery, GetStoryAlbumDetailPathsDataQueryVariables>(GetStoryAlbumDetailPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getStoryAlbumDetailPageData<T>(
@@ -136,7 +178,7 @@ export async function getStoryAlbumDetailPathsData<T>(
 ): Promise<GetStoryAlbumDetailPathsDataQuery> {
 	return fetchApi(GetStoryAlbumDetailPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -145,12 +187,14 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getStoryAlbumDetailPageData', () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData)],
-		['getStoryAlbumFeedData', () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getStoryAlbumDetailPageData', vars.getStoryAlbumDetailPageData], () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData), options),
+		client.prefetchInfiniteQuery(['getStoryAlbumDetailPageData.infinite', vars.getStoryAlbumDetailPageData], () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData), options),
+		client.prefetchQuery(['getStoryAlbumFeedData', vars.getStoryAlbumFeedData], () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData), options),
+		client.prefetchInfiniteQuery(['getStoryAlbumFeedData.infinite', vars.getStoryAlbumFeedData], () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData), options),
+	]);
 	
 	return client;
 }

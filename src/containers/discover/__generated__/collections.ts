@@ -12,7 +12,7 @@ import { CardRecordingStackFragmentDoc } from '../../../components/molecules/car
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { CardSponsorFragmentDoc } from '../../../components/molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../../components/molecules/card/__generated__/person';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverCollectionsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -115,6 +115,20 @@ export const useGetDiscoverCollectionsPageDataQuery = <
       graphqlFetcher<GetDiscoverCollectionsPageDataQuery, GetDiscoverCollectionsPageDataQueryVariables>(GetDiscoverCollectionsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetDiscoverCollectionsPageDataQuery = <
+      TData = GetDiscoverCollectionsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetDiscoverCollectionsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetDiscoverCollectionsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetDiscoverCollectionsPageDataQuery, TError, TData>(
+      ['getDiscoverCollectionsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetDiscoverCollectionsPageDataQuery, GetDiscoverCollectionsPageDataQueryVariables>(GetDiscoverCollectionsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getDiscoverCollectionsPageData<T>(
@@ -122,7 +136,7 @@ export async function getDiscoverCollectionsPageData<T>(
 ): Promise<GetDiscoverCollectionsPageDataQuery> {
 	return fetchApi(GetDiscoverCollectionsPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -130,11 +144,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getDiscoverCollectionsPageData', () => getDiscoverCollectionsPageData(vars.getDiscoverCollectionsPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getDiscoverCollectionsPageData', vars.getDiscoverCollectionsPageData], () => getDiscoverCollectionsPageData(vars.getDiscoverCollectionsPageData), options),
+		client.prefetchInfiniteQuery(['getDiscoverCollectionsPageData.infinite', vars.getDiscoverCollectionsPageData], () => getDiscoverCollectionsPageData(vars.getDiscoverCollectionsPageData), options),
+	]);
 	
 	return client;
 }

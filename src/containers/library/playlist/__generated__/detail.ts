@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../../../components/molecules/__gene
 import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryPlaylistPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -54,6 +54,20 @@ export const useGetLibraryPlaylistPageDataQuery = <
       graphqlFetcher<GetLibraryPlaylistPageDataQuery, GetLibraryPlaylistPageDataQueryVariables>(GetLibraryPlaylistPageDataDocument, variables),
       options
     );
+export const useInfiniteGetLibraryPlaylistPageDataQuery = <
+      TData = GetLibraryPlaylistPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetLibraryPlaylistPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetLibraryPlaylistPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetLibraryPlaylistPageDataQuery, TError, TData>(
+      ['getLibraryPlaylistPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetLibraryPlaylistPageDataQuery, GetLibraryPlaylistPageDataQueryVariables>(GetLibraryPlaylistPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getLibraryPlaylistPageData<T>(
@@ -61,7 +75,7 @@ export async function getLibraryPlaylistPageData<T>(
 ): Promise<GetLibraryPlaylistPageDataQuery> {
 	return fetchApi(GetLibraryPlaylistPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -69,11 +83,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getLibraryPlaylistPageData', () => getLibraryPlaylistPageData(vars.getLibraryPlaylistPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getLibraryPlaylistPageData', vars.getLibraryPlaylistPageData], () => getLibraryPlaylistPageData(vars.getLibraryPlaylistPageData), options),
+		client.prefetchInfiniteQuery(['getLibraryPlaylistPageData.infinite', vars.getLibraryPlaylistPageData], () => getLibraryPlaylistPageData(vars.getLibraryPlaylistPageData), options),
+	]);
 	
 	return client;
 }

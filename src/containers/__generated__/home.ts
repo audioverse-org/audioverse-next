@@ -9,7 +9,7 @@ import { AndMiniplayerFragmentDoc } from '../../components/templates/__generated
 import { TestimoniesFragmentDoc } from '../../components/organisms/__generated__/testimonies';
 import { CardPostFragmentDoc } from '../../components/molecules/card/__generated__/post';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/__generated__/sequence';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetHomeStaticPropsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -71,6 +71,20 @@ export const useGetHomeStaticPropsQuery = <
       graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, variables),
       options
     );
+export const useInfiniteGetHomeStaticPropsQuery = <
+      TData = GetHomeStaticPropsQuery,
+      TError = unknown
+    >(
+      variables: GetHomeStaticPropsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetHomeStaticPropsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetHomeStaticPropsQuery, TError, TData>(
+      ['getHomeStaticProps.infinite', variables],
+      (metaData) => graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getHomeStaticProps<T>(
@@ -78,7 +92,7 @@ export async function getHomeStaticProps<T>(
 ): Promise<GetHomeStaticPropsQuery> {
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -86,11 +100,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getHomeStaticProps', () => getHomeStaticProps(vars.getHomeStaticProps)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getHomeStaticProps', vars.getHomeStaticProps], () => getHomeStaticProps(vars.getHomeStaticProps), options),
+		client.prefetchInfiniteQuery(['getHomeStaticProps.infinite', vars.getHomeStaticProps], () => getHomeStaticProps(vars.getHomeStaticProps), options),
+	]);
 	
 	return client;
 }

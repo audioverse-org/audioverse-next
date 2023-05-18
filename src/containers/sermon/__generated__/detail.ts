@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../components/molecules/__genera
 import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSermonDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -55,6 +55,20 @@ export const useGetSermonDetailDataQuery = <
       graphqlFetcher<GetSermonDetailDataQuery, GetSermonDetailDataQueryVariables>(GetSermonDetailDataDocument, variables),
       options
     );
+export const useInfiniteGetSermonDetailDataQuery = <
+      TData = GetSermonDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetSermonDetailDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSermonDetailDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSermonDetailDataQuery, TError, TData>(
+      ['getSermonDetailData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSermonDetailDataQuery, GetSermonDetailDataQueryVariables>(GetSermonDetailDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSermonDetailStaticPathsDocument = `
     query getSermonDetailStaticPaths($language: Language!, $first: Int) {
   sermons(language: $language, first: $first) {
@@ -77,6 +91,20 @@ export const useGetSermonDetailStaticPathsQuery = <
       graphqlFetcher<GetSermonDetailStaticPathsQuery, GetSermonDetailStaticPathsQueryVariables>(GetSermonDetailStaticPathsDocument, variables),
       options
     );
+export const useInfiniteGetSermonDetailStaticPathsQuery = <
+      TData = GetSermonDetailStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetSermonDetailStaticPathsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSermonDetailStaticPathsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSermonDetailStaticPathsQuery, TError, TData>(
+      ['getSermonDetailStaticPaths.infinite', variables],
+      (metaData) => graphqlFetcher<GetSermonDetailStaticPathsQuery, GetSermonDetailStaticPathsQueryVariables>(GetSermonDetailStaticPathsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSermonDetailData<T>(
@@ -90,7 +118,7 @@ export async function getSermonDetailStaticPaths<T>(
 ): Promise<GetSermonDetailStaticPathsQuery> {
 	return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -98,11 +126,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSermonDetailData', () => getSermonDetailData(vars.getSermonDetailData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSermonDetailData', vars.getSermonDetailData], () => getSermonDetailData(vars.getSermonDetailData), options),
+		client.prefetchInfiniteQuery(['getSermonDetailData.infinite', vars.getSermonDetailData], () => getSermonDetailData(vars.getSermonDetailData), options),
+	]);
 	
 	return client;
 }

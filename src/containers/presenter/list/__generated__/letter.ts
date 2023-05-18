@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { PresenterListEntryFragmentDoc } from './list';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterListLetterPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -42,6 +42,20 @@ export const useGetPresenterListLetterPageDataQuery = <
       graphqlFetcher<GetPresenterListLetterPageDataQuery, GetPresenterListLetterPageDataQueryVariables>(GetPresenterListLetterPageDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterListLetterPageDataQuery = <
+      TData = GetPresenterListLetterPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterListLetterPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterListLetterPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterListLetterPageDataQuery, TError, TData>(
+      ['getPresenterListLetterPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterListLetterPageDataQuery, GetPresenterListLetterPageDataQueryVariables>(GetPresenterListLetterPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterListLetterPageData<T>(
@@ -49,7 +63,7 @@ export async function getPresenterListLetterPageData<T>(
 ): Promise<GetPresenterListLetterPageDataQuery> {
 	return fetchApi(GetPresenterListLetterPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -57,11 +71,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getPresenterListLetterPageData', () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getPresenterListLetterPageData', vars.getPresenterListLetterPageData], () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData), options),
+		client.prefetchInfiniteQuery(['getPresenterListLetterPageData.infinite', vars.getPresenterListLetterPageData], () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData), options),
+	]);
 	
 	return client;
 }

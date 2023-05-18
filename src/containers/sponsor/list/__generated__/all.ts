@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { SponsorListEntryFragmentDoc } from './list';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorListAllPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -42,6 +42,20 @@ export const useGetSponsorListAllPageDataQuery = <
       graphqlFetcher<GetSponsorListAllPageDataQuery, GetSponsorListAllPageDataQueryVariables>(GetSponsorListAllPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorListAllPageDataQuery = <
+      TData = GetSponsorListAllPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorListAllPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorListAllPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorListAllPageDataQuery, TError, TData>(
+      ['getSponsorListAllPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorListAllPageDataQuery, GetSponsorListAllPageDataQueryVariables>(GetSponsorListAllPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorListAllPageData<T>(
@@ -49,7 +63,7 @@ export async function getSponsorListAllPageData<T>(
 ): Promise<GetSponsorListAllPageDataQuery> {
 	return fetchApi(GetSponsorListAllPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -57,11 +71,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorListAllPageData', () => getSponsorListAllPageData(vars.getSponsorListAllPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSponsorListAllPageData', vars.getSponsorListAllPageData], () => getSponsorListAllPageData(vars.getSponsorListAllPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorListAllPageData.infinite', vars.getSponsorListAllPageData], () => getSponsorListAllPageData(vars.getSponsorListAllPageData), options),
+	]);
 	
 	return client;
 }

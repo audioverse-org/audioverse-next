@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type RecordingIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -29,6 +29,20 @@ export const useRecordingIsFavoritedQuery = <
       graphqlFetcher<RecordingIsFavoritedQuery, RecordingIsFavoritedQueryVariables>(RecordingIsFavoritedDocument, variables),
       options
     );
+export const useInfiniteRecordingIsFavoritedQuery = <
+      TData = RecordingIsFavoritedQuery,
+      TError = unknown
+    >(
+      variables: RecordingIsFavoritedQueryVariables,
+      options?: UseInfiniteQueryOptions<RecordingIsFavoritedQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<RecordingIsFavoritedQuery, TError, TData>(
+      ['recordingIsFavorited.infinite', variables],
+      (metaData) => graphqlFetcher<RecordingIsFavoritedQuery, RecordingIsFavoritedQueryVariables>(RecordingIsFavoritedDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function recordingIsFavorited<T>(
@@ -36,7 +50,7 @@ export async function recordingIsFavorited<T>(
 ): Promise<RecordingIsFavoritedQuery> {
 	return fetchApi(RecordingIsFavoritedDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -44,11 +58,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['recordingIsFavorited', () => recordingIsFavorited(vars.recordingIsFavorited)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['recordingIsFavorited', vars.recordingIsFavorited], () => recordingIsFavorited(vars.recordingIsFavorited), options),
+		client.prefetchInfiniteQuery(['recordingIsFavorited.infinite', vars.recordingIsFavorited], () => recordingIsFavorited(vars.recordingIsFavorited), options),
+	]);
 	
 	return client;
 }

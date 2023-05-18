@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobibleVersionDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -46,6 +46,20 @@ export const useGetAudiobibleVersionDataQuery = <
       graphqlFetcher<GetAudiobibleVersionDataQuery, GetAudiobibleVersionDataQueryVariables>(GetAudiobibleVersionDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobibleVersionDataQuery = <
+      TData = GetAudiobibleVersionDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobibleVersionDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobibleVersionDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobibleVersionDataQuery, TError, TData>(
+      ['getAudiobibleVersionData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobibleVersionDataQuery, GetAudiobibleVersionDataQueryVariables>(GetAudiobibleVersionDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobibleVersionData<T>(
@@ -53,7 +67,7 @@ export async function getAudiobibleVersionData<T>(
 ): Promise<GetAudiobibleVersionDataQuery> {
 	return fetchApi(GetAudiobibleVersionDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -61,11 +75,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getAudiobibleVersionData', () => getAudiobibleVersionData(vars.getAudiobibleVersionData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getAudiobibleVersionData', vars.getAudiobibleVersionData], () => getAudiobibleVersionData(vars.getAudiobibleVersionData), options),
+		client.prefetchInfiniteQuery(['getAudiobibleVersionData.infinite', vars.getAudiobibleVersionData], () => getAudiobibleVersionData(vars.getAudiobibleVersionData), options),
+	]);
 	
 	return client;
 }

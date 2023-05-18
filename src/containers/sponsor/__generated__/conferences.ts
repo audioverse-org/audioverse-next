@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { SponsorPivotFragmentDoc } from './pivot';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorConferencesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -57,6 +57,20 @@ export const useGetSponsorConferencesPageDataQuery = <
       graphqlFetcher<GetSponsorConferencesPageDataQuery, GetSponsorConferencesPageDataQueryVariables>(GetSponsorConferencesPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorConferencesPageDataQuery = <
+      TData = GetSponsorConferencesPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorConferencesPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorConferencesPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorConferencesPageDataQuery, TError, TData>(
+      ['getSponsorConferencesPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorConferencesPageDataQuery, GetSponsorConferencesPageDataQueryVariables>(GetSponsorConferencesPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSponsorConferencesPathsDataDocument = `
     query getSponsorConferencesPathsData($language: Language!, $first: Int) {
   sponsors(language: $language, first: $first) {
@@ -78,6 +92,20 @@ export const useGetSponsorConferencesPathsDataQuery = <
       graphqlFetcher<GetSponsorConferencesPathsDataQuery, GetSponsorConferencesPathsDataQueryVariables>(GetSponsorConferencesPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorConferencesPathsDataQuery = <
+      TData = GetSponsorConferencesPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorConferencesPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorConferencesPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorConferencesPathsDataQuery, TError, TData>(
+      ['getSponsorConferencesPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorConferencesPathsDataQuery, GetSponsorConferencesPathsDataQueryVariables>(GetSponsorConferencesPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorConferencesPageData<T>(
@@ -91,7 +119,7 @@ export async function getSponsorConferencesPathsData<T>(
 ): Promise<GetSponsorConferencesPathsDataQuery> {
 	return fetchApi(GetSponsorConferencesPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -99,11 +127,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorConferencesPageData', () => getSponsorConferencesPageData(vars.getSponsorConferencesPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSponsorConferencesPageData', vars.getSponsorConferencesPageData], () => getSponsorConferencesPageData(vars.getSponsorConferencesPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorConferencesPageData.infinite', vars.getSponsorConferencesPageData], () => getSponsorConferencesPageData(vars.getSponsorConferencesPageData), options),
+	]);
 	
 	return client;
 }

@@ -8,7 +8,7 @@ import { CardRecordingSequenceHatFragmentDoc } from '../../../components/molecul
 import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -98,6 +98,20 @@ export const useGetSponsorDetailPageDataQuery = <
       graphqlFetcher<GetSponsorDetailPageDataQuery, GetSponsorDetailPageDataQueryVariables>(GetSponsorDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorDetailPageDataQuery = <
+      TData = GetSponsorDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorDetailPageDataQuery, TError, TData>(
+      ['getSponsorDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorDetailPageDataQuery, GetSponsorDetailPageDataQueryVariables>(GetSponsorDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSponsorDetailPathsDataDocument = `
     query getSponsorDetailPathsData($language: Language!, $first: Int) {
   sponsors(language: $language, first: $first) {
@@ -119,6 +133,20 @@ export const useGetSponsorDetailPathsDataQuery = <
       graphqlFetcher<GetSponsorDetailPathsDataQuery, GetSponsorDetailPathsDataQueryVariables>(GetSponsorDetailPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorDetailPathsDataQuery = <
+      TData = GetSponsorDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorDetailPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorDetailPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorDetailPathsDataQuery, TError, TData>(
+      ['getSponsorDetailPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorDetailPathsDataQuery, GetSponsorDetailPathsDataQueryVariables>(GetSponsorDetailPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorDetailPageData<T>(
@@ -132,7 +160,7 @@ export async function getSponsorDetailPathsData<T>(
 ): Promise<GetSponsorDetailPathsDataQuery> {
 	return fetchApi(GetSponsorDetailPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -140,11 +168,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorDetailPageData', () => getSponsorDetailPageData(vars.getSponsorDetailPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSponsorDetailPageData', vars.getSponsorDetailPageData], () => getSponsorDetailPageData(vars.getSponsorDetailPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorDetailPageData.infinite', vars.getSponsorDetailPageData], () => getSponsorDetailPageData(vars.getSponsorDetailPageData), options),
+	]);
 	
 	return client;
 }

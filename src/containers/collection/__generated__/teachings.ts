@@ -7,7 +7,7 @@ import { PersonLockupFragmentDoc } from '../../../components/molecules/__generat
 import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionTeachingsPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -58,6 +58,20 @@ export const useGetCollectionTeachingsPageDataQuery = <
       graphqlFetcher<GetCollectionTeachingsPageDataQuery, GetCollectionTeachingsPageDataQueryVariables>(GetCollectionTeachingsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetCollectionTeachingsPageDataQuery = <
+      TData = GetCollectionTeachingsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetCollectionTeachingsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCollectionTeachingsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetCollectionTeachingsPageDataQuery, TError, TData>(
+      ['getCollectionTeachingsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetCollectionTeachingsPageDataQuery, GetCollectionTeachingsPageDataQueryVariables>(GetCollectionTeachingsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getCollectionTeachingsPageData<T>(
@@ -65,7 +79,7 @@ export async function getCollectionTeachingsPageData<T>(
 ): Promise<GetCollectionTeachingsPageDataQuery> {
 	return fetchApi(GetCollectionTeachingsPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -73,11 +87,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getCollectionTeachingsPageData', () => getCollectionTeachingsPageData(vars.getCollectionTeachingsPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getCollectionTeachingsPageData', vars.getCollectionTeachingsPageData], () => getCollectionTeachingsPageData(vars.getCollectionTeachingsPageData), options),
+		client.prefetchInfiniteQuery(['getCollectionTeachingsPageData.infinite', vars.getCollectionTeachingsPageData], () => getCollectionTeachingsPageData(vars.getCollectionTeachingsPageData), options),
+	]);
 	
 	return client;
 }

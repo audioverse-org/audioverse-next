@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { SponsorPivotFragmentDoc } from './pivot';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorSeriesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -59,6 +59,20 @@ export const useGetSponsorSeriesPageDataQuery = <
       graphqlFetcher<GetSponsorSeriesPageDataQuery, GetSponsorSeriesPageDataQueryVariables>(GetSponsorSeriesPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorSeriesPageDataQuery = <
+      TData = GetSponsorSeriesPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorSeriesPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorSeriesPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorSeriesPageDataQuery, TError, TData>(
+      ['getSponsorSeriesPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorSeriesPageDataQuery, GetSponsorSeriesPageDataQueryVariables>(GetSponsorSeriesPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSponsorSeriesPathsDataDocument = `
     query getSponsorSeriesPathsData($language: Language!, $first: Int) {
   sponsors(language: $language, first: $first) {
@@ -80,6 +94,20 @@ export const useGetSponsorSeriesPathsDataQuery = <
       graphqlFetcher<GetSponsorSeriesPathsDataQuery, GetSponsorSeriesPathsDataQueryVariables>(GetSponsorSeriesPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorSeriesPathsDataQuery = <
+      TData = GetSponsorSeriesPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorSeriesPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorSeriesPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorSeriesPathsDataQuery, TError, TData>(
+      ['getSponsorSeriesPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorSeriesPathsDataQuery, GetSponsorSeriesPathsDataQueryVariables>(GetSponsorSeriesPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorSeriesPageData<T>(
@@ -93,7 +121,7 @@ export async function getSponsorSeriesPathsData<T>(
 ): Promise<GetSponsorSeriesPathsDataQuery> {
 	return fetchApi(GetSponsorSeriesPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -101,11 +129,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorSeriesPageData', () => getSponsorSeriesPageData(vars.getSponsorSeriesPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSponsorSeriesPageData', vars.getSponsorSeriesPageData], () => getSponsorSeriesPageData(vars.getSponsorSeriesPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorSeriesPageData.infinite', vars.getSponsorSeriesPageData], () => getSponsorSeriesPageData(vars.getSponsorSeriesPageData), options),
+	]);
 	
 	return client;
 }

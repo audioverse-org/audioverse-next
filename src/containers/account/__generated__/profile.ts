@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetProfileDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -61,6 +61,20 @@ export const useGetProfileDataQuery = <
       graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, variables),
       options
     );
+export const useInfiniteGetProfileDataQuery = <
+      TData = GetProfileDataQuery,
+      TError = unknown
+    >(
+      variables?: GetProfileDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetProfileDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetProfileDataQuery, TError, TData>(
+      variables === undefined ? ['getProfileData.infinite'] : ['getProfileData.infinite', variables],
+      (metaData) => graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const UpdateProfileDataDocument = `
     mutation updateProfileData($email: String, $password: String, $givenName: String, $surname: String) {
   updateMyProfile(
@@ -124,7 +138,7 @@ export async function deleteAccount<T>(
 ): Promise<DeleteAccountMutation> {
 	return fetchApi(DeleteAccountDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -132,11 +146,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getProfileData', () => getProfileData(vars.getProfileData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getProfileData', vars.getProfileData], () => getProfileData(vars.getProfileData), options),
+		client.prefetchInfiniteQuery(['getProfileData.infinite', vars.getProfileData], () => getProfileData(vars.getProfileData), options),
+	]);
 	
 	return client;
 }

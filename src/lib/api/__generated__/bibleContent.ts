@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBibleBookContentQueryVariables = Types.Exact<{
   bibleId: Types.Scalars['ID'];
@@ -35,6 +35,20 @@ export const useGetBibleBookContentQuery = <
       graphqlFetcher<GetBibleBookContentQuery, GetBibleBookContentQueryVariables>(GetBibleBookContentDocument, variables),
       options
     );
+export const useInfiniteGetBibleBookContentQuery = <
+      TData = GetBibleBookContentQuery,
+      TError = unknown
+    >(
+      variables: GetBibleBookContentQueryVariables,
+      options?: UseInfiniteQueryOptions<GetBibleBookContentQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetBibleBookContentQuery, TError, TData>(
+      ['getBibleBookContent.infinite', variables],
+      (metaData) => graphqlFetcher<GetBibleBookContentQuery, GetBibleBookContentQueryVariables>(GetBibleBookContentDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getBibleBookContent<T>(
@@ -42,7 +56,7 @@ export async function getBibleBookContent<T>(
 ): Promise<GetBibleBookContentQuery> {
 	return fetchApi(GetBibleBookContentDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -50,11 +64,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getBibleBookContent', () => getBibleBookContent(vars.getBibleBookContent)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getBibleBookContent', vars.getBibleBookContent], () => getBibleBookContent(vars.getBibleBookContent), options),
+		client.prefetchInfiniteQuery(['getBibleBookContent.infinite', vars.getBibleBookContent], () => getBibleBookContent(vars.getBibleBookContent), options),
+	]);
 	
 	return client;
 }

@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../components/molecules/__genera
 import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobibleBookDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -54,6 +54,20 @@ export const useGetAudiobibleBookDetailDataQuery = <
       graphqlFetcher<GetAudiobibleBookDetailDataQuery, GetAudiobibleBookDetailDataQueryVariables>(GetAudiobibleBookDetailDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobibleBookDetailDataQuery = <
+      TData = GetAudiobibleBookDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobibleBookDetailDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobibleBookDetailDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobibleBookDetailDataQuery, TError, TData>(
+      ['getAudiobibleBookDetailData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobibleBookDetailDataQuery, GetAudiobibleBookDetailDataQueryVariables>(GetAudiobibleBookDetailDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetAudiobibleBookPathsDataDocument = `
     query getAudiobibleBookPathsData($language: Language!, $first: Int) {
   recordings(language: $language, first: $first, contentType: BIBLE_CHAPTER) {
@@ -75,6 +89,20 @@ export const useGetAudiobibleBookPathsDataQuery = <
       graphqlFetcher<GetAudiobibleBookPathsDataQuery, GetAudiobibleBookPathsDataQueryVariables>(GetAudiobibleBookPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetAudiobibleBookPathsDataQuery = <
+      TData = GetAudiobibleBookPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobibleBookPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAudiobibleBookPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAudiobibleBookPathsDataQuery, TError, TData>(
+      ['getAudiobibleBookPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAudiobibleBookPathsDataQuery, GetAudiobibleBookPathsDataQueryVariables>(GetAudiobibleBookPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getAudiobibleBookDetailData<T>(
@@ -88,7 +116,7 @@ export async function getAudiobibleBookPathsData<T>(
 ): Promise<GetAudiobibleBookPathsDataQuery> {
 	return fetchApi(GetAudiobibleBookPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -96,11 +124,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getAudiobibleBookDetailData', () => getAudiobibleBookDetailData(vars.getAudiobibleBookDetailData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getAudiobibleBookDetailData', vars.getAudiobibleBookDetailData], () => getAudiobibleBookDetailData(vars.getAudiobibleBookDetailData), options),
+		client.prefetchInfiniteQuery(['getAudiobibleBookDetailData.infinite', vars.getAudiobibleBookDetailData], () => getAudiobibleBookDetailData(vars.getAudiobibleBookDetailData), options),
+	]);
 	
 	return client;
 }

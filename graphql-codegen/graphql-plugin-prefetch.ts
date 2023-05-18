@@ -6,8 +6,12 @@ const template = (queryNames: string[]) => {
 		.map((n) => `${n}: ExactAlt<T, ${capitalize(n)}QueryVariables>`)
 		.join(',\n\t\t');
 
-	const queryPairs = queryNames
-		.map((n) => `['${n}', () => ${n}(vars.${n})],`)
+	const expressions = queryNames
+		.map((n) => [
+			`client.prefetchQuery(['${n}', vars.${n}], () => ${n}(vars.${n}), options),`,
+			`client.prefetchInfiniteQuery(['${n}.infinite', vars.${n}], () => ${n}(vars.${n}), options),`,
+		])
+		.flat()
 		.join('\n\t\t');
 
 	return `
@@ -17,11 +21,11 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		${queryPairs}
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		${expressions}
+	]);
 	
 	return client;
 }`;
@@ -59,7 +63,7 @@ const plugin: CodegenPlugin = {
 
 		if (!result) return '';
 
-		return `import {QueryClient} from 'react-query';\n${result}`;
+		return `import { QueryClient } from 'react-query';\n${result}`;
 	},
 };
 

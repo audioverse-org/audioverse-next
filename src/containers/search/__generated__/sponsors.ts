@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardSponsorFragmentDoc } from '../../../components/molecules/card/__generated__/sponsor';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsSponsorsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -38,6 +38,20 @@ export const useGetSearchResultsSponsorsQuery = <
       graphqlFetcher<GetSearchResultsSponsorsQuery, GetSearchResultsSponsorsQueryVariables>(GetSearchResultsSponsorsDocument, variables),
       options
     );
+export const useInfiniteGetSearchResultsSponsorsQuery = <
+      TData = GetSearchResultsSponsorsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchResultsSponsorsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchResultsSponsorsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchResultsSponsorsQuery, TError, TData>(
+      ['getSearchResultsSponsors.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchResultsSponsorsQuery, GetSearchResultsSponsorsQueryVariables>(GetSearchResultsSponsorsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSearchResultsSponsors<T>(
@@ -45,7 +59,7 @@ export async function getSearchResultsSponsors<T>(
 ): Promise<GetSearchResultsSponsorsQuery> {
 	return fetchApi(GetSearchResultsSponsorsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -53,11 +67,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSearchResultsSponsors', () => getSearchResultsSponsors(vars.getSearchResultsSponsors)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSearchResultsSponsors', vars.getSearchResultsSponsors], () => getSearchResultsSponsors(vars.getSearchResultsSponsors), options),
+		client.prefetchInfiniteQuery(['getSearchResultsSponsors.infinite', vars.getSearchResultsSponsors], () => getSearchResultsSponsors(vars.getSearchResultsSponsors), options),
+	]);
 	
 	return client;
 }

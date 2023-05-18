@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type CollectionIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -30,6 +30,20 @@ export const useCollectionIsFavoritedQuery = <
       graphqlFetcher<CollectionIsFavoritedQuery, CollectionIsFavoritedQueryVariables>(CollectionIsFavoritedDocument, variables),
       options
     );
+export const useInfiniteCollectionIsFavoritedQuery = <
+      TData = CollectionIsFavoritedQuery,
+      TError = unknown
+    >(
+      variables: CollectionIsFavoritedQueryVariables,
+      options?: UseInfiniteQueryOptions<CollectionIsFavoritedQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<CollectionIsFavoritedQuery, TError, TData>(
+      ['collectionIsFavorited.infinite', variables],
+      (metaData) => graphqlFetcher<CollectionIsFavoritedQuery, CollectionIsFavoritedQueryVariables>(CollectionIsFavoritedDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function collectionIsFavorited<T>(
@@ -37,7 +51,7 @@ export async function collectionIsFavorited<T>(
 ): Promise<CollectionIsFavoritedQuery> {
 	return fetchApi(CollectionIsFavoritedDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -45,11 +59,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['collectionIsFavorited', () => collectionIsFavorited(vars.collectionIsFavorited)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['collectionIsFavorited', vars.collectionIsFavorited], () => collectionIsFavorited(vars.collectionIsFavorited), options),
+		client.prefetchInfiniteQuery(['collectionIsFavorited.infinite', vars.collectionIsFavorited], () => collectionIsFavorited(vars.collectionIsFavorited), options),
+	]);
 	
 	return client;
 }

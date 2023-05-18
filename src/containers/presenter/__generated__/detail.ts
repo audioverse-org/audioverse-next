@@ -8,7 +8,7 @@ import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__gener
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -147,6 +147,20 @@ export const useGetPresenterDetailPageDataQuery = <
       graphqlFetcher<GetPresenterDetailPageDataQuery, GetPresenterDetailPageDataQueryVariables>(GetPresenterDetailPageDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterDetailPageDataQuery = <
+      TData = GetPresenterDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterDetailPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterDetailPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterDetailPageDataQuery, TError, TData>(
+      ['getPresenterDetailPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterDetailPageDataQuery, GetPresenterDetailPageDataQueryVariables>(GetPresenterDetailPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetPresenterDetailPathsDataDocument = `
     query getPresenterDetailPathsData($language: Language!, $first: Int) {
   persons(language: $language, first: $first) {
@@ -169,6 +183,20 @@ export const useGetPresenterDetailPathsDataQuery = <
       graphqlFetcher<GetPresenterDetailPathsDataQuery, GetPresenterDetailPathsDataQueryVariables>(GetPresenterDetailPathsDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterDetailPathsDataQuery = <
+      TData = GetPresenterDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterDetailPathsDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterDetailPathsDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterDetailPathsDataQuery, TError, TData>(
+      ['getPresenterDetailPathsData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterDetailPathsDataQuery, GetPresenterDetailPathsDataQueryVariables>(GetPresenterDetailPathsDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterDetailPageData<T>(
@@ -182,7 +210,7 @@ export async function getPresenterDetailPathsData<T>(
 ): Promise<GetPresenterDetailPathsDataQuery> {
 	return fetchApi(GetPresenterDetailPathsDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -190,11 +218,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getPresenterDetailPageData', () => getPresenterDetailPageData(vars.getPresenterDetailPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getPresenterDetailPageData', vars.getPresenterDetailPageData], () => getPresenterDetailPageData(vars.getPresenterDetailPageData), options),
+		client.prefetchInfiniteQuery(['getPresenterDetailPageData.infinite', vars.getPresenterDetailPageData], () => getPresenterDetailPageData(vars.getPresenterDetailPageData), options),
+	]);
 	
 	return client;
 }

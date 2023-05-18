@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { PresenterPivotFragmentDoc } from './pivot';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterAppearsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -50,6 +50,20 @@ export const useGetPresenterAppearsPageDataQuery = <
       graphqlFetcher<GetPresenterAppearsPageDataQuery, GetPresenterAppearsPageDataQueryVariables>(GetPresenterAppearsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetPresenterAppearsPageDataQuery = <
+      TData = GetPresenterAppearsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterAppearsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetPresenterAppearsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetPresenterAppearsPageDataQuery, TError, TData>(
+      ['getPresenterAppearsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetPresenterAppearsPageDataQuery, GetPresenterAppearsPageDataQueryVariables>(GetPresenterAppearsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getPresenterAppearsPageData<T>(
@@ -57,7 +71,7 @@ export async function getPresenterAppearsPageData<T>(
 ): Promise<GetPresenterAppearsPageDataQuery> {
 	return fetchApi(GetPresenterAppearsPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -65,11 +79,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getPresenterAppearsPageData', () => getPresenterAppearsPageData(vars.getPresenterAppearsPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getPresenterAppearsPageData', vars.getPresenterAppearsPageData], () => getPresenterAppearsPageData(vars.getPresenterAppearsPageData), options),
+		client.prefetchInfiniteQuery(['getPresenterAppearsPageData.infinite', vars.getPresenterAppearsPageData], () => getPresenterAppearsPageData(vars.getPresenterAppearsPageData), options),
+	]);
 	
 	return client;
 }

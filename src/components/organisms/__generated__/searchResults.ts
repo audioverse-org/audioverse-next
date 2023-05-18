@@ -10,7 +10,7 @@ import { CardSequenceFragmentDoc } from '../../molecules/card/__generated__/sequ
 import { CardCollectionFragmentDoc } from '../../molecules/card/__generated__/collection';
 import { CardSponsorFragmentDoc } from '../../molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../molecules/card/__generated__/person';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchRecordingsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -126,6 +126,20 @@ export const useGetSearchRecordingsQuery = <
       graphqlFetcher<GetSearchRecordingsQuery, GetSearchRecordingsQueryVariables>(GetSearchRecordingsDocument, variables),
       options
     );
+export const useInfiniteGetSearchRecordingsQuery = <
+      TData = GetSearchRecordingsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchRecordingsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchRecordingsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchRecordingsQuery, TError, TData>(
+      ['getSearchRecordings.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchRecordingsQuery, GetSearchRecordingsQueryVariables>(GetSearchRecordingsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSearchSeriesDocument = `
     query getSearchSeries($language: Language!, $term: String!, $first: Int!, $after: String) {
   serieses(language: $language, search: $term, first: $first, after: $after) {
@@ -155,6 +169,20 @@ export const useGetSearchSeriesQuery = <
       graphqlFetcher<GetSearchSeriesQuery, GetSearchSeriesQueryVariables>(GetSearchSeriesDocument, variables),
       options
     );
+export const useInfiniteGetSearchSeriesQuery = <
+      TData = GetSearchSeriesQuery,
+      TError = unknown
+    >(
+      variables: GetSearchSeriesQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchSeriesQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchSeriesQuery, TError, TData>(
+      ['getSearchSeries.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchSeriesQuery, GetSearchSeriesQueryVariables>(GetSearchSeriesDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSearchConferencesDocument = `
     query getSearchConferences($language: Language!, $term: String!, $first: Int!, $after: String) {
   conferences(language: $language, search: $term, first: $first, after: $after) {
@@ -183,6 +211,20 @@ export const useGetSearchConferencesQuery = <
       graphqlFetcher<GetSearchConferencesQuery, GetSearchConferencesQueryVariables>(GetSearchConferencesDocument, variables),
       options
     );
+export const useInfiniteGetSearchConferencesQuery = <
+      TData = GetSearchConferencesQuery,
+      TError = unknown
+    >(
+      variables: GetSearchConferencesQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchConferencesQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchConferencesQuery, TError, TData>(
+      ['getSearchConferences.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchConferencesQuery, GetSearchConferencesQueryVariables>(GetSearchConferencesDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSearchSponsorsDocument = `
     query getSearchSponsors($language: Language!, $term: String!, $first: Int!, $after: String) {
   sponsors(language: $language, search: $term, first: $first, after: $after) {
@@ -211,6 +253,20 @@ export const useGetSearchSponsorsQuery = <
       graphqlFetcher<GetSearchSponsorsQuery, GetSearchSponsorsQueryVariables>(GetSearchSponsorsDocument, variables),
       options
     );
+export const useInfiniteGetSearchSponsorsQuery = <
+      TData = GetSearchSponsorsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchSponsorsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchSponsorsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchSponsorsQuery, TError, TData>(
+      ['getSearchSponsors.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchSponsorsQuery, GetSearchSponsorsQueryVariables>(GetSearchSponsorsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSearchPersonsDocument = `
     query getSearchPersons($language: Language!, $term: String!, $first: Int!, $after: String) {
   persons(language: $language, search: $term, first: $first, after: $after) {
@@ -239,6 +295,20 @@ export const useGetSearchPersonsQuery = <
       graphqlFetcher<GetSearchPersonsQuery, GetSearchPersonsQueryVariables>(GetSearchPersonsDocument, variables),
       options
     );
+export const useInfiniteGetSearchPersonsQuery = <
+      TData = GetSearchPersonsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchPersonsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchPersonsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchPersonsQuery, TError, TData>(
+      ['getSearchPersons.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchPersonsQuery, GetSearchPersonsQueryVariables>(GetSearchPersonsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSearchAudiobooksDocument = `
     query getSearchAudiobooks($language: Language!, $term: String!, $first: Int!, $after: String) {
   audiobooks(language: $language, search: $term, first: $first, after: $after) {
@@ -268,6 +338,20 @@ export const useGetSearchAudiobooksQuery = <
       graphqlFetcher<GetSearchAudiobooksQuery, GetSearchAudiobooksQueryVariables>(GetSearchAudiobooksDocument, variables),
       options
     );
+export const useInfiniteGetSearchAudiobooksQuery = <
+      TData = GetSearchAudiobooksQuery,
+      TError = unknown
+    >(
+      variables: GetSearchAudiobooksQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchAudiobooksQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchAudiobooksQuery, TError, TData>(
+      ['getSearchAudiobooks.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchAudiobooksQuery, GetSearchAudiobooksQueryVariables>(GetSearchAudiobooksDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSearchMusicTracksDocument = `
     query getSearchMusicTracks($language: Language!, $term: String!, $first: Int!, $after: String) {
   musicTracks(language: $language, search: $term, first: $first, after: $after) {
@@ -301,6 +385,20 @@ export const useGetSearchMusicTracksQuery = <
       graphqlFetcher<GetSearchMusicTracksQuery, GetSearchMusicTracksQueryVariables>(GetSearchMusicTracksDocument, variables),
       options
     );
+export const useInfiniteGetSearchMusicTracksQuery = <
+      TData = GetSearchMusicTracksQuery,
+      TError = unknown
+    >(
+      variables: GetSearchMusicTracksQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchMusicTracksQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchMusicTracksQuery, TError, TData>(
+      ['getSearchMusicTracks.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchMusicTracksQuery, GetSearchMusicTracksQueryVariables>(GetSearchMusicTracksDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetSearchStoryProgramsDocument = `
     query getSearchStoryPrograms($language: Language!, $term: String!, $first: Int!, $after: String) {
   storyPrograms(language: $language, search: $term, first: $first, after: $after) {
@@ -329,6 +427,20 @@ export const useGetSearchStoryProgramsQuery = <
       graphqlFetcher<GetSearchStoryProgramsQuery, GetSearchStoryProgramsQueryVariables>(GetSearchStoryProgramsDocument, variables),
       options
     );
+export const useInfiniteGetSearchStoryProgramsQuery = <
+      TData = GetSearchStoryProgramsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchStoryProgramsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchStoryProgramsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchStoryProgramsQuery, TError, TData>(
+      ['getSearchStoryPrograms.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchStoryProgramsQuery, GetSearchStoryProgramsQueryVariables>(GetSearchStoryProgramsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSearchRecordings<T>(
@@ -378,7 +490,7 @@ export async function getSearchStoryPrograms<T>(
 ): Promise<GetSearchStoryProgramsQuery> {
 	return fetchApi(GetSearchStoryProgramsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -393,18 +505,26 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSearchRecordings', () => getSearchRecordings(vars.getSearchRecordings)],
-		['getSearchSeries', () => getSearchSeries(vars.getSearchSeries)],
-		['getSearchConferences', () => getSearchConferences(vars.getSearchConferences)],
-		['getSearchSponsors', () => getSearchSponsors(vars.getSearchSponsors)],
-		['getSearchPersons', () => getSearchPersons(vars.getSearchPersons)],
-		['getSearchAudiobooks', () => getSearchAudiobooks(vars.getSearchAudiobooks)],
-		['getSearchMusicTracks', () => getSearchMusicTracks(vars.getSearchMusicTracks)],
-		['getSearchStoryPrograms', () => getSearchStoryPrograms(vars.getSearchStoryPrograms)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSearchRecordings', vars.getSearchRecordings], () => getSearchRecordings(vars.getSearchRecordings), options),
+		client.prefetchInfiniteQuery(['getSearchRecordings.infinite', vars.getSearchRecordings], () => getSearchRecordings(vars.getSearchRecordings), options),
+		client.prefetchQuery(['getSearchSeries', vars.getSearchSeries], () => getSearchSeries(vars.getSearchSeries), options),
+		client.prefetchInfiniteQuery(['getSearchSeries.infinite', vars.getSearchSeries], () => getSearchSeries(vars.getSearchSeries), options),
+		client.prefetchQuery(['getSearchConferences', vars.getSearchConferences], () => getSearchConferences(vars.getSearchConferences), options),
+		client.prefetchInfiniteQuery(['getSearchConferences.infinite', vars.getSearchConferences], () => getSearchConferences(vars.getSearchConferences), options),
+		client.prefetchQuery(['getSearchSponsors', vars.getSearchSponsors], () => getSearchSponsors(vars.getSearchSponsors), options),
+		client.prefetchInfiniteQuery(['getSearchSponsors.infinite', vars.getSearchSponsors], () => getSearchSponsors(vars.getSearchSponsors), options),
+		client.prefetchQuery(['getSearchPersons', vars.getSearchPersons], () => getSearchPersons(vars.getSearchPersons), options),
+		client.prefetchInfiniteQuery(['getSearchPersons.infinite', vars.getSearchPersons], () => getSearchPersons(vars.getSearchPersons), options),
+		client.prefetchQuery(['getSearchAudiobooks', vars.getSearchAudiobooks], () => getSearchAudiobooks(vars.getSearchAudiobooks), options),
+		client.prefetchInfiniteQuery(['getSearchAudiobooks.infinite', vars.getSearchAudiobooks], () => getSearchAudiobooks(vars.getSearchAudiobooks), options),
+		client.prefetchQuery(['getSearchMusicTracks', vars.getSearchMusicTracks], () => getSearchMusicTracks(vars.getSearchMusicTracks), options),
+		client.prefetchInfiniteQuery(['getSearchMusicTracks.infinite', vars.getSearchMusicTracks], () => getSearchMusicTracks(vars.getSearchMusicTracks), options),
+		client.prefetchQuery(['getSearchStoryPrograms', vars.getSearchStoryPrograms], () => getSearchStoryPrograms(vars.getSearchStoryPrograms), options),
+		client.prefetchInfiniteQuery(['getSearchStoryPrograms.infinite', vars.getSearchStoryPrograms], () => getSearchStoryPrograms(vars.getSearchStoryPrograms), options),
+	]);
 	
 	return client;
 }

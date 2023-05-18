@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAccountPlaylistsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -54,6 +54,20 @@ export const useGetAccountPlaylistsPageDataQuery = <
       graphqlFetcher<GetAccountPlaylistsPageDataQuery, GetAccountPlaylistsPageDataQueryVariables>(GetAccountPlaylistsPageDataDocument, variables),
       options
     );
+export const useInfiniteGetAccountPlaylistsPageDataQuery = <
+      TData = GetAccountPlaylistsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAccountPlaylistsPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetAccountPlaylistsPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetAccountPlaylistsPageDataQuery, TError, TData>(
+      ['getAccountPlaylistsPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetAccountPlaylistsPageDataQuery, GetAccountPlaylistsPageDataQueryVariables>(GetAccountPlaylistsPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const AddAccountPlaylistDocument = `
     mutation addAccountPlaylist($isPublic: Boolean!, $language: Language!, $recordingIds: [ID!], $summary: String, $title: String!) {
   playlistAdd(
@@ -85,7 +99,7 @@ export async function addAccountPlaylist<T>(
 ): Promise<AddAccountPlaylistMutation> {
 	return fetchApi(AddAccountPlaylistDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -93,11 +107,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getAccountPlaylistsPageData', () => getAccountPlaylistsPageData(vars.getAccountPlaylistsPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getAccountPlaylistsPageData', vars.getAccountPlaylistsPageData], () => getAccountPlaylistsPageData(vars.getAccountPlaylistsPageData), options),
+		client.prefetchInfiniteQuery(['getAccountPlaylistsPageData.infinite', vars.getAccountPlaylistsPageData], () => getAccountPlaylistsPageData(vars.getAccountPlaylistsPageData), options),
+	]);
 	
 	return client;
 }

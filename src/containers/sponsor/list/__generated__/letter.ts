@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { SponsorListEntryFragmentDoc } from './list';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorListLetterPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -42,6 +42,20 @@ export const useGetSponsorListLetterPageDataQuery = <
       graphqlFetcher<GetSponsorListLetterPageDataQuery, GetSponsorListLetterPageDataQueryVariables>(GetSponsorListLetterPageDataDocument, variables),
       options
     );
+export const useInfiniteGetSponsorListLetterPageDataQuery = <
+      TData = GetSponsorListLetterPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorListLetterPageDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSponsorListLetterPageDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSponsorListLetterPageDataQuery, TError, TData>(
+      ['getSponsorListLetterPageData.infinite', variables],
+      (metaData) => graphqlFetcher<GetSponsorListLetterPageDataQuery, GetSponsorListLetterPageDataQueryVariables>(GetSponsorListLetterPageDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSponsorListLetterPageData<T>(
@@ -49,7 +63,7 @@ export async function getSponsorListLetterPageData<T>(
 ): Promise<GetSponsorListLetterPageDataQuery> {
 	return fetchApi(GetSponsorListLetterPageDataDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -57,11 +71,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSponsorListLetterPageData', () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSponsorListLetterPageData', vars.getSponsorListLetterPageData], () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData), options),
+		client.prefetchInfiniteQuery(['getSponsorListLetterPageData.infinite', vars.getSponsorListLetterPageData], () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData), options),
+	]);
 	
 	return client;
 }

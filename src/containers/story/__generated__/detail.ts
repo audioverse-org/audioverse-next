@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../components/molecules/__genera
 import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoryDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -55,6 +55,20 @@ export const useGetStoryDetailDataQuery = <
       graphqlFetcher<GetStoryDetailDataQuery, GetStoryDetailDataQueryVariables>(GetStoryDetailDataDocument, variables),
       options
     );
+export const useInfiniteGetStoryDetailDataQuery = <
+      TData = GetStoryDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoryDetailDataQueryVariables,
+      options?: UseInfiniteQueryOptions<GetStoryDetailDataQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetStoryDetailDataQuery, TError, TData>(
+      ['getStoryDetailData.infinite', variables],
+      (metaData) => graphqlFetcher<GetStoryDetailDataQuery, GetStoryDetailDataQueryVariables>(GetStoryDetailDataDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 export const GetStoryDetailStaticPathsDocument = `
     query getStoryDetailStaticPaths($language: Language!, $first: Int) {
   stories(language: $language, first: $first) {
@@ -76,6 +90,20 @@ export const useGetStoryDetailStaticPathsQuery = <
       graphqlFetcher<GetStoryDetailStaticPathsQuery, GetStoryDetailStaticPathsQueryVariables>(GetStoryDetailStaticPathsDocument, variables),
       options
     );
+export const useInfiniteGetStoryDetailStaticPathsQuery = <
+      TData = GetStoryDetailStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetStoryDetailStaticPathsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetStoryDetailStaticPathsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetStoryDetailStaticPathsQuery, TError, TData>(
+      ['getStoryDetailStaticPaths.infinite', variables],
+      (metaData) => graphqlFetcher<GetStoryDetailStaticPathsQuery, GetStoryDetailStaticPathsQueryVariables>(GetStoryDetailStaticPathsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getStoryDetailData<T>(
@@ -89,7 +117,7 @@ export async function getStoryDetailStaticPaths<T>(
 ): Promise<GetStoryDetailStaticPathsQuery> {
 	return fetchApi(GetStoryDetailStaticPathsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -97,11 +125,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getStoryDetailData', () => getStoryDetailData(vars.getStoryDetailData)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getStoryDetailData', vars.getStoryDetailData], () => getStoryDetailData(vars.getStoryDetailData), options),
+		client.prefetchInfiniteQuery(['getStoryDetailData.infinite', vars.getStoryDetailData], () => getStoryDetailData(vars.getStoryDetailData), options),
+	]);
 	
 	return client;
 }

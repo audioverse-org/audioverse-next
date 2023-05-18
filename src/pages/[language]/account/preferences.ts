@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { getAccountPreferencesData } from '~containers/account/__generated__/preferences';
+import { prefetchQueries } from '~containers/account/__generated__/preferences';
 import Preferences from '~containers/account/preferences';
 import { storeRequest } from '~lib/api/storeRequest';
 import getDehydratedProps, { DehydratedProps } from '~lib/getDehydratedProps';
@@ -12,7 +12,9 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext): Promise<DehydratedProps> {
 	storeRequest(req);
 
-	return getDehydratedProps([
-		['getAccountPreferencesData', () => getAccountPreferencesData({})],
-	]);
+	const client = await prefetchQueries({
+		getAccountPreferencesData: {},
+	});
+
+	return getDehydratedProps(client);
 }

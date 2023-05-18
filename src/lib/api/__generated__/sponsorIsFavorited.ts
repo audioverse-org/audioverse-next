@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SponsorIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -29,6 +29,20 @@ export const useSponsorIsFavoritedQuery = <
       graphqlFetcher<SponsorIsFavoritedQuery, SponsorIsFavoritedQueryVariables>(SponsorIsFavoritedDocument, variables),
       options
     );
+export const useInfiniteSponsorIsFavoritedQuery = <
+      TData = SponsorIsFavoritedQuery,
+      TError = unknown
+    >(
+      variables: SponsorIsFavoritedQueryVariables,
+      options?: UseInfiniteQueryOptions<SponsorIsFavoritedQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<SponsorIsFavoritedQuery, TError, TData>(
+      ['sponsorIsFavorited.infinite', variables],
+      (metaData) => graphqlFetcher<SponsorIsFavoritedQuery, SponsorIsFavoritedQueryVariables>(SponsorIsFavoritedDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function sponsorIsFavorited<T>(
@@ -36,7 +50,7 @@ export async function sponsorIsFavorited<T>(
 ): Promise<SponsorIsFavoritedQuery> {
 	return fetchApi(SponsorIsFavoritedDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -44,11 +58,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['sponsorIsFavorited', () => sponsorIsFavorited(vars.sponsorIsFavorited)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['sponsorIsFavorited', vars.sponsorIsFavorited], () => sponsorIsFavorited(vars.sponsorIsFavorited), options),
+		client.prefetchInfiniteQuery(['sponsorIsFavorited.infinite', vars.sponsorIsFavorited], () => sponsorIsFavorited(vars.sponsorIsFavorited), options),
+	]);
 	
 	return client;
 }

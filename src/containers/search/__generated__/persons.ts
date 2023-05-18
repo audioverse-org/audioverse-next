@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardPersonFragmentDoc } from '../../../components/molecules/card/__generated__/person';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsPersonsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -38,6 +38,20 @@ export const useGetSearchResultsPersonsQuery = <
       graphqlFetcher<GetSearchResultsPersonsQuery, GetSearchResultsPersonsQueryVariables>(GetSearchResultsPersonsDocument, variables),
       options
     );
+export const useInfiniteGetSearchResultsPersonsQuery = <
+      TData = GetSearchResultsPersonsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchResultsPersonsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetSearchResultsPersonsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetSearchResultsPersonsQuery, TError, TData>(
+      ['getSearchResultsPersons.infinite', variables],
+      (metaData) => graphqlFetcher<GetSearchResultsPersonsQuery, GetSearchResultsPersonsQueryVariables>(GetSearchResultsPersonsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi' 
 
 export async function getSearchResultsPersons<T>(
@@ -45,7 +59,7 @@ export async function getSearchResultsPersons<T>(
 ): Promise<GetSearchResultsPersonsQuery> {
 	return fetchApi(GetSearchResultsPersonsDocument, { variables });
 }
-import {QueryClient} from 'react-query';
+import { QueryClient } from 'react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -53,11 +67,12 @@ export async function prefetchQueries<T>(
 	},
 	client: QueryClient = new QueryClient(),
 ): Promise<QueryClient> {
-	const queryPairs: [string, () => unknown][] = [
-		['getSearchResultsPersons', () => getSearchResultsPersons(vars.getSearchResultsPersons)],
-	]
+	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
-	await Promise.all(queryPairs.map((p) => client.prefetchQuery(...p)));
+	await Promise.all([
+		client.prefetchQuery(['getSearchResultsPersons', vars.getSearchResultsPersons], () => getSearchResultsPersons(vars.getSearchResultsPersons), options),
+		client.prefetchInfiniteQuery(['getSearchResultsPersons.infinite', vars.getSearchResultsPersons], () => getSearchResultsPersons(vars.getSearchResultsPersons), options),
+	]);
 	
 	return client;
 }
