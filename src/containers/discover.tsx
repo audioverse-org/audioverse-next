@@ -8,15 +8,12 @@ import CardCollection from '~components/molecules/card/collection';
 import CardPost from '~components/molecules/card/post';
 import CardRecording from '~components/molecules/card/recording';
 import CardSequence from '~components/molecules/card/sequence';
-import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { CardPostFragment } from '~src/components/molecules/card/__generated__/post';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
-import IconBack from '../../public/img/icons/icon-back-light.svg';
-import IconForward from '../../public/img/icons/icon-forward-light.svg';
 import {
 	GetDiscoverBlogPostsQuery,
 	GetDiscoverConferencesQuery,
@@ -32,6 +29,7 @@ import {
 	useInfiniteGetDiscoverTrendingTeachingsQuery,
 } from './__generated__/discover';
 import styles from './discover.module.scss';
+import Slider from './discover.slider';
 
 const PRELOAD_COUNT = 3;
 
@@ -62,15 +60,16 @@ function Section<T, N>({
 	selectPageInfo,
 	Card,
 	seeAllUrl,
-	previous,
-	next,
+	...props
 }: SectionProps<T, N>): JSX.Element {
 	const [index, setIndex] = useState(0);
 	const { data, fetchNextPage, isLoading } = infiniteQueryResult;
 	const pages = useMemo(() => data?.pages || [], [data?.pages]);
 	const cappedIndex = Math.min(index, pages.length - 1);
 	const currentPage = pages[cappedIndex];
-	const nodes = selectNodes(currentPage);
+	const nodes: Node<N>[] = pages
+		.flatMap(selectNodes)
+		.filter((n): n is Node<N> => !!n);
 	const { hasNextPage = false } = selectPageInfo(currentPage) || {};
 
 	useEffect(() => {
@@ -85,9 +84,6 @@ function Section<T, N>({
 		fetchNextPage();
 	}, [pages, fetchNextPage, index, isLoading, selectPageInfo]);
 
-	const p = () => setIndex((i) => i - 1);
-	const n = () => setIndex((i) => i + 1);
-
 	return (
 		<div className={styles.section}>
 			<LineHeading variant="overline">
@@ -98,35 +94,10 @@ function Section<T, N>({
 					</a>
 				)}
 			</LineHeading>
-			<div className={styles.sectionCarousel}>
-				<button
-					className={styles.sectionArrow}
-					onClick={(e) => {
-						e.preventDefault();
-						p();
-					}}
-					disabled={index < 1}
-					aria-label={previous}
-				>
-					<IconBack />
-				</button>
-				<CardGroup>
-					{nodes?.map((n) => (
-						<Card node={n} key={n.canonicalPath} />
-					))}
-				</CardGroup>
-				<button
-					className={styles.sectionArrow}
-					onClick={(e) => {
-						e.preventDefault();
-						n();
-					}}
-					disabled={!hasNextPage}
-					aria-label={next}
-				>
-					<IconForward />
-				</button>
-			</div>
+			<Slider
+				{...props}
+				items={nodes?.map((n) => <Card node={n} key={n.canonicalPath} />) ?? []}
+			/>
 		</div>
 	);
 }

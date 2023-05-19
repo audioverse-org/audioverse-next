@@ -23,24 +23,29 @@ beforeEach(() => {
 	jest.clearAllMocks();
 	resetAllWhenMocks();
 
-	// IntersectionObserver isn't available in test environment
-	const mockIntersectionObserver = jest.fn();
-	mockIntersectionObserver.mockReturnValue({
-		observe: () => null,
-		unobserve: () => null,
-		disconnect: () => null,
-	});
-	window.IntersectionObserver = mockIntersectionObserver;
+	window.IntersectionObserver = jest.fn(
+		() =>
+			({
+				observe: jest.fn(),
+				unobserve: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
+	);
 
-	global.MutationObserver = class {
-		constructor() {
-			// noop
-		}
-		disconnect() {
-			// noop
-		}
-		observe() {
-			// noop
-		}
-	} as any;
+	global.MutationObserver = jest.fn(
+		() =>
+			({
+				observe: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
+	);
+
+	global.ResizeObserver = jest.fn(
+		() =>
+			({
+				observe: jest.fn(),
+				unobserve: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
+	);
 });
