@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 
@@ -32,19 +32,25 @@ export default function Slider({
 	const containerRef = useRef<HTMLDivElement>(null);
 	const width = useElementWidth(containerRef);
 
-	const itemsPerRow = Math.max(
-		Math.floor((width - GRID_GAP) / (MIN_CARD_WIDTH + GRID_GAP)),
-		1
-	);
-	const itemsPerPage = itemsPerRow > 1 ? itemsPerRow * rows : itemsPerRow;
-	const itemSets = items.reduce<JSX.Element[][]>(
-		(acc, item, i) => {
-			const setIndex = Math.floor(i / itemsPerPage);
-			acc[setIndex] = [...(acc[setIndex] || []), item];
-			return acc;
-		},
-		[[]]
-	);
+	const itemsPerPage = useMemo(() => {
+		const itemsPerRow = Math.max(
+			Math.floor((width - GRID_GAP) / (MIN_CARD_WIDTH + GRID_GAP)),
+			1
+		);
+		return itemsPerRow > 1 ? itemsPerRow * rows : itemsPerRow;
+	}, [rows, width]);
+
+	const itemSets = useMemo(() => {
+		return items.reduce<JSX.Element[][]>(
+			(acc, item, i) => {
+				const setIndex = Math.floor(i / itemsPerPage);
+				acc[setIndex] = [...(acc[setIndex] || []), item];
+				return acc;
+			},
+			[[]]
+		);
+	}, [items, itemsPerPage]);
+
 	const hasNextPage = index + itemsPerPage < items.length;
 
 	const navigate = (delta: number) => {
