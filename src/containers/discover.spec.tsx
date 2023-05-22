@@ -11,7 +11,6 @@ import {
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 import { __apiDocumentMock, fetchApi } from '~src/lib/api/fetchApi';
-import { sleep } from '~src/lib/sleep';
 import { createControlledPromise } from '~src/lib/test/loadControlledPromise';
 
 import {
@@ -28,14 +27,10 @@ import {
 	GetDiscoverTrendingTeachingsDocument,
 	GetDiscoverTrendingTeachingsQuery,
 } from './__generated__/discover';
-import { mockWidth } from './discover.slider.spec';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 
 const base = {
-	// aggregate: {
-	// 	count: 1,
-	// },
 	pageInfo: {
 		hasNextPage: false,
 		endCursor: null,
