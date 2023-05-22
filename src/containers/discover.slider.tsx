@@ -33,8 +33,9 @@ export default function Slider({
 	const containerRef = useRef<HTMLDivElement>(null);
 	const width = useElementWidth(containerRef);
 
-	const itemsPerRow = Math.floor(
-		(width - GRID_GAP) / (MIN_CARD_WIDTH + GRID_GAP)
+	const itemsPerRow = Math.max(
+		Math.floor((width - GRID_GAP) / (MIN_CARD_WIDTH + GRID_GAP)),
+		1
 	);
 	const itemsPerPage = itemsPerRow > 1 ? itemsPerRow * rows : itemsPerRow;
 	const itemSets = items.reduce<JSX.Element[][]>(
