@@ -66,12 +66,9 @@ function Section<T, N>({
 	const [index, setIndex] = useState(0);
 	const { data, fetchNextPage, isLoading } = infiniteQueryResult;
 	const pages = useMemo(() => data?.pages || [], [data?.pages]);
-	// const cappedIndex = Math.min(index, pages.length - 1);
-	// const currentPage = pages[cappedIndex];
 	const nodes: Node<N>[] = pages
 		.flatMap(selectNodes)
 		.filter((n): n is Node<N> => !!n);
-	// const { hasNextPage = false } = selectPageInfo(currentPage) || {};
 
 	useEffect(() => {
 		const lastPage = pages[pages.length - 1];
