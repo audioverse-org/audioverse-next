@@ -1,5 +1,5 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { startTransition, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseInfiniteQueryResult } from 'react-query';
 
@@ -66,9 +66,9 @@ function Section<T, N>({
 	const [index, setIndex] = useState(0);
 	const { data, fetchNextPage, isLoading } = infiniteQueryResult;
 	const pages = useMemo(() => data?.pages || [], [data?.pages]);
-	const nodes: Node<N>[] = pages
-		.flatMap(selectNodes)
-		.filter((n): n is Node<N> => !!n);
+	const nodes: Node<N>[] = useMemo(() => {
+		return pages.flatMap(selectNodes).filter((n): n is Node<N> => !!n);
+	}, [pages, selectNodes]);
 
 	useEffect(() => {
 		const lastPage = pages[pages.length - 1];
@@ -94,7 +94,9 @@ function Section<T, N>({
 			</LineHeading>
 			<Slider
 				{...props}
-				onIndexChange={({ indexEnd }) => setIndex(indexEnd)}
+				onIndexChange={({ indexEnd }) =>
+					startTransition(() => setIndex(indexEnd))
+				}
 				items={nodes?.map((n) => <Card node={n} key={n.canonicalPath} />) ?? []}
 			/>
 		</div>
