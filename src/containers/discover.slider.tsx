@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 
-import CardGroup from '~components/molecules/cardGroup';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 
 import IconBack from '../../public/img/icons/icon-back-light.svg';

@@ -31,7 +31,7 @@ import {
 import styles from './discover.module.scss';
 import Slider from './discover.slider';
 
-const PRELOAD_COUNT = 3;
+const PRELOAD_COUNT = 18;
 
 type Node<T> = T & {
 	canonicalPath: string;
@@ -41,6 +41,7 @@ type SectionProps<T, N> = {
 	heading: string;
 	previous: string;
 	next: string;
+	rows?: number;
 	seeAllUrl?: string;
 	infiniteQueryResult: UseInfiniteQueryResult<T>;
 	selectNodes: (page?: T) => Maybe<Node<N>[]>;
@@ -65,24 +66,24 @@ function Section<T, N>({
 	const [index, setIndex] = useState(0);
 	const { data, fetchNextPage, isLoading } = infiniteQueryResult;
 	const pages = useMemo(() => data?.pages || [], [data?.pages]);
-	const cappedIndex = Math.min(index, pages.length - 1);
-	const currentPage = pages[cappedIndex];
+	// const cappedIndex = Math.min(index, pages.length - 1);
+	// const currentPage = pages[cappedIndex];
 	const nodes: Node<N>[] = pages
 		.flatMap(selectNodes)
 		.filter((n): n is Node<N> => !!n);
-	const { hasNextPage = false } = selectPageInfo(currentPage) || {};
+	// const { hasNextPage = false } = selectPageInfo(currentPage) || {};
 
 	useEffect(() => {
 		const lastPage = pages[pages.length - 1];
 		const { hasNextPage = false } = selectPageInfo(lastPage) || {};
-		const leadCount = pages.length - (index + 1);
+		const leadCount = nodes.length - (index + 1);
 
 		if (isLoading) return;
 		if (!hasNextPage) return;
 		if (leadCount >= PRELOAD_COUNT) return;
 
 		fetchNextPage();
-	}, [pages, fetchNextPage, index, isLoading, selectPageInfo]);
+	}, [pages, fetchNextPage, index, isLoading, selectPageInfo, nodes.length]);
 
 	return (
 		<div className={styles.section}>
@@ -96,6 +97,9 @@ function Section<T, N>({
 			</LineHeading>
 			<Slider
 				{...props}
+				onIndexChange={({ indexEnd }) => {
+					setIndex(indexEnd);
+				}}
 				items={nodes?.map((n) => <Card node={n} key={n.canonicalPath} />) ?? []}
 			/>
 		</div>
@@ -143,6 +147,7 @@ function RecentTeachings(): JSX.Element {
 			selectNodes={(p) => p?.recentTeachings.nodes}
 			selectPageInfo={(p) => p?.recentTeachings.pageInfo}
 			Card={({ node }) => <CardRecording recording={node} />}
+			rows={2}
 		/>
 	);
 }
@@ -188,6 +193,7 @@ function TrendingTeachings(): JSX.Element {
 			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
 			selectPageInfo={(p) => p?.trendingTeachings.pageInfo}
 			Card={({ node }) => <CardRecording recording={node} />}
+			rows={2}
 		/>
 	);
 }

@@ -18,7 +18,7 @@ const renderComponent = buildRenderer(Slider, {
 	defaultProps,
 });
 
-const mockWidth = (cardsPerPage: number) => {
+export const mockWidth = (cardsPerPage: number) => {
 	const w = cardsPerPage * MIN_CARD_WIDTH + (cardsPerPage + 1) * GRID_GAP;
 	jest.mocked(useElementWidth).mockReturnValue(w);
 	return w;

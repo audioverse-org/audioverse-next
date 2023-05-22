@@ -11,6 +11,7 @@ import {
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 import { __apiDocumentMock, fetchApi } from '~src/lib/api/fetchApi';
+import { sleep } from '~src/lib/sleep';
 import { createControlledPromise } from '~src/lib/test/loadControlledPromise';
 
 import {
@@ -27,6 +28,7 @@ import {
 	GetDiscoverTrendingTeachingsDocument,
 	GetDiscoverTrendingTeachingsQuery,
 } from './__generated__/discover';
+import { mockWidth } from './discover.slider.spec';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 
@@ -477,6 +479,121 @@ describe('discover page', () => {
 					endCursor: null,
 				},
 			},
+		});
+	});
+
+	it('preloads more pages as user navigates slider', async () => {
+		function loadPage(i: number) {
+			loadRecentTeachings(
+				{
+					recentTeachings: {
+						nodes: [
+							{
+								...recentTeaching,
+								title: `page${i}`,
+							},
+						],
+						pageInfo: {
+							hasNextPage: true,
+							endCursor: `cursor${i}`,
+						},
+					},
+				},
+				{
+					variables: expect.objectContaining({
+						after: i ? `cursor${i - 1}` : null,
+					}),
+				}
+			);
+		}
+
+		loadPage(0);
+		loadPage(1);
+		loadPage(2);
+		loadPage(3);
+		loadPage(4);
+
+		await renderPage();
+
+		// preloaded pages are immediately rendered to the dom
+		await screen.findByText('page3');
+
+		userEvent.click(await screen.findByLabelText('Next recent teachings'));
+
+		expect(await screen.findByText('page4')).toBeInTheDocument();
+	});
+
+	it('does not preload new page if not near end of preloaded pages', async () => {
+		function loadPage(i: number) {
+			loadRecentTeachings(
+				{
+					recentTeachings: {
+						nodes: [
+							{
+								...recentTeaching,
+								title: `page${i}`,
+							},
+							{
+								...recentTeaching,
+								title: `page${i}`,
+							},
+							{
+								...recentTeaching,
+								title: `page${i}`,
+							},
+							{
+								...recentTeaching,
+								title: `page${i}`,
+							},
+							{
+								...recentTeaching,
+								title: `page${i}`,
+							},
+							{
+								...recentTeaching,
+								title: `page${i}`,
+							},
+						],
+						pageInfo: {
+							hasNextPage: true,
+							endCursor: `cursor${i}`,
+						},
+					},
+				},
+				{
+					variables: expect.objectContaining({
+						after: i ? `cursor${i - 1}` : null,
+					}),
+				}
+			);
+		}
+
+		loadPage(0);
+		loadPage(1);
+		loadPage(2);
+		loadPage(3);
+		loadPage(4);
+		loadPage(5);
+
+		await renderPage();
+
+		// preloaded pages are immediately rendered to the dom
+		await screen.findAllByText('page3');
+
+		const next = await screen.findByLabelText('Next recent teachings');
+		const previous = await screen.findByLabelText('Previous recent teachings');
+
+		userEvent.click(next);
+		await waitFor(() => expect(previous).toBeEnabled());
+		userEvent.click(previous);
+		await waitFor(() => expect(previous).toBeDisabled());
+		userEvent.click(next);
+		await waitFor(() => expect(previous).toBeEnabled());
+
+		expect(fetchApi).not.toBeCalledWith(GetDiscoverRecentTeachingsDocument, {
+			variables: expect.objectContaining({
+				after: 'cursor4',
+			}),
 		});
 	});
 });
