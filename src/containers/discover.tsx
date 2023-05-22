@@ -94,9 +94,7 @@ function Section<T, N>({
 			</LineHeading>
 			<Slider
 				{...props}
-				onIndexChange={({ indexEnd }) => {
-					setIndex(indexEnd);
-				}}
+				onIndexChange={({ indexEnd }) => setIndex(indexEnd)}
 				items={nodes?.map((n) => <Card node={n} key={n.canonicalPath} />) ?? []}
 			/>
 		</div>
