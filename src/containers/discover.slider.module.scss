@@ -26,6 +26,7 @@
 .track {
     display: flex;
     transition: left $transition-medium ease-in-out;
+    left: var(--left);
     position: relative;
 }
 

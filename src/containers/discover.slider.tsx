@@ -78,7 +78,7 @@ export default function Slider({
 					className={styles.track}
 					role="group"
 					style={{
-						left: `-${(index / itemsPerPage) * width}px`,
+						'--left': `-${(index / itemsPerPage) * width}px`,
 						'--min-card-width': `${MIN_CARD_WIDTH}px`,
 					}}
 				>
