@@ -44,11 +44,11 @@ export default function Slider({
 	const width = useElementWidth(containerRef.current);
 
 	const itemsPerPage = useMemo(() => {
-		const itemsPerRow = Math.max(
+		const perRow = Math.max(
 			Math.floor((width - GRID_GAP) / (MIN_CARD_WIDTH + GRID_GAP)),
 			1
 		);
-		return itemsPerRow > 1 ? itemsPerRow * rows : itemsPerRow;
+		return perRow > 1 ? perRow * rows : perRow;
 	}, [rows, width]);
 
 	const itemSets = useMemo(() => {
