@@ -52,11 +52,11 @@ describe('Slider', () => {
 
 		const container = screen.getByRole('group');
 
-		expect(container).toHaveStyle('left: -0px');
+		expect(container).toHaveStyle('--left: -0px');
 
 		userEvent.click(screen.getByLabelText('next'));
 
-		expect(container).toHaveStyle(`left: -${w}px`);
+		expect(container).toHaveStyle(`--left: -${w}px`);
 	});
 
 	it('displays two items per page', async () => {
@@ -181,11 +181,11 @@ describe('Slider', () => {
 
 		const container = screen.getByRole('group');
 
-		expect(container).toHaveStyle('left: -0px');
+		expect(container).toHaveStyle('--left: -0px');
 
 		userEvent.click(screen.getByLabelText('next'));
 
-		expect(container).toHaveStyle(`left: -${w}px`);
+		expect(container).toHaveStyle(`--left: -${w}px`);
 	});
 
 	it('fits six items on a single page', async () => {
