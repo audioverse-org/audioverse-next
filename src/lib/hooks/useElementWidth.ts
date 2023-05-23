@@ -1,8 +1,8 @@
-import { RefObject, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import isServerSide from '../isServerSide';
 
-export default function useElementWidth(ref: RefObject<HTMLElement>): number {
+export default function useElementWidth(el: HTMLElement | null): number {
 	const [width, setWidth] = useState(0);
 
 	const observer = useMemo(() => {
@@ -11,10 +11,10 @@ export default function useElementWidth(ref: RefObject<HTMLElement>): number {
 	}, []);
 
 	useEffect(() => {
-		if (!ref.current || !observer) return;
-		observer.observe(ref.current);
-		return () => observer?.disconnect();
-	}, [ref, observer]);
+		if (!el || !observer) return;
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, [el, observer]);
 
 	return width;
 }

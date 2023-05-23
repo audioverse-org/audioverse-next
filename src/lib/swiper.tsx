@@ -1,4 +1,4 @@
-import React, { forwardRef, PropsWithChildren } from 'react';
+import React, { ForwardedRef, forwardRef, PropsWithChildren } from 'react';
 import * as swiper from 'swiper';
 import { SwiperProps as _SwiperProps } from 'swiper/react';
 
@@ -17,13 +17,15 @@ export type SwiperProps = PropsWithChildren<
 		React.HTMLAttributes<HTMLElement> & _SwiperProps,
 		HTMLElement
 	>
->;
+> & {
+	forwardedRef?: ForwardedRef<HTMLSwiperElement>;
+};
 
 const Swiper = forwardRef<HTMLSwiperElement, SwiperProps>(function Swiper(
 	props: SwiperProps,
 	ref
 ) {
-	return <swiper-container {...props} ref={ref} />;
+	return <swiper-container {...props} ref={props.forwardedRef ?? ref} />;
 });
 
 export default Swiper;

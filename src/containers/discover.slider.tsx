@@ -1,6 +1,7 @@
-import React, { useMemo, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+import React, { forwardRef, useMemo, useRef, useState } from 'react';
 
-import Swiper, { HTMLSwiperElement } from '~lib/swiper';
+import { HTMLSwiperElement, SwiperProps } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 
 import IconBack from '../../public/img/icons/icon-back-light.svg';
@@ -22,6 +23,15 @@ type SliderProps = {
 export const MIN_CARD_WIDTH = 300;
 export const GRID_GAP = 24;
 
+const LazySwiperBase = dynamic(() => import('~lib/swiper'), {
+	ssr: false,
+});
+const LazySwiper = forwardRef<HTMLSwiperElement, SwiperProps>(
+	function LazySwiper({ ref: _, ...props }, ref) {
+		return <LazySwiperBase {...props} forwardedRef={ref} />;
+	}
+);
+
 export default function Slider({
 	onIndexChange,
 	items,
@@ -31,7 +41,7 @@ export default function Slider({
 }: SliderProps): JSX.Element {
 	const [index, setIndex] = useState(0);
 	const containerRef = useRef<HTMLSwiperElement>(null);
-	const width = useElementWidth(containerRef);
+	const width = useElementWidth(containerRef.current);
 
 	const itemsPerPage = useMemo(() => {
 		const itemsPerRow = Math.max(
@@ -82,7 +92,7 @@ export default function Slider({
 				<IconBack />
 			</button>
 
-			<Swiper
+			<LazySwiper
 				data-testid="swiper"
 				ref={containerRef}
 				style={{
@@ -94,7 +104,7 @@ export default function Slider({
 						<div className={styles.page}>{itemSet}</div>
 					</swiper-slide>
 				))}
-			</Swiper>
+			</LazySwiper>
 
 			<button
 				className={styles.arrow}

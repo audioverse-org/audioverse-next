@@ -22,10 +22,12 @@ const Swiper = forwardRef<HTMLSwiperElement, SwiperProps>(function Swiper(
 ) {
 	return (
 		<swiper-container
+			observer={true}
 			{...props}
 			ref={(el) => {
 				if (el) (el as HTMLSwiperElement).swiper = __swiper as swiper.Swiper;
-				if (ref) (ref as any).current = el;
+				const r = props.forwardedRef ?? ref;
+				if (r) (r as any).current = el;
 			}}
 		/>
 	);

@@ -57,6 +57,7 @@ module.exports = {
 			'error',
 			{
 				varsIgnorePattern: '_',
+				argsIgnorePattern: '_',
 			},
 		],
 		'no-mixed-spaces-and-tabs': 'off',
