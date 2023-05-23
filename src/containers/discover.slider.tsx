@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 
+import Swiper, { HTMLSwiperElement } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 
 import IconBack from '../../public/img/icons/icon-back-light.svg';
@@ -29,7 +30,7 @@ export default function Slider({
 	rows = 1,
 }: SliderProps): JSX.Element {
 	const [index, setIndex] = useState(0);
-	const containerRef = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<HTMLSwiperElement>(null);
 	const width = useElementWidth(containerRef);
 
 	const itemsPerPage = useMemo(() => {
@@ -72,6 +73,7 @@ export default function Slider({
 				className={styles.arrow}
 				onClick={(e) => {
 					e.preventDefault();
+					containerRef.current?.swiper?.slidePrev();
 					navigate(-itemsPerPage);
 				}}
 				disabled={index < 1}
@@ -80,7 +82,7 @@ export default function Slider({
 				<IconBack />
 			</button>
 
-			<swiper-container
+			<Swiper
 				data-testid="swiper"
 				ref={containerRef}
 				style={{
@@ -92,12 +94,13 @@ export default function Slider({
 						<div className={styles.page}>{itemSet}</div>
 					</swiper-slide>
 				))}
-			</swiper-container>
+			</Swiper>
 
 			<button
 				className={styles.arrow}
 				onClick={(e) => {
 					e.preventDefault();
+					containerRef.current?.swiper?.slideNext();
 					navigate(itemsPerPage);
 				}}
 				disabled={!hasNextPage}

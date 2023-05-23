@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import Slider, { GRID_GAP, MIN_CARD_WIDTH } from '~containers/discover.slider';
+import { __swiper } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 import { buildRenderer } from '~src/lib/test/buildRenderer';
 
@@ -193,5 +194,36 @@ describe('Slider', () => {
 		});
 
 		expect(screen.getByLabelText('next')).toBeEnabled();
+	});
+
+	it('uses swiper to page forward', async () => {
+		await renderComponent({
+			props: {
+				...defaultProps,
+				items: [<div key="1">1</div>, <div key="2">2</div>],
+			},
+		});
+
+		await screen.findByText('1');
+
+		userEvent.click(screen.getByLabelText('next'));
+
+		expect(__swiper.slideNext).toBeCalled();
+	});
+
+	it('uses swiper to page back', async () => {
+		await renderComponent({
+			props: {
+				...defaultProps,
+				items: [<div key="1">1</div>, <div key="2">2</div>],
+			},
+		});
+
+		await screen.findByText('1');
+
+		userEvent.click(screen.getByLabelText('next'));
+		userEvent.click(screen.getByLabelText('previous'));
+
+		expect(__swiper.slidePrev).toBeCalled();
 	});
 });
