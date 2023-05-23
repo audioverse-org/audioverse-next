@@ -79,22 +79,21 @@ export default function Slider({
 			>
 				<IconBack />
 			</button>
-			<div className={styles.pages} ref={containerRef}>
-				<div
-					className={styles.track}
-					role="group"
-					style={{
-						'--left': `-${(index / itemsPerPage) * width}px`,
-						'--min-card-width': `${MIN_CARD_WIDTH}px`,
-					}}
-				>
-					{itemSets.map((itemSet, i) => (
-						<div className={styles.page} key={i}>
-							{itemSet}
-						</div>
-					))}
-				</div>
-			</div>
+
+			<swiper-container
+				data-testid="swiper"
+				ref={containerRef}
+				style={{
+					'--min-card-width': `${MIN_CARD_WIDTH}px`,
+				}}
+			>
+				{itemSets.map((itemSet, i) => (
+					<swiper-slide data-testid="swiper-slide" key={i}>
+						<div className={styles.page}>{itemSet}</div>
+					</swiper-slide>
+				))}
+			</swiper-container>
+
 			<button
 				className={styles.arrow}
 				onClick={(e) => {

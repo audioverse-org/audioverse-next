@@ -11,7 +11,8 @@ export default function useElementWidth(ref: RefObject<HTMLElement>): number {
 	}, []);
 
 	useEffect(() => {
-		observer?.observe(ref.current as HTMLElement);
+		if (!ref.current || !observer) return;
+		observer.observe(ref.current);
 		return () => observer?.disconnect();
 	}, [ref, observer]);
 

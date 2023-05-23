@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -41,7 +41,7 @@ describe('Slider', () => {
 	});
 
 	it('displays one item per page on mobile', async () => {
-		const w = mockWidth(1);
+		mockWidth(1);
 
 		await renderComponent({
 			props: {
@@ -50,13 +50,10 @@ describe('Slider', () => {
 			},
 		});
 
-		const container = screen.getByRole('group');
+		const container = screen.getByTestId('swiper');
+		const slides = within(container).getAllByTestId('swiper-slide');
 
-		expect(container).toHaveStyle('--left: -0px');
-
-		userEvent.click(screen.getByLabelText('next'));
-
-		expect(container).toHaveStyle(`--left: -${w}px`);
+		expect(slides).toHaveLength(2);
 	});
 
 	it('displays two items per page', async () => {
@@ -162,30 +159,6 @@ describe('Slider', () => {
 		});
 
 		expect(screen.getByLabelText('next')).toBeEnabled();
-	});
-
-	it('sets left correctly when multiple items are displayed per page', async () => {
-		const w = mockWidth(2);
-
-		await renderComponent({
-			props: {
-				...defaultProps,
-				items: [
-					<div key="1">1</div>,
-					<div key="2">2</div>,
-					<div key="3">3</div>,
-					<div key="4">4</div>,
-				],
-			},
-		});
-
-		const container = screen.getByRole('group');
-
-		expect(container).toHaveStyle('--left: -0px');
-
-		userEvent.click(screen.getByLabelText('next'));
-
-		expect(container).toHaveStyle(`--left: -${w}px`);
 	});
 
 	it('fits six items on a single page', async () => {
