@@ -41,7 +41,6 @@ export default function Slider({
 	rows = 1,
 }: SliderProps): JSX.Element {
 	const [index, setIndex] = useState(0);
-	const containerRef = useRef<HTMLSwiperElement>(null);
 	const [swiper, setSwiper] = useState<Swiper>();
 	const width = swiper?.width ?? 0;
 	const itemsPerPage = useMemo(() => calculateItemsPerPage(width, rows), [rows, width]);
@@ -56,9 +55,6 @@ export default function Slider({
 			[[]]
 		);
 	}, [items, itemsPerPage]);
-
-
-	const hasNextPage = index + itemsPerPage < items.length;
 
 	const navigate = (delta: number) => {
 		setIndex((i) => {
@@ -92,8 +88,6 @@ export default function Slider({
 
 			<LazySwiper
 				data-testid="swiper"
-				// ref={containerRef}
-				
 				on={{
 					init: (swiper) => {
 						setSwiper(swiper)
