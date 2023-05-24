@@ -43,8 +43,7 @@ export default function Slider({
 	const [index, setIndex] = useState(0);
 	const containerRef = useRef<HTMLSwiperElement>(null);
 	const [swiper, setSwiper] = useState<Swiper>();
-	// const width = useElementWidth(containerRef.current);
-	const width = 100;
+	const width = swiper?.width ?? 0;
 	const itemsPerPage = useMemo(() => calculateItemsPerPage(width, rows), [rows, width]);
 	
 	const itemSets = useMemo(() => {

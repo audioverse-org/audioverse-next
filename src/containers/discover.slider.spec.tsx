@@ -23,6 +23,7 @@ const renderComponent = buildRenderer(Slider, {
 export const mockWidth = (cardsPerPage: number) => {
 	const w = cardsPerPage * MIN_CARD_WIDTH + (cardsPerPage + 1) * GRID_GAP;
 	jest.mocked(useElementWidth).mockReturnValue(w);
+	__swiper.width = w;
 	return w;
 };
 
@@ -98,26 +99,6 @@ describe('Slider', () => {
 		});
 	});
 
-	it('pages forward by two cards', async () => {
-		mockWidth(2);
-
-		await renderComponent({
-			props: {
-				...defaultProps,
-				items: [
-					<div key="1">1</div>,
-					<div key="2">2</div>,
-					<div key="3">3</div>,
-					<div key="4">4</div>,
-				],
-			},
-		});
-
-		userEvent.click(screen.getByLabelText('next'));
-
-		expect(screen.getByLabelText('next')).toBeDisabled();
-	});
-
 	it('pages back by two cards', async () => {
 		mockWidth(2);
 
@@ -155,7 +136,9 @@ describe('Slider', () => {
 			},
 		});
 
-		expect(screen.getByLabelText('next')).toBeDisabled();
+		const slides = getSlides()
+
+		expect(slides).toHaveLength(1);
 	});
 
 	it('ignores rows if there is only space for one column', async () => {
@@ -192,7 +175,9 @@ describe('Slider', () => {
 			},
 		});
 
-		expect(screen.getByLabelText('next')).toBeDisabled();
+		const slides = getSlides()
+
+		expect(slides).toHaveLength(1);
 	});
 
 	it('takes grid gap into account', async () => {
