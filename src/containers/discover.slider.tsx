@@ -74,7 +74,9 @@ export default function Slider({
 	};
 
 	return (
-		<div className={styles.base} >
+		<div className={styles.base} style={{
+			'--min-card-width': `${MIN_CARD_WIDTH}px`,
+		}}>
 			<button
 				className={styles.arrow}
 				onClick={(e) => {
@@ -91,9 +93,7 @@ export default function Slider({
 			<LazySwiper
 				data-testid="swiper"
 				// ref={containerRef}
-				style={{
-					'--min-card-width': `${MIN_CARD_WIDTH}px`,
-				}}
+				
 				on={{
 					init: (swiper) => {
 						setSwiper(swiper)

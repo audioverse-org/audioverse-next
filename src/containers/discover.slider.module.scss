@@ -42,6 +42,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--min-card-width), 1fr));
     grid-gap: $grid-gap;
+    height: 100%;
 }
 
 .page>* {
