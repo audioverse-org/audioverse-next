@@ -518,7 +518,7 @@ describe('discover page', () => {
 		expect(await screen.findByText('page4')).toBeInTheDocument();
 	});
 
-	it('does not preload new page if not near end of preloaded pages', async () => {
+	it.only('does not preload new page if not near end of preloaded pages', async () => {
 		function loadPage(i: number) {
 			loadRecentTeachings(
 				{

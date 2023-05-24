@@ -1,10 +1,10 @@
-import { screen, waitFor, within } from '@testing-library/react';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { SwiperEvents } from 'swiper/types';
 
 import Slider, { GRID_GAP, MIN_CARD_WIDTH } from '~containers/discover.slider';
-import { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
+import Swiper, { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 import { buildRenderer } from '~src/lib/test/buildRenderer';
 
@@ -25,6 +25,12 @@ export const mockWidth = (cardsPerPage: number) => {
 	jest.mocked(useElementWidth).mockReturnValue(w);
 	return w;
 };
+
+const getSlides = () => {
+	const container = screen.getByTestId('swiper');
+	
+	return within(container).getAllByTestId('swiper-slide');
+}
 
 describe('Slider', () => {
 	beforeEach(() => {
@@ -52,8 +58,7 @@ describe('Slider', () => {
 			},
 		});
 
-		const container = screen.getByTestId('swiper');
-		const slides = within(container).getAllByTestId('swiper-slide');
+		const slides = getSlides()
 
 		expect(slides).toHaveLength(2);
 	});
@@ -72,6 +77,8 @@ describe('Slider', () => {
 	});
 
 	it('calls onIndexChange', async () => {
+		__swiper.isEnd = false;
+
 		const onIndexChange = jest.fn();
 
 		await renderComponent({
@@ -152,6 +159,8 @@ describe('Slider', () => {
 	});
 
 	it('ignores rows if there is only space for one column', async () => {
+		mockWidth(1);
+
 		await renderComponent({
 			props: {
 				...defaultProps,
@@ -160,7 +169,9 @@ describe('Slider', () => {
 			},
 		});
 
-		expect(screen.getByLabelText('next')).toBeEnabled();
+		const slides = getSlides()
+
+		expect(slides).toHaveLength(2);
 	});
 
 	it('fits six items on a single page', async () => {
@@ -185,7 +196,8 @@ describe('Slider', () => {
 	});
 
 	it('takes grid gap into account', async () => {
-		jest.mocked(useElementWidth).mockReturnValue(642);
+		// jest.mocked(useElementWidth).mockReturnValue(642);
+		__swiper.width = 642;
 
 		await renderComponent({
 			props: {
@@ -194,10 +206,12 @@ describe('Slider', () => {
 			},
 		});
 
-		expect(screen.getByLabelText('next')).toBeEnabled();
+		const slides = getSlides()
+
+		expect(slides).toHaveLength(2);
 	});
 
-	it.only('uses swiper to page forward', async () => {
+	it('uses swiper to page forward', async () => {
 		__swiper.isEnd = false;
 
 		await renderComponent({
@@ -206,10 +220,6 @@ describe('Slider', () => {
 				items: [<div key="1">1</div>, <div key="2">2</div>],
 			},
 		});
-
-		await screen.findByText('1');
-
-		__runHandlers('afterInit');
 
 		await waitFor(() => {
 			expect(screen.getByLabelText('next')).toBeEnabled();

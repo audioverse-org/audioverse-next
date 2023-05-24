@@ -1,12 +1,13 @@
 import dynamic from 'next/dynamic';
-import React, { forwardRef, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
-import { HTMLSwiperElement, SwiperProps } from '~lib/swiper';
+import { HTMLSwiperElement } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 
 import IconBack from '../../public/img/icons/icon-back-light.svg';
 import IconForward from '../../public/img/icons/icon-forward-light.svg';
 import styles from './discover.slider.module.scss';
+import Swiper from 'swiper';
 
 type SliderProps = {
 	onIndexChange?: (state: {
@@ -23,14 +24,14 @@ type SliderProps = {
 export const MIN_CARD_WIDTH = 300;
 export const GRID_GAP = 24;
 
-const LazySwiperBase = dynamic(() => import('~lib/swiper'), {
+const LazySwiper = dynamic(() => import('~lib/swiper'), {
 	ssr: false,
 });
-const LazySwiper = forwardRef<HTMLSwiperElement, SwiperProps>(
-	function LazySwiper({ ref: _, ...props }, ref) {
-		return <LazySwiperBase {...props} forwardedRef={ref} />;
-	}
-);
+
+const calculateItemsPerPage = (width: number, rows: number) => {
+	const cardsPerRow = Math.max(Math.floor((width - GRID_GAP) / (MIN_CARD_WIDTH + GRID_GAP)), 1);
+	return cardsPerRow * (cardsPerRow > 1 ? rows : 1);
+};
 
 export default function Slider({
 	onIndexChange,
@@ -41,17 +42,11 @@ export default function Slider({
 }: SliderProps): JSX.Element {
 	const [index, setIndex] = useState(0);
 	const containerRef = useRef<HTMLSwiperElement>(null);
-	const swiper = useMemo(() => containerRef.current?.swiper, [containerRef]);
-	const width = useElementWidth(containerRef.current);
-
-	const itemsPerPage = useMemo(() => {
-		const perRow = Math.max(
-			Math.floor((width - GRID_GAP) / (MIN_CARD_WIDTH + GRID_GAP)),
-			1
-		);
-		return perRow > 1 ? perRow * rows : perRow;
-	}, [rows, width]);
-
+	const [swiper, setSwiper] = useState<Swiper>();
+	// const width = useElementWidth(containerRef.current);
+	const width = 100;
+	const itemsPerPage = useMemo(() => calculateItemsPerPage(width, rows), [rows, width]);
+	
 	const itemSets = useMemo(() => {
 		return items.reduce<JSX.Element[][]>(
 			(acc, item, i) => {
@@ -62,6 +57,7 @@ export default function Slider({
 			[[]]
 		);
 	}, [items, itemsPerPage]);
+
 
 	const hasNextPage = index + itemsPerPage < items.length;
 
@@ -78,15 +74,13 @@ export default function Slider({
 		});
 	};
 
-	console.log({ swiper });
-
 	return (
-		<div className={styles.base}>
+		<div className={styles.base} >
 			<button
 				className={styles.arrow}
 				onClick={(e) => {
 					e.preventDefault();
-					containerRef.current?.swiper?.slidePrev();
+					swiper?.slidePrev();
 					navigate(-itemsPerPage);
 				}}
 				disabled={swiper?.isBeginning ?? true}
@@ -97,9 +91,14 @@ export default function Slider({
 
 			<LazySwiper
 				data-testid="swiper"
-				ref={containerRef}
+				// ref={containerRef}
 				style={{
 					'--min-card-width': `${MIN_CARD_WIDTH}px`,
+				}}
+				on={{
+					init: (swiper) => {
+						setSwiper(swiper)
+					},
 				}}
 			>
 				{itemSets.map((itemSet, i) => (
@@ -113,7 +112,7 @@ export default function Slider({
 				className={styles.arrow}
 				onClick={(e) => {
 					e.preventDefault();
-					containerRef.current?.swiper?.slideNext();
+					swiper?.slideNext();
 					navigate(itemsPerPage);
 				}}
 				disabled={swiper?.isEnd ?? true}

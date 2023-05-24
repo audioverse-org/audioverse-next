@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, PropsWithChildren } from 'react';
+import React, { ForwardedRef, forwardRef, PropsWithChildren, useEffect, useState } from 'react';
 import * as swiper from 'swiper';
 import { SwiperProps as _SwiperProps } from 'swiper/react';
 
@@ -10,6 +10,7 @@ export function register() {
 
 export type HTMLSwiperElement = HTMLDivElement & {
 	swiper?: swiper.Swiper;
+	initialize: () => void;
 };
 
 export type SwiperProps = PropsWithChildren<
@@ -18,14 +19,53 @@ export type SwiperProps = PropsWithChildren<
 		HTMLElement
 	>
 > & {
-	forwardedRef?: ForwardedRef<HTMLSwiperElement>;
+	onInit?: (swiper: swiper.Swiper) => void;
 };
 
-const Swiper = forwardRef<HTMLSwiperElement, SwiperProps>(function Swiper(
-	props: SwiperProps,
-	ref
+const Swiper = function Swiper(
+	{children, ...props}: SwiperProps
 ) {
-	return <swiper-container {...props} ref={props.forwardedRef ?? ref} />;
-});
+	return <swiper-container ref={(el: HTMLSwiperElement) => {
+		if (!el) return;
+		Object.assign(el, props);
+		el.initialize();
+	}} init={false}>{children}</swiper-container>;
+};
 
 export default Swiper;
+
+type HTMLSwiperInitEvent = CustomEvent<[swiper.Swiper]>;
+
+function isSwiperInitEvent(
+	event: Event
+): event is HTMLSwiperInitEvent {
+	return event.type === 'init';
+}
+
+export function useSwiper(el: HTMLSwiperElement | null) {
+	const [swiper, setSwiper] = useState<swiper.Swiper | null>(null);
+
+	useEffect(() => {
+		if (!el) return;
+
+		const swiper = el.swiper;
+		if (swiper) {
+			setSwiper(swiper);
+			return;
+		}
+
+		const handler = (event: Event) => {
+			if (isSwiperInitEvent(event)) {
+				setSwiper(event.detail[0]);
+			}
+		};
+
+		el.addEventListener('init', handler);
+
+		return () => {
+			el.removeEventListener('init', handler);
+		};
+	}, [el]);
+
+	return swiper;
+}

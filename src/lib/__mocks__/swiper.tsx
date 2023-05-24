@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import * as swiper from 'swiper';
 import { SwiperEvents } from 'swiper/types';
 import { ValueOf } from 'type-fest';
@@ -9,6 +9,7 @@ declare module '~lib/swiper' {
 	export const __eventHandlers: EventHandlers;
 	export const __swiper: swiper.Swiper;
 	export function __runHandlers(event: keyof SwiperEvents, ...args: any): void;
+	export function __resetSwiper(): void;
 }
 
 type EventHandlers = NonNullable<
@@ -39,31 +40,27 @@ function makeSwiper(): Partial<swiper.Swiper> {
 
 const __swiper = makeSwiper();
 
-beforeEach(() => {
-	__swiper.activeIndex = 0;
-	__swiper.isBeginning = true;
-	__swiper.isEnd = true;
-});
+export function __resetSwiper() {
+	Object.assign(__swiper, makeSwiper());
+}
 
 export { __swiper };
 
 export const register = jest.fn();
 
-const Swiper = forwardRef<HTMLSwiperElement, SwiperProps>(function Swiper(
-	props: SwiperProps,
-	ref
+const Swiper = function Swiper(
+	props: SwiperProps
 ) {
 	return (
 		<swiper-container
 			observer={true}
 			{...props}
-			ref={(el) => {
-				if (el) (el as HTMLSwiperElement).swiper = __swiper as swiper.Swiper;
-				const r = props.forwardedRef ?? ref;
-				if (r) (r as any).current = el;
+			ref={(el: HTMLSwiperElement) => {
+				if (!el) return;
+				props.on?.init?.(__swiper as swiper.Swiper);
 			}}
 		/>
 	);
-});
+};
 
 export default Swiper;
