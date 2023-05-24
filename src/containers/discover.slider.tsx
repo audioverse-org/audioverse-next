@@ -41,6 +41,7 @@ export default function Slider({
 }: SliderProps): JSX.Element {
 	const [index, setIndex] = useState(0);
 	const containerRef = useRef<HTMLSwiperElement>(null);
+	const swiper = useMemo(() => containerRef.current?.swiper, [containerRef]);
 	const width = useElementWidth(containerRef.current);
 
 	const itemsPerPage = useMemo(() => {
@@ -77,6 +78,8 @@ export default function Slider({
 		});
 	};
 
+	console.log({ swiper });
+
 	return (
 		<div className={styles.base}>
 			<button
@@ -86,7 +89,7 @@ export default function Slider({
 					containerRef.current?.swiper?.slidePrev();
 					navigate(-itemsPerPage);
 				}}
-				disabled={index < 1}
+				disabled={swiper?.isBeginning ?? true}
 				aria-label={previous}
 			>
 				<IconBack />
@@ -113,7 +116,7 @@ export default function Slider({
 					containerRef.current?.swiper?.slideNext();
 					navigate(itemsPerPage);
 				}}
-				disabled={!hasNextPage}
+				disabled={swiper?.isEnd ?? true}
 				aria-label={next}
 			>
 				<IconForward />

@@ -1,9 +1,10 @@
-import { screen, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { SwiperEvents } from 'swiper/types';
 
 import Slider, { GRID_GAP, MIN_CARD_WIDTH } from '~containers/discover.slider';
-import { __swiper } from '~lib/swiper';
+import { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 import { buildRenderer } from '~src/lib/test/buildRenderer';
 
@@ -196,7 +197,9 @@ describe('Slider', () => {
 		expect(screen.getByLabelText('next')).toBeEnabled();
 	});
 
-	it('uses swiper to page forward', async () => {
+	it.only('uses swiper to page forward', async () => {
+		__swiper.isEnd = false;
+
 		await renderComponent({
 			props: {
 				...defaultProps,
@@ -205,6 +208,12 @@ describe('Slider', () => {
 		});
 
 		await screen.findByText('1');
+
+		__runHandlers('afterInit');
+
+		await waitFor(() => {
+			expect(screen.getByLabelText('next')).toBeEnabled();
+		});
 
 		userEvent.click(screen.getByLabelText('next'));
 
@@ -212,6 +221,8 @@ describe('Slider', () => {
 	});
 
 	it('uses swiper to page back', async () => {
+		__swiper.isBeginning = false;
+
 		await renderComponent({
 			props: {
 				...defaultProps,
@@ -221,7 +232,6 @@ describe('Slider', () => {
 
 		await screen.findByText('1');
 
-		userEvent.click(screen.getByLabelText('next'));
 		userEvent.click(screen.getByLabelText('previous'));
 
 		expect(__swiper.slidePrev).toBeCalled();
