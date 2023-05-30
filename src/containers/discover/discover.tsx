@@ -62,12 +62,11 @@ function Section<T, N>({
 		return pages.flatMap(selectNodes).filter((n): n is Node<N> => !!n);
 	}, [pages, selectNodes]);
 
-	const preload = useCallback(({index, total}: {
+	const preload = useCallback(({ index, total }: {
 		index: number;
 		total: number;
 	}) => {
 		if (index + PRELOAD_COUNT >= total) {
-			// console.log('fetching next page')
 			fetchNextPage()
 		}
 	}, [fetchNextPage]);
@@ -109,10 +108,10 @@ function RecentTeachings(): JSX.Element {
 			getNextPageParam: (last: Maybe<GetDiscoverRecentTeachingsQuery>) =>
 				last?.recentTeachings.pageInfo.hasNextPage
 					? {
-							language,
-							first: 6,
-							after: last.recentTeachings.pageInfo.endCursor,
-					  }
+						language,
+						first: 6,
+						after: last.recentTeachings.pageInfo.endCursor,
+					}
 					: undefined,
 		}
 	);
@@ -160,10 +159,10 @@ function TrendingTeachings(): JSX.Element {
 			getNextPageParam: (last: Maybe<GetDiscoverTrendingTeachingsQuery>) =>
 				last?.trendingTeachings.pageInfo.hasNextPage
 					? {
-							language,
-							first: 6,
-							after: last.trendingTeachings.pageInfo.endCursor,
-					  }
+						language,
+						first: 6,
+						after: last.trendingTeachings.pageInfo.endCursor,
+					}
 					: undefined,
 		}
 	);
@@ -210,10 +209,10 @@ function FeaturedTeachings(): JSX.Element {
 			getNextPageParam: (last: Maybe<GetDiscoverFeaturedTeachingsQuery>) =>
 				last?.featuredTeachings.pageInfo.hasNextPage
 					? {
-							language,
-							first: 3,
-							after: last.featuredTeachings.pageInfo.endCursor,
-					  }
+						language,
+						first: 3,
+						after: last.featuredTeachings.pageInfo.endCursor,
+					}
 					: undefined,
 		}
 	);
@@ -259,10 +258,10 @@ function BlogPosts(): JSX.Element {
 			getNextPageParam: (last: Maybe<GetDiscoverBlogPostsQuery>) =>
 				last?.blogPosts.pageInfo.hasNextPage
 					? {
-							language,
-							first: 3,
-							after: last.blogPosts.pageInfo.endCursor,
-					  }
+						language,
+						first: 3,
+						after: last.blogPosts.pageInfo.endCursor,
+					}
 					: undefined,
 		}
 	);
@@ -313,10 +312,10 @@ function StorySeasons(): JSX.Element {
 			getNextPageParam: (last: Maybe<GetDiscoverStorySeasonsQuery>) =>
 				last?.storySeasons.pageInfo.hasNextPage
 					? {
-							language,
-							first: 3,
-							after: last.storySeasons.pageInfo.endCursor,
-					  }
+						language,
+						first: 3,
+						after: last.storySeasons.pageInfo.endCursor,
+					}
 					: undefined,
 		}
 	);
@@ -369,10 +368,10 @@ function Conferences(): JSX.Element {
 			getNextPageParam: (last: Maybe<GetDiscoverConferencesQuery>) =>
 				last?.conferences.pageInfo.hasNextPage
 					? {
-							language,
-							first: 3,
-							after: last.conferences.pageInfo.endCursor,
-					  }
+						language,
+						first: 3,
+						after: last.conferences.pageInfo.endCursor,
+					}
 					: undefined,
 		}
 	);

@@ -23,21 +23,9 @@ export type SwiperProps = PropsWithChildren<
 };
 
 const Swiper = React.memo(function Swiper(
-	{children, ...props}: SwiperProps
+	{ children, ...props }: SwiperProps
 ) {
 	const ref = useRef<HTMLSwiperElement>(null);
-	console.log('swiper render')
-	
-	// useEffect(() => {
-	// 	// console.log('props change');
-	// 	// console.dir(props,{
-	// 	// 	depth: null,
-	// 	// })
-	// }, [props])
-
-	// useEffect(() => {
-	// 	// console.log('children change');
-	// }, [children])
 
 	useEffect(() => {
 		if (!ref.current) {
@@ -53,7 +41,6 @@ const Swiper = React.memo(function Swiper(
 		}
 
 		if (!ref.current.swiper) {
-			console.log('initializing')
 			ref.current.initialize();
 		}
 	}, [ref, props])
