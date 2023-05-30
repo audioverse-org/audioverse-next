@@ -30,14 +30,13 @@ const calculateItemsPerPage = (width: number, rows: number) => {
 	return cardsPerRow * (cardsPerRow > 1 ? rows : 1);
 };
 
-const makeSlides = (items: JSX.Element[], rows: number, swiper?: Swiper): JSX.Element[] => {
-	console.log('makeSlides', swiper?.width)
+const makeSlides = (items: JSX.Element[], rows: number, width?: number): JSX.Element[] => {
+	console.log('makeSlides', width)
 
-	if (!swiper) {
+	if (!width) {
 		return [];
 	}
 
-	const width = swiper.width;
 	const itemsPerPage = calculateItemsPerPage(width, rows);
 
 	const itemSets = items.reduce<JSX.Element[][]>(
@@ -66,12 +65,13 @@ export default function Slider({
 	const [swiper, setSwiper] = useState<Swiper>();
 	const [isBeginning, setIsBeginning] = useState(true);
 	const [isEnd, setIsEnd] = useState(true);
+	const [width, setWidth] = useState<number>();
 
 	const slides = useMemo(() => makeSlides(
 		items,
 		rows,
-		swiper
-	), [items, rows, swiper]);
+		width
+	), [items, rows, width]);
 
 	const handlers = useMemo(() => {
 		return {
@@ -79,6 +79,7 @@ export default function Slider({
 				setSwiper(swiper)
 				setIsBeginning(swiper.isBeginning)
 				setIsEnd(swiper.isEnd)
+				setWidth(swiper.width)
 			},
 			transitionEnd: (swiper: Swiper) => {
 				setIsBeginning(swiper.isBeginning)
@@ -95,6 +96,9 @@ export default function Slider({
 					index: swiper.realIndex,
 					total: swiper.slides.length,
 				}))
+			},
+			resize: (swiper: Swiper) => {
+				setWidth(swiper.width)
 			}
 		}
 	}, [onIndexChange]);
