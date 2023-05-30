@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
+import { __swiper } from '~lib/swiper';
 import { buildLoader } from '~lib/test/buildLoader';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import Discover, { getStaticProps } from '~pages/[language]/discover';
@@ -25,7 +26,6 @@ import {
 	GetDiscoverTrendingTeachingsQuery,
 } from './__generated__/index';
 import { mockWidth } from './index.slider.spec';
-import { __swiper } from '~lib/swiper';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 

@@ -31,11 +31,7 @@ const calculateItemsPerPage = (width: number, rows: number) => {
 };
 
 const makeSlides = (items: JSX.Element[], rows: number, width?: number): JSX.Element[] => {
-	console.log('makeSlides', width)
-
-	if (!width) {
-		return [];
-	}
+	if (!width) return [];
 
 	const itemsPerPage = calculateItemsPerPage(width, rows);
 
