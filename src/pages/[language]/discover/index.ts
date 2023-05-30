@@ -1,13 +1,13 @@
+import { DehydratedState } from '@tanstack/react-query';
 import {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
 	GetStaticPropsResult,
 } from 'next';
-import { DehydratedState } from 'react-query';
 
-import { prefetchQueries } from '~containers/__generated__/discover';
 import { IBaseProps } from '~containers/base';
-import Discover from '~containers/discover';
+import { prefetchQueries } from '~containers/discover/__generated__/discover';
+import Discover from '~containers/discover/discover';
 import { REVALIDATE } from '~lib/constants';
 import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';

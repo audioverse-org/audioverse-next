@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../../components/molecules/__generat
 import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryHistoryPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -82,7 +82,7 @@ export async function getLibraryHistoryPageData<T>(
 ): Promise<GetLibraryHistoryPageDataQuery> {
 	return fetchApi(GetLibraryHistoryPageDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {

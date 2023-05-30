@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
-import { useContext } from 'react';
 import {
 	UseMutateFunction,
 	useMutation,
 	useQuery,
 	useQueryClient,
-} from 'react-query';
+} from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
 import { GlobalModalsContext } from '~components/templates/andGlobalModals';
 import { getSessionToken } from '~lib/cookies';
@@ -22,7 +22,7 @@ export function useIsFavorited(
 	queryKey: IQueryKey,
 	isFavoritedQueryFn: () => boolean | Promise<boolean>,
 	setFavoritedQueryFn: (isFavorited: boolean) => Promise<boolean>,
-	invalidateQueryKeys?: IQueryKey[]
+	invalidateQueryKeys: IQueryKey[] = []
 ): IUseIsFavoritedResult {
 	const context = useContext(GlobalModalsContext);
 	const queryClient = useQueryClient();
@@ -43,17 +43,16 @@ export function useIsFavorited(
 
 			queryClient.setQueryData(queryKey, !isFavorited);
 
-			return () => queryClient.setQueryData(queryKey, snapshot);
+			return { snapshot };
 		},
-		onError: (err, variables, rollback) => {
-			if (rollback) {
-				rollback();
+		onError: (err, variables, context) => {
+			if (context?.snapshot !== undefined) {
+				queryClient.setQueryData(queryKey, context.snapshot);
 			}
 		},
-		onSuccess: () => {
-			[...(invalidateQueryKeys || []), ['getLibraryData']].map((key) =>
-				queryClient.invalidateQueries(key)
-			);
+		onSettled: () => {
+			const keys = [queryKey, ...invalidateQueryKeys, ['getLibraryData']];
+			keys.map((k) => queryClient.invalidateQueries(k));
 		},
 	});
 

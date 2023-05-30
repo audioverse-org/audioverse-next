@@ -1,4 +1,4 @@
-import { dehydrate, DehydratedState, QueryClient } from 'react-query';
+import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
 
 export default function serializableDehydrate(
 	client: QueryClient

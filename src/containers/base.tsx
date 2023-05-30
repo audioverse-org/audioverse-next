@@ -1,12 +1,12 @@
-import Head from 'next/head';
-import Script from 'next/script';
-import React, { useEffect } from 'react';
 import {
 	DehydratedState,
 	Hydrate,
 	QueryClient,
 	QueryClientProvider,
-} from 'react-query';
+} from '@tanstack/react-query';
+import Head from 'next/head';
+import Script from 'next/script';
+import React, { useEffect } from 'react';
 
 import withIntl from '~components/HOCs/withIntl';
 import LoadingIndicator from '~components/molecules/loadingIndicator';

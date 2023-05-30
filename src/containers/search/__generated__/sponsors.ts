@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardSponsorFragmentDoc } from '../../../components/molecules/card/__generated__/sponsor';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsSponsorsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -59,7 +59,7 @@ export async function getSearchResultsSponsors<T>(
 ): Promise<GetSearchResultsSponsorsQuery> {
 	return fetchApi(GetSearchResultsSponsorsDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {

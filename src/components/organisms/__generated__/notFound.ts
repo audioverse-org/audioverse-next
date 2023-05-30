@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../molecules/__generated__/personLoc
 import { CardHatSponsorFragmentDoc } from '../../molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../templates/__generated__/andMiniplayer';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetNotFoundPageDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -61,7 +61,7 @@ export async function getNotFoundPageData<T>(
 ): Promise<GetNotFoundPageDataQuery> {
 	return fetchApi(GetNotFoundPageDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {

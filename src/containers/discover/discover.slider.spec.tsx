@@ -2,10 +2,11 @@ import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import Slider, { GRID_GAP, MIN_CARD_WIDTH } from '~containers/discover.slider';
 import { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 import { buildRenderer } from '~src/lib/test/buildRenderer';
+
+import Slider, { GRID_GAP, MIN_CARD_WIDTH } from './discover.slider';
 
 jest.mock('~lib/hooks/useElementWidth');
 

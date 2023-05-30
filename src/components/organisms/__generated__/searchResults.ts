@@ -10,7 +10,7 @@ import { CardSequenceFragmentDoc } from '../../molecules/card/__generated__/sequ
 import { CardCollectionFragmentDoc } from '../../molecules/card/__generated__/collection';
 import { CardSponsorFragmentDoc } from '../../molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../molecules/card/__generated__/person';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchRecordingsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -490,7 +490,7 @@ export async function getSearchStoryPrograms<T>(
 ): Promise<GetSearchStoryProgramsQuery> {
 	return fetchApi(GetSearchStoryProgramsDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {

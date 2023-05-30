@@ -9,7 +9,7 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type * as VideoJs from 'video.js';
 
 import { getSessionToken } from '~lib/cookies';

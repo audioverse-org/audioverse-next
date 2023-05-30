@@ -8,7 +8,7 @@ import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__gener
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -210,7 +210,7 @@ export async function getPresenterDetailPathsData<T>(
 ): Promise<GetPresenterDetailPathsDataQuery> {
 	return fetchApi(GetPresenterDetailPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {

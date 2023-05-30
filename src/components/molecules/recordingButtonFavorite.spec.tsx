@@ -10,7 +10,6 @@ import { setRecordingFavorited } from '~lib/api/setRecordingFavorited';
 import { BaseColors } from '~lib/constants';
 import loadControlledPromise from '~lib/test/loadControlledPromise';
 import renderWithProviders from '~lib/test/renderWithProviders';
-import withMutedReactQueryLogger from '~lib/test/withMutedReactQueryLogger';
 
 jest.mock('~lib/api/recordingIsFavorited');
 jest.mock('~lib/api/setRecordingFavorited');
@@ -91,19 +90,17 @@ describe('recording favorite button', () => {
 	});
 
 	it('rolls back state if API fails', async () => {
-		await withMutedReactQueryLogger(async () => {
-			const { button, findByLabelText } = await renderComponent();
+		const { button } = await renderComponent();
 
-			const { reject } = loadControlledPromise(mockSetRecordingFavorited);
+		const { reject } = loadControlledPromise(mockSetRecordingFavorited);
 
-			userEvent.click(button);
+		userEvent.click(button);
 
-			await expect(findByLabelText('Unfavorite')).resolves.toBeInTheDocument();
+		expect(await screen.findByLabelText('Unfavorite')).toBeInTheDocument();
 
-			reject();
+		reject();
 
-			await expect(findByLabelText('Favorite')).resolves.toBeInTheDocument();
-		});
+		expect(await screen.findByLabelText('Favorite')).toBeInTheDocument();
 	});
 
 	it('does not roll back state if API succeeds', async () => {

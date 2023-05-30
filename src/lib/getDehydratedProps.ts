@@ -1,5 +1,5 @@
 import { GetServerSidePropsResult } from 'next';
-import { DehydratedState, QueryClient } from 'react-query';
+import { DehydratedState, QueryClient } from '@tanstack/react-query';
 
 import serializableDehydrate from './serializableDehydrate';
 

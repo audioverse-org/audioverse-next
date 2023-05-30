@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -113,7 +113,7 @@ export async function getAudiobookListPathsData<T>(
 ): Promise<GetAudiobookListPathsDataQuery> {
 	return fetchApi(GetAudiobookListPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {

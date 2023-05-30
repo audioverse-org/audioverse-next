@@ -1,3 +1,4 @@
+import { hydrate, QueryClient } from '@tanstack/react-query';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
@@ -7,7 +8,6 @@ import { GetServerSidePropsContext } from 'next';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils, { act } from 'react-dom/test-utils';
-import { hydrate, QueryClient } from 'react-query';
 
 import { fetchApi } from '~lib/api/fetchApi';
 import { login } from '~lib/api/login';

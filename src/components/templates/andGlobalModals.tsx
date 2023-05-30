@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React, { ReactNode, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import Button from '~components/molecules/button';
 import { refetchUserQueries } from '~lib/api/login';

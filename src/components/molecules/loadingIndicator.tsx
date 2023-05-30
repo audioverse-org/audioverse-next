@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { useEffect } from 'react';
-import { useIsFetching } from 'react-query';
+import { useIsFetching } from '@tanstack/react-query';
 
 import useRouterLoading from '~lib/useRouterLoading';
 

@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../components/molecules/__genera
 import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSongDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -117,7 +117,7 @@ export async function getSongDetailStaticPaths<T>(
 ): Promise<GetSongDetailStaticPathsQuery> {
 	return fetchApi(GetSongDetailStaticPathsDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {

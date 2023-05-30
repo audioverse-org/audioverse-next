@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -111,7 +111,7 @@ export async function getCollectionListPathsData<T>(
 ): Promise<GetCollectionListPathsDataQuery> {
 	return fetchApi(GetCollectionListPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {

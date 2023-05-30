@@ -1,6 +1,6 @@
 import * as Types from '../../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SponsorListEntryFragment = { __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null };
 
@@ -61,7 +61,7 @@ export async function getSponsorListLetterCounts<T>(
 ): Promise<GetSponsorListLetterCountsQuery> {
 	return fetchApi(GetSponsorListLetterCountsDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
 
 export async function prefetchQueries<T>(
 	vars: {
