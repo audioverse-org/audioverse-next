@@ -27,9 +27,9 @@ import {
 	useInfiniteGetDiscoverRecentTeachingsQuery,
 	useInfiniteGetDiscoverStorySeasonsQuery,
 	useInfiniteGetDiscoverTrendingTeachingsQuery,
-} from './__generated__/discover';
+} from './__generated__/index';
 import styles from './discover.module.scss';
-import Slider from './discover.slider';
+import Slider from './index.slider';
 
 const PRELOAD_COUNT = 3;
 

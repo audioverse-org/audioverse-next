@@ -23,7 +23,7 @@ import {
 	GetDiscoverStorySeasonsQuery,
 	GetDiscoverTrendingTeachingsDocument,
 	GetDiscoverTrendingTeachingsQuery,
-} from './__generated__/discover';
+} from './__generated__/index';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 
