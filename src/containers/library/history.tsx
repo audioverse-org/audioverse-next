@@ -1,6 +1,6 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useInfiniteQuery } from '@tanstack/react-query';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
 import Button from '~components/molecules/button';

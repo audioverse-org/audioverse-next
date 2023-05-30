@@ -1,7 +1,7 @@
+import { UseInfiniteQueryResult } from '@tanstack/react-query';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React, { useCallback, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseInfiniteQueryResult } from '@tanstack/react-query';
 
 import LineHeading from '~components/atoms/lineHeading';
 import CardCollection from '~components/molecules/card/collection';

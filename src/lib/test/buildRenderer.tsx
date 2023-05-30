@@ -1,7 +1,7 @@
+import { QueryClient } from '@tanstack/react-query';
 import { RenderResult } from '@testing-library/react';
 import { __mockedRouter, NextRouter } from 'next/router';
 import React, { ComponentType } from 'react';
-import { QueryClient } from '@tanstack/react-query';
 
 import renderWithProviders from '~lib/test/renderWithProviders';
 

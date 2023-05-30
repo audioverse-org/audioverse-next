@@ -1,6 +1,6 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useQueryClient } from '@tanstack/react-query';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
 import Checkbox from '~components/molecules/form/checkbox';
