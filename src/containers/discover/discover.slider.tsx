@@ -42,8 +42,6 @@ const makeSlides = (items: JSX.Element[], rows: number, swiper?: Swiper): JSX.El
 		[[]]
 	)
 
-	console.log('slide count', itemSets.length)
-
 	return itemSets.map((itemSet, i) => (
 		<swiper-slide data-testid="swiper-slide" key={i}>
 			<div className={styles.page}>{itemSet}</div>
@@ -69,7 +67,6 @@ export default function Slider({
 	), [items, rows, swiper]);
 
 	const handlers = useMemo(() => {
-		console.log('onIndexChange change')
 		return {
 			init: (swiper: Swiper) => {
 				setSwiper(swiper)
