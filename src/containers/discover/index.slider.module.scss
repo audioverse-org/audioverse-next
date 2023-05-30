@@ -27,27 +27,20 @@
     transition: none;
 }
 
-.pages {
+.base swiper-container {
     flex-grow: 1;
-    overflow: hidden;
 }
 
-.track {
-    display: flex;
-    transition: transform $transition-medium ease-in-out;
-    transform: translateX(var(--left));
-    position: relative;
-}
-
-.page {
+.base swiper-slide {
     padding: $grid-gap;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--min-card-width), 1fr));
     grid-gap: $grid-gap;
     height: 100%;
+    width: 100%;
 }
 
-.page>* {
+.base swiper-slide>* {
     width: 100%;
     max-width: 500px;
     margin-left: auto;

@@ -31,7 +31,13 @@ const calculateItemsPerPage = (width: number, rows: number) => {
 };
 
 const makeSlides = (items: JSX.Element[], rows: number, swiper?: Swiper): JSX.Element[] => {
-	const width = swiper?.width ?? 0;
+	console.log('makeSlides', swiper?.width)
+
+	if (!swiper) {
+		return [];
+	}
+
+	const width = swiper.width;
 	const itemsPerPage = calculateItemsPerPage(width, rows);
 
 	const itemSets = items.reduce<JSX.Element[][]>(
@@ -44,8 +50,8 @@ const makeSlides = (items: JSX.Element[], rows: number, swiper?: Swiper): JSX.El
 	)
 
 	return itemSets.map((itemSet, i) => (
-		<swiper-slide data-testid="swiper-slide" key={i}>
-			<div className={styles.page}>{itemSet}</div>
+		<swiper-slide className={styles.page} data-testid="swiper-slide" key={i}>
+			{itemSet}
 		</swiper-slide>
 	))
 }
