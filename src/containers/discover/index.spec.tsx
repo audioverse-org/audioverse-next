@@ -24,6 +24,8 @@ import {
 	GetDiscoverTrendingTeachingsDocument,
 	GetDiscoverTrendingTeachingsQuery,
 } from './__generated__/index';
+import { mockWidth } from './index.slider.spec';
+import { __swiper } from '~lib/swiper';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 
@@ -183,6 +185,7 @@ describe('discover page', () => {
 			language: 'en',
 		});
 		loadData();
+		mockWidth(1)
 	});
 
 	it('renders titles', async () => {
@@ -192,6 +195,8 @@ describe('discover page', () => {
 	});
 
 	it('disables next button if no next page', async () => {
+		__swiper.isEnd = true;
+
 		await renderPage();
 
 		const next = await screen.findByLabelText('Next recent teachings');

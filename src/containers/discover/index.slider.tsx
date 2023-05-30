@@ -109,10 +109,7 @@ export default function Slider({
 		}}>
 			<button
 				className={styles.arrow}
-				onClick={(e) => {
-					e.preventDefault();
-					swiper?.slidePrev();
-				}}
+				onClick={() => swiper?.slidePrev()}
 				disabled={isBeginning}
 				aria-label={previous}
 			>
@@ -123,10 +120,7 @@ export default function Slider({
 
 			<button
 				className={styles.arrow}
-				onClick={(e) => {
-					e.preventDefault();
-					swiper?.slideNext();
-				}}
+				onClick={() => swiper?.slideNext()}
 				disabled={isEnd}
 				aria-label={next}
 			>
