@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAccountPlaylistsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -58,6 +58,7 @@ export const useInfiniteGetAccountPlaylistsPageDataQuery = <
       TData = GetAccountPlaylistsPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAccountPlaylistsPageDataQueryVariables,
       variables: GetAccountPlaylistsPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAccountPlaylistsPageDataQuery, TError, TData>
     ) =>{
@@ -99,13 +100,16 @@ export async function addAccountPlaylist<T>(
 ): Promise<AddAccountPlaylistMutation> {
 	return fetchApi(AddAccountPlaylistDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getAccountPlaylistsPageData: ExactAlt<T, GetAccountPlaylistsPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

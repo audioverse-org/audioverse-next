@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type CollectionIsFavoritedQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -34,6 +34,7 @@ export const useInfiniteCollectionIsFavoritedQuery = <
       TData = CollectionIsFavoritedQuery,
       TError = unknown
     >(
+      pageParamKey: keyof CollectionIsFavoritedQueryVariables,
       variables: CollectionIsFavoritedQueryVariables,
       options?: UseInfiniteQueryOptions<CollectionIsFavoritedQuery, TError, TData>
     ) =>{
@@ -51,13 +52,16 @@ export async function collectionIsFavorited<T>(
 ): Promise<CollectionIsFavoritedQuery> {
 	return fetchApi(CollectionIsFavoritedDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		collectionIsFavorited: ExactAlt<T, CollectionIsFavoritedQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

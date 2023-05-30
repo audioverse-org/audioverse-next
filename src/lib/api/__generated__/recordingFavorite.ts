@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useMutation, UseMutationOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type RecordingFavoriteMutationVariables = Types.Exact<{
   id: Types.Scalars['ID'];

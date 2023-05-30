@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCustomDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -44,6 +44,7 @@ export const useInfiniteGetCustomDetailPageDataQuery = <
       TData = GetCustomDetailPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetCustomDetailPageDataQueryVariables,
       variables: GetCustomDetailPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetCustomDetailPageDataQuery, TError, TData>
     ) =>{
@@ -81,6 +82,7 @@ export const useInfiniteGetCustomDetailPageStaticPathsQuery = <
       TData = GetCustomDetailPageStaticPathsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetCustomDetailPageStaticPathsQueryVariables,
       variables: GetCustomDetailPageStaticPathsQueryVariables,
       options?: UseInfiniteQueryOptions<GetCustomDetailPageStaticPathsQuery, TError, TData>
     ) =>{
@@ -104,13 +106,16 @@ export async function getCustomDetailPageStaticPaths<T>(
 ): Promise<GetCustomDetailPageStaticPathsQuery> {
 	return fetchApi(GetCustomDetailPageStaticPathsDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getCustomDetailPageData: ExactAlt<T, GetCustomDetailPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

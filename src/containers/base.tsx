@@ -1,7 +1,6 @@
 import {
 	DehydratedState,
 	Hydrate,
-	QueryClient,
 	QueryClientProvider,
 } from '@tanstack/react-query';
 import Head from 'next/head';
@@ -14,6 +13,7 @@ import AndGlobalModals from '~components/templates/andGlobalModals';
 import AndMiniplayer from '~components/templates/andMiniplayer';
 import AndNavigation from '~components/templates/andNavigation';
 import AndPlaybackContext from '~components/templates/andPlaybackContext';
+import makeQueryClient from '~src/lib/makeQueryClient';
 
 import styles from './base.module.scss';
 
@@ -25,13 +25,7 @@ export interface IBaseProps {
 	dehydratedState?: DehydratedState;
 }
 
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			refetchOnWindowFocus: false,
-		},
-	},
-});
+const queryClient = makeQueryClient();
 
 export const GA_TRACKING_ID = 'GTM-5HNWR6';
 

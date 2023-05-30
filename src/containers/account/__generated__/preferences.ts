@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAccountPreferencesDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -52,6 +52,7 @@ export const useInfiniteGetAccountPreferencesDataQuery = <
       TData = GetAccountPreferencesDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAccountPreferencesDataQueryVariables,
       variables?: GetAccountPreferencesDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAccountPreferencesDataQuery, TError, TData>
     ) =>{
@@ -100,13 +101,16 @@ export async function updateAccountPreferences<T>(
 ): Promise<UpdateAccountPreferencesMutation> {
 	return fetchApi(UpdateAccountPreferencesDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getAccountPreferencesData: ExactAlt<T, GetAccountPreferencesDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

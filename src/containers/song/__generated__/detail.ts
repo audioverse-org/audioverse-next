@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../components/molecules/__genera
 import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSongDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -59,6 +59,7 @@ export const useInfiniteGetSongDetailDataQuery = <
       TData = GetSongDetailDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSongDetailDataQueryVariables,
       variables: GetSongDetailDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSongDetailDataQuery, TError, TData>
     ) =>{
@@ -94,6 +95,7 @@ export const useInfiniteGetSongDetailStaticPathsQuery = <
       TData = GetSongDetailStaticPathsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSongDetailStaticPathsQueryVariables,
       variables: GetSongDetailStaticPathsQueryVariables,
       options?: UseInfiniteQueryOptions<GetSongDetailStaticPathsQuery, TError, TData>
     ) =>{
@@ -117,13 +119,16 @@ export async function getSongDetailStaticPaths<T>(
 ): Promise<GetSongDetailStaticPathsQuery> {
 	return fetchApi(GetSongDetailStaticPathsDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getSongDetailData: ExactAlt<T, GetSongDetailDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

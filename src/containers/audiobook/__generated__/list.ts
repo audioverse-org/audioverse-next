@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -55,6 +55,7 @@ export const useInfiniteGetAudiobookListPageDataQuery = <
       TData = GetAudiobookListPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobookListPageDataQueryVariables,
       variables: GetAudiobookListPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobookListPageDataQuery, TError, TData>
     ) =>{
@@ -90,6 +91,7 @@ export const useInfiniteGetAudiobookListPathsDataQuery = <
       TData = GetAudiobookListPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobookListPathsDataQueryVariables,
       variables: GetAudiobookListPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobookListPathsDataQuery, TError, TData>
     ) =>{
@@ -113,13 +115,16 @@ export async function getAudiobookListPathsData<T>(
 ): Promise<GetAudiobookListPathsDataQuery> {
 	return fetchApi(GetAudiobookListPathsDataDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getAudiobookListPageData: ExactAlt<T, GetAudiobookListPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

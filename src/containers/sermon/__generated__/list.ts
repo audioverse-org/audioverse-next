@@ -7,7 +7,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSermonListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -74,6 +74,7 @@ export const useInfiniteGetSermonListPageDataQuery = <
       TData = GetSermonListPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSermonListPageDataQueryVariables,
       variables: GetSermonListPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSermonListPageDataQuery, TError, TData>
     ) =>{
@@ -113,6 +114,7 @@ export const useInfiniteGetSermonListFeedDataQuery = <
       TData = GetSermonListFeedDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSermonListFeedDataQueryVariables,
       variables: GetSermonListFeedDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSermonListFeedDataQuery, TError, TData>
     ) =>{
@@ -148,6 +150,7 @@ export const useInfiniteGetSermonListPagePathsDataQuery = <
       TData = GetSermonListPagePathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSermonListPagePathsDataQueryVariables,
       variables: GetSermonListPagePathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSermonListPagePathsDataQuery, TError, TData>
     ) =>{
@@ -177,14 +180,17 @@ export async function getSermonListPagePathsData<T>(
 ): Promise<GetSermonListPagePathsDataQuery> {
 	return fetchApi(GetSermonListPagePathsDataDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getSermonListPageData: ExactAlt<T, GetSermonListPageDataQueryVariables>,
 		getSermonListFeedData: ExactAlt<T, GetSermonListFeedDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

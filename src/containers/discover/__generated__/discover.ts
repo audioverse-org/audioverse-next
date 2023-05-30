@@ -9,7 +9,7 @@ import { AndMiniplayerFragmentDoc } from '../../../components/templates/__genera
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { CardPostFragmentDoc } from '../../../components/molecules/card/__generated__/post';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverRecentTeachingsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -105,6 +105,7 @@ export const useInfiniteGetDiscoverRecentTeachingsQuery = <
       TData = GetDiscoverRecentTeachingsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetDiscoverRecentTeachingsQueryVariables,
       variables: GetDiscoverRecentTeachingsQueryVariables,
       options?: UseInfiniteQueryOptions<GetDiscoverRecentTeachingsQuery, TError, TData>
     ) =>{
@@ -156,6 +157,7 @@ export const useInfiniteGetDiscoverTrendingTeachingsQuery = <
       TData = GetDiscoverTrendingTeachingsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetDiscoverTrendingTeachingsQueryVariables,
       variables: GetDiscoverTrendingTeachingsQueryVariables,
       options?: UseInfiniteQueryOptions<GetDiscoverTrendingTeachingsQuery, TError, TData>
     ) =>{
@@ -205,6 +207,7 @@ export const useInfiniteGetDiscoverFeaturedTeachingsQuery = <
       TData = GetDiscoverFeaturedTeachingsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetDiscoverFeaturedTeachingsQueryVariables,
       variables: GetDiscoverFeaturedTeachingsQueryVariables,
       options?: UseInfiniteQueryOptions<GetDiscoverFeaturedTeachingsQuery, TError, TData>
     ) =>{
@@ -260,6 +263,7 @@ export const useInfiniteGetDiscoverStorySeasonsQuery = <
       TData = GetDiscoverStorySeasonsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetDiscoverStorySeasonsQueryVariables,
       variables: GetDiscoverStorySeasonsQueryVariables,
       options?: UseInfiniteQueryOptions<GetDiscoverStorySeasonsQuery, TError, TData>
     ) =>{
@@ -325,6 +329,7 @@ export const useInfiniteGetDiscoverConferencesQuery = <
       TData = GetDiscoverConferencesQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetDiscoverConferencesQueryVariables,
       variables: GetDiscoverConferencesQueryVariables,
       options?: UseInfiniteQueryOptions<GetDiscoverConferencesQuery, TError, TData>
     ) =>{
@@ -369,6 +374,7 @@ export const useInfiniteGetDiscoverBlogPostsQuery = <
       TData = GetDiscoverBlogPostsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetDiscoverBlogPostsQueryVariables,
       variables: GetDiscoverBlogPostsQueryVariables,
       options?: UseInfiniteQueryOptions<GetDiscoverBlogPostsQuery, TError, TData>
     ) =>{
@@ -416,7 +422,10 @@ export async function getDiscoverBlogPosts<T>(
 ): Promise<GetDiscoverBlogPostsQuery> {
 	return fetchApi(GetDiscoverBlogPostsDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -427,7 +436,7 @@ export async function prefetchQueries<T>(
 		getDiscoverConferences: ExactAlt<T, GetDiscoverConferencesQueryVariables>,
 		getDiscoverBlogPosts: ExactAlt<T, GetDiscoverBlogPostsQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

@@ -10,7 +10,7 @@ import { CardSequenceFragmentDoc } from '../../molecules/card/__generated__/sequ
 import { CardCollectionFragmentDoc } from '../../molecules/card/__generated__/collection';
 import { CardSponsorFragmentDoc } from '../../molecules/card/__generated__/sponsor';
 import { CardPersonFragmentDoc } from '../../molecules/card/__generated__/person';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchRecordingsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -130,6 +130,7 @@ export const useInfiniteGetSearchRecordingsQuery = <
       TData = GetSearchRecordingsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchRecordingsQueryVariables,
       variables: GetSearchRecordingsQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchRecordingsQuery, TError, TData>
     ) =>{
@@ -173,6 +174,7 @@ export const useInfiniteGetSearchSeriesQuery = <
       TData = GetSearchSeriesQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchSeriesQueryVariables,
       variables: GetSearchSeriesQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchSeriesQuery, TError, TData>
     ) =>{
@@ -215,6 +217,7 @@ export const useInfiniteGetSearchConferencesQuery = <
       TData = GetSearchConferencesQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchConferencesQueryVariables,
       variables: GetSearchConferencesQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchConferencesQuery, TError, TData>
     ) =>{
@@ -257,6 +260,7 @@ export const useInfiniteGetSearchSponsorsQuery = <
       TData = GetSearchSponsorsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchSponsorsQueryVariables,
       variables: GetSearchSponsorsQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchSponsorsQuery, TError, TData>
     ) =>{
@@ -299,6 +303,7 @@ export const useInfiniteGetSearchPersonsQuery = <
       TData = GetSearchPersonsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchPersonsQueryVariables,
       variables: GetSearchPersonsQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchPersonsQuery, TError, TData>
     ) =>{
@@ -342,6 +347,7 @@ export const useInfiniteGetSearchAudiobooksQuery = <
       TData = GetSearchAudiobooksQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchAudiobooksQueryVariables,
       variables: GetSearchAudiobooksQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchAudiobooksQuery, TError, TData>
     ) =>{
@@ -389,6 +395,7 @@ export const useInfiniteGetSearchMusicTracksQuery = <
       TData = GetSearchMusicTracksQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchMusicTracksQueryVariables,
       variables: GetSearchMusicTracksQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchMusicTracksQuery, TError, TData>
     ) =>{
@@ -431,6 +438,7 @@ export const useInfiniteGetSearchStoryProgramsQuery = <
       TData = GetSearchStoryProgramsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchStoryProgramsQueryVariables,
       variables: GetSearchStoryProgramsQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchStoryProgramsQuery, TError, TData>
     ) =>{
@@ -490,7 +498,10 @@ export async function getSearchStoryPrograms<T>(
 ): Promise<GetSearchStoryProgramsQuery> {
 	return fetchApi(GetSearchStoryProgramsDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
@@ -503,7 +514,7 @@ export async function prefetchQueries<T>(
 		getSearchMusicTracks: ExactAlt<T, GetSearchMusicTracksQueryVariables>,
 		getSearchStoryPrograms: ExactAlt<T, GetSearchStoryProgramsQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

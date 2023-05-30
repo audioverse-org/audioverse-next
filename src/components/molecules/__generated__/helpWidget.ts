@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetHelpWidgetDataQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -47,6 +47,7 @@ export const useInfiniteGetHelpWidgetDataQuery = <
       TData = GetHelpWidgetDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetHelpWidgetDataQueryVariables,
       variables?: GetHelpWidgetDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetHelpWidgetDataQuery, TError, TData>
     ) =>{
@@ -64,13 +65,16 @@ export async function getHelpWidgetData<T>(
 ): Promise<GetHelpWidgetDataQuery> {
 	return fetchApi(GetHelpWidgetDataDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getHelpWidgetData: ExactAlt<T, GetHelpWidgetDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

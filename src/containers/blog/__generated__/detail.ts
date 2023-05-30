@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardPostFragmentDoc } from '../../../components/molecules/card/__generated__/post';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBlogDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -63,6 +63,7 @@ export const useInfiniteGetBlogDetailDataQuery = <
       TData = GetBlogDetailDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetBlogDetailDataQueryVariables,
       variables: GetBlogDetailDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetBlogDetailDataQuery, TError, TData>
     ) =>{
@@ -98,6 +99,7 @@ export const useInfiniteGetBlogDetailStaticPathsQuery = <
       TData = GetBlogDetailStaticPathsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetBlogDetailStaticPathsQueryVariables,
       variables: GetBlogDetailStaticPathsQueryVariables,
       options?: UseInfiniteQueryOptions<GetBlogDetailStaticPathsQuery, TError, TData>
     ) =>{
@@ -121,13 +123,16 @@ export async function getBlogDetailStaticPaths<T>(
 ): Promise<GetBlogDetailStaticPathsQuery> {
 	return fetchApi(GetBlogDetailStaticPathsDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getBlogDetailData: ExactAlt<T, GetBlogDetailDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

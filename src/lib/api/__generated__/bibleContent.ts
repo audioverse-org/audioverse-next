@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBibleBookContentQueryVariables = Types.Exact<{
   bibleId: Types.Scalars['ID'];
@@ -39,6 +39,7 @@ export const useInfiniteGetBibleBookContentQuery = <
       TData = GetBibleBookContentQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetBibleBookContentQueryVariables,
       variables: GetBibleBookContentQueryVariables,
       options?: UseInfiniteQueryOptions<GetBibleBookContentQuery, TError, TData>
     ) =>{
@@ -56,13 +57,16 @@ export async function getBibleBookContent<T>(
 ): Promise<GetBibleBookContentQuery> {
 	return fetchApi(GetBibleBookContentDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getBibleBookContent: ExactAlt<T, GetBibleBookContentQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

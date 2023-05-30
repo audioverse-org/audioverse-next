@@ -5,28 +5,13 @@ import React from 'react';
 import withIntl from '~components/HOCs/withIntl';
 import { __awaitIntlMessages } from '~lib/getIntlMessages';
 
+import makeQueryClient from '../makeQueryClient';
+
 export default async function renderWithProviders(
 	ui: React.ReactElement,
 	renderOptions?: RenderOptions
 ): Promise<RenderResult & { queryClient: QueryClient }> {
-	const queryClient = new QueryClient({
-		defaultOptions: {
-			queries: {
-				retry: false,
-			},
-		},
-		logger: {
-			log: () => {
-				// noop
-			},
-			warn: () => {
-				// noop
-			},
-			error: () => {
-				// noop
-			},
-		}
-	});
+	const queryClient = makeQueryClient();
 	const WithIntl = withIntl(() => ui);
 
 	const result = render(

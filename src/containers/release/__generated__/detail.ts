@@ -1,6 +1,6 @@
 import * as Types from '../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetMediaReleaseFormsPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -53,6 +53,7 @@ export const useInfiniteGetMediaReleaseFormsPageDataQuery = <
       TData = GetMediaReleaseFormsPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetMediaReleaseFormsPageDataQueryVariables,
       variables: GetMediaReleaseFormsPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetMediaReleaseFormsPageDataQuery, TError, TData>
     ) =>{
@@ -88,6 +89,7 @@ export const useInfiniteGetMediaReleaseFormsPathsDataQuery = <
       TData = GetMediaReleaseFormsPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetMediaReleaseFormsPathsDataQueryVariables,
       variables: GetMediaReleaseFormsPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetMediaReleaseFormsPathsDataQuery, TError, TData>
     ) =>{
@@ -140,13 +142,16 @@ export async function submitMediaReleaseForm<T>(
 ): Promise<SubmitMediaReleaseFormMutation> {
 	return fetchApi(SubmitMediaReleaseFormDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getMediaReleaseFormsPageData: ExactAlt<T, GetMediaReleaseFormsPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

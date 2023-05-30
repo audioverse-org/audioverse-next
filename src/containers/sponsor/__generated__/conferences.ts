@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { SponsorPivotFragmentDoc } from './pivot';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorConferencesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -61,6 +61,7 @@ export const useInfiniteGetSponsorConferencesPageDataQuery = <
       TData = GetSponsorConferencesPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSponsorConferencesPageDataQueryVariables,
       variables: GetSponsorConferencesPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSponsorConferencesPageDataQuery, TError, TData>
     ) =>{
@@ -96,6 +97,7 @@ export const useInfiniteGetSponsorConferencesPathsDataQuery = <
       TData = GetSponsorConferencesPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSponsorConferencesPathsDataQueryVariables,
       variables: GetSponsorConferencesPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSponsorConferencesPathsDataQuery, TError, TData>
     ) =>{
@@ -119,13 +121,16 @@ export async function getSponsorConferencesPathsData<T>(
 ): Promise<GetSponsorConferencesPathsDataQuery> {
 	return fetchApi(GetSponsorConferencesPathsDataDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getSponsorConferencesPageData: ExactAlt<T, GetSponsorConferencesPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

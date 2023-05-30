@@ -99,6 +99,7 @@ function RecentTeachings(): JSX.Element {
 	const route = useLanguageRoute();
 	const intl = useIntl();
 	const result = useInfiniteGetDiscoverRecentTeachingsQuery(
+		'after',
 		{
 			language,
 			first: 6,
@@ -150,6 +151,7 @@ function TrendingTeachings(): JSX.Element {
 	const route = useLanguageRoute();
 	const intl = useIntl();
 	const result = useInfiniteGetDiscoverTrendingTeachingsQuery(
+		'after',
 		{
 			language,
 			first: 6,
@@ -200,6 +202,7 @@ function FeaturedTeachings(): JSX.Element {
 	const language = useLanguageId();
 	const intl = useIntl();
 	const result = useInfiniteGetDiscoverFeaturedTeachingsQuery(
+		'after',
 		{
 			language,
 			first: 3,
@@ -249,6 +252,7 @@ function BlogPosts(): JSX.Element {
 	const language = useLanguageId();
 	const intl = useIntl();
 	const result = useInfiniteGetDiscoverBlogPostsQuery(
+		'after',
 		{
 			language,
 			first: 3,
@@ -303,6 +307,7 @@ function StorySeasons(): JSX.Element {
 	const language = useLanguageId();
 	const intl = useIntl();
 	const result = useInfiniteGetDiscoverStorySeasonsQuery(
+		'after',
 		{
 			language,
 			first: 3,
@@ -359,6 +364,7 @@ function Conferences(): JSX.Element {
 	const language = useLanguageId();
 	const intl = useIntl();
 	const result = useInfiniteGetDiscoverConferencesQuery(
+		'after',
 		{
 			language,
 			first: 3,

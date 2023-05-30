@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsCollectionsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -42,6 +42,7 @@ export const useInfiniteGetSearchResultsCollectionsQuery = <
       TData = GetSearchResultsCollectionsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchResultsCollectionsQueryVariables,
       variables: GetSearchResultsCollectionsQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchResultsCollectionsQuery, TError, TData>
     ) =>{
@@ -59,13 +60,16 @@ export async function getSearchResultsCollections<T>(
 ): Promise<GetSearchResultsCollectionsQuery> {
 	return fetchApi(GetSearchResultsCollectionsDocument, { variables });
 }
+
 import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getSearchResultsCollections: ExactAlt<T, GetSearchResultsCollectionsQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
