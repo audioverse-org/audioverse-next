@@ -2,9 +2,10 @@ import dynamic from 'next/dynamic';
 import React, { startTransition, useMemo, useState } from 'react';
 import Swiper from 'swiper';
 
-import IconBack from '../../public/img/icons/icon-back-light.svg';
-import IconForward from '../../public/img/icons/icon-forward-light.svg';
-import styles from './discover.slider.module.scss';
+import IconBack from '~public/img/icons/icon-back-light.svg';
+import IconForward from '~public/img/icons/icon-forward-light.svg';
+
+import styles from './index.slider.module.scss';
 
 type SliderProps = {
 	onIndexChange?: (state: {

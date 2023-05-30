@@ -1,4 +1,4 @@
-@import '../styles/common';
+@import '../../styles/common';
 
 .base {
     display: flex;
@@ -22,7 +22,8 @@
     }
 }
 
-.arrow, .arrow svg {
+.arrow,
+.arrow svg {
     transition: none;
 }
 
