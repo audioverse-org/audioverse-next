@@ -1,10 +1,9 @@
-import { fireEvent, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { SwiperEvents } from 'swiper/types';
 
 import Slider, { GRID_GAP, MIN_CARD_WIDTH } from '~containers/discover.slider';
-import Swiper, { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
+import { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 import { buildRenderer } from '~src/lib/test/buildRenderer';
 
@@ -78,24 +77,27 @@ describe('Slider', () => {
 	});
 
 	it('calls onIndexChange', async () => {
+		const items = [<div key="1">1</div>, <div key="2">2</div>] as any as HTMLElement[];
+
 		__swiper.isEnd = false;
+		__swiper.realIndex = 1;
+		__swiper.slides = items;
 
 		const onIndexChange = jest.fn();
 
 		await renderComponent({
 			props: {
 				...defaultProps,
-				items: [<div key="1">1</div>, <div key="2">2</div>],
+				items,
 				onIndexChange,
 			},
 		});
 
-		userEvent.click(screen.getByLabelText('next'));
+		__runHandlers('transitionEnd', __swiper)
 
 		expect(onIndexChange).toHaveBeenCalledWith({
-			indexStart: 1,
-			indexEnd: 1,
-			itemsPerPage: 1,
+			index: 1,
+			total: 2
 		});
 	});
 

@@ -1,19 +1,15 @@
 import dynamic from 'next/dynamic';
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
-
-import { HTMLSwiperElement } from '~lib/swiper';
-import useElementWidth from '~src/lib/hooks/useElementWidth';
+import React, { startTransition, useMemo, useState } from 'react';
+import Swiper from 'swiper';
 
 import IconBack from '../../public/img/icons/icon-back-light.svg';
 import IconForward from '../../public/img/icons/icon-forward-light.svg';
 import styles from './discover.slider.module.scss';
-import Swiper from 'swiper';
 
 type SliderProps = {
 	onIndexChange?: (state: {
-		indexStart: number;
-		indexEnd: number;
-		itemsPerPage: number;
+		index: number;
+		total: number;
 	}) => void;
 	items: JSX.Element[];
 	previous: string;
@@ -33,6 +29,28 @@ const calculateItemsPerPage = (width: number, rows: number) => {
 	return cardsPerRow * (cardsPerRow > 1 ? rows : 1);
 };
 
+const makeSlides = (items: JSX.Element[], rows: number, swiper?: Swiper): JSX.Element[] => {
+	const width = swiper?.width ?? 0;
+	const itemsPerPage = calculateItemsPerPage(width, rows);
+
+	const itemSets = items.reduce<JSX.Element[][]>(
+		(acc, item, i) => {
+			const setIndex = Math.floor(i / itemsPerPage);
+			acc[setIndex] = [...(acc[setIndex] || []), item];
+			return acc;
+		},
+		[[]]
+	)
+
+	console.log('slide count', itemSets.length)
+
+	return itemSets.map((itemSet, i) => (
+		<swiper-slide data-testid="swiper-slide" key={i}>
+			<div className={styles.page}>{itemSet}</div>
+		</swiper-slide>
+	))
+}
+
 export default function Slider({
 	onIndexChange,
 	items,
@@ -40,34 +58,42 @@ export default function Slider({
 	next,
 	rows = 1,
 }: SliderProps): JSX.Element {
-	const [index, setIndex] = useState(0);
 	const [swiper, setSwiper] = useState<Swiper>();
-	const width = swiper?.width ?? 0;
-	const itemsPerPage = useMemo(() => calculateItemsPerPage(width, rows), [rows, width]);
-	
-	const itemSets = useMemo(() => {
-		return items.reduce<JSX.Element[][]>(
-			(acc, item, i) => {
-				const setIndex = Math.floor(i / itemsPerPage);
-				acc[setIndex] = [...(acc[setIndex] || []), item];
-				return acc;
-			},
-			[[]]
-		);
-	}, [items, itemsPerPage]);
+	const [isBeginning, setIsBeginning] = useState(true);
+	const [isEnd, setIsEnd] = useState(true);
 
-	const navigate = (delta: number) => {
-		setIndex((i) => {
-			const indexStart = i + delta;
-			const indexEnd = indexStart + itemsPerPage - 1;
-			onIndexChange?.({
-				indexStart,
-				indexEnd,
-				itemsPerPage,
-			});
-			return indexStart;
-		});
-	};
+	const slides = useMemo(() => makeSlides(
+		items,
+		rows,
+		swiper
+	), [items, rows, swiper]);
+
+	const handlers = useMemo(() => {
+		console.log('onIndexChange change')
+		return {
+			init: (swiper: Swiper) => {
+				setSwiper(swiper)
+				setIsBeginning(swiper.isBeginning)
+				setIsEnd(swiper.isEnd)
+			},
+			transitionEnd: (swiper: Swiper) => {
+				setIsBeginning(swiper.isBeginning)
+				setIsEnd(swiper.isEnd)
+				startTransition(() => onIndexChange?.({
+					index: swiper.realIndex,
+					total: swiper.slides.length,
+				}))
+			},
+			slidesLengthChange: (swiper: Swiper) => {
+				setIsBeginning(swiper.isBeginning)
+				setIsEnd(swiper.isEnd)
+				startTransition(() => onIndexChange?.({
+					index: swiper.realIndex,
+					total: swiper.slides.length,
+				}))
+			}
+		}
+	}, [onIndexChange]);
 
 	return (
 		<div className={styles.base} style={{
@@ -78,37 +104,22 @@ export default function Slider({
 				onClick={(e) => {
 					e.preventDefault();
 					swiper?.slidePrev();
-					navigate(-itemsPerPage);
 				}}
-				disabled={swiper?.isBeginning ?? true}
+				disabled={isBeginning}
 				aria-label={previous}
 			>
 				<IconBack />
 			</button>
 
-			<LazySwiper
-				data-testid="swiper"
-				on={{
-					init: (swiper) => {
-						setSwiper(swiper)
-					},
-				}}
-			>
-				{itemSets.map((itemSet, i) => (
-					<swiper-slide data-testid="swiper-slide" key={i}>
-						<div className={styles.page}>{itemSet}</div>
-					</swiper-slide>
-				))}
-			</LazySwiper>
+			<LazySwiper on={handlers}>{slides}</LazySwiper>
 
 			<button
 				className={styles.arrow}
 				onClick={(e) => {
 					e.preventDefault();
 					swiper?.slideNext();
-					navigate(itemsPerPage);
 				}}
-				disabled={swiper?.isEnd ?? true}
+				disabled={isEnd}
 				aria-label={next}
 			>
 				<IconForward />

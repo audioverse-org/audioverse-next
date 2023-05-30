@@ -23,6 +23,14 @@ export function __runHandlers(event: keyof SwiperEvents, ...args: any) {
 	if (handlers) handlers.forEach((h: any) => h?.(...args));
 }
 
+function registerHandler(
+	event: keyof SwiperEvents,
+	handler: ValueOf<SwiperEvents>
+){
+	if (__eventHandlers[event] === undefined) __eventHandlers[event] = [];
+	(__eventHandlers[event] as any).push(handler);
+}
+
 // https://swiperjs.com/swiper-api#methods-and-properties
 function makeSwiper(): Partial<swiper.Swiper> {
 	return {
@@ -31,10 +39,7 @@ function makeSwiper(): Partial<swiper.Swiper> {
 		slidePrev: jest.fn(),
 		isBeginning: true,
 		isEnd: true,
-		on: jest.fn((event, handler) => {
-			if (__eventHandlers[event] === undefined) __eventHandlers[event] = [];
-			(__eventHandlers[event] as any).push(handler);
-		}),
+		on: jest.fn(registerHandler),
 	};
 }
 
@@ -53,10 +58,14 @@ const Swiper = function Swiper(
 ) {
 	return (
 		<swiper-container
+			data-testid="swiper"
 			observer={true}
 			{...props}
 			ref={(el: HTMLSwiperElement) => {
 				if (!el) return;
+				Object.entries(props.on || {}).forEach(([event, handler]) => {
+					registerHandler(event as keyof SwiperEvents, handler);
+				})
 				props.on?.init?.(__swiper as swiper.Swiper);
 			}}
 		/>

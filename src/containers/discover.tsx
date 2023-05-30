@@ -1,5 +1,5 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React, { startTransition, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseInfiniteQueryResult } from 'react-query';
 
@@ -31,7 +31,7 @@ import {
 import styles from './discover.module.scss';
 import Slider from './discover.slider';
 
-const PRELOAD_COUNT = 18;
+const PRELOAD_COUNT = 3;
 
 type Node<T> = T & {
 	canonicalPath: string;
@@ -45,12 +45,6 @@ type SectionProps<T, N> = {
 	seeAllUrl?: string;
 	infiniteQueryResult: UseInfiniteQueryResult<T>;
 	selectNodes: (page?: T) => Maybe<Node<N>[]>;
-	selectPageInfo: (page?: T) =>
-		| {
-				hasNextPage: boolean;
-				endCursor: Maybe<string>;
-		  }
-		| undefined;
 	Card: (props: { node: Node<N> }) => JSX.Element;
 };
 
@@ -58,29 +52,29 @@ function Section<T, N>({
 	heading,
 	infiniteQueryResult,
 	selectNodes,
-	selectPageInfo,
 	Card,
 	seeAllUrl,
 	...props
 }: SectionProps<T, N>): JSX.Element {
-	const [index, setIndex] = useState(0);
-	const { data, fetchNextPage, isLoading } = infiniteQueryResult;
+	const { data, fetchNextPage } = infiniteQueryResult;
 	const pages = useMemo(() => data?.pages || [], [data?.pages]);
 	const nodes: Node<N>[] = useMemo(() => {
 		return pages.flatMap(selectNodes).filter((n): n is Node<N> => !!n);
 	}, [pages, selectNodes]);
 
-	useEffect(() => {
-		const lastPage = pages[pages.length - 1];
-		const { hasNextPage = false } = selectPageInfo(lastPage) || {};
-		const leadCount = nodes.length - (index + 1);
+	const preload = useCallback(({index, total}: {
+		index: number;
+		total: number;
+	}) => {
+		if (index + PRELOAD_COUNT >= total) {
+			// console.log('fetching next page')
+			fetchNextPage()
+		}
+	}, [fetchNextPage]);
 
-		if (isLoading) return;
-		if (!hasNextPage) return;
-		if (leadCount >= PRELOAD_COUNT) return;
-
-		fetchNextPage();
-	}, [pages, fetchNextPage, index, isLoading, selectPageInfo, nodes.length]);
+	const cards = useMemo(() => nodes.map(
+		(n) => <Card node={n} key={n.canonicalPath} />
+	), [Card, nodes])
 
 	return (
 		<div className={styles.section}>
@@ -94,10 +88,8 @@ function Section<T, N>({
 			</LineHeading>
 			<Slider
 				{...props}
-				onIndexChange={({ indexEnd }) =>
-					startTransition(() => setIndex(indexEnd))
-				}
-				items={nodes?.map((n) => <Card node={n} key={n.canonicalPath} />) ?? []}
+				onIndexChange={preload}
+				items={cards}
 			/>
 		</div>
 	);
@@ -125,6 +117,12 @@ function RecentTeachings(): JSX.Element {
 		}
 	);
 
+	const Card = useCallback(({ node }: {
+		node: Node<CardRecordingFragment>
+	}) => <CardRecording recording={node} />, [])
+
+	const selectNodes = useCallback((p: GetDiscoverRecentTeachingsQuery | undefined) => p?.recentTeachings.nodes, [])
+
 	return (
 		<Section<GetDiscoverRecentTeachingsQuery, CardRecordingFragment>
 			heading={intl.formatMessage({
@@ -141,9 +139,8 @@ function RecentTeachings(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(route).teachings.all.get()}
 			infiniteQueryResult={result}
-			selectNodes={(p) => p?.recentTeachings.nodes}
-			selectPageInfo={(p) => p?.recentTeachings.pageInfo}
-			Card={({ node }) => <CardRecording recording={node} />}
+			selectNodes={selectNodes}
+			Card={Card}
 			rows={2}
 		/>
 	);
@@ -171,6 +168,12 @@ function TrendingTeachings(): JSX.Element {
 		}
 	);
 
+	const Card = useCallback(({ node }: {
+		node: Node<CardRecordingFragment>
+	}) => <CardRecording recording={node} />, [])
+
+	const selectNodes = useCallback((p: GetDiscoverTrendingTeachingsQuery | undefined) => p?.trendingTeachings.nodes?.map((n) => n.recording), [])
+
 	return (
 		<Section<GetDiscoverTrendingTeachingsQuery, CardRecordingFragment>
 			heading={intl.formatMessage({
@@ -187,9 +190,8 @@ function TrendingTeachings(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(route).teachings.trending.get()}
 			infiniteQueryResult={result}
-			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
-			selectPageInfo={(p) => p?.trendingTeachings.pageInfo}
-			Card={({ node }) => <CardRecording recording={node} />}
+			selectNodes={selectNodes}
+			Card={Card}
 			rows={2}
 		/>
 	);
@@ -216,6 +218,12 @@ function FeaturedTeachings(): JSX.Element {
 		}
 	);
 
+	const Card = useCallback(({ node }: {
+		node: Node<CardRecordingFragment>
+	}) => <CardRecording recording={node} />, [])
+
+	const selectNodes = useCallback((p: GetDiscoverFeaturedTeachingsQuery | undefined) => p?.featuredTeachings.nodes, [])
+
 	return (
 		<Section<GetDiscoverFeaturedTeachingsQuery, CardRecordingFragment>
 			heading={intl.formatMessage({
@@ -231,9 +239,8 @@ function FeaturedTeachings(): JSX.Element {
 				defaultMessage: 'Next featured teachings',
 			})}
 			infiniteQueryResult={result}
-			selectNodes={(p) => p?.featuredTeachings.nodes}
-			selectPageInfo={(p) => p?.featuredTeachings.pageInfo}
-			Card={({ node }) => <CardRecording recording={node} />}
+			selectNodes={selectNodes}
+			Card={Card}
 		/>
 	);
 }
@@ -260,6 +267,12 @@ function BlogPosts(): JSX.Element {
 		}
 	);
 
+	const Card = useCallback(({ node }: {
+		node: Node<CardPostFragment>
+	}) => <CardPost post={node} />, [])
+
+	const selectNodes = useCallback((p: GetDiscoverBlogPostsQuery | undefined) => p?.blogPosts.nodes, [])
+
 	return (
 		<Section<GetDiscoverBlogPostsQuery, CardPostFragment>
 			heading={intl.formatMessage({
@@ -276,9 +289,8 @@ function BlogPosts(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(languageRoute).blog.get()}
 			infiniteQueryResult={result}
-			selectNodes={(p) => p?.blogPosts.nodes}
-			selectPageInfo={(p) => p?.blogPosts.pageInfo}
-			Card={({ node }) => <CardPost post={node} />}
+			selectNodes={selectNodes}
+			Card={Card}
 		/>
 	);
 }
@@ -309,6 +321,14 @@ function StorySeasons(): JSX.Element {
 		}
 	);
 
+	const Card = useCallback(({ node }: {
+		node: Node<StorySeason>
+	}) => (
+		<CardSequence sequence={node} recordings={node.recordings.nodes} />
+	), [])
+
+	const selectNodes = useCallback((p: GetDiscoverStorySeasonsQuery | undefined) => p?.storySeasons.nodes, [])
+
 	return (
 		<Section<GetDiscoverStorySeasonsQuery, StorySeason>
 			heading={intl.formatMessage({
@@ -325,11 +345,8 @@ function StorySeasons(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(languageRoute).stories.albums.get()}
 			infiniteQueryResult={result}
-			selectNodes={(p) => p?.storySeasons.nodes}
-			selectPageInfo={(p) => p?.storySeasons.pageInfo}
-			Card={({ node }) => (
-				<CardSequence sequence={node} recordings={node.recordings.nodes} />
-			)}
+			selectNodes={selectNodes}
+			Card={Card}
 		/>
 	);
 }
@@ -360,6 +377,18 @@ function Conferences(): JSX.Element {
 		}
 	);
 
+	const Card = useCallback(({ node }: {
+		node: Node<Conference>
+	}) => (
+		<CardCollection
+			collection={node}
+			sequences={node.sequences.nodes}
+			recordings={node.sequences.nodes?.length ? null : node.recordings.nodes}
+		/>
+	), [])
+
+	const selectNodes = useCallback((p: GetDiscoverConferencesQuery | undefined) => p?.conferences.nodes, [])
+
 	return (
 		<Section<GetDiscoverConferencesQuery, Conference>
 			heading={intl.formatMessage({
@@ -376,17 +405,8 @@ function Conferences(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(languageRoute).conferences.get()}
 			infiniteQueryResult={result}
-			selectNodes={(p) => p?.conferences.nodes}
-			selectPageInfo={(p) => p?.conferences.pageInfo}
-			Card={({ node }) => (
-				<CardCollection
-					collection={node}
-					sequences={node.sequences.nodes}
-					recordings={
-						node.sequences.nodes?.length ? null : node.recordings.nodes
-					}
-				/>
-			)}
+			selectNodes={selectNodes}
+			Card={Card}
 		/>
 	);
 }

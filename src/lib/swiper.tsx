@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import * as swiper from 'swiper';
 import { SwiperProps as _SwiperProps } from 'swiper/react';
 
@@ -22,50 +22,47 @@ export type SwiperProps = PropsWithChildren<
 	onInit?: (swiper: swiper.Swiper) => void;
 };
 
-const Swiper = function Swiper(
+const Swiper = React.memo(function Swiper(
 	{children, ...props}: SwiperProps
 ) {
-	return <swiper-container ref={(el: HTMLSwiperElement) => {
-		if (!el) return;
-		Object.assign(el, props);
-		el.initialize();
-	}} init={false}>{children}</swiper-container>;
-};
+	const ref = useRef<HTMLSwiperElement>(null);
+	console.log('swiper render')
+	
+	// useEffect(() => {
+	// 	// console.log('props change');
+	// 	// console.dir(props,{
+	// 	// 	depth: null,
+	// 	// })
+	// }, [props])
 
-export default Swiper;
-
-type HTMLSwiperInitEvent = CustomEvent<[swiper.Swiper]>;
-
-function isSwiperInitEvent(
-	event: Event
-): event is HTMLSwiperInitEvent {
-	return event.type === 'init';
-}
-
-export function useSwiper(el: HTMLSwiperElement | null) {
-	const [swiper, setSwiper] = useState<swiper.Swiper | null>(null);
+	// useEffect(() => {
+	// 	// console.log('children change');
+	// }, [children])
 
 	useEffect(() => {
-		if (!el) return;
-
-		const swiper = el.swiper;
-		if (swiper) {
-			setSwiper(swiper);
+		if (!ref.current) {
+			console.error('No element');
 			return;
 		}
 
-		const handler = (event: Event) => {
-			if (isSwiperInitEvent(event)) {
-				setSwiper(event.detail[0]);
-			}
-		};
+		Object.assign(ref.current, props);
 
-		el.addEventListener('init', handler);
+		if (!ref.current.initialize) {
+			console.error('No initialize');
+			return;
+		}
 
-		return () => {
-			el.removeEventListener('init', handler);
-		};
-	}, [el]);
+		if (!ref.current.swiper) {
+			console.log('initializing')
+			ref.current.initialize();
+		}
+	}, [ref, props])
 
-	return swiper;
-}
+	useEffect(() => {
+		ref.current?.swiper?.update();
+	}, [ref, children])
+
+	return <swiper-container ref={ref} init={false}>{children}</swiper-container>;
+});
+
+export default Swiper;
