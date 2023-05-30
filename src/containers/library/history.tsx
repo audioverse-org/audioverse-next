@@ -33,7 +33,7 @@ export const getLibraryHistoryPageDataDefaultVariables = (
 
 export type ILibraryHistoryProps = {
 	language: Language;
-};
+} & React.JSX.IntrinsicAttributes;
 
 function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 	const variables = getLibraryHistoryPageDataDefaultVariables(language);
