@@ -18,7 +18,7 @@
         "test:watch": "TZ=UTC jest --watch --maxWorkers=25%",
         "test:strict": "TZ=UTC jest --config=jest.config.strict.ts --runInBand",
         "extract": "formatjs extract 'src/**/*.ts*' --ignore 'src/**/*.d.ts*' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json --format lang-formatter.js",
-        "extract:new": "./lang-extract-new.js",
+        "extract:new": "./scripts/lang-extract-new.js",
         "compile": "formatjs compile-folder --ast public/lang public/compiled-lang --format lang-formatter.js",
         "precommit": "npm run format && npm run lint:fix && npm run checkTs",
         "graphql:codegen": "tsc -p ./graphql-codegen/tsconfig.json && graphql-codegen --config .graphqlrc.yml",
