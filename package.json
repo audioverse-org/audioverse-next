@@ -22,7 +22,7 @@
         "compile": "formatjs compile-folder --ast public/lang public/compiled-lang --format lang-formatter.js",
         "precommit": "npm run format && npm run lint:fix && npm run checkTs",
         "graphql:codegen": "tsc -p ./graphql-codegen/tsconfig.json && graphql-codegen --config .graphqlrc.yml",
-        "graphql:purge": "find . -type d -name __generated__ -exec rm -r '{}' \\;",
+        "graphql:purge": "find . -type d -name __generated__ -exec rm -r '{}' \\; -prune",
         "lighthouse": "npx lhci autorun",
         "analyze": "ANALYZE=true npm run build:webpack-only",
         "analyze:server": "BUNDLE_ANALYZE=server npm run build:webpack-only",
