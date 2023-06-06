@@ -51,7 +51,7 @@
         "react-dom": "^18.2.0",
         "react-facebook-login": "^4.1.1",
         "react-google-login": "^5.2.2",
-        "react-intl": "^5.20.12",
+        "react-intl": "^6.4.3",
         "react-query": "^3.25.1",
         "react-tooltip": "^4.2.21",
         "sass": "^1.42.1",
