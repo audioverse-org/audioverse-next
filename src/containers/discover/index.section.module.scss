@@ -13,6 +13,13 @@
 	justify-content: space-between;
 }
 
-.seeAllButton {
-	margin-top: 16px;
+.seeAll {
+	font-size: 12px;
+	color: $ts-dark;
+	text-transform: none;
+	letter-spacing: normal;
+
+	&:hover {
+		text-decoration: none;
+	}
 }
