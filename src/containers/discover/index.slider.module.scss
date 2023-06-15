@@ -1,7 +1,18 @@
 @import '../../styles/common';
 
 .base {
+    --arrow-margin-visual: 16px;
+    --arrow-size: 24px;
+    --arrow-padding: 6px;
+    --slide-padding: 24px;
+    --arrow-margin: calc(var(--arrow-margin-visual) - var(--slide-padding));
+    --arrow-full-width: calc(var(--arrow-size) + var(--arrow-margin) + var(--arrow-padding) * 2);
+    --slider-full-width: calc(100% + var(--arrow-full-width) * 2 + var(--slide-padding) * 2);
+
     display: flex;
+    width: var(--slider-full-width);
+    position: relative;
+    left: calc(-1 * (var(--arrow-full-width) + var(--slide-padding)));
 }
 
 .arrow {
@@ -10,11 +21,11 @@
     background: transparent;
 
     &:first-child {
-        margin-right: 16px;
+        margin-right: var(--arrow-margin);
     }
 
     &:last-child {
-        margin-left: 16px;
+        margin-left: var(--arrow-margin);
     }
 
     &:disabled {
