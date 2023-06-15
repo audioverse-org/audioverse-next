@@ -11,10 +11,6 @@
     --arrow-outset: min(var(--max-outset) - var(--arrow-full-width), var(--arrow-full-width));
     --slider-full-width: calc(100% + var(--arrow-outset) * 2 + var(--slide-padding) * 2);
 
-    overflow: visible;
-}
-
-.inner {
     display: flex;
     width: var(--slider-full-width);
     position: relative;

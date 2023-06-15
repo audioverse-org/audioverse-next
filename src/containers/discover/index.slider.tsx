@@ -113,27 +113,25 @@ export default function Slider({
 				'--min-card-width': `${MIN_CARD_WIDTH}px`,
 			}}
 		>
-			<div className={styles.inner}>
-				<button
-					className={styles.arrow}
-					onClick={() => swiper?.slidePrev()}
-					disabled={isBeginning}
-					aria-label={previous}
-				>
-					<IconBack />
-				</button>
+			<button
+				className={styles.arrow}
+				onClick={() => swiper?.slidePrev()}
+				disabled={isBeginning}
+				aria-label={previous}
+			>
+				<IconBack />
+			</button>
 
-				<LazySwiper on={handlers}>{slides}</LazySwiper>
+			<LazySwiper on={handlers}>{slides}</LazySwiper>
 
-				<button
-					className={styles.arrow}
-					onClick={() => swiper?.slideNext()}
-					disabled={isEnd}
-					aria-label={next}
-				>
-					<IconForward />
-				</button>
-			</div>
+			<button
+				className={styles.arrow}
+				onClick={() => swiper?.slideNext()}
+				disabled={isEnd}
+				aria-label={next}
+			>
+				<IconForward />
+			</button>
 		</div>
 	);
 }
