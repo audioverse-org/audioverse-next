@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
-import * as swiper from 'swiper';
-import { SwiperProps as _SwiperProps } from 'swiper/react';
+import type { Swiper as _Swiper } from 'swiper';
+import type { SwiperProps as _SwiperProps } from 'swiper/react';
 
 export function register() {
 	import('swiper/element/bundle').then(({ register }) => {
@@ -9,7 +9,7 @@ export function register() {
 }
 
 export type HTMLSwiperElement = HTMLDivElement & {
-	swiper?: swiper.Swiper;
+	swiper?: _Swiper;
 	initialize: () => void;
 };
 
@@ -19,12 +19,10 @@ export type SwiperProps = PropsWithChildren<
 		HTMLElement
 	>
 > & {
-	onInit?: (swiper: swiper.Swiper) => void;
+	onInit?: (swiper: _Swiper) => void;
 };
 
-const Swiper = React.memo(function Swiper(
-	{ children, ...props }: SwiperProps
-) {
+const Swiper = React.memo(function Swiper({ children, ...props }: SwiperProps) {
 	const ref = useRef<HTMLSwiperElement>(null);
 
 	useEffect(() => {
@@ -43,13 +41,17 @@ const Swiper = React.memo(function Swiper(
 		if (!ref.current.swiper) {
 			ref.current.initialize();
 		}
-	}, [ref, props])
+	}, [ref, props]);
 
 	useEffect(() => {
 		ref.current?.swiper?.update();
-	}, [ref, children])
+	}, [ref, children]);
 
-	return <swiper-container ref={ref} init={false}>{children}</swiper-container>;
+	return (
+		<swiper-container ref={ref} init={false}>
+			{children}
+		</swiper-container>
+	);
 });
 
 export default Swiper;

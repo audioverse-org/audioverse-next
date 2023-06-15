@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import React, { startTransition, useMemo, useState } from 'react';
-import Swiper from 'swiper';
+import type Swiper from 'swiper';
 
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
