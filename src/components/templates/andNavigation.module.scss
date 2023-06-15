@@ -14,9 +14,9 @@
 	flex: 1 1 auto;
 	padding-top: 24px;
 	padding-bottom: 96px;
-	overflow: scroll;
-
-	@include content-horizontal-padding();
+	overflow-y: scroll;
+	padding-right: var(--content-padding-right);
+	padding-left: var(--content-padding-left);
 }
 
 .search {

@@ -71,24 +71,3 @@ $tease-padding: 16px 24px;
 
 $content-maxWidth-sm: 520px;
 $content-maxWidth: 1500px;
-
-@mixin content-horizontal-padding() {
-    --width: 100vw;
-
-    @media (min-width: $content-maxWidth-sm) {
-        --width: #{$content-maxWidth-sm};
-    }
-
-    @media (min-width: $breakpoint-md) {
-        --width: 100vw;
-    }
-
-    @media (min-width: $content-maxWidth) {
-        --width: #{$content-maxWidth};
-    }
-
-    --hPad: calc(((100vw - var(--width)) / 2) + 24px);
-
-    padding-right: calc(env(safe-area-inset-right) + var(--hPad));
-    padding-left: calc(env(safe-area-inset-left) + var(--hPad));
-}
