@@ -289,15 +289,15 @@ export function useNavigationItems(): INavigationItem[] {
 						defaultMessage: 'Our Story',
 					}),
 				},
-				{
-					key: 'meettheteam',
-					href: root.lang(languageRoute).about.id(13).get(),
-					Icon: iconMap.fa_users_heavy,
-					label: intl.formatMessage({
-						id: `header__navItemStory-team`,
-						defaultMessage: 'The Team',
-					}),
-				},
+				// {
+				// 	key: 'meettheteam',
+				// 	href: root.lang(languageRoute).about.id(13).get(),
+				// 	Icon: iconMap.fa_users_heavy,
+				// 	label: intl.formatMessage({
+				// 		id: `header__navItemStory-team`,
+				// 		defaultMessage: 'The Team',
+				// 	}),
+				// },
 				{
 					key: 'purpose',
 					href: root.lang(languageRoute).about.id(7).get(),

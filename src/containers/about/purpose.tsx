@@ -147,7 +147,7 @@ export default function Purpose(): JSX.Element {
 							IconRight={IconForward}
 							href={root.lang(languageRoute).about.id(12).get()}
 						/>
-						<Button
+						{/* <Button
 							type="secondary"
 							text={
 								<FormattedMessage
@@ -157,6 +157,17 @@ export default function Purpose(): JSX.Element {
 							}
 							IconLeft={IconBack}
 							href={root.lang(languageRoute).about.id(13).get()}
+						/> */}
+						<Button
+							type="secondary"
+							IconLeft={IconBack}
+							text={
+								<FormattedMessage
+									id="about__navStory"
+									defaultMessage="Our Story"
+								/>
+							}
+							href={root.lang(languageRoute).about.id(1).get()}
 						/>
 					</div>
 				</div>

@@ -3,17 +3,17 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
-import Button from '~components/molecules/button';
+ import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import AboutNav from '~components/organisms/aboutNav';
-import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+ import root from '~lib/routes';
+ import useLanguageRoute from '~lib/useLanguageRoute';
 
-import IconForward from '../../../public/img/icons/icon-forward-light.svg';
+ import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 import sharedStyles from './shared.module.scss';
 
 export default function Story(): JSX.Element {
-	const languageRoute = useLanguageRoute();
+	 const languageRoute = useLanguageRoute();
 
 	return (
 		<>
@@ -82,8 +82,9 @@ export default function Story(): JSX.Element {
 							defaultMessage="As this website has grown, we have had the opportunity to feature recordings in other languages than English.  In an effort to reach as many people as possible, messages in Spanish, French, German, and Chinese are now available with more to come."
 						/>
 					</p>
-					<div className={sharedStyles.navigation}>
-						<Button
+
+					 <div className={sharedStyles.navigation}>
+						{/* <Button
 							type="secondary"
 							text={
 								<FormattedMessage
@@ -93,8 +94,20 @@ export default function Story(): JSX.Element {
 							}
 							IconRight={IconForward}
 							href={root.lang(languageRoute).about.id(13).get()}
+						/> */}
+						<Button
+							type="secondary"
+							IconRight={IconForward}
+							text={
+								<FormattedMessage
+									id="about__navPurpose"
+									defaultMessage="Our Purpose"
+								/>
+							}
+							href={root.lang(languageRoute).about.id(7).get()}
 						/>
-					</div>
+					</div> 
+
 				</div>
 			</ContentWidthLimiter>
 		</>
