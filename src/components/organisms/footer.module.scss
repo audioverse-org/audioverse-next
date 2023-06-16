@@ -1,25 +1,25 @@
 @import '../../styles/common';
 
 .footerWrapper {
-    position: fixed;
-    bottom: $grid-gap;
-    margin: 0 auto;
-    opacity: 0;
-    pointer-events: none;
+	position: fixed;
+	bottom: $grid-gap;
+	margin: 0 auto;
+	opacity: 0;
+	pointer-events: none;
 }
 
 .footer {
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    padding-right: 75px + $grid-gap;
+	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	padding-right: 75px + $grid-gap;
 
-    .logo {
-        margin-right: $grid-gap;
-    }
+	.logo {
+		margin-right: $grid-gap;
+	}
 
-    h3 {
-        font-size: 18px;
-    }
+	h3 {
+		font-size: 18px;
+	}
 }

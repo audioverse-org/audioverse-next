@@ -23,8 +23,8 @@ const EXTENDED_CARD_THEMES = [
 	'songBook',
 ] as const;
 
-export type CardTheme = typeof CARD_THEMES[number];
-export type ExtendedCardTheme = typeof EXTENDED_CARD_THEMES[number];
+export type CardTheme = (typeof CARD_THEMES)[number];
+export type ExtendedCardTheme = (typeof EXTENDED_CARD_THEMES)[number];
 
 interface Props {
 	theme: ExtendedCardTheme;

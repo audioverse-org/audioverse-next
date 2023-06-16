@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
-import { __loadQuery,useRouter  } from 'next/router';
+import { __loadQuery, useRouter } from 'next/router';
 
 import { fetchApi } from '~lib/api/fetchApi';
 import {
