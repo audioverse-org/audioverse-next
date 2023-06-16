@@ -27,11 +27,21 @@ const Swiper = React.memo(function Swiper({ children, ...props }: SwiperProps) {
 
 	useEffect(() => {
 		if (!ref.current) return;
+
 		Object.assign(ref.current, props);
-		ref.current.swiper?.update();
+
+		if (ref.current.swiper) {
+			ref.current.swiper.update();
+		} else {
+			ref.current.initialize();
+		}
 	}, [ref, children, props]);
 
-	return <swiper-container ref={ref}>{children}</swiper-container>;
+	return (
+		<swiper-container ref={ref} init={false}>
+			{children}
+		</swiper-container>
+	);
 });
 
 export default Swiper;
