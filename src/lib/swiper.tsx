@@ -26,32 +26,12 @@ const Swiper = React.memo(function Swiper({ children, ...props }: SwiperProps) {
 	const ref = useRef<HTMLSwiperElement>(null);
 
 	useEffect(() => {
-		if (!ref.current) {
-			console.error('No element');
-			return;
-		}
-
+		if (!ref.current) return;
 		Object.assign(ref.current, props);
+		ref.current.swiper?.update();
+	}, [ref, children, props]);
 
-		if (!ref.current.initialize) {
-			console.error('No initialize');
-			return;
-		}
-
-		if (!ref.current.swiper) {
-			ref.current.initialize();
-		}
-	}, [ref, props]);
-
-	useEffect(() => {
-		ref.current?.swiper?.update();
-	}, [ref, children]);
-
-	return (
-		<swiper-container ref={ref} init={false}>
-			{children}
-		</swiper-container>
-	);
+	return <swiper-container ref={ref}>{children}</swiper-container>;
 });
 
 export default Swiper;
