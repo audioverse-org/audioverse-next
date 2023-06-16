@@ -30,7 +30,8 @@
         "analyze:server": "BUNDLE_ANALYZE=server npm run build:webpack-only",
         "analyze:browser": "BUNDLE_ANALYZE=browser npm run build:webpack-only",
         "svgo": "svgo -f ./public/img/icons-raw -o ./public/img/icons",
-        "pa11y": "pa11y-ci --sitemap http://localhost:3000/sitemap-0.xml --sitemap-find https://www.audioverse.org --sitemap-replace http://localhost:3000 --sitemap-exclude 'https?:\\/\\/[\\w\\.-]+\\/(?!en)\\w\\w\\/'"
+        "pa11y": "pa11y-ci --sitemap http://localhost:3000/sitemap-0.xml --sitemap-find https://www.audioverse.org --sitemap-replace http://localhost:3000 --sitemap-exclude 'https?:\\/\\/[\\w\\.-]+\\/(?!en)\\w\\w\\/'",
+        "prepare": "husky install"
     },
     "dependencies": {
         "@material-ui/core": "^4.12.4",
@@ -118,6 +119,7 @@
         "eslint-plugin-testing-library": "^5.0.5",
         "graphql": "^16.3.0",
         "graphql-tag": "^2.12.6",
+        "husky": "^8.0.3",
         "identity-obj-proxy": "^3.0.0",
         "jest": "^27.5.1",
         "jest-canvas-mock": "^2.3.1",
