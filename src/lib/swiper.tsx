@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import type { Swiper as _Swiper } from 'swiper';
 import type { SwiperProps as _SwiperProps } from 'swiper/react';
 
@@ -10,7 +10,7 @@ export function register() {
 
 export type HTMLSwiperElement = HTMLDivElement & {
 	swiper?: _Swiper;
-	initialize: () => void;
+	initialize?: () => void;
 };
 
 export type SwiperProps = PropsWithChildren<
@@ -22,26 +22,45 @@ export type SwiperProps = PropsWithChildren<
 	onInit?: (swiper: _Swiper) => void;
 };
 
-const Swiper = React.memo(function Swiper({ children, ...props }: SwiperProps) {
+function updateSwiper(el: HTMLSwiperElement): boolean {
+	if (el.swiper) {
+		el.swiper.update();
+		return true;
+	} else if (el.initialize) {
+		el.initialize();
+		return true;
+	} else {
+		console.warn('Swiper is not initialized');
+		return false;
+	}
+}
+
+const Swiper = React.memo(function Swiper(props: SwiperProps) {
 	const ref = useRef<HTMLSwiperElement>(null);
+	const [retry, setRetry] = useState(0);
 
 	useEffect(() => {
 		if (!ref.current) return;
+		const { children: _, ...rest } = props;
+		Object.assign(ref.current, rest);
+		setRetry(1);
+	}, [ref, props]);
 
-		Object.assign(ref.current, props);
+	useEffect(() => {
+		if (!ref.current) return;
+		if (retry === 0) return;
 
-		if (ref.current.swiper) {
-			ref.current.swiper.update();
-		} else if (ref.current.initialize) {
-			ref.current.initialize();
-		} else {
-			console.warn('Swiper is not initialized');
-		}
-	}, [ref, children, props]);
+		const timeout = setTimeout(() => {
+			const success = ref.current && updateSwiper(ref.current);
+			setRetry(success ? 0 : retry * 2);
+		}, retry * 100);
+
+		return () => clearTimeout(timeout);
+	}, [ref, retry]);
 
 	return (
 		<swiper-container ref={ref} init={false}>
-			{children}
+			{props.children}
 		</swiper-container>
 	);
 });
