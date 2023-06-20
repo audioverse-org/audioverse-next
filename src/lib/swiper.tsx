@@ -32,8 +32,10 @@ const Swiper = React.memo(function Swiper({ children, ...props }: SwiperProps) {
 
 		if (ref.current.swiper) {
 			ref.current.swiper.update();
-		} else {
+		} else if (ref.current.initialize) {
 			ref.current.initialize();
+		} else {
+			console.warn('Swiper is not initialized');
 		}
 	}, [ref, children, props]);
 
