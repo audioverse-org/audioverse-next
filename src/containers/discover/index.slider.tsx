@@ -80,6 +80,11 @@ export default function Slider({
 				setIsEnd(swiper.isEnd);
 				setWidth(swiper.width);
 			},
+			update: (swiper: Swiper) => {
+				setIsBeginning(swiper.isBeginning);
+				setIsEnd(swiper.isEnd);
+				setWidth(swiper.width);
+			},
 			transitionEnd: (swiper: Swiper) => {
 				setIsBeginning(swiper.isBeginning);
 				setIsEnd(swiper.isEnd);

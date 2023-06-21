@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import type { Swiper as _Swiper } from 'swiper';
 import type { SwiperProps as _SwiperProps } from 'swiper/react';
@@ -38,6 +39,7 @@ function updateSwiper(el: HTMLSwiperElement): boolean {
 const Swiper = React.memo(function Swiper(props: SwiperProps) {
 	const ref = useRef<HTMLSwiperElement>(null);
 	const [retry, setRetry] = useState(0);
+	const router = useRouter();
 
 	useEffect(() => {
 		if (!ref.current) return;
@@ -45,6 +47,12 @@ const Swiper = React.memo(function Swiper(props: SwiperProps) {
 		Object.assign(ref.current, rest);
 		setRetry(1);
 	}, [ref, props]);
+
+	useEffect(() => {
+		const fn = () => setRetry(1);
+		router.events.on('routeChangeComplete', fn);
+		return () => router.events.off('routeChangeComplete', fn);
+	}, [router]);
 
 	useEffect(() => {
 		if (!ref.current) return;
