@@ -29,12 +29,6 @@
       "value": "Our Story"
     }
   ],
-  "about__navTeam": [
-    {
-      "type": 0,
-      "value": "The Team"
-    }
-  ],
   "about__navTestimonials": [
     {
       "type": 0,
@@ -2011,12 +2005,6 @@
     {
       "type": 0,
       "value": "Spirit of AudioVerse"
-    }
-  ],
-  "header__navItemStory-team": [
-    {
-      "type": 0,
-      "value": "The Team"
     }
   ],
   "header__navItemStory-testimonials": [
