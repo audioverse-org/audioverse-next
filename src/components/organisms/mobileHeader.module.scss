@@ -1,100 +1,100 @@
 @import '../../styles/common';
 
 @mixin hpad() {
-    padding-left: calc(24px + env(safe-area-inset-left));
-    padding-right: calc(24px + env(safe-area-inset-right));
+	padding-left: calc(24px + env(safe-area-inset-left));
+	padding-right: calc(24px + env(safe-area-inset-right));
 }
 
 .base {
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
+	position: sticky;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	z-index: 10;
 }
 
 .wrapper {
-    background: $ts-cream;
-    padding-bottom: 8px;
+	background: $ts-cream;
+	padding-bottom: 8px;
 
-    @include hpad();
+	@include hpad();
 }
 
 .title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 1;
 
-    > :first-child {
-        margin-right: 16px;
-    }
+	> :first-child {
+		margin-right: 16px;
+	}
 }
 
 .subnav {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    background: $ts-cream;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+	background: $ts-cream;
 }
 
 .subnavItems {
-    height: 24px;
-    margin-right: 16px;
-    flex-wrap: wrap;
-    overflow: hidden;
+	height: 24px;
+	margin-right: 16px;
+	flex-wrap: wrap;
+	overflow: hidden;
 }
 
 .more {
-    height: 24px;
-    padding: 0;
-    border: none;
+	height: 24px;
+	padding: 0;
+	border: none;
 }
 
 .search {
-    display: none;
-    background: $ts-cream;
-    padding-top: 8px;
+	display: none;
+	background: $ts-cream;
+	padding-top: 8px;
 
-    @include hpad();
+	@include hpad();
 
-    .searchInput {
-        background: $ts-white;
-        border-bottom: none;
-        border-radius: 4px;
-        padding: 4px 12px 4px 8px;
-        height: 32px;
+	.searchInput {
+		background: $ts-white;
+		border-bottom: none;
+		border-radius: 4px;
+		padding: 4px 12px 4px 8px;
+		height: 32px;
 
-        >svg {
-            color: $ts-red;
-        }
+		> svg {
+			color: $ts-red;
+		}
 
-        input,
-        input::placeholder {
-            font-size: 16px;
-            line-height: 24px;
-            font-weight: 400;
-        }
-    }
+		input,
+		input::placeholder {
+			font-size: 16px;
+			line-height: 24px;
+			font-weight: 400;
+		}
+	}
 
-    >button {
-        margin-left: 8px;
-    }
+	> button {
+		margin-left: 8px;
+	}
 }
 
 .searchActive {
-    display: flex;
+	display: flex;
 }
 
 .searchFilters {
-    padding-top: 8px;
+	padding-top: 8px;
 }
 
 @media (min-width: $breakpoint-lg) {
-    .base {
-        display: none;
-    }
+	.base {
+		display: none;
+	}
 }

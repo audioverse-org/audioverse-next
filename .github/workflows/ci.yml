@@ -92,9 +92,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Extract
-        run: npm run extract
+        run: npm run intl:extract
       - name: Compile
-        run: npm run compile
+        run: npm run intl:compile
       - name: Check no changes were made
         run: git diff --exit-code
   codegen:

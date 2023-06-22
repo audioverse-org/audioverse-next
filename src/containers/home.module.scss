@@ -28,7 +28,7 @@
 	display: flex;
 	align-items: center;
 
-	>* {
+	> * {
 		margin-right: 16px;
 	}
 }
@@ -38,7 +38,7 @@
 	width: 100%;
 
 	@supports not (aspect-ratio: 9 / 16) {
-		>* {
+		> * {
 			height: 0 !important;
 			padding-top: 56.25% !important;
 		}
@@ -48,7 +48,7 @@
 		aspect-ratio: 1/1;
 
 		@supports not (aspect-ratio: 1 / 1) {
-			>* {
+			> * {
 				height: 0 !important;
 				padding-top: 100% !important;
 			}
@@ -73,7 +73,7 @@
 	@media (max-width: #{$breakpoint-lg - 1px}) {
 		overflow: visible;
 
-		>*:first-child {
+		> *:first-child {
 			height: auto;
 		}
 	}
@@ -96,7 +96,7 @@
 }
 
 .posts {
-	>* {
+	> * {
 		margin-bottom: 16px;
 	}
 
@@ -129,7 +129,7 @@
 	background: $ts-dark;
 	border-radius: 16px;
 
-	>* {
+	> * {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -165,7 +165,7 @@
 .featureSlide {
 	margin: 0 !important;
 
-	>*:last-child {
+	> *:last-child {
 		padding-bottom: 56px;
 	}
 }
@@ -207,7 +207,7 @@
 	padding: 16px;
 	background: $ts-red;
 
-	>svg {
+	> svg {
 		margin-top: 3px;
 		margin-right: 4px;
 	}
@@ -222,7 +222,7 @@
 	@media (min-width: $breakpoint-xl) {
 		display: flex;
 
-		>* {
+		> * {
 			max-width: 50%;
 
 			&:first-child {

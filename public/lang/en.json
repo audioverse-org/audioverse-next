@@ -16,9 +16,6 @@
   "about__navStory": {
     "string": "Our Story"
   },
-  "about__navTeam": {
-    "string": "The Team"
-  },
   "about__navTestimonials": {
     "string": "Testimonials"
   },
@@ -938,9 +935,6 @@
   },
   "header__navItemStory-spiritOfAudioVerse": {
     "string": "Spirit of AudioVerse"
-  },
-  "header__navItemStory-team": {
-    "string": "The Team"
   },
   "header__navItemStory-testimonials": {
     "string": "Testimonials"
