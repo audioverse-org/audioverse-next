@@ -571,6 +571,14 @@ module.exports = withBundleAnalyzer(
 					destination: '/:lang/teachings/all/page/1',
 				},
 				{
+					source: '/:lang/teachings/audio',
+					destination: '/:lang/teachings/audio/page/1',
+				},
+				{
+					source: '/:lang/teachings/video',
+					destination: '/:lang/teachings/video/page/1',
+				},
+				{
 					source: '/:lang/teachings/trending',
 					destination: '/:lang/teachings/trending/all',
 				},

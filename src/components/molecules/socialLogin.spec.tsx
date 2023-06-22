@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import React from 'react';
@@ -10,6 +10,8 @@ import renderWithProviders from '~lib/test/renderWithProviders';
 
 describe('social login', () => {
 	it('does not run onSuccess callback if errors', async () => {
+		const user = userEvent.setup();
+
 		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
@@ -24,14 +26,16 @@ describe('social login', () => {
 
 		let didCallbackRun = false;
 
-		const { getByText } = await renderWithProviders(
+		await renderWithProviders(
 			<SocialLogin onSuccess={() => (didCallbackRun = true)} />,
 			undefined
 		);
 
-		userEvent.click(getByText('Login with Facebook'));
+		const button = screen.getByText('Login with Facebook');
 
-		await waitFor(() => expect(fetchApi).toBeCalled());
+		await user.click(button);
+
+		await screen.findByText('the_error_message');
 
 		expect(didCallbackRun).toBeFalsy();
 	});

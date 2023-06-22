@@ -157,7 +157,7 @@ describe('app media playback', () => {
 	it('moves video to and from miniplayer', async () => {
 		const result = await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+		await userEvent.click(result.getByAltText('the_sermon_title'));
 
 		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
 
@@ -171,19 +171,19 @@ describe('app media playback', () => {
 
 		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
 
-		userEvent.click(screen.getByLabelText('pause'));
+		await userEvent.click(screen.getByLabelText('pause'));
 
 		await screen.findByLabelText('play');
 	});
 
 	it('hides controls when video in miniplayer', async () => {
-		const result = await renderApp(true, recordingVideo);
+		const { rerender } = await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+		await userEvent.click(screen.getByAltText('the_sermon_title'));
 
-		await result.rerender(false);
+		const miniplayer = await screen.findByLabelText('miniplayer');
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		await rerender(false);
 
 		await findByLabelText(miniplayer, 'pause');
 
@@ -195,7 +195,7 @@ describe('app media playback', () => {
 	it('shows controls when video not in miniplayer', async () => {
 		const result = await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+		await userEvent.click(result.getByAltText('the_sermon_title'));
 
 		const miniplayer = await result.findByLabelText('miniplayer');
 
@@ -209,11 +209,11 @@ describe('app media playback', () => {
 	});
 
 	it('shows controls when not playing video', async () => {
-		const result = await renderApp(true, recordingAudio);
+		await renderApp(true, recordingAudio);
 
-		userEvent.click(result.getByLabelText('play'));
+		await userEvent.click(screen.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await findByLabelText(miniplayer, 'pause');
 
@@ -223,15 +223,15 @@ describe('app media playback', () => {
 	});
 
 	it('handles pause event', async () => {
-		const result = await renderApp(true, recordingVideo);
+		await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+		await userEvent.click(screen.getByAltText('the_sermon_title'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await findByLabelText(miniplayer, 'pause');
 
-		const portal = result.getByTestId('portal');
+		const portal = screen.getByTestId('portal');
 		const video = await findByTestId(portal, 'video-element');
 
 		await act(async () => {
@@ -242,19 +242,19 @@ describe('app media playback', () => {
 	});
 
 	it('handles play event', async () => {
-		const result = await renderApp(true, recordingVideo);
+		await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+		await userEvent.click(screen.getByAltText('the_sermon_title'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await findByLabelText(miniplayer, 'pause');
 
-		userEvent.click(getByLabelText(miniplayer, 'pause'));
+		await userEvent.click(getByLabelText(miniplayer, 'pause'));
 
 		await findByLabelText(miniplayer, 'play');
 
-		const portal = result.getByTestId('portal');
+		const portal = screen.getByTestId('portal');
 
 		await waitFor(() => {
 			expect(getByTestId(portal, 'video-element')).toBeInTheDocument();
@@ -276,7 +276,7 @@ describe('app media playback', () => {
 			expect(result.getByText('Audio')).toBeInTheDocument();
 		});
 
-		userEvent.click(result.getByText('Audio'));
+		await userEvent.click(result.getByText('Audio'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -296,7 +296,7 @@ describe('app media playback', () => {
 			expect(result.getByText('Audio')).toBeInTheDocument();
 		});
 
-		userEvent.click(result.getByText('Audio'));
+		await userEvent.click(result.getByText('Audio'));
 
 		const player = result.getByLabelText('player');
 
@@ -304,7 +304,7 @@ describe('app media playback', () => {
 			expect(getByLabelText(player, 'play')).toBeInTheDocument();
 		});
 
-		userEvent.click(result.getByText('Video'));
+		await userEvent.click(result.getByText('Video'));
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -323,7 +323,7 @@ describe('app media playback', () => {
 			expect(result.getByText('Audio')).toBeInTheDocument();
 		});
 
-		userEvent.click(result.getByText('Audio'));
+		await userEvent.click(result.getByText('Audio'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -350,7 +350,7 @@ describe('app media playback', () => {
 			expect(result.getByText('Audio')).toBeInTheDocument();
 		});
 
-		userEvent.click(result.getByText('Audio'));
+		await userEvent.click(result.getByText('Audio'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();

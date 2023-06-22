@@ -84,7 +84,7 @@ describe('help widget', () => {
 
 		const button = await screen.findByRole('button');
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('open');
@@ -98,13 +98,13 @@ describe('help widget', () => {
 
 		const button = screen.getByRole('button');
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('open');
 		});
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('close');
@@ -118,7 +118,7 @@ describe('help widget', () => {
 
 		const button = screen.getByRole('button');
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('on', 'close', expect.any(Function));
@@ -133,7 +133,7 @@ describe('help widget', () => {
 			matches[matches.length - 1][2]();
 		});
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		expect(mockBeacon).not.toBeCalledWith('close');
 	});

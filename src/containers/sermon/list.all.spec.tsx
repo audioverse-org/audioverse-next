@@ -220,14 +220,13 @@ describe('sermons list page', () => {
 	it('links All button', async () => {
 		loadSermonListData();
 
-		const { getByRole, getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Filter'));
+		await userEvent.click(screen.getByText('Filter'));
 
-		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
-			'href',
-			'/en/teachings/all'
-		);
+		const link = await screen.findByRole('link', { name: 'All' });
+
+		expect(link).toHaveAttribute('href', '/en/teachings/all');
 	});
 
 	it('links All button using lang', async () => {
@@ -236,12 +235,11 @@ describe('sermons list page', () => {
 
 		await renderPage();
 
-		userEvent.click(await screen.findByText('Filtro'));
+		await userEvent.click(await screen.findByText('Filtro'));
 
-		expect(screen.getByRole('link', { name: 'Todo' })).toHaveAttribute(
-			'href',
-			'/es/teachings/all'
-		);
+		const link = await screen.findByRole('link', { name: 'Todo' });
+
+		expect(link).toHaveAttribute('href', '/es/teachings/all');
 	});
 
 	it('links Video button', async () => {
@@ -249,7 +247,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('Filter'));
+		await userEvent.click(getByText('Filter'));
 
 		const link = await screen.findByRole('link', { name: 'Video' });
 
@@ -259,13 +257,13 @@ describe('sermons list page', () => {
 	it('links Audio button', async () => {
 		loadSermonListData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Filter'));
+		await userEvent.click(screen.getByText('Filter'));
 
-		expect(
-			await screen.findByRole('link', { name: 'Audio only' })
-		).toHaveAttribute('href', '/en/teachings/audio');
+		const link = await screen.findByRole('link', { name: 'Audio only' });
+
+		expect(link).toHaveAttribute('href', '/en/teachings/audio');
 	});
 
 	it('does not include video paths', async () => {

@@ -217,34 +217,6 @@
   "accountNav__profile": {
     "string": "Profile"
   },
-  "accountPlaylists__buttonLabelSubmit": {
-    "comment": "account playlists page submit button label",
-    "string": "Add Playlist"
-  },
-  "accountPlaylists__errorMissingTitle": {
-    "comment": "account playlists page missing title error message",
-    "string": "missing title"
-  },
-  "accountPlaylists__inputLabelPublic": {
-    "comment": "account playlists page input label public",
-    "string": "public"
-  },
-  "accountPlaylists__inputLabelSummary": {
-    "comment": "account playlists page input label summary",
-    "string": "summary"
-  },
-  "accountPlaylists__inputLabelTitle": {
-    "comment": "account playlists page input label title",
-    "string": "title"
-  },
-  "accountPlaylists__labelPrivate": {
-    "comment": "account playlists page playlist private label",
-    "string": "private"
-  },
-  "accountPlaylists__labelPublic": {
-    "comment": "account playlists page playlist public label",
-    "string": "public"
-  },
   "andGlobalModals__authCopy": {
     "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
   },
