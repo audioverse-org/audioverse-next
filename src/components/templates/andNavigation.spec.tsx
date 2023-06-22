@@ -82,7 +82,7 @@ describe('AndNavigation', () => {
 		const searchInputs = screen.getAllByPlaceholderText('Search');
 		const search = searchInputs[0];
 
-		userEvent.type(search, 'test');
+		await userEvent.type(search, 'test');
 
 		const teachingsHeading = await screen.findByRole('heading', {
 			name: 'Teachings',
@@ -102,7 +102,7 @@ describe('AndNavigation', () => {
 		const searchInputs = screen.getAllByPlaceholderText('Search');
 		const search = searchInputs[0];
 
-		userEvent.type(search, 'Test');
+		await userEvent.type(search, 'Test');
 
 		const teachingsHeading = await screen.findByRole('heading', {
 			name: 'Teachings',
@@ -122,7 +122,7 @@ describe('AndNavigation', () => {
 		const searchInputs = screen.getAllByPlaceholderText('Search');
 		const search = searchInputs[0];
 
-		userEvent.type(search, 'test!');
+		await userEvent.type(search, 'test!');
 
 		const teachingsHeading = await screen.findByRole('heading', {
 			name: 'Teachings',

@@ -121,25 +121,19 @@ describe('profile page', () => {
 		).toBeInTheDocument();
 	});
 
-	it('displays password field if unauthenticated', async () => {
-		const { getByPlaceholderText } = await renderPage();
-
-		expect(getByPlaceholderText('∗∗∗∗∗∗∗')).toBeInTheDocument();
-	});
-
 	it('makes login request', async () => {
 		mockedLogin.mockRejectedValue(false);
 
-		const { getByPlaceholderText, getByText } = await renderPage();
+		await renderPage();
 
-		const emailField = getByPlaceholderText('jane@example.com');
-		const passwordField = getByPlaceholderText('∗∗∗∗∗∗∗');
-		const loginButton = getByText('Login');
+		const emailField = await screen.findByPlaceholderText('jane@example.com');
+		const passwordField = await screen.findByPlaceholderText('∗∗∗∗∗∗∗');
+		const loginButton = await screen.findByText('Login');
 
-		userEvent.type(emailField, 'the_email');
-		userEvent.type(passwordField, 'the_password');
+		await userEvent.type(emailField, 'the_email');
+		await userEvent.type(passwordField, 'the_password');
 
-		userEvent.click(loginButton);
+		await userEvent.click(loginButton);
 
 		expect(login).toHaveBeenCalledWith('the_email', 'the_password');
 
@@ -163,7 +157,7 @@ describe('profile page', () => {
 
 		const loginButton = screen.getByText('Login');
 
-		userEvent.click(loginButton);
+		await userEvent.click(loginButton);
 
 		expect(await screen.findByText('Login failed')).toBeInTheDocument();
 	});
@@ -185,11 +179,11 @@ describe('profile page', () => {
 	it('invalidates cache on successful login', async () => {
 		mockedLogin.mockResolvedValue(true);
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		loadData();
 
-		userEvent.click(getByText('Login'));
+		await userEvent.click(await screen.findByText('Login'));
 
 		await waitFor(() =>
 			expect(screen.getByLabelText('First name')).toHaveValue('the_given_name')
@@ -207,7 +201,7 @@ describe('profile page', () => {
 		await userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'the_password');
 
-		userEvent.click(getByText('Login'));
+		await userEvent.click(getByText('Login'));
 
 		expect(login).toBeCalledWith('the_email', 'the_password');
 
@@ -264,8 +258,8 @@ describe('profile page', () => {
 			expect(getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.type(getByLabelText('Email'), '123');
-		userEvent.click(getByText('Save changes'));
+		await userEvent.type(getByLabelText('Email'), '123');
+		await userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
@@ -287,8 +281,8 @@ describe('profile page', () => {
 			expect(getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.type(getByLabelText('Password'), 'the_password');
-		userEvent.click(getByText('Save changes'));
+		await userEvent.type(getByLabelText('Password'), 'the_password');
+		await userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
@@ -317,7 +311,7 @@ describe('profile page', () => {
 
 		const { getByText, getByDisplayValue } = await renderPage();
 
-		userEvent.click(getByText('Save changes'));
+		await userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(getByDisplayValue('the_new_email')).toBeInTheDocument();
@@ -348,7 +342,7 @@ describe('profile page', () => {
 
 		const { getByText, getByDisplayValue } = await renderPage();
 
-		userEvent.click(getByText('Save changes'));
+		await userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(getByDisplayValue('the_new_given_name')).toBeInTheDocument();
@@ -403,7 +397,7 @@ describe('profile page', () => {
 			expect(getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.click(getByText('Save changes'));
+		await userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {

@@ -77,7 +77,7 @@ describe('withAuthGuard', () => {
 				},
 			});
 
-		userEvent.click(getByText('Login with Google'));
+		await userEvent.click(getByText('Login with Google'));
 
 		await waitFor(() => {
 			expect(getByText('hello world')).toBeInTheDocument();

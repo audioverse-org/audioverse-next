@@ -120,8 +120,8 @@ describe('Slider', () => {
 			},
 		});
 
-		userEvent.click(screen.getByLabelText('next'));
-		userEvent.click(screen.getByLabelText('previous'));
+		await userEvent.click(screen.getByLabelText('next'));
+		await userEvent.click(screen.getByLabelText('previous'));
 
 		expect(screen.getByLabelText('previous')).toBeDisabled();
 	});
@@ -216,9 +216,11 @@ describe('Slider', () => {
 			expect(screen.getByLabelText('next')).toBeEnabled();
 		});
 
-		userEvent.click(screen.getByLabelText('next'));
+		await userEvent.click(screen.getByLabelText('next'));
 
-		expect(__swiper.slideNext).toBeCalled();
+		await waitFor(() => {
+			expect(__swiper.slideNext).toBeCalled();
+		});
 	});
 
 	it('uses swiper to page back', async () => {
@@ -233,8 +235,10 @@ describe('Slider', () => {
 
 		await screen.findByText('1');
 
-		userEvent.click(screen.getByLabelText('previous'));
+		await userEvent.click(screen.getByLabelText('previous'));
 
-		expect(__swiper.slidePrev).toBeCalled();
+		await waitFor(() => {
+			expect(__swiper.slidePrev).toBeCalled();
+		});
 	});
 });

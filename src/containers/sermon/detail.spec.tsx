@@ -4,6 +4,7 @@ import {
 	getByLabelText,
 	getByTestId,
 	getByText,
+	screen,
 	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -207,7 +208,7 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText } = await renderPage();
 
-		userEvent.click(getByLabelText('play'));
+		await userEvent.click(getByLabelText('play'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -227,7 +228,7 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText } = await renderPage();
 
-		userEvent.click(getByLabelText('play'));
+		await userEvent.click(getByLabelText('play'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -251,7 +252,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('Audio'));
+		await userEvent.click(getByText('Audio'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -285,7 +286,7 @@ describe('sermon detail page', () => {
 
 		const poster = getByAltText('the_sermon_title') as HTMLElement;
 
-		userEvent.click(poster.parentElement as HTMLElement);
+		await userEvent.click(poster.parentElement as HTMLElement);
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -317,7 +318,7 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText } = await renderPage();
 
-		userEvent.click(getByLabelText('play'));
+		await userEvent.click(getByLabelText('play'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -594,11 +595,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Read Transcript'));
+		await userEvent.click(screen.getByText('Read Transcript'));
 
-		expect(getByText('the_transcript_text')).toBeInTheDocument();
+		expect(await screen.findByText('the_transcript_text')).toBeInTheDocument();
 	});
 
 	it('notes probable auto generation', async () => {
@@ -608,12 +609,12 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Read Transcript'));
+		await userEvent.click(screen.getByText('Read Transcript'));
 
 		expect(
-			getByText('This transcript may be automatically generated.')
+			await screen.findByText('This transcript may be automatically generated.')
 		).toBeInTheDocument();
 	});
 
@@ -624,15 +625,14 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Read Transcript'));
+		await userEvent.click(screen.getByText('Read Transcript'));
 
-		expect(
-			getByText(
-				'Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org'
-			)
-		).toBeInTheDocument();
+		const needle =
+			'Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org';
+
+		expect(await screen.findByText(needle)).toBeInTheDocument();
 	});
 
 	it('does not include transcript section if no transcript', async () => {
@@ -654,7 +654,7 @@ describe('sermon detail page', () => {
 
 		const { getByText, getByLabelText } = await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		await userEvent.click(getByLabelText('share'));
 
 		expect((getByText('Copy Link') as HTMLAnchorElement).href).toContain(
 			'the_share_url'
@@ -668,7 +668,7 @@ describe('sermon detail page', () => {
 
 		const { getByText, getByLabelText } = await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		await userEvent.click(getByLabelText('share'));
 
 		expect(getByText('Copy Link')).toBeInTheDocument();
 	});
@@ -680,7 +680,7 @@ describe('sermon detail page', () => {
 
 		const { getByText, getByLabelText } = await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		await userEvent.click(getByLabelText('share'));
 
 		expect(getByText('Share')).toBeInTheDocument();
 	});
@@ -690,7 +690,7 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText, getByText } = await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		await userEvent.click(getByLabelText('share'));
 
 		expect(getByText('Audio Embed Code')).toBeInTheDocument();
 	});
@@ -700,7 +700,7 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText, getByText } = await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		await userEvent.click(getByLabelText('share'));
 
 		const input = getByText('Audio Embed Code').nextSibling as HTMLInputElement;
 
@@ -822,11 +822,11 @@ describe('sermon detail page', () => {
 
 		const player = result.getByLabelText('player');
 
-		userEvent.click(result.getByText('Audio'));
+		await userEvent.click(result.getByText('Audio'));
 		await findByLabelText(player, 'play');
-		userEvent.click(getByLabelText(player, 'play'));
-		userEvent.click(result.getByText('Video'));
-		userEvent.click(result.getByText('Audio'));
+		await userEvent.click(getByLabelText(player, 'play'));
+		await userEvent.click(result.getByText('Video'));
+		await userEvent.click(result.getByText('Audio'));
 		await findByLabelText(player, 'play');
 		expect(getByLabelText(player, 'play')).toBeInTheDocument();
 	});
@@ -896,11 +896,13 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Audio'));
+		await userEvent.click(screen.getByText('Audio'));
 
-		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'true');
+		await waitFor(() => {
+			expect(screen.getByText('Audio')).toHaveAttribute('aria-pressed', 'true');
+		});
 
 		await waitFor(() => expect(videojs).toBeCalled());
 	});
@@ -949,7 +951,7 @@ describe('sermon detail page', () => {
 
 		const result = await renderPage();
 
-		userEvent.click(result.getByText('Audio'));
+		await userEvent.click(result.getByText('Audio'));
 
 		const player = result.getByLabelText('player');
 
@@ -977,11 +979,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Read Transcript'));
+		await userEvent.click(screen.getByText('Read Transcript'));
 
-		expect(getByText('Hide Transcript')).toBeInTheDocument();
+		expect(await screen.findByText('Hide Transcript')).toBeInTheDocument();
 	});
 
 	it('displays play buttons for sequence recordings', async () => {
@@ -1028,13 +1030,13 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const result = await renderPage();
+		await renderPage();
 
-		const sidebar = result.getByLabelText('series list');
+		const sidebar = screen.getByLabelText('series list');
 
-		userEvent.click(getByLabelText(sidebar, 'play'));
+		await userEvent.click(getByLabelText(sidebar, 'play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await waitFor(() => {
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
@@ -1062,17 +1064,17 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const result = await renderPage();
+		await renderPage();
 
-		const player = result.getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
-		userEvent.click(getByLabelText(player, 'play'));
+		await userEvent.click(getByLabelText(player, 'play'));
 
-		const sidebar = result.getByLabelText('series list');
+		const sidebar = screen.getByLabelText('series list');
 
-		userEvent.click(getByLabelText(sidebar, 'play'));
+		await userEvent.click(getByLabelText(sidebar, 'play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await waitFor(() => {
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
@@ -1106,7 +1108,7 @@ describe('sermon detail page', () => {
 		const result = await renderPage();
 		const player = result.getByLabelText('player');
 
-		userEvent.click(getByLabelText(player, 'play'));
+		await userEvent.click(getByLabelText(player, 'play'));
 
 		await waitFor(() => {
 			expect(getByLabelText(player, 'pause')).toBeInTheDocument();
@@ -1129,7 +1131,7 @@ describe('sermon detail page', () => {
 
 		const sidebar = result.getByLabelText('series list');
 
-		userEvent.click(getByLabelText(sidebar, 'play'));
+		await userEvent.click(getByLabelText(sidebar, 'play'));
 
 		expect(mockPlayer.currentTime).toBeCalledWith(0);
 

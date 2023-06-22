@@ -25,10 +25,6 @@ describe('register page', () => {
 		Cookie.get = jest.fn().mockReturnValue({});
 	});
 
-	it('renders', async () => {
-		await renderPage({ router });
-	});
-
 	it('renders email field', async () => {
 		const { getByPlaceholderText } = await renderPage({ router });
 
@@ -52,11 +48,11 @@ describe('register page', () => {
 			router,
 		});
 
-		userEvent.click(getByText('Sign up'));
+		await userEvent.click(getByText('Sign up'));
 
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
-		userEvent.click(getByText('Sign up'));
+		await userEvent.click(getByText('Sign up'));
 
 		expect(queryByText('please type password twice')).not.toBeInTheDocument();
 	});
@@ -64,7 +60,7 @@ describe('register page', () => {
 	it('renders missing email error', async () => {
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(getByText('Sign up'));
+		await userEvent.click(getByText('Sign up'));
 
 		expect(getByText('email is required')).toBeInTheDocument();
 	});
@@ -72,12 +68,12 @@ describe('register page', () => {
 	it('registers user', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage({ router });
 
-		userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
-		userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
+		await userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
+		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
-		userEvent.click(getByText('Sign up'));
+		await userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(RegisterDocument, {
@@ -94,10 +90,10 @@ describe('register page', () => {
 	it('displays loading state', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage({ router });
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
-		userEvent.click(getByText('Sign up'));
+		await userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(getByText('loading...')).toBeInTheDocument();
@@ -119,9 +115,9 @@ describe('register page', () => {
 
 		const { getByText, getByPlaceholderText } = await renderPage({ router });
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
-		userEvent.click(getByText('Sign up'));
+		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.click(getByText('Sign up'));
 
 		expect(await screen.findByText('the_error_message')).toBeInTheDocument();
 	});
@@ -129,10 +125,10 @@ describe('register page', () => {
 	it('displays success message', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage({ router });
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
-		userEvent.click(getByText('Sign up'));
+		await userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(getByText('loading...')).toBeInTheDocument();
@@ -168,7 +164,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(getByText('Sign up with Google'));
+		await userEvent.click(getByText('Sign up with Google'));
 
 		await waitFor(() => {
 			expect(getByText('the_error_message')).toBeInTheDocument();
@@ -190,7 +186,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(await screen.findByText('Sign up with Facebook'));
+		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(getByText('the_error_message')).toBeInTheDocument();
@@ -200,7 +196,7 @@ describe('register page', () => {
 	it('renders social login success', async () => {
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(await screen.findByText('Sign up with Facebook'));
+		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(getByText('success')).toBeInTheDocument();
@@ -210,7 +206,7 @@ describe('register page', () => {
 	it('hits api with facebook registration', async () => {
 		await renderPage({ router });
 
-		userEvent.click(await screen.findByText('Sign up with Facebook'));
+		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
@@ -238,7 +234,7 @@ describe('register page', () => {
 
 		await renderPage({ router });
 
-		userEvent.click(await screen.findByText('Sign up with Facebook'));
+		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(Cookie.set).toBeCalledWith('avSession', 'the_token', {
@@ -254,7 +250,7 @@ describe('register page', () => {
 
 		await renderPage({ router });
 
-		userEvent.click(await screen.findByText('Sign up with Facebook'));
+		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await screen.findByText(/300/);
 
@@ -272,7 +268,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(await screen.findByText('Sign up with Facebook'));
+		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(
@@ -292,7 +288,7 @@ describe('register page', () => {
 	it('sends Google login data to API', async () => {
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(getByText('Sign up with Google'));
+		await userEvent.click(getByText('Sign up with Google'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
@@ -310,7 +306,7 @@ describe('register page', () => {
 	it('pops modal on guest info click', async () => {
 		const { getByText, getByTestId } = await renderPage();
 
-		userEvent.click(getByTestId('guest-info-button'));
+		await userEvent.click(getByTestId('guest-info-button'));
 
 		expect(getByText('Continue as guest?')).toBeInTheDocument();
 	});

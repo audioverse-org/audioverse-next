@@ -71,7 +71,7 @@ describe('recording favorite button', () => {
 
 		const { button } = await renderComponent();
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		await waitFor(() =>
 			expect(setRecordingFavorited).toBeCalledWith('-1', true)
@@ -84,7 +84,7 @@ describe('recording favorite button', () => {
 		mockRecordingIsFavorited.mockResolvedValue(true);
 		mockSetRecordingFavorited.mockResolvedValue(true);
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		await expect(findByLabelText('Unfavorite')).resolves.toBeInTheDocument();
 	});
@@ -94,7 +94,7 @@ describe('recording favorite button', () => {
 
 		const { reject } = loadControlledPromise(mockSetRecordingFavorited);
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		expect(await screen.findByLabelText('Unfavorite')).toBeInTheDocument();
 
@@ -113,7 +113,7 @@ describe('recording favorite button', () => {
 
 		isFavoritedSpy.mockResolvedValue(true);
 
-		userEvent.click(button);
+		await userEvent.click(button);
 
 		await expect(findByLabelText('Unfavorite')).resolves.toBeInTheDocument();
 		await expect(findByLabelText('Favorite')).rejects.toThrow();

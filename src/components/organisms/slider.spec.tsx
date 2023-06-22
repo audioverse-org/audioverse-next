@@ -51,7 +51,7 @@ describe('card slider', () => {
 			},
 		});
 
-		userEvent.click(getByLabelText('Next page'));
+		await userEvent.click(getByLabelText('Next page'));
 
 		const pane = getByTestId('slider');
 
@@ -65,8 +65,8 @@ describe('card slider', () => {
 			},
 		});
 
-		userEvent.click(getByLabelText('Next page'));
-		userEvent.click(getByLabelText('Next page'));
+		await userEvent.click(getByLabelText('Next page'));
+		await userEvent.click(getByLabelText('Next page'));
 
 		const pane = getByTestId('slider');
 
@@ -80,8 +80,8 @@ describe('card slider', () => {
 			},
 		});
 
-		userEvent.click(getByLabelText('Next page'));
-		userEvent.click(getByLabelText('Previous page'));
+		await userEvent.click(getByLabelText('Next page'));
+		await userEvent.click(getByLabelText('Previous page'));
 
 		const pane = getByTestId('slider');
 
@@ -95,8 +95,8 @@ describe('card slider', () => {
 			},
 		});
 
-		userEvent.click(getByLabelText('Previous page'));
-		userEvent.click(getByLabelText('Next page'));
+		await userEvent.click(getByLabelText('Previous page'));
+		await userEvent.click(getByLabelText('Next page'));
 
 		const pane = getByTestId('slider');
 
@@ -110,7 +110,7 @@ describe('card slider', () => {
 			},
 		});
 
-		userEvent.click(getByLabelText('Next page'));
+		await userEvent.click(getByLabelText('Next page'));
 
 		const pane = getByTestId('slider');
 
