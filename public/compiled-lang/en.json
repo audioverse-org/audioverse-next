@@ -1431,22 +1431,58 @@
       "value": "Stories"
     }
   ],
-  "discover__conferencesSeeAll": [
+  "discover__conferencesNext": [
     {
       "type": 0,
-      "value": "See All Conferences"
+      "value": "Next recent conferences"
     }
   ],
-  "discover__recentBlogSeeAll": [
+  "discover__conferencesPrevious": [
     {
       "type": 0,
-      "value": "See All Blog Posts"
+      "value": "Previous recent conferences"
     }
   ],
-  "discover__recentTeachingsSeeAll": [
+  "discover__featuredTeachingsNext": [
     {
       "type": 0,
-      "value": "See All Teachings"
+      "value": "Next featured teachings"
+    }
+  ],
+  "discover__featuredTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous featured teachings"
+    }
+  ],
+  "discover__recentBlogNext": [
+    {
+      "type": 0,
+      "value": "Next recent blog posts"
+    }
+  ],
+  "discover__recentBlogPrevious": [
+    {
+      "type": 0,
+      "value": "Previous recent blog posts"
+    }
+  ],
+  "discover__recentTeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next recent teachings"
+    }
+  ],
+  "discover__recentTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous recent teachings"
+    }
+  ],
+  "discover__seeAll": [
+    {
+      "type": 0,
+      "value": "See All"
     }
   ],
   "discover__storiesHeading": [
@@ -1455,10 +1491,16 @@
       "value": "Recent Stories"
     }
   ],
-  "discover__storiesSeeAll": [
+  "discover__storiesNext": [
     {
       "type": 0,
-      "value": "See All Stories"
+      "value": "Next recent stories"
+    }
+  ],
+  "discover__storiesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous recent stories"
     }
   ],
   "discover__title": [
@@ -1467,10 +1509,16 @@
       "value": "Discover"
     }
   ],
-  "discover__trendingTeachingsSeeAll": [
+  "discover__trendingTeachingsNext": [
     {
       "type": 0,
-      "value": "See All Trending Teachings"
+      "value": "Next trending teachings"
+    }
+  ],
+  "discover__trendingTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous trending teachings"
     }
   ],
   "discover_conferencesHeading": [

@@ -1,3 +1,4 @@
+import { hydrate } from '@tanstack/react-query';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
@@ -7,7 +8,6 @@ import { GetServerSidePropsContext } from 'next';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils, { act } from 'react-dom/test-utils';
-import { hydrate, QueryClient } from 'react-query';
 
 import { fetchApi } from '~lib/api/fetchApi';
 import { login } from '~lib/api/login';
@@ -16,6 +16,7 @@ import { buildServerRenderer } from '~lib/test/buildServerRenderer';
 import { loadAuthGuardData } from '~lib/test/loadAuthGuardData';
 import renderWithProviders from '~lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '~pages/[language]/account/profile';
+import makeQueryClient from '~src/lib/makeQueryClient';
 
 import {
 	GetProfileDataDocument,
@@ -87,7 +88,7 @@ describe('profile page', () => {
 			req: {} as any,
 		} as GetServerSidePropsContext)) as any;
 
-		const queryClient = new QueryClient();
+		const queryClient = makeQueryClient();
 
 		hydrate(queryClient, props.dehydratedState);
 
@@ -113,9 +114,11 @@ describe('profile page', () => {
 	});
 
 	it('displays email field if unauthenticated', async () => {
-		const { getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
+		expect(
+			await screen.findByPlaceholderText('jane@example.com')
+		).toBeInTheDocument();
 	});
 
 	it('displays password field if unauthenticated', async () => {

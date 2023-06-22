@@ -1,6 +1,6 @@
 import * as Types from '../../../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SponsorListEntryFragment = { __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null };
 
@@ -44,6 +44,7 @@ export const useInfiniteGetSponsorListLetterCountsQuery = <
       TData = GetSponsorListLetterCountsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSponsorListLetterCountsQueryVariables,
       variables: GetSponsorListLetterCountsQueryVariables,
       options?: UseInfiniteQueryOptions<GetSponsorListLetterCountsQuery, TError, TData>
     ) =>{
@@ -61,13 +62,16 @@ export async function getSponsorListLetterCounts<T>(
 ): Promise<GetSponsorListLetterCountsQuery> {
 	return fetchApi(GetSponsorListLetterCountsDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getSponsorListLetterCounts: ExactAlt<T, GetSponsorListLetterCountsQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

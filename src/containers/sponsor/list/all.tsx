@@ -1,6 +1,6 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { useIntl } from 'react-intl';
-import { useInfiniteQuery } from 'react-query';
 
 import { fetchApi } from '~lib/api/fetchApi';
 import useOnScreen from '~lib/hooks/useOnScreen';

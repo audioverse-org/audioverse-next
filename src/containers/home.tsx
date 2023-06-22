@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
@@ -124,7 +124,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									defaultMessage="Explore a sample of some of our recent audio pieces. Then when you’re ready, <a>visit the Discover page</a> to see more."
 									description="home page latest content section text"
 									values={{
-										a: function a(chunks: string) {
+										a: function a(chunks: ReactNode[]) {
 											return (
 												<Link
 													href={root.lang(languageRoute).discover.get()}
@@ -254,7 +254,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 										id="homePage__testimoniesIntro"
 										defaultMessage="See what some of our listeners have shared about using AudioVerse. <a>Visit the Testimonials page</a> to see even more."
 										values={{
-											a: function a(chunks: string) {
+											a: function a(chunks: ReactNode[]) {
 												return (
 													<Link
 														href={root.lang(languageRoute).testimonies.get()}

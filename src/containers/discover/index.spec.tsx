@@ -1,6 +1,7 @@
-import { waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
+import { __swiper } from '~lib/swiper';
 import { buildLoader } from '~lib/test/buildLoader';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import Discover, { getStaticProps } from '~pages/[language]/discover';
@@ -8,6 +9,7 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
+import { __apiDocumentMock } from '~src/lib/api/fetchApi';
 
 import {
 	GetDiscoverBlogPostsDocument,
@@ -22,28 +24,35 @@ import {
 	GetDiscoverStorySeasonsQuery,
 	GetDiscoverTrendingTeachingsDocument,
 	GetDiscoverTrendingTeachingsQuery,
-} from './__generated__/discover';
+} from './__generated__/index';
+import { mockWidth } from './index.slider.spec';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 
+const base = {
+	pageInfo: {
+		hasNextPage: false,
+		endCursor: null,
+	},
+};
+
+const recentTeaching = {
+	title: 'recent_sermon_title',
+	canonicalPath: 'the_sermon_path',
+	recordingContentType: RecordingContentType.Sermon,
+	persons: [],
+};
+
+const recentTeachingsDefaults = {
+	recentTeachings: {
+		nodes: [recentTeaching],
+		...base,
+	},
+};
+
 const loadRecentTeachings = buildLoader<GetDiscoverRecentTeachingsQuery>(
 	GetDiscoverRecentTeachingsDocument,
-	{
-		recentTeachings: {
-			nodes: [
-				{
-					title: 'the_sermon_title',
-					canonicalPath: 'the_sermon_path',
-					recordingContentType: RecordingContentType.Sermon,
-					persons: [],
-				},
-			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
-		},
-	}
+	recentTeachingsDefaults
 );
 
 const loadTrendingTeachings = buildLoader<GetDiscoverTrendingTeachingsQuery>(
@@ -53,17 +62,14 @@ const loadTrendingTeachings = buildLoader<GetDiscoverTrendingTeachingsQuery>(
 			nodes: [
 				{
 					recording: {
-						title: 'the_sermon_title2',
+						title: 'trending_sermon_title',
 						canonicalPath: 'the_sermon_path2',
 						recordingContentType: RecordingContentType.Sermon,
 						persons: [],
 					},
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -74,16 +80,13 @@ const loadFeaturedTeachings = buildLoader<GetDiscoverFeaturedTeachingsQuery>(
 		featuredTeachings: {
 			nodes: [
 				{
-					title: 'the_sermon_title3',
+					title: 'featured_sermon_title',
 					canonicalPath: 'the_sermon_path3',
 					recordingContentType: RecordingContentType.Sermon,
 					persons: [],
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -110,10 +113,7 @@ const loadStorySeasons = buildLoader<GetDiscoverStorySeasonsQuery>(
 					},
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -144,10 +144,7 @@ const loadConferences = buildLoader<GetDiscoverConferencesQuery>(
 					},
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -168,10 +165,7 @@ const loadBlogPosts = buildLoader<GetDiscoverBlogPostsQuery>(
 					readingDuration: 9 * 60,
 				},
 			],
-			pageInfo: {
-				hasNextPage: false,
-				endCursor: null,
-			},
+			...base,
 		},
 	}
 );
@@ -190,15 +184,23 @@ describe('discover page', () => {
 		__loadQuery({
 			language: 'en',
 		});
+		loadData();
+		mockWidth(1);
 	});
 
 	it('renders titles', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
+		expect(await screen.findByText('recent_sermon_title')).toBeInTheDocument();
+	});
 
-		await waitFor(() => {
-			expect(getByText('the_sermon_title')).toBeInTheDocument();
-		});
+	it('disables next button if no next page', async () => {
+		__swiper.isEnd = true;
+
+		await renderPage();
+
+		const next = await screen.findByLabelText('Next recent teachings');
+
+		expect(next).toBeDisabled();
 	});
 });

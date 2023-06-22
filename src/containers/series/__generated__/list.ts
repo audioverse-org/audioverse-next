@@ -2,7 +2,7 @@ import * as Types from '../../../__generated__/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSeriesListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -55,6 +55,7 @@ export const useInfiniteGetSeriesListPageDataQuery = <
       TData = GetSeriesListPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSeriesListPageDataQueryVariables,
       variables: GetSeriesListPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSeriesListPageDataQuery, TError, TData>
     ) =>{
@@ -90,6 +91,7 @@ export const useInfiniteGetSeriesListPathsDataQuery = <
       TData = GetSeriesListPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSeriesListPathsDataQueryVariables,
       variables: GetSeriesListPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSeriesListPathsDataQuery, TError, TData>
     ) =>{
@@ -113,13 +115,16 @@ export async function getSeriesListPathsData<T>(
 ): Promise<GetSeriesListPathsDataQuery> {
 	return fetchApi(GetSeriesListPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getSeriesListPageData: ExactAlt<T, GetSeriesListPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

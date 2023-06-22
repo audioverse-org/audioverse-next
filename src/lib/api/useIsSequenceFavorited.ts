@@ -1,4 +1,4 @@
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { setSequenceFavorited } from '~lib/api/setSequenceFavorited';
 import { getSessionToken } from '~lib/cookies';

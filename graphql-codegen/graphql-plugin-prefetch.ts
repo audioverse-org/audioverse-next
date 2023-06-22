@@ -19,7 +19,7 @@ export async function prefetchQueries<T>(
 	vars: {
 		${queryProps}
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
@@ -63,7 +63,12 @@ const plugin: CodegenPlugin = {
 
 		if (!result) return '';
 
-		return `import { QueryClient } from 'react-query';\n${result}`;
+		return `
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
+${result}
+`;
 	},
 };
 

@@ -1,4 +1,4 @@
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { setRecordingFavorited } from '~lib/api/setRecordingFavorited';
 import { Scalars } from '~src/__generated__/graphql';
@@ -28,14 +28,13 @@ export function useIsRecordingFavorited(
 		return recordingIsFavorited(recordingId);
 	};
 
-	const setFavoriteQueryFn = (isFavorited: boolean) => {
-		return setRecordingFavorited(recordingId, isFavorited).then((result) => {
-			if (!isFavorited && sequenceId) {
-				// When a recording in a sequence is unfavorited the sequence is unfavorited
-				queryClient.setQueryData(['isSequenceFavorited', sequenceId], false);
-			}
-			return result;
-		});
+	const setFavoriteQueryFn = async (isFavorited: boolean) => {
+		const result = await setRecordingFavorited(recordingId, isFavorited);
+		if (!isFavorited && sequenceId) {
+			// When a recording in a sequence is unfavorited the sequence is unfavorited
+			queryClient.setQueryData(['isSequenceFavorited', sequenceId], false);
+		}
+		return result;
 	};
 
 	const invalidateQueryKeys = [['sequenceIsFavorited', { id: sequenceId }]];

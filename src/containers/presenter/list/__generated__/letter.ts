@@ -1,7 +1,7 @@
 import * as Types from '../../../../__generated__/graphql';
 
 import { PresenterListEntryFragmentDoc } from './list';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterListLetterPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -46,6 +46,7 @@ export const useInfiniteGetPresenterListLetterPageDataQuery = <
       TData = GetPresenterListLetterPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetPresenterListLetterPageDataQueryVariables,
       variables: GetPresenterListLetterPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetPresenterListLetterPageDataQuery, TError, TData>
     ) =>{
@@ -63,13 +64,16 @@ export async function getPresenterListLetterPageData<T>(
 ): Promise<GetPresenterListLetterPageDataQuery> {
 	return fetchApi(GetPresenterListLetterPageDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getPresenterListLetterPageData: ExactAlt<T, GetPresenterListLetterPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

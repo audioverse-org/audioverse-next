@@ -7,7 +7,6 @@ import React from 'react';
 import Login from '~components/molecules/login';
 import { fetchApi } from '~lib/api/fetchApi';
 import renderWithProviders from '~lib/test/renderWithProviders';
-import withMutedReactQueryLogger from '~lib/test/withMutedReactQueryLogger';
 
 import { LoginForgotPasswordDocument } from './__generated__/login';
 
@@ -116,28 +115,26 @@ describe('login form', () => {
 	});
 
 	it('displays generic error on fetch error', async () => {
-		await withMutedReactQueryLogger(async () => {
-			when(fetchApi)
-				.calledWith(LoginForgotPasswordDocument, expect.anything())
-				.mockRejectedValue('oops');
+		when(fetchApi)
+			.calledWith(LoginForgotPasswordDocument, expect.anything())
+			.mockRejectedValue('oops');
 
-			const { getByText, getByPlaceholderText } = await renderWithProviders(
-				<Login />,
-				undefined
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
+
+		userEvent.click(getByText('Forgot password?'));
+
+		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(getByText('Send reset link'));
+
+		await waitFor(() => {
+			expect(
+				getByText(
+					'Something went wrong while trying to send a password reset link'
+				)
 			);
-
-			userEvent.click(getByText('Forgot password?'));
-
-			userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-			userEvent.click(getByText('Send reset link'));
-
-			await waitFor(() => {
-				expect(
-					getByText(
-						'Something went wrong while trying to send a password reset link'
-					)
-				);
-			});
 		});
 	});
 

@@ -1,6 +1,6 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useInfiniteQuery } from 'react-query';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
 import Button from '~components/molecules/button';
@@ -33,7 +33,7 @@ export const getLibraryHistoryPageDataDefaultVariables = (
 
 export type ILibraryHistoryProps = {
 	language: Language;
-};
+} & React.JSX.IntrinsicAttributes;
 
 function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 	const variables = getLibraryHistoryPageDataDefaultVariables(language);

@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../components/molecules/__genera
 import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobibleBookDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -58,6 +58,7 @@ export const useInfiniteGetAudiobibleBookDetailDataQuery = <
       TData = GetAudiobibleBookDetailDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobibleBookDetailDataQueryVariables,
       variables: GetAudiobibleBookDetailDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobibleBookDetailDataQuery, TError, TData>
     ) =>{
@@ -93,6 +94,7 @@ export const useInfiniteGetAudiobibleBookPathsDataQuery = <
       TData = GetAudiobibleBookPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobibleBookPathsDataQueryVariables,
       variables: GetAudiobibleBookPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobibleBookPathsDataQuery, TError, TData>
     ) =>{
@@ -116,13 +118,16 @@ export async function getAudiobibleBookPathsData<T>(
 ): Promise<GetAudiobibleBookPathsDataQuery> {
 	return fetchApi(GetAudiobibleBookPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getAudiobibleBookDetailData: ExactAlt<T, GetAudiobibleBookDetailDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

@@ -5,14 +5,14 @@ import { BaseColors } from '~lib/constants';
 
 import styles from './circleButton.module.scss';
 
-export type ICircleButtonProps = {
+export type ICircleButtonProps = PropsWithChildren<{
 	onClick: (event: MouseEvent<HTMLElement>) => void;
 	backgroundColor: BaseColors;
 	className?: string;
 	'aria-label'?: string;
 	'aria-controls'?: string;
 	ref?: Ref<HTMLButtonElement>;
-};
+}>;
 
 const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
 	function CircleButton(
@@ -22,7 +22,7 @@ const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
 			className,
 			children,
 			...props
-		}: PropsWithChildren<ICircleButtonProps>,
+		}: ICircleButtonProps,
 		ref: Ref<HTMLButtonElement>
 	): JSX.Element {
 		return (

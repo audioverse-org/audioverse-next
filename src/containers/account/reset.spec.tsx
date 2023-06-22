@@ -8,7 +8,6 @@ import { fetchApi } from '~lib/api/fetchApi';
 import { sleep } from '~lib/sleep';
 import { buildRenderer } from '~lib/test/buildRenderer';
 import loadControlledPromise from '~lib/test/loadControlledPromise';
-import withMutedReactQueryLogger from '~lib/test/withMutedReactQueryLogger';
 import Reset from '~pages/[language]/account/reset';
 
 import { ResetPasswordDocument } from './__generated__/reset';
@@ -147,22 +146,20 @@ describe('password reset page', () => {
 	});
 
 	it('displays generic error on http error', async () => {
-		await withMutedReactQueryLogger(async () => {
-			when(fetchApi)
-				.calledWith(ResetPasswordDocument, expect.anything())
-				.mockRejectedValue('oops');
+		when(fetchApi)
+			.calledWith(ResetPasswordDocument, expect.anything())
+			.mockRejectedValue('oops');
 
-			const { getByPlaceholderText, getByText } = await renderPage();
+		const { getByPlaceholderText, getByText } = await renderPage();
 
-			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-			userEvent.click(getByText('Login'));
+		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+		userEvent.click(getByText('Login'));
 
-			await waitFor(() => {
-				expect(
-					getByText('Something went wrong while trying to reset your password')
-				).toBeInTheDocument();
-			});
+		await waitFor(() => {
+			expect(
+				getByText('Something went wrong while trying to reset your password')
+			).toBeInTheDocument();
 		});
 	});
 

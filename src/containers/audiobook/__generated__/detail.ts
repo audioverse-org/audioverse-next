@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -64,6 +64,7 @@ export const useInfiniteGetAudiobookDetailPageDataQuery = <
       TData = GetAudiobookDetailPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobookDetailPageDataQueryVariables,
       variables: GetAudiobookDetailPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobookDetailPageDataQuery, TError, TData>
     ) =>{
@@ -115,6 +116,7 @@ export const useInfiniteGetAudiobookFeedDataQuery = <
       TData = GetAudiobookFeedDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobookFeedDataQueryVariables,
       variables: GetAudiobookFeedDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobookFeedDataQuery, TError, TData>
     ) =>{
@@ -150,6 +152,7 @@ export const useInfiniteGetAudiobookDetailPathsDataQuery = <
       TData = GetAudiobookDetailPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobookDetailPathsDataQueryVariables,
       variables: GetAudiobookDetailPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobookDetailPathsDataQuery, TError, TData>
     ) =>{
@@ -179,14 +182,17 @@ export async function getAudiobookDetailPathsData<T>(
 ): Promise<GetAudiobookDetailPathsDataQuery> {
 	return fetchApi(GetAudiobookDetailPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getAudiobookDetailPageData: ExactAlt<T, GetAudiobookDetailPageDataQueryVariables>,
 		getAudiobookFeedData: ExactAlt<T, GetAudiobookFeedDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
