@@ -1,4 +1,4 @@
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { clearSessionToken } from '~lib/cookies';
 import isServerSide from '~lib/isServerSide';

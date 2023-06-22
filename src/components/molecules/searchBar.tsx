@@ -41,7 +41,7 @@ export default function SearchBar({
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
 	const handleSubmit = useCallback(
-		(e) => e.key === 'Enter' && onSubmit?.(),
+		(e: KeyboardEvent) => e.key === 'Enter' && onSubmit?.(),
 		[onSubmit]
 	);
 

@@ -10,7 +10,10 @@ const langs = fs.readdirSync('./public/lang/');
 langs
 	.filter((file) => file !== 'en.json')
 	.map((file) => {
-		const langLangs = JSON.parse(fs.readFileSync(`./public/lang/${file}`));
+		console.log(`Extracting new keys from ${file}`);
+
+		const raw = fs.readFileSync(`./public/lang/${file}`, 'utf8').trim();
+		const langLangs = JSON.parse(raw);
 
 		const newLangs = reduce(
 			enLangs,

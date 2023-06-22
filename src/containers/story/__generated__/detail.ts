@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../components/molecules/__genera
 import { PlayerFragmentDoc } from '../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoryDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -59,6 +59,7 @@ export const useInfiniteGetStoryDetailDataQuery = <
       TData = GetStoryDetailDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetStoryDetailDataQueryVariables,
       variables: GetStoryDetailDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetStoryDetailDataQuery, TError, TData>
     ) =>{
@@ -94,6 +95,7 @@ export const useInfiniteGetStoryDetailStaticPathsQuery = <
       TData = GetStoryDetailStaticPathsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetStoryDetailStaticPathsQueryVariables,
       variables: GetStoryDetailStaticPathsQueryVariables,
       options?: UseInfiniteQueryOptions<GetStoryDetailStaticPathsQuery, TError, TData>
     ) =>{
@@ -117,13 +119,16 @@ export async function getStoryDetailStaticPaths<T>(
 ): Promise<GetStoryDetailStaticPathsQuery> {
 	return fetchApi(GetStoryDetailStaticPathsDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getStoryDetailData: ExactAlt<T, GetStoryDetailDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../../components/molecules/__generat
 import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsRecordingsQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -52,6 +52,7 @@ export const useInfiniteGetSearchResultsRecordingsQuery = <
       TData = GetSearchResultsRecordingsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSearchResultsRecordingsQueryVariables,
       variables: GetSearchResultsRecordingsQueryVariables,
       options?: UseInfiniteQueryOptions<GetSearchResultsRecordingsQuery, TError, TData>
     ) =>{
@@ -69,13 +70,16 @@ export async function getSearchResultsRecordings<T>(
 ): Promise<GetSearchResultsRecordingsQuery> {
 	return fetchApi(GetSearchResultsRecordingsDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getSearchResultsRecordings: ExactAlt<T, GetSearchResultsRecordingsQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

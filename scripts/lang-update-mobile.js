@@ -5,9 +5,9 @@ const fs = require('fs');
 
 const languages = ['es', 'fr', 'de', 'ja', 'ru', 'zh', 'pt'];
 
-const appLangs = require('../audioverse-mobile/locales/en.json');
+const appLangs = require('../../audioverse-mobile/locales/en.json');
 const appKeys = Object.keys(appLangs);
-const englishWebsiteLangs = require('./public/lang/en.json');
+const englishWebsiteLangs = require('../public/lang/en.json');
 const englishWebsiteValues = lodash.values(
 	lodash.pick(
 		lodash.invert(

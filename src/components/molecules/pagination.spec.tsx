@@ -1,6 +1,6 @@
+import { QueryClient } from '@tanstack/react-query';
 import { RenderOptions, RenderResult, screen } from '@testing-library/react';
 import React, { ReactElement } from 'react';
-import { QueryClient } from 'react-query';
 
 import renderWithProviders from '~lib/test/renderWithProviders';
 

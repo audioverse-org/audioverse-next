@@ -1,7 +1,7 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useQueryClient } from 'react-query';
 
 import Heading1 from '~components/atoms/heading1';
 import Heading2 from '~components/atoms/heading2';

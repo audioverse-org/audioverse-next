@@ -1,6 +1,6 @@
 import * as Types from '../../__generated__/graphql';
 
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetTestimoniesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -54,6 +54,7 @@ export const useInfiniteGetTestimoniesPageDataQuery = <
       TData = GetTestimoniesPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetTestimoniesPageDataQueryVariables,
       variables: GetTestimoniesPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetTestimoniesPageDataQuery, TError, TData>
     ) =>{
@@ -89,6 +90,7 @@ export const useInfiniteGetTestimoniesPathsDataQuery = <
       TData = GetTestimoniesPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetTestimoniesPathsDataQueryVariables,
       variables: GetTestimoniesPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetTestimoniesPathsDataQuery, TError, TData>
     ) =>{
@@ -112,13 +114,16 @@ export async function getTestimoniesPathsData<T>(
 ): Promise<GetTestimoniesPathsDataQuery> {
 	return fetchApi(GetTestimoniesPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getTestimoniesPageData: ExactAlt<T, GetTestimoniesPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

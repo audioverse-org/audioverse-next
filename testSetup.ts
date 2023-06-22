@@ -3,13 +3,16 @@ import 'jest-canvas-mock';
 
 import { resetAllWhenMocks } from 'jest-when';
 
-jest.mock('~lib/api/fetchApi');
-jest.mock('video.js');
 jest.mock('@silvermine/videojs-airplay');
 jest.mock('@silvermine/videojs-chromecast');
 jest.mock('next/image');
 jest.mock('next/legacy/image');
+jest.mock('video.js');
+
+jest.mock('~lib/api/fetchApi');
 jest.mock('~lib/getIntlMessages');
+jest.mock('~lib/makeQueryClient');
+jest.mock('~lib/swiper');
 
 // WORKAROUND: https://github.com/keppelen/react-facebook-login/issues/217#issuecomment-375652793
 beforeAll(() => {
@@ -23,24 +26,29 @@ beforeEach(() => {
 	jest.clearAllMocks();
 	resetAllWhenMocks();
 
-	// IntersectionObserver isn't available in test environment
-	const mockIntersectionObserver = jest.fn();
-	mockIntersectionObserver.mockReturnValue({
-		observe: () => null,
-		unobserve: () => null,
-		disconnect: () => null,
-	});
-	window.IntersectionObserver = mockIntersectionObserver;
+	window.IntersectionObserver = jest.fn(
+		() =>
+			({
+				observe: jest.fn(),
+				unobserve: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
+	);
 
-	global.MutationObserver = class {
-		constructor() {
-			// noop
-		}
-		disconnect() {
-			// noop
-		}
-		observe() {
-			// noop
-		}
-	} as any;
+	global.MutationObserver = jest.fn(
+		() =>
+			({
+				observe: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
+	);
+
+	global.ResizeObserver = jest.fn(
+		() =>
+			({
+				observe: jest.fn(),
+				unobserve: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
+	);
 });

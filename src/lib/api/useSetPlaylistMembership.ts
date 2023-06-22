@@ -1,4 +1,4 @@
-import { QueryKey, useMutation, useQueryClient } from 'react-query';
+import { QueryKey, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { setPlaylistMembership } from '~lib/api/setPlaylistMembership';
 import { Scalars } from '~src/__generated__/graphql';

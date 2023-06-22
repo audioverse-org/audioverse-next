@@ -1,7 +1,7 @@
+import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useQueryClient } from 'react-query';
 
 import Alert from '~components/atoms/alert';
 import Modal from '~components/organisms/modal';

@@ -682,26 +682,50 @@
   "discoverCollections_storiesHeading": {
     "string": "Stories"
   },
-  "discover__conferencesSeeAll": {
-    "string": "See All Conferences"
+  "discover__conferencesNext": {
+    "string": "Next recent conferences"
   },
-  "discover__recentBlogSeeAll": {
-    "string": "See All Blog Posts"
+  "discover__conferencesPrevious": {
+    "string": "Previous recent conferences"
   },
-  "discover__recentTeachingsSeeAll": {
-    "string": "See All Teachings"
+  "discover__featuredTeachingsNext": {
+    "string": "Next featured teachings"
+  },
+  "discover__featuredTeachingsPrevious": {
+    "string": "Previous featured teachings"
+  },
+  "discover__recentBlogNext": {
+    "string": "Next recent blog posts"
+  },
+  "discover__recentBlogPrevious": {
+    "string": "Previous recent blog posts"
+  },
+  "discover__recentTeachingsNext": {
+    "string": "Next recent teachings"
+  },
+  "discover__recentTeachingsPrevious": {
+    "string": "Previous recent teachings"
+  },
+  "discover__seeAll": {
+    "string": "See All"
   },
   "discover__storiesHeading": {
     "string": "Recent Stories"
   },
-  "discover__storiesSeeAll": {
-    "string": "See All Stories"
+  "discover__storiesNext": {
+    "string": "Next recent stories"
+  },
+  "discover__storiesPrevious": {
+    "string": "Previous recent stories"
   },
   "discover__title": {
     "string": "Discover"
   },
-  "discover__trendingTeachingsSeeAll": {
-    "string": "See All Trending Teachings"
+  "discover__trendingTeachingsNext": {
+    "string": "Next trending teachings"
+  },
+  "discover__trendingTeachingsPrevious": {
+    "string": "Previous trending teachings"
   },
   "discover_conferencesHeading": {
     "string": "Recent Conferences"

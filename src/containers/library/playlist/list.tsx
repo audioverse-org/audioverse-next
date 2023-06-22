@@ -18,7 +18,7 @@ import styles from './list.module.scss';
 
 export type ILibraryPlaylistsProps = {
 	language: Language;
-};
+} & React.JSX.IntrinsicAttributes;
 
 function LibraryPlaylists({ language }: ILibraryPlaylistsProps): JSX.Element {
 	const { data, isLoading } = useGetLibraryPlaylistsDataQuery({

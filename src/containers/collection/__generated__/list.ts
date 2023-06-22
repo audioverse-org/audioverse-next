@@ -1,7 +1,7 @@
 import * as Types from '../../../__generated__/graphql';
 
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -53,6 +53,7 @@ export const useInfiniteGetCollectionListPageDataQuery = <
       TData = GetCollectionListPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetCollectionListPageDataQueryVariables,
       variables: GetCollectionListPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetCollectionListPageDataQuery, TError, TData>
     ) =>{
@@ -88,6 +89,7 @@ export const useInfiniteGetCollectionListPathsDataQuery = <
       TData = GetCollectionListPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetCollectionListPathsDataQueryVariables,
       variables: GetCollectionListPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetCollectionListPathsDataQuery, TError, TData>
     ) =>{
@@ -111,13 +113,16 @@ export async function getCollectionListPathsData<T>(
 ): Promise<GetCollectionListPathsDataQuery> {
 	return fetchApi(GetCollectionListPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getCollectionListPageData: ExactAlt<T, GetCollectionListPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

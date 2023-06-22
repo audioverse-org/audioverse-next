@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import throttle from 'lodash/throttle';
 import Script from 'next/script';
 import React, {
@@ -9,7 +10,6 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import type * as VideoJs from 'video.js';
 
 import { getSessionToken } from '~lib/cookies';
