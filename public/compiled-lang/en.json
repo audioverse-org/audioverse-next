@@ -431,48 +431,6 @@
       "value": "Profile"
     }
   ],
-  "accountPlaylists__buttonLabelSubmit": [
-    {
-      "type": 0,
-      "value": "Add Playlist"
-    }
-  ],
-  "accountPlaylists__errorMissingTitle": [
-    {
-      "type": 0,
-      "value": "missing title"
-    }
-  ],
-  "accountPlaylists__inputLabelPublic": [
-    {
-      "type": 0,
-      "value": "public"
-    }
-  ],
-  "accountPlaylists__inputLabelSummary": [
-    {
-      "type": 0,
-      "value": "summary"
-    }
-  ],
-  "accountPlaylists__inputLabelTitle": [
-    {
-      "type": 0,
-      "value": "title"
-    }
-  ],
-  "accountPlaylists__labelPrivate": [
-    {
-      "type": 0,
-      "value": "private"
-    }
-  ],
-  "accountPlaylists__labelPublic": [
-    {
-      "type": 0,
-      "value": "public"
-    }
-  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
