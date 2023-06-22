@@ -28,27 +28,27 @@ beforeEach(() => {
 
 	window.IntersectionObserver = jest.fn(
 		() =>
-		({
-			observe: jest.fn(),
-			unobserve: jest.fn(),
-			disconnect: jest.fn(),
-		} as any)
+			({
+				observe: jest.fn(),
+				unobserve: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
 	);
 
 	global.MutationObserver = jest.fn(
 		() =>
-		({
-			observe: jest.fn(),
-			disconnect: jest.fn(),
-		} as any)
+			({
+				observe: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
 	);
 
 	global.ResizeObserver = jest.fn(
 		() =>
-		({
-			observe: jest.fn(),
-			unobserve: jest.fn(),
-			disconnect: jest.fn(),
-		} as any)
+			({
+				observe: jest.fn(),
+				unobserve: jest.fn(),
+				disconnect: jest.fn(),
+			} as any)
 	);
 });

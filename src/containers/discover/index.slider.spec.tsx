@@ -31,7 +31,7 @@ const getSlides = () => {
 	const container = screen.getByTestId('swiper');
 
 	return within(container).getAllByTestId('swiper-slide');
-}
+};
 
 describe('Slider', () => {
 	beforeEach(() => {
@@ -59,7 +59,7 @@ describe('Slider', () => {
 			},
 		});
 
-		const slides = getSlides()
+		const slides = getSlides();
 
 		expect(slides).toHaveLength(2);
 	});
@@ -78,7 +78,10 @@ describe('Slider', () => {
 	});
 
 	it('calls onIndexChange', async () => {
-		const items = [<div key="1">1</div>, <div key="2">2</div>] as any as HTMLElement[];
+		const items = [
+			<div key="1">1</div>,
+			<div key="2">2</div>,
+		] as any as HTMLElement[];
 
 		__swiper.isEnd = false;
 		__swiper.realIndex = 1;
@@ -94,11 +97,11 @@ describe('Slider', () => {
 			},
 		});
 
-		__runHandlers('transitionEnd', __swiper)
+		__runHandlers('transitionEnd', __swiper);
 
 		expect(onIndexChange).toHaveBeenCalledWith({
 			index: 1,
-			total: 2
+			total: 2,
 		});
 	});
 
@@ -139,7 +142,7 @@ describe('Slider', () => {
 			},
 		});
 
-		const slides = getSlides()
+		const slides = getSlides();
 
 		expect(slides).toHaveLength(1);
 	});
@@ -155,7 +158,7 @@ describe('Slider', () => {
 			},
 		});
 
-		const slides = getSlides()
+		const slides = getSlides();
 
 		expect(slides).toHaveLength(2);
 	});
@@ -178,7 +181,7 @@ describe('Slider', () => {
 			},
 		});
 
-		const slides = getSlides()
+		const slides = getSlides();
 
 		expect(slides).toHaveLength(1);
 	});
@@ -194,7 +197,7 @@ describe('Slider', () => {
 			},
 		});
 
-		const slides = getSlides()
+		const slides = getSlides();
 
 		expect(slides).toHaveLength(2);
 	});

@@ -26,7 +26,7 @@ export function __runHandlers(event: keyof SwiperEvents, ...args: any) {
 function registerHandler(
 	event: keyof SwiperEvents,
 	handler: ValueOf<SwiperEvents>
-){
+) {
 	if (__eventHandlers[event] === undefined) __eventHandlers[event] = [];
 	(__eventHandlers[event] as any).push(handler);
 }
@@ -53,9 +53,7 @@ export { __swiper };
 
 export const register = jest.fn();
 
-const Swiper = function Swiper(
-	props: SwiperProps
-) {
+const Swiper = function Swiper(props: SwiperProps) {
 	return (
 		<swiper-container
 			data-testid="swiper"
@@ -65,7 +63,7 @@ const Swiper = function Swiper(
 				if (!el) return;
 				Object.entries(props.on || {}).forEach(([event, handler]) => {
 					registerHandler(event as keyof SwiperEvents, handler);
-				})
+				});
 				props.on?.init?.(__swiper as swiper.Swiper);
 			}}
 		/>

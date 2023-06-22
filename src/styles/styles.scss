@@ -43,10 +43,7 @@ html {
 		background: $ts-dark;
 	}
 
-	transition-property: color,
-	border-color,
-	background-color,
-	filter;
+	transition-property: color, border-color, background-color, filter;
 	transition-duration: $transition-quick;
 	transition-timing-function: linear;
 }

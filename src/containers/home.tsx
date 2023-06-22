@@ -143,17 +143,17 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									items={[
 										...recentRecordings.map(
 											(r) =>
-											({
-												type: 'recording',
-												data: r,
-											} as const)
+												({
+													type: 'recording',
+													data: r,
+												} as const)
 										),
 										...(languageRoute === 'en'
 											? [
-												{
-													type: 'bible',
-												} as const,
-											]
+													{
+														type: 'bible',
+													} as const,
+											  ]
 											: []),
 									]}
 									render={({ data }) =>

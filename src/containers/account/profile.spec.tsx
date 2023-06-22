@@ -116,7 +116,9 @@ describe('profile page', () => {
 	it('displays email field if unauthenticated', async () => {
 		await renderPage();
 
-		expect(await screen.findByPlaceholderText('jane@example.com')).toBeInTheDocument();
+		expect(
+			await screen.findByPlaceholderText('jane@example.com')
+		).toBeInTheDocument();
 	});
 
 	it('displays password field if unauthenticated', async () => {

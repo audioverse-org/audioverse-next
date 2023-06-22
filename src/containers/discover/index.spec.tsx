@@ -185,7 +185,7 @@ describe('discover page', () => {
 			language: 'en',
 		});
 		loadData();
-		mockWidth(1)
+		mockWidth(1);
 	});
 
 	it('renders titles', async () => {

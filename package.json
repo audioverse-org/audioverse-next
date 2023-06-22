@@ -21,7 +21,7 @@
         "intl:extract": "formatjs extract 'src/**/*.ts*' --ignore 'src/**/*.d.ts*' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json --format lang-formatter.js",
         "intl:extract:new": "./scripts/lang-extract-new.js",
         "intl:compile": "formatjs compile-folder --ast public/lang public/compiled-lang --format lang-formatter.js",
-        "precommit": "concurrently --max-processes=50% \"npm:format\" \"npm:lint:fix\" \"npm:checkTs\" \"npm:intl:extract && npm:intl:compile\"",
+        "precommit": "concurrently --max-processes=50% \"npm:format\" \"npm:lint:fix\" \"npm:checkTs\" \"npm run intl:extract && npm run intl:compile\"",
         "graphql:codegen": "tsc -p ./graphql-codegen/tsconfig.json && graphql-codegen --config .graphqlrc.yml",
         "graphql:codegen:watch": "npm run graphql:codegen -- --watch",
         "graphql:purge": "find . -type d -name __generated__ -exec rm -r '{}' \\; -prune",
