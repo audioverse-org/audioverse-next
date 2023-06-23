@@ -1,4 +1,7 @@
-import { InfiniteQueryObserverResult, useInfiniteQuery } from 'react-query';
+import {
+	InfiniteQueryObserverResult,
+	useInfiniteQuery,
+} from '@tanstack/react-query';
 
 import { InferrableEntity } from '~components/molecules/card/inferred';
 import { fetchApi } from '~lib/api/fetchApi';

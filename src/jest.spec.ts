@@ -9,27 +9,133 @@ describe('jest and helpers', () => {
 		await expect(() => fn(1)).rejects.toMatch('Oops!');
 	});
 
-	// TODO: https://github.com/timkindberg/jest-when/issues/59
-	// it('can add deferred default after training', async () => {
+	// https://github.com/timkindberg/jest-when/issues/59
+	it('can add default after training', async () => {
+		const fn = jest.fn();
+
+		when(fn).calledWith(1).mockReturnValue('a');
+
+		when(fn).mockReturnValue('b');
+
+		expect(fn(1)).toEqual('a');
+		expect(fn(2)).toEqual('b');
+	});
+
+	// https://github.com/timkindberg/jest-when/issues/104
+	it('supports expect.objectContaining()', async () => {
+		const fn = jest.fn();
+
+		when(fn).mockReturnValue(false);
+		when(fn)
+			.calledWith(
+				'id',
+				expect.objectContaining({
+					k: 'v',
+				})
+			)
+			.mockReturnValue(true);
+
+		// this test passes
+		expect(
+			fn('id', {
+				k: 'v',
+			})
+		).toBeTruthy();
+	});
+
+	// https://github.com/timkindberg/jest-when/issues/104
+	it('deprioritizes expect.anything() against literal values', async () => {
+		const fn = jest.fn();
+
+		when(fn).calledWith('id', expect.anything()).mockReturnValue(false);
+		when(fn)
+			.calledWith('id', {
+				k: 'v',
+			})
+			.mockReturnValue(true);
+
+		// this test passes
+		expect(
+			fn('id', {
+				k: 'v',
+			})
+		).toBeTruthy();
+	});
+
+	// TODO: https://github.com/timkindberg/jest-when/issues/104
+	// it('deprioritizes expect.anything() against other asymmetric matchers', async () => {
 	// 	const fn = jest.fn();
-	//
-	// 	when(fn).calledWith(1).mockRejectedValue('Oops!');
-	//
-	// 	resolveWithDelay(fn, 50, 'default');
-	//
-	// 	await expect(() => fn(1)).rejects.toMatch('Oops!');
-	// 	await expect(fn).resolves.toMatch('default');
+
+	// 	when(fn).calledWith('id', expect.anything()).mockReturnValue(false);
+	// 	when(fn)
+	// 		.calledWith(
+	// 			'id',
+	// 			expect.objectContaining({
+	// 				k: 'v',
+	// 			})
+	// 		)
+	// 		.mockReturnValue(true);
+
+	// 	// this test fails
+	// 	expect(
+	// 		fn('id', {
+	// 			k: 'v',
+	// 		})
+	// 	).toBeTruthy();
 	// });
 
-	// TODO: https://github.com/timkindberg/jest-when/issues/59
-	// it('can add default after training, reduced', async () => {
+	// TODO: https://github.com/timkindberg/jest-when/issues/104
+	// it('accounts for assymetric matcher specificity', async () => {
 	// 	const fn = jest.fn();
-	//
-	// 	when(fn).calledWith(1).mockReturnValue('a');
-	//
-	// 	fn.mockReturnValue('b');
-	//
-	// 	expect(fn(1)).toEqual('a');
-	// 	expect(fn(2)).toEqual('b');
+
+	// 	when(fn)
+	// 		.calledWith(
+	// 			expect.objectContaining({
+	// 				id: 'id',
+	// 			})
+	// 		)
+	// 		.mockReturnValue(false);
+	// 	when(fn)
+	// 		.calledWith(
+	// 			expect.objectContaining({
+	// 				id: 'id',
+	// 				k: 'v',
+	// 			})
+	// 		)
+	// 		.mockReturnValue(true);
+
+	// 	// this test fails
+	// 	expect(
+	// 		fn({
+	// 			id: 'id',
+	// 			k: 'v',
+	// 		})
+	// 	).toBeTruthy();
 	// });
+
+	it('has return value precedence', () => {
+		const fn = jest.fn();
+
+		fn.mockReturnValue('return value');
+
+		expect(fn()).toEqual('return value');
+
+		fn.mockImplementation(() => 'implementation');
+
+		expect(fn()).toEqual('implementation');
+
+		fn.mockImplementationOnce(() => 'implementation once');
+
+		expect(fn()).toEqual('implementation once');
+
+		fn.mockReturnValueOnce('return value once');
+
+		expect(fn()).toEqual('return value once');
+
+		expect(fn()).toEqual('implementation');
+
+		fn.mockReturnValue('return value');
+
+		expect(fn()).toEqual('return value');
+	});
 });

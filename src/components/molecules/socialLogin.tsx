@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import {
 	ReactFacebookFailureResponse,
@@ -6,7 +7,6 @@ import {
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useQueryClient } from 'react-query';
 
 import { useRegisterSocialMutation } from '~containers/account/__generated__/register';
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '~lib/constants';

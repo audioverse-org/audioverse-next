@@ -9,7 +9,7 @@ import { CopyrightInfoFragmentDoc } from '../../../../components/molecules/__gen
 import { PlayerFragmentDoc } from '../../../../components/molecules/__generated__/player';
 import { ButtonDownloadFragmentDoc } from '../../../../components/molecules/__generated__/buttonDownload';
 import { ButtonShareRecordingFragmentDoc } from '../../../../components/molecules/__generated__/buttonShareRecording';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobookTrackDetailDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -59,6 +59,7 @@ export const useInfiniteGetAudiobookTrackDetailDataQuery = <
       TData = GetAudiobookTrackDetailDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobookTrackDetailDataQueryVariables,
       variables: GetAudiobookTrackDetailDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobookTrackDetailDataQuery, TError, TData>
     ) =>{
@@ -94,6 +95,7 @@ export const useInfiniteGetAudiobookTrackDetailStaticPathsQuery = <
       TData = GetAudiobookTrackDetailStaticPathsQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobookTrackDetailStaticPathsQueryVariables,
       variables: GetAudiobookTrackDetailStaticPathsQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobookTrackDetailStaticPathsQuery, TError, TData>
     ) =>{
@@ -117,13 +119,16 @@ export async function getAudiobookTrackDetailStaticPaths<T>(
 ): Promise<GetAudiobookTrackDetailStaticPathsQuery> {
 	return fetchApi(GetAudiobookTrackDetailStaticPathsDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getAudiobookTrackDetailData: ExactAlt<T, GetAudiobookTrackDetailDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

@@ -10,7 +10,7 @@ import { CardHatSponsorFragmentDoc } from '../../../components/molecules/card/ha
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../lib/__generated__/generateFeed';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -123,6 +123,7 @@ export const useInfiniteGetCollectionDetailPageDataQuery = <
       TData = GetCollectionDetailPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetCollectionDetailPageDataQueryVariables,
       variables: GetCollectionDetailPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetCollectionDetailPageDataQuery, TError, TData>
     ) =>{
@@ -169,6 +170,7 @@ export const useInfiniteGetCollectionFeedDataQuery = <
       TData = GetCollectionFeedDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetCollectionFeedDataQueryVariables,
       variables: GetCollectionFeedDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetCollectionFeedDataQuery, TError, TData>
     ) =>{
@@ -205,6 +207,7 @@ export const useInfiniteGetCollectionDetailPathsDataQuery = <
       TData = GetCollectionDetailPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetCollectionDetailPathsDataQueryVariables,
       variables: GetCollectionDetailPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetCollectionDetailPathsDataQuery, TError, TData>
     ) =>{
@@ -234,14 +237,17 @@ export async function getCollectionDetailPathsData<T>(
 ): Promise<GetCollectionDetailPathsDataQuery> {
 	return fetchApi(GetCollectionDetailPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getCollectionDetailPageData: ExactAlt<T, GetCollectionDetailPageDataQueryVariables>,
 		getCollectionFeedData: ExactAlt<T, GetCollectionFeedDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

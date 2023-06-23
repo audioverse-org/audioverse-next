@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { PersonLockupFragmentDoc } from '../../../components/molecules/__generated__/personLockup';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAudiobibleVersionsDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -53,6 +53,7 @@ export const useInfiniteGetAudiobibleVersionsDataQuery = <
       TData = GetAudiobibleVersionsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetAudiobibleVersionsDataQueryVariables,
       variables: GetAudiobibleVersionsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetAudiobibleVersionsDataQuery, TError, TData>
     ) =>{
@@ -70,13 +71,16 @@ export async function getAudiobibleVersionsData<T>(
 ): Promise<GetAudiobibleVersionsDataQuery> {
 	return fetchApi(GetAudiobibleVersionsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getAudiobibleVersionsData: ExactAlt<T, GetAudiobibleVersionsDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

@@ -6,7 +6,7 @@ import { PersonLockupFragmentDoc } from '../../../../components/molecules/__gene
 import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card/hat/__generated__/sponsor';
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSongBooksDetailPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -52,6 +52,7 @@ export const useInfiniteGetSongBooksDetailPageDataQuery = <
       TData = GetSongBooksDetailPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetSongBooksDetailPageDataQueryVariables,
       variables: GetSongBooksDetailPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetSongBooksDetailPageDataQuery, TError, TData>
     ) =>{
@@ -69,13 +70,16 @@ export async function getSongBooksDetailPageData<T>(
 ): Promise<GetSongBooksDetailPageDataQuery> {
 	return fetchApi(GetSongBooksDetailPageDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getSongBooksDetailPageData: ExactAlt<T, GetSongBooksDetailPageDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

@@ -1,10 +1,10 @@
+import { QueryClient } from '@tanstack/react-query';
 import { RenderOptions, RenderResult, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookies from 'js-cookie';
 import { __loadRouter } from 'next/router';
 import React, { ReactElement } from 'react';
-import { QueryClient } from 'react-query';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
 import { RegisterSocialDocument } from '~containers/account/__generated__/register';
@@ -77,7 +77,7 @@ describe('withAuthGuard', () => {
 				},
 			});
 
-		userEvent.click(getByText('Login with Google'));
+		await userEvent.click(getByText('Login with Google'));
 
 		await waitFor(() => {
 			expect(getByText('hello world')).toBeInTheDocument();

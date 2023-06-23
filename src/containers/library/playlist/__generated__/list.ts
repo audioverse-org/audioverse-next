@@ -4,7 +4,7 @@ import { CardPlaylistFragmentDoc } from '../../../../components/molecules/card/_
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
 import { PersonLockupFragmentDoc } from '../../../../components/molecules/__generated__/personLockup';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryPlaylistsDataQueryVariables = Types.Exact<{
   language: Types.Language;
@@ -56,6 +56,7 @@ export const useInfiniteGetLibraryPlaylistsDataQuery = <
       TData = GetLibraryPlaylistsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetLibraryPlaylistsDataQueryVariables,
       variables: GetLibraryPlaylistsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetLibraryPlaylistsDataQuery, TError, TData>
     ) =>{
@@ -73,13 +74,16 @@ export async function getLibraryPlaylistsData<T>(
 ): Promise<GetLibraryPlaylistsDataQuery> {
 	return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getLibraryPlaylistsData: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

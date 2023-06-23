@@ -1,50 +1,50 @@
 @import '../../styles/common';
 
 .header {
-    display: none;
+	display: none;
 }
 
 .navigation {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 24px 0 calc(24px + env(safe-area-inset-bottom));
-    background: $ts-cream;
-    z-index: 1000;
-    transition: transform $transition-medium;
-    transform: translateX(100%);
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	padding: 24px 0 calc(24px + env(safe-area-inset-bottom));
+	background: $ts-cream;
+	z-index: 1000;
+	transition: transform $transition-medium;
+	transform: translateX(100%);
 
-    @media (min-width: $breakpoint-lg) {
-        padding-left: 24px;
-        padding-right: 24px;
-    }
+	@media (min-width: $breakpoint-lg) {
+		padding-left: 24px;
+		padding-right: 24px;
+	}
 }
 
 .navigationShown {
-    transform: translateX(0%);
+	transform: translateX(0%);
 }
 
 @media (min-width: $breakpoint-lg) {
-    .header {
-        display: block;
-        margin: 32px;
-    }
+	.header {
+		display: block;
+		margin: 32px;
+	}
 
-    .navigation {
-        position: static;
-        flex: 0 0 $sidebar-width;
-        padding: 0;
-        overflow: scroll;
-        transform: translate(0);
-        animation: none;
-        background: $ts-white;
-        z-index: unset;
-    }
+	.navigation {
+		position: static;
+		flex: 0 0 $sidebar-width;
+		padding: 0;
+		overflow: scroll;
+		transform: translate(0);
+		animation: none;
+		background: $ts-white;
+		z-index: unset;
+	}
 
-    :global(.andMiniplayer--withPlayer) .navigation {
-        padding-bottom: $miniplayer-height;
-    }
+	:global(.andMiniplayer--withPlayer) .navigation {
+		padding-bottom: $miniplayer-height;
+	}
 }

@@ -7,7 +7,6 @@ import React from 'react';
 import Login from '~components/molecules/login';
 import { fetchApi } from '~lib/api/fetchApi';
 import renderWithProviders from '~lib/test/renderWithProviders';
-import withMutedReactQueryLogger from '~lib/test/withMutedReactQueryLogger';
 
 import { LoginForgotPasswordDocument } from './__generated__/login';
 
@@ -41,10 +40,10 @@ describe('login form', () => {
 			undefined
 		);
 
-		userEvent.click(getByText('Forgot password?'));
+		await userEvent.click(getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		await userEvent.click(getByText('Send reset link'));
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
 				variables: {
@@ -62,9 +61,9 @@ describe('login form', () => {
 			undefined
 		);
 
-		userEvent.click(getByText('Forgot password?'));
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		await userEvent.click(getByText('Forgot password?'));
+		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		await userEvent.click(getByText('Send reset link'));
 
 		expect(await screen.findByText(/Reset link sent/)).toBeInTheDocument();
 
@@ -82,10 +81,10 @@ describe('login form', () => {
 			undefined
 		);
 
-		userEvent.click(getByText('Forgot password?'));
+		await userEvent.click(getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		await userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
 			expect(getByText('the_error'));
@@ -101,10 +100,10 @@ describe('login form', () => {
 		const { getByText, getByPlaceholderText, queryByText } =
 			await renderWithProviders(<Login />, undefined);
 
-		userEvent.click(getByText('Forgot password?'));
+		await userEvent.click(getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		await userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
 			expect(getByText('the_error'));
@@ -116,28 +115,26 @@ describe('login form', () => {
 	});
 
 	it('displays generic error on fetch error', async () => {
-		await withMutedReactQueryLogger(async () => {
-			when(fetchApi)
-				.calledWith(LoginForgotPasswordDocument, expect.anything())
-				.mockRejectedValue('oops');
+		when(fetchApi)
+			.calledWith(LoginForgotPasswordDocument, expect.anything())
+			.mockRejectedValue('oops');
 
-			const { getByText, getByPlaceholderText } = await renderWithProviders(
-				<Login />,
-				undefined
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
+
+		await userEvent.click(getByText('Forgot password?'));
+
+		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		await userEvent.click(getByText('Send reset link'));
+
+		await waitFor(() => {
+			expect(
+				getByText(
+					'Something went wrong while trying to send a password reset link'
+				)
 			);
-
-			userEvent.click(getByText('Forgot password?'));
-
-			userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-			userEvent.click(getByText('Send reset link'));
-
-			await waitFor(() => {
-				expect(
-					getByText(
-						'Something went wrong while trying to send a password reset link'
-					)
-				);
-			});
 		});
 	});
 
@@ -152,10 +149,10 @@ describe('login form', () => {
 			undefined
 		);
 
-		userEvent.click(getByText('Forgot password?'));
+		await userEvent.click(getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		await userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
 			expect(getByText('error_two'));

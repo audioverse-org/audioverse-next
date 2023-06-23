@@ -6,7 +6,7 @@ import { getSessionToken } from '~lib/cookies';
 
 import { useGetWithAuthGuardDataQuery } from './__generated__/withAuthGuard';
 
-function withAuthGuard<P>(
+function withAuthGuard<P extends React.JSX.IntrinsicAttributes>(
 	Component: React.ComponentType<P>,
 	LoggedOutComponent: React.ComponentType = Login
 ): React.ComponentType<P> {

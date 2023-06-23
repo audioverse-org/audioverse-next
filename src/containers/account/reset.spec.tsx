@@ -8,7 +8,6 @@ import { fetchApi } from '~lib/api/fetchApi';
 import { sleep } from '~lib/sleep';
 import { buildRenderer } from '~lib/test/buildRenderer';
 import loadControlledPromise from '~lib/test/loadControlledPromise';
-import withMutedReactQueryLogger from '~lib/test/withMutedReactQueryLogger';
 import Reset from '~pages/[language]/account/reset';
 
 import { ResetPasswordDocument } from './__generated__/reset';
@@ -69,9 +68,12 @@ describe('password reset page', () => {
 	it('submits password change', async () => {
 		const { getByPlaceholderText, getByText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
+		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		await userEvent.type(
+			getByPlaceholderText('Confirm new password'),
+			'new_pass'
+		);
+		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(ResetPasswordDocument, {
@@ -86,9 +88,12 @@ describe('password reset page', () => {
 	it('does not submit mismatched password', async () => {
 		const { getByPlaceholderText, getByText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('New password'), 'pass_one');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'pass_two');
-		userEvent.click(getByText('Login'));
+		await userEvent.type(getByPlaceholderText('New password'), 'pass_one');
+		await userEvent.type(
+			getByPlaceholderText('Confirm new password'),
+			'pass_two'
+		);
+		await userEvent.click(getByText('Login'));
 
 		// TODO: don't use sleep
 		await sleep();
@@ -99,9 +104,12 @@ describe('password reset page', () => {
 	it('displays password mismatch error', async () => {
 		const { getByPlaceholderText, getByText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('New password'), 'pass_one');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'pass_two');
-		userEvent.click(getByText('Login'));
+		await userEvent.type(getByPlaceholderText('New password'), 'pass_one');
+		await userEvent.type(
+			getByPlaceholderText('Confirm new password'),
+			'pass_two'
+		);
+		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(getByText('Passwords must match')).toBeInTheDocument();
@@ -111,7 +119,7 @@ describe('password reset page', () => {
 	it('requires password input', async () => {
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('Login'));
+		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(getByText('Please type password twice')).toBeInTheDocument();
@@ -121,8 +129,8 @@ describe('password reset page', () => {
 	it('requires password confirm input', async () => {
 		const { getByPlaceholderText, getByText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('New password'), 'the_pass');
-		userEvent.click(getByText('Login'));
+		await userEvent.type(getByPlaceholderText('New password'), 'the_pass');
+		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(getByText('Please type password twice')).toBeInTheDocument();
@@ -137,9 +145,12 @@ describe('password reset page', () => {
 
 		const { getByPlaceholderText, getByText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
+		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		await userEvent.type(
+			getByPlaceholderText('Confirm new password'),
+			'new_pass'
+		);
+		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(getByText('the_error')).toBeInTheDocument();
@@ -147,22 +158,23 @@ describe('password reset page', () => {
 	});
 
 	it('displays generic error on http error', async () => {
-		await withMutedReactQueryLogger(async () => {
-			when(fetchApi)
-				.calledWith(ResetPasswordDocument, expect.anything())
-				.mockRejectedValue('oops');
+		when(fetchApi)
+			.calledWith(ResetPasswordDocument, expect.anything())
+			.mockRejectedValue('oops');
 
-			const { getByPlaceholderText, getByText } = await renderPage();
+		const { getByPlaceholderText, getByText } = await renderPage();
 
-			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-			userEvent.click(getByText('Login'));
+		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		await userEvent.type(
+			getByPlaceholderText('Confirm new password'),
+			'new_pass'
+		);
+		await userEvent.click(getByText('Login'));
 
-			await waitFor(() => {
-				expect(
-					getByText('Something went wrong while trying to reset your password')
-				).toBeInTheDocument();
-			});
+		await waitFor(() => {
+			expect(
+				getByText('Something went wrong while trying to reset your password')
+			).toBeInTheDocument();
 		});
 	});
 
@@ -174,9 +186,12 @@ describe('password reset page', () => {
 
 		const { getByPlaceholderText, getByText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
+		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		await userEvent.type(
+			getByPlaceholderText('Confirm new password'),
+			'new_pass'
+		);
+		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(
@@ -199,9 +214,12 @@ describe('password reset page', () => {
 
 		await waitFor(() => expect(getByText('Login')).toBeEnabled());
 
-		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
+		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		await userEvent.type(
+			getByPlaceholderText('Confirm new password'),
+			'new_pass'
+		);
+		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => expect(getByText('Login')).toBeDisabled());
 
@@ -228,22 +246,24 @@ describe('password reset page', () => {
 			token: 'the_token',
 		});
 
-		const { getByPlaceholderText, getByText, queryByPlaceholderText } =
-			await renderPage();
+		await renderPage();
 
-		userEvent.type(
+		await userEvent.type(
 			await screen.findByPlaceholderText('New password'),
 			'new_pass'
 		);
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
+		await userEvent.type(
+			screen.getByPlaceholderText('Confirm new password'),
+			'new_pass'
+		);
+		await userEvent.click(screen.getByText('Login'));
 
-		await waitFor(() => {
-			expect(
-				getByText('Your password was successfully changed')
-			).toBeInTheDocument();
-		});
+		expect(
+			await screen.findByText('Your password was successfully changed')
+		).toBeInTheDocument();
 
-		expect(queryByPlaceholderText('New password')).not.toBeInTheDocument();
+		expect(
+			screen.queryByPlaceholderText('New password')
+		).not.toBeInTheDocument();
 	});
 });

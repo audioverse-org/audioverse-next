@@ -65,7 +65,7 @@ const PLAYBACK_STATUS_MAP = {
 
 export type ILibraryProps = {
 	language: Language;
-};
+} & React.JSX.IntrinsicAttributes;
 
 function Library({ language }: ILibraryProps): JSX.Element {
 	const router = useRouter();

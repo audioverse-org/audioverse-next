@@ -8,7 +8,7 @@ import { CardHatSponsorFragmentDoc } from '../../../../components/molecules/card
 import { TeaseRecordingFragmentDoc } from '../../../../components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragmentDoc } from '../../../../components/templates/__generated__/andMiniplayer';
 import { GenerateFeedFragmentDoc } from '../../../../lib/__generated__/generateFeed';
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, QueryFunctionContext } from 'react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoryAlbumDetailPageDataQueryVariables = Types.Exact<{
   id: Types.Scalars['ID'];
@@ -64,6 +64,7 @@ export const useInfiniteGetStoryAlbumDetailPageDataQuery = <
       TData = GetStoryAlbumDetailPageDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetStoryAlbumDetailPageDataQueryVariables,
       variables: GetStoryAlbumDetailPageDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetStoryAlbumDetailPageDataQuery, TError, TData>
     ) =>{
@@ -114,6 +115,7 @@ export const useInfiniteGetStoryAlbumFeedDataQuery = <
       TData = GetStoryAlbumFeedDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetStoryAlbumFeedDataQueryVariables,
       variables: GetStoryAlbumFeedDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetStoryAlbumFeedDataQuery, TError, TData>
     ) =>{
@@ -149,6 +151,7 @@ export const useInfiniteGetStoryAlbumDetailPathsDataQuery = <
       TData = GetStoryAlbumDetailPathsDataQuery,
       TError = unknown
     >(
+      pageParamKey: keyof GetStoryAlbumDetailPathsDataQueryVariables,
       variables: GetStoryAlbumDetailPathsDataQueryVariables,
       options?: UseInfiniteQueryOptions<GetStoryAlbumDetailPathsDataQuery, TError, TData>
     ) =>{
@@ -178,14 +181,17 @@ export async function getStoryAlbumDetailPathsData<T>(
 ): Promise<GetStoryAlbumDetailPathsDataQuery> {
 	return fetchApi(GetStoryAlbumDetailPathsDataDocument, { variables });
 }
-import { QueryClient } from 'react-query';
+
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
 
 export async function prefetchQueries<T>(
 	vars: {
 		getStoryAlbumDetailPageData: ExactAlt<T, GetStoryAlbumDetailPageDataQueryVariables>,
 		getStoryAlbumFeedData: ExactAlt<T, GetStoryAlbumFeedDataQueryVariables>
 	},
-	client: QueryClient = new QueryClient(),
+	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
 	const options = { cacheTime: 24 * 60 * 60 * 1000 };
 

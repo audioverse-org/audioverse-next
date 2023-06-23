@@ -155,7 +155,7 @@ describe('Bible book detail page', () => {
 
 		const { getAllByLabelText } = await renderPage();
 
-		userEvent.click(getAllByLabelText('play')[0]);
+		await userEvent.click(getAllByLabelText('play')[0]);
 
 		await waitFor(() => expect(videojs).toBeCalled());
 

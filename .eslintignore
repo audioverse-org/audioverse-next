@@ -2,3 +2,5 @@
 **/__generated__/**/*
 **/*.js
 /graphql-codegen/dist
+/node_modules
+schema.graphql

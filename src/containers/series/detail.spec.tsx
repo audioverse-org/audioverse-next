@@ -17,6 +17,7 @@ import {
 import {
 	GetSeriesDetailPageDataDocument,
 	GetSeriesDetailPathsDataDocument,
+	GetSeriesDetailPathsDataQuery,
 } from './__generated__/detail';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
@@ -54,6 +55,13 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 		},
 	},
 });
+
+const loadPathsData = buildLoader<GetSeriesDetailPathsDataQuery>(
+	GetSeriesDetailPathsDataDocument,
+	{
+		serieses: { nodes: [] },
+	}
+);
 
 describe('series detail page', () => {
 	beforeEach(() => {
@@ -114,7 +122,7 @@ describe('series detail page', () => {
 	});
 
 	it('returns static paths', async () => {
-		(fetchApi as jest.Mock).mockResolvedValue({
+		loadPathsData({
 			serieses: {
 				nodes: [
 					{

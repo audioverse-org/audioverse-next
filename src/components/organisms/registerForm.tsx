@@ -159,7 +159,6 @@ function RegisterForm({
 						<FormattedMessage id="register__login" defaultMessage="Login" />
 					}
 					onClick={(e) => {
-						console.log('clicked');
 						e.preventDefault();
 						showLogin();
 					}}
