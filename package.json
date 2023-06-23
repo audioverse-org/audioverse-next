@@ -81,7 +81,7 @@
         "@graphql-codegen/typescript-react-query": "^4.1.0",
         "@graphql-codegen/visitor-plugin-common": "^4.0.1",
         "@jest/types": "^29.4.3",
-        "@lhci/cli": "^0.9.0",
+        "@lhci/cli": "^0.12.0",
         "@mizdra/eslint-plugin-layout-shift": "^1.0.1",
         "@next/bundle-analyzer": "^13.0.3",
         "@next/eslint-plugin-next": "^13.0.3",
