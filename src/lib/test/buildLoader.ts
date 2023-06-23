@@ -16,7 +16,14 @@ type Options = {
 	variables?: Record<string, unknown>;
 };
 
-type PartialData<T> = PartialDeep<T> | Record<string, never>;
+type PartialData<T> =
+	| PartialDeep<
+			T,
+			{
+				recurseIntoArrays: true;
+			}
+	  >
+	| Record<string, never>;
 
 type Loader<T> = (
 	data?: PartialData<T>,
