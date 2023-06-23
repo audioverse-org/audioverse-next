@@ -4,7 +4,7 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterListAllPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 

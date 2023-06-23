@@ -17,10 +17,10 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
-  offset: Types.Scalars['Int'];
-  groupSequences: Types.Scalars['Boolean'];
-  hasVideo: Types.InputMaybe<Types.Scalars['Boolean']>;
+  first: Types.Scalars['Int']['input'];
+  offset: Types.Scalars['Int']['input'];
+  groupSequences: Types.Scalars['Boolean']['input'];
+  hasVideo: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
   recordingDuration: Types.InputMaybe<Types.IntegerRangeInput>;
   recordingContentType: Types.InputMaybe<Types.RecordingContentType>;
   types: Types.InputMaybe<Array<Types.FavoritableCatalogEntityType> | Types.FavoritableCatalogEntityType>;

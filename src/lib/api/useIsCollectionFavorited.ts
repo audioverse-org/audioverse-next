@@ -15,7 +15,7 @@ interface IUseIsCollectionFavoritedResult extends IUseIsFavoritedResult {
 }
 
 export function useIsCollectionFavorited(
-	id: Scalars['ID']
+	id: Scalars['ID']['output']
 ): IUseIsCollectionFavoritedResult {
 	const queryClient = useQueryClient();
 	const { data } = useCollectionIsFavoritedQuery(

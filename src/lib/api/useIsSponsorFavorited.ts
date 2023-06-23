@@ -5,7 +5,7 @@ import { sponsorIsFavorited } from './sponsorIsFavorited';
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 
 export function useIsSponsorFavorited(
-	id: Scalars['ID']
+	id: Scalars['ID']['output']
 ): IUseIsFavoritedResult {
 	return useIsFavorited(
 		['isSponsorFavorited', id],

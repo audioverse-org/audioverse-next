@@ -5,8 +5,8 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBlogPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  offset?: Types.InputMaybe<Types.Scalars['Int']>;
-  first?: Types.InputMaybe<Types.Scalars['Int']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  first?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 

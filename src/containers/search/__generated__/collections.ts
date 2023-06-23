@@ -5,9 +5,9 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchResultsCollectionsQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  offset: Types.Scalars['Int'];
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  offset: Types.Scalars['Int']['input'];
 }>;
 
 

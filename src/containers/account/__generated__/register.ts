@@ -3,21 +3,21 @@ import * as Types from '../../../__generated__/graphql';
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type RegisterMutationVariables = Types.Exact<{
-  email: Types.Scalars['String'];
-  password: Types.Scalars['String'];
-  firstName: Types.Scalars['String'];
-  lastName: Types.Scalars['String'];
+  email: Types.Scalars['String']['input'];
+  password: Types.Scalars['String']['input'];
+  firstName: Types.Scalars['String']['input'];
+  lastName: Types.Scalars['String']['input'];
 }>;
 
 
 export type RegisterMutation = { __typename?: 'Mutation', signup: { __typename?: 'AuthenticatedUserPayload', authenticatedUser: { __typename?: 'AuthenticatedUser', sessionToken: string } | null, errors: Array<{ __typename?: 'InputValidationError', message: string }> } };
 
 export type RegisterSocialMutationVariables = Types.Exact<{
-  socialId: Types.Scalars['String'];
+  socialId: Types.Scalars['String']['input'];
   socialName: Types.UserSocialServiceName;
-  socialToken: Types.Scalars['String'];
-  givenName: Types.InputMaybe<Types.Scalars['String']>;
-  surname: Types.InputMaybe<Types.Scalars['String']>;
+  socialToken: Types.Scalars['String']['input'];
+  givenName: Types.InputMaybe<Types.Scalars['String']['input']>;
+  surname: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 

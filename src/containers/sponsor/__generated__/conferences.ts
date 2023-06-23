@@ -6,9 +6,9 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorConferencesPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  id: Types.Scalars['ID'];
-  offset: Types.InputMaybe<Types.Scalars['Int']>;
-  first: Types.InputMaybe<Types.Scalars['Int']>;
+  id: Types.Scalars['ID']['input'];
+  offset: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  first: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
@@ -16,7 +16,7 @@ export type GetSponsorConferencesPageDataQuery = { __typename?: 'Query', sponsor
 
 export type GetSponsorConferencesPathsDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.InputMaybe<Types.Scalars['Int']>;
+  first: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 

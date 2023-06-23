@@ -5,10 +5,10 @@ import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type SubmitContactPageMutationVariables = Types.Exact<{
   language: Types.Language;
   recipient: Types.PageContactRecipient;
-  firstName: Types.Scalars['String'];
-  lastName: Types.Scalars['String'];
-  email: Types.Scalars['String'];
-  body: Types.Scalars['String'];
+  firstName: Types.Scalars['String']['input'];
+  lastName: Types.Scalars['String']['input'];
+  email: Types.Scalars['String']['input'];
+  body: Types.Scalars['String']['input'];
 }>;
 
 

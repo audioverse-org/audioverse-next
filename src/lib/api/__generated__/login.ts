@@ -3,8 +3,8 @@ import * as Types from '../../../__generated__/graphql';
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type LoginMutationVariables = Types.Exact<{
-  email: Types.Scalars['String'];
-  password: Types.Scalars['String'];
+  email: Types.Scalars['String']['input'];
+  password: Types.Scalars['String']['input'];
 }>;
 
 

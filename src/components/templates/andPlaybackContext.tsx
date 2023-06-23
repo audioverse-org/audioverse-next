@@ -96,8 +96,11 @@ export type PlaybackContextType = {
 			prefersAudio?: boolean;
 		}
 	) => void;
-	setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => void;
-	unsetVideoHandler: (id: Scalars['ID']) => void;
+	setVideoHandler: (
+		id: Scalars['ID']['output'],
+		handler: (el: Element) => void
+	) => void;
+	unsetVideoHandler: (id: Scalars['ID']['output']) => void;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	supportsFullscreen: () => boolean;
@@ -195,8 +198,9 @@ export default function AndPlaybackContext({
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
-	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
-	const videoHandlerIdRef = useRef<Scalars['ID']>();
+	const [videoHandlerId, setVideoHandlerId] =
+		useState<Scalars['ID']['output']>();
+	const videoHandlerIdRef = useRef<Scalars['ID']['output']>();
 	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
 
@@ -322,12 +326,15 @@ export default function AndPlaybackContext({
 
 			playback._setRecording(newRecording, prefersAudio);
 		},
-		setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
+		setVideoHandler: (
+			id: Scalars['ID']['output'],
+			handler: (el: Element) => void
+		) => {
 			setVideoHandlerId(id);
 			videoHandlerIdRef.current = id;
 			setVideoHandler(() => handler);
 		},
-		unsetVideoHandler: (id: Scalars['ID']) => {
+		unsetVideoHandler: (id: Scalars['ID']['output']) => {
 			if (id !== videoHandlerIdRef.current) return;
 			setVideoHandlerId(undefined);
 			setVideoHandler(undefined);

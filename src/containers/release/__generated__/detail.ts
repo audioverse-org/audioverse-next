@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { useQuery, useInfiniteQuery, useMutation, UseQueryOptions, UseInfiniteQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetMediaReleaseFormsPageDataQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
 }>;
 
 
@@ -11,16 +11,16 @@ export type GetMediaReleaseFormsPageDataQuery = { __typename?: 'Query', mediaRel
 
 export type GetMediaReleaseFormsPathsDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
+  first: Types.Scalars['Int']['input'];
 }>;
 
 
 export type GetMediaReleaseFormsPathsDataQuery = { __typename?: 'Query', mediaReleaseForms: { __typename?: 'MediaReleaseFormConnection', nodes: Array<{ __typename?: 'MediaReleaseForm', id: string | number }> | null } };
 
 export type SubmitMediaReleaseFormMutationVariables = Types.Exact<{
-  mediaReleaseFormId: Types.Scalars['ID'];
+  mediaReleaseFormId: Types.Scalars['ID']['input'];
   mediaReleasePerson: Types.MediaReleasePersonCreateInput;
-  comments: Types.Scalars['String'];
+  comments: Types.Scalars['String']['input'];
 }>;
 
 

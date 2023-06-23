@@ -3,7 +3,7 @@ import { Scalars } from '~src/__generated__/graphql';
 import node from './primatives/node';
 
 const books = (r: string) => ({
-	id: (bookId: Scalars['ID']) =>
+	id: (bookId: Scalars['ID']['output']) =>
 		node(`${r}/${bookId}`, (r) => ({
 			feed: node(`${r}/feed.xml`),
 		})),

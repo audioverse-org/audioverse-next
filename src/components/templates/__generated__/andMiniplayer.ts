@@ -5,15 +5,15 @@ import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type AndMiniplayerFragment = { __typename?: 'Recording', id: string | number, title: string, canonicalPath: string, duration: number, sequence: { __typename?: 'Sequence', title: string, contentType: Types.SequenceContentType } | null, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> };
 
 export type GetRecordingPlaybackProgressQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
 }>;
 
 
 export type GetRecordingPlaybackProgressQuery = { __typename?: 'Query', recording: { __typename?: 'Recording', viewerPlaybackSession: { __typename?: 'RecordingPlaybackSession', positionPercentage: number } | null } | null };
 
 export type RecordingPlaybackProgressSetMutationVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
-  percentage: Types.Scalars['Float'];
+  id: Types.Scalars['ID']['input'];
+  percentage: Types.Scalars['Float']['input'];
 }>;
 
 

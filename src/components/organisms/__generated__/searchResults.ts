@@ -14,9 +14,9 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSearchRecordingsQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -24,9 +24,9 @@ export type GetSearchRecordingsQuery = { __typename?: 'Query', sermons: { __type
 
 export type GetSearchSeriesQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -34,9 +34,9 @@ export type GetSearchSeriesQuery = { __typename?: 'Query', serieses: { __typenam
 
 export type GetSearchConferencesQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -44,9 +44,9 @@ export type GetSearchConferencesQuery = { __typename?: 'Query', conferences: { _
 
 export type GetSearchSponsorsQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -54,9 +54,9 @@ export type GetSearchSponsorsQuery = { __typename?: 'Query', sponsors: { __typen
 
 export type GetSearchPersonsQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -64,9 +64,9 @@ export type GetSearchPersonsQuery = { __typename?: 'Query', persons: { __typenam
 
 export type GetSearchAudiobooksQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -74,9 +74,9 @@ export type GetSearchAudiobooksQuery = { __typename?: 'Query', audiobooks: { __t
 
 export type GetSearchMusicTracksQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -84,9 +84,9 @@ export type GetSearchMusicTracksQuery = { __typename?: 'Query', musicTracks: { _
 
 export type GetSearchStoryProgramsQueryVariables = Types.Exact<{
   language: Types.Language;
-  term: Types.Scalars['String'];
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  term: Types.Scalars['String']['input'];
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 

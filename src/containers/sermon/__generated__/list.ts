@@ -11,9 +11,9 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSermonListPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  hasVideo: Types.InputMaybe<Types.Scalars['Boolean']>;
-  first: Types.InputMaybe<Types.Scalars['Int']>;
-  offset: Types.InputMaybe<Types.Scalars['Int']>;
+  hasVideo: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
+  first: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  offset: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
@@ -28,7 +28,7 @@ export type GetSermonListFeedDataQuery = { __typename?: 'Query', sermons: { __ty
 
 export type GetSermonListPagePathsDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  hasVideo: Types.InputMaybe<Types.Scalars['Boolean']>;
+  hasVideo: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
 }>;
 
 
