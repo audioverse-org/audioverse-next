@@ -12,7 +12,7 @@ import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/_
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetStoryDetailDataQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
 }>;
 
 
@@ -20,7 +20,7 @@ export type GetStoryDetailDataQuery = { __typename?: 'Query', story: { __typenam
 
 export type GetStoryDetailStaticPathsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.InputMaybe<Types.Scalars['Int']>;
+  first: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 

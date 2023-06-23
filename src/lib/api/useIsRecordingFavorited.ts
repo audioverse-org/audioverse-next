@@ -9,8 +9,8 @@ import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 export const RECORDING_FAVORITED_QUERY_KEY_PREFIX = 'isRecordingFavorited';
 
 export function useIsRecordingFavorited(
-	recordingId: Scalars['ID'],
-	sequenceId?: Scalars['ID'],
+	recordingId: Scalars['ID']['output'],
+	sequenceId?: Scalars['ID']['output'],
 	disabled?: boolean
 ): IUseIsFavoritedResult {
 	const queryClient = useQueryClient();

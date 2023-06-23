@@ -6,7 +6,7 @@ import paginatedNode from './primatives/paginatedNode';
 const presenters = (r: string) => ({
 	letter: (letter: string) => node(`${r}/letter/${letter}`),
 	all: node(`${r}/all`),
-	id: (personId: Scalars['ID']) =>
+	id: (personId: Scalars['ID']['output']) =>
 		node(`${r}/${personId}`, (r) => ({
 			teachings: paginatedNode(`${r}/teachings`),
 			feed: node(`${r}/feed.xml`),

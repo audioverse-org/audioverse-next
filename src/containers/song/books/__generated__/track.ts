@@ -13,8 +13,8 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBookSongDetailDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  id: Types.Scalars['ID'];
-  book: Types.Scalars['String'];
+  id: Types.Scalars['ID']['input'];
+  book: Types.Scalars['String']['input'];
 }>;
 
 

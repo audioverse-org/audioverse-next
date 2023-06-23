@@ -10,9 +10,9 @@ import { AndMiniplayerFragmentDoc } from '../../../components/templates/__genera
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetCollectionTeachingsPageDataQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
-  offset: Types.InputMaybe<Types.Scalars['Int']>;
-  first: Types.InputMaybe<Types.Scalars['Int']>;
+  id: Types.Scalars['ID']['input'];
+  offset: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  first: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 

@@ -3,72 +3,74 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string | number;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  Date: string;
-  DateTime: string;
-  RelativeDateTime: string;
-  URL: string;
-  Upload: unknown;
+  ID: { input: string | number; output: string | number; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  Date: { input: string; output: string; }
+  DateTime: { input: string; output: string; }
+  RelativeDateTime: { input: string; output: string; }
+  URL: { input: string; output: string; }
+  Upload: { input: unknown; output: unknown; }
 };
 
 export type Aggregate = {
   __typename?: 'Aggregate';
-  count: Scalars['Int'];
+  count: Scalars['Int']['output'];
 };
 
 export type Attachment = Node & {
   __typename?: 'Attachment';
   /** Whether the current viewer may delete the file. */
-  canDelete: Maybe<Scalars['Boolean']>;
-  filename: Scalars['String'];
+  canDelete: Maybe<Scalars['Boolean']['output']>;
+  filename: Scalars['String']['output'];
   /** In bytes */
-  filesize: Scalars['String'];
-  id: Scalars['ID'];
-  mimeType: Scalars['String'];
+  filesize: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  mimeType: Scalars['String']['output'];
   recording: Recording;
-  updatedAt: Maybe<Scalars['DateTime']>;
-  url: Scalars['URL'];
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  url: Scalars['URL']['output'];
 };
 
 
 export type AttachmentUrlArgs = {
-  skipAnalytics: InputMaybe<Scalars['Boolean']>;
+  skipAnalytics: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type AudioFile = Node & {
   __typename?: 'AudioFile';
   /** Bitrate of the audio file in kbps. */
-  bitrate: Scalars['Int'];
+  bitrate: Scalars['Int']['output'];
   /** Whether the current viewer may delete the file. */
-  canDelete: Maybe<Scalars['Boolean']>;
+  canDelete: Maybe<Scalars['Boolean']['output']>;
   /** The duration of the audio file in seconds. */
-  duration: Scalars['Float'];
-  filename: Scalars['String'];
+  duration: Scalars['Float']['output'];
+  filename: Scalars['String']['output'];
   /** In bytes */
-  filesize: Scalars['String'];
-  id: Scalars['ID'];
-  mimeType: Scalars['String'];
+  filesize: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  mimeType: Scalars['String']['output'];
   recording: Recording;
   transcodingStatus: MediaFileTranscodingStatus;
-  updatedAt: Maybe<Scalars['DateTime']>;
-  url: Scalars['URL'];
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  url: Scalars['URL']['output'];
 };
 
 
 export type AudioFileUrlArgs = {
   requestType?: InputMaybe<MediaFileRequestType>;
-  skipAnalytics: InputMaybe<Scalars['Boolean']>;
+  skipAnalytics: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type AuthenticatedUser = {
   __typename?: 'AuthenticatedUser';
-  sessionToken: Scalars['String'];
+  sessionToken: Scalars['String']['output'];
   user: User;
 };
 
@@ -80,47 +82,47 @@ export type AuthenticatedUserPayload = {
 
 export type Bible = Node & {
   __typename?: 'Bible';
-  abbreviation: Scalars['String'];
+  abbreviation: Scalars['String']['output'];
   book: BibleBook;
   books: Array<BibleBook>;
-  copyrightText: Scalars['String'];
-  id: Scalars['ID'];
-  isDramatized: Scalars['Boolean'];
+  copyrightText: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  isDramatized: Scalars['Boolean']['output'];
   sponsor: BibleSponsor;
-  title: Scalars['String'];
+  title: Scalars['String']['output'];
 };
 
 
 export type BibleBookArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 export type BibleBook = Node & {
   __typename?: 'BibleBook';
   bible: Bible;
   chapter: BibleChapter;
-  chapterCount: Scalars['Int'];
+  chapterCount: Scalars['Int']['output'];
   chapters: Array<BibleChapter>;
-  id: Scalars['ID'];
-  isDramatized: Scalars['Boolean'];
+  id: Scalars['ID']['output'];
+  isDramatized: Scalars['Boolean']['output'];
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['String'];
-  title: Scalars['String'];
+  shareUrl: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 
 export type BibleBookChapterArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 export type BibleChapter = Node & {
   __typename?: 'BibleChapter';
   book: BibleBook;
-  id: Scalars['ID'];
-  text: Scalars['String'];
-  title: Scalars['String'];
-  url: Scalars['URL'];
-  verseCount: Scalars['Int'];
+  id: Scalars['ID']['output'];
+  text: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  url: Scalars['URL']['output'];
+  verseCount: Scalars['Int']['output'];
   verses: Array<BibleVerse>;
 };
 
@@ -134,15 +136,15 @@ export type BibleConnection = {
 
 export type BibleEdge = {
   __typename?: 'BibleEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Bible;
 };
 
 export type BibleReference = {
   __typename?: 'BibleReference';
   book: BibleReferenceBook;
-  chapter: Maybe<Scalars['Int']>;
-  verse: Maybe<Scalars['Int']>;
+  chapter: Maybe<Scalars['Int']['output']>;
+  verse: Maybe<Scalars['Int']['output']>;
 };
 
 export const BibleReferenceBook = {
@@ -218,8 +220,8 @@ export type BibleReferenceBook = typeof BibleReferenceBook[keyof typeof BibleRef
 /** A Bible reference. */
 export type BibleReferenceInput = {
   book: BibleReferenceBook;
-  chapter: InputMaybe<Scalars['Int']>;
-  verse: InputMaybe<Scalars['Int']>;
+  chapter: InputMaybe<Scalars['Int']['input']>;
+  verse: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** The Bible reference range applicable to an item. */
@@ -227,7 +229,7 @@ export type BibleReferenceRange = Node & {
   __typename?: 'BibleReferenceRange';
   /** The end reference. */
   endReference: BibleReference;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The start reference. */
   startReference: BibleReference;
 };
@@ -242,7 +244,7 @@ export type BibleReferenceRangeConnection = {
 
 export type BibleReferenceRangeEdge = {
   __typename?: 'BibleReferenceRangeEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: BibleReferenceRange;
 };
 
@@ -256,46 +258,46 @@ export type BibleReferenceRangeInput = {
 
 export type BibleSponsor = {
   __typename?: 'BibleSponsor';
-  name: Scalars['String'];
-  url: Scalars['URL'];
+  name: Scalars['String']['output'];
+  url: Scalars['URL']['output'];
 };
 
 export type BibleVerse = {
   __typename?: 'BibleVerse';
-  number: Scalars['Int'];
-  text: Scalars['String'];
+  number: Scalars['Int']['output'];
+  text: Scalars['String']['output'];
 };
 
 export type BlogPost = Node & UniformResourceLocatable & {
   __typename?: 'BlogPost';
-  body: Scalars['String'];
+  body: Scalars['String']['output'];
   /** The canonical HTML path to this resource. */
-  canonicalPath: Scalars['String'];
+  canonicalPath: Scalars['String']['output'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['URL'];
+  canonicalUrl: Scalars['URL']['output'];
   /** The number of days to feature blog post. */
-  featuredDuration: Maybe<Scalars['Int']>;
-  id: Scalars['ID'];
+  featuredDuration: Maybe<Scalars['Int']['output']>;
+  id: Scalars['ID']['output'];
   image: Maybe<Image>;
-  isHidden: Scalars['Boolean'];
+  isHidden: Scalars['Boolean']['output'];
   language: Language;
-  publishDate: Scalars['DateTime'];
+  publishDate: Scalars['DateTime']['output'];
   /** The estimated number of seconds to read the blog post. */
-  readingDuration: Maybe<Scalars['Float']>;
+  readingDuration: Maybe<Scalars['Float']['output']>;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['URL'];
-  teaser: Scalars['String'];
-  title: Scalars['String'];
+  shareUrl: Scalars['URL']['output'];
+  teaser: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 
 export type BlogPostCanonicalPathArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type BlogPostCanonicalUrlArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type BlogPostConnection = {
@@ -307,20 +309,20 @@ export type BlogPostConnection = {
 };
 
 export type BlogPostCreateInput = {
-  body: Scalars['String'];
+  body: Scalars['String']['input'];
   /** The number of days to feature blog post. */
-  featuredDuration: InputMaybe<Scalars['Int']>;
+  featuredDuration: InputMaybe<Scalars['Int']['input']>;
   image: InputMaybe<ImageInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  publishDate: InputMaybe<Scalars['DateTime']>;
-  teaser: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
+  publishDate: InputMaybe<Scalars['DateTime']['input']>;
+  teaser: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type BlogPostEdge = {
   __typename?: 'BlogPostEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: BlogPost;
 };
 
@@ -342,14 +344,14 @@ export const BlogPostSortableField = {
 
 export type BlogPostSortableField = typeof BlogPostSortableField[keyof typeof BlogPostSortableField];
 export type BlogPostUpdateInput = {
-  body: InputMaybe<Scalars['String']>;
+  body: InputMaybe<Scalars['String']['input']>;
   /** The number of days to feature blog post. */
-  featuredDuration: InputMaybe<Scalars['Int']>;
+  featuredDuration: InputMaybe<Scalars['Int']['input']>;
   image: InputMaybe<ImageInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  publishDate: InputMaybe<Scalars['DateTime']>;
-  teaser: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  publishDate: InputMaybe<Scalars['DateTime']['input']>;
+  teaser: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
 };
 
 /** The types of catalog entities. */
@@ -366,22 +368,22 @@ export const CatalogEntityType = {
 export type CatalogEntityType = typeof CatalogEntityType[keyof typeof CatalogEntityType];
 export type CatalogHistoryComment = {
   __typename?: 'CatalogHistoryComment';
-  isSticky: Scalars['Boolean'];
+  isSticky: Scalars['Boolean']['output'];
   mentions: Array<User>;
   /** Includes mentions in the format of @user:[id] (e.g., `@user:123`). */
-  message: Scalars['String'];
+  message: Scalars['String']['output'];
 };
 
 export type CatalogHistoryCommentCreateInput = {
-  isSticky: InputMaybe<Scalars['Boolean']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
   /** Can include mentions in the format of @user:[id] (e.g., `@user:123`). */
-  message: Scalars['String'];
+  message: Scalars['String']['input'];
 };
 
 export type CatalogHistoryCommentUpdateInput = {
-  isSticky: InputMaybe<Scalars['Boolean']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
   /** Can include mentions in the format of @user:[id] (e.g., `@user:123`). */
-  message: Scalars['String'];
+  message: Scalars['String']['input'];
 };
 
 export type CatalogHistoryEntityUnion = Collection | DistributionAgreement | License | MediaRelease | Person | Recording | Sequence | Sponsor;
@@ -389,9 +391,9 @@ export type CatalogHistoryEntityUnion = Collection | DistributionAgreement | Lic
 export type CatalogHistoryItem = Node & {
   __typename?: 'CatalogHistoryItem';
   comment: Maybe<CatalogHistoryComment>;
-  createdAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime']['output'];
   entity: Maybe<CatalogHistoryEntityUnion>;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   performer: Maybe<User>;
   type: CatalogHistoryItemType;
 };
@@ -406,7 +408,7 @@ export type CatalogHistoryItemConnection = {
 
 export type CatalogHistoryItemEdge = {
   __typename?: 'CatalogHistoryItemEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: CatalogHistoryItem;
 };
 
@@ -465,22 +467,22 @@ export type CatalogHistoryItemViewFilter = typeof CatalogHistoryItemViewFilter[k
 export type Collection = Node & UniformResourceLocatable & {
   __typename?: 'Collection';
   /** The canonical HTML path to this resource. */
-  canonicalPath: Scalars['String'];
+  canonicalPath: Scalars['String']['output'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['URL'];
+  canonicalUrl: Scalars['URL']['output'];
   contentType: CollectionContentType;
-  description: Scalars['String'];
+  description: Scalars['String']['output'];
   /** The combined duration of the collection's recordings in seconds. */
-  duration: Scalars['Float'];
-  endDate: Maybe<Scalars['Date']>;
-  hidingReason: Maybe<Scalars['String']>;
+  duration: Scalars['Float']['output'];
+  endDate: Maybe<Scalars['Date']['output']>;
+  hidingReason: Maybe<Scalars['String']['output']>;
   history: Maybe<CatalogHistoryItemConnection>;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   image: Maybe<Image>;
   imageWithFallback: Image;
-  isHidden: Maybe<Scalars['Boolean']>;
+  isHidden: Maybe<Scalars['Boolean']['output']>;
   language: Language;
-  location: Maybe<Scalars['String']>;
+  location: Maybe<Scalars['String']['output']>;
   /** @deprecated Collection.logoImage is replaced with Collection.image */
   logoImage: Maybe<Image>;
   /** @deprecated Collection.logoImageWithFallback is replaced with Collection.imageWithFallback */
@@ -490,103 +492,103 @@ export type Collection = Node & UniformResourceLocatable & {
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['URL'];
+  shareUrl: Scalars['URL']['output'];
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: Maybe<Scalars['Boolean']>;
+  skipContentScreening: Maybe<Scalars['Boolean']['output']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: Maybe<Scalars['Boolean']>;
+  skipLegalScreening: Maybe<Scalars['Boolean']['output']>;
   sponsor: Maybe<Sponsor>;
-  startDate: Maybe<Scalars['Date']>;
-  summary: Scalars['String'];
-  title: Scalars['String'];
-  viewerHasFavorited: Scalars['Boolean'];
+  startDate: Maybe<Scalars['Date']['output']>;
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  viewerHasFavorited: Scalars['Boolean']['output'];
   /** The percentage of the associated recordings the viewer has finished playing. */
-  viewerPlaybackCompletedPercentage: Scalars['Float'];
+  viewerPlaybackCompletedPercentage: Scalars['Float']['output'];
 };
 
 
 export type CollectionCanonicalPathArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type CollectionCanonicalUrlArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type CollectionHistoryArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   dateRange: InputMaybe<DateRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  isSticky: InputMaybe<Scalars['Boolean']>;
-  isUnread: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
+  isUnread: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: InputMaybe<Array<CatalogHistoryItemViewFilter>>;
 };
 
 
 export type CollectionPersonsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<PersonsOrder>>;
   role: InputMaybe<PersonsRoleField>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  startsWith: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  startsWith: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type CollectionRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type CollectionSequencesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SequenceOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 export type CollectionConnection = {
@@ -609,23 +611,23 @@ export const CollectionContentType = {
 export type CollectionContentType = typeof CollectionContentType[keyof typeof CollectionContentType];
 export type CollectionCreateInput = {
   contentType: CollectionContentType;
-  description: InputMaybe<Scalars['String']>;
-  hidingReason: InputMaybe<Scalars['String']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  hidingReason: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  location: InputMaybe<Scalars['String']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  location: InputMaybe<Scalars['String']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
-  sponsorId: Scalars['ID'];
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  sponsorId: Scalars['ID']['input'];
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type CollectionEdge = {
   __typename?: 'CollectionEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Collection;
 };
 
@@ -636,18 +638,18 @@ export type CollectionPayload = {
 };
 
 export type CollectionUpdateInput = {
-  description: InputMaybe<Scalars['String']>;
-  hidingReason: InputMaybe<Scalars['String']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  hidingReason: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  location: InputMaybe<Scalars['String']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  location: InputMaybe<Scalars['String']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CollectionsOrder = {
@@ -668,75 +670,75 @@ export type CollectionsSortableField = typeof CollectionsSortableField[keyof typ
 /** The date range the items must fall in to be applicable. */
 export type DateRangeInput = {
   /** The lower bound of the date range. */
-  greaterThan: InputMaybe<Scalars['Date']>;
+  greaterThan: InputMaybe<Scalars['Date']['input']>;
   /** The lower or equal bound of the date range. */
-  greaterThanOrEqualTo: InputMaybe<Scalars['Date']>;
+  greaterThanOrEqualTo: InputMaybe<Scalars['Date']['input']>;
   /** The upper bound of the date range. */
-  lessThan: InputMaybe<Scalars['Date']>;
+  lessThan: InputMaybe<Scalars['Date']['input']>;
   /** The upper or equal bound of the date range. */
-  lessThanOrEqualTo: InputMaybe<Scalars['Date']>;
+  lessThanOrEqualTo: InputMaybe<Scalars['Date']['input']>;
 };
 
 export type DistributionAgreement = Node & {
   __typename?: 'DistributionAgreement';
   history: Maybe<CatalogHistoryItemConnection>;
-  id: Scalars['ID'];
-  isDefault: Scalars['Boolean'];
-  isHidden: Maybe<Scalars['Boolean']>;
-  isRetired: Scalars['Boolean'];
+  id: Scalars['ID']['output'];
+  isDefault: Scalars['Boolean']['output'];
+  isHidden: Maybe<Scalars['Boolean']['output']>;
+  isRetired: Scalars['Boolean']['output'];
   license: Maybe<License>;
   recordings: RecordingConnection;
   sponsor: Maybe<Sponsor>;
-  summary: Scalars['String'];
-  title: Scalars['String'];
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 
 export type DistributionAgreementHistoryArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   dateRange: InputMaybe<DateRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  isSticky: InputMaybe<Scalars['Boolean']>;
-  isUnread: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
+  isUnread: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: InputMaybe<Array<CatalogHistoryItemViewFilter>>;
 };
 
 
 export type DistributionAgreementRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 export type DistributionAgreementConnection = {
@@ -748,18 +750,18 @@ export type DistributionAgreementConnection = {
 };
 
 export type DistributionAgreementCreateInput = {
-  isDefault: InputMaybe<Scalars['Boolean']>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  isRetired: InputMaybe<Scalars['Boolean']>;
-  licenseId: Scalars['ID'];
-  sponsorId: Scalars['ID'];
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  isRetired: InputMaybe<Scalars['Boolean']['input']>;
+  licenseId: Scalars['ID']['input'];
+  sponsorId: Scalars['ID']['input'];
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type DistributionAgreementEdge = {
   __typename?: 'DistributionAgreementEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: DistributionAgreement;
 };
 
@@ -770,13 +772,13 @@ export type DistributionAgreementPayload = {
 };
 
 export type DistributionAgreementUpdateInput = {
-  isDefault: InputMaybe<Scalars['Boolean']>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  isRetired: InputMaybe<Scalars['Boolean']>;
-  licenseId: InputMaybe<Scalars['ID']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  isRetired: InputMaybe<Scalars['Boolean']['input']>;
+  licenseId: InputMaybe<Scalars['ID']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DistributionAgreementsOrder = {
@@ -794,22 +796,22 @@ export const DistributionAgreementsSortableField = {
 export type DistributionAgreementsSortableField = typeof DistributionAgreementsSortableField[keyof typeof DistributionAgreementsSortableField];
 export type Faq = Node & {
   __typename?: 'Faq';
-  body: Scalars['String'];
+  body: Scalars['String']['output'];
   faqCategory: FaqCategory;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The index of the FAQ within its category. */
-  index: Scalars['Int'];
-  isHidden: Scalars['Boolean'];
-  publishDate: Scalars['DateTime'];
-  title: Scalars['String'];
+  index: Scalars['Int']['output'];
+  isHidden: Scalars['Boolean']['output'];
+  publishDate: Scalars['DateTime']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type FaqCategory = Node & {
   __typename?: 'FaqCategory';
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   /** The index of the category within all categories. */
-  index: Scalars['Int'];
-  title: Scalars['String'];
+  index: Scalars['Int']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type FaqCategoryConnection = {
@@ -822,7 +824,7 @@ export type FaqCategoryConnection = {
 
 export type FaqCategoryEdge = {
   __typename?: 'FaqCategoryEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: FaqCategory;
 };
 
@@ -835,19 +837,19 @@ export type FaqConnection = {
 };
 
 export type FaqCreateInput = {
-  body: Scalars['String'];
-  faqCategoryId: Scalars['ID'];
+  body: Scalars['String']['input'];
+  faqCategoryId: Scalars['ID']['input'];
   /** The index of the FAQ within its category. */
-  index: Scalars['Int'];
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  index: Scalars['Int']['input'];
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  publishDate: InputMaybe<Scalars['DateTime']>;
-  title: Scalars['String'];
+  publishDate: InputMaybe<Scalars['DateTime']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type FaqEdge = {
   __typename?: 'FaqEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Faq;
 };
 
@@ -858,13 +860,13 @@ export type FaqPayload = {
 };
 
 export type FaqUpdateInput = {
-  body: InputMaybe<Scalars['String']>;
-  faqCategoryId: InputMaybe<Scalars['ID']>;
+  body: InputMaybe<Scalars['String']['input']>;
+  faqCategoryId: InputMaybe<Scalars['ID']['input']>;
   /** The index of the FAQ within its category. */
-  index: InputMaybe<Scalars['Int']>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  publishDate: InputMaybe<Scalars['DateTime']>;
-  title: InputMaybe<Scalars['String']>;
+  index: InputMaybe<Scalars['Int']['input']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  publishDate: InputMaybe<Scalars['DateTime']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
 };
 
 export type FaqsOrder = {
@@ -906,17 +908,17 @@ export const FavoritesSortableField = {
 export type FavoritesSortableField = typeof FavoritesSortableField[keyof typeof FavoritesSortableField];
 export type Image = Node & {
   __typename?: 'Image';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  updatedAt: Maybe<Scalars['DateTime']>;
-  url: Scalars['URL'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  url: Scalars['URL']['output'];
 };
 
 
 export type ImageUrlArgs = {
   cropMode?: InputMaybe<ImageCropMode>;
-  size: Scalars['Int'];
-  skipCache: InputMaybe<Scalars['Boolean']>;
+  size: Scalars['Int']['input'];
+  skipCache: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The underlying API doesn't support offset-based pagination or count requests. As a result this connection doesn't include `pageInfo` or `aggregate` fields. */
@@ -949,12 +951,12 @@ export const ImageCropMode = {
 export type ImageCropMode = typeof ImageCropMode[keyof typeof ImageCropMode];
 export type ImageEdge = {
   __typename?: 'ImageEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Image;
 };
 
 export type ImageInput = {
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
 };
 
 export type ImagePayload = {
@@ -965,34 +967,34 @@ export type ImagePayload = {
 
 export type InputValidationError = {
   __typename?: 'InputValidationError';
-  message: Scalars['String'];
+  message: Scalars['String']['output'];
 };
 
 /** The range the items must fall in to be applicable. */
 export type IntegerRangeInput = {
   /** The lower bound of the range. */
-  greaterThan: InputMaybe<Scalars['Int']>;
+  greaterThan: InputMaybe<Scalars['Int']['input']>;
   /** The lower or equal bound of the range. */
-  greaterThanOrEqualTo: InputMaybe<Scalars['Int']>;
+  greaterThanOrEqualTo: InputMaybe<Scalars['Int']['input']>;
   /** The upper bound of the range. */
-  lessThan: InputMaybe<Scalars['Int']>;
+  lessThan: InputMaybe<Scalars['Int']['input']>;
   /** The upper or equal bound of the range. */
-  lessThanOrEqualTo: InputMaybe<Scalars['Int']>;
+  lessThanOrEqualTo: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type InternalContact = {
   __typename?: 'InternalContact';
-  address: Scalars['String'];
-  email: Scalars['String'];
-  name: Scalars['String'];
-  phone: Scalars['String'];
+  address: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  phone: Scalars['String']['output'];
 };
 
 export type InternalContactInput = {
-  address: InputMaybe<Scalars['String']>;
-  email: InputMaybe<Scalars['String']>;
-  name: InputMaybe<Scalars['String']>;
-  phone: InputMaybe<Scalars['String']>;
+  address: InputMaybe<Scalars['String']['input']>;
+  email: InputMaybe<Scalars['String']['input']>;
+  name: InputMaybe<Scalars['String']['input']>;
+  phone: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Supported languages */
@@ -1011,45 +1013,45 @@ export const Language = {
 export type Language = typeof Language[keyof typeof Language];
 export type LetterCount = {
   __typename?: 'LetterCount';
-  count: Scalars['Int'];
-  letter: Scalars['String'];
+  count: Scalars['Int']['output'];
+  letter: Scalars['String']['output'];
 };
 
 export type License = Node & {
   __typename?: 'License';
-  description: Scalars['String'];
+  description: Scalars['String']['output'];
   distributionAgreements: DistributionAgreementConnection;
   history: Maybe<CatalogHistoryItemConnection>;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   image: Maybe<Image>;
-  isDefault: Scalars['Boolean'];
-  isHidden: Maybe<Scalars['Boolean']>;
-  permitsSales: Maybe<Scalars['Boolean']>;
-  summary: Scalars['String'];
-  title: Scalars['String'];
+  isDefault: Scalars['Boolean']['output'];
+  isHidden: Maybe<Scalars['Boolean']['output']>;
+  permitsSales: Maybe<Scalars['Boolean']['output']>;
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 
 export type LicenseDistributionAgreementsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  isDefault: InputMaybe<Scalars['Boolean']>;
-  isRetired: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
+  isRetired: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<DistributionAgreementsOrder>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type LicenseHistoryArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   dateRange: InputMaybe<DateRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  isSticky: InputMaybe<Scalars['Boolean']>;
-  isUnread: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
+  isUnread: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: InputMaybe<Array<CatalogHistoryItemViewFilter>>;
 };
@@ -1063,19 +1065,19 @@ export type LicenseConnection = {
 };
 
 export type LicenseCreateInput = {
-  description: InputMaybe<Scalars['String']>;
+  description: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
-  isDefault: InputMaybe<Scalars['Boolean']>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  permitsSales: InputMaybe<Scalars['Boolean']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
+  permitsSales: InputMaybe<Scalars['Boolean']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type LicenseEdge = {
   __typename?: 'LicenseEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: License;
 };
 
@@ -1086,13 +1088,13 @@ export type LicensePayload = {
 };
 
 export type LicenseUpdateInput = {
-  description: InputMaybe<Scalars['String']>;
+  description: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
-  isDefault: InputMaybe<Scalars['Boolean']>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  permitsSales: InputMaybe<Scalars['Boolean']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  permitsSales: InputMaybe<Scalars['Boolean']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
 };
 
 export type LicensesOrder = {
@@ -1155,7 +1157,7 @@ export type MediaFileResultConnection = {
 
 export type MediaFileResultEdge = {
   __typename?: 'MediaFileResultEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: MediaFileResult;
 };
 
@@ -1177,24 +1179,24 @@ export type MediaFileTranscodingStatus = typeof MediaFileTranscodingStatus[keyof
 export type MediaFileUpload = Node & {
   __typename?: 'MediaFileUpload';
   /** Whether the current viewer may delete the file. */
-  canDelete: Maybe<Scalars['Boolean']>;
-  filename: Scalars['String'];
+  canDelete: Maybe<Scalars['Boolean']['output']>;
+  filename: Scalars['String']['output'];
   /** In bytes */
-  filesize: Scalars['String'];
-  hasUploaded: Scalars['Boolean'];
-  id: Scalars['ID'];
-  mimeType: Scalars['String'];
+  filesize: Scalars['String']['output'];
+  hasUploaded: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  mimeType: Scalars['String']['output'];
   /** The presigned part upload URLs. Unavailable after the upload has completed. */
-  partUploadUrls: Maybe<Array<Scalars['String']>>;
+  partUploadUrls: Maybe<Array<Scalars['String']['output']>>;
   recording: Maybe<Recording>;
   transcodingStatus: MediaFileTranscodingStatus;
-  updatedAt: Maybe<Scalars['DateTime']>;
-  url: Maybe<Scalars['URL']>;
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  url: Maybe<Scalars['URL']['output']>;
 };
 
 
 export type MediaFileUploadPartUploadUrlsArgs = {
-  count: Scalars['Int'];
+  count: Scalars['Int']['input'];
 };
 
 export type MediaFileUploadConnection = {
@@ -1207,13 +1209,13 @@ export type MediaFileUploadConnection = {
 
 export type MediaFileUploadEdge = {
   __typename?: 'MediaFileUploadEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: MediaFileUpload;
 };
 
 export type MediaFileUploadFinishInput = {
   /** The list of entity tags returned from the part upload API calls. */
-  uploadPartEtags: Array<Scalars['String']>;
+  uploadPartEtags: Array<Scalars['String']['input']>;
 };
 
 export type MediaFileUploadPayload = {
@@ -1223,9 +1225,9 @@ export type MediaFileUploadPayload = {
 };
 
 export type MediaFileUploadStartInput = {
-  filename: Scalars['String'];
-  filesize: Scalars['String'];
-  recordingId: InputMaybe<Scalars['ID']>;
+  filename: Scalars['String']['input'];
+  filesize: Scalars['String']['input'];
+  recordingId: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type MediaFileUploadsOrder = {
@@ -1255,12 +1257,12 @@ export const MediaFilesSortableField = {
 export type MediaFilesSortableField = typeof MediaFilesSortableField[keyof typeof MediaFilesSortableField];
 export type MediaRelease = Node & {
   __typename?: 'MediaRelease';
-  createdAt: Scalars['DateTime'];
-  id: Scalars['ID'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
   mediaReleaseForm: MediaReleaseForm;
   /** The personal information collected with the media release. */
   mediaReleasePerson: MediaReleasePerson;
-  notes: Maybe<Scalars['String']>;
+  notes: Maybe<Scalars['String']['output']>;
   /** The catalog person associated with the media release. */
   person: Maybe<Person>;
 };
@@ -1274,50 +1276,50 @@ export type MediaReleaseConnection = {
 };
 
 export type MediaReleaseCreateInput = {
-  mediaReleaseFormId: Scalars['ID'];
+  mediaReleaseFormId: Scalars['ID']['input'];
   /** The personal information collected with the media release. */
   mediaReleasePerson: MediaReleasePersonCreateInput;
-  notes: InputMaybe<Scalars['String']>;
+  notes: InputMaybe<Scalars['String']['input']>;
   /** The catalog person associated with the media release. */
-  personId: InputMaybe<Scalars['ID']>;
+  personId: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type MediaReleaseEdge = {
   __typename?: 'MediaReleaseEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: MediaRelease;
 };
 
 export type MediaReleaseForm = Node & {
   __typename?: 'MediaReleaseForm';
   collection: Maybe<Collection>;
-  createdAt: Scalars['DateTime'];
-  id: Scalars['ID'];
-  isClosed: Scalars['Boolean'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  isClosed: Scalars['Boolean']['output'];
   mediaReleases: MediaReleaseConnection;
   recording: Maybe<Recording>;
   sequence: Maybe<Sequence>;
   sponsor: Maybe<Sponsor>;
-  summary: Scalars['String'];
-  title: Scalars['String'];
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
   type: MediaReleaseFormType;
   /** The URL for media release form. */
-  url: Maybe<Scalars['URL']>;
+  url: Maybe<Scalars['URL']['output']>;
 };
 
 
 export type MediaReleaseFormMediaReleasesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<MediaReleaseOrder>>;
-  personId: InputMaybe<Scalars['ID']>;
-  recordingId: InputMaybe<Scalars['ID']>;
-  search: InputMaybe<Scalars['String']>;
-  seriesId: InputMaybe<Scalars['ID']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  personId: InputMaybe<Scalars['ID']['input']>;
+  recordingId: InputMaybe<Scalars['ID']['input']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  seriesId: InputMaybe<Scalars['ID']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 export type MediaReleaseFormConnection = {
@@ -1330,23 +1332,23 @@ export type MediaReleaseFormConnection = {
 
 export type MediaReleaseFormCreateInput = {
   /** Required if `type` is `COLLECTION`. */
-  collectionId: InputMaybe<Scalars['ID']>;
-  isClosed: InputMaybe<Scalars['Boolean']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  isClosed: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
   /** Required if `type` is `RECORDING`. */
-  recordingId: InputMaybe<Scalars['ID']>;
+  recordingId: InputMaybe<Scalars['ID']['input']>;
   /** Required if `type` is `SEQUENCE`. */
-  sequenceId: InputMaybe<Scalars['ID']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
   /** Required if `type` is `SPONSOR`. */
-  sponsorId: InputMaybe<Scalars['ID']>;
-  summary: Scalars['String'];
-  title: Scalars['String'];
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  summary: Scalars['String']['input'];
+  title: Scalars['String']['input'];
   type: MediaReleaseFormType;
 };
 
 export type MediaReleaseFormEdge = {
   __typename?: 'MediaReleaseFormEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: MediaReleaseForm;
 };
 
@@ -1389,8 +1391,8 @@ export const MediaReleaseFormSortableField = {
 export type MediaReleaseFormSortableField = typeof MediaReleaseFormSortableField[keyof typeof MediaReleaseFormSortableField];
 export type MediaReleaseFormTemplate = {
   __typename?: 'MediaReleaseFormTemplate';
-  summary: Scalars['String'];
-  title: Scalars['String'];
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
   type: MediaReleaseFormType;
 };
 
@@ -1406,16 +1408,16 @@ export const MediaReleaseFormType = {
 export type MediaReleaseFormType = typeof MediaReleaseFormType[keyof typeof MediaReleaseFormType];
 export type MediaReleaseFormUpdateInput = {
   /** Required if `type` is `COLLECTION`. */
-  collectionId: InputMaybe<Scalars['ID']>;
-  isClosed: InputMaybe<Scalars['Boolean']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  isClosed: InputMaybe<Scalars['Boolean']['input']>;
   /** Required if `type` is `RECORDING`. */
-  recordingId: InputMaybe<Scalars['ID']>;
+  recordingId: InputMaybe<Scalars['ID']['input']>;
   /** Required if `type` is `SEQUENCE`. */
-  sequenceId: InputMaybe<Scalars['ID']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
   /** Required if `type` is `SPONSOR`. */
-  sponsorId: InputMaybe<Scalars['ID']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
   type: InputMaybe<MediaReleaseFormType>;
 };
 
@@ -1433,73 +1435,73 @@ export type MediaReleasePayload = {
 export type MediaReleasePerson = {
   __typename?: 'MediaReleasePerson';
   /** The first line of the address. Typically the street address or PO Box number. */
-  address1: Maybe<Scalars['String']>;
+  address1: Maybe<Scalars['String']['output']>;
   /** The second line of the address. Typically the number of the apartment, suite, or unit. */
-  address2: Maybe<Scalars['String']>;
+  address2: Maybe<Scalars['String']['output']>;
   /** The name of the city, district, village, or town. */
-  city: Maybe<Scalars['String']>;
+  city: Maybe<Scalars['String']['output']>;
   /** The name of the country. */
-  country: Maybe<Scalars['String']>;
+  country: Maybe<Scalars['String']['output']>;
   /** The person's email address. */
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   /** The person's first name. */
-  givenName: Scalars['String'];
+  givenName: Scalars['String']['output'];
   /** The full name of the person, based on the values for givenName and surname. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** The person's phone number. */
-  phone: Scalars['String'];
+  phone: Scalars['String']['output'];
   /** The postal or zip code. */
-  postalCode: Maybe<Scalars['String']>;
+  postalCode: Maybe<Scalars['String']['output']>;
   /** The name of the region, such as the province, state, or district. */
-  province: Maybe<Scalars['String']>;
+  province: Maybe<Scalars['String']['output']>;
   /** The person's last name. */
-  surname: Scalars['String'];
+  surname: Scalars['String']['output'];
 };
 
 export type MediaReleasePersonCreateInput = {
   /** The first line of the address. Typically the street address or PO Box number. */
-  address1: Scalars['String'];
+  address1: Scalars['String']['input'];
   /** The second line of the address. Typically the number of the apartment, suite, or unit. */
-  address2: InputMaybe<Scalars['String']>;
+  address2: InputMaybe<Scalars['String']['input']>;
   /** The name of the city, district, village, or town. */
-  city: Scalars['String'];
+  city: Scalars['String']['input'];
   /** The name of the country. */
-  country: Scalars['String'];
+  country: Scalars['String']['input'];
   /** The person's email address. */
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
   /** The person's first name. */
-  givenName: Scalars['String'];
+  givenName: Scalars['String']['input'];
   /** The person's phone number. */
-  phone: Scalars['String'];
+  phone: Scalars['String']['input'];
   /** The postal or zip code. */
-  postalCode: Scalars['String'];
+  postalCode: Scalars['String']['input'];
   /** The name of the region, such as the province, state, or district. */
-  province: Scalars['String'];
+  province: Scalars['String']['input'];
   /** The person's last name. */
-  surname: Scalars['String'];
+  surname: Scalars['String']['input'];
 };
 
 export type MediaReleasePersonUpdateInput = {
   /** The first line of the address. Typically the street address or PO Box number. */
-  address1: InputMaybe<Scalars['String']>;
+  address1: InputMaybe<Scalars['String']['input']>;
   /** The second line of the address. Typically the number of the apartment, suite, or unit. */
-  address2: InputMaybe<Scalars['String']>;
+  address2: InputMaybe<Scalars['String']['input']>;
   /** The name of the city, district, village, or town. */
-  city: InputMaybe<Scalars['String']>;
+  city: InputMaybe<Scalars['String']['input']>;
   /** The name of the country. */
-  country: InputMaybe<Scalars['String']>;
+  country: InputMaybe<Scalars['String']['input']>;
   /** The person's email address. */
-  email: InputMaybe<Scalars['String']>;
+  email: InputMaybe<Scalars['String']['input']>;
   /** The person's first name. */
-  givenName: InputMaybe<Scalars['String']>;
+  givenName: InputMaybe<Scalars['String']['input']>;
   /** The person's phone number. */
-  phone: InputMaybe<Scalars['String']>;
+  phone: InputMaybe<Scalars['String']['input']>;
   /** The postal or zip code. */
-  postalCode: InputMaybe<Scalars['String']>;
+  postalCode: InputMaybe<Scalars['String']['input']>;
   /** The name of the region, such as the province, state, or district. */
-  province: InputMaybe<Scalars['String']>;
+  province: InputMaybe<Scalars['String']['input']>;
   /** The person's last name. */
-  surname: InputMaybe<Scalars['String']>;
+  surname: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Properties by which media release connections can be ordered. */
@@ -1514,9 +1516,9 @@ export type MediaReleaseSortableField = typeof MediaReleaseSortableField[keyof t
 export type MediaReleaseUpdateInput = {
   /** The personal information collected with the media release. */
   mediaReleasePerson: InputMaybe<MediaReleasePersonUpdateInput>;
-  notes: InputMaybe<Scalars['String']>;
+  notes: InputMaybe<Scalars['String']['input']>;
   /** The catalog person associated with the media release. */
-  personId: InputMaybe<Scalars['ID']>;
+  personId: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Mutation = {
@@ -1542,7 +1544,7 @@ export type Mutation = {
   faqDelete: SuccessPayload;
   faqUpdate: FaqPayload;
   /** @deprecated favoriteRecording is replaced with recordingFavorite */
-  favoriteRecording: Scalars['Boolean'];
+  favoriteRecording: Scalars['Boolean']['output'];
   /** Upload an image to an image type container. */
   imageUpload: ImagePayload;
   licenseCreate: LicensePayload;
@@ -1574,9 +1576,9 @@ export type Mutation = {
   personUnfavorite: SuccessPayload;
   personUpdate: PersonPayload;
   playlistAdd: UserPlaylist;
-  playlistDelete: Scalars['Boolean'];
-  playlistRecordingAdd: Scalars['Boolean'];
-  playlistRecordingRemove: Scalars['Boolean'];
+  playlistDelete: Scalars['Boolean']['output'];
+  playlistRecordingAdd: Scalars['Boolean']['output'];
+  playlistRecordingRemove: Scalars['Boolean']['output'];
   playlistUpdate: UserPlaylist;
   recordingArchive: SuccessPayload;
   recordingCreate: RecordingPayload;
@@ -1633,7 +1635,7 @@ export type Mutation = {
   testimonyDelete: SuccessPayload;
   testimonyUpdate: TestimonyPayload;
   /** @deprecated unfavoriteRecording is replaced with recordingUnfavorite */
-  unfavoriteRecording: Scalars['Boolean'];
+  unfavoriteRecording: Scalars['Boolean']['output'];
   updateMyProfile: AuthenticatedUserPayload;
   userCreate: UserPayload;
   userDelete: SuccessPayload;
@@ -1653,23 +1655,23 @@ export type MutationBlogPostCreateArgs = {
 
 
 export type MutationBlogPostDeleteArgs = {
-  blogPostId: Scalars['ID'];
+  blogPostId: Scalars['ID']['input'];
 };
 
 
 export type MutationBlogPostUpdateArgs = {
-  blogPostId: Scalars['ID'];
+  blogPostId: Scalars['ID']['input'];
   input: BlogPostUpdateInput;
 };
 
 
 export type MutationCatalogHistoryCommentDeleteArgs = {
-  catalogHistoryCommentId: Scalars['ID'];
+  catalogHistoryCommentId: Scalars['ID']['input'];
 };
 
 
 export type MutationCatalogHistoryCommentUpdateArgs = {
-  catalogHistoryCommentId: Scalars['ID'];
+  catalogHistoryCommentId: Scalars['ID']['input'];
   input: CatalogHistoryCommentUpdateInput;
 };
 
@@ -1680,33 +1682,33 @@ export type MutationCollectionCreateArgs = {
 
 
 export type MutationCollectionDeleteArgs = {
-  collectionId: Scalars['ID'];
+  collectionId: Scalars['ID']['input'];
 };
 
 
 export type MutationCollectionFavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationCollectionHistoryCommentCreateArgs = {
-  collectionId: Scalars['ID'];
+  collectionId: Scalars['ID']['input'];
   input: CatalogHistoryCommentCreateInput;
 };
 
 
 export type MutationCollectionScreeningLegalOverrideArgs = {
-  collectionId: Scalars['ID'];
+  collectionId: Scalars['ID']['input'];
 };
 
 
 export type MutationCollectionUnfavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationCollectionUpdateArgs = {
-  collectionId: Scalars['ID'];
+  collectionId: Scalars['ID']['input'];
   input: CollectionUpdateInput;
 };
 
@@ -1717,18 +1719,18 @@ export type MutationDistributionAgreementCreateArgs = {
 
 
 export type MutationDistributionAgreementDeleteArgs = {
-  distributionAgreementId: Scalars['ID'];
+  distributionAgreementId: Scalars['ID']['input'];
 };
 
 
 export type MutationDistributionAgreementHistoryCommentCreateArgs = {
-  distributionAgreementId: Scalars['ID'];
+  distributionAgreementId: Scalars['ID']['input'];
   input: CatalogHistoryCommentCreateInput;
 };
 
 
 export type MutationDistributionAgreementUpdateArgs = {
-  distributionAgreementId: Scalars['ID'];
+  distributionAgreementId: Scalars['ID']['input'];
   input: DistributionAgreementUpdateInput;
 };
 
@@ -1739,23 +1741,23 @@ export type MutationFaqCreateArgs = {
 
 
 export type MutationFaqDeleteArgs = {
-  faqId: Scalars['ID'];
+  faqId: Scalars['ID']['input'];
 };
 
 
 export type MutationFaqUpdateArgs = {
-  faqId: Scalars['ID'];
+  faqId: Scalars['ID']['input'];
   input: FaqUpdateInput;
 };
 
 
 export type MutationFavoriteRecordingArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationImageUploadArgs = {
-  image: Scalars['Upload'];
+  image: Scalars['Upload']['input'];
   imageType: ImageContainer;
 };
 
@@ -1766,19 +1768,19 @@ export type MutationLicenseCreateArgs = {
 
 
 export type MutationLicenseDeleteArgs = {
-  licenseId: Scalars['ID'];
+  licenseId: Scalars['ID']['input'];
 };
 
 
 export type MutationLicenseHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
-  licenseId: Scalars['ID'];
+  licenseId: Scalars['ID']['input'];
 };
 
 
 export type MutationLicenseUpdateArgs = {
   input: LicenseUpdateInput;
-  licenseId: Scalars['ID'];
+  licenseId: Scalars['ID']['input'];
 };
 
 
@@ -1793,24 +1795,24 @@ export type MutationLoginSocialArgs = {
 
 
 export type MutationMediaFileDeleteArgs = {
-  mediaFileId: Scalars['ID'];
+  mediaFileId: Scalars['ID']['input'];
 };
 
 
 export type MutationMediaFileUploadAbortArgs = {
-  mediaFileUploadId: Scalars['ID'];
+  mediaFileUploadId: Scalars['ID']['input'];
 };
 
 
 export type MutationMediaFileUploadAssignArgs = {
-  mediaFileUploadId: Scalars['ID'];
-  recordingId: Scalars['ID'];
+  mediaFileUploadId: Scalars['ID']['input'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationMediaFileUploadFinishArgs = {
   input: MediaFileUploadFinishInput;
-  mediaFileUploadId: Scalars['ID'];
+  mediaFileUploadId: Scalars['ID']['input'];
 };
 
 
@@ -1825,7 +1827,7 @@ export type MutationMediaReleaseCreateArgs = {
 
 
 export type MutationMediaReleaseDeleteArgs = {
-  mediaReleaseId: Scalars['ID'];
+  mediaReleaseId: Scalars['ID']['input'];
 };
 
 
@@ -1835,7 +1837,7 @@ export type MutationMediaReleaseFormCreateArgs = {
 
 
 export type MutationMediaReleaseFormDeleteArgs = {
-  mediaReleaseFormId: Scalars['ID'];
+  mediaReleaseFormId: Scalars['ID']['input'];
 };
 
 
@@ -1848,13 +1850,13 @@ export type MutationMediaReleaseFormTemplateUpdateArgs = {
 
 export type MutationMediaReleaseFormUpdateArgs = {
   input: MediaReleaseFormUpdateInput;
-  mediaReleaseFormId: Scalars['ID'];
+  mediaReleaseFormId: Scalars['ID']['input'];
 };
 
 
 export type MutationMediaReleaseUpdateArgs = {
   input: MediaReleaseUpdateInput;
-  mediaReleaseId: Scalars['ID'];
+  mediaReleaseId: Scalars['ID']['input'];
 };
 
 
@@ -1869,13 +1871,13 @@ export type MutationPageCreateArgs = {
 
 
 export type MutationPageDeleteArgs = {
-  pageId: Scalars['ID'];
+  pageId: Scalars['ID']['input'];
 };
 
 
 export type MutationPageUpdateArgs = {
   input: PageUpdateInput;
-  pageId: Scalars['ID'];
+  pageId: Scalars['ID']['input'];
 };
 
 
@@ -1885,29 +1887,29 @@ export type MutationPersonCreateArgs = {
 
 
 export type MutationPersonDeleteArgs = {
-  personId: Scalars['ID'];
+  personId: Scalars['ID']['input'];
 };
 
 
 export type MutationPersonFavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationPersonHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
-  personId: Scalars['ID'];
+  personId: Scalars['ID']['input'];
 };
 
 
 export type MutationPersonUnfavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationPersonUpdateArgs = {
   input: PersonUpdateInput;
-  personId: Scalars['ID'];
+  personId: Scalars['ID']['input'];
 };
 
 
@@ -1917,31 +1919,31 @@ export type MutationPlaylistAddArgs = {
 
 
 export type MutationPlaylistDeleteArgs = {
-  playlistId: Scalars['ID'];
+  playlistId: Scalars['ID']['input'];
 };
 
 
 export type MutationPlaylistRecordingAddArgs = {
-  playlistId: Scalars['ID'];
-  recordingId: Scalars['ID'];
+  playlistId: Scalars['ID']['input'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationPlaylistRecordingRemoveArgs = {
-  playlistId: Scalars['ID'];
-  recordingId: Scalars['ID'];
+  playlistId: Scalars['ID']['input'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationPlaylistUpdateArgs = {
   input: UserPlaylistUpdateInput;
-  playlistId: Scalars['ID'];
+  playlistId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingArchiveArgs = {
-  reason: Scalars['String'];
-  recordingId: Scalars['ID'];
+  reason: Scalars['String']['input'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
@@ -1951,160 +1953,160 @@ export type MutationRecordingCreateArgs = {
 
 
 export type MutationRecordingDeleteArgs = {
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingDraftingArgs = {
-  finished: Scalars['Boolean'];
-  recordingId: Scalars['ID'];
+  finished: Scalars['Boolean']['input'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingFavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingPlaybackSessionAdvanceArgs = {
   input: PlaybackSessionAdvanceInput;
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingPlaybackSessionBeginArgs = {
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingPlaybackSessionFinishArgs = {
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingScreeningContentCheckoutCreateArgs = {
-  recordingId: Scalars['ID'];
-  userId: InputMaybe<Scalars['ID']>;
+  recordingId: Scalars['ID']['input'];
+  userId: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationRecordingScreeningContentCheckoutDeleteArgs = {
-  recordingId: Scalars['ID'];
-  userId: InputMaybe<Scalars['ID']>;
+  recordingId: Scalars['ID']['input'];
+  userId: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationRecordingScreeningContentEvaluateArgs = {
-  approve: Scalars['Boolean'];
-  recordingId: Scalars['ID'];
+  approve: Scalars['Boolean']['input'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingScreeningContentEvaluationsClearArgs = {
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingScreeningContentMethodsSetArgs = {
   methods: Array<RecordingScreeningMethod>;
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingScreeningContentUnevaluateArgs = {
-  recordingId: Scalars['ID'];
-  userId: InputMaybe<Scalars['ID']>;
+  recordingId: Scalars['ID']['input'];
+  userId: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationRecordingScreeningIssueCreateArgs = {
   input: RecordingScreeningIssueInput;
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingScreeningIssueDeleteArgs = {
-  issueId: Scalars['ID'];
+  issueId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingScreeningIssueUpdateArgs = {
   input: RecordingScreeningIssueInput;
-  issueId: Scalars['ID'];
+  issueId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingScreeningLegalCheckoutCreateArgs = {
-  recordingId: Scalars['ID'];
-  userId: InputMaybe<Scalars['ID']>;
+  recordingId: Scalars['ID']['input'];
+  userId: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationRecordingScreeningLegalCheckoutDeleteArgs = {
-  recordingId: Scalars['ID'];
-  userId: InputMaybe<Scalars['ID']>;
+  recordingId: Scalars['ID']['input'];
+  userId: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationRecordingScreeningLegalEvaluateArgs = {
-  approve: Scalars['Boolean'];
-  recordingId: Scalars['ID'];
+  approve: Scalars['Boolean']['input'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingScreeningTechnicalCheckoutCreateArgs = {
-  recordingId: Scalars['ID'];
-  userId: InputMaybe<Scalars['ID']>;
+  recordingId: Scalars['ID']['input'];
+  userId: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationRecordingScreeningTechnicalCheckoutDeleteArgs = {
-  recordingId: Scalars['ID'];
-  userId: InputMaybe<Scalars['ID']>;
+  recordingId: Scalars['ID']['input'];
+  userId: InputMaybe<Scalars['ID']['input']>;
 };
 
 
 export type MutationRecordingScreeningTechnicalEvaluateArgs = {
-  approve: Scalars['Boolean'];
-  recordingId: Scalars['ID'];
+  approve: Scalars['Boolean']['input'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingTranscriptDeleteArgs = {
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingTranscriptUpdateArgs = {
   input: TranscriptUpdateInput;
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingTranscriptionRequestArgs = {
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingUnarchiveArgs = {
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingUnfavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationRecordingUpdateArgs = {
   input: RecordingUpdateInput;
-  recordingId: Scalars['ID'];
+  recordingId: Scalars['ID']['input'];
 };
 
 
@@ -2114,34 +2116,34 @@ export type MutationSequenceCreateArgs = {
 
 
 export type MutationSequenceDeleteArgs = {
-  sequenceId: Scalars['ID'];
+  sequenceId: Scalars['ID']['input'];
 };
 
 
 export type MutationSequenceFavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationSequenceHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
-  sequenceId: Scalars['ID'];
+  sequenceId: Scalars['ID']['input'];
 };
 
 
 export type MutationSequenceScreeningLegalOverrideArgs = {
-  sequenceId: Scalars['ID'];
+  sequenceId: Scalars['ID']['input'];
 };
 
 
 export type MutationSequenceUnfavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationSequenceUpdateArgs = {
   input: SequenceUpdateInput;
-  sequenceId: Scalars['ID'];
+  sequenceId: Scalars['ID']['input'];
 };
 
 
@@ -2156,29 +2158,29 @@ export type MutationSponsorCreateArgs = {
 
 
 export type MutationSponsorDeleteArgs = {
-  sponsorId: Scalars['ID'];
+  sponsorId: Scalars['ID']['input'];
 };
 
 
 export type MutationSponsorFavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationSponsorHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
-  sponsorId: Scalars['ID'];
+  sponsorId: Scalars['ID']['input'];
 };
 
 
 export type MutationSponsorUnfavoriteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type MutationSponsorUpdateArgs = {
   input: SponsorUpdateInput;
-  sponsorId: Scalars['ID'];
+  sponsorId: Scalars['ID']['input'];
 };
 
 
@@ -2188,18 +2190,18 @@ export type MutationTestimonyCreateArgs = {
 
 
 export type MutationTestimonyDeleteArgs = {
-  testimonyId: Scalars['ID'];
+  testimonyId: Scalars['ID']['input'];
 };
 
 
 export type MutationTestimonyUpdateArgs = {
   input: TestimonyUpdateInput;
-  testimonyId: Scalars['ID'];
+  testimonyId: Scalars['ID']['input'];
 };
 
 
 export type MutationUnfavoriteRecordingArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
@@ -2214,36 +2216,36 @@ export type MutationUserCreateArgs = {
 
 
 export type MutationUserDeleteArgs = {
-  destroyData: InputMaybe<Scalars['Boolean']>;
-  userId: Scalars['ID'];
+  destroyData: InputMaybe<Scalars['Boolean']['input']>;
+  userId: Scalars['ID']['input'];
 };
 
 
 export type MutationUserRecoverArgs = {
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
 };
 
 
 export type MutationUserResetArgs = {
-  password: Scalars['String'];
-  token: Scalars['String'];
+  password: Scalars['String']['input'];
+  token: Scalars['String']['input'];
 };
 
 
 export type MutationUserUpdateArgs = {
   input: UserUpdateInput;
-  userId: Scalars['ID'];
+  userId: Scalars['ID']['input'];
 };
 
 export type Node = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
 };
 
 export type NotificationChannel = Node & {
   __typename?: 'NotificationChannel';
-  description: Scalars['String'];
-  id: Scalars['ID'];
-  title: Scalars['String'];
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type NotificationChannelConnection = {
@@ -2256,7 +2258,7 @@ export type NotificationChannelConnection = {
 
 export type NotificationChannelEdge = {
   __typename?: 'NotificationChannelEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: NotificationChannel;
 };
 
@@ -2289,13 +2291,13 @@ export type NotificationSubscriptionConnection = {
 
 export type NotificationSubscriptionEdge = {
   __typename?: 'NotificationSubscriptionEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: NotificationSubscription;
 };
 
 export type NotificationSubscriptionInput = {
   frequency: NotificationFrequency;
-  notificationChannelId: Scalars['ID'];
+  notificationChannelId: Scalars['ID']['input'];
 };
 
 /** Possible directions in which to order a list of items when provided an `orderBy` argument. */
@@ -2307,29 +2309,29 @@ export const OrderByDirection = {
 export type OrderByDirection = typeof OrderByDirection[keyof typeof OrderByDirection];
 export type Page = Node & {
   __typename?: 'Page';
-  body: Scalars['String'];
+  body: Scalars['String']['output'];
   /** The canonical HTML path to this resource. */
-  canonicalPath: Scalars['String'];
+  canonicalPath: Scalars['String']['output'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['URL'];
-  id: Scalars['ID'];
-  isHidden: Scalars['Boolean'];
+  canonicalUrl: Scalars['URL']['output'];
+  id: Scalars['ID']['output'];
+  isHidden: Scalars['Boolean']['output'];
   pageMenu: Maybe<PageMenu>;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['URL'];
-  slug: Scalars['String'];
-  title: Scalars['String'];
+  shareUrl: Scalars['URL']['output'];
+  slug: Scalars['String']['output'];
+  title: Scalars['String']['output'];
   type: PageType;
 };
 
 
 export type PageCanonicalPathArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type PageCanonicalUrlArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type PageConnection = {
@@ -2349,42 +2351,42 @@ export const PageContactRecipient = {
 
 export type PageContactRecipient = typeof PageContactRecipient[keyof typeof PageContactRecipient];
 export type PageContactSubmitInput = {
-  body: Scalars['String'];
-  email: Scalars['String'];
-  givenName: Scalars['String'];
+  body: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  givenName: Scalars['String']['input'];
   language: Language;
   recipient: PageContactRecipient;
-  surname: Scalars['String'];
+  surname: Scalars['String']['input'];
 };
 
 export type PageCreateInput = {
-  body: Scalars['String'];
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  body: Scalars['String']['input'];
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  pageMenuId: InputMaybe<Scalars['ID']>;
-  slug: Scalars['String'];
-  title: Scalars['String'];
+  pageMenuId: InputMaybe<Scalars['ID']['input']>;
+  slug: Scalars['String']['input'];
+  title: Scalars['String']['input'];
   type: PageType;
 };
 
 export type PageEdge = {
   __typename?: 'PageEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Page;
 };
 
 export type PageInfo = {
   __typename?: 'PageInfo';
-  endCursor: Maybe<Scalars['String']>;
-  hasNextPage: Scalars['Boolean'];
-  hasPreviousPage: Scalars['Boolean'];
-  startCursor: Maybe<Scalars['String']>;
+  endCursor: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  startCursor: Maybe<Scalars['String']['output']>;
 };
 
 export type PageMenu = Node & {
   __typename?: 'PageMenu';
-  id: Scalars['ID'];
-  name: Scalars['String'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type PageMenuConnection = {
@@ -2397,7 +2399,7 @@ export type PageMenuConnection = {
 
 export type PageMenuEdge = {
   __typename?: 'PageMenuEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: PageMenu;
 };
 
@@ -2422,11 +2424,11 @@ export const PageType = {
 
 export type PageType = typeof PageType[keyof typeof PageType];
 export type PageUpdateInput = {
-  body: InputMaybe<Scalars['String']>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  pageMenuId: InputMaybe<Scalars['ID']>;
-  slug: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
+  body: InputMaybe<Scalars['String']['input']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  pageMenuId: InputMaybe<Scalars['ID']['input']>;
+  slug: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PagesOrder = {
@@ -2444,28 +2446,28 @@ export const PagesSortableField = {
 export type PagesSortableField = typeof PagesSortableField[keyof typeof PagesSortableField];
 export type Person = Node & UniformResourceLocatable & {
   __typename?: 'Person';
-  address: Maybe<Scalars['String']>;
+  address: Maybe<Scalars['String']['output']>;
   /** The canonical HTML path to this resource. */
-  canonicalPath: Scalars['String'];
+  canonicalPath: Scalars['String']['output'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['URL'];
+  canonicalUrl: Scalars['URL']['output'];
   collections: CollectionConnection;
-  description: Scalars['String'];
-  designations: Scalars['String'];
-  email: Maybe<Scalars['String']>;
-  givenName: Scalars['String'];
-  hidingReason: Maybe<Scalars['String']>;
+  description: Scalars['String']['output'];
+  designations: Scalars['String']['output'];
+  email: Maybe<Scalars['String']['output']>;
+  givenName: Scalars['String']['output'];
+  hidingReason: Maybe<Scalars['String']['output']>;
   history: Maybe<CatalogHistoryItemConnection>;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   image: Maybe<Image>;
   imageWithFallback: Image;
   internalContact: Maybe<InternalContact>;
-  isHidden: Scalars['Boolean'];
+  isHidden: Scalars['Boolean']['output'];
   /** @deprecated Person.isPreapproved is replaced with Person.skipContentScreening */
-  isPreapproved: Maybe<Scalars['Boolean']>;
+  isPreapproved: Maybe<Scalars['Boolean']['output']>;
   language: Language;
-  name: Scalars['String'];
-  phone: Maybe<Scalars['String']>;
+  name: Scalars['String']['output'];
+  phone: Maybe<Scalars['String']['output']>;
   /** @deprecated Person.photo is replaced with Person.image */
   photo: Maybe<Image>;
   /** @deprecated Person.photoWithFallback is replaced with Person.imageWithFallback */
@@ -2473,105 +2475,105 @@ export type Person = Node & UniformResourceLocatable & {
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['URL'];
+  shareUrl: Scalars['URL']['output'];
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: Maybe<Scalars['Boolean']>;
+  skipContentScreening: Maybe<Scalars['Boolean']['output']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: Maybe<Scalars['Boolean']>;
-  suffix: Scalars['String'];
-  summary: Scalars['String'];
-  surname: Scalars['String'];
-  title: Scalars['String'];
-  viewerHasFavorited: Scalars['Boolean'];
-  website: Maybe<Scalars['URL']>;
+  skipLegalScreening: Maybe<Scalars['Boolean']['output']>;
+  suffix: Scalars['String']['output'];
+  summary: Scalars['String']['output'];
+  surname: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  viewerHasFavorited: Scalars['Boolean']['output'];
+  website: Maybe<Scalars['URL']['output']>;
 };
 
 
 export type PersonCanonicalPathArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type PersonCanonicalUrlArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type PersonCollectionsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CollectionsOrder>>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   withRole: InputMaybe<PersonsRoleField>;
 };
 
 
 export type PersonHistoryArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   dateRange: InputMaybe<DateRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  isSticky: InputMaybe<Scalars['Boolean']>;
-  isUnread: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
+  isUnread: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: InputMaybe<Array<CatalogHistoryItemViewFilter>>;
 };
 
 
 export type PersonRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
   withRole: InputMaybe<PersonsRoleField>;
 };
 
 
 export type PersonSequencesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SequenceOrder>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   withRole: InputMaybe<PersonsRoleField>;
 };
 
@@ -2584,33 +2586,33 @@ export type PersonConnection = {
 };
 
 export type PersonCreateInput = {
-  address: InputMaybe<Scalars['String']>;
-  description: InputMaybe<Scalars['String']>;
-  designations: InputMaybe<Scalars['String']>;
-  email: InputMaybe<Scalars['String']>;
-  givenName: Scalars['String'];
-  hidingReason: InputMaybe<Scalars['String']>;
+  address: InputMaybe<Scalars['String']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  designations: InputMaybe<Scalars['String']['input']>;
+  email: InputMaybe<Scalars['String']['input']>;
+  givenName: Scalars['String']['input'];
+  hidingReason: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
   internalContact: InputMaybe<InternalContactInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   /** Deprecated: isPreapproved is replaced with skipContentScreening. */
-  isPreapproved: InputMaybe<Scalars['Boolean']>;
+  isPreapproved: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  phone: InputMaybe<Scalars['String']>;
+  phone: InputMaybe<Scalars['String']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
-  suffix: InputMaybe<Scalars['String']>;
-  summary: InputMaybe<Scalars['String']>;
-  surname: Scalars['String'];
-  title: InputMaybe<Scalars['String']>;
-  website: InputMaybe<Scalars['URL']>;
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  suffix: InputMaybe<Scalars['String']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  surname: Scalars['String']['input'];
+  title: InputMaybe<Scalars['String']['input']>;
+  website: InputMaybe<Scalars['URL']['input']>;
 };
 
 export type PersonEdge = {
   __typename?: 'PersonEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Person;
 };
 
@@ -2621,27 +2623,27 @@ export type PersonPayload = {
 };
 
 export type PersonUpdateInput = {
-  address: InputMaybe<Scalars['String']>;
-  description: InputMaybe<Scalars['String']>;
-  designations: InputMaybe<Scalars['String']>;
-  email: InputMaybe<Scalars['String']>;
-  givenName: InputMaybe<Scalars['String']>;
-  hidingReason: InputMaybe<Scalars['String']>;
+  address: InputMaybe<Scalars['String']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  designations: InputMaybe<Scalars['String']['input']>;
+  email: InputMaybe<Scalars['String']['input']>;
+  givenName: InputMaybe<Scalars['String']['input']>;
+  hidingReason: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
   internalContact: InputMaybe<InternalContactInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   /** Deprecated: isPreapproved is replaced with skipContentScreening. */
-  isPreapproved: InputMaybe<Scalars['Boolean']>;
-  phone: InputMaybe<Scalars['String']>;
+  isPreapproved: InputMaybe<Scalars['Boolean']['input']>;
+  phone: InputMaybe<Scalars['String']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
-  suffix: InputMaybe<Scalars['String']>;
-  summary: InputMaybe<Scalars['String']>;
-  surname: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
-  website: InputMaybe<Scalars['URL']>;
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  suffix: InputMaybe<Scalars['String']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  surname: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
+  website: InputMaybe<Scalars['URL']['input']>;
 };
 
 export type PersonsOrder = {
@@ -2674,13 +2676,13 @@ export const PersonsSortableField = {
 export type PersonsSortableField = typeof PersonsSortableField[keyof typeof PersonsSortableField];
 export type PlaybackSessionAdvanceInput = {
   /** The playback position as a percentage of the recording duration. */
-  positionPercentage: Scalars['Float'];
+  positionPercentage: Scalars['Float']['input'];
 };
 
 export type PopularPerson = {
   __typename?: 'PopularPerson';
   person: Person;
-  weight: Scalars['Float'];
+  weight: Scalars['Float']['output'];
 };
 
 export type PopularPersonConnection = {
@@ -2693,14 +2695,14 @@ export type PopularPersonConnection = {
 
 export type PopularPersonEdge = {
   __typename?: 'PopularPersonEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: PopularPerson;
 };
 
 export type PopularRecording = {
   __typename?: 'PopularRecording';
   recording: Recording;
-  weight: Scalars['Float'];
+  weight: Scalars['Float']['output'];
 };
 
 export type PopularRecordingConnection = {
@@ -2713,7 +2715,7 @@ export type PopularRecordingConnection = {
 
 export type PopularRecordingEdge = {
   __typename?: 'PopularRecordingEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: PopularRecording;
 };
 
@@ -2813,353 +2815,353 @@ export type Query = {
 
 export type QueryAdminImageArgs = {
   imageType: ImageContainer;
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
 };
 
 
 export type QueryAdminImagesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   imageType: ImageContainer;
 };
 
 
 export type QueryAudiobibleArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryAudiobibleChapterArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryAudiobiblesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryAudiobookArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryAudiobookSeriesArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryAudiobookSeriesesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CollectionsOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryAudiobookTrackArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryAudiobookTracksArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryAudiobooksArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SequenceOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryBlogPostArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryBlogPostsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<BlogPostOrder>>;
 };
 
 
 export type QueryCollectionArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryCollectionsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   contentType: InputMaybe<CollectionContentType>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CollectionsOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryConferenceArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryConferencesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CollectionsOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryDistributionAgreementArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryDistributionAgreementsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  isDefault: InputMaybe<Scalars['Boolean']>;
-  isRetired: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
+  isRetired: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  licenseId: InputMaybe<Scalars['ID']>;
-  offset: InputMaybe<Scalars['Int']>;
+  licenseId: InputMaybe<Scalars['ID']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<DistributionAgreementsOrder>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryFaqArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryFaqCategoriesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryFaqsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  faqCategoryId: InputMaybe<Scalars['Int']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  faqCategoryId: InputMaybe<Scalars['Int']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<FaqsOrder>>;
 };
 
 
 export type QueryFeaturedBlogPostsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryFeaturedPersonsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   role: InputMaybe<PersonsRoleField>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
-  startsWith: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  startsWith: InputMaybe<Scalars['String']['input']>;
   withContentTypes: InputMaybe<Array<RecordingContentType>>;
 };
 
 
 export type QueryFeaturedRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType?: InputMaybe<RecordingContentType>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryFeaturedSequencesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentType: InputMaybe<SequenceContentType>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryFeaturedSponsorsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
-  search: InputMaybe<Scalars['String']>;
-  startsWith: InputMaybe<Scalars['String']>;
-  withMusic: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  startsWith: InputMaybe<Scalars['String']['input']>;
+  withMusic: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type QueryLicenseArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryLicensesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isDefault: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<LicensesOrder>>;
-  search: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type QueryMediaFileUploadsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  hasUploaded: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasUploaded: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<MediaFileUploadsOrder>>;
-  search: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type QueryMediaFilesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<MediaFilesOrder>>;
   transcodingStatuses: InputMaybe<Array<MediaFileTranscodingStatus>>;
 };
 
 
 export type QueryMediaReleaseArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryMediaReleaseFormArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
@@ -3169,167 +3171,167 @@ export type QueryMediaReleaseFormTemplatesArgs = {
 
 
 export type QueryMediaReleaseFormsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
   entityContentType: InputMaybe<MediaReleaseFormEntityContentType>;
-  first: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<MediaReleaseFormOrder>>;
-  recordingId: InputMaybe<Scalars['ID']>;
-  search: InputMaybe<Scalars['String']>;
-  seriesId: InputMaybe<Scalars['ID']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  recordingId: InputMaybe<Scalars['ID']['input']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  seriesId: InputMaybe<Scalars['ID']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   type: InputMaybe<MediaReleaseFormType>;
 };
 
 
 export type QueryMediaReleasesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  mediaReleaseFormId: InputMaybe<Scalars['ID']>;
+  mediaReleaseFormId: InputMaybe<Scalars['ID']['input']>;
   mediaReleaseFormType: InputMaybe<MediaReleaseFormType>;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<MediaReleaseOrder>>;
-  personId: InputMaybe<Scalars['ID']>;
-  recordingId: InputMaybe<Scalars['ID']>;
-  search: InputMaybe<Scalars['String']>;
-  seriesId: InputMaybe<Scalars['ID']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  personId: InputMaybe<Scalars['ID']['input']>;
+  recordingId: InputMaybe<Scalars['ID']['input']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  seriesId: InputMaybe<Scalars['ID']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryMusicAlbumArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryMusicAlbumsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SequenceOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryMusicBookTagsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryMusicMoodTagsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryMusicSeriesesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CollectionsOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryMusicTrackArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryMusicTracksArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryNotificationChannelsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryPageArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryPageMenusArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryPagesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<PagesOrder>>;
-  pageMenuId: InputMaybe<Scalars['Int']>;
+  pageMenuId: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryPersonArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
@@ -3339,223 +3341,223 @@ export type QueryPersonLetterCountsArgs = {
 
 
 export type QueryPersonsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<PersonsOrder>>;
   role: InputMaybe<PersonsRoleField>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
-  startsWith: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  startsWith: InputMaybe<Scalars['String']['input']>;
   withContentTypes: InputMaybe<Array<RecordingContentType>>;
 };
 
 
 export type QueryPopularPersonsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   role: InputMaybe<PersonsRoleField>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
-  startsWith: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  startsWith: InputMaybe<Scalars['String']['input']>;
   withContentTypes: InputMaybe<Array<RecordingContentType>>;
 };
 
 
 export type QueryPopularRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryRecordingArgs = {
-  allowArchived: InputMaybe<Scalars['Boolean']>;
-  id: Scalars['ID'];
+  allowArchived: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryRecordingScreeningIssueTypeArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryRecordingScreeningIssueTypesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QuerySequenceArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QuerySequencesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentType: InputMaybe<SequenceContentType>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SequenceOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QuerySeriesArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QuerySeriesesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SequenceOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QuerySermonArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QuerySermonsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QuerySponsorArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
@@ -3565,244 +3567,244 @@ export type QuerySponsorLetterCountsArgs = {
 
 
 export type QuerySponsorsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SponsorsOrder>>;
-  search: InputMaybe<Scalars['String']>;
-  startsWith: InputMaybe<Scalars['String']>;
-  withMusic: InputMaybe<Scalars['Boolean']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  startsWith: InputMaybe<Scalars['String']['input']>;
+  withMusic: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type QueryStoriesArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryStoryArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryStoryProgramArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryStoryProgramsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CollectionsOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryStorySeasonArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryStorySeasonsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SequenceOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type QueryTagsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<TagsOrder>>;
-  search: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type QueryTestimoniesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<TestimoniesOrder>>;
 };
 
 
 export type QueryTestimonyArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryTopicArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryTopicsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<TopicsOrder>>;
 };
 
 
 export type QueryUserArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type QueryUsersArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  hasAnyRoles: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasAnyRoles: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<UsersOrder>>;
-  search: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
   withReadAccess: InputMaybe<UserLanguageEntityInput>;
   withRole: InputMaybe<UserLanguageRoleInput>;
 };
 
 
 export type QueryWebsiteRecentRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryWebsitesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type Recording = Node & UniformResourceLocatable & {
   __typename?: 'Recording';
   /** Requires `ADMINISTRATION` role. */
-  archiveDate: Maybe<Scalars['DateTime']>;
+  archiveDate: Maybe<Scalars['DateTime']['output']>;
   /** Requires `ADMINISTRATION` role. */
-  archiveReason: Maybe<Scalars['String']>;
+  archiveReason: Maybe<Scalars['String']['output']>;
   /** Requires `ADMINISTRATION` role. */
   archiveUser: Maybe<User>;
   attachments: Array<Attachment>;
   audioFiles: Array<AudioFile>;
   bibleReferences: BibleReferenceRangeConnection;
   /** Whether the current viewer may archive the recording. */
-  canArchive: Maybe<Scalars['Boolean']>;
+  canArchive: Maybe<Scalars['Boolean']['output']>;
   /** Whether the current viewer may delete the recording. */
-  canDelete: Maybe<Scalars['Boolean']>;
+  canDelete: Maybe<Scalars['Boolean']['output']>;
   /** Whether the recording can be manually enqueued for transcribing. */
-  canRequestTranscription: Maybe<Scalars['Boolean']>;
+  canRequestTranscription: Maybe<Scalars['Boolean']['output']>;
   /** The canonical HTML path to this resource. */
-  canonicalPath: Scalars['String'];
+  canonicalPath: Scalars['String']['output'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['URL'];
+  canonicalUrl: Scalars['URL']['output'];
   collection: Maybe<Collection>;
   contentScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
   contentScreeningEvaluations: Maybe<Array<RecordingContentScreeningEvaluation>>;
   contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   contentType: RecordingContentType;
-  copyrightYear: Maybe<Scalars['Int']>;
+  copyrightYear: Maybe<Scalars['Int']['output']>;
   coverImage: Maybe<Image>;
-  description: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']['output']>;
   distributionAgreement: Maybe<DistributionAgreement>;
   /** @deprecated Recording.downloadDisabled is replaced with Recording.isDownloadAllowed */
-  downloadDisabled: Scalars['Boolean'];
+  downloadDisabled: Scalars['Boolean']['output'];
   /** The duration of the primary audio source in seconds. */
-  duration: Scalars['Float'];
-  hasAudio: Scalars['Boolean'];
-  hasVideo: Scalars['Boolean'];
-  hidingReason: Maybe<Scalars['String']>;
+  duration: Scalars['Float']['output'];
+  hasAudio: Scalars['Boolean']['output'];
+  hasVideo: Scalars['Boolean']['output'];
+  hidingReason: Maybe<Scalars['String']['output']>;
   history: Maybe<CatalogHistoryItemConnection>;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   imageWithFallback: Image;
-  isDownloadAllowed: Scalars['Boolean'];
-  isFeatured: Scalars['Boolean'];
+  isDownloadAllowed: Scalars['Boolean']['output'];
+  isFeatured: Scalars['Boolean']['output'];
   /** Whether the recording has been hidden. `isHidden` being `false` does not indicate the recording is published. Use `stage` to determine published status. */
-  isHidden: Scalars['Boolean'];
+  isHidden: Scalars['Boolean']['output'];
   language: Language;
   legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
   persons: Array<Person>;
-  publishDate: Maybe<Scalars['DateTime']>;
-  recordingDate: Maybe<Scalars['RelativeDateTime']>;
+  publishDate: Maybe<Scalars['DateTime']['output']>;
+  recordingDate: Maybe<Scalars['RelativeDateTime']['output']>;
   recordingTagSuggestions: RecordingTagSuggestionConnection;
   recordingTags: RecordingTagConnection;
   screeningIssues: Maybe<RecordingScreeningIssueConnection>;
   sequence: Maybe<Sequence>;
   /** The index of the recording within its sequence. */
-  sequenceIndex: Maybe<Scalars['Int']>;
+  sequenceIndex: Maybe<Scalars['Int']['output']>;
   /** The next recording within this recording's sequence. */
   sequenceNextRecording: Maybe<Recording>;
   /** The previous recording within this recording's sequence. */
   sequencePreviousRecording: Maybe<Recording>;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['URL'];
+  shareUrl: Scalars['URL']['output'];
   sponsor: Maybe<Sponsor>;
   stage: RecordingStage;
   technicalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
-  title: Scalars['String'];
+  title: Scalars['String']['output'];
   transcript: Maybe<Transcript>;
   transcriptionStatus: Maybe<RecordingTranscriptionStatus>;
   videoFiles: Array<VideoFile>;
-  viewerHasFavorited: Scalars['Boolean'];
+  viewerHasFavorited: Scalars['Boolean']['output'];
   viewerPlaybackSession: Maybe<RecordingPlaybackSession>;
   websites: Array<Website>;
 };
@@ -3815,71 +3817,71 @@ export type RecordingAttachmentsArgs = {
 
 export type RecordingAudioFilesArgs = {
   allowedContainers: InputMaybe<Array<MediaFileContainer>>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type RecordingBibleReferencesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type RecordingCanonicalPathArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type RecordingCanonicalUrlArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type RecordingHistoryArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   dateRange: InputMaybe<DateRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  isSticky: InputMaybe<Scalars['Boolean']>;
-  isUnread: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
+  isUnread: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: InputMaybe<Array<CatalogHistoryItemViewFilter>>;
 };
 
 
 export type RecordingPersonsArgs = {
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
   role: InputMaybe<PersonsRoleField>;
 };
 
 
 export type RecordingRecordingTagSuggestionsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type RecordingRecordingTagsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type RecordingScreeningIssuesArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   category: InputMaybe<RecordingScreeningIssueCategory>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<RecordingScreeningIssueOrder>>;
 };
 
 
 export type RecordingVideoFilesArgs = {
   allowedContainers: InputMaybe<Array<MediaFileContainer>>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type RecordingConnection = {
@@ -3952,39 +3954,39 @@ export const RecordingContentType = {
 export type RecordingContentType = typeof RecordingContentType[keyof typeof RecordingContentType];
 export type RecordingCreateInput = {
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
   contentScreeningCheckouts: InputMaybe<Array<RecordingScreeningCheckoutInput>>;
   contentType: RecordingContentType;
-  copyrightYear: InputMaybe<Scalars['Int']>;
+  copyrightYear: InputMaybe<Scalars['Int']['input']>;
   coverImage: InputMaybe<ImageInput>;
-  description: InputMaybe<Scalars['String']>;
-  distributionAgreementId: Scalars['ID'];
-  hidingReason: InputMaybe<Scalars['String']>;
-  isDownloadAllowed: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  distributionAgreementId: Scalars['ID']['input'];
+  hidingReason: InputMaybe<Scalars['String']['input']>;
+  isDownloadAllowed: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningCheckouts: InputMaybe<Array<RecordingScreeningCheckoutInput>>;
   /** Requires `ADMINISTRATION` role. */
-  publishDate: InputMaybe<Scalars['DateTime']>;
-  recordingDate: InputMaybe<Scalars['RelativeDateTime']>;
+  publishDate: InputMaybe<Scalars['DateTime']['input']>;
+  recordingDate: InputMaybe<Scalars['RelativeDateTime']['input']>;
   recordingPersons: InputMaybe<Array<RecordingPersonRoleInput>>;
   recordingTags: InputMaybe<Array<RecordingTagInput>>;
-  sequenceId: InputMaybe<Scalars['ID']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipTechnicalScreening: InputMaybe<Scalars['Boolean']>;
-  sponsorId: Scalars['ID'];
+  skipTechnicalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  sponsorId: Scalars['ID']['input'];
   technicalScreeningCheckouts: InputMaybe<Array<RecordingScreeningCheckoutInput>>;
-  title: Scalars['String'];
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  title: Scalars['String']['input'];
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 export type RecordingEdge = {
   __typename?: 'RecordingEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Recording;
 };
 
@@ -4010,24 +4012,24 @@ export type RecordingPayload = {
 
 export type RecordingPersonInput = {
   /** The ID of a person associated with the recording. */
-  personId: Scalars['ID'];
+  personId: Scalars['ID']['input'];
   /** The role a person has with the recording. */
   role: InputMaybe<PersonsRoleField>;
 };
 
 export type RecordingPersonRoleInput = {
   /** The ID of a person associated with the recording. */
-  personId: Scalars['ID'];
+  personId: Scalars['ID']['input'];
   /** The role a person has with the recording. */
   role: PersonsRoleField;
 };
 
 export type RecordingPlaybackSession = {
   __typename?: 'RecordingPlaybackSession';
-  createdAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime']['output'];
   /** The playback position as a percentage of the recording duration. */
-  positionPercentage: Scalars['Float'];
-  updatedAt: Scalars['DateTime'];
+  positionPercentage: Scalars['Float']['output'];
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 /** The playback session status for a recording. */
@@ -4049,13 +4051,13 @@ export type RecordingScreeningCheckout = {
   __typename?: 'RecordingScreeningCheckout';
   /** The user who assigned the screener. */
   assigner: User;
-  createdAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime']['output'];
   /** The screener user. */
   screener: User;
 };
 
 export type RecordingScreeningCheckoutInput = {
-  userId: Scalars['ID'];
+  userId: Scalars['ID']['input'];
 };
 
 export type RecordingScreeningCheckoutPayload = {
@@ -4078,12 +4080,12 @@ export type RecordingScreeningContentViewFilter = typeof RecordingScreeningConte
 export type RecordingScreeningIssue = Node & {
   __typename?: 'RecordingScreeningIssue';
   /** In HH:mm:ss format. */
-  endTime: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  notes: Scalars['String'];
+  endTime: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  notes: Scalars['String']['output'];
   screener: User;
   /** In HH:mm:ss format. */
-  startTime: Maybe<Scalars['String']>;
+  startTime: Maybe<Scalars['String']['output']>;
   target: RecordingScreeningIssueTarget;
   type: RecordingScreeningIssueType;
 };
@@ -4109,17 +4111,17 @@ export type RecordingScreeningIssueConnection = {
 
 export type RecordingScreeningIssueEdge = {
   __typename?: 'RecordingScreeningIssueEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: RecordingScreeningIssue;
 };
 
 export type RecordingScreeningIssueInput = {
   /** In HH:mm:ss format. */
-  endTime: InputMaybe<Scalars['String']>;
-  notes: InputMaybe<Scalars['String']>;
-  recordingScreeningIssueTypeId: Scalars['ID'];
+  endTime: InputMaybe<Scalars['String']['input']>;
+  notes: InputMaybe<Scalars['String']['input']>;
+  recordingScreeningIssueTypeId: Scalars['ID']['input'];
   /** In HH:mm:ss format. */
-  startTime: InputMaybe<Scalars['String']>;
+  startTime: InputMaybe<Scalars['String']['input']>;
   target: RecordingScreeningIssueTarget;
 };
 
@@ -4144,9 +4146,9 @@ export type RecordingScreeningIssueTarget = typeof RecordingScreeningIssueTarget
 export type RecordingScreeningIssueType = Node & {
   __typename?: 'RecordingScreeningIssueType';
   category: RecordingScreeningIssueCategory;
-  id: Scalars['ID'];
-  notes: Scalars['String'];
-  title: Scalars['String'];
+  id: Scalars['ID']['output'];
+  notes: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type RecordingScreeningIssueTypeConnection = {
@@ -4159,7 +4161,7 @@ export type RecordingScreeningIssueTypeConnection = {
 
 export type RecordingScreeningIssueTypeEdge = {
   __typename?: 'RecordingScreeningIssueTypeEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: RecordingScreeningIssueType;
 };
 
@@ -4204,18 +4206,18 @@ export type RecordingTagConnection = {
 
 export type RecordingTagEdge = {
   __typename?: 'RecordingTagEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: RecordingTag;
 };
 
 export type RecordingTagInput = {
   /** The name of a tag. */
-  tagName: Scalars['String'];
+  tagName: Scalars['String']['input'];
 };
 
 export type RecordingTagSuggestion = {
   __typename?: 'RecordingTagSuggestion';
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
 };
 
 export type RecordingTagSuggestionConnection = {
@@ -4228,7 +4230,7 @@ export type RecordingTagSuggestionConnection = {
 
 export type RecordingTagSuggestionEdge = {
   __typename?: 'RecordingTagSuggestionEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: RecordingTagSuggestion;
 };
 
@@ -4262,33 +4264,33 @@ export const RecordingTranscriptionStatus = {
 export type RecordingTranscriptionStatus = typeof RecordingTranscriptionStatus[keyof typeof RecordingTranscriptionStatus];
 export type RecordingUpdateInput = {
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
   contentScreeningCheckouts: InputMaybe<Array<RecordingScreeningCheckoutInput>>;
-  copyrightYear: InputMaybe<Scalars['Int']>;
+  copyrightYear: InputMaybe<Scalars['Int']['input']>;
   coverImage: InputMaybe<ImageInput>;
-  description: InputMaybe<Scalars['String']>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
-  hidingReason: InputMaybe<Scalars['String']>;
-  isDownloadAllowed: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
+  hidingReason: InputMaybe<Scalars['String']['input']>;
+  isDownloadAllowed: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningCheckouts: InputMaybe<Array<RecordingScreeningCheckoutInput>>;
   /** Requires `ADMINISTRATION` role. */
-  publishDate: InputMaybe<Scalars['DateTime']>;
-  recordingDate: InputMaybe<Scalars['RelativeDateTime']>;
+  publishDate: InputMaybe<Scalars['DateTime']['input']>;
+  recordingDate: InputMaybe<Scalars['RelativeDateTime']['input']>;
   recordingPersons: InputMaybe<Array<RecordingPersonRoleInput>>;
   recordingTags: InputMaybe<Array<RecordingTagInput>>;
-  sequenceId: InputMaybe<Scalars['ID']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipTechnicalScreening: InputMaybe<Scalars['Boolean']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
+  skipTechnicalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
   technicalScreeningCheckouts: InputMaybe<Array<RecordingScreeningCheckoutInput>>;
-  title: InputMaybe<Scalars['String']>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  title: InputMaybe<Scalars['String']['input']>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 /** Whether a viewer has played a recording or sequence. */
@@ -4322,21 +4324,21 @@ export type RecordingsSortableField = typeof RecordingsSortableField[keyof typeo
 export type Sequence = Node & UniformResourceLocatable & {
   __typename?: 'Sequence';
   /** The canonical HTML path to this resource. */
-  canonicalPath: Scalars['String'];
+  canonicalPath: Scalars['String']['output'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['URL'];
+  canonicalUrl: Scalars['URL']['output'];
   collection: Maybe<Collection>;
   contentType: SequenceContentType;
-  description: Scalars['String'];
+  description: Scalars['String']['output'];
   /** The combined duration of the sequence's recordings in seconds. */
-  duration: Scalars['Float'];
-  endDate: Maybe<Scalars['Date']>;
-  hidingReason: Maybe<Scalars['String']>;
+  duration: Scalars['Float']['output'];
+  endDate: Maybe<Scalars['Date']['output']>;
+  hidingReason: Maybe<Scalars['String']['output']>;
   history: Maybe<CatalogHistoryItemConnection>;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   image: Maybe<Image>;
   imageWithFallback: Image;
-  isHidden: Maybe<Scalars['Boolean']>;
+  isHidden: Maybe<Scalars['Boolean']['output']>;
   language: Language;
   /** @deprecated Sequence.logoImage is replaced with Sequence.image */
   logoImage: Maybe<Image>;
@@ -4346,87 +4348,87 @@ export type Sequence = Node & UniformResourceLocatable & {
   persons: PersonConnection;
   recordings: RecordingConnection;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['URL'];
+  shareUrl: Scalars['URL']['output'];
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: Maybe<Scalars['Boolean']>;
+  skipContentScreening: Maybe<Scalars['Boolean']['output']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: Maybe<Scalars['Boolean']>;
+  skipLegalScreening: Maybe<Scalars['Boolean']['output']>;
   sponsor: Maybe<Sponsor>;
-  startDate: Maybe<Scalars['Date']>;
-  summary: Scalars['String'];
-  title: Scalars['String'];
-  viewerHasFavorited: Scalars['Boolean'];
+  startDate: Maybe<Scalars['Date']['output']>;
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  viewerHasFavorited: Scalars['Boolean']['output'];
   /** The percentage of the associated recordings the viewer has finished playing. */
-  viewerPlaybackCompletedPercentage: Scalars['Float'];
+  viewerPlaybackCompletedPercentage: Scalars['Float']['output'];
 };
 
 
 export type SequenceCanonicalPathArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type SequenceCanonicalUrlArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type SequenceHistoryArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   dateRange: InputMaybe<DateRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  isSticky: InputMaybe<Scalars['Boolean']>;
-  isUnread: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
+  isUnread: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: InputMaybe<Array<CatalogHistoryItemViewFilter>>;
 };
 
 
 export type SequencePersonsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<PersonsOrder>>;
   role: InputMaybe<PersonsRoleField>;
-  search: InputMaybe<Scalars['String']>;
-  startsWith: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  startsWith: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type SequenceRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 export type SequenceConnection = {
@@ -4448,24 +4450,24 @@ export const SequenceContentType = {
 
 export type SequenceContentType = typeof SequenceContentType[keyof typeof SequenceContentType];
 export type SequenceCreateInput = {
-  collectionId: InputMaybe<Scalars['ID']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
   contentType: SequenceContentType;
-  description: InputMaybe<Scalars['String']>;
-  hidingReason: InputMaybe<Scalars['String']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  hidingReason: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
-  sponsorId: Scalars['ID'];
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  sponsorId: Scalars['ID']['input'];
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type SequenceEdge = {
   __typename?: 'SequenceEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Sequence;
 };
 
@@ -4491,159 +4493,159 @@ export const SequenceSortableField = {
 
 export type SequenceSortableField = typeof SequenceSortableField[keyof typeof SequenceSortableField];
 export type SequenceUpdateInput = {
-  collectionId: InputMaybe<Scalars['ID']>;
-  description: InputMaybe<Scalars['String']>;
-  hidingReason: InputMaybe<Scalars['String']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  hidingReason: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Sponsor = Node & UniformResourceLocatable & {
   __typename?: 'Sponsor';
-  address: Maybe<Scalars['String']>;
+  address: Maybe<Scalars['String']['output']>;
   /** The canonical HTML path to this resource. */
-  canonicalPath: Scalars['String'];
+  canonicalPath: Scalars['String']['output'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['URL'];
+  canonicalUrl: Scalars['URL']['output'];
   collections: CollectionConnection;
   defaultDistributionAgreement: Maybe<DistributionAgreement>;
-  description: Scalars['String'];
+  description: Scalars['String']['output'];
   distributionAgreements: Maybe<DistributionAgreementConnection>;
-  email: Maybe<Scalars['String']>;
-  hidingReason: Maybe<Scalars['String']>;
+  email: Maybe<Scalars['String']['output']>;
+  hidingReason: Maybe<Scalars['String']['output']>;
   history: Maybe<CatalogHistoryItemConnection>;
-  id: Scalars['ID'];
+  id: Scalars['ID']['output'];
   image: Maybe<Image>;
   imageWithFallback: Image;
   internalContact: Maybe<InternalContact>;
-  isHidden: Scalars['Boolean'];
+  isHidden: Scalars['Boolean']['output'];
   language: Language;
-  location: Maybe<Scalars['String']>;
+  location: Maybe<Scalars['String']['output']>;
   /** @deprecated Sponsor.logoImage is replaced with Sponsor.image */
   logoImage: Maybe<Image>;
   /** @deprecated Sponsor.logoImageWithFallback is replaced with Sponsor.imageWithFallback */
   logoImageWithFallback: Image;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
-  phone: Maybe<Scalars['String']>;
+  phone: Maybe<Scalars['String']['output']>;
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['URL'];
+  shareUrl: Scalars['URL']['output'];
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: Maybe<Scalars['Boolean']>;
+  skipContentScreening: Maybe<Scalars['Boolean']['output']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: Maybe<Scalars['Boolean']>;
-  summary: Scalars['String'];
-  title: Scalars['String'];
-  viewerHasFavorited: Scalars['Boolean'];
-  website: Maybe<Scalars['URL']>;
+  skipLegalScreening: Maybe<Scalars['Boolean']['output']>;
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  viewerHasFavorited: Scalars['Boolean']['output'];
+  website: Maybe<Scalars['URL']['output']>;
 };
 
 
 export type SponsorCanonicalPathArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type SponsorCanonicalUrlArgs = {
-  useFuturePath?: InputMaybe<Scalars['Boolean']>;
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 export type SponsorCollectionsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   contentType: InputMaybe<CollectionContentType>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CollectionsOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type SponsorDistributionAgreementsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  isDefault: InputMaybe<Scalars['Boolean']>;
-  isRetired: InputMaybe<Scalars['Boolean']>;
-  licenseId: InputMaybe<Scalars['ID']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
+  isRetired: InputMaybe<Scalars['Boolean']['input']>;
+  licenseId: InputMaybe<Scalars['ID']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<DistributionAgreementsOrder>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type SponsorHistoryArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   dateRange: InputMaybe<DateRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  isSticky: InputMaybe<Scalars['Boolean']>;
-  isUnread: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
+  isUnread: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: InputMaybe<Array<CatalogHistoryItemViewFilter>>;
 };
 
 
 export type SponsorRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type SponsorSequencesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentType?: InputMaybe<SequenceContentType>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<SequenceOrder>>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  search: InputMaybe<Scalars['String']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 export type SponsorConnection = {
@@ -4655,37 +4657,37 @@ export type SponsorConnection = {
 };
 
 export type SponsorCreateInput = {
-  address: InputMaybe<Scalars['String']>;
-  description: InputMaybe<Scalars['String']>;
+  address: InputMaybe<Scalars['String']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
   distributionAgreements: InputMaybe<Array<SponsorDistributionAgreementInput>>;
-  email: InputMaybe<Scalars['String']>;
-  hidingReason: InputMaybe<Scalars['String']>;
+  email: InputMaybe<Scalars['String']['input']>;
+  hidingReason: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
   internalContact: InputMaybe<InternalContactInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  location: InputMaybe<Scalars['String']>;
-  phone: InputMaybe<Scalars['String']>;
+  location: InputMaybe<Scalars['String']['input']>;
+  phone: InputMaybe<Scalars['String']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
-  website: InputMaybe<Scalars['URL']>;
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
+  website: InputMaybe<Scalars['URL']['input']>;
 };
 
 export type SponsorDistributionAgreementInput = {
-  isDefault: InputMaybe<Scalars['Boolean']>;
-  isRetired: InputMaybe<Scalars['Boolean']>;
-  licenseId: Scalars['ID'];
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
+  isDefault: InputMaybe<Scalars['Boolean']['input']>;
+  isRetired: InputMaybe<Scalars['Boolean']['input']>;
+  licenseId: Scalars['ID']['input'];
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type SponsorEdge = {
   __typename?: 'SponsorEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Sponsor;
 };
 
@@ -4696,23 +4698,23 @@ export type SponsorPayload = {
 };
 
 export type SponsorUpdateInput = {
-  address: InputMaybe<Scalars['String']>;
-  description: InputMaybe<Scalars['String']>;
+  address: InputMaybe<Scalars['String']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
   distributionAgreements: InputMaybe<Array<SponsorDistributionAgreementInput>>;
-  email: InputMaybe<Scalars['String']>;
-  hidingReason: InputMaybe<Scalars['String']>;
+  email: InputMaybe<Scalars['String']['input']>;
+  hidingReason: InputMaybe<Scalars['String']['input']>;
   image: InputMaybe<ImageInput>;
   internalContact: InputMaybe<InternalContactInput>;
-  isHidden: InputMaybe<Scalars['Boolean']>;
-  location: InputMaybe<Scalars['String']>;
-  phone: InputMaybe<Scalars['String']>;
+  isHidden: InputMaybe<Scalars['Boolean']['input']>;
+  location: InputMaybe<Scalars['String']['input']>;
+  phone: InputMaybe<Scalars['String']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipContentScreening: InputMaybe<Scalars['Boolean']>;
+  skipContentScreening: InputMaybe<Scalars['Boolean']['input']>;
   /** Requires `ADMINISTRATION` role. */
-  skipLegalScreening: InputMaybe<Scalars['Boolean']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: InputMaybe<Scalars['String']>;
-  website: InputMaybe<Scalars['URL']>;
+  skipLegalScreening: InputMaybe<Scalars['Boolean']['input']>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
+  website: InputMaybe<Scalars['URL']['input']>;
 };
 
 export type SponsorsOrder = {
@@ -4733,50 +4735,50 @@ export type SponsorsSortableField = typeof SponsorsSortableField[keyof typeof Sp
 export type SuccessPayload = {
   __typename?: 'SuccessPayload';
   errors: Array<InputValidationError>;
-  success: Scalars['Boolean'];
+  success: Scalars['Boolean']['output'];
 };
 
 export type Tag = Node & {
   __typename?: 'Tag';
-  id: Scalars['ID'];
-  name: Scalars['String'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
   recordings: RecordingConnection;
 };
 
 
 export type TagRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 export type TagConnection = {
@@ -4789,7 +4791,7 @@ export type TagConnection = {
 
 export type TagEdge = {
   __typename?: 'TagEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Tag;
 };
 
@@ -4820,11 +4822,11 @@ export type TestimoniesSortableField = typeof TestimoniesSortableField[keyof typ
 /** A user testimony. */
 export type Testimony = Node & {
   __typename?: 'Testimony';
-  author: Scalars['String'];
-  body: Scalars['String'];
-  id: Scalars['ID'];
-  publishDate: Scalars['DateTime'];
-  writtenDate: Scalars['DateTime'];
+  author: Scalars['String']['output'];
+  body: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  publishDate: Scalars['DateTime']['output'];
+  writtenDate: Scalars['DateTime']['output'];
 };
 
 export type TestimonyConnection = {
@@ -4836,16 +4838,16 @@ export type TestimonyConnection = {
 };
 
 export type TestimonyCreateInput = {
-  author: Scalars['String'];
-  body: Scalars['String'];
+  author: Scalars['String']['input'];
+  body: Scalars['String']['input'];
   language: Language;
-  publishDate: Scalars['DateTime'];
-  writtenDate: Scalars['DateTime'];
+  publishDate: Scalars['DateTime']['input'];
+  writtenDate: Scalars['DateTime']['input'];
 };
 
 export type TestimonyEdge = {
   __typename?: 'TestimonyEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Testimony;
 };
 
@@ -4856,10 +4858,10 @@ export type TestimonyPayload = {
 };
 
 export type TestimonyUpdateInput = {
-  author: InputMaybe<Scalars['String']>;
-  body: InputMaybe<Scalars['String']>;
-  publishDate: InputMaybe<Scalars['DateTime']>;
-  writtenDate: InputMaybe<Scalars['DateTime']>;
+  author: InputMaybe<Scalars['String']['input']>;
+  body: InputMaybe<Scalars['String']['input']>;
+  publishDate: InputMaybe<Scalars['DateTime']['input']>;
+  writtenDate: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 /** The supported timezones. */
@@ -5390,32 +5392,32 @@ export const Timezone = {
 export type Timezone = typeof Timezone[keyof typeof Timezone];
 export type Topic = Node & {
   __typename?: 'Topic';
-  description: Scalars['String'];
+  description: Scalars['String']['output'];
   /** The combined duration of the topic's recordings in seconds. */
-  duration: Scalars['Float'];
-  hidingReason: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  isHidden: Maybe<Scalars['Boolean']>;
+  duration: Scalars['Float']['output'];
+  hidingReason: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  isHidden: Maybe<Scalars['Boolean']['output']>;
   items: TopicItemConnection;
   language: Language;
   parentTopic: Maybe<Topic>;
   subTopics: TopicConnection;
-  summary: Scalars['String'];
-  title: Scalars['String'];
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 
 export type TopicItemsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type TopicSubTopicsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<TopicsOrder>>;
 };
 
@@ -5429,7 +5431,7 @@ export type TopicConnection = {
 
 export type TopicEdge = {
   __typename?: 'TopicEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Topic;
 };
 
@@ -5450,7 +5452,7 @@ export type TopicItemConnection = {
 
 export type TopicItemEdge = {
   __typename?: 'TopicItemEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: TopicItem;
 };
 
@@ -5469,55 +5471,55 @@ export const TopicsSortableField = {
 export type TopicsSortableField = typeof TopicsSortableField[keyof typeof TopicsSortableField];
 export type Transcript = Node & {
   __typename?: 'Transcript';
-  id: Scalars['ID'];
-  text: Scalars['String'];
+  id: Scalars['ID']['output'];
+  text: Scalars['String']['output'];
 };
 
 export type TranscriptUpdateInput = {
-  transcript: Scalars['String'];
+  transcript: Scalars['String']['input'];
 };
 
 /** Represents a type that can be retrieved by a URL. */
 export type UniformResourceLocatable = {
-  canonicalPath: Scalars['String'];
-  canonicalUrl: Scalars['URL'];
-  shareUrl: Scalars['URL'];
+  canonicalPath: Scalars['String']['output'];
+  canonicalUrl: Scalars['URL']['output'];
+  shareUrl: Scalars['URL']['output'];
 };
 
 export type User = Node & {
   __typename?: 'User';
   /** The first line of the address. Typically the street address or PO Box number. */
-  address1: Maybe<Scalars['String']>;
+  address1: Maybe<Scalars['String']['output']>;
   /** The second line of the address. Typically the number of the apartment, suite, or unit. */
-  address2: Maybe<Scalars['String']>;
+  address2: Maybe<Scalars['String']['output']>;
   /** Whether recordings should autoplay by default. */
-  autoplay: Scalars['Boolean'];
+  autoplay: Scalars['Boolean']['output'];
   /** The name of the city, district, village, or town. */
-  city: Maybe<Scalars['String']>;
+  city: Maybe<Scalars['String']['output']>;
   /** The name of the country. */
-  country: Maybe<Scalars['String']>;
-  createdAt: Scalars['DateTime'];
+  country: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
   downloadHistory: UserDownloadHistoryConnection;
   /** The user's email address. */
-  email: Scalars['String'];
+  email: Scalars['String']['output'];
   favoritePersons: PersonConnection;
   favoriteRecordings: RecordingConnection;
   favorites: UserFavoriteConnection;
   /** The user's first name. */
-  givenName: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  givenName: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
   /** The user's avatar image. */
   image: Maybe<Image>;
   /** Whether the user has permission to perform all administrative functions. */
-  isSuperuser: Scalars['Boolean'];
+  isSuperuser: Scalars['Boolean']['output'];
   /** Whether the user has verified their email. */
-  isVerified: Scalars['Boolean'];
+  isVerified: Scalars['Boolean']['output'];
   /** The user's preferred interface language. */
   language: UserLanguage;
   /** The last date the user had activity. */
-  lastActivity: Scalars['DateTime'];
+  lastActivity: Scalars['DateTime']['output'];
   /** The full name of the user, based on the values for givenName and surname. */
-  name: Scalars['String'];
+  name: Scalars['String']['output'];
   /** Available only for viewer `User`. */
   notificationSubscriptions: Maybe<NotificationSubscriptionConnection>;
   /** Available only for viewer `User`. */
@@ -5525,91 +5527,91 @@ export type User = Node & {
   playlist: Maybe<UserPlaylist>;
   playlists: UserPlaylistConnection;
   /** The postal or zip code. */
-  postalCode: Maybe<Scalars['String']>;
+  postalCode: Maybe<Scalars['String']['output']>;
   /** The user's preferred audio bitrate in kbps. */
   preferredAudioQuality: RecordingQuality;
   /** The name of the region, such as the province, state, or district. */
-  province: Maybe<Scalars['String']>;
+  province: Maybe<Scalars['String']['output']>;
   /** The user's administrative roles. */
   roles: Array<UserLanguageRole>;
   /** The user's last name. */
-  surname: Maybe<Scalars['String']>;
+  surname: Maybe<Scalars['String']['output']>;
   /** The user's timezone. */
   timezone: Timezone;
 };
 
 
 export type UserDownloadHistoryArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  hasIncompletePlaybackSession: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasIncompletePlaybackSession: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<UserDownloadHistoryOrder>>;
 };
 
 
 export type UserFavoritePersonsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  first: InputMaybe<Scalars['Int']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<PersonsOrder>>;
   role: InputMaybe<PersonsRoleField>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
-  startsWith: InputMaybe<Scalars['String']>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  startsWith: InputMaybe<Scalars['String']['input']>;
   withContentTypes: InputMaybe<Array<RecordingContentType>>;
 };
 
 
 export type UserFavoriteRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   orderBy: InputMaybe<Array<RecordingsOrder>>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 
 export type UserFavoritesArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  groupSequences: InputMaybe<Scalars['Boolean']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  groupSequences: InputMaybe<Scalars['Boolean']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<FavoritesOrder>>;
   recordingContentType: InputMaybe<RecordingContentType>;
   recordingDuration: InputMaybe<IntegerRangeInput>;
@@ -5619,35 +5621,35 @@ export type UserFavoritesArgs = {
 
 
 export type UserNotificationSubscriptionsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type UserNotificationsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   dateRange: InputMaybe<DateRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  isSticky: InputMaybe<Scalars['Boolean']>;
-  isUnread: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  isSticky: InputMaybe<Scalars['Boolean']['input']>;
+  isUnread: InputMaybe<Scalars['Boolean']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: InputMaybe<Array<CatalogHistoryItemViewFilter>>;
 };
 
 
 export type UserPlaylistArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type UserPlaylistsArgs = {
-  after: InputMaybe<Scalars['String']>;
-  first: InputMaybe<Scalars['Int']>;
+  after: InputMaybe<Scalars['String']['input']>;
+  first: InputMaybe<Scalars['Int']['input']>;
   language: Language;
-  offset: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
   orderBy: InputMaybe<Array<UserPlaylistsOrder>>;
 };
 
@@ -5661,45 +5663,45 @@ export type UserConnection = {
 
 export type UserCreateInput = {
   /** The first line of the address. Typically the street address or PO Box number. */
-  address1: InputMaybe<Scalars['String']>;
+  address1: InputMaybe<Scalars['String']['input']>;
   /** The second line of the address. Typically the number of the apartment, suite, or unit. */
-  address2: InputMaybe<Scalars['String']>;
+  address2: InputMaybe<Scalars['String']['input']>;
   /** Whether recordings should autoplay by default. */
-  autoplay: InputMaybe<Scalars['Boolean']>;
+  autoplay: InputMaybe<Scalars['Boolean']['input']>;
   /** The name of the city, district, village, or town. */
-  city: InputMaybe<Scalars['String']>;
+  city: InputMaybe<Scalars['String']['input']>;
   /** The name of the country. */
-  country: InputMaybe<Scalars['String']>;
+  country: InputMaybe<Scalars['String']['input']>;
   /** The user's email address. */
-  email: Scalars['String'];
+  email: Scalars['String']['input'];
   /** The user's first name. */
-  givenName: InputMaybe<Scalars['String']>;
+  givenName: InputMaybe<Scalars['String']['input']>;
   /** The user's avatar image. */
-  image: InputMaybe<Scalars['Upload']>;
+  image: InputMaybe<Scalars['Upload']['input']>;
   /** Whether the user has permission to perform all administrative functions. */
-  isSuperuser: InputMaybe<Scalars['Boolean']>;
+  isSuperuser: InputMaybe<Scalars['Boolean']['input']>;
   /** The user's preferred interface language. */
   language: InputMaybe<Language>;
   notificationSubscriptions: InputMaybe<Array<NotificationSubscriptionInput>>;
   /** The user's password. */
-  password: InputMaybe<Scalars['String']>;
+  password: InputMaybe<Scalars['String']['input']>;
   /** The postal or zip code. */
-  postalCode: InputMaybe<Scalars['String']>;
+  postalCode: InputMaybe<Scalars['String']['input']>;
   /** The user's preferred audio bitrate in kbps. */
   preferredAudioQuality: InputMaybe<RecordingQuality>;
   /** The name of the region, such as the province, state, or district. */
-  province: InputMaybe<Scalars['String']>;
+  province: InputMaybe<Scalars['String']['input']>;
   /** The user's administrative roles. Viewers with `ADMINISTRATION` role(s) may only manage roles for the languages they hold `ADMINISTRATION` role(s) for. */
   roles: InputMaybe<Array<UserLanguageRoleInput>>;
   /** The user's last name. */
-  surname: InputMaybe<Scalars['String']>;
+  surname: InputMaybe<Scalars['String']['input']>;
   /** The user's timezone. */
   timezone: InputMaybe<Timezone>;
 };
 
 export type UserDownloadHistory = {
   __typename?: 'UserDownloadHistory';
-  createdAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime']['output'];
   recording: Recording;
 };
 
@@ -5713,7 +5715,7 @@ export type UserDownloadHistoryConnection = {
 
 export type UserDownloadHistoryEdge = {
   __typename?: 'UserDownloadHistoryEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: UserDownloadHistory;
 };
 
@@ -5730,13 +5732,13 @@ export const UserDownloadHistorySortableField = {
 export type UserDownloadHistorySortableField = typeof UserDownloadHistorySortableField[keyof typeof UserDownloadHistorySortableField];
 export type UserEdge = {
   __typename?: 'UserEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: User;
 };
 
 export type UserFavorite = {
   __typename?: 'UserFavorite';
-  createdAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime']['output'];
   entity: FavoriteEntityUnion;
 };
 
@@ -5750,7 +5752,7 @@ export type UserFavoriteConnection = {
 
 export type UserFavoriteEdge = {
   __typename?: 'UserFavoriteEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: UserFavorite;
 };
 
@@ -5835,16 +5837,16 @@ export type UserLanguageRoleInput = {
 };
 
 export type UserLoginInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type UserLoginSocialInput = {
-  givenName: InputMaybe<Scalars['String']>;
-  socialId: Scalars['String'];
+  givenName: InputMaybe<Scalars['String']['input']>;
+  socialId: Scalars['String']['input'];
   socialName: UserSocialServiceName;
-  socialToken: Scalars['String'];
-  surname: InputMaybe<Scalars['String']>;
+  socialToken: Scalars['String']['input'];
+  surname: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserPayload = {
@@ -5855,64 +5857,64 @@ export type UserPayload = {
 
 export type UserPlaylist = Node & {
   __typename?: 'UserPlaylist';
-  createdAt: Scalars['DateTime'];
-  hasRecording: Scalars['Boolean'];
-  id: Scalars['ID'];
-  isPublic: Scalars['Boolean'];
+  createdAt: Scalars['DateTime']['output'];
+  hasRecording: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  isPublic: Scalars['Boolean']['output'];
   language: Language;
   recordings: RecordingConnection;
-  summary: Scalars['String'];
-  title: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
+  summary: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 
 export type UserPlaylistHasRecordingArgs = {
-  id: Scalars['ID'];
+  id: Scalars['ID']['input'];
 };
 
 
 export type UserPlaylistRecordingsArgs = {
-  after: InputMaybe<Scalars['String']>;
+  after: InputMaybe<Scalars['String']['input']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
-  collectionId: InputMaybe<Scalars['ID']>;
-  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  collectionId: InputMaybe<Scalars['ID']['input']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']['input']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  distributionAgreementId: InputMaybe<Scalars['ID']>;
+  distributionAgreementId: InputMaybe<Scalars['ID']['input']>;
   duration: InputMaybe<IntegerRangeInput>;
-  first: InputMaybe<Scalars['Int']>;
-  hasVideo: InputMaybe<Scalars['Boolean']>;
-  includeUnpublished: InputMaybe<Scalars['Boolean']>;
-  isFeatured: InputMaybe<Scalars['Boolean']>;
+  first: InputMaybe<Scalars['Int']['input']>;
+  hasVideo: InputMaybe<Scalars['Boolean']['input']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']['input']>;
+  isFeatured: InputMaybe<Scalars['Boolean']['input']>;
   legalScreeningStatus: InputMaybe<RecordingLegalScreeningStatus>;
-  offset: InputMaybe<Scalars['Int']>;
-  onlyArchived: InputMaybe<Scalars['Boolean']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  onlyArchived: InputMaybe<Scalars['Boolean']['input']>;
   person: InputMaybe<RecordingPersonInput>;
   persons: InputMaybe<Array<RecordingPersonInput>>;
-  presenterId: InputMaybe<Scalars['ID']>;
+  presenterId: InputMaybe<Scalars['ID']['input']>;
   publishDates: InputMaybe<Array<DateRangeInput>>;
   recordingDates: InputMaybe<Array<DateRangeInput>>;
   screeningContentViewFilter: InputMaybe<RecordingScreeningContentViewFilter>;
-  search: InputMaybe<Scalars['String']>;
-  sequenceId: InputMaybe<Scalars['ID']>;
-  sequenceIds: InputMaybe<Array<Scalars['ID']>>;
-  sponsorId: InputMaybe<Scalars['ID']>;
-  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  search: InputMaybe<Scalars['String']['input']>;
+  sequenceId: InputMaybe<Scalars['ID']['input']>;
+  sequenceIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  sponsorId: InputMaybe<Scalars['ID']['input']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']['input']>>;
   stage: InputMaybe<RecordingStage>;
-  tagName: InputMaybe<Scalars['String']>;
+  tagName: InputMaybe<Scalars['String']['input']>;
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
-  viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerHasFavorited: InputMaybe<Scalars['Boolean']['input']>;
   viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
-  websiteIds: InputMaybe<Array<Scalars['ID']>>;
+  websiteIds: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
 export type UserPlaylistAddInput = {
-  isPublic: Scalars['Boolean'];
+  isPublic: Scalars['Boolean']['input'];
   language: Language;
-  recordingIds: InputMaybe<Array<Scalars['ID']>>;
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
+  recordingIds: InputMaybe<Array<Scalars['ID']['input']>>;
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type UserPlaylistConnection = {
@@ -5925,14 +5927,14 @@ export type UserPlaylistConnection = {
 
 export type UserPlaylistEdge = {
   __typename?: 'UserPlaylistEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: UserPlaylist;
 };
 
 export type UserPlaylistUpdateInput = {
-  isPublic: Scalars['Boolean'];
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
+  isPublic: Scalars['Boolean']['input'];
+  summary: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type UserPlaylistsOrder = {
@@ -5964,10 +5966,10 @@ export const UserRole = {
 
 export type UserRole = typeof UserRole[keyof typeof UserRole];
 export type UserSignupInput = {
-  email: Scalars['String'];
-  givenName: InputMaybe<Scalars['String']>;
-  password: Scalars['String'];
-  surname: InputMaybe<Scalars['String']>;
+  email: Scalars['String']['input'];
+  givenName: InputMaybe<Scalars['String']['input']>;
+  password: Scalars['String']['input'];
+  surname: InputMaybe<Scalars['String']['input']>;
 };
 
 /** The supported social login services. */
@@ -5980,38 +5982,38 @@ export const UserSocialServiceName = {
 export type UserSocialServiceName = typeof UserSocialServiceName[keyof typeof UserSocialServiceName];
 export type UserUpdateInput = {
   /** The first line of the address. Typically the street address or PO Box number. */
-  address1: InputMaybe<Scalars['String']>;
+  address1: InputMaybe<Scalars['String']['input']>;
   /** The second line of the address. Typically the number of the apartment, suite, or unit. */
-  address2: InputMaybe<Scalars['String']>;
+  address2: InputMaybe<Scalars['String']['input']>;
   /** Whether recordings should autoplay by default. */
-  autoplay: InputMaybe<Scalars['Boolean']>;
+  autoplay: InputMaybe<Scalars['Boolean']['input']>;
   /** The name of the city, district, village, or town. */
-  city: InputMaybe<Scalars['String']>;
+  city: InputMaybe<Scalars['String']['input']>;
   /** The name of the country. */
-  country: InputMaybe<Scalars['String']>;
+  country: InputMaybe<Scalars['String']['input']>;
   /** The user's email address. */
-  email: InputMaybe<Scalars['String']>;
+  email: InputMaybe<Scalars['String']['input']>;
   /** The user's first name. */
-  givenName: InputMaybe<Scalars['String']>;
+  givenName: InputMaybe<Scalars['String']['input']>;
   /** The user's avatar image. */
-  image: InputMaybe<Scalars['Upload']>;
+  image: InputMaybe<Scalars['Upload']['input']>;
   /** Whether the user has permission to perform all administrative functions. */
-  isSuperuser: InputMaybe<Scalars['Boolean']>;
+  isSuperuser: InputMaybe<Scalars['Boolean']['input']>;
   /** The user's preferred interface language. */
   language: InputMaybe<Language>;
   notificationSubscriptions: InputMaybe<Array<NotificationSubscriptionInput>>;
   /** The user's password. */
-  password: InputMaybe<Scalars['String']>;
+  password: InputMaybe<Scalars['String']['input']>;
   /** The postal or zip code. */
-  postalCode: InputMaybe<Scalars['String']>;
+  postalCode: InputMaybe<Scalars['String']['input']>;
   /** The user's preferred audio bitrate in kbps. */
   preferredAudioQuality: InputMaybe<RecordingQuality>;
   /** The name of the region, such as the province, state, or district. */
-  province: InputMaybe<Scalars['String']>;
+  province: InputMaybe<Scalars['String']['input']>;
   /** The user's administrative roles. Viewers with `ADMINISTRATION` role(s) may only manage roles for the languages they hold `ADMINISTRATION` role(s) for. */
   roles: InputMaybe<Array<UserLanguageRoleInput>>;
   /** The user's last name. */
-  surname: InputMaybe<Scalars['String']>;
+  surname: InputMaybe<Scalars['String']['input']>;
   /** The user's timezone. */
   timezone: InputMaybe<Timezone>;
 };
@@ -6032,37 +6034,37 @@ export type UsersSortableField = typeof UsersSortableField[keyof typeof UsersSor
 export type VideoFile = Node & {
   __typename?: 'VideoFile';
   /** Bitrate of the video file in kbps. */
-  bitrate: Scalars['Int'];
+  bitrate: Scalars['Int']['output'];
   /** Whether the current viewer may delete the file. */
-  canDelete: Maybe<Scalars['Boolean']>;
-  container: Scalars['String'];
+  canDelete: Maybe<Scalars['Boolean']['output']>;
+  container: Scalars['String']['output'];
   /** The duration of the video file in seconds. */
-  duration: Scalars['Float'];
-  filename: Scalars['String'];
+  duration: Scalars['Float']['output'];
+  filename: Scalars['String']['output'];
   /** In bytes */
-  filesize: Scalars['String'];
-  height: Scalars['Int'];
-  id: Scalars['ID'];
+  filesize: Scalars['String']['output'];
+  height: Scalars['Int']['output'];
+  id: Scalars['ID']['output'];
   /** The URL to record video views for analytics. */
-  logUrl: Maybe<Scalars['URL']>;
-  mimeType: Scalars['String'];
+  logUrl: Maybe<Scalars['URL']['output']>;
+  mimeType: Scalars['String']['output'];
   recording: Recording;
   transcodingStatus: MediaFileTranscodingStatus;
-  updatedAt: Maybe<Scalars['DateTime']>;
-  url: Scalars['URL'];
-  width: Scalars['Int'];
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  url: Scalars['URL']['output'];
+  width: Scalars['Int']['output'];
 };
 
 
 export type VideoFileUrlArgs = {
   requestType?: InputMaybe<MediaFileRequestType>;
-  skipAnalytics: InputMaybe<Scalars['Boolean']>;
+  skipAnalytics: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type Website = Node & {
   __typename?: 'Website';
-  id: Scalars['ID'];
-  title: Scalars['String'];
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type WebsiteConnection = {
@@ -6075,6 +6077,6 @@ export type WebsiteConnection = {
 
 export type WebsiteEdge = {
   __typename?: 'WebsiteEdge';
-  cursor: Scalars['String'];
+  cursor: Scalars['String']['output'];
   node: Website;
 };

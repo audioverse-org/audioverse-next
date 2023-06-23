@@ -8,7 +8,7 @@ export type GetAccountPreferencesDataQueryVariables = Types.Exact<{ [key: string
 export type GetAccountPreferencesDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', autoplay: boolean, language: Types.UserLanguage, preferredAudioQuality: Types.RecordingQuality, timezone: Types.Timezone } } | null };
 
 export type UpdateAccountPreferencesMutationVariables = Types.Exact<{
-  autoplay: Types.Scalars['Boolean'];
+  autoplay: Types.Scalars['Boolean']['input'];
   language: Types.Language;
   preferredAudioQuality: Types.RecordingQuality;
   timezone: Types.Timezone;

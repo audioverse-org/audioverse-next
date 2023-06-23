@@ -11,7 +11,7 @@ import { AndMiniplayerFragmentDoc } from '../../../components/templates/__genera
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorDetailPageDataQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
 }>;
 
 
@@ -19,7 +19,7 @@ export type GetSponsorDetailPageDataQuery = { __typename?: 'Query', sponsor: { _
 
 export type GetSponsorDetailPathsDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.InputMaybe<Types.Scalars['Int']>;
+  first: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 

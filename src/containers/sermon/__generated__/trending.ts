@@ -10,7 +10,7 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetTrendingTeachingsPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  hasVideo: Types.InputMaybe<Types.Scalars['Boolean']>;
+  hasVideo: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
 }>;
 
 

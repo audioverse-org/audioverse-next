@@ -11,8 +11,8 @@ export default function RecordingButtonFavorite({
 	sequenceId,
 	...props
 }: {
-	id: Scalars['ID'];
-	sequenceId?: Scalars['ID'];
+	id: Scalars['ID']['output'];
+	sequenceId?: Scalars['ID']['output'];
 	backgroundColor: BaseColors;
 	light?: boolean;
 	className?: string;

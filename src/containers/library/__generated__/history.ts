@@ -10,8 +10,8 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetLibraryHistoryPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
-  offset: Types.Scalars['Int'];
+  first: Types.Scalars['Int']['input'];
+  offset: Types.Scalars['Int']['input'];
 }>;
 
 

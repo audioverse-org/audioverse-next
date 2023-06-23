@@ -4,7 +4,7 @@ import node from './primatives/node';
 import paginatedNode from './primatives/paginatedNode';
 
 const conferences = (r: string) => ({
-	id: (conferenceId: Scalars['ID']) =>
+	id: (conferenceId: Scalars['ID']['output']) =>
 		node(`${r}/${conferenceId}`, (r) => ({
 			feed: node(`${r}/feed.xml`),
 			sequences: paginatedNode(`${r}/sequences`),

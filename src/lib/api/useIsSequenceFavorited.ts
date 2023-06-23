@@ -17,7 +17,7 @@ interface IUseIsSequenceFavoritedResult extends IUseIsFavoritedResult {
 }
 
 export function useIsSequenceFavorited(
-	id: Scalars['ID']
+	id: Scalars['ID']['output']
 ): IUseIsSequenceFavoritedResult {
 	const queryClient = useQueryClient();
 	const { data } = useSequenceIsFavoritedQuery(

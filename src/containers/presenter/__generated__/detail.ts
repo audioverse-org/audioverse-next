@@ -11,7 +11,7 @@ import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetPresenterDetailPageDataQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
   language: Types.Language;
 }>;
 
@@ -20,7 +20,7 @@ export type GetPresenterDetailPageDataQuery = { __typename?: 'Query', person: { 
 
 export type GetPresenterDetailPathsDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.InputMaybe<Types.Scalars['Int']>;
+  first: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 

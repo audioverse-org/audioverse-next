@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetAboutPageDataQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
 }>;
 
 
@@ -11,7 +11,7 @@ export type GetAboutPageDataQuery = { __typename?: 'Query', page: { __typename?:
 
 export type GetAboutStaticPathsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
+  first: Types.Scalars['Int']['input'];
 }>;
 
 

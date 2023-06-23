@@ -4,7 +4,7 @@ import { CardPostFragmentDoc } from '../../../components/molecules/card/__genera
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBlogDetailDataQueryVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
   language: Types.Language;
 }>;
 
@@ -13,7 +13,7 @@ export type GetBlogDetailDataQuery = { __typename?: 'Query', blogPost: { __typen
 
 export type GetBlogDetailStaticPathsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.InputMaybe<Types.Scalars['Int']>;
+  first: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 

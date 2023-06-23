@@ -5,7 +5,7 @@ import slug from './primatives/slug';
 
 const songs = (r: string) => ({
 	albums: node(`${r}/albums`, (r) => ({
-		id: (albumId: Scalars['ID']) => ({
+		id: (albumId: Scalars['ID']['output']) => ({
 			feed: node(`${r}/${albumId}/feed.xml`),
 		}),
 	})),

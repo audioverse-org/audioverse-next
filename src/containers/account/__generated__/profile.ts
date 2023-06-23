@@ -8,10 +8,10 @@ export type GetProfileDataQueryVariables = Types.Exact<{ [key: string]: never; }
 export type GetProfileDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', id: string | number, email: string, givenName: string | null, surname: string | null, address1: string | null, address2: string | null, city: string | null, province: string | null, postalCode: string | null, country: string | null } } | null };
 
 export type UpdateProfileDataMutationVariables = Types.Exact<{
-  email: Types.InputMaybe<Types.Scalars['String']>;
-  password: Types.InputMaybe<Types.Scalars['String']>;
-  givenName: Types.InputMaybe<Types.Scalars['String']>;
-  surname: Types.InputMaybe<Types.Scalars['String']>;
+  email: Types.InputMaybe<Types.Scalars['String']['input']>;
+  password: Types.InputMaybe<Types.Scalars['String']['input']>;
+  givenName: Types.InputMaybe<Types.Scalars['String']['input']>;
+  surname: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -20,7 +20,7 @@ export type UpdateProfileDataMutation = { __typename?: 'Mutation', updateMyProfi
 export type ProfileFragment = { __typename?: 'User', id: string | number, email: string, givenName: string | null, surname: string | null, address1: string | null, address2: string | null, city: string | null, province: string | null, postalCode: string | null, country: string | null };
 
 export type DeleteAccountMutationVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
 }>;
 
 

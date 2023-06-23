@@ -3,8 +3,8 @@ import * as Types from '../../../__generated__/graphql';
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetBibleBookContentQueryVariables = Types.Exact<{
-  bibleId: Types.Scalars['ID'];
-  bookId: Types.Scalars['ID'];
+  bibleId: Types.Scalars['ID']['input'];
+  bookId: Types.Scalars['ID']['input'];
 }>;
 
 

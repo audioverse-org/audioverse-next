@@ -5,7 +5,7 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetSponsorListLetterPageDataQueryVariables = Types.Exact<{
   language: Types.Language;
-  startsWith: Types.InputMaybe<Types.Scalars['String']>;
+  startsWith: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 

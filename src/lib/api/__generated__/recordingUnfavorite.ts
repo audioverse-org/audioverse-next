@@ -3,7 +3,7 @@ import * as Types from '../../../__generated__/graphql';
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type RecordingUnfavoriteMutationVariables = Types.Exact<{
-  id: Types.Scalars['ID'];
+  id: Types.Scalars['ID']['input'];
 }>;
 
 

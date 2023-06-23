@@ -13,8 +13,8 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverRecentTeachingsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -22,8 +22,8 @@ export type GetDiscoverRecentTeachingsQuery = { __typename?: 'Query', recentTeac
 
 export type GetDiscoverTrendingTeachingsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -31,8 +31,8 @@ export type GetDiscoverTrendingTeachingsQuery = { __typename?: 'Query', trending
 
 export type GetDiscoverFeaturedTeachingsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -40,8 +40,8 @@ export type GetDiscoverFeaturedTeachingsQuery = { __typename?: 'Query', featured
 
 export type GetDiscoverStorySeasonsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -49,8 +49,8 @@ export type GetDiscoverStorySeasonsQuery = { __typename?: 'Query', storySeasons:
 
 export type GetDiscoverConferencesQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -58,8 +58,8 @@ export type GetDiscoverConferencesQuery = { __typename?: 'Query', conferences: {
 
 export type GetDiscoverBlogPostsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int'];
-  after: Types.InputMaybe<Types.Scalars['String']>;
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 

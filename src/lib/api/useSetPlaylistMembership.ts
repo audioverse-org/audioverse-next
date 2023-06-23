@@ -4,14 +4,14 @@ import { setPlaylistMembership } from '~lib/api/setPlaylistMembership';
 import { Scalars } from '~src/__generated__/graphql';
 
 interface MutateVariables {
-	recordingId: Scalars['ID'];
-	playlistId: Scalars['ID'];
+	recordingId: Scalars['ID']['output'];
+	playlistId: Scalars['ID']['output'];
 	add: boolean;
 }
 
 type ReturnType = (
-	recordingId: Scalars['ID'],
-	playlistId: Scalars['ID'],
+	recordingId: Scalars['ID']['output'],
+	playlistId: Scalars['ID']['output'],
 	add: boolean
 ) => void;
 
@@ -32,8 +32,8 @@ export function useSetPlaylistMembership(
 	);
 
 	return (
-		recordingId: Scalars['ID'],
-		playlistId: Scalars['ID'],
+		recordingId: Scalars['ID']['output'],
+		playlistId: Scalars['ID']['output'],
 		add: boolean
 	) => mutate({ recordingId, playlistId, add });
 }
