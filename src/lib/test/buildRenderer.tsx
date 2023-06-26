@@ -2,19 +2,17 @@ import { QueryClient } from '@tanstack/react-query';
 import { RenderResult } from '@testing-library/react';
 import { __mockedRouter } from 'next/router';
 import React, { ComponentType } from 'react';
-import { PartialDeep } from 'type-fest';
 
 import renderWithProviders from '~lib/test/renderWithProviders';
+import { PartialDeepRecursive } from '~src/types/types';
 
 type RendererOptions<T> = {
-	props?: PartialDeep<T, { recurseIntoArrays: true }>;
+	props?: PartialDeepRecursive<T>;
 };
 
 export type RendererResult<T> = Omit<RenderResult, 'rerender'> & {
 	queryClient: QueryClient;
-	rerender: (
-		rerenderProps?: PartialDeep<T, { recurseIntoArrays: true }>
-	) => void;
+	rerender: (rerenderProps?: PartialDeepRecursive<T>) => void;
 };
 
 export type Renderer<T> = (
@@ -24,7 +22,7 @@ export type Renderer<T> = (
 export function buildRenderer<T extends Record<string, any>>(
 	Component: ComponentType<T>,
 	options: {
-		defaultProps?: PartialDeep<T, { recurseIntoArrays: true }>;
+		defaultProps?: PartialDeepRecursive<T>;
 	} = {}
 ): Renderer<T> {
 	const { defaultProps = {} } = options;
@@ -35,11 +33,9 @@ export function buildRenderer<T extends Record<string, any>>(
 		const r = await renderWithProviders(<Component {...p} />);
 		return {
 			...r,
-			rerender: (
-				rerenderProps?: PartialDeep<T, { recurseIntoArrays: true }>
-			) => {
+			rerender: (rerenderProps?: PartialDeepRecursive<T>) => {
 				const rp = { ...p, ...(rerenderProps || {}) };
-				return r.rerender(<Component {...rp} />);
+				r.rerender(<Component {...rp} />);
 			},
 		};
 	};

@@ -1,16 +1,12 @@
 import { __mockedRouter } from 'next/router';
 import { ComponentType } from 'react';
-import { PartialDeep } from 'type-fest';
+
+import { PartialDeepRecursive } from '~src/types/types';
 
 import { buildRenderer, RendererResult } from './buildRenderer';
 
 type PageRendererOptions<T> = {
-	props?: PartialDeep<
-		T,
-		{
-			recurseIntoArrays: true;
-		}
-	>;
+	props?: PartialDeepRecursive<T>;
 };
 
 export type PageRenderer<T> = (
@@ -25,7 +21,5 @@ export function buildPageRenderer<T extends Record<string, unknown>>(
 ): PageRenderer<T> {
 	const { getProps } = options;
 	const r = buildRenderer(Page);
-	return async () => {
-		return r({ props: await getProps(__mockedRouter.query) });
-	};
+	return async () => r({ props: await getProps(__mockedRouter.query) });
 }

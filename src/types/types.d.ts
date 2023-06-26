@@ -1,3 +1,5 @@
+import { PartialDeep } from 'type-fest';
+
 type ExactAlt<T, Shape> = T extends Shape
 	? Exclude<keyof T, keyof Shape> extends never
 		? T
@@ -8,3 +10,10 @@ type ExactAlt<T, Shape> = T extends Shape
 type Must<T> = {
 	[P in keyof T]-?: NonNullable<T[P]>;
 };
+
+type PartialDeepRecursive<T> = PartialDeep<
+	T,
+	{
+		recurseIntoArrays: true;
+	}
+>;
