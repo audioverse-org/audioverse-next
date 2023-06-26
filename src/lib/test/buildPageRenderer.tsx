@@ -1,32 +1,31 @@
-import { QueryClient } from '@tanstack/react-query';
-import { RenderResult } from '@testing-library/react';
 import { __mockedRouter } from 'next/router';
 import { ComponentType } from 'react';
+import { PartialDeep } from 'type-fest';
 
-import { buildRenderer } from './buildRenderer';
+import { buildRenderer, RendererResult } from './buildRenderer';
 
-// TODO: Only accept props if getProps not provided
-// TODO: Only accept params if getProps provided
-type PageRendererOptions = {
-	props?: any; // TODO: restrict to props component actually accepts
+type PageRendererOptions<T> = {
+	props?: PartialDeep<
+		T,
+		{
+			recurseIntoArrays: true;
+		}
+	>;
 };
 
-export type PageRenderer = (
-	options?: PageRendererOptions
-) => Promise<RenderResult & { queryClient: QueryClient }>;
+export type PageRenderer<T> = (
+	options?: PageRendererOptions<T>
+) => Promise<RendererResult<T>>;
 
-export function buildPageRenderer<
-	C extends ComponentType<any>,
-	F extends (params: any) => Promise<any>
->(
-	Page: C,
+export function buildPageRenderer<T extends Record<string, unknown>>(
+	Page: ComponentType<T>,
 	options: {
-		getProps: F;
+		getProps: (params: any) => Promise<any>;
 	}
-): PageRenderer {
+): PageRenderer<T> {
 	const { getProps } = options;
 	const r = buildRenderer(Page);
-	return async (): Promise<RenderResult & { queryClient: QueryClient }> => {
+	return async () => {
 		return r({ props: await getProps(__mockedRouter.query) });
 	};
 }

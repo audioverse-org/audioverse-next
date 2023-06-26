@@ -35,7 +35,7 @@ export default async function renderWithProviders(
 		queryClient,
 		rerender: (rerenderUi: React.ReactElement) => {
 			const WithProviders = withProviders(rerenderUi, queryClient);
-			return result.rerender(<WithProviders />);
+			result.rerender(<WithProviders />);
 		},
 	};
 }

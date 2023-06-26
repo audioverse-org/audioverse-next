@@ -10,11 +10,18 @@ type RendererOptions<T> = {
 	props?: PartialDeep<T, { recurseIntoArrays: true }>;
 };
 
+export type RendererResult<T> = Omit<RenderResult, 'rerender'> & {
+	queryClient: QueryClient;
+	rerender: (
+		rerenderProps?: PartialDeep<T, { recurseIntoArrays: true }>
+	) => void;
+};
+
 export type Renderer<T> = (
 	options?: RendererOptions<T>
-) => Promise<RenderResult & { queryClient: QueryClient }>;
+) => Promise<RendererResult<T>>;
 
-export function buildRenderer<T>(
+export function buildRenderer<T extends Record<string, any>>(
 	Component: ComponentType<T>,
 	options: {
 		defaultProps?: PartialDeep<T, { recurseIntoArrays: true }>;
@@ -22,9 +29,18 @@ export function buildRenderer<T>(
 ): Renderer<T> {
 	const { defaultProps = {} } = options;
 	return async ({ props }: RendererOptions<T> = {}): Promise<
-		RenderResult & { queryClient: QueryClient }
+		RendererResult<T>
 	> => {
 		const p = (props || defaultProps) as any;
-		return renderWithProviders(<Component {...p} />);
+		const r = await renderWithProviders(<Component {...p} />);
+		return {
+			...r,
+			rerender: (
+				rerenderProps?: PartialDeep<T, { recurseIntoArrays: true }>
+			) => {
+				const rp = { ...p, ...(rerenderProps || {}) };
+				return r.rerender(<Component {...rp} />);
+			},
+		};
 	};
 }
