@@ -26,7 +26,8 @@ export const useSequenceUnfavoriteMutation = <
       (variables?: SequenceUnfavoriteMutationVariables) => graphqlFetcher<SequenceUnfavoriteMutation, SequenceUnfavoriteMutationVariables>(SequenceUnfavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function sequenceUnfavorite<T>(
 	variables: ExactAlt<T, SequenceUnfavoriteMutationVariables>

@@ -100,7 +100,8 @@ export const useInfiniteGetBlogPathsDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getBlogPageData<T>(
 	variables: ExactAlt<T, GetBlogPageDataQueryVariables>

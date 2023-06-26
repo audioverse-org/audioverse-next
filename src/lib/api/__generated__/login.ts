@@ -32,7 +32,8 @@ export const useLoginMutation = <
       (variables?: LoginMutationVariables) => graphqlFetcher<LoginMutation, LoginMutationVariables>(LoginDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function login<T>(
 	variables: ExactAlt<T, LoginMutationVariables>

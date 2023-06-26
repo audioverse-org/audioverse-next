@@ -73,7 +73,8 @@ export const useInfiniteGetCollectionTeachingsPageDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getCollectionTeachingsPageData<T>(
 	variables: ExactAlt<T, GetCollectionTeachingsPageDataQueryVariables>

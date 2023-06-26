@@ -26,7 +26,8 @@ export const useSponsorFavoriteMutation = <
       (variables?: SponsorFavoriteMutationVariables) => graphqlFetcher<SponsorFavoriteMutation, SponsorFavoriteMutationVariables>(SponsorFavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function sponsorFavorite<T>(
 	variables: ExactAlt<T, SponsorFavoriteMutationVariables>

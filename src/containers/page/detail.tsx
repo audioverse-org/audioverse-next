@@ -3,6 +3,7 @@ import React from 'react';
 import Heading1 from '~components/atoms/heading1';
 import withFailStates from '~components/HOCs/withFailStates';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
+import { Must } from '~src/types/types';
 
 import { GetCustomDetailPageDataQuery } from './__generated__/detail';
 

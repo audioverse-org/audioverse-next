@@ -25,6 +25,7 @@ import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import { Must } from '~src/types/types';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 import { GetPresenterDetailPageDataQuery } from './__generated__/detail';

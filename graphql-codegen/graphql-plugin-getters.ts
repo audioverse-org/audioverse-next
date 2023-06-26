@@ -56,7 +56,7 @@ const plugin: CodegenPlugin = {
 
 		if (!result) return '';
 
-		return `import { fetchApi } from '~lib/api/fetchApi' \n${result}`;
+		return `import { fetchApi } from '~lib/api/fetchApi';\nimport { ExactAlt } from '~src/types/types';\n${result}`;
 	},
 };
 

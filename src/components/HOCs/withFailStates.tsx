@@ -3,6 +3,7 @@ import React from 'react';
 
 import LoadingCards from '~components/molecules/loadingCards';
 import NotFoundBase from '~components/organisms/notFound';
+import { Must } from '~src/types/types';
 
 type WithFailStateOptions<P> = {
 	useShould404?: (props: P) => boolean;

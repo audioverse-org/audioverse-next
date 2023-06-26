@@ -70,7 +70,8 @@ export const useRegisterSocialMutation = <
       (variables?: RegisterSocialMutationVariables) => graphqlFetcher<RegisterSocialMutation, RegisterSocialMutationVariables>(RegisterSocialDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function register<T>(
 	variables: ExactAlt<T, RegisterMutationVariables>

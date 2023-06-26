@@ -26,7 +26,8 @@ export const useSponsorUnfavoriteMutation = <
       (variables?: SponsorUnfavoriteMutationVariables) => graphqlFetcher<SponsorUnfavoriteMutation, SponsorUnfavoriteMutationVariables>(SponsorUnfavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function sponsorUnfavorite<T>(
 	variables: ExactAlt<T, SponsorUnfavoriteMutationVariables>

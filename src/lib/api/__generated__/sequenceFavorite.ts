@@ -26,7 +26,8 @@ export const useSequenceFavoriteMutation = <
       (variables?: SequenceFavoriteMutationVariables) => graphqlFetcher<SequenceFavoriteMutation, SequenceFavoriteMutationVariables>(SequenceFavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function sequenceFavorite<T>(
 	variables: ExactAlt<T, SequenceFavoriteMutationVariables>

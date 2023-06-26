@@ -26,7 +26,8 @@ export const useCollectionUnfavoriteMutation = <
       (variables?: CollectionUnfavoriteMutationVariables) => graphqlFetcher<CollectionUnfavoriteMutation, CollectionUnfavoriteMutationVariables>(CollectionUnfavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function collectionUnfavorite<T>(
 	variables: ExactAlt<T, CollectionUnfavoriteMutationVariables>

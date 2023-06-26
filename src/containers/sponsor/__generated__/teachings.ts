@@ -165,7 +165,8 @@ export const useInfiniteGetSponsorTeachingsPathsDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getSponsorTeachingsPageData<T>(
 	variables: ExactAlt<T, GetSponsorTeachingsPageDataQueryVariables>

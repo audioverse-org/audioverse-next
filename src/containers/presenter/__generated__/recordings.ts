@@ -125,7 +125,8 @@ export const useInfiniteGetPresenterRecordingsFeedDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getPresenterRecordingsPageData<T>(
 	variables: ExactAlt<T, GetPresenterRecordingsPageDataQueryVariables>

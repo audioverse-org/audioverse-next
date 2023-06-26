@@ -120,7 +120,8 @@ export const useDeleteAccountMutation = <
       (variables?: DeleteAccountMutationVariables) => graphqlFetcher<DeleteAccountMutation, DeleteAccountMutationVariables>(DeleteAccountDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getProfileData<T>(
 	variables: ExactAlt<T, GetProfileDataQueryVariables>

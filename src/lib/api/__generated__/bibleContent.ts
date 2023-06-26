@@ -50,7 +50,8 @@ export const useInfiniteGetBibleBookContentQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getBibleBookContent<T>(
 	variables: ExactAlt<T, GetBibleBookContentQueryVariables>

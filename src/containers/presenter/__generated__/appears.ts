@@ -65,7 +65,8 @@ export const useInfiniteGetPresenterAppearsPageDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getPresenterAppearsPageData<T>(
 	variables: ExactAlt<T, GetPresenterAppearsPageDataQueryVariables>

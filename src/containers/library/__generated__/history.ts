@@ -76,7 +76,8 @@ export const useInfiniteGetLibraryHistoryPageDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getLibraryHistoryPageData<T>(
 	variables: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>

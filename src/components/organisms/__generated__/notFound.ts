@@ -55,7 +55,8 @@ export const useInfiniteGetNotFoundPageDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getNotFoundPageData<T>(
 	variables: ExactAlt<T, GetNotFoundPageDataQueryVariables>

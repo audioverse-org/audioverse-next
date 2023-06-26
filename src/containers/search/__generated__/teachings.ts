@@ -63,7 +63,8 @@ export const useInfiniteGetSearchResultsRecordingsQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getSearchResultsRecordings<T>(
 	variables: ExactAlt<T, GetSearchResultsRecordingsQueryVariables>
