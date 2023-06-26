@@ -78,14 +78,11 @@ describe('Slider', () => {
 	});
 
 	it('calls onIndexChange', async () => {
-		const items = [
-			<div key="1">1</div>,
-			<div key="2">2</div>,
-		] as any as HTMLElement[];
+		const items = [<div key="1">1</div>, <div key="2">2</div>];
 
 		__swiper.isEnd = false;
 		__swiper.realIndex = 1;
-		__swiper.slides = items;
+		__swiper.slides = items as any;
 
 		const onIndexChange = jest.fn();
 

@@ -1,19 +1,19 @@
 import { GetServerSidePropsResult } from 'next';
 import { ComponentType } from 'react';
 
-import { buildRenderer, Renderer } from '~lib/test/buildRenderer';
+import { Renderer } from '~lib/test/buildRenderer';
 
-export function buildServerRenderer<
-	C extends ComponentType<any>,
-	F extends (context: any) => Promise<GetServerSidePropsResult<any>>
->(Component: C, getServerSideProps: F): Renderer {
+import { buildPageRenderer } from './buildPageRenderer';
+
+export function buildServerRenderer<T>(
+	Component: ComponentType<T>,
+	getServerSideProps: (context: any) => Promise<GetServerSidePropsResult<any>>
+): Renderer<T> {
 	const getProps = async (p: any) => {
-		const result = await getServerSideProps({ params: p, query: p } as any);
-		if (!('props' in result)) {
-			throw new Error('Failed to get server props');
-		}
-		return result.props;
+		const r = await getServerSideProps({ params: p, query: p } as any);
+		if (!('props' in r)) throw new Error('Failed to get server props');
+		return r.props;
 	};
 
-	return buildRenderer(Component, { getProps });
+	return buildPageRenderer(Component, { getProps });
 }

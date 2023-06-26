@@ -18,35 +18,31 @@ jest.mock('react-google-login');
 
 const renderPage = buildRenderer(Register);
 
-const router = { push: () => jest.fn().mockResolvedValue(true) } as any;
-
 describe('register page', () => {
 	beforeEach(() => {
 		Cookie.get = jest.fn().mockReturnValue({});
 	});
 
 	it('renders email field', async () => {
-		const { getByPlaceholderText } = await renderPage({ router });
+		const { getByPlaceholderText } = await renderPage();
 
 		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('renders password field', async () => {
-		const { getByPlaceholderText } = await renderPage({ router });
+		const { getByPlaceholderText } = await renderPage();
 
 		expect(getByPlaceholderText('∗∗∗∗∗∗∗')).toBeInTheDocument();
 	});
 
 	it('renders sign up button', async () => {
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		expect(getByText('Sign up')).toBeInTheDocument();
 	});
 
 	it('resets errors on click', async () => {
-		const { getByText, getByPlaceholderText, queryByText } = await renderPage({
-			router,
-		});
+		const { getByText, getByPlaceholderText, queryByText } = await renderPage();
 
 		await userEvent.click(getByText('Sign up'));
 
@@ -58,7 +54,7 @@ describe('register page', () => {
 	});
 
 	it('renders missing email error', async () => {
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		await userEvent.click(getByText('Sign up'));
 
@@ -66,7 +62,7 @@ describe('register page', () => {
 	});
 
 	it('registers user', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage({ router });
+		const { getByText, getByPlaceholderText } = await renderPage();
 
 		await userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
 		await userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
@@ -88,7 +84,7 @@ describe('register page', () => {
 	});
 
 	it('displays loading state', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage({ router });
+		const { getByText, getByPlaceholderText } = await renderPage();
 
 		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
 		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
@@ -113,7 +109,7 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText, getByPlaceholderText } = await renderPage({ router });
+		const { getByText, getByPlaceholderText } = await renderPage();
 
 		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
 		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
@@ -123,7 +119,7 @@ describe('register page', () => {
 	});
 
 	it('displays success message', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage({ router });
+		const { getByText, getByPlaceholderText } = await renderPage();
 
 		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
 		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
@@ -136,7 +132,7 @@ describe('register page', () => {
 	});
 
 	it('renders continue with Facebook', async () => {
-		await renderPage({ router });
+		await renderPage();
 
 		expect(
 			await screen.findByText('Sign up with Facebook')
@@ -144,7 +140,7 @@ describe('register page', () => {
 	});
 
 	it('renders continue with Google', async () => {
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		expect(getByText('Sign up with Google')).toBeInTheDocument();
 	});
@@ -162,7 +158,7 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		await userEvent.click(getByText('Sign up with Google'));
 
@@ -184,7 +180,7 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
@@ -194,7 +190,7 @@ describe('register page', () => {
 	});
 
 	it('renders social login success', async () => {
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
@@ -204,7 +200,7 @@ describe('register page', () => {
 	});
 
 	it('hits api with facebook registration', async () => {
-		await renderPage({ router });
+		await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
@@ -232,7 +228,7 @@ describe('register page', () => {
 				},
 			});
 
-		await renderPage({ router });
+		await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
@@ -248,7 +244,7 @@ describe('register page', () => {
 			status: 300,
 		});
 
-		await renderPage({ router });
+		await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
@@ -266,7 +262,7 @@ describe('register page', () => {
 			statusText: 'FAILED',
 		});
 
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
@@ -280,13 +276,13 @@ describe('register page', () => {
 	it('does not display form if user logged in', async () => {
 		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
 
-		const { queryByPlaceholderText } = await renderPage({ router });
+		const { queryByPlaceholderText } = await renderPage();
 
 		expect(queryByPlaceholderText('email')).not.toBeInTheDocument();
 	});
 
 	it('sends Google login data to API', async () => {
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		await userEvent.click(getByText('Sign up with Google'));
 
