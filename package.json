@@ -60,7 +60,7 @@
         "react-intl": "^6.4.4",
         "sass": "^1.42.1",
         "striptags": "^3.2.0",
-        "swiper": "^9.3.2",
+        "swiper": "^9.4.1",
         "video.js": "^7.21.1"
     },
     "devDependencies": {
