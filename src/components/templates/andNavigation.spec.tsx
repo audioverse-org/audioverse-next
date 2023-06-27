@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { CardPersonFragment } from '~components/molecules/card/__generated__/person';
 import { CardRecordingFragment } from '~components/molecules/card/__generated__/recording';
 import {
+	GetSearchAudiobooksDocument,
 	GetSearchPersonsDocument,
 	GetSearchRecordingsDocument,
 } from '~components/organisms/__generated__/searchResults';
@@ -153,6 +154,56 @@ describe('AndNavigation', () => {
 				expect.objectContaining({
 					variables: expect.objectContaining({
 						term: 'abc',
+					}),
+				})
+			);
+		});
+
+		expect(fetchApi).not.toBeCalledWith(
+			GetSearchRecordingsDocument,
+			expect.objectContaining({
+				variables: expect.objectContaining({
+					term: 'ab',
+				}),
+			})
+		);
+	});
+
+	it('disables queries for inactive tabs', async () => {
+		const user = userEvent.setup();
+
+		await renderTemplate();
+
+		const searchInputs = screen.getAllByPlaceholderText('Search');
+		const search = searchInputs[0];
+
+		await user.type(search, 'a');
+
+		await waitFor(() => {
+			expect(fetchApi).toBeCalledWith(
+				GetSearchRecordingsDocument,
+				expect.objectContaining({
+					variables: expect.objectContaining({
+						term: 'a',
+					}),
+				})
+			);
+		});
+
+		const tabs = await screen.findAllByRole('button', {
+			name: 'Audiobooks',
+		});
+
+		user.click(tabs[0]);
+
+		await user.type(search, 'b');
+
+		await waitFor(() => {
+			expect(fetchApi).toBeCalledWith(
+				GetSearchAudiobooksDocument,
+				expect.objectContaining({
+					variables: expect.objectContaining({
+						term: 'ab',
 					}),
 				})
 			);

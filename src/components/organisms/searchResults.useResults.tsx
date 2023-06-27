@@ -73,7 +73,8 @@ function useFilterQuery(
 		term: string;
 		language: string;
 		first: number;
-	}
+	},
+	activeFilter: EntityFilterId
 ) {
 	const doc = filters[filter].document;
 	if (!doc) throw new Error('No document for filter');
@@ -84,9 +85,11 @@ function useFilterQuery(
 				after: pageParam,
 			},
 		});
+	const isActive = filter === activeFilter || activeFilter === 'all';
+	const enabled = !!vars.term && isActive;
 	return useInfiniteQuery(['search', filter, vars], fn, {
 		getNextPageParam,
-		enabled: !!vars.term,
+		enabled,
 	});
 }
 
@@ -104,14 +107,14 @@ function useQueryResults(filter: EntityFilterId, term: string) {
 	);
 
 	const results: Record<EntityFilterId, QueryResult> = {
-		presenters: useFilterQuery('presenters', vars),
-		teachings: useFilterQuery('teachings', vars),
-		series: useFilterQuery('series', vars),
-		books: useFilterQuery('books', vars),
-		sponsors: useFilterQuery('sponsors', vars),
-		conferences: useFilterQuery('conferences', vars),
-		music: useFilterQuery('music', vars),
-		stories: useFilterQuery('stories', vars),
+		presenters: useFilterQuery('presenters', vars, filter),
+		teachings: useFilterQuery('teachings', vars, filter),
+		series: useFilterQuery('series', vars, filter),
+		books: useFilterQuery('books', vars, filter),
+		sponsors: useFilterQuery('sponsors', vars, filter),
+		conferences: useFilterQuery('conferences', vars, filter),
+		music: useFilterQuery('music', vars, filter),
+		stories: useFilterQuery('stories', vars, filter),
 	};
 
 	return results;
@@ -139,7 +142,10 @@ export default function useResults(
 	}));
 
 	return {
-		isLoading: Object.values(results).some((r) => r.isLoading),
+		isLoading:
+			filter === 'all'
+				? Object.values(results).some((r) => r.isLoading)
+				: result.isLoading,
 		visible: augmented,
 		loadMore: () => result.hasNextPage && result.fetchNextPage(),
 	};
