@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { CardPersonFragment } from '~components/molecules/card/__generated__/person';
@@ -7,6 +7,7 @@ import {
 	GetSearchPersonsDocument,
 	GetSearchRecordingsDocument,
 } from '~components/organisms/__generated__/searchResults';
+import { fetchApi } from '~lib/api/fetchApi';
 
 import { buildLoader } from '../../lib/test/buildLoader';
 import { buildRenderer } from '../../lib/test/buildRenderer';
@@ -133,6 +134,37 @@ describe('AndNavigation', () => {
 
 		expect(teachingsHeading.compareDocumentPosition(presentersHeading)).toBe(
 			Node.DOCUMENT_POSITION_FOLLOWING
+		);
+	});
+
+	it('debounces search queries', async () => {
+		const user = userEvent.setup();
+
+		await renderTemplate();
+
+		const searchInputs = screen.getAllByPlaceholderText('Search');
+		const search = searchInputs[0];
+
+		await user.type(search, 'abc');
+
+		await waitFor(() => {
+			expect(fetchApi).toBeCalledWith(
+				GetSearchRecordingsDocument,
+				expect.objectContaining({
+					variables: expect.objectContaining({
+						term: 'abc',
+					}),
+				})
+			);
+		});
+
+		expect(fetchApi).not.toBeCalledWith(
+			GetSearchRecordingsDocument,
+			expect.objectContaining({
+				variables: expect.objectContaining({
+					term: 'ab',
+				}),
+			})
 		);
 	});
 });
