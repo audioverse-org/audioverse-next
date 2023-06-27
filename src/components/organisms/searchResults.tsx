@@ -122,7 +122,7 @@ function hasExactMatch(term: string, sections: AugmentedFilter[]): boolean {
 
 export default function Search({
 	term,
-	entityType,
+	entityType = 'all',
 	onEntityTypeChange,
 }: {
 	term?: string;
