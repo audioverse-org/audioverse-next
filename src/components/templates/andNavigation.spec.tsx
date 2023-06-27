@@ -93,9 +93,7 @@ describe('AndNavigation', () => {
 			name: 'Presenters',
 		});
 
-		expect(teachingsHeading.compareDocumentPosition(presentersHeading)).toBe(
-			Node.DOCUMENT_POSITION_FOLLOWING
-		);
+		expect(teachingsHeading).toAppearBefore(presentersHeading);
 	});
 
 	it('ignores case when hoisting teachings', async () => {
@@ -113,9 +111,7 @@ describe('AndNavigation', () => {
 			name: 'Presenters',
 		});
 
-		expect(teachingsHeading.compareDocumentPosition(presentersHeading)).toBe(
-			Node.DOCUMENT_POSITION_FOLLOWING
-		);
+		expect(teachingsHeading).toAppearBefore(presentersHeading);
 	});
 
 	it('ignores punctuation when hoisting teachings', async () => {
@@ -133,9 +129,7 @@ describe('AndNavigation', () => {
 			name: 'Presenters',
 		});
 
-		expect(teachingsHeading.compareDocumentPosition(presentersHeading)).toBe(
-			Node.DOCUMENT_POSITION_FOLLOWING
-		);
+		expect(teachingsHeading).toAppearBefore(presentersHeading);
 	});
 
 	it('debounces search queries', async () => {

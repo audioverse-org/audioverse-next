@@ -72,27 +72,28 @@ function Section({
 	return (
 		<div className={styles.section}>
 			<LineHeading variant="overline">{section.heading}</LineHeading>
-			<CardGroup>
-				{nodes.map((e: InferrableEntity) => (
-					<CardInferred key={e.id} entity={e} />
-				))}
-				{nodes.length === 0 && (
-					<EmptyState
-						title={
-							<FormattedMessage
-								id="search__emptyStateTitle"
-								defaultMessage="No results found"
-							/>
-						}
-						message={
-							<FormattedMessage
-								id="search__emptyStateMessage"
-								defaultMessage="Try searching for something else"
-							/>
-						}
-					/>
-				)}
-			</CardGroup>
+			{nodes.length ? (
+				<CardGroup>
+					{nodes.map((e: InferrableEntity) => (
+						<CardInferred key={e.id} entity={e} />
+					))}
+				</CardGroup>
+			) : (
+				<EmptyState
+					title={
+						<FormattedMessage
+							id="search__emptyStateTitle"
+							defaultMessage="No results found"
+						/>
+					}
+					message={
+						<FormattedMessage
+							id="search__emptyStateMessage"
+							defaultMessage="Try searching for something else"
+						/>
+					}
+				/>
+			)}
 			{section.hasNextPage && entityType === 'all' && (
 				<Button
 					type="secondary"
