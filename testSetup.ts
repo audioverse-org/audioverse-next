@@ -31,19 +31,18 @@ declare global {
 
 expect.extend({
 	toAppearBefore(received: HTMLElement, argument: HTMLElement) {
-		const pass =
+		const pass = !!(
 			received.compareDocumentPosition(argument) &
-			Node.DOCUMENT_POSITION_FOLLOWING;
+			Node.DOCUMENT_POSITION_FOLLOWING
+		);
 
-		return pass
-			? {
-					message: () => `expected ${received} not to be before ${argument}`,
-					pass: true,
-			  }
-			: {
-					message: () => `expected ${received} to be before ${argument}`,
-					pass: false,
-			  };
+		return {
+			message: () =>
+				pass
+					? `expected ${received} not to be before ${argument}`
+					: `expected ${received} to be before ${argument}`,
+			pass,
+		};
 	},
 });
 
