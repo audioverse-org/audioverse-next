@@ -4603,6 +4603,18 @@
       "value": "See All Matching Conferences"
     }
   ],
+  "search__emptyStateMessage": [
+    {
+      "type": 0,
+      "value": "Try searching for something else"
+    }
+  ],
+  "search__emptyStateTitle": [
+    {
+      "type": 0,
+      "value": "No results found"
+    }
+  ],
   "search__musicHeading": [
     {
       "type": 0,
