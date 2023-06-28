@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 
 import { BaseColors } from '~lib/constants';
 
+import baseStyles from './headingBase.module.scss';
 import styles from './lineHeading.module.scss';
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 	color?: BaseColors.RED | BaseColors.SALMON;
 	className?: string;
 	small?: boolean;
+	unpadded?: boolean;
 	variant?: 'sideline' | 'overline';
 };
 
@@ -18,6 +20,7 @@ export default function LineHeading({
 	color,
 	className,
 	small,
+	unpadded,
 	variant = 'sideline',
 }: Props): JSX.Element {
 	return (
@@ -27,6 +30,7 @@ export default function LineHeading({
 				className,
 				color === BaseColors.SALMON && styles.salmon,
 				small && styles.small,
+				unpadded && baseStyles.unpadded,
 				styles[variant]
 			)}
 		>

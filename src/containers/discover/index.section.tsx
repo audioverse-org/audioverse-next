@@ -55,7 +55,7 @@ export default function Section<T, N>({
 
 	return (
 		<div className={styles.section}>
-			<LineHeading variant="overline">
+			<LineHeading variant="overline" unpadded>
 				<span>{heading}</span>
 				{seeAllUrl && (
 					<a className={styles.seeAll} href={seeAllUrl}>
