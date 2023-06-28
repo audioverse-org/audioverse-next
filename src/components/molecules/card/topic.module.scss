@@ -1,6 +1,13 @@
+.theme {
+	height: 100%;
+}
+
 .content {
 	padding: 16px;
 	color: var(--cardColor);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 .title {
@@ -10,6 +17,7 @@
 .summary {
 	font-size: 16px;
 	margin-top: 8px;
+	flex-grow: 1;
 }
 
 .count {

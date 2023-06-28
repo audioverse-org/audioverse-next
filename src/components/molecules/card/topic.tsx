@@ -20,7 +20,7 @@ export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
 	const duration = useFormattedDuration(topic.duration);
 
 	return (
-		<CardWithTheme theme="topic">
+		<CardWithTheme theme="topic" className={styles.theme}>
 			<div className={styles.content}>
 				<TypeLockup
 					Icon={HatIcon}
