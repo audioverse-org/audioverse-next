@@ -155,7 +155,8 @@ export const useInfiniteGetSeriesDetailPathsDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getSeriesDetailPageData<T>(
 	variables: ExactAlt<T, GetSeriesDetailPageDataQueryVariables>

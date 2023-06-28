@@ -2,6 +2,8 @@ import {
 	InfiniteQueryObserverResult,
 	useInfiniteQuery,
 } from '@tanstack/react-query';
+import { useMemo } from 'react';
+import { useDebounce } from 'use-debounce';
 
 import { InferrableEntity } from '~components/molecules/card/inferred';
 import { fetchApi } from '~lib/api/fetchApi';
@@ -65,6 +67,59 @@ function getNextPageParam(lastPage: OuterData) {
 	return p?.hasNextPage ? p?.endCursor : undefined;
 }
 
+function useFilterQuery(
+	filter: EntityFilterId,
+	vars: {
+		term: string;
+		language: string;
+		first: number;
+	},
+	activeFilter: EntityFilterId
+) {
+	const doc = filters[filter].document;
+	if (!doc) throw new Error('No document for filter');
+	const fn = ({ pageParam = null }) =>
+		fetchApi<OuterData>(doc, {
+			variables: {
+				...vars,
+				after: pageParam,
+			},
+		});
+	const isActive = filter === activeFilter || activeFilter === 'all';
+	const enabled = !!vars.term && isActive;
+	return useInfiniteQuery(['search', filter, vars], fn, {
+		getNextPageParam,
+		enabled,
+	});
+}
+
+function useQueryResults(filter: EntityFilterId, term: string) {
+	const language = useLanguageId();
+	const [_term] = useDebounce(term, 200);
+
+	const vars = useMemo(
+		() => ({
+			term: _term,
+			language,
+			first: PAGE_SIZE,
+		}),
+		[_term, language]
+	);
+
+	const results: Record<EntityFilterId, QueryResult> = {
+		presenters: useFilterQuery('presenters', vars, filter),
+		teachings: useFilterQuery('teachings', vars, filter),
+		series: useFilterQuery('series', vars, filter),
+		books: useFilterQuery('books', vars, filter),
+		sponsors: useFilterQuery('sponsors', vars, filter),
+		conferences: useFilterQuery('conferences', vars, filter),
+		music: useFilterQuery('music', vars, filter),
+		stories: useFilterQuery('stories', vars, filter),
+	};
+
+	return results;
+}
+
 export default function useResults(
 	filter: EntityFilterId,
 	term: string
@@ -73,38 +128,7 @@ export default function useResults(
 	visible: AugmentedFilter[];
 	loadMore: () => void;
 } {
-	const vars = {
-		term,
-		language: useLanguageId(),
-		first: PAGE_SIZE,
-	};
-
-	function useFilterQuery(filter: EntityFilterId) {
-		const doc = filters[filter].document;
-		if (!doc) throw new Error('No document for filter');
-		const fn = ({ pageParam = null }) =>
-			fetchApi<OuterData>(doc, {
-				variables: {
-					...vars,
-					after: pageParam,
-				},
-			});
-		return useInfiniteQuery(['search', filter, vars], fn, {
-			getNextPageParam,
-			enabled: !!vars.term,
-		});
-	}
-
-	const results: Record<EntityFilterId, QueryResult> = {
-		presenters: useFilterQuery('presenters'),
-		teachings: useFilterQuery('teachings'),
-		series: useFilterQuery('series'),
-		books: useFilterQuery('books'),
-		sponsors: useFilterQuery('sponsors'),
-		conferences: useFilterQuery('conferences'),
-		music: useFilterQuery('music'),
-		stories: useFilterQuery('stories'),
-	};
+	const results = useQueryResults(filter, term);
 	const result = results[filter];
 	const entries = Object.entries(results);
 	const nonEmpty = entries.filter(([, r]) => reduceNodes(r).length);
@@ -118,7 +142,10 @@ export default function useResults(
 	}));
 
 	return {
-		isLoading: Object.values(results).some((r) => r.isLoading),
+		isLoading:
+			filter === 'all'
+				? Object.values(results).some((r) => r.isLoading)
+				: result.isLoading,
 		visible: augmented,
 		loadMore: () => result.hasNextPage && result.fetchNextPage(),
 	};

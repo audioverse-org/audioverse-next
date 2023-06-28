@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React, { RefObject, useEffect, useMemo, useRef, useState } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import Button from '~components/molecules/button';
@@ -14,6 +14,7 @@ import isServerSide from '~lib/isServerSide';
 import { useQueryString } from '~lib/useQueryString';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
+import EmptyState from './emptyState';
 import { EntityFilterId } from './searchResults.filters';
 import styles from './searchResults.module.scss';
 import useSearch, { AugmentedFilter } from './searchResults.useResults';
@@ -71,11 +72,28 @@ function Section({
 	return (
 		<div className={styles.section}>
 			<LineHeading variant="overline">{section.heading}</LineHeading>
-			<CardGroup>
-				{nodes.map((e: InferrableEntity) => (
-					<CardInferred key={e.id} entity={e} />
-				))}
-			</CardGroup>
+			{nodes.length ? (
+				<CardGroup>
+					{nodes.map((e: InferrableEntity) => (
+						<CardInferred key={e.id} entity={e} />
+					))}
+				</CardGroup>
+			) : (
+				<EmptyState
+					title={
+						<FormattedMessage
+							id="search__emptyStateTitle"
+							defaultMessage="No results found"
+						/>
+					}
+					message={
+						<FormattedMessage
+							id="search__emptyStateMessage"
+							defaultMessage="Try searching for something else"
+						/>
+					}
+				/>
+			)}
 			{section.hasNextPage && entityType === 'all' && (
 				<Button
 					type="secondary"
@@ -104,7 +122,7 @@ function hasExactMatch(term: string, sections: AugmentedFilter[]): boolean {
 
 export default function Search({
 	term,
-	entityType,
+	entityType = 'all',
 	onEntityTypeChange,
 }: {
 	term?: string;

@@ -88,7 +88,8 @@ export const useUpdateAccountPreferencesMutation = <
       (variables?: UpdateAccountPreferencesMutationVariables) => graphqlFetcher<UpdateAccountPreferencesMutation, UpdateAccountPreferencesMutationVariables>(UpdateAccountPreferencesDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getAccountPreferencesData<T>(
 	variables: ExactAlt<T, GetAccountPreferencesDataQueryVariables>

@@ -1,46 +1,42 @@
 import { QueryClient } from '@tanstack/react-query';
 import { RenderResult } from '@testing-library/react';
-import { __mockedRouter, NextRouter } from 'next/router';
+import { __mockedRouter } from 'next/router';
 import React, { ComponentType } from 'react';
 
 import renderWithProviders from '~lib/test/renderWithProviders';
+import { PartialDeepRecursive } from '~src/types/types';
 
-// TODO: Only accept props if getProps not provided
-// TODO: Only accept params if getProps provided
-type RendererOptions = {
-	props?: any; // TODO: restrict to props component actually accepts
-	router?: Partial<NextRouter>;
+type RendererOptions<T> = {
+	props?: PartialDeepRecursive<T>;
 };
 
-export type Renderer = (
-	options?: RendererOptions
-) => Promise<RenderResult & { queryClient: QueryClient }>;
+export type RendererResult<T> = Omit<RenderResult, 'rerender'> & {
+	queryClient: QueryClient;
+	rerender: (rerenderProps?: PartialDeepRecursive<T>) => void;
+};
 
-// TODO: Consider how to simplify this function. Perhaps extract a simple
-//   version and rename this function to `buildPageRenderer` or similar.
-export function buildRenderer<
-	C extends ComponentType<any>,
-	F extends (params: any) => Promise<any>
->(
-	Component: C,
+export type Renderer<T> = (
+	options?: RendererOptions<T>
+) => Promise<RendererResult<T>>;
+
+export function buildRenderer<T extends Record<string, any>>(
+	Component: ComponentType<T>,
 	options: {
-		getProps?: F;
-		defaultProps?: any; // TODO: restrict to props component actually accepts
+		defaultProps?: PartialDeepRecursive<T>;
 	} = {}
-): Renderer {
-	const { getProps = undefined, defaultProps = {} } = options;
-	return async (
-		options: RendererOptions = {}
-	): Promise<RenderResult & { queryClient: QueryClient }> => {
-		const { props } = options;
-		const props_ = getProps
-			? await getProps(__mockedRouter.query)
-			: props || defaultProps;
-
-		const result = renderWithProviders(<Component {...props_} />, undefined);
-
-		return result as unknown as Promise<
-			RenderResult & { queryClient: QueryClient }
-		>;
+): Renderer<T> {
+	const { defaultProps = {} } = options;
+	return async ({ props }: RendererOptions<T> = {}): Promise<
+		RendererResult<T>
+	> => {
+		const p = (props || defaultProps) as any;
+		const r = await renderWithProviders(<Component {...p} />);
+		return {
+			...r,
+			rerender: (rerenderProps?: PartialDeepRecursive<T>) => {
+				const rp = { ...p, ...(rerenderProps || {}) };
+				r.rerender(<Component {...rp} />);
+			},
+		};
 	};
 }

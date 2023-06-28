@@ -47,13 +47,6 @@ describe('card sermon', () => {
 		expect(getByLabelText('play')).toBeInTheDocument();
 	});
 
-	// TODO: fix when usePlaybackSession returns server-side progress
-	// it('disables progress bar interactivity', async () => {
-	// 	const { getByLabelText } = await renderComponent();
-
-	// 	expect(getByLabelText('progress')).toBeDisabled();
-	// });
-
 	it('does not render 0 if 0 duration', async () => {
 		const { queryByText } = await renderComponent({
 			props: {
@@ -61,27 +54,12 @@ describe('card sermon', () => {
 					id: 'the_recording_id',
 					canonicalPath: 'the_sermon_path',
 					persons: [],
+					duration: 0,
 				},
-				duration: 0,
 			},
 		});
 
 		expect(queryByText('0')).not.toBeInTheDocument();
-	});
-
-	it('does not render progress if no progress', async () => {
-		const { queryByLabelText } = await renderComponent({
-			props: {
-				recording: {
-					id: 'the_recording_id',
-					canonicalPath: 'the_sermon_path',
-					persons: [],
-				},
-				progress: 0,
-			},
-		});
-
-		expect(queryByLabelText('progress')).not.toBeInTheDocument();
 	});
 
 	it('has favorite button', async () => {

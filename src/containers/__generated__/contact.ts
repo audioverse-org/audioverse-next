@@ -33,7 +33,8 @@ export const useSubmitContactPageMutation = <
       (variables?: SubmitContactPageMutationVariables) => graphqlFetcher<SubmitContactPageMutation, SubmitContactPageMutationVariables>(SubmitContactPageDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function submitContactPage<T>(
 	variables: ExactAlt<T, SubmitContactPageMutationVariables>

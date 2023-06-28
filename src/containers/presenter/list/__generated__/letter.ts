@@ -57,7 +57,8 @@ export const useInfiniteGetPresenterListLetterPageDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getPresenterListLetterPageData<T>(
 	variables: ExactAlt<T, GetPresenterListLetterPageDataQueryVariables>

@@ -26,7 +26,8 @@ export const useRecordingUnfavoriteMutation = <
       (variables?: RecordingUnfavoriteMutationVariables) => graphqlFetcher<RecordingUnfavoriteMutation, RecordingUnfavoriteMutationVariables>(RecordingUnfavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function recordingUnfavorite<T>(
 	variables: ExactAlt<T, RecordingUnfavoriteMutationVariables>

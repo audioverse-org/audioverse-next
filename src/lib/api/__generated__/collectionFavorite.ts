@@ -26,7 +26,8 @@ export const useCollectionFavoriteMutation = <
       (variables?: CollectionFavoriteMutationVariables) => graphqlFetcher<CollectionFavoriteMutation, CollectionFavoriteMutationVariables>(CollectionFavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function collectionFavorite<T>(
 	variables: ExactAlt<T, CollectionFavoriteMutationVariables>

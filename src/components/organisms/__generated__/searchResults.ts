@@ -449,7 +449,8 @@ export const useInfiniteGetSearchStoryProgramsQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getSearchRecordings<T>(
 	variables: ExactAlt<T, GetSearchRecordingsQueryVariables>

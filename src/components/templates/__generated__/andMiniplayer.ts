@@ -112,7 +112,8 @@ export const useRecordingPlaybackProgressSetMutation = <
       (variables?: RecordingPlaybackProgressSetMutationVariables) => graphqlFetcher<RecordingPlaybackProgressSetMutation, RecordingPlaybackProgressSetMutationVariables>(RecordingPlaybackProgressSetDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getRecordingPlaybackProgress<T>(
 	variables: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>

@@ -30,7 +30,8 @@ export const useResetPasswordMutation = <
       (variables?: ResetPasswordMutationVariables) => graphqlFetcher<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function resetPassword<T>(
 	variables: ExactAlt<T, ResetPasswordMutationVariables>

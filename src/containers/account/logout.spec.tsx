@@ -14,7 +14,7 @@ describe('logout route', () => {
 		mockUseLogout.mockResolvedValue(undefined);
 
 		await act(async () => {
-			await renderPage({ router: { push: () => Promise.resolve(true) } });
+			await renderPage();
 		});
 
 		expect(useLogout).toBeCalled();

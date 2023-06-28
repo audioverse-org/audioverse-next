@@ -28,6 +28,7 @@ import { formatDateRange } from '~lib/date';
 import root from '~lib/routes';
 import { useFormattedDuration } from '~lib/time';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import { Must } from '~src/types/types';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 import { GetCollectionDetailPageDataQuery } from './__generated__/detail';

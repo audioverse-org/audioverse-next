@@ -2196,6 +2196,12 @@
   "search__conferencesSeeAll": {
     "string": "See All Matching Conferences"
   },
+  "search__emptyStateMessage": {
+    "string": "Try searching for something else"
+  },
+  "search__emptyStateTitle": {
+    "string": "No results found"
+  },
   "search__musicHeading": {
     "string": "Music"
   },

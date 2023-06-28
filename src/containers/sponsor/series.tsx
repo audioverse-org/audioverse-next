@@ -9,6 +9,7 @@ import Pagination from '~components/molecules/pagination';
 import { BaseColors } from '~lib/constants';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import { Must } from '~src/types/types';
 
 import { SponsorPivotFragment } from './__generated__/pivot';
 import { GetSponsorSeriesPageDataQuery } from './__generated__/series';

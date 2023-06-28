@@ -65,7 +65,8 @@ export const useInfiniteGetTrendingTeachingsPageDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getTrendingTeachingsPageData<T>(
 	variables: ExactAlt<T, GetTrendingTeachingsPageDataQueryVariables>

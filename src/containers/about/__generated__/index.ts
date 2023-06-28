@@ -92,7 +92,8 @@ export const useInfiniteGetAboutStaticPathsQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getAboutPageData<T>(
 	variables: ExactAlt<T, GetAboutPageDataQueryVariables>

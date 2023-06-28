@@ -26,7 +26,8 @@ export const usePersonFavoriteMutation = <
       (variables?: PersonFavoriteMutationVariables) => graphqlFetcher<PersonFavoriteMutation, PersonFavoriteMutationVariables>(PersonFavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function personFavorite<T>(
 	variables: ExactAlt<T, PersonFavoriteMutationVariables>

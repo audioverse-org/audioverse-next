@@ -53,7 +53,8 @@ export const useInfiniteGetSearchResultsPersonsQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getSearchResultsPersons<T>(
 	variables: ExactAlt<T, GetSearchResultsPersonsQueryVariables>

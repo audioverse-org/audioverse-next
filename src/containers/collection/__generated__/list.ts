@@ -100,7 +100,8 @@ export const useInfiniteGetCollectionListPathsDataQuery = <
       options
     )};
 
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function getCollectionListPageData<T>(
 	variables: ExactAlt<T, GetCollectionListPageDataQueryVariables>

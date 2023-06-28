@@ -9,6 +9,7 @@ import CardGroup from '~components/molecules/cardGroup';
 import RecordingHasVideoFilter from '~components/molecules/recordingHasVideoFilter';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import { Must } from '~src/types/types';
 
 import { GetTrendingTeachingsPageDataQuery } from './__generated__/trending';
 import styles from './trending.module.scss';

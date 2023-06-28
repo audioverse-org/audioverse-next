@@ -26,7 +26,8 @@ export const usePersonUnfavoriteMutation = <
       (variables?: PersonUnfavoriteMutationVariables) => graphqlFetcher<PersonUnfavoriteMutation, PersonUnfavoriteMutationVariables>(PersonUnfavoriteDocument, variables)(),
       options
     );
-import { fetchApi } from '~lib/api/fetchApi' 
+import { fetchApi } from '~lib/api/fetchApi';
+import { ExactAlt } from '~src/types/types';
 
 export async function personUnfavorite<T>(
 	variables: ExactAlt<T, PersonUnfavoriteMutationVariables>

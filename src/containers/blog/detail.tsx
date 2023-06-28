@@ -10,6 +10,7 @@ import CardPost from '~components/molecules/card/post';
 import { BaseColors } from '~lib/constants';
 import { formatLongDate } from '~lib/date';
 import { useFormattedDuration } from '~lib/time';
+import { Must } from '~src/types/types';
 
 import { GetBlogDetailDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';

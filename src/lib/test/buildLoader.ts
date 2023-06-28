@@ -1,8 +1,8 @@
 import { when } from 'jest-when';
 import defaultsDeep from 'lodash/defaultsDeep';
-import { PartialDeep } from 'type-fest';
 
 import * as api from '~lib/api/fetchApi';
+import { PartialDeepRecursive } from '~src/types/types';
 
 import {
 	createControlledPromise,
@@ -16,14 +16,7 @@ type Options = {
 	variables?: Record<string, unknown>;
 };
 
-type PartialData<T> =
-	| PartialDeep<
-			T,
-			{
-				recurseIntoArrays: true;
-			}
-	  >
-	| Record<string, never>;
+type PartialData<T> = PartialDeepRecursive<T> | Record<string, never>;
 
 type Loader<T> = (
 	data?: PartialData<T>,
