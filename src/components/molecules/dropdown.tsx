@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { MouseEvent, ReactNode,useState } from 'react';
+import { MouseEvent, ReactNode, useState } from 'react';
 
 import styles from './dropdown.module.scss';
 

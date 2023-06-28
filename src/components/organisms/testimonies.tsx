@@ -9,7 +9,7 @@ interface TestimoniesProps {
 
 const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 	return (
-        <Slider>
+		<Slider>
 			{testimonies.map((t) => (
 				<blockquote className={styles.testimony} key={t.id}>
 					<p
@@ -22,7 +22,7 @@ const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 				</blockquote>
 			))}
 		</Slider>
-    );
+	);
 };
 
 export default Testimonies;

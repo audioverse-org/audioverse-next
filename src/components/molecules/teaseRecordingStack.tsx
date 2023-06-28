@@ -23,7 +23,7 @@ export default function TeaseRecordingStack({
 }: Props): JSX.Element | null {
 	// TODO: add expand/contract?
 	return (
-        <WithCardTheme theme={theme} className={styles.base}>
+		<WithCardTheme theme={theme} className={styles.base}>
 			{recordings.map((recording, index) => (
 				<Fragment key={recording.canonicalPath}>
 					<TeaseRecording
@@ -36,5 +36,5 @@ export default function TeaseRecordingStack({
 				</Fragment>
 			))}
 		</WithCardTheme>
-    );
+	);
 }

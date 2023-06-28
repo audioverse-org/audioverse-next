@@ -14,12 +14,10 @@ export type GlobalModalsContextType = {
 	confirmRemoveFavorite: (onConfirm: () => unknown) => void;
 };
 
-export const GlobalModalsContext = createContext<GlobalModalsContextType>(
-	{
-		challengeAuth: () => undefined,
-		confirmRemoveFavorite: () => void 0,
-	}
-);
+export const GlobalModalsContext = createContext<GlobalModalsContextType>({
+	challengeAuth: () => undefined,
+	confirmRemoveFavorite: () => void 0,
+});
 
 const LazyModal = dynamic(() => import('../organisms/modal'));
 const LazyModalRegisterForm = dynamic(

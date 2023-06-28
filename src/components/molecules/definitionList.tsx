@@ -22,7 +22,7 @@ export default function DefinitionList({
 	textColor,
 }: Props): JSX.Element {
 	return (
-        <dl className={clsx(styles.dl, baseColorStyles[textColor])}>
+		<dl className={clsx(styles.dl, baseColorStyles[textColor])}>
 			{terms.map(({ term, definition }, index) => (
 				<Fragment key={index}>
 					<dt className={styles.dt}>
@@ -34,5 +34,5 @@ export default function DefinitionList({
 				</Fragment>
 			))}
 		</dl>
-    );
+	);
 }
