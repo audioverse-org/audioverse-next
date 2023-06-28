@@ -9,6 +9,7 @@ import { AndMiniplayerFragmentDoc } from '../../../components/templates/__genera
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/__generated__/sequence';
 import { CardCollectionFragmentDoc } from '../../../components/molecules/card/__generated__/collection';
 import { CardPostFragmentDoc } from '../../../components/molecules/card/__generated__/post';
+import { CardTopicFragmentDoc } from '../../../components/molecules/card/__generated__/topic';
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverRecentTeachingsQueryVariables = Types.Exact<{
@@ -64,6 +65,15 @@ export type GetDiscoverBlogPostsQueryVariables = Types.Exact<{
 
 
 export type GetDiscoverBlogPostsQuery = { __typename?: 'Query', blogPosts: { __typename?: 'BlogPostConnection', nodes: Array<{ __typename?: 'BlogPost', publishDate: string, title: string, teaser: string, canonicalPath: string, readingDuration: number | null, image: { __typename?: 'Image', url: string } | null }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
+export type GetDiscoverTopicsQueryVariables = Types.Exact<{
+  language: Types.Language;
+  first: Types.Scalars['Int']['input'];
+  after: Types.InputMaybe<Types.Scalars['String']['input']>;
+}>;
+
+
+export type GetDiscoverTopicsQuery = { __typename?: 'Query', topics: { __typename?: 'TopicConnection', nodes: Array<{ __typename?: 'Topic', id: string | number, title: string, summary: string, duration: number, canonicalPath: string, items: { __typename?: 'TopicItemConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
 
 
 export const GetDiscoverRecentTeachingsDocument = `
@@ -385,6 +395,51 @@ export const useInfiniteGetDiscoverBlogPostsQuery = <
       options
     )};
 
+export const GetDiscoverTopicsDocument = `
+    query getDiscoverTopics($language: Language!, $first: Int!, $after: String) {
+  topics(
+    language: $language
+    first: $first
+    after: $after
+    orderBy: {field: ID, direction: DESC}
+  ) {
+    nodes {
+      ...cardTopic
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+    ${CardTopicFragmentDoc}`;
+export const useGetDiscoverTopicsQuery = <
+      TData = GetDiscoverTopicsQuery,
+      TError = unknown
+    >(
+      variables: GetDiscoverTopicsQueryVariables,
+      options?: UseQueryOptions<GetDiscoverTopicsQuery, TError, TData>
+    ) =>
+    useQuery<GetDiscoverTopicsQuery, TError, TData>(
+      ['getDiscoverTopics', variables],
+      graphqlFetcher<GetDiscoverTopicsQuery, GetDiscoverTopicsQueryVariables>(GetDiscoverTopicsDocument, variables),
+      options
+    );
+export const useInfiniteGetDiscoverTopicsQuery = <
+      TData = GetDiscoverTopicsQuery,
+      TError = unknown
+    >(
+      pageParamKey: keyof GetDiscoverTopicsQueryVariables,
+      variables: GetDiscoverTopicsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetDiscoverTopicsQuery, TError, TData>
+    ) =>{
+    
+    return useInfiniteQuery<GetDiscoverTopicsQuery, TError, TData>(
+      ['getDiscoverTopics.infinite', variables],
+      (metaData) => graphqlFetcher<GetDiscoverTopicsQuery, GetDiscoverTopicsQueryVariables>(GetDiscoverTopicsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
 import { fetchApi } from '~lib/api/fetchApi';
 import { ExactAlt } from '~src/types/types';
 
@@ -424,6 +479,12 @@ export async function getDiscoverBlogPosts<T>(
 	return fetchApi(GetDiscoverBlogPostsDocument, { variables });
 }
 
+export async function getDiscoverTopics<T>(
+	variables: ExactAlt<T, GetDiscoverTopicsQueryVariables>
+): Promise<GetDiscoverTopicsQuery> {
+	return fetchApi(GetDiscoverTopicsDocument, { variables });
+}
+
 import { QueryClient } from '@tanstack/react-query';
 import makeQueryClient from '~lib/makeQueryClient';
 
@@ -435,7 +496,8 @@ export async function prefetchQueries<T>(
 		getDiscoverFeaturedTeachings: ExactAlt<T, GetDiscoverFeaturedTeachingsQueryVariables>,
 		getDiscoverStorySeasons: ExactAlt<T, GetDiscoverStorySeasonsQueryVariables>,
 		getDiscoverConferences: ExactAlt<T, GetDiscoverConferencesQueryVariables>,
-		getDiscoverBlogPosts: ExactAlt<T, GetDiscoverBlogPostsQueryVariables>
+		getDiscoverBlogPosts: ExactAlt<T, GetDiscoverBlogPostsQueryVariables>,
+		getDiscoverTopics: ExactAlt<T, GetDiscoverTopicsQueryVariables>
 	},
 	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
@@ -454,6 +516,8 @@ export async function prefetchQueries<T>(
 		client.prefetchInfiniteQuery(['getDiscoverConferences.infinite', vars.getDiscoverConferences], () => getDiscoverConferences(vars.getDiscoverConferences), options),
 		client.prefetchQuery(['getDiscoverBlogPosts', vars.getDiscoverBlogPosts], () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts), options),
 		client.prefetchInfiniteQuery(['getDiscoverBlogPosts.infinite', vars.getDiscoverBlogPosts], () => getDiscoverBlogPosts(vars.getDiscoverBlogPosts), options),
+		client.prefetchQuery(['getDiscoverTopics', vars.getDiscoverTopics], () => getDiscoverTopics(vars.getDiscoverTopics), options),
+		client.prefetchInfiniteQuery(['getDiscoverTopics.infinite', vars.getDiscoverTopics], () => getDiscoverTopics(vars.getDiscoverTopics), options),
 	]);
 	
 	return client;

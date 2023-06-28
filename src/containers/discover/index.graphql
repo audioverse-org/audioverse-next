@@ -143,3 +143,20 @@ query getDiscoverBlogPosts($language: Language!, $first: Int!, $after: String) {
 		}
 	}
 }
+
+query getDiscoverTopics($language: Language!, $first: Int!, $after: String) {
+	topics(
+		language: $language
+		first: $first
+		after: $after
+		orderBy: { field: ID, direction: DESC }
+	) {
+		nodes {
+			...cardTopic
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

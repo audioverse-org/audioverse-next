@@ -1,36 +1,51 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import Heading2 from '~src/components/atoms/heading2';
+import Heading6 from '~src/components/atoms/heading6';
+import { BaseColors } from '~src/lib/constants';
+import { useFormattedDuration } from '~src/lib/time';
 
 import HatIcon from '../../../../public/img/icons/fa-layer-group.svg';
-import TeaseRecording from '../teaseRecording';
-import { CardRecordingFragment } from './__generated__/recording';
+import TypeLockup from '../typeLockup';
+import { CardTopicFragment } from './__generated__/topic';
 import CardWithTheme from './base/withTheme';
-import CardHat from './hat';
+import styles from './topic.module.scss';
 
-interface CardTopicProps {
-	topicRecording: CardRecordingFragment;
-}
+type CardTopicProps = {
+	topic: CardTopicFragment;
+};
 
-// TODO: finish this component when replacing tags
-export default function CardTopic({
-	topicRecording,
-}: CardTopicProps): JSX.Element {
-	const theme = 'topic';
+export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
+	const duration = useFormattedDuration(topic.duration);
 
-	// Replace hard-coded tag name (also hard-coded in home.graphql)
 	return (
-		<CardWithTheme {...{ theme }}>
-			<CardHat
-				title="Family"
-				/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
-				label="TODO"
-				url={topicRecording.sequence?.canonicalPath || ''}
-				icon={<HatIcon />}
-				longHat
-			>
-				{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
-				<h1>TODO</h1>
-			</CardHat>
-			<TeaseRecording {...{ recording: topicRecording, theme }} />
+		<CardWithTheme theme="topic">
+			<div className={styles.content}>
+				<TypeLockup
+					Icon={HatIcon}
+					label={
+						<FormattedMessage defaultMessage="Topic" id="cardTopic__hatLabel" />
+					}
+					iconColor={BaseColors.SALMON}
+					textColor={BaseColors.WHITE}
+					unpadded
+				/>
+				<Heading2 unpadded className={styles.title}>
+					{topic.title}
+				</Heading2>
+				<p className={styles.summary}>{topic.summary}</p>
+				<Heading6 sans loose unpadded uppercase className={styles.count}>
+					<FormattedMessage
+						id="cardTopic__count"
+						defaultMessage="{count, plural, one {# item} other {# items}}"
+						values={{
+							count: topic.items.aggregate?.count ?? 0,
+						}}
+					/>
+				</Heading6>
+				<p className={styles.duration}>{duration}</p>
+			</div>
 		</CardWithTheme>
 	);
 }

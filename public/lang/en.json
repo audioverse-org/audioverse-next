@@ -493,6 +493,12 @@
   "cardStory_sequenceLabel": {
     "string": "Stories"
   },
+  "cardTopic__count": {
+    "string": "{count, plural, one {# item} other {# items}}"
+  },
+  "cardTopic__hatLabel": {
+    "string": "Topic"
+  },
   "ccollectionTeachingsDetail__heading": {
     "string": "All Individual Teachings"
   },
@@ -693,6 +699,12 @@
   "discover__title": {
     "string": "Discover"
   },
+  "discover__topicsNext": {
+    "string": "Next topics"
+  },
+  "discover__topicsPrevious": {
+    "string": "Previous topics"
+  },
   "discover__trendingTeachingsNext": {
     "string": "Next trending teachings"
   },
@@ -710,6 +722,9 @@
   },
   "discover_recentTeachingsHeading": {
     "string": "Recent Teachings"
+  },
+  "discover_topicsHeading": {
+    "string": "Topics"
   },
   "discover_trendingTeachingsHeading": {
     "string": "Trending Teachings"
