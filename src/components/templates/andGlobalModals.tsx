@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
-import React, { ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '~components/molecules/button';
@@ -14,7 +14,7 @@ export type GlobalModalsContextType = {
 	confirmRemoveFavorite: (onConfirm: () => unknown) => void;
 };
 
-export const GlobalModalsContext = React.createContext<GlobalModalsContextType>(
+export const GlobalModalsContext = createContext<GlobalModalsContextType>(
 	{
 		challengeAuth: () => undefined,
 		confirmRemoveFavorite: () => void 0,

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
-import React from 'react';
 
 import styles from './roundImage.module.scss';
 

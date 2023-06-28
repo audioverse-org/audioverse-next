@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Router } from 'next/router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Header from '~components/organisms/header';
 import Navigation from '~components/organisms/navigation';

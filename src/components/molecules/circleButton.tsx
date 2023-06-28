@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { MouseEvent, PropsWithChildren, Ref } from 'react';
+import { forwardRef, MouseEvent, PropsWithChildren, Ref } from 'react';
 
 import { BaseColors } from '~lib/constants';
 
@@ -14,7 +14,7 @@ export type ICircleButtonProps = PropsWithChildren<{
 	ref?: Ref<HTMLButtonElement>;
 }>;
 
-const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
+const CircleButton: React.FC<ICircleButtonProps> = forwardRef(
 	function CircleButton(
 		{
 			onClick,

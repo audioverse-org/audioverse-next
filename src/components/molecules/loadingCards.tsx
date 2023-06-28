@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { ExtendedCardTheme } from './card/base/withCardTheme';

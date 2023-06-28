@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { startTransition, useMemo, useState } from 'react';
+import { startTransition, useMemo, useState } from 'react';
 import type Swiper from 'swiper';
 
 import IconBack from '~public/img/icons/icon-back-light.svg';

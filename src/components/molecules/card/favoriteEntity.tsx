@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { UnreachableCaseError } from '~lib/typeHelpers';
 
 import { CardFavoriteEntityFragment } from './__generated__/favoriteEntity';

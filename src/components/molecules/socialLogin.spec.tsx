@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
-import React from 'react';
 
 import SocialLogin from '~components/molecules/socialLogin';
 import { RegisterSocialDocument } from '~containers/account/__generated__/register';

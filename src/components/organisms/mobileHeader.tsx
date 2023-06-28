@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '~components/molecules/button';

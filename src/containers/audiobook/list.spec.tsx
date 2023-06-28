@@ -1,6 +1,5 @@
 import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
-import React from 'react';
 
 import { fetchApi } from '~lib/api/fetchApi';
 import { ENTRIES_PER_PAGE } from '~lib/constants';

@@ -1,6 +1,5 @@
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 
 import { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';

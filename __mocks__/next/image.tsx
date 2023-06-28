@@ -1,5 +1,4 @@
 import { ImageProps } from 'next/image';
-import React from 'react';
 
 function Image(p: ImageProps): JSX.Element {
 	/* eslint-disable @next/next/no-img-element */

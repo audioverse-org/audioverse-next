@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Alert from '~components/atoms/alert';

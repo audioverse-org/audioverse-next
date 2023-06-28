@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 import { RenderResult } from '@testing-library/react';
 import { __mockedRouter } from 'next/router';
-import React, { ComponentType } from 'react';
+import { ComponentType } from 'react';
 
 import renderWithProviders from '~lib/test/renderWithProviders';
 import { PartialDeepRecursive } from '~src/types/types';

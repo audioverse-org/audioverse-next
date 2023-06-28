@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { UnreachableCaseError } from '~lib/typeHelpers';
 import { RecordingContentType } from '~src/__generated__/graphql';
 

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import React, { MouseEvent, ReactNode } from 'react';
+import { MouseEvent, ReactNode,useState } from 'react';
 
 import styles from './dropdown.module.scss';
 
@@ -22,7 +22,7 @@ export default function Dropdown({
 	children,
 	alignment = 'right',
 }: Props): JSX.Element {
-	const [anchorEl, setAnchorEl] = React.useState<Element | null>(null);
+	const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
 	const handleClick = (event: MouseEvent) => {
 		setAnchorEl(event.currentTarget);

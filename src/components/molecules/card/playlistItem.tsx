@@ -1,5 +1,3 @@
-import React from 'react';
-
 import TeaseRecording from '../teaseRecording';
 import { CardRecordingFragment } from './__generated__/recording';
 import CardWithTheme from './base/withTheme';

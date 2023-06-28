@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';

@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import React from 'react';
 
 import * as bibleBrain from '~lib/api/bibleBrain';
 import { buildLoader } from '~lib/test/buildLoader';

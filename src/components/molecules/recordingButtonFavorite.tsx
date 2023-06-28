@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useIsRecordingFavorited } from '~lib/api/useIsRecordingFavorited';
 import { BaseColors } from '~lib/constants';
 import { Scalars } from '~src/__generated__/graphql';

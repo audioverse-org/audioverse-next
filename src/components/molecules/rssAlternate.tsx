@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 export default function RssAlternate({ url }: { url: string }): JSX.Element {

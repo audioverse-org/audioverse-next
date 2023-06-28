@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import React from 'react';
 
 import CardSermon, { CardSermonProps } from '~components/molecules/card/sermon';
 import AndMiniplayer from '~components/templates/andMiniplayer';

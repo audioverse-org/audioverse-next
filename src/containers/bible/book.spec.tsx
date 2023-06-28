@@ -1,7 +1,6 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
-import React from 'react';
 import videojs from 'video.js';
 
 import AndMiniplayer from '~components/templates/andMiniplayer';

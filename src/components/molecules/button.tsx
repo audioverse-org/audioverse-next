@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import React, { MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 
 import styles from './button.module.scss';
 
@@ -10,7 +10,7 @@ export type IButtonType =
 	| 'primaryInverse'
 	| 'secondary'
 	| 'secondaryInverse';
-// | 'tertiary' someday
+// | 'tertiary' TODO
 
 type Props = {
 	type: IButtonType;

@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import DownloadAppButton from '~components/molecules/downloadAppButton';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useFormattedTime } from '~lib/time';
 import usePlaybackSession from '~lib/usePlaybackSession';
 

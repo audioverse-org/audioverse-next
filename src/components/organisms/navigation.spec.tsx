@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react';
 import { __loadRouter } from 'next/router';
-import React from 'react';
 
 import Navigation from '~components/organisms/navigation';
 import renderWithProviders from '~lib/test/renderWithProviders';

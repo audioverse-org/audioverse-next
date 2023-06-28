@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Router, useRouter } from 'next/router';
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import InfoBox from '~components/atoms/infoBox';
@@ -19,7 +19,7 @@ const SUPPORTED_ROUTES = [
 ];
 
 export default function LanguageAlternativesAlert(): JSX.Element | null {
-	const [showingAlert, setShowingAlert] = React.useState(false);
+	const [showingAlert, setShowingAlert] = useState(false);
 	const languageRoute = useLanguageRoute();
 
 	const router = useRouter();

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getSequenceTypeTheme } from '~lib/getSequenceType';
 import { SequenceContentType } from '~src/__generated__/graphql';
 

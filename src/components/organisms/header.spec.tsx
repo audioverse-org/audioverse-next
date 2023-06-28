@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Header from '~components/organisms/header';
 import renderWithProviders from '~lib/test/renderWithProviders';
 

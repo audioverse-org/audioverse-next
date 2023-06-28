@@ -10,7 +10,6 @@ import {
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadQuery, __loadRouter } from 'next/router';
-import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 

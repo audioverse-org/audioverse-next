@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import startCase from 'lodash/startCase';
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';

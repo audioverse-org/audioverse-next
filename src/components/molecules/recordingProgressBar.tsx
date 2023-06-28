@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import usePlaybackSession from '~lib/usePlaybackSession';
 

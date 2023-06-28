@@ -1,4 +1,3 @@
-import React from 'react';
 import { SetRequired } from 'type-fest';
 
 import { CollectionContentType } from '~src/__generated__/graphql';

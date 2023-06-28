@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
-import React, { PropsWithChildren, useContext, useEffect } from 'react';
+import { PropsWithChildren, useContext, useEffect } from 'react';
 
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';

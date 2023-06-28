@@ -1,6 +1,6 @@
 import { useIsFetching } from '@tanstack/react-query';
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useRouterLoading from '~lib/useRouterLoading';
 
@@ -8,11 +8,11 @@ import styles from './loadingIndicator.module.scss';
 
 const HIDE_DELAY = 1000; //ms
 
-const LoadingIndicator: React.VoidFunctionComponent = () => {
+const LoadingIndicator = () => {
 	const isFetching = useIsFetching();
 	const isLoading = useRouterLoading();
 	const isAnyLoading = !!(isFetching || isLoading);
-	const [visible, setVisible] = React.useState(false);
+	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
 		if (isAnyLoading) {

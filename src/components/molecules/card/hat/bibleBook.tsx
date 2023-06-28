@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Heading2 from '~components/atoms/heading2';
 
 import HatIcon from '../../../../../public/img/icons/fa-book-light.svg';

@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import AndOnboarding from '~components/templates/andOnboarding';
 import root from '~lib/routes';

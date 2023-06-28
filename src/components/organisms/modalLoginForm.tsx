@@ -1,5 +1,3 @@
-import React from 'react';
-
 import LoginForm from '~components/molecules/loginForm';
 import SocialLogin from '~components/molecules/socialLogin';
 

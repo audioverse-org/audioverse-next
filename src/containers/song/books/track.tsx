@@ -1,5 +1,3 @@
-import React from 'react';
-
 import withFailStates from '~components/HOCs/withFailStates';
 import { Recording } from '~components/organisms/recording';
 import root from '~lib/routes';

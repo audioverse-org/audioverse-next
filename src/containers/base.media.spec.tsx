@@ -11,7 +11,6 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
-import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 

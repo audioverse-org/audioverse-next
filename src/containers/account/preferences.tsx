@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import capitalize from 'lodash/capitalize';
-import React, { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';

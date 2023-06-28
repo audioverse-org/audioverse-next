@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IntlProvider, ResolvedIntlConfig } from 'react-intl';
 
 import getIntlMessages from '~lib/getIntlMessages';
@@ -14,7 +14,7 @@ const withIntl = <P extends Record<string, unknown>>(
 		const language = useLanguageRoute();
 		const [messages, setMessages] = useState<Messages>({});
 
-		React.useEffect(() => {
+		useEffect(() => {
 			getIntlMessages(language).then(setMessages);
 		}, [language]);
 

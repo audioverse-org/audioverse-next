@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Slider from '~components/organisms/slider';
 
 import { TestimoniesFragment } from './__generated__/testimonies';
@@ -11,7 +9,7 @@ interface TestimoniesProps {
 
 const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 	return (
-		<Slider>
+        <Slider>
 			{testimonies.map((t) => (
 				<blockquote className={styles.testimony} key={t.id}>
 					<p
@@ -24,7 +22,7 @@ const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 				</blockquote>
 			))}
 		</Slider>
-	);
+    );
 };
 
 export default Testimonies;

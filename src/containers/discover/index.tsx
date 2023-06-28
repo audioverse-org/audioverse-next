@@ -1,5 +1,3 @@
-import React from 'react';
-
 import BlogPosts from './index.section.blogPosts';
 import Conferences from './index.section.conferences';
 import FeaturedTeachings from './index.section.featuredTeachings';

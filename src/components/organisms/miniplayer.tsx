@@ -3,7 +3,7 @@ import 'video.js/dist/video-js.css';
 import Slider from '@material-ui/core/Slider';
 import clsx from 'clsx';
 import Link from 'next/link';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useIntl } from 'react-intl';
 
 import ButtonNudge from '~components/molecules/buttonNudge';

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { memo, PropsWithChildren, useEffect, useRef, useState } from 'react';
 import type { Swiper as _Swiper } from 'swiper';
 import type { SwiperProps as _SwiperProps } from 'swiper/react';
 
@@ -36,7 +36,7 @@ function updateSwiper(el: HTMLSwiperElement): boolean {
 	}
 }
 
-const Swiper = React.memo(function Swiper(props: SwiperProps) {
+const Swiper = memo(function Swiper(props: SwiperProps) {
 	const ref = useRef<HTMLSwiperElement>(null);
 	const [retry, setRetry] = useState(0);
 	const router = useRouter();

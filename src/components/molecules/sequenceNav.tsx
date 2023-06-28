@@ -1,4 +1,3 @@
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';

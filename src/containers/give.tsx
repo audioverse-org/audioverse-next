@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { SyntheticEvent } from 'react';
+import { SyntheticEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';

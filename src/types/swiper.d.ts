@@ -1,4 +1,3 @@
-import React from 'react';
 import type { SwiperProps, SwiperSlideProps } from 'swiper/react';
 
 declare global {

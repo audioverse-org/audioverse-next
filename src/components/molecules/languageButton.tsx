@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import React from 'react';
 
 import { LANGUAGES } from '~lib/constants';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';

@@ -24,6 +24,7 @@ module.exports = {
 		'plugin:testing-library/dom',
 		'plugin:jest-dom/recommended',
 		'plugin:@next/next/recommended',
+		'plugin:react/jsx-runtime',
 	],
 	root: true,
 	env: {

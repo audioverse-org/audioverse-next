@@ -1,5 +1,3 @@
-import React from 'react';
-
 import withFailStates from '~components/HOCs/withFailStates';
 import CardPost from '~components/molecules/card/post';
 import CardGroup from '~components/molecules/cardGroup';

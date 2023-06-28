@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';

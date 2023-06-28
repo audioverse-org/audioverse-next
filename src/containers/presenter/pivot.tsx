@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 import Heading2 from '~components/atoms/heading2';
 import RoundImage from '~components/atoms/roundImage';

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';

@@ -1,4 +1,3 @@
-import React from 'react';
 import * as swiper from 'swiper';
 import { SwiperEvents } from 'swiper/types';
 import { ValueOf } from 'type-fest';

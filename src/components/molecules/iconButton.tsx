@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import { forwardRef, Ref } from 'react';
 
 import { BaseColors } from '~lib/constants';
 
@@ -10,17 +10,15 @@ type Props = {
 	color: BaseColors;
 } & ICircleButtonProps;
 
-const IconButton: React.VoidFunctionComponent<Props> = React.forwardRef(
-	function IconButton(
-		{ Icon, color, ...props }: Props,
-		ref: Ref<HTMLButtonElement>
-	) {
-		return (
-			<CircleButton {...props} ref={ref}>
-				<Icon className={baseColorsStyles[color]} />
-			</CircleButton>
-		);
-	}
-);
+const IconButton = forwardRef(function IconButton(
+	{ Icon, color, ...props }: Props,
+	ref: Ref<HTMLButtonElement>
+) {
+	return (
+		<CircleButton {...props} ref={ref}>
+			<Icon className={baseColorsStyles[color]} />
+		</CircleButton>
+	);
+});
 
 export default IconButton;

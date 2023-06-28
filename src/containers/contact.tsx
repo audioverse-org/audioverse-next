@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Alert from '~components/atoms/alert';

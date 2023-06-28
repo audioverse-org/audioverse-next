@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';

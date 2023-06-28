@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import React from 'react';
 
 import LoadingIndicator from '~components/molecules/loadingIndicator';
 import renderWithProviders from '~lib/test/renderWithProviders';

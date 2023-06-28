@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';

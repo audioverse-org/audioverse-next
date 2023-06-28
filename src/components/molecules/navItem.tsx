@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ActiveLink from '~components/atoms/activeLink';
 // TODO: Split into its own SCSS module
 import styles from '~components/organisms/navigation.module.scss';

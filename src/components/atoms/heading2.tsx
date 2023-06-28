@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 import styles from './heading2.module.scss';
 import baseStyles from './headingBase.module.scss';

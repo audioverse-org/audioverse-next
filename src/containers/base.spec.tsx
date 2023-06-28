@@ -1,7 +1,6 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { __loadRouter } from 'next/router';
-import React from 'react';
 
 import { __awaitIntlMessages } from '~lib/getIntlMessages';
 import MyApp from '~pages/_app';

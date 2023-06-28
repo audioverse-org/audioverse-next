@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';

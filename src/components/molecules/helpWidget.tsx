@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '~components/molecules/button';

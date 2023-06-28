@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Mininav from '~components/molecules/mininav';
 import { useNavigationItems } from '~lib/useNavigationItems';
 

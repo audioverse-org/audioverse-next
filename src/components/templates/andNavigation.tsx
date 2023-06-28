@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import LanguageAlternativesAlert from '~components/molecules/languageAlternativesAlert';
 import SearchBar from '~components/molecules/searchBar';

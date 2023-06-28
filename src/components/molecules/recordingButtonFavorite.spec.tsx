@@ -2,7 +2,6 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Cookie from 'js-cookie';
 import { __loadRouter } from 'next/router';
-import React from 'react';
 
 import RecordingButtonFavorite from '~components/molecules/recordingButtonFavorite';
 import { recordingIsFavorited } from '~lib/api/recordingIsFavorited';

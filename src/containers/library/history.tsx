@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import React from 'react';
+import { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
@@ -67,7 +67,7 @@ function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 				<>
 					<CardGroup>
 						{data?.pages?.map((group, i) => (
-							<React.Fragment key={i}>
+							<Fragment key={i}>
 								{(group.me?.user.downloadHistory.nodes || []).map(
 									({ recording }) => (
 										<CardRecording
@@ -76,7 +76,7 @@ function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 										/>
 									)
 								)}
-							</React.Fragment>
+							</Fragment>
 						))}
 					</CardGroup>
 					{showLoadMore && (

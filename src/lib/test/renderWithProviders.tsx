@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
-import React from 'react';
 
 import withIntl from '~components/HOCs/withIntl';
 import { __awaitIntlMessages } from '~lib/getIntlMessages';

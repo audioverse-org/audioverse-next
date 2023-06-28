@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
 	ReactFacebookFailureResponse,
 	ReactFacebookLoginInfo,

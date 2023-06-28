@@ -1,5 +1,4 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React from 'react';
 import { useIntl } from 'react-intl';
 
 import CardSequence from '~src/components/molecules/card/sequence';

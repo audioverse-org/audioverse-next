@@ -6,7 +6,6 @@ import Cookie from 'js-cookie';
 import get from 'lodash/get';
 import { GetServerSidePropsContext } from 'next';
 import { __loadRouter } from 'next/router';
-import React from 'react';
 import ReactTestUtils, { act } from 'react-dom/test-utils';
 
 import { fetchApi } from '~lib/api/fetchApi';

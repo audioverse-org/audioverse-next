@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import React, { MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 
 import styles from './mininav.module.scss';
 

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '~components/molecules/button';

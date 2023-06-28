@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query';
 import Head from 'next/head';
 import Script from 'next/script';
-import React, { useEffect } from 'react';
+import { Component as Component_, StrictMode, useEffect } from 'react';
 
 import withIntl from '~components/HOCs/withIntl';
 import LoadingIndicator from '~components/molecules/loadingIndicator';
@@ -33,7 +33,7 @@ function Base<P>({
 	Component,
 	pageProps,
 }: {
-	Component: typeof React.Component;
+	Component: typeof Component_;
 	pageProps: P & IBaseProps;
 }): JSX.Element {
 	const { description, disableSidebar, title, canonicalUrl, dehydratedState } =
@@ -45,7 +45,7 @@ function Base<P>({
 
 	return (
 		<div className={styles.base}>
-			<React.StrictMode>
+			<StrictMode>
 				<Head>
 					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
 					<title>{title ? `${title} | AudioVerse` : 'AudioVerse'}</title>
@@ -96,7 +96,7 @@ function Base<P>({
 						</AndGlobalModals>
 					</Hydrate>
 				</QueryClientProvider>
-			</React.StrictMode>
+			</StrictMode>
 		</div>
 	);
 }

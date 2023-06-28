@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CardFavoriteFragment } from './__generated__/favorite';
 import CardFavoriteEntity from './favoriteEntity';
 

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import { Fragment } from 'react';
 
 import Heading6 from '~components/atoms/heading6';
 import { BaseColors } from '~lib/constants';
@@ -22,17 +22,17 @@ export default function DefinitionList({
 	textColor,
 }: Props): JSX.Element {
 	return (
-		<dl className={clsx(styles.dl, baseColorStyles[textColor])}>
+        <dl className={clsx(styles.dl, baseColorStyles[textColor])}>
 			{terms.map(({ term, definition }, index) => (
-				<React.Fragment key={index}>
+				<Fragment key={index}>
 					<dt className={styles.dt}>
 						<Heading6 sans unpadded uppercase>
 							{term}
 						</Heading6>
 					</dt>
 					<dd className={styles.dd}>{definition}</dd>
-				</React.Fragment>
+				</Fragment>
 			))}
 		</dl>
-	);
+    );
 }

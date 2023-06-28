@@ -1,14 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import throttle from 'lodash/throttle';
 import Script from 'next/script';
-import React, {
-	MutableRefObject,
-	ReactNode,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
+import {
+    createContext,
+    MutableRefObject,
+    ReactNode,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
 } from 'react';
 import type * as VideoJs from 'video.js';
 
@@ -125,7 +126,7 @@ export type PlaybackContextType = {
 	) => void;
 };
 
-export const PlaybackContext = React.createContext<PlaybackContextType>({
+export const PlaybackContext = createContext<PlaybackContextType>({
 	player: () => undefined,
 	play: () => undefined,
 	pause: () => undefined,

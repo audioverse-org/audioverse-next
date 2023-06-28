@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';

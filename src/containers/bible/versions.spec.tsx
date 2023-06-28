@@ -1,5 +1,3 @@
-import React from 'react';
-
 import * as bibleBrain from '~lib/api/bibleBrain';
 import { buildLoader } from '~lib/test/buildLoader';
 import renderWithProviders from '~lib/test/renderWithProviders';

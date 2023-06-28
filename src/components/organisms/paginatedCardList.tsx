@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 import Heading1 from '~components/atoms/heading1';
 import ButtonBack from '~components/molecules/buttonBack';

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { useIsSequenceFavorited } from '~lib/api/useIsSequenceFavorited';

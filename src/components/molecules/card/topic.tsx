@@ -1,5 +1,3 @@
-import React from 'react';
-
 import HatIcon from '../../../../public/img/icons/fa-layer-group.svg';
 import TeaseRecording from '../teaseRecording';
 import { CardRecordingFragment } from './__generated__/recording';

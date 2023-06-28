@@ -2,7 +2,6 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
-import React from 'react';
 
 import Login from '~components/molecules/login';
 import { fetchApi } from '~lib/api/fetchApi';

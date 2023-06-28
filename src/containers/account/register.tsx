@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
 import SocialLogin from '~components/molecules/socialLogin';

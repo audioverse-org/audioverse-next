@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import React from 'react';
 
 import RoundImage from '~components/atoms/roundImage';
 import { BaseColors } from '~lib/constants';

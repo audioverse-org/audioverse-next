@@ -1,4 +1,4 @@
-import React, { MouseEvent, PropsWithChildren, useState } from 'react';
+import { MouseEvent, PropsWithChildren, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading6 from '~components/atoms/heading6';

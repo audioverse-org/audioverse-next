@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { PersonLockupFragment } from './__generated__/personLockup';
 import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 

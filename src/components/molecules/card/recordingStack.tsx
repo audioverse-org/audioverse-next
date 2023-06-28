@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { SequenceContentType } from '~src/__generated__/graphql';
 
 import TeaseRecordingStack from '../teaseRecordingStack';

@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading6 from '~components/atoms/heading6';

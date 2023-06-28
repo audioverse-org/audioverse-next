@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookies from 'js-cookie';
 import { __loadRouter } from 'next/router';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
 import { RegisterSocialDocument } from '~containers/account/__generated__/register';

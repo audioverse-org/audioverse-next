@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
@@ -38,7 +38,7 @@ export default function SearchBar({
 	const intl = useIntl();
 	const [isFocused, setIsFocused] = useState(false);
 	const [lastTerm, setLastTerm] = useState(term);
-	const inputRef = React.useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleSubmit = useCallback(
 		(e: KeyboardEvent) => e.key === 'Enter' && onSubmit?.(),

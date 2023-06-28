@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { ReactNode, useState } from 'react';
+import { Children, ReactNode, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import Button from '~components/molecules/button';
@@ -30,11 +30,11 @@ export default function Slider({
 	const intl = useIntl();
 	const [delta, setDelta] = useState<number>(0);
 
-	if (floatingControls && React.Children.count(children) > 5) {
+	if (floatingControls && Children.count(children) > 5) {
 		throw new Error('Unsupported number of children');
 	}
 
-	const array = React.Children.toArray(children);
+	const array = Children.toArray(children);
 	const pageCount = Math.ceil(array.length / perSlide);
 	const pageIndices = Array.from(new Array(pageCount).keys());
 

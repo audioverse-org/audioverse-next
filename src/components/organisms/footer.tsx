@@ -1,6 +1,6 @@
 import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading3 from '~components/atoms/heading3';

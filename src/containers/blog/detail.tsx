@@ -1,5 +1,4 @@
 import Image from 'next/legacy/image';
-import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import HorizontalRule from '~components/atoms/horizontalRule';

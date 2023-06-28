@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import { Fragment } from 'react';
 
 import TeaseRecording from '~components/molecules/teaseRecording';
 
@@ -23,9 +23,9 @@ export default function TeaseRecordingStack({
 }: Props): JSX.Element | null {
 	// TODO: add expand/contract?
 	return (
-		<WithCardTheme theme={theme} className={styles.base}>
+        <WithCardTheme theme={theme} className={styles.base}>
 			{recordings.map((recording, index) => (
-				<React.Fragment key={recording.canonicalPath}>
+				<Fragment key={recording.canonicalPath}>
 					<TeaseRecording
 						{...{ recording, theme, ...props }}
 						small={recordings.length > 1 || allSmall}
@@ -33,8 +33,8 @@ export default function TeaseRecordingStack({
 					{index + 1 < recordings.length && (
 						<div className={clsx(styles.separator, styles.paddedSeparator)} />
 					)}
-				</React.Fragment>
+				</Fragment>
 			))}
 		</WithCardTheme>
-	);
+    );
 }

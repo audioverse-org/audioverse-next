@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useIntl } from 'react-intl';
 
 import IconButton from '~components/molecules/iconButton';

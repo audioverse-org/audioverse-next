@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import LoadingCards from '~components/molecules/loadingCards';
 import NotFoundBase from '~components/organisms/notFound';

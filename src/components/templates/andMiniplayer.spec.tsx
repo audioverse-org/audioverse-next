@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import AndMiniplayer from '~components/templates/andMiniplayer';
 import AndPlaybackContext, {
