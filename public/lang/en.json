@@ -2502,8 +2502,14 @@
   "topicDetail__count": {
     "string": "{count, plural, one {# item} other {# items}}"
   },
+  "topicDetail__description": {
+    "string": "Description"
+  },
   "topicDetail__label": {
     "string": "Topic"
+  },
+  "topicDetail__parentTopic": {
+    "string": "Parent Topic"
   },
   "topicDetail__series": {
     "string": "Series"
