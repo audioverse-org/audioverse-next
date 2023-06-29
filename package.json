@@ -41,7 +41,7 @@
         "@tanstack/react-query-devtools": "^4.29.19",
         "clsx": "^1.2.1",
         "cookie": "^0.4.1",
-        "dayjs": "^1.10.7",
+        "dayjs": "^1.11.8",
         "feed": "git+https://mattleff@github.com/mattleff/feed.git#custome-elements-build",
         "full-icu": "^1.5.0",
         "he": "^1.2.0",
