@@ -8,8 +8,21 @@
 
 .title {
 	color: $ts-white;
+	margin-top: 18px;
+}
+
+.summary {
+	margin-top: 8px;
+	margin-bottom: 16px;
+	font-size: 16px;
+}
+
+.duration {
+	margin-top: 3.5px;
+	margin-bottom: 18px;
 }
 
 .grid {
 	grid-gap: 16px;
+	margin-bottom: 16px;
 }

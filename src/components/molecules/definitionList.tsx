@@ -9,7 +9,7 @@ import styles from './definitionList.module.scss';
 
 export type IDefinitionListTerm = {
 	term: JSX.Element | string;
-	definition: JSX.Element | string;
+	definition: JSX.Element | string | null | undefined | false;
 };
 
 type Props = {
@@ -23,16 +23,18 @@ export default function DefinitionList({
 }: Props): JSX.Element {
 	return (
 		<dl className={clsx(styles.dl, baseColorStyles[textColor])}>
-			{terms.map(({ term, definition }, index) => (
-				<React.Fragment key={index}>
-					<dt className={styles.dt}>
-						<Heading6 sans unpadded uppercase>
-							{term}
-						</Heading6>
-					</dt>
-					<dd className={styles.dd}>{definition}</dd>
-				</React.Fragment>
-			))}
+			{terms
+				.filter((t) => !!t.definition)
+				.map(({ term, definition }, index) => (
+					<React.Fragment key={index}>
+						<dt className={styles.dt}>
+							<Heading6 sans unpadded uppercase>
+								{term}
+							</Heading6>
+						</dt>
+						<dd className={styles.dd}>{definition}</dd>
+					</React.Fragment>
+				))}
 		</dl>
 	);
 }

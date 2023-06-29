@@ -116,4 +116,16 @@ describe('Topic', () => {
 
 		expect(screen.getByText('The Recording Title')).toBeInTheDocument();
 	});
+
+	it('does not render empty metadata', async () => {
+		loadData({
+			topic: {
+				description: '',
+			},
+		});
+
+		await render();
+
+		expect(screen.queryByText('Description')).not.toBeInTheDocument();
+	});
 });
