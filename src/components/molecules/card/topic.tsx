@@ -1,10 +1,13 @@
+import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~src/components/atoms/heading2';
 import Heading6 from '~src/components/atoms/heading6';
 import { BaseColors } from '~src/lib/constants';
+import root from '~src/lib/routes';
 import { useFormattedDuration } from '~src/lib/time';
+import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import HatIcon from '../../../../public/img/icons/fa-layer-group.svg';
 import TypeLockup from '../typeLockup';
@@ -17,11 +20,15 @@ type CardTopicProps = {
 };
 
 export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
+	const lang = useLanguageRoute();
 	const duration = useFormattedDuration(topic.duration);
 
 	return (
 		<CardWithTheme theme="topic" className={styles.theme}>
-			<div className={styles.content}>
+			<Link
+				className={styles.content}
+				href={root.lang(lang).topics.id(topic.id).slug(topic.title).get()}
+			>
 				<TypeLockup
 					Icon={HatIcon}
 					label={
@@ -45,7 +52,7 @@ export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
 					/>
 				</Heading6>
 				<p className={styles.duration}>{duration}</p>
-			</div>
+			</Link>
 		</CardWithTheme>
 	);
 }

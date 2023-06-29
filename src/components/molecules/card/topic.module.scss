@@ -10,6 +10,10 @@
 	height: 100%;
 }
 
+.content:hover {
+	color: var(--cardColor);
+}
+
 .title {
 	margin-top: 18px;
 }

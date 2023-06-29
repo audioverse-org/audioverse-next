@@ -428,16 +428,6 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
-					source: '/:lang/topics',
-					destination: '/:lang/discover/collections',
-					permanent: true,
-				},
-				{
-					source: '/:lang/topics/:topicId/:slugs',
-					destination: '/:lang/discover/collections',
-					permanent: true,
-				},
-				{
 					source: '/:lang/testimonials',
 					destination: '/:lang/testimonies/page/1',
 					permanent: true,
