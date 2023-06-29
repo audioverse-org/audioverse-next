@@ -16,6 +16,7 @@ import songs from './songs';
 import sponsors from './sponsors';
 import stories from './stories';
 import teachings from './teachings';
+import topics from './topics';
 
 const namespaces = (r: string) => ({
 	about: node(`${r}/about`, about),
@@ -37,6 +38,7 @@ const namespaces = (r: string) => ({
 	stories: node(`${r}/stories`, stories),
 	teachings: node(`${r}/teachings`, teachings),
 	testimonies: paginatedNode(`${r}/testimonies`),
+	topics: node(`${r}/topics`, topics),
 });
 
 const root = {

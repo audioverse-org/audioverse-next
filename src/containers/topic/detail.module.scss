@@ -1,0 +1,15 @@
+@import '../../styles/common';
+
+.container {
+    padding: $tease-padding;
+    background-color: $ts-topicH;
+    color: $ts-lightTone;
+}
+
+.title {
+    color: $ts-white;
+}
+
+.grid {
+    grid-gap: 16px;
+}
