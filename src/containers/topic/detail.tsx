@@ -19,15 +19,18 @@ import { Must } from '~src/types/types';
 import { GetTopicDetailDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
+type Item = CardRecordingFragment | CardSequenceFragment;
+
+const isSeries = (v: Item): v is CardSequenceFragment =>
+	v.__typename === 'Sequence';
+const isTeaching = (v: Item): v is CardRecordingFragment =>
+	v.__typename === 'Recording';
+
 function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
-	const items = topic.items.nodes?.map((n) => n.entity) ?? [];
-	const series: CardSequenceFragment[] = items?.filter(
-		(n): n is CardSequenceFragment => n.__typename === 'Sequence'
-	);
-	const teachings: CardRecordingFragment[] = items?.filter(
-		(n): n is CardRecordingFragment => n.__typename === 'Recording'
-	);
 	const duration = useFormattedDuration(topic.duration);
+	const items = topic.items.nodes?.map((n) => n.entity) ?? [];
+	const series = items.filter(isSeries);
+	const teachings = items.filter(isTeaching);
 
 	return (
 		<Tease className={styles.container}>
