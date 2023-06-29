@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import ButtonShare from '~components/molecules/buttonShare';
 import Icon from '~public/img/icons/fa-layer-group.svg';
 import Heading2 from '~src/components/atoms/heading2';
 import Heading6 from '~src/components/atoms/heading6';
@@ -100,7 +101,18 @@ function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
 						}}
 					/>
 				</Heading6>
-				<p className={styles.duration}>{duration}</p>
+				<div className={styles.row}>
+					<p className={styles.duration}>{duration}</p>
+					<ButtonShare
+						shareUrl={root
+							.lang(lang)
+							.topics.id(topic.id)
+							.slug(topic.title)
+							.get()}
+						backgroundColor={BaseColors.TOPIC_B}
+						emailSubject={topic.title}
+					/>
+				</div>
 				{hasDetails && (
 					<>
 						<HorizontalRule color={BaseColors.LIGHT_TONE} />
