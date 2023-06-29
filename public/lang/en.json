@@ -2499,6 +2499,15 @@
     "comment": "time minutes and seconds",
     "string": "{m}:{s}"
   },
+  "topicDetail__label": {
+    "string": "Topic"
+  },
+  "topicDetail__series": {
+    "string": "Series"
+  },
+  "topicDetail__teachings": {
+    "string": "Teachings"
+  },
   "trendingTeachings__heading": {
     "string": "Trending Teachings"
   },

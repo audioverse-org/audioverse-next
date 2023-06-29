@@ -5355,6 +5355,24 @@
       "value": "s"
     }
   ],
+  "topicDetail__label": [
+    {
+      "type": 0,
+      "value": "Topic"
+    }
+  ],
+  "topicDetail__series": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "topicDetail__teachings": [
+    {
+      "type": 0,
+      "value": "Teachings"
+    }
+  ],
   "trendingTeachings__heading": [
     {
       "type": 0,
