@@ -13,6 +13,7 @@ import CardGroup from '~src/components/molecules/cardGroup';
 import ContentWidthLimiter from '~src/components/molecules/contentWidthLimiter';
 import Tease from '~src/components/molecules/tease';
 import { BaseColors } from '~src/lib/constants';
+import { useFormattedDuration } from '~src/lib/time';
 import { Must } from '~src/types/types';
 
 import { GetTopicDetailDataQuery } from './__generated__/detail';
@@ -26,6 +27,7 @@ function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
 	const teachings: CardRecordingFragment[] = items?.filter(
 		(n): n is CardRecordingFragment => n.__typename === 'Recording'
 	);
+	const duration = useFormattedDuration(topic.duration);
 
 	return (
 		<Tease className={styles.container}>
@@ -36,8 +38,16 @@ function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
 				</p>
 				<Heading2 className={styles.title}>{topic.title}</Heading2>
 				<p>{topic.summary}</p>
-				<p>{topic.items.aggregate?.count}</p>
-				<p>{topic.duration}</p>
+				<p>
+					<FormattedMessage
+						id="topicDetail__count"
+						defaultMessage="{count, plural, one {# item} other {# items}}"
+						values={{
+							count: topic.items.aggregate?.count ?? 0,
+						}}
+					/>
+				</p>
+				<p>{duration}</p>
 				<p>{topic.description}</p>
 				<p>{topic.parentTopic?.title}</p>
 			</ContentWidthLimiter>
