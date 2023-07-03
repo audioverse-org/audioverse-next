@@ -20,15 +20,16 @@
 .row {
 	display: flex;
 	align-items: center;
-	margin-bottom: -4px;
+	margin-bottom: 16px;
 
-	> *:first-child {
+	>*:first-child {
 		flex-grow: 1;
 	}
 }
 
 .duration {
-	margin-top: 3.5px;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .grid {
