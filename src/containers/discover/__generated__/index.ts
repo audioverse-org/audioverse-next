@@ -73,7 +73,7 @@ export type GetDiscoverTopicsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetDiscoverTopicsQuery = { __typename?: 'Query', topics: { __typename?: 'TopicConnection', nodes: Array<{ __typename?: 'Topic', id: string | number, title: string, summary: string, duration: number, canonicalPath: string, items: { __typename?: 'TopicItemConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+export type GetDiscoverTopicsQuery = { __typename?: 'Query', topics: { __typename?: 'TopicConnection', nodes: Array<{ __typename?: 'Topic', id: string | number, title: string, summary: string, duration: number, canonicalPath: string, items: { __typename?: 'TopicItemConnection', nodes: Array<{ __typename?: 'TopicItem', entity: { __typename: 'Recording' } | { __typename: 'Sequence' } }> | null, aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
 
 
 export const GetDiscoverRecentTeachingsDocument = `
