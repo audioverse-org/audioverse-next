@@ -8,6 +8,7 @@ import Heading2 from '~src/components/atoms/heading2';
 import Heading6 from '~src/components/atoms/heading6';
 import HorizontalRule from '~src/components/atoms/horizontalRule';
 import LineHeading from '~src/components/atoms/lineHeading';
+import TopicItemCount from '~src/components/atoms/topicItemCount';
 import withFailStates from '~src/components/HOCs/withFailStates';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import { CardSequenceFragment } from '~src/components/molecules/card/__generated__/sequence';
@@ -93,13 +94,7 @@ function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
 				</Heading2>
 				<p className={styles.summary}>{topic.summary}</p>
 				<Heading6 sans loose unpadded uppercase className={styles.count}>
-					<FormattedMessage
-						id="topicDetail__count"
-						defaultMessage="{count, plural, one {# item} other {# items}}"
-						values={{
-							count: topic.items.aggregate?.count ?? 0,
-						}}
-					/>
+					<TopicItemCount topic={topic} />
 				</Heading6>
 				<div className={styles.row}>
 					<p className={styles.duration}>{duration}</p>
