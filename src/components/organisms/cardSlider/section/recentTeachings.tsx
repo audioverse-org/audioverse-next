@@ -11,8 +11,8 @@ import useLanguageRoute from '~src/lib/useLanguageRoute';
 import {
 	GetDiscoverRecentTeachingsQuery,
 	useInfiniteGetDiscoverRecentTeachingsQuery,
-} from './__generated__';
-import Section, { SectionNode } from './index.section';
+} from '../../../../containers/discover/__generated__';
+import Section, { SectionNode } from './index';
 
 function selectRecentTeachings(p: GetDiscoverRecentTeachingsQuery | undefined) {
 	return p?.recentTeachings.nodes;

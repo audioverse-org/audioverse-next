@@ -11,8 +11,8 @@ import useLanguageRoute from '~src/lib/useLanguageRoute';
 import {
 	GetDiscoverTrendingTeachingsQuery,
 	useInfiniteGetDiscoverTrendingTeachingsQuery,
-} from './__generated__';
-import Section, { SectionNode } from './index.section';
+} from '../../../../containers/discover/__generated__';
+import Section, { SectionNode } from './index';
 
 function selectTrendingTeachings(
 	p: GetDiscoverTrendingTeachingsQuery | undefined

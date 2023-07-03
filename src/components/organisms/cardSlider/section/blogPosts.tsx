@@ -11,8 +11,8 @@ import useLanguageRoute from '~src/lib/useLanguageRoute';
 import {
 	GetDiscoverBlogPostsQuery,
 	useInfiniteGetDiscoverBlogPostsQuery,
-} from './__generated__';
-import Section, { SectionNode } from './index.section';
+} from '../../../../containers/discover/__generated__';
+import Section, { SectionNode } from '.';
 
 function selectPosts(p: GetDiscoverBlogPostsQuery | undefined) {
 	return p?.blogPosts.nodes;

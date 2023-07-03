@@ -10,8 +10,8 @@ import useLanguageRoute from '~src/lib/useLanguageRoute';
 import {
 	GetDiscoverStorySeasonsQuery,
 	useInfiniteGetDiscoverStorySeasonsQuery,
-} from './__generated__';
-import Section, { SectionNode } from './index.section';
+} from '../../../../containers/discover/__generated__';
+import Section, { SectionNode } from './index';
 
 type StorySeason = NonNullable<
 	GetDiscoverStorySeasonsQuery['storySeasons']['nodes']
