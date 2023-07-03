@@ -9,8 +9,8 @@ import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
 import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 import { BaseColors } from '~lib/constants';
+import UserPlusIcon from '~public/img/icons/fa-user-plus.svg';
 
-import UserPlusIcon from '../../../../public/img/icons/fa-user-plus.svg';
 import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
 import { CardSponsorFragment } from './__generated__/sponsor';

@@ -11,8 +11,8 @@ import CardSponsor from '~components/molecules/card/sponsor';
 import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 
-import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
 import styles from './collections.module.scss';
 

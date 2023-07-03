@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Heading2 from '~components/atoms/heading2';
+import HatIcon from '~public/img/icons/fa-book-light.svg';
 
-import HatIcon from '../../../../../public/img/icons/fa-book-light.svg';
 import { CardRecordingFragment } from '../__generated__/recording';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
 import CardHat from '.';

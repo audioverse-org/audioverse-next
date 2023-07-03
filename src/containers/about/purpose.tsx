@@ -12,9 +12,9 @@ import AboutNav from '~components/organisms/aboutNav';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import IconBack from '~public/img/icons/icon-back-light.svg';
+import IconForward from '~public/img/icons/icon-forward-light.svg';
 
-import IconBack from '../../../public/img/icons/icon-back-light.svg';
-import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 import styles from './purpose.module.scss';
 import sharedStyles from './shared.module.scss';
 

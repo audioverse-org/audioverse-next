@@ -2,16 +2,16 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import {
+	GetDiscoverRecentTeachingsQuery,
+	useInfiniteGetDiscoverRecentTeachingsQuery,
+} from '~containers/discover/__generated__';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import {
-	GetDiscoverRecentTeachingsQuery,
-	useInfiniteGetDiscoverRecentTeachingsQuery,
-} from '../../../../containers/discover/__generated__';
 import Section, { SectionNode } from './index';
 
 function selectRecentTeachings(p: GetDiscoverRecentTeachingsQuery | undefined) {

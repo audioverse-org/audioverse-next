@@ -2,16 +2,16 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import {
+	GetDiscoverBlogPostsQuery,
+	useInfiniteGetDiscoverBlogPostsQuery,
+} from '~containers/discover/__generated__';
 import { CardPostFragment } from '~src/components/molecules/card/__generated__/post';
 import CardPost from '~src/components/molecules/card/post';
 import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import {
-	GetDiscoverBlogPostsQuery,
-	useInfiniteGetDiscoverBlogPostsQuery,
-} from '../../../../containers/discover/__generated__';
 import Section, { SectionNode } from '.';
 
 function selectPosts(p: GetDiscoverBlogPostsQuery | undefined) {

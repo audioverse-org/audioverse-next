@@ -3,8 +3,8 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
 import RoundImage from '~components/atoms/roundImage';
+import HatIcon from '~public/img/icons/fa-list-alt.svg';
 
-import HatIcon from '../../../../../public/img/icons/fa-list-alt.svg';
 import { CardRecordingFragment } from '../__generated__/recording';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
 import CardHat from '.';

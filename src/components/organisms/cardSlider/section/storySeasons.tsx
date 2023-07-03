@@ -2,15 +2,15 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import {
+	GetDiscoverStorySeasonsQuery,
+	useInfiniteGetDiscoverStorySeasonsQuery,
+} from '~containers/discover/__generated__';
 import CardSequence from '~src/components/molecules/card/sequence';
 import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import {
-	GetDiscoverStorySeasonsQuery,
-	useInfiniteGetDiscoverStorySeasonsQuery,
-} from '../../../../containers/discover/__generated__';
 import Section, { SectionNode } from './index';
 
 type StorySeason = NonNullable<
