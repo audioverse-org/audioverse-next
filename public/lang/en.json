@@ -2496,9 +2496,6 @@
     "comment": "time minutes and seconds",
     "string": "{m}:{s}"
   },
-  "topicDetail__count": {
-    "string": "{count, plural, one {# item} other {# items}}"
-  },
   "topicDetail__description": {
     "string": "Description"
   },
