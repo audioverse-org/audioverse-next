@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
+import { mockWidth } from '~components/organisms/cardSlider/index.spec';
 import { __swiper } from '~lib/swiper';
 import { buildLoader } from '~lib/test/buildLoader';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
@@ -25,7 +26,6 @@ import {
 	GetDiscoverTrendingTeachingsDocument,
 	GetDiscoverTrendingTeachingsQuery,
 } from './__generated__/index';
-import { mockWidth } from './index.slider.spec';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 
