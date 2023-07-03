@@ -493,15 +493,6 @@
   "cardStory_sequenceLabel": {
     "string": "Stories"
   },
-  "cardTopic__countBoth": {
-    "string": "{count, plural, one {# item} other {# items}}"
-  },
-  "cardTopic__countSeries": {
-    "string": "{count, plural, one {# series} other {# series}}"
-  },
-  "cardTopic__countTeachings": {
-    "string": "{count, plural, one {# teaching} other {# teachings}}"
-  },
   "cardTopic__hatLabel": {
     "string": "Topic"
   },
@@ -2522,6 +2513,15 @@
   },
   "topicDetail__teachings": {
     "string": "Teachings"
+  },
+  "topicItemCount__items": {
+    "string": "{count, plural, one {# item} other {# items}}"
+  },
+  "topicItemCount__series": {
+    "string": "{count, plural, one {# series} other {# series}}"
+  },
+  "topicItemCount__teachings": {
+    "string": "{count, plural, one {# teaching} other {# teachings}}"
   },
   "trendingTeachings__heading": {
     "string": "Trending Teachings"
