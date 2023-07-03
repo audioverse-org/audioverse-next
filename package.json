@@ -86,7 +86,7 @@
         "@mizdra/eslint-plugin-layout-shift": "^1.0.1",
         "@next/bundle-analyzer": "^13.0.3",
         "@next/eslint-plugin-next": "^13.0.3",
-        "@svgr/webpack": "^6.2.1",
+        "@svgr/webpack": "^8.0.1",
         "@testing-library/dom": "^9.0.1",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^14.0.0",
