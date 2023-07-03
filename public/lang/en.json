@@ -493,8 +493,14 @@
   "cardStory_sequenceLabel": {
     "string": "Stories"
   },
-  "cardTopic__count": {
+  "cardTopic__countBoth": {
     "string": "{count, plural, one {# item} other {# items}}"
+  },
+  "cardTopic__countSeries": {
+    "string": "{count, plural, one {# series} other {# series}}"
+  },
+  "cardTopic__countTeachings": {
+    "string": "{count, plural, one {# teaching} other {# teachings}}"
   },
   "cardTopic__hatLabel": {
     "string": "Topic"
