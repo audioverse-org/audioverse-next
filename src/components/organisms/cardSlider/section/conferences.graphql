@@ -1,0 +1,37 @@
+query getDiscoverConferences(
+	$language: Language!
+	$first: Int!
+	$after: String
+) {
+	conferences(
+		language: $language
+		first: $first
+		after: $after
+		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
+	) {
+		nodes {
+			...cardCollection
+			sequences(
+				first: 2
+				orderBy: [{ field: RECORDING_COUNT, direction: DESC }]
+			) {
+				nodes {
+					...cardSequence
+				}
+			}
+			recordings(
+				first: 2
+				sequenceId: 0
+				orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+			) {
+				nodes {
+					...cardRecording
+				}
+			}
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

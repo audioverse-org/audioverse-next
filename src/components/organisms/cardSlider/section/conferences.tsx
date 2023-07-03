@@ -2,15 +2,15 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import {
-	GetDiscoverConferencesQuery,
-	useInfiniteGetDiscoverConferencesQuery,
-} from '~containers/discover/__generated__';
 import CardCollection from '~src/components/molecules/card/collection';
 import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
+import {
+	GetDiscoverConferencesQuery,
+	useInfiniteGetDiscoverConferencesQuery,
+} from './__generated__/conferences';
 import Section, { SectionNode } from './index';
 
 type Conference = NonNullable<

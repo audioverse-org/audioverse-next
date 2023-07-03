@@ -2,14 +2,14 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import {
-	GetDiscoverFeaturedTeachingsQuery,
-	useInfiniteGetDiscoverFeaturedTeachingsQuery,
-} from '~containers/discover/__generated__';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
+import {
+	GetDiscoverFeaturedTeachingsQuery,
+	useInfiniteGetDiscoverFeaturedTeachingsQuery,
+} from './__generated__/featuredTeachings';
 import Section, { SectionNode } from './index';
 
 function selectFeaturedTeachings(

@@ -1,0 +1,22 @@
+query getDiscoverTrendingTeachings(
+	$language: Language!
+	$first: Int!
+	$after: String
+) {
+	trendingTeachings: popularRecordings(
+		language: $language
+		contentType: SERMON
+		first: $first
+		after: $after
+	) {
+		nodes {
+			recording {
+				...cardRecording
+			}
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

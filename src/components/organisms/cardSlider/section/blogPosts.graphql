@@ -1,0 +1,16 @@
+query getDiscoverBlogPosts($language: Language!, $first: Int!, $after: String) {
+	blogPosts(
+		language: $language
+		first: $first
+		after: $after
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
+		nodes {
+			...cardPost
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

@@ -1,15 +1,15 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import {
-	GetDiscoverTopicsQuery,
-	useInfiniteGetDiscoverTopicsQuery,
-} from '~containers/discover/__generated__';
 import { Maybe } from '~src/__generated__/graphql';
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
+import {
+	GetDiscoverTopicsQuery,
+	useInfiniteGetDiscoverTopicsQuery,
+} from './__generated__/topics';
 import Section, { SectionNode } from './index';
 
 function selectTopics(p: GetDiscoverTopicsQuery | undefined) {
