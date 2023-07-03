@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~src/components/atoms/heading2';
 import Heading6 from '~src/components/atoms/heading6';
+import TopicItemCount from '~src/components/atoms/topicItemCount';
 import { BaseColors } from '~src/lib/constants';
 import root from '~src/lib/routes';
 import { useFormattedDuration } from '~src/lib/time';
@@ -18,66 +19,6 @@ import styles from './topic.module.scss';
 type CardTopicProps = {
 	topic: CardTopicFragment;
 };
-
-type Item = {
-	entity: {
-		__typename: string;
-	};
-};
-
-const isSeries = (v: Item): boolean => v.entity.__typename === 'Sequence';
-const isTeaching = (v: Item): boolean => v.entity.__typename === 'Recording';
-
-function ItemCount({ topic }: CardTopicProps): JSX.Element {
-	const n = topic.items.nodes || [];
-	const count = n.length;
-	const s = +n.some(isSeries);
-	const t = +n.some(isTeaching);
-	const f = `${s}${t}`;
-
-	const bl = (
-		<FormattedMessage
-			id="cardTopic__countBoth"
-			defaultMessage="{count, plural, one {# item} other {# items}}"
-			values={{
-				count,
-			}}
-		/>
-	);
-
-	const tl = (
-		<FormattedMessage
-			id="cardTopic__countTeachings"
-			defaultMessage="{count, plural, one {# teaching} other {# teachings}}"
-			values={{
-				count,
-			}}
-		/>
-	);
-
-	const sl = (
-		<FormattedMessage
-			id="cardTopic__countSeries"
-			defaultMessage="{count, plural, one {# series} other {# series}}"
-			values={{
-				count,
-			}}
-		/>
-	);
-
-	switch (f) {
-		case '00':
-			return bl;
-		case '01':
-			return tl;
-		case '10':
-			return sl;
-		case '11':
-			return bl;
-		default:
-			throw new Error(`Unreachable case`);
-	}
-}
 
 export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
 	const lang = useLanguageRoute();
@@ -107,7 +48,7 @@ export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
 					</Heading2>
 					<p className={styles.summary}>{topic.summary}</p>
 					<Heading6 sans loose unpadded uppercase className={styles.count}>
-						<ItemCount topic={topic} />
+						<TopicItemCount topic={topic} />
 					</Heading6>
 					<p className={styles.duration}>{duration}</p>
 				</>
