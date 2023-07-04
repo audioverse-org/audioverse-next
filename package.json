@@ -65,7 +65,7 @@
         "video.js": "^7.21.1"
     },
     "devDependencies": {
-        "@babel/core": "^7.17.5",
+        "@babel/core": "^7.22.6",
         "@babel/plugin-proposal-optional-chaining": "^7.16.7",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-react": "^7.22.5",
