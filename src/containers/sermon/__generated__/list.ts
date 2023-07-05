@@ -181,26 +181,3 @@ export async function getSermonListPagePathsData<T>(
 ): Promise<GetSermonListPagePathsDataQuery> {
 	return fetchApi(GetSermonListPagePathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSermonListPageData: ExactAlt<T, GetSermonListPageDataQueryVariables>,
-		getSermonListFeedData: ExactAlt<T, GetSermonListFeedDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSermonListPageData', vars.getSermonListPageData], () => getSermonListPageData(vars.getSermonListPageData), options),
-		client.prefetchInfiniteQuery(['getSermonListPageData.infinite', vars.getSermonListPageData], () => getSermonListPageData(vars.getSermonListPageData), options),
-		client.prefetchQuery(['getSermonListFeedData', vars.getSermonListFeedData], () => getSermonListFeedData(vars.getSermonListFeedData), options),
-		client.prefetchInfiniteQuery(['getSermonListFeedData.infinite', vars.getSermonListFeedData], () => getSermonListFeedData(vars.getSermonListFeedData), options),
-	]);
-	
-	return client;
-}

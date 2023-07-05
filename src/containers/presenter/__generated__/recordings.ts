@@ -139,26 +139,3 @@ export async function getPresenterRecordingsFeedData<T>(
 ): Promise<GetPresenterRecordingsFeedDataQuery> {
 	return fetchApi(GetPresenterRecordingsFeedDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getPresenterRecordingsPageData: ExactAlt<T, GetPresenterRecordingsPageDataQueryVariables>,
-		getPresenterRecordingsFeedData: ExactAlt<T, GetPresenterRecordingsFeedDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getPresenterRecordingsPageData', vars.getPresenterRecordingsPageData], () => getPresenterRecordingsPageData(vars.getPresenterRecordingsPageData), options),
-		client.prefetchInfiniteQuery(['getPresenterRecordingsPageData.infinite', vars.getPresenterRecordingsPageData], () => getPresenterRecordingsPageData(vars.getPresenterRecordingsPageData), options),
-		client.prefetchQuery(['getPresenterRecordingsFeedData', vars.getPresenterRecordingsFeedData], () => getPresenterRecordingsFeedData(vars.getPresenterRecordingsFeedData), options),
-		client.prefetchInfiniteQuery(['getPresenterRecordingsFeedData.infinite', vars.getPresenterRecordingsFeedData], () => getPresenterRecordingsFeedData(vars.getPresenterRecordingsFeedData), options),
-	]);
-	
-	return client;
-}

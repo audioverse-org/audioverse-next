@@ -66,23 +66,3 @@ export async function getHelpWidgetData<T>(
 ): Promise<GetHelpWidgetDataQuery> {
 	return fetchApi(GetHelpWidgetDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getHelpWidgetData: ExactAlt<T, GetHelpWidgetDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getHelpWidgetData', vars.getHelpWidgetData], () => getHelpWidgetData(vars.getHelpWidgetData), options),
-		client.prefetchInfiniteQuery(['getHelpWidgetData.infinite', vars.getHelpWidgetData], () => getHelpWidgetData(vars.getHelpWidgetData), options),
-	]);
-	
-	return client;
-}

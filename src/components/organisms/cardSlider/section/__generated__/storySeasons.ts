@@ -83,23 +83,3 @@ export async function getDiscoverStorySeasons<T>(
 ): Promise<GetDiscoverStorySeasonsQuery> {
 	return fetchApi(GetDiscoverStorySeasonsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getDiscoverStorySeasons: ExactAlt<T, GetDiscoverStorySeasonsQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getDiscoverStorySeasons', vars.getDiscoverStorySeasons], () => getDiscoverStorySeasons(vars.getDiscoverStorySeasons), options),
-		client.prefetchInfiniteQuery(['getDiscoverStorySeasons.infinite', vars.getDiscoverStorySeasons], () => getDiscoverStorySeasons(vars.getDiscoverStorySeasons), options),
-	]);
-	
-	return client;
-}

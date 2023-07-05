@@ -115,23 +115,3 @@ export async function getTestimoniesPathsData<T>(
 ): Promise<GetTestimoniesPathsDataQuery> {
 	return fetchApi(GetTestimoniesPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getTestimoniesPageData: ExactAlt<T, GetTestimoniesPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getTestimoniesPageData', vars.getTestimoniesPageData], () => getTestimoniesPageData(vars.getTestimoniesPageData), options),
-		client.prefetchInfiniteQuery(['getTestimoniesPageData.infinite', vars.getTestimoniesPageData], () => getTestimoniesPageData(vars.getTestimoniesPageData), options),
-	]);
-	
-	return client;
-}

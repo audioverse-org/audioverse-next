@@ -213,23 +213,3 @@ export async function getPresenterDetailPathsData<T>(
 ): Promise<GetPresenterDetailPathsDataQuery> {
 	return fetchApi(GetPresenterDetailPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getPresenterDetailPageData: ExactAlt<T, GetPresenterDetailPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getPresenterDetailPageData', vars.getPresenterDetailPageData], () => getPresenterDetailPageData(vars.getPresenterDetailPageData), options),
-		client.prefetchInfiniteQuery(['getPresenterDetailPageData.infinite', vars.getPresenterDetailPageData], () => getPresenterDetailPageData(vars.getPresenterDetailPageData), options),
-	]);
-	
-	return client;
-}

@@ -81,23 +81,3 @@ export async function getCollectionTeachingsPageData<T>(
 ): Promise<GetCollectionTeachingsPageDataQuery> {
 	return fetchApi(GetCollectionTeachingsPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getCollectionTeachingsPageData: ExactAlt<T, GetCollectionTeachingsPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getCollectionTeachingsPageData', vars.getCollectionTeachingsPageData], () => getCollectionTeachingsPageData(vars.getCollectionTeachingsPageData), options),
-		client.prefetchInfiniteQuery(['getCollectionTeachingsPageData.infinite', vars.getCollectionTeachingsPageData], () => getCollectionTeachingsPageData(vars.getCollectionTeachingsPageData), options),
-	]);
-	
-	return client;
-}

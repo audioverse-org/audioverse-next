@@ -23,6 +23,9 @@ generates:
         DateTime: 'string'
         RelativeDateTime: 'string'
         URL: 'string'
+  src/__generated__/prefetch.ts:
+    plugins:
+      - 'graphql-codegen/dist/graphql-plugin-prefetch.js'
   src/:
     preset: near-operation-file
     presetConfig:
@@ -33,7 +36,6 @@ generates:
       - 'typescript-operations'
       - 'typescript-react-query'
       - 'graphql-codegen/dist/graphql-plugin-getters.js'
-      - 'graphql-codegen/dist/graphql-plugin-prefetch.js'
     config:
       fetcher: '~lib/api/graphqlFetcher#graphqlFetcher'
       addInfiniteQuery: true

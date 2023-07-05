@@ -58,23 +58,3 @@ export async function sequenceIsFavorited<T>(
 ): Promise<SequenceIsFavoritedQuery> {
 	return fetchApi(SequenceIsFavoritedDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		sequenceIsFavorited: ExactAlt<T, SequenceIsFavoritedQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['sequenceIsFavorited', vars.sequenceIsFavorited], () => sequenceIsFavorited(vars.sequenceIsFavorited), options),
-		client.prefetchInfiniteQuery(['sequenceIsFavorited.infinite', vars.sequenceIsFavorited], () => sequenceIsFavorited(vars.sequenceIsFavorited), options),
-	]);
-	
-	return client;
-}

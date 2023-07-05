@@ -66,23 +66,3 @@ export async function getDiscoverTopics<T>(
 ): Promise<GetDiscoverTopicsQuery> {
 	return fetchApi(GetDiscoverTopicsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getDiscoverTopics: ExactAlt<T, GetDiscoverTopicsQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getDiscoverTopics', vars.getDiscoverTopics], () => getDiscoverTopics(vars.getDiscoverTopics), options),
-		client.prefetchInfiniteQuery(['getDiscoverTopics.infinite', vars.getDiscoverTopics], () => getDiscoverTopics(vars.getDiscoverTopics), options),
-	]);
-	
-	return client;
-}

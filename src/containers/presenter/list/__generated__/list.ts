@@ -65,23 +65,3 @@ export async function getPersonListLetterCounts<T>(
 ): Promise<GetPersonListLetterCountsQuery> {
 	return fetchApi(GetPersonListLetterCountsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getPersonListLetterCounts: ExactAlt<T, GetPersonListLetterCountsQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getPersonListLetterCounts', vars.getPersonListLetterCounts], () => getPersonListLetterCounts(vars.getPersonListLetterCounts), options),
-		client.prefetchInfiniteQuery(['getPersonListLetterCounts.infinite', vars.getPersonListLetterCounts], () => getPersonListLetterCounts(vars.getPersonListLetterCounts), options),
-	]);
-	
-	return client;
-}

@@ -107,23 +107,3 @@ export async function getCustomDetailPageStaticPaths<T>(
 ): Promise<GetCustomDetailPageStaticPathsQuery> {
 	return fetchApi(GetCustomDetailPageStaticPathsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getCustomDetailPageData: ExactAlt<T, GetCustomDetailPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getCustomDetailPageData', vars.getCustomDetailPageData], () => getCustomDetailPageData(vars.getCustomDetailPageData), options),
-		client.prefetchInfiniteQuery(['getCustomDetailPageData.infinite', vars.getCustomDetailPageData], () => getCustomDetailPageData(vars.getCustomDetailPageData), options),
-	]);
-	
-	return client;
-}

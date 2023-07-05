@@ -111,26 +111,3 @@ export async function getStoriesAlbumsPathData<T>(
 ): Promise<GetStoriesAlbumsPathDataQuery> {
 	return fetchApi(GetStoriesAlbumsPathDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getStoriesAlbumsPageData: ExactAlt<T, GetStoriesAlbumsPageDataQueryVariables>,
-		getStoriesAlbumsPathData: ExactAlt<T, GetStoriesAlbumsPathDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getStoriesAlbumsPageData', vars.getStoriesAlbumsPageData], () => getStoriesAlbumsPageData(vars.getStoriesAlbumsPageData), options),
-		client.prefetchInfiniteQuery(['getStoriesAlbumsPageData.infinite', vars.getStoriesAlbumsPageData], () => getStoriesAlbumsPageData(vars.getStoriesAlbumsPageData), options),
-		client.prefetchQuery(['getStoriesAlbumsPathData', vars.getStoriesAlbumsPathData], () => getStoriesAlbumsPathData(vars.getStoriesAlbumsPathData), options),
-		client.prefetchInfiniteQuery(['getStoriesAlbumsPathData.infinite', vars.getStoriesAlbumsPathData], () => getStoriesAlbumsPathData(vars.getStoriesAlbumsPathData), options),
-	]);
-	
-	return client;
-}

@@ -58,23 +58,3 @@ export async function getBibleBookContent<T>(
 ): Promise<GetBibleBookContentQuery> {
 	return fetchApi(GetBibleBookContentDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getBibleBookContent: ExactAlt<T, GetBibleBookContentQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getBibleBookContent', vars.getBibleBookContent], () => getBibleBookContent(vars.getBibleBookContent), options),
-		client.prefetchInfiniteQuery(['getBibleBookContent.infinite', vars.getBibleBookContent], () => getBibleBookContent(vars.getBibleBookContent), options),
-	]);
-	
-	return client;
-}

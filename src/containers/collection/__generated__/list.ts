@@ -114,23 +114,3 @@ export async function getCollectionListPathsData<T>(
 ): Promise<GetCollectionListPathsDataQuery> {
 	return fetchApi(GetCollectionListPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getCollectionListPageData: ExactAlt<T, GetCollectionListPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getCollectionListPageData', vars.getCollectionListPageData], () => getCollectionListPageData(vars.getCollectionListPageData), options),
-		client.prefetchInfiniteQuery(['getCollectionListPageData.infinite', vars.getCollectionListPageData], () => getCollectionListPageData(vars.getCollectionListPageData), options),
-	]);
-	
-	return client;
-}

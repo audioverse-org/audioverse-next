@@ -63,23 +63,3 @@ export async function getNotFoundPageData<T>(
 ): Promise<GetNotFoundPageDataQuery> {
 	return fetchApi(GetNotFoundPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getNotFoundPageData: ExactAlt<T, GetNotFoundPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getNotFoundPageData', vars.getNotFoundPageData], () => getNotFoundPageData(vars.getNotFoundPageData), options),
-		client.prefetchInfiniteQuery(['getNotFoundPageData.infinite', vars.getNotFoundPageData], () => getNotFoundPageData(vars.getNotFoundPageData), options),
-	]);
-	
-	return client;
-}

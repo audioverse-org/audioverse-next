@@ -1,10 +1,10 @@
-@import '../../styles/common';
+@import '../../../../styles/common';
 
 .section:last-child {
 	margin-bottom: 0;
 }
 
-.section > h5 {
+.section>h5 {
 	display: flex;
 	justify-content: space-between;
 }

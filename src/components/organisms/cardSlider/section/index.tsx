@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import LineHeading from '~components/atoms/lineHeading';
 import CardSlider from '~components/organisms/cardSlider';
 
-import styles from './index.section.module.scss';
+import styles from './index.module.scss';
 
 const PRELOAD_COUNT = 3;
 

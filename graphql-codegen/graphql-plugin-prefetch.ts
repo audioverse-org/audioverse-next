@@ -1,74 +1,105 @@
 import { CodegenPlugin, Types } from '@graphql-codegen/plugin-helpers';
-import { Kind, OperationDefinitionNode } from 'graphql';
+import { DefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
+import path from 'path';
 
-const template = (queryNames: string[]) => {
-	const queryProps = queryNames
-		.map((n) => `${n}: ExactAlt<T, ${capitalize(n)}QueryVariables>`)
-		.join(',\n\t\t');
+type Query = { name: string; type: string };
 
-	const expressions = queryNames
-		.map((n) => [
-			`client.prefetchQuery(['${n}', vars.${n}], () => ${n}(vars.${n}), options),`,
-			`client.prefetchInfiniteQuery(['${n}.infinite', vars.${n}], () => ${n}(vars.${n}), options),`,
-		])
-		.flat()
-		.join('\n\t\t');
+type FileQueries = {
+	source: string;
+	queries: Query[];
+};
 
+const template = (imports: string[], functions: string[]) => {
 	return `
-export async function prefetchQueries<T>(
-	vars: {
-		${queryProps}
-	},
+import { QueryClient } from '@tanstack/react-query';
+import makeQueryClient from '~lib/makeQueryClient';
+
+${imports.join('\n')}
+
+type Fn<T> = (vars: T) => Promise<unknown>;
+type Key = keyof typeof fns;
+type Vars = {
+	[K in Key]?: Parameters<typeof fns[K]>[0];
+};
+
+const options = { cacheTime: 24 * 60 * 60 * 1000 };
+
+async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) {
+	const r = await fns[k](v as any);
+	await client.prefetchQuery([k, v], () => r, options);
+	await client.prefetchInfiniteQuery([\`\${k}.infinite\`, v], () => r, options);	
+}
+
+export async function prefetchQueries(
+	vars: Vars,
 	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
+	const queries = Object.keys(vars) as Key[];
 
-	await Promise.all([
-		${expressions}
-	]);
+	await Promise.all(
+		queries.map(k => doPrefetch(k, vars[k], client))
+	);
 	
 	return client;
-}`;
+}
+
+const fns = {
+	${functions.join('\n\t')}
+};
+`;
 };
 
 function capitalize(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const processDocument = (doc: Types.DocumentFile) => {
-	const operations = doc.document?.definitions.filter(
-		(def): def is OperationDefinitionNode =>
-			def.kind === Kind.OPERATION_DEFINITION
-	);
+function isOperation(def: DefinitionNode): def is OperationDefinitionNode {
+	return def.kind === Kind.OPERATION_DEFINITION;
+}
 
-	if (!operations?.length) return '';
-
+const getQueries = (doc: Types.DocumentFile): FileQueries => {
+	const root = path.dirname(path.dirname(__dirname));
+	const dir = doc.location && path.relative(root, path.dirname(doc.location));
+	const filename = doc.location && path.basename(doc.location, '.graphql');
+	const operations = doc.document?.definitions.filter(isOperation) ?? [];
 	const queries = operations.filter((op) => op.operation === 'query');
-
-	if (!queries?.length) return '';
-
 	const queryNames = queries
 		.map((q) => q.name?.value)
-		.filter((n): n is string => n !== undefined)
+		.filter((n): n is string => n !== undefined && !!n.length)
 		.filter((n) => !n.includes('Paths'));
 
-	if (!queryNames?.length) return '';
-
-	return template(queryNames);
+	return {
+		source: `~${dir}/__generated__/${filename}`,
+		queries: queryNames.map((n) => ({
+			name: n,
+			type: `${capitalize(n)}QueryVariables`,
+		})),
+	};
 };
 
 const plugin: CodegenPlugin = {
 	plugin: (schema, documents) => {
-		const result = documents.map(processDocument).join('\n');
+		const queries = documents
+			.map(getQueries)
+			.filter((q) => q.queries.length > 0);
 
-		if (!result) return '';
+		const imports = queries.map((q) => {
+			const { source, queries } = q;
+			const symbols = [
+				...queries.map((q) => q.type),
+				...queries.map((q) => q.name),
+			];
+			return `import { ${symbols.join(', ')} } from '${source}';`;
+		});
 
-		return `
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
+		const functions = queries
+			.map((q) => {
+				const { queries } = q;
+				return queries.map((q) => `${q.name}: ${q.name} as Fn<${q.type}>,`);
+			})
+			.flat();
 
-${result}
-`;
+		return template(imports, functions);
 	},
 };
 

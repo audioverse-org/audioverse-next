@@ -76,23 +76,3 @@ export async function getDiscoverRecentTeachings<T>(
 ): Promise<GetDiscoverRecentTeachingsQuery> {
 	return fetchApi(GetDiscoverRecentTeachingsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getDiscoverRecentTeachings: ExactAlt<T, GetDiscoverRecentTeachingsQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getDiscoverRecentTeachings', vars.getDiscoverRecentTeachings], () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings), options),
-		client.prefetchInfiniteQuery(['getDiscoverRecentTeachings.infinite', vars.getDiscoverRecentTeachings], () => getDiscoverRecentTeachings(vars.getDiscoverRecentTeachings), options),
-	]);
-	
-	return client;
-}

@@ -12,7 +12,7 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverConferencesQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int']['input'];
+  first?: Types.Scalars['Int']['input'];
   after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
@@ -21,7 +21,7 @@ export type GetDiscoverConferencesQuery = { __typename?: 'Query', conferences: {
 
 
 export const GetDiscoverConferencesDocument = `
-    query getDiscoverConferences($language: Language!, $first: Int!, $after: String) {
+    query getDiscoverConferences($language: Language!, $first: Int! = 6, $after: String) {
   conferences(
     language: $language
     first: $first
@@ -93,24 +93,4 @@ export async function getDiscoverConferences<T>(
 	variables: ExactAlt<T, GetDiscoverConferencesQueryVariables>
 ): Promise<GetDiscoverConferencesQuery> {
 	return fetchApi(GetDiscoverConferencesDocument, { variables });
-}
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getDiscoverConferences: ExactAlt<T, GetDiscoverConferencesQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getDiscoverConferences', vars.getDiscoverConferences], () => getDiscoverConferences(vars.getDiscoverConferences), options),
-		client.prefetchInfiniteQuery(['getDiscoverConferences.infinite', vars.getDiscoverConferences], () => getDiscoverConferences(vars.getDiscoverConferences), options),
-	]);
-	
-	return client;
 }

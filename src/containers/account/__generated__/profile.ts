@@ -140,23 +140,3 @@ export async function deleteAccount<T>(
 ): Promise<DeleteAccountMutation> {
 	return fetchApi(DeleteAccountDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getProfileData: ExactAlt<T, GetProfileDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getProfileData', vars.getProfileData], () => getProfileData(vars.getProfileData), options),
-		client.prefetchInfiniteQuery(['getProfileData.infinite', vars.getProfileData], () => getProfileData(vars.getProfileData), options),
-	]);
-	
-	return client;
-}

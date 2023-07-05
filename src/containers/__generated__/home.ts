@@ -94,23 +94,3 @@ export async function getHomeStaticProps<T>(
 ): Promise<GetHomeStaticPropsQuery> {
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getHomeStaticProps: ExactAlt<T, GetHomeStaticPropsQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getHomeStaticProps', vars.getHomeStaticProps], () => getHomeStaticProps(vars.getHomeStaticProps), options),
-		client.prefetchInfiniteQuery(['getHomeStaticProps.infinite', vars.getHomeStaticProps], () => getHomeStaticProps(vars.getHomeStaticProps), options),
-	]);
-	
-	return client;
-}

@@ -143,23 +143,3 @@ export async function getTopicDetailStaticPaths<T>(
 ): Promise<GetTopicDetailStaticPathsQuery> {
 	return fetchApi(GetTopicDetailStaticPathsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getTopicDetailData: ExactAlt<T, GetTopicDetailDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getTopicDetailData', vars.getTopicDetailData], () => getTopicDetailData(vars.getTopicDetailData), options),
-		client.prefetchInfiniteQuery(['getTopicDetailData.infinite', vars.getTopicDetailData], () => getTopicDetailData(vars.getTopicDetailData), options),
-	]);
-	
-	return client;
-}

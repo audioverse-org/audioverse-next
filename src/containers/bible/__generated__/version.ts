@@ -69,23 +69,3 @@ export async function getAudiobibleVersionData<T>(
 ): Promise<GetAudiobibleVersionDataQuery> {
 	return fetchApi(GetAudiobibleVersionDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getAudiobibleVersionData: ExactAlt<T, GetAudiobibleVersionDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getAudiobibleVersionData', vars.getAudiobibleVersionData], () => getAudiobibleVersionData(vars.getAudiobibleVersionData), options),
-		client.prefetchInfiniteQuery(['getAudiobibleVersionData.infinite', vars.getAudiobibleVersionData], () => getAudiobibleVersionData(vars.getAudiobibleVersionData), options),
-	]);
-	
-	return client;
-}

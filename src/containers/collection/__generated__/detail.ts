@@ -238,26 +238,3 @@ export async function getCollectionDetailPathsData<T>(
 ): Promise<GetCollectionDetailPathsDataQuery> {
 	return fetchApi(GetCollectionDetailPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getCollectionDetailPageData: ExactAlt<T, GetCollectionDetailPageDataQueryVariables>,
-		getCollectionFeedData: ExactAlt<T, GetCollectionFeedDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getCollectionDetailPageData', vars.getCollectionDetailPageData], () => getCollectionDetailPageData(vars.getCollectionDetailPageData), options),
-		client.prefetchInfiniteQuery(['getCollectionDetailPageData.infinite', vars.getCollectionDetailPageData], () => getCollectionDetailPageData(vars.getCollectionDetailPageData), options),
-		client.prefetchQuery(['getCollectionFeedData', vars.getCollectionFeedData], () => getCollectionFeedData(vars.getCollectionFeedData), options),
-		client.prefetchInfiniteQuery(['getCollectionFeedData.infinite', vars.getCollectionFeedData], () => getCollectionFeedData(vars.getCollectionFeedData), options),
-	]);
-	
-	return client;
-}

@@ -172,26 +172,3 @@ export async function getSongAlbumsDetailPathsData<T>(
 ): Promise<GetSongAlbumsDetailPathsDataQuery> {
 	return fetchApi(GetSongAlbumsDetailPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSongAlbumsDetailPageData: ExactAlt<T, GetSongAlbumsDetailPageDataQueryVariables>,
-		getSongAlbumFeedData: ExactAlt<T, GetSongAlbumFeedDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSongAlbumsDetailPageData', vars.getSongAlbumsDetailPageData], () => getSongAlbumsDetailPageData(vars.getSongAlbumsDetailPageData), options),
-		client.prefetchInfiniteQuery(['getSongAlbumsDetailPageData.infinite', vars.getSongAlbumsDetailPageData], () => getSongAlbumsDetailPageData(vars.getSongAlbumsDetailPageData), options),
-		client.prefetchQuery(['getSongAlbumFeedData', vars.getSongAlbumFeedData], () => getSongAlbumFeedData(vars.getSongAlbumFeedData), options),
-		client.prefetchInfiniteQuery(['getSongAlbumFeedData.infinite', vars.getSongAlbumFeedData], () => getSongAlbumFeedData(vars.getSongAlbumFeedData), options),
-	]);
-	
-	return client;
-}

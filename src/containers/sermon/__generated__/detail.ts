@@ -121,23 +121,3 @@ export async function getSermonDetailStaticPaths<T>(
 ): Promise<GetSermonDetailStaticPathsQuery> {
 	return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSermonDetailData: ExactAlt<T, GetSermonDetailDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSermonDetailData', vars.getSermonDetailData], () => getSermonDetailData(vars.getSermonDetailData), options),
-		client.prefetchInfiniteQuery(['getSermonDetailData.infinite', vars.getSermonDetailData], () => getSermonDetailData(vars.getSermonDetailData), options),
-	]);
-	
-	return client;
-}

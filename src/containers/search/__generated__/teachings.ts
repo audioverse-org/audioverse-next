@@ -71,23 +71,3 @@ export async function getSearchResultsRecordings<T>(
 ): Promise<GetSearchResultsRecordingsQuery> {
 	return fetchApi(GetSearchResultsRecordingsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSearchResultsRecordings: ExactAlt<T, GetSearchResultsRecordingsQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSearchResultsRecordings', vars.getSearchResultsRecordings], () => getSearchResultsRecordings(vars.getSearchResultsRecordings), options),
-		client.prefetchInfiniteQuery(['getSearchResultsRecordings.infinite', vars.getSearchResultsRecordings], () => getSearchResultsRecordings(vars.getSearchResultsRecordings), options),
-	]);
-	
-	return client;
-}

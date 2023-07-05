@@ -65,23 +65,3 @@ export async function getSponsorListAllPageData<T>(
 ): Promise<GetSponsorListAllPageDataQuery> {
 	return fetchApi(GetSponsorListAllPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSponsorListAllPageData: ExactAlt<T, GetSponsorListAllPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSponsorListAllPageData', vars.getSponsorListAllPageData], () => getSponsorListAllPageData(vars.getSponsorListAllPageData), options),
-		client.prefetchInfiniteQuery(['getSponsorListAllPageData.infinite', vars.getSponsorListAllPageData], () => getSponsorListAllPageData(vars.getSponsorListAllPageData), options),
-	]);
-	
-	return client;
-}
