@@ -52,10 +52,10 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Install Prettier
-        run: npm install --global prettier
+      - name: Install dependencies
+        run: npm ci
       - name: Check formatting
-        run: prettier --check .
+        run: npm run format:check
   test:
     runs-on: ubuntu-latest
     steps:
