@@ -22,9 +22,7 @@ import DefinitionList, {
 import Tease from '~src/components/molecules/tease';
 import TypeLockup from '~src/components/molecules/typeLockup';
 import { BaseColors } from '~src/lib/constants';
-import root from '~src/lib/routes';
 import { useFormattedDuration } from '~src/lib/time';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { GetTopicDetailDataQuery } from './__generated__/detail';
@@ -38,7 +36,6 @@ const isTeaching = (v: Item): v is CardRecordingFragment =>
 	v.__typename === 'Recording';
 
 function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
-	const lang = useLanguageRoute();
 	const duration = useFormattedDuration(topic.duration);
 	const items = topic.items.nodes?.map((n) => n.entity) ?? [];
 	const series = items.filter(isSeries);
@@ -62,13 +59,7 @@ function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
 				/>
 			),
 			definition: topic.parentTopic && (
-				<Link
-					href={root
-						.lang(lang)
-						.topics.id(topic.parentTopic.id)
-						.slug(topic.parentTopic.title)
-						.get()}
-				>
+				<Link href={topic.parentTopic.canonicalPath}>
 					<a>{topic.parentTopic.title}</a>
 				</Link>
 			),
@@ -99,11 +90,7 @@ function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
 				<div className={styles.row}>
 					<p className={styles.duration}>{duration}</p>
 					<ButtonShare
-						shareUrl={root
-							.lang(lang)
-							.topics.id(topic.id)
-							.slug(topic.title)
-							.get()}
+						shareUrl={topic.shareUrl}
 						backgroundColor={BaseColors.TOPIC_B}
 						emailSubject={topic.title}
 					/>

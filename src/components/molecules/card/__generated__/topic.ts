@@ -18,6 +18,6 @@ export const CardTopicFragmentDoc = `
       count
     }
   }
-  canonicalPath: title
+  canonicalPath(useFuturePath: true)
 }
     `;

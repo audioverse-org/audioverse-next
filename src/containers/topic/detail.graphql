@@ -5,13 +5,12 @@ query getTopicDetailData($id: ID!) {
 		summary
 		duration
 		description
-		# TODO
-		canonicalPath: title
+		canonicalPath(useFuturePath: true)
+		shareUrl
 		parentTopic {
 			id
 			title
-			# TODO
-			canonicalPath: title
+			canonicalPath(useFuturePath: true)
 		}
 		items {
 			nodes {

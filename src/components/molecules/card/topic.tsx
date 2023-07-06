@@ -7,9 +7,7 @@ import Heading2 from '~src/components/atoms/heading2';
 import Heading6 from '~src/components/atoms/heading6';
 import TopicItemCount from '~src/components/atoms/topicItemCount';
 import { BaseColors } from '~src/lib/constants';
-import root from '~src/lib/routes';
 import { useFormattedDuration } from '~src/lib/time';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import TypeLockup from '../typeLockup';
 import { CardTopicFragment } from './__generated__/topic';
@@ -21,15 +19,11 @@ type CardTopicProps = {
 };
 
 export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
-	const lang = useLanguageRoute();
 	const duration = useFormattedDuration(topic.duration);
 
 	return (
 		<CardWithTheme theme="topic" className={styles.theme}>
-			<Link
-				className={styles.content}
-				href={root.lang(lang).topics.id(topic.id).slug(topic.title).get()}
-			>
+			<Link className={styles.content} href={topic.canonicalPath}>
 				<>
 					<TypeLockup
 						Icon={HatIcon}
