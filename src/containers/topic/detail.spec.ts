@@ -25,6 +25,7 @@ const loadData = buildLoader<GetTopicDetailDataQuery>(
 	{
 		topic: {
 			title: 'The Title',
+			canonicalPath: '/en/topics/1/the-title',
 			items: {
 				nodes: [
 					{
@@ -65,6 +66,7 @@ const loadStaticPathsData = buildLoader<GetTopicDetailStaticPathsQuery>(
 				{
 					id: 1,
 					title: 'The Title',
+					canonicalPath: '/en/topics/1/the-title',
 				},
 			],
 		},
