@@ -1,43 +1,27 @@
 import { screen } from '@testing-library/react';
+import { PartialDeep } from 'type-fest';
 
+import { TopicItem } from '~src/__generated__/graphql';
 import { buildRenderer } from '~src/lib/test/buildRenderer';
 
 import CardTopic from './topic';
 
-const recording: {
-	entity: {
-		__typename: 'Recording';
-	};
-} = {
+const recording: PartialDeep<TopicItem> = {
 	entity: {
 		__typename: 'Recording',
 	},
 };
 
-const sequence: {
-	entity: {
-		__typename: 'Sequence';
-	};
-} = {
+const sequence: PartialDeep<TopicItem> = {
 	entity: {
 		__typename: 'Sequence',
 	},
 };
 
-const render = buildRenderer(CardTopic, {
-	defaultProps: {
-		topic: {
-			title: 'the_title',
-			canonicalPath: 'the_path',
-			items: {
-				aggregate: null,
-			},
-		},
-	},
-});
+const r = buildRenderer(CardTopic);
 
 const renderWithItems = (nodes: any[] = []) => {
-	return render({
+	return r({
 		props: {
 			topic: {
 				title: 'the_title',
@@ -55,7 +39,7 @@ const renderWithItems = (nodes: any[] = []) => {
 
 describe('topic card', () => {
 	it('uses "items" label when count is 0', async () => {
-		await render();
+		await renderWithItems();
 
 		expect(screen.getByText(/items/)).toBeInTheDocument();
 	});
