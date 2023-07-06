@@ -98,7 +98,7 @@ export const GetTopicDetailStaticPathsDocument = `
     nodes {
       id
       title
-      canonicalPath: title
+      canonicalPath(useFuturePath: true)
     }
   }
 }

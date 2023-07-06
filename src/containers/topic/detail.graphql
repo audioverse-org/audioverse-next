@@ -36,8 +36,7 @@ query getTopicDetailStaticPaths($language: Language!, $first: Int) {
 		nodes {
 			id
 			title
-			# TODO
-			canonicalPath: title
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }
