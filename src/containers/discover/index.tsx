@@ -12,8 +12,8 @@ import Topics from '../../components/organisms/cardSlider/section/topics';
 export default function Discover(): JSX.Element {
 	return (
 		<div>
-			<Topics />
 			<RecentTeachings />
+			<Topics />
 			<TrendingTeachings />
 			<FeaturedTeachings />
 			<BlogPosts />
