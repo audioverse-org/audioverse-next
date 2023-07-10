@@ -5392,6 +5392,10 @@ export const Timezone = {
 export type Timezone = typeof Timezone[keyof typeof Timezone];
 export type Topic = Node & {
   __typename?: 'Topic';
+  /** The canonical HTML path to this resource. */
+  canonicalPath: Scalars['String']['output'];
+  /** The canonical URL to this resource. */
+  canonicalUrl: Scalars['URL']['output'];
   description: Scalars['String']['output'];
   /** The combined duration of the topic's recordings in seconds. */
   duration: Scalars['Float']['output'];
@@ -5401,9 +5405,21 @@ export type Topic = Node & {
   items: TopicItemConnection;
   language: Language;
   parentTopic: Maybe<Topic>;
+  /** A shareable short URL to this resource. */
+  shareUrl: Scalars['URL']['output'];
   subTopics: TopicConnection;
   summary: Scalars['String']['output'];
   title: Scalars['String']['output'];
+};
+
+
+export type TopicCanonicalPathArgs = {
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type TopicCanonicalUrlArgs = {
+  useFuturePath?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
