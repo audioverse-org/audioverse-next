@@ -1033,6 +1033,44 @@
       "value": "Stories"
     }
   ],
+  "cardTopic__count": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " item"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "cardTopic__hatLabel": [
+    {
+      "type": 0,
+      "value": "Topic"
+    }
+  ],
   "ccollectionTeachingsDetail__heading": [
     {
       "type": 0,
@@ -1467,6 +1505,18 @@
       "value": "Discover"
     }
   ],
+  "discover__topicsNext": [
+    {
+      "type": 0,
+      "value": "Next topics"
+    }
+  ],
+  "discover__topicsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous topics"
+    }
+  ],
   "discover__trendingTeachingsNext": [
     {
       "type": 0,
@@ -1501,6 +1551,12 @@
     {
       "type": 0,
       "value": "Recent Teachings"
+    }
+  ],
+  "discover_topicsHeading": [
+    {
+      "type": 0,
+      "value": "Topics"
     }
   ],
   "discover_trendingTeachingsHeading": [

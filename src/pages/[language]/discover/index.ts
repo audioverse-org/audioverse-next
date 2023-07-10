@@ -35,6 +35,7 @@ export async function getStaticProps({
 		getDiscoverStorySeasons: { language, first: 3, after: null },
 		getDiscoverConferences: { language, first: 3, after: null },
 		getDiscoverBlogPosts: { language, first: 3, after: null },
+		getDiscoverTopics: { language, first: 3, after: null },
 	});
 
 	return {

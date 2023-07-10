@@ -1,0 +1,13 @@
+fragment cardTopic on Topic {
+	id
+	title
+	summary
+	duration
+	items {
+		aggregate {
+			count
+		}
+	}
+	# TODO: add canonical path to API
+	canonicalPath: title
+}
