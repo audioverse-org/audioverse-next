@@ -5334,6 +5334,11 @@ enum Timezone {
 }
 
 type Topic implements Node {
+  """The canonical HTML path to this resource."""
+  canonicalPath(useFuturePath: Boolean = false): String!
+
+  """The canonical URL to this resource."""
+  canonicalUrl(useFuturePath: Boolean = false): URL!
   description: String!
 
   """The combined duration of the topic's recordings in seconds."""
@@ -5353,6 +5358,9 @@ type Topic implements Node {
   ): TopicItemConnection!
   language: Language!
   parentTopic: Topic
+
+  """A shareable short URL to this resource."""
+  shareUrl: URL!
   subTopics(
     """Return the elements that come after the specified cursor."""
     after: String
