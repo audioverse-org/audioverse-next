@@ -3,7 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "concurrently \"npx update-browserslist-db@latest\" \"npm:graphql:codegen:watch\" \"next dev\"",
+        "predev": "concurrently \"npx update-browserslist-db@latest\" \"npm:graphql:codegen\"",
+        "dev": "concurrently \"npm:graphql:codegen:watch\" \"next dev\"",
         "build": "NODE_ICU_DATA=node_modules/full-icu next build",
         "postbuild": "next-sitemap",
         "build:dev": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu next build --debug",
