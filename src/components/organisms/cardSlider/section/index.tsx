@@ -15,7 +15,7 @@ export type SectionNode<T> = T & {
 };
 
 type SectionProps<T, N> = {
-	heading: string;
+	heading: string | JSX.Element;
 	previous: string;
 	next: string;
 	rows?: number;

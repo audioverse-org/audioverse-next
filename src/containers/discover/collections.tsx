@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import Button from '~components/molecules/button';
-import CardCollection from '~components/molecules/card/collection';
 import CardFavoriteEntity from '~components/molecules/card/favoriteEntity';
 import CardPerson from '~components/molecules/card/person';
 import CardSequence from '~components/molecules/card/sequence';
@@ -12,6 +11,7 @@ import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
+import Conferences from '~src/components/organisms/cardSlider/section/conferences';
 
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
 import styles from './collections.module.scss';
@@ -22,7 +22,6 @@ export default function DiscoverCollections({
 	websiteFeaturedCollection,
 	persons,
 	serieses,
-	conferences,
 	sponsors,
 	audiobooks,
 	storySeasons,
@@ -86,18 +85,17 @@ export default function DiscoverCollections({
 				))}
 			</CardGroup>
 			{makeSeeAllButton(root.lang(language).books.get())}
-			<LineHeading>
-				<FormattedMessage
-					id="discoverCollections_conferencesHeading"
-					defaultMessage="Conferences"
-				/>
-			</LineHeading>
-			<CardGroup className={styles.cardGroup}>
-				{conferences.nodes?.map((n) => (
-					<CardCollection collection={n} key={n.canonicalPath} />
-				))}
-			</CardGroup>
-			{makeSeeAllButton(root.lang(language).conferences.get())}
+
+			<Conferences
+				heading={
+					<FormattedMessage
+						id="discoverCollections_conferencesHeading"
+						defaultMessage="Conferences"
+					/>
+				}
+				includeSubItems={false}
+			/>
+
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_sponsorsHeading"

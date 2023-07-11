@@ -1,6 +1,6 @@
 query getDiscoverConferences(
 	$language: Language!
-	$first: Int! = 6
+	$first: Int! = 3
 	$after: String
 ) {
 	conferences(

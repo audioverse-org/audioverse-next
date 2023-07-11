@@ -21,7 +21,7 @@ export type GetDiscoverConferencesQuery = { __typename?: 'Query', conferences: {
 
 
 export const GetDiscoverConferencesDocument = `
-    query getDiscoverConferences($language: Language!, $first: Int! = 6, $after: String) {
+    query getDiscoverConferences($language: Language!, $first: Int! = 3, $after: String) {
   conferences(
     language: $language
     first: $first

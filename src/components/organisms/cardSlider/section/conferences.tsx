@@ -1,5 +1,5 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import CardCollection from '~src/components/molecules/card/collection';
@@ -21,24 +21,38 @@ function selectConferences(p: GetDiscoverConferencesQuery | undefined) {
 	return p?.conferences.nodes;
 }
 
-function NodeConference({
-	node,
-}: {
-	node: SectionNode<Conference>;
+export default function Conferences(props: {
+	heading?: string | JSX.Element;
+	includeSubItems?: boolean;
 }): JSX.Element {
-	return (
-		<CardCollection
-			collection={node}
-			sequences={node.sequences.nodes}
-			recordings={node.sequences.nodes?.length ? null : node.recordings.nodes}
-		/>
-	);
-}
-
-export default function Conferences(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
 	const intl = useIntl();
+
+	const {
+		heading = intl.formatMessage({
+			id: 'discover_conferencesHeading',
+			defaultMessage: 'Recent Conferences',
+		}),
+		includeSubItems = true,
+	} = props;
+
+	const NodeConference = useCallback(
+		({ node }: { node: SectionNode<Conference> }): JSX.Element => {
+			const sequences = includeSubItems ? node.sequences.nodes : null;
+			const recordings =
+				includeSubItems && !sequences?.length ? node.recordings.nodes : null;
+			return (
+				<CardCollection
+					collection={node}
+					sequences={sequences}
+					recordings={recordings}
+				/>
+			);
+		},
+		[includeSubItems]
+	);
+
 	const result = useInfiniteGetDiscoverConferencesQuery(
 		'after',
 		{
@@ -60,10 +74,7 @@ export default function Conferences(): JSX.Element {
 
 	return (
 		<Section<GetDiscoverConferencesQuery, Conference>
-			heading={intl.formatMessage({
-				id: 'discover_conferencesHeading',
-				defaultMessage: 'Recent Conferences',
-			})}
+			heading={heading}
 			previous={intl.formatMessage({
 				id: 'discover__conferencesPrevious',
 				defaultMessage: 'Previous recent conferences',
