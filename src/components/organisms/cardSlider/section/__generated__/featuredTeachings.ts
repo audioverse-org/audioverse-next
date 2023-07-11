@@ -10,7 +10,7 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverFeaturedTeachingsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int']['input'];
+  first?: Types.Scalars['Int']['input'];
   after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
@@ -19,7 +19,7 @@ export type GetDiscoverFeaturedTeachingsQuery = { __typename?: 'Query', featured
 
 
 export const GetDiscoverFeaturedTeachingsDocument = `
-    query getDiscoverFeaturedTeachings($language: Language!, $first: Int!, $after: String) {
+    query getDiscoverFeaturedTeachings($language: Language!, $first: Int! = 3, $after: String) {
   featuredTeachings: featuredRecordings(
     language: $language
     contentType: SERMON

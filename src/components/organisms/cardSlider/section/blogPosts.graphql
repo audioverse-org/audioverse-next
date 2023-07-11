@@ -1,4 +1,8 @@
-query getDiscoverBlogPosts($language: Language!, $first: Int!, $after: String) {
+query getDiscoverBlogPosts(
+	$language: Language!
+	$first: Int! = 3
+	$after: String
+) {
 	blogPosts(
 		language: $language
 		first: $first

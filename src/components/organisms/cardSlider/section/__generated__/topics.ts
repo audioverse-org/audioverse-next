@@ -5,7 +5,7 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverTopicsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int']['input'];
+  first?: Types.Scalars['Int']['input'];
   after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
@@ -14,7 +14,7 @@ export type GetDiscoverTopicsQuery = { __typename?: 'Query', topics: { __typenam
 
 
 export const GetDiscoverTopicsDocument = `
-    query getDiscoverTopics($language: Language!, $first: Int!, $after: String) {
+    query getDiscoverTopics($language: Language!, $first: Int! = 6, $after: String) {
   topics(
     language: $language
     first: $first

@@ -5,7 +5,7 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverBlogPostsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int']['input'];
+  first?: Types.Scalars['Int']['input'];
   after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
@@ -14,7 +14,7 @@ export type GetDiscoverBlogPostsQuery = { __typename?: 'Query', blogPosts: { __t
 
 
 export const GetDiscoverBlogPostsDocument = `
-    query getDiscoverBlogPosts($language: Language!, $first: Int!, $after: String) {
+    query getDiscoverBlogPosts($language: Language!, $first: Int! = 3, $after: String) {
   blogPosts(
     language: $language
     first: $first

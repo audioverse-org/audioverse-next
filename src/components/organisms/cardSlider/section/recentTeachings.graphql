@@ -1,6 +1,6 @@
 query getDiscoverRecentTeachings(
 	$language: Language!
-	$first: Int!
+	$first: Int! = 6
 	$after: String
 ) {
 	recentTeachings: sermons(

@@ -1,6 +1,6 @@
 query getDiscoverFeaturedTeachings(
 	$language: Language!
-	$first: Int!
+	$first: Int! = 3
 	$after: String
 ) {
 	featuredTeachings: featuredRecordings(

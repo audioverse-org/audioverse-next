@@ -29,7 +29,6 @@ type SectionRoot<T> = {
 
 type InfiniteQueryVariables = {
 	language: Language;
-	first: number;
 	after: string | null;
 };
 
@@ -44,6 +43,7 @@ type SectionProps<T, N> = {
 	heading: string | JSX.Element;
 	previous: string;
 	next: string;
+	first?: number;
 	rows?: number;
 	seeAllUrl?: string;
 	selectNodes?: (page?: T) => Maybe<SectionNode<N>[]>;
@@ -76,7 +76,6 @@ export default function Section<T, N>({
 		'after',
 		{
 			language,
-			first: 6,
 			after: null,
 		},
 		{
@@ -85,7 +84,6 @@ export default function Section<T, N>({
 				if (!sectionRoot) return;
 				return {
 					language,
-					first: 6,
 					after: sectionRoot.pageInfo.endCursor,
 				};
 			},

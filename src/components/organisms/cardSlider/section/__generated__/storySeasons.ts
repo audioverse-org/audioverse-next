@@ -11,7 +11,7 @@ import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 export type GetDiscoverStorySeasonsQueryVariables = Types.Exact<{
   language: Types.Language;
-  first: Types.Scalars['Int']['input'];
+  first?: Types.Scalars['Int']['input'];
   after: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
@@ -20,7 +20,7 @@ export type GetDiscoverStorySeasonsQuery = { __typename?: 'Query', storySeasons:
 
 
 export const GetDiscoverStorySeasonsDocument = `
-    query getDiscoverStorySeasons($language: Language!, $first: Int!, $after: String) {
+    query getDiscoverStorySeasons($language: Language!, $first: Int! = 3, $after: String) {
   storySeasons(
     language: $language
     first: $first
