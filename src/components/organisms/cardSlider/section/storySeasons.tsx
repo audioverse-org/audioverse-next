@@ -29,10 +29,20 @@ function NodeStorySeason({
 	return <CardSequence sequence={node} />;
 }
 
-export default function StorySeasons(): JSX.Element {
+export default function StorySeasons(props: {
+	heading?: string | JSX.Element;
+}): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const language = useLanguageId();
 	const intl = useIntl();
+
+	const {
+		heading = intl.formatMessage({
+			id: 'discover__storiesHeading',
+			defaultMessage: 'Recent Stories',
+		}),
+	} = props;
+
 	const result = useInfiniteGetDiscoverStorySeasonsQuery(
 		'after',
 		{
@@ -54,10 +64,7 @@ export default function StorySeasons(): JSX.Element {
 
 	return (
 		<Section<GetDiscoverStorySeasonsQuery, StorySeason>
-			heading={intl.formatMessage({
-				id: 'discover__storiesHeading',
-				defaultMessage: 'Recent Stories',
-			})}
+			heading={heading}
 			previous={intl.formatMessage({
 				id: 'discover__storiesPrevious',
 				defaultMessage: 'Previous recent stories',

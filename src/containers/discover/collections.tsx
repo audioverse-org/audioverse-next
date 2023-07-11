@@ -12,6 +12,7 @@ import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 import Conferences from '~src/components/organisms/cardSlider/section/conferences';
+import StorySeasons from '~src/components/organisms/cardSlider/section/storySeasons';
 
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
 import styles from './collections.module.scss';
@@ -24,7 +25,6 @@ export default function DiscoverCollections({
 	serieses,
 	sponsors,
 	audiobooks,
-	storySeasons,
 	musicAlbums,
 }: IDiscoverCollectionsProps): JSX.Element {
 	const language = useLanguageRoute();
@@ -108,18 +108,16 @@ export default function DiscoverCollections({
 				))}
 			</CardGroup>
 			{makeSeeAllButton(root.lang(language).sponsors.get())}
-			<LineHeading>
-				<FormattedMessage
-					id="discoverCollections_storiesHeading"
-					defaultMessage="Stories"
-				/>
-			</LineHeading>
-			<CardGroup className={styles.cardGroup}>
-				{storySeasons.nodes?.map((n) => (
-					<CardSequence sequence={n} key={n.canonicalPath} />
-				))}
-			</CardGroup>
-			{makeSeeAllButton(root.lang(language).stories.albums.get())}
+
+			<StorySeasons
+				heading={
+					<FormattedMessage
+						id="discoverCollections_storySeasonsHeading"
+						defaultMessage="Stories"
+					/>
+				}
+			/>
+
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_scriptureSongsHeading"
