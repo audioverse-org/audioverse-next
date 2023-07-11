@@ -14,6 +14,10 @@ export type SectionNode<T> = T & {
 	canonicalPath: string;
 };
 
+type SectionRoot<T> = {
+	nodes: SectionNode<T>[];
+};
+
 type SectionProps<T, N> = {
 	heading: string | JSX.Element;
 	previous: string;
@@ -25,18 +29,17 @@ type SectionProps<T, N> = {
 	Card: (props: { node: SectionNode<N> }) => JSX.Element;
 };
 
-function defaultSelectNodes<T, N>(page?: T): Maybe<SectionNode<N>[]> {
-	if (!page) return [];
+function isSectionRoot<T>(v: unknown): v is SectionRoot<T> {
+	return typeof v === 'object' && v !== null && 'nodes' in v;
+}
 
-	return (
-		Object.values(page).find(
-			(
-				v
-			): v is {
-				nodes: SectionNode<N>[];
-			} => typeof v === 'object' && v !== null && 'nodes' in v
-		)?.nodes || []
-	);
+function selectSectionRoot<T, N>(page?: T): Maybe<SectionRoot<N>> {
+	if (!page) return;
+	return Object.values(page).find(isSectionRoot<N>);
+}
+
+function defaultSelectNodes<T, N>(page?: T): Maybe<SectionNode<N>[]> {
+	return selectSectionRoot<T, N>(page)?.nodes || [];
 }
 
 export default function Section<T, N>({
