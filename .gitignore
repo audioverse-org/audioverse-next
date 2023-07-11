@@ -3,6 +3,7 @@
 /public/**/*.xml
 /dist
 /graphql-codegen/dist
+**/__generated__
 
 # next-pwa
 /public/sw.js
