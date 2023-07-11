@@ -17,10 +17,6 @@ type StorySeason = NonNullable<
 	GetDiscoverStorySeasonsQuery['storySeasons']['nodes']
 >[0];
 
-function selectStorySeasons(p: GetDiscoverStorySeasonsQuery | undefined) {
-	return p?.storySeasons.nodes;
-}
-
 function NodeStorySeason({
 	node,
 }: {
@@ -75,7 +71,6 @@ export default function StorySeasons(props: {
 			})}
 			seeAllUrl={root.lang(languageRoute).stories.albums.get()}
 			infiniteQueryResult={result}
-			selectNodes={selectStorySeasons}
 			Card={NodeStorySeason}
 		/>
 	);

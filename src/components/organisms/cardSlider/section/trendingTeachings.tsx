@@ -14,12 +14,6 @@ import {
 } from './__generated__/trendingTeachings';
 import Section, { SectionNode } from './index';
 
-function selectTrendingTeachings(
-	p: GetDiscoverTrendingTeachingsQuery | undefined
-) {
-	return p?.trendingTeachings.nodes?.map((n) => n.recording);
-}
-
 function NodeRecording({
 	node,
 }: {
@@ -67,7 +61,7 @@ export default function TrendingTeachings(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(route).teachings.trending.get()}
 			infiniteQueryResult={result}
-			selectNodes={selectTrendingTeachings}
+			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
 			Card={NodeRecording}
 			rows={2}
 		/>

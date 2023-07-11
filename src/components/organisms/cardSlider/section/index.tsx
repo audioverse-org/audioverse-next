@@ -21,14 +21,28 @@ type SectionProps<T, N> = {
 	rows?: number;
 	seeAllUrl?: string;
 	infiniteQueryResult: UseInfiniteQueryResult<T>;
-	selectNodes: (page?: T) => Maybe<SectionNode<N>[]>;
+	selectNodes?: (page?: T) => Maybe<SectionNode<N>[]>;
 	Card: (props: { node: SectionNode<N> }) => JSX.Element;
 };
+
+function defaultSelectNodes<T, N>(page?: T): Maybe<SectionNode<N>[]> {
+	if (!page) return [];
+
+	return (
+		Object.values(page).find(
+			(
+				v
+			): v is {
+				nodes: SectionNode<N>[];
+			} => typeof v === 'object' && v !== null && 'nodes' in v
+		)?.nodes || []
+	);
+}
 
 export default function Section<T, N>({
 	heading,
 	infiniteQueryResult,
-	selectNodes,
+	selectNodes = defaultSelectNodes,
 	Card,
 	seeAllUrl,
 	...props

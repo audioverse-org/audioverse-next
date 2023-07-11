@@ -12,12 +12,6 @@ import {
 } from './__generated__/featuredTeachings';
 import Section, { SectionNode } from './index';
 
-function selectFeaturedTeachings(
-	p: GetDiscoverFeaturedTeachingsQuery | undefined
-) {
-	return p?.featuredTeachings.nodes;
-}
-
 function NodeRecording({
 	node,
 }: {
@@ -63,7 +57,6 @@ export default function FeaturedTeachings(): JSX.Element {
 				defaultMessage: 'Next featured teachings',
 			})}
 			infiniteQueryResult={result}
-			selectNodes={selectFeaturedTeachings}
 			Card={NodeRecording}
 		/>
 	);

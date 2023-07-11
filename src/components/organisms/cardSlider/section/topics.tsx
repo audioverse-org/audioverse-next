@@ -12,10 +12,6 @@ import {
 } from './__generated__/topics';
 import Section, { SectionNode } from './index';
 
-function selectTopics(p: GetDiscoverTopicsQuery | undefined) {
-	return p?.topics.nodes;
-}
-
 function NodeTopic({
 	node,
 }: {
@@ -61,7 +57,6 @@ export default function Topics(): JSX.Element {
 				defaultMessage: 'Next topics',
 			})}
 			infiniteQueryResult={result}
-			selectNodes={selectTopics}
 			Card={NodeTopic}
 		/>
 	);

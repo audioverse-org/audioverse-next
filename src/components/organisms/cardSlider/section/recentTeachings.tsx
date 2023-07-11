@@ -14,10 +14,6 @@ import {
 } from './__generated__/recentTeachings';
 import Section, { SectionNode } from './index';
 
-function selectRecentTeachings(p: GetDiscoverRecentTeachingsQuery | undefined) {
-	return p?.recentTeachings.nodes;
-}
-
 function NodeRecording({
 	node,
 }: {
@@ -65,7 +61,6 @@ export default function RecentTeachings(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(route).teachings.all.get()}
 			infiniteQueryResult={result}
-			selectNodes={selectRecentTeachings}
 			Card={NodeRecording}
 			rows={2}
 		/>

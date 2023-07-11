@@ -14,10 +14,6 @@ import {
 	useInfiniteGetDiscoverBlogPostsQuery,
 } from './__generated__/blogPosts';
 
-function selectPosts(p: GetDiscoverBlogPostsQuery | undefined) {
-	return p?.blogPosts.nodes;
-}
-
 function NodePost({
 	node,
 }: {
@@ -65,7 +61,6 @@ export default function BlogPosts(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(languageRoute).blog.get()}
 			infiniteQueryResult={result}
-			selectNodes={selectPosts}
 			Card={NodePost}
 		/>
 	);

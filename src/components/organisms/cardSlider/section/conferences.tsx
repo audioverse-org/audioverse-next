@@ -17,10 +17,6 @@ type Conference = NonNullable<
 	GetDiscoverConferencesQuery['conferences']['nodes']
 >[0];
 
-function selectConferences(p: GetDiscoverConferencesQuery | undefined) {
-	return p?.conferences.nodes;
-}
-
 export default function Conferences(props: {
 	heading?: string | JSX.Element;
 	includeSubItems?: boolean;
@@ -85,7 +81,6 @@ export default function Conferences(props: {
 			})}
 			seeAllUrl={root.lang(languageRoute).conferences.get()}
 			infiniteQueryResult={result}
-			selectNodes={selectConferences}
 			Card={NodeConference}
 		/>
 	);
