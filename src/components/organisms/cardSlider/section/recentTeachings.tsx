@@ -10,15 +10,7 @@ import {
 	GetDiscoverRecentTeachingsQuery,
 	useInfiniteGetDiscoverRecentTeachingsQuery,
 } from './__generated__/recentTeachings';
-import Section, { SectionNode } from './index';
-
-function NodeRecording({
-	node,
-}: {
-	node: SectionNode<CardRecordingFragment>;
-}): JSX.Element {
-	return <CardRecording recording={node} />;
-}
+import Section from './index';
 
 export default function RecentTeachings(): JSX.Element {
 	const route = useLanguageRoute();
@@ -40,7 +32,7 @@ export default function RecentTeachings(): JSX.Element {
 				defaultMessage: 'Next recent teachings',
 			})}
 			seeAllUrl={root.lang(route).teachings.all.get()}
-			Card={NodeRecording}
+			Card={(p) => <CardRecording recording={p.node} />}
 			rows={2}
 		/>
 	);

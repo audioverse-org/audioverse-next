@@ -10,15 +10,7 @@ import {
 	GetDiscoverTrendingTeachingsQuery,
 	useInfiniteGetDiscoverTrendingTeachingsQuery,
 } from './__generated__/trendingTeachings';
-import Section, { SectionNode } from './index';
-
-function NodeRecording({
-	node,
-}: {
-	node: SectionNode<CardRecordingFragment>;
-}): JSX.Element {
-	return <CardRecording recording={node} />;
-}
+import Section from './index';
 
 export default function TrendingTeachings(): JSX.Element {
 	const route = useLanguageRoute();
@@ -41,7 +33,7 @@ export default function TrendingTeachings(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(route).teachings.trending.get()}
 			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
-			Card={NodeRecording}
+			Card={(p) => <CardRecording recording={p.node} />}
 			rows={2}
 		/>
 	);

@@ -9,19 +9,11 @@ import {
 	GetDiscoverStorySeasonsQuery,
 	useInfiniteGetDiscoverStorySeasonsQuery,
 } from './__generated__/storySeasons';
-import Section, { SectionNode } from './index';
+import Section from './index';
 
 type StorySeason = NonNullable<
 	GetDiscoverStorySeasonsQuery['storySeasons']['nodes']
 >[0];
-
-function NodeStorySeason({
-	node,
-}: {
-	node: SectionNode<StorySeason>;
-}): JSX.Element {
-	return <CardSequence sequence={node} />;
-}
 
 export default function StorySeasons(props: {
 	heading?: string | JSX.Element;
@@ -49,7 +41,7 @@ export default function StorySeasons(props: {
 				defaultMessage: 'Next recent stories',
 			})}
 			seeAllUrl={root.lang(languageRoute).stories.albums.get()}
-			Card={NodeStorySeason}
+			Card={(p) => <CardSequence sequence={p.node} />}
 		/>
 	);
 }

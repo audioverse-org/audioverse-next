@@ -8,19 +8,10 @@ import {
 	GetDiscoverTopicsQuery,
 	useInfiniteGetDiscoverTopicsQuery,
 } from './__generated__/topics';
-import Section, { SectionNode } from './index';
-
-function NodeTopic({
-	node,
-}: {
-	node: SectionNode<CardTopicFragment>;
-}): JSX.Element {
-	return <CardTopic topic={node} />;
-}
+import Section from './index';
 
 export default function Topics(): JSX.Element {
 	const intl = useIntl();
-
 	return (
 		<Section<GetDiscoverTopicsQuery, CardTopicFragment>
 			infiniteQuery={useInfiniteGetDiscoverTopicsQuery}
@@ -36,7 +27,7 @@ export default function Topics(): JSX.Element {
 				id: 'discover__topicsNext',
 				defaultMessage: 'Next topics',
 			})}
-			Card={NodeTopic}
+			Card={(p) => <CardTopic topic={p.node} />}
 		/>
 	);
 }

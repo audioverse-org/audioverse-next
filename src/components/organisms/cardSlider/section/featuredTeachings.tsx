@@ -8,19 +8,10 @@ import {
 	GetDiscoverFeaturedTeachingsQuery,
 	useInfiniteGetDiscoverFeaturedTeachingsQuery,
 } from './__generated__/featuredTeachings';
-import Section, { SectionNode } from './index';
-
-function NodeRecording({
-	node,
-}: {
-	node: SectionNode<CardRecordingFragment>;
-}): JSX.Element {
-	return <CardRecording recording={node} />;
-}
+import Section from './index';
 
 export default function FeaturedTeachings(): JSX.Element {
 	const intl = useIntl();
-
 	return (
 		<Section<GetDiscoverFeaturedTeachingsQuery, CardRecordingFragment>
 			infiniteQuery={useInfiniteGetDiscoverFeaturedTeachingsQuery}
@@ -36,7 +27,7 @@ export default function FeaturedTeachings(): JSX.Element {
 				id: 'discover__featuredTeachingsNext',
 				defaultMessage: 'Next featured teachings',
 			})}
-			Card={NodeRecording}
+			Card={(p) => <CardRecording recording={p.node} />}
 		/>
 	);
 }

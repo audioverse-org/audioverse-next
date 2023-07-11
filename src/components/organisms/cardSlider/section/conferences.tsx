@@ -30,18 +30,11 @@ export default function Conferences(props: {
 		includeSubItems = true,
 	} = props;
 
-	const NodeConference = useCallback(
+	const Card = useCallback(
 		({ node }: { node: SectionNode<Conference> }): JSX.Element => {
-			const sequences = includeSubItems ? node.sequences.nodes : null;
-			const recordings =
-				includeSubItems && !sequences?.length ? node.recordings.nodes : null;
-			return (
-				<CardCollection
-					collection={node}
-					sequences={sequences}
-					recordings={recordings}
-				/>
-			);
+			const s = includeSubItems ? node.sequences.nodes : null;
+			const r = includeSubItems && !s?.length ? node.recordings.nodes : null;
+			return <CardCollection collection={node} sequences={s} recordings={r} />;
 		},
 		[includeSubItems]
 	);
@@ -59,7 +52,7 @@ export default function Conferences(props: {
 				defaultMessage: 'Next recent conferences',
 			})}
 			seeAllUrl={root.lang(languageRoute).conferences.get()}
-			Card={NodeConference}
+			Card={Card}
 		/>
 	);
 }
