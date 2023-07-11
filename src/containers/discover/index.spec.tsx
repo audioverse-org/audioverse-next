@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
+import { mockWidth } from '~components/organisms/cardSlider/index.spec';
 import { __swiper } from '~lib/swiper';
 import { buildLoader } from '~lib/test/buildLoader';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
@@ -9,23 +10,31 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
-import { __apiDocumentMock } from '~src/lib/api/fetchApi';
-
 import {
 	GetDiscoverBlogPostsDocument,
 	GetDiscoverBlogPostsQuery,
+} from '~src/components/organisms/cardSlider/section/__generated__/blogPosts';
+import {
 	GetDiscoverConferencesDocument,
 	GetDiscoverConferencesQuery,
+} from '~src/components/organisms/cardSlider/section/__generated__/conferences';
+import {
 	GetDiscoverFeaturedTeachingsDocument,
 	GetDiscoverFeaturedTeachingsQuery,
+} from '~src/components/organisms/cardSlider/section/__generated__/featuredTeachings';
+import {
 	GetDiscoverRecentTeachingsDocument,
 	GetDiscoverRecentTeachingsQuery,
+} from '~src/components/organisms/cardSlider/section/__generated__/recentTeachings';
+import {
 	GetDiscoverStorySeasonsDocument,
 	GetDiscoverStorySeasonsQuery,
+} from '~src/components/organisms/cardSlider/section/__generated__/storySeasons';
+import {
 	GetDiscoverTrendingTeachingsDocument,
 	GetDiscoverTrendingTeachingsQuery,
-} from './__generated__/index';
-import { mockWidth } from './index.slider.spec';
+} from '~src/components/organisms/cardSlider/section/__generated__/trendingTeachings';
+import { __apiDocumentMock } from '~src/lib/api/fetchApi';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 

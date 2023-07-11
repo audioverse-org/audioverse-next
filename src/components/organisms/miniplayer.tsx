@@ -13,10 +13,10 @@ import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import { BaseColors } from '~lib/constants';
 import { getSequenceTypeTheme } from '~lib/getSequenceType';
 import { useFormattedTime } from '~lib/time';
+import IconVolumeHigh from '~public/img/icons/icon-volume-high.svg';
+import IconVolumeLow from '~public/img/icons/icon-volume-low.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
 
-import IconVolumeHigh from '../../../public/img/icons/icon-volume-high.svg';
-import IconVolumeLow from '../../../public/img/icons/icon-volume-low.svg';
 import styles from './miniplayer.module.scss';
 
 export default function Miniplayer(): JSX.Element | null {

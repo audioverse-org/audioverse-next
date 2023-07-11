@@ -13,9 +13,9 @@ import { BaseColors } from '~lib/constants';
 import { formatDateRange } from '~lib/date';
 import { useFormattedDuration } from '~lib/time';
 import useHover from '~lib/useHover';
+import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { CollectionContentType } from '~src/__generated__/graphql';
 
-import SuccessIcon from '../../../../public/img/icons/icon-success-light.svg';
 import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
 import { CardCollectionFragment } from './__generated__/collection';

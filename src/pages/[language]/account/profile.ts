@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { prefetchQueries } from '~containers/account/__generated__/profile';
 import Profile from '~containers/account/profile';
 import { storeRequest } from '~lib/api/storeRequest';
 import getDehydratedProps, { DehydratedProps } from '~lib/getDehydratedProps';
+import { prefetchQueries } from '~src/__generated__/prefetch';
 
 export default Profile;
 

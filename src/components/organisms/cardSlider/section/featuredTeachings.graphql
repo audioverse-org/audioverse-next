@@ -1,0 +1,20 @@
+query getDiscoverFeaturedTeachings(
+	$language: Language!
+	$first: Int!
+	$after: String
+) {
+	featuredTeachings: featuredRecordings(
+		language: $language
+		contentType: SERMON
+		first: $first
+		after: $after
+	) {
+		nodes {
+			...cardRecording
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

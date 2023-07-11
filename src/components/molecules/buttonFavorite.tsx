@@ -2,10 +2,10 @@ import React, { Ref } from 'react';
 import { useIntl } from 'react-intl';
 
 import { BaseColors } from '~lib/constants';
+import IconLike from '~public/img/icons/icon-like.svg';
+import IconLikeActive from '~public/img/icons/icon-like-active.svg';
+import IconLikeLight from '~public/img/icons/icon-like-light.svg';
 
-import IconLike from '../../../public/img/icons/icon-like.svg';
-import IconLikeActive from '../../../public/img/icons/icon-like-active.svg';
-import IconLikeLight from '../../../public/img/icons/icon-like-light.svg';
 import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
 

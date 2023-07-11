@@ -10,8 +10,8 @@ import Card from '~components/molecules/card';
 import { BaseColors } from '~lib/constants';
 import { formatLongDate } from '~lib/date';
 import { useFormattedDuration } from '~lib/time';
+import IconAlignLeft from '~public/img/icons/fa-align-left.svg';
 
-import IconAlignLeft from '../../../../public/img/icons/fa-align-left.svg';
 import TypeLockup from '../typeLockup';
 import { CardPostFragment } from './__generated__/post';
 import styles from './post.module.scss';

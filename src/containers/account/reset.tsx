@@ -9,8 +9,8 @@ import { login } from '~lib/api/login';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { useQueryString } from '~lib/useQueryString';
+import LogoLarge from '~public/img/logo-large.svg';
 
-import LogoLarge from '../../../public/img/logo-large.svg';
 import { useResetPasswordMutation } from './__generated__/reset';
 import styles from './reset.module.scss';
 

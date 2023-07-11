@@ -4,9 +4,9 @@ import React, { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
+import CardSlider from '~components/organisms/cardSlider';
 
-import styles from './index.section.module.scss';
-import Slider from './index.slider';
+import styles from './index.module.scss';
 
 const PRELOAD_COUNT = 3;
 
@@ -63,7 +63,7 @@ export default function Section<T, N>({
 					</a>
 				)}
 			</LineHeading>
-			<Slider {...props} onIndexChange={preload} items={cards} />
+			<CardSlider {...props} onIndexChange={preload} items={cards} />
 		</div>
 	);
 }

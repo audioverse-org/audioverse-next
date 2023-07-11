@@ -13,13 +13,13 @@ import { useIsRecordingFavorited } from '~lib/api/useIsRecordingFavorited';
 import { BaseColors } from '~lib/constants';
 import { useFormattedDuration } from '~lib/time';
 import usePlaybackSession from '~lib/usePlaybackSession';
+import IconClosure from '~public/img/icons/icon-closure.svg';
+import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
+import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg';
+import IconPlay from '~public/img/icons/icon-play.svg';
+import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 
-import IconClosure from '../../../public/img/icons/icon-closure.svg';
-import IconDisclosure from '../../../public/img/icons/icon-disclosure.svg';
-import IconListeningAnimated from '../../../public/img/icons/icon-listening-animated.svg';
-import IconPlay from '../../../public/img/icons/icon-play.svg';
-import SuccessIcon from '../../../public/img/icons/icon-success-light.svg';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';

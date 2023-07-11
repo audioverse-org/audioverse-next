@@ -7,9 +7,9 @@ import Heading6 from '~components/atoms/heading6';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import ListIcon from '~public/img/icons/fa-list.svg';
+import LikeActiveIcon from '~public/img/icons/icon-like-active.svg';
 
-import ListIcon from '../../../../public/img/icons/fa-list.svg';
-import LikeActiveIcon from '../../../../public/img/icons/icon-like-active.svg';
 import IconButton from '../iconButton';
 import TeaseRecordingStack from '../teaseRecordingStack';
 import TypeLockup from '../typeLockup';

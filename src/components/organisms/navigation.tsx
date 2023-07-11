@@ -17,10 +17,10 @@ import { getSessionToken, setSessionToken } from '~lib/cookies';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { INavigationItem, useNavigationItems } from '~lib/useNavigationItems';
+import IconUser from '~public/img/icons/fa-user-heavy.svg';
+import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
+import IconExit from '~public/img/icons/icon-exit.svg';
 
-import IconUser from '../../../public/img/icons/fa-user-heavy.svg';
-import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
-import IconExit from '../../../public/img/icons/icon-exit.svg';
 import styles from './navigation.module.scss';
 
 const Navigation = ({

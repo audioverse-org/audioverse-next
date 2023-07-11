@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 
 import { useIsSequenceFavorited } from '~lib/api/useIsSequenceFavorited';
 import { UnreachableCaseError } from '~lib/typeHelpers';
+import IconLike from '~public/img/icons/icon-like-light.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
 
-import IconLike from '../../../../public/img/icons/icon-like-light.svg';
 import Button from '../button';
 import { CardRecordingSequenceHatFragment } from './__generated__/recordingSequenceHat';
 import styles from './recordingSequenceHat.module.scss';

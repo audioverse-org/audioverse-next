@@ -6,12 +6,12 @@ import {
 } from 'next';
 
 import { IBaseProps } from '~containers/base';
-import { prefetchQueries } from '~containers/discover/__generated__/index';
 import { REVALIDATE } from '~lib/constants';
 import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '~lib/getLanguageRoutes';
 import root from '~lib/routes';
+import { prefetchQueries } from '~src/__generated__/prefetch';
 import Discover from '~src/containers/discover';
 import serializableDehydrate from '~src/lib/serializableDehydrate';
 

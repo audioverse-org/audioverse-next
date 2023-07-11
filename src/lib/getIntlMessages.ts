@@ -11,5 +11,5 @@ export default function getIntlMessages(
 		throw new Error(`Language "${languageRoute}" not found`);
 	}
 
-	return import(`../../public/compiled-lang/${lang.base_urls[0]}.json`);
+	return import(`~public/compiled-lang/${lang.base_urls[0]}.json`);
 }
