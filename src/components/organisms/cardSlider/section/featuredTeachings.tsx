@@ -1,10 +1,8 @@
-import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
-import { useLanguageId } from '~src/lib/useLanguageId';
 
 import {
 	GetDiscoverFeaturedTeachingsQuery,
@@ -21,29 +19,11 @@ function NodeRecording({
 }
 
 export default function FeaturedTeachings(): JSX.Element {
-	const language = useLanguageId();
 	const intl = useIntl();
-	const result = useInfiniteGetDiscoverFeaturedTeachingsQuery(
-		'after',
-		{
-			language,
-			first: 3,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<GetDiscoverFeaturedTeachingsQuery>) =>
-				last?.featuredTeachings.pageInfo.hasNextPage
-					? {
-							language,
-							first: 3,
-							after: last.featuredTeachings.pageInfo.endCursor,
-					  }
-					: undefined,
-		}
-	);
 
 	return (
 		<Section<GetDiscoverFeaturedTeachingsQuery, CardRecordingFragment>
+			infiniteQuery={useInfiniteGetDiscoverFeaturedTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_featuredTeachingsHeading',
 				defaultMessage: 'Featured Teachings',
@@ -56,7 +36,6 @@ export default function FeaturedTeachings(): JSX.Element {
 				id: 'discover__featuredTeachingsNext',
 				defaultMessage: 'Next featured teachings',
 			})}
-			infiniteQueryResult={result}
 			Card={NodeRecording}
 		/>
 	);

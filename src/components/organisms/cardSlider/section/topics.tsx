@@ -1,10 +1,8 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { Maybe } from '~src/__generated__/graphql';
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
-import { useLanguageId } from '~src/lib/useLanguageId';
 
 import {
 	GetDiscoverTopicsQuery,
@@ -21,29 +19,11 @@ function NodeTopic({
 }
 
 export default function Topics(): JSX.Element {
-	const language = useLanguageId();
 	const intl = useIntl();
-	const result = useInfiniteGetDiscoverTopicsQuery(
-		'after',
-		{
-			language,
-			first: 6,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<GetDiscoverTopicsQuery>) =>
-				last?.topics.pageInfo.hasNextPage
-					? {
-							language,
-							first: 6,
-							after: last.topics.pageInfo.endCursor,
-					  }
-					: undefined,
-		}
-	);
 
 	return (
 		<Section<GetDiscoverTopicsQuery, CardTopicFragment>
+			infiniteQuery={useInfiniteGetDiscoverTopicsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_topicsHeading',
 				defaultMessage: 'Topics',
@@ -56,7 +36,6 @@ export default function Topics(): JSX.Element {
 				id: 'discover__topicsNext',
 				defaultMessage: 'Next topics',
 			})}
-			infiniteQueryResult={result}
 			Card={NodeTopic}
 		/>
 	);

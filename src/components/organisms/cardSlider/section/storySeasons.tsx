@@ -1,10 +1,8 @@
-import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
 import CardSequence from '~src/components/molecules/card/sequence';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import {
@@ -29,7 +27,6 @@ export default function StorySeasons(props: {
 	heading?: string | JSX.Element;
 }): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	const language = useLanguageId();
 	const intl = useIntl();
 
 	const {
@@ -39,27 +36,9 @@ export default function StorySeasons(props: {
 		}),
 	} = props;
 
-	const result = useInfiniteGetDiscoverStorySeasonsQuery(
-		'after',
-		{
-			language,
-			first: 3,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<GetDiscoverStorySeasonsQuery>) =>
-				last?.storySeasons.pageInfo.hasNextPage
-					? {
-							language,
-							first: 3,
-							after: last.storySeasons.pageInfo.endCursor,
-					  }
-					: undefined,
-		}
-	);
-
 	return (
 		<Section<GetDiscoverStorySeasonsQuery, StorySeason>
+			infiniteQuery={useInfiniteGetDiscoverStorySeasonsQuery}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'discover__storiesPrevious',
@@ -70,7 +49,6 @@ export default function StorySeasons(props: {
 				defaultMessage: 'Next recent stories',
 			})}
 			seeAllUrl={root.lang(languageRoute).stories.albums.get()}
-			infiniteQueryResult={result}
 			Card={NodeStorySeason}
 		/>
 	);

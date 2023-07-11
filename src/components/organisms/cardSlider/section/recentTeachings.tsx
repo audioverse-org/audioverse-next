@@ -1,11 +1,9 @@
-import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import {
@@ -23,30 +21,12 @@ function NodeRecording({
 }
 
 export default function RecentTeachings(): JSX.Element {
-	const language = useLanguageId();
 	const route = useLanguageRoute();
 	const intl = useIntl();
-	const result = useInfiniteGetDiscoverRecentTeachingsQuery(
-		'after',
-		{
-			language,
-			first: 6,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<GetDiscoverRecentTeachingsQuery>) =>
-				last?.recentTeachings.pageInfo.hasNextPage
-					? {
-							language,
-							first: 6,
-							after: last.recentTeachings.pageInfo.endCursor,
-					  }
-					: undefined,
-		}
-	);
 
 	return (
 		<Section<GetDiscoverRecentTeachingsQuery, CardRecordingFragment>
+			infiniteQuery={useInfiniteGetDiscoverRecentTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_recentTeachingsHeading',
 				defaultMessage: 'Recent Teachings',
@@ -60,7 +40,6 @@ export default function RecentTeachings(): JSX.Element {
 				defaultMessage: 'Next recent teachings',
 			})}
 			seeAllUrl={root.lang(route).teachings.all.get()}
-			infiniteQueryResult={result}
 			Card={NodeRecording}
 			rows={2}
 		/>

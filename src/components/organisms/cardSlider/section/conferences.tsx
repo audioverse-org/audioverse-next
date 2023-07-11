@@ -1,10 +1,8 @@
-import { Maybe } from 'graphql/jsutils/Maybe';
 import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import CardCollection from '~src/components/molecules/card/collection';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import {
@@ -22,7 +20,6 @@ export default function Conferences(props: {
 	includeSubItems?: boolean;
 }): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	const language = useLanguageId();
 	const intl = useIntl();
 
 	const {
@@ -49,27 +46,9 @@ export default function Conferences(props: {
 		[includeSubItems]
 	);
 
-	const result = useInfiniteGetDiscoverConferencesQuery(
-		'after',
-		{
-			language,
-			first: 3,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<GetDiscoverConferencesQuery>) =>
-				last?.conferences.pageInfo.hasNextPage
-					? {
-							language,
-							first: 3,
-							after: last.conferences.pageInfo.endCursor,
-					  }
-					: undefined,
-		}
-	);
-
 	return (
 		<Section<GetDiscoverConferencesQuery, Conference>
+			infiniteQuery={useInfiniteGetDiscoverConferencesQuery}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'discover__conferencesPrevious',
@@ -80,7 +59,6 @@ export default function Conferences(props: {
 				defaultMessage: 'Next recent conferences',
 			})}
 			seeAllUrl={root.lang(languageRoute).conferences.get()}
-			infiniteQueryResult={result}
 			Card={NodeConference}
 		/>
 	);
