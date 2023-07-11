@@ -1,0 +1,38 @@
+@import '../../styles/common';
+
+.container {
+	padding: $tease-padding;
+	background-color: $ts-topicH;
+	color: $ts-lightTone;
+}
+
+.title {
+	color: $ts-white;
+	margin-top: 18px;
+}
+
+.summary {
+	margin-top: 8px;
+	margin-bottom: 16px;
+	font-size: 16px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+
+	> *:first-child {
+		flex-grow: 1;
+	}
+}
+
+.duration {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.grid {
+	grid-gap: 16px;
+	margin-bottom: 16px;
+}

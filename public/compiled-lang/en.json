@@ -1033,38 +1033,6 @@
       "value": "Stories"
     }
   ],
-  "cardTopic__count": [
-    {
-      "offset": 0,
-      "options": {
-        "one": {
-          "value": [
-            {
-              "type": 7
-            },
-            {
-              "type": 0,
-              "value": " item"
-            }
-          ]
-        },
-        "other": {
-          "value": [
-            {
-              "type": 7
-            },
-            {
-              "type": 0,
-              "value": " items"
-            }
-          ]
-        }
-      },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "count"
-    }
-  ],
   "cardTopic__hatLabel": [
     {
       "type": 0,
@@ -5353,6 +5321,132 @@
     {
       "type": 1,
       "value": "s"
+    }
+  ],
+  "topicDetail__description": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "topicDetail__label": [
+    {
+      "type": 0,
+      "value": "Topic"
+    }
+  ],
+  "topicDetail__parentTopic": [
+    {
+      "type": 0,
+      "value": "Parent Topic"
+    }
+  ],
+  "topicDetail__series": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "topicDetail__teachings": [
+    {
+      "type": 0,
+      "value": "Teachings"
+    }
+  ],
+  "topicItemCount__items": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " item"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "topicItemCount__series": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " series"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " series"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "topicItemCount__teachings": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " teaching"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " teachings"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
     }
   ],
   "trendingTeachings__heading": [

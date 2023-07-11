@@ -493,9 +493,6 @@
   "cardStory_sequenceLabel": {
     "string": "Stories"
   },
-  "cardTopic__count": {
-    "string": "{count, plural, one {# item} other {# items}}"
-  },
   "cardTopic__hatLabel": {
     "string": "Topic"
   },
@@ -2498,6 +2495,30 @@
   "time__minutesAndSeconds": {
     "comment": "time minutes and seconds",
     "string": "{m}:{s}"
+  },
+  "topicDetail__description": {
+    "string": "Description"
+  },
+  "topicDetail__label": {
+    "string": "Topic"
+  },
+  "topicDetail__parentTopic": {
+    "string": "Parent Topic"
+  },
+  "topicDetail__series": {
+    "string": "Series"
+  },
+  "topicDetail__teachings": {
+    "string": "Teachings"
+  },
+  "topicItemCount__items": {
+    "string": "{count, plural, one {# item} other {# items}}"
+  },
+  "topicItemCount__series": {
+    "string": "{count, plural, one {# series} other {# series}}"
+  },
+  "topicItemCount__teachings": {
+    "string": "{count, plural, one {# teaching} other {# teachings}}"
   },
   "trendingTeachings__heading": {
     "string": "Trending Teachings"

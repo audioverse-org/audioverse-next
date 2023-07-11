@@ -1,0 +1,44 @@
+query getTopicDetailData($id: ID!) {
+	topic(id: $id) {
+		id
+		title
+		summary
+		duration
+		description
+		# TODO
+		canonicalPath: title
+		parentTopic {
+			id
+			title
+			# TODO
+			canonicalPath: title
+		}
+		items {
+			nodes {
+				entity {
+					__typename
+					... on Recording {
+						...cardRecording
+					}
+					... on Sequence {
+						...cardSequence
+					}
+				}
+			}
+			aggregate {
+				count
+			}
+		}
+	}
+}
+
+query getTopicDetailStaticPaths($language: Language!, $first: Int) {
+	topics(language: $language, first: $first) {
+		nodes {
+			id
+			title
+			# TODO
+			canonicalPath: title
+		}
+	}
+}
