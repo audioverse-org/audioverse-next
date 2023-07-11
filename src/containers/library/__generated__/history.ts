@@ -84,23 +84,3 @@ export async function getLibraryHistoryPageData<T>(
 ): Promise<GetLibraryHistoryPageDataQuery> {
 	return fetchApi(GetLibraryHistoryPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getLibraryHistoryPageData: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getLibraryHistoryPageData', vars.getLibraryHistoryPageData], () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData), options),
-		client.prefetchInfiniteQuery(['getLibraryHistoryPageData.infinite', vars.getLibraryHistoryPageData], () => getLibraryHistoryPageData(vars.getLibraryHistoryPageData), options),
-	]);
-	
-	return client;
-}

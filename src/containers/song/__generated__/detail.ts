@@ -120,23 +120,3 @@ export async function getSongDetailStaticPaths<T>(
 ): Promise<GetSongDetailStaticPathsQuery> {
 	return fetchApi(GetSongDetailStaticPathsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSongDetailData: ExactAlt<T, GetSongDetailDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSongDetailData', vars.getSongDetailData], () => getSongDetailData(vars.getSongDetailData), options),
-		client.prefetchInfiniteQuery(['getSongDetailData.infinite', vars.getSongDetailData], () => getSongDetailData(vars.getSongDetailData), options),
-	]);
-	
-	return client;
-}

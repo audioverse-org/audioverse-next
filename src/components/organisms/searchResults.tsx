@@ -12,8 +12,8 @@ import CardGroup from '~components/molecules/cardGroup';
 import LoadingCards from '~components/molecules/loadingCards';
 import isServerSide from '~lib/isServerSide';
 import { useQueryString } from '~lib/useQueryString';
+import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 
-import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 import EmptyState from './emptyState';
 import { EntityFilterId } from './searchResults.filters';
 import styles from './searchResults.module.scss';

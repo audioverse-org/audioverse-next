@@ -63,23 +63,3 @@ export async function getSponsorListLetterCounts<T>(
 ): Promise<GetSponsorListLetterCountsQuery> {
 	return fetchApi(GetSponsorListLetterCountsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSponsorListLetterCounts: ExactAlt<T, GetSponsorListLetterCountsQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSponsorListLetterCounts', vars.getSponsorListLetterCounts], () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts), options),
-		client.prefetchInfiniteQuery(['getSponsorListLetterCounts.infinite', vars.getSponsorListLetterCounts], () => getSponsorListLetterCounts(vars.getSponsorListLetterCounts), options),
-	]);
-	
-	return client;
-}

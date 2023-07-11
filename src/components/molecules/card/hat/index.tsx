@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import React, { PropsWithChildren, useState } from 'react';
 
 import Heading6 from '~components/atoms/heading6';
+import ClosureIcon from '~public/img/icons/icon-closure-slim.svg';
+import DisclosureIcon from '~public/img/icons/icon-disclosure-slim.svg';
 
-import ClosureIcon from '../../../../../public/img/icons/icon-closure-slim.svg';
-import DisclosureIcon from '../../../../../public/img/icons/icon-disclosure-slim.svg';
 import styles from './index.module.scss';
 
 type SimpleProps = {

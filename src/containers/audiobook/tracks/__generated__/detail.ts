@@ -120,23 +120,3 @@ export async function getAudiobookTrackDetailStaticPaths<T>(
 ): Promise<GetAudiobookTrackDetailStaticPathsQuery> {
 	return fetchApi(GetAudiobookTrackDetailStaticPathsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getAudiobookTrackDetailData: ExactAlt<T, GetAudiobookTrackDetailDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getAudiobookTrackDetailData', vars.getAudiobookTrackDetailData], () => getAudiobookTrackDetailData(vars.getAudiobookTrackDetailData), options),
-		client.prefetchInfiniteQuery(['getAudiobookTrackDetailData.infinite', vars.getAudiobookTrackDetailData], () => getAudiobookTrackDetailData(vars.getAudiobookTrackDetailData), options),
-	]);
-	
-	return client;
-}

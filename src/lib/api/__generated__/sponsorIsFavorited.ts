@@ -52,23 +52,3 @@ export async function sponsorIsFavorited<T>(
 ): Promise<SponsorIsFavoritedQuery> {
 	return fetchApi(SponsorIsFavoritedDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		sponsorIsFavorited: ExactAlt<T, SponsorIsFavoritedQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['sponsorIsFavorited', vars.sponsorIsFavorited], () => sponsorIsFavorited(vars.sponsorIsFavorited), options),
-		client.prefetchInfiniteQuery(['sponsorIsFavorited.infinite', vars.sponsorIsFavorited], () => sponsorIsFavorited(vars.sponsorIsFavorited), options),
-	]);
-	
-	return client;
-}

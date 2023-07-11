@@ -6,9 +6,9 @@ import {
 	EntityFilterId,
 	filters,
 } from '~components/organisms/searchResults.filters';
+import IconExit from '~public/img/icons/icon-exit.svg';
+import IconSearch from '~public/img/icons/icon-search.svg';
 
-import IconExit from '../../../public/img/icons/icon-exit.svg';
-import IconSearch from '../../../public/img/icons/icon-search.svg';
 import Mininav from './mininav';
 import styles from './searchBar.module.scss';
 

@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { prefetchQueries } from '~containers/account/__generated__/preferences';
 import Preferences from '~containers/account/preferences';
 import { storeRequest } from '~lib/api/storeRequest';
 import getDehydratedProps, { DehydratedProps } from '~lib/getDehydratedProps';
+import { prefetchQueries } from '~src/__generated__/prefetch';
 
 export default Preferences;
 

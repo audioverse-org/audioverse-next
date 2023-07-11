@@ -126,23 +126,3 @@ export async function recordingPlaybackProgressSet<T>(
 ): Promise<RecordingPlaybackProgressSetMutation> {
 	return fetchApi(RecordingPlaybackProgressSetDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getRecordingPlaybackProgress: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getRecordingPlaybackProgress', vars.getRecordingPlaybackProgress], () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress), options),
-		client.prefetchInfiniteQuery(['getRecordingPlaybackProgress.infinite', vars.getRecordingPlaybackProgress], () => getRecordingPlaybackProgress(vars.getRecordingPlaybackProgress), options),
-	]);
-	
-	return client;
-}

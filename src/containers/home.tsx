@@ -20,10 +20,10 @@ import { getSessionToken } from '~lib/cookies';
 import { getAppFeatures } from '~lib/getAppFeatures';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import IconBell from '~public/img/icons/fa-bell.svg';
+import IconForward from '~public/img/icons/icon-forward-light.svg';
+import ImagePlayers from '~public/img/players.jpeg';
 
-import IconBell from '../../public/img/icons/fa-bell.svg';
-import IconForward from '../../public/img/icons/icon-forward-light.svg';
-import ImagePlayers from '../../public/img/players.jpeg';
 import { GetHomeStaticPropsQuery } from './__generated__/home';
 import styles from './home.module.scss';
 

@@ -9,8 +9,8 @@ import { useLanguageId } from '~src/lib/useLanguageId';
 import {
 	GetDiscoverFeaturedTeachingsQuery,
 	useInfiniteGetDiscoverFeaturedTeachingsQuery,
-} from './__generated__';
-import Section, { SectionNode } from './index.section';
+} from './__generated__/featuredTeachings';
+import Section, { SectionNode } from './index';
 
 function selectFeaturedTeachings(
 	p: GetDiscoverFeaturedTeachingsQuery | undefined

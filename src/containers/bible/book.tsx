@@ -27,11 +27,11 @@ import {
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import IconBack from '~public/img/icons/icon-back-light.svg';
+import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import { Must } from '~src/types/types';
 
-import IconBack from '../../../public/img/icons/icon-back-light.svg';
-import IconBlog from '../../../public/img/icons/icon-blog-light-small.svg';
 import styles from './book.module.scss';
 
 export interface BookProps {

@@ -102,23 +102,3 @@ export async function updateAccountPreferences<T>(
 ): Promise<UpdateAccountPreferencesMutation> {
 	return fetchApi(UpdateAccountPreferencesDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getAccountPreferencesData: ExactAlt<T, GetAccountPreferencesDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getAccountPreferencesData', vars.getAccountPreferencesData], () => getAccountPreferencesData(vars.getAccountPreferencesData), options),
-		client.prefetchInfiniteQuery(['getAccountPreferencesData.infinite', vars.getAccountPreferencesData], () => getAccountPreferencesData(vars.getAccountPreferencesData), options),
-	]);
-	
-	return client;
-}

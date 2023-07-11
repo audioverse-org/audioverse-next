@@ -52,23 +52,3 @@ export async function recordingIsFavorited<T>(
 ): Promise<RecordingIsFavoritedQuery> {
 	return fetchApi(RecordingIsFavoritedDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		recordingIsFavorited: ExactAlt<T, RecordingIsFavoritedQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['recordingIsFavorited', vars.recordingIsFavorited], () => recordingIsFavorited(vars.recordingIsFavorited), options),
-		client.prefetchInfiniteQuery(['recordingIsFavorited.infinite', vars.recordingIsFavorited], () => recordingIsFavorited(vars.recordingIsFavorited), options),
-	]);
-	
-	return client;
-}

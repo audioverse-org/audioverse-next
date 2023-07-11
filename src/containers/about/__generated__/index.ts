@@ -106,23 +106,3 @@ export async function getAboutStaticPaths<T>(
 ): Promise<GetAboutStaticPathsQuery> {
 	return fetchApi(GetAboutStaticPathsDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getAboutPageData: ExactAlt<T, GetAboutPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getAboutPageData', vars.getAboutPageData], () => getAboutPageData(vars.getAboutPageData), options),
-		client.prefetchInfiniteQuery(['getAboutPageData.infinite', vars.getAboutPageData], () => getAboutPageData(vars.getAboutPageData), options),
-	]);
-	
-	return client;
-}

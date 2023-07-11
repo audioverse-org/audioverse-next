@@ -185,26 +185,3 @@ export async function getSponsorTeachingsPathsData<T>(
 ): Promise<GetSponsorTeachingsPathsDataQuery> {
 	return fetchApi(GetSponsorTeachingsPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSponsorTeachingsPageData: ExactAlt<T, GetSponsorTeachingsPageDataQueryVariables>,
-		getSponsorTeachingsFeedData: ExactAlt<T, GetSponsorTeachingsFeedDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSponsorTeachingsPageData', vars.getSponsorTeachingsPageData], () => getSponsorTeachingsPageData(vars.getSponsorTeachingsPageData), options),
-		client.prefetchInfiniteQuery(['getSponsorTeachingsPageData.infinite', vars.getSponsorTeachingsPageData], () => getSponsorTeachingsPageData(vars.getSponsorTeachingsPageData), options),
-		client.prefetchQuery(['getSponsorTeachingsFeedData', vars.getSponsorTeachingsFeedData], () => getSponsorTeachingsFeedData(vars.getSponsorTeachingsFeedData), options),
-		client.prefetchInfiniteQuery(['getSponsorTeachingsFeedData.infinite', vars.getSponsorTeachingsFeedData], () => getSponsorTeachingsFeedData(vars.getSponsorTeachingsFeedData), options),
-	]);
-	
-	return client;
-}

@@ -5,7 +5,7 @@ import type Swiper from 'swiper';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
 
-import styles from './index.slider.module.scss';
+import styles from './index.module.scss';
 
 type SliderProps = {
 	onIndexChange?: (state: { index: number; total: number }) => void;

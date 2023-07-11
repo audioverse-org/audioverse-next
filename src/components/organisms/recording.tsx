@@ -28,15 +28,15 @@ import { formatLongDateTime, parseRelativeDate } from '~lib/date';
 import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import IconBack from '~public/img/icons/icon-back-light.svg';
+import IconBlogLight from '~public/img/icons/icon-blog-light-small.svg';
+import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
+import IconDownload from '~public/img/icons/icon-download.svg';
 import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 
-import IconBack from '../../../public/img/icons/icon-back-light.svg';
-import IconBlogLight from '../../../public/img/icons/icon-blog-light-small.svg';
-import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
-import IconDownload from '../../../public/img/icons/icon-download.svg';
 import { RecordingFragment } from './__generated__/recording';
 import styles from './recording.module.scss';
 

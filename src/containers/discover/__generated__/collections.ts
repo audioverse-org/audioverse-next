@@ -138,23 +138,3 @@ export async function getDiscoverCollectionsPageData<T>(
 ): Promise<GetDiscoverCollectionsPageDataQuery> {
 	return fetchApi(GetDiscoverCollectionsPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getDiscoverCollectionsPageData: ExactAlt<T, GetDiscoverCollectionsPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getDiscoverCollectionsPageData', vars.getDiscoverCollectionsPageData], () => getDiscoverCollectionsPageData(vars.getDiscoverCollectionsPageData), options),
-		client.prefetchInfiniteQuery(['getDiscoverCollectionsPageData.infinite', vars.getDiscoverCollectionsPageData], () => getDiscoverCollectionsPageData(vars.getDiscoverCollectionsPageData), options),
-	]);
-	
-	return client;
-}

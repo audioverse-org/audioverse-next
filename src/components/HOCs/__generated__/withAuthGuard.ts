@@ -53,23 +53,3 @@ export async function getWithAuthGuardData<T>(
 ): Promise<GetWithAuthGuardDataQuery> {
 	return fetchApi(GetWithAuthGuardDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getWithAuthGuardData: ExactAlt<T, GetWithAuthGuardDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getWithAuthGuardData', vars.getWithAuthGuardData], () => getWithAuthGuardData(vars.getWithAuthGuardData), options),
-		client.prefetchInfiniteQuery(['getWithAuthGuardData.infinite', vars.getWithAuthGuardData], () => getWithAuthGuardData(vars.getWithAuthGuardData), options),
-	]);
-	
-	return client;
-}

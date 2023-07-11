@@ -77,23 +77,3 @@ export async function getLibraryPlaylistPageData<T>(
 ): Promise<GetLibraryPlaylistPageDataQuery> {
 	return fetchApi(GetLibraryPlaylistPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getLibraryPlaylistPageData: ExactAlt<T, GetLibraryPlaylistPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getLibraryPlaylistPageData', vars.getLibraryPlaylistPageData], () => getLibraryPlaylistPageData(vars.getLibraryPlaylistPageData), options),
-		client.prefetchInfiniteQuery(['getLibraryPlaylistPageData.infinite', vars.getLibraryPlaylistPageData], () => getLibraryPlaylistPageData(vars.getLibraryPlaylistPageData), options),
-	]);
-	
-	return client;
-}

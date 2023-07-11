@@ -10,8 +10,8 @@ import useLanguageRoute from '~src/lib/useLanguageRoute';
 import {
 	GetDiscoverConferencesQuery,
 	useInfiniteGetDiscoverConferencesQuery,
-} from './__generated__';
-import Section, { SectionNode } from './index.section';
+} from './__generated__/conferences';
+import Section, { SectionNode } from './index';
 
 type Conference = NonNullable<
 	GetDiscoverConferencesQuery['conferences']['nodes']

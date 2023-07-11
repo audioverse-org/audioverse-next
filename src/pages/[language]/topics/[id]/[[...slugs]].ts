@@ -12,7 +12,6 @@ import {
 import Topic from '~src/containers/topic/detail';
 import { REVALIDATE, REVALIDATE_FAILURE } from '~src/lib/constants';
 import { getDetailStaticPaths } from '~src/lib/getDetailStaticPaths';
-import root from '~src/lib/routes';
 
 export default Topic;
 
@@ -41,6 +40,6 @@ export function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getTopicDetailStaticPaths,
 		(d) => d.topics.nodes,
-		(l, n) => root.lang(l).topics.id(n.id).slug(n.title).get()
+		(l, n) => n.canonicalPath
 	);
 }

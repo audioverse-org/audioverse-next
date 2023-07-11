@@ -182,26 +182,3 @@ export async function getStoryAlbumDetailPathsData<T>(
 ): Promise<GetStoryAlbumDetailPathsDataQuery> {
 	return fetchApi(GetStoryAlbumDetailPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getStoryAlbumDetailPageData: ExactAlt<T, GetStoryAlbumDetailPageDataQueryVariables>,
-		getStoryAlbumFeedData: ExactAlt<T, GetStoryAlbumFeedDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getStoryAlbumDetailPageData', vars.getStoryAlbumDetailPageData], () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData), options),
-		client.prefetchInfiniteQuery(['getStoryAlbumDetailPageData.infinite', vars.getStoryAlbumDetailPageData], () => getStoryAlbumDetailPageData(vars.getStoryAlbumDetailPageData), options),
-		client.prefetchQuery(['getStoryAlbumFeedData', vars.getStoryAlbumFeedData], () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData), options),
-		client.prefetchInfiniteQuery(['getStoryAlbumFeedData.infinite', vars.getStoryAlbumFeedData], () => getStoryAlbumFeedData(vars.getStoryAlbumFeedData), options),
-	]);
-	
-	return client;
-}

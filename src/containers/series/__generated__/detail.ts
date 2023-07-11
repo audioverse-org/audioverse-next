@@ -175,26 +175,3 @@ export async function getSeriesDetailPathsData<T>(
 ): Promise<GetSeriesDetailPathsDataQuery> {
 	return fetchApi(GetSeriesDetailPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSeriesDetailPageData: ExactAlt<T, GetSeriesDetailPageDataQueryVariables>,
-		getSeriesFeedData: ExactAlt<T, GetSeriesFeedDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSeriesDetailPageData', vars.getSeriesDetailPageData], () => getSeriesDetailPageData(vars.getSeriesDetailPageData), options),
-		client.prefetchInfiniteQuery(['getSeriesDetailPageData.infinite', vars.getSeriesDetailPageData], () => getSeriesDetailPageData(vars.getSeriesDetailPageData), options),
-		client.prefetchQuery(['getSeriesFeedData', vars.getSeriesFeedData], () => getSeriesFeedData(vars.getSeriesFeedData), options),
-		client.prefetchInfiniteQuery(['getSeriesFeedData.infinite', vars.getSeriesFeedData], () => getSeriesFeedData(vars.getSeriesFeedData), options),
-	]);
-	
-	return client;
-}

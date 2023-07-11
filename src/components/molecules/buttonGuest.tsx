@@ -8,8 +8,8 @@ import Button from '~components/molecules/button';
 import Modal from '~components/organisms/modal';
 import root, { isRedirectRouteAllowed } from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import Icon from '~public/img/icons/icon-info.svg';
 
-import Icon from '../../../public/img/icons/icon-info.svg';
 import styles from './buttonGuest.module.scss';
 
 export default function ButtonGuest({

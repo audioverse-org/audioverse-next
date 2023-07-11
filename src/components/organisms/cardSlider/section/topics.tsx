@@ -9,8 +9,8 @@ import { useLanguageId } from '~src/lib/useLanguageId';
 import {
 	GetDiscoverTopicsQuery,
 	useInfiniteGetDiscoverTopicsQuery,
-} from './__generated__';
-import Section, { SectionNode } from './index.section';
+} from './__generated__/topics';
+import Section, { SectionNode } from './index';
 
 function selectTopics(p: GetDiscoverTopicsQuery | undefined) {
 	return p?.topics.nodes;

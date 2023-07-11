@@ -8,11 +8,11 @@ import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
+import Section, { SectionNode } from '.';
 import {
 	GetDiscoverBlogPostsQuery,
 	useInfiniteGetDiscoverBlogPostsQuery,
-} from './__generated__';
-import Section, { SectionNode } from './index.section';
+} from './__generated__/blogPosts';
 
 function selectPosts(p: GetDiscoverBlogPostsQuery | undefined) {
 	return p?.blogPosts.nodes;

@@ -7,8 +7,8 @@ import { useIntl } from 'react-intl';
 import Heading2 from '~components/atoms/heading2';
 import IconButton from '~components/molecules/iconButton';
 import { BaseColors } from '~lib/constants';
+import IconClose from '~public/img/icons/fa-times.svg';
 
-import IconClose from '../../../public/img/icons/fa-times.svg';
 import styles from './modal.module.scss';
 
 interface ModalProps {

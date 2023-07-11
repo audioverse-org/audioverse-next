@@ -65,23 +65,3 @@ export async function getPresenterListLetterPageData<T>(
 ): Promise<GetPresenterListLetterPageDataQuery> {
 	return fetchApi(GetPresenterListLetterPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getPresenterListLetterPageData: ExactAlt<T, GetPresenterListLetterPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getPresenterListLetterPageData', vars.getPresenterListLetterPageData], () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData), options),
-		client.prefetchInfiniteQuery(['getPresenterListLetterPageData.infinite', vars.getPresenterListLetterPageData], () => getPresenterListLetterPageData(vars.getPresenterListLetterPageData), options),
-	]);
-	
-	return client;
-}

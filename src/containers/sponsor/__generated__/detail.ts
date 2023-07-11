@@ -163,23 +163,3 @@ export async function getSponsorDetailPathsData<T>(
 ): Promise<GetSponsorDetailPathsDataQuery> {
 	return fetchApi(GetSponsorDetailPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSponsorDetailPageData: ExactAlt<T, GetSponsorDetailPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSponsorDetailPageData', vars.getSponsorDetailPageData], () => getSponsorDetailPageData(vars.getSponsorDetailPageData), options),
-		client.prefetchInfiniteQuery(['getSponsorDetailPageData.infinite', vars.getSponsorDetailPageData], () => getSponsorDetailPageData(vars.getSponsorDetailPageData), options),
-	]);
-	
-	return client;
-}

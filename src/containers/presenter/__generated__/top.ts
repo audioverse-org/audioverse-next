@@ -81,23 +81,3 @@ export async function getPresenterTopPageData<T>(
 ): Promise<GetPresenterTopPageDataQuery> {
 	return fetchApi(GetPresenterTopPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getPresenterTopPageData: ExactAlt<T, GetPresenterTopPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getPresenterTopPageData', vars.getPresenterTopPageData], () => getPresenterTopPageData(vars.getPresenterTopPageData), options),
-		client.prefetchInfiniteQuery(['getPresenterTopPageData.infinite', vars.getPresenterTopPageData], () => getPresenterTopPageData(vars.getPresenterTopPageData), options),
-	]);
-	
-	return client;
-}

@@ -6,7 +6,7 @@ import { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 import { buildRenderer } from '~src/lib/test/buildRenderer';
 
-import Slider, { GRID_GAP, MIN_CARD_WIDTH } from './index.slider';
+import Slider, { GRID_GAP, MIN_CARD_WIDTH } from '.';
 
 jest.mock('~lib/hooks/useElementWidth');
 

@@ -71,23 +71,3 @@ export async function getSongBooksDetailPageData<T>(
 ): Promise<GetSongBooksDetailPageDataQuery> {
 	return fetchApi(GetSongBooksDetailPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSongBooksDetailPageData: ExactAlt<T, GetSongBooksDetailPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSongBooksDetailPageData', vars.getSongBooksDetailPageData], () => getSongBooksDetailPageData(vars.getSongBooksDetailPageData), options),
-		client.prefetchInfiniteQuery(['getSongBooksDetailPageData.infinite', vars.getSongBooksDetailPageData], () => getSongBooksDetailPageData(vars.getSongBooksDetailPageData), options),
-	]);
-	
-	return client;
-}

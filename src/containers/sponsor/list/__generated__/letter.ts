@@ -65,23 +65,3 @@ export async function getSponsorListLetterPageData<T>(
 ): Promise<GetSponsorListLetterPageDataQuery> {
 	return fetchApi(GetSponsorListLetterPageDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSponsorListLetterPageData: ExactAlt<T, GetSponsorListLetterPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSponsorListLetterPageData', vars.getSponsorListLetterPageData], () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData), options),
-		client.prefetchInfiniteQuery(['getSponsorListLetterPageData.infinite', vars.getSponsorListLetterPageData], () => getSponsorListLetterPageData(vars.getSponsorListLetterPageData), options),
-	]);
-	
-	return client;
-}

@@ -114,23 +114,3 @@ export async function getBlogPathsData<T>(
 ): Promise<GetBlogPathsDataQuery> {
 	return fetchApi(GetBlogPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getBlogPageData: ExactAlt<T, GetBlogPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getBlogPageData', vars.getBlogPageData], () => getBlogPageData(vars.getBlogPageData), options),
-		client.prefetchInfiniteQuery(['getBlogPageData.infinite', vars.getBlogPageData], () => getBlogPageData(vars.getBlogPageData), options),
-	]);
-	
-	return client;
-}

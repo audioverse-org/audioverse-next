@@ -52,23 +52,3 @@ export async function personIsFavorited<T>(
 ): Promise<PersonIsFavoritedQuery> {
 	return fetchApi(PersonIsFavoritedDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		personIsFavorited: ExactAlt<T, PersonIsFavoritedQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['personIsFavorited', vars.personIsFavorited], () => personIsFavorited(vars.personIsFavorited), options),
-		client.prefetchInfiniteQuery(['personIsFavorited.infinite', vars.personIsFavorited], () => personIsFavorited(vars.personIsFavorited), options),
-	]);
-	
-	return client;
-}

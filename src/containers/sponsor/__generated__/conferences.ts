@@ -122,23 +122,3 @@ export async function getSponsorConferencesPathsData<T>(
 ): Promise<GetSponsorConferencesPathsDataQuery> {
 	return fetchApi(GetSponsorConferencesPathsDataDocument, { variables });
 }
-
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-
-export async function prefetchQueries<T>(
-	vars: {
-		getSponsorConferencesPageData: ExactAlt<T, GetSponsorConferencesPageDataQueryVariables>
-	},
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const options = { cacheTime: 24 * 60 * 60 * 1000 };
-
-	await Promise.all([
-		client.prefetchQuery(['getSponsorConferencesPageData', vars.getSponsorConferencesPageData], () => getSponsorConferencesPageData(vars.getSponsorConferencesPageData), options),
-		client.prefetchInfiniteQuery(['getSponsorConferencesPageData.infinite', vars.getSponsorConferencesPageData], () => getSponsorConferencesPageData(vars.getSponsorConferencesPageData), options),
-	]);
-	
-	return client;
-}

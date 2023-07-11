@@ -12,9 +12,9 @@ import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { useNavigationItems } from '~lib/useNavigationItems';
+import IconExitSmall from '~public/img/icons/icon-exit-small.svg';
+import MoreIcon from '~public/img/icons/icon-more.svg';
 
-import IconExitSmall from '../../../public/img/icons/icon-exit-small.svg';
-import MoreIcon from '../../../public/img/icons/icon-more.svg';
 import styles from './mobileHeader.module.scss';
 import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
 import { EntityFilterId } from './searchResults.filters';

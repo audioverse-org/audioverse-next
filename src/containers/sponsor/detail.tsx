@@ -25,9 +25,9 @@ import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 import { Must } from '~src/types/types';
 
-import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 import { GetSponsorDetailPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
