@@ -24,8 +24,9 @@ const getQueries = (doc: Types.DocumentFile) => {
 	return {
 		source: `~${dir}/__generated__/${filename}`,
 		queries: queryNames.map((n) => ({
-			functionName: `load${capitalize(n)}`,
+			functionName: `build${capitalize(n)}Loader`,
 			dataType: `${capitalize(n)}Query`,
+			variableType: `${capitalize(n)}QueryVariables`,
 			documentName: `${capitalize(n)}Document`,
 		})),
 	};
@@ -48,10 +49,11 @@ const plugin: CodegenPlugin = {
 			.flatMap((q) => q.queries)
 			.map(
 				(q) =>
-					`export const ${q.functionName} = buildLoader<${q.dataType}>(${q.documentName});`
+					`export const ${q.functionName} = (defaults: PartialData<${q.dataType}>) => buildLoader<${q.dataType}>(${q.documentName}, defaults);`
 			);
 
 		return `import { buildLoader } from "~src/lib/test/buildLoader";
+import { PartialData } from '~lib/test/buildLoader';
 
 ${imports.join('\n')}
 

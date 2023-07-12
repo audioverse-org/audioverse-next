@@ -16,7 +16,7 @@ type Options = {
 	variables?: Record<string, unknown>;
 };
 
-type PartialData<T> = PartialDeepRecursive<T> | Record<string, never>;
+export type PartialData<T> = PartialDeepRecursive<T> | Record<string, never>;
 
 type Loader<T> = (
 	data?: PartialData<T>,
