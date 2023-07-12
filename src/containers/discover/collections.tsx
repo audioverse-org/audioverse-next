@@ -39,8 +39,8 @@ export default function DiscoverCollections({
 				</>
 			)}
 
-			<Topics />
 			<Presenters />
+			<Topics />
 			<Audiobooks />
 			<Conferences
 				heading={
