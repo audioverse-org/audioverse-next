@@ -1341,12 +1341,6 @@
       "value": "Discover Collections"
     }
   ],
-  "discoverCollections_audiobooksHeading": [
-    {
-      "type": 0,
-      "value": "Audiobooks"
-    }
-  ],
   "discoverCollections_conferencesHeading": [
     {
       "type": 0,
@@ -3795,6 +3789,24 @@
     {
       "type": 0,
       "value": "Sponsor"
+    }
+  ],
+  "organismSection__audiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Audiobooks"
+    }
+  ],
+  "organismSection__audiobooksNext": [
+    {
+      "type": 0,
+      "value": "Next audiobooks"
+    }
+  ],
+  "organismSection__audiobooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous audiobooks"
     }
   ],
   "organismSection_presentersHeading": [

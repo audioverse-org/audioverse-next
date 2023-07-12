@@ -630,9 +630,6 @@
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
-  "discoverCollections_audiobooksHeading": {
-    "string": "Audiobooks"
-  },
   "discoverCollections_conferencesHeading": {
     "string": "Conferences"
   },
@@ -1793,6 +1790,15 @@
   "organism-recording__sponsorInfoTitle": {
     "comment": "recording sponsor info title",
     "string": "Sponsor"
+  },
+  "organismSection__audiobooksHeading": {
+    "string": "Audiobooks"
+  },
+  "organismSection__audiobooksNext": {
+    "string": "Next audiobooks"
+  },
+  "organismSection__audiobooksPrevious": {
+    "string": "Previous audiobooks"
   },
   "organismSection_presentersHeading": {
     "string": "Presenters"
