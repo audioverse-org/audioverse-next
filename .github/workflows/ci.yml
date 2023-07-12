@@ -72,6 +72,8 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
+      - name: Run codegen
+        run: npm run graphql:codegen
       - name: Run tests
         run: npm run test:strict
   intl:
@@ -116,5 +118,5 @@ jobs:
         run: npm run graphql:purge
       - name: Codegen
         run: npm run graphql:codegen
-      - name: Check no changes were made
+      - name: Check no uncommitted changes
         run: git diff --exit-code
