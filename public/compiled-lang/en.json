@@ -1371,12 +1371,6 @@
       "value": "Series"
     }
   ],
-  "discoverCollections_sponsorsHeading": [
-    {
-      "type": 0,
-      "value": "Sponsors"
-    }
-  ],
   "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
@@ -3825,6 +3819,24 @@
     {
       "type": 0,
       "value": "Previous presenters"
+    }
+  ],
+  "organismSection_sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "organismSection_sponsorsNext": [
+    {
+      "type": 0,
+      "value": "Next sponsors"
+    }
+  ],
+  "organismSection_sponsorsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous sponsors"
     }
   ],
   "ourPurpose__title": [

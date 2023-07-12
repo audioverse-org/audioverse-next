@@ -645,9 +645,6 @@
   "discoverCollections_seriesHeading": {
     "string": "Series"
   },
-  "discoverCollections_sponsorsHeading": {
-    "string": "Sponsors"
-  },
   "discoverCollections_storySeasonsHeading": {
     "string": "Stories"
   },
@@ -1808,6 +1805,15 @@
   },
   "organismSection_presentersPrevious": {
     "string": "Previous presenters"
+  },
+  "organismSection_sponsorsHeading": {
+    "string": "Sponsors"
+  },
+  "organismSection_sponsorsNext": {
+    "string": "Next sponsors"
+  },
+  "organismSection_sponsorsPrevious": {
+    "string": "Previous sponsors"
   },
   "ourPurpose__title": {
     "string": "Our Purpose"
