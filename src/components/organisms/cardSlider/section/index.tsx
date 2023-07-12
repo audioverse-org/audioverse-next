@@ -34,7 +34,6 @@ type SectionProps<T, N> = {
 	heading: string | JSX.Element;
 	previous: string;
 	next: string;
-	first?: number;
 	rows?: number;
 	seeAllUrl?: string;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
@@ -63,28 +62,30 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	...props
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
-	const infiniteQueryResult = infiniteQuery(
+
+	const { data, fetchNextPage } = infiniteQuery(
 		'after',
-		{
-			language,
-			after: null,
-		},
+		{ language },
 		{
 			getNextPageParam: (last: Maybe<T>) => {
-				const sectionRoot = selectSectionRoot<T, N>(last);
-				if (!sectionRoot) return;
+				const r = selectSectionRoot<T, N>(last);
+				if (!r) return;
 				return {
 					language,
-					after: sectionRoot.pageInfo.endCursor,
+					after: r.pageInfo.endCursor,
 				};
 			},
 		}
 	);
-	const { data, fetchNextPage } = infiniteQueryResult;
-	const pages = useMemo(() => data?.pages || [], [data?.pages]);
-	const nodes: SectionNode<N>[] = useMemo(() => {
-		return pages.flatMap(selectNodes).filter((n): n is SectionNode<N> => !!n);
-	}, [pages, selectNodes]);
+
+	const cards = useMemo(
+		() =>
+			data?.pages
+				.flatMap(selectNodes)
+				.filter((n): n is SectionNode<N> => !!n)
+				.map((n) => <Card node={n} key={n.canonicalPath} />) ?? [],
+		[Card, data?.pages, selectNodes]
+	);
 
 	const preload = useCallback(
 		({ index, total }: { index: number; total: number }) => {
@@ -93,11 +94,6 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 			}
 		},
 		[fetchNextPage]
-	);
-
-	const cards = useMemo(
-		() => nodes.map((n) => <Card node={n} key={n.canonicalPath} />),
-		[Card, nodes]
 	);
 
 	return (
