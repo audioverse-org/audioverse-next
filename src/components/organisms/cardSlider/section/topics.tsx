@@ -4,14 +4,14 @@ import { useIntl } from 'react-intl';
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
 
-import { useInfiniteGetDiscoverTopicsQuery } from './__generated__/topics';
+import { useInfiniteGetSectionTopicsQuery } from './__generated__/topics';
 import Section from './index';
 
 export default function Topics(): JSX.Element {
 	const intl = useIntl();
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetDiscoverTopicsQuery}
+			infiniteQuery={useInfiniteGetSectionTopicsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_topicsHeading',
 				defaultMessage: 'Topics',

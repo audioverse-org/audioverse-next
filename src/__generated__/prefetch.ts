@@ -4,13 +4,13 @@ import makeQueryClient from '~lib/makeQueryClient';
 
 import { GetWithAuthGuardDataQueryVariables, getWithAuthGuardData } from '~src/components/HOCs/__generated__/withAuthGuard';
 import { GetHelpWidgetDataQueryVariables, getHelpWidgetData } from '~src/components/molecules/__generated__/helpWidget';
-import { GetDiscoverBlogPostsQueryVariables, getDiscoverBlogPosts } from '~src/components/organisms/cardSlider/section/__generated__/blogPosts';
-import { GetDiscoverConferencesQueryVariables, getDiscoverConferences } from '~src/components/organisms/cardSlider/section/__generated__/conferences';
-import { GetDiscoverFeaturedTeachingsQueryVariables, getDiscoverFeaturedTeachings } from '~src/components/organisms/cardSlider/section/__generated__/featuredTeachings';
-import { GetDiscoverRecentTeachingsQueryVariables, getDiscoverRecentTeachings } from '~src/components/organisms/cardSlider/section/__generated__/recentTeachings';
-import { GetDiscoverStorySeasonsQueryVariables, getDiscoverStorySeasons } from '~src/components/organisms/cardSlider/section/__generated__/storySeasons';
-import { GetDiscoverTopicsQueryVariables, getDiscoverTopics } from '~src/components/organisms/cardSlider/section/__generated__/topics';
-import { GetDiscoverTrendingTeachingsQueryVariables, getDiscoverTrendingTeachings } from '~src/components/organisms/cardSlider/section/__generated__/trendingTeachings';
+import { GetSectionBlogPostsQueryVariables, getSectionBlogPosts } from '~src/components/organisms/cardSlider/section/__generated__/blogPosts';
+import { GetSectionConferencesQueryVariables, getSectionConferences } from '~src/components/organisms/cardSlider/section/__generated__/conferences';
+import { GetSectionFeaturedTeachingsQueryVariables, getSectionFeaturedTeachings } from '~src/components/organisms/cardSlider/section/__generated__/featuredTeachings';
+import { GetSectionRecentTeachingsQueryVariables, getSectionRecentTeachings } from '~src/components/organisms/cardSlider/section/__generated__/recentTeachings';
+import { GetSectionStorySeasonsQueryVariables, getSectionStorySeasons } from '~src/components/organisms/cardSlider/section/__generated__/storySeasons';
+import { GetSectionTopicsQueryVariables, getSectionTopics } from '~src/components/organisms/cardSlider/section/__generated__/topics';
+import { GetSectionTrendingTeachingsQueryVariables, getSectionTrendingTeachings } from '~src/components/organisms/cardSlider/section/__generated__/trendingTeachings';
 import { GetNotFoundPageDataQueryVariables, getNotFoundPageData } from '~src/components/organisms/__generated__/notFound';
 import { GetSearchRecordingsQueryVariables, GetSearchSeriesQueryVariables, GetSearchConferencesQueryVariables, GetSearchSponsorsQueryVariables, GetSearchPersonsQueryVariables, GetSearchAudiobooksQueryVariables, GetSearchMusicTracksQueryVariables, GetSearchStoryProgramsQueryVariables, getSearchRecordings, getSearchSeries, getSearchConferences, getSearchSponsors, getSearchPersons, getSearchAudiobooks, getSearchMusicTracks, getSearchStoryPrograms } from '~src/components/organisms/__generated__/searchResults';
 import { GetRecordingPlaybackProgressQueryVariables, getRecordingPlaybackProgress } from '~src/components/templates/__generated__/andMiniplayer';
@@ -110,13 +110,13 @@ export async function prefetchQueries(
 const fns = {
 	getWithAuthGuardData: getWithAuthGuardData as Fn<GetWithAuthGuardDataQueryVariables>,
 	getHelpWidgetData: getHelpWidgetData as Fn<GetHelpWidgetDataQueryVariables>,
-	getDiscoverBlogPosts: getDiscoverBlogPosts as Fn<GetDiscoverBlogPostsQueryVariables>,
-	getDiscoverConferences: getDiscoverConferences as Fn<GetDiscoverConferencesQueryVariables>,
-	getDiscoverFeaturedTeachings: getDiscoverFeaturedTeachings as Fn<GetDiscoverFeaturedTeachingsQueryVariables>,
-	getDiscoverRecentTeachings: getDiscoverRecentTeachings as Fn<GetDiscoverRecentTeachingsQueryVariables>,
-	getDiscoverStorySeasons: getDiscoverStorySeasons as Fn<GetDiscoverStorySeasonsQueryVariables>,
-	getDiscoverTopics: getDiscoverTopics as Fn<GetDiscoverTopicsQueryVariables>,
-	getDiscoverTrendingTeachings: getDiscoverTrendingTeachings as Fn<GetDiscoverTrendingTeachingsQueryVariables>,
+	getSectionBlogPosts: getSectionBlogPosts as Fn<GetSectionBlogPostsQueryVariables>,
+	getSectionConferences: getSectionConferences as Fn<GetSectionConferencesQueryVariables>,
+	getSectionFeaturedTeachings: getSectionFeaturedTeachings as Fn<GetSectionFeaturedTeachingsQueryVariables>,
+	getSectionRecentTeachings: getSectionRecentTeachings as Fn<GetSectionRecentTeachingsQueryVariables>,
+	getSectionStorySeasons: getSectionStorySeasons as Fn<GetSectionStorySeasonsQueryVariables>,
+	getSectionTopics: getSectionTopics as Fn<GetSectionTopicsQueryVariables>,
+	getSectionTrendingTeachings: getSectionTrendingTeachings as Fn<GetSectionTrendingTeachingsQueryVariables>,
 	getNotFoundPageData: getNotFoundPageData as Fn<GetNotFoundPageDataQueryVariables>,
 	getSearchRecordings: getSearchRecordings as Fn<GetSearchRecordingsQueryVariables>,
 	getSearchSeries: getSearchSeries as Fn<GetSearchSeriesQueryVariables>,

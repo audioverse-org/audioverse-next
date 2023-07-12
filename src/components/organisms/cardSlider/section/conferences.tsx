@@ -6,13 +6,13 @@ import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import {
-	GetDiscoverConferencesQuery,
-	useInfiniteGetDiscoverConferencesQuery,
+	GetSectionConferencesQuery,
+	useInfiniteGetSectionConferencesQuery,
 } from './__generated__/conferences';
 import Section, { SectionNode } from './index';
 
 type Conference = NonNullable<
-	GetDiscoverConferencesQuery['conferences']['nodes']
+	GetSectionConferencesQuery['conferences']['nodes']
 >[0];
 
 export default function Conferences(props: {
@@ -41,7 +41,7 @@ export default function Conferences(props: {
 
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetDiscoverConferencesQuery}
+			infiniteQuery={useInfiniteGetSectionConferencesQuery}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'discover__conferencesPrevious',

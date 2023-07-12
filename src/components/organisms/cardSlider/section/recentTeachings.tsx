@@ -6,7 +6,7 @@ import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import { useInfiniteGetDiscoverRecentTeachingsQuery } from './__generated__/recentTeachings';
+import { useInfiniteGetSectionRecentTeachingsQuery } from './__generated__/recentTeachings';
 import Section from './index';
 
 export default function RecentTeachings(): JSX.Element {
@@ -15,7 +15,7 @@ export default function RecentTeachings(): JSX.Element {
 
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetDiscoverRecentTeachingsQuery}
+			infiniteQuery={useInfiniteGetSectionRecentTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_recentTeachingsHeading',
 				defaultMessage: 'Recent Teachings',

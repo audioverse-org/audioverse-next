@@ -6,13 +6,13 @@ import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import {
-	GetDiscoverStorySeasonsQuery,
-	useInfiniteGetDiscoverStorySeasonsQuery,
+	GetSectionStorySeasonsQuery,
+	useInfiniteGetSectionStorySeasonsQuery,
 } from './__generated__/storySeasons';
 import Section from './index';
 
 type StorySeason = NonNullable<
-	GetDiscoverStorySeasonsQuery['storySeasons']['nodes']
+	GetSectionStorySeasonsQuery['storySeasons']['nodes']
 >[0];
 
 export default function StorySeasons(props: {
@@ -30,7 +30,7 @@ export default function StorySeasons(props: {
 
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetDiscoverStorySeasonsQuery}
+			infiniteQuery={useInfiniteGetSectionStorySeasonsQuery}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'discover__storiesPrevious',

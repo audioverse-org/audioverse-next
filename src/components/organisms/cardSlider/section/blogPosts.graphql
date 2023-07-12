@@ -1,7 +1,7 @@
-query getDiscoverBlogPosts(
+query getSectionBlogPosts(
 	$language: Language!
 	$first: Int! = 3
-	$after: String
+	$after: String = null
 ) {
 	blogPosts(
 		language: $language

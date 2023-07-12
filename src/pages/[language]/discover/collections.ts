@@ -1,3 +1,4 @@
+import { DehydratedState } from '@tanstack/react-query';
 import {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
@@ -14,17 +15,25 @@ import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '~lib/getLanguageRoutes';
 import root from '~lib/routes';
+import { prefetchQueries } from '~src/__generated__/prefetch';
+import serializableDehydrate from '~src/lib/serializableDehydrate';
 
 export default DiscoverCollections;
 
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string }>): Promise<
-	GetStaticPropsResult<IDiscoverCollectionsProps & IBaseProps>
+	GetStaticPropsResult<
+		IDiscoverCollectionsProps & {
+			dehydratedState: DehydratedState;
+		} & IBaseProps
+	>
 > {
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
 	const data = await getDiscoverCollectionsPageData({ language });
+
+	const client = await prefetchQueries({});
 
 	return {
 		props: {
@@ -33,6 +42,7 @@ export async function getStaticProps({
 				id: 'discoverCollections__title',
 				defaultMessage: 'Discover Collections',
 			}),
+			dehydratedState: serializableDehydrate(client),
 		},
 		revalidate: REVALIDATE,
 	};

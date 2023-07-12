@@ -1,7 +1,7 @@
-query getDiscoverTrendingTeachings(
+query getSectionTrendingTeachings(
 	$language: Language!
 	$first: Int! = 6
-	$after: String
+	$after: String = null
 ) {
 	trendingTeachings: popularRecordings(
 		language: $language

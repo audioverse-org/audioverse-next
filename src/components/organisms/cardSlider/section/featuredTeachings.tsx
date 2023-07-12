@@ -4,14 +4,14 @@ import { useIntl } from 'react-intl';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 
-import { useInfiniteGetDiscoverFeaturedTeachingsQuery } from './__generated__/featuredTeachings';
+import { useInfiniteGetSectionFeaturedTeachingsQuery } from './__generated__/featuredTeachings';
 import Section from './index';
 
 export default function FeaturedTeachings(): JSX.Element {
 	const intl = useIntl();
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetDiscoverFeaturedTeachingsQuery}
+			infiniteQuery={useInfiniteGetSectionFeaturedTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_featuredTeachingsHeading',
 				defaultMessage: 'Featured Teachings',

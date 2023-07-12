@@ -7,7 +7,7 @@ import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import Section from '.';
-import { useInfiniteGetDiscoverBlogPostsQuery } from './__generated__/blogPosts';
+import { useInfiniteGetSectionBlogPostsQuery } from './__generated__/blogPosts';
 
 export default function BlogPosts(): JSX.Element {
 	const languageRoute = useLanguageRoute();
@@ -15,7 +15,7 @@ export default function BlogPosts(): JSX.Element {
 
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetDiscoverBlogPostsQuery}
+			infiniteQuery={useInfiniteGetSectionBlogPostsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_recentBlogHeading',
 				defaultMessage: 'Recent Blog Posts',

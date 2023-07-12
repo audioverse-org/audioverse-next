@@ -5,7 +5,7 @@ import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import { useInfiniteGetDiscoverTrendingTeachingsQuery } from './__generated__/trendingTeachings';
+import { useInfiniteGetSectionTrendingTeachingsQuery } from './__generated__/trendingTeachings';
 import Section from './index';
 
 export default function TrendingTeachings(): JSX.Element {
@@ -14,7 +14,7 @@ export default function TrendingTeachings(): JSX.Element {
 
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetDiscoverTrendingTeachingsQuery}
+			infiniteQuery={useInfiniteGetSectionTrendingTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_trendingTeachingsHeading',
 				defaultMessage: 'Trending Teachings',
