@@ -28,9 +28,12 @@ generates:
       - 'graphql-codegen/dist/graphql-plugin-prefetch.js'
   src/__generated__/mock-data.ts:
     plugins:
-      - 'typescript-mock-data'
-    config:
-      prefix: 'make'
+      - add:
+          content: "import * as Types from './graphql';"
+      - 'typescript-mock-data':
+          prefix: 'make'
+          typesPrefix: 'Types.'
+          enumsPrefix: 'Types.'
   src/:
     preset: near-operation-file
     presetConfig:

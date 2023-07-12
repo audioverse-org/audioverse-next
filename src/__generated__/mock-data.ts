@@ -1,11 +1,12 @@
+import * as Types from './graphql';
 
-export const makeAggregate = (overrides?: Partial<Aggregate>): Aggregate => {
+export const makeAggregate = (overrides?: Partial<Types.Aggregate>): Types.Aggregate => {
     return {
         count: overrides && overrides.hasOwnProperty('count') ? overrides.count! : 6985,
     };
 };
 
-export const makeAttachment = (overrides?: Partial<Attachment>): Attachment => {
+export const makeAttachment = (overrides?: Partial<Types.Attachment>): Types.Attachment => {
     return {
         canDelete: overrides && overrides.hasOwnProperty('canDelete') ? overrides.canDelete! : true,
         filename: overrides && overrides.hasOwnProperty('filename') ? overrides.filename! : 'reprehenderit',
@@ -18,7 +19,7 @@ export const makeAttachment = (overrides?: Partial<Attachment>): Attachment => {
     };
 };
 
-export const makeAudioFile = (overrides?: Partial<AudioFile>): AudioFile => {
+export const makeAudioFile = (overrides?: Partial<Types.AudioFile>): Types.AudioFile => {
     return {
         bitrate: overrides && overrides.hasOwnProperty('bitrate') ? overrides.bitrate! : 2386,
         canDelete: overrides && overrides.hasOwnProperty('canDelete') ? overrides.canDelete! : true,
@@ -28,27 +29,27 @@ export const makeAudioFile = (overrides?: Partial<AudioFile>): AudioFile => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bf398da8-a428-41b1-8529-1ecd0f939412',
         mimeType: overrides && overrides.hasOwnProperty('mimeType') ? overrides.mimeType! : 'eos',
         recording: overrides && overrides.hasOwnProperty('recording') ? overrides.recording! : makeRecording(),
-        transcodingStatus: overrides && overrides.hasOwnProperty('transcodingStatus') ? overrides.transcodingStatus! : MediaFileTranscodingStatus.Complete,
+        transcodingStatus: overrides && overrides.hasOwnProperty('transcodingStatus') ? overrides.transcodingStatus! : Types.MediaFileTranscodingStatus.Complete,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'deleniti',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'et',
     };
 };
 
-export const makeAuthenticatedUser = (overrides?: Partial<AuthenticatedUser>): AuthenticatedUser => {
+export const makeAuthenticatedUser = (overrides?: Partial<Types.AuthenticatedUser>): Types.AuthenticatedUser => {
     return {
         sessionToken: overrides && overrides.hasOwnProperty('sessionToken') ? overrides.sessionToken! : 'velit',
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : makeUser(),
     };
 };
 
-export const makeAuthenticatedUserPayload = (overrides?: Partial<AuthenticatedUserPayload>): AuthenticatedUserPayload => {
+export const makeAuthenticatedUserPayload = (overrides?: Partial<Types.AuthenticatedUserPayload>): Types.AuthenticatedUserPayload => {
     return {
         authenticatedUser: overrides && overrides.hasOwnProperty('authenticatedUser') ? overrides.authenticatedUser! : makeAuthenticatedUser(),
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
     };
 };
 
-export const makeBible = (overrides?: Partial<Bible>): Bible => {
+export const makeBible = (overrides?: Partial<Types.Bible>): Types.Bible => {
     return {
         abbreviation: overrides && overrides.hasOwnProperty('abbreviation') ? overrides.abbreviation! : 'quam',
         book: overrides && overrides.hasOwnProperty('book') ? overrides.book! : makeBibleBook(),
@@ -61,7 +62,7 @@ export const makeBible = (overrides?: Partial<Bible>): Bible => {
     };
 };
 
-export const makeBibleBook = (overrides?: Partial<BibleBook>): BibleBook => {
+export const makeBibleBook = (overrides?: Partial<Types.BibleBook>): Types.BibleBook => {
     return {
         bible: overrides && overrides.hasOwnProperty('bible') ? overrides.bible! : makeBible(),
         chapter: overrides && overrides.hasOwnProperty('chapter') ? overrides.chapter! : makeBibleChapter(),
@@ -74,7 +75,7 @@ export const makeBibleBook = (overrides?: Partial<BibleBook>): BibleBook => {
     };
 };
 
-export const makeBibleChapter = (overrides?: Partial<BibleChapter>): BibleChapter => {
+export const makeBibleChapter = (overrides?: Partial<Types.BibleChapter>): Types.BibleChapter => {
     return {
         book: overrides && overrides.hasOwnProperty('book') ? overrides.book! : makeBibleBook(),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bff0b1d6-2877-484a-b668-ce689114e3ed',
@@ -86,7 +87,7 @@ export const makeBibleChapter = (overrides?: Partial<BibleChapter>): BibleChapte
     };
 };
 
-export const makeBibleConnection = (overrides?: Partial<BibleConnection>): BibleConnection => {
+export const makeBibleConnection = (overrides?: Partial<Types.BibleConnection>): Types.BibleConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeBibleEdge()],
@@ -95,30 +96,30 @@ export const makeBibleConnection = (overrides?: Partial<BibleConnection>): Bible
     };
 };
 
-export const makeBibleEdge = (overrides?: Partial<BibleEdge>): BibleEdge => {
+export const makeBibleEdge = (overrides?: Partial<Types.BibleEdge>): Types.BibleEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'quis',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeBible(),
     };
 };
 
-export const makeBibleReference = (overrides?: Partial<BibleReference>): BibleReference => {
+export const makeBibleReference = (overrides?: Partial<Types.BibleReference>): Types.BibleReference => {
     return {
-        book: overrides && overrides.hasOwnProperty('book') ? overrides.book! : BibleReferenceBook.Acts,
+        book: overrides && overrides.hasOwnProperty('book') ? overrides.book! : Types.BibleReferenceBook.Acts,
         chapter: overrides && overrides.hasOwnProperty('chapter') ? overrides.chapter! : 414,
         verse: overrides && overrides.hasOwnProperty('verse') ? overrides.verse! : 532,
     };
 };
 
-export const makeBibleReferenceInput = (overrides?: Partial<BibleReferenceInput>): BibleReferenceInput => {
+export const makeBibleReferenceInput = (overrides?: Partial<Types.BibleReferenceInput>): Types.BibleReferenceInput => {
     return {
-        book: overrides && overrides.hasOwnProperty('book') ? overrides.book! : BibleReferenceBook.Acts,
+        book: overrides && overrides.hasOwnProperty('book') ? overrides.book! : Types.BibleReferenceBook.Acts,
         chapter: overrides && overrides.hasOwnProperty('chapter') ? overrides.chapter! : 4873,
         verse: overrides && overrides.hasOwnProperty('verse') ? overrides.verse! : 3999,
     };
 };
 
-export const makeBibleReferenceRange = (overrides?: Partial<BibleReferenceRange>): BibleReferenceRange => {
+export const makeBibleReferenceRange = (overrides?: Partial<Types.BibleReferenceRange>): Types.BibleReferenceRange => {
     return {
         endReference: overrides && overrides.hasOwnProperty('endReference') ? overrides.endReference! : makeBibleReference(),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2d673cb7-fde2-4142-9b90-645424da91c1',
@@ -126,7 +127,7 @@ export const makeBibleReferenceRange = (overrides?: Partial<BibleReferenceRange>
     };
 };
 
-export const makeBibleReferenceRangeConnection = (overrides?: Partial<BibleReferenceRangeConnection>): BibleReferenceRangeConnection => {
+export const makeBibleReferenceRangeConnection = (overrides?: Partial<Types.BibleReferenceRangeConnection>): Types.BibleReferenceRangeConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeBibleReferenceRangeEdge()],
@@ -135,35 +136,35 @@ export const makeBibleReferenceRangeConnection = (overrides?: Partial<BibleRefer
     };
 };
 
-export const makeBibleReferenceRangeEdge = (overrides?: Partial<BibleReferenceRangeEdge>): BibleReferenceRangeEdge => {
+export const makeBibleReferenceRangeEdge = (overrides?: Partial<Types.BibleReferenceRangeEdge>): Types.BibleReferenceRangeEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'laudantium',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeBibleReferenceRange(),
     };
 };
 
-export const makeBibleReferenceRangeInput = (overrides?: Partial<BibleReferenceRangeInput>): BibleReferenceRangeInput => {
+export const makeBibleReferenceRangeInput = (overrides?: Partial<Types.BibleReferenceRangeInput>): Types.BibleReferenceRangeInput => {
     return {
         endReference: overrides && overrides.hasOwnProperty('endReference') ? overrides.endReference! : makeBibleReferenceInput(),
         startReference: overrides && overrides.hasOwnProperty('startReference') ? overrides.startReference! : makeBibleReferenceInput(),
     };
 };
 
-export const makeBibleSponsor = (overrides?: Partial<BibleSponsor>): BibleSponsor => {
+export const makeBibleSponsor = (overrides?: Partial<Types.BibleSponsor>): Types.BibleSponsor => {
     return {
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'consequatur',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'illum',
     };
 };
 
-export const makeBibleVerse = (overrides?: Partial<BibleVerse>): BibleVerse => {
+export const makeBibleVerse = (overrides?: Partial<Types.BibleVerse>): Types.BibleVerse => {
     return {
         number: overrides && overrides.hasOwnProperty('number') ? overrides.number! : 6429,
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'aspernatur',
     };
 };
 
-export const makeBlogPost = (overrides?: Partial<BlogPost>): BlogPost => {
+export const makeBlogPost = (overrides?: Partial<Types.BlogPost>): Types.BlogPost => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'est',
         canonicalPath: overrides && overrides.hasOwnProperty('canonicalPath') ? overrides.canonicalPath! : 'est',
@@ -172,7 +173,7 @@ export const makeBlogPost = (overrides?: Partial<BlogPost>): BlogPost => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'cc3d7a27-1ad5-4451-8923-d6e74ec2ad72',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImage(),
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         publishDate: overrides && overrides.hasOwnProperty('publishDate') ? overrides.publishDate! : 'exercitationem',
         readingDuration: overrides && overrides.hasOwnProperty('readingDuration') ? overrides.readingDuration! : 2.15,
         shareUrl: overrides && overrides.hasOwnProperty('shareUrl') ? overrides.shareUrl! : 'necessitatibus',
@@ -181,7 +182,7 @@ export const makeBlogPost = (overrides?: Partial<BlogPost>): BlogPost => {
     };
 };
 
-export const makeBlogPostConnection = (overrides?: Partial<BlogPostConnection>): BlogPostConnection => {
+export const makeBlogPostConnection = (overrides?: Partial<Types.BlogPostConnection>): Types.BlogPostConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeBlogPostEdge()],
@@ -190,41 +191,41 @@ export const makeBlogPostConnection = (overrides?: Partial<BlogPostConnection>):
     };
 };
 
-export const makeBlogPostCreateInput = (overrides?: Partial<BlogPostCreateInput>): BlogPostCreateInput => {
+export const makeBlogPostCreateInput = (overrides?: Partial<Types.BlogPostCreateInput>): Types.BlogPostCreateInput => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'similique',
         featuredDuration: overrides && overrides.hasOwnProperty('featuredDuration') ? overrides.featuredDuration! : 3411,
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImageInput(),
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         publishDate: overrides && overrides.hasOwnProperty('publishDate') ? overrides.publishDate! : 'voluptas',
         teaser: overrides && overrides.hasOwnProperty('teaser') ? overrides.teaser! : 'qui',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'qui',
     };
 };
 
-export const makeBlogPostEdge = (overrides?: Partial<BlogPostEdge>): BlogPostEdge => {
+export const makeBlogPostEdge = (overrides?: Partial<Types.BlogPostEdge>): Types.BlogPostEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'voluptates',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeBlogPost(),
     };
 };
 
-export const makeBlogPostOrder = (overrides?: Partial<BlogPostOrder>): BlogPostOrder => {
+export const makeBlogPostOrder = (overrides?: Partial<Types.BlogPostOrder>): Types.BlogPostOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : BlogPostSortableField.PublishedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.BlogPostSortableField.PublishedAt,
     };
 };
 
-export const makeBlogPostPayload = (overrides?: Partial<BlogPostPayload>): BlogPostPayload => {
+export const makeBlogPostPayload = (overrides?: Partial<Types.BlogPostPayload>): Types.BlogPostPayload => {
     return {
         blogPost: overrides && overrides.hasOwnProperty('blogPost') ? overrides.blogPost! : makeBlogPost(),
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
     };
 };
 
-export const makeBlogPostUpdateInput = (overrides?: Partial<BlogPostUpdateInput>): BlogPostUpdateInput => {
+export const makeBlogPostUpdateInput = (overrides?: Partial<Types.BlogPostUpdateInput>): Types.BlogPostUpdateInput => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'ex',
         featuredDuration: overrides && overrides.hasOwnProperty('featuredDuration') ? overrides.featuredDuration! : 8405,
@@ -236,7 +237,7 @@ export const makeBlogPostUpdateInput = (overrides?: Partial<BlogPostUpdateInput>
     };
 };
 
-export const makeCatalogHistoryComment = (overrides?: Partial<CatalogHistoryComment>): CatalogHistoryComment => {
+export const makeCatalogHistoryComment = (overrides?: Partial<Types.CatalogHistoryComment>): Types.CatalogHistoryComment => {
     return {
         isSticky: overrides && overrides.hasOwnProperty('isSticky') ? overrides.isSticky! : false,
         mentions: overrides && overrides.hasOwnProperty('mentions') ? overrides.mentions! : [makeUser()],
@@ -244,32 +245,32 @@ export const makeCatalogHistoryComment = (overrides?: Partial<CatalogHistoryComm
     };
 };
 
-export const makeCatalogHistoryCommentCreateInput = (overrides?: Partial<CatalogHistoryCommentCreateInput>): CatalogHistoryCommentCreateInput => {
+export const makeCatalogHistoryCommentCreateInput = (overrides?: Partial<Types.CatalogHistoryCommentCreateInput>): Types.CatalogHistoryCommentCreateInput => {
     return {
         isSticky: overrides && overrides.hasOwnProperty('isSticky') ? overrides.isSticky! : false,
         message: overrides && overrides.hasOwnProperty('message') ? overrides.message! : 'quisquam',
     };
 };
 
-export const makeCatalogHistoryCommentUpdateInput = (overrides?: Partial<CatalogHistoryCommentUpdateInput>): CatalogHistoryCommentUpdateInput => {
+export const makeCatalogHistoryCommentUpdateInput = (overrides?: Partial<Types.CatalogHistoryCommentUpdateInput>): Types.CatalogHistoryCommentUpdateInput => {
     return {
         isSticky: overrides && overrides.hasOwnProperty('isSticky') ? overrides.isSticky! : true,
         message: overrides && overrides.hasOwnProperty('message') ? overrides.message! : 'repellat',
     };
 };
 
-export const makeCatalogHistoryItem = (overrides?: Partial<CatalogHistoryItem>): CatalogHistoryItem => {
+export const makeCatalogHistoryItem = (overrides?: Partial<Types.CatalogHistoryItem>): Types.CatalogHistoryItem => {
     return {
         comment: overrides && overrides.hasOwnProperty('comment') ? overrides.comment! : makeCatalogHistoryComment(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'est',
         entity: overrides && overrides.hasOwnProperty('entity') ? overrides.entity! : makeCollection(),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '39bb0a73-e103-4a91-9054-5e017d58c20e',
         performer: overrides && overrides.hasOwnProperty('performer') ? overrides.performer! : makeUser(),
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : CatalogHistoryItemType.Archive,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : Types.CatalogHistoryItemType.Archive,
     };
 };
 
-export const makeCatalogHistoryItemConnection = (overrides?: Partial<CatalogHistoryItemConnection>): CatalogHistoryItemConnection => {
+export const makeCatalogHistoryItemConnection = (overrides?: Partial<Types.CatalogHistoryItemConnection>): Types.CatalogHistoryItemConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeCatalogHistoryItemEdge()],
@@ -278,32 +279,32 @@ export const makeCatalogHistoryItemConnection = (overrides?: Partial<CatalogHist
     };
 };
 
-export const makeCatalogHistoryItemEdge = (overrides?: Partial<CatalogHistoryItemEdge>): CatalogHistoryItemEdge => {
+export const makeCatalogHistoryItemEdge = (overrides?: Partial<Types.CatalogHistoryItemEdge>): Types.CatalogHistoryItemEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'esse',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeCatalogHistoryItem(),
     };
 };
 
-export const makeCatalogHistoryItemOrder = (overrides?: Partial<CatalogHistoryItemOrder>): CatalogHistoryItemOrder => {
+export const makeCatalogHistoryItemOrder = (overrides?: Partial<Types.CatalogHistoryItemOrder>): Types.CatalogHistoryItemOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : CatalogHistoryItemSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.CatalogHistoryItemSortableField.CreatedAt,
     };
 };
 
-export const makeCatalogHistoryItemPayload = (overrides?: Partial<CatalogHistoryItemPayload>): CatalogHistoryItemPayload => {
+export const makeCatalogHistoryItemPayload = (overrides?: Partial<Types.CatalogHistoryItemPayload>): Types.CatalogHistoryItemPayload => {
     return {
         catalogHistoryItem: overrides && overrides.hasOwnProperty('catalogHistoryItem') ? overrides.catalogHistoryItem! : makeCatalogHistoryItem(),
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
     };
 };
 
-export const makeCollection = (overrides?: Partial<Collection>): Collection => {
+export const makeCollection = (overrides?: Partial<Types.Collection>): Types.Collection => {
     return {
         canonicalPath: overrides && overrides.hasOwnProperty('canonicalPath') ? overrides.canonicalPath! : 'incidunt',
         canonicalUrl: overrides && overrides.hasOwnProperty('canonicalUrl') ? overrides.canonicalUrl! : 'vel',
-        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : CollectionContentType.AudiobookSeries,
+        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : Types.CollectionContentType.AudiobookSeries,
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'suscipit',
         duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 8.21,
         endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : '1970-01-04T22:39:13.305Z',
@@ -313,7 +314,7 @@ export const makeCollection = (overrides?: Partial<Collection>): Collection => {
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImage(),
         imageWithFallback: overrides && overrides.hasOwnProperty('imageWithFallback') ? overrides.imageWithFallback! : makeImage(),
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'non',
         logoImage: overrides && overrides.hasOwnProperty('logoImage') ? overrides.logoImage! : makeImage(),
         logoImageWithFallback: overrides && overrides.hasOwnProperty('logoImageWithFallback') ? overrides.logoImageWithFallback! : makeImage(),
@@ -333,7 +334,7 @@ export const makeCollection = (overrides?: Partial<Collection>): Collection => {
     };
 };
 
-export const makeCollectionConnection = (overrides?: Partial<CollectionConnection>): CollectionConnection => {
+export const makeCollectionConnection = (overrides?: Partial<Types.CollectionConnection>): Types.CollectionConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeCollectionEdge()],
@@ -342,9 +343,9 @@ export const makeCollectionConnection = (overrides?: Partial<CollectionConnectio
     };
 };
 
-export const makeCollectionCreateInput = (overrides?: Partial<CollectionCreateInput>): CollectionCreateInput => {
+export const makeCollectionCreateInput = (overrides?: Partial<Types.CollectionCreateInput>): Types.CollectionCreateInput => {
     return {
-        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : CollectionContentType.AudiobookSeries,
+        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : Types.CollectionContentType.AudiobookSeries,
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'aut',
         hidingReason: overrides && overrides.hasOwnProperty('hidingReason') ? overrides.hidingReason! : 'aut',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImageInput(),
@@ -358,21 +359,21 @@ export const makeCollectionCreateInput = (overrides?: Partial<CollectionCreateIn
     };
 };
 
-export const makeCollectionEdge = (overrides?: Partial<CollectionEdge>): CollectionEdge => {
+export const makeCollectionEdge = (overrides?: Partial<Types.CollectionEdge>): Types.CollectionEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'et',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeCollection(),
     };
 };
 
-export const makeCollectionPayload = (overrides?: Partial<CollectionPayload>): CollectionPayload => {
+export const makeCollectionPayload = (overrides?: Partial<Types.CollectionPayload>): Types.CollectionPayload => {
     return {
         collection: overrides && overrides.hasOwnProperty('collection') ? overrides.collection! : makeCollection(),
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
     };
 };
 
-export const makeCollectionUpdateInput = (overrides?: Partial<CollectionUpdateInput>): CollectionUpdateInput => {
+export const makeCollectionUpdateInput = (overrides?: Partial<Types.CollectionUpdateInput>): Types.CollectionUpdateInput => {
     return {
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'iusto',
         hidingReason: overrides && overrides.hasOwnProperty('hidingReason') ? overrides.hidingReason! : 'architecto',
@@ -387,14 +388,14 @@ export const makeCollectionUpdateInput = (overrides?: Partial<CollectionUpdateIn
     };
 };
 
-export const makeCollectionsOrder = (overrides?: Partial<CollectionsOrder>): CollectionsOrder => {
+export const makeCollectionsOrder = (overrides?: Partial<Types.CollectionsOrder>): Types.CollectionsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : CollectionsSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.CollectionsSortableField.CreatedAt,
     };
 };
 
-export const makeDateRangeInput = (overrides?: Partial<DateRangeInput>): DateRangeInput => {
+export const makeDateRangeInput = (overrides?: Partial<Types.DateRangeInput>): Types.DateRangeInput => {
     return {
         greaterThan: overrides && overrides.hasOwnProperty('greaterThan') ? overrides.greaterThan! : '1970-01-08T09:56:28.668Z',
         greaterThanOrEqualTo: overrides && overrides.hasOwnProperty('greaterThanOrEqualTo') ? overrides.greaterThanOrEqualTo! : '1970-01-07T00:46:33.192Z',
@@ -403,7 +404,7 @@ export const makeDateRangeInput = (overrides?: Partial<DateRangeInput>): DateRan
     };
 };
 
-export const makeDistributionAgreement = (overrides?: Partial<DistributionAgreement>): DistributionAgreement => {
+export const makeDistributionAgreement = (overrides?: Partial<Types.DistributionAgreement>): Types.DistributionAgreement => {
     return {
         history: overrides && overrides.hasOwnProperty('history') ? overrides.history! : makeCatalogHistoryItemConnection(),
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '10975d35-8f47-4bff-85b2-023d16365fdc',
@@ -418,7 +419,7 @@ export const makeDistributionAgreement = (overrides?: Partial<DistributionAgreem
     };
 };
 
-export const makeDistributionAgreementConnection = (overrides?: Partial<DistributionAgreementConnection>): DistributionAgreementConnection => {
+export const makeDistributionAgreementConnection = (overrides?: Partial<Types.DistributionAgreementConnection>): Types.DistributionAgreementConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeDistributionAgreementEdge()],
@@ -427,7 +428,7 @@ export const makeDistributionAgreementConnection = (overrides?: Partial<Distribu
     };
 };
 
-export const makeDistributionAgreementCreateInput = (overrides?: Partial<DistributionAgreementCreateInput>): DistributionAgreementCreateInput => {
+export const makeDistributionAgreementCreateInput = (overrides?: Partial<Types.DistributionAgreementCreateInput>): Types.DistributionAgreementCreateInput => {
     return {
         isDefault: overrides && overrides.hasOwnProperty('isDefault') ? overrides.isDefault! : false,
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
@@ -439,21 +440,21 @@ export const makeDistributionAgreementCreateInput = (overrides?: Partial<Distrib
     };
 };
 
-export const makeDistributionAgreementEdge = (overrides?: Partial<DistributionAgreementEdge>): DistributionAgreementEdge => {
+export const makeDistributionAgreementEdge = (overrides?: Partial<Types.DistributionAgreementEdge>): Types.DistributionAgreementEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'corrupti',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeDistributionAgreement(),
     };
 };
 
-export const makeDistributionAgreementPayload = (overrides?: Partial<DistributionAgreementPayload>): DistributionAgreementPayload => {
+export const makeDistributionAgreementPayload = (overrides?: Partial<Types.DistributionAgreementPayload>): Types.DistributionAgreementPayload => {
     return {
         distributionAgreement: overrides && overrides.hasOwnProperty('distributionAgreement') ? overrides.distributionAgreement! : makeDistributionAgreement(),
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
     };
 };
 
-export const makeDistributionAgreementUpdateInput = (overrides?: Partial<DistributionAgreementUpdateInput>): DistributionAgreementUpdateInput => {
+export const makeDistributionAgreementUpdateInput = (overrides?: Partial<Types.DistributionAgreementUpdateInput>): Types.DistributionAgreementUpdateInput => {
     return {
         isDefault: overrides && overrides.hasOwnProperty('isDefault') ? overrides.isDefault! : false,
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
@@ -465,14 +466,14 @@ export const makeDistributionAgreementUpdateInput = (overrides?: Partial<Distrib
     };
 };
 
-export const makeDistributionAgreementsOrder = (overrides?: Partial<DistributionAgreementsOrder>): DistributionAgreementsOrder => {
+export const makeDistributionAgreementsOrder = (overrides?: Partial<Types.DistributionAgreementsOrder>): Types.DistributionAgreementsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : DistributionAgreementsSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.DistributionAgreementsSortableField.CreatedAt,
     };
 };
 
-export const makeFaq = (overrides?: Partial<Faq>): Faq => {
+export const makeFaq = (overrides?: Partial<Types.Faq>): Types.Faq => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'est',
         faqCategory: overrides && overrides.hasOwnProperty('faqCategory') ? overrides.faqCategory! : makeFaqCategory(),
@@ -484,7 +485,7 @@ export const makeFaq = (overrides?: Partial<Faq>): Faq => {
     };
 };
 
-export const makeFaqCategory = (overrides?: Partial<FaqCategory>): FaqCategory => {
+export const makeFaqCategory = (overrides?: Partial<Types.FaqCategory>): Types.FaqCategory => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'a22fd09d-b485-49d3-8c68-203ea6df58d5',
         index: overrides && overrides.hasOwnProperty('index') ? overrides.index! : 5027,
@@ -492,7 +493,7 @@ export const makeFaqCategory = (overrides?: Partial<FaqCategory>): FaqCategory =
     };
 };
 
-export const makeFaqCategoryConnection = (overrides?: Partial<FaqCategoryConnection>): FaqCategoryConnection => {
+export const makeFaqCategoryConnection = (overrides?: Partial<Types.FaqCategoryConnection>): Types.FaqCategoryConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeFaqCategoryEdge()],
@@ -501,14 +502,14 @@ export const makeFaqCategoryConnection = (overrides?: Partial<FaqCategoryConnect
     };
 };
 
-export const makeFaqCategoryEdge = (overrides?: Partial<FaqCategoryEdge>): FaqCategoryEdge => {
+export const makeFaqCategoryEdge = (overrides?: Partial<Types.FaqCategoryEdge>): Types.FaqCategoryEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'est',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeFaqCategory(),
     };
 };
 
-export const makeFaqConnection = (overrides?: Partial<FaqConnection>): FaqConnection => {
+export const makeFaqConnection = (overrides?: Partial<Types.FaqConnection>): Types.FaqConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeFaqEdge()],
@@ -517,33 +518,33 @@ export const makeFaqConnection = (overrides?: Partial<FaqConnection>): FaqConnec
     };
 };
 
-export const makeFaqCreateInput = (overrides?: Partial<FaqCreateInput>): FaqCreateInput => {
+export const makeFaqCreateInput = (overrides?: Partial<Types.FaqCreateInput>): Types.FaqCreateInput => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'dicta',
         faqCategoryId: overrides && overrides.hasOwnProperty('faqCategoryId') ? overrides.faqCategoryId! : '765f8fae-f7bd-45ac-abe5-a2cb15c89775',
         index: overrides && overrides.hasOwnProperty('index') ? overrides.index! : 7748,
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : true,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         publishDate: overrides && overrides.hasOwnProperty('publishDate') ? overrides.publishDate! : 'explicabo',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'blanditiis',
     };
 };
 
-export const makeFaqEdge = (overrides?: Partial<FaqEdge>): FaqEdge => {
+export const makeFaqEdge = (overrides?: Partial<Types.FaqEdge>): Types.FaqEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'facere',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeFaq(),
     };
 };
 
-export const makeFaqPayload = (overrides?: Partial<FaqPayload>): FaqPayload => {
+export const makeFaqPayload = (overrides?: Partial<Types.FaqPayload>): Types.FaqPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         faq: overrides && overrides.hasOwnProperty('faq') ? overrides.faq! : makeFaq(),
     };
 };
 
-export const makeFaqUpdateInput = (overrides?: Partial<FaqUpdateInput>): FaqUpdateInput => {
+export const makeFaqUpdateInput = (overrides?: Partial<Types.FaqUpdateInput>): Types.FaqUpdateInput => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'facere',
         faqCategoryId: overrides && overrides.hasOwnProperty('faqCategoryId') ? overrides.faqCategoryId! : '45090427-6bae-4ef4-b8ee-3c4845f78811',
@@ -554,21 +555,21 @@ export const makeFaqUpdateInput = (overrides?: Partial<FaqUpdateInput>): FaqUpda
     };
 };
 
-export const makeFaqsOrder = (overrides?: Partial<FaqsOrder>): FaqsOrder => {
+export const makeFaqsOrder = (overrides?: Partial<Types.FaqsOrder>): Types.FaqsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : FaqsSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.FaqsSortableField.CreatedAt,
     };
 };
 
-export const makeFavoritesOrder = (overrides?: Partial<FavoritesOrder>): FavoritesOrder => {
+export const makeFavoritesOrder = (overrides?: Partial<Types.FavoritesOrder>): Types.FavoritesOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : FavoritesSortableField.EntityTitle,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.FavoritesSortableField.EntityTitle,
     };
 };
 
-export const makeImage = (overrides?: Partial<Image>): Image => {
+export const makeImage = (overrides?: Partial<Types.Image>): Types.Image => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8cd950ba-96bb-470a-aecf-4194f25bbbb9',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'cum',
@@ -577,39 +578,39 @@ export const makeImage = (overrides?: Partial<Image>): Image => {
     };
 };
 
-export const makeImageConnectionSlim = (overrides?: Partial<ImageConnectionSlim>): ImageConnectionSlim => {
+export const makeImageConnectionSlim = (overrides?: Partial<Types.ImageConnectionSlim>): Types.ImageConnectionSlim => {
     return {
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeImageEdge()],
     };
 };
 
-export const makeImageEdge = (overrides?: Partial<ImageEdge>): ImageEdge => {
+export const makeImageEdge = (overrides?: Partial<Types.ImageEdge>): Types.ImageEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'nostrum',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeImage(),
     };
 };
 
-export const makeImageInput = (overrides?: Partial<ImageInput>): ImageInput => {
+export const makeImageInput = (overrides?: Partial<Types.ImageInput>): Types.ImageInput => {
     return {
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'beatae',
     };
 };
 
-export const makeImagePayload = (overrides?: Partial<ImagePayload>): ImagePayload => {
+export const makeImagePayload = (overrides?: Partial<Types.ImagePayload>): Types.ImagePayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImage(),
     };
 };
 
-export const makeInputValidationError = (overrides?: Partial<InputValidationError>): InputValidationError => {
+export const makeInputValidationError = (overrides?: Partial<Types.InputValidationError>): Types.InputValidationError => {
     return {
         message: overrides && overrides.hasOwnProperty('message') ? overrides.message! : 'in',
     };
 };
 
-export const makeIntegerRangeInput = (overrides?: Partial<IntegerRangeInput>): IntegerRangeInput => {
+export const makeIntegerRangeInput = (overrides?: Partial<Types.IntegerRangeInput>): Types.IntegerRangeInput => {
     return {
         greaterThan: overrides && overrides.hasOwnProperty('greaterThan') ? overrides.greaterThan! : 9976,
         greaterThanOrEqualTo: overrides && overrides.hasOwnProperty('greaterThanOrEqualTo') ? overrides.greaterThanOrEqualTo! : 2131,
@@ -618,7 +619,7 @@ export const makeIntegerRangeInput = (overrides?: Partial<IntegerRangeInput>): I
     };
 };
 
-export const makeInternalContact = (overrides?: Partial<InternalContact>): InternalContact => {
+export const makeInternalContact = (overrides?: Partial<Types.InternalContact>): Types.InternalContact => {
     return {
         address: overrides && overrides.hasOwnProperty('address') ? overrides.address! : 'id',
         email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'sit',
@@ -627,7 +628,7 @@ export const makeInternalContact = (overrides?: Partial<InternalContact>): Inter
     };
 };
 
-export const makeInternalContactInput = (overrides?: Partial<InternalContactInput>): InternalContactInput => {
+export const makeInternalContactInput = (overrides?: Partial<Types.InternalContactInput>): Types.InternalContactInput => {
     return {
         address: overrides && overrides.hasOwnProperty('address') ? overrides.address! : 'sint',
         email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'eligendi',
@@ -636,14 +637,14 @@ export const makeInternalContactInput = (overrides?: Partial<InternalContactInpu
     };
 };
 
-export const makeLetterCount = (overrides?: Partial<LetterCount>): LetterCount => {
+export const makeLetterCount = (overrides?: Partial<Types.LetterCount>): Types.LetterCount => {
     return {
         count: overrides && overrides.hasOwnProperty('count') ? overrides.count! : 3877,
         letter: overrides && overrides.hasOwnProperty('letter') ? overrides.letter! : 'quod',
     };
 };
 
-export const makeLicense = (overrides?: Partial<License>): License => {
+export const makeLicense = (overrides?: Partial<Types.License>): Types.License => {
     return {
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'et',
         distributionAgreements: overrides && overrides.hasOwnProperty('distributionAgreements') ? overrides.distributionAgreements! : makeDistributionAgreementConnection(),
@@ -658,7 +659,7 @@ export const makeLicense = (overrides?: Partial<License>): License => {
     };
 };
 
-export const makeLicenseConnection = (overrides?: Partial<LicenseConnection>): LicenseConnection => {
+export const makeLicenseConnection = (overrides?: Partial<Types.LicenseConnection>): Types.LicenseConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeLicenseEdge()],
@@ -667,34 +668,34 @@ export const makeLicenseConnection = (overrides?: Partial<LicenseConnection>): L
     };
 };
 
-export const makeLicenseCreateInput = (overrides?: Partial<LicenseCreateInput>): LicenseCreateInput => {
+export const makeLicenseCreateInput = (overrides?: Partial<Types.LicenseCreateInput>): Types.LicenseCreateInput => {
     return {
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'quis',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImageInput(),
         isDefault: overrides && overrides.hasOwnProperty('isDefault') ? overrides.isDefault! : true,
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : true,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         permitsSales: overrides && overrides.hasOwnProperty('permitsSales') ? overrides.permitsSales! : false,
         summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'aut',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'veniam',
     };
 };
 
-export const makeLicenseEdge = (overrides?: Partial<LicenseEdge>): LicenseEdge => {
+export const makeLicenseEdge = (overrides?: Partial<Types.LicenseEdge>): Types.LicenseEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'dignissimos',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeLicense(),
     };
 };
 
-export const makeLicensePayload = (overrides?: Partial<LicensePayload>): LicensePayload => {
+export const makeLicensePayload = (overrides?: Partial<Types.LicensePayload>): Types.LicensePayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         license: overrides && overrides.hasOwnProperty('license') ? overrides.license! : makeLicense(),
     };
 };
 
-export const makeLicenseUpdateInput = (overrides?: Partial<LicenseUpdateInput>): LicenseUpdateInput => {
+export const makeLicenseUpdateInput = (overrides?: Partial<Types.LicenseUpdateInput>): Types.LicenseUpdateInput => {
     return {
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'in',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImageInput(),
@@ -706,14 +707,14 @@ export const makeLicenseUpdateInput = (overrides?: Partial<LicenseUpdateInput>):
     };
 };
 
-export const makeLicensesOrder = (overrides?: Partial<LicensesOrder>): LicensesOrder => {
+export const makeLicensesOrder = (overrides?: Partial<Types.LicensesOrder>): Types.LicensesOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : LicensesSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.LicensesSortableField.CreatedAt,
     };
 };
 
-export const makeMediaFileResultConnection = (overrides?: Partial<MediaFileResultConnection>): MediaFileResultConnection => {
+export const makeMediaFileResultConnection = (overrides?: Partial<Types.MediaFileResultConnection>): Types.MediaFileResultConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeMediaFileResultEdge()],
@@ -722,14 +723,14 @@ export const makeMediaFileResultConnection = (overrides?: Partial<MediaFileResul
     };
 };
 
-export const makeMediaFileResultEdge = (overrides?: Partial<MediaFileResultEdge>): MediaFileResultEdge => {
+export const makeMediaFileResultEdge = (overrides?: Partial<Types.MediaFileResultEdge>): Types.MediaFileResultEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'necessitatibus',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeAttachment(),
     };
 };
 
-export const makeMediaFileUpload = (overrides?: Partial<MediaFileUpload>): MediaFileUpload => {
+export const makeMediaFileUpload = (overrides?: Partial<Types.MediaFileUpload>): Types.MediaFileUpload => {
     return {
         canDelete: overrides && overrides.hasOwnProperty('canDelete') ? overrides.canDelete! : false,
         filename: overrides && overrides.hasOwnProperty('filename') ? overrides.filename! : 'cupiditate',
@@ -739,13 +740,13 @@ export const makeMediaFileUpload = (overrides?: Partial<MediaFileUpload>): Media
         mimeType: overrides && overrides.hasOwnProperty('mimeType') ? overrides.mimeType! : 'delectus',
         partUploadUrls: overrides && overrides.hasOwnProperty('partUploadUrls') ? overrides.partUploadUrls! : ['rerum'],
         recording: overrides && overrides.hasOwnProperty('recording') ? overrides.recording! : makeRecording(),
-        transcodingStatus: overrides && overrides.hasOwnProperty('transcodingStatus') ? overrides.transcodingStatus! : MediaFileTranscodingStatus.Complete,
+        transcodingStatus: overrides && overrides.hasOwnProperty('transcodingStatus') ? overrides.transcodingStatus! : Types.MediaFileTranscodingStatus.Complete,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'nisi',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'nihil',
     };
 };
 
-export const makeMediaFileUploadConnection = (overrides?: Partial<MediaFileUploadConnection>): MediaFileUploadConnection => {
+export const makeMediaFileUploadConnection = (overrides?: Partial<Types.MediaFileUploadConnection>): Types.MediaFileUploadConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeMediaFileUploadEdge()],
@@ -754,27 +755,27 @@ export const makeMediaFileUploadConnection = (overrides?: Partial<MediaFileUploa
     };
 };
 
-export const makeMediaFileUploadEdge = (overrides?: Partial<MediaFileUploadEdge>): MediaFileUploadEdge => {
+export const makeMediaFileUploadEdge = (overrides?: Partial<Types.MediaFileUploadEdge>): Types.MediaFileUploadEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'occaecati',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeMediaFileUpload(),
     };
 };
 
-export const makeMediaFileUploadFinishInput = (overrides?: Partial<MediaFileUploadFinishInput>): MediaFileUploadFinishInput => {
+export const makeMediaFileUploadFinishInput = (overrides?: Partial<Types.MediaFileUploadFinishInput>): Types.MediaFileUploadFinishInput => {
     return {
         uploadPartEtags: overrides && overrides.hasOwnProperty('uploadPartEtags') ? overrides.uploadPartEtags! : ['perspiciatis'],
     };
 };
 
-export const makeMediaFileUploadPayload = (overrides?: Partial<MediaFileUploadPayload>): MediaFileUploadPayload => {
+export const makeMediaFileUploadPayload = (overrides?: Partial<Types.MediaFileUploadPayload>): Types.MediaFileUploadPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         mediaFileUpload: overrides && overrides.hasOwnProperty('mediaFileUpload') ? overrides.mediaFileUpload! : makeMediaFileUpload(),
     };
 };
 
-export const makeMediaFileUploadStartInput = (overrides?: Partial<MediaFileUploadStartInput>): MediaFileUploadStartInput => {
+export const makeMediaFileUploadStartInput = (overrides?: Partial<Types.MediaFileUploadStartInput>): Types.MediaFileUploadStartInput => {
     return {
         filename: overrides && overrides.hasOwnProperty('filename') ? overrides.filename! : 'enim',
         filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : 'sed',
@@ -782,21 +783,21 @@ export const makeMediaFileUploadStartInput = (overrides?: Partial<MediaFileUploa
     };
 };
 
-export const makeMediaFileUploadsOrder = (overrides?: Partial<MediaFileUploadsOrder>): MediaFileUploadsOrder => {
+export const makeMediaFileUploadsOrder = (overrides?: Partial<Types.MediaFileUploadsOrder>): Types.MediaFileUploadsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : MediaFileUploadsSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.MediaFileUploadsSortableField.CreatedAt,
     };
 };
 
-export const makeMediaFilesOrder = (overrides?: Partial<MediaFilesOrder>): MediaFilesOrder => {
+export const makeMediaFilesOrder = (overrides?: Partial<Types.MediaFilesOrder>): Types.MediaFilesOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : MediaFilesSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.MediaFilesSortableField.CreatedAt,
     };
 };
 
-export const makeMediaRelease = (overrides?: Partial<MediaRelease>): MediaRelease => {
+export const makeMediaRelease = (overrides?: Partial<Types.MediaRelease>): Types.MediaRelease => {
     return {
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'qui',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '5bc277cd-6641-48d8-a643-ae4fe12a2868',
@@ -807,7 +808,7 @@ export const makeMediaRelease = (overrides?: Partial<MediaRelease>): MediaReleas
     };
 };
 
-export const makeMediaReleaseConnection = (overrides?: Partial<MediaReleaseConnection>): MediaReleaseConnection => {
+export const makeMediaReleaseConnection = (overrides?: Partial<Types.MediaReleaseConnection>): Types.MediaReleaseConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeMediaReleaseEdge()],
@@ -816,7 +817,7 @@ export const makeMediaReleaseConnection = (overrides?: Partial<MediaReleaseConne
     };
 };
 
-export const makeMediaReleaseCreateInput = (overrides?: Partial<MediaReleaseCreateInput>): MediaReleaseCreateInput => {
+export const makeMediaReleaseCreateInput = (overrides?: Partial<Types.MediaReleaseCreateInput>): Types.MediaReleaseCreateInput => {
     return {
         mediaReleaseFormId: overrides && overrides.hasOwnProperty('mediaReleaseFormId') ? overrides.mediaReleaseFormId! : 'beca14ba-c319-45cd-a6ce-27d2de9f3401',
         mediaReleasePerson: overrides && overrides.hasOwnProperty('mediaReleasePerson') ? overrides.mediaReleasePerson! : makeMediaReleasePersonCreateInput(),
@@ -825,14 +826,14 @@ export const makeMediaReleaseCreateInput = (overrides?: Partial<MediaReleaseCrea
     };
 };
 
-export const makeMediaReleaseEdge = (overrides?: Partial<MediaReleaseEdge>): MediaReleaseEdge => {
+export const makeMediaReleaseEdge = (overrides?: Partial<Types.MediaReleaseEdge>): Types.MediaReleaseEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'nihil',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeMediaRelease(),
     };
 };
 
-export const makeMediaReleaseForm = (overrides?: Partial<MediaReleaseForm>): MediaReleaseForm => {
+export const makeMediaReleaseForm = (overrides?: Partial<Types.MediaReleaseForm>): Types.MediaReleaseForm => {
     return {
         collection: overrides && overrides.hasOwnProperty('collection') ? overrides.collection! : makeCollection(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'qui',
@@ -844,12 +845,12 @@ export const makeMediaReleaseForm = (overrides?: Partial<MediaReleaseForm>): Med
         sponsor: overrides && overrides.hasOwnProperty('sponsor') ? overrides.sponsor! : makeSponsor(),
         summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'aut',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'praesentium',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : MediaReleaseFormType.Collection,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : Types.MediaReleaseFormType.Collection,
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'qui',
     };
 };
 
-export const makeMediaReleaseFormConnection = (overrides?: Partial<MediaReleaseFormConnection>): MediaReleaseFormConnection => {
+export const makeMediaReleaseFormConnection = (overrides?: Partial<Types.MediaReleaseFormConnection>): Types.MediaReleaseFormConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeMediaReleaseFormEdge()],
@@ -858,50 +859,50 @@ export const makeMediaReleaseFormConnection = (overrides?: Partial<MediaReleaseF
     };
 };
 
-export const makeMediaReleaseFormCreateInput = (overrides?: Partial<MediaReleaseFormCreateInput>): MediaReleaseFormCreateInput => {
+export const makeMediaReleaseFormCreateInput = (overrides?: Partial<Types.MediaReleaseFormCreateInput>): Types.MediaReleaseFormCreateInput => {
     return {
         collectionId: overrides && overrides.hasOwnProperty('collectionId') ? overrides.collectionId! : 'a5126647-bd07-42b0-bb76-0b7e037e7c4c',
         isClosed: overrides && overrides.hasOwnProperty('isClosed') ? overrides.isClosed! : true,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         recordingId: overrides && overrides.hasOwnProperty('recordingId') ? overrides.recordingId! : '73d7bd18-dbb9-4b4c-8768-ff726f682f4b',
         sequenceId: overrides && overrides.hasOwnProperty('sequenceId') ? overrides.sequenceId! : 'c3066efd-7160-4fdf-8acf-c9fd3bb91e63',
         sponsorId: overrides && overrides.hasOwnProperty('sponsorId') ? overrides.sponsorId! : 'd7e8860c-2e4b-41b4-804b-b7a9a318ba05',
         summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'consectetur',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'aliquid',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : MediaReleaseFormType.Collection,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : Types.MediaReleaseFormType.Collection,
     };
 };
 
-export const makeMediaReleaseFormEdge = (overrides?: Partial<MediaReleaseFormEdge>): MediaReleaseFormEdge => {
+export const makeMediaReleaseFormEdge = (overrides?: Partial<Types.MediaReleaseFormEdge>): Types.MediaReleaseFormEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'eveniet',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeMediaReleaseForm(),
     };
 };
 
-export const makeMediaReleaseFormOrder = (overrides?: Partial<MediaReleaseFormOrder>): MediaReleaseFormOrder => {
+export const makeMediaReleaseFormOrder = (overrides?: Partial<Types.MediaReleaseFormOrder>): Types.MediaReleaseFormOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : MediaReleaseFormSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.MediaReleaseFormSortableField.CreatedAt,
     };
 };
 
-export const makeMediaReleaseFormPayload = (overrides?: Partial<MediaReleaseFormPayload>): MediaReleaseFormPayload => {
+export const makeMediaReleaseFormPayload = (overrides?: Partial<Types.MediaReleaseFormPayload>): Types.MediaReleaseFormPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         mediaReleaseForm: overrides && overrides.hasOwnProperty('mediaReleaseForm') ? overrides.mediaReleaseForm! : makeMediaReleaseForm(),
     };
 };
 
-export const makeMediaReleaseFormTemplate = (overrides?: Partial<MediaReleaseFormTemplate>): MediaReleaseFormTemplate => {
+export const makeMediaReleaseFormTemplate = (overrides?: Partial<Types.MediaReleaseFormTemplate>): Types.MediaReleaseFormTemplate => {
     return {
         summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'eum',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'consequatur',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : MediaReleaseFormType.Collection,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : Types.MediaReleaseFormType.Collection,
     };
 };
 
-export const makeMediaReleaseFormUpdateInput = (overrides?: Partial<MediaReleaseFormUpdateInput>): MediaReleaseFormUpdateInput => {
+export const makeMediaReleaseFormUpdateInput = (overrides?: Partial<Types.MediaReleaseFormUpdateInput>): Types.MediaReleaseFormUpdateInput => {
     return {
         collectionId: overrides && overrides.hasOwnProperty('collectionId') ? overrides.collectionId! : '34f3bbf3-7bd3-4b88-b07e-72af60e0e856',
         isClosed: overrides && overrides.hasOwnProperty('isClosed') ? overrides.isClosed! : false,
@@ -910,25 +911,25 @@ export const makeMediaReleaseFormUpdateInput = (overrides?: Partial<MediaRelease
         sponsorId: overrides && overrides.hasOwnProperty('sponsorId') ? overrides.sponsorId! : '484ab7fb-2d85-4676-ac8b-c246a0a5d9e1',
         summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'voluptatem',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'velit',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : MediaReleaseFormType.Collection,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : Types.MediaReleaseFormType.Collection,
     };
 };
 
-export const makeMediaReleaseOrder = (overrides?: Partial<MediaReleaseOrder>): MediaReleaseOrder => {
+export const makeMediaReleaseOrder = (overrides?: Partial<Types.MediaReleaseOrder>): Types.MediaReleaseOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : MediaReleaseSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.MediaReleaseSortableField.CreatedAt,
     };
 };
 
-export const makeMediaReleasePayload = (overrides?: Partial<MediaReleasePayload>): MediaReleasePayload => {
+export const makeMediaReleasePayload = (overrides?: Partial<Types.MediaReleasePayload>): Types.MediaReleasePayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         mediaRelease: overrides && overrides.hasOwnProperty('mediaRelease') ? overrides.mediaRelease! : makeMediaRelease(),
     };
 };
 
-export const makeMediaReleasePerson = (overrides?: Partial<MediaReleasePerson>): MediaReleasePerson => {
+export const makeMediaReleasePerson = (overrides?: Partial<Types.MediaReleasePerson>): Types.MediaReleasePerson => {
     return {
         address1: overrides && overrides.hasOwnProperty('address1') ? overrides.address1! : 'ut',
         address2: overrides && overrides.hasOwnProperty('address2') ? overrides.address2! : 'ullam',
@@ -944,7 +945,7 @@ export const makeMediaReleasePerson = (overrides?: Partial<MediaReleasePerson>):
     };
 };
 
-export const makeMediaReleasePersonCreateInput = (overrides?: Partial<MediaReleasePersonCreateInput>): MediaReleasePersonCreateInput => {
+export const makeMediaReleasePersonCreateInput = (overrides?: Partial<Types.MediaReleasePersonCreateInput>): Types.MediaReleasePersonCreateInput => {
     return {
         address1: overrides && overrides.hasOwnProperty('address1') ? overrides.address1! : 'illum',
         address2: overrides && overrides.hasOwnProperty('address2') ? overrides.address2! : 'nulla',
@@ -959,7 +960,7 @@ export const makeMediaReleasePersonCreateInput = (overrides?: Partial<MediaRelea
     };
 };
 
-export const makeMediaReleasePersonUpdateInput = (overrides?: Partial<MediaReleasePersonUpdateInput>): MediaReleasePersonUpdateInput => {
+export const makeMediaReleasePersonUpdateInput = (overrides?: Partial<Types.MediaReleasePersonUpdateInput>): Types.MediaReleasePersonUpdateInput => {
     return {
         address1: overrides && overrides.hasOwnProperty('address1') ? overrides.address1! : 'recusandae',
         address2: overrides && overrides.hasOwnProperty('address2') ? overrides.address2! : 'dolor',
@@ -974,7 +975,7 @@ export const makeMediaReleasePersonUpdateInput = (overrides?: Partial<MediaRelea
     };
 };
 
-export const makeMediaReleaseUpdateInput = (overrides?: Partial<MediaReleaseUpdateInput>): MediaReleaseUpdateInput => {
+export const makeMediaReleaseUpdateInput = (overrides?: Partial<Types.MediaReleaseUpdateInput>): Types.MediaReleaseUpdateInput => {
     return {
         mediaReleasePerson: overrides && overrides.hasOwnProperty('mediaReleasePerson') ? overrides.mediaReleasePerson! : makeMediaReleasePersonUpdateInput(),
         notes: overrides && overrides.hasOwnProperty('notes') ? overrides.notes! : 'modi',
@@ -982,7 +983,7 @@ export const makeMediaReleaseUpdateInput = (overrides?: Partial<MediaReleaseUpda
     };
 };
 
-export const makeMutation = (overrides?: Partial<Mutation>): Mutation => {
+export const makeMutation = (overrides?: Partial<Types.Mutation>): Types.Mutation => {
     return {
         blogPostCreate: overrides && overrides.hasOwnProperty('blogPostCreate') ? overrides.blogPostCreate! : makeBlogPostPayload(),
         blogPostDelete: overrides && overrides.hasOwnProperty('blogPostDelete') ? overrides.blogPostDelete! : makeSuccessPayload(),
@@ -1096,13 +1097,13 @@ export const makeMutation = (overrides?: Partial<Mutation>): Mutation => {
     };
 };
 
-export const makeNode = (overrides?: Partial<Node>): Node => {
+export const makeNode = (overrides?: Partial<Types.Node>): Types.Node => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '95bb2f34-6c86-495f-bfdc-f25b025cdba5',
     };
 };
 
-export const makeNotificationChannel = (overrides?: Partial<NotificationChannel>): NotificationChannel => {
+export const makeNotificationChannel = (overrides?: Partial<Types.NotificationChannel>): Types.NotificationChannel => {
     return {
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'tempora',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'ff4717b3-f706-4233-b18b-cb1c90798e85',
@@ -1110,7 +1111,7 @@ export const makeNotificationChannel = (overrides?: Partial<NotificationChannel>
     };
 };
 
-export const makeNotificationChannelConnection = (overrides?: Partial<NotificationChannelConnection>): NotificationChannelConnection => {
+export const makeNotificationChannelConnection = (overrides?: Partial<Types.NotificationChannelConnection>): Types.NotificationChannelConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeNotificationChannelEdge()],
@@ -1119,21 +1120,21 @@ export const makeNotificationChannelConnection = (overrides?: Partial<Notificati
     };
 };
 
-export const makeNotificationChannelEdge = (overrides?: Partial<NotificationChannelEdge>): NotificationChannelEdge => {
+export const makeNotificationChannelEdge = (overrides?: Partial<Types.NotificationChannelEdge>): Types.NotificationChannelEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'incidunt',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeNotificationChannel(),
     };
 };
 
-export const makeNotificationSubscription = (overrides?: Partial<NotificationSubscription>): NotificationSubscription => {
+export const makeNotificationSubscription = (overrides?: Partial<Types.NotificationSubscription>): Types.NotificationSubscription => {
     return {
-        frequency: overrides && overrides.hasOwnProperty('frequency') ? overrides.frequency! : NotificationFrequency.Daily,
+        frequency: overrides && overrides.hasOwnProperty('frequency') ? overrides.frequency! : Types.NotificationFrequency.Daily,
         notificationChannel: overrides && overrides.hasOwnProperty('notificationChannel') ? overrides.notificationChannel! : makeNotificationChannel(),
     };
 };
 
-export const makeNotificationSubscriptionConnection = (overrides?: Partial<NotificationSubscriptionConnection>): NotificationSubscriptionConnection => {
+export const makeNotificationSubscriptionConnection = (overrides?: Partial<Types.NotificationSubscriptionConnection>): Types.NotificationSubscriptionConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeNotificationSubscriptionEdge()],
@@ -1142,21 +1143,21 @@ export const makeNotificationSubscriptionConnection = (overrides?: Partial<Notif
     };
 };
 
-export const makeNotificationSubscriptionEdge = (overrides?: Partial<NotificationSubscriptionEdge>): NotificationSubscriptionEdge => {
+export const makeNotificationSubscriptionEdge = (overrides?: Partial<Types.NotificationSubscriptionEdge>): Types.NotificationSubscriptionEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'repellendus',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeNotificationSubscription(),
     };
 };
 
-export const makeNotificationSubscriptionInput = (overrides?: Partial<NotificationSubscriptionInput>): NotificationSubscriptionInput => {
+export const makeNotificationSubscriptionInput = (overrides?: Partial<Types.NotificationSubscriptionInput>): Types.NotificationSubscriptionInput => {
     return {
-        frequency: overrides && overrides.hasOwnProperty('frequency') ? overrides.frequency! : NotificationFrequency.Daily,
+        frequency: overrides && overrides.hasOwnProperty('frequency') ? overrides.frequency! : Types.NotificationFrequency.Daily,
         notificationChannelId: overrides && overrides.hasOwnProperty('notificationChannelId') ? overrides.notificationChannelId! : '0c9e99cd-cca3-4f80-baee-265006788a70',
     };
 };
 
-export const makePage = (overrides?: Partial<Page>): Page => {
+export const makePage = (overrides?: Partial<Types.Page>): Types.Page => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'et',
         canonicalPath: overrides && overrides.hasOwnProperty('canonicalPath') ? overrides.canonicalPath! : 'voluptate',
@@ -1167,11 +1168,11 @@ export const makePage = (overrides?: Partial<Page>): Page => {
         shareUrl: overrides && overrides.hasOwnProperty('shareUrl') ? overrides.shareUrl! : 'vel',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'dignissimos',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'vel',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PageType.About,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : Types.PageType.About,
     };
 };
 
-export const makePageConnection = (overrides?: Partial<PageConnection>): PageConnection => {
+export const makePageConnection = (overrides?: Partial<Types.PageConnection>): Types.PageConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makePageEdge()],
@@ -1180,37 +1181,37 @@ export const makePageConnection = (overrides?: Partial<PageConnection>): PageCon
     };
 };
 
-export const makePageContactSubmitInput = (overrides?: Partial<PageContactSubmitInput>): PageContactSubmitInput => {
+export const makePageContactSubmitInput = (overrides?: Partial<Types.PageContactSubmitInput>): Types.PageContactSubmitInput => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'aut',
         email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'nam',
         givenName: overrides && overrides.hasOwnProperty('givenName') ? overrides.givenName! : 'rerum',
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
-        recipient: overrides && overrides.hasOwnProperty('recipient') ? overrides.recipient! : PageContactRecipient.General,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
+        recipient: overrides && overrides.hasOwnProperty('recipient') ? overrides.recipient! : Types.PageContactRecipient.General,
         surname: overrides && overrides.hasOwnProperty('surname') ? overrides.surname! : 'totam',
     };
 };
 
-export const makePageCreateInput = (overrides?: Partial<PageCreateInput>): PageCreateInput => {
+export const makePageCreateInput = (overrides?: Partial<Types.PageCreateInput>): Types.PageCreateInput => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'voluptas',
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         pageMenuId: overrides && overrides.hasOwnProperty('pageMenuId') ? overrides.pageMenuId! : 'dc5e36aa-07a5-4ff4-be03-dc3807c6ede4',
         slug: overrides && overrides.hasOwnProperty('slug') ? overrides.slug! : 'est',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'quis',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : PageType.About,
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : Types.PageType.About,
     };
 };
 
-export const makePageEdge = (overrides?: Partial<PageEdge>): PageEdge => {
+export const makePageEdge = (overrides?: Partial<Types.PageEdge>): Types.PageEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'in',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makePage(),
     };
 };
 
-export const makePageInfo = (overrides?: Partial<PageInfo>): PageInfo => {
+export const makePageInfo = (overrides?: Partial<Types.PageInfo>): Types.PageInfo => {
     return {
         endCursor: overrides && overrides.hasOwnProperty('endCursor') ? overrides.endCursor! : 'id',
         hasNextPage: overrides && overrides.hasOwnProperty('hasNextPage') ? overrides.hasNextPage! : true,
@@ -1219,14 +1220,14 @@ export const makePageInfo = (overrides?: Partial<PageInfo>): PageInfo => {
     };
 };
 
-export const makePageMenu = (overrides?: Partial<PageMenu>): PageMenu => {
+export const makePageMenu = (overrides?: Partial<Types.PageMenu>): Types.PageMenu => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'f9148d60-4f99-4d90-9164-81e279d41fcf',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'maiores',
     };
 };
 
-export const makePageMenuConnection = (overrides?: Partial<PageMenuConnection>): PageMenuConnection => {
+export const makePageMenuConnection = (overrides?: Partial<Types.PageMenuConnection>): Types.PageMenuConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makePageMenuEdge()],
@@ -1235,21 +1236,21 @@ export const makePageMenuConnection = (overrides?: Partial<PageMenuConnection>):
     };
 };
 
-export const makePageMenuEdge = (overrides?: Partial<PageMenuEdge>): PageMenuEdge => {
+export const makePageMenuEdge = (overrides?: Partial<Types.PageMenuEdge>): Types.PageMenuEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'veritatis',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makePageMenu(),
     };
 };
 
-export const makePagePayload = (overrides?: Partial<PagePayload>): PagePayload => {
+export const makePagePayload = (overrides?: Partial<Types.PagePayload>): Types.PagePayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         page: overrides && overrides.hasOwnProperty('page') ? overrides.page! : makePage(),
     };
 };
 
-export const makePageUpdateInput = (overrides?: Partial<PageUpdateInput>): PageUpdateInput => {
+export const makePageUpdateInput = (overrides?: Partial<Types.PageUpdateInput>): Types.PageUpdateInput => {
     return {
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'odio',
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
@@ -1259,14 +1260,14 @@ export const makePageUpdateInput = (overrides?: Partial<PageUpdateInput>): PageU
     };
 };
 
-export const makePagesOrder = (overrides?: Partial<PagesOrder>): PagesOrder => {
+export const makePagesOrder = (overrides?: Partial<Types.PagesOrder>): Types.PagesOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : PagesSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.PagesSortableField.CreatedAt,
     };
 };
 
-export const makePerson = (overrides?: Partial<Person>): Person => {
+export const makePerson = (overrides?: Partial<Types.Person>): Types.Person => {
     return {
         address: overrides && overrides.hasOwnProperty('address') ? overrides.address! : 'sunt',
         canonicalPath: overrides && overrides.hasOwnProperty('canonicalPath') ? overrides.canonicalPath! : 'accusantium',
@@ -1284,7 +1285,7 @@ export const makePerson = (overrides?: Partial<Person>): Person => {
         internalContact: overrides && overrides.hasOwnProperty('internalContact') ? overrides.internalContact! : makeInternalContact(),
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
         isPreapproved: overrides && overrides.hasOwnProperty('isPreapproved') ? overrides.isPreapproved! : true,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'et',
         phone: overrides && overrides.hasOwnProperty('phone') ? overrides.phone! : 'eum',
         photo: overrides && overrides.hasOwnProperty('photo') ? overrides.photo! : makeImage(),
@@ -1303,7 +1304,7 @@ export const makePerson = (overrides?: Partial<Person>): Person => {
     };
 };
 
-export const makePersonConnection = (overrides?: Partial<PersonConnection>): PersonConnection => {
+export const makePersonConnection = (overrides?: Partial<Types.PersonConnection>): Types.PersonConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makePersonEdge()],
@@ -1312,7 +1313,7 @@ export const makePersonConnection = (overrides?: Partial<PersonConnection>): Per
     };
 };
 
-export const makePersonCreateInput = (overrides?: Partial<PersonCreateInput>): PersonCreateInput => {
+export const makePersonCreateInput = (overrides?: Partial<Types.PersonCreateInput>): Types.PersonCreateInput => {
     return {
         address: overrides && overrides.hasOwnProperty('address') ? overrides.address! : 'quia',
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'tempore',
@@ -1324,7 +1325,7 @@ export const makePersonCreateInput = (overrides?: Partial<PersonCreateInput>): P
         internalContact: overrides && overrides.hasOwnProperty('internalContact') ? overrides.internalContact! : makeInternalContactInput(),
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
         isPreapproved: overrides && overrides.hasOwnProperty('isPreapproved') ? overrides.isPreapproved! : true,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         phone: overrides && overrides.hasOwnProperty('phone') ? overrides.phone! : 'aut',
         skipContentScreening: overrides && overrides.hasOwnProperty('skipContentScreening') ? overrides.skipContentScreening! : false,
         skipLegalScreening: overrides && overrides.hasOwnProperty('skipLegalScreening') ? overrides.skipLegalScreening! : false,
@@ -1336,21 +1337,21 @@ export const makePersonCreateInput = (overrides?: Partial<PersonCreateInput>): P
     };
 };
 
-export const makePersonEdge = (overrides?: Partial<PersonEdge>): PersonEdge => {
+export const makePersonEdge = (overrides?: Partial<Types.PersonEdge>): Types.PersonEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'ut',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makePerson(),
     };
 };
 
-export const makePersonPayload = (overrides?: Partial<PersonPayload>): PersonPayload => {
+export const makePersonPayload = (overrides?: Partial<Types.PersonPayload>): Types.PersonPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         person: overrides && overrides.hasOwnProperty('person') ? overrides.person! : makePerson(),
     };
 };
 
-export const makePersonUpdateInput = (overrides?: Partial<PersonUpdateInput>): PersonUpdateInput => {
+export const makePersonUpdateInput = (overrides?: Partial<Types.PersonUpdateInput>): Types.PersonUpdateInput => {
     return {
         address: overrides && overrides.hasOwnProperty('address') ? overrides.address! : 'et',
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'voluptatum',
@@ -1373,27 +1374,27 @@ export const makePersonUpdateInput = (overrides?: Partial<PersonUpdateInput>): P
     };
 };
 
-export const makePersonsOrder = (overrides?: Partial<PersonsOrder>): PersonsOrder => {
+export const makePersonsOrder = (overrides?: Partial<Types.PersonsOrder>): Types.PersonsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : PersonsSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.PersonsSortableField.CreatedAt,
     };
 };
 
-export const makePlaybackSessionAdvanceInput = (overrides?: Partial<PlaybackSessionAdvanceInput>): PlaybackSessionAdvanceInput => {
+export const makePlaybackSessionAdvanceInput = (overrides?: Partial<Types.PlaybackSessionAdvanceInput>): Types.PlaybackSessionAdvanceInput => {
     return {
         positionPercentage: overrides && overrides.hasOwnProperty('positionPercentage') ? overrides.positionPercentage! : 7.57,
     };
 };
 
-export const makePopularPerson = (overrides?: Partial<PopularPerson>): PopularPerson => {
+export const makePopularPerson = (overrides?: Partial<Types.PopularPerson>): Types.PopularPerson => {
     return {
         person: overrides && overrides.hasOwnProperty('person') ? overrides.person! : makePerson(),
         weight: overrides && overrides.hasOwnProperty('weight') ? overrides.weight! : 6.94,
     };
 };
 
-export const makePopularPersonConnection = (overrides?: Partial<PopularPersonConnection>): PopularPersonConnection => {
+export const makePopularPersonConnection = (overrides?: Partial<Types.PopularPersonConnection>): Types.PopularPersonConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makePopularPersonEdge()],
@@ -1402,21 +1403,21 @@ export const makePopularPersonConnection = (overrides?: Partial<PopularPersonCon
     };
 };
 
-export const makePopularPersonEdge = (overrides?: Partial<PopularPersonEdge>): PopularPersonEdge => {
+export const makePopularPersonEdge = (overrides?: Partial<Types.PopularPersonEdge>): Types.PopularPersonEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'unde',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makePopularPerson(),
     };
 };
 
-export const makePopularRecording = (overrides?: Partial<PopularRecording>): PopularRecording => {
+export const makePopularRecording = (overrides?: Partial<Types.PopularRecording>): Types.PopularRecording => {
     return {
         recording: overrides && overrides.hasOwnProperty('recording') ? overrides.recording! : makeRecording(),
         weight: overrides && overrides.hasOwnProperty('weight') ? overrides.weight! : 7.84,
     };
 };
 
-export const makePopularRecordingConnection = (overrides?: Partial<PopularRecordingConnection>): PopularRecordingConnection => {
+export const makePopularRecordingConnection = (overrides?: Partial<Types.PopularRecordingConnection>): Types.PopularRecordingConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makePopularRecordingEdge()],
@@ -1425,14 +1426,14 @@ export const makePopularRecordingConnection = (overrides?: Partial<PopularRecord
     };
 };
 
-export const makePopularRecordingEdge = (overrides?: Partial<PopularRecordingEdge>): PopularRecordingEdge => {
+export const makePopularRecordingEdge = (overrides?: Partial<Types.PopularRecordingEdge>): Types.PopularRecordingEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'nulla',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makePopularRecording(),
     };
 };
 
-export const makeQuery = (overrides?: Partial<Query>): Query => {
+export const makeQuery = (overrides?: Partial<Types.Query>): Types.Query => {
     return {
         adminImage: overrides && overrides.hasOwnProperty('adminImage') ? overrides.adminImage! : makeImage(),
         adminImages: overrides && overrides.hasOwnProperty('adminImages') ? overrides.adminImages! : makeImageConnectionSlim(),
@@ -1519,7 +1520,7 @@ export const makeQuery = (overrides?: Partial<Query>): Query => {
     };
 };
 
-export const makeRecording = (overrides?: Partial<Recording>): Recording => {
+export const makeRecording = (overrides?: Partial<Types.Recording>): Types.Recording => {
     return {
         archiveDate: overrides && overrides.hasOwnProperty('archiveDate') ? overrides.archiveDate! : 'labore',
         archiveReason: overrides && overrides.hasOwnProperty('archiveReason') ? overrides.archiveReason! : 'est',
@@ -1535,8 +1536,8 @@ export const makeRecording = (overrides?: Partial<Recording>): Recording => {
         collection: overrides && overrides.hasOwnProperty('collection') ? overrides.collection! : makeCollection(),
         contentScreeningCheckouts: overrides && overrides.hasOwnProperty('contentScreeningCheckouts') ? overrides.contentScreeningCheckouts! : [makeRecordingScreeningCheckout()],
         contentScreeningEvaluations: overrides && overrides.hasOwnProperty('contentScreeningEvaluations') ? overrides.contentScreeningEvaluations! : [makeRecordingContentScreeningEvaluation()],
-        contentScreeningStatus: overrides && overrides.hasOwnProperty('contentScreeningStatus') ? overrides.contentScreeningStatus! : RecordingContentScreeningStatus.AdminOverride,
-        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : RecordingContentType.AudiobookTrack,
+        contentScreeningStatus: overrides && overrides.hasOwnProperty('contentScreeningStatus') ? overrides.contentScreeningStatus! : Types.RecordingContentScreeningStatus.AdminOverride,
+        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : Types.RecordingContentType.AudiobookTrack,
         copyrightYear: overrides && overrides.hasOwnProperty('copyrightYear') ? overrides.copyrightYear! : 2552,
         coverImage: overrides && overrides.hasOwnProperty('coverImage') ? overrides.coverImage! : makeImage(),
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'est',
@@ -1552,9 +1553,9 @@ export const makeRecording = (overrides?: Partial<Recording>): Recording => {
         isDownloadAllowed: overrides && overrides.hasOwnProperty('isDownloadAllowed') ? overrides.isDownloadAllowed! : false,
         isFeatured: overrides && overrides.hasOwnProperty('isFeatured') ? overrides.isFeatured! : false,
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         legalScreeningCheckouts: overrides && overrides.hasOwnProperty('legalScreeningCheckouts') ? overrides.legalScreeningCheckouts! : [makeRecordingScreeningCheckout()],
-        legalScreeningStatus: overrides && overrides.hasOwnProperty('legalScreeningStatus') ? overrides.legalScreeningStatus! : RecordingLegalScreeningStatus.AdminOverride,
+        legalScreeningStatus: overrides && overrides.hasOwnProperty('legalScreeningStatus') ? overrides.legalScreeningStatus! : Types.RecordingLegalScreeningStatus.AdminOverride,
         mediaReleaseForm: overrides && overrides.hasOwnProperty('mediaReleaseForm') ? overrides.mediaReleaseForm! : makeMediaReleaseForm(),
         persons: overrides && overrides.hasOwnProperty('persons') ? overrides.persons! : [makePerson()],
         publishDate: overrides && overrides.hasOwnProperty('publishDate') ? overrides.publishDate! : 'aut',
@@ -1568,12 +1569,12 @@ export const makeRecording = (overrides?: Partial<Recording>): Recording => {
         sequencePreviousRecording: overrides && overrides.hasOwnProperty('sequencePreviousRecording') ? overrides.sequencePreviousRecording! : makeRecording(),
         shareUrl: overrides && overrides.hasOwnProperty('shareUrl') ? overrides.shareUrl! : 'est',
         sponsor: overrides && overrides.hasOwnProperty('sponsor') ? overrides.sponsor! : makeSponsor(),
-        stage: overrides && overrides.hasOwnProperty('stage') ? overrides.stage! : RecordingStage.Draft,
+        stage: overrides && overrides.hasOwnProperty('stage') ? overrides.stage! : Types.RecordingStage.Draft,
         technicalScreeningCheckouts: overrides && overrides.hasOwnProperty('technicalScreeningCheckouts') ? overrides.technicalScreeningCheckouts! : [makeRecordingScreeningCheckout()],
-        technicalScreeningStatus: overrides && overrides.hasOwnProperty('technicalScreeningStatus') ? overrides.technicalScreeningStatus! : RecordingTechnicalScreeningStatus.AdminOverride,
+        technicalScreeningStatus: overrides && overrides.hasOwnProperty('technicalScreeningStatus') ? overrides.technicalScreeningStatus! : Types.RecordingTechnicalScreeningStatus.AdminOverride,
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'cumque',
         transcript: overrides && overrides.hasOwnProperty('transcript') ? overrides.transcript! : makeTranscript(),
-        transcriptionStatus: overrides && overrides.hasOwnProperty('transcriptionStatus') ? overrides.transcriptionStatus! : RecordingTranscriptionStatus.Complete,
+        transcriptionStatus: overrides && overrides.hasOwnProperty('transcriptionStatus') ? overrides.transcriptionStatus! : Types.RecordingTranscriptionStatus.Complete,
         videoFiles: overrides && overrides.hasOwnProperty('videoFiles') ? overrides.videoFiles! : [makeVideoFile()],
         viewerHasFavorited: overrides && overrides.hasOwnProperty('viewerHasFavorited') ? overrides.viewerHasFavorited! : false,
         viewerPlaybackSession: overrides && overrides.hasOwnProperty('viewerPlaybackSession') ? overrides.viewerPlaybackSession! : makeRecordingPlaybackSession(),
@@ -1581,7 +1582,7 @@ export const makeRecording = (overrides?: Partial<Recording>): Recording => {
     };
 };
 
-export const makeRecordingConnection = (overrides?: Partial<RecordingConnection>): RecordingConnection => {
+export const makeRecordingConnection = (overrides?: Partial<Types.RecordingConnection>): Types.RecordingConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeRecordingEdge()],
@@ -1590,27 +1591,27 @@ export const makeRecordingConnection = (overrides?: Partial<RecordingConnection>
     };
 };
 
-export const makeRecordingContentScreeningEvaluation = (overrides?: Partial<RecordingContentScreeningEvaluation>): RecordingContentScreeningEvaluation => {
+export const makeRecordingContentScreeningEvaluation = (overrides?: Partial<Types.RecordingContentScreeningEvaluation>): Types.RecordingContentScreeningEvaluation => {
     return {
-        methods: overrides && overrides.hasOwnProperty('methods') ? overrides.methods! : [RecordingScreeningMethod.Live],
-        recommendation: overrides && overrides.hasOwnProperty('recommendation') ? overrides.recommendation! : RecordingContentScreeningEvaluationRecommendation.Approve,
+        methods: overrides && overrides.hasOwnProperty('methods') ? overrides.methods! : [Types.RecordingScreeningMethod.Live],
+        recommendation: overrides && overrides.hasOwnProperty('recommendation') ? overrides.recommendation! : Types.RecordingContentScreeningEvaluationRecommendation.Approve,
         screener: overrides && overrides.hasOwnProperty('screener') ? overrides.screener! : makeUser(),
     };
 };
 
-export const makeRecordingContentScreeningEvaluationPayload = (overrides?: Partial<RecordingContentScreeningEvaluationPayload>): RecordingContentScreeningEvaluationPayload => {
+export const makeRecordingContentScreeningEvaluationPayload = (overrides?: Partial<Types.RecordingContentScreeningEvaluationPayload>): Types.RecordingContentScreeningEvaluationPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         recordingContentScreeningEvaluation: overrides && overrides.hasOwnProperty('recordingContentScreeningEvaluation') ? overrides.recordingContentScreeningEvaluation! : makeRecordingContentScreeningEvaluation(),
     };
 };
 
-export const makeRecordingCreateInput = (overrides?: Partial<RecordingCreateInput>): RecordingCreateInput => {
+export const makeRecordingCreateInput = (overrides?: Partial<Types.RecordingCreateInput>): Types.RecordingCreateInput => {
     return {
         bibleReferences: overrides && overrides.hasOwnProperty('bibleReferences') ? overrides.bibleReferences! : [makeBibleReferenceRangeInput()],
         collectionId: overrides && overrides.hasOwnProperty('collectionId') ? overrides.collectionId! : 'da0c0693-aae8-48aa-af62-55195355e461',
         contentScreeningCheckouts: overrides && overrides.hasOwnProperty('contentScreeningCheckouts') ? overrides.contentScreeningCheckouts! : [makeRecordingScreeningCheckoutInput()],
-        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : RecordingContentType.AudiobookTrack,
+        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : Types.RecordingContentType.AudiobookTrack,
         copyrightYear: overrides && overrides.hasOwnProperty('copyrightYear') ? overrides.copyrightYear! : 1446,
         coverImage: overrides && overrides.hasOwnProperty('coverImage') ? overrides.coverImage! : makeImageInput(),
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'laudantium',
@@ -1635,35 +1636,35 @@ export const makeRecordingCreateInput = (overrides?: Partial<RecordingCreateInpu
     };
 };
 
-export const makeRecordingEdge = (overrides?: Partial<RecordingEdge>): RecordingEdge => {
+export const makeRecordingEdge = (overrides?: Partial<Types.RecordingEdge>): Types.RecordingEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'a',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeRecording(),
     };
 };
 
-export const makeRecordingPayload = (overrides?: Partial<RecordingPayload>): RecordingPayload => {
+export const makeRecordingPayload = (overrides?: Partial<Types.RecordingPayload>): Types.RecordingPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         recording: overrides && overrides.hasOwnProperty('recording') ? overrides.recording! : makeRecording(),
     };
 };
 
-export const makeRecordingPersonInput = (overrides?: Partial<RecordingPersonInput>): RecordingPersonInput => {
+export const makeRecordingPersonInput = (overrides?: Partial<Types.RecordingPersonInput>): Types.RecordingPersonInput => {
     return {
         personId: overrides && overrides.hasOwnProperty('personId') ? overrides.personId! : '8291cd00-6cf9-4748-b2c9-96fab43d22a7',
-        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : PersonsRoleField.Artist,
+        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : Types.PersonsRoleField.Artist,
     };
 };
 
-export const makeRecordingPersonRoleInput = (overrides?: Partial<RecordingPersonRoleInput>): RecordingPersonRoleInput => {
+export const makeRecordingPersonRoleInput = (overrides?: Partial<Types.RecordingPersonRoleInput>): Types.RecordingPersonRoleInput => {
     return {
         personId: overrides && overrides.hasOwnProperty('personId') ? overrides.personId! : 'd462ce79-6724-489a-87b7-de9dabfd988b',
-        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : PersonsRoleField.Artist,
+        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : Types.PersonsRoleField.Artist,
     };
 };
 
-export const makeRecordingPlaybackSession = (overrides?: Partial<RecordingPlaybackSession>): RecordingPlaybackSession => {
+export const makeRecordingPlaybackSession = (overrides?: Partial<Types.RecordingPlaybackSession>): Types.RecordingPlaybackSession => {
     return {
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'dolorum',
         positionPercentage: overrides && overrides.hasOwnProperty('positionPercentage') ? overrides.positionPercentage! : 9.64,
@@ -1671,7 +1672,7 @@ export const makeRecordingPlaybackSession = (overrides?: Partial<RecordingPlayba
     };
 };
 
-export const makeRecordingScreeningCheckout = (overrides?: Partial<RecordingScreeningCheckout>): RecordingScreeningCheckout => {
+export const makeRecordingScreeningCheckout = (overrides?: Partial<Types.RecordingScreeningCheckout>): Types.RecordingScreeningCheckout => {
     return {
         assigner: overrides && overrides.hasOwnProperty('assigner') ? overrides.assigner! : makeUser(),
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'soluta',
@@ -1679,32 +1680,32 @@ export const makeRecordingScreeningCheckout = (overrides?: Partial<RecordingScre
     };
 };
 
-export const makeRecordingScreeningCheckoutInput = (overrides?: Partial<RecordingScreeningCheckoutInput>): RecordingScreeningCheckoutInput => {
+export const makeRecordingScreeningCheckoutInput = (overrides?: Partial<Types.RecordingScreeningCheckoutInput>): Types.RecordingScreeningCheckoutInput => {
     return {
         userId: overrides && overrides.hasOwnProperty('userId') ? overrides.userId! : '8c9f018d-bc8d-466f-afe6-09018c0780a6',
     };
 };
 
-export const makeRecordingScreeningCheckoutPayload = (overrides?: Partial<RecordingScreeningCheckoutPayload>): RecordingScreeningCheckoutPayload => {
+export const makeRecordingScreeningCheckoutPayload = (overrides?: Partial<Types.RecordingScreeningCheckoutPayload>): Types.RecordingScreeningCheckoutPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         recordingScreeningCheckout: overrides && overrides.hasOwnProperty('recordingScreeningCheckout') ? overrides.recordingScreeningCheckout! : makeRecordingScreeningCheckout(),
     };
 };
 
-export const makeRecordingScreeningIssue = (overrides?: Partial<RecordingScreeningIssue>): RecordingScreeningIssue => {
+export const makeRecordingScreeningIssue = (overrides?: Partial<Types.RecordingScreeningIssue>): Types.RecordingScreeningIssue => {
     return {
         endTime: overrides && overrides.hasOwnProperty('endTime') ? overrides.endTime! : 'perspiciatis',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'ac7e0ec6-c9fb-4e86-874d-82aa24d9090b',
         notes: overrides && overrides.hasOwnProperty('notes') ? overrides.notes! : 'eos',
         screener: overrides && overrides.hasOwnProperty('screener') ? overrides.screener! : makeUser(),
         startTime: overrides && overrides.hasOwnProperty('startTime') ? overrides.startTime! : 'mollitia',
-        target: overrides && overrides.hasOwnProperty('target') ? overrides.target! : RecordingScreeningIssueTarget.Audio,
+        target: overrides && overrides.hasOwnProperty('target') ? overrides.target! : Types.RecordingScreeningIssueTarget.Audio,
         type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : makeRecordingScreeningIssueType(),
     };
 };
 
-export const makeRecordingScreeningIssueConnection = (overrides?: Partial<RecordingScreeningIssueConnection>): RecordingScreeningIssueConnection => {
+export const makeRecordingScreeningIssueConnection = (overrides?: Partial<Types.RecordingScreeningIssueConnection>): Types.RecordingScreeningIssueConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeRecordingScreeningIssueEdge()],
@@ -1713,47 +1714,47 @@ export const makeRecordingScreeningIssueConnection = (overrides?: Partial<Record
     };
 };
 
-export const makeRecordingScreeningIssueEdge = (overrides?: Partial<RecordingScreeningIssueEdge>): RecordingScreeningIssueEdge => {
+export const makeRecordingScreeningIssueEdge = (overrides?: Partial<Types.RecordingScreeningIssueEdge>): Types.RecordingScreeningIssueEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'quia',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeRecordingScreeningIssue(),
     };
 };
 
-export const makeRecordingScreeningIssueInput = (overrides?: Partial<RecordingScreeningIssueInput>): RecordingScreeningIssueInput => {
+export const makeRecordingScreeningIssueInput = (overrides?: Partial<Types.RecordingScreeningIssueInput>): Types.RecordingScreeningIssueInput => {
     return {
         endTime: overrides && overrides.hasOwnProperty('endTime') ? overrides.endTime! : 'cupiditate',
         notes: overrides && overrides.hasOwnProperty('notes') ? overrides.notes! : 'facilis',
         recordingScreeningIssueTypeId: overrides && overrides.hasOwnProperty('recordingScreeningIssueTypeId') ? overrides.recordingScreeningIssueTypeId! : '17581dc0-157d-4f3e-b1d1-4b7a15b3c4c3',
         startTime: overrides && overrides.hasOwnProperty('startTime') ? overrides.startTime! : 'aliquid',
-        target: overrides && overrides.hasOwnProperty('target') ? overrides.target! : RecordingScreeningIssueTarget.Audio,
+        target: overrides && overrides.hasOwnProperty('target') ? overrides.target! : Types.RecordingScreeningIssueTarget.Audio,
     };
 };
 
-export const makeRecordingScreeningIssueOrder = (overrides?: Partial<RecordingScreeningIssueOrder>): RecordingScreeningIssueOrder => {
+export const makeRecordingScreeningIssueOrder = (overrides?: Partial<Types.RecordingScreeningIssueOrder>): Types.RecordingScreeningIssueOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : RecordingScreeningIssuesSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.RecordingScreeningIssuesSortableField.CreatedAt,
     };
 };
 
-export const makeRecordingScreeningIssuePayload = (overrides?: Partial<RecordingScreeningIssuePayload>): RecordingScreeningIssuePayload => {
+export const makeRecordingScreeningIssuePayload = (overrides?: Partial<Types.RecordingScreeningIssuePayload>): Types.RecordingScreeningIssuePayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         recordingScreeningIssue: overrides && overrides.hasOwnProperty('recordingScreeningIssue') ? overrides.recordingScreeningIssue! : makeRecordingScreeningIssue(),
     };
 };
 
-export const makeRecordingScreeningIssueType = (overrides?: Partial<RecordingScreeningIssueType>): RecordingScreeningIssueType => {
+export const makeRecordingScreeningIssueType = (overrides?: Partial<Types.RecordingScreeningIssueType>): Types.RecordingScreeningIssueType => {
     return {
-        category: overrides && overrides.hasOwnProperty('category') ? overrides.category! : RecordingScreeningIssueCategory.General,
+        category: overrides && overrides.hasOwnProperty('category') ? overrides.category! : Types.RecordingScreeningIssueCategory.General,
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'eb38653a-b860-4c5d-86e5-034080bb98be',
         notes: overrides && overrides.hasOwnProperty('notes') ? overrides.notes! : 'esse',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'iste',
     };
 };
 
-export const makeRecordingScreeningIssueTypeConnection = (overrides?: Partial<RecordingScreeningIssueTypeConnection>): RecordingScreeningIssueTypeConnection => {
+export const makeRecordingScreeningIssueTypeConnection = (overrides?: Partial<Types.RecordingScreeningIssueTypeConnection>): Types.RecordingScreeningIssueTypeConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeRecordingScreeningIssueTypeEdge()],
@@ -1762,20 +1763,20 @@ export const makeRecordingScreeningIssueTypeConnection = (overrides?: Partial<Re
     };
 };
 
-export const makeRecordingScreeningIssueTypeEdge = (overrides?: Partial<RecordingScreeningIssueTypeEdge>): RecordingScreeningIssueTypeEdge => {
+export const makeRecordingScreeningIssueTypeEdge = (overrides?: Partial<Types.RecordingScreeningIssueTypeEdge>): Types.RecordingScreeningIssueTypeEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'necessitatibus',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeRecordingScreeningIssueType(),
     };
 };
 
-export const makeRecordingTag = (overrides?: Partial<RecordingTag>): RecordingTag => {
+export const makeRecordingTag = (overrides?: Partial<Types.RecordingTag>): Types.RecordingTag => {
     return {
         tag: overrides && overrides.hasOwnProperty('tag') ? overrides.tag! : makeTag(),
     };
 };
 
-export const makeRecordingTagConnection = (overrides?: Partial<RecordingTagConnection>): RecordingTagConnection => {
+export const makeRecordingTagConnection = (overrides?: Partial<Types.RecordingTagConnection>): Types.RecordingTagConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeRecordingTagEdge()],
@@ -1784,26 +1785,26 @@ export const makeRecordingTagConnection = (overrides?: Partial<RecordingTagConne
     };
 };
 
-export const makeRecordingTagEdge = (overrides?: Partial<RecordingTagEdge>): RecordingTagEdge => {
+export const makeRecordingTagEdge = (overrides?: Partial<Types.RecordingTagEdge>): Types.RecordingTagEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'neque',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeRecordingTag(),
     };
 };
 
-export const makeRecordingTagInput = (overrides?: Partial<RecordingTagInput>): RecordingTagInput => {
+export const makeRecordingTagInput = (overrides?: Partial<Types.RecordingTagInput>): Types.RecordingTagInput => {
     return {
         tagName: overrides && overrides.hasOwnProperty('tagName') ? overrides.tagName! : 'voluptatem',
     };
 };
 
-export const makeRecordingTagSuggestion = (overrides?: Partial<RecordingTagSuggestion>): RecordingTagSuggestion => {
+export const makeRecordingTagSuggestion = (overrides?: Partial<Types.RecordingTagSuggestion>): Types.RecordingTagSuggestion => {
     return {
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'similique',
     };
 };
 
-export const makeRecordingTagSuggestionConnection = (overrides?: Partial<RecordingTagSuggestionConnection>): RecordingTagSuggestionConnection => {
+export const makeRecordingTagSuggestionConnection = (overrides?: Partial<Types.RecordingTagSuggestionConnection>): Types.RecordingTagSuggestionConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeRecordingTagSuggestionEdge()],
@@ -1812,14 +1813,14 @@ export const makeRecordingTagSuggestionConnection = (overrides?: Partial<Recordi
     };
 };
 
-export const makeRecordingTagSuggestionEdge = (overrides?: Partial<RecordingTagSuggestionEdge>): RecordingTagSuggestionEdge => {
+export const makeRecordingTagSuggestionEdge = (overrides?: Partial<Types.RecordingTagSuggestionEdge>): Types.RecordingTagSuggestionEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'et',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeRecordingTagSuggestion(),
     };
 };
 
-export const makeRecordingUpdateInput = (overrides?: Partial<RecordingUpdateInput>): RecordingUpdateInput => {
+export const makeRecordingUpdateInput = (overrides?: Partial<Types.RecordingUpdateInput>): Types.RecordingUpdateInput => {
     return {
         bibleReferences: overrides && overrides.hasOwnProperty('bibleReferences') ? overrides.bibleReferences! : [makeBibleReferenceRangeInput()],
         collectionId: overrides && overrides.hasOwnProperty('collectionId') ? overrides.collectionId! : '370946d0-0b2e-46eb-badd-2d416f3c7b7d',
@@ -1848,19 +1849,19 @@ export const makeRecordingUpdateInput = (overrides?: Partial<RecordingUpdateInpu
     };
 };
 
-export const makeRecordingsOrder = (overrides?: Partial<RecordingsOrder>): RecordingsOrder => {
+export const makeRecordingsOrder = (overrides?: Partial<Types.RecordingsOrder>): Types.RecordingsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : RecordingsSortableField.CollectionTitle,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.RecordingsSortableField.CollectionTitle,
     };
 };
 
-export const makeSequence = (overrides?: Partial<Sequence>): Sequence => {
+export const makeSequence = (overrides?: Partial<Types.Sequence>): Types.Sequence => {
     return {
         canonicalPath: overrides && overrides.hasOwnProperty('canonicalPath') ? overrides.canonicalPath! : 'asperiores',
         canonicalUrl: overrides && overrides.hasOwnProperty('canonicalUrl') ? overrides.canonicalUrl! : 'sed',
         collection: overrides && overrides.hasOwnProperty('collection') ? overrides.collection! : makeCollection(),
-        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : SequenceContentType.Audiobook,
+        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : Types.SequenceContentType.Audiobook,
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'accusantium',
         duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 7.28,
         endDate: overrides && overrides.hasOwnProperty('endDate') ? overrides.endDate! : '1970-01-14T07:44:40.972Z',
@@ -1870,7 +1871,7 @@ export const makeSequence = (overrides?: Partial<Sequence>): Sequence => {
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImage(),
         imageWithFallback: overrides && overrides.hasOwnProperty('imageWithFallback') ? overrides.imageWithFallback! : makeImage(),
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         logoImage: overrides && overrides.hasOwnProperty('logoImage') ? overrides.logoImage! : makeImage(),
         logoImageWithFallback: overrides && overrides.hasOwnProperty('logoImageWithFallback') ? overrides.logoImageWithFallback! : makeImage(),
         mediaReleaseForm: overrides && overrides.hasOwnProperty('mediaReleaseForm') ? overrides.mediaReleaseForm! : makeMediaReleaseForm(),
@@ -1888,7 +1889,7 @@ export const makeSequence = (overrides?: Partial<Sequence>): Sequence => {
     };
 };
 
-export const makeSequenceConnection = (overrides?: Partial<SequenceConnection>): SequenceConnection => {
+export const makeSequenceConnection = (overrides?: Partial<Types.SequenceConnection>): Types.SequenceConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeSequenceEdge()],
@@ -1897,10 +1898,10 @@ export const makeSequenceConnection = (overrides?: Partial<SequenceConnection>):
     };
 };
 
-export const makeSequenceCreateInput = (overrides?: Partial<SequenceCreateInput>): SequenceCreateInput => {
+export const makeSequenceCreateInput = (overrides?: Partial<Types.SequenceCreateInput>): Types.SequenceCreateInput => {
     return {
         collectionId: overrides && overrides.hasOwnProperty('collectionId') ? overrides.collectionId! : '72230959-b7ae-4a2a-8df7-1480b1ea78a8',
-        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : SequenceContentType.Audiobook,
+        contentType: overrides && overrides.hasOwnProperty('contentType') ? overrides.contentType! : Types.SequenceContentType.Audiobook,
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'enim',
         hidingReason: overrides && overrides.hasOwnProperty('hidingReason') ? overrides.hidingReason! : 'explicabo',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImageInput(),
@@ -1913,28 +1914,28 @@ export const makeSequenceCreateInput = (overrides?: Partial<SequenceCreateInput>
     };
 };
 
-export const makeSequenceEdge = (overrides?: Partial<SequenceEdge>): SequenceEdge => {
+export const makeSequenceEdge = (overrides?: Partial<Types.SequenceEdge>): Types.SequenceEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'atque',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeSequence(),
     };
 };
 
-export const makeSequenceOrder = (overrides?: Partial<SequenceOrder>): SequenceOrder => {
+export const makeSequenceOrder = (overrides?: Partial<Types.SequenceOrder>): Types.SequenceOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : SequenceSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.SequenceSortableField.CreatedAt,
     };
 };
 
-export const makeSequencePayload = (overrides?: Partial<SequencePayload>): SequencePayload => {
+export const makeSequencePayload = (overrides?: Partial<Types.SequencePayload>): Types.SequencePayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         sequence: overrides && overrides.hasOwnProperty('sequence') ? overrides.sequence! : makeSequence(),
     };
 };
 
-export const makeSequenceUpdateInput = (overrides?: Partial<SequenceUpdateInput>): SequenceUpdateInput => {
+export const makeSequenceUpdateInput = (overrides?: Partial<Types.SequenceUpdateInput>): Types.SequenceUpdateInput => {
     return {
         collectionId: overrides && overrides.hasOwnProperty('collectionId') ? overrides.collectionId! : '2f2e8632-d5bf-43f4-9fa6-d64458661530',
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'cupiditate',
@@ -1949,7 +1950,7 @@ export const makeSequenceUpdateInput = (overrides?: Partial<SequenceUpdateInput>
     };
 };
 
-export const makeSponsor = (overrides?: Partial<Sponsor>): Sponsor => {
+export const makeSponsor = (overrides?: Partial<Types.Sponsor>): Types.Sponsor => {
     return {
         address: overrides && overrides.hasOwnProperty('address') ? overrides.address! : 'ad',
         canonicalPath: overrides && overrides.hasOwnProperty('canonicalPath') ? overrides.canonicalPath! : 'itaque',
@@ -1966,7 +1967,7 @@ export const makeSponsor = (overrides?: Partial<Sponsor>): Sponsor => {
         imageWithFallback: overrides && overrides.hasOwnProperty('imageWithFallback') ? overrides.imageWithFallback! : makeImage(),
         internalContact: overrides && overrides.hasOwnProperty('internalContact') ? overrides.internalContact! : makeInternalContact(),
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'molestiae',
         logoImage: overrides && overrides.hasOwnProperty('logoImage') ? overrides.logoImage! : makeImage(),
         logoImageWithFallback: overrides && overrides.hasOwnProperty('logoImageWithFallback') ? overrides.logoImageWithFallback! : makeImage(),
@@ -1984,7 +1985,7 @@ export const makeSponsor = (overrides?: Partial<Sponsor>): Sponsor => {
     };
 };
 
-export const makeSponsorConnection = (overrides?: Partial<SponsorConnection>): SponsorConnection => {
+export const makeSponsorConnection = (overrides?: Partial<Types.SponsorConnection>): Types.SponsorConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeSponsorEdge()],
@@ -1993,7 +1994,7 @@ export const makeSponsorConnection = (overrides?: Partial<SponsorConnection>): S
     };
 };
 
-export const makeSponsorCreateInput = (overrides?: Partial<SponsorCreateInput>): SponsorCreateInput => {
+export const makeSponsorCreateInput = (overrides?: Partial<Types.SponsorCreateInput>): Types.SponsorCreateInput => {
     return {
         address: overrides && overrides.hasOwnProperty('address') ? overrides.address! : 'corrupti',
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'et',
@@ -2003,7 +2004,7 @@ export const makeSponsorCreateInput = (overrides?: Partial<SponsorCreateInput>):
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImageInput(),
         internalContact: overrides && overrides.hasOwnProperty('internalContact') ? overrides.internalContact! : makeInternalContactInput(),
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'est',
         phone: overrides && overrides.hasOwnProperty('phone') ? overrides.phone! : 'minima',
         skipContentScreening: overrides && overrides.hasOwnProperty('skipContentScreening') ? overrides.skipContentScreening! : false,
@@ -2014,7 +2015,7 @@ export const makeSponsorCreateInput = (overrides?: Partial<SponsorCreateInput>):
     };
 };
 
-export const makeSponsorDistributionAgreementInput = (overrides?: Partial<SponsorDistributionAgreementInput>): SponsorDistributionAgreementInput => {
+export const makeSponsorDistributionAgreementInput = (overrides?: Partial<Types.SponsorDistributionAgreementInput>): Types.SponsorDistributionAgreementInput => {
     return {
         isDefault: overrides && overrides.hasOwnProperty('isDefault') ? overrides.isDefault! : true,
         isRetired: overrides && overrides.hasOwnProperty('isRetired') ? overrides.isRetired! : true,
@@ -2024,21 +2025,21 @@ export const makeSponsorDistributionAgreementInput = (overrides?: Partial<Sponso
     };
 };
 
-export const makeSponsorEdge = (overrides?: Partial<SponsorEdge>): SponsorEdge => {
+export const makeSponsorEdge = (overrides?: Partial<Types.SponsorEdge>): Types.SponsorEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'aliquid',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeSponsor(),
     };
 };
 
-export const makeSponsorPayload = (overrides?: Partial<SponsorPayload>): SponsorPayload => {
+export const makeSponsorPayload = (overrides?: Partial<Types.SponsorPayload>): Types.SponsorPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         sponsor: overrides && overrides.hasOwnProperty('sponsor') ? overrides.sponsor! : makeSponsor(),
     };
 };
 
-export const makeSponsorUpdateInput = (overrides?: Partial<SponsorUpdateInput>): SponsorUpdateInput => {
+export const makeSponsorUpdateInput = (overrides?: Partial<Types.SponsorUpdateInput>): Types.SponsorUpdateInput => {
     return {
         address: overrides && overrides.hasOwnProperty('address') ? overrides.address! : 'non',
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'consequatur',
@@ -2058,21 +2059,21 @@ export const makeSponsorUpdateInput = (overrides?: Partial<SponsorUpdateInput>):
     };
 };
 
-export const makeSponsorsOrder = (overrides?: Partial<SponsorsOrder>): SponsorsOrder => {
+export const makeSponsorsOrder = (overrides?: Partial<Types.SponsorsOrder>): Types.SponsorsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : SponsorsSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.SponsorsSortableField.CreatedAt,
     };
 };
 
-export const makeSuccessPayload = (overrides?: Partial<SuccessPayload>): SuccessPayload => {
+export const makeSuccessPayload = (overrides?: Partial<Types.SuccessPayload>): Types.SuccessPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         success: overrides && overrides.hasOwnProperty('success') ? overrides.success! : false,
     };
 };
 
-export const makeTag = (overrides?: Partial<Tag>): Tag => {
+export const makeTag = (overrides?: Partial<Types.Tag>): Types.Tag => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '7926b150-6296-4e15-b70c-92302664d98c',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'qui',
@@ -2080,7 +2081,7 @@ export const makeTag = (overrides?: Partial<Tag>): Tag => {
     };
 };
 
-export const makeTagConnection = (overrides?: Partial<TagConnection>): TagConnection => {
+export const makeTagConnection = (overrides?: Partial<Types.TagConnection>): Types.TagConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeTagEdge()],
@@ -2089,28 +2090,28 @@ export const makeTagConnection = (overrides?: Partial<TagConnection>): TagConnec
     };
 };
 
-export const makeTagEdge = (overrides?: Partial<TagEdge>): TagEdge => {
+export const makeTagEdge = (overrides?: Partial<Types.TagEdge>): Types.TagEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'doloremque',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeTag(),
     };
 };
 
-export const makeTagsOrder = (overrides?: Partial<TagsOrder>): TagsOrder => {
+export const makeTagsOrder = (overrides?: Partial<Types.TagsOrder>): Types.TagsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : TagsSortableField.Name,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.TagsSortableField.Name,
     };
 };
 
-export const makeTestimoniesOrder = (overrides?: Partial<TestimoniesOrder>): TestimoniesOrder => {
+export const makeTestimoniesOrder = (overrides?: Partial<Types.TestimoniesOrder>): Types.TestimoniesOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : TestimoniesSortableField.WrittenDate,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.TestimoniesSortableField.WrittenDate,
     };
 };
 
-export const makeTestimony = (overrides?: Partial<Testimony>): Testimony => {
+export const makeTestimony = (overrides?: Partial<Types.Testimony>): Types.Testimony => {
     return {
         author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : 'in',
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'non',
@@ -2120,7 +2121,7 @@ export const makeTestimony = (overrides?: Partial<Testimony>): Testimony => {
     };
 };
 
-export const makeTestimonyConnection = (overrides?: Partial<TestimonyConnection>): TestimonyConnection => {
+export const makeTestimonyConnection = (overrides?: Partial<Types.TestimonyConnection>): Types.TestimonyConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeTestimonyEdge()],
@@ -2129,31 +2130,31 @@ export const makeTestimonyConnection = (overrides?: Partial<TestimonyConnection>
     };
 };
 
-export const makeTestimonyCreateInput = (overrides?: Partial<TestimonyCreateInput>): TestimonyCreateInput => {
+export const makeTestimonyCreateInput = (overrides?: Partial<Types.TestimonyCreateInput>): Types.TestimonyCreateInput => {
     return {
         author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : 'doloremque',
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'tempore',
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         publishDate: overrides && overrides.hasOwnProperty('publishDate') ? overrides.publishDate! : 'est',
         writtenDate: overrides && overrides.hasOwnProperty('writtenDate') ? overrides.writtenDate! : 'placeat',
     };
 };
 
-export const makeTestimonyEdge = (overrides?: Partial<TestimonyEdge>): TestimonyEdge => {
+export const makeTestimonyEdge = (overrides?: Partial<Types.TestimonyEdge>): Types.TestimonyEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'laboriosam',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeTestimony(),
     };
 };
 
-export const makeTestimonyPayload = (overrides?: Partial<TestimonyPayload>): TestimonyPayload => {
+export const makeTestimonyPayload = (overrides?: Partial<Types.TestimonyPayload>): Types.TestimonyPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         testimony: overrides && overrides.hasOwnProperty('testimony') ? overrides.testimony! : makeTestimony(),
     };
 };
 
-export const makeTestimonyUpdateInput = (overrides?: Partial<TestimonyUpdateInput>): TestimonyUpdateInput => {
+export const makeTestimonyUpdateInput = (overrides?: Partial<Types.TestimonyUpdateInput>): Types.TestimonyUpdateInput => {
     return {
         author: overrides && overrides.hasOwnProperty('author') ? overrides.author! : 'nisi',
         body: overrides && overrides.hasOwnProperty('body') ? overrides.body! : 'aut',
@@ -2162,7 +2163,7 @@ export const makeTestimonyUpdateInput = (overrides?: Partial<TestimonyUpdateInpu
     };
 };
 
-export const makeTopic = (overrides?: Partial<Topic>): Topic => {
+export const makeTopic = (overrides?: Partial<Types.Topic>): Types.Topic => {
     return {
         canonicalPath: overrides && overrides.hasOwnProperty('canonicalPath') ? overrides.canonicalPath! : 'illum',
         canonicalUrl: overrides && overrides.hasOwnProperty('canonicalUrl') ? overrides.canonicalUrl! : 'libero',
@@ -2172,7 +2173,7 @@ export const makeTopic = (overrides?: Partial<Topic>): Topic => {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2fc62363-865b-4b21-9e75-518c6679de7c',
         isHidden: overrides && overrides.hasOwnProperty('isHidden') ? overrides.isHidden! : false,
         items: overrides && overrides.hasOwnProperty('items') ? overrides.items! : makeTopicItemConnection(),
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         parentTopic: overrides && overrides.hasOwnProperty('parentTopic') ? overrides.parentTopic! : makeTopic(),
         shareUrl: overrides && overrides.hasOwnProperty('shareUrl') ? overrides.shareUrl! : 'optio',
         subTopics: overrides && overrides.hasOwnProperty('subTopics') ? overrides.subTopics! : makeTopicConnection(),
@@ -2181,7 +2182,7 @@ export const makeTopic = (overrides?: Partial<Topic>): Topic => {
     };
 };
 
-export const makeTopicConnection = (overrides?: Partial<TopicConnection>): TopicConnection => {
+export const makeTopicConnection = (overrides?: Partial<Types.TopicConnection>): Types.TopicConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeTopicEdge()],
@@ -2190,20 +2191,20 @@ export const makeTopicConnection = (overrides?: Partial<TopicConnection>): Topic
     };
 };
 
-export const makeTopicEdge = (overrides?: Partial<TopicEdge>): TopicEdge => {
+export const makeTopicEdge = (overrides?: Partial<Types.TopicEdge>): Types.TopicEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'in',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeTopic(),
     };
 };
 
-export const makeTopicItem = (overrides?: Partial<TopicItem>): TopicItem => {
+export const makeTopicItem = (overrides?: Partial<Types.TopicItem>): Types.TopicItem => {
     return {
         entity: overrides && overrides.hasOwnProperty('entity') ? overrides.entity! : makeRecording(),
     };
 };
 
-export const makeTopicItemConnection = (overrides?: Partial<TopicItemConnection>): TopicItemConnection => {
+export const makeTopicItemConnection = (overrides?: Partial<Types.TopicItemConnection>): Types.TopicItemConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeTopicItemEdge()],
@@ -2212,34 +2213,34 @@ export const makeTopicItemConnection = (overrides?: Partial<TopicItemConnection>
     };
 };
 
-export const makeTopicItemEdge = (overrides?: Partial<TopicItemEdge>): TopicItemEdge => {
+export const makeTopicItemEdge = (overrides?: Partial<Types.TopicItemEdge>): Types.TopicItemEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'et',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeTopicItem(),
     };
 };
 
-export const makeTopicsOrder = (overrides?: Partial<TopicsOrder>): TopicsOrder => {
+export const makeTopicsOrder = (overrides?: Partial<Types.TopicsOrder>): Types.TopicsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : TopicsSortableField.Featured,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.TopicsSortableField.Featured,
     };
 };
 
-export const makeTranscript = (overrides?: Partial<Transcript>): Transcript => {
+export const makeTranscript = (overrides?: Partial<Types.Transcript>): Types.Transcript => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '9a7ea27e-bbeb-42f9-8129-1b4c548e18bb',
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'modi',
     };
 };
 
-export const makeTranscriptUpdateInput = (overrides?: Partial<TranscriptUpdateInput>): TranscriptUpdateInput => {
+export const makeTranscriptUpdateInput = (overrides?: Partial<Types.TranscriptUpdateInput>): Types.TranscriptUpdateInput => {
     return {
         transcript: overrides && overrides.hasOwnProperty('transcript') ? overrides.transcript! : 'a',
     };
 };
 
-export const makeUniformResourceLocatable = (overrides?: Partial<UniformResourceLocatable>): UniformResourceLocatable => {
+export const makeUniformResourceLocatable = (overrides?: Partial<Types.UniformResourceLocatable>): Types.UniformResourceLocatable => {
     return {
         canonicalPath: overrides && overrides.hasOwnProperty('canonicalPath') ? overrides.canonicalPath! : 'voluptas',
         canonicalUrl: overrides && overrides.hasOwnProperty('canonicalUrl') ? overrides.canonicalUrl! : 'incidunt',
@@ -2247,7 +2248,7 @@ export const makeUniformResourceLocatable = (overrides?: Partial<UniformResource
     };
 };
 
-export const makeUser = (overrides?: Partial<User>): User => {
+export const makeUser = (overrides?: Partial<Types.User>): Types.User => {
     return {
         address1: overrides && overrides.hasOwnProperty('address1') ? overrides.address1! : 'voluptatum',
         address2: overrides && overrides.hasOwnProperty('address2') ? overrides.address2! : 'temporibus',
@@ -2265,7 +2266,7 @@ export const makeUser = (overrides?: Partial<User>): User => {
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : makeImage(),
         isSuperuser: overrides && overrides.hasOwnProperty('isSuperuser') ? overrides.isSuperuser! : false,
         isVerified: overrides && overrides.hasOwnProperty('isVerified') ? overrides.isVerified! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : UserLanguage.Abkhazian,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.UserLanguage.Abkhazian,
         lastActivity: overrides && overrides.hasOwnProperty('lastActivity') ? overrides.lastActivity! : 'et',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'porro',
         notificationSubscriptions: overrides && overrides.hasOwnProperty('notificationSubscriptions') ? overrides.notificationSubscriptions! : makeNotificationSubscriptionConnection(),
@@ -2273,15 +2274,15 @@ export const makeUser = (overrides?: Partial<User>): User => {
         playlist: overrides && overrides.hasOwnProperty('playlist') ? overrides.playlist! : makeUserPlaylist(),
         playlists: overrides && overrides.hasOwnProperty('playlists') ? overrides.playlists! : makeUserPlaylistConnection(),
         postalCode: overrides && overrides.hasOwnProperty('postalCode') ? overrides.postalCode! : 'veniam',
-        preferredAudioQuality: overrides && overrides.hasOwnProperty('preferredAudioQuality') ? overrides.preferredAudioQuality! : RecordingQuality.Highest,
+        preferredAudioQuality: overrides && overrides.hasOwnProperty('preferredAudioQuality') ? overrides.preferredAudioQuality! : Types.RecordingQuality.Highest,
         province: overrides && overrides.hasOwnProperty('province') ? overrides.province! : 'autem',
         roles: overrides && overrides.hasOwnProperty('roles') ? overrides.roles! : [makeUserLanguageRole()],
         surname: overrides && overrides.hasOwnProperty('surname') ? overrides.surname! : 'ipsa',
-        timezone: overrides && overrides.hasOwnProperty('timezone') ? overrides.timezone! : Timezone.AfricaAbidjan,
+        timezone: overrides && overrides.hasOwnProperty('timezone') ? overrides.timezone! : Types.Timezone.AfricaAbidjan,
     };
 };
 
-export const makeUserConnection = (overrides?: Partial<UserConnection>): UserConnection => {
+export const makeUserConnection = (overrides?: Partial<Types.UserConnection>): Types.UserConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeUserEdge()],
@@ -2290,7 +2291,7 @@ export const makeUserConnection = (overrides?: Partial<UserConnection>): UserCon
     };
 };
 
-export const makeUserCreateInput = (overrides?: Partial<UserCreateInput>): UserCreateInput => {
+export const makeUserCreateInput = (overrides?: Partial<Types.UserCreateInput>): Types.UserCreateInput => {
     return {
         address1: overrides && overrides.hasOwnProperty('address1') ? overrides.address1! : 'cupiditate',
         address2: overrides && overrides.hasOwnProperty('address2') ? overrides.address2! : 'saepe',
@@ -2301,26 +2302,26 @@ export const makeUserCreateInput = (overrides?: Partial<UserCreateInput>): UserC
         givenName: overrides && overrides.hasOwnProperty('givenName') ? overrides.givenName! : 'rerum',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : 'voluptatum',
         isSuperuser: overrides && overrides.hasOwnProperty('isSuperuser') ? overrides.isSuperuser! : true,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         notificationSubscriptions: overrides && overrides.hasOwnProperty('notificationSubscriptions') ? overrides.notificationSubscriptions! : [makeNotificationSubscriptionInput()],
         password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'excepturi',
         postalCode: overrides && overrides.hasOwnProperty('postalCode') ? overrides.postalCode! : 'et',
-        preferredAudioQuality: overrides && overrides.hasOwnProperty('preferredAudioQuality') ? overrides.preferredAudioQuality! : RecordingQuality.Highest,
+        preferredAudioQuality: overrides && overrides.hasOwnProperty('preferredAudioQuality') ? overrides.preferredAudioQuality! : Types.RecordingQuality.Highest,
         province: overrides && overrides.hasOwnProperty('province') ? overrides.province! : 'aut',
         roles: overrides && overrides.hasOwnProperty('roles') ? overrides.roles! : [makeUserLanguageRoleInput()],
         surname: overrides && overrides.hasOwnProperty('surname') ? overrides.surname! : 'ut',
-        timezone: overrides && overrides.hasOwnProperty('timezone') ? overrides.timezone! : Timezone.AfricaAbidjan,
+        timezone: overrides && overrides.hasOwnProperty('timezone') ? overrides.timezone! : Types.Timezone.AfricaAbidjan,
     };
 };
 
-export const makeUserDownloadHistory = (overrides?: Partial<UserDownloadHistory>): UserDownloadHistory => {
+export const makeUserDownloadHistory = (overrides?: Partial<Types.UserDownloadHistory>): Types.UserDownloadHistory => {
     return {
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'deleniti',
         recording: overrides && overrides.hasOwnProperty('recording') ? overrides.recording! : makeRecording(),
     };
 };
 
-export const makeUserDownloadHistoryConnection = (overrides?: Partial<UserDownloadHistoryConnection>): UserDownloadHistoryConnection => {
+export const makeUserDownloadHistoryConnection = (overrides?: Partial<Types.UserDownloadHistoryConnection>): Types.UserDownloadHistoryConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeUserDownloadHistoryEdge()],
@@ -2329,35 +2330,35 @@ export const makeUserDownloadHistoryConnection = (overrides?: Partial<UserDownlo
     };
 };
 
-export const makeUserDownloadHistoryEdge = (overrides?: Partial<UserDownloadHistoryEdge>): UserDownloadHistoryEdge => {
+export const makeUserDownloadHistoryEdge = (overrides?: Partial<Types.UserDownloadHistoryEdge>): Types.UserDownloadHistoryEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'unde',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeUserDownloadHistory(),
     };
 };
 
-export const makeUserDownloadHistoryOrder = (overrides?: Partial<UserDownloadHistoryOrder>): UserDownloadHistoryOrder => {
+export const makeUserDownloadHistoryOrder = (overrides?: Partial<Types.UserDownloadHistoryOrder>): Types.UserDownloadHistoryOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : UserDownloadHistorySortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.UserDownloadHistorySortableField.CreatedAt,
     };
 };
 
-export const makeUserEdge = (overrides?: Partial<UserEdge>): UserEdge => {
+export const makeUserEdge = (overrides?: Partial<Types.UserEdge>): Types.UserEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'optio',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeUser(),
     };
 };
 
-export const makeUserFavorite = (overrides?: Partial<UserFavorite>): UserFavorite => {
+export const makeUserFavorite = (overrides?: Partial<Types.UserFavorite>): Types.UserFavorite => {
     return {
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'quia',
         entity: overrides && overrides.hasOwnProperty('entity') ? overrides.entity! : makeCollection(),
     };
 };
 
-export const makeUserFavoriteConnection = (overrides?: Partial<UserFavoriteConnection>): UserFavoriteConnection => {
+export const makeUserFavoriteConnection = (overrides?: Partial<Types.UserFavoriteConnection>): Types.UserFavoriteConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeUserFavoriteEdge()],
@@ -2366,65 +2367,65 @@ export const makeUserFavoriteConnection = (overrides?: Partial<UserFavoriteConne
     };
 };
 
-export const makeUserFavoriteEdge = (overrides?: Partial<UserFavoriteEdge>): UserFavoriteEdge => {
+export const makeUserFavoriteEdge = (overrides?: Partial<Types.UserFavoriteEdge>): Types.UserFavoriteEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'voluptatem',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeUserFavorite(),
     };
 };
 
-export const makeUserLanguageEntityInput = (overrides?: Partial<UserLanguageEntityInput>): UserLanguageEntityInput => {
+export const makeUserLanguageEntityInput = (overrides?: Partial<Types.UserLanguageEntityInput>): Types.UserLanguageEntityInput => {
     return {
-        entityType: overrides && overrides.hasOwnProperty('entityType') ? overrides.entityType! : CatalogEntityType.Collection,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        entityType: overrides && overrides.hasOwnProperty('entityType') ? overrides.entityType! : Types.CatalogEntityType.Collection,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
     };
 };
 
-export const makeUserLanguageRole = (overrides?: Partial<UserLanguageRole>): UserLanguageRole => {
+export const makeUserLanguageRole = (overrides?: Partial<Types.UserLanguageRole>): Types.UserLanguageRole => {
     return {
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
-        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : UserRole.Administration,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
+        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : Types.UserRole.Administration,
     };
 };
 
-export const makeUserLanguageRoleInput = (overrides?: Partial<UserLanguageRoleInput>): UserLanguageRoleInput => {
+export const makeUserLanguageRoleInput = (overrides?: Partial<Types.UserLanguageRoleInput>): Types.UserLanguageRoleInput => {
     return {
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
-        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : UserRole.Administration,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
+        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : Types.UserRole.Administration,
     };
 };
 
-export const makeUserLoginInput = (overrides?: Partial<UserLoginInput>): UserLoginInput => {
+export const makeUserLoginInput = (overrides?: Partial<Types.UserLoginInput>): Types.UserLoginInput => {
     return {
         email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'dolorem',
         password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'voluptas',
     };
 };
 
-export const makeUserLoginSocialInput = (overrides?: Partial<UserLoginSocialInput>): UserLoginSocialInput => {
+export const makeUserLoginSocialInput = (overrides?: Partial<Types.UserLoginSocialInput>): Types.UserLoginSocialInput => {
     return {
         givenName: overrides && overrides.hasOwnProperty('givenName') ? overrides.givenName! : 'architecto',
         socialId: overrides && overrides.hasOwnProperty('socialId') ? overrides.socialId! : 'vitae',
-        socialName: overrides && overrides.hasOwnProperty('socialName') ? overrides.socialName! : UserSocialServiceName.Apple,
+        socialName: overrides && overrides.hasOwnProperty('socialName') ? overrides.socialName! : Types.UserSocialServiceName.Apple,
         socialToken: overrides && overrides.hasOwnProperty('socialToken') ? overrides.socialToken! : 'illo',
         surname: overrides && overrides.hasOwnProperty('surname') ? overrides.surname! : 'voluptatibus',
     };
 };
 
-export const makeUserPayload = (overrides?: Partial<UserPayload>): UserPayload => {
+export const makeUserPayload = (overrides?: Partial<Types.UserPayload>): Types.UserPayload => {
     return {
         errors: overrides && overrides.hasOwnProperty('errors') ? overrides.errors! : [makeInputValidationError()],
         user: overrides && overrides.hasOwnProperty('user') ? overrides.user! : makeUser(),
     };
 };
 
-export const makeUserPlaylist = (overrides?: Partial<UserPlaylist>): UserPlaylist => {
+export const makeUserPlaylist = (overrides?: Partial<Types.UserPlaylist>): Types.UserPlaylist => {
     return {
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : 'possimus',
         hasRecording: overrides && overrides.hasOwnProperty('hasRecording') ? overrides.hasRecording! : false,
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'd180d0cf-eab9-4c9f-b1aa-8ec52c2db4f6',
         isPublic: overrides && overrides.hasOwnProperty('isPublic') ? overrides.isPublic! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         recordings: overrides && overrides.hasOwnProperty('recordings') ? overrides.recordings! : makeRecordingConnection(),
         summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'consequatur',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'aliquam',
@@ -2432,17 +2433,17 @@ export const makeUserPlaylist = (overrides?: Partial<UserPlaylist>): UserPlaylis
     };
 };
 
-export const makeUserPlaylistAddInput = (overrides?: Partial<UserPlaylistAddInput>): UserPlaylistAddInput => {
+export const makeUserPlaylistAddInput = (overrides?: Partial<Types.UserPlaylistAddInput>): Types.UserPlaylistAddInput => {
     return {
         isPublic: overrides && overrides.hasOwnProperty('isPublic') ? overrides.isPublic! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         recordingIds: overrides && overrides.hasOwnProperty('recordingIds') ? overrides.recordingIds! : ['360d4090-1a6c-4f11-a614-5e1302faba5d'],
         summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'ut',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'perspiciatis',
     };
 };
 
-export const makeUserPlaylistConnection = (overrides?: Partial<UserPlaylistConnection>): UserPlaylistConnection => {
+export const makeUserPlaylistConnection = (overrides?: Partial<Types.UserPlaylistConnection>): Types.UserPlaylistConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeUserPlaylistEdge()],
@@ -2451,14 +2452,14 @@ export const makeUserPlaylistConnection = (overrides?: Partial<UserPlaylistConne
     };
 };
 
-export const makeUserPlaylistEdge = (overrides?: Partial<UserPlaylistEdge>): UserPlaylistEdge => {
+export const makeUserPlaylistEdge = (overrides?: Partial<Types.UserPlaylistEdge>): Types.UserPlaylistEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'temporibus',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeUserPlaylist(),
     };
 };
 
-export const makeUserPlaylistUpdateInput = (overrides?: Partial<UserPlaylistUpdateInput>): UserPlaylistUpdateInput => {
+export const makeUserPlaylistUpdateInput = (overrides?: Partial<Types.UserPlaylistUpdateInput>): Types.UserPlaylistUpdateInput => {
     return {
         isPublic: overrides && overrides.hasOwnProperty('isPublic') ? overrides.isPublic! : true,
         summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'nihil',
@@ -2466,14 +2467,14 @@ export const makeUserPlaylistUpdateInput = (overrides?: Partial<UserPlaylistUpda
     };
 };
 
-export const makeUserPlaylistsOrder = (overrides?: Partial<UserPlaylistsOrder>): UserPlaylistsOrder => {
+export const makeUserPlaylistsOrder = (overrides?: Partial<Types.UserPlaylistsOrder>): Types.UserPlaylistsOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : UserPlaylistsSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.UserPlaylistsSortableField.CreatedAt,
     };
 };
 
-export const makeUserSignupInput = (overrides?: Partial<UserSignupInput>): UserSignupInput => {
+export const makeUserSignupInput = (overrides?: Partial<Types.UserSignupInput>): Types.UserSignupInput => {
     return {
         email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'repudiandae',
         givenName: overrides && overrides.hasOwnProperty('givenName') ? overrides.givenName! : 'reprehenderit',
@@ -2482,7 +2483,7 @@ export const makeUserSignupInput = (overrides?: Partial<UserSignupInput>): UserS
     };
 };
 
-export const makeUserUpdateInput = (overrides?: Partial<UserUpdateInput>): UserUpdateInput => {
+export const makeUserUpdateInput = (overrides?: Partial<Types.UserUpdateInput>): Types.UserUpdateInput => {
     return {
         address1: overrides && overrides.hasOwnProperty('address1') ? overrides.address1! : 'quis',
         address2: overrides && overrides.hasOwnProperty('address2') ? overrides.address2! : 'fugiat',
@@ -2493,26 +2494,26 @@ export const makeUserUpdateInput = (overrides?: Partial<UserUpdateInput>): UserU
         givenName: overrides && overrides.hasOwnProperty('givenName') ? overrides.givenName! : 'ipsam',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : 'enim',
         isSuperuser: overrides && overrides.hasOwnProperty('isSuperuser') ? overrides.isSuperuser! : false,
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Language.Chinese,
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : Types.Language.Chinese,
         notificationSubscriptions: overrides && overrides.hasOwnProperty('notificationSubscriptions') ? overrides.notificationSubscriptions! : [makeNotificationSubscriptionInput()],
         password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'inventore',
         postalCode: overrides && overrides.hasOwnProperty('postalCode') ? overrides.postalCode! : 'aspernatur',
-        preferredAudioQuality: overrides && overrides.hasOwnProperty('preferredAudioQuality') ? overrides.preferredAudioQuality! : RecordingQuality.Highest,
+        preferredAudioQuality: overrides && overrides.hasOwnProperty('preferredAudioQuality') ? overrides.preferredAudioQuality! : Types.RecordingQuality.Highest,
         province: overrides && overrides.hasOwnProperty('province') ? overrides.province! : 'at',
         roles: overrides && overrides.hasOwnProperty('roles') ? overrides.roles! : [makeUserLanguageRoleInput()],
         surname: overrides && overrides.hasOwnProperty('surname') ? overrides.surname! : 'deleniti',
-        timezone: overrides && overrides.hasOwnProperty('timezone') ? overrides.timezone! : Timezone.AfricaAbidjan,
+        timezone: overrides && overrides.hasOwnProperty('timezone') ? overrides.timezone! : Types.Timezone.AfricaAbidjan,
     };
 };
 
-export const makeUsersOrder = (overrides?: Partial<UsersOrder>): UsersOrder => {
+export const makeUsersOrder = (overrides?: Partial<Types.UsersOrder>): Types.UsersOrder => {
     return {
-        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : OrderByDirection.Asc,
-        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : UsersSortableField.CreatedAt,
+        direction: overrides && overrides.hasOwnProperty('direction') ? overrides.direction! : Types.OrderByDirection.Asc,
+        field: overrides && overrides.hasOwnProperty('field') ? overrides.field! : Types.UsersSortableField.CreatedAt,
     };
 };
 
-export const makeVideoFile = (overrides?: Partial<VideoFile>): VideoFile => {
+export const makeVideoFile = (overrides?: Partial<Types.VideoFile>): Types.VideoFile => {
     return {
         bitrate: overrides && overrides.hasOwnProperty('bitrate') ? overrides.bitrate! : 3144,
         canDelete: overrides && overrides.hasOwnProperty('canDelete') ? overrides.canDelete! : true,
@@ -2525,21 +2526,21 @@ export const makeVideoFile = (overrides?: Partial<VideoFile>): VideoFile => {
         logUrl: overrides && overrides.hasOwnProperty('logUrl') ? overrides.logUrl! : 'fugiat',
         mimeType: overrides && overrides.hasOwnProperty('mimeType') ? overrides.mimeType! : 'nulla',
         recording: overrides && overrides.hasOwnProperty('recording') ? overrides.recording! : makeRecording(),
-        transcodingStatus: overrides && overrides.hasOwnProperty('transcodingStatus') ? overrides.transcodingStatus! : MediaFileTranscodingStatus.Complete,
+        transcodingStatus: overrides && overrides.hasOwnProperty('transcodingStatus') ? overrides.transcodingStatus! : Types.MediaFileTranscodingStatus.Complete,
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : 'velit',
         url: overrides && overrides.hasOwnProperty('url') ? overrides.url! : 'deserunt',
         width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : 7799,
     };
 };
 
-export const makeWebsite = (overrides?: Partial<Website>): Website => {
+export const makeWebsite = (overrides?: Partial<Types.Website>): Types.Website => {
     return {
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '6f64dc37-c71c-4021-9182-42a9b9f1727c',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ipsa',
     };
 };
 
-export const makeWebsiteConnection = (overrides?: Partial<WebsiteConnection>): WebsiteConnection => {
+export const makeWebsiteConnection = (overrides?: Partial<Types.WebsiteConnection>): Types.WebsiteConnection => {
     return {
         aggregate: overrides && overrides.hasOwnProperty('aggregate') ? overrides.aggregate! : makeAggregate(),
         edges: overrides && overrides.hasOwnProperty('edges') ? overrides.edges! : [makeWebsiteEdge()],
@@ -2548,7 +2549,7 @@ export const makeWebsiteConnection = (overrides?: Partial<WebsiteConnection>): W
     };
 };
 
-export const makeWebsiteEdge = (overrides?: Partial<WebsiteEdge>): WebsiteEdge => {
+export const makeWebsiteEdge = (overrides?: Partial<Types.WebsiteEdge>): Types.WebsiteEdge => {
     return {
         cursor: overrides && overrides.hasOwnProperty('cursor') ? overrides.cursor! : 'et',
         node: overrides && overrides.hasOwnProperty('node') ? overrides.node! : makeWebsite(),
