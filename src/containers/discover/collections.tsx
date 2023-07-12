@@ -23,7 +23,7 @@ export default function DiscoverCollections({
 		<div>
 			{websiteFeaturedCollection && (
 				<>
-					<LineHeading>
+					<LineHeading variant="overline">
 						<FormattedMessage
 							id="discoverCollections_featuredCollectionHeading"
 							defaultMessage="Featured Collection"
