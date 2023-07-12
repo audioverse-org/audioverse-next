@@ -33,7 +33,11 @@ export async function getStaticProps({
 	const intl = await getIntl(language);
 	const data = await getDiscoverCollectionsPageData({ language });
 
-	const client = await prefetchQueries({});
+	const client = await prefetchQueries({
+		getSectionConferences: { language },
+		getSectionPresenters: { language },
+		getSectionStorySeasons: { language },
+	});
 
 	return {
 		props: {

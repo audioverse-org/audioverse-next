@@ -7,6 +7,7 @@ import { GetHelpWidgetDataQueryVariables, getHelpWidgetData } from '~src/compone
 import { GetSectionBlogPostsQueryVariables, getSectionBlogPosts } from '~src/components/organisms/cardSlider/section/__generated__/blogPosts';
 import { GetSectionConferencesQueryVariables, getSectionConferences } from '~src/components/organisms/cardSlider/section/__generated__/conferences';
 import { GetSectionFeaturedTeachingsQueryVariables, getSectionFeaturedTeachings } from '~src/components/organisms/cardSlider/section/__generated__/featuredTeachings';
+import { GetSectionPresentersQueryVariables, getSectionPresenters } from '~src/components/organisms/cardSlider/section/__generated__/presenters';
 import { GetSectionRecentTeachingsQueryVariables, getSectionRecentTeachings } from '~src/components/organisms/cardSlider/section/__generated__/recentTeachings';
 import { GetSectionStorySeasonsQueryVariables, getSectionStorySeasons } from '~src/components/organisms/cardSlider/section/__generated__/storySeasons';
 import { GetSectionTopicsQueryVariables, getSectionTopics } from '~src/components/organisms/cardSlider/section/__generated__/topics';
@@ -113,6 +114,7 @@ const fns = {
 	getSectionBlogPosts: getSectionBlogPosts as Fn<GetSectionBlogPostsQueryVariables>,
 	getSectionConferences: getSectionConferences as Fn<GetSectionConferencesQueryVariables>,
 	getSectionFeaturedTeachings: getSectionFeaturedTeachings as Fn<GetSectionFeaturedTeachingsQueryVariables>,
+	getSectionPresenters: getSectionPresenters as Fn<GetSectionPresentersQueryVariables>,
 	getSectionRecentTeachings: getSectionRecentTeachings as Fn<GetSectionRecentTeachingsQueryVariables>,
 	getSectionStorySeasons: getSectionStorySeasons as Fn<GetSectionStorySeasonsQueryVariables>,
 	getSectionTopics: getSectionTopics as Fn<GetSectionTopicsQueryVariables>,

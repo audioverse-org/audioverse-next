@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import LineHeading from '~components/atoms/lineHeading';
 import Button from '~components/molecules/button';
 import CardFavoriteEntity from '~components/molecules/card/favoriteEntity';
-import CardPerson from '~components/molecules/card/person';
 import CardSequence from '~components/molecules/card/sequence';
 import CardSponsor from '~components/molecules/card/sponsor';
 import CardGroup from '~components/molecules/cardGroup';
@@ -12,6 +11,7 @@ import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 import Conferences from '~src/components/organisms/cardSlider/section/conferences';
+import Presenters from '~src/components/organisms/cardSlider/section/presenters';
 import StorySeasons from '~src/components/organisms/cardSlider/section/storySeasons';
 
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
@@ -21,7 +21,6 @@ export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 
 export default function DiscoverCollections({
 	websiteFeaturedCollection,
-	persons,
 	serieses,
 	sponsors,
 	audiobooks,
@@ -61,18 +60,9 @@ export default function DiscoverCollections({
 					</div>
 				</>
 			)}
-			<LineHeading>
-				<FormattedMessage
-					id="discoverCollections_presentersHeading"
-					defaultMessage="Presenters"
-				/>
-			</LineHeading>
-			<CardGroup className={styles.cardGroup}>
-				{persons.nodes?.map((s) => (
-					<CardPerson person={s} key={s.canonicalPath} />
-				))}
-			</CardGroup>
-			{makeSeeAllButton(root.lang(language).presenters.get())}
+
+			<Presenters />
+
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_audiobooksHeading"
