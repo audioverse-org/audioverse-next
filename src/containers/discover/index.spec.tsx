@@ -11,28 +11,28 @@ import {
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 import {
-	GetDiscoverBlogPostsDocument,
-	GetDiscoverBlogPostsQuery,
+	GetSectionBlogPostsDocument,
+	GetSectionBlogPostsQuery,
 } from '~src/components/organisms/cardSlider/section/__generated__/blogPosts';
 import {
-	GetDiscoverConferencesDocument,
-	GetDiscoverConferencesQuery,
+	GetSectionConferencesDocument,
+	GetSectionConferencesQuery,
 } from '~src/components/organisms/cardSlider/section/__generated__/conferences';
 import {
-	GetDiscoverFeaturedTeachingsDocument,
-	GetDiscoverFeaturedTeachingsQuery,
+	GetSectionFeaturedTeachingsDocument,
+	GetSectionFeaturedTeachingsQuery,
 } from '~src/components/organisms/cardSlider/section/__generated__/featuredTeachings';
 import {
-	GetDiscoverRecentTeachingsDocument,
-	GetDiscoverRecentTeachingsQuery,
+	GetSectionRecentTeachingsDocument,
+	GetSectionRecentTeachingsQuery,
 } from '~src/components/organisms/cardSlider/section/__generated__/recentTeachings';
 import {
-	GetDiscoverStorySeasonsDocument,
-	GetDiscoverStorySeasonsQuery,
+	GetSectionStorySeasonsDocument,
+	GetSectionStorySeasonsQuery,
 } from '~src/components/organisms/cardSlider/section/__generated__/storySeasons';
 import {
-	GetDiscoverTrendingTeachingsDocument,
-	GetDiscoverTrendingTeachingsQuery,
+	GetSectionTrendingTeachingsDocument,
+	GetSectionTrendingTeachingsQuery,
 } from '~src/components/organisms/cardSlider/section/__generated__/trendingTeachings';
 import { __apiDocumentMock } from '~src/lib/api/fetchApi';
 
@@ -59,13 +59,13 @@ const recentTeachingsDefaults = {
 	},
 };
 
-const loadRecentTeachings = buildLoader<GetDiscoverRecentTeachingsQuery>(
-	GetDiscoverRecentTeachingsDocument,
+const loadRecentTeachings = buildLoader<GetSectionRecentTeachingsQuery>(
+	GetSectionRecentTeachingsDocument,
 	recentTeachingsDefaults
 );
 
-const loadTrendingTeachings = buildLoader<GetDiscoverTrendingTeachingsQuery>(
-	GetDiscoverTrendingTeachingsDocument,
+const loadTrendingTeachings = buildLoader<GetSectionTrendingTeachingsQuery>(
+	GetSectionTrendingTeachingsDocument,
 	{
 		trendingTeachings: {
 			nodes: [
@@ -83,8 +83,8 @@ const loadTrendingTeachings = buildLoader<GetDiscoverTrendingTeachingsQuery>(
 	}
 );
 
-const loadFeaturedTeachings = buildLoader<GetDiscoverFeaturedTeachingsQuery>(
-	GetDiscoverFeaturedTeachingsDocument,
+const loadFeaturedTeachings = buildLoader<GetSectionFeaturedTeachingsQuery>(
+	GetSectionFeaturedTeachingsDocument,
 	{
 		featuredTeachings: {
 			nodes: [
@@ -100,8 +100,8 @@ const loadFeaturedTeachings = buildLoader<GetDiscoverFeaturedTeachingsQuery>(
 	}
 );
 
-const loadStorySeasons = buildLoader<GetDiscoverStorySeasonsQuery>(
-	GetDiscoverStorySeasonsDocument,
+const loadStorySeasons = buildLoader<GetSectionStorySeasonsQuery>(
+	GetSectionStorySeasonsDocument,
 	{
 		storySeasons: {
 			nodes: [
@@ -127,8 +127,8 @@ const loadStorySeasons = buildLoader<GetDiscoverStorySeasonsQuery>(
 	}
 );
 
-const loadConferences = buildLoader<GetDiscoverConferencesQuery>(
-	GetDiscoverConferencesDocument,
+const loadConferences = buildLoader<GetSectionConferencesQuery>(
+	GetSectionConferencesDocument,
 	{
 		conferences: {
 			nodes: [
@@ -158,8 +158,8 @@ const loadConferences = buildLoader<GetDiscoverConferencesQuery>(
 	}
 );
 
-const loadBlogPosts = buildLoader<GetDiscoverBlogPostsQuery>(
-	GetDiscoverBlogPostsDocument,
+const loadBlogPosts = buildLoader<GetSectionBlogPostsQuery>(
+	GetSectionBlogPostsDocument,
 	{
 		blogPosts: {
 			nodes: [
