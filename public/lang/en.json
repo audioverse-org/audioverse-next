@@ -636,9 +636,6 @@
   "discoverCollections_featuredCollectionHeading": {
     "string": "Featured Collection"
   },
-  "discoverCollections_scriptureSongsHeading": {
-    "string": "Scripture Songs"
-  },
   "discoverCollections_seeAll": {
     "string": "See All"
   },
@@ -1805,6 +1802,15 @@
   },
   "organismSection_presentersPrevious": {
     "string": "Previous presenters"
+  },
+  "organismSection_scriptureSongsHeading": {
+    "string": "Scripture Songs"
+  },
+  "organismSection_scriptureSongsNext": {
+    "string": "Next scripture songs"
+  },
+  "organismSection_scriptureSongsPrevious": {
+    "string": "Previous scripture songs"
   },
   "organismSection_sponsorsHeading": {
     "string": "Sponsors"

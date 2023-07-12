@@ -1353,12 +1353,6 @@
       "value": "Featured Collection"
     }
   ],
-  "discoverCollections_scriptureSongsHeading": [
-    {
-      "type": 0,
-      "value": "Scripture Songs"
-    }
-  ],
   "discoverCollections_seeAll": [
     {
       "type": 0,
@@ -3819,6 +3813,24 @@
     {
       "type": 0,
       "value": "Previous presenters"
+    }
+  ],
+  "organismSection_scriptureSongsHeading": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
+  "organismSection_scriptureSongsNext": [
+    {
+      "type": 0,
+      "value": "Next scripture songs"
+    }
+  ],
+  "organismSection_scriptureSongsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous scripture songs"
     }
   ],
   "organismSection_sponsorsHeading": [
