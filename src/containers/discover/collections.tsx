@@ -5,7 +5,6 @@ import LineHeading from '~components/atoms/lineHeading';
 import Button from '~components/molecules/button';
 import CardFavoriteEntity from '~components/molecules/card/favoriteEntity';
 import CardSequence from '~components/molecules/card/sequence';
-import CardSponsor from '~components/molecules/card/sponsor';
 import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
@@ -13,6 +12,7 @@ import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 import Audiobooks from '~src/components/organisms/cardSlider/section/Audiobooks';
 import Conferences from '~src/components/organisms/cardSlider/section/conferences';
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
+import Sponsors from '~src/components/organisms/cardSlider/section/sponsors';
 import StorySeasons from '~src/components/organisms/cardSlider/section/storySeasons';
 
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
@@ -23,7 +23,6 @@ export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 export default function DiscoverCollections({
 	websiteFeaturedCollection,
 	serieses,
-	sponsors,
 	musicAlbums,
 }: IDiscoverCollectionsProps): JSX.Element {
 	const language = useLanguageRoute();
@@ -72,20 +71,7 @@ export default function DiscoverCollections({
 				}
 				includeSubItems={false}
 			/>
-
-			<LineHeading>
-				<FormattedMessage
-					id="discoverCollections_sponsorsHeading"
-					defaultMessage="Sponsors"
-				/>
-			</LineHeading>
-			<CardGroup className={styles.cardGroup}>
-				{sponsors.nodes?.map((n) => (
-					<CardSponsor sponsor={n} key={n.canonicalPath} />
-				))}
-			</CardGroup>
-			{makeSeeAllButton(root.lang(language).sponsors.get())}
-
+			<Sponsors />
 			<StorySeasons
 				heading={
 					<FormattedMessage

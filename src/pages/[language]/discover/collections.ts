@@ -38,6 +38,7 @@ export async function getStaticProps({
 		getSectionPresenters: { language },
 		getSectionStorySeasons: { language },
 		getSectionAudiobooks: { language },
+		getSectionSponsors: { language },
 	});
 
 	return {
