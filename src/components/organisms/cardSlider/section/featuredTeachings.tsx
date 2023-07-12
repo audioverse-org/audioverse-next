@@ -4,16 +4,13 @@ import { useIntl } from 'react-intl';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 
-import {
-	GetDiscoverFeaturedTeachingsQuery,
-	useInfiniteGetDiscoverFeaturedTeachingsQuery,
-} from './__generated__/featuredTeachings';
+import { useInfiniteGetDiscoverFeaturedTeachingsQuery } from './__generated__/featuredTeachings';
 import Section from './index';
 
 export default function FeaturedTeachings(): JSX.Element {
 	const intl = useIntl();
 	return (
-		<Section<GetDiscoverFeaturedTeachingsQuery, CardRecordingFragment>
+		<Section
 			infiniteQuery={useInfiniteGetDiscoverFeaturedTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_featuredTeachingsHeading',
@@ -27,7 +24,9 @@ export default function FeaturedTeachings(): JSX.Element {
 				id: 'discover__featuredTeachingsNext',
 				defaultMessage: 'Next featured teachings',
 			})}
-			Card={(p) => <CardRecording recording={p.node} />}
+			Card={(p: { node: CardRecordingFragment }) => (
+				<CardRecording recording={p.node} />
+			)}
 		/>
 	);
 }

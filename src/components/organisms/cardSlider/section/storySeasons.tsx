@@ -29,7 +29,7 @@ export default function StorySeasons(props: {
 	} = props;
 
 	return (
-		<Section<GetDiscoverStorySeasonsQuery, StorySeason>
+		<Section
 			infiniteQuery={useInfiniteGetDiscoverStorySeasonsQuery}
 			heading={heading}
 			previous={intl.formatMessage({
@@ -41,7 +41,7 @@ export default function StorySeasons(props: {
 				defaultMessage: 'Next recent stories',
 			})}
 			seeAllUrl={root.lang(languageRoute).stories.albums.get()}
-			Card={(p) => <CardSequence sequence={p.node} />}
+			Card={(p: { node: StorySeason }) => <CardSequence sequence={p.node} />}
 		/>
 	);
 }

@@ -4,16 +4,13 @@ import { useIntl } from 'react-intl';
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
 
-import {
-	GetDiscoverTopicsQuery,
-	useInfiniteGetDiscoverTopicsQuery,
-} from './__generated__/topics';
+import { useInfiniteGetDiscoverTopicsQuery } from './__generated__/topics';
 import Section from './index';
 
 export default function Topics(): JSX.Element {
 	const intl = useIntl();
 	return (
-		<Section<GetDiscoverTopicsQuery, CardTopicFragment>
+		<Section
 			infiniteQuery={useInfiniteGetDiscoverTopicsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_topicsHeading',
@@ -27,7 +24,7 @@ export default function Topics(): JSX.Element {
 				id: 'discover__topicsNext',
 				defaultMessage: 'Next topics',
 			})}
-			Card={(p) => <CardTopic topic={p.node} />}
+			Card={(p: { node: CardTopicFragment }) => <CardTopic topic={p.node} />}
 		/>
 	);
 }

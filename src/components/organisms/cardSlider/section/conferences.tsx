@@ -40,7 +40,7 @@ export default function Conferences(props: {
 	);
 
 	return (
-		<Section<GetDiscoverConferencesQuery, Conference>
+		<Section
 			infiniteQuery={useInfiniteGetDiscoverConferencesQuery}
 			heading={heading}
 			previous={intl.formatMessage({

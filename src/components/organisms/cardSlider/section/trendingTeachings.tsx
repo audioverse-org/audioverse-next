@@ -1,15 +1,11 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import {
-	GetDiscoverTrendingTeachingsQuery,
-	useInfiniteGetDiscoverTrendingTeachingsQuery,
-} from './__generated__/trendingTeachings';
+import { useInfiniteGetDiscoverTrendingTeachingsQuery } from './__generated__/trendingTeachings';
 import Section from './index';
 
 export default function TrendingTeachings(): JSX.Element {
@@ -17,7 +13,7 @@ export default function TrendingTeachings(): JSX.Element {
 	const intl = useIntl();
 
 	return (
-		<Section<GetDiscoverTrendingTeachingsQuery, CardRecordingFragment>
+		<Section
 			infiniteQuery={useInfiniteGetDiscoverTrendingTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_trendingTeachingsHeading',

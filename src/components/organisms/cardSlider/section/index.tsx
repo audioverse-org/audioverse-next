@@ -1,15 +1,14 @@
-import {
-	UseInfiniteQueryOptions,
-	UseInfiniteQueryResult,
-} from '@tanstack/react-query';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React, { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import CardSlider from '~components/organisms/cardSlider';
-import { Language } from '~src/__generated__/graphql';
 import { useLanguageId } from '~src/lib/useLanguageId';
+import {
+	GraphqlInfiniteQuery,
+	InferGraphqlInfiniteQueryType,
+} from '~src/types/graphql-codegen';
 
 import styles from './index.module.scss';
 
@@ -27,27 +26,19 @@ type SectionRoot<T> = {
 	};
 };
 
-type InfiniteQueryVariables = {
-	language: Language;
-	after: string | null;
-};
-
-type InfiniteQuery<T, V> = (
-	pageParamKey: keyof V,
-	variables: V,
-	options?: UseInfiniteQueryOptions<T>
-) => UseInfiniteQueryResult<T>;
+type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
+type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
 
 type SectionProps<T, N> = {
-	infiniteQuery: InfiniteQuery<T, InfiniteQueryVariables>;
+	infiniteQuery: T;
 	heading: string | JSX.Element;
 	previous: string;
 	next: string;
 	first?: number;
 	rows?: number;
 	seeAllUrl?: string;
-	selectNodes?: (page?: T) => Maybe<SectionNode<N>[]>;
-	Card: (props: { node: SectionNode<N> }) => JSX.Element;
+	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
+	Card: Card<N>;
 };
 
 function isSectionRoot<T>(v: unknown): v is SectionRoot<T> {
@@ -63,7 +54,7 @@ function defaultSelectNodes<T, N>(page?: T): Maybe<SectionNode<N>[]> {
 	return selectSectionRoot<T, N>(page)?.nodes || [];
 }
 
-export default function Section<T, N>({
+export default function Section<T extends GraphqlInfiniteQuery, N>({
 	infiniteQuery,
 	heading,
 	selectNodes = defaultSelectNodes,

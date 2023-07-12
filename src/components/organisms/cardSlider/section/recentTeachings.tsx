@@ -6,10 +6,7 @@ import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import {
-	GetDiscoverRecentTeachingsQuery,
-	useInfiniteGetDiscoverRecentTeachingsQuery,
-} from './__generated__/recentTeachings';
+import { useInfiniteGetDiscoverRecentTeachingsQuery } from './__generated__/recentTeachings';
 import Section from './index';
 
 export default function RecentTeachings(): JSX.Element {
@@ -17,7 +14,7 @@ export default function RecentTeachings(): JSX.Element {
 	const intl = useIntl();
 
 	return (
-		<Section<GetDiscoverRecentTeachingsQuery, CardRecordingFragment>
+		<Section
 			infiniteQuery={useInfiniteGetDiscoverRecentTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_recentTeachingsHeading',
@@ -32,7 +29,9 @@ export default function RecentTeachings(): JSX.Element {
 				defaultMessage: 'Next recent teachings',
 			})}
 			seeAllUrl={root.lang(route).teachings.all.get()}
-			Card={(p) => <CardRecording recording={p.node} />}
+			Card={(p: { node: CardRecordingFragment }) => (
+				<CardRecording recording={p.node} />
+			)}
 			rows={2}
 		/>
 	);
