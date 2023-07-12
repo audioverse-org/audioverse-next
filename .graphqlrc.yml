@@ -26,6 +26,11 @@ generates:
   src/__generated__/prefetch.ts:
     plugins:
       - 'graphql-codegen/dist/graphql-plugin-prefetch.js'
+  src/__generated__/mock-data.ts:
+    plugins:
+      - 'typescript-mock-data'
+    config:
+      prefix: 'make'
   src/:
     preset: near-operation-file
     presetConfig:
