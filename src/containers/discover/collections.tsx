@@ -10,6 +10,7 @@ import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
+import Audiobooks from '~src/components/organisms/cardSlider/section/Audiobooks';
 import Conferences from '~src/components/organisms/cardSlider/section/conferences';
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
 import StorySeasons from '~src/components/organisms/cardSlider/section/storySeasons';
@@ -23,7 +24,6 @@ export default function DiscoverCollections({
 	websiteFeaturedCollection,
 	serieses,
 	sponsors,
-	audiobooks,
 	musicAlbums,
 }: IDiscoverCollectionsProps): JSX.Element {
 	const language = useLanguageRoute();
@@ -62,20 +62,7 @@ export default function DiscoverCollections({
 			)}
 
 			<Presenters />
-
-			<LineHeading>
-				<FormattedMessage
-					id="discoverCollections_audiobooksHeading"
-					defaultMessage="Audiobooks"
-				/>
-			</LineHeading>
-			<CardGroup className={styles.cardGroup}>
-				{audiobooks.nodes?.map((n) => (
-					<CardSequence sequence={n} key={n.canonicalPath} />
-				))}
-			</CardGroup>
-			{makeSeeAllButton(root.lang(language).books.get())}
-
+			<Audiobooks />
 			<Conferences
 				heading={
 					<FormattedMessage

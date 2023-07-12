@@ -4,6 +4,7 @@ import makeQueryClient from '~lib/makeQueryClient';
 
 import { GetWithAuthGuardDataQueryVariables, getWithAuthGuardData } from '~src/components/HOCs/__generated__/withAuthGuard';
 import { GetHelpWidgetDataQueryVariables, getHelpWidgetData } from '~src/components/molecules/__generated__/helpWidget';
+import { GetSectionAudiobooksQueryVariables, getSectionAudiobooks } from '~src/components/organisms/cardSlider/section/__generated__/audiobooks';
 import { GetSectionBlogPostsQueryVariables, getSectionBlogPosts } from '~src/components/organisms/cardSlider/section/__generated__/blogPosts';
 import { GetSectionConferencesQueryVariables, getSectionConferences } from '~src/components/organisms/cardSlider/section/__generated__/conferences';
 import { GetSectionFeaturedTeachingsQueryVariables, getSectionFeaturedTeachings } from '~src/components/organisms/cardSlider/section/__generated__/featuredTeachings';
@@ -111,6 +112,7 @@ export async function prefetchQueries(
 const fns = {
 	getWithAuthGuardData: getWithAuthGuardData as Fn<GetWithAuthGuardDataQueryVariables>,
 	getHelpWidgetData: getHelpWidgetData as Fn<GetHelpWidgetDataQueryVariables>,
+	getSectionAudiobooks: getSectionAudiobooks as Fn<GetSectionAudiobooksQueryVariables>,
 	getSectionBlogPosts: getSectionBlogPosts as Fn<GetSectionBlogPostsQueryVariables>,
 	getSectionConferences: getSectionConferences as Fn<GetSectionConferencesQueryVariables>,
 	getSectionFeaturedTeachings: getSectionFeaturedTeachings as Fn<GetSectionFeaturedTeachingsQueryVariables>,
