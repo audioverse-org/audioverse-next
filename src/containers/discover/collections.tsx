@@ -10,6 +10,7 @@ import ScriptureSongs from '~src/components/organisms/cardSlider/section/scriptu
 import Series from '~src/components/organisms/cardSlider/section/series';
 import Sponsors from '~src/components/organisms/cardSlider/section/sponsors';
 import StorySeasons from '~src/components/organisms/cardSlider/section/storySeasons';
+import Topics from '~src/components/organisms/cardSlider/section/topics';
 
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
 import styles from './collections.module.scss';
@@ -38,6 +39,7 @@ export default function DiscoverCollections({
 				</>
 			)}
 
+			<Topics />
 			<Presenters />
 			<Audiobooks />
 			<Conferences
