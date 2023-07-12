@@ -1359,12 +1359,6 @@
       "value": "Featured Collection"
     }
   ],
-  "discoverCollections_presentersHeading": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
   "discoverCollections_scriptureSongsHeading": [
     {
       "type": 0,
@@ -3801,6 +3795,24 @@
     {
       "type": 0,
       "value": "Sponsor"
+    }
+  ],
+  "organismSection_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
+  "organismSection_presentersNext": [
+    {
+      "type": 0,
+      "value": "Next presenters"
+    }
+  ],
+  "organismSection_presentersPrevious": [
+    {
+      "type": 0,
+      "value": "Previous presenters"
     }
   ],
   "ourPurpose__title": [

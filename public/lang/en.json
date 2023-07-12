@@ -639,9 +639,6 @@
   "discoverCollections_featuredCollectionHeading": {
     "string": "Featured Collection"
   },
-  "discoverCollections_presentersHeading": {
-    "string": "Presenters"
-  },
   "discoverCollections_scriptureSongsHeading": {
     "string": "Scripture Songs"
   },
@@ -1796,6 +1793,15 @@
   "organism-recording__sponsorInfoTitle": {
     "comment": "recording sponsor info title",
     "string": "Sponsor"
+  },
+  "organismSection_presentersHeading": {
+    "string": "Presenters"
+  },
+  "organismSection_presentersNext": {
+    "string": "Next presenters"
+  },
+  "organismSection_presentersPrevious": {
+    "string": "Previous presenters"
   },
   "ourPurpose__title": {
     "string": "Our Purpose"
