@@ -1353,18 +1353,6 @@
       "value": "Featured Collection"
     }
   ],
-  "discoverCollections_seeAll": [
-    {
-      "type": 0,
-      "value": "See All"
-    }
-  ],
-  "discoverCollections_seriesHeading": [
-    {
-      "type": 0,
-      "value": "Series"
-    }
-  ],
   "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
@@ -3831,6 +3819,24 @@
     {
       "type": 0,
       "value": "Previous scripture songs"
+    }
+  ],
+  "organismSection_seriesHeading": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "organismSection_seriesNext": [
+    {
+      "type": 0,
+      "value": "Next series"
+    }
+  ],
+  "organismSection_seriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous series"
     }
   ],
   "organismSection_sponsorsHeading": [

@@ -636,12 +636,6 @@
   "discoverCollections_featuredCollectionHeading": {
     "string": "Featured Collection"
   },
-  "discoverCollections_seeAll": {
-    "string": "See All"
-  },
-  "discoverCollections_seriesHeading": {
-    "string": "Series"
-  },
   "discoverCollections_storySeasonsHeading": {
     "string": "Stories"
   },
@@ -1811,6 +1805,15 @@
   },
   "organismSection_scriptureSongsPrevious": {
     "string": "Previous scripture songs"
+  },
+  "organismSection_seriesHeading": {
+    "string": "Series"
+  },
+  "organismSection_seriesNext": {
+    "string": "Next series"
+  },
+  "organismSection_seriesPrevious": {
+    "string": "Previous series"
   },
   "organismSection_sponsorsHeading": {
     "string": "Sponsors"
