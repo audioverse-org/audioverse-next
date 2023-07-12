@@ -40,6 +40,7 @@ export async function getStaticProps({
 		getSectionAudiobooks: { language },
 		getSectionSponsors: { language },
 		getSectionScriptureSongs: { language },
+		getSectionSeries: { language },
 	});
 
 	return {

@@ -11,6 +11,7 @@ import { GetSectionFeaturedTeachingsQueryVariables, getSectionFeaturedTeachings 
 import { GetSectionPresentersQueryVariables, getSectionPresenters } from '~src/components/organisms/cardSlider/section/__generated__/presenters';
 import { GetSectionRecentTeachingsQueryVariables, getSectionRecentTeachings } from '~src/components/organisms/cardSlider/section/__generated__/recentTeachings';
 import { GetSectionScriptureSongsQueryVariables, getSectionScriptureSongs } from '~src/components/organisms/cardSlider/section/__generated__/scriptureSongs';
+import { GetSectionSeriesQueryVariables, getSectionSeries } from '~src/components/organisms/cardSlider/section/__generated__/series';
 import { GetSectionSponsorsQueryVariables, getSectionSponsors } from '~src/components/organisms/cardSlider/section/__generated__/sponsors';
 import { GetSectionStorySeasonsQueryVariables, getSectionStorySeasons } from '~src/components/organisms/cardSlider/section/__generated__/storySeasons';
 import { GetSectionTopicsQueryVariables, getSectionTopics } from '~src/components/organisms/cardSlider/section/__generated__/topics';
@@ -121,6 +122,7 @@ const fns = {
 	getSectionPresenters: getSectionPresenters as Fn<GetSectionPresentersQueryVariables>,
 	getSectionRecentTeachings: getSectionRecentTeachings as Fn<GetSectionRecentTeachingsQueryVariables>,
 	getSectionScriptureSongs: getSectionScriptureSongs as Fn<GetSectionScriptureSongsQueryVariables>,
+	getSectionSeries: getSectionSeries as Fn<GetSectionSeriesQueryVariables>,
 	getSectionSponsors: getSectionSponsors as Fn<GetSectionSponsorsQueryVariables>,
 	getSectionStorySeasons: getSectionStorySeasons as Fn<GetSectionStorySeasonsQueryVariables>,
 	getSectionTopics: getSectionTopics as Fn<GetSectionTopicsQueryVariables>,
