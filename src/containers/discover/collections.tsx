@@ -12,6 +12,7 @@ import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 import Audiobooks from '~src/components/organisms/cardSlider/section/Audiobooks';
 import Conferences from '~src/components/organisms/cardSlider/section/conferences';
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
+import ScriptureSongs from '~src/components/organisms/cardSlider/section/scriptureSongs';
 import Sponsors from '~src/components/organisms/cardSlider/section/sponsors';
 import StorySeasons from '~src/components/organisms/cardSlider/section/storySeasons';
 
@@ -23,7 +24,6 @@ export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 export default function DiscoverCollections({
 	websiteFeaturedCollection,
 	serieses,
-	musicAlbums,
 }: IDiscoverCollectionsProps): JSX.Element {
 	const language = useLanguageRoute();
 
@@ -80,19 +80,8 @@ export default function DiscoverCollections({
 					/>
 				}
 			/>
+			<ScriptureSongs />
 
-			<LineHeading>
-				<FormattedMessage
-					id="discoverCollections_scriptureSongsHeading"
-					defaultMessage="Scripture Songs"
-				/>
-			</LineHeading>
-			<CardGroup className={styles.cardGroup}>
-				{musicAlbums.nodes?.map((n) => (
-					<CardSequence sequence={n} key={n.canonicalPath} />
-				))}
-			</CardGroup>
-			{makeSeeAllButton(root.lang(language).songs.albums.get())}
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_seriesHeading"

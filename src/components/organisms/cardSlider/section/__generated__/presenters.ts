@@ -17,9 +17,9 @@ export const GetSectionPresentersDocument = `
     query getSectionPresenters($language: Language!, $first: Int! = 3, $after: String = null) {
   persons(
     language: $language
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
     first: $first
     after: $after
+    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
   ) {
     nodes {
       ...cardPerson
