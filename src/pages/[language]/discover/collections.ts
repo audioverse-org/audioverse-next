@@ -31,7 +31,7 @@ export async function getStaticProps({
 > {
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
-	const data = await getDiscoverCollectionsPageData({ language });
+	const data = await getDiscoverCollectionsPageData({});
 
 	const client = await prefetchQueries({
 		getSectionConferences: { language },
