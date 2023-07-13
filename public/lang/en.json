@@ -2520,6 +2520,9 @@
   "topicItemCount__teachings": {
     "string": "{count, plural, one {# teaching} other {# teachings}}"
   },
+  "topicListPage__title": {
+    "string": "All Topics"
+  },
   "trendingTeachings__heading": {
     "string": "Trending Teachings"
   },
