@@ -836,6 +836,9 @@
   "header__navItemCollections-stories": {
     "string": "Stories"
   },
+  "header__navItemCollections-topics": {
+    "string": "Topics"
+  },
   "header__navItemContact": {
     "string": "Contact"
   },

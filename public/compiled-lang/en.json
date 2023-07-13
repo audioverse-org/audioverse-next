@@ -1875,6 +1875,12 @@
       "value": "Stories"
     }
   ],
+  "header__navItemCollections-topics": [
+    {
+      "type": 0,
+      "value": "Topics"
+    }
+  ],
   "header__navItemContact": [
     {
       "type": 0,
