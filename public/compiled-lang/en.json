@@ -1341,12 +1341,6 @@
       "value": "Discover Collections"
     }
   ],
-  "discoverCollections_audiobooksHeading": [
-    {
-      "type": 0,
-      "value": "Audiobooks"
-    }
-  ],
   "discoverCollections_conferencesHeading": [
     {
       "type": 0,
@@ -1359,37 +1353,7 @@
       "value": "Featured Collection"
     }
   ],
-  "discoverCollections_presentersHeading": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
-  "discoverCollections_scriptureSongsHeading": [
-    {
-      "type": 0,
-      "value": "Scripture Songs"
-    }
-  ],
-  "discoverCollections_seeAll": [
-    {
-      "type": 0,
-      "value": "See All"
-    }
-  ],
-  "discoverCollections_seriesHeading": [
-    {
-      "type": 0,
-      "value": "Series"
-    }
-  ],
-  "discoverCollections_sponsorsHeading": [
-    {
-      "type": 0,
-      "value": "Sponsors"
-    }
-  ],
-  "discoverCollections_storiesHeading": [
+  "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
       "value": "Stories"
@@ -3801,6 +3765,96 @@
     {
       "type": 0,
       "value": "Sponsor"
+    }
+  ],
+  "organismSection__audiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Audiobooks"
+    }
+  ],
+  "organismSection__audiobooksNext": [
+    {
+      "type": 0,
+      "value": "Next audiobooks"
+    }
+  ],
+  "organismSection__audiobooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous audiobooks"
+    }
+  ],
+  "organismSection_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
+  "organismSection_presentersNext": [
+    {
+      "type": 0,
+      "value": "Next presenters"
+    }
+  ],
+  "organismSection_presentersPrevious": [
+    {
+      "type": 0,
+      "value": "Previous presenters"
+    }
+  ],
+  "organismSection_scriptureSongsHeading": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
+  "organismSection_scriptureSongsNext": [
+    {
+      "type": 0,
+      "value": "Next scripture songs"
+    }
+  ],
+  "organismSection_scriptureSongsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous scripture songs"
+    }
+  ],
+  "organismSection_seriesHeading": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "organismSection_seriesNext": [
+    {
+      "type": 0,
+      "value": "Next series"
+    }
+  ],
+  "organismSection_seriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous series"
+    }
+  ],
+  "organismSection_sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "organismSection_sponsorsNext": [
+    {
+      "type": 0,
+      "value": "Next sponsors"
+    }
+  ],
+  "organismSection_sponsorsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous sponsors"
     }
   ],
   "ourPurpose__title": [

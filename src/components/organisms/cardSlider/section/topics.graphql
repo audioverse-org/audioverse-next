@@ -1,4 +1,8 @@
-query getDiscoverTopics($language: Language!, $first: Int!, $after: String) {
+query getSectionTopics(
+	$language: Language!
+	$first: Int! = 6
+	$after: String = null
+) {
 	topics(
 		language: $language
 		first: $first

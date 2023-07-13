@@ -1,7 +1,7 @@
-query getDiscoverConferences(
+query getSectionConferences(
 	$language: Language!
-	$first: Int! = 6
-	$after: String
+	$first: Int! = 3
+	$after: String = null
 ) {
 	conferences(
 		language: $language

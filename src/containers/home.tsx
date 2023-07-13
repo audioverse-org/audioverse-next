@@ -12,7 +12,6 @@ import CardSequence from '~components/molecules/card/sequence';
 import CardMasonry from '~components/molecules/cardMasonry';
 import DownloadAppButton from '~components/molecules/downloadAppButton';
 import Input from '~components/molecules/form/input';
-import Section from '~components/organisms/section';
 import Slider from '~components/organisms/slider';
 import Testimonies from '~components/organisms/testimonies';
 import { BaseColors } from '~lib/constants';
@@ -26,6 +25,7 @@ import ImagePlayers from '~public/img/players.jpeg';
 
 import { GetHomeStaticPropsQuery } from './__generated__/home';
 import styles from './home.module.scss';
+import Section from './home.section';
 
 export type HomeProps = {
 	data: GetHomeStaticPropsQuery | undefined;

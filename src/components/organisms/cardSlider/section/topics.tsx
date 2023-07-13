@@ -1,53 +1,17 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { Maybe } from '~src/__generated__/graphql';
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
-import { useLanguageId } from '~src/lib/useLanguageId';
 
-import {
-	GetDiscoverTopicsQuery,
-	useInfiniteGetDiscoverTopicsQuery,
-} from './__generated__/topics';
-import Section, { SectionNode } from './index';
-
-function selectTopics(p: GetDiscoverTopicsQuery | undefined) {
-	return p?.topics.nodes;
-}
-
-function NodeTopic({
-	node,
-}: {
-	node: SectionNode<CardTopicFragment>;
-}): JSX.Element {
-	return <CardTopic topic={node} />;
-}
+import { useInfiniteGetSectionTopicsQuery } from './__generated__/topics';
+import Section from './index';
 
 export default function Topics(): JSX.Element {
-	const language = useLanguageId();
 	const intl = useIntl();
-	const result = useInfiniteGetDiscoverTopicsQuery(
-		'after',
-		{
-			language,
-			first: 6,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<GetDiscoverTopicsQuery>) =>
-				last?.topics.pageInfo.hasNextPage
-					? {
-							language,
-							first: 6,
-							after: last.topics.pageInfo.endCursor,
-					  }
-					: undefined,
-		}
-	);
-
 	return (
-		<Section<GetDiscoverTopicsQuery, CardTopicFragment>
+		<Section
+			infiniteQuery={useInfiniteGetSectionTopicsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_topicsHeading',
 				defaultMessage: 'Topics',
@@ -60,9 +24,7 @@ export default function Topics(): JSX.Element {
 				id: 'discover__topicsNext',
 				defaultMessage: 'Next topics',
 			})}
-			infiniteQueryResult={result}
-			selectNodes={selectTopics}
-			Card={NodeTopic}
+			Card={(p: { node: CardTopicFragment }) => <CardTopic topic={p.node} />}
 		/>
 	);
 }
