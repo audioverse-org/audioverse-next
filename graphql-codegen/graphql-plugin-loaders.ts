@@ -49,7 +49,7 @@ const plugin: CodegenPlugin = {
 			.flatMap((q) => q.queries)
 			.map(
 				(q) =>
-					`export const ${q.functionName} = (defaults: PartialData<${q.dataType}>) => buildLoader<${q.dataType}>(${q.documentName}, defaults);`
+					`export const ${q.functionName} = (defaults: PartialData<${q.dataType}> = {}) => buildLoader<${q.dataType}>(${q.documentName}, defaults);`
 			);
 
 		return `import { buildLoader } from "~src/lib/test/buildLoader";

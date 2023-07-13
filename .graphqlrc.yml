@@ -31,12 +31,10 @@ generates:
       - 'graphql-codegen/dist/graphql-plugin-loaders.js'
   src/__generated__/mock-data.ts:
     plugins:
-      - add:
-          content: "import * as Types from './graphql';"
       - 'typescript-mock-data':
           prefix: 'make'
-          typesPrefix: 'Types.'
-          enumsPrefix: 'Types.'
+          terminateCircularRelationships: true
+          typesFile: './graphql.ts'
   src/:
     preset: near-operation-file
     presetConfig:

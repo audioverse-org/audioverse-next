@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { Maybe } from '~src/__generated__/graphql';
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
+import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
 import {
@@ -63,6 +64,7 @@ export default function Topics(): JSX.Element {
 			infiniteQueryResult={result}
 			selectNodes={selectTopics}
 			Card={NodeTopic}
+			seeAllUrl={root.lang(language).topics.get()}
 		/>
 	);
 }

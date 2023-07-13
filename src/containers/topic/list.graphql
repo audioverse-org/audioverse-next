@@ -1,0 +1,11 @@
+query getTopicListData($language: Language!) {
+	topics(
+		language: $language
+		first: 1000
+		orderBy: { field: TITLE, direction: ASC }
+	) {
+		nodes {
+			...cardTopic
+		}
+	}
+}
