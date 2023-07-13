@@ -1,4 +1,4 @@
-@import '../../styles/common';
+@import '../styles/common';
 
 .base {
 	display: flex;
@@ -14,6 +14,7 @@
 			align-items: flex-start;
 			justify-content: center;
 			margin: 16px;
+
 			@media (min-width: $breakpoint-xl) {
 				margin: 48px;
 			}
@@ -40,6 +41,7 @@
 
 	@media (min-width: $breakpoint-md) {
 		grid-area: media;
+
 		.tall & {
 			height: 100%;
 		}
@@ -48,6 +50,7 @@
 
 .base:not(.short) .media {
 	aspect-ratio: 1/1;
+
 	@supports not (aspect-ratio: 1 / 1) {
 		> * {
 			height: 0 !important;
@@ -66,12 +69,14 @@
 		grid-area: content;
 		min-width: 0;
 	}
+
 	@media (min-width: $breakpoint-lg) and (max-width: #{$breakpoint-xl - 1px}) {
 		h1 {
 			margin-bottom: 8px;
 			font-size: 33px;
 		}
 	}
+
 	@media (min-width: $breakpoint-lg) {
 		p {
 			font-size: 18px;
@@ -108,12 +113,14 @@
 			'. . . .'
 			'. media content .'
 			'. . . .';
+
 		&.bleed {
 			grid-template-areas:
 				'media media . .'
 				'media media content .'
 				'media media . .';
 		}
+
 		&.center {
 			grid-template-areas:
 				'. . .'
@@ -121,6 +128,7 @@
 				'. media .'
 				'. . .';
 		}
+
 		&.center.bleed {
 			grid-template-areas:
 				'. . .'

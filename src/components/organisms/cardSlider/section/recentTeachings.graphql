@@ -1,7 +1,7 @@
-query getDiscoverRecentTeachings(
+query getSectionRecentTeachings(
 	$language: Language!
-	$first: Int!
-	$after: String
+	$first: Int! = 6
+	$after: String = null
 ) {
 	recentTeachings: sermons(
 		language: $language

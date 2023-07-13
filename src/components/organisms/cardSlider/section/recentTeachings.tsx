@@ -1,56 +1,21 @@
-import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import {
-	GetDiscoverRecentTeachingsQuery,
-	useInfiniteGetDiscoverRecentTeachingsQuery,
-} from './__generated__/recentTeachings';
-import Section, { SectionNode } from './index';
-
-function selectRecentTeachings(p: GetDiscoverRecentTeachingsQuery | undefined) {
-	return p?.recentTeachings.nodes;
-}
-
-function NodeRecording({
-	node,
-}: {
-	node: SectionNode<CardRecordingFragment>;
-}): JSX.Element {
-	return <CardRecording recording={node} />;
-}
+import { useInfiniteGetSectionRecentTeachingsQuery } from './__generated__/recentTeachings';
+import Section from './index';
 
 export default function RecentTeachings(): JSX.Element {
-	const language = useLanguageId();
 	const route = useLanguageRoute();
 	const intl = useIntl();
-	const result = useInfiniteGetDiscoverRecentTeachingsQuery(
-		'after',
-		{
-			language,
-			first: 6,
-			after: null,
-		},
-		{
-			getNextPageParam: (last: Maybe<GetDiscoverRecentTeachingsQuery>) =>
-				last?.recentTeachings.pageInfo.hasNextPage
-					? {
-							language,
-							first: 6,
-							after: last.recentTeachings.pageInfo.endCursor,
-					  }
-					: undefined,
-		}
-	);
 
 	return (
-		<Section<GetDiscoverRecentTeachingsQuery, CardRecordingFragment>
+		<Section
+			infiniteQuery={useInfiniteGetSectionRecentTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_recentTeachingsHeading',
 				defaultMessage: 'Recent Teachings',
@@ -64,9 +29,9 @@ export default function RecentTeachings(): JSX.Element {
 				defaultMessage: 'Next recent teachings',
 			})}
 			seeAllUrl={root.lang(route).teachings.all.get()}
-			infiniteQueryResult={result}
-			selectNodes={selectRecentTeachings}
-			Card={NodeRecording}
+			Card={(p: { node: CardRecordingFragment }) => (
+				<CardRecording recording={p.node} />
+			)}
 			rows={2}
 		/>
 	);

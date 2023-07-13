@@ -3,7 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "concurrently \"npx update-browserslist-db@latest\" \"npm:graphql:codegen:watch\" \"next dev\"",
+        "predev": "concurrently \"npx update-browserslist-db@latest\" \"npm:graphql:codegen\"",
+        "dev": "concurrently \"npm:graphql:codegen:watch\" \"next dev\"",
         "build": "NODE_ICU_DATA=node_modules/full-icu next build",
         "postbuild": "next-sitemap",
         "build:dev": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu next build --debug",
@@ -139,7 +140,7 @@
         "tsconfig-paths-jest-mapper": "^1.4.0",
         "tsconfig-paths-webpack-plugin": "^3.5.2",
         "type-fest": "^3.12.0",
-        "typescript": "^4.4.2"
+        "typescript": "^5.1.6"
     },
     "nextBundleAnalysis": {
         "budget": 230400,

@@ -1,10 +1,14 @@
-import { UseInfiniteQueryResult } from '@tanstack/react-query';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React, { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import CardSlider from '~components/organisms/cardSlider';
+import { useLanguageId } from '~src/lib/useLanguageId';
+import {
+	GraphqlInfiniteQuery,
+	InferGraphqlInfiniteQueryType,
+} from '~src/types/graphql-codegen';
 
 import styles from './index.module.scss';
 
@@ -14,30 +18,74 @@ export type SectionNode<T> = T & {
 	canonicalPath: string;
 };
 
+type SectionRoot<T> = {
+	nodes: SectionNode<T>[];
+	pageInfo: {
+		hasNextPage: boolean;
+		endCursor: string | null;
+	};
+};
+
+type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
+type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
+
 type SectionProps<T, N> = {
-	heading: string;
+	infiniteQuery: T;
+	heading: string | JSX.Element;
 	previous: string;
 	next: string;
 	rows?: number;
 	seeAllUrl?: string;
-	infiniteQueryResult: UseInfiniteQueryResult<T>;
-	selectNodes: (page?: T) => Maybe<SectionNode<N>[]>;
-	Card: (props: { node: SectionNode<N> }) => JSX.Element;
+	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
+	Card: Card<N>;
 };
 
-export default function Section<T, N>({
+function isSectionRoot<T>(v: unknown): v is SectionRoot<T> {
+	return typeof v === 'object' && v !== null && 'nodes' in v;
+}
+
+function selectSectionRoot<T, N>(page: Maybe<T>): Maybe<SectionRoot<N>> {
+	if (!page) return;
+	return Object.values(page).find(isSectionRoot<N>);
+}
+
+function defaultSelectNodes<T, N>(page?: T): Maybe<SectionNode<N>[]> {
+	return selectSectionRoot<T, N>(page)?.nodes || [];
+}
+
+export default function Section<T extends GraphqlInfiniteQuery, N>({
+	infiniteQuery,
 	heading,
-	infiniteQueryResult,
-	selectNodes,
+	selectNodes = defaultSelectNodes,
 	Card,
 	seeAllUrl,
 	...props
 }: SectionProps<T, N>): JSX.Element {
-	const { data, fetchNextPage } = infiniteQueryResult;
-	const pages = useMemo(() => data?.pages || [], [data?.pages]);
-	const nodes: SectionNode<N>[] = useMemo(() => {
-		return pages.flatMap(selectNodes).filter((n): n is SectionNode<N> => !!n);
-	}, [pages, selectNodes]);
+	const language = useLanguageId();
+
+	const { data, fetchNextPage } = infiniteQuery(
+		'after',
+		{ language },
+		{
+			getNextPageParam: (last: Maybe<T>) => {
+				const r = selectSectionRoot<T, N>(last);
+				if (!r) return;
+				return {
+					language,
+					after: r.pageInfo.endCursor,
+				};
+			},
+		}
+	);
+
+	const cards = useMemo(
+		() =>
+			data?.pages
+				.flatMap(selectNodes)
+				.filter((n): n is SectionNode<N> => !!n)
+				.map((n) => <Card node={n} key={n.canonicalPath} />) ?? [],
+		[Card, data?.pages, selectNodes]
+	);
 
 	const preload = useCallback(
 		({ index, total }: { index: number; total: number }) => {
@@ -46,11 +94,6 @@ export default function Section<T, N>({
 			}
 		},
 		[fetchNextPage]
-	);
-
-	const cards = useMemo(
-		() => nodes.map((n) => <Card node={n} key={n.canonicalPath} />),
-		[Card, nodes]
 	);
 
 	return (

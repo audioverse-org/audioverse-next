@@ -1,16 +1,16 @@
-query getSectionBlogPosts(
+query getSectionPresenters(
 	$language: Language!
 	$first: Int! = 3
 	$after: String = null
 ) {
-	blogPosts(
+	persons(
 		language: $language
 		first: $first
 		after: $after
-		orderBy: { field: PUBLISHED_AT, direction: DESC }
+		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
 	) {
 		nodes {
-			...cardPost
+			...cardPerson
 		}
 		pageInfo {
 			hasNextPage

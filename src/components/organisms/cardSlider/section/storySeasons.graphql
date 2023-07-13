@@ -1,7 +1,7 @@
-query getDiscoverStorySeasons(
+query getSectionStorySeasons(
 	$language: Language!
-	$first: Int!
-	$after: String
+	$first: Int! = 3
+	$after: String = null
 ) {
 	storySeasons(
 		language: $language

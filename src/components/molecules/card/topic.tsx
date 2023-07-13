@@ -7,7 +7,6 @@ import Heading2 from '~src/components/atoms/heading2';
 import Heading6 from '~src/components/atoms/heading6';
 import TopicItemCount from '~src/components/atoms/topicItemCount';
 import { BaseColors } from '~src/lib/constants';
-import { useFormattedDuration } from '~src/lib/time';
 
 import TypeLockup from '../typeLockup';
 import { CardTopicFragment } from './__generated__/topic';
@@ -19,8 +18,6 @@ type CardTopicProps = {
 };
 
 export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
-	const duration = useFormattedDuration(topic.duration);
-
 	return (
 		<CardWithTheme theme="topic" className={styles.theme}>
 			<Link className={styles.content} href={topic.canonicalPath}>
@@ -44,7 +41,6 @@ export default function CardTopic({ topic }: CardTopicProps): JSX.Element {
 					<Heading6 sans loose unpadded uppercase className={styles.count}>
 						<TopicItemCount topic={topic} />
 					</Heading6>
-					<p className={styles.duration}>{duration}</p>
 				</>
 			</Link>
 		</CardWithTheme>

@@ -630,31 +630,13 @@
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
-  "discoverCollections_audiobooksHeading": {
-    "string": "Audiobooks"
-  },
   "discoverCollections_conferencesHeading": {
     "string": "Conferences"
   },
   "discoverCollections_featuredCollectionHeading": {
     "string": "Featured Collection"
   },
-  "discoverCollections_presentersHeading": {
-    "string": "Presenters"
-  },
-  "discoverCollections_scriptureSongsHeading": {
-    "string": "Scripture Songs"
-  },
-  "discoverCollections_seeAll": {
-    "string": "See All"
-  },
-  "discoverCollections_seriesHeading": {
-    "string": "Series"
-  },
-  "discoverCollections_sponsorsHeading": {
-    "string": "Sponsors"
-  },
-  "discoverCollections_storiesHeading": {
+  "discoverCollections_storySeasonsHeading": {
     "string": "Stories"
   },
   "discover__conferencesNext": {
@@ -1799,6 +1781,51 @@
   "organism-recording__sponsorInfoTitle": {
     "comment": "recording sponsor info title",
     "string": "Sponsor"
+  },
+  "organismSection__audiobooksHeading": {
+    "string": "Audiobooks"
+  },
+  "organismSection__audiobooksNext": {
+    "string": "Next audiobooks"
+  },
+  "organismSection__audiobooksPrevious": {
+    "string": "Previous audiobooks"
+  },
+  "organismSection_presentersHeading": {
+    "string": "Presenters"
+  },
+  "organismSection_presentersNext": {
+    "string": "Next presenters"
+  },
+  "organismSection_presentersPrevious": {
+    "string": "Previous presenters"
+  },
+  "organismSection_scriptureSongsHeading": {
+    "string": "Scripture Songs"
+  },
+  "organismSection_scriptureSongsNext": {
+    "string": "Next scripture songs"
+  },
+  "organismSection_scriptureSongsPrevious": {
+    "string": "Previous scripture songs"
+  },
+  "organismSection_seriesHeading": {
+    "string": "Series"
+  },
+  "organismSection_seriesNext": {
+    "string": "Next series"
+  },
+  "organismSection_seriesPrevious": {
+    "string": "Previous series"
+  },
+  "organismSection_sponsorsHeading": {
+    "string": "Sponsors"
+  },
+  "organismSection_sponsorsNext": {
+    "string": "Next sponsors"
+  },
+  "organismSection_sponsorsPrevious": {
+    "string": "Previous sponsors"
   },
   "ourPurpose__title": {
     "string": "Our Purpose"
