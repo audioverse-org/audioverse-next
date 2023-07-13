@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import { __loadQuery } from 'next/router';
 
 import {
 	buildGetTopicListDataLoader,
@@ -15,6 +16,9 @@ const topic = makeTopic();
 
 const loadPageData = buildGetTopicListDataLoader({
 	topics: {
+		aggregate: {
+			count: 1,
+		},
 		nodes: [topic],
 	},
 });
@@ -33,12 +37,16 @@ describe('topic list page', () => {
 	beforeEach(() => {
 		loadPageData();
 		loadPathsData();
+		__loadQuery({
+			i: '1',
+			language: 'en',
+		});
 	});
 
 	it('renders', async () => {
 		await renderPage();
 
-		expect(screen.getByText(topic.title)).toBeInTheDocument();
+		expect(await screen.findByText(topic.title)).toBeInTheDocument();
 	});
 
 	it('returns paths', async () => {
