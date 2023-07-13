@@ -18,8 +18,7 @@ const getQueries = (doc: Types.DocumentFile) => {
 	const queries = operations.filter((op) => op.operation === 'query');
 	const queryNames = queries
 		.map((q) => q.name?.value)
-		.filter((n): n is string => n !== undefined && !!n.length)
-		.filter((n) => !n.includes('Paths'));
+		.filter((n): n is string => n !== undefined && !!n.length);
 
 	return {
 		source: `~${dir}/__generated__/${filename}`,

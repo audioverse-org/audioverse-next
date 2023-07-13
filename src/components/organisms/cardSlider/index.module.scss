@@ -3,7 +3,7 @@
 .base {
 	--arrow-size: 24px;
 	--arrow-margin: 8px;
-	--slide-padding: 24px;
+	--slide-padding: #{$grid-gap};
 	--arrow-padding: 16px;
 	--slider-full-width: calc(100% + var(--slide-padding) * 2);
 	--slide-shift: calc(-1 * var(--slide-padding));
@@ -12,21 +12,13 @@
 	@media (min-width: $breakpoint-lg) {
 		--arrow-padding: 6px;
 		--arrow-margin-visual: 16px;
-		--max-outset: min(
-			var(--content-padding-left),
-			var(--content-padding-right)
-		);
+		--max-outset: min(var(--content-padding-left),
+				var(--content-padding-right));
 		--arrow-margin: calc(var(--arrow-margin-visual) - var(--slide-padding));
-		--arrow-full-width: calc(
-			var(--arrow-size) + var(--arrow-margin) + var(--arrow-padding) * 2
-		);
-		--arrow-outset: min(
-			var(--max-outset) - var(--arrow-full-width),
-			var(--arrow-full-width)
-		);
-		--slider-full-width: calc(
-			100% + var(--arrow-outset) * 2 + var(--slide-padding) * 2
-		);
+		--arrow-full-width: calc(var(--arrow-size) + var(--arrow-margin) + var(--arrow-padding) * 2);
+		--arrow-outset: min(var(--max-outset) - var(--arrow-full-width),
+				var(--arrow-full-width));
+		--slider-full-width: calc(100% + var(--arrow-outset) * 2 + var(--slide-padding) * 2);
 		--slide-shift: calc(-1 * (var(--arrow-outset) + var(--slide-padding)));
 	}
 
@@ -96,15 +88,15 @@
 }
 
 .base swiper-slide {
-	padding: 12px $grid-gap 32px $grid-gap;
+	padding: $grid-gap $grid-gap 32px $grid-gap;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(var(--min-card-width), 1fr));
-	grid-gap: 12px;
+	grid-gap: $grid-gap;
 	height: 100%;
 	width: 100%;
 }
 
-.base swiper-slide > * {
+.base swiper-slide>* {
 	width: 100%;
 	max-width: 500px;
 	margin-left: auto;

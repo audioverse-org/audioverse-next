@@ -252,6 +252,11 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/topics/page/1',
+					destination: '/:lang/topics',
+					permanent: true,
+				},
+				{
 					source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/1',
 					destination: '/:lang/bibles/472',
 					permanent: false,
@@ -507,6 +512,10 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/conferences/:id/presenters',
 					destination: '/:lang/conferences/:id/presenters/page/1',
+				},
+				{
+					source: '/:lang/topics',
+					destination: '/:lang/topics/page/1',
 				},
 				{
 					source: '/:lang/conferences/:id/sequences',

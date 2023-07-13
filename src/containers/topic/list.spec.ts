@@ -1,12 +1,15 @@
 import { screen } from '@testing-library/react';
 
+import {
+	buildGetTopicListDataLoader,
+	buildGetTopicListPathsDataLoader,
+} from '~src/__generated__/loaders';
+import { makeTopic } from '~src/__generated__/mock-data';
+import { buildStaticRenderer } from '~src/lib/test/buildStaticRenderer';
 import Topics, {
 	getStaticPaths,
 	getStaticProps,
-} from '~pages/[language]/topics';
-import { buildGetTopicListDataLoader } from '~src/__generated__/loaders';
-import { makeTopic } from '~src/__generated__/mock-data';
-import { buildStaticRenderer } from '~src/lib/test/buildStaticRenderer';
+} from '~src/pages/[language]/topics/page/[i]';
 
 const topic = makeTopic();
 
@@ -16,11 +19,20 @@ const loadPageData = buildGetTopicListDataLoader({
 	},
 });
 
+const loadPathsData = buildGetTopicListPathsDataLoader({
+	topics: {
+		aggregate: {
+			count: 1,
+		},
+	},
+});
+
 const renderPage = buildStaticRenderer(Topics, getStaticProps);
 
 describe('topic list page', () => {
 	beforeEach(() => {
 		loadPageData();
+		loadPathsData();
 	});
 
 	it('renders', async () => {
@@ -32,6 +44,6 @@ describe('topic list page', () => {
 	it('returns paths', async () => {
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain(`/en/topics`);
+		expect(paths).toContain(`/en/topics/page/1`);
 	});
 });
