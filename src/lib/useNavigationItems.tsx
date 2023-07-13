@@ -116,6 +116,10 @@ const iconMap = {
 		opts
 	),
 	fa_store: dynamic(() => import('~public/img/icons/fa-store.svg'), opts),
+	fa_layer_group: dynamic(
+		() => import('~public/img/icons/fa-layer-group.svg'),
+		opts
+	),
 };
 
 export function useNavigationItems(): INavigationItem[] {
@@ -178,6 +182,15 @@ export function useNavigationItems(): INavigationItem[] {
 					label: intl.formatMessage({
 						id: `header__navItemCollections-presenters`,
 						defaultMessage: 'Presenters',
+					}),
+				},
+				{
+					key: 'topics',
+					href: root.lang(languageRoute).topics.get(),
+					Icon: iconMap.fa_layer_group,
+					label: intl.formatMessage({
+						id: `header__navItemCollections-topics`,
+						defaultMessage: 'Topics',
 					}),
 				},
 				{
