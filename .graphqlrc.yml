@@ -26,6 +26,15 @@ generates:
   src/__generated__/prefetch.ts:
     plugins:
       - 'graphql-codegen/dist/graphql-plugin-prefetch.js'
+  src/__generated__/loaders.ts:
+    plugins:
+      - 'graphql-codegen/dist/graphql-plugin-loaders.js'
+  src/__generated__/mock-data.ts:
+    plugins:
+      - 'typescript-mock-data':
+          prefix: 'make'
+          terminateCircularRelationships: true
+          typesFile: './graphql.ts'
   src/:
     preset: near-operation-file
     presetConfig:

@@ -4,6 +4,7 @@
 /dist
 /graphql-codegen/dist
 **/__generated__
+**/__generated__/**
 
 # next-pwa
 /public/sw.js

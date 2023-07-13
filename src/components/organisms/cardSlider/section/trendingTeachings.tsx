@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
@@ -29,7 +30,9 @@ export default function TrendingTeachings(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(route).teachings.trending.get()}
 			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
-			Card={(p) => <CardRecording recording={p.node} />}
+			Card={(p: { node: CardRecordingFragment }) => (
+				<CardRecording recording={p.node} />
+			)}
 			rows={2}
 		/>
 	);

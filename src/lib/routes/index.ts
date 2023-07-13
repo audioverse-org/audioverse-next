@@ -38,7 +38,7 @@ const namespaces = (r: string) => ({
 	stories: node(`${r}/stories`, stories),
 	teachings: node(`${r}/teachings`, teachings),
 	testimonies: paginatedNode(`${r}/testimonies`),
-	topics: node(`${r}/topics`, topics),
+	topics: paginatedNode(`${r}/topics`, topics),
 });
 
 const root = {

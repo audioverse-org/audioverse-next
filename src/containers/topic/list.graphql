@@ -1,0 +1,23 @@
+query getTopicListData($language: Language!, $first: Int!, $offset: Int!) {
+	topics(
+		language: $language
+		first: $first
+		offset: $offset
+		orderBy: { field: TITLE, direction: ASC }
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardTopic
+		}
+	}
+}
+
+query getTopicListPathsData($language: Language!) {
+	topics(language: $language) {
+		aggregate {
+			count
+		}
+	}
+}

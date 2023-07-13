@@ -1839,6 +1839,12 @@
       "value": "Stories"
     }
   ],
+  "header__navItemCollections-topics": [
+    {
+      "type": 0,
+      "value": "Topics"
+    }
+  ],
   "header__navItemContact": [
     {
       "type": 0,
@@ -5501,6 +5507,12 @@
       "pluralType": "cardinal",
       "type": 6,
       "value": "count"
+    }
+  ],
+  "topicListPage__title": [
+    {
+      "type": 0,
+      "value": "All Topics"
     }
   ],
   "trendingTeachings__heading": [

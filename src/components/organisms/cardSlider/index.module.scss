@@ -3,7 +3,7 @@
 .base {
 	--arrow-size: 24px;
 	--arrow-margin: 8px;
-	--slide-padding: 24px;
+	--slide-padding: #{$grid-gap};
 	--arrow-padding: 16px;
 	--slider-full-width: calc(100% + var(--slide-padding) * 2);
 	--slide-shift: calc(-1 * var(--slide-padding));
@@ -96,10 +96,10 @@
 }
 
 .base swiper-slide {
-	padding: 12px $grid-gap 32px $grid-gap;
+	padding: $grid-gap $grid-gap 32px $grid-gap;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(var(--min-card-width), 1fr));
-	grid-gap: 12px;
+	grid-gap: $grid-gap;
 	height: 100%;
 	width: 100%;
 }

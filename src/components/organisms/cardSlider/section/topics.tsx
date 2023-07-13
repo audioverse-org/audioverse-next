@@ -3,12 +3,15 @@ import { useIntl } from 'react-intl';
 
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
+import root from '~src/lib/routes';
+import { useLanguageId } from '~src/lib/useLanguageId';
 
 import { useInfiniteGetSectionTopicsQuery } from './__generated__/topics';
 import Section from './index';
 
 export default function Topics(): JSX.Element {
 	const intl = useIntl();
+	const language = useLanguageId();
 	return (
 		<Section
 			infiniteQuery={useInfiniteGetSectionTopicsQuery}
@@ -24,6 +27,7 @@ export default function Topics(): JSX.Element {
 				id: 'discover__topicsNext',
 				defaultMessage: 'Next topics',
 			})}
+			seeAllUrl={root.lang(language).topics.get()}
 			Card={(p: { node: CardTopicFragment }) => <CardTopic topic={p.node} />}
 		/>
 	);

@@ -16,7 +16,7 @@ type Options = {
 	variables?: Record<string, unknown>;
 };
 
-type PartialData<T> = PartialDeepRecursive<T> | Record<string, never>;
+export type PartialData<T> = PartialDeepRecursive<T> | Record<string, never>;
 
 type Loader<T> = (
 	data?: PartialData<T>,
@@ -38,7 +38,7 @@ function getController<T>(defaults: PartialData<T>) {
 
 export function buildLoader<T>(
 	document: string,
-	defaults: PartialData<T>
+	defaults: PartialData<T> = {}
 ): Loader<T> {
 	const fn = (d: PartialData<T> = {}, o: Options = {}) => {
 		if (o.useDefaults !== false) defaultsDeep(d, defaults);
