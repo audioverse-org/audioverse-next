@@ -5,12 +5,14 @@ import { CardPersonFragment } from '~components/molecules/card/__generated__/per
 import { CardRecordingFragment } from '~components/molecules/card/__generated__/recording';
 import {
 	GetSearchAudiobooksDocument,
-	GetSearchPersonsDocument,
 	GetSearchRecordingsDocument,
 } from '~components/organisms/__generated__/searchResults';
 import { fetchApi } from '~lib/api/fetchApi';
+import {
+	buildGetSearchPersonsLoader,
+	buildGetSearchRecordingsLoader,
+} from '~src/__generated__/loaders';
 
-import { buildLoader } from '../../lib/test/buildLoader';
 import { buildRenderer } from '../../lib/test/buildRenderer';
 import AndNavigation from './andNavigation';
 
@@ -47,7 +49,7 @@ const person: CardPersonFragment = {
 	image: null,
 };
 
-const loadTeachings = buildLoader(GetSearchRecordingsDocument, {
+const loadTeachings = buildGetSearchRecordingsLoader({
 	sermons: {
 		aggregate: {
 			count: 1,
@@ -59,7 +61,7 @@ const loadTeachings = buildLoader(GetSearchRecordingsDocument, {
 		},
 	},
 });
-const loadPresenters = buildLoader(GetSearchPersonsDocument, {
+const loadPresenters = buildGetSearchPersonsLoader({
 	persons: {
 		aggregate: {
 			count: 1,
