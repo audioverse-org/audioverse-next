@@ -13,7 +13,6 @@ import isServerSide from '~lib/isServerSide';
 import { useQueryString } from '~lib/useQueryString';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 
-import { CardPersonFragment } from '../molecules/card/__generated__/person';
 import EmptyState from './emptyState';
 import { EntityFilterId } from './searchResults.filters';
 import styles from './searchResults.module.scss';
