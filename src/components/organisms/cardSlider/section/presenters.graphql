@@ -1,6 +1,6 @@
 query getSectionPresenters(
 	$language: Language!
-	$first: Int! = 3
+	$first: Int! = 12
 	$after: String = null
 ) {
 	persons(

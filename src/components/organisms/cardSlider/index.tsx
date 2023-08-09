@@ -13,6 +13,7 @@ type SliderProps = {
 	previous: string;
 	next: string;
 	rows?: number;
+	minCardWidth?: number;
 };
 
 export const MIN_CARD_WIDTH = 300;
@@ -22,22 +23,27 @@ const LazySwiper = dynamic(() => import('~lib/swiper'), {
 	ssr: false,
 });
 
-const calculateItemsPerPage = (width: number, rows: number) => {
-	const cardsPerRow = Math.max(
-		Math.floor((width - GRID_GAP) / (MIN_CARD_WIDTH + GRID_GAP)),
-		1
-	);
-	return cardsPerRow * (cardsPerRow > 1 ? rows : 1);
+const calculateItemsPerPage = (
+	width: number,
+	rows: number,
+	minItemWidth: number
+) => {
+	const usableSpace = width - GRID_GAP;
+	const minSpace = minItemWidth + GRID_GAP;
+	const perRow = Math.max(Math.floor(usableSpace / minSpace), 1);
+	const rowCount = perRow > 1 ? rows : 1;
+	return perRow * rowCount;
 };
 
 const makeSlides = (
 	items: JSX.Element[],
 	rows: number,
+	minItemWidth: number,
 	width?: number
 ): JSX.Element[] => {
 	if (!width) return [];
 
-	const itemsPerPage = calculateItemsPerPage(width, rows);
+	const itemsPerPage = calculateItemsPerPage(width, rows, minItemWidth);
 
 	const itemSets = items.reduce<JSX.Element[][]>(
 		(acc, item, i) => {
@@ -61,6 +67,7 @@ export default function Slider({
 	previous,
 	next,
 	rows = 1,
+	minCardWidth = MIN_CARD_WIDTH,
 }: SliderProps): JSX.Element {
 	const [swiper, setSwiper] = useState<Swiper>();
 	const [isBeginning, setIsBeginning] = useState(true);
@@ -68,8 +75,8 @@ export default function Slider({
 	const [width, setWidth] = useState<number>();
 
 	const slides = useMemo(
-		() => makeSlides(items, rows, width),
-		[items, rows, width]
+		() => makeSlides(items, rows, minCardWidth, width),
+		[items, rows, minCardWidth, width]
 	);
 
 	const handlers = useMemo(() => {
@@ -115,7 +122,7 @@ export default function Slider({
 		<div
 			className={styles.base}
 			style={{
-				'--min-card-width': `${MIN_CARD_WIDTH}px`,
+				'--min-card-width': `${minCardWidth}px`,
 			}}
 		>
 			<button
