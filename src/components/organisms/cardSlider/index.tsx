@@ -5,6 +5,7 @@ import type Swiper from 'swiper';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
 
+import { calculateItemsPerPage, MIN_CARD_WIDTH } from './index.helpers';
 import styles from './index.module.scss';
 
 type SliderProps = {
@@ -16,24 +17,9 @@ type SliderProps = {
 	minCardWidth?: number;
 };
 
-export const MIN_CARD_WIDTH = 300;
-export const GRID_GAP = 24;
-
 const LazySwiper = dynamic(() => import('~lib/swiper'), {
 	ssr: false,
 });
-
-const calculateItemsPerPage = (
-	width: number,
-	rows: number,
-	minItemWidth: number
-) => {
-	const usableSpace = width - GRID_GAP;
-	const minSpace = minItemWidth + GRID_GAP;
-	const perRow = Math.max(Math.floor(usableSpace / minSpace), 1);
-	const rowCount = perRow > 1 ? rows : 1;
-	return perRow * rowCount;
-};
 
 const makeSlides = (
 	items: JSX.Element[],
