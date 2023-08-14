@@ -5,20 +5,25 @@ import { CardPersonFragment } from '~components/molecules/card/__generated__/per
 import { CardRecordingFragment } from '~components/molecules/card/__generated__/recording';
 import {
 	GetSearchAudiobooksDocument,
-	GetSearchPersonsDocument,
 	GetSearchRecordingsDocument,
 } from '~components/organisms/__generated__/searchResults';
 import { fetchApi } from '~lib/api/fetchApi';
+import { SequenceContentType } from '~src/__generated__/graphql';
+import {
+	buildGetSearchPersonsLoader,
+	buildGetSearchRecordingsLoader,
+	buildGetSearchSeriesLoader,
+} from '~src/__generated__/loaders';
 
-import { buildLoader } from '../../lib/test/buildLoader';
 import { buildRenderer } from '../../lib/test/buildRenderer';
+import { CardSequenceFragment } from '../molecules/card/__generated__/sequence';
 import AndNavigation from './andNavigation';
 
 const renderTemplate = buildRenderer(AndNavigation);
 
 const teaching: CardRecordingFragment = {
 	__typename: 'Recording',
-	title: 'test',
+	title: 'the_teaching_title',
 	canonicalPath: '',
 	sequenceIndex: null,
 	id: '',
@@ -36,7 +41,7 @@ const teaching: CardRecordingFragment = {
 
 const person: CardPersonFragment = {
 	__typename: 'Person',
-	name: 'test',
+	name: 'the_person_title',
 	recordings: {
 		aggregate: {
 			count: 0,
@@ -47,7 +52,30 @@ const person: CardPersonFragment = {
 	image: null,
 };
 
-const loadTeachings = buildLoader(GetSearchRecordingsDocument, {
+const series: CardSequenceFragment = {
+	__typename: 'Sequence',
+	title: 'the_series_title',
+	canonicalPath: '',
+	id: '',
+	contentType: SequenceContentType.Series,
+	duration: 0,
+	summary: '',
+	speakers: {
+		nodes: [],
+	},
+	sequenceWriters: {
+		nodes: [],
+	},
+	allRecordings: {
+		aggregate: {
+			count: 0,
+		},
+		nodes: [],
+	},
+	collection: null,
+};
+
+const loadTeachings = buildGetSearchRecordingsLoader({
 	sermons: {
 		aggregate: {
 			count: 1,
@@ -59,7 +87,8 @@ const loadTeachings = buildLoader(GetSearchRecordingsDocument, {
 		},
 	},
 });
-const loadPresenters = buildLoader(GetSearchPersonsDocument, {
+
+const loadPresenters = buildGetSearchPersonsLoader({
 	persons: {
 		aggregate: {
 			count: 1,
@@ -72,10 +101,24 @@ const loadPresenters = buildLoader(GetSearchPersonsDocument, {
 	},
 });
 
+const loadSeries = buildGetSearchSeriesLoader({
+	serieses: {
+		aggregate: {
+			count: 1,
+		},
+		nodes: [series],
+		pageInfo: {
+			hasNextPage: false,
+			endCursor: null,
+		},
+	},
+});
+
 describe('AndNavigation', () => {
 	beforeEach(() => {
 		loadTeachings();
 		loadPresenters();
+		loadSeries();
 	});
 
 	it('hoists teachings on exact match', async () => {
@@ -84,7 +127,7 @@ describe('AndNavigation', () => {
 		const searchInputs = screen.getAllByPlaceholderText('Search');
 		const search = searchInputs[0];
 
-		await userEvent.type(search, 'test');
+		await userEvent.type(search, 'the_teaching_title');
 
 		const teachingsHeading = await screen.findByRole('heading', {
 			name: 'Teachings',
@@ -102,7 +145,7 @@ describe('AndNavigation', () => {
 		const searchInputs = screen.getAllByPlaceholderText('Search');
 		const search = searchInputs[0];
 
-		await userEvent.type(search, 'Test');
+		await userEvent.type(search, 'The_Teaching_Title');
 
 		const teachingsHeading = await screen.findByRole('heading', {
 			name: 'Teachings',
@@ -120,7 +163,7 @@ describe('AndNavigation', () => {
 		const searchInputs = screen.getAllByPlaceholderText('Search');
 		const search = searchInputs[0];
 
-		await userEvent.type(search, 'test!');
+		await userEvent.type(search, 'the_teaching_title!');
 
 		const teachingsHeading = await screen.findByRole('heading', {
 			name: 'Teachings',
@@ -211,5 +254,65 @@ describe('AndNavigation', () => {
 				}),
 			})
 		);
+	});
+
+	it('hoists series on exact match', async () => {
+		await renderTemplate();
+
+		const searchInputs = screen.getAllByPlaceholderText('Search');
+		const search = searchInputs[0];
+
+		await userEvent.type(search, 'the_series_title');
+
+		const seriesHeading = (
+			await screen.findAllByRole('heading', {
+				name: 'Series',
+			})
+		)[0];
+		const presentersHeading = await screen.findByRole('heading', {
+			name: 'Presenters',
+		});
+
+		expect(seriesHeading).toAppearBefore(presentersHeading);
+	});
+
+	it('only checks first three entities in section when hoisting', async () => {
+		loadTeachings({
+			sermons: {
+				aggregate: {
+					count: 4,
+				},
+				nodes: [
+					{ ...teaching, id: '1' },
+					{ ...teaching, id: '2' },
+					{ ...teaching, id: '3' },
+					{
+						...teaching,
+						id: '4',
+						title: 'the_teaching_title_2',
+					},
+				],
+				pageInfo: {
+					hasNextPage: false,
+					endCursor: null,
+				},
+			},
+		});
+
+		await renderTemplate();
+
+		const searchInputs = screen.getAllByPlaceholderText('Search');
+		const search = searchInputs[0];
+
+		await userEvent.type(search, 'the_teaching_title_2');
+
+		const teachingsHeading = await screen.findByRole('heading', {
+			name: 'Teachings',
+		});
+		const presentersHeading = await screen.findByRole('heading', {
+			name: 'Presenters',
+		});
+
+		expect(presentersHeading).toAppearBefore(teachingsHeading);
 	});
 });

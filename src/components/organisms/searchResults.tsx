@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import Button from '~components/molecules/button';
-import { CardRecordingFragment } from '~components/molecules/card/__generated__/recording';
 import CardInferred, {
 	InferrableEntity,
 } from '~components/molecules/card/inferred';
@@ -110,14 +109,16 @@ function Section({
 const normalize = (s: string) =>
 	s.replace(/[\p{P}\p{S}\s]/gu, '').toLowerCase();
 
-const isRecording = (e: InferrableEntity): e is CardRecordingFragment =>
-	e.__typename === 'Recording';
+const getTitle = (e: InferrableEntity) =>
+	e.__typename === 'Person' ? e.name : e.title;
 
-function hasExactMatch(term: string, sections: AugmentedFilter[]): boolean {
-	return !!sections
-		.find((s) => s.id === 'teachings')
-		?.nodes.slice(0, 3)
-		.find((e) => isRecording(e) && normalize(e.title) === normalize(term));
+function sortSections(term: string, sections: AugmentedFilter[]) {
+	const t = normalize(term);
+	const a = sections.filter((s) =>
+		s.nodes.slice(0, 3).map(getTitle).map(normalize).includes(t)
+	);
+	const b = sections.filter((s) => !a.find((hs) => hs.id === s.id));
+	return [...a, ...b];
 }
 
 export default function Search({
@@ -134,8 +135,7 @@ export default function Search({
 	const { visible, loadMore, isLoading } = useSearch(entityType, t);
 	const endRef = useRef<HTMLDivElement>(null);
 	const endReached = useOnScreen(endRef);
-	const hasExactTeaching = hasExactMatch(t, visible);
-	const shouldHoistTeachings = hasExactTeaching && entityType === 'all';
+	const sections = sortSections(t, visible);
 
 	useEffect(() => {
 		if (entityType !== 'all' && endReached && !isLoading) loadMore();
@@ -149,29 +149,14 @@ export default function Search({
 				<LoadingCards />
 			) : (
 				<>
-					{shouldHoistTeachings && (
+					{sections.map((s) => (
 						<Section
-							key="teachings"
-							section={
-								visible.find((s) => s.id === 'teachings') as AugmentedFilter
-							}
+							key={s.id}
+							section={s}
 							entityType={entityType}
 							onEntityTypeChange={onEntityTypeChange}
 						/>
-					)}
-					{visible.map((s) => {
-						if (s.id === 'teachings' && shouldHoistTeachings) {
-							return null;
-						}
-						return (
-							<Section
-								key={s.id}
-								section={s}
-								entityType={entityType}
-								onEntityTypeChange={onEntityTypeChange}
-							/>
-						);
-					})}
+					))}
 					<div ref={endRef} />
 				</>
 			)}

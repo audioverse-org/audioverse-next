@@ -1,31 +1,22 @@
 import { screen, waitFor } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
-import {
-	GetSearchAudiobooksDocument,
-	GetSearchAudiobooksQuery,
-	GetSearchConferencesDocument,
-	GetSearchConferencesQuery,
-	GetSearchMusicTracksDocument,
-	GetSearchMusicTracksQuery,
-	GetSearchPersonsDocument,
-	GetSearchPersonsQuery,
-	GetSearchRecordingsDocument,
-	GetSearchRecordingsQuery,
-	GetSearchSeriesDocument,
-	GetSearchSeriesQuery,
-	GetSearchSponsorsDocument,
-	GetSearchSponsorsQuery,
-	GetSearchStoryProgramsDocument,
-	GetSearchStoryProgramsQuery,
-} from '~components/organisms/__generated__/searchResults';
-import { buildLoader } from '~lib/test/buildLoader';
 import { buildRenderer } from '~lib/test/buildRenderer';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
 } from '~pages/[language]/search';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import {
+	buildGetSearchAudiobooksLoader,
+	buildGetSearchConferencesLoader,
+	buildGetSearchMusicTracksLoader,
+	buildGetSearchPersonsLoader,
+	buildGetSearchRecordingsLoader,
+	buildGetSearchSeriesLoader,
+	buildGetSearchSponsorsLoader,
+	buildGetSearchStoryProgramsLoader,
+} from '~src/__generated__/loaders';
 
 jest.mock('next/head');
 
@@ -47,58 +38,37 @@ const empty = {
 	},
 };
 
-const loadRecordings = buildLoader<GetSearchRecordingsQuery>(
-	GetSearchRecordingsDocument,
-	{
-		sermons: empty,
-	}
-);
+const loadRecordings = buildGetSearchRecordingsLoader({
+	sermons: empty,
+});
 
-const loadSeries = buildLoader<GetSearchSeriesQuery>(GetSearchSeriesDocument, {
+const loadSeries = buildGetSearchSeriesLoader({
 	serieses: empty,
 });
 
-const loadConferences = buildLoader<GetSearchConferencesQuery>(
-	GetSearchConferencesDocument,
-	{
-		conferences: empty,
-	}
-);
+const loadConferences = buildGetSearchConferencesLoader({
+	conferences: empty,
+});
 
-const loadSponsors = buildLoader<GetSearchSponsorsQuery>(
-	GetSearchSponsorsDocument,
-	{
-		sponsors: empty,
-	}
-);
+const loadSponsors = buildGetSearchSponsorsLoader({
+	sponsors: empty,
+});
 
-const loadPersons = buildLoader<GetSearchPersonsQuery>(
-	GetSearchPersonsDocument,
-	{
-		persons: empty,
-	}
-);
+const loadPersons = buildGetSearchPersonsLoader({
+	persons: empty,
+});
 
-const loadAudiobooks = buildLoader<GetSearchAudiobooksQuery>(
-	GetSearchAudiobooksDocument,
-	{
-		audiobooks: empty,
-	}
-);
+const loadAudiobooks = buildGetSearchAudiobooksLoader({
+	audiobooks: empty,
+});
 
-const loadMusicTracks = buildLoader<GetSearchMusicTracksQuery>(
-	GetSearchMusicTracksDocument,
-	{
-		musicTracks: empty,
-	}
-);
+const loadMusicTracks = buildGetSearchMusicTracksLoader({
+	musicTracks: empty,
+});
 
-const loadStoryPrograms = buildLoader<GetSearchStoryProgramsQuery>(
-	GetSearchStoryProgramsDocument,
-	{
-		storyPrograms: empty,
-	}
-);
+const loadStoryPrograms = buildGetSearchStoryProgramsLoader({
+	storyPrograms: empty,
+});
 
 describe('search', () => {
 	beforeEach(() => {
