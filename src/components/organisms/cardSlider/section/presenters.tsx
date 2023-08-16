@@ -15,6 +15,8 @@ export default function Presenters(): JSX.Element {
 
 	return (
 		<Section
+			rows={2}
+			minCardWidth={170}
 			infiniteQuery={useInfiniteGetSectionPresentersQuery}
 			heading={intl.formatMessage({
 				id: 'organismSection_presentersHeading',
@@ -29,7 +31,9 @@ export default function Presenters(): JSX.Element {
 				defaultMessage: 'Next presenters',
 			})}
 			seeAllUrl={root.lang(lang).presenters.get()}
-			Card={(p: { node: CardPersonFragment }) => <CardPerson person={p.node} />}
+			Card={(p: { node: CardPersonFragment }) => (
+				<CardPerson person={p.node} compact />
+			)}
 		/>
 	);
 }

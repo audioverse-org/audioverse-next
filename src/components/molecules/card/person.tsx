@@ -17,59 +17,64 @@ import styles from './person.module.scss';
 
 interface CardCollectionProps {
 	person: CardPersonFragment;
+	compact?: boolean;
 }
 
 export default function CardPerson({
 	person,
+	compact = false,
 }: CardCollectionProps): JSX.Element {
 	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
 	const { canonicalPath, image, name, recordings } = person;
 	return (
-		<Card>
+		<Card className={clsx(compact && styles.compact)}>
 			<Link href={canonicalPath} legacyBehavior>
 				<a className={styles.container}>
 					<div className={styles.stretch}>
-						<PersonTypeLockup />
+						{!compact && <PersonTypeLockup />}
 						<Heading2 unpadded sans className={styles.title}>
 							{image && (
 								<div className={styles.image}>
-									<RoundImage image={image.url} alt={name} />
+									<RoundImage image={image.url} alt={name} large={compact} />
 								</div>
 							)}
 							{name}
 						</Heading2>
 					</div>
-					<div
-						className={clsx(
-							styles.details,
-							isFavorited && styles.detailsWithLike
-						)}
-					>
-						<Heading6
-							sans
-							unpadded
-							uppercase
-							loose
-							className={styles.teachingsLabel}
+					{!compact && (
+						<div
+							className={clsx(
+								styles.details,
+								isFavorited && styles.detailsWithLike
+							)}
 						>
-							<FormattedMessage
-								id="cardPerson_teachingsLabel"
-								defaultMessage="{count} teachings"
-								description="Card person teachings count label"
-								values={{ count: recordings.aggregate?.count }}
-							/>
-						</Heading6>
-					</div>
-					{/* TODO: sub-recordings */}
+							<Heading6
+								sans
+								unpadded
+								uppercase
+								loose
+								className={styles.teachingsLabel}
+							>
+								<FormattedMessage
+									id="cardPerson_teachingsLabel"
+									defaultMessage="{count} teachings"
+									description="Card person teachings count label"
+									values={{ count: recordings.aggregate?.count }}
+								/>
+							</Heading6>
+						</div>
+					)}
 				</a>
 			</Link>
-			<ButtonFavorite
-				isFavorited={!!isFavorited}
-				toggleFavorited={toggleFavorited}
-				backgroundColor={BaseColors.SMART_PLAYLIST_H}
-				light
-				className={clsx(styles.like, isFavorited && styles.likeActive)}
-			/>
+			{!compact && (
+				<ButtonFavorite
+					isFavorited={!!isFavorited}
+					toggleFavorited={toggleFavorited}
+					backgroundColor={BaseColors.SMART_PLAYLIST_H}
+					light
+					className={clsx(styles.like, isFavorited && styles.likeActive)}
+				/>
+			)}
 		</Card>
 	);
 }

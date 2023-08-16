@@ -6,7 +6,8 @@ import { __eventHandlers, __runHandlers, __swiper } from '~lib/swiper';
 import useElementWidth from '~src/lib/hooks/useElementWidth';
 import { buildRenderer } from '~src/lib/test/buildRenderer';
 
-import Slider, { GRID_GAP, MIN_CARD_WIDTH } from '.';
+import Slider from '.';
+import { GRID_GAP, MIN_CARD_WIDTH } from './index.helpers';
 
 jest.mock('~lib/hooks/useElementWidth');
 
@@ -184,8 +185,7 @@ describe('Slider', () => {
 	});
 
 	it('takes grid gap into account', async () => {
-		// jest.mocked(useElementWidth).mockReturnValue(642);
-		__swiper.width = 642;
+		__swiper.width = 2 * MIN_CARD_WIDTH + GRID_GAP - 1;
 
 		await renderComponent({
 			props: {

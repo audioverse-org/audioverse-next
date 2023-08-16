@@ -35,6 +35,7 @@ type SectionProps<T, N> = {
 	previous: string;
 	next: string;
 	rows?: number;
+	minCardWidth?: number;
 	seeAllUrl?: string;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
 	Card: Card<N>;
