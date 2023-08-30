@@ -16,23 +16,10 @@ import IconExitSmall from '~public/img/icons/icon-exit-small.svg';
 import MoreIcon from '~public/img/icons/icon-more.svg';
 
 import styles from './mobileHeader.module.scss';
-import { useTransitionProgress } from './mobileHeader.useTransitionProgress';
+import useScrollDirection, {
+	SCROLL_DIRECTIONS,
+} from './mobileHeader.useScrollDirection';
 import { EntityFilterId } from './searchResults.filters';
-
-type Transition = [number, number];
-
-const SUBNAV_HEIGHT: Transition = [24, 0];
-const TITLE_PAD_TOP: Transition = [24, 16];
-const TITLE_PAD_BOTTOM: Transition = [14, 8];
-
-const COLLAPSING_HEIGHT = [
-	SUBNAV_HEIGHT,
-	TITLE_PAD_TOP,
-	TITLE_PAD_BOTTOM,
-].reduce((acc, [s, e]) => acc + (s - e), 0);
-
-const px = (progress: number, [s, e]: Transition) =>
-	`${s + (e - s) * progress}px`;
 
 export default function MobileHeader({
 	setShowingMenu,
@@ -53,18 +40,17 @@ export default function MobileHeader({
 	const lang = useLanguageRoute();
 	const navItems = useNavigationItems();
 	const { getRecording } = useContext(PlaybackContext);
-	const progress = useTransitionProgress(scrollRef, COLLAPSING_HEIGHT);
+	const scrollDirection = useScrollDirection(scrollRef);
 
 	return (
-		<div className={styles.base}>
+		<div
+			className={clsx(styles.base, {
+				[styles.up]: scrollDirection === SCROLL_DIRECTIONS.UP,
+				[styles.down]: scrollDirection === SCROLL_DIRECTIONS.DOWN,
+			})}
+		>
 			<div className={styles.wrapper}>
-				<div
-					className={styles.title}
-					style={{
-						paddingTop: px(progress, TITLE_PAD_TOP),
-						paddingBottom: px(progress, TITLE_PAD_BOTTOM),
-					}}
-				>
+				<div className={styles.title}>
 					<Header />
 					<Button
 						type="super"
@@ -78,10 +64,7 @@ export default function MobileHeader({
 					/>
 					{getRecording() && <ButtonPlayback />}
 				</div>
-				<div
-					className={styles.subnav}
-					style={{ height: px(progress, SUBNAV_HEIGHT) }}
-				>
+				<div className={styles.subnav}>
 					<Mininav
 						items={navItems.slice(0, -2).map((item) => {
 							if (!item.href) {
