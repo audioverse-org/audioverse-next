@@ -1,3 +1,4 @@
+import { screen } from '@testing-library/react';
 import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
 import React from 'react';
@@ -68,9 +69,9 @@ describe('audiobook list page', () => {
 	it('lists book titles', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_book_title')).toBeInTheDocument();
+		expect(screen.getByText('the_book_title')).toBeInTheDocument();
 	});
 
 	it('generates static paths', async () => {
@@ -92,17 +93,17 @@ describe('audiobook list page', () => {
 	it('renders pagination', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toBeInTheDocument();
+		expect(screen.getByText('1')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('1') as HTMLLinkElement;
+		const link = screen.getByText('1') as HTMLLinkElement;
 
 		expect(link.href).toContain('/en/books');
 	});
@@ -110,42 +111,47 @@ describe('audiobook list page', () => {
 	it('localizes pagination links', async () => {
 		loadData();
 
-		const { getByText } = await renderPage({ language: 'es' });
+		await renderPage({ language: 'es' });
 
-		const link = getByText('1') as HTMLLinkElement;
+		const link = screen.getByText('1') as HTMLLinkElement;
 
 		expect(link.href).toContain('/es/books');
 	});
 
 	it('renders 404', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('calculates page count correctly', async () => {
 		loadData();
 
-		const { queryByText } = await renderPage();
+		await renderPage();
 
-		expect(queryByText('0')).not.toBeInTheDocument();
+		expect(screen.queryByText('0')).not.toBeInTheDocument();
 	});
 
 	it('links entries', async () => {
 		loadData();
 
-		const { getAllByRole } = await renderPage();
+		await renderPage();
 
-		const link = getAllByRole('link')[0] as HTMLLinkElement;
+		const link = screen.getByRole('link', {
+			name: /the_book_title/,
+		});
 
-		expect(link.href).toContain('the_book_path');
+		expect(link).toHaveAttribute(
+			'href',
+			expect.stringContaining('the_book_path')
+		);
 	});
 
 	it('renders page title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('All Audiobooks')).toBeInTheDocument();
+		expect(screen.getByText('All Audiobooks')).toBeInTheDocument();
 	});
 });
