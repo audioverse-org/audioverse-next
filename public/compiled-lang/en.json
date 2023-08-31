@@ -611,12 +611,6 @@
       "value": "All Audiobooks"
     }
   ],
-  "backButton__back": [
-    {
-      "type": 0,
-      "value": "Back"
-    }
-  ],
   "bibleBook__backToChapter": [
     {
       "type": 0,
