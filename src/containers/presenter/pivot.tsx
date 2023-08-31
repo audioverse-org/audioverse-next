@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react';
 
 import Heading2 from '~components/atoms/heading2';
 import RoundImage from '~components/atoms/roundImage';
-import ButtonBack from '~components/molecules/buttonBack';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import PersonTypeLockup from '~components/molecules/personTypeLockup';
 import Tease from '~components/molecules/tease';
@@ -18,13 +17,12 @@ export default function PresenterPivot({
 	person,
 	children,
 }: PropsWithChildren<Props>): JSX.Element {
-	const { name, imageWithFallback, canonicalPath } = person;
+	const { name, imageWithFallback } = person;
 	const image = imageWithFallback.url;
 
 	return (
 		<Tease className={styles.container}>
 			<ContentWidthLimiter>
-				<ButtonBack backUrl={canonicalPath} className={styles.back} />
 				<PersonTypeLockup />
 				<div className={styles.titleLockup}>
 					{image && (

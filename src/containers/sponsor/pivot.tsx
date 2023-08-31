@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react';
 
 import Heading2 from '~components/atoms/heading2';
 import RoundImage from '~components/atoms/roundImage';
-import ButtonBack from '~components/molecules/buttonBack';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import SponsorTypeLockup from '~components/molecules/sponsorTypeLockup';
 import Tease from '~components/molecules/tease';
@@ -18,12 +17,11 @@ export default function SponsorPivot({
 	sponsor,
 	children,
 }: PropsWithChildren<Props>): JSX.Element {
-	const { title, image, canonicalPath } = sponsor;
+	const { title, image } = sponsor;
 
 	return (
 		<Tease className={styles.container}>
 			<ContentWidthLimiter>
-				<ButtonBack backUrl={canonicalPath} className={styles.back} />
 				<SponsorTypeLockup />
 				<div className={styles.titleLockup}>
 					{image && (
