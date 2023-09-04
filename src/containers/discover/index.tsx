@@ -1,5 +1,7 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
+import Presenters from '~src/components/organisms/cardSlider/section/presenters';
 import TrendingTeachings from '~src/components/organisms/cardSlider/section/trendingTeachings';
 
 import BlogPosts from '../../components/organisms/cardSlider/section/blogPosts';
@@ -12,6 +14,14 @@ import Topics from '../../components/organisms/cardSlider/section/topics';
 export default function Discover(): JSX.Element {
 	return (
 		<div>
+			<Presenters
+				heading={
+					<FormattedMessage
+						id="discover_presentersHeading"
+						defaultMessage="Discover Presenters"
+					/>
+				}
+			/>
 			<RecentTeachings />
 			<Topics />
 			<TrendingTeachings />
