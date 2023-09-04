@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import BibleBooks from '~src/components/organisms/cardSlider/section/bibleBooks';
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
 import TrendingTeachings from '~src/components/organisms/cardSlider/section/trendingTeachings';
 
@@ -14,6 +15,8 @@ import Topics from '../../components/organisms/cardSlider/section/topics';
 export default function Discover(): JSX.Element {
 	return (
 		<div>
+			<RecentTeachings />
+			<Topics />
 			<Presenters
 				heading={
 					<FormattedMessage
@@ -22,11 +25,17 @@ export default function Discover(): JSX.Element {
 					/>
 				}
 			/>
-			<RecentTeachings />
-			<Topics />
 			<TrendingTeachings />
 			<FeaturedTeachings />
 			<BlogPosts />
+			<BibleBooks
+				heading={
+					<FormattedMessage
+						id="discover_bibleBooksHeading"
+						defaultMessage="Discover Bible Books"
+					/>
+				}
+			/>
 			<StorySeasons />
 			<Conferences />
 		</div>

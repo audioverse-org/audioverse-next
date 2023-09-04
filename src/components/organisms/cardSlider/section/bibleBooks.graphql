@@ -1,0 +1,20 @@
+query getSectionBibleBooks(
+	$language: Language!
+	$first: Int! = 3
+	$after: String = null
+) {
+	bibleBooks: featuredSequences(
+		contentType: BIBLE_BOOK
+		language: $language
+		first: $first
+		after: $after
+	) {
+		nodes {
+			...cardSequence
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
