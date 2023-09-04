@@ -9,19 +9,25 @@ import { useLanguageId } from '~src/lib/useLanguageId';
 import Section from '.';
 import { useInfiniteGetSectionPresentersQuery } from './__generated__/presenters';
 
-export default function Presenters(): JSX.Element {
+export default function Presenters(props: {
+	heading?: string | JSX.Element;
+}): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageId();
+
+	const {
+		heading = intl.formatMessage({
+			id: 'organismSection_presentersHeading',
+			defaultMessage: 'Presenters',
+		}),
+	} = props;
 
 	return (
 		<Section
 			rows={2}
 			minCardWidth={170}
 			infiniteQuery={useInfiniteGetSectionPresentersQuery}
-			heading={intl.formatMessage({
-				id: 'organismSection_presentersHeading',
-				defaultMessage: 'Presenters',
-			})}
+			heading={heading}
 			previous={intl.formatMessage({
 				id: 'organismSection_presentersPrevious',
 				defaultMessage: 'Previous presenters',
