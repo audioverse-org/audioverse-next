@@ -690,6 +690,9 @@
   "discover__trendingTeachingsPrevious": {
     "string": "Previous trending teachings"
   },
+  "discover_bibleBooksHeading": {
+    "string": "Discover Bible Books"
+  },
   "discover_conferencesHeading": {
     "string": "Recent Conferences"
   },
@@ -1793,6 +1796,15 @@
   },
   "organismSection__audiobooksPrevious": {
     "string": "Previous audiobooks"
+  },
+  "organismSection__bibleBooksHeading": {
+    "string": "Bible Books"
+  },
+  "organismSection__bibleBooksNext": {
+    "string": "Next Bible books"
+  },
+  "organismSection__bibleBooksPrevious": {
+    "string": "Previous Bible books"
   },
   "organismSection_presentersHeading": {
     "string": "Presenters"
