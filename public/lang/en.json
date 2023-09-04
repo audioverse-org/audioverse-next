@@ -696,6 +696,9 @@
   "discover_featuredTeachingsHeading": {
     "string": "Featured Teachings"
   },
+  "discover_presentersHeading": {
+    "string": "Discover Presenters"
+  },
   "discover_recentBlogHeading": {
     "string": "Recent Blog Posts"
   },

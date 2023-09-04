@@ -1473,6 +1473,12 @@
       "value": "Featured Teachings"
     }
   ],
+  "discover_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Discover Presenters"
+    }
+  ],
   "discover_recentBlogHeading": [
     {
       "type": 0,
