@@ -6,9 +6,9 @@
 
 .navigation {
 	position: fixed;
-	height: 100vh;
 	width: 100vw;
 	top: 0;
+	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	padding: 24px 0 calc(24px + env(safe-area-inset-bottom));
