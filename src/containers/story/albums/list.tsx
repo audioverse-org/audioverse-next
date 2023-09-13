@@ -6,7 +6,6 @@ import EmptyState from '~components/organisms/emptyState';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 
 import { GetStoriesAlbumsPageDataQuery } from './__generated__/list';
 
@@ -19,8 +18,6 @@ export default function StoryAlbumsList({
 	nodes,
 	pagination,
 }: StoryAlbumsListProps): JSX.Element {
-	const language = useLanguageRoute();
-
 	if (!nodes.length) {
 		return (
 			<EmptyState
@@ -43,7 +40,6 @@ export default function StoryAlbumsList({
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={root.lang(language).discover.collections.get()}
 			heading={
 				<FormattedMessage
 					id="storyAlbumList__heading"

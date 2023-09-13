@@ -3,12 +3,10 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import withFailStates from '~components/HOCs/withFailStates';
-import ButtonBack from '~components/molecules/buttonBack';
 import CardRecording from '~components/molecules/card/recording';
 import CardGroup from '~components/molecules/cardGroup';
 import RecordingHasVideoFilter from '~components/molecules/recordingHasVideoFilter';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { GetTrendingTeachingsPageDataQuery } from './__generated__/trending';
@@ -22,14 +20,9 @@ function TeachingsTrending({
 	nodes,
 	filter,
 }: Must<TrendingTeachingsProps>): JSX.Element {
-	const languageRoute = useLanguageRoute();
 	return (
 		<div>
 			<div className={styles.filterRow}>
-				<ButtonBack
-					backUrl={root.lang(languageRoute).discover.get()}
-					className={styles.back}
-				/>
 				<RecordingHasVideoFilter
 					filter={filter}
 					makeRoute={(l: string, f: 'all' | 'audio' | 'video', i: number) =>

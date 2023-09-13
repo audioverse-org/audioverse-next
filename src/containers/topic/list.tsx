@@ -5,7 +5,6 @@ import CardTopic from '~src/components/molecules/card/topic';
 import PaginatedCardList from '~src/components/organisms/paginatedCardList';
 import { PaginatedProps } from '~src/lib/getPaginatedStaticProps';
 import root from '~src/lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import { GetTopicListDataQuery } from './__generated__/list';
 
@@ -18,12 +17,9 @@ export default function Topics({
 	nodes,
 	pagination,
 }: CollectionListProps): JSX.Element {
-	const language = useLanguageRoute();
-
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={root.lang(language).discover.collections.get()}
 			heading={
 				<FormattedMessage
 					id="topicListPage__title"

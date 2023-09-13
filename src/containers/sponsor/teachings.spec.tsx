@@ -89,14 +89,6 @@ describe('sponsor teachings page', () => {
 		expect(getByText('All Teachings')).toBeInTheDocument();
 	});
 
-	it('links back to detail page', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('Back')).toHaveAttribute('href', 'the_sponsor_path');
-	});
-
 	it('links pagination properly', async () => {
 		loadData();
 
