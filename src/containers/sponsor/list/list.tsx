@@ -5,7 +5,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '~components/atoms/heading1';
 import Heading2 from '~components/atoms/heading2';
 import RoundImage from '~components/atoms/roundImage';
-import ButtonBack from '~components/molecules/buttonBack';
 import Card from '~components/molecules/card';
 import JumpBar from '~components/molecules/jumpBar';
 import root from '~lib/routes';
@@ -50,10 +49,6 @@ export default function Sponsors({
 
 	return (
 		<>
-			<ButtonBack
-				backUrl={root.lang(language).discover.collections.get()}
-				className={styles.back}
-			/>
 			<Heading1 className={styles.heading}>
 				<FormattedMessage
 					id="sponsorsList__title"

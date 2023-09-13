@@ -7,7 +7,6 @@ import CardSponsor from '~components/molecules/card/sponsor';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 
 import { GetSearchResultsSponsorsQuery } from './__generated__/sponsors';
 
@@ -17,18 +16,12 @@ export type SearchSponsorsProps = PaginatedProps<
 >;
 
 function SearchSponsors({ nodes, pagination }: SearchSponsorsProps) {
-	const languageRoute = useLanguageRoute();
 	const { query } = useRouter();
 	const term = query.q as string;
 
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={root.lang(languageRoute).search.get({
-				params: {
-					q: term,
-				},
-			})}
 			heading={
 				<FormattedMessage
 					id="searchSponsors__heading"

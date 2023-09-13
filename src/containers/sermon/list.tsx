@@ -23,7 +23,6 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={root.lang(language).discover.get()}
 			heading={
 				<FormattedMessage
 					id="sermonList__heading"

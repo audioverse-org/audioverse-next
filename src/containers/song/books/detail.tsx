@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import withFailStates from '~components/HOCs/withFailStates';
-import ButtonBack from '~components/molecules/buttonBack';
 import ButtonShare from '~components/molecules/buttonShare';
 import CardSong from '~components/molecules/card/song';
 import CardGroup from '~components/molecules/cardGroup';
@@ -41,11 +40,6 @@ function SongBooksDetail({
 	return (
 		<Tease className={styles.container}>
 			<ContentWidthLimiter>
-				<ButtonBack
-					type="secondary"
-					backUrl={root.lang(languageRoute).songs.albums.get()}
-					className={styles.back}
-				/>
 				<SequenceTypeLockup contentType={SequenceContentType.MusicAlbum} />
 				<Heading2 sans className={styles.header}>
 					{startCase(book)}

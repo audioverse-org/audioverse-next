@@ -7,7 +7,6 @@ import CardPerson from '~components/molecules/card/person';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 
 import { GetSearchResultsPersonsQuery } from './__generated__/persons';
 
@@ -17,18 +16,12 @@ export type SearchPersonsProps = PaginatedProps<
 >;
 
 function SearchPersons({ nodes, pagination }: SearchPersonsProps) {
-	const languageRoute = useLanguageRoute();
 	const { query } = useRouter();
 	const term = query.q as string;
 
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={root.lang(languageRoute).search.get({
-				params: {
-					q: term,
-				},
-			})}
 			heading={
 				<FormattedMessage
 					id="searchPersons__heading"

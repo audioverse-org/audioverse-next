@@ -6,7 +6,6 @@ import CardSequence from '~components/molecules/card/sequence';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 
 import { GetAudiobookListPageDataQuery } from './__generated__/list';
 
@@ -19,11 +18,9 @@ export function AudiobooksList({
 	nodes,
 	pagination,
 }: AudiobooksListProps): JSX.Element {
-	const language = useLanguageRoute();
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={root.lang(language).discover.collections.get()}
 			heading={
 				<FormattedMessage
 					id="audiobookList__heading"
