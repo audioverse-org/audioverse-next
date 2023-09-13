@@ -684,6 +684,12 @@
   "discover__topicsPrevious": {
     "string": "Previous topics"
   },
+  "discover__trendingMusicNext": {
+    "string": "Next trending scripture songs"
+  },
+  "discover__trendingMusicPrevious": {
+    "string": "Previous trending scripture songs"
+  },
   "discover__trendingTeachingsNext": {
     "string": "Next trending teachings"
   },
@@ -704,6 +710,9 @@
   },
   "discover_topicsHeading": {
     "string": "Topics"
+  },
+  "discover_trendingMusicHeading": {
+    "string": "Trending Scripture Songs"
   },
   "discover_trendingTeachingsHeading": {
     "string": "Trending Teachings"
