@@ -25,10 +25,18 @@
 	align-items: center;
 	justify-content: space-between;
 	z-index: 1;
+	padding-top: 24px;
+	padding-bottom: 14px;
+	transition: $transition-quick padding-top, $transition-quick padding-bottom;
 
 	> :first-child {
 		margin-right: 16px;
 	}
+}
+
+.down .title {
+	padding-top: 16px;
+	padding-bottom: 8px;
 }
 
 .subnav {
@@ -39,6 +47,12 @@
 	position: relative;
 	overflow: hidden;
 	background: $ts-cream;
+	height: 24px;
+	transition: $transition-quick height;
+}
+
+.down .subnav {
+	height: 0;
 }
 
 .subnavItems {
