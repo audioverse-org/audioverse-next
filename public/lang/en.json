@@ -693,11 +693,17 @@
   "discover__trendingTeachingsPrevious": {
     "string": "Previous trending teachings"
   },
+  "discover_bibleBooksHeading": {
+    "string": "Discover Bible Books"
+  },
   "discover_conferencesHeading": {
     "string": "Recent Conferences"
   },
   "discover_featuredTeachingsHeading": {
     "string": "Featured Teachings"
+  },
+  "discover_presentersHeading": {
+    "string": "Discover Presenters"
   },
   "discover_recentBlogHeading": {
     "string": "Recent Blog Posts"
@@ -1796,6 +1802,15 @@
   },
   "organismSection__audiobooksPrevious": {
     "string": "Previous audiobooks"
+  },
+  "organismSection__bibleBooksHeading": {
+    "string": "Bible Books"
+  },
+  "organismSection__bibleBooksNext": {
+    "string": "Next Bible books"
+  },
+  "organismSection__bibleBooksPrevious": {
+    "string": "Previous Bible books"
   },
   "organismSection_presentersHeading": {
     "string": "Presenters"

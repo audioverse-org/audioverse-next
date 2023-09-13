@@ -1467,6 +1467,12 @@
       "value": "Previous trending teachings"
     }
   ],
+  "discover_bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "Discover Bible Books"
+    }
+  ],
   "discover_conferencesHeading": [
     {
       "type": 0,
@@ -1477,6 +1483,12 @@
     {
       "type": 0,
       "value": "Featured Teachings"
+    }
+  ],
+  "discover_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Discover Presenters"
     }
   ],
   "discover_recentBlogHeading": [
@@ -3801,6 +3813,24 @@
     {
       "type": 0,
       "value": "Previous audiobooks"
+    }
+  ],
+  "organismSection__bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "Bible Books"
+    }
+  ],
+  "organismSection__bibleBooksNext": [
+    {
+      "type": 0,
+      "value": "Next Bible books"
+    }
+  ],
+  "organismSection__bibleBooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Bible books"
     }
   ],
   "organismSection_presentersHeading": [
