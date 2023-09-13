@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
-import ButtonBack from '~components/molecules/buttonBack';
 import CardSequence from '~components/molecules/card/sequence';
 import CardSongBook from '~components/molecules/card/songBook';
 import CardGroup from '~components/molecules/cardGroup';
@@ -27,10 +26,6 @@ function SongAlbumList({
 	return (
 		<>
 			<ContentWidthLimiter>
-				<ButtonBack
-					backUrl={root.lang(languageRoute).discover.collections.get()}
-					className={styles.backButton}
-				/>
 				<Heading1>
 					<FormattedMessage
 						id="songsListPage__title"
