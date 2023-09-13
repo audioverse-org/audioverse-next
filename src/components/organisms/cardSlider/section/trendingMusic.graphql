@@ -1,0 +1,22 @@
+query getSectionTrendingMusic(
+	$language: Language!
+	$first: Int! = 3
+	$after: String = null
+) {
+	trendingMusic: popularRecordings(
+		language: $language
+		contentType: MUSIC_TRACK
+		first: $first
+		after: $after
+	) {
+		nodes {
+			recording {
+				...cardRecording
+			}
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

@@ -38,6 +38,7 @@ export async function getStaticProps({
 		getSectionTopics: { language },
 		getSectionPresenters: { language },
 		getSectionBibleBooks: { language },
+		getSectionTrendingMusic: { language },
 	});
 
 	return {
