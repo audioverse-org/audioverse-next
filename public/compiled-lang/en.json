@@ -1443,6 +1443,18 @@
       "value": "Previous topics"
     }
   ],
+  "discover__trendingMusicNext": [
+    {
+      "type": 0,
+      "value": "Next trending scripture songs"
+    }
+  ],
+  "discover__trendingMusicPrevious": [
+    {
+      "type": 0,
+      "value": "Previous trending scripture songs"
+    }
+  ],
   "discover__trendingTeachingsNext": [
     {
       "type": 0,
@@ -1483,6 +1495,12 @@
     {
       "type": 0,
       "value": "Topics"
+    }
+  ],
+  "discover_trendingMusicHeading": [
+    {
+      "type": 0,
+      "value": "Trending Scripture Songs"
     }
   ],
   "discover_trendingTeachingsHeading": [
