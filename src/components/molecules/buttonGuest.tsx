@@ -29,7 +29,6 @@ export default function ButtonGuest({
 	return (
 		<>
 			<div className={clsx(styles.wrapper, className)}>
-			
 				<button
 					className={styles.link}
 					data-testid="guest-info-button"
