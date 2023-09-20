@@ -5,7 +5,7 @@
     "scripts": {
         "predev": "concurrently \"npx update-browserslist-db@latest\" \"npm:graphql:codegen\"",
         "dev": "concurrently \"npm:graphql:codegen:watch\" \"next dev\"",
-        "build": "SET NODE_ICU_DATA=node_modules/full-icu next build",
+        "build": "cross-env NODE_ICU_DATA=node_modules/full-icu next build",
         "postbuild": "next-sitemap",
         "build:dev": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu next build --debug",
         "build:webpack-only": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu ./next-build-webpack-only.js",
@@ -112,6 +112,7 @@
         "babel-loader": "^8.2.3",
         "babel-plugin-react-intl": "^8.2.4",
         "concurrently": "^8.2.1",
+        "cross-env": "^7.0.3",
         "eslint": "^8.43.0",
         "eslint-config-next": "^13.0.3",
         "eslint-plugin-formatjs": "^3.0.0",
