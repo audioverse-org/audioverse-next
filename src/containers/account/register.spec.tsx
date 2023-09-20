@@ -306,6 +306,14 @@ describe('register page', () => {
 
 		expect(getByText('Continue as guest?')).toBeInTheDocument();
 	});
+
+	it('pops modal on guest info click', async () => {
+		const { getByText, getByTestId } = await renderPage();
+
+		await userEvent.click(getByTestId('guest-info-button2'));
+
+		expect(getByText('Continue as guest?')).toBeInTheDocument();
+	});
 });
 
 // link to login form on registration success

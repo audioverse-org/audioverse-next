@@ -31,7 +31,7 @@ export default function ButtonGuest({
 			<div className={clsx(styles.wrapper, className)}>
 				<button
 					className={styles.link}
-					data-testid="guest-info-button"
+					data-testid="guest-info-button2"
 					onClick={(e) => {
 						e.preventDefault();
 						setIsGuestModalOpen(true);
