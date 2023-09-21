@@ -29,7 +29,6 @@ export default function ButtonGuest({
 	return (
 		<>
 			<div className={clsx(styles.wrapper, className)}>
-			
 				<button
 					className={styles.link}
 					data-testid="guest-info-button"
@@ -39,9 +38,9 @@ export default function ButtonGuest({
 					}}
 				>
 					<FormattedMessage
-							id="molecule-buttonGuest__label"
-							defaultMessage="Continue as guest"
-						/>
+						id="molecule-buttonGuest__label"
+						defaultMessage="Continue as guest"
+					/>
 					<Icon />
 				</button>
 			</div>
