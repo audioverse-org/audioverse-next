@@ -29,14 +29,7 @@ export default function ButtonGuest({
 	return (
 		<>
 			<div className={clsx(styles.wrapper, className)}>
-				<Link href={redirectRoute} legacyBehavior>
-					<a className="decorated">
-						<FormattedMessage
-							id="molecule-buttonGuest__label"
-							defaultMessage="Continue as guest"
-						/>
-					</a>
-				</Link>
+			
 				<button
 					className={styles.link}
 					data-testid="guest-info-button"
@@ -45,6 +38,10 @@ export default function ButtonGuest({
 						setIsGuestModalOpen(true);
 					}}
 				>
+					<FormattedMessage
+							id="molecule-buttonGuest__label"
+							defaultMessage="Continue as guest"
+						/>
 					<Icon />
 				</button>
 			</div>
