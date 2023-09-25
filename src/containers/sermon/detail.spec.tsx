@@ -399,12 +399,12 @@ describe('sermon detail page', () => {
 					},
 				},
 			],
-			recordingDate: '253-03-01 09:30:00',
+			recordingDate: '2023-03-01 09:30:00',
 		});
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('March 1, 253, 9:30 AM')).toBeInTheDocument();
+		expect(getByText('March 1, 2023, 9:30 AM')).toBeInTheDocument();
 	});
 
 	it('includes series title', async () => {
