@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import CircleInitials from '~components/atoms/circleInitials';
 import Heading1 from '~components/atoms/heading1';
 import Heading2 from '~components/atoms/heading2';
 import RoundImage from '~components/atoms/roundImage';
@@ -60,13 +61,15 @@ export default function Presenters({
 					<Link href={canonicalPath} legacyBehavior>
 						<a className={styles.container}>
 							<div className={styles.nameLockup}>
-								{image && (
+								{image ? (
 									<div className={styles.image}>
 										<RoundImage
 											image={image.url}
 											alt={`${surname}, ${givenName}`}
 										/>
 									</div>
+								):(
+									<CircleInitials name={surname+' '+givenName} mid={true}/>
 								)}
 								<span className={styles.name}>
 									{surname}, {givenName}

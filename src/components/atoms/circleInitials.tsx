@@ -5,9 +5,12 @@ import styles from './circleInitials.module.scss';
 
 interface CircleInitialsProps {
 	name: string;
+	large?: boolean;
+	mid?: boolean;
+	small?: boolean;
 }
 
-const CircleInitials: React.FC<CircleInitialsProps> = ({ name }) => {
+const CircleInitials: React.FC<CircleInitialsProps> = ({ name,large,mid,small }) => {
 	// Split the name into first and last names
 	const [firstName, lastName] = name.split(' ');
 
@@ -16,7 +19,11 @@ const CircleInitials: React.FC<CircleInitialsProps> = ({ name }) => {
 	const lastLetter = lastName ? lastName.charAt(0).toUpperCase() : '';
 
 	return (
-		<div className={clsx(styles.circle)}>
+		<div className={clsx(styles.circle,
+			large && styles.large,
+			mid && styles.mid,
+			small && styles.small,
+		)}>
 			<div className={clsx(styles.initial)}>{firstLetter}</div>
 			<div className={clsx(styles.initial)}>{lastLetter}</div>
 		</div>

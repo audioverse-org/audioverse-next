@@ -1,14 +1,32 @@
 .circle {
-	width: 64px;
-	height: 64px;
 	border-radius: 50%;
 	background-color: #323e48;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: white;
+	
+}
+
+.large {
+	width: 64px;
+	height: 64px;
 	font-size: 26px;
 }
+
+.mid {
+	width: 32px;
+	height: 32px;
+	font-size: 16px;
+	margin-right: 8px;
+}
+
+.small {
+	width: 24px;
+	height: 24px;
+	font-size: 12px;
+}
+
 .initial {
 	margin: 0 0px;
 }
