@@ -10,7 +10,12 @@ interface CircleInitialsProps {
 	small?: boolean;
 }
 
-const CircleInitials: React.FC<CircleInitialsProps> = ({ name,large,mid,small }) => {
+const CircleInitials: React.FC<CircleInitialsProps> = ({
+	name,
+	large,
+	mid,
+	small,
+}) => {
 	// Split the name into first and last names
 	const [firstName, lastName] = name.split(' ');
 
@@ -19,11 +24,14 @@ const CircleInitials: React.FC<CircleInitialsProps> = ({ name,large,mid,small })
 	const lastLetter = lastName ? lastName.charAt(0).toUpperCase() : '';
 
 	return (
-		<div className={clsx(styles.circle,
-			large && styles.large,
-			mid && styles.mid,
-			small && styles.small,
-		)}>
+		<div
+			className={clsx(
+				styles.circle,
+				large && styles.large,
+				mid && styles.mid,
+				small && styles.small
+			)}
+		>
 			<div className={clsx(styles.initial)}>{firstLetter}</div>
 			<div className={clsx(styles.initial)}>{lastLetter}</div>
 		</div>

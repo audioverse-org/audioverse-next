@@ -68,8 +68,8 @@ export default function Presenters({
 											alt={`${surname}, ${givenName}`}
 										/>
 									</div>
-								):(
-									<CircleInitials name={surname+' '+givenName} mid={true}/>
+								) : (
+									<CircleInitials name={surname + ' ' + givenName} mid={true} />
 								)}
 								<span className={styles.name}>
 									{surname}, {givenName}

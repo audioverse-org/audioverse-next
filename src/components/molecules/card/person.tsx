@@ -39,7 +39,7 @@ export default function CardPerson({
 									<RoundImage image={image.url} alt={name} large={compact} />
 								</div>
 							) : (
-								<CircleInitials name={name} large={true}/>
+								<CircleInitials name={name} large={true} />
 							)}
 							{name}
 						</Heading2>
