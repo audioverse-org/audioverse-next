@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
+import CircleInitials from '~components/atoms/circleInitials';
 import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
 import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
@@ -33,10 +34,12 @@ export default function CardPerson({
 					<div className={styles.stretch}>
 						{!compact && <PersonTypeLockup />}
 						<Heading2 unpadded sans className={styles.title}>
-							{image && (
+							{image ? (
 								<div className={styles.image}>
 									<RoundImage image={image.url} alt={name} large={compact} />
 								</div>
+							):(
+								<CircleInitials name={name}/>
 							)}
 							{name}
 						</Heading2>
