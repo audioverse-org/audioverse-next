@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import CircleInitials from '~components/atoms/circleInitials';
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import RoundImage from '~components/atoms/roundImage';
@@ -33,10 +34,12 @@ export default function CardPerson({
 					<div className={styles.stretch}>
 						{!compact && <PersonTypeLockup />}
 						<Heading2 unpadded sans className={styles.title}>
-							{image && (
+							{image ? (
 								<div className={styles.image}>
 									<RoundImage image={image.url} alt={name} large={compact} />
 								</div>
+							) : (
+								<CircleInitials name={name} large={true} />
 							)}
 							{name}
 						</Heading2>
