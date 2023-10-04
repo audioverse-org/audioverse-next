@@ -608,7 +608,7 @@
   "audiobookList__heading": [
     {
       "type": 0,
-      "value": "All Audiobooks"
+      "value": "Books"
     }
   ],
   "bibleBook__backToChapter": [
@@ -714,7 +714,7 @@
   "books__title": [
     {
       "type": 0,
-      "value": "All Audiobooks"
+      "value": "Books"
     }
   ],
   "buttonShareRecording__emailSubject": [
@@ -889,6 +889,12 @@
     {
       "type": 0,
       "value": " chapters"
+    }
+  ],
+  "cardSequence_egwAudiobookType": [
+    {
+      "type": 0,
+      "value": "ELLEN G. WHITE"
     }
   ],
   "cardSequence_readByLabel": [
@@ -1583,6 +1589,18 @@
       "value": "m"
     }
   ],
+  "egwAudiobookList__heading": [
+    {
+      "type": 0,
+      "value": "Ellen G. White"
+    }
+  ],
+  "egwbooks__title": [
+    {
+      "type": 0,
+      "value": "Ellen G. White"
+    }
+  ],
   "embed__partInfo": [
     {
       "type": 0,
@@ -1837,6 +1855,12 @@
     {
       "type": 0,
       "value": "Conferences"
+    }
+  ],
+  "header__navItemCollections-egwbooks": [
+    {
+      "type": 0,
+      "value": "Ellen G. White"
     }
   ],
   "header__navItemCollections-presenters": [
@@ -3800,7 +3824,7 @@
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
-      "value": "Audiobooks"
+      "value": "Discover Books"
     }
   ],
   "organismSection__audiobooksNext": [
@@ -3831,6 +3855,24 @@
     {
       "type": 0,
       "value": "Previous Bible books"
+    }
+  ],
+  "organismSection__egwAudiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Discover Ellen G. White"
+    }
+  ],
+  "organismSection__egwAudiobooksNext": [
+    {
+      "type": 0,
+      "value": "Next EGW audiobooks"
+    }
+  ],
+  "organismSection__egwAudiobooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous EGW audiobooks"
     }
   ],
   "organismSection_presentersHeading": [

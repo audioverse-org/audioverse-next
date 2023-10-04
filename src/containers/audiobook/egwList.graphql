@@ -1,0 +1,28 @@
+query getEgwAudiobookListPageData(
+	$language: Language!
+	$first: Int = 12
+	$offset: Int = 0
+) {
+	audiobooks(
+		language: $language
+		first: $first
+		offset: $offset
+		orderBy: [{ field: TITLE, direction: ASC }]
+		persons: [{ personId: 128 }]
+	) {
+		nodes {
+			...cardSequence
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getEgwAudiobookListPathsData($language: Language!) {
+	audiobooks(language: $language) {
+		aggregate {
+			count
+		}
+	}
+}

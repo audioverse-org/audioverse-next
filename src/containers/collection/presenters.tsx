@@ -43,7 +43,7 @@ function CollectionPresenters({
 			</LineHeading>
 			<CardGroup>
 				{nodes.map((node) => (
-					<CardPerson person={node} key={node.canonicalPath} />
+					<CardPerson person={node} largeinit={true} key={node.canonicalPath} />
 				))}
 			</CardGroup>
 			<Pagination

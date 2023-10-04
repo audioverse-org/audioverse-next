@@ -5,6 +5,7 @@ import books from './books';
 import conferences from './conferences';
 import contact from './contact';
 import discover from './discover';
+import egwbooks from './egwbooks';
 import library from './library';
 import presenters from './presenters';
 import node from './primatives/node';
@@ -24,6 +25,7 @@ const namespaces = (r: string) => ({
 	bibles: node(`${r}/bibles`, bibles),
 	blog: paginatedNode(`${r}/blog`),
 	books: paginatedNode(`${r}/books`, books),
+	egwbooks: paginatedNode(`${r}/egwbooks`, egwbooks),
 	conferences: paginatedNode(`${r}/conferences`, conferences),
 	contact: node(`${r}/contact`, contact),
 	discover: node(`${r}/discover`, discover),

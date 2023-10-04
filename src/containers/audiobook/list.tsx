@@ -22,10 +22,7 @@ export function AudiobooksList({
 		<PaginatedCardList
 			pagination={pagination}
 			heading={
-				<FormattedMessage
-					id="audiobookList__heading"
-					defaultMessage="All Audiobooks"
-				/>
+				<FormattedMessage id="audiobookList__heading" defaultMessage="Books" />
 			}
 			makeRoute={(l, i) => root.lang(l).books.page(i).get()}
 		>

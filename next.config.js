@@ -111,6 +111,11 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/audiobooks/egwbooks/podcast/:seriesId/latest/:slug',
+					destination: '/:lang/egwbooks/:seriesId/feed.xml',
+					permanent: true,
+				},
+				{
 					source: '/:lang/music/browse/podcast/:seriesId/latest/:slug',
 					destination: '/:lang/songs/albums/:seriesId/feed.xml',
 					permanent: true,
@@ -179,6 +184,11 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/books/page/1',
 					destination: '/:lang/books',
+					permanent: true,
+				},
+				{
+					source: '/:lang/egwbooks/page/1',
+					destination: '/:lang/egwbooks',
 					permanent: true,
 				},
 				{
@@ -324,8 +334,25 @@ module.exports = withBundleAnalyzer(
 					destination: '/:lang/stories/albums/page/1',
 				},
 				{
+					source: '/:lang/audiobooks/egwbooks',
+					has: [
+						{
+							type: 'query',
+							key: 'stories',
+							value: '1',
+						},
+					],
+					permanent: false,
+					destination: '/:lang/stories/albums/page/1',
+				},
+				{
 					source: '/:lang/audiobooks/books/:path*',
 					destination: '/:lang/books/:path*',
+					permanent: true,
+				},
+				{
+					source: '/:lang/audiobooks/egwbooks/:path*',
+					destination: '/:lang/egwbooks/:path*',
 					permanent: true,
 				},
 				{
@@ -504,6 +531,10 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/books',
 					destination: '/:lang/books/page/1',
+				},
+				{
+					source: '/:lang/egwbooks',
+					destination: '/:lang/egwbooks/page/1',
 				},
 				{
 					source: '/:lang/conferences',

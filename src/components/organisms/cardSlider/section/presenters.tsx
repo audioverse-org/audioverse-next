@@ -38,7 +38,7 @@ export default function Presenters(props: {
 			})}
 			seeAllUrl={root.lang(lang).presenters.get()}
 			Card={(p: { node: CardPersonFragment }) => (
-				<CardPerson person={p.node} compact />
+				<CardPerson person={p.node} largeinit={true} compact />
 			)}
 		/>
 	);

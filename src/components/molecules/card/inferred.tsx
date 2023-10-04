@@ -34,7 +34,9 @@ const Typename = {
 export default function CardInferred({ entity }: { entity: InferrableEntity }) {
 	switch (entity.__typename) {
 		case Typename.Person:
-			return <CardPerson person={entity as CardPersonFragment} />;
+			return (
+				<CardPerson person={entity as CardPersonFragment} midinit={true} />
+			);
 		case Typename.Recording:
 			return <CardRecording recording={entity as CardRecordingFragment} />;
 		case Typename.Sequence:

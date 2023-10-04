@@ -5,35 +5,35 @@ import {
 } from 'next';
 
 import {
-	getAudiobookListPageData,
-	getAudiobookListPathsData,
-} from '~containers/audiobook/__generated__/list';
-import AudiobooksList, {
-	AudiobooksListProps,
-} from '~containers/audiobook/list';
+	getEgwAudiobookListPageData,
+	getEgwAudiobookListPathsData,
+} from '~containers/audiobook/__generated__/egwList';
+import EgwAudiobooksList, {
+	EgwAudiobooksListProps,
+} from '~containers/audiobook/egwList';
 import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '~lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '~lib/getPaginatedStaticProps';
 
-export default AudiobooksList;
+export default EgwAudiobooksList;
 
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{
 	i: string;
 	language: string;
-}>): Promise<GetStaticPropsResult<AudiobooksListProps>> {
+}>): Promise<GetStaticPropsResult<EgwAudiobooksListProps>> {
 	const intl = await getIntl(getLanguageIdByRoute(params?.language));
 	return getPaginatedStaticProps(
 		params,
-		getAudiobookListPageData,
+		getEgwAudiobookListPageData,
 		(d) => d.audiobooks.nodes,
 		(d) => d.audiobooks.aggregate?.count,
 		() => ({
 			title: intl.formatMessage({
-				id: 'books__title',
-				defaultMessage: 'Books',
+				id: 'egwbooks__title',
+				defaultMessage: 'Ellen G. White',
 			}),
 		})
 	);
@@ -41,8 +41,8 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
-		'books',
-		getAudiobookListPathsData,
+		'egwbooks',
+		getEgwAudiobookListPathsData,
 		(d) => d.audiobooks.aggregate?.count
 	);
 }

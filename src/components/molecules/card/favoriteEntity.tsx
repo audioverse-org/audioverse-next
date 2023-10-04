@@ -23,7 +23,7 @@ export default function CardFavoriteEntity({
 		case 'Collection':
 			return <CardCollection collection={entity} />;
 		case 'Person':
-			return <CardPerson person={entity} />;
+			return <CardPerson person={entity} midinit={true} />;
 		case 'Recording':
 			return <CardRecording recording={entity} />;
 		case 'Sequence':
