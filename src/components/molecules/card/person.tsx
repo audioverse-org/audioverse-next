@@ -19,11 +19,17 @@ import styles from './person.module.scss';
 interface CardCollectionProps {
 	person: CardPersonFragment;
 	compact?: boolean;
+	largeinit?: boolean;
+	midinit?: boolean;
+	smallinit?: boolean;
 }
 
 export default function CardPerson({
 	person,
 	compact = false,
+	largeinit = false,
+	midinit = false,
+	smallinit = false,
 }: CardCollectionProps): JSX.Element {
 	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
 	const { canonicalPath, image, name, recordings } = person;
@@ -39,7 +45,12 @@ export default function CardPerson({
 									<RoundImage image={image.url} alt={name} large={compact} />
 								</div>
 							) : (
-								<CircleInitials name={name} large={true} />
+								<CircleInitials
+									name={name}
+									large={largeinit}
+									mid={midinit}
+									small={smallinit}
+								/>
 							)}
 							{name}
 						</Heading2>
