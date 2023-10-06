@@ -5,7 +5,7 @@ import books from './books';
 import conferences from './conferences';
 import contact from './contact';
 import discover from './discover';
-import egwbooks from './egwbooks';
+import egwbooks from './egwbooks'; //egw
 import library from './library';
 import presenters from './presenters';
 import node from './primatives/node';

@@ -5,7 +5,7 @@ import LineHeading from '~components/atoms/lineHeading';
 import CardFavoriteEntity from '~components/molecules/card/favoriteEntity';
 import Audiobooks from '~src/components/organisms/cardSlider/section/audiobooks';
 import Conferences from '~src/components/organisms/cardSlider/section/conferences';
-import EgwAudiobooks from '~src/components/organisms/cardSlider/section/egwAudiobooks';
+import EgwAudiobooks from '~src/components/organisms/cardSlider/section/egwAudiobooks'; //egw
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
 import ScriptureSongs from '~src/components/organisms/cardSlider/section/scriptureSongs';
 import Series from '~src/components/organisms/cardSlider/section/series';

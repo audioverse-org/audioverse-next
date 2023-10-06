@@ -34,7 +34,7 @@ interface CardCollectionProps {
 	sequence: CardSequenceFragment;
 	recordings?: CardRecordingFragment[] | null;
 	slim?: boolean;
-	egw?: boolean;
+	egw?: boolean; //egw
 }
 
 export default function CardSequence({

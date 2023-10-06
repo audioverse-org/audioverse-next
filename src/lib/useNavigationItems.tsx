@@ -207,7 +207,7 @@ export function useNavigationItems(): INavigationItem[] {
 					href: root.lang(languageRoute).egwbooks.get(),
 					Icon: iconMap.fa_feather,
 					label: intl.formatMessage({
-						id: `header__navItemCollections-egwbooks`,
+						id: `header__navItemCollections-egwbooks`, //egw
 						defaultMessage: 'Ellen G. White',
 					}),
 				},

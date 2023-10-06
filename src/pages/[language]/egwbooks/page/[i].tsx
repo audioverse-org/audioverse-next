@@ -5,7 +5,7 @@ import {
 } from 'next';
 
 import {
-	getEgwAudiobookListPageData,
+	getEgwAudiobookListPageData, //egw
 	getEgwAudiobookListPathsData,
 } from '~containers/audiobook/__generated__/egwList';
 import EgwAudiobooksList, {

@@ -11,7 +11,7 @@ import TrendingMusic from '~components/organisms/cardSlider/section/trendingMusi
 import TrendingTeachings from '~components/organisms/cardSlider/section/trendingTeachings';
 import Audiobooks from '~src/components/organisms/cardSlider/section/audiobooks';
 import BibleBooks from '~src/components/organisms/cardSlider/section/bibleBooks';
-import EgwAudiobooks from '~src/components/organisms/cardSlider/section/egwAudiobooks';
+import EgwAudiobooks from '~src/components/organisms/cardSlider/section/egwAudiobooks'; //egw
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
 
 export default function Discover(): JSX.Element {

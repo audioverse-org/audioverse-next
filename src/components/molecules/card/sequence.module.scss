@@ -9,6 +9,7 @@ $container-padding: 16px;
 	overflow: hidden;
 	transition-duration: $transition-medium;
 	&.EGWAUDIOBOOK {
+		//egw
 		--sequenceHeadingColor: #{$ts-white};
 		--sequenceTextColor: #{$ts-white};
 		--sequenceTextSecondaryColor: #{$ts-lightTone};

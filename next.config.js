@@ -113,7 +113,7 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/audiobooks/egwbooks/podcast/:seriesId/latest/:slug',
 					destination: '/:lang/egwbooks/:seriesId/feed.xml',
-					permanent: true,
+					permanent: true, //egw
 				},
 				{
 					source: '/:lang/music/browse/podcast/:seriesId/latest/:slug',
