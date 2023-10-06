@@ -8,6 +8,14 @@ $container-padding: 16px;
 	border-radius: 16px;
 	overflow: hidden;
 	transition-duration: $transition-medium;
+	&.EGWAUDIOBOOK {
+		//egw
+		--sequenceHeadingColor: #{$ts-white};
+		--sequenceTextColor: #{$ts-white};
+		--sequenceTextSecondaryColor: #{$ts-lightTone};
+		background-color: $ts-egw;
+		--sequenceBackgroundColorHover: #{$ts-darkened-egw};
+	}
 	&.AUDIOBOOK {
 		--sequenceHeadingColor: #{$ts-white};
 		--sequenceTextColor: #{$ts-white};
@@ -87,6 +95,11 @@ $container-padding: 16px;
 .bibleReadBy {
 	font-weight: 300;
 	text-align: center;
+	color: $ts-lightTone;
+}
+
+.bookReadBy {
+	font-weight: 300;
 	color: $ts-lightTone;
 }
 

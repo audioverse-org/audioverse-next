@@ -40,7 +40,7 @@ function SearchPersons({ nodes, pagination }: SearchPersonsProps) {
 			}
 		>
 			{nodes.map((node) => (
-				<CardPerson person={node} key={node.canonicalPath} />
+				<CardPerson person={node} midinit={true} key={node.canonicalPath} />
 			))}
 		</PaginatedCardList>
 	);

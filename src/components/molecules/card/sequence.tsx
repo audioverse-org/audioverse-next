@@ -34,12 +34,14 @@ interface CardCollectionProps {
 	sequence: CardSequenceFragment;
 	recordings?: CardRecordingFragment[] | null;
 	slim?: boolean;
+	egw?: boolean; //egw
 }
 
 export default function CardSequence({
 	sequence,
 	recordings,
 	slim,
+	egw,
 }: CardCollectionProps): JSX.Element {
 	const [ref, isHovered] = useHover<HTMLButtonElement>();
 	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
@@ -65,15 +67,20 @@ export default function CardSequence({
 	const { Icon, accentColor, backgroundColor, textColor, label, labelColor } = (
 		{
 			[SequenceContentType.Audiobook]: {
-				Icon: BookIcon,
+				Icon: egw ? FeatherIcon : BookIcon,
 				accentColor: BaseColors.SALMON,
-				backgroundColor: BaseColors.BOOK_B,
+				backgroundColor: egw ? BaseColors.DARK : BaseColors.BOOK_B,
 				iconColor: BaseColors.WHITE,
 				textColor: BaseColors.LIGHT_TONE,
-				label: intl.formatMessage({
-					id: 'cardSequence_audiobookType',
-					defaultMessage: 'Book',
-				}),
+				label: egw
+					? intl.formatMessage({
+							id: 'cardSequence_egwAudiobookType',
+							defaultMessage: 'ELLEN G. WHITE',
+					  })
+					: intl.formatMessage({
+							id: 'cardSequence_audiobookType',
+							defaultMessage: 'Book',
+					  }),
 				labelColor: BaseColors.WHITE,
 			},
 			[SequenceContentType.BibleBook]: {
@@ -154,13 +161,13 @@ export default function CardSequence({
 				>
 					{title}
 				</Heading2>
-				{isBibleBook && (
+				{(isBibleBook || egw) && (
 					<Heading6
 						loose
 						sans
 						uppercase
 						ultralight
-						className={styles.bibleReadBy}
+						className={egw ? styles.bookReadBy : styles.bibleReadBy}
 					>
 						<FormattedMessage
 							id="cardSequence_readByLabel"
@@ -178,6 +185,7 @@ export default function CardSequence({
 					></div>
 				)}
 				{!!persons.length &&
+					!egw &&
 					sequence.contentType !== SequenceContentType.BibleBook &&
 					(!recordings?.length ||
 						sequence.contentType === SequenceContentType.Audiobook ||
@@ -277,7 +285,7 @@ export default function CardSequence({
 	const className = clsx(
 		styles.container,
 		(isHovered || isSubHovered) && styles.otherHovered,
-		styles[contentType]
+		egw ? styles['EGWAUDIOBOOK'] : styles[contentType]
 	);
 	const linkUrl =
 		(isBibleBook && (sequence.allRecordings.nodes || [])[0].canonicalPath) ||

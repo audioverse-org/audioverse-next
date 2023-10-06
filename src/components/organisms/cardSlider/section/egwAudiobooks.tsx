@@ -6,30 +6,30 @@ import CardSequence from '~src/components/molecules/card/sequence';
 import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
-import { useInfiniteGetSectionAudiobooksQuery } from './__generated__/audiobooks';
+import { useInfiniteGetSectionEgwAudiobooksQuery } from './__generated__/egwAudiobooks';
 import Section from './index';
 
-export default function Audiobooks(): JSX.Element {
+export default function EgwAudiobooks(): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageId();
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetSectionAudiobooksQuery}
+			infiniteQuery={useInfiniteGetSectionEgwAudiobooksQuery}
 			heading={intl.formatMessage({
-				id: 'organismSection__audiobooksHeading',
-				defaultMessage: 'Discover Books',
+				id: 'organismSection__egwAudiobooksHeading',
+				defaultMessage: 'Discover Ellen G. White',
 			})}
 			previous={intl.formatMessage({
-				id: 'organismSection__audiobooksPrevious',
-				defaultMessage: 'Previous audiobooks',
+				id: 'organismSection__egwAudiobooksPrevious',
+				defaultMessage: 'Previous EGW audiobooks',
 			})}
 			next={intl.formatMessage({
-				id: 'organismSection__audiobooksNext',
-				defaultMessage: 'Next audiobooks',
+				id: 'organismSection__egwAudiobooksNext',
+				defaultMessage: 'Next EGW audiobooks',
 			})}
-			seeAllUrl={root.lang(lang).books.get()}
+			seeAllUrl={root.lang(lang).egwbooks.get()}
 			Card={(p: { node: CardSequenceFragment }) => (
-				<CardSequence sequence={p.node} />
+				<CardSequence sequence={p.node} slim={true} egw={true} />
 			)}
 		/>
 	);
