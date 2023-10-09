@@ -6,17 +6,17 @@ import React from 'react';
 import { fetchApi } from '~lib/api/fetchApi';
 import { ENTRIES_PER_PAGE } from '~lib/constants';
 import renderWithProviders from '~lib/test/renderWithProviders';
-import AudiobooksList, {
+import EgwAudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
-} from '~pages/[language]/books/page/[i]';
+} from '~pages/[language]/egwbooks/page/[i]';
 import { SequenceContentType } from '~src/__generated__/graphql';
 
 import {
-	GetAudiobookListPageDataDocument,
-	GetAudiobookListPageDataQuery,
-	GetAudiobookListPathsDataDocument,
-} from './__generated__/list';
+	GetEgwAudiobookListPageDataDocument,
+	GetEgwAudiobookListPageDataQuery,
+	GetEgwAudiobookListPathsDataDocument,
+} from './__generated__/egwList';
 
 async function renderPage(
 	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {}
@@ -27,12 +27,12 @@ async function renderPage(
 		params: { language: 'en', i: '1', ...params },
 	})) as any;
 
-	return renderWithProviders(<AudiobooksList {...props} />, undefined);
+	return renderWithProviders(<EgwAudiobooksList {...props} />, undefined);
 }
 
-function loadData(data: Partial<GetAudiobookListPageDataQuery> = {}) {
+function loadData(data: Partial<GetEgwAudiobookListPageDataQuery> = {}) {
 	when(fetchApi)
-		.calledWith(GetAudiobookListPageDataDocument, expect.anything())
+		.calledWith(GetEgwAudiobookListPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			audiobooks: {
 				nodes: [
@@ -57,7 +57,7 @@ describe('audiobook list page', () => {
 	it('renders', async () => {
 		await renderPage();
 
-		expect(fetchApi).toBeCalledWith(GetAudiobookListPageDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetEgwAudiobookListPageDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 				first: ENTRIES_PER_PAGE,
@@ -76,7 +76,7 @@ describe('audiobook list page', () => {
 
 	it('generates static paths', async () => {
 		when(fetchApi)
-			.calledWith(GetAudiobookListPathsDataDocument, expect.anything())
+			.calledWith(GetEgwAudiobookListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				audiobooks: {
 					aggregate: {
@@ -87,7 +87,7 @@ describe('audiobook list page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/books/page/1');
+		expect(paths).toContain('/en/egwbooks/page/1');
 	});
 
 	it('renders pagination', async () => {
@@ -105,7 +105,7 @@ describe('audiobook list page', () => {
 
 		const link = screen.getByText('1') as HTMLLinkElement;
 
-		expect(link.href).toContain('/en/books');
+		expect(link.href).toContain('/en/egwbooks');
 	});
 
 	it('localizes pagination links', async () => {
@@ -115,7 +115,7 @@ describe('audiobook list page', () => {
 
 		const link = screen.getByText('1') as HTMLLinkElement;
 
-		expect(link.href).toContain('/es/books');
+		expect(link.href).toContain('/es/egwbooks');
 	});
 
 	it('renders 404', async () => {
@@ -152,6 +152,6 @@ describe('audiobook list page', () => {
 
 		await renderPage();
 
-		expect(screen.getByText('Books')).toBeInTheDocument();
+		expect(screen.getByText('Ellen G. White')).toBeInTheDocument();
 	});
 });
