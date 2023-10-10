@@ -7,7 +7,7 @@ query getSectionTopics(
 		language: $language
 		first: $first
 		after: $after
-		orderBy: { field: ID, direction: DESC }
+		orderBy: { field: FEATURED, direction: ASC }
 	) {
 		nodes {
 			...cardTopic
