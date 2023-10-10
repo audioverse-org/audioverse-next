@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import root, { isRedirectRouteAllowed } from '~lib/routes';
+import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 
 export default function LoginRedirect(): JSX.Element {
@@ -10,12 +10,8 @@ export default function LoginRedirect(): JSX.Element {
 	const route = useLanguageRoute();
 
 	useEffect(() => {
-		const backRoute = router.query.back as string;
-		router.push(
-			backRoute && isRedirectRouteAllowed(backRoute)
-				? backRoute
-				: root.lang(route).discover.get()
-		);
+		//const backRoute = router.query.back as string;
+		router.push(root.lang(route).discover.get());
 	}, [router, route]);
 
 	return (
