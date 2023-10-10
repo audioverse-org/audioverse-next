@@ -19,6 +19,7 @@ export default function DiscoverCollections(): JSX.Element {
 		<div>
 			<Presenters />
 			<Topics />
+			<Series />
 			<Audiobooks />
 			<Conferences
 				heading={
@@ -39,7 +40,7 @@ export default function DiscoverCollections(): JSX.Element {
 				}
 			/>
 			<ScriptureSongs />
-			<Series />
+			
 		</div>
 	);
 }
