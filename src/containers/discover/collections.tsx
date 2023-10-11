@@ -8,7 +8,7 @@ import ScriptureSongs from '~src/components/organisms/cardSlider/section/scriptu
 import Series from '~src/components/organisms/cardSlider/section/series';
 import Sponsors from '~src/components/organisms/cardSlider/section/sponsors';
 import StorySeasons from '~src/components/organisms/cardSlider/section/storySeasons';
-import Topics from '~src/components/organisms/cardSlider/section/topics';
+import TopicsBrowse from '~src/components/organisms/cardSlider/section/topicsBrowse';
 
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
 
@@ -18,7 +18,7 @@ export default function DiscoverCollections(): JSX.Element {
 	return (
 		<div>
 			<Presenters />
-			<Topics />
+			<TopicsBrowse />
 			<Series />
 			<Audiobooks />
 			<Conferences

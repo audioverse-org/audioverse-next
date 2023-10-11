@@ -36,6 +36,7 @@ export async function getStaticProps({
 		getSectionConferences: { language },
 		getSectionBlogPosts: { language },
 		getSectionTopics: { language },
+		getSectionTopicsBrowse: { language },
 		getSectionPresenters: { language },
 		getSectionBibleBooks: { language },
 		getSectionTrendingMusic: { language },

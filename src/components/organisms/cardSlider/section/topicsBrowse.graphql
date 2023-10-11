@@ -1,0 +1,20 @@
+query getSectionTopicsBrowse(
+	$language: Language!
+	$first: Int! = 6
+	$after: String = null
+) {
+	topics(
+		language: $language
+		first: $first
+		after: $after
+		orderBy: { field: FEATURED, direction: DESC }
+	) {
+		nodes {
+			...cardTopic
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
