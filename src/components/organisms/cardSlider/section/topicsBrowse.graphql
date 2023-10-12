@@ -1,4 +1,4 @@
-query getSectionTopics(
+query getSectionTopicsBrowse(
 	$language: Language!
 	$first: Int! = 6
 	$after: String = null
@@ -7,7 +7,7 @@ query getSectionTopics(
 		language: $language
 		first: $first
 		after: $after
-		orderBy: { field: FEATURED, direction: ASC }
+		orderBy: { field: FEATURED, direction: DESC }
 	) {
 		nodes {
 			...cardTopic

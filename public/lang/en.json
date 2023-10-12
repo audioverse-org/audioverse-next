@@ -361,6 +361,15 @@
   "books__title": {
     "string": "All Audiobooks"
   },
+  "browse__topicsNext": {
+    "string": "Next topics"
+  },
+  "browse__topicsPrevious": {
+    "string": "Previous topics"
+  },
+  "browse_topicsHeading": {
+    "string": "Topics"
+  },
   "buttonShareRecording__emailSubject": {
     "string": "{title} by {presenters}"
   },
