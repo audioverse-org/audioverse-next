@@ -1,8 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '~components/atoms/lineHeading';
-import CardFavoriteEntity from '~components/molecules/card/favoriteEntity';
 import Audiobooks from '~src/components/organisms/cardSlider/section/audiobooks';
 import Conferences from '~src/components/organisms/cardSlider/section/conferences';
 import EgwAudiobooks from '~src/components/organisms/cardSlider/section/egwAudiobooks'; //egw
@@ -11,37 +9,18 @@ import ScriptureSongs from '~src/components/organisms/cardSlider/section/scriptu
 import Series from '~src/components/organisms/cardSlider/section/series';
 import Sponsors from '~src/components/organisms/cardSlider/section/sponsors';
 import StorySeasons from '~src/components/organisms/cardSlider/section/storySeasons';
-import Topics from '~src/components/organisms/cardSlider/section/topics';
+import TopicsBrowse from '~src/components/organisms/cardSlider/section/topicsBrowse';
 
 import { GetDiscoverCollectionsPageDataQuery } from './__generated__/collections';
-import styles from './collections.module.scss';
 
 export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 
-export default function DiscoverCollections({
-	websiteFeaturedCollection,
-}: IDiscoverCollectionsProps): JSX.Element {
+export default function DiscoverCollections(): JSX.Element {
 	return (
 		<div>
-			{websiteFeaturedCollection && (
-				<>
-					<LineHeading variant="overline">
-						<FormattedMessage
-							id="discoverCollections_featuredCollectionHeading"
-							defaultMessage="Featured Collection"
-						/>
-					</LineHeading>
-					<div className={styles.featured}>
-						<CardFavoriteEntity
-							entity={websiteFeaturedCollection}
-							disableSequenceStack
-						/>
-					</div>
-				</>
-			)}
-
 			<Presenters />
-			<Topics />
+			<TopicsBrowse />
+			<Series />
 			<EgwAudiobooks />
 			<Audiobooks />
 			<Conferences
@@ -63,7 +42,6 @@ export default function DiscoverCollections({
 				}
 			/>
 			<ScriptureSongs />
-			<Series />
 		</div>
 	);
 }

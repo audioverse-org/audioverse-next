@@ -717,6 +717,24 @@
       "value": "Books"
     }
   ],
+  "browse__topicsNext": [
+    {
+      "type": 0,
+      "value": "Next topics"
+    }
+  ],
+  "browse__topicsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous topics"
+    }
+  ],
+  "browse_topicsHeading": [
+    {
+      "type": 0,
+      "value": "Topics"
+    }
+  ],
   "buttonShareRecording__emailSubject": [
     {
       "type": 1,
@@ -1345,12 +1363,6 @@
     {
       "type": 0,
       "value": "Conferences"
-    }
-  ],
-  "discoverCollections_featuredCollectionHeading": [
-    {
-      "type": 0,
-      "value": "Featured Collection"
     }
   ],
   "discoverCollections_storySeasonsHeading": [
