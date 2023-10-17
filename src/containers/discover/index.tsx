@@ -29,8 +29,22 @@ export default function Discover(): JSX.Element {
 			/>
 			<TrendingTeachings />
 			<FeaturedTeachings />
-			<EgwAudiobooks />
-			<Audiobooks />
+			<EgwAudiobooks
+				heading={
+					<FormattedMessage
+						id="discoverCollections_egwAudiobooksHeading"
+						defaultMessage="Discover Ellen G. White"
+					/>
+				}
+			/>
+			<Audiobooks
+				heading={
+					<FormattedMessage
+						id="discoverCollections_audiobooksHeading"
+						defaultMessage="Discover Books"
+					/>
+				}
+			/>
 			<BlogPosts />
 			<BibleBooks
 				heading={

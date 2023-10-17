@@ -639,8 +639,14 @@
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
+  "discoverCollections_audiobooksHeading": {
+    "string": "Discover Books"
+  },
   "discoverCollections_conferencesHeading": {
     "string": "Conferences"
+  },
+  "discoverCollections_egwAudiobooksHeading": {
+    "string": "Discover Ellen G. White"
   },
   "discoverCollections_storySeasonsHeading": {
     "string": "Stories"
@@ -1813,7 +1819,7 @@
     "string": "Sponsor"
   },
   "organismSection__audiobooksHeading": {
-    "string": "Discover Books"
+    "string": "Books"
   },
   "organismSection__audiobooksNext": {
     "string": "Next audiobooks"
@@ -1831,7 +1837,7 @@
     "string": "Previous Bible books"
   },
   "organismSection__egwAudiobooksHeading": {
-    "string": "Discover Ellen G. White"
+    "string": "Ellen G. White"
   },
   "organismSection__egwAudiobooksNext": {
     "string": "Next EGW audiobooks"

@@ -9,16 +9,23 @@ import { useLanguageId } from '~src/lib/useLanguageId';
 import { useInfiniteGetSectionEgwAudiobooksQuery } from './__generated__/egwAudiobooks';
 import Section from './index';
 
-export default function EgwAudiobooks(): JSX.Element {
+export default function EgwAudiobooks(props: {
+	heading?: string | JSX.Element;
+}): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageId();
+
+	const {
+		heading = intl.formatMessage({
+			id: 'organismSection__egwAudiobooksHeading',
+			defaultMessage: 'Ellen G. White',
+		}),
+	} = props;
+
 	return (
 		<Section
 			infiniteQuery={useInfiniteGetSectionEgwAudiobooksQuery}
-			heading={intl.formatMessage({
-				id: 'organismSection__egwAudiobooksHeading',
-				defaultMessage: 'Discover Ellen G. White',
-			})}
+			heading={heading}
 			previous={intl.formatMessage({
 				id: 'organismSection__egwAudiobooksPrevious',
 				defaultMessage: 'Previous EGW audiobooks',

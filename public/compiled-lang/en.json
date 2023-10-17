@@ -1359,10 +1359,22 @@
       "value": "Discover Collections"
     }
   ],
+  "discoverCollections_audiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Discover Books"
+    }
+  ],
   "discoverCollections_conferencesHeading": [
     {
       "type": 0,
       "value": "Conferences"
+    }
+  ],
+  "discoverCollections_egwAudiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Discover Ellen G. White"
     }
   ],
   "discoverCollections_storySeasonsHeading": [
@@ -3836,7 +3848,7 @@
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
-      "value": "Discover Books"
+      "value": "Books"
     }
   ],
   "organismSection__audiobooksNext": [
@@ -3872,7 +3884,7 @@
   "organismSection__egwAudiobooksHeading": [
     {
       "type": 0,
-      "value": "Discover Ellen G. White"
+      "value": "Ellen G. White"
     }
   ],
   "organismSection__egwAudiobooksNext": [

@@ -17,6 +17,7 @@ import BookIcon from '~public/img/icons/fa-book-light.svg';
 import FeatherIcon from '~public/img/icons/fa-feather-light.svg';
 import ListIcon from '~public/img/icons/fa-list-alt.svg';
 import MusicIcon from '~public/img/icons/fa-music-light.svg';
+import SeedlingIcon from '~public/img/icons/fa-seedling.svg';
 import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
@@ -119,7 +120,7 @@ export default function CardSequence({
 				labelColor: BaseColors.DARK,
 			},
 			[SequenceContentType.StorySeason]: {
-				Icon: FeatherIcon,
+				Icon: SeedlingIcon,
 				accentColor: BaseColors.SALMON,
 				backgroundColor: BaseColors.STORY_B,
 				iconColor: BaseColors.WHITE,
@@ -174,13 +175,15 @@ export default function CardSequence({
 						ultralight
 						className={egw ? styles.bookReadBy : styles.bibleReadBy}
 					>
-						<FormattedMessage
-							id="cardSequence_readByLabel"
-							defaultMessage="Read By {name}"
-							values={{
-								name: (speakers.nodes || [])[0]?.name,
-							}}
-						/>
+						{(speakers.nodes || [])[0]?.name && (
+							<FormattedMessage
+								id="cardSequence_readByLabel"
+								defaultMessage="Read By {name}"
+								values={{
+									name: (speakers.nodes || [])[0]?.name,
+								}}
+							/>
+						)}
 					</Heading6>
 				)}
 				{summary && (
