@@ -21,6 +21,7 @@ import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
+import NameMatcher from '~src/components/atoms/nameMatcher';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonLockup from '../personLockup';
@@ -49,6 +50,7 @@ export default function CardSequence({
 	const { isFavorited, toggleFavorited, playbackCompletedPercentage } =
 		useIsSequenceFavorited(sequence.id);
 	const [personsExpanded, setPersonsExpanded] = useState(false);
+	//const [thisPerson, setThisPerson] = useState(false);
 	const router = useRouter();
 	const isBibleBook = sequence.contentType === SequenceContentType.BibleBook;
 
@@ -136,6 +138,9 @@ export default function CardSequence({
 			? writers.nodes
 			: speakers.nodes) || [];
 
+	const isPersonMatched = persons.some((person) =>
+		NameMatcher({ person, targetName: 'Ellen G. White' })
+	);
 	const inner = (
 		<>
 			<div className={styles.stretch}>
@@ -285,7 +290,11 @@ export default function CardSequence({
 	const className = clsx(
 		styles.container,
 		(isHovered || isSubHovered) && styles.otherHovered,
-		egw ? styles['EGWAUDIOBOOK'] : styles[contentType]
+		egw
+			? styles['EGWAUDIOBOOK']
+			: isPersonMatched
+			? styles['EGWAUDIOBOOK']
+			: styles[contentType]
 	);
 	const linkUrl =
 		(isBibleBook && (sequence.allRecordings.nodes || [])[0].canonicalPath) ||
