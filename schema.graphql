@@ -546,6 +546,9 @@ type Collection implements Node & UniformResourceLocatable {
     after: String
     collectionIds: [ID!]
 
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
+
     """Return up to the first `n` elements from the list."""
     first: Int
 
@@ -2087,6 +2090,9 @@ type Person implements Node & UniformResourceLocatable {
     collectionId: ID
     collectionIds: [ID!]
 
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
+
     """Return up to the first `n` elements from the list."""
     first: Int
 
@@ -2399,6 +2405,9 @@ type Query {
     collectionId: ID
     collectionIds: [ID!]
 
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
+
     """Return up to the first `n` elements from the list."""
     first: Int
 
@@ -2653,6 +2662,9 @@ type Query {
     collectionIds: [ID!]
     contentType: SequenceContentType
 
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
+
     """Return up to the first `n` elements from the list."""
     first: Int
 
@@ -2785,6 +2797,9 @@ type Query {
     after: String
     collectionId: ID
     collectionIds: [ID!]
+
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
 
     """Return up to the first `n` elements from the list."""
     first: Int
@@ -3200,6 +3215,9 @@ type Query {
     collectionIds: [ID!]
     contentType: SequenceContentType
 
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
+
     """Return up to the first `n` elements from the list."""
     first: Int
 
@@ -3227,6 +3245,9 @@ type Query {
     after: String
     collectionId: ID
     collectionIds: [ID!]
+
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
 
     """Return up to the first `n` elements from the list."""
     first: Int
@@ -3458,6 +3479,9 @@ type Query {
     after: String
     collectionId: ID
     collectionIds: [ID!]
+
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
 
     """Return up to the first `n` elements from the list."""
     first: Int
@@ -4539,6 +4563,9 @@ type Sponsor implements Node & UniformResourceLocatable {
     collectionId: ID
     collectionIds: [ID!]
     contentType: SequenceContentType = SERIES
+
+    """The sequence must not be associated with any of the persons provided."""
+    excludePersons: [RecordingPersonInput!]
 
     """Return up to the first `n` elements from the list."""
     first: Int
