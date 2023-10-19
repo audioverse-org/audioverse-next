@@ -9,23 +9,28 @@ import { useLanguageId } from '~src/lib/useLanguageId';
 import { useInfiniteGetSectionEgwAudiobooksQuery } from './__generated__/egwAudiobooks';
 import Section from './index';
 
-export default function EgwAudiobooks(props: {
+interface EgwAudiobooksProps {
 	heading?: string | JSX.Element;
-}): JSX.Element {
+}
+
+const EgwAudiobooks: React.FC<EgwAudiobooksProps> = ({ heading }) => {
 	const intl = useIntl();
 	const lang = useLanguageId();
 
-	const {
-		heading = intl.formatMessage({
-			id: 'organismSection__egwAudiobooksHeading',
-			defaultMessage: 'Ellen G. White',
-		}),
-	} = props;
+	const renderCard = (p: { node: CardSequenceFragment }) => {
+		return <CardSequence sequence={p.node} slim={true} egw={true} />;
+	};
 
 	return (
 		<Section
 			infiniteQuery={useInfiniteGetSectionEgwAudiobooksQuery}
-			heading={heading}
+			heading={
+				heading ||
+				intl.formatMessage({
+					id: 'organismSection__egwAudiobooksHeading',
+					defaultMessage: 'Ellen G. White',
+				})
+			}
 			previous={intl.formatMessage({
 				id: 'organismSection__egwAudiobooksPrevious',
 				defaultMessage: 'Previous EGW audiobooks',
@@ -35,9 +40,9 @@ export default function EgwAudiobooks(props: {
 				defaultMessage: 'Next EGW audiobooks',
 			})}
 			seeAllUrl={root.lang(lang).egwbooks.get()}
-			Card={(p: { node: CardSequenceFragment }) => (
-				<CardSequence sequence={p.node} slim={true} egw={true} />
-			)}
+			Card={renderCard}
 		/>
 	);
-}
+};
+
+export default EgwAudiobooks;
