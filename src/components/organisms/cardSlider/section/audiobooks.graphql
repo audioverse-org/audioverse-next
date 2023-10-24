@@ -15,7 +15,7 @@ query getSectionAudiobooks(
 			{ personId: 506 }
 			{ personId: 1208 }
 			{ personId: 1884 }
-		] #temp fix, need a flag on DB
+		]
 	) {
 		nodes {
 			...cardSequence
