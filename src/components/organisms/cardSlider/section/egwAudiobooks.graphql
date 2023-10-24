@@ -8,7 +8,14 @@ query getSectionEgwAudiobooks(
 		first: $first
 		after: $after
 		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
-		persons: [{ personId: 128 }]
+		persons: [
+			{ personId: 128 }
+			{ personId: 381 }
+			{ personId: 445 }
+			{ personId: 506 }
+			{ personId: 1208 }
+			{ personId: 1884 }
+		] #temp fix, need a flag on DB
 	) {
 		nodes {
 			...cardSequence
