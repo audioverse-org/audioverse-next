@@ -97,6 +97,11 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 		[fetchNextPage]
 	);
 
+	// Check if there's content to render, if not, return an empty JSX element
+	if (cards.length < 1) {
+		return <></>;
+	}
+
 	return (
 		<div className={styles.section}>
 			<LineHeading variant="overline" unpadded>

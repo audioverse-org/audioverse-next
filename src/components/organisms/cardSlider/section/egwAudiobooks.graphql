@@ -1,4 +1,4 @@
-query getSectionAudiobooks(
+query getSectionEgwAudiobooks(
 	$language: Language!
 	$first: Int! = 3
 	$after: String = null
@@ -8,7 +8,7 @@ query getSectionAudiobooks(
 		first: $first
 		after: $after
 		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
-		excludePersons: [
+		persons: [
 			{ personId: 128 }
 			{ personId: 381 }
 			{ personId: 445 }

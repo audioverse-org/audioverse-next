@@ -244,7 +244,11 @@ function CollectionDetail({
 					</LineHeading>
 					<CardGroup className={styles.cardGroup}>
 						{persons.nodes.map((person) => (
-							<CardPerson person={person} key={person.canonicalPath} />
+							<CardPerson
+								person={person}
+								largeinit={true}
+								key={person.canonicalPath}
+							/>
 						))}
 					</CardGroup>
 					{persons.pageInfo.hasNextPage && (

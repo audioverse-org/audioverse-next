@@ -152,6 +152,6 @@ describe('audiobook list page', () => {
 
 		await renderPage();
 
-		expect(screen.getByText('All Audiobooks')).toBeInTheDocument();
+		expect(screen.getByText('Books')).toBeInTheDocument();
 	});
 });

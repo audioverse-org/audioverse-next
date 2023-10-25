@@ -196,10 +196,19 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'stories',
 					href: root.lang(languageRoute).stories.albums.get(),
-					Icon: iconMap.fa_feather,
+					Icon: iconMap.fa_seedling,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-stories`,
 						defaultMessage: 'Stories',
+					}),
+				},
+				{
+					key: 'egwbooks',
+					href: root.lang(languageRoute).egwbooks.get(),
+					Icon: iconMap.fa_feather,
+					label: intl.formatMessage({
+						id: `header__navItemCollections-egwbooks`, //egw
+						defaultMessage: 'Ellen G. White',
 					}),
 				},
 				{
@@ -211,6 +220,7 @@ export function useNavigationItems(): INavigationItem[] {
 						defaultMessage: 'Books',
 					}),
 				},
+
 				{
 					key: 'songs',
 					href: root.lang(languageRoute).songs.albums.get(),

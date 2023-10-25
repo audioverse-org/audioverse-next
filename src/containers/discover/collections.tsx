@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Audiobooks from '~src/components/organisms/cardSlider/section/audiobooks';
 import Conferences from '~src/components/organisms/cardSlider/section/conferences';
+import EgwAudiobooks from '~src/components/organisms/cardSlider/section/egwAudiobooks'; //egw
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
 import ScriptureSongs from '~src/components/organisms/cardSlider/section/scriptureSongs';
 import Series from '~src/components/organisms/cardSlider/section/series';
@@ -20,6 +21,7 @@ export default function DiscoverCollections(): JSX.Element {
 			<Presenters />
 			<TopicsBrowse />
 			<Series />
+			<EgwAudiobooks />
 			<Audiobooks />
 			<Conferences
 				heading={

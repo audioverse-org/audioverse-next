@@ -306,7 +306,7 @@
     "string": "progress"
   },
   "audiobookList__heading": {
-    "string": "All Audiobooks"
+    "string": "Books"
   },
   "bibleBook__backToChapter": {
     "string": "Back to Chapter Info"
@@ -359,7 +359,7 @@
     "string": "All Blog Posts"
   },
   "books__title": {
-    "string": "All Audiobooks"
+    "string": "Books"
   },
   "browse__topicsNext": {
     "string": "Next topics"
@@ -436,6 +436,9 @@
   },
   "cardSequence_chaptersLabel": {
     "string": "{count} chapters"
+  },
+  "cardSequence_egwAudiobookType": {
+    "string": "ELLEN G. WHITE"
   },
   "cardSequence_readByLabel": {
     "string": "Read By {name}"
@@ -636,8 +639,14 @@
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
+  "discoverCollections_audiobooksHeading": {
+    "string": "Discover Books"
+  },
   "discoverCollections_conferencesHeading": {
     "string": "Conferences"
+  },
+  "discoverCollections_egwAudiobooksHeading": {
+    "string": "Discover Ellen G. White"
   },
   "discoverCollections_storySeasonsHeading": {
     "string": "Stories"
@@ -750,6 +759,12 @@
     "comment": "duration minutes",
     "string": "{minutes}m"
   },
+  "egwAudiobookList__heading": {
+    "string": "Ellen G. White"
+  },
+  "egwbooks__title": {
+    "string": "Ellen G. White"
+  },
   "embed__partInfo": {
     "string": "Part {index} of {count}"
   },
@@ -823,6 +838,9 @@
   },
   "header__navItemCollections-conferences": {
     "string": "Conferences"
+  },
+  "header__navItemCollections-egwbooks": {
+    "string": "Ellen G. White"
   },
   "header__navItemCollections-presenters": {
     "string": "Presenters"
@@ -1801,7 +1819,7 @@
     "string": "Sponsor"
   },
   "organismSection__audiobooksHeading": {
-    "string": "Audiobooks"
+    "string": "Books"
   },
   "organismSection__audiobooksNext": {
     "string": "Next audiobooks"
@@ -1817,6 +1835,15 @@
   },
   "organismSection__bibleBooksPrevious": {
     "string": "Previous Bible books"
+  },
+  "organismSection__egwAudiobooksHeading": {
+    "string": "Ellen G. White"
+  },
+  "organismSection__egwAudiobooksNext": {
+    "string": "Next EGW audiobooks"
+  },
+  "organismSection__egwAudiobooksPrevious": {
+    "string": "Previous EGW audiobooks"
   },
   "organismSection_presentersHeading": {
     "string": "Presenters"
