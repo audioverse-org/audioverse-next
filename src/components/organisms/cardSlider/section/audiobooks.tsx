@@ -9,16 +9,23 @@ import { useLanguageId } from '~src/lib/useLanguageId';
 import { useInfiniteGetSectionAudiobooksQuery } from './__generated__/audiobooks';
 import Section from './index';
 
-export default function Audiobooks(): JSX.Element {
+export default function Audiobooks(props: {
+	heading?: string | JSX.Element;
+}): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageId();
+
+	const {
+		heading = intl.formatMessage({
+			id: 'organismSection__audiobooksHeading',
+			defaultMessage: 'Books',
+		}),
+	} = props;
+
 	return (
 		<Section
 			infiniteQuery={useInfiniteGetSectionAudiobooksQuery}
-			heading={intl.formatMessage({
-				id: 'organismSection__audiobooksHeading',
-				defaultMessage: 'Audiobooks',
-			})}
+			heading={heading}
 			previous={intl.formatMessage({
 				id: 'organismSection__audiobooksPrevious',
 				defaultMessage: 'Previous audiobooks',

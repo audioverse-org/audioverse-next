@@ -37,6 +37,7 @@ export async function getStaticProps({
 		getSectionConferences: { language },
 		getSectionPresenters: { language },
 		getSectionStorySeasons: { language },
+		getSectionEgwAudiobooks: { language }, //egw
 		getSectionAudiobooks: { language },
 		getSectionSponsors: { language },
 		getSectionScriptureSongs: { language },

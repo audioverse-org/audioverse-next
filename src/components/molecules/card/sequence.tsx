@@ -17,10 +17,12 @@ import BookIcon from '~public/img/icons/fa-book-light.svg';
 import FeatherIcon from '~public/img/icons/fa-feather-light.svg';
 import ListIcon from '~public/img/icons/fa-list-alt.svg';
 import MusicIcon from '~public/img/icons/fa-music-light.svg';
+import SeedlingIcon from '~public/img/icons/fa-seedling.svg';
 import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
+import NameMatcher from '~src/components/atoms/nameMatcher';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonLockup from '../personLockup';
@@ -34,12 +36,14 @@ interface CardCollectionProps {
 	sequence: CardSequenceFragment;
 	recordings?: CardRecordingFragment[] | null;
 	slim?: boolean;
+	egw?: boolean; //egw
 }
 
 export default function CardSequence({
 	sequence,
 	recordings,
 	slim,
+	egw,
 }: CardCollectionProps): JSX.Element {
 	const [ref, isHovered] = useHover<HTMLButtonElement>();
 	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
@@ -47,6 +51,7 @@ export default function CardSequence({
 	const { isFavorited, toggleFavorited, playbackCompletedPercentage } =
 		useIsSequenceFavorited(sequence.id);
 	const [personsExpanded, setPersonsExpanded] = useState(false);
+	//const [thisPerson, setThisPerson] = useState(false);
 	const router = useRouter();
 	const isBibleBook = sequence.contentType === SequenceContentType.BibleBook;
 
@@ -65,15 +70,20 @@ export default function CardSequence({
 	const { Icon, accentColor, backgroundColor, textColor, label, labelColor } = (
 		{
 			[SequenceContentType.Audiobook]: {
-				Icon: BookIcon,
+				Icon: egw ? FeatherIcon : BookIcon,
 				accentColor: BaseColors.SALMON,
-				backgroundColor: BaseColors.BOOK_B,
+				backgroundColor: egw ? BaseColors.DARK : BaseColors.BOOK_B,
 				iconColor: BaseColors.WHITE,
 				textColor: BaseColors.LIGHT_TONE,
-				label: intl.formatMessage({
-					id: 'cardSequence_audiobookType',
-					defaultMessage: 'Book',
-				}),
+				label: egw
+					? intl.formatMessage({
+							id: 'cardSequence_egwAudiobookType',
+							defaultMessage: 'ELLEN G. WHITE',
+					  })
+					: intl.formatMessage({
+							id: 'cardSequence_audiobookType',
+							defaultMessage: 'Book',
+					  }),
 				labelColor: BaseColors.WHITE,
 			},
 			[SequenceContentType.BibleBook]: {
@@ -110,7 +120,7 @@ export default function CardSequence({
 				labelColor: BaseColors.DARK,
 			},
 			[SequenceContentType.StorySeason]: {
-				Icon: FeatherIcon,
+				Icon: SeedlingIcon,
 				accentColor: BaseColors.SALMON,
 				backgroundColor: BaseColors.STORY_B,
 				iconColor: BaseColors.WHITE,
@@ -129,6 +139,9 @@ export default function CardSequence({
 			? writers.nodes
 			: speakers.nodes) || [];
 
+	const isPersonMatched = persons.some((person) =>
+		NameMatcher({ person, targetName: 'Ellen G. White' })
+	);
 	const inner = (
 		<>
 			<div className={styles.stretch}>
@@ -154,21 +167,23 @@ export default function CardSequence({
 				>
 					{title}
 				</Heading2>
-				{isBibleBook && (
+				{(isBibleBook || egw) && (
 					<Heading6
 						loose
 						sans
 						uppercase
 						ultralight
-						className={styles.bibleReadBy}
+						className={egw ? styles.bookReadBy : styles.bibleReadBy}
 					>
-						<FormattedMessage
-							id="cardSequence_readByLabel"
-							defaultMessage="Read By {name}"
-							values={{
-								name: (speakers.nodes || [])[0]?.name,
-							}}
-						/>
+						{(speakers.nodes || [])[0]?.name && (
+							<FormattedMessage
+								id="cardSequence_readByLabel"
+								defaultMessage="Read By {name}"
+								values={{
+									name: (speakers.nodes || [])[0]?.name,
+								}}
+							/>
+						)}
 					</Heading6>
 				)}
 				{summary && (
@@ -178,6 +193,7 @@ export default function CardSequence({
 					></div>
 				)}
 				{!!persons.length &&
+					!egw &&
 					sequence.contentType !== SequenceContentType.BibleBook &&
 					(!recordings?.length ||
 						sequence.contentType === SequenceContentType.Audiobook ||
@@ -277,7 +293,11 @@ export default function CardSequence({
 	const className = clsx(
 		styles.container,
 		(isHovered || isSubHovered) && styles.otherHovered,
-		styles[contentType]
+		egw
+			? styles['EGWAUDIOBOOK']
+			: isPersonMatched
+			? styles['EGWAUDIOBOOK']
+			: styles[contentType]
 	);
 	const linkUrl =
 		(isBibleBook && (sequence.allRecordings.nodes || [])[0].canonicalPath) ||

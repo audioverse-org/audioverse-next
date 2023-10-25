@@ -1,4 +1,4 @@
-query getAudiobookListPageData(
+query getEgwAudiobookListPageData(
 	$language: Language!
 	$first: Int = 12
 	$offset: Int = 0
@@ -8,7 +8,7 @@ query getAudiobookListPageData(
 		first: $first
 		offset: $offset
 		orderBy: [{ field: TITLE, direction: ASC }]
-		excludePersons: [
+		persons: [
 			{ personId: 128 }
 			{ personId: 381 }
 			{ personId: 445 }
@@ -26,7 +26,7 @@ query getAudiobookListPageData(
 	}
 }
 
-query getAudiobookListPathsData($language: Language!) {
+query getEgwAudiobookListPathsData($language: Language!) {
 	audiobooks(language: $language) {
 		aggregate {
 			count
