@@ -4795,6 +4795,18 @@
       "value": "See All Matching Conferences"
     }
   ],
+  "search__egwbooksHeading": [
+    {
+      "type": 0,
+      "value": "Ellen G. White"
+    }
+  ],
+  "search__egwbooksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Ellen G. White Audiobooks"
+    }
+  ],
   "search__emptyStateMessage": [
     {
       "type": 0,

@@ -2292,6 +2292,12 @@
   "search__conferencesSeeAll": {
     "string": "See All Matching Conferences"
   },
+  "search__egwbooksHeading": {
+    "string": "Ellen G. White"
+  },
+  "search__egwbooksSeeAll": {
+    "string": "See All Matching Ellen G. White Audiobooks"
+  },
   "search__emptyStateMessage": {
     "string": "Try searching for something else"
   },

@@ -109,7 +109,53 @@ query getSearchAudiobooks(
 	$first: Int!
 	$after: String
 ) {
-	audiobooks(language: $language, search: $term, first: $first, after: $after) {
+	audiobooks(
+		language: $language
+		search: $term
+		first: $first
+		after: $after
+		excludePersons: [
+			{ personId: 128 }
+			{ personId: 381 }
+			{ personId: 445 }
+			{ personId: 506 }
+			{ personId: 1208 }
+			{ personId: 1884 }
+		]
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardSequence
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
+
+query getSearchEgwAudiobooks(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	audiobooks(
+		language: $language
+		search: $term
+		first: $first
+		after: $after
+		persons: [
+			{ personId: 128 }
+			{ personId: 381 }
+			{ personId: 445 }
+			{ personId: 506 }
+			{ personId: 1208 }
+			{ personId: 1884 }
+		]
+	) {
 		aggregate {
 			count
 		}
