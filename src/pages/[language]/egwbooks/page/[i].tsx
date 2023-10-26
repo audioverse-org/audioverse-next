@@ -33,7 +33,7 @@ export async function getStaticProps({
 		() => ({
 			title: intl.formatMessage({
 				id: 'egwbooks__title',
-				defaultMessage: 'Ellen G. White',
+				defaultMessage: 'Ellen White',
 			}),
 		})
 	);

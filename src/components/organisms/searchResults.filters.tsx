@@ -94,13 +94,13 @@ export const filters: Record<string, EntityFilter> = {
 		heading: (
 			<FormattedMessage
 				id="search__egwbooksHeading"
-				defaultMessage="Ellen G. White"
+				defaultMessage="Ellen White"
 			/>
 		),
 		seeAll: (
 			<FormattedMessage
 				id="search__egwbooksSeeAll"
-				defaultMessage="See All Matching Ellen G. White Audiobooks"
+				defaultMessage="See All Matching Ellen White Audiobooks"
 			/>
 		),
 		document: GetSearchEgwAudiobooksDocument,

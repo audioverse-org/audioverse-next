@@ -78,7 +78,7 @@ export default function CardSequence({
 				label: egw
 					? intl.formatMessage({
 							id: 'cardSequence_egwAudiobookType',
-							defaultMessage: 'ELLEN G. WHITE',
+							defaultMessage: 'ELLEN WHITE',
 					  })
 					: intl.formatMessage({
 							id: 'cardSequence_audiobookType',

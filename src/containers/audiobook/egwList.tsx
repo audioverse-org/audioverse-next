@@ -24,7 +24,7 @@ export function EgwAudiobooksList({
 			heading={
 				<FormattedMessage
 					id="egwAudiobookList__heading"
-					defaultMessage="Ellen G. White"
+					defaultMessage="Ellen White"
 				/>
 			}
 			makeRoute={(l, i) => root.lang(l).egwbooks.page(i).get()}
