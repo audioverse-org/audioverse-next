@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import LanguageAlternativesAlert from '~components/molecules/languageAlternativesAlert';
@@ -39,8 +39,19 @@ export default function AndNavigation({
 	useEffect(() => {
 		if (scrollRef.current) scrollRef.current.scrollTop = 0;
 	}, [term, entityType]);
-
 	useEffect(() => setEntityType(contextualFilterId), [contextualFilterId]);
+
+	useEffect(() => {
+		const fn = () => {
+			if (scrollRef.current) scrollRef.current.scrollTop = 0;
+		};
+
+		Router.events.on('routeChangeComplete', fn);
+
+		return () => {
+			Router.events.off('routeChangeComplete', fn);
+		};
+	}, []);
 
 	const hideMobileSearch =
 		contextualFilterId === 'all' &&

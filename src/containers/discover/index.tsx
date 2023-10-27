@@ -33,7 +33,7 @@ export default function Discover(): JSX.Element {
 				heading={
 					<FormattedMessage
 						id="discoverCollections_egwAudiobooksHeading"
-						defaultMessage="Discover Ellen G. White"
+						defaultMessage="Discover Ellen White"
 					/>
 				}
 			/>

@@ -28,7 +28,7 @@ const EgwAudiobooks: React.FC<EgwAudiobooksProps> = ({ heading }) => {
 				heading ||
 				intl.formatMessage({
 					id: 'organismSection__egwAudiobooksHeading',
-					defaultMessage: 'Ellen G. White',
+					defaultMessage: 'Ellen White',
 				})
 			}
 			previous={intl.formatMessage({

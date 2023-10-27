@@ -111,6 +111,7 @@ function useQueryResults(filter: EntityFilterId, term: string) {
 		teachings: useFilterQuery('teachings', vars, filter),
 		series: useFilterQuery('series', vars, filter),
 		books: useFilterQuery('books', vars, filter),
+		egwbooks: useFilterQuery('egwbooks', vars, filter),
 		sponsors: useFilterQuery('sponsors', vars, filter),
 		conferences: useFilterQuery('conferences', vars, filter),
 		music: useFilterQuery('music', vars, filter),

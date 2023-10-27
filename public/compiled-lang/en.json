@@ -912,7 +912,7 @@
   "cardSequence_egwAudiobookType": [
     {
       "type": 0,
-      "value": "ELLEN G. WHITE"
+      "value": "ELLEN WHITE"
     }
   ],
   "cardSequence_readByLabel": [
@@ -1374,7 +1374,7 @@
   "discoverCollections_egwAudiobooksHeading": [
     {
       "type": 0,
-      "value": "Discover Ellen G. White"
+      "value": "Discover Ellen White"
     }
   ],
   "discoverCollections_storySeasonsHeading": [
@@ -1616,13 +1616,13 @@
   "egwAudiobookList__heading": [
     {
       "type": 0,
-      "value": "Ellen G. White"
+      "value": "Ellen White"
     }
   ],
   "egwbooks__title": [
     {
       "type": 0,
-      "value": "Ellen G. White"
+      "value": "Ellen White"
     }
   ],
   "embed__partInfo": [
@@ -1884,7 +1884,7 @@
   "header__navItemCollections-egwbooks": [
     {
       "type": 0,
-      "value": "Ellen G. White"
+      "value": "Ellen White"
     }
   ],
   "header__navItemCollections-presenters": [
@@ -3884,7 +3884,7 @@
   "organismSection__egwAudiobooksHeading": [
     {
       "type": 0,
-      "value": "Ellen G. White"
+      "value": "Ellen White"
     }
   ],
   "organismSection__egwAudiobooksNext": [
@@ -4793,6 +4793,18 @@
     {
       "type": 0,
       "value": "See All Matching Conferences"
+    }
+  ],
+  "search__egwbooksHeading": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
+  "search__egwbooksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Ellen White Audiobooks"
     }
   ],
   "search__emptyStateMessage": [

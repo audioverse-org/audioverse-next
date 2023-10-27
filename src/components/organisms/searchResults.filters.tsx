@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import {
 	GetSearchAudiobooksDocument,
 	GetSearchConferencesDocument,
+	GetSearchEgwAudiobooksDocument,
 	GetSearchMusicTracksDocument,
 	GetSearchPersonsDocument,
 	GetSearchRecordingsDocument,
@@ -88,6 +89,21 @@ export const filters: Record<string, EntityFilter> = {
 			/>
 		),
 		document: GetSearchAudiobooksDocument,
+	},
+	egwbooks: {
+		heading: (
+			<FormattedMessage
+				id="search__egwbooksHeading"
+				defaultMessage="Ellen White"
+			/>
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__egwbooksSeeAll"
+				defaultMessage="See All Matching Ellen White Audiobooks"
+			/>
+		),
+		document: GetSearchEgwAudiobooksDocument,
 	},
 	sponsors: {
 		heading: (

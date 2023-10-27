@@ -438,7 +438,7 @@
     "string": "{count} chapters"
   },
   "cardSequence_egwAudiobookType": {
-    "string": "ELLEN G. WHITE"
+    "string": "ELLEN WHITE"
   },
   "cardSequence_readByLabel": {
     "string": "Read By {name}"
@@ -646,7 +646,7 @@
     "string": "Conferences"
   },
   "discoverCollections_egwAudiobooksHeading": {
-    "string": "Discover Ellen G. White"
+    "string": "Discover Ellen White"
   },
   "discoverCollections_storySeasonsHeading": {
     "string": "Stories"
@@ -760,10 +760,10 @@
     "string": "{minutes}m"
   },
   "egwAudiobookList__heading": {
-    "string": "Ellen G. White"
+    "string": "Ellen White"
   },
   "egwbooks__title": {
-    "string": "Ellen G. White"
+    "string": "Ellen White"
   },
   "embed__partInfo": {
     "string": "Part {index} of {count}"
@@ -840,7 +840,7 @@
     "string": "Conferences"
   },
   "header__navItemCollections-egwbooks": {
-    "string": "Ellen G. White"
+    "string": "Ellen White"
   },
   "header__navItemCollections-presenters": {
     "string": "Presenters"
@@ -1837,7 +1837,7 @@
     "string": "Previous Bible books"
   },
   "organismSection__egwAudiobooksHeading": {
-    "string": "Ellen G. White"
+    "string": "Ellen White"
   },
   "organismSection__egwAudiobooksNext": {
     "string": "Next EGW audiobooks"
@@ -2291,6 +2291,12 @@
   },
   "search__conferencesSeeAll": {
     "string": "See All Matching Conferences"
+  },
+  "search__egwbooksHeading": {
+    "string": "Ellen White"
+  },
+  "search__egwbooksSeeAll": {
+    "string": "See All Matching Ellen White Audiobooks"
   },
   "search__emptyStateMessage": {
     "string": "Try searching for something else"
