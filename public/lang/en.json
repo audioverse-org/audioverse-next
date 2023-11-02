@@ -2280,6 +2280,12 @@
   "search__allHeading": {
     "string": "All"
   },
+  "search__bibleBooksHeading": {
+    "string": "Bible"
+  },
+  "search__bileBooksSeeAll": {
+    "string": "See All Matching Bible books"
+  },
   "search__booksHeading": {
     "string": "Audiobooks"
   },

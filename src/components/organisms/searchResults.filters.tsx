@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import {
 	GetSearchAudiobooksDocument,
+	GetSearchBiblebooksDocument,
 	GetSearchConferencesDocument,
 	GetSearchEgwAudiobooksDocument,
 	GetSearchMusicTracksDocument,
@@ -104,6 +105,18 @@ export const filters: Record<string, EntityFilter> = {
 			/>
 		),
 		document: GetSearchEgwAudiobooksDocument,
+	},
+	bible: {
+		heading: (
+			<FormattedMessage id="search__bibleBooksHeading" defaultMessage="Bible" />
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__bileBooksSeeAll"
+				defaultMessage="See All Matching Bible books"
+			/>
+		),
+		document: GetSearchBiblebooksDocument,
 	},
 	sponsors: {
 		heading: (
