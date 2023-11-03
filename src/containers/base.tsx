@@ -81,9 +81,9 @@ function Base<P>({
                       n.parentNode.insertBefore(t,n);
                       analytics._loadOptions=i;
                     };
-                    analytics._writeKey="oTuJ7Ab15OkcWQH1nAQKcKewzi9sQL3k";
+                    analytics._writeKey="mj9GUB6HuH8JYJKtR4eSyrGl0FRTLYHm";
                     analytics.SNIPPET_VERSION="4.16.1";
-                    analytics.load("oTuJ7Ab15OkcWQH1nAQKcKewzi9sQL3k");
+                    analytics.load("mj9GUB6HuH8JYJKtR4eSyrGl0FRTLYHm");
                     analytics.page();
                   }
               }();
