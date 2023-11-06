@@ -174,20 +174,21 @@ query getSearchBiblebooks(
 	$first: Int!
 	$after: String
 ) {
-	recordings(
+	sequences(
 		language: $language
-		contentType: BIBLE_CHAPTER
-		first: 2
-		#after: $after
-		#search: $term
+		contentType: BIBLE_BOOK
+		first: $first
+		after: $after
+		search: $term
 		orderBy: [{ field: ID, direction: ASC }]
 	) {
 		aggregate {
 			count
 		}
 		nodes {
-			...cardRecording
+			...cardSequence
 		}
+
 		pageInfo {
 			hasNextPage
 			endCursor
