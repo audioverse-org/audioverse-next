@@ -105,7 +105,7 @@ export const filters: Record<string, EntityFilter> = {
 	},
 	egwbooks: {
 		heading: (
-			<FormattedMessage id="search__egwbooksHeading" defaultMessage="E.White" />
+			<FormattedMessage id="search__egwbooksHeading" defaultMessage="E.G.W" />
 		),
 		seeAll: (
 			<FormattedMessage
