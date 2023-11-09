@@ -47,6 +47,49 @@ function Base<P>({
 		<div className={styles.base}>
 			<React.StrictMode>
 				<Head>
+					<script
+						dangerouslySetInnerHTML={{
+							__html: `
+              !function(){
+                var analytics=window.analytics=window.analytics||[];
+                if(!analytics.initialize)
+                  if(analytics.invoked)
+                    window.console && console.error && console.error("Segment snippet included twice.");
+                  else{
+                    analytics.invoked=!0;
+                    analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];
+                    analytics.factory=function(e){
+                      return function(){
+                        if(window.analytics.initialized)
+                          return window.analytics[e].apply(window.analytics,arguments);
+                        var i=Array.prototype.slice.call(arguments);
+                        i.unshift(e);
+                        analytics.push(i);
+                        return analytics;
+                      };
+                    };
+                    for(var i=0;i<analytics.methods.length;i++){
+                      var key=analytics.methods[i];
+                      analytics[key]=analytics.factory(key);
+                    }
+                    analytics.load=function(key,i){
+                      var t=document.createElement("script");
+                      t.type="text/javascript";
+                      t.async=!0;
+                      t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";
+                      var n=document.getElementsByTagName("script")[0];
+                      n.parentNode.insertBefore(t,n);
+                      analytics._loadOptions=i;
+                    };
+                    analytics._writeKey="oTuJ7Ab15OkcWQH1nAQKcKewzi9sQL3k";
+                    analytics.SNIPPET_VERSION="4.16.1";
+                    analytics.load("oTuJ7Ab15OkcWQH1nAQKcKewzi9sQL3k");
+                    analytics.page();
+                  }
+              }();
+            `,
+						}}
+					/>
 					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
 					<title>{title ? `${title} | AudioVerse` : 'AudioVerse'}</title>
 					{description && <meta name="description" content={description} />}
@@ -56,10 +99,12 @@ function Base<P>({
 						content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
 					/>
 					<meta name="theme-color" content="#efebeb" />
+
 					<link rel="icon" href="/favicon.ico" sizes="any" />
 					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 				</Head>
+
 				<Script
 					id="google-analytics"
 					strategy="afterInteractive"
