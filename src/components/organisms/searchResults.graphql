@@ -168,6 +168,33 @@ query getSearchEgwAudiobooks(
 		}
 	}
 }
+query getSearchBiblebooks(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	sequences(
+		language: $language
+		contentType: BIBLE_BOOK
+		first: $first
+		after: $after
+		search: $term
+		orderBy: [{ field: ID, direction: ASC }]
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardSequence
+		}
+
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
 
 query getSearchMusicTracks(
 	$language: Language!

@@ -2280,6 +2280,12 @@
   "search__allHeading": {
     "string": "All"
   },
+  "search__bibleBooksHeading": {
+    "string": "Bible"
+  },
+  "search__bileBooksSeeAll": {
+    "string": "See All Matching Bible books"
+  },
   "search__booksHeading": {
     "string": "Audiobooks"
   },
@@ -2293,7 +2299,7 @@
     "string": "See All Matching Conferences"
   },
   "search__egwbooksHeading": {
-    "string": "Ellen White"
+    "string": "EGW"
   },
   "search__egwbooksSeeAll": {
     "string": "See All Matching Ellen White Audiobooks"

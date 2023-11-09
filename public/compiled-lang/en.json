@@ -4771,6 +4771,18 @@
       "value": "All"
     }
   ],
+  "search__bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "Bible"
+    }
+  ],
+  "search__bileBooksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Bible books"
+    }
+  ],
   "search__booksHeading": [
     {
       "type": 0,
@@ -4798,7 +4810,7 @@
   "search__egwbooksHeading": [
     {
       "type": 0,
-      "value": "Ellen White"
+      "value": "EGW"
     }
   ],
   "search__egwbooksSeeAll": [

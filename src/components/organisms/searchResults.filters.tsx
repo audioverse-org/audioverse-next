@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import {
 	GetSearchAudiobooksDocument,
+	GetSearchBiblebooksDocument,
 	GetSearchConferencesDocument,
 	GetSearchEgwAudiobooksDocument,
 	GetSearchMusicTracksDocument,
@@ -78,6 +79,18 @@ export const filters: Record<string, EntityFilter> = {
 		),
 		document: GetSearchSeriesDocument,
 	},
+	bible: {
+		heading: (
+			<FormattedMessage id="search__bibleBooksHeading" defaultMessage="Bible" />
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__bileBooksSeeAll"
+				defaultMessage="See All Matching Bible books"
+			/>
+		),
+		document: GetSearchBiblebooksDocument,
+	},
 	books: {
 		heading: (
 			<FormattedMessage id="search__booksHeading" defaultMessage="Audiobooks" />
@@ -92,10 +105,7 @@ export const filters: Record<string, EntityFilter> = {
 	},
 	egwbooks: {
 		heading: (
-			<FormattedMessage
-				id="search__egwbooksHeading"
-				defaultMessage="Ellen White"
-			/>
+			<FormattedMessage id="search__egwbooksHeading" defaultMessage="EGW" />
 		),
 		seeAll: (
 			<FormattedMessage
