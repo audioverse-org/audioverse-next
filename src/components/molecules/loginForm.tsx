@@ -13,6 +13,7 @@ import ButtonGuest from './buttonGuest';
 import Input from './form/input';
 import styles from './loginForm.module.scss';
 
+
 type Props = {
 	showRegister: () => void;
 	onSuccess?: () => void;
@@ -68,7 +69,7 @@ export default function LoginForm({
 		e.preventDefault();
 		setIsSubmitting(true);
 		try {
-			await login(email, password);
+			await login(email, password)
 			await queryClient.invalidateQueries();
 			await refetchUserQueries(queryClient);
 			onSuccess && onSuccess();

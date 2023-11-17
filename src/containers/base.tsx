@@ -47,7 +47,8 @@ function Base<P>({
 		<div className={styles.base}>
 			<React.StrictMode>
 				<Head>
-					<script
+				
+					{/* <script
 						dangerouslySetInnerHTML={{
 							__html: `
               !function(){
@@ -81,15 +82,15 @@ function Base<P>({
                       n.parentNode.insertBefore(t,n);
                       analytics._loadOptions=i;
                     };
-                    analytics._writeKey="oTuJ7Ab15OkcWQH1nAQKcKewzi9sQL3k";
+                    analytics._writeKey="vkWzScRn3eSetN6cMhGhrzEuo4GaBJ0v";
                     analytics.SNIPPET_VERSION="4.16.1";
-                    analytics.load("oTuJ7Ab15OkcWQH1nAQKcKewzi9sQL3k");
+                    analytics.load("vkWzScRn3eSetN6cMhGhrzEuo4GaBJ0v");
                     analytics.page();
                   }
               }();
             `,
 						}}
-					/>
+					/> */}
 					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
 					<title>{title ? `${title} | AudioVerse` : 'AudioVerse'}</title>
 					{description && <meta name="description" content={description} />}
