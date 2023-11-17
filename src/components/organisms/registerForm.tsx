@@ -34,14 +34,13 @@ function RegisterForm({
 	} = useRegisterMutation();
 
 	const intl = useIntl();
-	
+
 	useEffect(() => {
 		if (dataRegister?.signup.errors.length) {
 			setErrors(dataRegister?.signup.errors.map((e) => e.message));
 		} else if (dataRegister?.signup.authenticatedUser?.sessionToken) {
 			setSessionToken(dataRegister?.signup.authenticatedUser?.sessionToken);
-			   onSuccess();
-		
+			onSuccess();
 		}
 	}, [dataRegister, onSuccess]);
 

@@ -46,10 +46,10 @@ const Navigation = ({
 				setSubmenu('');
 			}
 			if (url) {
-				  analytics.page('Loaded Another Website Page', {
-				  page: url,
+				analytics.page('Loaded Another Website Page', {
+					page: url,
 				});
-			  }
+			}
 		};
 		Router.events.on('routeChangeComplete', onRouteChange);
 		return () => {

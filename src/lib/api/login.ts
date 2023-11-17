@@ -32,7 +32,6 @@ export async function refetchUserQueries(
 }
 
 export async function login(email: string, password: string): Promise<true> {
-	
 	const {
 		login: { authenticatedUser, errors },
 	} = await _login({ email, password });

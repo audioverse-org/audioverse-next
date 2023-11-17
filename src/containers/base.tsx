@@ -47,7 +47,6 @@ function Base<P>({
 		<div className={styles.base}>
 			<React.StrictMode>
 				<Head>
-				
 					{/* <script
 						dangerouslySetInnerHTML={{
 							__html: `
