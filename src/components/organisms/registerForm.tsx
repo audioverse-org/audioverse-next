@@ -7,6 +7,7 @@ import Input from '~components/molecules/form/input';
 import { useRegisterMutation } from '~containers/account/__generated__/register';
 import { setSessionToken } from '~lib/cookies';
 
+import { analytics } from '../atoms/analytics';
 import styles from './registerForm.module.scss';
 
 type Props = {
@@ -40,9 +41,21 @@ function RegisterForm({
 			setErrors(dataRegister?.signup.errors.map((e) => e.message));
 		} else if (dataRegister?.signup.authenticatedUser?.sessionToken) {
 			setSessionToken(dataRegister?.signup.authenticatedUser?.sessionToken);
+			analytics.identify(
+				'user_' + dataRegister?.signup.authenticatedUser?.user.id,
+				{
+					firstName: firstName,
+					lastName: lastName,
+					email: email,
+				}
+			);
+			analytics.track('User Registered', {
+				accountType: 'User',
+			});
+
 			onSuccess();
 		}
-	}, [dataRegister, onSuccess]);
+	}, [dataRegister, onSuccess, firstName, lastName, email]);
 
 	const onSubmit = (e: React.MouseEvent) => {
 		e.preventDefault();

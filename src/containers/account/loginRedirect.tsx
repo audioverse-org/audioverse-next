@@ -15,11 +15,14 @@ export default function LoginRedirect(): JSX.Element {
 	useEffect(() => {
 		const d = data?.me?.user;
 		if (d) {
-			analytics.identify('User' + d?.id, {
+			analytics.identify('user_' + d?.id, {
 				id: d?.id,
 				firstName: d?.givenName,
 				lastName: d?.surname,
 				email: d?.email,
+			});
+			analytics.track('User Logged in', {
+				accountType: 'User',
 			});
 		}
 		//const backRoute = router.query.back as string;

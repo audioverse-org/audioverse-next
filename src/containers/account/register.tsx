@@ -26,7 +26,9 @@ function Register(): JSX.Element {
 						})
 					)
 				}
-				onSuccess={() => router.push(root.lang(languageRoute).discover.get())}
+				onSuccess={() => {
+					router.push(root.lang(languageRoute).discover.get());
+				}}
 			/>
 		</AndOnboarding>
 	);
