@@ -20,7 +20,7 @@ describe('login page', () => {
 		await renderPage();
 
 		await waitFor(() => {
-			expect(__mockedRouter.push).toBeCalledWith('/en/discover');
+			expect(__mockedRouter.push).toHaveBeenCalledWith('/en/discover');
 		});
 	});
 });
