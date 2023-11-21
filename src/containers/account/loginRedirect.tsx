@@ -24,9 +24,9 @@ export default function LoginRedirect(): JSX.Element {
 			analytics.track('User Logged in', {
 				accountType: 'User',
 			});
+			//const backRoute = router.query.back as string;
+			router.push(root.lang(route).discover.get());
 		}
-		//const backRoute = router.query.back as string;
-		router.push(root.lang(route).discover.get());
 	}, [router, route, data]);
 
 	return (
