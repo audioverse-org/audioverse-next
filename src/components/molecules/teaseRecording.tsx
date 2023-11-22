@@ -20,6 +20,7 @@ import IconPlay from '~public/img/icons/icon-play.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 
+import { analytics } from '../atoms/analytics';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';
@@ -63,6 +64,13 @@ export default function TeaseRecording({
 	const session = usePlaybackSession(recording, { playlistRecordings });
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
+
+	const trackTeasePlay = () => {
+		analytics.track('Tease Play', {
+			Id: recording.id,
+			Recording: recording.title,
+		});
+	};
 
 	const index = recording.sequenceIndex;
 	const count = recording.sequence?.recordings.aggregate?.count;
@@ -149,6 +157,7 @@ export default function TeaseRecording({
 								onClick={(e) => {
 									e.preventDefault();
 									session.play();
+									trackTeasePlay();
 								}}
 								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
 								backgroundColor={backgroundColor}
