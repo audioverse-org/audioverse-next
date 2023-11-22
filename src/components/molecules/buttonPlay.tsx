@@ -9,7 +9,9 @@ import IconPauseLarge from '~public/img/icons/icon-pause-large.svg';
 import IconPause from '~public/img/icons/icon-pause-medium.svg';
 import IconPlayLarge from '~public/img/icons/icon-play-large.svg';
 import IconPlay from '~public/img/icons/icon-play-medium.svg';
+import { useFormattedTime } from '~src/lib/time';
 
+import { analytics } from '../atoms/analytics';
 import styles from './buttonPlay.module.scss';
 import IconButton from './iconButton';
 
@@ -41,10 +43,27 @@ export default function ButtonPlay({
 	prefersAudio?: boolean;
 	className?: string;
 }): JSX.Element {
-	const { isPaused, play, pause } = usePlaybackSession(recording, {
+	const { isPaused, play, pause, time } = usePlaybackSession(recording, {
 		playlistRecordings,
 		prefersAudio,
 	});
+	const thisTime = useFormattedTime(time);
+
+	const trackPlay = () => {
+		analytics.track('Play', {
+			Id: recording.id,
+			Recording: recording.title,
+			Played_at: thisTime,
+		});
+	};
+
+	const trackPause = () => {
+		analytics.track('Pause', {
+			Id: recording.id,
+			Recording: recording.title,
+			Paused_at: thisTime,
+		});
+	};
 	const intl = useIntl();
 
 	const label = isPaused
@@ -70,7 +89,9 @@ export default function ButtonPlay({
 					? IconPauseLarge
 					: IconPause
 			}
-			onClick={() => (isPaused ? play() : pause())}
+			onClick={() =>
+				isPaused ? (play(), trackPlay()) : (pause(), trackPause())
+			}
 			color={
 				active
 					? isBackgroundColorDark(backgroundColor)
