@@ -10,6 +10,9 @@ import {
 	PlaybackContextType,
 	shouldLoadRecordingPlaybackProgress,
 } from '~components/templates/andPlaybackContext';
+import { analytics } from '~src/components/atoms/analytics';
+
+import { useFormattedTime } from './time';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
@@ -34,6 +37,8 @@ interface PlaybackSessionInfo {
 	duration: number;
 	getVideo: () => JSX.Element;
 	supportsFullscreen: boolean;
+	trackPlay: () => void;
+	trackPause: () => void;
 }
 
 export default function usePlaybackSession(
@@ -81,6 +86,33 @@ export default function usePlaybackSession(
 			enabled: shouldLoadPlaybackProgress,
 		}
 	);
+
+	//here we have the play and paused tracking
+	const thisTime = useFormattedTime(time);
+	const trackPlay = () => {
+		analytics.track('Play', {
+			Id: recording?.id,
+			Recording: recording?.title,
+			Played_at: thisTime,
+			media_type: {
+				Audio: isAudioLoaded,
+				Video: isVideoLoaded,
+			},
+		});
+	};
+
+	const trackPause = () => {
+		analytics.track('Pause', {
+			Id: recording?.id,
+			Recording: recording?.title,
+			Paused_at: thisTime,
+			media_type: {
+				Audio: isAudioLoaded,
+				Video: isVideoLoaded,
+			},
+		});
+	};
+
 	useEffect(() => {
 		if (data?.recording?.viewerPlaybackSession) {
 			_setProgress(data?.recording?.viewerPlaybackSession.positionPercentage);
@@ -206,5 +238,7 @@ export default function usePlaybackSession(
 		getVideo,
 		speed,
 		supportsFullscreen,
+		trackPlay,
+		trackPause,
 	};
 }
