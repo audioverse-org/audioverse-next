@@ -121,6 +121,9 @@ const Navigation = ({
 
 						<Button
 							type="super"
+							onClick={()=>{
+								analytics.track('Donate');
+							}}
 							text={
 								<FormattedMessage
 									id="andNavigation__donate"

@@ -15,6 +15,7 @@ import { useNavigationItems } from '~lib/useNavigationItems';
 import IconExitSmall from '~public/img/icons/icon-exit-small.svg';
 import MoreIcon from '~public/img/icons/icon-more.svg';
 
+import { analytics } from '../atoms/analytics';
 import styles from './mobileHeader.module.scss';
 import useScrollDirection, {
 	SCROLL_DIRECTIONS,
@@ -54,6 +55,9 @@ export default function MobileHeader({
 					<Header />
 					<Button
 						type="super"
+						onClick={()=>{
+							analytics.track('Donate');
+						}}
 						text={
 							<FormattedMessage
 								id="andNavigation__donate"
