@@ -15,25 +15,22 @@ import { analytics } from '~src/components/atoms/analytics';
 import styles from './give.module.scss';
 
 export default function Blog(): JSX.Element {
-
-
 	// useEffect(() => {
 	// 	const onLoad = () => {
 
 	// 			console.log('Page and iframes have fully loaded');
-				
+
 	// 				// Access the iframe element
 	// 			const iframe = document.querySelector('iframe[name="donorbox"]');
-				
 
 	// 			if(iframe){
 	// 				  // Access the document inside the iframe
 	// 				  const iframeDocument = iframe.children;
 	// 				  console.log(iframeDocument)
-    //                    if(iframeDocument)
+	//                    if(iframeDocument)
 	// 				   {
 	// 						// const form = iframeDocument.forms.namedItem('footer_button');
-					      
+
 	// 						// // Check if the element is not null or undefined before accessing it
 	// 						// if (form) {
 	// 						// console.log('Form element found.');
@@ -50,21 +47,19 @@ export default function Blog(): JSX.Element {
 	// 					} else {
 	// 					  console.log('Iframe element not found.');
 	// 					}
-				
 
 	// 	};
-		  
-	
+
 	// 	if (typeof window !== 'undefined') {
-		 
+
 	// 	  window.addEventListener('load', onLoad);
-	
+
 	// 	  return () => {
 	// 		window.removeEventListener('load', onLoad);
 	// 	  };
 	// 	}
-	//   }, []); 
-	
+	//   }, []);
+
 	return (
 		<div className={styles.wrapper}>
 			<AboutNav current="donate" />
@@ -125,7 +120,7 @@ export default function Blog(): JSX.Element {
 				</p>
 				<Button
 					type="primary"
-					onClick={()=>{
+					onClick={() => {
 						analytics.track('Give: Paypal');
 					}}
 					text={
@@ -149,7 +144,7 @@ export default function Blog(): JSX.Element {
 				</p>
 				<Button
 					type="primary"
-					onClick={()=>{
+					onClick={() => {
 						analytics.track('Give: Shop Now');
 					}}
 					text={
@@ -195,7 +190,7 @@ export default function Blog(): JSX.Element {
 				</address>
 				<Button
 					type="primary"
-					onClick={()=>{
+					onClick={() => {
 						analytics.track('Give: Estate Plan');
 					}}
 					text={

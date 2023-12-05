@@ -121,7 +121,7 @@ const Navigation = ({
 
 						<Button
 							type="super"
-							onClick={()=>{
+							onClick={() => {
 								analytics.track('Donate');
 							}}
 							text={

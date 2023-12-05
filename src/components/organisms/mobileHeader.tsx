@@ -55,7 +55,7 @@ export default function MobileHeader({
 					<Header />
 					<Button
 						type="super"
-						onClick={()=>{
+						onClick={() => {
 							analytics.track('Donate');
 						}}
 						text={
