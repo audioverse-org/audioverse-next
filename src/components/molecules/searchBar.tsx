@@ -9,6 +9,7 @@ import {
 import IconExit from '~public/img/icons/icon-exit.svg';
 import IconSearch from '~public/img/icons/icon-search.svg';
 
+import { analytics } from '../atoms/analytics';
 import Mininav from './mininav';
 import styles from './searchBar.module.scss';
 
@@ -48,13 +49,14 @@ export default function SearchBar({
 	useEffect(() => {
 		if (isFocused) {
 			document.addEventListener('keydown', handleSubmit);
+			analytics.track('search', { term: term });
 		} else {
 			document.removeEventListener('keydown', handleSubmit);
 		}
 		return () => {
 			document.removeEventListener('keydown', handleSubmit);
 		};
-	}, [isFocused, handleSubmit]);
+	}, [isFocused, handleSubmit, term]);
 
 	useEffect(() => {
 		if (
