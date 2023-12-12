@@ -97,9 +97,7 @@ const Player = ({
 								(shouldShowPoster || posterHovered) && styles.posterPlayShown
 							)}
 							onClick={() =>
-								session.isPaused
-									? (session.play(), session.trackPlay())
-									: (session.pause(), session.trackPause())
+								session.isPaused ? session.play() : session.pause()
 							}
 							onTouchStart={() => setPosterHovered(true)}
 							onTouchEnd={() => setPosterHovered(false)}

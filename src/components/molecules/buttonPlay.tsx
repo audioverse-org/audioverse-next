@@ -41,13 +41,10 @@ export default function ButtonPlay({
 	prefersAudio?: boolean;
 	className?: string;
 }): JSX.Element {
-	const { isPaused, play, pause, trackPlay, trackPause } = usePlaybackSession(
-		recording,
-		{
-			playlistRecordings,
-			prefersAudio,
-		}
-	);
+	const { isPaused, play, pause } = usePlaybackSession(recording, {
+		playlistRecordings,
+		prefersAudio,
+	});
 	const intl = useIntl();
 
 	const label = isPaused
@@ -73,9 +70,7 @@ export default function ButtonPlay({
 					? IconPauseLarge
 					: IconPause
 			}
-			onClick={() =>
-				isPaused ? (play(), trackPlay()) : (pause(), trackPause())
-			}
+			onClick={() => (isPaused ? play() : pause())}
 			color={
 				active
 					? isBackgroundColorDark(backgroundColor)

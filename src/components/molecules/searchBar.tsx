@@ -49,7 +49,6 @@ export default function SearchBar({
 	useEffect(() => {
 		if (isFocused) {
 			document.addEventListener('keydown', handleSubmit);
-			analytics.track('search', { term: term });
 		} else {
 			document.removeEventListener('keydown', handleSubmit);
 		}
@@ -87,7 +86,9 @@ export default function SearchBar({
 					value={term ?? ''}
 					onChange={({ target }) => onTermChange(target.value)}
 					onFocus={() => setIsFocused(true)}
-					onBlur={() => setIsFocused(false)}
+					onBlur={() => {
+						setIsFocused(false), analytics.track('search', { term: term });
+					}}
 					placeholder={
 						isFocused
 							? ''
