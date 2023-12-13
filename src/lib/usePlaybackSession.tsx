@@ -179,8 +179,8 @@ export default function usePlaybackSession(
 	}
 
 	function play() {
-		trackPlay();
 		afterLoad((c) => c.play());
+		trackPlay();
 	}
 
 	function setPrefersAudio(prefersAudio: boolean) {
