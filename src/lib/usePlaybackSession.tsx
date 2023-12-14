@@ -174,11 +174,13 @@ export default function usePlaybackSession(
 		// TODO: Maybe only if `isLoaded` is true
 		// Or perhaps throw an exception, since the user should never be presented
 		// with a pause button for a recording that isn't loaded.
+		trackPause();
 		context.pause();
 	}
 
 	function play() {
 		afterLoad((c) => c.play());
+		trackPlay();
 	}
 
 	function setPrefersAudio(prefersAudio: boolean) {
