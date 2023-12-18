@@ -9,6 +9,7 @@ import {
 import IconExit from '~public/img/icons/icon-exit.svg';
 import IconSearch from '~public/img/icons/icon-search.svg';
 
+import { analytics } from '../atoms/analytics';
 import Mininav from './mininav';
 import styles from './searchBar.module.scss';
 
@@ -54,7 +55,7 @@ export default function SearchBar({
 		return () => {
 			document.removeEventListener('keydown', handleSubmit);
 		};
-	}, [isFocused, handleSubmit]);
+	}, [isFocused, handleSubmit, term]);
 
 	useEffect(() => {
 		if (
@@ -85,7 +86,9 @@ export default function SearchBar({
 					value={term ?? ''}
 					onChange={({ target }) => onTermChange(target.value)}
 					onFocus={() => setIsFocused(true)}
-					onBlur={() => setIsFocused(false)}
+					onBlur={() => {
+						setIsFocused(false), analytics.track('search', { term: term });
+					}}
 					placeholder={
 						isFocused
 							? ''
