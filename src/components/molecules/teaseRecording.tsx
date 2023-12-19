@@ -264,6 +264,9 @@ export default function TeaseRecording({
 
 			{!disableUserFeatures && (
 				<ButtonFavorite
+					favoritedType="Recording"
+					favoritedId={recording.id}
+					favoritedTitle={recording.title}
 					isFavorited={!!isFavorited}
 					toggleFavorited={toggleFavorited}
 					backgroundColor={backgroundColor}
