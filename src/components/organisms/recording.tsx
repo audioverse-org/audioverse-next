@@ -221,6 +221,7 @@ export function Recording({
 									attachment: filename,
 								});
 							}}
+							download
 						>
 							{filename}
 							<div className={styles.attachmentIcon}>
