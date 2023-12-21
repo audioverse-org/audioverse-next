@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
+import router from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -15,6 +16,8 @@ import { useFormattedDuration } from '~lib/time';
 import useHover from '~lib/useHover';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { CollectionContentType } from '~src/__generated__/graphql';
+import { analytics } from '~src/components/atoms/analytics';
+import TitleLogger from '~src/components/atoms/titleLogger';
 
 import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
@@ -64,6 +67,7 @@ export default function CardCollection({
 		</div>
 	);
 	const isBibleVersion = contentType === CollectionContentType.BibleVersion;
+    const currentTitle=TitleLogger();
 	return (
 		<Card>
 			<Link href={canonicalPath} legacyBehavior>
@@ -73,6 +77,15 @@ export default function CardCollection({
 						isBibleVersion && styles.bibleVersion,
 						(isHovered || isSubHovered) && styles.otherHovered
 					)}
+					onClick={() => {
+						
+						analytics.track('CardClick', {
+							type: contentType,
+							path: canonicalPath,
+							title: currentTitle,
+						});
+						router.push(canonicalPath);
+					}}
 				>
 					<CollectionTypeLockup contentType={contentType} />
 					{heroImage}
