@@ -67,7 +67,7 @@ export default function CardCollection({
 		</div>
 	);
 	const isBibleVersion = contentType === CollectionContentType.BibleVersion;
-    const currentTitle=TitleLogger();
+	const currentTitle = TitleLogger();
 	return (
 		<Card>
 			<Link href={canonicalPath} legacyBehavior>
@@ -78,7 +78,6 @@ export default function CardCollection({
 						(isHovered || isSubHovered) && styles.otherHovered
 					)}
 					onClick={() => {
-						
 						analytics.track('CardClick', {
 							type: contentType,
 							path: canonicalPath,

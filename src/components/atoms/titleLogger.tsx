@@ -25,7 +25,7 @@ function TitleLogger() {
 		};
 	}, [router.events]);
 
-	return {currentTitle};
+	return { currentTitle };
 }
 
 export default TitleLogger;

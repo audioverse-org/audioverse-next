@@ -304,7 +304,7 @@ export default function CardSequence({
 	const linkUrl =
 		(isBibleBook && (sequence.allRecordings.nodes || [])[0].canonicalPath) ||
 		canonicalPath;
-	const currentTitle=TitleLogger();
+	const currentTitle = TitleLogger();
 	return (
 		<Card>
 			{slim ? (
@@ -313,7 +313,7 @@ export default function CardSequence({
 					onClick={(e) => {
 						e.preventDefault();
 						e.stopPropagation();
-						
+
 						analytics.track('CardClick', {
 							type: sequence.contentType,
 							path: canonicalPath,
@@ -329,7 +329,6 @@ export default function CardSequence({
 					<a
 						className={className}
 						onClick={() => {
-							
 							analytics.track('CardClick', {
 								type: sequence.contentType,
 								path: canonicalPath,

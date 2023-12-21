@@ -238,7 +238,7 @@ export default function TeaseRecording({
 			</div>
 		</>
 	);
-	const currentTitle=TitleLogger();
+	const currentTitle = TitleLogger();
 	return (
 		<div className={clsx(styles.container, small && styles.small)}>
 			{isOptionalLink ? (
@@ -250,7 +250,7 @@ export default function TeaseRecording({
 					)}
 					onClick={(e) => {
 						e.stopPropagation();
-						
+
 						analytics.track('CardClick', {
 							type: recording.recordingContentType,
 							path: recording.canonicalPath,
@@ -266,7 +266,6 @@ export default function TeaseRecording({
 					<a
 						className={clsx(styles.content, unpadded && styles.unpadded)}
 						onClick={() => {
-							
 							analytics.track('CardClick', {
 								type: recording.recordingContentType,
 								path: recording.canonicalPath,

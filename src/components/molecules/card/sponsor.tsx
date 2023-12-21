@@ -30,7 +30,7 @@ export default function CardSponsor({
 
 	const { canonicalPath, image, title, collections, sequences, recordings } =
 		sponsor;
-		const currentTitle=TitleLogger();
+	const currentTitle = TitleLogger();
 	return (
 		<Card>
 			<Link href={canonicalPath} legacyBehavior>
@@ -40,7 +40,7 @@ export default function CardSponsor({
 						analytics.track('CardClick', {
 							type: 'SPONSOR',
 							path: canonicalPath,
-							title: currentTitle
+							title: currentTitle,
 						});
 					}}
 				>

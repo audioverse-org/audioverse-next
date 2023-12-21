@@ -35,7 +35,7 @@ export default function CardPerson({
 }: CardCollectionProps): JSX.Element {
 	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
 	const { canonicalPath, image, name, recordings } = person;
-	const currentTitle=TitleLogger();
+	const currentTitle = TitleLogger();
 	return (
 		<Card className={clsx(compact && styles.compact)}>
 			<Link href={canonicalPath} legacyBehavior>
