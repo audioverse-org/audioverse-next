@@ -66,7 +66,6 @@ export default function SearchBar({
 		) {
 			inputRef.current?.focus();
 		}
-		setLastTerm(term);
 	}, [term, lastTerm, isFocused, stealFocus]);
 
 	return (
@@ -87,7 +86,10 @@ export default function SearchBar({
 					onChange={({ target }) => onTermChange(target.value)}
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => {
-						setIsFocused(false), analytics.track('search', { term: term });
+						setIsFocused(false),
+							lastTerm != term
+								? (analytics.track('search', { term: term }), setLastTerm(term))
+								: '';
 					}}
 					placeholder={
 						isFocused
