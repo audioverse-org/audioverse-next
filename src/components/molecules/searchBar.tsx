@@ -87,7 +87,7 @@ export default function SearchBar({
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => {
 						setIsFocused(false),
-							lastTerm != term
+							lastTerm != term && term != ''
 								? (analytics.track('search', { term: term }), setLastTerm(term))
 								: '';
 					}}
