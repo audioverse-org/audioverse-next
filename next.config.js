@@ -346,6 +346,11 @@ module.exports = withBundleAnalyzer(
 					destination: '/:lang/stories/albums/page/1',
 				},
 				{
+					source: '/:lang/bibles/:path*',
+					destination: '/:lang/biles/:path*',
+					permanent: true,
+				},
+				{
 					source: '/:lang/audiobooks/books/:path*',
 					destination: '/:lang/books/:path*',
 					permanent: true,
