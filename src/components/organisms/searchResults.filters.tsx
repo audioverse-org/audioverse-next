@@ -27,7 +27,7 @@ export function useContextualFilterId(): EntityFilterId {
 	const { pathname } = useRouter();
 	const filterIds = Object.keys(filters) as EntityFilterId[];
 	const filterId = filterIds.find((id) =>
-		pathname.match(`/\\[language\\]\\/${id}`)
+		pathname.match(`/\\[language\\]\\/${id}/`)
 	);
 
 	return filterId || 'all';
