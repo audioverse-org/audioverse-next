@@ -278,12 +278,12 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGESV/:testamentCode/:bookCode/2',
-					destination: '/:lang/bibles',
+					destination: '/:lang/bibles/',
 					permanent: false,
 				},
 				{
 					source: '/:lang/audiobibles/volumes',
-					destination: '/:lang/bibles',
+					destination: '/:lang/bibles/',
 					permanent: true,
 				},
 				{
@@ -308,12 +308,12 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGESV/2',
-					destination: '/:lang/bibles',
+					destination: '/:lang/bibles/',
 					permanent: false,
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGESV/2',
-					destination: '/:lang/bibles',
+					destination: '/:lang/bibles/',
 					permanent: false,
 				},
 				{
@@ -527,6 +527,10 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/blog',
 					destination: '/:lang/blog/page/1',
+				},
+				{
+					source: '/:lang/bibles',
+					destination: '/:lang/bibles/',
 				},
 				{
 					source: '/:lang/books',

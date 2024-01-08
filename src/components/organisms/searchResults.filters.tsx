@@ -26,9 +26,11 @@ export type EntityFilterId = keyof typeof filters;
 export function useContextualFilterId(): EntityFilterId {
 	const { pathname } = useRouter();
 	const filterIds = Object.keys(filters) as EntityFilterId[];
-	const filterId = filterIds.find((id) =>
-		pathname.match(`/\\[language\\]\\/${id}/`)
-	);
+	const filterId = filterIds.find((id) => {
+		if (pathname.match(`/\\[language\\]\\/${id}/`))
+			return pathname.match(`/\\[language\\]\\/${id}/`);
+		else return pathname.match(`/\\[language\\]\\/${id}`);
+	});
 
 	return filterId || 'all';
 }
@@ -79,7 +81,7 @@ export const filters: Record<string, EntityFilter> = {
 		),
 		document: GetSearchSeriesDocument,
 	},
-	bible: {
+	bibles: {
 		heading: (
 			<FormattedMessage id="search__bibleBooksHeading" defaultMessage="Bible" />
 		),
