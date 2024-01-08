@@ -10,6 +10,8 @@ import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
 import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
 import { BaseColors } from '~lib/constants';
+import { analytics } from '~src/components/atoms/analytics';
+import TitleLogger from '~src/components/atoms/titleLogger';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonTypeLockup from '../personTypeLockup';
@@ -33,10 +35,20 @@ export default function CardPerson({
 }: CardCollectionProps): JSX.Element {
 	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
 	const { canonicalPath, image, name, recordings } = person;
+	const currentTitle = TitleLogger();
 	return (
 		<Card className={clsx(compact && styles.compact)}>
 			<Link href={canonicalPath} legacyBehavior>
-				<a className={styles.container}>
+				<a
+					className={styles.container}
+					onClick={() => {
+						analytics.track('CardClick', {
+							type: 'PRESENTER',
+							path: canonicalPath,
+							title: currentTitle,
+						});
+					}}
+				>
 					<div className={styles.stretch}>
 						{!compact && <PersonTypeLockup />}
 						<Heading2 unpadded sans className={styles.title}>

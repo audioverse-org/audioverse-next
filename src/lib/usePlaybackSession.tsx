@@ -95,8 +95,8 @@ export default function usePlaybackSession(
 			Recording: recording?.title,
 			Played_at: thisTime,
 			media_type: {
-				Audio: isAudioLoaded,
-				Video: isVideoLoaded,
+				Audio: !context.isShowingVideo(),
+				Video: context.isShowingVideo(),
 			},
 		});
 	};
@@ -179,8 +179,9 @@ export default function usePlaybackSession(
 	}
 
 	function play() {
-		afterLoad((c) => c.play());
-		trackPlay();
+		afterLoad((c) => {
+			c.play(), trackPlay();
+		});
 	}
 
 	function setPrefersAudio(prefersAudio: boolean) {
