@@ -6,10 +6,14 @@ import IconLike from '~public/img/icons/icon-like.svg';
 import IconLikeActive from '~public/img/icons/icon-like-active.svg';
 import IconLikeLight from '~public/img/icons/icon-like-light.svg';
 
+import { analytics } from '../atoms/analytics';
 import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
 
 type Props = {
+	favoritedType?: string;
+	favoritedId?: string | number;
+	favoritedTitle?: string;
 	isFavorited: boolean;
 	toggleFavorited: () => void;
 	light?: boolean;
@@ -20,7 +24,16 @@ type Props = {
 
 const ButtonFavorite: React.VoidFunctionComponent<Props> = React.forwardRef(
 	function ButtonFavorite(
-		{ isFavorited, toggleFavorited, light, backgroundColor, className }: Props,
+		{
+			favoritedType,
+			favoritedId,
+			favoritedTitle,
+			isFavorited,
+			toggleFavorited,
+			light,
+			backgroundColor,
+			className,
+		}: Props,
 		ref: Ref<HTMLButtonElement>
 	): JSX.Element {
 		const intl = useIntl();
@@ -54,6 +67,13 @@ const ButtonFavorite: React.VoidFunctionComponent<Props> = React.forwardRef(
 					e.preventDefault();
 					e.stopPropagation();
 					toggleFavorited();
+					if (favoritedType) {
+						analytics.track(isFavorited ? 'Unfavorited' : 'Favorited', {
+							Type: favoritedType,
+							Id: favoritedId,
+							Title: favoritedTitle,
+						});
+					}
 				}}
 				color={iconColor}
 				{...{

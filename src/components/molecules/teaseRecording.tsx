@@ -21,6 +21,7 @@ import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 
 import { analytics } from '../atoms/analytics';
+import TitleLogger from '../atoms/titleLogger';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';
@@ -237,7 +238,7 @@ export default function TeaseRecording({
 			</div>
 		</>
 	);
-
+	const currentTitle = TitleLogger();
 	return (
 		<div className={clsx(styles.container, small && styles.small)}>
 			{isOptionalLink ? (
@@ -249,6 +250,12 @@ export default function TeaseRecording({
 					)}
 					onClick={(e) => {
 						e.stopPropagation();
+
+						analytics.track('CardClick', {
+							type: recording.recordingContentType,
+							path: recording.canonicalPath,
+							title: currentTitle,
+						});
 						router.push(recording.canonicalPath);
 					}}
 				>
@@ -256,7 +263,16 @@ export default function TeaseRecording({
 				</div>
 			) : (
 				<Link href={recording.canonicalPath} legacyBehavior>
-					<a className={clsx(styles.content, unpadded && styles.unpadded)}>
+					<a
+						className={clsx(styles.content, unpadded && styles.unpadded)}
+						onClick={() => {
+							analytics.track('CardClick', {
+								type: recording.recordingContentType,
+								path: recording.canonicalPath,
+								title: currentTitle,
+							});
+						}}
+					>
 						{inner}
 					</a>
 				</Link>
@@ -264,6 +280,9 @@ export default function TeaseRecording({
 
 			{!disableUserFeatures && (
 				<ButtonFavorite
+					favoritedType="Recording"
+					favoritedId={recording.id}
+					favoritedTitle={recording.title}
 					isFavorited={!!isFavorited}
 					toggleFavorited={toggleFavorited}
 					backgroundColor={backgroundColor}

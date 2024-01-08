@@ -37,6 +37,7 @@ import {
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 
+import { analytics } from '../atoms/analytics';
 import { RecordingFragment } from './__generated__/recording';
 import styles from './recording.module.scss';
 
@@ -214,6 +215,13 @@ export function Recording({
 							className={styles.attachment}
 							key={url}
 							rel="noreferrer"
+							onClick={() => {
+								analytics.track('AttachmentClicked', {
+									recording: recording.title,
+									attachment: filename,
+								});
+							}}
+							download
 						>
 							{filename}
 							<div className={styles.attachmentIcon}>

@@ -31,7 +31,7 @@ export default function NavItem({
 					href={href}
 					className={styles.navLink}
 					activeClassName={styles.active}
-					linkLable={label}
+					linkLabel={label}
 				>
 					{inner}
 				</ActiveLink>

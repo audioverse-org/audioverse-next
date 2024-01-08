@@ -22,7 +22,9 @@ import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
+import { analytics } from '~src/components/atoms/analytics';
 import NameMatcher from '~src/components/atoms/nameMatcher';
+import TitleLogger from '~src/components/atoms/titleLogger';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonLockup from '../personLockup';
@@ -302,6 +304,7 @@ export default function CardSequence({
 	const linkUrl =
 		(isBibleBook && (sequence.allRecordings.nodes || [])[0].canonicalPath) ||
 		canonicalPath;
+	const currentTitle = TitleLogger();
 	return (
 		<Card>
 			{slim ? (
@@ -310,6 +313,12 @@ export default function CardSequence({
 					onClick={(e) => {
 						e.preventDefault();
 						e.stopPropagation();
+
+						analytics.track('CardClick', {
+							type: sequence.contentType,
+							path: canonicalPath,
+							title: currentTitle,
+						});
 						router.push(linkUrl);
 					}}
 				>
@@ -317,7 +326,18 @@ export default function CardSequence({
 				</div>
 			) : (
 				<Link href={linkUrl} legacyBehavior>
-					<a className={className}>{inner}</a>
+					<a
+						className={className}
+						onClick={() => {
+							analytics.track('CardClick', {
+								type: sequence.contentType,
+								path: canonicalPath,
+								title: currentTitle,
+							});
+						}}
+					>
+						{inner}
+					</a>
 				</Link>
 			)}
 		</Card>

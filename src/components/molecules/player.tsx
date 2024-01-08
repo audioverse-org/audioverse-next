@@ -241,6 +241,7 @@ const Player = ({
 					{!disableUserFeatures && (
 						<RecordingButtonFavorite
 							id={recording.id}
+							title={recording.title}
 							backgroundColor={backgroundColor}
 						/>
 					)}
