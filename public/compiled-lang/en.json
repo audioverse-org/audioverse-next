@@ -3391,6 +3391,18 @@
       "value": "Video Downloads"
     }
   ],
+  "molecule-buttonGuestDownload__modalParagraph": [
+    {
+      "type": 0,
+      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+    }
+  ],
+  "molecule-buttonGuestDownload__modalTitle": [
+    {
+      "type": 0,
+      "value": "Create a Free Account"
+    }
+  ],
   "molecule-buttonGuest__downloadQuality": [
     {
       "type": 0,

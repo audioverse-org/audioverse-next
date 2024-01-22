@@ -1593,6 +1593,12 @@
     "comment": "download button menu video heading",
     "string": "Video Downloads"
   },
+  "molecule-buttonGuestDownload__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonGuestDownload__modalTitle": {
+    "string": "Create a Free Account"
+  },
   "molecule-buttonGuest__downloadQuality": {
     "string": "Adjusting download quality"
   },
