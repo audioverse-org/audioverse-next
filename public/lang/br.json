@@ -246,7 +246,7 @@
 	"about__spirit12": {
 
 
-		"string": "Os materiais devem vir de oradores ligados a organizações ou grupos que defendem e representam o “Espirito do AudioVerse” descrito acima. Que eles sejam Adventistas do Sétimo Dia com uma boa reputação."
+		"string": "Os materiais devem vir de palestrantes ligados a organizações ou grupos que defendem e representam o “Espirito do AudioVerse” descrito acima. Que eles sejam Adventistas do Sétimo Dia com uma boa reputação."
 
 
 	},
@@ -1194,7 +1194,7 @@
 	"buttonShareRecording__emailSubject": {
 
 
-		"string": "{título} por {oradores}"
+		"string": "{título} por {palestrantes}"
 
 
 	},
@@ -1404,7 +1404,7 @@
 	"cardSequence_scriptureSongsType": {
 
 
-		"string": "Canções das Escrituras"
+		"string": "Canções Biblicas"
 
 
 	},
@@ -1497,7 +1497,7 @@
 	"cardSongBook__contributors": {
 
 
-		"string": "Vários colaboradores"
+		"string": "Vários Colaboradoes"
 
 
 	},
@@ -1515,7 +1515,7 @@
 	"cardSong_sequenceLabel": {
 
 
-		"string": "Canções das Escrituras"
+		"string": "Canções Biblicas"
 
 
 	},
@@ -1608,7 +1608,7 @@
 	"collectionDetail__presentersAllLabel": {
 
 
-		"string": "Ver todos Oradores"
+		"string": "Ver todos Palestrantes"
 
 
 	},
@@ -1620,7 +1620,7 @@
 		"comment": "Coleção detalhada da etiqueta dos alto-falantes",
 
 
-		"string": "Oradores"
+		"string": "Palestrantes"
 
 
 	},
@@ -1704,7 +1704,7 @@
 	"collectionPresenterssDetail__heading": {
 
 
-		"string": "Todos Oradores"
+		"string": "Todos Palestrantes"
 
 
 	},
@@ -1776,7 +1776,7 @@
 	"conferencesPresenters__title": {
 
 
-		"string": "Oradores do {conferenceName}"
+		"string": "Palestrantes do {conferenceName}"
 
 
 	},
@@ -2010,7 +2010,7 @@
 	"discoverCollections_presentersHeading": {
 
 
-		"string": "Oradores"
+		"string": "Palestrantes"
 
 
 	},
@@ -2019,7 +2019,7 @@
 	"discoverCollections_scriptureSongsHeading": {
 
 
-		"string": "Canções das Escrituras"
+		"string": "Canções Biblicas"
 
 
 	},
@@ -2343,7 +2343,7 @@
 	"give__estateDescription": {
 
 
-		"string": "Você pode impactar o AudioVerse hoje e amanhã, fazendo do AudioVerse um destinatário em seu plano testamentário. A forma mais fácil de fazer isso, é fazendo da AudioVerse um beneficiário em suas contas financeiras ou incluindo o ministério em seu testamento ou fundo.{br}{br} Para aqueles que desejam deixar um legado duradouro doando ao trabalho do Senhor, mas ainda precisam do benefício de seus bens, uma doação anual de caridade pode ser uma boa opção. Este método de doação é projetado para ser benéfico tanto para o doador quanto para o receptor. O AudioVerse está trabalhando com a WAF, Western Adventist Foundation [Fundação Adventista Ocidental], para oferecer esta opção de doação aos nossos colaboradores.{br}{br}{br} Se você deseja oferecer uma doação por meio de uma doação de caridade anual para o AudioVerse, por favor, entre em contato diretamente com a WAF por meio de seu site ou telefone."
+		"string": "Você pode impactar o AudioVerse hoje e amanhã, fazendo do AudioVerse um destinatário em seu plano testamentário. A forma mais fácil de fazer isso, é fazendo da AudioVerse um beneficiário em suas contas financeiras ou incluindo o ministério em seu testamento ou fundo.{br}{br} Para aqueles que desejam deixar um legado duradouro doando ao trabalho do Senhor, mas ainda precisam do benefício de seus bens, uma doação anual de caridade pode ser uma boa opção. Este método de doação é projetado para ser benéfico tanto para o doador quanto para o receptor. O AudioVerse está trabalhando com a WAF, Western Adventist Foundation [Fundação Adventista Ocidental], para oferecer esta opção de doação aos nossos Colaboradoes.{br}{br}{br} Se você deseja oferecer uma doação por meio de uma doação de caridade anual para o AudioVerse, por favor, entre em contato diretamente com a WAF por meio de seu site ou telefone."
 
 
 	},
@@ -2493,7 +2493,7 @@
 	"header__navItemCollections-presenters": {
 
 
-		"string": "Oradores"
+		"string": "Palestrantes"
 
 
 	},
@@ -2502,7 +2502,7 @@
 	"header__navItemCollections-songs": {
 
 
-		"string": "Canções das Escrituras"
+		"string": "Canções Biblicas"
 
 
 	},
@@ -2727,7 +2727,7 @@
 	"header__navItemPresenters": {
 
 
-		"string": "Oradores"
+		"string": "Palestrantes"
 
 
 	},
@@ -5430,7 +5430,7 @@
 	"personTypeLockup_type": {
 
 
-		"string": "Orador"
+		"string": "Palestrante"
 
 
 	},
@@ -5790,7 +5790,7 @@
 	"presenterDetail__seriesAllLabel": {
 
 
-		"string": "Ver todas as séries"
+		"string": "Ver todas séries"
 
 
 	},
@@ -5880,7 +5880,7 @@
 	"presenterSequencesDetail__heading": {
 
 
-		"string": "Todas as séries"
+		"string": "Todas Séries"
 
 
 	},
@@ -5925,7 +5925,7 @@
 	"presentersList__title": {
 
 
-		"string": "Todos Oradores"
+		"string": "Todos Palestrantes"
 
 
 	},
@@ -5961,7 +5961,7 @@
 	"presenters__title": {
 
 
-		"string": "Todos Oradores"
+		"string": "Todos Palestrantes"
 
 
 	},
@@ -5979,7 +5979,7 @@
 	"profile__buttonLabelSaveChanges": {
 
 
-		"string": "Salvar mudanças"
+		"string": "Salvar Alterações"
 
 
 	},
@@ -6600,7 +6600,7 @@
 	"search__personsHeading": {
 
 
-		"string": "Oradores"
+		"string": "Palestrantes"
 
 
 	},
@@ -6609,7 +6609,7 @@
 	"search__personsSeeAllMatching": {
 
 
-		"string": "Ver todos Oradores correspondentes"
+		"string": "Ver todos Palestrantes correspondentes"
 
 
 	},
@@ -6690,7 +6690,7 @@
 	"search__titleDynamic": {
 
 
-		"string": "Pesquisa | \"{termo}\" | AudioVerse"
+		"string": "Busca | \"{termo}\" | AudioVerse"
 
 
 	},
@@ -6717,7 +6717,7 @@
 	"sequenceType__musicTrackTitle": {
 
 
-		"string": "Canções das Escrituras"
+		"string": "Canções Biblicas"
 
 
 	},
@@ -6846,7 +6846,7 @@
 	"sermonDetailPage__disclaimer": {
 
 
-		"string": "As ideias nesta gravação são as de seus colaboradores e podem não necessariamente refletir a visão do AudioVerse."
+		"string": "As ideias nesta gravação são as de seus Palestrantes e podem não necessariamente refletir a visão do AudioVerse."
 
 
 	},
@@ -6921,7 +6921,7 @@
 	"socialLogin__loginFacebookButton": {
 
 
-		"string": "Entrar com Facebook"
+		"string": "Accessar com Facebook"
 
 
 	},
@@ -6930,7 +6930,7 @@
 	"socialLogin__loginGoogleButton": {
 
 
-		"string": "Entrar com o Google"
+		"string": "Accessar com Google"
 
 
 	},
@@ -6939,7 +6939,7 @@
 	"socialLogin__registerFacebookButton": {
 
 
-		"string": "Se cadastrar com Facebook"
+		"string": "Cadastra-se com Facebook"
 
 
 	},
@@ -6948,7 +6948,7 @@
 	"socialLogin__registerGoogleButton": {
 
 
-		"string": "Se cadastrar com Google"
+		"string": "Cadastra-se com Google"
 
 
 	},
@@ -6969,7 +6969,7 @@
 	"songBook__title": {
 
 
-		"string": "{livro} Canções das Escrituras"
+		"string": "{livro} Canções Biblicas"
 
 
 	},
@@ -6978,7 +6978,7 @@
 	"songsBooksDetail__contributors": {
 
 
-		"string": "Vários colaboradores"
+		"string": "Vários Colaboradores"
 
 
 	},
@@ -7023,7 +7023,7 @@
 	"songsListPage__title": {
 
 
-		"string": "Canções das Escrituras"
+		"string": "Canções Biblicas"
 
 
 	},
@@ -7278,7 +7278,7 @@
 	"storyAlbums__title": {
 
 
-		"string": "Canções das Escrituras"
+		"string": "Canções Biblicas"
 
 
 	},
@@ -7398,7 +7398,7 @@
 	},
 
 	"search__presentersHeading": {
-		"string": "Oradores"
+		"string": "Palestrantes"
 	},
 	"search__musicHeading": {
 		"string": "Musica"
