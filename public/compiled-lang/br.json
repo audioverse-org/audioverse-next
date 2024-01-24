@@ -158,7 +158,7 @@
   "about__spirit12": [
     {
       "type": 0,
-      "value": "Os materiais devem vir de oradores ligados a organizações ou grupos que defendem e representam o “Espirito do AudioVerse” descrito acima. Que eles sejam Adventistas do Sétimo Dia com uma boa reputação."
+      "value": "Os materiais devem vir de Palestrantes ligados a organizações ou grupos que defendem e representam o “Espirito do AudioVerse” descrito acima. Que eles sejam Adventistas do Sétimo Dia com uma boa reputação."
     }
   ],
   "about__spirit2": [
@@ -782,7 +782,7 @@
     },
     {
       "type": 1,
-      "value": "oradores"
+      "value": "Palestrantes"
     }
   ],
   "buttonShare__emailSubjectSuffix": [
@@ -958,7 +958,7 @@
   "cardSequence_scriptureSongsType": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "cardSequence_sequenceLabel": [
@@ -1036,7 +1036,7 @@
   "cardSong_sequenceLabel": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "cardSponsor__collectionCountLabel": [
@@ -1102,13 +1102,13 @@
   "collectionDetail__presentersAllLabel": [
     {
       "type": 0,
-      "value": "Ver todos Oradores"
+      "value": "Ver todos Palestrantes"
     }
   ],
   "collectionDetail__presentersLabel": [
     {
       "type": 0,
-      "value": "Oradores"
+      "value": "Palestrantes"
     }
   ],
   "collectionDetail__sequenceCountLabel": [
@@ -1164,7 +1164,7 @@
   "collectionPresenterssDetail__heading": [
     {
       "type": 0,
-      "value": "Todos Oradores"
+      "value": "Todos Palestrantes"
     }
   ],
   "collectionSequencesDetail__heading": [
@@ -1212,7 +1212,7 @@
   "conferencesPresenters__title": [
     {
       "type": 0,
-      "value": "Oradores do "
+      "value": "Palestrantes do "
     },
     {
       "type": 1,
@@ -1404,13 +1404,13 @@
   "discoverCollections_presentersHeading": [
     {
       "type": 0,
-      "value": "Oradores"
+      "value": "Palestrantes"
     }
   ],
   "discoverCollections_scriptureSongsHeading": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "discoverCollections_seeAll": [
@@ -1876,13 +1876,13 @@
   "header__navItemCollections-presenters": [
     {
       "type": 0,
-      "value": "Oradores"
+      "value": "Palestrantes"
     }
   ],
   "header__navItemCollections-songs": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "header__navItemCollections-sponsors": [
@@ -2026,7 +2026,7 @@
   "header__navItemPresenters": [
     {
       "type": 0,
-      "value": "Oradores"
+      "value": "Palestrantes"
     }
   ],
   "header__navItemStory": [
@@ -3840,7 +3840,7 @@
   "personTypeLockup_type": [
     {
       "type": 0,
-      "value": "Orador"
+      "value": "Palestrante"
     }
   ],
   "playButton__pauseLabel": [
@@ -4176,7 +4176,7 @@
   "presentersList__title": [
     {
       "type": 0,
-      "value": "Todos Oradores"
+      "value": "Todos Palestrantes"
     }
   ],
   "presentersSequences__title": [
@@ -4212,7 +4212,7 @@
   "presenters__title": [
     {
       "type": 0,
-      "value": "Todos Oradores"
+      "value": "Todos Palestrantes"
     }
   ],
   "profile__buttonLabelDeleteAccount": [
@@ -4634,19 +4634,19 @@
   "search__personsHeading": [
     {
       "type": 0,
-      "value": "Oradores"
+      "value": "Palestrantes"
     }
   ],
   "search__personsSeeAllMatching": [
     {
       "type": 0,
-      "value": "Ver todos Oradores correspondentes"
+      "value": "Ver todos Palestrantes correspondentes"
     }
   ],
   "search__presentersHeading": [
     {
       "type": 0,
-      "value": "Oradores"
+      "value": "Palestrantes"
     }
   ],
   "search__resultsCount": [
@@ -4736,7 +4736,7 @@
   "sequenceType__musicTrackTitle": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "sequenceType__seriesTitle": [
@@ -4932,7 +4932,7 @@
     },
     {
       "type": 0,
-      "value": " Canções das Escrituras"
+      "value": " Canções Biblicas"
     }
   ],
   "songsBooksDetail__contributors": [
@@ -4972,7 +4972,7 @@
   "songsListPage__title": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "sopnsorTypeLockup_type": [
@@ -5186,7 +5186,7 @@
   "storyAlbums__title": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "teachingsFeed__description": [
