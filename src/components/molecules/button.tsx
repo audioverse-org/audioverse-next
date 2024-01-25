@@ -9,7 +9,8 @@ export type IButtonType =
 	| 'primary'
 	| 'primaryInverse'
 	| 'secondary'
-	| 'secondaryInverse';
+	| 'secondaryInverse'
+	| 'none';
 // | 'tertiary' someday
 
 type Props = {

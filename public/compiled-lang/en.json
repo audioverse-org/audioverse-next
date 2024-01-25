@@ -3391,28 +3391,28 @@
       "value": "Video Downloads"
     }
   ],
-  "molecule-buttonGuest__downloadQuality": [
+  "molecule-buttonGuest__Download": [
     {
       "type": 0,
-      "value": "Adjusting download quality"
+      "value": "Download content for offline access"
     }
   ],
   "molecule-buttonGuest__label": [
     {
       "type": 0,
-      "value": "Continue as guest"
+      "value": "Why Sign Up?"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelCreateAccount": [
     {
       "type": 0,
-      "value": "Create account"
+      "value": "Sign Up"
     }
   ],
-  "molecule-buttonGuest__modalButtonLabelGuest": [
+  "molecule-buttonGuest__modalButtonLabelGuestSkip2": [
     {
       "type": 0,
-      "value": "Continue as guest"
+      "value": "Skip"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelLogIn": [
@@ -3421,28 +3421,52 @@
       "value": "Log in"
     }
   ],
+  "molecule-buttonGuest__modalButtonLabelSkip": [
+    {
+      "type": 0,
+      "value": "Skip"
+    }
+  ],
   "molecule-buttonGuest__modalParagraph": [
     {
       "type": 0,
-      "value": "You'll be missing out on some key features without an account, like:"
+      "value": "Free user accounts help us provide you with a personal, customized experience, giving you access to mobile downloads, saving, and more. In addition, accounts help us know how users use the app, which helps us know how to improve the app. Please consider signing up or logging in to help our mission of sharing sound doctrine"
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph2": [
+    {
+      "type": 0,
+      "value": "With a free account,you can"
     }
   ],
   "molecule-buttonGuest__modalTitle": [
     {
       "type": 0,
-      "value": "Continue as guest?"
+      "value": "Why Sign Up?"
     }
   ],
-  "molecule-buttonGuest__saving": [
+  "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "Saving to your library"
+      "value": "Are you sure?"
     }
   ],
-  "molecule-buttonGuest__syncing": [
+  "molecule-buttonGuest__requests": [
     {
       "type": 0,
-      "value": "Syncing across your devices"
+      "value": "Avoid annoying login requests"
+    }
+  ],
+  "molecule-buttonGuest__save": [
+    {
+      "type": 0,
+      "value": "Save your content to listen later"
+    }
+  ],
+  "molecule-buttonGuest__sync": [
+    {
+      "type": 0,
+      "value": "Pick up where you left off across devices"
     }
   ],
   "molecule-buttonShareRecording__audioEmbedLabel": [

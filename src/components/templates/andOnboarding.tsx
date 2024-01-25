@@ -7,6 +7,7 @@ import { getAppFeatures } from '~lib/getAppFeatures';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import LogoLarge from '~public/img/logo-large.svg';
 
+import ButtonGuest from '../molecules/buttonGuest';
 import styles from './andOnboarding.module.scss';
 
 export default function AndOnboarding({
@@ -22,6 +23,7 @@ export default function AndOnboarding({
 			<div className={styles.form}>
 				<div className={styles.logo}>
 					<LogoLarge />
+					<ButtonGuest />
 				</div>
 				<div className={styles.intro}>
 					<FormattedMessage
