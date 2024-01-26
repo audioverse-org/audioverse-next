@@ -304,7 +304,7 @@ describe('register page', () => {
 
 		await userEvent.click(getByTestId('guest-info-button2'));
 
-		expect(getByText('Sign Up?')).toBeInTheDocument();
+		expect(getByText('Sign Up')).toBeInTheDocument();
 	});
 });
 
