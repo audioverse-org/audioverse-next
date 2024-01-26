@@ -1,4 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import {
 	ReactFacebookFailureResponse,
@@ -12,7 +14,9 @@ import { useRegisterSocialMutation } from '~containers/account/__generated__/reg
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '~lib/constants';
 import { setSessionToken } from '~lib/cookies';
 import useDidUnmount from '~lib/useDidUnmount';
+import useLanguageRoute from '~lib/useLanguageRoute';
 import { UserSocialServiceName } from '~src/__generated__/graphql';
+import root from '~src/lib/routes';
 
 import Button from './button';
 import styles from './socialLogin.module.scss';
@@ -24,10 +28,13 @@ export default function SocialLogin({
 	onSuccess?: () => void;
 	isRegister?: boolean;
 }): JSX.Element {
+	
+	const languageRoute = useLanguageRoute();
 	const [errors, setErrors] = useState<string[]>([]);
 	const intl = useIntl();
 	const didUnmount = useDidUnmount();
 	const queryClient = useQueryClient();
+	const router = useRouter();
 
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
 		useRegisterSocialMutation({
@@ -95,11 +102,12 @@ export default function SocialLogin({
 				</ul>
 			)}
 
-			<div className={styles.buttonRow}>
+			<div className={styles.buttonCol}>
 				<FacebookLogin
 					appId={FACEBOOK_APP_ID}
 					render={(renderProps) => (
 						<Button
+						   
 							type="primary"
 							text={
 								isRegister
@@ -158,6 +166,47 @@ export default function SocialLogin({
 					onClick={signIn}
 					centered
 				/>
+				<p>
+				{intl.formatMessage({
+									id: 'socialLogin__loginOr',
+									defaultMessage: 'Or',
+							  })}
+				</p>
+				<Button
+							
+							href={root.lang(languageRoute).account.register.get({
+								params: {
+									back: router.asPath,
+								},
+							})}
+							className={styles.centerText}
+							type="secondary"
+							text={
+								<FormattedMessage
+									id="molecule-button-SignUp"
+									defaultMessage="Sign Up with Email"
+								/>
+							}
+							/>
+
+							<p>
+							{intl.formatMessage({
+									id: 'regularLogin__login',
+									defaultMessage: 'Already have an account? ',
+							  })}
+							  <Link 	href={root.lang(languageRoute).account.login.get({
+								params: {
+									back: router.asPath,
+								},
+							})} legacyBehavior>
+								<a> 
+								{intl.formatMessage({
+									id: 'regularLogin__loginTxt',
+									defaultMessage: 'Log In',
+							  })}
+								</a>
+							 </Link>
+							</p>
 			</div>
 		</>
 	);

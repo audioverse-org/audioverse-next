@@ -3271,6 +3271,12 @@
       "value": "Don’t have an account?"
     }
   ],
+  "loginLanding__title": [
+    {
+      "type": 0,
+      "value": "Login Landing"
+    }
+  ],
   "loginRedirect__message": [
     {
       "type": 0,
@@ -3391,6 +3397,18 @@
       "value": "Video Downloads"
     }
   ],
+  "molecule-buttonGuestDownload__modalParagraph": [
+    {
+      "type": 0,
+      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+    }
+  ],
+  "molecule-buttonGuestDownload__modalTitle": [
+    {
+      "type": 0,
+      "value": "Create a Free Account"
+    }
+  ],
   "molecule-buttonGuest__Download": [
     {
       "type": 0,
@@ -3407,6 +3425,12 @@
     {
       "type": 0,
       "value": "Sign Up"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": [
+    {
+      "type": 0,
+      "value": "Create account"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": [

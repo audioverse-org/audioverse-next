@@ -1542,6 +1542,9 @@
   "loginForm__signupIntro": {
     "string": "Don’t have an account?"
   },
+  "loginLanding__title": {
+    "string": "Login Landing"
+  },
   "loginRedirect__message": {
     "string": "Redirecting..."
   },
@@ -1593,6 +1596,12 @@
     "comment": "download button menu video heading",
     "string": "Video Downloads"
   },
+  "molecule-buttonGuestDownload__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonGuestDownload__modalTitle": {
+    "string": "Create a Free Account"
+  },
   "molecule-buttonGuest__Download": {
     "string": "Download content for offline access"
   },
@@ -1601,6 +1610,9 @@
   },
   "molecule-buttonGuest__modalButtonLabelCreateAccount": {
     "string": "Sign Up"
+  },
+  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
     "string": "Skip"

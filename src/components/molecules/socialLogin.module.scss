@@ -6,3 +6,17 @@
 		flex: 0 1 calc(50% - 16px);
 	}
 }
+.buttonCol {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center;
+	flex-wrap: wrap-reverse;
+	> * {
+		margin-top: 16px;
+		margin-left: 16px;
+	}
+}
+.centerText {
+	justify-content: center;
+}

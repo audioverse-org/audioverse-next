@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
-import SocialLogin from '~components/molecules/socialLogin';
 import RegisterForm from '~components/organisms/registerForm';
 import AndOnboarding from '~components/templates/andOnboarding';
 import root from '~lib/routes';
@@ -15,7 +14,6 @@ function Register(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	return (
 		<AndOnboarding>
-			<SocialLogin isRegister />
 			<RegisterForm
 				showLogin={() =>
 					router.push(

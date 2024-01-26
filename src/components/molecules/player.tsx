@@ -3,6 +3,7 @@ import Image from 'next/legacy/image';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { useGetWithAuthGuardDataQuery } from '~components/HOCs/__generated__/withAuthGuard';
 import ButtonDownload from '~components/molecules/buttonDownload';
 import ButtonNudge from '~components/molecules/buttonNudge';
 import ButtonPlay, {
@@ -14,6 +15,7 @@ import PlaybackTimes from '~components/molecules/playbackTimes';
 import RecordingProgressBar from '~components/molecules/recordingProgressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
+import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
 import useGlobalSpaceDown from '~lib/useGlobalSpaceDown';
 import usePlaybackSession from '~lib/usePlaybackSession';
@@ -24,6 +26,7 @@ import IconPause from '~public/img/icons/icon-pause-large.svg';
 import IconPlay from '~public/img/icons/icon-play-large.svg';
 
 import { PlayerFragment } from './__generated__/player';
+import ButtonDownloadBlank from './buttonDownloadBlank';
 import CircleButton from './circleButton';
 import styles from './player.module.scss';
 import RecordingButtonFavorite from './recordingButtonFavorite';
@@ -78,6 +81,16 @@ const Player = ({
 	const iconColor = isBackgroundColorDark(backgroundColor)
 		? BaseColors.WHITE
 		: BaseColors.DARK;
+
+	const sessionToken = getSessionToken(); // i will see if this give any issue
+	const authResult = useGetWithAuthGuardDataQuery(
+		{},
+		{
+			enabled: !!sessionToken,
+			retry: false,
+		}
+	);
+	const user = authResult.data?.me?.user;
 
 	return (
 		<div
@@ -229,7 +242,12 @@ const Player = ({
 					)}
 
 					<ButtonSpeed {...{ recording, backgroundColor }} />
-					<ButtonDownload {...{ recording, backgroundColor }} />
+					{user ? (
+						<ButtonDownload {...{ recording, backgroundColor }} />
+					) : (
+						<ButtonDownloadBlank />
+					)}
+
 					<ButtonShareRecording
 						{...{
 							recording,

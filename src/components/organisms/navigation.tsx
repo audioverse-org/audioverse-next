@@ -164,7 +164,7 @@ const Navigation = ({
 								</>
 							) : (
 								<Link
-									href={root.lang(languageRoute).account.login.get({
+									href={root.lang(languageRoute).account.loginLanding.get({
 										params: {
 											back: router.asPath,
 										},
