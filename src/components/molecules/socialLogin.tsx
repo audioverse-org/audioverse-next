@@ -28,7 +28,6 @@ export default function SocialLogin({
 	onSuccess?: () => void;
 	isRegister?: boolean;
 }): JSX.Element {
-	
 	const languageRoute = useLanguageRoute();
 	const [errors, setErrors] = useState<string[]>([]);
 	const intl = useIntl();
@@ -107,7 +106,6 @@ export default function SocialLogin({
 					appId={FACEBOOK_APP_ID}
 					render={(renderProps) => (
 						<Button
-						   
 							type="primary"
 							text={
 								isRegister
@@ -167,46 +165,48 @@ export default function SocialLogin({
 					centered
 				/>
 				<p>
-				{intl.formatMessage({
-									id: 'socialLogin__loginOr',
-									defaultMessage: 'Or',
-							  })}
+					{intl.formatMessage({
+						id: 'socialLogin__loginOr',
+						defaultMessage: 'Or',
+					})}
 				</p>
 				<Button
-							
-							href={root.lang(languageRoute).account.register.get({
-								params: {
-									back: router.asPath,
-								},
-							})}
-							className={styles.centerText}
-							type="secondary"
-							text={
-								<FormattedMessage
-									id="molecule-button-SignUp"
-									defaultMessage="Sign Up with Email"
-								/>
-							}
-							/>
+					href={root.lang(languageRoute).account.register.get({
+						params: {
+							back: router.asPath,
+						},
+					})}
+					className={styles.centerText}
+					type="secondary"
+					text={
+						<FormattedMessage
+							id="molecule-button-SignUp"
+							defaultMessage="Sign Up with Email"
+						/>
+					}
+				/>
 
-							<p>
+				<p>
+					{intl.formatMessage({
+						id: 'regularLogin__login',
+						defaultMessage: 'Already have an account? ',
+					})}
+					<Link
+						href={root.lang(languageRoute).account.login.get({
+							params: {
+								back: router.asPath,
+							},
+						})}
+						legacyBehavior
+					>
+						<a>
 							{intl.formatMessage({
-									id: 'regularLogin__login',
-									defaultMessage: 'Already have an account? ',
-							  })}
-							  <Link 	href={root.lang(languageRoute).account.login.get({
-								params: {
-									back: router.asPath,
-								},
-							})} legacyBehavior>
-								<a> 
-								{intl.formatMessage({
-									id: 'regularLogin__loginTxt',
-									defaultMessage: 'Log In',
-							  })}
-								</a>
-							 </Link>
-							</p>
+								id: 'regularLogin__loginTxt',
+								defaultMessage: 'Log In',
+							})}
+						</a>
+					</Link>
+				</p>
 			</div>
 		</>
 	);

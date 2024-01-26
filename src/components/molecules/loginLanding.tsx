@@ -10,7 +10,6 @@ export default function Login(): JSX.Element {
 	return (
 		<AndOnboarding>
 			<SocialLogin />
-            
 		</AndOnboarding>
 	);
 }

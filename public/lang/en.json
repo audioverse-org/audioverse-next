@@ -1575,6 +1575,9 @@
   "miniplayer__volume": {
     "string": "Volume"
   },
+  "molecule-button-SignUp": {
+    "string": "Sign Up with Email"
+  },
   "molecule-buttonDownload__buttonLabel": {
     "comment": "download button label",
     "string": "downloads"
@@ -2207,6 +2210,12 @@
   "register__title": {
     "string": "Register"
   },
+  "regularLogin__login": {
+    "string": "Already have an account?"
+  },
+  "regularLogin__loginTxt": {
+    "string": "Log In"
+  },
   "release__address1": {
     "string": "Address line 1"
   },
@@ -2455,6 +2464,9 @@
   },
   "socialLogin__loginGoogleButton": {
     "string": "Login with Google"
+  },
+  "socialLogin__loginOr": {
+    "string": "Or"
   },
   "socialLogin__registerFacebookButton": {
     "string": "Sign up with Facebook"

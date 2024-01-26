@@ -3337,6 +3337,12 @@
       "value": "Volume"
     }
   ],
+  "molecule-button-SignUp": [
+    {
+      "type": 0,
+      "value": "Sign Up with Email"
+    }
+  ],
   "molecule-buttonDownload__buttonLabel": [
     {
       "type": 0,
@@ -4625,6 +4631,18 @@
       "value": "Register"
     }
   ],
+  "regularLogin__login": [
+    {
+      "type": 0,
+      "value": "Already have an account?"
+    }
+  ],
+  "regularLogin__loginTxt": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
   "release__address1": [
     {
       "type": 0,
@@ -5159,6 +5177,12 @@
     {
       "type": 0,
       "value": "Login with Google"
+    }
+  ],
+  "socialLogin__loginOr": [
+    {
+      "type": 0,
+      "value": "Or"
     }
   ],
   "socialLogin__registerFacebookButton": [
