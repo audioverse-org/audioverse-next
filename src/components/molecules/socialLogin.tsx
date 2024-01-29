@@ -16,7 +16,7 @@ import { setSessionToken } from '~lib/cookies';
 import useDidUnmount from '~lib/useDidUnmount';
 import { UserSocialServiceName } from '~src/__generated__/graphql';
 
-import Button from './button';
+import Button from './buttonSocial';
 import styles from './socialLogin.module.scss';
 
 export default function SocialLogin({

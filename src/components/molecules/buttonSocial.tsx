@@ -50,14 +50,20 @@ export default function Button({
 	};
 
 	const inner = (
-		<>
-			{IconLeft && <IconLeft className={clsx(text && styles.iconLeftOfText)} />}
-
-			{text}
-			{IconRight && (
-				<IconRight className={clsx(text && styles.iconRightOfText)} />
+		<div className={IconLeft ? styles.spaceIcon : ''}>
+			{IconLeft && (
+				<div className={styles.leftIcon}>
+					<IconLeft className={clsx(text && styles.iconLeftOfText)} />
+				</div>
 			)}
-		</>
+
+			<div className={styles.text}>{text}</div>
+			{IconRight && (
+				<div>
+					<IconRight className={clsx(text && styles.iconRightOfText)} />
+				</div>
+			)}
+		</div>
 	);
 	return href ? (
 		<Link href={href} legacyBehavior>
