@@ -54,7 +54,7 @@ export default function Login(): JSX.Element {
 						})}
 						legacyBehavior
 					>
-						<a>
+						<a className={styles.loginText}>
 							{intl.formatMessage({
 								id: 'regularLogin__loginTxt',
 								defaultMessage: 'Log In',

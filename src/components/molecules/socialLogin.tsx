@@ -1,4 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
+import fafacebook from 'public/img/icons-raw/fa-facebook.svg';
+import fagoogle from 'public/img/icons-raw/fa-google.svg';
 import React, { useState } from 'react';
 import {
 	ReactFacebookFailureResponse,
@@ -100,7 +102,7 @@ export default function SocialLogin({
 					appId={FACEBOOK_APP_ID}
 					render={(renderProps) => (
 						<Button
-							type="primary"
+							type="secondary"
 							text={
 								isRegister
 									? intl.formatMessage({
@@ -114,6 +116,7 @@ export default function SocialLogin({
 							}
 							onClick={renderProps.onClick}
 							centered
+							IconLeft={fafacebook}
 						/>
 					)}
 					callback={(response) => {
@@ -143,7 +146,7 @@ export default function SocialLogin({
 				/>
 
 				<Button
-					type="primary"
+					type="secondary"
 					text={
 						isRegister
 							? intl.formatMessage({
@@ -157,6 +160,7 @@ export default function SocialLogin({
 					}
 					onClick={signIn}
 					centered
+					IconLeft={fagoogle}
 				/>
 			</div>
 		</>

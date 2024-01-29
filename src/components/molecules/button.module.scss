@@ -111,8 +111,22 @@ $button-height: 31px;
 }
 
 .iconLeftOfText {
-	margin-right: 4px;
+	margin-right: 0px;
+}
+.leftIcon {
+	float: left;
+	margin-left: 20%;
 }
 .iconRightOfText {
 	margin-left: 4px;
+}
+.spaceIcon {
+	flex: 1;
+	flex-direction: row;
+	//justify-content: center;
+	//align-content: center;
+}
+.text {
+	text-align: center;
+	width: 80%;
 }

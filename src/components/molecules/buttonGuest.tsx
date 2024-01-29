@@ -158,7 +158,7 @@ export default function ButtonGuest({
 						/>
 						<Button
 							onClick={() => setIsGuestModal2Open(false)}
-							href={redirectRoute}
+							href="/"
 							className={styles.link}
 							type="none"
 							text={
