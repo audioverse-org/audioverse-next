@@ -14,6 +14,20 @@ $button-height: 31px;
 	cursor: pointer;
 	white-space: nowrap;
 }
+.social {
+	display: inline-flex;
+	align-items: center;
+	height: 40px;
+	width: 60%;
+	margin: 0 20%;
+	padding: 20px 20px;
+	border-radius: 4px;
+	background: transparent;
+	font-size: 14px;
+	line-height: 15px;
+	cursor: pointer;
+	white-space: nowrap;
+}
 
 .centered {
 	justify-content: center;
@@ -112,10 +126,11 @@ $button-height: 31px;
 
 .iconLeftOfText {
 	margin-right: 0px;
+	color: #1877f2;
 }
 .leftIcon {
 	float: left;
-	margin-left: 20%;
+	margin-left: 10%;
 }
 .iconRightOfText {
 	margin-left: 4px;
@@ -127,6 +142,7 @@ $button-height: 31px;
 	//align-content: center;
 }
 .text {
+	margin-top: 3px;
 	text-align: center;
 	width: 80%;
 }

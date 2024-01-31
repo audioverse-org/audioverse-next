@@ -107,7 +107,13 @@ export default function ButtonGuest({
 				<p className={styles.intro}>
 					<FormattedMessage
 						id="molecule-buttonGuest__modalParagraph"
-						defaultMessage="Free user accounts help us provide you with a personal, customized experience, giving you access to mobile downloads, saving, and more. In addition, accounts help us know how users use the app, which helps us know how to improve the app. Please consider signing up or logging in to help our mission of sharing sound doctrine"
+						defaultMessage="Free user accounts help us provide you with a personal, customized experience, giving you access to mobile downloads, saving, and more. In addition, accounts help us know how users use the app, which helps us know how to improve the app."
+					/>
+				</p>
+				<p className={styles.intro}>
+					<FormattedMessage
+						id="molecule-buttonGuest__modalParagraph1-2"
+						defaultMessage="Please consider signing up or logging in to help our mission of sharing sound doctrine."
 					/>
 				</p>
 			</Modal>

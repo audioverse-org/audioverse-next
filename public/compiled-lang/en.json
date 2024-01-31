@@ -3460,7 +3460,13 @@
   "molecule-buttonGuest__modalParagraph": [
     {
       "type": 0,
-      "value": "Free user accounts help us provide you with a personal, customized experience, giving you access to mobile downloads, saving, and more. In addition, accounts help us know how users use the app, which helps us know how to improve the app. Please consider signing up or logging in to help our mission of sharing sound doctrine"
+      "value": "Free user accounts help us provide you with a personal, customized experience, giving you access to mobile downloads, saving, and more. In addition, accounts help us know how users use the app, which helps us know how to improve the app."
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph1-2": [
+    {
+      "type": 0,
+      "value": "Please consider signing up or logging in to help our mission of sharing sound doctrine."
     }
   ],
   "molecule-buttonGuest__modalParagraph2": [

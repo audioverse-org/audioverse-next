@@ -58,7 +58,7 @@ export default function Modal({
 					) : (
 						''
 					)}
-					<Heading2 className="centerText">{title}</Heading2>
+					<Heading2 className={styles.centerText}>{title}</Heading2>
 					{children}
 					{actions && <div className={styles.buttonCol}>{actions}</div>}
 				</div>

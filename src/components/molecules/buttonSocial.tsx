@@ -40,7 +40,7 @@ export default function Button({
 }: Props): JSX.Element {
 	const _props = {
 		className: clsx(
-			styles.base,
+			styles.social,
 			styles[type],
 			centered && styles.centered,
 			disabled && styles.disabled,

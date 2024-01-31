@@ -7,7 +7,7 @@ import AndOnboarding from '~components/templates/andOnboarding';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import Button from './button';
+import Button from './buttonSocial';
 import SocialLogin from './socialLogin';
 import styles from './socialLogin.module.scss';
 
