@@ -30,12 +30,8 @@
 	margin-bottom: 32px;
 }
 
-.whySignUp {
-	display: flex;
-	flex-direction: column;
-}
 .guest {
-	margin-top: 10px;
+	margin-top: 16px;
 }
 .intro {
 	font-size: 18px;
@@ -96,13 +92,13 @@
 		}
 	}
 
-	.whySignUp {
-		flex-direction: row;
-		align-items: center;
-		margin: auto;
-		margin-left: 20%;
-		margin-bottom: 20px;
-	}
+	// .whySignUp {
+	// 	flex-direction: row;
+	// 	align-items: center;
+	// 	margin: auto;
+	// 	margin-left: 20%;
+	// 	margin-bottom: 20px;
+	// }
 	.guest {
 		margin-left: 40px;
 		float: right;

@@ -17,15 +17,13 @@ export default function AndOnboarding({
 }): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const features = getAppFeatures(languageRoute);
-	const classes = `${styles.logo} ${styles.whySignUp}`;
 
 	return (
 		<div className={styles.page}>
 			<div className={styles.form}>
-				<div className={classes}>
-					<div>
-						<LogoLarge />
-					</div>
+				<div className={styles.logo}>
+					<LogoLarge />
+
 					<div className={styles.guest}>
 						<ButtonGuest />
 					</div>

@@ -18,7 +18,7 @@ export default function Login(): JSX.Element {
 	return (
 		<AndOnboarding>
 			<SocialLogin />
-			<div className={styles.buttonCol}>
+			<div className={styles.buttonColLanding}>
 				<p className={styles.centerText}>
 					{intl.formatMessage({
 						id: 'socialLogin__loginOr',
