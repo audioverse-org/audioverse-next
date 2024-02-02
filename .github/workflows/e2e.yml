@@ -31,7 +31,7 @@ jobs:
             --sitemap-exclude 'https?:\/\/[\w\.-]+\/(?!en)\w\w\/'
       - name: Add comment
         if: always()
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         env:
           BODY_PREFIX: '<!-- pa11y-ci results -->'
         with:
@@ -72,7 +72,7 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Add comment
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         env:
           LIGHTHOUSE_LINKS: ${{ steps.lighthouse.outputs.links }}
         with:
