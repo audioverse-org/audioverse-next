@@ -9,7 +9,6 @@ import { login, refetchUserQueries } from '~lib/api/login';
 
 import { useLoginForgotPasswordMutation } from './__generated__/login';
 import Button from './button';
-import ButtonGuest from './buttonGuest';
 import Input from './form/input';
 import styles from './loginForm.module.scss';
 
@@ -22,7 +21,6 @@ type Props = {
 export default function LoginForm({
 	onSuccess,
 	showRegister,
-	hideGuestButton,
 }: Props): JSX.Element {
 	const queryClient = useQueryClient();
 	const intl = useIntl();
@@ -170,7 +168,6 @@ export default function LoginForm({
 						centered
 						className={styles.signup}
 					/>
-					{!hideGuestButton && <ButtonGuest className={styles.guestLink} />}
 				</div>
 			</form>
 			<Modal

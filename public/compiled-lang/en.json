@@ -3271,6 +3271,12 @@
       "value": "Don’t have an account?"
     }
   ],
+  "loginLanding__title": [
+    {
+      "type": 0,
+      "value": "Login Landing"
+    }
+  ],
   "loginRedirect__message": [
     {
       "type": 0,
@@ -3329,6 +3335,12 @@
     {
       "type": 0,
       "value": "Volume"
+    }
+  ],
+  "molecule-button-SignUp": [
+    {
+      "type": 0,
+      "value": "Sign Up with Email"
     }
   ],
   "molecule-buttonDownload__buttonLabel": [
@@ -3391,28 +3403,46 @@
       "value": "Video Downloads"
     }
   ],
-  "molecule-buttonGuest__downloadQuality": [
+  "molecule-buttonGuestDownload__modalParagraph": [
     {
       "type": 0,
-      "value": "Adjusting download quality"
+      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+    }
+  ],
+  "molecule-buttonGuestDownload__modalTitle": [
+    {
+      "type": 0,
+      "value": "Create a Free Account"
+    }
+  ],
+  "molecule-buttonGuest__Download": [
+    {
+      "type": 0,
+      "value": "Download content for offline access"
     }
   ],
   "molecule-buttonGuest__label": [
     {
       "type": 0,
-      "value": "Continue as guest"
+      "value": "Why Sign Up?"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelCreateAccount": [
     {
       "type": 0,
+      "value": "Sign Up"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": [
+    {
+      "type": 0,
       "value": "Create account"
     }
   ],
-  "molecule-buttonGuest__modalButtonLabelGuest": [
+  "molecule-buttonGuest__modalButtonLabelGuestSkip2": [
     {
       "type": 0,
-      "value": "Continue as guest"
+      "value": "Skip"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelLogIn": [
@@ -3421,28 +3451,58 @@
       "value": "Log in"
     }
   ],
+  "molecule-buttonGuest__modalButtonLabelSkip": [
+    {
+      "type": 0,
+      "value": "Skip"
+    }
+  ],
   "molecule-buttonGuest__modalParagraph": [
     {
       "type": 0,
-      "value": "You'll be missing out on some key features without an account, like:"
+      "value": "Free user accounts help us provide you with a personal, customized experience, giving you access to mobile downloads, saving, and more. In addition, accounts help us know how users use the app, which helps us know how to improve the app."
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph1-2": [
+    {
+      "type": 0,
+      "value": "Please consider signing up or logging in to help our mission of sharing sound doctrine."
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph2": [
+    {
+      "type": 0,
+      "value": "With a free account,you can"
     }
   ],
   "molecule-buttonGuest__modalTitle": [
     {
       "type": 0,
-      "value": "Continue as guest?"
+      "value": "Why Sign Up?"
     }
   ],
-  "molecule-buttonGuest__saving": [
+  "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "Saving to your library"
+      "value": "Are you sure?"
     }
   ],
-  "molecule-buttonGuest__syncing": [
+  "molecule-buttonGuest__requests": [
     {
       "type": 0,
-      "value": "Syncing across your devices"
+      "value": "Avoid annoying login requests"
+    }
+  ],
+  "molecule-buttonGuest__save": [
+    {
+      "type": 0,
+      "value": "Save your content to listen later"
+    }
+  ],
+  "molecule-buttonGuest__sync": [
+    {
+      "type": 0,
+      "value": "Pick up where you left off across devices"
     }
   ],
   "molecule-buttonShareRecording__audioEmbedLabel": [
@@ -4577,6 +4637,18 @@
       "value": "Register"
     }
   ],
+  "regularLogin__login": [
+    {
+      "type": 0,
+      "value": "Already have an account?"
+    }
+  ],
+  "regularLogin__loginTxt": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
   "release__address1": [
     {
       "type": 0,
@@ -5111,6 +5183,12 @@
     {
       "type": 0,
       "value": "Login with Google"
+    }
+  ],
+  "socialLogin__loginOr": [
+    {
+      "type": 0,
+      "value": "Or"
     }
   ],
   "socialLogin__registerFacebookButton": [

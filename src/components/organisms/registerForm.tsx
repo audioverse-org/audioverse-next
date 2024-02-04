@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '~components/molecules/button';
-import ButtonGuest from '~components/molecules/buttonGuest';
 import Input from '~components/molecules/form/input';
 import { useRegisterMutation } from '~containers/account/__generated__/register';
 import { setSessionToken } from '~lib/cookies';
@@ -16,11 +15,7 @@ type Props = {
 	hideGuestButton?: boolean;
 };
 
-function RegisterForm({
-	showLogin,
-	onSuccess,
-	hideGuestButton,
-}: Props): JSX.Element {
+function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -178,7 +173,6 @@ function RegisterForm({
 					centered
 					className={styles.login}
 				/>
-				{!hideGuestButton && <ButtonGuest className={styles.guestLink} />}
 			</div>
 		</form>
 	);

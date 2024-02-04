@@ -9,7 +9,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 0;
+	margin-left: 0;
 	padding: 0;
 	background: none;
 	border: none;
@@ -18,9 +18,12 @@
 		margin-left: 8px;
 	}
 }
-
+.centerText {
+	justify-content: center;
+}
 .intro {
-	margin: 0 0 16px;
+	margin: 0 0 4px;
+	padding: 16px;
 }
 
 .featuresList {
