@@ -14,7 +14,7 @@ import styles from './modal.module.scss';
 interface ModalProps {
 	title: string | JSX.Element;
 	children: ReactNode;
-	onClose: () => void;
+	onClose?: () => void;
 	open: boolean;
 	actions?: ReactNode;
 }
@@ -41,22 +41,26 @@ export default function Modal({
 		>
 			<Fade in={open}>
 				<div className={styles.modal}>
-					<IconButton
-						Icon={IconClose}
-						onClick={onClose}
-						color={BaseColors.DARK}
-						backgroundColor={BaseColors.WHITE}
-						className={styles.close}
-						{...{
-							'aria-label': intl.formatMessage({
-								id: 'organism-modal__close',
-								defaultMessage: 'Close',
-							}),
-						}}
-					/>
-					<Heading2>{title}</Heading2>
+					{onClose ? (
+						<IconButton
+							Icon={IconClose}
+							onClick={onClose}
+							color={BaseColors.DARK}
+							backgroundColor={BaseColors.WHITE}
+							className={styles.close}
+							{...{
+								'aria-label': intl.formatMessage({
+									id: 'organism-modal__close',
+									defaultMessage: 'Close',
+								}),
+							}}
+						/>
+					) : (
+						''
+					)}
+					<Heading2 className={styles.centerText}>{title}</Heading2>
 					{children}
-					{actions && <div className={styles.buttonRow}>{actions}</div>}
+					{actions && <div className={styles.buttonCol}>{actions}</div>}
 				</div>
 			</Fade>
 		</MuiModal>

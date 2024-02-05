@@ -1,4 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
+import fafacebook from 'public/img/icons-raw/fa-facebook.svg';
+import fagoogle from 'public/img/icons-raw/fa-google.svg';
 import React, { useState } from 'react';
 import {
 	ReactFacebookFailureResponse,
@@ -14,7 +16,7 @@ import { setSessionToken } from '~lib/cookies';
 import useDidUnmount from '~lib/useDidUnmount';
 import { UserSocialServiceName } from '~src/__generated__/graphql';
 
-import Button from './button';
+import Button from './buttonSocial';
 import styles from './socialLogin.module.scss';
 
 export default function SocialLogin({
@@ -95,12 +97,12 @@ export default function SocialLogin({
 				</ul>
 			)}
 
-			<div className={styles.buttonRow}>
+			<div className={styles.buttonCol}>
 				<FacebookLogin
 					appId={FACEBOOK_APP_ID}
 					render={(renderProps) => (
 						<Button
-							type="primary"
+							type="secondary"
 							text={
 								isRegister
 									? intl.formatMessage({
@@ -114,6 +116,7 @@ export default function SocialLogin({
 							}
 							onClick={renderProps.onClick}
 							centered
+							IconLeft={fafacebook}
 						/>
 					)}
 					callback={(response) => {
@@ -143,7 +146,7 @@ export default function SocialLogin({
 				/>
 
 				<Button
-					type="primary"
+					type="secondary"
 					text={
 						isRegister
 							? intl.formatMessage({
@@ -157,6 +160,7 @@ export default function SocialLogin({
 					}
 					onClick={signIn}
 					centered
+					IconLeft={fagoogle}
 				/>
 			</div>
 		</>

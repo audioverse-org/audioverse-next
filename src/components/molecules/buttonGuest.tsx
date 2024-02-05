@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -8,7 +7,6 @@ import Button from '~components/molecules/button';
 import Modal from '~components/organisms/modal';
 import root, { isRedirectRouteAllowed } from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
-import Icon from '~public/img/icons/icon-info.svg';
 
 import styles from './buttonGuest.module.scss';
 
@@ -18,6 +16,7 @@ export default function ButtonGuest({
 	className?: string;
 }): JSX.Element {
 	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+	const [isGuestModal2Open, setIsGuestModal2Open] = useState(false);
 	const language = useLanguageRoute();
 	const router = useRouter();
 	const backRoute = router.query.back as string;
@@ -39,28 +38,19 @@ export default function ButtonGuest({
 				>
 					<FormattedMessage
 						id="molecule-buttonGuest__label"
-						defaultMessage="Continue as guest"
+						defaultMessage="Why Sign Up?"
 					/>
 				</button>
-
-				<button
-					className={styles.link}
-					data-testid="guest-info-button"
-					onClick={(e) => {
-						e.preventDefault();
-						setIsGuestModalOpen(true);
-					}}
-				>
-					<Icon />
-				</button>
 			</div>
+
+			{/* first modal ############################################################################# */}
 			<Modal
 				open={isGuestModalOpen}
-				onClose={() => setIsGuestModalOpen(false)}
+				//onClose={() => setIsGuestModalOpen(false)}
 				title={
 					<FormattedMessage
 						id="molecule-buttonGuest__modalTitle"
-						defaultMessage="Continue as guest?"
+						defaultMessage="Why Sign Up?"
 					/>
 				}
 				actions={
@@ -72,11 +62,12 @@ export default function ButtonGuest({
 									back: redirectRoute,
 								},
 							})}
-							type="super"
+							className={styles.centerText}
+							type="primary"
 							text={
 								<FormattedMessage
 									id="molecule-buttonGuest__modalButtonLabelCreateAccount"
-									defaultMessage="Create account"
+									defaultMessage="Sign Up"
 								/>
 							}
 						/>
@@ -87,7 +78,8 @@ export default function ButtonGuest({
 									back: redirectRoute,
 								},
 							})}
-							type="primary"
+							className={styles.centerText}
+							type="secondary"
 							text={
 								<FormattedMessage
 									id="molecule-buttonGuest__modalButtonLabelLogIn"
@@ -95,43 +87,128 @@ export default function ButtonGuest({
 								/>
 							}
 						/>
-						<Link href={redirectRoute} legacyBehavior>
-							<a className="decorated">
+						<Button
+							onClick={() => {
+								setIsGuestModalOpen(false);
+								setIsGuestModal2Open(true);
+							}}
+							className={styles.link}
+							type="none"
+							text={
 								<FormattedMessage
-									id="molecule-buttonGuest__modalButtonLabelGuest"
-									defaultMessage="Continue as guest"
+									id="molecule-buttonGuest__modalButtonLabelSkip"
+									defaultMessage="Skip"
 								/>
-							</a>
-						</Link>
+							}
+						/>
 					</>
 				}
 			>
 				<p className={styles.intro}>
 					<FormattedMessage
 						id="molecule-buttonGuest__modalParagraph"
-						defaultMessage="You'll be missing out on some key features without an account, like:"
+						defaultMessage="Free user accounts help us provide you with a personal, customized experience, giving you access to mobile downloads, saving, and more. In addition, accounts help us know how users use the app, which helps us know how to improve the app."
 					/>
 				</p>
-				<ul className={styles.featuresList}>
+				<p className={styles.intro}>
+					<FormattedMessage
+						id="molecule-buttonGuest__modalParagraph1-2"
+						defaultMessage="Please consider signing up or logging in to help our mission of sharing sound doctrine."
+					/>
+				</p>
+			</Modal>
+
+			{/* last modal ##################################################################################*/}
+			<Modal
+				open={isGuestModal2Open}
+				//onClose={() => setIsGuestModal2Open(false)}
+				title={
+					<FormattedMessage
+						id="molecule-buttonGuest__modalTitle2"
+						defaultMessage="Are you sure?"
+					/>
+				}
+				actions={
+					<>
+						<Button
+							onClick={() => setIsGuestModal2Open(false)}
+							href={root.lang(language).account.register.get({
+								params: {
+									back: redirectRoute,
+								},
+							})}
+							className={styles.centerText}
+							type="primary"
+							text={
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelCreateAccount"
+									defaultMessage="Sign Up"
+								/>
+							}
+						/>
+						<Button
+							onClick={() => setIsGuestModal2Open(false)}
+							href={root.lang(language).account.login.get({
+								params: {
+									back: redirectRoute,
+								},
+							})}
+							className={styles.centerText}
+							type="secondary"
+							text={
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelLogIn"
+									defaultMessage="Log in"
+								/>
+							}
+						/>
+						<Button
+							onClick={() => setIsGuestModal2Open(false)}
+							href="/"
+							className={styles.link}
+							type="none"
+							text={
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelGuestSkip2"
+									defaultMessage="Skip"
+								/>
+							}
+						/>
+					</>
+				}
+			>
+				<p className={styles.intro}>
+					<FormattedMessage
+						id="molecule-buttonGuest__modalParagraph2"
+						defaultMessage="With a free account,you can"
+					/>
+				</p>
+				<ol className={styles.featuresList}>
 					<li>
 						<FormattedMessage
-							id="molecule-buttonGuest__saving"
-							defaultMessage="Saving to your library"
+							id="molecule-buttonGuest__Download"
+							defaultMessage="Download content for offline access"
 						/>
 					</li>
 					<li>
 						<FormattedMessage
-							id="molecule-buttonGuest__syncing"
-							defaultMessage="Syncing across your devices"
+							id="molecule-buttonGuest__save"
+							defaultMessage="Save your content to listen later"
 						/>
 					</li>
 					<li>
 						<FormattedMessage
-							id="molecule-buttonGuest__downloadQuality"
-							defaultMessage="Adjusting download quality"
+							id="molecule-buttonGuest__sync"
+							defaultMessage="Pick up where you left off across devices"
 						/>
 					</li>
-				</ul>
+					<li>
+						<FormattedMessage
+							id="molecule-buttonGuest__requests"
+							defaultMessage="Avoid annoying login requests"
+						/>
+					</li>
+				</ol>
 			</Modal>
 		</>
 	);

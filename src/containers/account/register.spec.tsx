@@ -302,17 +302,9 @@ describe('register page', () => {
 	it('pops modal on guest info click', async () => {
 		const { getByText, getByTestId } = await renderPage();
 
-		await userEvent.click(getByTestId('guest-info-button'));
-
-		expect(getByText('Continue as guest?')).toBeInTheDocument();
-	});
-
-	it('pops modal on guest info click', async () => {
-		const { getByText, getByTestId } = await renderPage();
-
 		await userEvent.click(getByTestId('guest-info-button2'));
 
-		expect(getByText('Continue as guest?')).toBeInTheDocument();
+		expect(getByText('Sign Up')).toBeInTheDocument();
 	});
 });
 
