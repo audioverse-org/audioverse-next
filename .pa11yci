@@ -1,5 +1,12 @@
 {
 	"defaults": {
+		"chromeLaunchConfig": {
+			"args": [
+				"--no-sandbox",
+				"--disable-setuid-sandbox",
+				"--disable-dev-shm-usage"
+			]
+		},
 		"standard": "WCAG2AA",
 		"runners": [
 			"htmlcs",
@@ -19,13 +26,6 @@
 					"fileName": "./reports/results.json"
 				}
 			]
-		]
-	},
-	"chromeLaunchConfig": {
-		"args": [
-			"--no-sandbox",
-			"--disable-setuid-sandbox",
-			"--disable-dev-shm-usage"
 		]
 	}
 }
