@@ -77,7 +77,7 @@ export default function SocialLogin({
 
 	if (isSuccessSocial && !errors.length) {
 		return (
-			<p>
+			<p className={styles.centerTxt}>
 				<FormattedMessage
 					id="socialLogin__successMessage"
 					defaultMessage="success"
