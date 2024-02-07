@@ -17,9 +17,13 @@ export default function Login(): JSX.Element {
 	const router = useRouter();
 	return (
 		<AndOnboarding>
-			<SocialLogin />
+			<SocialLogin
+				onSuccess={() => {
+					router.push(root.lang(languageRoute).discover.get());
+				}}
+			/>
 			<div className={styles.buttonColLanding}>
-				<p className={styles.centerText}>
+				<p className={styles.centerTxt}>
 					{intl.formatMessage({
 						id: 'socialLogin__loginOr',
 						defaultMessage: 'Or',
