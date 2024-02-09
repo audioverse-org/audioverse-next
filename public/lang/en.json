@@ -636,6 +636,9 @@
   "contact__title": {
     "string": "Contact"
   },
+  "contact_footer": {
+    "string": "Contact"
+  },
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
@@ -1327,6 +1330,9 @@
   },
   "languageAlternativesAlert__message": {
     "string": "Thanks to our supporters and international partners, AudioVerse exists in many language sites available. Change your language here or in the menu."
+  },
+  "legal_footer": {
+    "string": "Legal"
   },
   "libraryCollections__dismiss": {
     "string": "Dismiss"
@@ -2103,6 +2109,9 @@
   "presenters__title": {
     "string": "All Presenters"
   },
+  "privacy_footer": {
+    "string": "Privacy Policy"
+  },
   "profile__buttonLabelDeleteAccount": {
     "string": "Delete Account"
   },
@@ -2610,6 +2619,9 @@
   },
   "team__title": {
     "string": "Our Team"
+  },
+  "terms_footer": {
+    "string": "Terms of Use"
   },
   "testimonies__heading": {
     "string": "Testimonials"

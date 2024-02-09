@@ -1,10 +1,13 @@
 import Image from 'next/legacy/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading3 from '~components/atoms/heading3';
 import isServerSide from '~lib/isServerSide';
+import root from '~src/lib/routes';
+import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import styles from './footer.module.scss';
 
@@ -15,6 +18,8 @@ export default function Footer({
 }): JSX.Element {
 	const footerRef = useRef<HTMLDivElement>(null);
 	const router = useRouter();
+	const intl = useIntl();
+	const languageRoute = useLanguageRoute();
 
 	useEffect(() => {
 		const currentFooterRef = footerRef.current;
@@ -66,6 +71,43 @@ export default function Footer({
 						defaultMessage="Sound Doctrine"
 					/>
 				</Heading3>
+			</div>
+			<div className={styles.linksFooter}>
+				<Link href={root.lang(languageRoute).about.id(4).get()} legacyBehavior>
+					<a className={styles.footerLinks}>
+						{intl.formatMessage({
+							id: 'privacy_footer',
+							defaultMessage: 'Privacy Policy',
+						})}
+					</a>
+				</Link>
+
+				<Link href={root.lang(languageRoute).about.id(5).get()} legacyBehavior>
+					<a className={styles.footerLinks}>
+						{intl.formatMessage({
+							id: 'terms_footer',
+							defaultMessage: 'Terms of Use',
+						})}
+					</a>
+				</Link>
+
+				<Link href={root.lang(languageRoute).about.id(3).get()} legacyBehavior>
+					<a className={styles.footerLinks}>
+						{intl.formatMessage({
+							id: 'legal_footer',
+							defaultMessage: 'Legal',
+						})}
+					</a>
+				</Link>
+
+				<Link href={root.lang(languageRoute).contact.get()} legacyBehavior>
+					<a className={styles.footerLinks}>
+						{intl.formatMessage({
+							id: 'contact_footer',
+							defaultMessage: 'Contact',
+						})}
+					</a>
+				</Link>
 			</div>
 		</div>
 	);
