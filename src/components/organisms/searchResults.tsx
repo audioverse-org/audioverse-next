@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
@@ -9,7 +9,6 @@ import CardInferred, {
 } from '~components/molecules/card/inferred';
 import CardGroup from '~components/molecules/cardGroup';
 import LoadingCards from '~components/molecules/loadingCards';
-import isServerSide from '~lib/isServerSide';
 import { useQueryString } from '~lib/useQueryString';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 
@@ -19,9 +18,6 @@ import styles from './searchResults.module.scss';
 import useSearch, { AugmentedFilter } from './searchResults.useResults';
 
 function SearchHead({ term }: { term?: string }): JSX.Element {
-	// WORKAROUND: We can't use the <FormattedMessage> component here because
-	// next/head renders outside of our IntlProvider. So we use useIntl() to
-	// get the intl object and format the message manually.
 	const intl = useIntl();
 	const title = intl.formatMessage(
 		{
@@ -35,26 +31,6 @@ function SearchHead({ term }: { term?: string }): JSX.Element {
 			<title>{title}</title>
 		</Head>
 	);
-}
-
-function useOnScreen(ref: RefObject<HTMLElement>): boolean {
-	const [isIntersecting, setIntersecting] = useState(false);
-	const enabled = !isServerSide() && ref.current;
-
-	const observer = useMemo(() => {
-		if (!enabled) return null;
-		return new IntersectionObserver(([entry]) =>
-			setIntersecting(entry.isIntersecting)
-		);
-	}, [enabled]);
-
-	useEffect(() => {
-		if (!observer || !ref.current) return;
-		observer.observe(ref.current);
-		return () => observer.disconnect();
-	}, [ref, observer]);
-
-	return isIntersecting;
 }
 
 function Section({
@@ -121,6 +97,8 @@ function sortSections(term: string, sections: AugmentedFilter[]) {
 	return [...a, ...b];
 }
 
+// ...
+
 export default function Search({
 	term,
 	entityType = 'all',
@@ -134,12 +112,40 @@ export default function Search({
 	const t = term || q || '';
 	const { visible, loadMore, isLoading } = useSearch(entityType, t);
 	const endRef = useRef<HTMLDivElement>(null);
-	const endReached = useOnScreen(endRef);
-	const sections = sortSections(t, visible);
 
 	useEffect(() => {
-		if (entityType !== 'all' && endReached && !isLoading) loadMore();
-	}, [entityType, endReached, isLoading, loadMore]);
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (
+					entries[0].isIntersecting &&
+					!isLoading &&
+					visible.length > 0 &&
+					visible[visible.length - 1].hasNextPage
+				) {
+					loadMore();
+				}
+			},
+			{
+				root: null,
+				rootMargin: '0px',
+				threshold: 0.5, // Adjust the threshold as needed
+			}
+		);
+
+		const currentEndRef = endRef.current; // Save the current value
+
+		if (currentEndRef) {
+			observer.observe(currentEndRef);
+		}
+
+		return () => {
+			if (currentEndRef) {
+				observer.unobserve(currentEndRef);
+			}
+		};
+	}, [isLoading, loadMore, visible]);
+
+	const sections = sortSections(t, visible);
 
 	return (
 		<>
@@ -157,7 +163,7 @@ export default function Search({
 							onEntityTypeChange={onEntityTypeChange}
 						/>
 					))}
-					<div ref={endRef} />
+					<div id="endRef" ref={endRef} />
 				</>
 			)}
 		</>
