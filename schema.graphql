@@ -3010,6 +3010,7 @@ type Query {
     """
     withContentTypes: [RecordingContentType!]
   ): PersonConnection!
+  playlist(id: ID!): UserPlaylist
   popularPersons(
     """Return the elements that come after the specified cursor."""
     after: String
