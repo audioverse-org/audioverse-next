@@ -174,19 +174,19 @@ query getSearchBiblebooks(
 	$first: Int!
 	$after: String
 ) {
-	sequences(
+	recordings(
 		language: $language
-		contentType: BIBLE_BOOK
+		contentType: BIBLE_CHAPTER
 		first: $first
 		after: $after
 		search: $term
-		orderBy: [{ field: ID, direction: ASC }]
+		orderBy: [{ field: ID, direction: DESC }]
 	) {
 		aggregate {
 			count
 		}
 		nodes {
-			...cardSequence
+			...cardRecording
 		}
 
 		pageInfo {
@@ -227,7 +227,8 @@ query getSearchStoryPrograms(
 	$first: Int!
 	$after: String
 ) {
-	storyPrograms(
+	recordings(
+		contentType: STORY
 		language: $language
 		search: $term
 		first: $first
@@ -237,7 +238,7 @@ query getSearchStoryPrograms(
 			count
 		}
 		nodes {
-			...cardCollection
+			...cardRecording
 		}
 		pageInfo {
 			hasNextPage
