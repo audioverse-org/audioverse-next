@@ -572,9 +572,6 @@
   "libraryCollections__collectionsHeading": {
     "string": "Compilaciones"
   },
-  "libraryCollections__dismiss": {
-    "string": "Descartar"
-  },
   "libraryCollections__emptyCopy": {
     "string": "Marque sus audios favoritos o escúchelos desde la página “Descubrir”."
   },
@@ -583,9 +580,6 @@
   },
   "libraryCollections__personsHeading": {
     "string": "Presentadores"
-  },
-  "libraryCollections__playlistsAlert": {
-    "string": "En este momento, estamos reinventando la experiencia de la lista de reproducción. Usted todavía puede administrar sus listas de reproducción usando la aplicación móvil."
   },
   "libraryCollections__playlistsHeading": {
     "string": "Listas de reproducción"
@@ -994,35 +988,15 @@
     "comment": "etiqueta de progreso del jugador",
     "string": "En progreso"
   },
-  "playlistButton__createButton": {
-    "comment": "PlaylistButton crear etiqueta de botón",
-    "string": "Crear"
-  },
-  "playlistButton__newPlaylistInputPlaceholder": {
-    "comment": "botón de lista de reproducción nuevo marcador de posición de entrada de lista de reproducción",
-    "string": "Nueva lista de reproducción"
-  },
-  "playlistButton__publicToggle": {
-    "comment": "PlaylistButton public toggle label",
-    "string": "Público"
-  },
-  "playlistButton__trigger": {
-    "comment": "Texto del botón PlaylistButton",
-    "string": "Añadir a la lista de reproducción"
-  },
-  "playlistButton__unauthenticated": {
-    "comment": "PlaylistButton error no autenticado",
-    "string": "Debe iniciar sesión para realizar esta acción"
-  },
   "playlistDetail__createdLabel": {
     "string": "Creado"
+  },
+  "playlistDetail__descriptionLabel": {
+    "string": "Descripción"
   },
   "playlistDetail__partsCountLabel": {
     "comment": "Lista de reproducción Detalle teachings count label",
     "string": "{count} lecciones"
-  },
-  "playlistDetail__summaryLabel": {
-    "string": "Resumen"
   },
   "playlistDetail__type": {
     "string": "Lista de reproducción"

@@ -572,9 +572,6 @@
   "libraryCollections__collectionsHeading": {
     "string": "Подборки"
   },
-  "libraryCollections__dismiss": {
-    "string": "Отклонить"
-  },
   "libraryCollections__emptyCopy": {
     "string": "Пометьте темы или прослушивайте аудио на странице Проповеди."
   },
@@ -583,9 +580,6 @@
   },
   "libraryCollections__personsHeading": {
     "string": "Проповедники"
-  },
-  "libraryCollections__playlistsAlert": {
-    "string": "В данный момент проводятся ремонтные работы в списках воппроизведения. Вы можете управлять списком воспроизведений, используя мобильное приложение."
   },
   "libraryCollections__playlistsHeading": {
     "string": "Списки воспроизведений"
@@ -993,35 +987,15 @@
     "comment": "player progress label",
     "string": "Прогресс"
   },
-  "playlistButton__createButton": {
-    "comment": "PlaylistButton create button label",
-    "string": "Создать"
-  },
-  "playlistButton__newPlaylistInputPlaceholder": {
-    "comment": "playlist button new playlist input placeholder",
-    "string": "Новый список воспроизведений"
-  },
-  "playlistButton__publicToggle": {
-    "comment": "PlaylistButton public toggle label",
-    "string": "Публичный"
-  },
-  "playlistButton__trigger": {
-    "comment": "PlaylistButton button text",
-    "string": "Добавить в список воспроизведения"
-  },
-  "playlistButton__unauthenticated": {
-    "comment": "PlaylistButton not authenticated error",
-    "string": "Вам нужно зайти в учётную запись, чтобы выполнить это действие "
-  },
   "playlistDetail__createdLabel": {
     "string": "Создано"
+  },
+  "playlistDetail__descriptionLabel": {
+    "string": "Описание"
   },
   "playlistDetail__partsCountLabel": {
     "comment": "Playlist Detail teachings count label",
     "string": "{count} поучения"
-  },
-  "playlistDetail__summaryLabel": {
-    "string": "Резюме/краткий обзор"
   },
   "playlistDetail__type": {
     "string": "Список воспроизведений"

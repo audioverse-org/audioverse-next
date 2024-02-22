@@ -572,9 +572,6 @@
   "libraryCollections__collectionsHeading": {
     "string": "コレクション"
   },
-  "libraryCollections__dismiss": {
-    "string": "取り消し"
-  },
   "libraryCollections__emptyCopy": {
     "string": "ディスカバーページからアイテムをブックマークする、オーディオを聴くなどが出来ます。"
   },
@@ -583,9 +580,6 @@
   },
   "libraryCollections__personsHeading": {
     "string": "スピーカー"
-  },
-  "libraryCollections__playlistsAlert": {
-    "string": "只今、プレイリストの使い方を新しくデザインしています。プレイリストはスマホのアプリを使ってでも管理できます。"
   },
   "libraryCollections__playlistsHeading": {
     "string": "プレイリスト"
@@ -993,35 +987,15 @@
     "comment": "player progress label",
     "string": "経過"
   },
-  "playlistButton__createButton": {
-    "comment": "PlaylistButton create button label",
-    "string": "作成する"
-  },
-  "playlistButton__newPlaylistInputPlaceholder": {
-    "comment": "playlist button new playlist input placeholder",
-    "string": "新規プレイリストを作成"
-  },
-  "playlistButton__publicToggle": {
-    "comment": "PlaylistButton public toggle label",
-    "string": "公開"
-  },
-  "playlistButton__trigger": {
-    "comment": "PlaylistButton button text",
-    "string": "プレイリストに追加"
-  },
-  "playlistButton__unauthenticated": {
-    "comment": "PlaylistButton not authenticated error",
-    "string": "この機能を利用するにはログインする必要があります。"
-  },
   "playlistDetail__createdLabel": {
     "string": "作成されました"
+  },
+  "playlistDetail__descriptionLabel": {
+    "string": "内容詳細"
   },
   "playlistDetail__partsCountLabel": {
     "comment": "Playlist Detail teachings count label",
     "string": "レッスン{count}個"
-  },
-  "playlistDetail__summaryLabel": {
-    "string": "概要"
   },
   "playlistDetail__type": {
     "string": "プレイリスト"

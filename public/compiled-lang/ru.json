@@ -1743,12 +1743,6 @@
       "value": "Подборки"
     }
   ],
-  "libraryCollections__dismiss": [
-    {
-      "type": 0,
-      "value": "Отклонить"
-    }
-  ],
   "libraryCollections__emptyCopy": [
     {
       "type": 0,
@@ -1765,12 +1759,6 @@
     {
       "type": 0,
       "value": "Проповедники"
-    }
-  ],
-  "libraryCollections__playlistsAlert": [
-    {
-      "type": 0,
-      "value": "В данный момент проводятся ремонтные работы в списках воппроизведения. Вы можете управлять списком воспроизведений, используя мобильное приложение."
     }
   ],
   "libraryCollections__playlistsHeading": [
@@ -2773,40 +2761,16 @@
       "value": "Прогресс"
     }
   ],
-  "playlistButton__createButton": [
-    {
-      "type": 0,
-      "value": "Создать"
-    }
-  ],
-  "playlistButton__newPlaylistInputPlaceholder": [
-    {
-      "type": 0,
-      "value": "Новый список воспроизведений"
-    }
-  ],
-  "playlistButton__publicToggle": [
-    {
-      "type": 0,
-      "value": "Публичный"
-    }
-  ],
-  "playlistButton__trigger": [
-    {
-      "type": 0,
-      "value": "Добавить в список воспроизведения"
-    }
-  ],
-  "playlistButton__unauthenticated": [
-    {
-      "type": 0,
-      "value": "Вам нужно зайти в учётную запись, чтобы выполнить это действие "
-    }
-  ],
   "playlistDetail__createdLabel": [
     {
       "type": 0,
       "value": "Создано"
+    }
+  ],
+  "playlistDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Описание"
     }
   ],
   "playlistDetail__partsCountLabel": [
@@ -2817,12 +2781,6 @@
     {
       "type": 0,
       "value": " поучения"
-    }
-  ],
-  "playlistDetail__summaryLabel": [
-    {
-      "type": 0,
-      "value": "Резюме/краткий обзор"
     }
   ],
   "playlistDetail__type": [

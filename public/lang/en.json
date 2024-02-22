@@ -1334,17 +1334,11 @@
   "legal_footer": {
     "string": "Legal"
   },
-  "libraryCollections__dismiss": {
-    "string": "Dismiss"
-  },
   "libraryCollections__emptyCopy": {
     "string": "Bookmark items or listen to audio from the Discover page."
   },
   "libraryCollections__emptyHeading": {
     "string": "You don’t have any collections items saved yet"
-  },
-  "libraryCollections__playlistsAlert": {
-    "string": "At the moment, we’re reimagining the playlist experience. You can still manage your playlists using the mobile app."
   },
   "libraryError__cta": {
     "string": "Go to Discover"
@@ -1965,12 +1959,12 @@
   "playlistDetail__createdLabel": {
     "string": "Created"
   },
+  "playlistDetail__descriptionLabel": {
+    "string": "Description"
+  },
   "playlistDetail__partsCountLabel": {
     "comment": "Playlist Detail teachings count label",
     "string": "{count} Teachings"
-  },
-  "playlistDetail__summaryLabel": {
-    "string": "Summary"
   },
   "playlistDetail__type": {
     "string": "Playlist"

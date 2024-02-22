@@ -572,9 +572,6 @@
   "libraryCollections__collectionsHeading": {
     "string": "Sammlungen"
   },
-  "libraryCollections__dismiss": {
-    "string": "Schließen"
-  },
   "libraryCollections__emptyCopy": {
     "string": "Versieh Artikel mit Lesezeichen oder höre dir Audiotitel auf der \"Entdecken\"-Seite an."
   },
@@ -583,9 +580,6 @@
   },
   "libraryCollections__personsHeading": {
     "string": "Sprecher"
-  },
-  "libraryCollections__playlistsAlert": {
-    "string": "Momentan überarbeiten wir die Playlist-Erfahrung. Du kannst deine Playlisten immer noch über die mobile App verwalten."
   },
   "libraryCollections__playlistsHeading": {
     "string": "Playlisten"
@@ -995,35 +989,15 @@
     "comment": "player progress label",
     "string": "Fortschritt"
   },
-  "playlistButton__createButton": {
-    "comment": "PlaylistButton create button label",
-    "string": "Erstellen"
-  },
-  "playlistButton__newPlaylistInputPlaceholder": {
-    "comment": "playlist button new playlist input placeholder",
-    "string": "Neue Playlist"
-  },
-  "playlistButton__publicToggle": {
-    "comment": "PlaylistButton public toggle label",
-    "string": "Öffentlich"
-  },
-  "playlistButton__trigger": {
-    "comment": "PlaylistButton button text",
-    "string": "Zur Playlist hinzufügen"
-  },
-  "playlistButton__unauthenticated": {
-    "comment": "PlaylistButton not authenticated error",
-    "string": "Du musst eingeloggt sein, um diesen Vorgang ausführen zu können."
-  },
   "playlistDetail__createdLabel": {
     "string": "Erstellt"
   },
+  "playlistDetail__descriptionLabel": {
+		"string": "Beschreibung"
+	},
   "playlistDetail__partsCountLabel": {
     "comment": "Playlist Detail teachings count label",
     "string": "{count} Lehren"
-  },
-  "playlistDetail__summaryLabel": {
-    "string": "Zusammenfassung"
   },
   "playlistDetail__type": {
     "string": "Playlist"

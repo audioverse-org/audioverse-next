@@ -702,18 +702,6 @@
 	},
 
 
-	"accountPlaylists__inputLabelSummary": {
-
-
-		"comment": "página de playlists da conta síntese da entrada de dados",
-
-
-		"string": "resumo"
-
-
-	},
-
-
 	"accountPlaylists__inputLabelTitle": {
 
 
@@ -3948,15 +3936,6 @@
 	},
 
 
-	"libraryCollections__dismiss": {
-
-
-		"string": "Dispensar"
-
-
-	},
-
-
 	"libraryCollections__emptyCopy": {
 
 
@@ -3970,15 +3949,6 @@
 
 
 		"string": "Você ainda não tem nenhuma coleção salva"
-
-
-	},
-
-
-	"libraryCollections__playlistsAlert": {
-
-
-		"string": "No momento, estamos reimaginando a experiência da playlist. Você ainda pode gerenciar suas listas de reprodução usando o aplicativo."
 
 
 	},
@@ -5552,6 +5522,10 @@
 
 	},
 
+	"playlistDetail__descriptionLabel": {
+		"string": "Descrição"
+	},
+
 
 	"playlistDetail__partsCountLabel": {
 
@@ -5560,15 +5534,6 @@
 
 
 		"string": "{contagem} ensinamentos"
-
-
-	},
-
-
-	"playlistDetail__summaryLabel": {
-
-
-		"string": "resumo"
 
 
 	},

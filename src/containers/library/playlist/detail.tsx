@@ -11,13 +11,11 @@ import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '~components/molecules/definitionList';
-import IconButton from '~components/molecules/iconButton';
 import Tease from '~components/molecules/tease';
 import TypeLockup from '~components/molecules/typeLockup';
 import { BaseColors } from '~lib/constants';
 import { formatLongDateTime } from '~lib/date';
 import ListIcon from '~public/img/icons/fa-list.svg';
-import LikeActiveIcon from '~public/img/icons/icon-like-active.svg';
 import { Must } from '~src/types/types';
 
 import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
@@ -35,6 +33,18 @@ function LibraryPlaylistDetail({
 	const { title, recordings, createdAt, summary } = playlist;
 
 	const details: IDefinitionListTerm[] = [];
+	if (summary) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="playlistDetail__descriptionLabel"
+					defaultMessage="Description"
+				/>
+			),
+			definition: <div>{summary}</div>,
+		});
+	}
+
 	if (createdAt) {
 		details.push({
 			term: (
@@ -44,17 +54,6 @@ function LibraryPlaylistDetail({
 				/>
 			),
 			definition: <p>{formatLongDateTime(createdAt)}</p>,
-		});
-	}
-	if (summary) {
-		details.push({
-			term: (
-				<FormattedMessage
-					id="playlistDetail__summaryLabel"
-					defaultMessage="Summary"
-				/>
-			),
-			definition: <div>{summary}</div>,
 		});
 	}
 
@@ -70,7 +69,7 @@ function LibraryPlaylistDetail({
 						/>
 					}
 					iconColor={BaseColors.SALMON}
-					textColor={BaseColors.WHITE}
+					textColor={BaseColors.DARK}
 				/>
 
 				<Heading2 className={styles.title}>{title}</Heading2>
@@ -83,16 +82,9 @@ function LibraryPlaylistDetail({
 							values={{ count: recordings.aggregate?.count }}
 						/>
 					</Heading6>
-					<IconButton
-						Icon={LikeActiveIcon}
-						onClick={() => void 0}
-						color={BaseColors.SALMON}
-						backgroundColor={BaseColors.PLAYLIST_H}
-						className={styles.iconButton}
-					/>
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
-				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
+				<DefinitionList terms={details} textColor={BaseColors.DARK} />
 			</ContentWidthLimiter>
 			{recordings.nodes?.length ? (
 				<CardGroup className={styles.cardGroup}>

@@ -1751,12 +1751,6 @@
       "value": "合集"
     }
   ],
-  "libraryCollections__dismiss": [
-    {
-      "type": 0,
-      "value": "消除"
-    }
-  ],
   "libraryCollections__emptyCopy": [
     {
       "type": 0,
@@ -1773,12 +1767,6 @@
     {
       "type": 0,
       "value": "讲员"
-    }
-  ],
-  "libraryCollections__playlistsAlert": [
-    {
-      "type": 0,
-      "value": "现在我们正在重新构思播放清单的使用方式。您仍然可以使用移动应用管理您的播放清单。"
     }
   ],
   "libraryCollections__playlistsHeading": [
@@ -2801,40 +2789,16 @@
       "value": "进度"
     }
   ],
-  "playlistButton__createButton": [
-    {
-      "type": 0,
-      "value": "创建"
-    }
-  ],
-  "playlistButton__newPlaylistInputPlaceholder": [
-    {
-      "type": 0,
-      "value": "新播放清单"
-    }
-  ],
-  "playlistButton__publicToggle": [
-    {
-      "type": 0,
-      "value": "公共"
-    }
-  ],
-  "playlistButton__trigger": [
-    {
-      "type": 0,
-      "value": "加入播放清单"
-    }
-  ],
-  "playlistButton__unauthenticated": [
-    {
-      "type": 0,
-      "value": "您必须登录才能执行该操作"
-    }
-  ],
   "playlistDetail__createdLabel": [
     {
       "type": 0,
       "value": "已创建的"
+    }
+  ],
+  "playlistDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "描述"
     }
   ],
   "playlistDetail__partsCountLabel": [
@@ -2845,12 +2809,6 @@
     {
       "type": 0,
       "value": "篇证道"
-    }
-  ],
-  "playlistDetail__summaryLabel": [
-    {
-      "type": 0,
-      "value": "摘要"
     }
   ],
   "playlistDetail__type": [

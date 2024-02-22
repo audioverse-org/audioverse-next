@@ -2863,12 +2863,6 @@
       "value": "Legal"
     }
   ],
-  "libraryCollections__dismiss": [
-    {
-      "type": 0,
-      "value": "Dismiss"
-    }
-  ],
   "libraryCollections__emptyCopy": [
     {
       "type": 0,
@@ -2879,12 +2873,6 @@
     {
       "type": 0,
       "value": "You don’t have any collections items saved yet"
-    }
-  ],
-  "libraryCollections__playlistsAlert": [
-    {
-      "type": 0,
-      "value": "At the moment, we’re reimagining the playlist experience. You can still manage your playlists using the mobile app."
     }
   ],
   "libraryError__cta": [
@@ -4121,6 +4109,12 @@
       "value": "Created"
     }
   ],
+  "playlistDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
   "playlistDetail__partsCountLabel": [
     {
       "type": 1,
@@ -4129,12 +4123,6 @@
     {
       "type": 0,
       "value": " Teachings"
-    }
-  ],
-  "playlistDetail__summaryLabel": [
-    {
-      "type": 0,
-      "value": "Summary"
     }
   ],
   "playlistDetail__type": [

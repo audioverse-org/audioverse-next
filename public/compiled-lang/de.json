@@ -1755,12 +1755,6 @@
       "value": "Sammlungen"
     }
   ],
-  "libraryCollections__dismiss": [
-    {
-      "type": 0,
-      "value": "Schließen"
-    }
-  ],
   "libraryCollections__emptyCopy": [
     {
       "type": 0,
@@ -1777,12 +1771,6 @@
     {
       "type": 0,
       "value": "Sprecher"
-    }
-  ],
-  "libraryCollections__playlistsAlert": [
-    {
-      "type": 0,
-      "value": "Momentan überarbeiten wir die Playlist-Erfahrung. Du kannst deine Playlisten immer noch über die mobile App verwalten."
     }
   ],
   "libraryCollections__playlistsHeading": [
@@ -2785,40 +2773,16 @@
       "value": "Fortschritt"
     }
   ],
-  "playlistButton__createButton": [
-    {
-      "type": 0,
-      "value": "Erstellen"
-    }
-  ],
-  "playlistButton__newPlaylistInputPlaceholder": [
-    {
-      "type": 0,
-      "value": "Neue Playlist"
-    }
-  ],
-  "playlistButton__publicToggle": [
-    {
-      "type": 0,
-      "value": "Öffentlich"
-    }
-  ],
-  "playlistButton__trigger": [
-    {
-      "type": 0,
-      "value": "Zur Playlist hinzufügen"
-    }
-  ],
-  "playlistButton__unauthenticated": [
-    {
-      "type": 0,
-      "value": "Du musst eingeloggt sein, um diesen Vorgang ausführen zu können."
-    }
-  ],
   "playlistDetail__createdLabel": [
     {
       "type": 0,
       "value": "Erstellt"
+    }
+  ],
+  "playlistDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Beschreibung"
     }
   ],
   "playlistDetail__partsCountLabel": [
@@ -2829,12 +2793,6 @@
     {
       "type": 0,
       "value": " Lehren"
-    }
-  ],
-  "playlistDetail__summaryLabel": [
-    {
-      "type": 0,
-      "value": "Zusammenfassung"
     }
   ],
   "playlistDetail__type": [

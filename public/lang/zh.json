@@ -572,9 +572,6 @@
   "libraryCollections__collectionsHeading": {
     "string": "合集"
   },
-  "libraryCollections__dismiss": {
-    "string": "消除"
-  },
   "libraryCollections__emptyCopy": {
     "string": "给条目添加书签或从“发现”页面收听音频。"
   },
@@ -583,9 +580,6 @@
   },
   "libraryCollections__personsHeading": {
     "string": "讲员"
-  },
-  "libraryCollections__playlistsAlert": {
-    "string": "现在我们正在重新构思播放清单的使用方式。您仍然可以使用移动应用管理您的播放清单。"
   },
   "libraryCollections__playlistsHeading": {
     "string": "播放清单"
@@ -993,35 +987,15 @@
     "comment": "player progress label",
     "string": "进度"
   },
-  "playlistButton__createButton": {
-    "comment": "PlaylistButton create button label",
-    "string": "创建"
-  },
-  "playlistButton__newPlaylistInputPlaceholder": {
-    "comment": "playlist button new playlist input placeholder",
-    "string": "新播放清单"
-  },
-  "playlistButton__publicToggle": {
-    "comment": "PlaylistButton public toggle label",
-    "string": "公共"
-  },
-  "playlistButton__trigger": {
-    "comment": "PlaylistButton button text",
-    "string": "加入播放清单"
-  },
-  "playlistButton__unauthenticated": {
-    "comment": "PlaylistButton not authenticated error",
-    "string": "您必须登录才能执行该操作"
-  },
   "playlistDetail__createdLabel": {
     "string": "已创建的"
+  },
+  "playlistDetail__descriptionLabel": {
+    "string": "描述"
   },
   "playlistDetail__partsCountLabel": {
     "comment": "Playlist Detail teachings count label",
     "string": "{count}篇证道"
-  },
-  "playlistDetail__summaryLabel": {
-    "string": "摘要"
   },
   "playlistDetail__type": {
     "string": "播放清单"

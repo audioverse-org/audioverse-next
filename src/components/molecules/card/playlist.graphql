@@ -1,10 +1,7 @@
 fragment cardPlaylist on UserPlaylist {
 	id
 	title
-	recordings(first: 2) {
-		nodes {
-			...teaseRecording
-		}
+	recordings {
 		aggregate {
 			count
 		}

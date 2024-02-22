@@ -1763,12 +1763,6 @@
       "value": "Compilaciones"
     }
   ],
-  "libraryCollections__dismiss": [
-    {
-      "type": 0,
-      "value": "Descartar"
-    }
-  ],
   "libraryCollections__emptyCopy": [
     {
       "type": 0,
@@ -1785,12 +1779,6 @@
     {
       "type": 0,
       "value": "Presentadores"
-    }
-  ],
-  "libraryCollections__playlistsAlert": [
-    {
-      "type": 0,
-      "value": "En este momento, estamos reinventando la experiencia de la lista de reproducción. Usted todavía puede administrar sus listas de reproducción usando la aplicación móvil."
     }
   ],
   "libraryCollections__playlistsHeading": [
@@ -2793,40 +2781,16 @@
       "value": "En progreso"
     }
   ],
-  "playlistButton__createButton": [
-    {
-      "type": 0,
-      "value": "Crear"
-    }
-  ],
-  "playlistButton__newPlaylistInputPlaceholder": [
-    {
-      "type": 0,
-      "value": "Nueva lista de reproducción"
-    }
-  ],
-  "playlistButton__publicToggle": [
-    {
-      "type": 0,
-      "value": "Público"
-    }
-  ],
-  "playlistButton__trigger": [
-    {
-      "type": 0,
-      "value": "Añadir a la lista de reproducción"
-    }
-  ],
-  "playlistButton__unauthenticated": [
-    {
-      "type": 0,
-      "value": "Debe iniciar sesión para realizar esta acción"
-    }
-  ],
   "playlistDetail__createdLabel": [
     {
       "type": 0,
       "value": "Creado"
+    }
+  ],
+  "playlistDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Descripción"
     }
   ],
   "playlistDetail__partsCountLabel": [
@@ -2837,12 +2801,6 @@
     {
       "type": 0,
       "value": " lecciones"
-    }
-  ],
-  "playlistDetail__summaryLabel": [
-    {
-      "type": 0,
-      "value": "Resumen"
     }
   ],
   "playlistDetail__type": [
