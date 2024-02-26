@@ -6,7 +6,6 @@
 }
 
 .title {
-	color: $ts-white;
 	margin-bottom: 8px;
 }
 
@@ -20,14 +19,10 @@
 }
 
 .countLabel {
-	color: $ts-lightTone;
+	color: $ts-dark;
 	> span {
 		margin-right: 16px;
 	}
-}
-
-.iconButton {
-	margin-left: 8px;
 }
 
 .cardGroup {

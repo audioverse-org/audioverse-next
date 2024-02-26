@@ -8,10 +8,7 @@ import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ListIcon from '~public/img/icons/fa-list.svg';
-import LikeActiveIcon from '~public/img/icons/icon-like-active.svg';
 
-import IconButton from '../iconButton';
-import TeaseRecordingStack from '../teaseRecordingStack';
 import TypeLockup from '../typeLockup';
 import { CardPlaylistFragment } from './__generated__/playlist';
 import CardWithTheme from './base/withTheme';
@@ -42,7 +39,7 @@ export default function CardPlaylist({ playlist }: Props): JSX.Element {
 									defaultMessage="Playlist"
 								/>
 							}
-							textColor={BaseColors.WHITE}
+							textColor={BaseColors.DARK}
 						/>
 						<Heading2 className={styles.title}>{title}</Heading2>
 					</div>
@@ -61,21 +58,6 @@ export default function CardPlaylist({ playlist }: Props): JSX.Element {
 								values={{ count: recordings.aggregate?.count }}
 							/>
 						</Heading6>
-
-						<IconButton
-							Icon={LikeActiveIcon}
-							onClick={() => void 0}
-							color={BaseColors.SALMON}
-							backgroundColor={BaseColors.PLAYLIST_H}
-							className={styles.like}
-						/>
-					</div>
-					<div className={styles.subRecordingsList}>
-						<TeaseRecordingStack
-							{...{ recordings: recordings.nodes || [], theme }}
-							paddedSeparator
-							isOptionalLink
-						/>
 					</div>
 				</a>
 			</Link>

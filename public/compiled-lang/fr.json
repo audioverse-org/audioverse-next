@@ -1735,12 +1735,6 @@
       "value": "Collections"
     }
   ],
-  "libraryCollections__dismiss": [
-    {
-      "type": 0,
-      "value": "Cacher"
-    }
-  ],
   "libraryCollections__emptyCopy": [
     {
       "type": 0,
@@ -1757,12 +1751,6 @@
     {
       "type": 0,
       "value": "Orateurs"
-    }
-  ],
-  "libraryCollections__playlistsAlert": [
-    {
-      "type": 0,
-      "value": "En ce moment, nous réinventons l'expérience de la playlist. Vous pouvez toujours gérer vos playlists à l'aide de l'application mobile."
     }
   ],
   "libraryCollections__playlistsHeading": [
@@ -2765,40 +2753,16 @@
       "value": "avancement"
     }
   ],
-  "playlistButton__createButton": [
-    {
-      "type": 0,
-      "value": "Créer"
-    }
-  ],
-  "playlistButton__newPlaylistInputPlaceholder": [
-    {
-      "type": 0,
-      "value": "Nouvelle playlist"
-    }
-  ],
-  "playlistButton__publicToggle": [
-    {
-      "type": 0,
-      "value": "Publique"
-    }
-  ],
-  "playlistButton__trigger": [
-    {
-      "type": 0,
-      "value": "Ajouter à la playlist"
-    }
-  ],
-  "playlistButton__unauthenticated": [
-    {
-      "type": 0,
-      "value": "Vous devez être connecté pour effectuer cette action"
-    }
-  ],
   "playlistDetail__createdLabel": [
     {
       "type": 0,
       "value": "Créée"
+    }
+  ],
+  "playlistDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Description"
     }
   ],
   "playlistDetail__partsCountLabel": [
@@ -2809,12 +2773,6 @@
     {
       "type": 0,
       "value": " enseignements"
-    }
-  ],
-  "playlistDetail__summaryLabel": [
-    {
-      "type": 0,
-      "value": "Description"
     }
   ],
   "playlistDetail__type": [

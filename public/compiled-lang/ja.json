@@ -1747,12 +1747,6 @@
       "value": "コレクション"
     }
   ],
-  "libraryCollections__dismiss": [
-    {
-      "type": 0,
-      "value": "取り消し"
-    }
-  ],
   "libraryCollections__emptyCopy": [
     {
       "type": 0,
@@ -1769,12 +1763,6 @@
     {
       "type": 0,
       "value": "スピーカー"
-    }
-  ],
-  "libraryCollections__playlistsAlert": [
-    {
-      "type": 0,
-      "value": "只今、プレイリストの使い方を新しくデザインしています。プレイリストはスマホのアプリを使ってでも管理できます。"
     }
   ],
   "libraryCollections__playlistsHeading": [
@@ -2777,40 +2765,16 @@
       "value": "経過"
     }
   ],
-  "playlistButton__createButton": [
-    {
-      "type": 0,
-      "value": "作成する"
-    }
-  ],
-  "playlistButton__newPlaylistInputPlaceholder": [
-    {
-      "type": 0,
-      "value": "新規プレイリストを作成"
-    }
-  ],
-  "playlistButton__publicToggle": [
-    {
-      "type": 0,
-      "value": "公開"
-    }
-  ],
-  "playlistButton__trigger": [
-    {
-      "type": 0,
-      "value": "プレイリストに追加"
-    }
-  ],
-  "playlistButton__unauthenticated": [
-    {
-      "type": 0,
-      "value": "この機能を利用するにはログインする必要があります。"
-    }
-  ],
   "playlistDetail__createdLabel": [
     {
       "type": 0,
       "value": "作成されました"
+    }
+  ],
+  "playlistDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "内容詳細"
     }
   ],
   "playlistDetail__partsCountLabel": [
@@ -2825,12 +2789,6 @@
     {
       "type": 0,
       "value": "個"
-    }
-  ],
-  "playlistDetail__summaryLabel": [
-    {
-      "type": 0,
-      "value": "概要"
     }
   ],
   "playlistDetail__type": [
