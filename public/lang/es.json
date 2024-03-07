@@ -137,9 +137,6 @@
     "comment": "Tarjeta persona enseñanzas contar etiqueta",
     "string": "{count} lecciones"
   },
-  "cardPlaylist__typeLabel": {
-    "string": "Lista de reproducción"
-  },
   "cardPost__readingDuration": {
     "comment": "Duración de la lectura del poste de la tarjeta",
     "string": "{duration} leer"
@@ -928,6 +925,9 @@
   "organism-recording__partInfo": {
     "comment": "grabación de información de la pieza",
     "string": "Parte {index}"
+  },
+  "organism-recording__playlistTitle": {
+    "string": "Otros elementos en la lista de reproducción"
   },
   "organism-recording__readByLabel": {
     "string": "Leído por {name}"

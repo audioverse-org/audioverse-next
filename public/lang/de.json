@@ -137,9 +137,6 @@
     "comment": "Card person teachings count label",
     "string": "{count} Lehren"
   },
-  "cardPlaylist__typeLabel": {
-    "string": "Playlist"
-  },
   "cardPost__readingDuration": {
     "comment": "Card post reading duration",
     "string": "{duration} lesen"
@@ -928,6 +925,9 @@
   "organism-recording__partInfo": {
     "comment": "recording part info",
     "string": "Teil {index}"
+  },
+  "organism-recording__playlistTitle": {
+    "string": "Andere Elemente in der Playlist"
   },
   "organism-recording__readByLabel": {
     "string": "Lesen nach {name}"

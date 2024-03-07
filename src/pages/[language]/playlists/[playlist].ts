@@ -13,12 +13,12 @@ export async function getServerSideProps({
 	params,
 }: GetServerSidePropsContext<{
 	language: string;
-	id: string;
+	playlist: string;
 }>): Promise<GetServerSidePropsResult<ILibraryPlaylistDetailProps>> {
 	storeRequest(req);
-	const { playlist } = params?.id
+	const { playlist } = params?.playlist
 		? await getPlaylistPageData({
-				id: params.id,
+				id: params.playlist,
 		  }).catch(() => ({
 				playlist: null,
 		  }))

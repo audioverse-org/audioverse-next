@@ -12,10 +12,11 @@ import DefinitionList, {
 	IDefinitionListTerm,
 } from '~components/molecules/definitionList';
 import Tease from '~components/molecules/tease';
-import TypeLockup from '~components/molecules/typeLockup';
 import { BaseColors } from '~lib/constants';
 import { formatLongDateTime } from '~lib/date';
-import ListIcon from '~public/img/icons/fa-list.svg';
+import PlaylistTypeLockup from '~src/components/molecules/playlistTypeLockup';
+import root from '~src/lib/routes';
+import useLanguageRoute from '~src/lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
@@ -30,7 +31,8 @@ export type ILibraryPlaylistDetailProps = {
 function LibraryPlaylistDetail({
 	playlist,
 }: Must<ILibraryPlaylistDetailProps>): JSX.Element {
-	const { title, recordings, createdAt, summary } = playlist;
+	const { title, recordings, createdAt, summary, id } = playlist;
+	const languageRoute = useLanguageRoute();
 
 	const details: IDefinitionListTerm[] = [];
 	if (summary) {
@@ -60,17 +62,7 @@ function LibraryPlaylistDetail({
 	return (
 		<Tease className={styles.container}>
 			<ContentWidthLimiter>
-				<TypeLockup
-					Icon={ListIcon}
-					label={
-						<FormattedMessage
-							id="playlistDetail__type"
-							defaultMessage="Playlist"
-						/>
-					}
-					iconColor={BaseColors.SALMON}
-					textColor={BaseColors.DARK}
-				/>
+				<PlaylistTypeLockup />
 
 				<Heading2 className={styles.title}>{title}</Heading2>
 				<div className={styles.row}>
@@ -89,7 +81,17 @@ function LibraryPlaylistDetail({
 			{recordings.nodes?.length ? (
 				<CardGroup className={styles.cardGroup}>
 					{recordings.nodes.map((recording) => (
-						<CardPlaylistItem recording={recording} key={recording.id} />
+						<CardPlaylistItem
+							recording={{
+								...recording,
+								canonicalPath: root
+									.lang(languageRoute)
+									.playlists.playlist(id)
+									.items(recording.canonicalPath)
+									.get(),
+							}}
+							key={recording.id}
+						/>
 					))}
 				</CardGroup>
 			) : null}

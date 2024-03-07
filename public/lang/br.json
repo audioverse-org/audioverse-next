@@ -1332,15 +1332,6 @@
 	},
 
 
-	"cardPlaylist__typeLabel": {
-
-
-		"string": "Playlist"
-
-
-	},
-
-
 	"cardPost__readingDuration": {
 
 
@@ -5310,6 +5301,10 @@
 		"string": "Parte {index}"
 
 
+	},
+
+	"organism-recording__playlistTitle": {
+		"string": "Outros itens na Playlist"
 	},
 
 

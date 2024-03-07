@@ -7,6 +7,7 @@ import contact from './contact';
 import discover from './discover';
 import egwbooks from './egwbooks'; //egw
 import library from './library';
+import playlists from './playlists';
 import presenters from './presenters';
 import node from './primatives/node';
 import paginatedNode from './primatives/paginatedNode';
@@ -41,6 +42,7 @@ const namespaces = (r: string) => ({
 	teachings: node(`${r}/teachings`, teachings),
 	testimonies: paginatedNode(`${r}/testimonies`),
 	topics: paginatedNode(`${r}/topics`, topics),
+	playlists: node(`${r}/playlists`, playlists),
 });
 
 const root = {

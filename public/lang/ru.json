@@ -137,9 +137,6 @@
     "comment": "Card person teachings count label",
     "string": "{count} темы"
   },
-  "cardPlaylist__typeLabel": {
-    "string": "Список воспроизведений"
-  },
   "cardPost__readingDuration": {
     "comment": "Card post reading duration",
     "string": "{duration} прочитано"
@@ -928,6 +925,9 @@
   "organism-recording__partInfo": {
     "comment": "recording part info",
     "string": "Часть {index}"
+  },
+  "organism-recording__playlistTitle": {
+    "string": "Другие элементы в плейлисте"
   },
   "organism-recording__readByLabel": {
     "string": "Прочитано (кем-то) {name}"

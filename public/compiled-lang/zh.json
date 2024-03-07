@@ -385,12 +385,6 @@
       "value": "篇证道"
     }
   ],
-  "cardPlaylist__typeLabel": [
-    {
-      "type": 0,
-      "value": "播放清单"
-    }
-  ],
   "cardPost__readingDuration": [
     {
       "type": 1,
@@ -2689,6 +2683,12 @@
     {
       "type": 0,
       "value": "部分"
+    }
+  ],
+  "organism-recording__playlistTitle": [
+    {
+      "type": 0,
+      "value": "播放清單中的其他項目"
     }
   ],
   "organism-recording__readByLabel": [

@@ -1,0 +1,16 @@
+query getPlaylistItemDetailData($id: ID!, $playlistId: ID!) {
+	playlist(id: $playlistId) {
+		id
+		title
+		summary
+		recordings(first: 1000) {
+			nodes {
+				...teaseRecording
+			}
+		}
+	}
+	recording(id: $id) {
+		...recording
+		language
+	}
+}
