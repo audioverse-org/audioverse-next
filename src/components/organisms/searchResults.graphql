@@ -109,25 +109,18 @@ query getSearchAudiobooks(
 	$first: Int!
 	$after: String
 ) {
-	audiobooks(
+	recordings(
+		contentType: AUDIOBOOK_TRACK
 		language: $language
 		search: $term
 		first: $first
 		after: $after
-		excludePersons: [
-			{ personId: 128 }
-			{ personId: 381 }
-			{ personId: 445 }
-			{ personId: 506 }
-			{ personId: 1208 }
-			{ personId: 1884 }
-		]
 	) {
 		aggregate {
 			count
 		}
 		nodes {
-			...cardSequence
+			...cardRecording
 		}
 		pageInfo {
 			hasNextPage
@@ -142,7 +135,8 @@ query getSearchEgwAudiobooks(
 	$first: Int!
 	$after: String
 ) {
-	audiobooks(
+	recordings(
+		contentType: AUDIOBOOK_TRACK
 		language: $language
 		search: $term
 		first: $first
@@ -160,7 +154,7 @@ query getSearchEgwAudiobooks(
 			count
 		}
 		nodes {
-			...cardSequence
+			...cardRecording
 		}
 		pageInfo {
 			hasNextPage
@@ -180,7 +174,7 @@ query getSearchBiblebooks(
 		first: $first
 		after: $after
 		search: $term
-		orderBy: [{ field: ID, direction: DESC }]
+		orderBy: [{ field: ID, direction: ASC }]
 	) {
 		aggregate {
 			count

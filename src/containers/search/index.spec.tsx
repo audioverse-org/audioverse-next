@@ -59,7 +59,7 @@ const loadPersons = buildGetSearchPersonsLoader({
 });
 
 const loadAudiobooks = buildGetSearchAudiobooksLoader({
-	audiobooks: empty,
+	recordings: empty,
 });
 
 const loadMusicTracks = buildGetSearchMusicTracksLoader({
