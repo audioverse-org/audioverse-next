@@ -381,12 +381,6 @@
       "value": " Lehren"
     }
   ],
-  "cardPlaylist__typeLabel": [
-    {
-      "type": 0,
-      "value": "Playlist"
-    }
-  ],
   "cardPost__readingDuration": [
     {
       "type": 1,
@@ -2677,6 +2671,12 @@
     {
       "type": 1,
       "value": "index"
+    }
+  ],
+  "organism-recording__playlistTitle": [
+    {
+      "type": 0,
+      "value": "Andere Elemente in der Playlist"
     }
   ],
   "organism-recording__readByLabel": [

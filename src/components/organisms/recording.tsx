@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import startCase from 'lodash/startCase';
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
@@ -38,14 +38,16 @@ import {
 } from '~src/__generated__/graphql';
 
 import { analytics } from '../atoms/analytics';
+import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
 import styles from './recording.module.scss';
 
 interface RecordingProps {
 	recording: RecordingFragment;
 	overrideSequence?: {
-		book: string;
-		seriesItems: TeaseRecordingFragment[];
+		playlistId?: string | number;
+		title: string;
+		items: TeaseRecordingFragment[];
 	};
 }
 
@@ -97,8 +99,8 @@ export function Recording({
 			? formatLongDateTime(parseRelativeDate(recordingDate) || '')
 			: undefined;
 	const index = sequenceIndex;
-	const seriesItems = overrideSequence
-		? overrideSequence.seriesItems
+	const items = overrideSequence
+		? overrideSequence.items
 		: sequence?.recordings?.nodes;
 
 	const {
@@ -235,20 +237,16 @@ export function Recording({
 	}
 
 	const playlistRecordings =
-		isAudiobook ||
-		isBibleChapter ||
-		contentType === RecordingContentType.MusicTrack
+		overrideSequence && overrideSequence
+			? overrideSequence.items
+			: contentType !== RecordingContentType.Sermon
 			? recording.sequence?.recordings.nodes
 			: undefined;
 
-	const makeHat = (
-		sequenceContentType: SequenceContentType,
-		title: string,
-		href: string
-	) => (
+	const makeHat = (typeLockup: ReactElement, title: string, href: string) => (
 		<Link href={href} legacyBehavior>
 			<a className={styles.hat}>
-				<SequenceTypeLockup contentType={sequenceContentType} unpadded />
+				{typeLockup}
 				<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
 			</a>
 		</Link>
@@ -327,16 +325,31 @@ export function Recording({
 						<h4>{recording.sequence?.title}</h4>
 					</a>
 				</Link>
+			) : overrideSequence && overrideSequence.playlistId ? (
+				makeHat(
+					<PlaylistTypeLockup unpadded />,
+					startCase(overrideSequence.title),
+					root
+						.lang(languageRoute)
+						.playlists.playlist(overrideSequence.playlistId)
+						.get()
+				)
 			) : overrideSequence ? (
 				makeHat(
-					SequenceContentType.MusicAlbum,
-					startCase(overrideSequence.book),
-					root.lang(languageRoute).songs.book(overrideSequence.book).get()
+					<SequenceTypeLockup
+						contentType={SequenceContentType.MusicAlbum}
+						unpadded
+					/>,
+					startCase(overrideSequence.title),
+					root.lang(languageRoute).songs.book(overrideSequence.title).get()
 				)
 			) : (
 				recording.sequence &&
 				makeHat(
-					recording.sequence.contentType,
+					<SequenceTypeLockup
+						contentType={recording.sequence.contentType}
+						unpadded
+					/>,
 					recording.sequence.title,
 					recording.sequence.canonicalPath
 				)
@@ -420,7 +433,12 @@ export function Recording({
 								{...{
 									recording,
 									playlistRecordings: playlistRecordings?.slice(
-										Math.max((recording.sequenceIndex || 0) - 1, 0)
+										Math.max(
+											playlistRecordings.findIndex(
+												(item) => item.id === recording.id
+											) || 0,
+											0
+										)
 									),
 									backgroundColor,
 								}}
@@ -504,7 +522,7 @@ export function Recording({
 					)}
 				</div>
 
-				{seriesItems?.length && (
+				{items?.length && (
 					<div
 						className={styles.series}
 						aria-label={intl.formatMessage({
@@ -525,6 +543,11 @@ export function Recording({
 											id="organism-recording__albumListTitle"
 											defaultMessage="Other Songs in Album"
 										/>
+									) : overrideSequence?.playlistId ? (
+										<FormattedMessage
+											id="organism-recording__playlistTitle"
+											defaultMessage="Other items in Playlist"
+										/>
 									) : (
 										<FormattedMessage
 											id="organism-recording__seriesListTitle"
@@ -535,7 +558,7 @@ export function Recording({
 								</LineHeading>
 
 								<ol className={styles.seriesItems}>
-									{seriesItems.map((r) => (
+									{items.map((r) => (
 										<li
 											className={styles.item}
 											key={r.id}
@@ -544,7 +567,12 @@ export function Recording({
 											<TeaseRecording
 												recording={r}
 												playlistRecordings={playlistRecordings?.slice(
-													Math.max((r.sequenceIndex || 0) - 1, 0)
+													Math.max(
+														playlistRecordings.findIndex(
+															(item) => item.id === recording.id
+														) || 0,
+														0
+													)
 												)}
 												theme={theme}
 												unpadded

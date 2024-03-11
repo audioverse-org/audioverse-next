@@ -137,9 +137,6 @@
     "comment": "Card person teachings count label",
     "string": "レッスン{count}個"
   },
-  "cardPlaylist__typeLabel": {
-    "string": "プレイリスト"
-  },
   "cardPost__readingDuration": {
     "comment": "Card post reading duration",
     "string": "{duration}分"
@@ -928,6 +925,9 @@
   "organism-recording__partInfo": {
     "comment": "recording part info",
     "string": "パート{index}"
+  },
+  "organism-recording__playlistTitle": {
+    "string": "プレイリスト内のその他のアイテム"
   },
   "organism-recording__readByLabel": {
     "string": "語り手{name}"

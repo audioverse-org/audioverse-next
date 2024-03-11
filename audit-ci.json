@@ -13,6 +13,7 @@
 		"GHSA-3rfm-jhwj-7488", // Not used at runtime because this is only used in dev ci
 		"GHSA-hjrf-2m68-5959", // Not used at runtime because this is only used in dev ci
 		"GHSA-prr3-c3m5-p7q2", // Not used at runtime
-		"GHSA-67hx-6x53-jw92" // Not used at runtime
+		"GHSA-67hx-6x53-jw92", // Not used at runtime
+		"GHSA-hhhv-q57g-882q" // Not used at runtime
 	]
 }

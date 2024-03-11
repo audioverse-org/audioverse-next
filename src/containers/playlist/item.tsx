@@ -6,28 +6,24 @@ import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
-import { GetBookSongDetailDataQuery } from './__generated__/track';
+import { GetPlaylistItemDetailDataQuery } from './__generated__/item';
 
-export type SongTrack = NonNullable<GetBookSongDetailDataQuery['musicTrack']>;
-
-export interface SongBookTrackProps {
-	book: string;
-	recording: SongTrack | null;
-	recordings: GetBookSongDetailDataQuery['recordings'];
+export interface PlaylistItemProps {
+	playlist: GetPlaylistItemDetailDataQuery['playlist'];
+	recording: GetPlaylistItemDetailDataQuery['recording'];
 }
 
-function SongBookTrack({
+function PlaylistItem({
+	playlist,
 	recording,
-	book,
-	recordings,
-}: Must<SongBookTrackProps>): JSX.Element {
+}: Must<PlaylistItemProps>): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	const items = (recordings.nodes || []).map((r) => ({
+	const items = (playlist.recordings.nodes || []).map((r) => ({
 		...r,
 		canonicalPath: root
 			.lang(languageRoute)
-			.songs.book(book)
-			.track(r.canonicalPath)
+			.playlists.playlist(playlist.id)
+			.items(r.canonicalPath)
 			.get(),
 	}));
 	const currentRecordingIndex =
@@ -42,13 +38,14 @@ function SongBookTrack({
 				sequenceNextRecording,
 			}}
 			overrideSequence={{
-				title: book,
+				playlistId: playlist.id,
+				title: playlist.title,
 				items,
 			}}
 		/>
 	);
 }
 
-export default withFailStates(SongBookTrack, {
-	useShould404: (props) => !props.recording,
+export default withFailStates(PlaylistItem, {
+	useShould404: (props) => !props.playlist || !props.recording,
 });

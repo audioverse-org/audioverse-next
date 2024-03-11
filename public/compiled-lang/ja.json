@@ -389,12 +389,6 @@
       "value": "個"
     }
   ],
-  "cardPlaylist__typeLabel": [
-    {
-      "type": 0,
-      "value": "プレイリスト"
-    }
-  ],
   "cardPost__readingDuration": [
     {
       "type": 1,
@@ -2669,6 +2663,12 @@
     {
       "type": 1,
       "value": "index"
+    }
+  ],
+  "organism-recording__playlistTitle": [
+    {
+      "type": 0,
+      "value": "プレイリスト内のその他のアイテム"
     }
   ],
   "organism-recording__readByLabel": [
