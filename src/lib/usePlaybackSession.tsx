@@ -18,7 +18,7 @@ interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
 	setProgress: (percent: number) => void;
 	pause: () => void;
-	play: () => void;
+	play: (playType?: string) => void;
 	chromecastTrigger: () => void;
 	airPlayTrigger: () => void;
 	requestFullscreen: () => void;
@@ -89,11 +89,12 @@ export default function usePlaybackSession(
 
 	//here we have the play and paused tracking
 	const thisTime = useFormattedTime(time);
-	const trackPlay = () => {
+	const trackPlay = (playType?: string) => {
 		analytics.track('Play', {
 			Id: recording?.id,
-			Recording: recording?.title,
+			title: recording?.title,
 			Played_at: thisTime,
+			Play_type: playType ? playType : 'Regular',
 			media_type: {
 				Audio: !context.isShowingVideo(),
 				Video: context.isShowingVideo(),
@@ -178,9 +179,9 @@ export default function usePlaybackSession(
 		context.pause();
 	}
 
-	function play() {
+	function play(playType?: string) {
 		afterLoad((c) => {
-			c.play(), trackPlay();
+			c.play(), trackPlay(playType);
 		});
 	}
 
