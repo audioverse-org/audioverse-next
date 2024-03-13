@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { useGetWithAuthGuardDataQuery } from '~components/HOCs/__generated__/withAuthGuard';
@@ -25,6 +25,7 @@ import IconFullscreen from '~public/img/icons/icon-fullscreen.svg';
 import IconPause from '~public/img/icons/icon-pause-large.svg';
 import IconPlay from '~public/img/icons/icon-play-large.svg';
 
+import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';
 import ButtonDownloadBlank from './buttonDownloadBlank';
 import CircleButton from './circleButton';
@@ -48,6 +49,7 @@ const Player = ({
 	prefersAudio,
 	compact,
 }: PlayerProps): JSX.Element => {
+	useContext(PlaybackContext);
 	const intl = useIntl();
 	const session = usePlaybackSession(recording, {
 		playlistRecordings,

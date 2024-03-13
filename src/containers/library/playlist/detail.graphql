@@ -2,6 +2,7 @@ query getLibraryPlaylistPageData($id: ID!) {
 	me {
 		user {
 			playlist(id: $id) {
+				id
 				title
 				createdAt
 				summary
@@ -20,6 +21,7 @@ query getLibraryPlaylistPageData($id: ID!) {
 
 query getPlaylistPageData($id: ID!) {
 	playlist(id: $id) {
+		id
 		title
 		createdAt
 		summary

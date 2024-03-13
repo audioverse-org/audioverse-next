@@ -95,7 +95,7 @@ export default function TeaseRecording({
 
 	const inner = (
 		<>
-			{recording.recordingContentType !== RecordingContentType.BibleChapter && (
+			{!playlistRecordings && (
 				<div className={styles.part}>
 					{index && count ? (
 						<FormattedMessage

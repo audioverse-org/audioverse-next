@@ -381,12 +381,6 @@
       "value": " lecciones"
     }
   ],
-  "cardPlaylist__typeLabel": [
-    {
-      "type": 0,
-      "value": "Lista de reproducción"
-    }
-  ],
   "cardPost__readingDuration": [
     {
       "type": 1,
@@ -2685,6 +2679,12 @@
     {
       "type": 1,
       "value": "index"
+    }
+  ],
+  "organism-recording__playlistTitle": [
+    {
+      "type": 0,
+      "value": "Otros elementos en la lista de reproducción"
     }
   ],
   "organism-recording__readByLabel": [

@@ -137,9 +137,6 @@
     "comment": "Card person teachings count label",
     "string": "{count}篇证道"
   },
-  "cardPlaylist__typeLabel": {
-    "string": "播放清单"
-  },
   "cardPost__readingDuration": {
     "comment": "Card post reading duration",
     "string": "{duration} 朗读"
@@ -928,6 +925,9 @@
   "organism-recording__partInfo": {
     "comment": "recording part info",
     "string": "第 {index}部分"
+  },
+  "organism-recording__playlistTitle": {
+    "string": "播放清單中的其他項目"
   },
   "organism-recording__readByLabel": {
     "string": "由{name}朗读"

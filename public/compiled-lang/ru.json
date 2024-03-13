@@ -381,12 +381,6 @@
       "value": " темы"
     }
   ],
-  "cardPlaylist__typeLabel": [
-    {
-      "type": 0,
-      "value": "Список воспроизведений"
-    }
-  ],
   "cardPost__readingDuration": [
     {
       "type": 1,
@@ -2665,6 +2659,12 @@
     {
       "type": 1,
       "value": "index"
+    }
+  ],
+  "organism-recording__playlistTitle": [
+    {
+      "type": 0,
+      "value": "Другие элементы в плейлисте"
     }
   ],
   "organism-recording__readByLabel": [
