@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import {
 	AndMiniplayerFragment,
+	useGetRecordingExtraDataQuery,
 	useGetRecordingPlaybackProgressQuery,
 } from '~components/templates/__generated__/andMiniplayer';
 import {
@@ -78,6 +79,7 @@ export default function usePlaybackSession(
 
 	const shouldLoadPlaybackProgress =
 		shouldLoadRecordingPlaybackProgress(recording);
+
 	const { data, isLoading, refetch } = useGetRecordingPlaybackProgressQuery(
 		{
 			id: recording?.id || 0,
@@ -87,8 +89,13 @@ export default function usePlaybackSession(
 		}
 	);
 
+	const trackData = useGetRecordingExtraDataQuery({
+		id: recording?.id || 0,
+	});
+
 	//here we have the play and paused tracking
 	const thisTime = useFormattedTime(time);
+
 	const trackPlay = (playType?: string) => {
 		analytics.track('Play', {
 			Id: recording?.id,
@@ -99,6 +106,11 @@ export default function usePlaybackSession(
 				Audio: !context.isShowingVideo(),
 				Video: context.isShowingVideo(),
 			},
+			sponsor_title: trackData.data?.recording?.sponsor?.title,
+			series_title: trackData.data?.recording?.sequence?.title,
+			conference_title: trackData.data?.recording?.collection?.title,
+			Speakers: trackData.data?.recording?.speakers,
+			publish_date: trackData.data?.recording?.publishDate,
 		});
 	};
 
