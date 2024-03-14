@@ -66,13 +66,6 @@ export default function TeaseRecording({
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 
-	// const trackTeasePlay = () => {
-	// 	analytics.track('Play', {
-	// 		Id: recording.id,
-	// 		Recording: recording.title,
-	// 	});
-	// };
-
 	const index = recording.sequenceIndex;
 	const count = recording.sequence?.recordings.aggregate?.count;
 
