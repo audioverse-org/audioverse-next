@@ -31,6 +31,25 @@ fragment andMiniplayer on Recording {
 	}
 }
 
+query getRecordingExtraData($id: ID!) {
+	recording(id: $id) {
+		publishDate
+		sponsor {
+			title
+		}
+		speakers: persons(role: SPEAKER) {
+			name
+		}
+		collection {
+			title
+		}
+
+		sequence {
+			title
+		}
+	}
+}
+
 query getRecordingPlaybackProgress($id: ID!) {
 	recording(id: $id) {
 		viewerPlaybackSession {

@@ -66,13 +66,6 @@ export default function TeaseRecording({
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 
-	const trackTeasePlay = () => {
-		analytics.track('Tease Play', {
-			Id: recording.id,
-			Recording: recording.title,
-		});
-	};
-
 	const index = recording.sequenceIndex;
 	const count = recording.sequence?.recordings.aggregate?.count;
 
@@ -157,8 +150,7 @@ export default function TeaseRecording({
 								Icon={IconPlay}
 								onClick={(e) => {
 									e.preventDefault();
-									session.play();
-									trackTeasePlay();
+									session.play('Teased');
 								}}
 								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
 								backgroundColor={backgroundColor}
