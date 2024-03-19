@@ -107,10 +107,11 @@ export default function usePlaybackSession(
 				Video: context.isShowingVideo(),
 			},
 			sponsor_title: trackData.data?.recording?.sponsor?.title,
-			series_title: trackData.data?.recording?.sequence?.title,
-			conference_title: trackData.data?.recording?.collection?.title,
+			series_title: recording?.sequence?.title,
+			conference_title: recording?.collection?.title,
 			Speakers: trackData.data?.recording?.speakers,
 			publish_date: trackData.data?.recording?.publishDate,
+			content_type: trackData.data?.recording?.contentType,
 		});
 	};
 
