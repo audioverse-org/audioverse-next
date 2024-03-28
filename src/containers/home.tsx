@@ -97,6 +97,12 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<div className={styles.bannerImage}>
 							<Image
 								src="/img/hero-av.jpg"
+								alt={intl.formatMessage({
+									id: 'homePage__bannerImageAlt',
+									defaultMessage:
+										'Young woman with headphones listening to music and reading a book.',
+									description: 'home page banner image alt',
+								})}
 								layout="fill"
 								objectFit="cover"
 								priority

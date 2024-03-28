@@ -62,8 +62,21 @@ export default function Footer({
 	return (
 		<div className={styles.footerWrapper} ref={footerRef}>
 			<div className={styles.footer}>
-				<span className={styles.logo}>
-					<Image src="/img/logo.svg" width={161} height={23} />
+				<span
+					aria-label={intl.formatMessage({
+						id: 'organism-footer__logo',
+						defaultMessage: 'footer',
+						description: 'footer logo',
+					})}
+					className={styles.logo}
+				>
+					<Image
+						/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
+						alt="AudioVerse"
+						src="/img/logo.svg"
+						width={161}
+						height={23}
+					/>
 				</span>
 				<Heading3 sans unpadded>
 					<FormattedMessage
