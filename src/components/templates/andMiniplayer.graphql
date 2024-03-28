@@ -40,13 +40,7 @@ query getRecordingExtraData($id: ID!) {
 		speakers: persons(role: SPEAKER) {
 			name
 		}
-		collection {
-			title
-		}
-
-		sequence {
-			title
-		}
+		contentType
 	}
 }
 
