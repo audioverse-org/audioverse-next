@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Script from 'next/script';
 import React, { SyntheticEvent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import Heading2 from '~components/atoms/heading2';
@@ -15,6 +15,8 @@ import { analytics } from '~src/components/atoms/analytics';
 import styles from './give.module.scss';
 
 export default function Blog(): JSX.Element {
+	const intl = useIntl();
+
 	// useEffect(() => {
 	// 	const onLoad = () => {
 
@@ -76,6 +78,11 @@ export default function Blog(): JSX.Element {
 				<div className={styles.twoUp}>
 					<iframe
 						src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
+						title={intl.formatMessage({
+							id: 'give__donorboxTitle',
+							defaultMessage: 'Donation form',
+							description: 'Title for the donorbox iframe',
+						})}
 						height="1100px"
 						width="100%"
 						style={{
