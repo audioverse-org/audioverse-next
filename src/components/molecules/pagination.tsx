@@ -134,6 +134,10 @@ export default function Pagination({
 						href={makeRoute(language, pageNext)}
 						IconLeft={IconForward}
 						className={clsx(styles.nextButton, styles.mobileButton)}
+						aria-label={intl.formatMessage({
+							id: 'molecules-pagination__nextLabelMobile',
+							defaultMessage: 'Next',
+						})}
 					/>
 					<Button
 						type={buttonType}
