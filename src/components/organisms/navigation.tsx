@@ -82,7 +82,14 @@ const Navigation = ({
 			<div className={styles.mobileHeader}>
 				<div className={styles.mobileRow}>
 					<Header />
-					<a onClick={() => onExit()}>
+					<a
+						aria-label={intl.formatMessage({
+							id: 'organism-navigation__exit',
+							defaultMessage: 'Exit',
+							description: 'Exit button label',
+						})}
+						onClick={() => onExit()}
+					>
 						<IconExit />
 					</a>
 				</div>
