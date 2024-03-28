@@ -191,7 +191,10 @@ const Navigation = ({
 							)}
 						</div>
 					</div>
-					<div className={clsx(styles.submenu, submenu && styles.submenuShown)}>
+					<div
+						aria-hidden={submenuItem === undefined}
+						className={clsx(styles.submenu, submenu && styles.submenuShown)}
+					>
 						<a
 							className={styles.backToMenu}
 							onClick={(e) => {

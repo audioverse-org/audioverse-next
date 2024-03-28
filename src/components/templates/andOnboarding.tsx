@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import Slider from '~components/organisms/slider';
@@ -15,8 +15,9 @@ export default function AndOnboarding({
 }: {
 	children: ReactNode;
 }): JSX.Element {
+	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
-	const features = getAppFeatures(languageRoute);
+	const features = getAppFeatures(languageRoute, intl);
 
 	return (
 		<div className={styles.page}>
