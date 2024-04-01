@@ -25,7 +25,7 @@ jobs:
         if: always()
         uses: actions/github-script@v5
         env:
-          BODY_PREFIX: "<!-- pa11y-ci results -->"
+          BODY_PREFIX: '<!-- pa11y-ci results -->'
         with:
           script: |
             const script = require('./.github/workflows/scripts/pa11y-ci.js')
