@@ -14,14 +14,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.15.0
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: Install dependencies
-        run: npm ci
       - name: Scan for issues
         run: |
           npx pa11y-ci \
@@ -33,7 +25,7 @@ jobs:
         if: always()
         uses: actions/github-script@v5
         env:
-          BODY_PREFIX: '<!-- pa11y-ci results -->'
+          BODY_PREFIX: "<!-- pa11y-ci results -->"
         with:
           script: |
             const script = require('./.github/workflows/scripts/pa11y-ci.js')
