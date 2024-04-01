@@ -59,6 +59,12 @@
       "value": "All around the world there are people who yearn for the Gospel, but they cannot afford to pay for it. These may be individuals in developing countries or simply young people in school. If the Gospel is to go to them too, then as many barriers must be removed as possible, and cost is one of them. This is only possible through the generous financial support of donors who believe in this mission."
     }
   ],
+  "about__purposeImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman in a field wearing headphones while reading a book."
+    }
+  ],
   "about__purposeImageLabel": [
     {
       "type": 0,
@@ -521,6 +527,12 @@
       "value": "Treasures New and Old"
     }
   ],
+  "app__features1ImageAlt": [
+    {
+      "type": 0,
+      "value": "Media on the Audioverse website"
+    }
+  ],
   "app__features1Kicker": [
     {
       "type": 0,
@@ -537,6 +549,12 @@
     {
       "type": 0,
       "value": "Present Truth"
+    }
+  ],
+  "app__features2ImageAlt": [
+    {
+      "type": 0,
+      "value": "List of recent sermons from Sebastien Braxton"
     }
   ],
   "app__features2Kicker": [
@@ -557,6 +575,12 @@
       "value": "Connected and Harmonious"
     }
   ],
+  "app__features3ImageAlt": [
+    {
+      "type": 0,
+      "value": "A diagram of AudioVerse’s card UI"
+    }
+  ],
   "app__features3Kicker": [
     {
       "type": 0,
@@ -575,6 +599,12 @@
       "value": "Save the Ones You Love"
     }
   ],
+  "app__features4ImageAlt": [
+    {
+      "type": 0,
+      "value": "The save button on a sermon by Katie Chitwood"
+    }
+  ],
   "app__features4Kicker": [
     {
       "type": 0,
@@ -591,6 +621,12 @@
     {
       "type": 0,
       "value": "Lay Up for Yourselves…"
+    }
+  ],
+  "app__features5ImageAlt": [
+    {
+      "type": 0,
+      "value": "The download button on a sermon by Don Mackintosh"
     }
   ],
   "app__features5Kicker": [
@@ -1755,6 +1791,12 @@
       "value": "Check By Mail"
     }
   ],
+  "give__donorboxTitle": [
+    {
+      "type": 0,
+      "value": "Donation form"
+    }
+  ],
   "give__estateCta": [
     {
       "type": 0,
@@ -2673,6 +2715,18 @@
       "value": "Discover Audio"
     }
   ],
+  "homePage__bannerImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman with headphones listening to music and reading a book."
+    }
+  ],
+  "homePage__downloadAppImageAlt": [
+    {
+      "type": 0,
+      "value": "Smartphones with AudioVerse app"
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -2793,6 +2847,12 @@
     {
       "type": 0,
       "value": "Make a donation"
+    }
+  ],
+  "homePage__supportSectionImageAlt": [
+    {
+      "type": 0,
+      "value": "People having a discussion in a meeting"
     }
   ],
   "homePage__supportSectionText": [
@@ -3647,6 +3707,12 @@
       "value": "Remove Album"
     }
   ],
+  "molecule-searchBar__ariaLabel": [
+    {
+      "type": 0,
+      "value": "search"
+    }
+  ],
   "molecule-searchBar__cancel": [
     {
       "type": 0,
@@ -3747,6 +3813,12 @@
       "value": "Next"
     }
   ],
+  "molecules-pagination__nextLabelMobile": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
   "molecules-pagination__previousLabel": [
     {
       "type": 0,
@@ -3801,10 +3873,28 @@
       "value": "Go back to Discover"
     }
   ],
+  "organism-footer__logo": [
+    {
+      "type": 0,
+      "value": "footer"
+    }
+  ],
+  "organism-mobileHeader__more": [
+    {
+      "type": 0,
+      "value": "more"
+    }
+  ],
   "organism-modal__close": [
     {
       "type": 0,
       "value": "Close"
+    }
+  ],
+  "organism-navigation__exit": [
+    {
+      "type": 0,
+      "value": "Exit"
     }
   ],
   "organism-recording__albumListTitle": [
