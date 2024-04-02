@@ -1838,10 +1838,6 @@
   "notFound__toDiscover": {
     "string": "Go back to Discover"
   },
-  "organism-footer__logo": {
-    "comment": "footer logo",
-    "string": "footer"
-  },
   "organism-mobileHeader__more": {
     "comment": "more button label",
     "string": "more"
