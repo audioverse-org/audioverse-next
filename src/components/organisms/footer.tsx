@@ -62,14 +62,7 @@ export default function Footer({
 	return (
 		<div className={styles.footerWrapper} ref={footerRef}>
 			<div className={styles.footer}>
-				<span
-					aria-label={intl.formatMessage({
-						id: 'organism-footer__logo',
-						defaultMessage: 'footer',
-						description: 'footer logo',
-					})}
-					className={styles.logo}
-				>
+				<span className={styles.logo}>
 					<Image
 						/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
 						alt="AudioVerse"
