@@ -31,6 +31,10 @@
   "about__purposeGivingDescription": {
     "string": "All around the world there are people who yearn for the Gospel, but they cannot afford to pay for it. These may be individuals in developing countries or simply young people in school. If the Gospel is to go to them too, then as many barriers must be removed as possible, and cost is one of them. This is only possible through the generous financial support of donors who believe in this mission."
   },
+  "about__purposeImageAlt": {
+    "comment": "Alt text for the purpose image",
+    "string": "Young woman in a field wearing headphones while reading a book."
+  },
   "about__purposeImageLabel": {
     "string": "Our vision is to hasten the Second Coming of our Lord Jesus Christ by making high quality Bible-based and Christ-centered media available to the whole world."
   },
@@ -262,6 +266,10 @@
   "app__features1Heading": {
     "string": "Treasures New and Old"
   },
+  "app__features1ImageAlt": {
+    "comment": "Image alt text for the first feature",
+    "string": "Media on the Audioverse website"
+  },
   "app__features1Kicker": {
     "string": "Easily discover inspiring content from a rich storehouse of spiritual content."
   },
@@ -270,6 +278,10 @@
   },
   "app__features2Heading": {
     "string": "Present Truth"
+  },
+  "app__features2ImageAlt": {
+    "comment": "Image alt text for the second feature",
+    "string": "List of recent sermons from Sebastien Braxton"
   },
   "app__features2Kicker": {
     "string": "AudioVerse makes it easy to find recent content from your favorite speakers, conferences, and sponsors."
@@ -280,6 +292,10 @@
   "app__features3Heading": {
     "string": "Connected and Harmonious"
   },
+  "app__features3ImageAlt": {
+    "comment": "Image alt text for the third feature",
+    "string": "A diagram of AudioVerse’s card UI"
+  },
   "app__features3Kicker": {
     "string": "Cards include relevant information like parent series so you can always see what’s truly important, with detail pages showing additional context and connections."
   },
@@ -289,6 +305,10 @@
   "app__features4Heading": {
     "string": "Save the Ones You Love"
   },
+  "app__features4ImageAlt": {
+    "comment": "Image alt text for the fourth feature",
+    "string": "The save button on a sermon by Katie Chitwood"
+  },
   "app__features4Kicker": {
     "string": "Build a library of teachings to listen to later, and never be lost again with progress that syncs across your devices."
   },
@@ -297,6 +317,10 @@
   },
   "app__features5Heading": {
     "string": "Lay Up for Yourselves…"
+  },
+  "app__features5ImageAlt": {
+    "comment": "Image alt text for the fifth feature",
+    "string": "The download button on a sermon by Don Mackintosh"
   },
   "app__features5Kicker": {
     "string": "Download content to your devices for moments when you have no signal, or simply want to avoid your data running over."
@@ -786,6 +810,10 @@
   "give__checkTitle": {
     "string": "Check By Mail"
   },
+  "give__donorboxTitle": {
+    "comment": "Title for the donorbox iframe",
+    "string": "Donation form"
+  },
   "give__estateCta": {
     "string": "Give Now"
   },
@@ -1239,6 +1267,14 @@
   "homePage__DiscoverAudioButtonLabel": {
     "string": "Discover Audio"
   },
+  "homePage__bannerImageAlt": {
+    "comment": "home page banner image alt",
+    "string": "Young woman with headphones listening to music and reading a book."
+  },
+  "homePage__downloadAppImageAlt": {
+    "comment": "home page download app image alt",
+    "string": "Smartphones with AudioVerse app"
+  },
   "homePage__downloadAppSectionText": {
     "comment": "home page download app section text",
     "string": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere or download to your device. New app coming in 2022."
@@ -1303,6 +1339,10 @@
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
     "string": "Make a donation"
+  },
+  "homePage__supportSectionImageAlt": {
+    "comment": "home page support section image alt",
+    "string": "People having a discussion in a meeting"
   },
   "homePage__supportSectionText": {
     "comment": "home page support section text",
@@ -1716,6 +1756,10 @@
   "molecule-cardRecordingSequenceHat__removeStoryAlbum": {
     "string": "Remove Album"
   },
+  "molecule-searchBar__ariaLabel": {
+    "comment": "search bar label",
+    "string": "search"
+  },
   "molecule-searchBar__cancel": {
     "string": "Cancel"
   },
@@ -1764,6 +1808,9 @@
   "molecules-pagination__nextLabel": {
     "string": "Next"
   },
+  "molecules-pagination__nextLabelMobile": {
+    "string": "Next"
+  },
   "molecules-pagination__previousLabel": {
     "string": "Previous"
   },
@@ -1791,8 +1838,16 @@
   "notFound__toDiscover": {
     "string": "Go back to Discover"
   },
+  "organism-mobileHeader__more": {
+    "comment": "more button label",
+    "string": "more"
+  },
   "organism-modal__close": {
     "string": "Close"
+  },
+  "organism-navigation__exit": {
+    "comment": "Exit button label",
+    "string": "Exit"
   },
   "organism-recording__albumListTitle": {
     "string": "Other Songs in Album"

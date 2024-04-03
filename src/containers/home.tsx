@@ -43,7 +43,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const posts = data?.blogPosts.nodes || [];
 	const bibleChapters = data?.bibleChapters.nodes || [];
 
-	const features = getAppFeatures(languageRoute);
+	const features = getAppFeatures(languageRoute, intl);
 
 	const isEnglish = languageRoute === 'en';
 
@@ -97,6 +97,12 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<div className={styles.bannerImage}>
 							<Image
 								src="/img/hero-av.jpg"
+								alt={intl.formatMessage({
+									id: 'homePage__bannerImageAlt',
+									defaultMessage:
+										'Young woman with headphones listening to music and reading a book.',
+									description: 'home page banner image alt',
+								})}
 								layout="fill"
 								objectFit="cover"
 								priority
@@ -221,21 +227,30 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				/>
 				<div className={styles.featuresWrapper}>
 					<Slider perSlide={1} floatingControls dark grow>
-						{features.map(({ heading, kicker, cta, url, image }, index) => (
-							<Section
-								key={index}
-								text={
-									<>
-										<Heading1>{heading}</Heading1>
-										<p className={styles.paragraph}>{kicker}</p>
-										<Button type="super" href={url} text={cta} />
-									</>
-								}
-								media={<Image src={image} layout="fill" objectFit="cover" />}
-								theme={BaseColors.DARK}
-								className={styles.featureSlide}
-							/>
-						))}
+						{features.map(
+							({ heading, kicker, cta, url, image, imageAlt }, index) => (
+								<Section
+									key={index}
+									text={
+										<>
+											<Heading1>{heading}</Heading1>
+											<p className={styles.paragraph}>{kicker}</p>
+											<Button type="super" href={url} text={cta} />
+										</>
+									}
+									media={
+										<Image
+											alt={imageAlt}
+											src={image}
+											layout="fill"
+											objectFit="cover"
+										/>
+									}
+									theme={BaseColors.DARK}
+									className={styles.featureSlide}
+								/>
+							)
+						)}
 					</Slider>
 				</div>
 				{!!testimonies.length && (
@@ -301,6 +316,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					}
 					media={
 						<Image
+							alt={intl.formatMessage({
+								id: 'homePage__downloadAppImageAlt',
+								defaultMessage: 'Smartphones with AudioVerse app',
+								description: 'home page download app image alt',
+							})}
 							src={ImagePlayers}
 							layout="fill"
 							objectFit="cover"
@@ -443,6 +463,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					}
 					media={
 						<Image
+							alt={intl.formatMessage({
+								id: 'homePage__supportSectionImageAlt',
+								defaultMessage: 'People having a discussion in a meeting',
+								description: 'home page support section image alt',
+							})}
 							src="/img/unsplash-support.jpg"
 							layout="fill"
 							objectFit="cover"

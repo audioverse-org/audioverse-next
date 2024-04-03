@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import Heading2 from '~components/atoms/heading2';
@@ -19,6 +19,7 @@ import styles from './purpose.module.scss';
 import sharedStyles from './shared.module.scss';
 
 export default function Purpose(): JSX.Element {
+	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
 
 	return (
@@ -32,6 +33,12 @@ export default function Purpose(): JSX.Element {
 			</Heading1>
 			<div className={clsx(sharedStyles.image, sharedStyles.imageLabeled)}>
 				<Image
+					alt={intl.formatMessage({
+						id: 'about__purposeImageAlt',
+						defaultMessage:
+							'Young woman in a field wearing headphones while reading a book.',
+						description: 'Alt text for the purpose image',
+					})}
 					src="/img/hero-av-full.jpg"
 					layout="fill"
 					objectFit="cover"

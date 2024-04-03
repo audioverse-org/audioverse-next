@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 
 import root from '~lib/routes';
 
@@ -9,10 +9,14 @@ export type IAppFeature = {
 	cta: JSX.Element;
 	url: string;
 	image: string;
+	imageAlt: string;
 	backgroundColor: string;
 };
 
-export function getAppFeatures(languageRoute: string): IAppFeature[] {
+export function getAppFeatures(
+	languageRoute: string,
+	intl: IntlShape
+): IAppFeature[] {
 	return [
 		{
 			heading: (
@@ -35,6 +39,12 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			),
 			url: root.lang(languageRoute).discover.get(),
 			backgroundColor: '#FF6E6E',
+			image: '/img/features/1.png',
+			imageAlt: intl.formatMessage({
+				id: 'app__features1ImageAlt',
+				defaultMessage: 'Media on the Audioverse website',
+				description: 'Image alt text for the first feature',
+			}),
 		},
 		{
 			heading: (
@@ -57,6 +67,12 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			),
 			url: root.lang(languageRoute).teachings.all.get(),
 			backgroundColor: '#325763',
+			image: '/img/features/2.png',
+			imageAlt: intl.formatMessage({
+				id: 'app__features2ImageAlt',
+				defaultMessage: 'List of recent sermons from Sebastien Braxton',
+				description: 'Image alt text for the second feature',
+			}),
 		},
 		{
 			heading: (
@@ -79,6 +95,12 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			),
 			url: root.lang(languageRoute).discover.collections.get(),
 			backgroundColor: '#6B7680',
+			image: '/img/features/3.png',
+			imageAlt: intl.formatMessage({
+				id: 'app__features3ImageAlt',
+				defaultMessage: 'A diagram of AudioVerse’s card UI',
+				description: 'Image alt text for the third feature',
+			}),
 		},
 		{
 			heading: (
@@ -101,6 +123,12 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			),
 			url: root.lang(languageRoute).library.get(),
 			backgroundColor: '#EFEBEB',
+			image: '/img/features/4.png',
+			imageAlt: intl.formatMessage({
+				id: 'app__features4ImageAlt',
+				defaultMessage: 'The save button on a sermon by Katie Chitwood',
+				description: 'Image alt text for the fourth feature',
+			}),
 		},
 		{
 			heading: (
@@ -123,9 +151,12 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			),
 			url: root.lang(languageRoute).teachings.all.get(),
 			backgroundColor: '#CDD9E3',
+			image: '/img/features/5.png',
+			imageAlt: intl.formatMessage({
+				id: 'app__features5ImageAlt',
+				defaultMessage: 'The download button on a sermon by Don Mackintosh',
+				description: 'Image alt text for the fifth feature',
+			}),
 		},
-	].map((item, index) => ({
-		image: `/img/features/${index + 1}.png`,
-		...item,
-	}));
+	];
 }

@@ -6,13 +6,7 @@
 			"axe"
 		],
 		"reporters": [
-			"pa11y-ci-reporter-cli-summary",
-			[
-				"pa11y-ci-reporter-html",
-				{
-					"destination": "./reports"
-				}
-			],
+			"cli",
 			[
 				"json",
 				{

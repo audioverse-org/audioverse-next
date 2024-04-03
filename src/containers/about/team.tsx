@@ -245,6 +245,7 @@ export default function Team(): JSX.Element {
 								<div className={styles.imageBackground}>
 									{image && (
 										<Image
+											alt={name}
 											width={280}
 											height={187}
 											src={`/img/staff/${image}.jpg`}
@@ -272,7 +273,7 @@ export default function Team(): JSX.Element {
 					<div className={styles.boardList}>
 						{boardMembers.map(({ image, name, title }) => (
 							<div key={name}>
-								<RoundImage image={`/img/board/${image}.jpg`} />
+								<RoundImage alt={name} image={`/img/board/${image}.jpg`} />
 								<span className={styles.name}>{name}</span>
 								<span className={styles.title}>{title}</span>
 							</div>

@@ -85,6 +85,11 @@ export default function SearchBar({
 					value={term ?? ''}
 					onChange={({ target }) => onTermChange(target.value)}
 					onFocus={() => setIsFocused(true)}
+					aria-label={intl.formatMessage({
+						id: 'molecule-searchBar__ariaLabel',
+						defaultMessage: 'search',
+						description: 'search bar label',
+					})}
 					onBlur={() => {
 						setIsFocused(false),
 							lastTerm != term && term != ''

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '~components/molecules/button';
 import ButtonPlayback from '~components/molecules/buttonPlayback';
@@ -37,6 +37,7 @@ export default function MobileHeader({
 	entityType: EntityFilterId;
 	onEntityTypeChange: (entityType: EntityFilterId) => void;
 }): JSX.Element {
+	const intl = useIntl();
 	const { asPath } = useRouter();
 	const lang = useLanguageRoute();
 	const navItems = useNavigationItems();
@@ -85,7 +86,15 @@ export default function MobileHeader({
 						compact
 						className={styles.subnavItems}
 					/>
-					<button className={styles.more} onClick={() => setShowingMenu(true)}>
+					<button
+						aria-label={intl.formatMessage({
+							id: 'organism-mobileHeader__more',
+							defaultMessage: 'more',
+							description: 'more button label',
+						})}
+						className={styles.more}
+						onClick={() => setShowingMenu(true)}
+					>
 						<MoreIcon />
 					</button>
 				</div>
