@@ -21,7 +21,7 @@ import IconUser from '~public/img/icons/fa-user-heavy.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import IconExit from '~public/img/icons/icon-exit.svg';
 
-import { analytics } from '../atoms/analytics';
+import { analytics } from '../../lib/analytics';
 import styles from './navigation.module.scss';
 
 const Navigation = ({
@@ -45,11 +45,7 @@ const Navigation = ({
 			if (isUrlLanguageHome) {
 				setSubmenu('');
 			}
-			if (url) {
-				analytics.page('Loaded Another Website Page', {
-					page: url,
-				});
-			}
+			analytics.page();
 		};
 		Router.events.on('routeChangeComplete', onRouteChange);
 		return () => {

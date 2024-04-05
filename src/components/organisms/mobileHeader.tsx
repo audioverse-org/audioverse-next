@@ -15,7 +15,7 @@ import { useNavigationItems } from '~lib/useNavigationItems';
 import IconExitSmall from '~public/img/icons/icon-exit-small.svg';
 import MoreIcon from '~public/img/icons/icon-more.svg';
 
-import { analytics } from '../atoms/analytics';
+import { analytics } from '../../lib/analytics';
 import styles from './mobileHeader.module.scss';
 import useScrollDirection, {
 	SCROLL_DIRECTIONS,

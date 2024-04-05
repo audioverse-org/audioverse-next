@@ -6,7 +6,7 @@ import styles from '~components/organisms/navigation.module.scss';
 import { INavigationItem } from '~lib/useNavigationItems';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 
-import { analytics } from '../atoms/analytics';
+import { analytics } from '../../lib/analytics';
 
 export default function NavItem({
 	item,
@@ -39,7 +39,7 @@ export default function NavItem({
 				<a
 					className={styles.navLink}
 					onClick={() => {
-						analytics.track('menuClick', { link: label }), setSubmenu(key);
+						analytics.track('Menu click', { label }), setSubmenu(key);
 					}}
 				>
 					{inner}

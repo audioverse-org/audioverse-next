@@ -6,7 +6,7 @@ import IconLike from '~public/img/icons/icon-like.svg';
 import IconLikeActive from '~public/img/icons/icon-like-active.svg';
 import IconLikeLight from '~public/img/icons/icon-like-light.svg';
 
-import { analytics } from '../atoms/analytics';
+import { analytics } from '../../lib/analytics';
 import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
 
@@ -68,10 +68,10 @@ const ButtonFavorite: React.VoidFunctionComponent<Props> = React.forwardRef(
 					e.stopPropagation();
 					toggleFavorited();
 					if (favoritedType) {
-						analytics.track(isFavorited ? 'Unfavorited' : 'Favorited', {
-							Type: favoritedType,
-							Id: favoritedId,
-							Title: favoritedTitle,
+						analytics.track(isFavorited ? 'Unfavorite' : 'Favorite', {
+							type: favoritedType,
+							id: favoritedId,
+							title: favoritedTitle,
 						});
 					}
 				}}

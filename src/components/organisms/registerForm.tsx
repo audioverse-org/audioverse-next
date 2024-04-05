@@ -6,7 +6,7 @@ import Input from '~components/molecules/form/input';
 import { useRegisterMutation } from '~containers/account/__generated__/register';
 import { setSessionToken } from '~lib/cookies';
 
-import { analytics } from '../atoms/analytics';
+import { analytics } from '../../lib/analytics';
 import styles from './registerForm.module.scss';
 
 type Props = {
@@ -44,9 +44,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 					email: email,
 				}
 			);
-			analytics.track('User Registered', {
-				accountType: 'User',
-			});
+			analytics.track('Sign up');
 
 			onSuccess();
 		}

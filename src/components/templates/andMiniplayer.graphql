@@ -33,7 +33,6 @@ fragment andMiniplayer on Recording {
 
 query getRecordingExtraData($id: ID!) {
 	recording(id: $id) {
-		publishDate
 		sponsor {
 			title
 		}

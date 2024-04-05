@@ -16,8 +16,7 @@ import { useFormattedDuration } from '~lib/time';
 import useHover from '~lib/useHover';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { CollectionContentType } from '~src/__generated__/graphql';
-import { analytics } from '~src/components/atoms/analytics';
-import TitleLogger from '~src/components/atoms/titleLogger';
+import { analytics } from '~src/lib/analytics';
 
 import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
@@ -53,6 +52,7 @@ export default function CardCollection({
 		image,
 		startDate,
 		title,
+		id,
 	} = collection;
 	const heroImage = image?.url && (
 		<div className={styles.imageContainer}>
@@ -67,7 +67,7 @@ export default function CardCollection({
 		</div>
 	);
 	const isBibleVersion = contentType === CollectionContentType.BibleVersion;
-	const currentTitle = TitleLogger();
+
 	return (
 		<Card>
 			<Link href={canonicalPath} legacyBehavior>
@@ -78,10 +78,10 @@ export default function CardCollection({
 						(isHovered || isSubHovered) && styles.otherHovered
 					)}
 					onClick={() => {
-						analytics.track('CardClick', {
+						analytics.track('Card click', {
 							type: contentType,
-							path: canonicalPath,
-							title: currentTitle,
+							id,
+							title,
 						});
 						router.push(canonicalPath);
 					}}

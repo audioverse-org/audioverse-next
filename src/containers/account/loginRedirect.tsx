@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { useGetProfileDataQuery } from '~containers/account/__generated__/profile';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
-import { analytics } from '~src/components/atoms/analytics';
+import { analytics } from '~src/lib/analytics';
 
 export default function LoginRedirect(): JSX.Element {
 	const router = useRouter();
@@ -21,9 +21,7 @@ export default function LoginRedirect(): JSX.Element {
 				lastName: d?.surname,
 				email: d?.email,
 			});
-			analytics.track('User Logged in', {
-				accountType: 'User',
-			});
+			analytics.track('Login');
 			//const backRoute = router.query.back as string;
 			router.push(root.lang(route).discover.get());
 		}

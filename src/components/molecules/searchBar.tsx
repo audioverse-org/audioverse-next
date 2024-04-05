@@ -9,7 +9,7 @@ import {
 import IconExit from '~public/img/icons/icon-exit.svg';
 import IconSearch from '~public/img/icons/icon-search.svg';
 
-import { analytics } from '../atoms/analytics';
+import { analytics } from '../../lib/analytics';
 import Mininav from './mininav';
 import styles from './searchBar.module.scss';
 
@@ -93,7 +93,7 @@ export default function SearchBar({
 					onBlur={() => {
 						setIsFocused(false),
 							lastTerm != term && term != ''
-								? (analytics.track('search', { term: term }), setLastTerm(term))
+								? (analytics.track('Search', { term }), setLastTerm(term))
 								: '';
 					}}
 					placeholder={

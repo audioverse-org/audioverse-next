@@ -10,57 +10,12 @@ import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import AboutNav from '~components/organisms/aboutNav';
 import { BaseColors } from '~lib/constants';
-import { analytics } from '~src/components/atoms/analytics';
+import { analytics } from '~src/lib/analytics';
 
 import styles from './give.module.scss';
 
 export default function Blog(): JSX.Element {
 	const intl = useIntl();
-
-	// useEffect(() => {
-	// 	const onLoad = () => {
-
-	// 			console.log('Page and iframes have fully loaded');
-
-	// 				// Access the iframe element
-	// 			const iframe = document.querySelector('iframe[name="donorbox"]');
-
-	// 			if(iframe){
-	// 				  // Access the document inside the iframe
-	// 				  const iframeDocument = iframe.children;
-	// 				  console.log(iframeDocument)
-	//                    if(iframeDocument)
-	// 				   {
-	// 						// const form = iframeDocument.forms.namedItem('footer_button');
-
-	// 						// // Check if the element is not null or undefined before accessing it
-	// 						// if (form) {
-	// 						// console.log('Form element found.');
-	// 						// analytics.trackSubmit(form, 'New Donation', {
-	// 						// 	plan: 'Premium',
-	// 						// 	revenue: 99.00,
-	// 						// });
-	// 						// } else {
-	// 						// console.log('Form element not found.');
-	// 						// }
-	// 					}else {
-	// 						console.log('Iframe document not accessible.');
-	// 					  }
-	// 					} else {
-	// 					  console.log('Iframe element not found.');
-	// 					}
-
-	// 	};
-
-	// 	if (typeof window !== 'undefined') {
-
-	// 	  window.addEventListener('load', onLoad);
-
-	// 	  return () => {
-	// 		window.removeEventListener('load', onLoad);
-	// 	  };
-	// 	}
-	//   }, []);
 
 	return (
 		<div className={styles.wrapper}>
@@ -128,7 +83,7 @@ export default function Blog(): JSX.Element {
 				<Button
 					type="primary"
 					onClick={() => {
-						analytics.track('Give: Paypal');
+						analytics.track('Give', { source: 'Paypal' });
 					}}
 					text={
 						<FormattedMessage id="give__paypalCta" defaultMessage="Give Now" />
@@ -152,7 +107,7 @@ export default function Blog(): JSX.Element {
 				<Button
 					type="primary"
 					onClick={() => {
-						analytics.track('Give: Shop Now');
+						analytics.track('Give', { source: 'Shop Now' });
 					}}
 					text={
 						<FormattedMessage
@@ -198,7 +153,7 @@ export default function Blog(): JSX.Element {
 				<Button
 					type="primary"
 					onClick={() => {
-						analytics.track('Give: Estate Plan');
+						analytics.track('Give', { source: 'Estate Plan' });
 					}}
 					text={
 						<FormattedMessage id="give__estateCta" defaultMessage="Give Now" />

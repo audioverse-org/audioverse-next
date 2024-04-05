@@ -12,7 +12,7 @@ import { AndMiniplayerFragment } from '~components/templates/__generated__/andMi
 import { useIsRecordingFavorited } from '~lib/api/useIsRecordingFavorited';
 import { BaseColors } from '~lib/constants';
 import { useFormattedDuration } from '~lib/time';
-import usePlaybackSession from '~lib/usePlaybackSession';
+import usePlaybackSession, { PlaySource } from '~lib/usePlaybackSession';
 import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg';
@@ -20,8 +20,7 @@ import IconPlay from '~public/img/icons/icon-play.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 
-import { analytics } from '../atoms/analytics';
-import TitleLogger from '../atoms/titleLogger';
+import { analytics } from '../../lib/analytics';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';
@@ -150,7 +149,7 @@ export default function TeaseRecording({
 								Icon={IconPlay}
 								onClick={(e) => {
 									e.preventDefault();
-									session.play('Teased');
+									session.play(PlaySource.Tease);
 								}}
 								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
 								backgroundColor={backgroundColor}
@@ -230,7 +229,7 @@ export default function TeaseRecording({
 			</div>
 		</>
 	);
-	const currentTitle = TitleLogger();
+
 	return (
 		<div className={clsx(styles.container, small && styles.small)}>
 			{isOptionalLink ? (
@@ -243,10 +242,10 @@ export default function TeaseRecording({
 					onClick={(e) => {
 						e.stopPropagation();
 
-						analytics.track('CardClick', {
+						analytics.track('Card click', {
 							type: recording.recordingContentType,
-							path: recording.canonicalPath,
-							title: currentTitle,
+							id: recording.id,
+							title: recording.title,
 						});
 						router.push(recording.canonicalPath);
 					}}
@@ -258,10 +257,10 @@ export default function TeaseRecording({
 					<a
 						className={clsx(styles.content, unpadded && styles.unpadded)}
 						onClick={() => {
-							analytics.track('CardClick', {
+							analytics.track('Card click', {
 								type: recording.recordingContentType,
-								path: recording.canonicalPath,
-								title: currentTitle,
+								id: recording.id,
+								title: recording.title,
 							});
 						}}
 					>

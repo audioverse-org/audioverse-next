@@ -10,8 +10,8 @@ import Card from '~components/molecules/card';
 import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 import { BaseColors } from '~lib/constants';
 import UserPlusIcon from '~public/img/icons/fa-user-plus.svg';
-import { analytics } from '~src/components/atoms/analytics';
-import TitleLogger from '~src/components/atoms/titleLogger';
+import { CatalogEntityType } from '~src/__generated__/graphql';
+import { analytics } from '~src/lib/analytics';
 
 import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
@@ -28,19 +28,26 @@ export default function CardSponsor({
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
-	const { canonicalPath, image, title, collections, sequences, recordings } =
-		sponsor;
-	const currentTitle = TitleLogger();
+	const {
+		canonicalPath,
+		image,
+		title,
+		collections,
+		sequences,
+		recordings,
+		id,
+	} = sponsor;
+
 	return (
 		<Card>
 			<Link href={canonicalPath} legacyBehavior>
 				<a
 					className={styles.container}
 					onClick={() => {
-						analytics.track('CardClick', {
-							type: 'SPONSOR',
-							path: canonicalPath,
-							title: currentTitle,
+						analytics.track('Card click', {
+							type: CatalogEntityType.Sponsor,
+							id,
+							title,
 						});
 					}}
 				>

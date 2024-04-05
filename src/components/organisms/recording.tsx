@@ -37,7 +37,7 @@ import {
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 
-import { analytics } from '../atoms/analytics';
+import { analytics } from '../../lib/analytics';
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
 import styles from './recording.module.scss';
@@ -218,7 +218,7 @@ export function Recording({
 							key={url}
 							rel="noreferrer"
 							onClick={() => {
-								analytics.track('AttachmentClicked', {
+								analytics.track('Attachment click', {
 									recording: recording.title,
 									attachment: filename,
 								});
