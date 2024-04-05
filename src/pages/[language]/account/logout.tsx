@@ -16,8 +16,7 @@ export default function Logout(): JSX.Element {
 
 	useEffect(() => {
 		if (loggedOut) {
-			analytics.track('Logout');
-			analytics.reset(); //This may need to be romeved in production
+			analytics.reset();
 			router.push(root.lang(languageRoute).discover.get());
 		}
 	}, [loggedOut, router, languageRoute]);

@@ -42,6 +42,12 @@ mutation registerSocial(
 	) {
 		authenticatedUser {
 			sessionToken
+			user {
+				id
+				givenName
+				surname
+				email
+			}
 		}
 		errors {
 			message
