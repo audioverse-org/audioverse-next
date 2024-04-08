@@ -15,9 +15,12 @@ import type * as VideoJs from 'video.js';
 import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
 import { Scalars } from '~src/__generated__/graphql';
+import { PlaySource } from '~src/lib/usePlaybackSession';
 
+import { analytics } from '../../lib/analytics';
 import {
 	AndMiniplayerFragment,
+	GetRecordingExtraDataQuery,
 	GetRecordingPlaybackProgressQuery,
 	recordingPlaybackProgressSet,
 	RecordingPlaybackProgressSetMutationVariables,
@@ -94,7 +97,8 @@ export type PlaybackContextType = {
 		options?: {
 			onLoad?: (c: PlaybackContextType) => void;
 			prefersAudio?: boolean;
-		}
+		},
+		source?: PlaySource
 	) => void;
 	setVideoHandler: (
 		id: Scalars['ID']['output'],
@@ -121,7 +125,8 @@ export type PlaybackContextType = {
 	};
 	_setRecording: (
 		recording: AndMiniplayerFragment,
-		prefersAudio?: boolean
+		prefersAudio?: boolean,
+		source?: PlaySource
 	) => void;
 };
 
@@ -302,11 +307,13 @@ export default function AndPlaybackContext({
 			if (!playerRef.current || !duration || isNaN(duration) || !updatePlayer)
 				return;
 			playerRef.current.currentTime(p * duration);
+			playerRef.current.play();
 		},
 		getRecording: () => recording,
 		loadRecording: (
 			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
-			options = {}
+			options = {},
+			source?: PlaySource
 		) => {
 			const { onLoad, prefersAudio } = options;
 			onLoadRef.current = onLoad;
@@ -324,7 +331,7 @@ export default function AndPlaybackContext({
 				playback.unsetVideoHandler(videoHandlerId);
 			}
 
-			playback._setRecording(newRecording, prefersAudio);
+			playback._setRecording(newRecording, prefersAudio, source);
 		},
 		setVideoHandler: (
 			id: Scalars['ID']['output'],
@@ -359,6 +366,7 @@ export default function AndPlaybackContext({
 		setSpeed: (s: number) => {
 			playerRef.current?.playbackRate(s);
 			playerRef.current?.defaultPlaybackRate(s);
+			playerRef.current?.play();
 			_setSpeed(s);
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
@@ -378,7 +386,8 @@ export default function AndPlaybackContext({
 		}),
 		_setRecording: (
 			recording: AndMiniplayerFragment,
-			prefersAudio: boolean | undefined
+			prefersAudio: boolean | undefined,
+			source: PlaySource | undefined
 		) => {
 			const currentVideoEl = videoElRef.current;
 			if (!currentVideoEl) return;
@@ -414,6 +423,27 @@ export default function AndPlaybackContext({
 
 				onLoadRef.current && onLoadRef.current(playback);
 				onLoadRef.current = undefined;
+
+				const recordingExtraData =
+					queryClient.getQueryData<GetRecordingExtraDataQuery>([
+						'getRecordingExtraData',
+						{ id: recording.id },
+					]);
+
+				const speakersNames = recordingExtraData?.recording?.speakers.map(
+					(speaker) => speaker.name
+				);
+				analytics.track('Play', {
+					id: recording.id,
+					title: recording.title,
+					isAudio: !(!!recording && hasVideo(recording) && !prefersAudio),
+					contentType: recordingExtraData?.recording?.contentType,
+					speakers: speakersNames,
+					sponsor: recordingExtraData?.recording?.sponsor?.title,
+					series: recording.sequence?.title,
+					conference: recording.collection?.title,
+					source: source ?? PlaySource.Other,
+				});
 			};
 
 			const options: VideoJs.VideoJsPlayerOptions = {

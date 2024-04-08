@@ -15,6 +15,7 @@ import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '~lib/constants';
 import { setSessionToken } from '~lib/cookies';
 import useDidUnmount from '~lib/useDidUnmount';
 import { UserSocialServiceName } from '~src/__generated__/graphql';
+import { analytics } from '~src/lib/analytics';
 
 import Button from './buttonSocial';
 import styles from './socialLogin.module.scss';
@@ -39,6 +40,13 @@ export default function SocialLogin({
 
 				if (token && !errors.length) {
 					setSessionToken(token);
+					const user = response?.loginSocial.authenticatedUser?.user;
+					analytics.identify(user?.id + '', {
+						firstName: user?.givenName,
+						lastName: user?.surname,
+						email: user?.email,
+						source: 'Login',
+					});
 					onSuccess ? onSuccess() : await queryClient.invalidateQueries();
 				} else if (!didUnmount.current) {
 					setErrors(errors.map((e) => e.message));

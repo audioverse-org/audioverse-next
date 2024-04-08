@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import {
 	AndMiniplayerFragment,
-	useGetRecordingExtraDataQuery,
 	useGetRecordingPlaybackProgressQuery,
 } from '~components/templates/__generated__/andMiniplayer';
 import {
@@ -11,15 +10,17 @@ import {
 	PlaybackContextType,
 	shouldLoadRecordingPlaybackProgress,
 } from '~components/templates/andPlaybackContext';
-import { analytics } from '~src/components/atoms/analytics';
 
-import { useFormattedTime } from './time';
+export enum PlaySource {
+	Tease = 'Tease',
+	Other = 'Other',
+}
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
 	setProgress: (percent: number) => void;
 	pause: () => void;
-	play: (playType?: string) => void;
+	play: (source?: PlaySource) => void;
 	chromecastTrigger: () => void;
 	airPlayTrigger: () => void;
 	requestFullscreen: () => void;
@@ -38,8 +39,6 @@ interface PlaybackSessionInfo {
 	duration: number;
 	getVideo: () => JSX.Element;
 	supportsFullscreen: boolean;
-	trackPlay: () => void;
-	trackPause: () => void;
 }
 
 export default function usePlaybackSession(
@@ -89,44 +88,6 @@ export default function usePlaybackSession(
 		}
 	);
 
-	const trackData = useGetRecordingExtraDataQuery({
-		id: recording?.id || 0,
-	});
-
-	//here we have the play and paused tracking
-	const thisTime = useFormattedTime(time);
-
-	const trackPlay = (playType?: string) => {
-		analytics.track('Play', {
-			Id: recording?.id,
-			title: recording?.title,
-			Played_at: thisTime,
-			Play_type: playType ? playType : 'Regular',
-			media_type: {
-				Audio: !context.isShowingVideo(),
-				Video: context.isShowingVideo(),
-			},
-			sponsor_title: trackData.data?.recording?.sponsor?.title,
-			series_title: recording?.sequence?.title,
-			conference_title: recording?.collection?.title,
-			Speakers: trackData.data?.recording?.speakers,
-			publish_date: trackData.data?.recording?.publishDate,
-			content_type: trackData.data?.recording?.contentType,
-		});
-	};
-
-	const trackPause = () => {
-		analytics.track('Pause', {
-			Id: recording?.id,
-			Recording: recording?.title,
-			Paused_at: thisTime,
-			media_type: {
-				Audio: isAudioLoaded,
-				Video: isVideoLoaded,
-			},
-		});
-	};
-
 	useEffect(() => {
 		if (data?.recording?.viewerPlaybackSession) {
 			_setProgress(data?.recording?.viewerPlaybackSession.positionPercentage);
@@ -158,7 +119,10 @@ export default function usePlaybackSession(
 		[]
 	);
 
-	function afterLoad(func: (c: PlaybackContextType) => void) {
+	function afterLoad(
+		func: (c: PlaybackContextType) => void,
+		source?: PlaySource
+	) {
 		if (!recording) return;
 
 		if (isLoaded) {
@@ -166,12 +130,16 @@ export default function usePlaybackSession(
 			return;
 		}
 
-		context.loadRecording(playlistRecordings || recording, {
-			onLoad: (c: PlaybackContextType) => {
-				func(c);
+		context.loadRecording(
+			playlistRecordings || recording,
+			{
+				onLoad: (c: PlaybackContextType) => {
+					func(c);
+				},
+				prefersAudio: options.prefersAudio,
 			},
-			prefersAudio: options.prefersAudio,
-		});
+			source
+		);
 	}
 
 	function shiftTime(delta: number) {
@@ -188,14 +156,13 @@ export default function usePlaybackSession(
 		// TODO: Maybe only if `isLoaded` is true
 		// Or perhaps throw an exception, since the user should never be presented
 		// with a pause button for a recording that isn't loaded.
-		trackPause();
 		context.pause();
 	}
 
-	function play(playType?: string) {
+	function play(source?: PlaySource) {
 		afterLoad((c) => {
-			c.play(), trackPlay(playType);
-		});
+			c.play();
+		}, source);
 	}
 
 	function setPrefersAudio(prefersAudio: boolean) {
@@ -255,7 +222,5 @@ export default function usePlaybackSession(
 		getVideo,
 		speed,
 		supportsFullscreen,
-		trackPlay,
-		trackPause,
 	};
 }

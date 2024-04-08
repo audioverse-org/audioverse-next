@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { useLogout } from '~lib/api/useLogout';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
-import { analytics } from '~src/components/atoms/analytics';
+import { analytics } from '~src/lib/analytics';
 
 export default function Logout(): JSX.Element {
 	const router = useRouter();
@@ -16,10 +16,7 @@ export default function Logout(): JSX.Element {
 
 	useEffect(() => {
 		if (loggedOut) {
-			analytics.track('User logged out', {
-				accountType: 'User',
-			});
-			analytics.reset(); //This may need to be romeved in production
+			analytics.reset();
 			router.push(root.lang(languageRoute).discover.get());
 		}
 	}, [loggedOut, router, languageRoute]);

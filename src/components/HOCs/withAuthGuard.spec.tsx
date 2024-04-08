@@ -63,6 +63,12 @@ describe('withAuthGuard', () => {
 					errors: [],
 					authenticatedUser: {
 						sessionToken: 'the_token',
+						user: {
+							id: 1,
+							givenName: 'test',
+							surname: 'test',
+							email: 'test@test.com',
+						},
 					},
 				},
 			});

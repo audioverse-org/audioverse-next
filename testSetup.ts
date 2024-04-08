@@ -13,6 +13,24 @@ jest.mock('~lib/api/fetchApi');
 jest.mock('~lib/getIntlMessages');
 jest.mock('~lib/makeQueryClient');
 jest.mock('~lib/swiper');
+jest.mock('@segment/analytics-next', () => {
+	const originalModule = jest.requireActual('@segment/analytics-next');
+
+	return {
+		__esModule: true,
+		...originalModule,
+		AnalyticsBrowser: {
+			load: () => {
+				return {
+					track: jest.fn(),
+					page: jest.fn(),
+					reset: jest.fn(),
+					identify: jest.fn(),
+				};
+			},
+		},
+	};
+});
 
 interface CustomMatchers<R = unknown> {
 	toAppearBefore: (argument: HTMLElement) => R;

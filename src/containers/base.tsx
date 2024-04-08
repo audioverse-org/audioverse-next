@@ -13,6 +13,7 @@ import AndGlobalModals from '~components/templates/andGlobalModals';
 import AndMiniplayer from '~components/templates/andMiniplayer';
 import AndNavigation from '~components/templates/andNavigation';
 import AndPlaybackContext from '~components/templates/andPlaybackContext';
+import { analytics } from '~src/lib/analytics';
 import makeQueryClient from '~src/lib/makeQueryClient';
 
 import styles from './base.module.scss';
@@ -38,6 +39,10 @@ function Base<P>({
 }): JSX.Element {
 	const { description, disableSidebar, title, canonicalUrl, dehydratedState } =
 		pageProps;
+
+	useEffect(() => {
+		analytics.page();
+	}, []);
 
 	useEffect(() => {
 		document.body.classList.toggle('body--no-sidebar', disableSidebar);

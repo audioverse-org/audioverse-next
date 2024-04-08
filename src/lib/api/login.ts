@@ -2,6 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 
 import { setSessionToken } from '~lib/cookies';
 
+import { analytics } from '../analytics';
 import { login as _login } from './__generated__/login';
 
 export const USER_SESSION_QUERY_KEYS = [
@@ -37,6 +38,13 @@ export async function login(email: string, password: string): Promise<true> {
 	} = await _login({ email, password });
 	if (authenticatedUser) {
 		setSessionToken(authenticatedUser.sessionToken);
+		const user = authenticatedUser.user;
+		analytics.identify(user.id + '', {
+			firstName: user.givenName,
+			lastName: user.surname,
+			email,
+			source: 'Login',
+		});
 		return true;
 	}
 	throw new Error((errors?.length && errors[0].message) || '');
