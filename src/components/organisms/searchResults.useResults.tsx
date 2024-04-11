@@ -149,6 +149,6 @@ export default function useResults(
 				? Object.values(results).some((r) => r.isLoading)
 				: result.isLoading,
 		visible: augmented,
-		loadMore: () => result.hasNextPage && result.fetchNextPage(), // loads aditional results
+		loadMore: () => filter !== 'all' && result.hasNextPage && result.fetchNextPage(), // loads aditional results
 	};
 }
