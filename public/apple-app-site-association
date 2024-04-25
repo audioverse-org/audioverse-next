@@ -16,7 +16,8 @@
 					"/*/stories/*",
 					"/*/conferences/*",
 					"/*/presenters/*",
-					"/*/sponsors/*"
+					"/*/sponsors/*",
+					"/*/playlists/*"
 				]
 			}
 		]
