@@ -17,7 +17,7 @@ export default function CardHatBibleBook({ sequence }: Props): JSX.Element {
 		<CardHat
 			title={sequence.title}
 			label={
-				sequence.collection?.title.includes('New') ? 'NKJV Bible' : 'KJV Bible'
+				sequence.collection?.title.split(" ").map((n)=>n[0]).join('').toUpperCase() + ' Bible'
 			}
 			url={sequence.canonicalPath}
 			icon={<HatIcon />}
