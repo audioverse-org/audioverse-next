@@ -94,12 +94,7 @@ export default function CardSequence({
 				backgroundColor: BaseColors.BIBLE_H,
 				iconColor: BaseColors.WHITE,
 				textColor: BaseColors.LIGHT_TONE,
-				label:
-					collection?.title
-						.split(' ')
-						.map((n) => n[0])
-						.join('')
-						.toUpperCase() + ' Bible',
+				label: collection ? collection.title : sequence.title,
 				labelColor: BaseColors.WHITE,
 			},
 			[SequenceContentType.MusicAlbum]: {

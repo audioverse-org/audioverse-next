@@ -13,16 +13,13 @@ interface Props {
 }
 
 export default function CardHatBibleBook({ sequence }: Props): JSX.Element {
+	const title = sequence.collection
+		? sequence.collection.title
+		: sequence.title;
 	return (
 		<CardHat
-			title={sequence.title}
-			label={
-				sequence.collection?.title
-					.split(' ')
-					.map((n) => n[0])
-					.join('')
-					.toUpperCase() + ' Bible'
-			}
+			title={title}
+			label={title}
 			url={sequence.canonicalPath}
 			icon={<HatIcon />}
 			longHat
