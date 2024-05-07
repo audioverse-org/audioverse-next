@@ -186,7 +186,7 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 				{
 					title: 'Genesis',
 					collection: {
-						title: 'King James Version'
+						title: 'King James Version',
 					},
 					canonicalPath: 'the_sequence_path',
 					contentType: SequenceContentType.BibleBook,
