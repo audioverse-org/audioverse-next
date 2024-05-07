@@ -185,6 +185,9 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 			nodes: [
 				{
 					title: 'Genesis',
+					collection: {
+						title: 'King James Version',
+					},
 					canonicalPath: 'the_sequence_path',
 					contentType: SequenceContentType.BibleBook,
 					speakers: {
@@ -291,7 +294,7 @@ describe('home page', () => {
 	it('renders Bible book title', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('Genesis')).toBeInTheDocument();
+		expect(getByText('King James Version')).toBeInTheDocument();
 	});
 
 	it('renders story title', async () => {
