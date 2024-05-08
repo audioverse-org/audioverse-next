@@ -111,8 +111,6 @@ jobs:
         uses: flydiverny/github-typescript@v1
         with:
           script-file: .github/workflows/scripts/lang-summary.ts
-      - run: cat ./.github/workflows/scripts/lang-summary.ts
-      - run: cat ./.github/workflows/scripts/lang-summary.mjs
   codegen:
     runs-on: ubuntu-latest
     steps:
