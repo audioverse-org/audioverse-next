@@ -33,5 +33,7 @@ langFiles.forEach((langFile) => {
 	const langs: Langs = JSON.parse(jsonString);
 	const ids = Object.keys(langs);
 	const missingIds = enIds.filter((id) => !ids.includes(id));
+	const outDatedIds = ids.filter((id) => !enIds.includes(id));
 	console.log(`Missing ids in ${lang}: ${missingIds.length}`);
+	console.log(`Outdated ids in ${lang}: ${outDatedIds.length}`);
 });
