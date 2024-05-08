@@ -2,11 +2,14 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 
 const BODY_PREFIX = '<!-- intl summary -->';
+const BOM_REGEX = /^\uFEFF/;
 
 type Langs = Record<string, { string: string; comment?: string }>;
 
 function getLangs(filePath: string, hash: string): Langs {
-	const c = execSync(`git show ${hash}:${filePath}`, { encoding: 'utf-8' });
+	const c = execSync(`git show ${hash}:${filePath}`, {
+		encoding: 'utf-8',
+	}).replace(BOM_REGEX, '');
 	return JSON.parse(c);
 }
 
