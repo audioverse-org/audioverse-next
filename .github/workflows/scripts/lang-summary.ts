@@ -14,7 +14,7 @@ function getLangs(filePath: string, hash: string): Langs {
 }
 
 function getSummary(filePaths: string[], hash1: string, hash2: string): string {
-	let s = `${BODY_PREFIX}\nfile|id|change|string\n---|---|---|---`;
+	let s = `${BODY_PREFIX}\nlang|id|change|string\n-|-|-|-`;
 
 	filePaths.forEach((p) => {
 		const langs1 = getLangs(p, hash1);
@@ -28,8 +28,10 @@ function getSummary(filePaths: string[], hash1: string, hash2: string): string {
 			return;
 		}
 
-		added.forEach((id) => (s += `\n${p}|${id}|added|${langs2[id].string}`));
-		removed.forEach((id) => (s += `\n${p}|${id}|removed|${langs1[id].string}`));
+		const langId = p.split('/').pop()?.split('.')[0];
+
+		added.forEach((id) => (s += `\n${p}|${langId}|add|${langs2[id].string}`));
+		removed.forEach((id) => (s += `\n${p}|${langId}|del|${langs1[id].string}`));
 	});
 
 	return s;
