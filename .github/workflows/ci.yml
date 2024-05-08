@@ -103,6 +103,9 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Add comment
         uses: flydiverny/github-typescript@v1
         with:
