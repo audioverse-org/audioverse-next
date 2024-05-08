@@ -78,8 +78,6 @@ jobs:
         run: npm run test:strict
   intl:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js
@@ -100,6 +98,11 @@ jobs:
         run: npm run intl:compile
       - name: Check no changes were made
         run: git diff --exit-code
+  intl-summary:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
       - name: Add comment
         uses: flydiverny/github-typescript@v1
         with:
