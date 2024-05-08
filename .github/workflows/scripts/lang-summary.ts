@@ -34,9 +34,8 @@ function getSummary(filePaths: string[], hash1: string, hash2: string): string {
 
 export default async function main({ github, context }): Promise<void> {
 	console.log('running');
-	console.dir({ github, context }, { depth: null });
 
-	const prNumber = context.payload.pull_request.id;
+	const prNumber = github.context.payload.pull_request.id;
 
 	if (!prNumber) {
 		console.warn('No PR found for this commit');
