@@ -16,8 +16,6 @@ import { extractAndWrite } from '@formatjs/cli-lib';
 import fs from 'fs';
 import glob from 'glob';
 
-console.log('hello world');
-
 type Langs = Record<string, { string: string; comment?: string }>;
 
 async function main() {
