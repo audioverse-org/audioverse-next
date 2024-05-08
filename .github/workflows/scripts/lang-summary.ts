@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import fs from 'fs';
+import glob from 'glob';
 
 const BODY_PREFIX = '<!-- intl summary -->';
 
@@ -44,7 +44,7 @@ export default async function main({ github, context }): Promise<void> {
 
 	console.log('PR found:', prNumber);
 
-	const langFiles = fs.readdirSync('./public/lang/');
+	const langFiles = glob.sync('public/lang/*.json');
 	const hash1 = context.payload.pull_request.base.sha;
 	const hash2 = context.sha;
 	const body = getSummary(langFiles, hash1, hash2);
