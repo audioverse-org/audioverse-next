@@ -32,7 +32,7 @@ function getSummary(filePaths: string[], hash1: string, hash2: string): string {
 	return s;
 }
 
-export async function main({ github, context }): Promise<void> {
+export default async function main({ github, context }): Promise<void> {
 	console.log('running');
 	const { data } = await github.rest.repos.listPullRequestsAssociatedWithCommit(
 		{
