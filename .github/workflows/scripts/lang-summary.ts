@@ -44,6 +44,7 @@ export async function main({ github, context }): Promise<void> {
 	const prNumber = data[0] && data[0].number;
 
 	if (!prNumber) {
+		console.warn('No PR found for this commit');
 		return;
 	}
 
