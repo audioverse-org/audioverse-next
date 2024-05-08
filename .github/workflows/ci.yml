@@ -101,6 +101,7 @@ jobs:
   intl-summary:
     runs-on: ubuntu-latest
     permissions:
+      checks: read
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
