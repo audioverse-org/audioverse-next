@@ -43,6 +43,8 @@ export default async function main({ github, context }): Promise<void> {
 		return;
 	}
 
+	console.log('PR found:', prNumber);
+
 	const langFiles = fs.readdirSync('./public/lang/');
 	const hash1 = github.event.pull_request.base.sha;
 	const hash2 = github.sha;
@@ -59,7 +61,7 @@ export default async function main({ github, context }): Promise<void> {
 	);
 
 	if (prev) {
-		// Update the previous comment
+		console.log('Updating previous comment');
 		await github.rest.issues.updateComment({
 			owner: context.repo.owner,
 			repo: context.repo.repo,
@@ -67,7 +69,7 @@ export default async function main({ github, context }): Promise<void> {
 			body,
 		});
 	} else {
-		// Create a new comment
+		console.log('Creating new comment');
 		await github.rest.issues.createComment({
 			owner: context.repo.owner,
 			repo: context.repo.repo,
