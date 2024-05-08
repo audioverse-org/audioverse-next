@@ -50,8 +50,26 @@ async function main() {
 		const ids = Object.keys(langs);
 		const missingIds = enIds.filter((id) => !ids.includes(id));
 		const outDatedIds = ids.filter((id) => !enIds.includes(id));
+
 		console.log(`Missing ids in ${lang}: ${missingIds.length}`);
 		console.log(`Outdated ids in ${lang}: ${outDatedIds.length}`);
+
+		if (missingIds.length) {
+			missingIds.forEach((id) => {
+				langs[id] = enLangs[id];
+			});
+		}
+
+		if (outDatedIds.length) {
+			outDatedIds.forEach((id) => {
+				delete langs[id];
+			});
+		}
+
+		fs.writeFileSync(
+			`./public/lang/${langFile}`,
+			JSON.stringify(langs, null, 2)
+		);
 	});
 }
 

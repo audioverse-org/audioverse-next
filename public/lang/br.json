@@ -16,9 +16,6 @@
   "about__navStory": {
     "string": "Nossa História"
   },
-  "about__navTeam": {
-    "string": "A Equipe"
-  },
   "about__navTestimonials": {
     "string": "Testemunhos"
   },
@@ -220,30 +217,6 @@
   "accountNav__profile": {
     "string": "Perfil"
   },
-  "accountPlaylists__buttonLabelSubmit": {
-    "comment": "Página da playlist da conta rótulo botão de envio",
-    "string": "Adicionar na lista de reprodução"
-  },
-  "accountPlaylists__errorMissingTitle": {
-    "comment": "página de listas de reprodução de contas mensagem de erro título em falta",
-    "string": "título em falta"
-  },
-  "accountPlaylists__inputLabelPublic": {
-    "comment": "listas de reprodução da conta página de entrada de páginas públicas",
-    "string": "público"
-  },
-  "accountPlaylists__inputLabelTitle": {
-    "comment": "página da playlist da conta, título dos rótulos de entrada",
-    "string": "Título"
-  },
-  "accountPlaylists__labelPrivate": {
-    "comment": "playlists de conta, playlist privada",
-    "string": "privado"
-  },
-  "accountPlaylists__labelPublic": {
-    "comment": "página de playlist da conta, rótulo público da playlist",
-    "string": "público"
-  },
   "andGlobalModals__authCopy": {
     "string": "Crie uma conta ou login gratuito para acessar os recursos da Biblioteca, tais como, salvar, visualizar seu histórico e sincronizar os dispositivos."
   },
@@ -334,9 +307,6 @@
   },
   "audiobookList__heading": {
     "string": "Todos Audiolivros"
-  },
-  "backButton__back": {
-    "string": "Voltar"
   },
   "bibleBook__backToChapter": {
     "string": "Voltar para as informações do capítulo"
@@ -657,47 +627,11 @@
   "discoverCollections_conferencesHeading": {
     "string": "Congressos"
   },
-  "discoverCollections_featuredCollectionHeading": {
-    "string": "Coleção em Destaque"
-  },
-  "discoverCollections_presentersHeading": {
-    "string": "Oradores"
-  },
-  "discoverCollections_scriptureSongsHeading": {
-    "string": "Canções das Escrituras"
-  },
-  "discoverCollections_seeAll": {
-    "string": "Ver todos"
-  },
-  "discoverCollections_seriesHeading": {
-    "string": "Séries"
-  },
-  "discoverCollections_sponsorsHeading": {
-    "string": "Patrocinadores"
-  },
-  "discoverCollections_storiesHeading": {
-    "string": "Histórias"
-  },
-  "discover__conferencesSeeAll": {
-    "string": "Ver todos Congressos"
-  },
-  "discover__recentBlogSeeAll": {
-    "string": "Ver todas as postagens do blog"
-  },
-  "discover__recentTeachingsSeeAll": {
-    "string": "Ver todos Ensinamentos"
-  },
   "discover__storiesHeading": {
     "string": "Histórias recentes"
   },
-  "discover__storiesSeeAll": {
-    "string": "Ver todas Histórias"
-  },
   "discover__title": {
     "string": "Descobrir"
-  },
-  "discover__trendingTeachingsSeeAll": {
-    "string": "Ver todos Ensinamentos em alta"
   },
   "discover_conferencesHeading": {
     "string": "Congressos recentes"
@@ -752,15 +686,6 @@
   },
   "generatedFeed__copyright": {
     "string": "Este material fornece direitos autorais {ano} ao AudioVerse. As gravações individuais são protegidas por direitos autorais de seus respectivos proprietários."
-  },
-  "give__amazonCta": {
-    "string": "Comprar agora"
-  },
-  "give__amazonDescription": {
-    "string": "A cada compra na AmazonSmile, o AudioVerse recebe 0,5%.{br}{br}Como? Apenas clique no botão.{br}{br} É só isso! Apenas certifique-se de selecionar o novo site AmazonSmile ou então seu navegador provavelmente voltará ao site normal da Amazon."
-  },
-  "give__amazonTitle": {
-    "string": "Amazon Smile"
   },
   "give__checkDescription": {
     "string": "Por favor, faça os cheques em nome da AudioVerse.{br}{br} Nosso endereço postal é:{br}{br}AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
@@ -916,9 +841,6 @@
   },
   "header__navItemStory-spiritOfAudioVerse": {
     "string": "Espírito do AudioVerse"
-  },
-  "header__navItemStory-team": {
-    "string": "A Equipe"
   },
   "header__navItemStory-testimonials": {
     "string": "Testemunhos"
@@ -1566,17 +1488,11 @@
     "comment": "botão de download, título do vídeo do menu",
     "string": "Vídeos baixados"
   },
-  "molecule-buttonGuest__downloadQuality": {
-    "string": "Ajustando a qualidade do download"
-  },
   "molecule-buttonGuest__label": {
     "string": "Continuar como visitante"
   },
   "molecule-buttonGuest__modalButtonLabelCreateAccount": {
     "string": "Criar conta"
-  },
-  "molecule-buttonGuest__modalButtonLabelGuest": {
-    "string": "Continuar como visitante"
   },
   "molecule-buttonGuest__modalButtonLabelLogIn": {
     "string": "Entrar"
@@ -1586,12 +1502,6 @@
   },
   "molecule-buttonGuest__modalTitle": {
     "string": "Continuar como visitante?"
-  },
-  "molecule-buttonGuest__saving": {
-    "string": "Salvando em sua biblioteca"
-  },
-  "molecule-buttonGuest__syncing": {
-    "string": "Sincronizando em seus dispositivos"
   },
   "molecule-buttonShareRecording__audioEmbedLabel": {
     "string": "Código de áudio embutido"
@@ -2184,35 +2094,11 @@
   "search__conferencesHeading": {
     "string": "Congressos"
   },
-  "search__conferencesSeeAllMatching": {
-    "string": "Ver todos Congressos correspondentes."
-  },
-  "search__personsHeading": {
-    "string": "Oradores"
-  },
-  "search__personsSeeAllMatching": {
-    "string": "Ver todos Oradores correspondentes"
-  },
-  "search__resultsCount": {
-    "string": "{count} Resultados"
-  },
-  "search__sequencesHeading": {
-    "string": "Séries"
-  },
-  "search__sequencesSeeAllMatching": {
-    "string": "Ver todas as séries correspondentes"
-  },
   "search__sponsorsHeading": {
     "string": "Patrocinadores"
   },
-  "search__sponsorsSeeAllMatching": {
-    "string": "Ver todos Patrocinadores correspondentes"
-  },
   "search__teachingsHeading": {
     "string": "Ensinamentos"
-  },
-  "search__teachingsSeeAllMatching": {
-    "string": "Ver todos Ensinamentos correspondentes"
   },
   "search__title": {
     "string": "Buscar"
@@ -2465,5 +2351,378 @@
   },
   "search__storiesHeading": {
     "string": "Historias"
+  },
+  "about__purposeImageAlt": {
+    "comment": "Alt text for the purpose image",
+    "string": "Young woman in a field wearing headphones while reading a book."
+  },
+  "app__features1ImageAlt": {
+    "comment": "Image alt text for the first feature",
+    "string": "Media on the Audioverse website"
+  },
+  "app__features2ImageAlt": {
+    "comment": "Image alt text for the second feature",
+    "string": "List of recent sermons from Sebastien Braxton"
+  },
+  "app__features3ImageAlt": {
+    "comment": "Image alt text for the third feature",
+    "string": "A diagram of AudioVerse’s card UI"
+  },
+  "app__features4ImageAlt": {
+    "comment": "Image alt text for the fourth feature",
+    "string": "The save button on a sermon by Katie Chitwood"
+  },
+  "app__features5ImageAlt": {
+    "comment": "Image alt text for the fifth feature",
+    "string": "The download button on a sermon by Don Mackintosh"
+  },
+  "browse__topicsNext": {
+    "string": "Next topics"
+  },
+  "browse__topicsPrevious": {
+    "string": "Previous topics"
+  },
+  "browse_topicsHeading": {
+    "string": "Topics"
+  },
+  "cardSequence_egwAudiobookType": {
+    "string": "ELLEN WHITE"
+  },
+  "cardTopic__hatLabel": {
+    "string": "Topic"
+  },
+  "contact_footer": {
+    "string": "Contact"
+  },
+  "discoverCollections_egwAudiobooksHeading": {
+    "string": "Discover Ellen White"
+  },
+  "discoverCollections_storySeasonsHeading": {
+    "string": "Stories"
+  },
+  "discover__conferencesNext": {
+    "string": "Next recent conferences"
+  },
+  "discover__conferencesPrevious": {
+    "string": "Previous recent conferences"
+  },
+  "discover__featuredTeachingsNext": {
+    "string": "Next featured teachings"
+  },
+  "discover__featuredTeachingsPrevious": {
+    "string": "Previous featured teachings"
+  },
+  "discover__recentBlogNext": {
+    "string": "Next recent blog posts"
+  },
+  "discover__recentBlogPrevious": {
+    "string": "Previous recent blog posts"
+  },
+  "discover__recentTeachingsNext": {
+    "string": "Next recent teachings"
+  },
+  "discover__recentTeachingsPrevious": {
+    "string": "Previous recent teachings"
+  },
+  "discover__seeAll": {
+    "string": "See All"
+  },
+  "discover__storiesNext": {
+    "string": "Next recent stories"
+  },
+  "discover__storiesPrevious": {
+    "string": "Previous recent stories"
+  },
+  "discover__topicsNext": {
+    "string": "Next topics"
+  },
+  "discover__topicsPrevious": {
+    "string": "Previous topics"
+  },
+  "discover__trendingMusicNext": {
+    "string": "Next trending scripture songs"
+  },
+  "discover__trendingMusicPrevious": {
+    "string": "Previous trending scripture songs"
+  },
+  "discover__trendingTeachingsNext": {
+    "string": "Next trending teachings"
+  },
+  "discover__trendingTeachingsPrevious": {
+    "string": "Previous trending teachings"
+  },
+  "discover_bibleBooksHeading": {
+    "string": "Discover Bible Books"
+  },
+  "discover_presentersHeading": {
+    "string": "Discover Presenters"
+  },
+  "discover_topicsHeading": {
+    "string": "Topics"
+  },
+  "discover_trendingMusicHeading": {
+    "string": "Trending Scripture Songs"
+  },
+  "egwAudiobookList__heading": {
+    "string": "Ellen White"
+  },
+  "egwbooks__title": {
+    "string": "Ellen White"
+  },
+  "give__donorboxTitle": {
+    "comment": "Title for the donorbox iframe",
+    "string": "Donation form"
+  },
+  "header__navItemCollections-egwbooks": {
+    "string": "Ellen White"
+  },
+  "header__navItemCollections-topics": {
+    "string": "Topics"
+  },
+  "homePage__bannerImageAlt": {
+    "comment": "home page banner image alt",
+    "string": "Young woman with headphones listening to music and reading a book."
+  },
+  "homePage__downloadAppImageAlt": {
+    "comment": "home page download app image alt",
+    "string": "Smartphones with AudioVerse app"
+  },
+  "homePage__supportSectionImageAlt": {
+    "comment": "home page support section image alt",
+    "string": "People having a discussion in a meeting"
+  },
+  "legal_footer": {
+    "string": "Legal"
+  },
+  "loginLanding__title": {
+    "string": "Login Landing"
+  },
+  "molecule-button-SignUp": {
+    "string": "Sign Up with Email"
+  },
+  "molecule-buttonGuestDownload__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonGuestDownload__modalTitle": {
+    "string": "Create a Free Account"
+  },
+  "molecule-buttonGuest__Download": {
+    "string": "Download content for offline access"
+  },
+  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
+  },
+  "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
+    "string": "Skip"
+  },
+  "molecule-buttonGuest__modalButtonLabelSkip": {
+    "string": "Skip"
+  },
+  "molecule-buttonGuest__modalParagraph1-2": {
+    "string": "Please consider signing up or logging in to help our mission of sharing sound doctrine."
+  },
+  "molecule-buttonGuest__modalParagraph2": {
+    "string": "With a free account,you can"
+  },
+  "molecule-buttonGuest__modalTitle2": {
+    "string": "Are you sure?"
+  },
+  "molecule-buttonGuest__requests": {
+    "string": "Avoid annoying login requests"
+  },
+  "molecule-buttonGuest__save": {
+    "string": "Save your content to listen later"
+  },
+  "molecule-buttonGuest__sync": {
+    "string": "Pick up where you left off across devices"
+  },
+  "molecule-searchBar__ariaLabel": {
+    "comment": "search bar label",
+    "string": "search"
+  },
+  "molecule-searchBar__cancel": {
+    "string": "Cancel"
+  },
+  "molecules-pagination__nextLabelMobile": {
+    "string": "Next"
+  },
+  "organism-mobileHeader__more": {
+    "comment": "more button label",
+    "string": "more"
+  },
+  "organism-navigation__exit": {
+    "comment": "Exit button label",
+    "string": "Exit"
+  },
+  "organismSection__audiobooksHeading": {
+    "string": "Books"
+  },
+  "organismSection__audiobooksNext": {
+    "string": "Next audiobooks"
+  },
+  "organismSection__audiobooksPrevious": {
+    "string": "Previous audiobooks"
+  },
+  "organismSection__bibleBooksHeading": {
+    "string": "Bible Books"
+  },
+  "organismSection__bibleBooksNext": {
+    "string": "Next Bible books"
+  },
+  "organismSection__bibleBooksPrevious": {
+    "string": "Previous Bible books"
+  },
+  "organismSection__egwAudiobooksHeading": {
+    "string": "Ellen White"
+  },
+  "organismSection__egwAudiobooksNext": {
+    "string": "Next EGW audiobooks"
+  },
+  "organismSection__egwAudiobooksPrevious": {
+    "string": "Previous EGW audiobooks"
+  },
+  "organismSection_presentersHeading": {
+    "string": "Presenters"
+  },
+  "organismSection_presentersNext": {
+    "string": "Next presenters"
+  },
+  "organismSection_presentersPrevious": {
+    "string": "Previous presenters"
+  },
+  "organismSection_scriptureSongsHeading": {
+    "string": "Scripture Songs"
+  },
+  "organismSection_scriptureSongsNext": {
+    "string": "Next scripture songs"
+  },
+  "organismSection_scriptureSongsPrevious": {
+    "string": "Previous scripture songs"
+  },
+  "organismSection_seriesHeading": {
+    "string": "Series"
+  },
+  "organismSection_seriesNext": {
+    "string": "Next series"
+  },
+  "organismSection_seriesPrevious": {
+    "string": "Previous series"
+  },
+  "organismSection_sponsorsHeading": {
+    "string": "Sponsors"
+  },
+  "organismSection_sponsorsNext": {
+    "string": "Next sponsors"
+  },
+  "organismSection_sponsorsPrevious": {
+    "string": "Previous sponsors"
+  },
+  "presentersListAll__all": {
+    "string": "All"
+  },
+  "presentersList__all": {
+    "string": "All"
+  },
+  "privacy_footer": {
+    "string": "Privacy Policy"
+  },
+  "regularLogin__login": {
+    "string": "Already have an account?"
+  },
+  "regularLogin__loginTxt": {
+    "string": "Log In"
+  },
+  "search__allHeading": {
+    "string": "All"
+  },
+  "search__bibleBooksHeading": {
+    "string": "Bible"
+  },
+  "search__bileBooksSeeAll": {
+    "string": "See All Matching Bible books"
+  },
+  "search__booksSeeAll": {
+    "string": "See All Matching Audiobooks"
+  },
+  "search__conferencesSeeAll": {
+    "string": "See All Matching Conferences"
+  },
+  "search__egwbooksHeading": {
+    "string": "EGW"
+  },
+  "search__egwbooksSeeAll": {
+    "string": "See All Matching Ellen White Audiobooks"
+  },
+  "search__emptyStateMessage": {
+    "string": "Try searching for something else"
+  },
+  "search__emptyStateTitle": {
+    "string": "No results found"
+  },
+  "search__musicSeeAll": {
+    "string": "See All Matching Music"
+  },
+  "search__presentersSeeAll": {
+    "string": "See All Matching Presenters"
+  },
+  "search__seriesHeading": {
+    "string": "Series"
+  },
+  "search__seriesSeeAll": {
+    "string": "See All Matching Series"
+  },
+  "search__sponsorsSeeAll": {
+    "string": "See All Matching Sponsors"
+  },
+  "search__storiesSeeAll": {
+    "string": "See All Matching Stories"
+  },
+  "search__teachingsSeeAll": {
+    "string": "See All Matching Teachings"
+  },
+  "socialLogin__loginOr": {
+    "string": "Or"
+  },
+  "sponsorsListAll__all": {
+    "string": "All"
+  },
+  "sponsorsList__all": {
+    "string": "All"
+  },
+  "storyAlbumList__emptyStateMessage": {
+    "string": "There are no story albums to show."
+  },
+  "storyAlbumList__emptyStateTitle": {
+    "string": "Nothing here!"
+  },
+  "terms_footer": {
+    "string": "Terms of Use"
+  },
+  "topicDetail__description": {
+    "string": "Description"
+  },
+  "topicDetail__label": {
+    "string": "Topic"
+  },
+  "topicDetail__parentTopic": {
+    "string": "Parent Topic"
+  },
+  "topicDetail__series": {
+    "string": "Series"
+  },
+  "topicDetail__teachings": {
+    "string": "Teachings"
+  },
+  "topicItemCount__items": {
+    "string": "{count, plural, one {# item} other {# items}}"
+  },
+  "topicItemCount__series": {
+    "string": "{count, plural, one {# series} other {# series}}"
+  },
+  "topicItemCount__teachings": {
+    "string": "{count, plural, one {# teaching} other {# teachings}}"
+  },
+  "topicListPage__title": {
+    "string": "All Topics"
   }
 }
