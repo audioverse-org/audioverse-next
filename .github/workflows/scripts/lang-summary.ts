@@ -35,6 +35,9 @@ function getSummary(filePaths: string[], hash1: string, hash2: string): string {
 export default async function main({ github, context }): Promise<void> {
 	console.log('running');
 
+	console.dir(context.payload, { depth: null });
+	console.dir(github.context.payload, { depth: null });
+
 	const prNumber = context.payload.pull_request.number;
 
 	if (!prNumber) {
