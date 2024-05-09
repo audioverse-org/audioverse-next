@@ -110,21 +110,25 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 
 		row += defaultString + '|';
 
-		langIds.forEach((langId) => {
-			const lang1 = files1[`${langId}.json`]?.[stringId];
-			const lang2 = files2[`${langId}.json`]?.[stringId];
-			const en2 = files2['en.json']?.[stringId];
-			const isAdded = !lang1 && lang2;
-			const isDeleted = lang1 && !lang2;
-			const mutation = isAdded ? '+' : isDeleted ? '-' : '';
-			const untranslated =
-				langId !== 'en' && lang2 && lang2.string === en2?.string ? '!' : '';
-			const missing = !lang2 ? '?' : '';
+		const flags = Array.from(langIds)
+			.map((langId) => {
+				const lang1 = files1[`${langId}.json`]?.[stringId];
+				const lang2 = files2[`${langId}.json`]?.[stringId];
+				const en2 = files2['en.json']?.[stringId];
+				const isAdded = !lang1 && lang2;
+				const isDeleted = lang1 && !lang2;
+				const mutation = isAdded ? '+' : isDeleted ? '-' : '';
+				const untranslated =
+					langId !== 'en' && lang2 && lang2.string === en2?.string ? '!' : '';
+				const missing = !lang2 ? '?' : '';
 
-			row += `${mutation}${langId}${untranslated}${missing} `;
-		});
+				return `${mutation}${langId}${untranslated}${missing}`;
+			})
+			.join(' ');
 
-		row.match(/(\+|-|!|\?)/g) && lines.push(row);
+		row += flags;
+
+		flags.match(/(\+|-|!|\?)/g) && lines.push(row);
 	});
 
 	return lines.join('\n');
