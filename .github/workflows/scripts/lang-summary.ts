@@ -4,40 +4,141 @@ import fs from 'fs';
 const BODY_PREFIX = '<!-- intl summary -->';
 const BOM_REGEX = /^\uFEFF/;
 
+/* 
+# Current
+
+lang                | id               | change | string
+------------------- | ---------------- | ------ | --------------------
+public/lang/en.json | about__navSpirit | add    | Spirit of AudioVerse
+
+# Target
+
+syntax | flag | description
+------ | ---- | ----------
+es     | -    |   unchanged string
++es    | 🟢   |  added string
+-es    | 🔵   |   removed string
+es!    | 🟡   |  untranslated string
+es?    | 🔴   |  missing string
+
+id				    | default 			   | langs
+------------------- | -------------------- | ---------------------------------
+🔴 about__navSpirit | Spirit of AudioVerse | +en -br -es -fr -pt ru zh?
+🟡 about__navStory  | Our Story			   | +en +br! +es! +fr! +pt! ru! zh!
+*/
+
 type Langs = Record<string, { string: string; comment?: string }>;
 
 function getLangs(filePath: string, hash: string): Langs {
-	const c = execSync(`git show ${hash}:${filePath}`, {
-		encoding: 'utf-8',
-	}).replace(BOM_REGEX, '');
-	return JSON.parse(c);
+	try {
+		const c = execSync(`git show ${hash}:${filePath}`, {
+			encoding: 'utf-8',
+		}).replace(BOM_REGEX, '');
+		return JSON.parse(c);
+	} catch (e) {
+		console.warn(`Error reading file ${filePath}`);
+		console.warn(e);
+		return {};
+	}
 }
 
-function getSummary(filePaths: string[], hash1: string, hash2: string): string {
-	let s = `${BODY_PREFIX}\nlang|id|change|string\n-|-|-|-`;
+function getLangFiles(paths: string[], hash: string): Record<string, Langs> {
+	return paths.reduce<Record<string, Langs>>((acc, p) => {
+		const f = p.split('/').pop() as string;
+		return { ...acc, [f]: getLangs(p, hash) };
+	}, {});
+}
 
-	filePaths.forEach((p) => {
-		const langs1 = getLangs(p, hash1);
-		const langs2 = getLangs(p, hash2);
-		const ids1 = Object.keys(langs1);
-		const ids2 = Object.keys(langs2);
-		const added = ids2.filter((id) => !ids1.includes(id));
-		const removed = ids1.filter((id) => !ids2.includes(id));
+function getAllStringIds(
+	files1: Record<string, Langs>,
+	files2: Record<string, Langs>
+): Set<string> {
+	const allIds = new Set<string>();
 
-		if (added.length == 0 && removed.length == 0) {
-			return;
-		}
+	Object.values(files1).forEach((langs) =>
+		Object.keys(langs).forEach((id) => allIds.add(id))
+	);
+	Object.values(files2).forEach((langs) =>
+		Object.keys(langs).forEach((id) => allIds.add(id))
+	);
 
-		const langId = p.split('/').pop()?.split('.')[0];
+	return allIds;
+}
 
-		added.forEach((id) => (s += `\n${p}|${langId}|add|${langs2[id].string}`));
-		removed.forEach((id) => (s += `\n${p}|${langId}|del|${langs1[id].string}`));
+function getAllLangIds(
+	files1: Record<string, Langs>,
+	files2: Record<string, Langs>
+): Set<string> {
+	const allLangs = new Set<string>();
+
+	Object.keys(files1).forEach((fileName) =>
+		allLangs.add(fileName.split('.')[0])
+	);
+	Object.keys(files2).forEach((fileName) =>
+		allLangs.add(fileName.split('.')[0])
+	);
+
+	return allLangs;
+}
+
+function getSummary(paths: string[], hash1: string, hash2: string): string {
+	const lines = [
+		BODY_PREFIX,
+		'syntax | flag | description',
+		'------ | ---- | ----------',
+		'fr     | -    | unchanged string',
+		'+fr    | 🟢   | added string',
+		'-fr    | 🔵   | removed string',
+		'fr!    | 🟡   | untranslated string',
+		'fr?    | 🔴   | missing string',
+		'',
+		'id|default|langs',
+		'-|-|-|-',
+	];
+	const files1 = getLangFiles(paths, hash1);
+	const files2 = getLangFiles(paths, hash2);
+	const sringIds = getAllStringIds(files1, files2);
+	const langIds = getAllLangIds(files1, files2);
+
+	sringIds.forEach((stringId) => {
+		let row = `\n${stringId}|`;
+
+		const defaultString =
+			files2['en.json']?.[stringId]?.string ??
+			files1['en.json']?.[stringId]?.string ??
+			'';
+
+		row += defaultString + '|';
+
+		langIds.forEach((langId) => {
+			const lang1 = files1[`${langId}.json`]?.[stringId];
+			const lang2 = files2[`${langId}.json`]?.[stringId];
+			const en2 = files2['en.json']?.[stringId];
+			const isAdded = !lang1 && lang2;
+			const isDeleted = lang1 && !lang2;
+			const mutation = isAdded ? '+' : isDeleted ? '-' : '';
+			const untranslated =
+				langId !== 'en' && lang2 && lang2.string === en2?.string ? '!' : '';
+			const missing = !lang2 ? '?' : '';
+
+			row += `${mutation}${langId}${untranslated}${missing} `;
+		});
+
+		lines.push(row);
 	});
 
-	return s;
+	return lines.join('\n');
 }
 
-export default async function main({ github, context }): Promise<void> {
+type Options = {
+	github: any;
+	context: any;
+};
+
+export default async function main({
+	github,
+	context,
+}: Options): Promise<void> {
 	console.log('running');
 
 	const prNumber = context.payload.pull_request.number;
@@ -65,6 +166,8 @@ export default async function main({ github, context }): Promise<void> {
 	const prev = comments.find((c: { body: string }) =>
 		c.body.startsWith(BODY_PREFIX)
 	);
+
+	console.log(body);
 
 	if (prev) {
 		console.log('Updating previous comment');
