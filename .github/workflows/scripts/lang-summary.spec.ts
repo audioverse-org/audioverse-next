@@ -283,4 +283,19 @@ describe('lang-summary', () => {
 
 		expect(createComment).toBeCalled();
 	});
+
+	it('skips unchanged strings', async () => {
+		loadFiles(
+			{ 'en.json': { the_id: { string: 'the_string' } } },
+			{ 'en.json': { the_id: { string: 'the_string' } } }
+		);
+
+		await run();
+
+		expect(createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.not.stringContaining('the_string'),
+			})
+		);
+	});
 });

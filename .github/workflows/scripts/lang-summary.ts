@@ -124,7 +124,7 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 			row += `${mutation}${langId}${untranslated}${missing} `;
 		});
 
-		lines.push(row);
+		row.match(/(\+|-|!|\?)/g) && lines.push(row);
 	});
 
 	return lines.join('\n');
