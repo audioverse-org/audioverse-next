@@ -6,12 +6,16 @@ type CheckboxOptions = {
 	label: string | JSX.Element;
 	checked: boolean;
 	toggleChecked: () => void;
+	value?: string;
+	name?: string;
 };
 
 export default function Checkbox({
 	label,
 	checked,
 	toggleChecked,
+	value,
+	name,
 }: CheckboxOptions): JSX.Element {
 	return (
 		<label className={styles.label}>
@@ -20,6 +24,8 @@ export default function Checkbox({
 				className={styles.checkbox}
 				checked={checked}
 				onChange={toggleChecked}
+				value={value}
+				name={name}
 			/>
 			{label}
 		</label>

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
@@ -11,7 +11,7 @@ import CardRecording from '~components/molecules/card/recording';
 import CardSequence from '~components/molecules/card/sequence';
 import CardMasonry from '~components/molecules/cardMasonry';
 import DownloadAppButton from '~components/molecules/downloadAppButton';
-import Input from '~components/molecules/form/input';
+import NewsletterForm from '~components/molecules/newsletterForm';
 import Slider from '~components/organisms/slider';
 import Testimonies from '~components/organisms/testimonies';
 import { BaseColors } from '~lib/constants';
@@ -19,7 +19,6 @@ import { getSessionToken } from '~lib/cookies';
 import { getAppFeatures } from '~lib/getAppFeatures';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
-import IconBell from '~public/img/icons/fa-bell.svg';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
 import ImagePlayers from '~public/img/players.jpeg';
 
@@ -34,10 +33,7 @@ export type HomeProps = {
 export default function Home({ data }: HomeProps): JSX.Element {
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
 	const isLoggedIn = !!getSessionToken();
-
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
@@ -348,7 +344,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								<p className={styles.newsletterPromoKicker}>
 									<FormattedMessage
 										id="homePage__newsletterSectionText"
-										defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
+										defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Gift? Subscribe to our newsletter to get updates."
 										description="home page newsletter section text"
 									/>
 								</p>
@@ -356,77 +352,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						}
 						media={
 							<div className={styles.newsletterWrapper} id="newsletter-signup">
-								<div className={styles.newsletterBox}>
-									<div className={styles.newsletterHat}>
-										<IconBell />
-										<FormattedMessage
-											id="homePage__newsletterHatTitle"
-											defaultMessage="Sign up for our Newsletter"
-										/>
-									</div>
-									<form
-										className={styles.newsletterBody}
-										action="https://audioverse.activehosted.com/proc.php"
-										method="POST"
-										target="_blank"
-									>
-										<input type="hidden" name="u" value="1" />
-										<input type="hidden" name="f" value="1" />
-										<input type="hidden" name="s" />
-										<input type="hidden" name="c" value="0" />
-										<input type="hidden" name="m" value="0" />
-										<input type="hidden" name="act" value="sub" />
-										<input type="hidden" name="v" value="2" />
-										<input
-											type="hidden"
-											name="or"
-											value="e2e4794f66cb49fa14b643a5f9d6536b"
-										/>
-										<div className={styles.newsletterFieldRow}>
-											<Input
-												name="fullname"
-												type="text"
-												label={
-													<FormattedMessage
-														id="homePage__newsletterName"
-														defaultMessage="Name"
-													/>
-												}
-												placeholder={intl.formatMessage({
-													id: 'homePage__newsletterNamePlaceholder',
-													defaultMessage: 'Joseph Bates',
-												})}
-												value={name}
-												setValue={setName}
-											/>
-											<Input
-												name="email"
-												type="text"
-												label={
-													<FormattedMessage
-														id="homePage__newsletterEmail"
-														defaultMessage="Email Address"
-													/>
-												}
-												placeholder={intl.formatMessage({
-													id: 'homePage__newsletterEmailPlaceholder',
-													defaultMessage: 'josephbates@email.com',
-												})}
-												value={email}
-												setValue={setEmail}
-											/>
-										</div>
-										<Button
-											type="secondary"
-											text={
-												<FormattedMessage
-													id="homePage__newsletterSubscribe"
-													defaultMessage="Subscribe"
-												/>
-											}
-										/>
-									</form>
-								</div>
+								<NewsletterForm />
 							</div>
 						}
 					/>
