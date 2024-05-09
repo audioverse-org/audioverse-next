@@ -101,7 +101,7 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 	const langIds = getAllLangIds(files1, files2);
 
 	sringIds.forEach((stringId) => {
-		let row = `\n${stringId}|`;
+		let row = `${stringId}|`;
 
 		const defaultString =
 			files2['en.json']?.[stringId]?.string ??
