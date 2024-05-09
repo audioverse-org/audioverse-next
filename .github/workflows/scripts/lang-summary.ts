@@ -93,7 +93,7 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 		'fr?    | 🔴   | missing string',
 		'',
 		'id|default|langs',
-		'-|-|-|-',
+		'-|-|-',
 	];
 	const files1 = getLangFiles(paths, hash1);
 	const files2 = getLangFiles(paths, hash2);
