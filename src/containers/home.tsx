@@ -344,7 +344,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								<p className={styles.newsletterPromoKicker}>
 									<FormattedMessage
 										id="homePage__newsletterSectionText"
-										defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Gift? Subscribe to our newsletter to get updates."
+										defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
 										description="home page newsletter section text"
 									/>
 								</p>
