@@ -120,12 +120,24 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 				const mutation = isAdded ? '+' : isDeleted ? '-' : '';
 				const untranslated =
 					langId !== 'en' && lang2 && lang2.string === en2?.string ? '!' : '';
-				const missing = !lang2 ? '?' : '';
+				const survives = Object.values(files2).some((f) => f[stringId]);
+				const missing = survives && !lang2 ? '?' : '';
 
 				return `${mutation}${langId}${untranslated}${missing}`;
 			})
 			.join(' ');
 
+		const light = flags.includes('?')
+			? '🔴 '
+			: flags.includes('!')
+			? '🟡 '
+			: flags.includes('+')
+			? '🟢 '
+			: flags.includes('-')
+			? '🔵 '
+			: '';
+
+		row = light + row;
 		row += flags;
 
 		flags.match(/(\+|-|!|\?)/g) && lines.push(row);

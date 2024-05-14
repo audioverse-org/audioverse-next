@@ -298,4 +298,85 @@ describe('lang-summary', () => {
 			})
 		);
 	});
+
+	it('does not flag missing if not present in event commit', async () => {
+		loadFiles(
+			{ 'en.json': { the_id: { string: 'the_string' } } },
+			{ 'en.json': {} }
+		);
+
+		await run();
+
+		expect(createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.not.stringContaining('en?'),
+			})
+		);
+	});
+
+	it('uses green light if string added', async () => {
+		loadFiles(
+			{ 'en.json': {} },
+			{ 'en.json': { the_id: { string: 'the_string' } } }
+		);
+
+		await run();
+
+		expect(createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('🟢 the_id'),
+			})
+		);
+	});
+
+	it('uses blue light if string removed', async () => {
+		loadFiles(
+			{ 'en.json': { the_id: { string: 'the_string' } } },
+			{ 'en.json': {} }
+		);
+
+		await run();
+
+		expect(createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('🔵 the_id'),
+			})
+		);
+	});
+
+	it('uses yellow light if string untranslated', async () => {
+		loadFiles(
+			{ 'en.json': {} },
+			{
+				'en.json': { the_id: { string: 'the_string' } },
+				'es.json': { the_id: { string: 'the_string' } },
+			}
+		);
+
+		await run();
+
+		expect(createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('🟡 the_id'),
+			})
+		);
+	});
+
+	it('uses red light if string missing', async () => {
+		loadFiles(
+			{ 'en.json': {} },
+			{
+				'en.json': { the_id: { string: 'the_string' } },
+				'es.json': {},
+			}
+		);
+
+		await run();
+
+		expect(createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('🔴 the_id'),
+			})
+		);
+	});
 });
