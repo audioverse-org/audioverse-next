@@ -94,6 +94,7 @@ export type PlaybackContextType = {
 	getRecording: () => AndMiniplayerFragment | undefined;
 	loadRecording: (
 		recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
+		recordingId: string | number,
 		options?: {
 			onLoad?: (c: PlaybackContextType) => void;
 			prefersAudio?: boolean;
@@ -312,6 +313,7 @@ export default function AndPlaybackContext({
 		getRecording: () => recording,
 		loadRecording: (
 			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
+			recordingId: string | number,
 			options = {},
 			source?: PlaySource
 		) => {
@@ -321,7 +323,12 @@ export default function AndPlaybackContext({
 				? recordingOrRecordings
 				: [recordingOrRecordings];
 			setSourceRecordings(recordingsArray);
-			const newRecording = recordingsArray[0];
+
+			const currentIndex = !Array.isArray(recordingOrRecordings)
+				? 0
+				: recordingsArray.findIndex((item) => item.id === recordingId);
+
+			const newRecording = recordingsArray[currentIndex];
 			setRecording(newRecording);
 			recordingRef.current = newRecording;
 			if (typeof prefersAudio === 'boolean') {
@@ -371,11 +378,19 @@ export default function AndPlaybackContext({
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
-			if (sourceRecordings && sourceRecordings.length > 1) {
-				setRecording(sourceRecordings[1]);
-				setSourceRecordings(sourceRecordings?.slice(1));
+			if (!sourceRecordings) {
+				return;
+			}
+			const currentIndex = sourceRecordings.findIndex(
+				(item) => item.id === recording?.id
+			);
+			if (currentIndex !== -1 && currentIndex + 1 < sourceRecordings.length) {
+				setRecording(sourceRecordings[currentIndex + 1]);
 				onLoadRef.current = () => playback.play();
-				playback._setRecording(sourceRecordings[1], prefersAudio);
+				playback._setRecording(
+					sourceRecordings[currentIndex + 1],
+					prefersAudio
+				);
 			}
 		},
 		setIsPaused: (paused) => setIsPaused(paused),
