@@ -51,22 +51,6 @@ describe('lang-summary', () => {
 		);
 	});
 
-	it('creates comment', async () => {
-		await run();
-
-		expect(createComment).toBeCalled();
-	});
-
-	it('has langs column', async () => {
-		await run();
-
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('langs'),
-			})
-		);
-	});
-
 	it('only has one row per id', async () => {
 		await run();
 

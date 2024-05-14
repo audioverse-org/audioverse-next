@@ -100,9 +100,6 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 		'-fr    | 🔵   | removed string',
 		'fr!    | 🟡   | untranslated string',
 		'fr?    | 🔴   | missing string',
-		'',
-		'id|langs|default',
-		'-|-|-',
 	];
 	const files1 = getLangFiles(paths, hash1);
 	const files2 = getLangFiles(paths, hash2);
@@ -122,7 +119,15 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 		const light = getLight(flags);
 
 		if (flags.match(/(\+|-|!|\?)/g)) {
-			lines.push(`${light}${stringId}|${flags}|${defaultString}`);
+			lines.push(`
+**${light}${stringId}**
+
+${flags}
+
+> ${defaultString}
+
+---
+`);
 		}
 	});
 
