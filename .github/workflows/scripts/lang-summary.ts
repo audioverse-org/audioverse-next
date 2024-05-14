@@ -93,6 +93,8 @@ function getLight(flags: string) {
 function getSummary(paths: string[], hash1: string, hash2: string): string {
 	const lines = [
 		BODY_PREFIX,
+		'## Internationalization Summary',
+		'',
 		'syntax | flag | description',
 		'------ | ---- | ----------',
 		'fr     | -    | unchanged string',
