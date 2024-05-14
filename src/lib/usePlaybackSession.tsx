@@ -132,6 +132,7 @@ export default function usePlaybackSession(
 
 		context.loadRecording(
 			playlistRecordings || recording,
+			recording.id,
 			{
 				onLoad: (c: PlaybackContextType) => {
 					func(c);
@@ -172,7 +173,7 @@ export default function usePlaybackSession(
 			context.setPrefersAudio(prefersAudio);
 		}
 
-		context.loadRecording(recording, {
+		context.loadRecording(recording, recording.id, {
 			prefersAudio,
 		});
 	}
