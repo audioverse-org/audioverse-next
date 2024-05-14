@@ -4,29 +4,6 @@ import fs from 'fs';
 const BODY_PREFIX = '<!-- intl summary -->';
 const BOM_REGEX = /^\uFEFF/;
 
-/* 
-# Current
-
-lang                | id               | change | string
-------------------- | ---------------- | ------ | --------------------
-public/lang/en.json | about__navSpirit | add    | Spirit of AudioVerse
-
-# Target
-
-syntax | flag | description
------- | ---- | ----------
-es     | -    |   unchanged string
-+es    | 🟢   |  added string
--es    | 🔵   |   removed string
-es!    | 🟡   |  untranslated string
-es?    | 🔴   |  missing string
-
-id				    | default 			   | langs
-------------------- | -------------------- | ---------------------------------
-🔴 about__navSpirit | Spirit of AudioVerse | +en -br -es -fr -pt ru zh?
-🟡 about__navStory  | Our Story			   | +en +br! +es! +fr! +pt! ru! zh!
-*/
-
 type Langs = Record<string, { string: string; comment?: string }>;
 
 function getLangs(filePath: string, hash: string): Langs {
@@ -81,6 +58,38 @@ function getAllLangIds(
 	return allLangs;
 }
 
+function getFlag(
+	stringId: string,
+	langId: string,
+	files1: Record<string, Langs>,
+	files2: Record<string, Langs>
+) {
+	const lang1 = files1[`${langId}.json`]?.[stringId];
+	const lang2 = files2[`${langId}.json`]?.[stringId];
+	const en2 = files2['en.json']?.[stringId];
+	const isAdded = !lang1 && lang2;
+	const isDeleted = lang1 && !lang2;
+	const mutation = isAdded ? '+' : isDeleted ? '-' : '';
+	const untranslated =
+		langId !== 'en' && lang2 && lang2.string === en2?.string ? '!' : '';
+	const survives = Object.values(files2).some((f) => f[stringId]);
+	const missing = survives && !lang2 ? '?' : '';
+
+	return `${mutation}${langId}${untranslated}${missing}`;
+}
+
+function getLight(flags: string) {
+	return flags.includes('?')
+		? '🔴 '
+		: flags.includes('!')
+		? '🟡 '
+		: flags.includes('+')
+		? '🟢 '
+		: flags.includes('-')
+		? '🔵 '
+		: '';
+}
+
 function getSummary(paths: string[], hash1: string, hash2: string): string {
 	const lines = [
 		BODY_PREFIX,
@@ -92,7 +101,7 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 		'fr!    | 🟡   | untranslated string',
 		'fr?    | 🔴   | missing string',
 		'',
-		'id|default|langs',
+		'id|langs|default',
 		'-|-|-',
 	];
 	const files1 = getLangFiles(paths, hash1);
@@ -101,46 +110,20 @@ function getSummary(paths: string[], hash1: string, hash2: string): string {
 	const langIds = getAllLangIds(files1, files2);
 
 	sringIds.forEach((stringId) => {
-		let row = `${stringId}|`;
-
 		const defaultString =
 			files2['en.json']?.[stringId]?.string ??
 			files1['en.json']?.[stringId]?.string ??
 			'';
 
-		row += defaultString + '|';
-
 		const flags = Array.from(langIds)
-			.map((langId) => {
-				const lang1 = files1[`${langId}.json`]?.[stringId];
-				const lang2 = files2[`${langId}.json`]?.[stringId];
-				const en2 = files2['en.json']?.[stringId];
-				const isAdded = !lang1 && lang2;
-				const isDeleted = lang1 && !lang2;
-				const mutation = isAdded ? '+' : isDeleted ? '-' : '';
-				const untranslated =
-					langId !== 'en' && lang2 && lang2.string === en2?.string ? '!' : '';
-				const survives = Object.values(files2).some((f) => f[stringId]);
-				const missing = survives && !lang2 ? '?' : '';
-
-				return `${mutation}${langId}${untranslated}${missing}`;
-			})
+			.map((langId) => getFlag(stringId, langId, files1, files2))
 			.join(' ');
 
-		const light = flags.includes('?')
-			? '🔴 '
-			: flags.includes('!')
-			? '🟡 '
-			: flags.includes('+')
-			? '🟢 '
-			: flags.includes('-')
-			? '🔵 '
-			: '';
+		const light = getLight(flags);
 
-		row = light + row;
-		row += flags;
-
-		flags.match(/(\+|-|!|\?)/g) && lines.push(row);
+		if (flags.match(/(\+|-|!|\?)/g)) {
+			lines.push(`${light}${stringId}|${flags}|${defaultString}`);
+		}
 	});
 
 	return lines.join('\n');
