@@ -54,7 +54,6 @@
 	}
 
 	.navLink:hover {
-
 		&,
 		.icon {
 			color: $ts-red;
@@ -63,7 +62,6 @@
 
 	@media (min-width: $breakpoint-lg) {
 		.navLink.active {
-
 			&,
 			.icon,
 			.iconDisclosure {
@@ -118,7 +116,7 @@
 .mobileSearch {
 	margin-bottom: 0;
 
-	>div {
+	> div {
 		flex-grow: 1;
 	}
 }
@@ -146,7 +144,7 @@
 	display: flex;
 	width: 100%;
 
-	>* {
+	> * {
 		flex: 0 0 100%;
 		display: flex;
 		flex-direction: column;
@@ -218,7 +216,7 @@
 	margin-bottom: 24px;
 	color: $ts-midTone;
 
-	>svg {
+	> svg {
 		transform: rotate(90deg);
 		margin-right: 4px;
 	}
@@ -252,7 +250,6 @@
 }
 
 @media (min-width: $breakpoint-lg) {
-
 	.mobileHeader,
 	.mobileRow {
 		display: none;
@@ -263,7 +260,7 @@
 		overflow: hidden;
 	}
 
-	.sliderColumns>* {
+	.sliderColumns > * {
 		padding-top: 0;
 		padding-left: 32px;
 		padding-right: 22px;
