@@ -432,14 +432,7 @@ export function Recording({
 							<Player
 								{...{
 									recording,
-									playlistRecordings: playlistRecordings?.slice(
-										Math.max(
-											playlistRecordings.findIndex(
-												(item) => item.id === recording.id
-											) || 0,
-											0
-										)
-									),
+									playlistRecordings: playlistRecordings || undefined,
 									backgroundColor,
 								}}
 							/>
@@ -566,14 +559,7 @@ export function Recording({
 										>
 											<TeaseRecording
 												recording={r}
-												playlistRecordings={playlistRecordings?.slice(
-													Math.max(
-														playlistRecordings.findIndex(
-															(item) => item.id === recording.id
-														) || 0,
-														0
-													)
-												)}
+												playlistRecordings={playlistRecordings || undefined}
 												theme={theme}
 												unpadded
 											/>

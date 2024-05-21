@@ -52,27 +52,30 @@ describe('miniplayer template', () => {
 					<AndMiniplayer>
 						<ContextUser
 							func={(c) => {
-								c.loadRecording({
-									id: 'the_recording_id',
-									title: 'the_recording_title',
-									canonicalPath: 'the_recording_path',
-									duration: 60,
-									sequence: {
-										contentType: SequenceContentType.Series,
-										title: 'the_sequence_title',
-									},
-									videoFiles: [
-										{
-											url: 'the_video_url',
-											filesize: 'the_video_size',
-											mimeType: 'the_video_type',
-											duration: 1234,
+								c.loadRecording(
+									{
+										id: 'the_recording_id',
+										title: 'the_recording_title',
+										canonicalPath: 'the_recording_path',
+										duration: 60,
+										sequence: {
+											contentType: SequenceContentType.Series,
+											title: 'the_sequence_title',
 										},
-									],
-									audioFiles: [],
-									videoStreams: [],
-									collection: null,
-								});
+										videoFiles: [
+											{
+												url: 'the_video_url',
+												filesize: 'the_video_size',
+												mimeType: 'the_video_type',
+												duration: 1234,
+											},
+										],
+										audioFiles: [],
+										videoStreams: [],
+										collection: null,
+									},
+									'the_recording_id'
+								);
 								c.play();
 							}}
 						/>
@@ -93,10 +96,13 @@ describe('miniplayer template', () => {
 					<AndMiniplayer>
 						<ContextUser
 							func={(c) => {
-								c.loadRecording({
-									title: 'the_recording_title',
-									canonicalPath: 'the_recording_path',
-								} as any);
+								c.loadRecording(
+									{
+										title: 'the_recording_title',
+										canonicalPath: 'the_recording_path',
+									} as any,
+									'the_recording_id'
+								);
 							}}
 						/>
 					</AndMiniplayer>
@@ -116,10 +122,13 @@ describe('miniplayer template', () => {
 					<AndMiniplayer>
 						<ContextUser
 							func={(c) => {
-								c.loadRecording({
-									title: 'the_recording_title',
-									canonicalPath: 'the_recording_path',
-								} as any);
+								c.loadRecording(
+									{
+										title: 'the_recording_title',
+										canonicalPath: 'the_recording_path',
+									} as any,
+									'the_recording_id'
+								);
 							}}
 						/>
 					</AndMiniplayer>
