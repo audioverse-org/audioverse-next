@@ -20,8 +20,10 @@ import { INavigationItem, useNavigationItems } from '~lib/useNavigationItems';
 import IconUser from '~public/img/icons/fa-user-heavy.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import IconExit from '~public/img/icons/icon-exit.svg';
+import { BaseColors } from '~src/lib/constants';
 
 import { analytics } from '../../lib/analytics';
+import IconButton from '../molecules/iconButton';
 import styles from './navigation.module.scss';
 
 const Navigation = ({
@@ -78,16 +80,18 @@ const Navigation = ({
 			<div className={styles.mobileHeader}>
 				<div className={styles.mobileRow}>
 					<Header />
-					<a
+					<IconButton
 						aria-label={intl.formatMessage({
 							id: 'organism-navigation__exit',
 							defaultMessage: 'Exit',
 							description: 'Exit button label',
 						})}
+						Icon={IconExit}
 						onClick={() => onExit()}
-					>
-						<IconExit />
-					</a>
+						color={BaseColors.DARK}
+						backgroundColor={BaseColors.CREAM}
+						className={styles.exitButton}
+					/>
 				</div>
 				<div className={clsx(styles.mobileRow, styles.mobileSearch)}>
 					<SearchBar
