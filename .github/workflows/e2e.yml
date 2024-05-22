@@ -9,33 +9,41 @@ jobs:
       checks: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - uses: narthur/pa11y-ratchet@v2
         with:
-          node-version: 16.15.0
-      - name: Scan for issues
-        run: |
-          npx pa11y-ci \
-            --sitemap ${{github.event.deployment_status.target_url}}/sitemap-0.xml \
-            --sitemap-find https://www.audioverse.org \
-            --sitemap-replace ${{github.event.deployment_status.target_url}} \
-            --sitemap-exclude 'https?:\/\/[\w\.-]+\/(?!en)\w\w\/'
-      - name: Add comment
-        if: always()
-        uses: actions/github-script@v5
-        env:
-          BODY_PREFIX: '<!-- pa11y-ci results -->'
-        with:
-          script: |
-            const script = require('./.github/workflows/scripts/pa11y-ci.js')
-            await script({ context, core, github })
-      - name: Upload results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: pa11y-results
-          path: reports
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          sitemap-url: ${{github.event.deployment_status.target_url}}/sitemap-0.xml
+          find: https://www.audioverse.org
+          replace: ${{github.event.deployment_status.target_url}}
+          include: 'https?:\/\/[\w\.-]+\/en\/'
+
+      # - uses: actions/checkout@v2
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: 16.15.0
+      # - name: Scan for issues
+      #   run: |
+      #     npx pa11y-ci \
+      #       --sitemap ${{github.event.deployment_status.target_url}}/sitemap-0.xml \
+      #       --sitemap-find https://www.audioverse.org \
+      #       --sitemap-replace ${{github.event.deployment_status.target_url}} \
+      #       --sitemap-exclude 'https?:\/\/[\w\.-]+\/(?!en)\w\w\/'
+      # - name: Add comment
+      #   if: always()
+      #   uses: actions/github-script@v5
+      #   env:
+      #     BODY_PREFIX: '<!-- pa11y-ci results -->'
+      #   with:
+      #     script: |
+      #       const script = require('./.github/workflows/scripts/pa11y-ci.js')
+      #       await script({ context, core, github })
+      # - name: Upload results
+      #   if: always()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: pa11y-results
+      #     path: reports
   lighthouse:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
