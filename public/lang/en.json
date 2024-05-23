@@ -1806,10 +1806,10 @@
     "string": "User Account"
   },
   "newsLetterForm__checkboxNewsletter": {
-    "string": "Newsletter typically about once a month"
+    "string": "Newsletter (typically about once a month)"
   },
   "newsLetterForm__checkboxWeeklyPics": {
-    "string": "Weekly Picks goes out every Monday"
+    "string": "Weekly Picks (goes out every Monday)"
   },
   "newsLetterForm__newsletterEmail": {
     "string": "Email Address"

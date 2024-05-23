@@ -3810,13 +3810,13 @@
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
-      "value": "Newsletter typically about once a month"
+      "value": "Newsletter (typically about once a month)"
     }
   ],
   "newsLetterForm__checkboxWeeklyPics": [
     {
       "type": 0,
-      "value": "Weekly Picks goes out every Monday"
+      "value": "Weekly Picks (goes out every Monday)"
     }
   ],
   "newsLetterForm__newsletterEmail": [

@@ -82,7 +82,7 @@ export default function NewsletterForm(): JSX.Element {
 						label={
 							<FormattedMessage
 								id="newsLetterForm__checkboxNewsletter"
-								defaultMessage="Newsletter typically about once a month"
+								defaultMessage="Newsletter (typically about once a month)"
 							/>
 						}
 						checked={checkboxNewsLetter}
@@ -94,7 +94,7 @@ export default function NewsletterForm(): JSX.Element {
 						label={
 							<FormattedMessage
 								id="newsLetterForm__checkboxWeeklyPics"
-								defaultMessage="Weekly Picks goes out every Monday"
+								defaultMessage="Weekly Picks (goes out every Monday)"
 							/>
 						}
 						checked={checkboxWeeklyPics}
