@@ -31,7 +31,6 @@ const NewPlaylist: React.FC = () => {
 			if (data) {
 				// Navigate back to the previous page
 				if (previousRoute) {
-					console.log(previousRoute);
 					router.push(previousRoute);
 				} else {
 					router.back();
