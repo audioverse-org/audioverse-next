@@ -97,7 +97,6 @@ function LibraryPlaylistDetail({
 							light={true}
 						/>
 					)}
-
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />

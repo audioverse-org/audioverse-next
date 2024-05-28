@@ -30,13 +30,12 @@ const NewPlaylist: React.FC = () => {
 			});
 			if (data) {
 				// Navigate back to the previous page
-				   if (previousRoute) {
+				if (previousRoute) {
 					console.log(previousRoute);
 					router.push(previousRoute);
-					} else {
+				} else {
 					router.back();
-					}
-				
+				}
 			} else {
 				// Handle the case where data is not returned as expected
 				setError('Failed to add the playlist. Please try again.');
