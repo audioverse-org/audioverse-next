@@ -1,4 +1,3 @@
-import router from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -22,7 +21,6 @@ import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
-import EditIcon from '../../../../public/img/icons/edit-light.svg';
 import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';
 import Modal from '../../../components/organisms/modal';
 import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
@@ -41,17 +39,6 @@ function LibraryPlaylistDetail({
 	const languageRoute = useLanguageRoute();
 
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
-
-	const edit = () =>
-		router.push({
-			pathname: `/${languageRoute}/playlists/edit`,
-			query: {
-				id: playlist.id,
-				isPublic: playlist.isPublic,
-				summary: playlist.summary,
-				title: playlist.title,
-			},
-		});
 
 	const details: IDefinitionListTerm[] = [];
 	if (summary) {
@@ -111,15 +98,6 @@ function LibraryPlaylistDetail({
 						/>
 					)}
 
-					<IconButton
-						Icon={EditIcon}
-						color={BaseColors.DARK}
-						onClick={(e) => {
-							e.preventDefault();
-							edit();
-						}}
-						backgroundColor={BaseColors.CREAM}
-					/>
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />

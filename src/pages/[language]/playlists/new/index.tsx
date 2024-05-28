@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-//import { toast } from 'react-toastify';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
+import usePreviousRoute from '~src/lib/hooks/usePreviousRoute';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
@@ -17,6 +17,7 @@ const NewPlaylist: React.FC = () => {
 	const language = useLanguageRoute();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const previousRoute = usePreviousRoute();
 
 	const add = async (playlist: PlaylistProps) => {
 		try {
@@ -29,9 +30,13 @@ const NewPlaylist: React.FC = () => {
 			});
 			if (data) {
 				// Navigate back to the previous page
-				router.back();
-				// Add your toast notification logic here, for example:
-				//toast.success('Playlist added successfully!');
+				   if (previousRoute) {
+					console.log(previousRoute);
+					router.push(previousRoute);
+					} else {
+					router.back();
+					}
+				
 			} else {
 				// Handle the case where data is not returned as expected
 				setError('Failed to add the playlist. Please try again.');
