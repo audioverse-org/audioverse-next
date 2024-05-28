@@ -1,4 +1,5 @@
-import React from 'react';
+import router from 'next/router';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
@@ -14,11 +15,16 @@ import DefinitionList, {
 import Tease from '~components/molecules/tease';
 import { BaseColors } from '~lib/constants';
 import { formatLongDateTime } from '~lib/date';
+import ButtonShare from '~src/components/molecules/buttonShare';
+import IconButton from '~src/components/molecules/iconButton';
 import PlaylistTypeLockup from '~src/components/molecules/playlistTypeLockup';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
+import EditIcon from '../../../../public/img/icons/edit-light.svg';
+import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';
+import Modal from '../../../components/organisms/modal';
 import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
@@ -33,6 +39,19 @@ function LibraryPlaylistDetail({
 }: Must<ILibraryPlaylistDetailProps>): JSX.Element {
 	const { title, recordings, createdAt, summary, id } = playlist;
 	const languageRoute = useLanguageRoute();
+
+	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
+
+	const edit = () =>
+		router.push({
+			pathname: `/${languageRoute}/playlists/edit`,
+			query: {
+				id: playlist.id,
+				isPublic: playlist.isPublic,
+				summary: playlist.summary,
+				title: playlist.title,
+			},
+		});
 
 	const details: IDefinitionListTerm[] = [];
 	if (summary) {
@@ -74,6 +93,33 @@ function LibraryPlaylistDetail({
 							values={{ count: recordings.aggregate?.count }}
 						/>
 					</Heading6>
+					{!playlist.isPublic ? (
+						<IconButton
+							Icon={ShareIcon}
+							color={BaseColors.DARK}
+							onClick={(e) => {
+								e.preventDefault();
+								setIsNotShareableOpen(true);
+							}}
+							backgroundColor={BaseColors.CREAM}
+						/>
+					) : (
+						<ButtonShare
+							shareUrl={`https://audioverse.org/${languageRoute}/playlists/${playlist.id}`}
+							backgroundColor={BaseColors.CREAM}
+							light={true}
+						/>
+					)}
+
+					<IconButton
+						Icon={EditIcon}
+						color={BaseColors.DARK}
+						onClick={(e) => {
+							e.preventDefault();
+							edit();
+						}}
+						backgroundColor={BaseColors.CREAM}
+					/>
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
@@ -95,6 +141,22 @@ function LibraryPlaylistDetail({
 					))}
 				</CardGroup>
 			) : null}
+
+			<Modal
+				open={isNotShareableOpen}
+				onClose={() => setIsNotShareableOpen(false)}
+				title={
+					<FormattedMessage
+						id="not_shareable_title"
+						defaultMessage="NOT SHAREABLE"
+					/>
+				}
+			>
+				<FormattedMessage
+					id="not_shareable"
+					defaultMessage="This Playlist is Private. Only SHAREABLE Playlists can be shared."
+				/>
+			</Modal>
 		</Tease>
 	);
 }

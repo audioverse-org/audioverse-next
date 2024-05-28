@@ -1,0 +1,15 @@
+fragment PlaylistCard on UserPlaylist {
+	id
+	title
+	isPublic
+	recordings {
+		aggregate {
+			count
+		}
+		edges {
+			node {
+				id
+			}
+		}
+	}
+}

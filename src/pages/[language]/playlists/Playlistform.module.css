@@ -1,0 +1,72 @@
+.container {
+	display: flex;
+	flex: 1;
+	background-color: #ffffff; /* Replace COLORS.WHITE with actual color value */
+	padding: 24px;
+}
+
+.header {
+	margin-bottom: 8px;
+}
+
+.privacyLabel {
+	margin-bottom: 4px;
+}
+
+.privacyInput {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.privacyInputLeft {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.privacyInputLeftLabel {
+	margin-left: 4px;
+}
+
+.privacyContainer {
+	margin-top: 4px;
+	border-color: #ff0000; /* Replace COLORS.RED with actual color value */
+	border-width: 1px;
+	border-radius: 4px;
+	padding: 16px;
+}
+
+.privacyOption {
+	display: flex;
+	flex-direction: row;
+}
+
+.pressed {
+	background-color: #f0f0f0; /* Replace COLORS_DARKENED.WHITE with actual color value */
+}
+
+.privacyOptionRight {
+	margin-left: 4px;
+}
+
+.privacyOptionSubtitle {
+	font-size: 11px;
+	line-height: 13px;
+}
+
+.privacyOptionShareable {
+	margin-top: 16px;
+}
+
+.footer {
+	display: flex;
+	flex-direction: row;
+	margin-top: 16px;
+}
+
+.cancel {
+	margin-left: 16px;
+	align-self: center;
+}

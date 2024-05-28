@@ -1,0 +1,22 @@
+/* components/PlaylistList.module.css */
+.playlistList {
+	display: flex;
+	flex-direction: column;
+}
+
+.playlistItem {
+	padding: 16px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+}
+
+.pressable {
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}

@@ -13,9 +13,11 @@ import styles from './modal.module.scss';
 
 interface ModalProps {
 	title: string | JSX.Element;
+	titleLink?: string | JSX.Element;
 	children: ReactNode;
 	onClose?: () => void;
 	open: boolean;
+	hideClose?: boolean;
 	actions?: ReactNode;
 }
 
@@ -23,7 +25,9 @@ export default function Modal({
 	children,
 	onClose,
 	open,
+	titleLink,
 	title,
+	hideClose,
 	actions,
 }: ModalProps): JSX.Element {
 	const intl = useIntl();
@@ -41,7 +45,7 @@ export default function Modal({
 		>
 			<Fade in={open}>
 				<div className={styles.modal}>
-					{onClose ? (
+					{onClose && !hideClose ? (
 						<IconButton
 							Icon={IconClose}
 							onClick={onClose}
@@ -58,7 +62,15 @@ export default function Modal({
 					) : (
 						''
 					)}
-					<Heading2 className={styles.centerText}>{title}</Heading2>
+					{titleLink ? (
+						<div className={styles.head}>
+							<h5 className={styles.leftText}>{title}</h5>
+							<div className={styles.link}>{titleLink}</div>
+						</div>
+					) : (
+						<Heading2 className={styles.centerText}>{title}</Heading2>
+					)}
+
 					{children}
 					{actions && <div className={styles.buttonCol}>{actions}</div>}
 				</div>

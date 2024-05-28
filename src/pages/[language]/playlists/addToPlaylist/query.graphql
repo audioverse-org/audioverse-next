@@ -1,0 +1,6 @@
+query GetRecordingHasFavorited($id: ID!) {
+	recording(id: $id) {
+		id
+		viewerHasFavorited
+	}
+}

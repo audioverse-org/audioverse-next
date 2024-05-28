@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
@@ -9,7 +9,6 @@ import Heading3 from '~components/atoms/heading3';
 import Heading6 from '~components/atoms/heading6';
 import ProgressBar from '~components/atoms/progressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
-import { useIsRecordingFavorited } from '~lib/api/useIsRecordingFavorited';
 import { BaseColors } from '~lib/constants';
 import { useFormattedDuration } from '~lib/time';
 import usePlaybackSession, { PlaySource } from '~lib/usePlaybackSession';
@@ -19,10 +18,15 @@ import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg
 import IconPlay from '~public/img/icons/icon-play.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import { getSessionToken } from '~src/lib/cookies';
+import useLanguageRoute from '~src/lib/useLanguageRoute';
 
+import AddToPlaylistIcon from '../../../public/img/icons/in-queue-light.svg';
 import { analytics } from '../../lib/analytics';
+import PlaylistsPage from '../../pages/[language]/playlists/addToPlaylist/AddToPlaylist';
+import Modal from '../organisms/modal';
+import { GlobalModalsContext } from '../templates/andGlobalModals';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
-import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';
 import IconButton from './iconButton';
 import PersonLockup from './personLockup';
@@ -54,19 +58,16 @@ export default function TeaseRecording({
 	disableUserFeatures,
 	disablePlayback = false,
 }: Props): JSX.Element {
+	const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
 	const intl = useIntl();
-	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
-		recording.id,
-		recording.sequence?.id,
-		disableUserFeatures
-	);
 	const router = useRouter();
 	const session = usePlaybackSession(recording, { playlistRecordings });
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
-
+	const language = useLanguageRoute();
 	const index = recording.sequenceIndex;
 	const count = recording.sequence?.recordings.aggregate?.count;
+	const context = useContext(GlobalModalsContext);
 
 	const backgroundColor = {
 		audiobookTrack: BaseColors.BOOK_B,
@@ -85,6 +86,7 @@ export default function TeaseRecording({
 		['audiobookTrack', 'chapter'].includes(theme) ||
 		(theme === 'song' && small);
 
+	const iconColor = BaseColors.MID_TONE;
 	const inner = (
 		<>
 			{!playlistRecordings && (
@@ -210,12 +212,7 @@ export default function TeaseRecording({
 				</div>
 			)}
 			<div className={styles.flexGrow}>
-				<div
-					className={clsx(
-						styles.details,
-						isFavorited && styles.detailsWithLike
-					)}
-				>
+				<div className={clsx(styles.details, styles.detailsWithLike)}>
 					<span className={styles.duration}>
 						{useFormattedDuration(recording.duration)}
 					</span>
@@ -231,60 +228,91 @@ export default function TeaseRecording({
 	);
 
 	return (
-		<div className={clsx(styles.container, small && styles.small)}>
-			{isOptionalLink ? (
-				<div
-					className={clsx(
-						styles.content,
-						styles.contentOptionalLink,
-						unpadded && styles.unpadded
-					)}
-					onClick={(e) => {
-						e.stopPropagation();
+		<>
+			<div className={clsx(styles.container, small && styles.small)}>
+				{isOptionalLink ? (
+					<div
+						className={clsx(
+							styles.content,
+							styles.contentOptionalLink,
+							unpadded && styles.unpadded
+						)}
+						onClick={(e) => {
+							e.stopPropagation();
 
-						analytics.track('Card click', {
-							type: recording.recordingContentType,
-							id: recording.id,
-							title: recording.title,
-						});
-						router.push(recording.canonicalPath);
-					}}
-				>
-					{inner}
-				</div>
-			) : (
-				<Link href={recording.canonicalPath} legacyBehavior>
-					<a
-						className={clsx(styles.content, unpadded && styles.unpadded)}
-						onClick={() => {
 							analytics.track('Card click', {
 								type: recording.recordingContentType,
 								id: recording.id,
 								title: recording.title,
 							});
+							router.push(recording.canonicalPath);
 						}}
 					>
 						{inner}
-					</a>
-				</Link>
-			)}
+					</div>
+				) : (
+					<Link href={recording.canonicalPath} legacyBehavior>
+						<a
+							className={clsx(styles.content, unpadded && styles.unpadded)}
+							onClick={() => {
+								analytics.track('Card click', {
+									type: recording.recordingContentType,
+									id: recording.id,
+									title: recording.title,
+								});
+							}}
+						>
+							{inner}
+						</a>
+					</Link>
+				)}
 
-			{!disableUserFeatures && (
-				<ButtonFavorite
-					favoritedType="Recording"
-					favoritedId={recording.id}
-					favoritedTitle={recording.title}
-					isFavorited={!!isFavorited}
-					toggleFavorited={toggleFavorited}
-					backgroundColor={backgroundColor}
-					className={clsx(
-						styles.like,
-						unpadded && styles.likeUnpadded,
-						isFavorited && styles.likeActive
-					)}
-					light
-				/>
-			)}
-		</div>
+				{!disableUserFeatures && (
+					<IconButton
+						Icon={AddToPlaylistIcon}
+						color={iconColor}
+						onClick={(e) => {
+							e.preventDefault();
+							const isLoggedOut = !getSessionToken();
+							if (isLoggedOut) {
+								return context.challengeAuth(() =>
+									setIsPlaylistModalOpen(true)
+								);
+							}
+							setIsPlaylistModalOpen(true);
+						}}
+						backgroundColor={backgroundColor}
+						className={clsx(
+							styles.like,
+							unpadded && styles.likeUnpadded,
+							styles.likeActive
+						)}
+					/>
+				)}
+			</div>
+			<Modal
+				open={isPlaylistModalOpen}
+				onClose={() => setIsPlaylistModalOpen(false)}
+				title={
+					<FormattedMessage
+						id="add_to_playlist"
+						defaultMessage="ADD TO PLAYLIST"
+					/>
+				}
+				titleLink={
+					<Link
+						href={`/${language}/playlists/new?id=${recording.id}`}
+						legacyBehavior
+					>
+						<a>
+							<FormattedMessage id="create_new" defaultMessage="Create New" />
+						</a>
+					</Link>
+				}
+				hideClose={true}
+			>
+				<PlaylistsPage language={language} recId={recording.id} />
+			</Modal>
+		</>
 	);
 }
