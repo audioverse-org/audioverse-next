@@ -1235,7 +1235,7 @@ describe('sermon detail page', () => {
 
 		const sidebar = result.getByLabelText('series list');
 
-		expect(getByLabelText(sidebar, 'Favorite')).toBeInTheDocument();
+		expect(getByLabelText(sidebar, 'Playlist')).toBeInTheDocument();
 	});
 
 	it('displays part info', async () => {

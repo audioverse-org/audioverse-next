@@ -1,4 +1,7 @@
 {
+  "Listen_Later": {
+    "string": "Listen Later"
+  },
   "RecordingFavorite__favorite": {
     "comment": "Recording favorite button label",
     "string": "Favorite"
@@ -221,6 +224,9 @@
   "accountNav__profile": {
     "string": "Profile"
   },
+  "add_to_playlist": {
+    "string": "ADD TO PLAYLIST"
+  },
   "andGlobalModals__authCopy": {
     "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
   },
@@ -259,6 +265,9 @@
   },
   "andOnboarding__intro": {
     "string": "Create or login to an account and access a growing set of features to help you explore sound doctrine."
+  },
+  "anyoneWithLink": {
+    "string": "Anyone with the link can view"
   },
   "app__features1Cta": {
     "string": "Discover Audio"
@@ -660,6 +669,13 @@
   "contact_footer": {
     "string": "Contact"
   },
+  "create_new": {
+    "string": "Create New"
+  },
+  "dd_to_playlist_bnt": {
+    "comment": "Add to Playlist button label",
+    "string": "Playlist"
+  },
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
@@ -783,6 +799,9 @@
     "comment": "duration minutes",
     "string": "{minutes}m"
   },
+  "editPlayLists": {
+    "string": "Edit playlist"
+  },
   "egwAudiobookList__heading": {
     "string": "Ellen White"
   },
@@ -791,6 +810,9 @@
   },
   "embed__partInfo": {
     "string": "Part {index} of {count}"
+  },
+  "error": {
+    "string": "Error"
   },
   "generateFeed__audio": {
     "string": "Audio"
@@ -1518,6 +1540,9 @@
   "library__noMatchingHeading": {
     "string": "You don’t have any matching items saved yet"
   },
+  "loading": {
+    "string": "Loading..."
+  },
   "loadingCards-ariaLabel": {
     "string": "Loading…"
   },
@@ -1823,6 +1848,18 @@
   "navigation__nameFallback": {
     "string": "User Account"
   },
+  "newPlayLists": {
+    "string": "New playlist"
+  },
+  "newPrivacy": {
+    "string": "Privacy"
+  },
+  "newPrivate": {
+    "string": "Private"
+  },
+  "newShareable": {
+    "string": "Shareable"
+  },
   "notFound__header": {
     "string": "Sorry!"
   },
@@ -1837,6 +1874,15 @@
   },
   "notFound__toDiscover": {
     "string": "Go back to Discover"
+  },
+  "not_shareable": {
+    "string": "This Playlist is Private. Only SHAREABLE Playlists can be shared."
+  },
+  "not_shareable_title": {
+    "string": "NOT SHAREABLE"
+  },
+  "onlyYow": {
+    "string": "Only you can view"
   },
   "organism-mobileHeader__more": {
     "comment": "more button label",
@@ -1974,6 +2020,12 @@
   },
   "personTypeLockup_type": {
     "string": "Presenter"
+  },
+  "pl_description": {
+    "string": "Description"
+  },
+  "pl_title": {
+    "string": "Tile"
   },
   "playButton__pauseLabel": {
     "comment": "play button pause label",
@@ -2355,6 +2407,9 @@
   },
   "rssAlternate__title": {
     "string": "RSS feed"
+  },
+  "scroll-down": {
+    "string": "Scroll down for more"
   },
   "searchCollections__heading": {
     "string": "All Matching Collections"

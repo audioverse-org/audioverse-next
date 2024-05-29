@@ -87,6 +87,14 @@ export default function TeaseRecording({
 		(theme === 'song' && small);
 
 	const iconColor = BaseColors.MID_TONE;
+
+	const label = intl.formatMessage({
+		id: 'dd_to_playlist_bnt',
+		defaultMessage: 'Playlist',
+		description: 'Add to Playlist button label',
+  })
+	//<FormattedMessage id="add_to_playlist_bnt" defaultMessage="Playlist" />;
+
 	const inner = (
 		<>
 			{!playlistRecordings && (
@@ -269,8 +277,9 @@ export default function TeaseRecording({
 
 				{!disableUserFeatures && (
 					<IconButton
+
 						Icon={AddToPlaylistIcon}
-						color={iconColor}
+						
 						onClick={(e) => {
 							e.preventDefault();
 							const isLoggedOut = !getSessionToken();
@@ -287,6 +296,12 @@ export default function TeaseRecording({
 							unpadded && styles.likeUnpadded,
 							styles.likeActive
 						)}
+						color={iconColor}
+						{...{
+							
+							'aria-label': label,
+							
+						}}
 					/>
 				)}
 			</div>
