@@ -1,0 +1,49 @@
+@import '../../styles/common';
+
+.newsletterBox {
+	margin: 16px;
+	background: $ts-white;
+	border-radius: 16px;
+	overflow: hidden;
+	flex: 1;
+
+	@media (min-width: $breakpoint-xl) {
+		margin: 48px;
+	}
+}
+
+.newsletterHat {
+	height: 49px;
+	display: flex;
+	align-items: center;
+	padding: 16px;
+	background: $ts-red;
+
+	> svg {
+		margin-top: 3px;
+		margin-right: 4px;
+	}
+}
+
+.newsletterBody {
+	padding: 16px;
+	color: $ts-dark;
+}
+
+.newsletterFieldRow {
+	@media (min-width: $breakpoint-xl) {
+		display: flex;
+
+		> * {
+			max-width: 50%;
+
+			&:first-child {
+				padding-right: 8px;
+			}
+
+			&:last-child {
+				padding-left: 8px;
+			}
+		}
+	}
+}
