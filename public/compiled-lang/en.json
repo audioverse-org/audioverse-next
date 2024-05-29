@@ -2765,36 +2765,6 @@
       "value": "Latest Content"
     }
   ],
-  "homePage__newsletterEmail": [
-    {
-      "type": 0,
-      "value": "Email Address"
-    }
-  ],
-  "homePage__newsletterEmailPlaceholder": [
-    {
-      "type": 0,
-      "value": "josephbates@email.com"
-    }
-  ],
-  "homePage__newsletterHatTitle": [
-    {
-      "type": 0,
-      "value": "Sign up for our Newsletter"
-    }
-  ],
-  "homePage__newsletterName": [
-    {
-      "type": 0,
-      "value": "Name"
-    }
-  ],
-  "homePage__newsletterNamePlaceholder": [
-    {
-      "type": 0,
-      "value": "Joseph Bates"
-    }
-  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -2805,12 +2775,6 @@
     {
       "type": 0,
       "value": "Subscribe to Updates"
-    }
-  ],
-  "homePage__newsletterSubscribe": [
-    {
-      "type": 0,
-      "value": "Subscribe"
     }
   ],
   "homePage__recentPostsSectionText": [
@@ -3841,6 +3805,54 @@
     {
       "type": 0,
       "value": "User Account"
+    }
+  ],
+  "newsLetterForm__checkboxNewsletter": [
+    {
+      "type": 0,
+      "value": "Newsletter (typically about once a month)"
+    }
+  ],
+  "newsLetterForm__checkboxWeeklyPics": [
+    {
+      "type": 0,
+      "value": "Weekly Picks (goes out every Monday)"
+    }
+  ],
+  "newsLetterForm__newsletterEmail": [
+    {
+      "type": 0,
+      "value": "Email Address"
+    }
+  ],
+  "newsLetterForm__newsletterEmailPlaceholder": [
+    {
+      "type": 0,
+      "value": "josephbates@email.com"
+    }
+  ],
+  "newsLetterForm__newsletterHatTitle": [
+    {
+      "type": 0,
+      "value": "Sign up for our Emails"
+    }
+  ],
+  "newsLetterForm__newsletterName": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "newsLetterForm__newsletterNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Joseph Bates"
+    }
+  ],
+  "newsLetterForm__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Subscribe"
     }
   ],
   "notFound__header": [

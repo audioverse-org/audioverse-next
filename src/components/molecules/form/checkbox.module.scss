@@ -14,8 +14,9 @@
 	border: 2px solid $ts-cream;
 	border-radius: 4px;
 	margin-right: 8px;
+
 	&:checked:after {
-		content: url('/img/icon-success.svg');
+		content: url('/img/icons/icon-success.svg');
 		font-size: 14px;
 		position: absolute;
 		top: -2px;
