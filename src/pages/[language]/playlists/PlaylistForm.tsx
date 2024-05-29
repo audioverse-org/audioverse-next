@@ -12,7 +12,7 @@ import ClosureIcon from '../../../../public/img/icons/closure-light.svg';
 import DisclosureIcon from '../../../../public/img/icons/disclosure-light.svg';
 import ShareableIcon from '../../../../public/img/icons/linked-light.svg';
 import PrivateIcon from '../../../../public/img/icons/private-light.svg';
-import styles from './playlistform.module.css';
+import styles from './Playlistform.module.css';
 
 export type PlaylistProps = Pick<
 	UserPlaylistAddInput,
