@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Listen Later"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -437,6 +443,12 @@
       "value": "Profile"
     }
   ],
+  "add_to_playlist": [
+    {
+      "type": 0,
+      "value": "ADD TO PLAYLIST"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -513,6 +525,12 @@
     {
       "type": 0,
       "value": "Create or login to an account and access a growing set of features to help you explore sound doctrine."
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Anyone with the link can view"
     }
   ],
   "app__features1Cta": [
@@ -1389,6 +1407,18 @@
       "value": "Contact"
     }
   ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Create New"
+    }
+  ],
+  "dd_to_playlist_bnt": [
+    {
+      "type": 0,
+      "value": "Playlist"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1649,6 +1679,12 @@
       "value": "m"
     }
   ],
+  "editPlayLists": [
+    {
+      "type": 0,
+      "value": "Edit playlist"
+    }
+  ],
   "egwAudiobookList__heading": [
     {
       "type": 0,
@@ -1677,6 +1713,12 @@
     {
       "type": 1,
       "value": "count"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Error"
     }
   ],
   "generateFeed__audio": [
@@ -3211,6 +3253,12 @@
       "value": "You don’t have any matching items saved yet"
     }
   ],
+  "loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "loadingCards-ariaLabel": [
     {
       "type": 0,
@@ -3843,6 +3891,30 @@
       "value": "User Account"
     }
   ],
+  "newPlayLists": [
+    {
+      "type": 0,
+      "value": "New playlist"
+    }
+  ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Privacy"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Shareable"
+    }
+  ],
   "notFound__header": [
     {
       "type": 0,
@@ -3871,6 +3943,24 @@
     {
       "type": 0,
       "value": "Go back to Discover"
+    }
+  ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "This Playlist is Private. Only SHAREABLE Playlists can be shared."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "NOT SHAREABLE"
+    }
+  ],
+  "onlyYow": [
+    {
+      "type": 0,
+      "value": "Only you can view"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4131,6 +4221,18 @@
     {
       "type": 0,
       "value": "Presenter"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Tile"
     }
   ],
   "playButton__pauseLabel": [
@@ -4895,6 +4997,12 @@
     {
       "type": 0,
       "value": "RSS feed"
+    }
+  ],
+  "scroll-down": [
+    {
+      "type": 0,
+      "value": "Scroll down for more"
     }
   ],
   "searchCollections__heading": [
