@@ -676,6 +676,9 @@
     "comment": "Add to Playlist button label",
     "string": "Playlist"
   },
+  "deletePlaylists": {
+    "string": "Delete Playlist"
+  },
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
@@ -1830,6 +1833,18 @@
   "navigation__nameFallback": {
     "string": "User Account"
   },
+  "newPlayLists": {
+    "string": "New playlist"
+  },
+  "newPrivacy": {
+    "string": "Privacy"
+  },
+  "newPrivate": {
+    "string": "Private"
+  },
+  "newShareable": {
+    "string": "Shareable"
+  },
   "newsLetterForm__checkboxNewsletter": {
     "string": "Newsletter (typically about once a month)"
   },
@@ -1853,18 +1868,6 @@
   },
   "newsLetterForm__newsletterSubscribe": {
     "string": "Subscribe"
-  },
-  "newPlayLists": {
-    "string": "New playlist"
-  },
-  "newPrivacy": {
-    "string": "Privacy"
-  },
-  "newPrivate": {
-    "string": "Private"
-  },
-  "newShareable": {
-    "string": "Shareable"
   },
   "notFound__header": {
     "string": "Sorry!"

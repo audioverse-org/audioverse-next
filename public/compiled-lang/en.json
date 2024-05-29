@@ -1419,6 +1419,12 @@
       "value": "Playlist"
     }
   ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Delete Playlist"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
