@@ -5930,10 +5930,11 @@ input UserLoginInput {
 }
 
 input UserLoginSocialInput {
+  email: String
   givenName: String
   socialId: String!
   socialName: UserSocialServiceName!
-  socialToken: String!
+  socialToken: String
   surname: String
 }
 
