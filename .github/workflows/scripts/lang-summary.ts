@@ -186,31 +186,11 @@ type Options = {
 	};
 };
 
-export default async function main({
-	github,
-	context,
-	core,
-}: Options): Promise<void> {
-	console.log('running');
-
-	const pr = context.payload.pull_request;
-
-	if (!pr) {
-		console.warn('No PR found for this commit');
-		return;
-	}
-
-	const prNumber = pr.number;
-
-	console.log('PR found:', prNumber);
-
-	const langFiles = fs
-		.readdirSync('./public/lang/')
-		.map((f) => `public/lang/${f}`);
-	const hash1 = pr.base.sha;
-	const hash2 = context.sha;
-	const body = getSummary(langFiles, hash1, hash2);
-
+async function upsertComment(
+	prNumber: number,
+	body: string,
+	{ github, context }: Options
+) {
 	const { data: comments } = await github.rest.issues.listComments({
 		owner: context.repo.owner,
 		repo: context.repo.repo,
@@ -220,10 +200,6 @@ export default async function main({
 	const prev = comments.find((c: { body: string }) =>
 		c.body.startsWith(BODY_PREFIX)
 	);
-
-	console.log(body);
-
-	core.summary.addRaw(body);
 
 	if (prev) {
 		console.log('Updating previous comment');
@@ -242,4 +218,30 @@ export default async function main({
 			body,
 		});
 	}
+}
+
+export default async function main(ctx: Options): Promise<void> {
+	const { github, context, core } = ctx;
+	const pr = context.payload.pull_request;
+
+	if (!pr) {
+		console.warn('No PR found for this commit');
+		return;
+	}
+
+	const prNumber = pr.number;
+
+	console.log('PR found:', prNumber);
+
+	const langFiles = fs
+		.readdirSync('./public/lang/')
+		.map((f) => `public/lang/${f}`);
+	const hash1 = pr.base.sha;
+	const hash2 = context.sha;
+	const body = getSummary(langFiles, hash1, hash2);
+
+	core.summary.addRaw(body);
+	core.summary.write({ overwrite: true });
+
+	await upsertComment(prNumber, body, ctx);
 }

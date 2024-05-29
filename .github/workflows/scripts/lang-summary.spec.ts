@@ -335,4 +335,10 @@ describe('lang-summary', () => {
 			expect.stringContaining('🔴 the_id')
 		);
 	});
+
+	it('writes summary', async () => {
+		await run();
+
+		expect(context.core.summary.write).toBeCalled();
+	});
 });
