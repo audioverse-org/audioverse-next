@@ -221,7 +221,7 @@ async function upsertComment(
 }
 
 export default async function main(ctx: Options): Promise<void> {
-	const { github, context, core } = ctx;
+	const { context, core } = ctx;
 	const pr = context.payload.pull_request;
 
 	if (!pr) {
@@ -229,19 +229,15 @@ export default async function main(ctx: Options): Promise<void> {
 		return;
 	}
 
-	const prNumber = pr.number;
-
-	console.log('PR found:', prNumber);
-
 	const langFiles = fs
 		.readdirSync('./public/lang/')
 		.map((f) => `public/lang/${f}`);
 	const hash1 = pr.base.sha;
 	const hash2 = context.sha;
-	const body = getSummary(langFiles, hash1, hash2);
+	const summary = getSummary(langFiles, hash1, hash2);
 
-	core.summary.addRaw(body);
+	core.summary.addRaw(summary);
 	core.summary.write({ overwrite: true });
 
-	await upsertComment(prNumber, body, ctx);
+	await upsertComment(pr.number, 'hello world', ctx);
 }

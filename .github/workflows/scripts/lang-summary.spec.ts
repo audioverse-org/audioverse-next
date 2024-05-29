@@ -341,4 +341,14 @@ describe('lang-summary', () => {
 
 		expect(context.core.summary.write).toBeCalled();
 	});
+
+	it('does not include syntax table in pr comment', async () => {
+		await run();
+
+		expect(context.github.rest.issues.createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.not.stringContaining('syntax'),
+			})
+		);
+	});
 });
