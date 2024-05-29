@@ -13,7 +13,8 @@ function run() {
 			rest: {
 				issues: {
 					createComment,
-					listComments: jest.fn(() => ({ data: [] })),
+					listComments: jest.fn(() => Promise.resolve({ data: [] })),
+					updateComment: jest.fn(),
 				},
 			},
 		},
@@ -21,6 +22,9 @@ function run() {
 			payload: { pull_request: { number: 1, base: { sha: 'the_base_sha' } } },
 			repo: { owner: 'the_owner', repo: 'the_repo' },
 			sha: 'the_event_sha',
+		},
+		core: {
+			summary: {},
 		},
 	});
 }

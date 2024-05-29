@@ -137,8 +137,47 @@ ${flags}
 }
 
 type Options = {
-	github: any;
-	context: any;
+	github: {
+		rest: {
+			issues: {
+				createComment: (options: {
+					owner: string;
+					repo: string;
+					issue_number: number;
+					body: string;
+				}) => Promise<void>;
+				listComments: (options: {
+					owner: string;
+					repo: string;
+					issue_number: number;
+				}) => Promise<{ data: any[] }>;
+				updateComment: (options: {
+					owner: string;
+					repo: string;
+					comment_id: number;
+					body: string;
+				}) => Promise<void>;
+			};
+		};
+	};
+	context: {
+		payload: {
+			pull_request?: {
+				number: number;
+				base: {
+					sha: string;
+				};
+			};
+		};
+		repo: {
+			owner: string;
+			repo: string;
+		};
+		sha: string;
+	};
+	core: {
+		summary: {};
+	};
 };
 
 export default async function main({
@@ -147,19 +186,21 @@ export default async function main({
 }: Options): Promise<void> {
 	console.log('running');
 
-	const prNumber = context.payload.pull_request.number;
+	const pr = context.payload.pull_request;
 
-	if (!prNumber) {
+	if (!pr) {
 		console.warn('No PR found for this commit');
 		return;
 	}
+
+	const prNumber = pr.number;
 
 	console.log('PR found:', prNumber);
 
 	const langFiles = fs
 		.readdirSync('./public/lang/')
 		.map((f) => `public/lang/${f}`);
-	const hash1 = context.payload.pull_request.base.sha;
+	const hash1 = pr.base.sha;
 	const hash2 = context.sha;
 	const body = getSummary(langFiles, hash1, hash2);
 
