@@ -33,10 +33,8 @@ export default function PlaylistForm({
 	isPublic: playlistIsPublic,
 	onSubmit,
 	onCancel,
-}: //onDelete,
-Props): JSX.Element {
-	//const refTitle = useRef<HTMLInputElement>(null);
-	//const refDescription = useRef<HTMLInputElement>(null);
+	onDelete,
+}: Props): JSX.Element {
 	const [title, setTitle] = useState<string>(playlistTitle || '');
 	const [description, setDescription] = useState<string>(summary || '');
 	const [isPrivacyVisible, setIsPrivacyVisible] = useState<boolean>(false);
@@ -60,10 +58,10 @@ Props): JSX.Element {
 		}
 	};
 
-	// const deletePlaylist = async () => {
-	// 	setLoading(true);
-	// 	onDelete && (await onDelete());
-	// };
+	const deletePlaylist = async () => {
+		setLoading(true);
+		onDelete && (await onDelete());
+	};
 
 	return (
 		<div>
@@ -74,8 +72,21 @@ Props): JSX.Element {
 					<FormattedMessage id="editPlayLists" defaultMessage="Edit playlist" />
 				)}
 			</Heading2>
-			{/* rightText={id ? 'Delete Playlist' : undefined}
-             onPressRightText={id ? deletePlaylist : undefined} */}
+			{id ? (
+				<div style={{ textAlign: 'right' }}>
+					<Link href="#" legacyBehavior>
+						<a onClick={deletePlaylist}>
+							<FormattedMessage
+								id="deletePlaylists"
+								defaultMessage="Delete Playlist"
+							/>
+						</a>
+					</Link>
+				</div>
+			) : (
+				''
+			)}
+
 			<Input
 				label={intl.formatMessage({
 					id: 'pl_title',
@@ -84,10 +95,6 @@ Props): JSX.Element {
 				value={title}
 				setValue={setTitle}
 				placeholder="Spiritual Lessons"
-				//onSubmitEditing={() => refDescription.current?.focus()}
-				//blurOnSubmit={false}
-				//autoCapitalize="none"
-				//ref={refTitle}
 			/>
 			<Input
 				label={intl.formatMessage({
@@ -97,19 +104,11 @@ Props): JSX.Element {
 				value={description}
 				setValue={setDescription}
 				placeholder="Things I’ve learned lately"
-				//onSubmitEditing={() => refDescription.current?.focus()}
-				//blurOnSubmit={false}
-				//autoCapitalize="none"
-				//ref={refDescription}
 			/>
 			<div className={styles.privacyLabel}>
 				<FormattedMessage id="newPrivacy" defaultMessage="Privacy" />
 			</div>
-			<Link
-				//className={ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }
-				href="#"
-				onClick={() => setIsPrivacyVisible(!isPrivacyVisible)}
-			>
+			<Link href="#" onClick={() => setIsPrivacyVisible(!isPrivacyVisible)}>
 				<div className={styles.privacyInputLeft}>
 					{!isPublic ? (
 						<PrivateIcon color={BaseColors.DARK} />

@@ -6,3 +6,33 @@
 		margin-top: 0;
 	}
 }
+
+.scrollContainer {
+	overflow-y: auto;
+	max-height: 80vh; /* Adjust as needed */
+}
+
+.gradientOverlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 50px; /* Adjust as needed */
+	background: linear-gradient(
+		to top,
+		rgba(255, 255, 255, 1),
+		rgba(255, 255, 255, 0)
+	);
+}
+
+.scrollIndicator {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-size: 14px;
+}

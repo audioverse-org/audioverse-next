@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
 import CardPlaylist from '~components/molecules/card/playlist';
 import CardMasonry from '~components/molecules/cardMasonry';
-import LoadingCards from '~components/molecules/loadingCards';
 import EmptyState from '~components/organisms/emptyState';
 import LibraryNav from '~components/organisms/libraryNav';
 import { Language } from '~src/__generated__/graphql';
+import Loader from '~src/components/atoms/Loader';
 
 import baseStyles from '../base.module.scss';
 import LibraryLoggedOut from '../loggedOut';
@@ -23,19 +23,50 @@ function LibraryPlaylists({ language }: ILibraryPlaylistsProps): JSX.Element {
 		first: 1500,
 		offset: 0,
 	});
-	const playlistItems = data?.me?.user.playlists.nodes || [];
+
+	const [playlistData, setPlaylistData] = useState(
+		data?.me?.user.playlists.nodes || []
+	);
+	const [isScrollable, setIsScrollable] = useState(false);
+	const containerRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		setPlaylistData([...(data?.me?.user.playlists.nodes || [])]);
+	}, [data?.me?.user.playlists.nodes]);
+
+	useEffect(() => {
+		if (containerRef.current) {
+			const isScrollable =
+				containerRef.current.scrollHeight > containerRef.current.clientHeight;
+			setIsScrollable(isScrollable);
+		}
+	}, [playlistData]);
 
 	return (
 		<div className={baseStyles.wrapper}>
 			<LibraryNav currentNavHref="playlists" disableFiltersAndSorts />
 
 			{isLoading ? (
-				<LoadingCards />
-			) : playlistItems.length ? (
-				<CardMasonry
-					items={playlistItems}
-					render={({ data }) => <CardPlaylist playlist={data} />}
-				/>
+				<Loader />
+			) : playlistData.length ? (
+				<div ref={containerRef} className={baseStyles.scrollContainer}>
+					<CardMasonry
+						key={playlistData.length}
+						items={playlistData}
+						render={({ data }) => <CardPlaylist playlist={data} />}
+					/>
+					{isScrollable && (
+						<>
+							<div className={baseStyles.gradientOverlay}></div>
+							<div className={baseStyles.scrollIndicator}>
+								<FormattedMessage
+									id="scroll-down"
+									defaultMessage="Scroll down for more"
+								/>
+							</div>
+						</>
+					)}
+				</div>
 			) : (
 				<EmptyState
 					title={
