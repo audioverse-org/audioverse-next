@@ -1,5 +1,5 @@
 // components/PlaylistList.tsx
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Language } from '~src/__generated__/graphql';
@@ -21,6 +21,31 @@ const PlaylistList: React.FC<Props> = ({ language, recordingId }) => {
 	const variables: GetLibraryPlaylistsQueryVariables = { language };
 	const { data, error, isLoading } = useGetLibraryPlaylistsQuery(variables);
 
+	const containerRef = useRef<HTMLDivElement>(null);
+	const [isScrollable, setIsScrollable] = useState(false);
+
+	useEffect(() => {
+		const checkScrollable = () => {
+			if (containerRef.current) {
+				const isOverflowing =
+					containerRef.current.scrollHeight > containerRef.current.clientHeight;
+				setIsScrollable(isOverflowing);
+			}
+		};
+
+		checkScrollable();
+
+		// Check if the content changes size
+		const resizeObserver = new ResizeObserver(checkScrollable);
+		if (containerRef.current) {
+			resizeObserver.observe(containerRef.current);
+		}
+
+		return () => {
+			resizeObserver.disconnect();
+		};
+	}, [data]);
+
 	if (isLoading)
 		return (
 			<div>
@@ -32,7 +57,7 @@ const PlaylistList: React.FC<Props> = ({ language, recordingId }) => {
 		<FormattedMessage id="error" defaultMessage="Error" />
 	</div>;
 	return (
-		<div className={styles.playlistList}>
+		<div className={styles.playlistList} ref={containerRef}>
 			{data?.me?.user?.playlists?.edges?.map((edge) => (
 				<AddToPlaylistItem
 					key={edge.node.id}
@@ -40,6 +65,16 @@ const PlaylistList: React.FC<Props> = ({ language, recordingId }) => {
 					recordingId={recordingId}
 				/>
 			))}
+			{isScrollable && (
+				<>
+					<div className={styles.scrollIndicator}>
+						<FormattedMessage
+							id="scroll-down"
+							defaultMessage="Scroll down for more"
+						/>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

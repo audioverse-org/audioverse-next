@@ -2,6 +2,31 @@
 .playlistList {
 	display: flex;
 	flex-direction: column;
+	max-height: 400px; /* Adjust height as needed */
+	overflow-y: auto;
+}
+
+.gradientOverlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 30px; /* Adjust height as needed */
+	background: linear-gradient(
+		to top,
+		white,
+		rgba(255, 255, 255, 0)
+	); /* Adjust colors as needed */
+	pointer-events: none; /* Ensure the overlay doesn't block scrolling */
+}
+
+.scrollIndicator {
+	text-align: center;
+	font-size: 12px;
+	color: #888; /* Adjust color as needed */
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
 }
 
 .playlistItem {

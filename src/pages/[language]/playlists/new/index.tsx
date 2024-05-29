@@ -17,6 +17,7 @@ const NewPlaylist: React.FC = () => {
 	const language = useLanguageRoute();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const [success, setSuccess] = useState<string | null>(null);
 	const previousRoute = usePreviousRoute();
 
 	const add = async (playlist: PlaylistProps) => {
@@ -35,6 +36,8 @@ const NewPlaylist: React.FC = () => {
 				} else {
 					router.back();
 				}
+				// Handle the case where data is returned as expected
+				setSuccess('Succesfully created the playlist!');
 			} else {
 				// Handle the case where data is not returned as expected
 				setError('Failed to add the playlist. Please try again.');
@@ -59,6 +62,7 @@ const NewPlaylist: React.FC = () => {
 				<FormattedMessage id="loading" defaultMessage="Loading..." />
 			)}
 			{error && <p style={{ color: 'red' }}>{error}</p>}
+			{success && <p style={{ color: 'green' }}>{success}</p>}
 			<PlaylistForm onSubmit={add} onCancel={cancel} />
 		</div>
 	);
