@@ -176,13 +176,20 @@ type Options = {
 		sha: string;
 	};
 	core: {
-		summary: {};
+		summary: {
+			addRaw: (text: string) => void;
+			addHeading: (text: string) => void;
+			addSeparator: () => void;
+			addQuote: (text: string) => void;
+			write: (options: { overwrite: boolean }) => void;
+		};
 	};
 };
 
 export default async function main({
 	github,
 	context,
+	core,
 }: Options): Promise<void> {
 	console.log('running');
 
@@ -215,6 +222,8 @@ export default async function main({
 	);
 
 	console.log(body);
+
+	core.summary.addRaw(body);
 
 	if (prev) {
 		console.log('Updating previous comment');

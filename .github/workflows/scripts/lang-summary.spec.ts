@@ -5,28 +5,34 @@ import { execSync } from 'child_process';
 jest.mock('fs');
 jest.mock('child_process');
 
-const createComment = jest.fn();
-
-function run() {
-	return main({
-		github: {
-			rest: {
-				issues: {
-					createComment,
-					listComments: jest.fn(() => Promise.resolve({ data: [] })),
-					updateComment: jest.fn(),
-				},
+const context = {
+	github: {
+		rest: {
+			issues: {
+				createComment: jest.fn(),
+				listComments: jest.fn(() => Promise.resolve({ data: [] })),
+				updateComment: jest.fn(),
 			},
 		},
-		context: {
-			payload: { pull_request: { number: 1, base: { sha: 'the_base_sha' } } },
-			repo: { owner: 'the_owner', repo: 'the_repo' },
-			sha: 'the_event_sha',
+	},
+	context: {
+		payload: { pull_request: { number: 1, base: { sha: 'the_base_sha' } } },
+		repo: { owner: 'the_owner', repo: 'the_repo' },
+		sha: 'the_event_sha',
+	},
+	core: {
+		summary: {
+			addRaw: jest.fn(),
+			addHeading: jest.fn(),
+			addSeparator: jest.fn(),
+			addQuote: jest.fn(),
+			write: jest.fn(),
 		},
-		core: {
-			summary: {},
-		},
-	});
+	},
+};
+
+function run() {
+	return main(context);
 }
 
 function loadFiles(
@@ -58,30 +64,24 @@ describe('lang-summary', () => {
 	it('only has one row per id', async () => {
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.not.stringMatching(/the_id.*the_id/s),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.not.stringMatching(/the_id.*the_id/s)
 		);
 	});
 
 	it('includes id', async () => {
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('the_id'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('the_id')
 		);
 	});
 
 	it('includes default string', async () => {
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('the_string'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('the_string')
 		);
 	});
 
@@ -96,10 +96,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.not.stringContaining('the_translated_string'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.not.stringContaining('the_translated_string')
 		);
 	});
 
@@ -114,20 +112,16 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('the_string'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('the_string')
 		);
 	});
 
 	it('flags en addition', async () => {
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('+en'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('+en')
 		);
 	});
 
@@ -141,10 +135,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('-en'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('-en')
 		);
 	});
 
@@ -159,10 +151,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('es!'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('es!')
 		);
 	});
 
@@ -177,10 +167,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.not.stringContaining('es!'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.not.stringContaining('es!')
 		);
 	});
 
@@ -195,10 +183,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.not.stringContaining('en!'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.not.stringContaining('en!')
 		);
 	});
 
@@ -213,10 +199,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('es?'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('es?')
 		);
 	});
 
@@ -231,10 +215,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.not.stringContaining('+es'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.not.stringContaining('+es')
 		);
 	});
 
@@ -250,10 +232,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.not.stringContaining('!?'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.not.stringContaining('!?')
 		);
 	});
 
@@ -269,7 +249,7 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalled();
+		expect(context.core.summary.addRaw).toBeCalled();
 	});
 
 	it('skips unchanged strings', async () => {
@@ -280,10 +260,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.not.stringContaining('the_string'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.not.stringContaining('the_string')
 		);
 	});
 
@@ -295,10 +273,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.not.stringContaining('en?'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.not.stringContaining('en?')
 		);
 	});
 
@@ -310,10 +286,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('🟢 the_id'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('🟢 the_id')
 		);
 	});
 
@@ -325,10 +299,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('🔵 the_id'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('🔵 the_id')
 		);
 	});
 
@@ -343,10 +315,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('🟡 the_id'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('🟡 the_id')
 		);
 	});
 
@@ -361,10 +331,8 @@ describe('lang-summary', () => {
 
 		await run();
 
-		expect(createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('🔴 the_id'),
-			})
+		expect(context.core.summary.addRaw).toBeCalledWith(
+			expect.stringContaining('🔴 the_id')
 		);
 	});
 });
