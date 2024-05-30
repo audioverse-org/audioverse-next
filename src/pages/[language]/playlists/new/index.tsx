@@ -17,7 +17,7 @@ type NewPlaylistProps = {
 	onClose: () => void;
 };
 
-const NewPlaylist: React.FC<NewPlaylistProps> = ({id, onClose}) => {
+const NewPlaylist: React.FC<NewPlaylistProps> = ({ id, onClose }) => {
 	//const router = useRouter();
 	const language = useLanguageRoute();
 	const [isLoading, setIsLoading] = useState(false);

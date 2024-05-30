@@ -97,8 +97,8 @@ export default function TeaseRecording({
 	});
 
 	const handleCloseNewModal = () => {
-        setIsPlaylistModalNewOpen(false);
-    };
+		setIsPlaylistModalNewOpen(false);
+	};
 
 	const inner = (
 		<>
@@ -317,16 +317,12 @@ export default function TeaseRecording({
 				}
 				titleLink={
 					<div
-					
-						onClick={()=>{
+						onClick={() => {
 							setIsPlaylistModalOpen(false);
 							setIsPlaylistModalNewOpen(true);
 						}}
-						
 					>
-						
-							<FormattedMessage id="create_new" defaultMessage="Create New" />
-						
+						<FormattedMessage id="create_new" defaultMessage="Create New" />
 					</div>
 				}
 				hideClose
@@ -335,16 +331,13 @@ export default function TeaseRecording({
 			</Modal>
 			<Modal
 				open={isPlaylistModalNewOpen}
-				onClose={handleCloseNewModal }
+				onClose={handleCloseNewModal}
 				title={
-					<FormattedMessage
-						id="new_playlist"
-						defaultMessage="New playlist"
-					/>
+					<FormattedMessage id="new_playlist" defaultMessage="New playlist" />
 				}
 				hideClose
 			>
-				<NewPlaylist id={recording.id} onClose={handleCloseNewModal } />
+				<NewPlaylist id={recording.id} onClose={handleCloseNewModal} />
 			</Modal>
 		</>
 	);
