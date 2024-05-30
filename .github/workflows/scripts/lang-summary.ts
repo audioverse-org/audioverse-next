@@ -30,32 +30,28 @@ function getAllStringIds(
 	files1: Record<string, Langs>,
 	files2: Record<string, Langs>
 ): Set<string> {
-	const allIds = new Set<string>();
+	const ids = new Set<string>();
 
 	Object.values(files1).forEach((langs) =>
-		Object.keys(langs).forEach((id) => allIds.add(id))
+		Object.keys(langs).forEach((id) => ids.add(id))
 	);
 	Object.values(files2).forEach((langs) =>
-		Object.keys(langs).forEach((id) => allIds.add(id))
+		Object.keys(langs).forEach((id) => ids.add(id))
 	);
 
-	return allIds;
+	return ids;
 }
 
 function getAllLangIds(
 	files1: Record<string, Langs>,
 	files2: Record<string, Langs>
 ): Set<string> {
-	const allLangs = new Set<string>();
+	const ids = new Set<string>();
 
-	Object.keys(files1).forEach((fileName) =>
-		allLangs.add(fileName.split('.')[0])
-	);
-	Object.keys(files2).forEach((fileName) =>
-		allLangs.add(fileName.split('.')[0])
-	);
+	Object.keys(files1).forEach((s) => ids.add(s.split('.')[0]));
+	Object.keys(files2).forEach((s) => ids.add(s.split('.')[0]));
 
-	return allLangs;
+	return ids;
 }
 
 function getFlag(
