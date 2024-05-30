@@ -3861,12 +3861,6 @@
       "value": "User Account"
     }
   ],
-  "newPlayLists": [
-    {
-      "type": 0,
-      "value": "New playlist"
-    }
-  ],
   "newPrivacy": [
     {
       "type": 0,
@@ -3883,6 +3877,12 @@
     {
       "type": 0,
       "value": "Shareable"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "New playlist"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [

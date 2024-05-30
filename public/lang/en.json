@@ -1833,9 +1833,6 @@
   "navigation__nameFallback": {
     "string": "User Account"
   },
-  "newPlayLists": {
-    "string": "New playlist"
-  },
   "newPrivacy": {
     "string": "Privacy"
   },
@@ -1844,6 +1841,9 @@
   },
   "newShareable": {
     "string": "Shareable"
+  },
+  "new_playlist": {
+    "string": "New playlist"
   },
   "newsLetterForm__checkboxNewsletter": {
     "string": "Newsletter (typically about once a month)"
