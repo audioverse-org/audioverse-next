@@ -22,6 +22,7 @@ const NewPlaylist: React.FC = () => {
 
 	const add = async (playlist: PlaylistProps) => {
 		try {
+			setIsLoading(true);
 			const data = await playlistAdd<PlaylistAddMutationVariables>({
 				input: {
 					language: getLanguageIdByRoute(language),

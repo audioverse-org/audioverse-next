@@ -52,10 +52,13 @@ const PlaylistList: React.FC<Props> = ({ language, recordingId }) => {
 				<Loader />
 			</div>
 		);
-	if (error) return;
-	<div>
-		<FormattedMessage id="error" defaultMessage="Error" />
-	</div>;
+	if (error)
+		return (
+			<div>
+				<FormattedMessage id="error" defaultMessage="Error" />
+			</div>
+		);
+
 	return (
 		<div className={styles.playlistList} ref={containerRef}>
 			{data?.me?.user?.playlists?.edges?.map((edge) => (

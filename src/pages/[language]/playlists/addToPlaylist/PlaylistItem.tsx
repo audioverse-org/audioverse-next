@@ -4,7 +4,7 @@ import AddIcon from '../../../../../public/img/icons/add-light.svg';
 import PrivateIcon from '../../../../../public/img/icons/private-light.svg';
 import PublicIcon from '../../../../../public/img/icons/public-light.svg';
 import SuccessIcon from '../../../../../public/img/icons/success-light.svg';
-import styles from './PlaylistItem.module.css'; // Using CSS Module for styling
+import styles from './PlaylistItem.module.css';
 
 type Props = {
 	onPress: () => void;
@@ -27,7 +27,7 @@ const PlaylistItem: React.FC<Props> = ({
 					{!isAdded ? (
 						<AddIcon className={styles.leftIcon} />
 					) : (
-						<SuccessIcon className={styles.leftIcon} width="24" height="24" />
+						<SuccessIcon className={styles.leftIcon} />
 					)}
 					<span className={styles.title}>{title}</span>
 				</div>

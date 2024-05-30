@@ -449,6 +449,12 @@
       "value": "ADD TO PLAYLIST"
     }
   ],
+  "add_to_playlist_bnt": [
+    {
+      "type": 0,
+      "value": "Playlist"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -1411,12 +1417,6 @@
     {
       "type": 0,
       "value": "Create New"
-    }
-  ],
-  "dd_to_playlist_bnt": [
-    {
-      "type": 0,
-      "value": "Playlist"
     }
   ],
   "deletePlaylists": [
@@ -3972,7 +3972,7 @@
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "NOT SHAREABLE"
+      "value": "PRIVATE"
     }
   ],
   "onlyYow": [
@@ -4250,7 +4250,7 @@
   "pl_title": [
     {
       "type": 0,
-      "value": "Tile"
+      "value": "Title"
     }
   ],
   "playButton__pauseLabel": [

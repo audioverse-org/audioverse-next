@@ -1,7 +1,5 @@
 import React from 'react';
 
-import HorizontalRule from '~src/components/atoms/horizontalRule';
-import { BaseColors } from '~src/lib/constants';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
 import ListenLaterItem from './ListenLaterItem';
@@ -17,7 +15,6 @@ const PlaylistsPage: React.FC<PlaylistsPageProps> = ({ language, recId }) => {
 
 	return (
 		<div>
-			<HorizontalRule color={BaseColors.CREAM} />
 			<ListenLaterItem id={recId} />
 			<PlaylistList language={languageFullForm} recordingId={recId} />
 		</div>

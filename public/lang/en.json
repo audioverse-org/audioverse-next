@@ -227,6 +227,10 @@
   "add_to_playlist": {
     "string": "ADD TO PLAYLIST"
   },
+  "add_to_playlist_bnt": {
+    "comment": "Add to Playlist button label",
+    "string": "Playlist"
+  },
   "andGlobalModals__authCopy": {
     "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
   },
@@ -671,10 +675,6 @@
   },
   "create_new": {
     "string": "Create New"
-  },
-  "dd_to_playlist_bnt": {
-    "comment": "Add to Playlist button label",
-    "string": "Playlist"
   },
   "deletePlaylists": {
     "string": "Delete Playlist"
@@ -1888,7 +1888,7 @@
     "string": "This Playlist is Private. Only SHAREABLE Playlists can be shared."
   },
   "not_shareable_title": {
-    "string": "NOT SHAREABLE"
+    "string": "PRIVATE"
   },
   "onlyYow": {
     "string": "Only you can view"
@@ -2034,7 +2034,7 @@
     "string": "Description"
   },
   "pl_title": {
-    "string": "Tile"
+    "string": "Title"
   },
   "playButton__pauseLabel": {
     "comment": "play button pause label",

@@ -146,10 +146,7 @@ function LibraryPlaylistDetail({
 				open={isNotShareableOpen}
 				onClose={() => setIsNotShareableOpen(false)}
 				title={
-					<FormattedMessage
-						id="not_shareable_title"
-						defaultMessage="NOT SHAREABLE"
-					/>
+					<FormattedMessage id="not_shareable_title" defaultMessage="PRIVATE" />
 				}
 			>
 				<FormattedMessage

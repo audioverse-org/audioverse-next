@@ -12,7 +12,7 @@ import ClosureIcon from '../../../../public/img/icons/closure-light.svg';
 import DisclosureIcon from '../../../../public/img/icons/disclosure-light.svg';
 import ShareableIcon from '../../../../public/img/icons/linked-light.svg';
 import PrivateIcon from '../../../../public/img/icons/private-light.svg';
-import styles from './Playlistform.module.css';
+import styles from './Playlistform.module.scss';
 
 export type PlaylistProps = Pick<
 	UserPlaylistAddInput,
@@ -65,14 +65,7 @@ export default function PlaylistForm({
 
 	return (
 		<div>
-			<Heading2>
-				{!id ? (
-					<FormattedMessage id="newPlayLists" defaultMessage="New playlist" />
-				) : (
-					<FormattedMessage id="editPlayLists" defaultMessage="Edit playlist" />
-				)}
-			</Heading2>
-			{id ? (
+			{id && (
 				<div style={{ textAlign: 'right' }}>
 					<Link href="#" legacyBehavior>
 						<a onClick={deletePlaylist}>
@@ -83,14 +76,19 @@ export default function PlaylistForm({
 						</a>
 					</Link>
 				</div>
-			) : (
-				''
 			)}
+			<Heading2>
+				{!id ? (
+					<FormattedMessage id="newPlayLists" defaultMessage="New playlist" />
+				) : (
+					<FormattedMessage id="editPlayLists" defaultMessage="Edit playlist" />
+				)}
+			</Heading2>
 
 			<Input
 				label={intl.formatMessage({
 					id: 'pl_title',
-					defaultMessage: 'Tile',
+					defaultMessage: 'Title',
 				})}
 				value={title}
 				setValue={setTitle}

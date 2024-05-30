@@ -89,11 +89,10 @@ export default function TeaseRecording({
 	const iconColor = BaseColors.MID_TONE;
 
 	const label = intl.formatMessage({
-		id: 'dd_to_playlist_bnt',
+		id: 'add_to_playlist_bnt',
 		defaultMessage: 'Playlist',
 		description: 'Add to Playlist button label',
 	});
-	//<FormattedMessage id="add_to_playlist_bnt" defaultMessage="Playlist" />;
 
 	const inner = (
 		<>
@@ -320,7 +319,7 @@ export default function TeaseRecording({
 						</a>
 					</Link>
 				}
-				hideClose={true}
+				hideClose
 			>
 				<PlaylistsPage language={language} recId={recording.id} />
 			</Modal>

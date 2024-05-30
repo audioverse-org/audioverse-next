@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
@@ -27,20 +27,10 @@ function LibraryPlaylists({ language }: ILibraryPlaylistsProps): JSX.Element {
 	const [playlistData, setPlaylistData] = useState(
 		data?.me?.user.playlists.nodes || []
 	);
-	const [isScrollable, setIsScrollable] = useState(false);
-	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		setPlaylistData([...(data?.me?.user.playlists.nodes || [])]);
 	}, [data?.me?.user.playlists.nodes]);
-
-	useEffect(() => {
-		if (containerRef.current) {
-			const isScrollable =
-				containerRef.current.scrollHeight > containerRef.current.clientHeight;
-			setIsScrollable(isScrollable);
-		}
-	}, [playlistData]);
 
 	return (
 		<div className={baseStyles.wrapper}>
@@ -49,23 +39,12 @@ function LibraryPlaylists({ language }: ILibraryPlaylistsProps): JSX.Element {
 			{isLoading ? (
 				<Loader />
 			) : playlistData.length ? (
-				<div ref={containerRef} className={baseStyles.scrollContainer}>
+				<div className={baseStyles.scrollContainer}>
 					<CardMasonry
 						key={playlistData.length}
 						items={playlistData}
 						render={({ data }) => <CardPlaylist playlist={data} />}
 					/>
-					{isScrollable && (
-						<>
-							<div className={baseStyles.gradientOverlay}></div>
-							<div className={baseStyles.scrollIndicator}>
-								<FormattedMessage
-									id="scroll-down"
-									defaultMessage="Scroll down for more"
-								/>
-							</div>
-						</>
-					)}
 				</div>
 			) : (
 				<EmptyState

@@ -1,7 +1,8 @@
+@import '../../../styles/common.scss';
 .container {
 	display: flex;
 	flex: 1;
-	background-color: #ffffff; /* Replace COLORS.WHITE with actual color value */
+	background-color: $ts-white;
 	padding: 24px;
 }
 
@@ -32,7 +33,7 @@
 
 .privacyContainer {
 	margin-top: 4px;
-	border-color: #ff0000; /* Replace COLORS.RED with actual color value */
+	border-color: $ts-red;
 	border-width: 1px;
 	border-radius: 4px;
 	padding: 16px;
@@ -44,7 +45,7 @@
 }
 
 .pressed {
-	background-color: #f0f0f0; /* Replace COLORS_DARKENED.WHITE with actual color value */
+	background-color: $ts-darkened-white;
 }
 
 .privacyOptionRight {
