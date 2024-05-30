@@ -57,6 +57,13 @@
 }
 .link {
 	float: right;
+	text-decoration: none;
+    color: inherit;
+}
+.link:hover,
+.link:focus {
+    text-decoration: underline;
+	color: #ff224a;
 }
 .head {
 	margin-bottom: 10px;

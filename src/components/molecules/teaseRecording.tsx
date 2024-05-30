@@ -20,6 +20,7 @@ import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import { getSessionToken } from '~src/lib/cookies';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
+import NewPlaylist from '~src/pages/[language]/playlists/new';
 
 import AddToPlaylistIcon from '../../../public/img/icons/in-queue-light.svg';
 import { analytics } from '../../lib/analytics';
@@ -59,6 +60,7 @@ export default function TeaseRecording({
 	disablePlayback = false,
 }: Props): JSX.Element {
 	const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
+	const [isPlaylistModalNewOpen, setIsPlaylistModalNewOpen] = useState(false);
 	const intl = useIntl();
 	const router = useRouter();
 	const session = usePlaybackSession(recording, { playlistRecordings });
@@ -93,6 +95,10 @@ export default function TeaseRecording({
 		defaultMessage: 'Playlist',
 		description: 'Add to Playlist button label',
 	});
+
+	const handleCloseNewModal = () => {
+        setIsPlaylistModalNewOpen(false);
+    };
 
 	const inner = (
 		<>
@@ -310,18 +316,35 @@ export default function TeaseRecording({
 					/>
 				}
 				titleLink={
-					<Link
-						href={`/${language}/playlists/new?id=${recording.id}`}
-						legacyBehavior
+					<div
+					
+						onClick={()=>{
+							setIsPlaylistModalOpen(false);
+							setIsPlaylistModalNewOpen(true);
+						}}
+						
 					>
-						<a>
+						
 							<FormattedMessage id="create_new" defaultMessage="Create New" />
-						</a>
-					</Link>
+						
+					</div>
 				}
 				hideClose
 			>
 				<PlaylistsPage language={language} recId={recording.id} />
+			</Modal>
+			<Modal
+				open={isPlaylistModalNewOpen}
+				onClose={handleCloseNewModal }
+				title={
+					<FormattedMessage
+						id="new_playlist"
+						defaultMessage="New playlist"
+					/>
+				}
+				hideClose
+			>
+				<NewPlaylist id={recording.id} onClose={handleCloseNewModal } />
 			</Modal>
 		</>
 	);

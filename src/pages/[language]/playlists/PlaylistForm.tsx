@@ -77,13 +77,12 @@ export default function PlaylistForm({
 					</Link>
 				</div>
 			)}
-			<Heading2>
-				{!id ? (
-					<FormattedMessage id="newPlayLists" defaultMessage="New playlist" />
-				) : (
+			{id && (<Heading2>
+				
 					<FormattedMessage id="editPlayLists" defaultMessage="Edit playlist" />
+					</Heading2>
 				)}
-			</Heading2>
+			
 
 			<Input
 				label={intl.formatMessage({
