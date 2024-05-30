@@ -136,6 +136,56 @@ ${flags}
 	return lines.join('\n');
 }
 
+function getBody(paths: string[], hash1: string, hash2: string) {
+	const files1 = getLangFiles(paths, hash1);
+	const files2 = getLangFiles(paths, hash2);
+	const sringIds = getAllStringIds(files1, files2);
+	const langIds = getAllLangIds(files1, files2);
+
+	const lines: string[] = [
+		'language | unchanged | added | removed | untranslated | missing',
+		'-------- | --------- | ----- | ------- | ------------ | -------',
+	];
+
+	langIds.forEach((langId) => {
+		const unchangedCount = Array.from(sringIds).filter((stringId) => {
+			const lang1 = files1[`${langId}.json`]?.[stringId];
+			const lang2 = files2[`${langId}.json`]?.[stringId];
+			return lang1?.string === lang2?.string;
+		}).length;
+
+		const addedCount = Array.from(sringIds).filter((stringId) => {
+			const lang1 = files1[`${langId}.json`]?.[stringId];
+			const lang2 = files2[`${langId}.json`]?.[stringId];
+			return !lang1 && lang2;
+		}).length;
+
+		const removedCount = Array.from(sringIds).filter((stringId) => {
+			const lang1 = files1[`${langId}.json`]?.[stringId];
+			const lang2 = files2[`${langId}.json`]?.[stringId];
+			return lang1 && !lang2;
+		}).length;
+
+		const untranslatedCount = Array.from(sringIds).filter((stringId) => {
+			const lang2 = files2[`${langId}.json`]?.[stringId];
+			const en2 = files2['en.json']?.[stringId];
+			return langId !== 'en' && lang2 && lang2.string === en2?.string;
+		}).length;
+
+		const missingCount = Array.from(sringIds).filter((stringId) => {
+			const survives = Object.values(files2).some((f) => f[stringId]);
+			const lang2 = files2[`${langId}.json`]?.[stringId];
+			return survives && !lang2;
+		}).length;
+
+		lines.push(
+			`${langId} | ${unchangedCount} | ${addedCount} | ${removedCount} | ${untranslatedCount} | ${missingCount}`
+		);
+	});
+
+	return lines.join('\n');
+}
+
 type Options = {
 	github: {
 		rest: {
@@ -235,9 +285,10 @@ export default async function main(ctx: Options): Promise<void> {
 	const hash1 = pr.base.sha;
 	const hash2 = context.sha;
 	const summary = getSummary(langFiles, hash1, hash2);
+	const comment = getBody(langFiles, hash1, hash2);
 
 	core.summary.addRaw(summary);
 	core.summary.write({ overwrite: true });
 
-	await upsertComment(pr.number, 'hello world', ctx);
+	await upsertComment(pr.number, comment, ctx);
 }

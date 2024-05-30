@@ -351,4 +351,85 @@ describe('lang-summary', () => {
 			})
 		);
 	});
+
+	it('includes unchanged count in pr comment', async () => {
+		loadFiles(
+			{ 'en.json': { the_id: { string: 'the_string' } } },
+			{ 'en.json': { the_id: { string: 'the_string' } } }
+		);
+
+		await run();
+
+		expect(context.github.rest.issues.createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('1'),
+			})
+		);
+	});
+
+	it('includes added count in pr comment', async () => {
+		loadFiles(
+			{ 'en.json': {} },
+			{ 'en.json': { the_id: { string: 'the_string' } } }
+		);
+
+		await run();
+
+		expect(context.github.rest.issues.createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('1'),
+			})
+		);
+	});
+
+	it('includes removed count in pr comment', async () => {
+		loadFiles(
+			{ 'en.json': { the_id: { string: 'the_string' } } },
+			{ 'en.json': {} }
+		);
+
+		await run();
+
+		expect(context.github.rest.issues.createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('1'),
+			})
+		);
+	});
+
+	it('includes untranslated count in pr comment', async () => {
+		loadFiles(
+			{ 'en.json': {} },
+			{
+				'en.json': { the_id: { string: 'the_string' } },
+				'es.json': { the_id: { string: 'the_string' } },
+			}
+		);
+
+		await run();
+
+		expect(context.github.rest.issues.createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('0 | 1 | 0 | 1'),
+			})
+		);
+	});
+
+	it('includes missing count in pr comment', async () => {
+		loadFiles(
+			{ 'en.json': {} },
+			{
+				'en.json': { the_id: { string: 'the_string' } },
+				'es.json': {},
+			}
+		);
+
+		await run();
+
+		expect(context.github.rest.issues.createComment).toBeCalledWith(
+			expect.objectContaining({
+				body: expect.stringContaining('1 | 0 | 0 | 0 | 1'),
+			})
+		);
+	});
 });
