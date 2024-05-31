@@ -131,7 +131,20 @@ ${flags}
 	return lines.join('\n');
 }
 
-function getBody(paths: string[], hash1: string, hash2: string) {
+function getSummaryUrl(prNumber: number, { context }: Options) {
+	const owner = context.repo.owner;
+	const repo = context.repo.repo;
+	const runId = context.runId;
+
+	return `https://github.com/${owner}/${repo}/actions/runs/${runId}?pr=${prNumber}#user-content-pa11y-summary`;
+}
+
+function getBody(
+	paths: string[],
+	hash1: string,
+	hash2: string,
+	summaryUrl: string
+) {
 	const files1 = getLangFiles(paths, hash1);
 	const files2 = getLangFiles(paths, hash2);
 	const sringIds = getAllStringIds(files1, files2);
@@ -178,6 +191,9 @@ function getBody(paths: string[], hash1: string, hash2: string) {
 		);
 	});
 
+	lines.push('');
+	lines.push(`[View full summary](${summaryUrl})`);
+
 	return lines.join('\n');
 }
 
@@ -219,6 +235,7 @@ type Options = {
 			repo: string;
 		};
 		sha: string;
+		runId: unknown;
 	};
 	core: {
 		summary: {
@@ -282,7 +299,8 @@ export default async function main(ctx: Options): Promise<void> {
 	const hash1 = pr.base.sha;
 	const hash2 = context.sha;
 	const summary = getSummary(langFiles, hash1, hash2);
-	const comment = getBody(langFiles, hash1, hash2);
+	const summaryUrl = getSummaryUrl(pr.number, ctx);
+	const comment = getBody(langFiles, hash1, hash2, summaryUrl);
 
 	core.summary.addRaw(summary);
 	core.summary.write({ overwrite: true });
