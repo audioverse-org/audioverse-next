@@ -47,12 +47,12 @@ export function useRecordingPlaylist(
 			>(PlaylistRecordingAddDocument, variables)(),
 		{
 			onMutate: async () => {
-				await queryClient.fetchQuery(PLAYLIST_REFETCH_QUERIES);
+				await queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
 			},
 			onSuccess: (data) => {
 				if (data?.playlistRecordingAdd) {
 					// queryClient.setQueryData<UserPlaylist | undefined>(
-					// 	[playlist.id],
+					// 	playlist.id,
 					// 	(old) => {
 					// 		if (!old) return old;
 
@@ -78,7 +78,6 @@ export function useRecordingPlaylist(
 					// 							__typename: 'Recording',
 					// 							id: recordingId,
 					// 						},
-
 					// 					},
 					// 				],
 					// 			},
@@ -109,12 +108,12 @@ export function useRecordingPlaylist(
 			>(PlaylistRecordingRemoveDocument, variables)(),
 		{
 			onMutate: async () => {
-				await queryClient.fetchQuery(PLAYLIST_REFETCH_QUERIES);
+				await queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
 			},
 			onSuccess: (data) => {
 				if (data?.playlistRecordingRemove) {
-					// queryClient.setQueryData<UserPlaylist>(
-					// 	[playlist.id],
+					// queryClient.setQueryData<UserPlaylist | undefined>(
+					// 	playlist.id,
 					// 	(old) => {
 					// 		if (!old) return old;
 

@@ -79,7 +79,13 @@ export default function PlaylistForm({
 			<div className={styles.privacyLabel}>
 				<FormattedMessage id="newPrivacy" defaultMessage="Privacy" />
 			</div>
-			<Link href="#" onClick={() => setIsPrivacyVisible(!isPrivacyVisible)}>
+			<Link
+				href="#"
+				onClick={(e) => {
+					e.preventDefault();
+					setIsPrivacyVisible(!isPrivacyVisible);
+				}}
+			>
 				<div className={styles.privacyInputLeft}>
 					{!isPublic ? (
 						<PrivateIcon color={BaseColors.DARK} />
@@ -90,18 +96,23 @@ export default function PlaylistForm({
 						{!isPublic ? 'Private' : 'Shareable'}
 					</p>
 				</div>
-				{!isPrivacyVisible ? (
-					<DisclosureIcon color={BaseColors.DARK} />
-				) : (
-					<ClosureIcon color={BaseColors.DARK} />
-				)}
+				<div className={styles.privacyInputRightIcon}>
+					{!isPrivacyVisible ? (
+						<DisclosureIcon color={BaseColors.DARK} />
+					) : (
+						<ClosureIcon color={BaseColors.DARK} />
+					)}
+				</div>
 			</Link>
 			{isPrivacyVisible && (
 				<div className={styles.privacyContainer}>
 					<Link
 						className={styles.privacyOption}
 						href="#"
-						onClick={() => setPrivacy(false)}
+						onClick={(e) => {
+							e.preventDefault();
+							setPrivacy(false);
+						}}
 					>
 						<PrivateIcon color={BaseColors.DARK} />
 						<div className={styles.privacyOptionRight}>
@@ -117,7 +128,10 @@ export default function PlaylistForm({
 					<Link
 						className={styles.privacyOption}
 						href="#"
-						onClick={() => setPrivacy(true)}
+						onClick={(e) => {
+							e.preventDefault();
+							setPrivacy(true);
+						}}
 					>
 						<ShareableIcon color={BaseColors.DARK} />
 						<div className={styles.privacyOptionRight}>
