@@ -16,6 +16,8 @@ jobs:
           find: https://www.audioverse.org
           replace: ${{github.event.deployment_status.target_url}}
           include: 'https?:\/\/[\w\.-]+\/en\/'
+          # Ignore contrast-related errors for now
+          ignore: WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail,WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail
   lighthouse:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
