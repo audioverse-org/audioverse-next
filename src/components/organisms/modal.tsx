@@ -18,6 +18,7 @@ interface ModalProps {
 	onClose?: () => void;
 	open: boolean;
 	hideClose?: boolean;
+	leftTitle?: boolean;
 	actions?: ReactNode;
 }
 
@@ -28,6 +29,7 @@ export default function Modal({
 	titleLink,
 	title,
 	hideClose,
+	leftTitle,
 	actions,
 }: ModalProps): JSX.Element {
 	const intl = useIntl();
@@ -62,7 +64,7 @@ export default function Modal({
 					) : (
 						''
 					)}
-					{titleLink ? (
+					{titleLink || leftTitle ? (
 						<div className={styles.head}>
 							<h5 className={styles.leftText}>{title}</h5>
 							<div className={styles.link}>{titleLink}</div>

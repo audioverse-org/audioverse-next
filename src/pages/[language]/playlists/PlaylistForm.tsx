@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { UserPlaylist, UserPlaylistAddInput } from '~src/__generated__/graphql';
-import Heading2 from '~src/components/atoms/heading2';
 import Button from '~src/components/molecules/button';
 import Input from '~src/components/molecules/form/input';
 import { BaseColors } from '~src/lib/constants';
@@ -33,7 +32,6 @@ export default function PlaylistForm({
 	isPublic: playlistIsPublic,
 	onSubmit,
 	onCancel,
-	onDelete,
 }: Props): JSX.Element {
 	const [title, setTitle] = useState<string>(playlistTitle || '');
 	const [description, setDescription] = useState<string>(summary || '');
@@ -58,31 +56,8 @@ export default function PlaylistForm({
 		}
 	};
 
-	const deletePlaylist = async () => {
-		setLoading(true);
-		onDelete && (await onDelete());
-	};
-
 	return (
 		<div>
-			{id && (
-				<div style={{ textAlign: 'right' }}>
-					<Link href="#" legacyBehavior>
-						<a onClick={deletePlaylist}>
-							<FormattedMessage
-								id="deletePlaylists"
-								defaultMessage="Delete Playlist"
-							/>
-						</a>
-					</Link>
-				</div>
-			)}
-			{id && (
-				<Heading2>
-					<FormattedMessage id="editPlayLists" defaultMessage="Edit playlist" />
-				</Heading2>
-			)}
-
 			<Input
 				label={intl.formatMessage({
 					id: 'pl_title',

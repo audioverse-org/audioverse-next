@@ -446,7 +446,7 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "ADD TO PLAYLIST"
+      "value": "Add To Playlist"
     }
   ],
   "add_to_playlist_btn": [
@@ -1685,10 +1685,10 @@
       "value": "m"
     }
   ],
-  "editPlayLists": [
+  "edit_playlist": [
     {
       "type": 0,
-      "value": "Edit playlist"
+      "value": "Edit Playlist"
     }
   ],
   "egwAudiobookList__heading": [

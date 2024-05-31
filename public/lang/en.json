@@ -225,7 +225,7 @@
     "string": "Profile"
   },
   "add_to_playlist": {
-    "string": "ADD TO PLAYLIST"
+    "string": "Add To Playlist"
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
@@ -802,8 +802,8 @@
     "comment": "duration minutes",
     "string": "{minutes}m"
   },
-  "editPlayLists": {
-    "string": "Edit playlist"
+  "edit_playlist": {
+    "string": "Edit Playlist"
   },
   "egwAudiobookList__heading": {
     "string": "Ellen White"

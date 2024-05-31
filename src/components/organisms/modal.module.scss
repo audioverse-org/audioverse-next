@@ -56,17 +56,11 @@
 	letter-spacing: 0.1em;
 	margin-bottom: 1px;
 }
-.link {
-	float: right;
-	text-decoration: none;
-	color: inherit;
-}
-.link:hover,
-.link:focus {
-	text-decoration: underline;
-	color: #ff224a;
-}
+
 .head {
-	margin-bottom: 10px;
-	padding: 10px 0;
+	margin-bottom: 20px;
+	padding: 0 0 10px 0;
+}
+.link {
+	margin-bottom: 1px;
 }

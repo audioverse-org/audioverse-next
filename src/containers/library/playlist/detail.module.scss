@@ -28,3 +28,20 @@
 .cardGroup {
 	margin-bottom: 24px;
 }
+.modalLink {
+	float: right;
+	text-decoration: none;
+	color: inherit;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font: inherit;
+	padding: 0;
+	height: auto;
+}
+
+.modalLink:hover,
+.modalLink:focus {
+	text-decoration: underline;
+	color: #ff224a;
+}

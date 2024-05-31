@@ -28,6 +28,7 @@ import PlaylistsPage from '../../pages/[language]/playlists/addToPlaylist/AddToP
 import Modal from '../organisms/modal';
 import { GlobalModalsContext } from '../templates/andGlobalModals';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
+import Button from './button';
 import { CardTheme } from './card/base/withCardTheme';
 import IconButton from './iconButton';
 import PersonLockup from './personLockup';
@@ -312,17 +313,20 @@ export default function TeaseRecording({
 				title={
 					<FormattedMessage
 						id="add_to_playlist"
-						defaultMessage="ADD TO PLAYLIST"
+						defaultMessage="Add To Playlist"
 					/>
 				}
 				titleLink={
-					<div
+					<Button
 						onClick={() => {
 							setIsPlaylistModalNewOpen(true);
 						}}
-					>
-						<FormattedMessage id="create_new" defaultMessage="Create New" />
-					</div>
+						className={styles.modalLink}
+						text={
+							<FormattedMessage id="create_new" defaultMessage="Create New" />
+						}
+						type="none"
+					/>
 				}
 				hideClose
 			>
@@ -334,6 +338,7 @@ export default function TeaseRecording({
 				title={
 					<FormattedMessage id="new_playlist" defaultMessage="New playlist" />
 				}
+				leftTitle
 				hideClose
 			>
 				<NewPlaylist id={recording.id} onClose={handleCloseNewModal} />
