@@ -1386,7 +1386,7 @@
   "contact_footer": [
     {
       "type": 0,
-      "value": "Contact"
+      "value": "Contato"
     }
   ],
   "discoverCollections__title": [
@@ -1416,7 +1416,7 @@
   "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "Histórias"
     }
   ],
   "discover__conferencesNext": [
@@ -2882,7 +2882,7 @@
   "legal_footer": [
     {
       "type": 0,
-      "value": "Legal"
+      "value": "Jurídico"
     }
   ],
   "libraryCollections__emptyCopy": [
@@ -3434,7 +3434,7 @@
   "molecule-buttonGuestDownload__modalTitle": [
     {
       "type": 0,
-      "value": "Create a Free Account"
+      "value": "Criar uma conta gratuita"
     }
   ],
   "molecule-buttonGuest__Download": [
@@ -3506,7 +3506,7 @@
   "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "Tem certeza?"
     }
   ],
   "molecule-buttonGuest__requests": [
@@ -3784,7 +3784,7 @@
   "molecules-pagination__nextLabelMobile": [
     {
       "type": 0,
-      "value": "Next"
+      "value": "Próximo"
     }
   ],
   "molecules-pagination__previousLabel": [
@@ -3844,7 +3844,7 @@
   "newsLetterForm__newsletterName": [
     {
       "type": 0,
-      "value": "Name"
+      "value": "Nome"
     }
   ],
   "newsLetterForm__newsletterNamePlaceholder": [
@@ -4008,7 +4008,7 @@
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "Todos Audiolivros"
     }
   ],
   "organismSection__audiobooksNext": [
@@ -4062,7 +4062,7 @@
   "organismSection_presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "Oradores"
     }
   ],
   "organismSection_presentersNext": [
@@ -4080,7 +4080,7 @@
   "organismSection_scriptureSongsHeading": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "Canções das Escrituras"
     }
   ],
   "organismSection_scriptureSongsNext": [
@@ -4098,7 +4098,7 @@
   "organismSection_seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Séries"
     }
   ],
   "organismSection_seriesNext": [
@@ -4116,7 +4116,7 @@
   "organismSection_sponsorsHeading": [
     {
       "type": 0,
-      "value": "Sponsors"
+      "value": "Patrocinadores"
     }
   ],
   "organismSection_sponsorsNext": [
@@ -4482,13 +4482,13 @@
   "presentersListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Todos"
     }
   ],
   "presentersList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Todos"
     }
   ],
   "presentersList__title": [
@@ -4746,7 +4746,7 @@
   "regularLogin__login": [
     {
       "type": 0,
-      "value": "Already have an account?"
+      "value": "Já tem uma conta?"
     }
   ],
   "regularLogin__loginTxt": [
@@ -4946,13 +4946,13 @@
   "search__allHeading": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Todos"
     }
   ],
   "search__bibleBooksHeading": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "Bíblia"
     }
   ],
   "search__bileBooksSeeAll": [
@@ -5036,7 +5036,7 @@
   "search__seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Séries"
     }
   ],
   "search__seriesSeeAll": [
@@ -5512,13 +5512,13 @@
   "sponsorsListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Todos"
     }
   ],
   "sponsorsList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Todos"
     }
   ],
   "sponsorsList__title": [
@@ -5638,7 +5638,7 @@
   "terms_footer": [
     {
       "type": 0,
-      "value": "Terms of Use"
+      "value": "Termos de uso"
     }
   ],
   "testimonies__heading": [
@@ -5704,7 +5704,7 @@
   "topicDetail__description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "Descrição"
     }
   ],
   "topicDetail__label": [
@@ -5722,13 +5722,13 @@
   "topicDetail__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Séries"
     }
   ],
   "topicDetail__teachings": [
     {
       "type": 0,
-      "value": "Teachings"
+      "value": "Ensinamentos"
     }
   ],
   "topicItemCount__items": [

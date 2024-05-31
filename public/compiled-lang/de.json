@@ -722,7 +722,7 @@
   "bible__title": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "Bibel"
     }
   ],
   "blogDetailPage__moreBlogPosts": [
@@ -750,7 +750,7 @@
   "books__title": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "Alle Hörbücher"
     }
   ],
   "browse__topicsNext": [
@@ -936,7 +936,7 @@
     },
     {
       "type": 0,
-      "value": " chapters"
+      "value": " Kapitel"
     }
   ],
   "cardSequence_egwAudiobookType": [
@@ -1188,7 +1188,7 @@
   "collectionType__bibleVersion": [
     {
       "type": 0,
-      "value": "Bible Version"
+      "value": "Bibelversion"
     }
   ],
   "collectionType__conference": [
@@ -1248,7 +1248,7 @@
   "conferences__title": [
     {
       "type": 0,
-      "value": "All Conferences"
+      "value": "Konferenzen"
     }
   ],
   "contact__emailLabel": [
@@ -1386,7 +1386,7 @@
   "contact_footer": [
     {
       "type": 0,
-      "value": "Contact"
+      "value": "Kontakt"
     }
   ],
   "discoverCollections__title": [
@@ -1416,7 +1416,7 @@
   "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "Geschichten"
     }
   ],
   "discover__conferencesNext": [
@@ -1898,7 +1898,7 @@
   "give__title": [
     {
       "type": 0,
-      "value": "Donate"
+      "value": "Spenden"
     }
   ],
   "header__navItemBible": [
@@ -2426,7 +2426,7 @@
   "helpScout.emailLabel": [
     {
       "type": 0,
-      "value": "Email address"
+      "value": "E-Mail-Adresse"
     }
   ],
   "helpScout.emailValidationLabel": [
@@ -2516,7 +2516,7 @@
   "helpScout.history": [
     {
       "type": 0,
-      "value": "History"
+      "value": "Verlauf"
     }
   ],
   "helpScout.howCanWeHelp": [
@@ -2720,7 +2720,7 @@
   "homePage__DiscoverAudioButtonLabel": [
     {
       "type": 0,
-      "value": "Discover Audio"
+      "value": "Audio entdecken"
     }
   ],
   "homePage__bannerImageAlt": [
@@ -2886,7 +2886,7 @@
   "legal_footer": [
     {
       "type": 0,
-      "value": "Legal"
+      "value": "Rechtliches"
     }
   ],
   "libraryCollections__emptyCopy": [
@@ -3354,7 +3354,7 @@
   "miniplayer__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Serien"
     }
   ],
   "miniplayer__volume": [
@@ -3510,7 +3510,7 @@
   "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "Bist du sicher?"
     }
   ],
   "molecule-buttonGuest__requests": [
@@ -4012,7 +4012,7 @@
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "Alle Hörbücher"
     }
   ],
   "organismSection__audiobooksNext": [
@@ -4066,7 +4066,7 @@
   "organismSection_presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "Sprecher"
     }
   ],
   "organismSection_presentersNext": [
@@ -4084,7 +4084,7 @@
   "organismSection_scriptureSongsHeading": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "Bibel-Lieder"
     }
   ],
   "organismSection_scriptureSongsNext": [
@@ -4102,7 +4102,7 @@
   "organismSection_seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Serien"
     }
   ],
   "organismSection_seriesNext": [
@@ -4120,7 +4120,7 @@
   "organismSection_sponsorsHeading": [
     {
       "type": 0,
-      "value": "Sponsors"
+      "value": "Sponsoren"
     }
   ],
   "organismSection_sponsorsNext": [
@@ -4486,13 +4486,13 @@
   "presentersListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Alle"
     }
   ],
   "presentersList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Alle"
     }
   ],
   "presentersList__title": [
@@ -4534,7 +4534,7 @@
   "presenters__title": [
     {
       "type": 0,
-      "value": "All Presenters"
+      "value": "Alle Sprecher"
     }
   ],
   "privacy_footer": [
@@ -4600,7 +4600,7 @@
   "profile__deleteConfirmTitle": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "Bist du sicher?"
     }
   ],
   "profile__heading": [
@@ -4702,7 +4702,7 @@
   "register__lastNamePlaceholder": [
     {
       "type": 0,
-      "value": "Doe"
+      "value": "Mustermann"
     }
   ],
   "register__loadingMessage": [
@@ -4750,7 +4750,7 @@
   "regularLogin__login": [
     {
       "type": 0,
-      "value": "Already have an account?"
+      "value": "Hast du schon ein Benutzerkonto?"
     }
   ],
   "regularLogin__loginTxt": [
@@ -4950,13 +4950,13 @@
   "search__allHeading": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Alle"
     }
   ],
   "search__bibleBooksHeading": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "Bibel"
     }
   ],
   "search__bileBooksSeeAll": [
@@ -4968,7 +4968,7 @@
   "search__booksHeading": [
     {
       "type": 0,
-      "value": "Audiobooks"
+      "value": "Hörbücher"
     }
   ],
   "search__booksSeeAll": [
@@ -5016,7 +5016,7 @@
   "search__musicHeading": [
     {
       "type": 0,
-      "value": "Music"
+      "value": "Musik"
     }
   ],
   "search__musicSeeAll": [
@@ -5028,7 +5028,7 @@
   "search__presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "Sprecher"
     }
   ],
   "search__presentersSeeAll": [
@@ -5040,7 +5040,7 @@
   "search__seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Serien"
     }
   ],
   "search__seriesSeeAll": [
@@ -5064,7 +5064,7 @@
   "search__storiesHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "Geschichten"
     }
   ],
   "search__storiesSeeAll": [
@@ -5088,7 +5088,7 @@
   "search__title": [
     {
       "type": 0,
-      "value": "Search"
+      "value": "Suchen"
     }
   ],
   "search__titleDynamic": [
@@ -5178,7 +5178,7 @@
   "seriesList__title": [
     {
       "type": 0,
-      "value": "All Series"
+      "value": "Alle Serien"
     }
   ],
   "sermonDetailPage__attachments": [
@@ -5520,13 +5520,13 @@
   "sponsorsListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Alle"
     }
   ],
   "sponsorsList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Alle"
     }
   ],
   "sponsorsList__title": [
@@ -5558,7 +5558,7 @@
   "sponsors__title": [
     {
       "type": 0,
-      "value": "All Sponsors"
+      "value": "Alle Sponsoren"
     }
   ],
   "storyAlbumList__emptyStateMessage": [
@@ -5604,7 +5604,7 @@
   "storyAlbums__title": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "Bibel-Lieder"
     }
   ],
   "teachingsFeed__description": [
@@ -5634,7 +5634,7 @@
   "teachings__title": [
     {
       "type": 0,
-      "value": "All Teachings"
+      "value": "Alle Lehren"
     }
   ],
   "team__title": [
@@ -5646,7 +5646,7 @@
   "terms_footer": [
     {
       "type": 0,
-      "value": "Terms of Use"
+      "value": "Nutzungsbedingungen"
     }
   ],
   "testimonies__heading": [
@@ -5712,7 +5712,7 @@
   "topicDetail__description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "Beschreibung"
     }
   ],
   "topicDetail__label": [
@@ -5730,13 +5730,13 @@
   "topicDetail__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Serien"
     }
   ],
   "topicDetail__teachings": [
     {
       "type": 0,
-      "value": "Teachings"
+      "value": "Lehren"
     }
   ],
   "topicItemCount__items": [
@@ -5850,7 +5850,7 @@
   "trending__title": [
     {
       "type": 0,
-      "value": "Trending Teachings"
+      "value": "Beliebte Lehren"
     }
   ]
 }

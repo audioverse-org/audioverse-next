@@ -722,7 +722,7 @@
   "bible__title": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "聖書"
     }
   ],
   "blogDetailPage__moreBlogPosts": [
@@ -750,7 +750,7 @@
   "books__title": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "全てのオーディオブック"
     }
   ],
   "browse__topicsNext": [
@@ -898,7 +898,7 @@
   "cardHatSponsor__sponsorLabel": [
     {
       "type": 0,
-      "value": "Sponsor"
+      "value": "主催者"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -944,7 +944,7 @@
     },
     {
       "type": 0,
-      "value": " chapters"
+      "value": "章"
     }
   ],
   "cardSequence_egwAudiobookType": [
@@ -1208,7 +1208,7 @@
   "collectionType__bibleVersion": [
     {
       "type": 0,
-      "value": "Bible Version"
+      "value": "聖書バージョン"
     }
   ],
   "collectionType__conference": [
@@ -1268,7 +1268,7 @@
   "conferences__title": [
     {
       "type": 0,
-      "value": "All Conferences"
+      "value": "大会・総会"
     }
   ],
   "contact__emailLabel": [
@@ -1406,7 +1406,7 @@
   "contact_footer": [
     {
       "type": 0,
-      "value": "Contact"
+      "value": "お問い合わせ"
     }
   ],
   "discoverCollections__title": [
@@ -1436,7 +1436,7 @@
   "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "ストーリー"
     }
   ],
   "discover__conferencesNext": [
@@ -1902,7 +1902,7 @@
   "give__title": [
     {
       "type": 0,
-      "value": "Donate"
+      "value": "ご支援"
     }
   ],
   "header__navItemBible": [
@@ -2430,7 +2430,7 @@
   "helpScout.emailLabel": [
     {
       "type": 0,
-      "value": "Email address"
+      "value": "メールアドレス"
     }
   ],
   "helpScout.emailValidationLabel": [
@@ -2520,7 +2520,7 @@
   "helpScout.history": [
     {
       "type": 0,
-      "value": "History"
+      "value": "履歴"
     }
   ],
   "helpScout.howCanWeHelp": [
@@ -2724,7 +2724,7 @@
   "homePage__DiscoverAudioButtonLabel": [
     {
       "type": 0,
-      "value": "Discover Audio"
+      "value": "ディスカバー オーディオ"
     }
   ],
   "homePage__bannerImageAlt": [
@@ -2890,7 +2890,7 @@
   "legal_footer": [
     {
       "type": 0,
-      "value": "Legal"
+      "value": "法律情報"
     }
   ],
   "libraryCollections__emptyCopy": [
@@ -3328,13 +3328,13 @@
   "mediaFormatSwitcher__audio": [
     {
       "type": 0,
-      "value": "Audio"
+      "value": "オーディオ"
     }
   ],
   "mediaFormatSwitcher__video": [
     {
       "type": 0,
-      "value": "Video"
+      "value": "動画"
     }
   ],
   "miniplayer__increaseVolume": [
@@ -3358,7 +3358,7 @@
   "miniplayer__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "シリーズ"
     }
   ],
   "miniplayer__volume": [
@@ -3514,7 +3514,7 @@
   "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "削除されます。よろしいですか？"
     }
   ],
   "molecule-buttonGuest__requests": [
@@ -4016,7 +4016,7 @@
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "全てのオーディオブック"
     }
   ],
   "organismSection__audiobooksNext": [
@@ -4070,7 +4070,7 @@
   "organismSection_presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "プリゼンター"
     }
   ],
   "organismSection_presentersNext": [
@@ -4088,7 +4088,7 @@
   "organismSection_scriptureSongsHeading": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "聖句ソング"
     }
   ],
   "organismSection_scriptureSongsNext": [
@@ -4106,7 +4106,7 @@
   "organismSection_seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "シリーズ"
     }
   ],
   "organismSection_seriesNext": [
@@ -4124,7 +4124,7 @@
   "organismSection_sponsorsHeading": [
     {
       "type": 0,
-      "value": "Sponsors"
+      "value": "主催者"
     }
   ],
   "organismSection_sponsorsNext": [
@@ -4510,13 +4510,13 @@
   "presentersListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全て"
     }
   ],
   "presentersList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全て"
     }
   ],
   "presentersList__title": [
@@ -4558,7 +4558,7 @@
   "presenters__title": [
     {
       "type": 0,
-      "value": "All Presenters"
+      "value": "全てのスピーカー"
     }
   ],
   "privacy_footer": [
@@ -4624,7 +4624,7 @@
   "profile__deleteConfirmTitle": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "削除されます。よろしいですか？"
     }
   ],
   "profile__heading": [
@@ -4714,7 +4714,7 @@
   "register__firstNamePlaceholder": [
     {
       "type": 0,
-      "value": "Jane"
+      "value": "Hanako"
     }
   ],
   "register__lastNameLabel": [
@@ -4726,7 +4726,7 @@
   "register__lastNamePlaceholder": [
     {
       "type": 0,
-      "value": "Doe"
+      "value": "Suzuki"
     }
   ],
   "register__loadingMessage": [
@@ -4774,7 +4774,7 @@
   "regularLogin__login": [
     {
       "type": 0,
-      "value": "Already have an account?"
+      "value": "すでにアカウントをお持ちですか？"
     }
   ],
   "regularLogin__loginTxt": [
@@ -4970,13 +4970,13 @@
   "search__allHeading": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全て"
     }
   ],
   "search__bibleBooksHeading": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "聖書"
     }
   ],
   "search__bileBooksSeeAll": [
@@ -4988,7 +4988,7 @@
   "search__booksHeading": [
     {
       "type": 0,
-      "value": "Audiobooks"
+      "value": "オーディオブック"
     }
   ],
   "search__booksSeeAll": [
@@ -5036,7 +5036,7 @@
   "search__musicHeading": [
     {
       "type": 0,
-      "value": "Music"
+      "value": "音楽"
     }
   ],
   "search__musicSeeAll": [
@@ -5048,7 +5048,7 @@
   "search__presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "プリゼンター"
     }
   ],
   "search__presentersSeeAll": [
@@ -5060,7 +5060,7 @@
   "search__seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "シリーズ"
     }
   ],
   "search__seriesSeeAll": [
@@ -5084,7 +5084,7 @@
   "search__storiesHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "ストーリー"
     }
   ],
   "search__storiesSeeAll": [
@@ -5108,7 +5108,7 @@
   "search__title": [
     {
       "type": 0,
-      "value": "Search"
+      "value": "検索"
     }
   ],
   "search__titleDynamic": [
@@ -5198,7 +5198,7 @@
   "seriesList__title": [
     {
       "type": 0,
-      "value": "All Series"
+      "value": "全てのシリーズ"
     }
   ],
   "sermonDetailPage__attachments": [
@@ -5540,13 +5540,13 @@
   "sponsorsListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全て"
     }
   ],
   "sponsorsList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全て"
     }
   ],
   "sponsorsList__title": [
@@ -5578,7 +5578,7 @@
   "sponsors__title": [
     {
       "type": 0,
-      "value": "All Sponsors"
+      "value": "全ての主催者"
     }
   ],
   "storyAlbumList__emptyStateMessage": [
@@ -5632,7 +5632,7 @@
   "storyAlbums__title": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "聖句ソング"
     }
   ],
   "teachingsFeed__description": [
@@ -5662,7 +5662,7 @@
   "teachings__title": [
     {
       "type": 0,
-      "value": "All Teachings"
+      "value": "全てのレッスン"
     }
   ],
   "team__title": [
@@ -5674,7 +5674,7 @@
   "terms_footer": [
     {
       "type": 0,
-      "value": "Terms of Use"
+      "value": "利用規約"
     }
   ],
   "testimonies__heading": [
@@ -5744,7 +5744,7 @@
   "topicDetail__description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "内容詳細"
     }
   ],
   "topicDetail__label": [
@@ -5762,13 +5762,13 @@
   "topicDetail__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "シリーズ"
     }
   ],
   "topicDetail__teachings": [
     {
       "type": 0,
-      "value": "Teachings"
+      "value": "レッスン"
     }
   ],
   "topicItemCount__items": [
@@ -5882,7 +5882,7 @@
   "trending__title": [
     {
       "type": 0,
-      "value": "Trending Teachings"
+      "value": "最近人気のレッスン"
     }
   ]
 }

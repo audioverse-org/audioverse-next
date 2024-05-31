@@ -722,7 +722,7 @@
   "bible__title": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "圣经"
     }
   ],
   "blogDetailPage__moreBlogPosts": [
@@ -750,7 +750,7 @@
   "books__title": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "全部有声书"
     }
   ],
   "browse__topicsNext": [
@@ -898,7 +898,7 @@
   "cardHatSponsor__sponsorLabel": [
     {
       "type": 0,
-      "value": "Sponsor"
+      "value": "赞助者"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -940,7 +940,7 @@
     },
     {
       "type": 0,
-      "value": " chapters"
+      "value": " 章"
     }
   ],
   "cardSequence_egwAudiobookType": [
@@ -1196,7 +1196,7 @@
   "collectionType__bibleVersion": [
     {
       "type": 0,
-      "value": "Bible Version"
+      "value": "圣经版本"
     }
   ],
   "collectionType__conference": [
@@ -1256,7 +1256,7 @@
   "conferences__title": [
     {
       "type": 0,
-      "value": "All Conferences"
+      "value": "大会"
     }
   ],
   "contact__emailLabel": [
@@ -1394,7 +1394,7 @@
   "contact_footer": [
     {
       "type": 0,
-      "value": "Contact"
+      "value": "联系"
     }
   ],
   "discoverCollections__title": [
@@ -1424,7 +1424,7 @@
   "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "故事"
     }
   ],
   "discover__conferencesNext": [
@@ -1902,7 +1902,7 @@
   "give__title": [
     {
       "type": 0,
-      "value": "Donate"
+      "value": "捐赠"
     }
   ],
   "header__navItemBible": [
@@ -2430,7 +2430,7 @@
   "helpScout.emailLabel": [
     {
       "type": 0,
-      "value": "Email address"
+      "value": "邮件地址"
     }
   ],
   "helpScout.emailValidationLabel": [
@@ -2520,7 +2520,7 @@
   "helpScout.history": [
     {
       "type": 0,
-      "value": "History"
+      "value": "历史"
     }
   ],
   "helpScout.howCanWeHelp": [
@@ -2724,7 +2724,7 @@
   "homePage__DiscoverAudioButtonLabel": [
     {
       "type": 0,
-      "value": "Discover Audio"
+      "value": "探索音频"
     }
   ],
   "homePage__bannerImageAlt": [
@@ -2890,7 +2890,7 @@
   "legal_footer": [
     {
       "type": 0,
-      "value": "Legal"
+      "value": "法律相关"
     }
   ],
   "libraryCollections__emptyCopy": [
@@ -3328,13 +3328,13 @@
   "mediaFormatSwitcher__audio": [
     {
       "type": 0,
-      "value": "Audio"
+      "value": "音频"
     }
   ],
   "mediaFormatSwitcher__video": [
     {
       "type": 0,
-      "value": "Video"
+      "value": "视频"
     }
   ],
   "miniplayer__increaseVolume": [
@@ -3358,7 +3358,7 @@
   "miniplayer__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "系列"
     }
   ],
   "miniplayer__volume": [
@@ -3514,7 +3514,7 @@
   "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "确定吗？"
     }
   ],
   "molecule-buttonGuest__requests": [
@@ -4036,7 +4036,7 @@
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "全部有声书"
     }
   ],
   "organismSection__audiobooksNext": [
@@ -4090,7 +4090,7 @@
   "organismSection_presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "讲员"
     }
   ],
   "organismSection_presentersNext": [
@@ -4108,7 +4108,7 @@
   "organismSection_scriptureSongsHeading": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "经文歌曲"
     }
   ],
   "organismSection_scriptureSongsNext": [
@@ -4126,7 +4126,7 @@
   "organismSection_seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "系列"
     }
   ],
   "organismSection_seriesNext": [
@@ -4144,7 +4144,7 @@
   "organismSection_sponsorsHeading": [
     {
       "type": 0,
-      "value": "Sponsors"
+      "value": "赞助者"
     }
   ],
   "organismSection_sponsorsNext": [
@@ -4510,13 +4510,13 @@
   "presentersListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全部"
     }
   ],
   "presentersList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全部"
     }
   ],
   "presentersList__title": [
@@ -4558,7 +4558,7 @@
   "presenters__title": [
     {
       "type": 0,
-      "value": "All Presenters"
+      "value": "所有讲员"
     }
   ],
   "privacy_footer": [
@@ -4624,7 +4624,7 @@
   "profile__deleteConfirmTitle": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "确定吗？"
     }
   ],
   "profile__heading": [
@@ -4774,7 +4774,7 @@
   "regularLogin__login": [
     {
       "type": 0,
-      "value": "Already have an account?"
+      "value": "已经有账户了？"
     }
   ],
   "regularLogin__loginTxt": [
@@ -4974,13 +4974,13 @@
   "search__allHeading": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全部"
     }
   ],
   "search__bibleBooksHeading": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "圣经"
     }
   ],
   "search__bileBooksSeeAll": [
@@ -4992,7 +4992,7 @@
   "search__booksHeading": [
     {
       "type": 0,
-      "value": "Audiobooks"
+      "value": "音频书籍"
     }
   ],
   "search__booksSeeAll": [
@@ -5040,7 +5040,7 @@
   "search__musicHeading": [
     {
       "type": 0,
-      "value": "Music"
+      "value": "音乐"
     }
   ],
   "search__musicSeeAll": [
@@ -5052,7 +5052,7 @@
   "search__presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "讲员"
     }
   ],
   "search__presentersSeeAll": [
@@ -5064,7 +5064,7 @@
   "search__seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "系列"
     }
   ],
   "search__seriesSeeAll": [
@@ -5088,7 +5088,7 @@
   "search__storiesHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "故事"
     }
   ],
   "search__storiesSeeAll": [
@@ -5112,7 +5112,7 @@
   "search__title": [
     {
       "type": 0,
-      "value": "Search"
+      "value": "搜索"
     }
   ],
   "search__titleDynamic": [
@@ -5202,7 +5202,7 @@
   "seriesList__title": [
     {
       "type": 0,
-      "value": "All Series"
+      "value": "所有系列"
     }
   ],
   "sermonDetailPage__attachments": [
@@ -5544,13 +5544,13 @@
   "sponsorsListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全部"
     }
   ],
   "sponsorsList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "全部"
     }
   ],
   "sponsorsList__title": [
@@ -5582,7 +5582,7 @@
   "sponsors__title": [
     {
       "type": 0,
-      "value": "All Sponsors"
+      "value": "所有赞助者"
     }
   ],
   "storyAlbumList__emptyStateMessage": [
@@ -5628,7 +5628,7 @@
   "storyAlbums__title": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "经文歌曲"
     }
   ],
   "teachingsFeed__description": [
@@ -5662,7 +5662,7 @@
   "teachings__title": [
     {
       "type": 0,
-      "value": "All Teachings"
+      "value": "所有证道"
     }
   ],
   "team__title": [
@@ -5674,7 +5674,7 @@
   "terms_footer": [
     {
       "type": 0,
-      "value": "Terms of Use"
+      "value": "使用条款"
     }
   ],
   "testimonies__heading": [
@@ -5748,7 +5748,7 @@
   "topicDetail__description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "描述"
     }
   ],
   "topicDetail__label": [
@@ -5766,13 +5766,13 @@
   "topicDetail__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "系列"
     }
   ],
   "topicDetail__teachings": [
     {
       "type": 0,
-      "value": "Teachings"
+      "value": "证道"
     }
   ],
   "topicItemCount__items": [
@@ -5886,7 +5886,7 @@
   "trending__title": [
     {
       "type": 0,
-      "value": "Trending Teachings"
+      "value": "热门证道"
     }
   ]
 }

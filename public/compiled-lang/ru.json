@@ -722,7 +722,7 @@
   "bible__title": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "Библия"
     }
   ],
   "blogDetailPage__moreBlogPosts": [
@@ -750,7 +750,7 @@
   "books__title": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "Все аудиокниги"
     }
   ],
   "browse__topicsNext": [
@@ -894,7 +894,7 @@
   "cardHatSponsor__sponsorLabel": [
     {
       "type": 0,
-      "value": "Sponsor"
+      "value": "Организатор"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -936,7 +936,7 @@
     },
     {
       "type": 0,
-      "value": " chapters"
+      "value": " главы"
     }
   ],
   "cardSequence_egwAudiobookType": [
@@ -1188,7 +1188,7 @@
   "collectionType__bibleVersion": [
     {
       "type": 0,
-      "value": "Bible Version"
+      "value": "Версия Библии"
     }
   ],
   "collectionType__conference": [
@@ -1248,7 +1248,7 @@
   "conferences__title": [
     {
       "type": 0,
-      "value": "All Conferences"
+      "value": "Конференции"
     }
   ],
   "contact__emailLabel": [
@@ -1386,7 +1386,7 @@
   "contact_footer": [
     {
       "type": 0,
-      "value": "Contact"
+      "value": "Контакт"
     }
   ],
   "discoverCollections__title": [
@@ -1416,7 +1416,7 @@
   "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "Истории"
     }
   ],
   "discover__conferencesNext": [
@@ -1894,7 +1894,7 @@
   "give__title": [
     {
       "type": 0,
-      "value": "Donate"
+      "value": "Пожертвовать"
     }
   ],
   "header__navItemBible": [
@@ -2422,7 +2422,7 @@
   "helpScout.emailLabel": [
     {
       "type": 0,
-      "value": "Email address"
+      "value": "Адрес электронной почты"
     }
   ],
   "helpScout.emailValidationLabel": [
@@ -2512,7 +2512,7 @@
   "helpScout.history": [
     {
       "type": 0,
-      "value": "History"
+      "value": "История"
     }
   ],
   "helpScout.howCanWeHelp": [
@@ -2716,7 +2716,7 @@
   "homePage__DiscoverAudioButtonLabel": [
     {
       "type": 0,
-      "value": "Discover Audio"
+      "value": "Открыть аудио"
     }
   ],
   "homePage__bannerImageAlt": [
@@ -2882,7 +2882,7 @@
   "legal_footer": [
     {
       "type": 0,
-      "value": "Legal"
+      "value": "Юр. вопросы"
     }
   ],
   "libraryCollections__emptyCopy": [
@@ -3320,13 +3320,13 @@
   "mediaFormatSwitcher__audio": [
     {
       "type": 0,
-      "value": "Audio"
+      "value": "Аудио"
     }
   ],
   "mediaFormatSwitcher__video": [
     {
       "type": 0,
-      "value": "Video"
+      "value": "Видео"
     }
   ],
   "miniplayer__increaseVolume": [
@@ -3350,7 +3350,7 @@
   "miniplayer__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Семинары"
     }
   ],
   "miniplayer__volume": [
@@ -3506,7 +3506,7 @@
   "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "Вы уверены?"
     }
   ],
   "molecule-buttonGuest__requests": [
@@ -4008,7 +4008,7 @@
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "Все аудиокниги"
     }
   ],
   "organismSection__audiobooksNext": [
@@ -4062,7 +4062,7 @@
   "organismSection_presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "Проповедники"
     }
   ],
   "organismSection_presentersNext": [
@@ -4080,7 +4080,7 @@
   "organismSection_scriptureSongsHeading": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "Песни на библейские тексты"
     }
   ],
   "organismSection_scriptureSongsNext": [
@@ -4098,7 +4098,7 @@
   "organismSection_seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Семинары"
     }
   ],
   "organismSection_seriesNext": [
@@ -4116,7 +4116,7 @@
   "organismSection_sponsorsHeading": [
     {
       "type": 0,
-      "value": "Sponsors"
+      "value": "Организаторы"
     }
   ],
   "organismSection_sponsorsNext": [
@@ -4482,13 +4482,13 @@
   "presentersListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Все"
     }
   ],
   "presentersList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Все"
     }
   ],
   "presentersList__title": [
@@ -4530,7 +4530,7 @@
   "presenters__title": [
     {
       "type": 0,
-      "value": "All Presenters"
+      "value": "Все проповедники"
     }
   ],
   "privacy_footer": [
@@ -4596,7 +4596,7 @@
   "profile__deleteConfirmTitle": [
     {
       "type": 0,
-      "value": "Are you sure?"
+      "value": "Вы уверены?"
     }
   ],
   "profile__heading": [
@@ -4746,7 +4746,7 @@
   "regularLogin__login": [
     {
       "type": 0,
-      "value": "Already have an account?"
+      "value": "У Вас уже есть учетная запись?"
     }
   ],
   "regularLogin__loginTxt": [
@@ -4946,13 +4946,13 @@
   "search__allHeading": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Все"
     }
   ],
   "search__bibleBooksHeading": [
     {
       "type": 0,
-      "value": "Bible"
+      "value": "Библия"
     }
   ],
   "search__bileBooksSeeAll": [
@@ -4964,7 +4964,7 @@
   "search__booksHeading": [
     {
       "type": 0,
-      "value": "Audiobooks"
+      "value": "Аудиокниги"
     }
   ],
   "search__booksSeeAll": [
@@ -5012,7 +5012,7 @@
   "search__musicHeading": [
     {
       "type": 0,
-      "value": "Music"
+      "value": "Музыка"
     }
   ],
   "search__musicSeeAll": [
@@ -5024,7 +5024,7 @@
   "search__presentersHeading": [
     {
       "type": 0,
-      "value": "Presenters"
+      "value": "Проповедники"
     }
   ],
   "search__presentersSeeAll": [
@@ -5036,7 +5036,7 @@
   "search__seriesHeading": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Семинары"
     }
   ],
   "search__seriesSeeAll": [
@@ -5060,7 +5060,7 @@
   "search__storiesHeading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "Истории"
     }
   ],
   "search__storiesSeeAll": [
@@ -5084,7 +5084,7 @@
   "search__title": [
     {
       "type": 0,
-      "value": "Search"
+      "value": "Поиск"
     }
   ],
   "search__titleDynamic": [
@@ -5174,7 +5174,7 @@
   "seriesList__title": [
     {
       "type": 0,
-      "value": "All Series"
+      "value": "Все семинары"
     }
   ],
   "sermonDetailPage__attachments": [
@@ -5470,7 +5470,7 @@
   "sponsorSeriesDetail__heading": [
     {
       "type": 0,
-      "value": "All Series"
+      "value": "Все семинары"
     }
   ],
   "sponsorTeachingsDetail__heading": [
@@ -5516,13 +5516,13 @@
   "sponsorsListAll__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Все"
     }
   ],
   "sponsorsList__all": [
     {
       "type": 0,
-      "value": "All"
+      "value": "Все"
     }
   ],
   "sponsorsList__title": [
@@ -5554,7 +5554,7 @@
   "sponsors__title": [
     {
       "type": 0,
-      "value": "All Sponsors"
+      "value": "Все организаторы"
     }
   ],
   "storyAlbumList__emptyStateMessage": [
@@ -5600,7 +5600,7 @@
   "storyAlbums__title": [
     {
       "type": 0,
-      "value": "Scripture Songs"
+      "value": "Песни на библейские тексты"
     }
   ],
   "teachingsFeed__description": [
@@ -5630,7 +5630,7 @@
   "teachings__title": [
     {
       "type": 0,
-      "value": "All Teachings"
+      "value": "Все темы"
     }
   ],
   "team__title": [
@@ -5642,7 +5642,7 @@
   "terms_footer": [
     {
       "type": 0,
-      "value": "Terms of Use"
+      "value": "Условия использования"
     }
   ],
   "testimonies__heading": [
@@ -5708,7 +5708,7 @@
   "topicDetail__description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "Описание"
     }
   ],
   "topicDetail__label": [
@@ -5726,13 +5726,13 @@
   "topicDetail__series": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Семинары"
     }
   ],
   "topicDetail__teachings": [
     {
       "type": 0,
-      "value": "Teachings"
+      "value": "Проповеди"
     }
   ],
   "topicItemCount__items": [
@@ -5846,7 +5846,7 @@
   "trending__title": [
     {
       "type": 0,
-      "value": "Trending Teachings"
+      "value": "Популяные проповеди"
     }
   ]
 }
