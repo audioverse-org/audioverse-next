@@ -1352,24 +1352,6 @@
   "header__navItemStory-blog": {
     "string": "ブログ"
   },
-  "homePage__newsletterEmail": {
-    "string": "メールアドレス"
-  },
-  "homePage__newsletterEmailPlaceholder": {
-    "string": "taro_suzuki@email.com"
-  },
-  "homePage__newsletterHatTitle": {
-    "string": "ニュースレターを購読する"
-  },
-  "homePage__newsletterName": {
-    "string": "氏名"
-  },
-  "homePage__newsletterNamePlaceholder": {
-    "string": "Taro Suzuki"
-  },
-  "homePage__newsletterSubscribe": {
-    "string": "今、購読に登録する"
-  },
   "homePage__tagline": {
     "string": "確実な教理"
   },
@@ -2724,5 +2706,29 @@
   },
   "trending__title": {
     "string": "Trending Teachings"
+  },
+  "newsLetterForm__checkboxNewsletter": {
+    "string": "Newsletter (typically about once a month)"
+  },
+  "newsLetterForm__checkboxWeeklyPics": {
+    "string": "Weekly Picks (goes out every Monday)"
+  },
+  "newsLetterForm__newsletterEmail": {
+    "string": "Email Address"
+  },
+  "newsLetterForm__newsletterEmailPlaceholder": {
+    "string": "josephbates@email.com"
+  },
+  "newsLetterForm__newsletterHatTitle": {
+    "string": "Sign up for our Emails"
+  },
+  "newsLetterForm__newsletterName": {
+    "string": "Name"
+  },
+  "newsLetterForm__newsletterNamePlaceholder": {
+    "string": "Joseph Bates"
+  },
+  "newsLetterForm__newsletterSubscribe": {
+    "string": "Subscribe"
   }
 }

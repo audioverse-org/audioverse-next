@@ -2777,36 +2777,6 @@
       "value": "Latest Content"
     }
   ],
-  "homePage__newsletterEmail": [
-    {
-      "type": 0,
-      "value": "メールアドレス"
-    }
-  ],
-  "homePage__newsletterEmailPlaceholder": [
-    {
-      "type": 0,
-      "value": "taro_suzuki@email.com"
-    }
-  ],
-  "homePage__newsletterHatTitle": [
-    {
-      "type": 0,
-      "value": "ニュースレターを購読する"
-    }
-  ],
-  "homePage__newsletterName": [
-    {
-      "type": 0,
-      "value": "氏名"
-    }
-  ],
-  "homePage__newsletterNamePlaceholder": [
-    {
-      "type": 0,
-      "value": "Taro Suzuki"
-    }
-  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -2817,12 +2787,6 @@
     {
       "type": 0,
       "value": "更新情報のお知らせを購読する"
-    }
-  ],
-  "homePage__newsletterSubscribe": [
-    {
-      "type": 0,
-      "value": "今、購読に登録する"
     }
   ],
   "homePage__recentPostsSectionText": [
@@ -3853,6 +3817,54 @@
     {
       "type": 0,
       "value": "User Account"
+    }
+  ],
+  "newsLetterForm__checkboxNewsletter": [
+    {
+      "type": 0,
+      "value": "Newsletter (typically about once a month)"
+    }
+  ],
+  "newsLetterForm__checkboxWeeklyPics": [
+    {
+      "type": 0,
+      "value": "Weekly Picks (goes out every Monday)"
+    }
+  ],
+  "newsLetterForm__newsletterEmail": [
+    {
+      "type": 0,
+      "value": "Email Address"
+    }
+  ],
+  "newsLetterForm__newsletterEmailPlaceholder": [
+    {
+      "type": 0,
+      "value": "josephbates@email.com"
+    }
+  ],
+  "newsLetterForm__newsletterHatTitle": [
+    {
+      "type": 0,
+      "value": "Sign up for our Emails"
+    }
+  ],
+  "newsLetterForm__newsletterName": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "newsLetterForm__newsletterNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Joseph Bates"
+    }
+  ],
+  "newsLetterForm__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Subscribe"
     }
   ],
   "notFound__header": [

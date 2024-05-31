@@ -1349,24 +1349,6 @@
   "header__navItemStory-blog": {
     "string": "Блог"
   },
-  "homePage__newsletterEmail": {
-    "string": "Адрес электронной почты"
-  },
-  "homePage__newsletterEmailPlaceholder": {
-    "string": "josephbates@email.com"
-  },
-  "homePage__newsletterHatTitle": {
-    "string": "Подписаться на рассылку нашего бюллетеня"
-  },
-  "homePage__newsletterName": {
-    "string": "Имя"
-  },
-  "homePage__newsletterNamePlaceholder": {
-    "string": "Джозеф Бейтс"
-  },
-  "homePage__newsletterSubscribe": {
-    "string": "Подписаться"
-  },
   "homePage__tagline": {
     "string": "Здравое библейское учение"
   },
@@ -2724,5 +2706,29 @@
   },
   "trending__title": {
     "string": "Trending Teachings"
+  },
+  "newsLetterForm__checkboxNewsletter": {
+    "string": "Newsletter (typically about once a month)"
+  },
+  "newsLetterForm__checkboxWeeklyPics": {
+    "string": "Weekly Picks (goes out every Monday)"
+  },
+  "newsLetterForm__newsletterEmail": {
+    "string": "Email Address"
+  },
+  "newsLetterForm__newsletterEmailPlaceholder": {
+    "string": "josephbates@email.com"
+  },
+  "newsLetterForm__newsletterHatTitle": {
+    "string": "Sign up for our Emails"
+  },
+  "newsLetterForm__newsletterName": {
+    "string": "Name"
+  },
+  "newsLetterForm__newsletterNamePlaceholder": {
+    "string": "Joseph Bates"
+  },
+  "newsLetterForm__newsletterSubscribe": {
+    "string": "Subscribe"
   }
 }

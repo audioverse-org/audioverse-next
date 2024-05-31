@@ -1352,24 +1352,6 @@
   "header__navItemStory-blog": {
     "string": "Blog"
   },
-  "homePage__newsletterEmail": {
-    "string": "Adresse e-mail"
-  },
-  "homePage__newsletterEmailPlaceholder": {
-    "string": "jeandupont@email.com"
-  },
-  "homePage__newsletterHatTitle": {
-    "string": "Inscrivez-vous à notre newsletter"
-  },
-  "homePage__newsletterName": {
-    "string": "Nom"
-  },
-  "homePage__newsletterNamePlaceholder": {
-    "string": "Jean Dupont"
-  },
-  "homePage__newsletterSubscribe": {
-    "string": "S'abonner"
-  },
   "homePage__tagline": {
     "string": "La saine doctrine"
   },
@@ -2724,5 +2706,29 @@
   },
   "trending__title": {
     "string": "Trending Teachings"
+  },
+  "newsLetterForm__checkboxNewsletter": {
+    "string": "Newsletter (typically about once a month)"
+  },
+  "newsLetterForm__checkboxWeeklyPics": {
+    "string": "Weekly Picks (goes out every Monday)"
+  },
+  "newsLetterForm__newsletterEmail": {
+    "string": "Email Address"
+  },
+  "newsLetterForm__newsletterEmailPlaceholder": {
+    "string": "josephbates@email.com"
+  },
+  "newsLetterForm__newsletterHatTitle": {
+    "string": "Sign up for our Emails"
+  },
+  "newsLetterForm__newsletterName": {
+    "string": "Name"
+  },
+  "newsLetterForm__newsletterNamePlaceholder": {
+    "string": "Joseph Bates"
+  },
+  "newsLetterForm__newsletterSubscribe": {
+    "string": "Subscribe"
   }
 }
