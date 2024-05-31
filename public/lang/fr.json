@@ -963,7 +963,7 @@
     "string": "Voir toutes les conférences"
   },
   "search__sponsorsHeading": {
-    "string": "Sponsors"
+    "string": "Collaborateurs"
   },
   "search__sponsorsSeeAll": {
     "string": "Voir tous les sponsors"
@@ -1738,7 +1738,7 @@
     "string": "All Blog Posts"
   },
   "books__title": {
-    "string": "Books"
+    "string": "Tous les livres audio"
   },
   "browse__topicsNext": {
     "string": "Next topics"
@@ -1774,7 +1774,7 @@
     "string": "Sponsor"
   },
   "cardSequence_chaptersLabel": {
-    "string": "{count} chapters"
+    "string": "{count} chapitres"
   },
   "cardSequence_egwAudiobookType": {
     "string": "ELLEN WHITE"
@@ -1786,7 +1786,7 @@
     "string": "Topic"
   },
   "collectionType__bibleVersion": {
-    "string": "Bible Version"
+    "string": "Version de la Bible"
   },
   "conferencesPresenters__title": {
     "string": "Presenters from {conferenceName}"
@@ -1798,7 +1798,7 @@
     "string": "Teachings from {conferenceName}"
   },
   "conferences__title": {
-    "string": "All Conferences"
+    "string": "Conférences"
   },
   "contact__help": {
     "string": "View help articles"
@@ -1825,7 +1825,7 @@
     "string": "Discover Ellen White"
   },
   "discoverCollections_storySeasonsHeading": {
-    "string": "Stories"
+    "string": "Histoires"
   },
   "discover__conferencesNext": {
     "string": "Next recent conferences"
@@ -1910,7 +1910,7 @@
     "string": "Donation form"
   },
   "give__title": {
-    "string": "Donate"
+    "string": "Faire un don"
   },
   "header__navItemBrowse": {
     "comment": "Header nav link name: Browse",
@@ -2070,7 +2070,7 @@
     "string": "joined the chat"
   },
   "helpScout.emailLabel": {
-    "string": "Email address"
+    "string": "Adresse e-mail"
   },
   "helpScout.emailValidationLabel": {
     "string": "Please use a valid email address"
@@ -2115,7 +2115,7 @@
     "string": "Get in touch"
   },
   "helpScout.history": {
-    "string": "History"
+    "string": "Historique"
   },
   "helpScout.howCanWeHelp": {
     "string": "How can we help?"
@@ -2217,7 +2217,7 @@
     "string": "Create an Account"
   },
   "homePage__DiscoverAudioButtonLabel": {
-    "string": "Discover Audio"
+    "string": "Découvrir en audio"
   },
   "homePage__bannerImageAlt": {
     "comment": "home page banner image alt",
@@ -2246,7 +2246,7 @@
     "string": "See what some of our listeners have shared about using AudioVerse. <a>Visit the Testimonials page</a> to see even more."
   },
   "legal_footer": {
-    "string": "Legal"
+    "string": "Mentions légales"
   },
   "library__createAccountHeading": {
     "string": "Create a free account"
@@ -2270,7 +2270,7 @@
     "string": "Audio"
   },
   "mediaFormatSwitcher__video": {
-    "string": "Video"
+    "string": "Vidéo"
   },
   "miniplayer__increaseVolume": {
     "string": "Increase volume"
@@ -2282,7 +2282,7 @@
     "string": "Reduce volume"
   },
   "miniplayer__series": {
-    "string": "Series"
+    "string": "Séries"
   },
   "miniplayer__volume": {
     "string": "Volume"
@@ -2324,7 +2324,7 @@
     "string": "With a free account,you can"
   },
   "molecule-buttonGuest__modalTitle2": {
-    "string": "Are you sure?"
+    "string": "Êtes-vous sûr(e) ?"
   },
   "molecule-buttonGuest__requests": {
     "string": "Avoid annoying login requests"
@@ -2384,7 +2384,7 @@
     "string": "Read Along"
   },
   "organismSection__audiobooksHeading": {
-    "string": "Books"
+    "string": "Tous les livres audio"
   },
   "organismSection__audiobooksNext": {
     "string": "Next audiobooks"
@@ -2411,7 +2411,7 @@
     "string": "Previous EGW audiobooks"
   },
   "organismSection_presentersHeading": {
-    "string": "Presenters"
+    "string": "Présentateurs"
   },
   "organismSection_presentersNext": {
     "string": "Next presenters"
@@ -2420,7 +2420,7 @@
     "string": "Previous presenters"
   },
   "organismSection_scriptureSongsHeading": {
-    "string": "Scripture Songs"
+    "string": "Chants bibliques"
   },
   "organismSection_scriptureSongsNext": {
     "string": "Next scripture songs"
@@ -2429,7 +2429,7 @@
     "string": "Previous scripture songs"
   },
   "organismSection_seriesHeading": {
-    "string": "Series"
+    "string": "Séries"
   },
   "organismSection_seriesNext": {
     "string": "Next series"
@@ -2438,7 +2438,7 @@
     "string": "Previous series"
   },
   "organismSection_sponsorsHeading": {
-    "string": "Sponsors"
+    "string": "Collaborateurs"
   },
   "organismSection_sponsorsNext": {
     "string": "Next sponsors"
@@ -2456,10 +2456,10 @@
     "string": "{personName} Also Appears In"
   },
   "presentersListAll__all": {
-    "string": "All"
+    "string": "Tous"
   },
   "presentersList__all": {
-    "string": "All"
+    "string": "Tous"
   },
   "presentersSequences__title": {
     "string": "Series by {personName}"
@@ -2471,7 +2471,7 @@
     "string": "Most Listened by {personName}"
   },
   "presenters__title": {
-    "string": "All Presenters"
+    "string": "Présentateurs"
   },
   "privacy_footer": {
     "string": "Privacy Policy"
@@ -2498,13 +2498,13 @@
     "string": "I understand that I will no longer be able to log in unless I create a new account."
   },
   "profile__deleteConfirmTitle": {
-    "string": "Are you sure?"
+    "string": "Êtes-vous sûr(e) ?"
   },
   "register__title": {
     "string": "Register"
   },
   "regularLogin__login": {
-    "string": "Already have an account?"
+    "string": "Vous avez déjà un compte ?"
   },
   "regularLogin__loginTxt": {
     "string": "Log In"
@@ -2552,7 +2552,7 @@
     "string": "Postal Code"
   },
   "search__allHeading": {
-    "string": "All"
+    "string": "Tous"
   },
   "search__bibleBooksHeading": {
     "string": "Bible"
@@ -2561,7 +2561,7 @@
     "string": "See All Matching Bible books"
   },
   "search__booksHeading": {
-    "string": "Audiobooks"
+    "string": "Livres audio"
   },
   "search__booksSeeAll": {
     "string": "See All Matching Audiobooks"
@@ -2579,31 +2579,31 @@
     "string": "No results found"
   },
   "search__musicHeading": {
-    "string": "Music"
+    "string": "Musiques"
   },
   "search__musicSeeAll": {
     "string": "See All Matching Music"
   },
   "search__presentersHeading": {
-    "string": "Presenters"
+    "string": "Présentateurs"
   },
   "search__presentersSeeAll": {
     "string": "See All Matching Presenters"
   },
   "search__seriesHeading": {
-    "string": "Series"
+    "string": "Séries"
   },
   "search__seriesSeeAll": {
     "string": "See All Matching Series"
   },
   "search__storiesHeading": {
-    "string": "Stories"
+    "string": "Histoires"
   },
   "search__storiesSeeAll": {
     "string": "See All Matching Stories"
   },
   "search__title": {
-    "string": "Search"
+    "string": "Rechercher"
   },
   "search__titleDynamic": {
     "string": "Search | \"{term}\" | AudioVerse"
@@ -2612,7 +2612,7 @@
     "string": "Bible Book"
   },
   "seriesList__title": {
-    "string": "All Series"
+    "string": "Toutes les séries"
   },
   "sermonDetailPage__openGraphDescription_audiobook": {
     "string": "Audiobook provided by {sponsorName}"
@@ -2642,10 +2642,10 @@
     "string": "Conferences by {sponsorName}"
   },
   "sponsorsListAll__all": {
-    "string": "All"
+    "string": "Tous"
   },
   "sponsorsList__all": {
-    "string": "All"
+    "string": "Tous"
   },
   "sponsorsSequences__title": {
     "string": "Series by {sponsorName}"
@@ -2654,7 +2654,7 @@
     "string": "Teachings by {sponsorName}"
   },
   "sponsors__title": {
-    "string": "All Sponsors"
+    "string": "Tous les sponsors"
   },
   "storyAlbumList__emptyStateMessage": {
     "string": "There are no story albums to show."
@@ -2663,16 +2663,16 @@
     "string": "Nothing here!"
   },
   "storyAlbums__title": {
-    "string": "Scripture Songs"
+    "string": "Chants bibliques"
   },
   "teachings__title": {
-    "string": "All Teachings"
+    "string": "Tous les enseignements"
   },
   "team__title": {
     "string": "Our Team"
   },
   "terms_footer": {
-    "string": "Terms of Use"
+    "string": "Conditions d'utilisation"
   },
   "testimonies__title": {
     "string": "Testimonials"
@@ -2687,10 +2687,10 @@
     "string": "Parent Topic"
   },
   "topicDetail__series": {
-    "string": "Series"
+    "string": "Séries"
   },
   "topicDetail__teachings": {
-    "string": "Teachings"
+    "string": "Enseignements"
   },
   "topicItemCount__items": {
     "string": "{count, plural, one {# item} other {# items}}"
@@ -2705,7 +2705,7 @@
     "string": "All Topics"
   },
   "trending__title": {
-    "string": "Trending Teachings"
+    "string": "Enseignements les plus écoutés"
   },
   "newsLetterForm__checkboxNewsletter": {
     "string": "Newsletter (typically about once a month)"

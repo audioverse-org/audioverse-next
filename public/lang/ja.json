@@ -877,13 +877,13 @@
     "string": "名"
   },
   "register__firstNamePlaceholder": {
-    "string": "Jane"
+    "string": "Hanako"
   },
   "register__lastNameLabel": {
     "string": "姓"
   },
   "register__lastNamePlaceholder": {
-    "string": "Doe"
+    "string": "Suzuki"
   },
   "register__loadingMessage": {
     "comment": "register loading message",
@@ -1732,13 +1732,13 @@
     "string": "Website"
   },
   "bible__title": {
-    "string": "Bible"
+    "string": "聖書"
   },
   "blog__title": {
     "string": "All Blog Posts"
   },
   "books__title": {
-    "string": "Books"
+    "string": "全てのオーディオブック"
   },
   "browse__topicsNext": {
     "string": "Next topics"
@@ -1771,10 +1771,10 @@
     "string": "Remove Sponsor"
   },
   "cardHatSponsor__sponsorLabel": {
-    "string": "Sponsor"
+    "string": "主催者"
   },
   "cardSequence_chaptersLabel": {
-    "string": "{count} chapters"
+    "string": "{count}章"
   },
   "cardSequence_egwAudiobookType": {
     "string": "ELLEN WHITE"
@@ -1786,7 +1786,7 @@
     "string": "Topic"
   },
   "collectionType__bibleVersion": {
-    "string": "Bible Version"
+    "string": "聖書バージョン"
   },
   "conferencesPresenters__title": {
     "string": "Presenters from {conferenceName}"
@@ -1798,7 +1798,7 @@
     "string": "Teachings from {conferenceName}"
   },
   "conferences__title": {
-    "string": "All Conferences"
+    "string": "大会・総会"
   },
   "contact__help": {
     "string": "View help articles"
@@ -1816,7 +1816,7 @@
     "string": "Thank you!"
   },
   "contact_footer": {
-    "string": "Contact"
+    "string": "お問い合わせ"
   },
   "discoverCollections__title": {
     "string": "Discover Collections"
@@ -1825,7 +1825,7 @@
     "string": "Discover Ellen White"
   },
   "discoverCollections_storySeasonsHeading": {
-    "string": "Stories"
+    "string": "ストーリー"
   },
   "discover__conferencesNext": {
     "string": "Next recent conferences"
@@ -1910,7 +1910,7 @@
     "string": "Donation form"
   },
   "give__title": {
-    "string": "Donate"
+    "string": "ご支援"
   },
   "header__navItemBrowse": {
     "comment": "Header nav link name: Browse",
@@ -2070,7 +2070,7 @@
     "string": "joined the chat"
   },
   "helpScout.emailLabel": {
-    "string": "Email address"
+    "string": "メールアドレス"
   },
   "helpScout.emailValidationLabel": {
     "string": "Please use a valid email address"
@@ -2115,7 +2115,7 @@
     "string": "Get in touch"
   },
   "helpScout.history": {
-    "string": "History"
+    "string": "履歴"
   },
   "helpScout.howCanWeHelp": {
     "string": "How can we help?"
@@ -2217,7 +2217,7 @@
     "string": "Create an Account"
   },
   "homePage__DiscoverAudioButtonLabel": {
-    "string": "Discover Audio"
+    "string": "ディスカバー オーディオ"
   },
   "homePage__bannerImageAlt": {
     "comment": "home page banner image alt",
@@ -2246,7 +2246,7 @@
     "string": "See what some of our listeners have shared about using AudioVerse. <a>Visit the Testimonials page</a> to see even more."
   },
   "legal_footer": {
-    "string": "Legal"
+    "string": "法律情報"
   },
   "library__createAccountHeading": {
     "string": "Create a free account"
@@ -2267,10 +2267,10 @@
     "string": "Login"
   },
   "mediaFormatSwitcher__audio": {
-    "string": "Audio"
+    "string": "オーディオ"
   },
   "mediaFormatSwitcher__video": {
-    "string": "Video"
+    "string": "動画"
   },
   "miniplayer__increaseVolume": {
     "string": "Increase volume"
@@ -2282,7 +2282,7 @@
     "string": "Reduce volume"
   },
   "miniplayer__series": {
-    "string": "Series"
+    "string": "シリーズ"
   },
   "miniplayer__volume": {
     "string": "Volume"
@@ -2324,7 +2324,7 @@
     "string": "With a free account,you can"
   },
   "molecule-buttonGuest__modalTitle2": {
-    "string": "Are you sure?"
+    "string": "削除されます。よろしいですか？"
   },
   "molecule-buttonGuest__requests": {
     "string": "Avoid annoying login requests"
@@ -2384,7 +2384,7 @@
     "string": "Read Along"
   },
   "organismSection__audiobooksHeading": {
-    "string": "Books"
+    "string": "全てのオーディオブック"
   },
   "organismSection__audiobooksNext": {
     "string": "Next audiobooks"
@@ -2411,7 +2411,7 @@
     "string": "Previous EGW audiobooks"
   },
   "organismSection_presentersHeading": {
-    "string": "Presenters"
+    "string": "プリゼンター"
   },
   "organismSection_presentersNext": {
     "string": "Next presenters"
@@ -2420,7 +2420,7 @@
     "string": "Previous presenters"
   },
   "organismSection_scriptureSongsHeading": {
-    "string": "Scripture Songs"
+    "string": "聖句ソング"
   },
   "organismSection_scriptureSongsNext": {
     "string": "Next scripture songs"
@@ -2429,7 +2429,7 @@
     "string": "Previous scripture songs"
   },
   "organismSection_seriesHeading": {
-    "string": "Series"
+    "string": "シリーズ"
   },
   "organismSection_seriesNext": {
     "string": "Next series"
@@ -2438,7 +2438,7 @@
     "string": "Previous series"
   },
   "organismSection_sponsorsHeading": {
-    "string": "Sponsors"
+    "string": "主催者"
   },
   "organismSection_sponsorsNext": {
     "string": "Next sponsors"
@@ -2456,10 +2456,10 @@
     "string": "{personName} Also Appears In"
   },
   "presentersListAll__all": {
-    "string": "All"
+    "string": "全て"
   },
   "presentersList__all": {
-    "string": "All"
+    "string": "全て"
   },
   "presentersSequences__title": {
     "string": "Series by {personName}"
@@ -2471,7 +2471,7 @@
     "string": "Most Listened by {personName}"
   },
   "presenters__title": {
-    "string": "All Presenters"
+    "string": "全てのスピーカー"
   },
   "privacy_footer": {
     "string": "Privacy Policy"
@@ -2498,13 +2498,13 @@
     "string": "I understand that I will no longer be able to log in unless I create a new account."
   },
   "profile__deleteConfirmTitle": {
-    "string": "Are you sure?"
+    "string": "削除されます。よろしいですか？"
   },
   "register__title": {
     "string": "Register"
   },
   "regularLogin__login": {
-    "string": "Already have an account?"
+    "string": "すでにアカウントをお持ちですか？"
   },
   "regularLogin__loginTxt": {
     "string": "Log In"
@@ -2552,16 +2552,16 @@
     "string": "Postal Code"
   },
   "search__allHeading": {
-    "string": "All"
+    "string": "全て"
   },
   "search__bibleBooksHeading": {
-    "string": "Bible"
+    "string": "聖書"
   },
   "search__bileBooksSeeAll": {
     "string": "See All Matching Bible books"
   },
   "search__booksHeading": {
-    "string": "Audiobooks"
+    "string": "オーディオブック"
   },
   "search__booksSeeAll": {
     "string": "See All Matching Audiobooks"
@@ -2579,31 +2579,31 @@
     "string": "No results found"
   },
   "search__musicHeading": {
-    "string": "Music"
+    "string": "音楽"
   },
   "search__musicSeeAll": {
     "string": "See All Matching Music"
   },
   "search__presentersHeading": {
-    "string": "Presenters"
+    "string": "プリゼンター"
   },
   "search__presentersSeeAll": {
     "string": "See All Matching Presenters"
   },
   "search__seriesHeading": {
-    "string": "Series"
+    "string": "シリーズ"
   },
   "search__seriesSeeAll": {
     "string": "See All Matching Series"
   },
   "search__storiesHeading": {
-    "string": "Stories"
+    "string": "ストーリー"
   },
   "search__storiesSeeAll": {
     "string": "See All Matching Stories"
   },
   "search__title": {
-    "string": "Search"
+    "string": "検索"
   },
   "search__titleDynamic": {
     "string": "Search | \"{term}\" | AudioVerse"
@@ -2612,7 +2612,7 @@
     "string": "Bible Book"
   },
   "seriesList__title": {
-    "string": "All Series"
+    "string": "全てのシリーズ"
   },
   "sermonDetailPage__openGraphDescription_audiobook": {
     "string": "Audiobook provided by {sponsorName}"
@@ -2642,10 +2642,10 @@
     "string": "Conferences by {sponsorName}"
   },
   "sponsorsListAll__all": {
-    "string": "All"
+    "string": "全て"
   },
   "sponsorsList__all": {
-    "string": "All"
+    "string": "全て"
   },
   "sponsorsSequences__title": {
     "string": "Series by {sponsorName}"
@@ -2654,7 +2654,7 @@
     "string": "Teachings by {sponsorName}"
   },
   "sponsors__title": {
-    "string": "All Sponsors"
+    "string": "全ての主催者"
   },
   "storyAlbumList__emptyStateMessage": {
     "string": "There are no story albums to show."
@@ -2663,22 +2663,22 @@
     "string": "Nothing here!"
   },
   "storyAlbums__title": {
-    "string": "Scripture Songs"
+    "string": "聖句ソング"
   },
   "teachings__title": {
-    "string": "All Teachings"
+    "string": "全てのレッスン"
   },
   "team__title": {
     "string": "Our Team"
   },
   "terms_footer": {
-    "string": "Terms of Use"
+    "string": "利用規約"
   },
   "testimonies__title": {
     "string": "Testimonials"
   },
   "topicDetail__description": {
-    "string": "Description"
+    "string": "内容詳細"
   },
   "topicDetail__label": {
     "string": "Topic"
@@ -2687,10 +2687,10 @@
     "string": "Parent Topic"
   },
   "topicDetail__series": {
-    "string": "Series"
+    "string": "シリーズ"
   },
   "topicDetail__teachings": {
-    "string": "Teachings"
+    "string": "レッスン"
   },
   "topicItemCount__items": {
     "string": "{count, plural, one {# item} other {# items}}"
@@ -2705,7 +2705,7 @@
     "string": "All Topics"
   },
   "trending__title": {
-    "string": "Trending Teachings"
+    "string": "最近人気のレッスン"
   },
   "newsLetterForm__checkboxNewsletter": {
     "string": "Newsletter (typically about once a month)"
