@@ -449,7 +449,7 @@
       "value": "ADD TO PLAYLIST"
     }
   ],
-  "add_to_playlist_bnt": [
+  "add_to_playlist_btn": [
     {
       "type": 0,
       "value": "Playlist"
@@ -3966,13 +3966,13 @@
   "not_shareable": [
     {
       "type": 0,
-      "value": "This Playlist is Private. Only SHAREABLE Playlists can be shared."
+      "value": "This Playlist is Private."
     }
   ],
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "PRIVATE"
+      "value": "Private"
     }
   ],
   "onlyYow": [

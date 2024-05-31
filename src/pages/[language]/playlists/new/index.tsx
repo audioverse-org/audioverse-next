@@ -1,9 +1,7 @@
-//import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
-//import usePreviousRoute from '~src/lib/hooks/usePreviousRoute';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
@@ -18,12 +16,10 @@ type NewPlaylistProps = {
 };
 
 const NewPlaylist: React.FC<NewPlaylistProps> = ({ id, onClose }) => {
-	//const router = useRouter();
 	const language = useLanguageRoute();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [success, setSuccess] = useState<string | null>(null);
-	//const previousRoute = usePreviousRoute();
 
 	const add = async (playlist: PlaylistProps) => {
 		try {

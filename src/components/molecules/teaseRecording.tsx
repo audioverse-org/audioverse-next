@@ -91,7 +91,7 @@ export default function TeaseRecording({
 	const iconColor = BaseColors.MID_TONE;
 
 	const label = intl.formatMessage({
-		id: 'add_to_playlist_bnt',
+		id: 'add_to_playlist_btn',
 		defaultMessage: 'Playlist',
 		description: 'Add to Playlist button label',
 	});
@@ -318,7 +318,6 @@ export default function TeaseRecording({
 				titleLink={
 					<div
 						onClick={() => {
-							setIsPlaylistModalOpen(false);
 							setIsPlaylistModalNewOpen(true);
 						}}
 					>

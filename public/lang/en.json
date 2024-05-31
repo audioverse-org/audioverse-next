@@ -227,7 +227,7 @@
   "add_to_playlist": {
     "string": "ADD TO PLAYLIST"
   },
-  "add_to_playlist_bnt": {
+  "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
     "string": "Playlist"
   },
@@ -1885,10 +1885,10 @@
     "string": "Go back to Discover"
   },
   "not_shareable": {
-    "string": "This Playlist is Private. Only SHAREABLE Playlists can be shared."
+    "string": "This Playlist is Private."
   },
   "not_shareable_title": {
-    "string": "PRIVATE"
+    "string": "Private"
   },
   "onlyYow": {
     "string": "Only you can view"
