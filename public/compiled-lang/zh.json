@@ -257,6 +257,18 @@
       "value": "As this website has grown, we have had the opportunity to feature recordings in other languages than English. In an effort to reach as many people as possible, messages in Spanish, French, German, and Chinese are now available with more to come."
     }
   ],
+  "about__storyAncientScreenshotAlt": [
+    {
+      "type": 0,
+      "value": "Screenshot of an old version of the AudioVerse website"
+    }
+  ],
+  "about__storyImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman in a field wearing headphones while reading a book."
+    }
+  ],
   "about__storyImageCaption": [
     {
       "type": 0,

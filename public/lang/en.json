@@ -131,6 +131,14 @@
   "about__story5": {
     "string": "As this website has grown, we have had the opportunity to feature recordings in other languages than English. In an effort to reach as many people as possible, messages in Spanish, French, German, and Chinese are now available with more to come."
   },
+  "about__storyAncientScreenshotAlt": {
+    "comment": "Alt text for the ancient screenshot image",
+    "string": "Screenshot of an old version of the AudioVerse website"
+  },
+  "about__storyImageAlt": {
+    "comment": "Alt text for the story image",
+    "string": "Young woman in a field wearing headphones while reading a book."
+  },
   "about__storyImageCaption": {
     "string": "The original AudioVerse design, in use from October 2005 to August 2006."
   },

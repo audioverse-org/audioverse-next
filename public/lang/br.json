@@ -2730,5 +2730,13 @@
   },
   "newsLetterForm__newsletterSubscribe": {
     "string": "Subscribe"
+  },
+  "about__storyAncientScreenshotAlt": {
+    "comment": "Alt text for the ancient screenshot image",
+    "string": "Screenshot of an old version of the AudioVerse website"
+  },
+  "about__storyImageAlt": {
+    "comment": "Alt text for the story image",
+    "string": "Young woman in a field wearing headphones while reading a book."
   }
 }
