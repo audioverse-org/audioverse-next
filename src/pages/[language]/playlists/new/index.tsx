@@ -4,11 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
 import {
 	playlistAdd,
 	PlaylistAddMutationVariables,
-} from './__generated__/query';
+} from '../../../../graphql/__generated__/query';
+import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
 
 type NewPlaylistProps = {
 	id: number | string;

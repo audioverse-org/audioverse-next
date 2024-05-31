@@ -3,13 +3,13 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
 import {
 	playlistDelete,
 	PlaylistDeleteMutationVariables,
 	playlistUpdate,
 	PlaylistUpdateMutationVariables,
-} from './__generated__/query';
+} from '../../../../graphql/__generated__/query';
+import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
 
 type EditPlaylistProps = {
 	id: number | string;
