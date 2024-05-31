@@ -21,7 +21,6 @@
         "test:watch": "TZ=UTC jest --watch --maxWorkers=25%",
         "test:strict": "TZ=UTC jest --config=jest.config.strict.ts --runInBand",
         "intl:extract": "tsx ./scripts/lang-extract.ts",
-        "intl:extract:new": "./scripts/lang-extract-new.js",
         "intl:compile": "formatjs compile-folder --ast public/lang public/compiled-lang --format lang-formatter.js",
         "precommit": "concurrently --max-processes=50% \"npm:format:fix\" \"npm:lint:fix\" \"npm:checkTs\" \"npm run intl:compile\"",
         "graphql:codegen": "tsc -p ./graphql-codegen/tsconfig.json && graphql-codegen --config .graphqlrc.yml",
