@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import Script from 'next/script';
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
@@ -30,44 +29,22 @@ export default function Blog(): JSX.Element {
 					src="https://donorbox.org/widget.js"
 					{...{ paypalexpress: 'true' }}
 				/>
-				<div className={styles.twoUp}>
-					<iframe
-						src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
-						title={intl.formatMessage({
-							id: 'give__donorboxTitle',
-							defaultMessage: 'Donation form',
-							description: 'Title for the donorbox iframe',
-						})}
-						height="1100px"
-						width="100%"
-						style={{
-							maxWidth: '400px',
-							minWidth: '310px',
-							maxHeight: 'none !important',
-						}}
-						seamless
-						name="donorbox"
-						frameBorder="0"
-						scrolling="no"
-						allow="payment"
-					/>
-					<Link
-						href="https://www.audioverse.org/en/blog/567/meat-in-due-season.html"
-						legacyBehavior
-					>
-						<a>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
-								width={555}
-								height={330}
-								onError={(e: SyntheticEvent<HTMLImageElement>) =>
-									(e.currentTarget.style.display = 'none')
-								}
-							/>
-						</a>
-					</Link>
-				</div>
+				<iframe
+					className={styles.iframe}
+					src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
+					title={intl.formatMessage({
+						id: 'give__donorboxTitle',
+						defaultMessage: 'Donation form',
+						description: 'Title for the donorbox iframe',
+					})}
+					height="1100px"
+					width="100%"
+					seamless
+					name="donorbox"
+					frameBorder="0"
+					scrolling="no"
+					allow="payment"
+				/>
 				<Heading2>
 					<FormattedMessage
 						id="give__paypalTitle"
