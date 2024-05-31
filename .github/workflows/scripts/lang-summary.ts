@@ -13,8 +13,6 @@ function getLangs(filePath: string, hash: string): Langs {
 		}).replace(BOM_REGEX, '');
 		return JSON.parse(c);
 	} catch (e) {
-		console.warn(`Error reading file ${filePath}`);
-		console.warn(e);
 		return {};
 	}
 }
@@ -268,7 +266,6 @@ async function upsertComment(
 	);
 
 	if (prev) {
-		console.log('Updating previous comment');
 		await github.rest.issues.updateComment({
 			owner: context.repo.owner,
 			repo: context.repo.repo,
@@ -276,7 +273,6 @@ async function upsertComment(
 			body,
 		});
 	} else {
-		console.log('Creating new comment');
 		await github.rest.issues.createComment({
 			owner: context.repo.owner,
 			repo: context.repo.repo,

@@ -33,12 +33,8 @@ export default async function main() {
 	const baseEnIds = Object.keys(baseEnLangs);
 	const enIds = Object.keys(enLangs);
 
-	console.log(enIds);
-
 	langFiles.forEach((langFile) => {
 		if (langFile === 'en.json') return;
-		console.log(langFile);
-		const lang = langFile.split('.')[0];
 		const jsonString = fs.readFileSync(`./public/lang/${langFile}`).toString();
 		const langs: Langs = JSON.parse(jsonString);
 		const ids = Object.keys(langs);
@@ -50,10 +46,6 @@ export default async function main() {
 			);
 			return stringMatch && stringMatch !== id;
 		});
-
-		console.log(`Missing ids in ${lang}: ${missingIds.length}`);
-		console.log(`Outdated ids in ${lang}: ${outDatedIds.length}`);
-		console.log(`Renamed ids in ${lang}: ${renamedIds.length}`);
 
 		if (missingIds.length) {
 			missingIds.forEach((id) => {
