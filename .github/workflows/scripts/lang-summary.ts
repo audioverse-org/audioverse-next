@@ -151,6 +151,8 @@ function getBody(
 	const langIds = getAllLangIds(files1, files2);
 
 	const lines: string[] = [
+		'## Localization Summary',
+		'',
 		'language | unchanged | added | removed | untranslated | missing',
 		'-------- | --------- | ----- | ------- | ------------ | -------',
 	];
