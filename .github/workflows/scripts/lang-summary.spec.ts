@@ -19,6 +19,7 @@ const context = {
 		payload: { pull_request: { number: 1, base: { sha: 'the_base_sha' } } },
 		repo: { owner: 'the_owner', repo: 'the_repo' },
 		sha: 'the_event_sha',
+		runId: 'the_run_id',
 	},
 	core: {
 		summary: {

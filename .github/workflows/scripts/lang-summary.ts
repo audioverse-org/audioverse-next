@@ -136,7 +136,7 @@ function getSummaryUrl(prNumber: number, { context }: Options) {
 	const repo = context.repo.repo;
 	const runId = context.runId;
 
-	return `https://github.com/${owner}/${repo}/actions/runs/${runId}?pr=${prNumber}#user-content-pa11y-summary`;
+	return `https://github.com/${owner}/${repo}/actions/runs/${runId}?pr=${prNumber}`;
 }
 
 function getBody(
