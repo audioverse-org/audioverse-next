@@ -1,4 +1,17 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Check if nvm is available
+if command -v nvm >/dev/null 2>&1; then
+    # Load nvm and install/use node
+    [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+    nvm use
+elif command -v asdf >/dev/null 2>&1; then
+    # Load asdf and install/use node
+    [ -s "$HOME/.asdf/asdf.sh" ] && \. "$HOME/.asdf/asdf.sh"
+    # Read the version from .nvmrc and use it with asdf
+    version=$(cat .nvmrc)
+    asdf local nodejs $version
+fi
+
 npm run precommit
