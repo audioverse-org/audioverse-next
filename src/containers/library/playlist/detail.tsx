@@ -20,13 +20,13 @@ import IconButton from '~src/components/molecules/iconButton';
 import PlaylistTypeLockup from '~src/components/molecules/playlistTypeLockup';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
-import EditPlaylist, {
-	EditPlaylistRef,
-} from '~src/pages/[language]/playlists/edit';
 import { Must } from '~src/types/types';
 
 import EditIcon from '../../../../public/img/icons/edit-light.svg';
 import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';
+import EditPlaylist, {
+	EditPlaylistRef,
+} from '../../../../src/pages/[language]/library/playlists/edit';
 import Modal from '../../../components/organisms/modal';
 import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';

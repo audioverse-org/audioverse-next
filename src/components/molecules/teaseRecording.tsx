@@ -20,7 +20,7 @@ import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import { getSessionToken } from '~src/lib/cookies';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
-import NewPlaylist from '~src/pages/[language]/playlists/new';
+import NewPlaylist from '~src/pages/[language]/library/playlists/new';
 
 import AddToPlaylistIcon from '../../../public/img/icons/in-queue-light.svg';
 import { analytics } from '../../lib/analytics';

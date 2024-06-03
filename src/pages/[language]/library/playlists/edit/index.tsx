@@ -8,7 +8,7 @@ import {
 	PlaylistDeleteMutationVariables,
 	playlistUpdate,
 	PlaylistUpdateMutationVariables,
-} from '../../../../graphql/__generated__/query';
+} from '../../../../../graphql/__generated__/query';
 import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
 
 type EditPlaylistProps = {

@@ -7,10 +7,10 @@ import Button from '~src/components/molecules/button';
 import Input from '~src/components/molecules/form/input';
 import { BaseColors } from '~src/lib/constants';
 
-import ClosureIcon from '../../../../public/img/icons/closure-light.svg';
-import DisclosureIcon from '../../../../public/img/icons/disclosure-light.svg';
-import ShareableIcon from '../../../../public/img/icons/linked-light.svg';
-import PrivateIcon from '../../../../public/img/icons/private-light.svg';
+import ClosureIcon from '../../../../../public/img/icons/closure-light.svg';
+import DisclosureIcon from '../../../../../public/img/icons/disclosure-light.svg';
+import ShareableIcon from '../../../../../public/img/icons/linked-light.svg';
+import PrivateIcon from '../../../../../public/img/icons/private-light.svg';
 import styles from './Playlistform.module.scss';
 
 export type PlaylistProps = Pick<
