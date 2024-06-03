@@ -151,8 +151,8 @@ function getBody(
 	const lines: string[] = [
 		'## Localization Summary',
 		'',
-		'language | unchanged | added | removed | untranslated | missing',
-		'-------- | --------- | ----- | ------- | ------------ | -------',
+		'language | unchanged | added | removed | untranslated',
+		'-------- | --------- | ----- | ------- | ------------',
 	];
 
 	langIds.forEach((langId) => {
@@ -180,14 +180,8 @@ function getBody(
 			return langId !== 'en' && lang2 && lang2.string === en2?.string;
 		}).length;
 
-		const missingCount = Array.from(sringIds).filter((stringId) => {
-			const survives = Object.values(files2).some((f) => f[stringId]);
-			const lang2 = files2[`${langId}.json`]?.[stringId];
-			return survives && !lang2;
-		}).length;
-
 		lines.push(
-			`${langId} | ${unchangedCount} | ${addedCount} | ${removedCount} | ${untranslatedCount} | ${missingCount}`
+			`${langId} | ${unchangedCount} | ${addedCount} | ${removedCount} | ${untranslatedCount}`
 		);
 	});
 

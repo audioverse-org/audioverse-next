@@ -415,22 +415,4 @@ describe('lang-summary', () => {
 			})
 		);
 	});
-
-	it('includes missing count in pr comment', async () => {
-		loadFiles(
-			{ 'en.json': {} },
-			{
-				'en.json': { the_id: { string: 'the_string' } },
-				'es.json': {},
-			}
-		);
-
-		await run();
-
-		expect(context.github.rest.issues.createComment).toBeCalledWith(
-			expect.objectContaining({
-				body: expect.stringContaining('1 | 0 | 0 | 0 | 1'),
-			})
-		);
-	});
 });
