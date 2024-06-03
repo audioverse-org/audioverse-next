@@ -27,11 +27,16 @@
 }
 
 .title {
-	font-family: var(--font-sans); /* Replace with actual font */
+	font-family: var(--font-sans);
 	font-size: 14px;
 	color: #323e48;
 }
 
 .rightIcon {
 	margin-left: 8px;
+}
+
+.loading {
+	margin-left: 8px;
+	font-size: 14px;
 }

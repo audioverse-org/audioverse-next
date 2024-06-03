@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
 import { Recording, UserPlaylist } from '~src/__generated__/graphql';
@@ -21,9 +22,11 @@ export function useRecordingPlaylist(
 ): {
 	addToPlaylist: () => void;
 	removeFromPlaylist: () => void;
+	isLoading: boolean;
 } {
 	const requireUser = useRequireUser();
 	const queryClient = useQueryClient();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const variablesAdd: PlaylistRecordingAddMutationVariables = {
 		playlistId: playlist.id,
@@ -47,43 +50,11 @@ export function useRecordingPlaylist(
 			>(PlaylistRecordingAddDocument, variables)(),
 		{
 			onMutate: async () => {
+				setIsLoading(true);
 				await queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
 			},
 			onSuccess: (data) => {
 				if (data?.playlistRecordingAdd) {
-					// queryClient.setQueryData<UserPlaylist | undefined>(
-					// 	playlist.id,
-					// 	(old) => {
-					// 		if (!old) return old;
-
-					// 		const alreadyInPlaylist = old.recordings.edges?.find(
-					// 			(edge) => edge.node.id === recordingId
-					// 		);
-
-					// 		if (alreadyInPlaylist) return old;
-
-					// 		return {
-					// 			...old,
-					// 			recordings: {
-					// 				...old.recordings,
-					// 				aggregate: {
-					// 					...old.recordings.aggregate,
-					// 					count: (old.recordings.aggregate?.count || 0) + 1,
-					// 				},
-					// 				edges: [
-					// 					...(old.recordings.edges || []),
-					// 					{
-					// 						__typename: 'RecordingEdge',
-					// 						node: {
-					// 							__typename: 'Recording',
-					// 							id: recordingId,
-					// 						},
-					// 					},
-					// 				],
-					// 			},
-					// 		};
-					// 	}
-					// );
 					console.log('added');
 				}
 			},
@@ -91,6 +62,7 @@ export function useRecordingPlaylist(
 				console.error('Error adding to playlist:', error);
 			},
 			onSettled: () => {
+				setIsLoading(false);
 				queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
 			},
 		}
@@ -108,32 +80,11 @@ export function useRecordingPlaylist(
 			>(PlaylistRecordingRemoveDocument, variables)(),
 		{
 			onMutate: async () => {
+				setIsLoading(true);
 				await queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
 			},
 			onSuccess: (data) => {
 				if (data?.playlistRecordingRemove) {
-					// queryClient.setQueryData<UserPlaylist | undefined>(
-					// 	playlist.id,
-					// 	(old) => {
-					// 		if (!old) return old;
-
-					// 		const newEdges = old.recordings.edges?.filter(
-					// 			(edge) => edge.node.id !== recordingId
-					// 		);
-
-					// 		return {
-					// 			...old,
-					// 			recordings: {
-					// 				...old.recordings,
-					// 				aggregate: {
-					// 					...old.recordings.aggregate,
-					// 					count: newEdges?.length || 0,
-					// 				},
-					// 				edges: newEdges,
-					// 			},
-					// 		};
-					// 	}
-					// );
 					console.log('removed');
 				}
 			},
@@ -141,6 +92,7 @@ export function useRecordingPlaylist(
 				console.error('Error removing from playlist:', error);
 			},
 			onSettled: () => {
+				setIsLoading(false);
 				queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
 			},
 		}
@@ -153,5 +105,6 @@ export function useRecordingPlaylist(
 		removeFromPlaylist: requireUser(() =>
 			removeFromPlaylistMutation.mutate(variablesRemove)
 		),
+		isLoading,
 	};
 }

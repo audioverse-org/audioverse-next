@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { useIsRecordingFavorited } from '~src/lib/api/useIsRecordingFavorited';
@@ -12,9 +12,12 @@ type Props = {
 const ListenLaterItem = ({ id }: Props) => {
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(id);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const toggleFavorite = () => {
+		setIsLoading(true);
 		toggleFavorited();
+		setIsLoading(false);
 	};
 
 	return (
@@ -26,6 +29,7 @@ const ListenLaterItem = ({ id }: Props) => {
 				defaultMessage: 'Listen Later',
 			})}
 			isPublic={false}
+			isLoading={isLoading}
 		/>
 	);
 };

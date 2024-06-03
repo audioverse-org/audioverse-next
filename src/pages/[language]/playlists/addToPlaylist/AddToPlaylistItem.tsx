@@ -11,10 +11,11 @@ type Props = {
 };
 
 const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
-	const { addToPlaylist, removeFromPlaylist } = useRecordingPlaylist(
+	const { addToPlaylist, removeFromPlaylist, isLoading } = useRecordingPlaylist(
 		playlist,
 		recordingId
 	);
+
 	const isRecordingInPlaylist = playlist.recordings.edges?.find(
 		(item) => item.node.id === recordingId
 	);
@@ -33,6 +34,7 @@ const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
 			isAdded={!!isRecordingInPlaylist}
 			title={playlist.title}
 			isPublic={playlist.isPublic}
+			isLoading={isLoading}
 		/>
 	);
 };
