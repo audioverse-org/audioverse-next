@@ -11,7 +11,7 @@ elif command -v asdf >/dev/null 2>&1; then
     [ -s "$HOME/.asdf/asdf.sh" ] && \. "$HOME/.asdf/asdf.sh"
     # Read the version from .nvmrc and use it with asdf
     version=$(cat .nvmrc)
-    asdf local nodejs $version
+    asdf shell nodejs $version
 fi
 
 npm run precommit
