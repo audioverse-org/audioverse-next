@@ -2,7 +2,7 @@
   "Listen_Later": [
     {
       "type": 0,
-      "value": "Listen Later"
+      "value": "已保存"
     }
   ],
   "RecordingFavorite__favorite": [
@@ -464,7 +464,7 @@
   "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "Playlist"
+      "value": "播放清单"
     }
   ],
   "andGlobalModals__authCopy": [
@@ -3900,7 +3900,7 @@
   "newPrivacy": [
     {
       "type": 0,
-      "value": "Privacy"
+      "value": "隐私"
     }
   ],
   "newPrivate": [
@@ -4288,7 +4288,7 @@
   "pl_description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "描述"
     }
   ],
   "pl_title": [

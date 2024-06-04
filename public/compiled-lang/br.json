@@ -2,7 +2,7 @@
   "Listen_Later": [
     {
       "type": 0,
-      "value": "Listen Later"
+      "value": "Escute Depois"
     }
   ],
   "RecordingFavorite__favorite": [
@@ -3880,7 +3880,7 @@
   "newPrivacy": [
     {
       "type": 0,
-      "value": "Privacy"
+      "value": "Privacidade"
     }
   ],
   "newPrivate": [
@@ -4260,7 +4260,7 @@
   "pl_description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "Descrição"
     }
   ],
   "pl_title": [

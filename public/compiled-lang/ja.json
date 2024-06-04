@@ -2,7 +2,7 @@
   "Listen_Later": [
     {
       "type": 0,
-      "value": "Listen Later"
+      "value": "図書に保存"
     }
   ],
   "RecordingFavorite__favorite": [
@@ -464,7 +464,7 @@
   "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "Playlist"
+      "value": "プレイリスト"
     }
   ],
   "andGlobalModals__authCopy": [
@@ -3888,7 +3888,7 @@
   "newPrivacy": [
     {
       "type": 0,
-      "value": "Privacy"
+      "value": "プライバシー"
     }
   ],
   "newPrivate": [
@@ -4268,7 +4268,7 @@
   "pl_description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "内容詳細"
     }
   ],
   "pl_title": [

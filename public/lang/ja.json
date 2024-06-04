@@ -2740,14 +2740,14 @@
     "string": "Young woman in a field wearing headphones while reading a book."
   },
   "Listen_Later": {
-    "string": "Listen Later"
+    "string": "図書に保存"
   },
   "add_to_playlist": {
     "string": "Add To Playlist"
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
-    "string": "Playlist"
+    "string": "プレイリスト"
   },
   "anyoneWithLink": {
     "string": "Anyone with the link can view"
@@ -2768,7 +2768,7 @@
     "string": "Loading..."
   },
   "newPrivacy": {
-    "string": "Privacy"
+    "string": "プライバシー"
   },
   "newPrivate": {
     "string": "Private"
@@ -2789,7 +2789,7 @@
     "string": "Only you can view"
   },
   "pl_description": {
-    "string": "Description"
+    "string": "内容詳細"
   },
   "pl_title": {
     "string": "Title"

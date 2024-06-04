@@ -2,7 +2,7 @@
   "Listen_Later": [
     {
       "type": 0,
-      "value": "Listen Later"
+      "value": "Сохранено"
     }
   ],
   "RecordingFavorite__favorite": [
@@ -464,7 +464,7 @@
   "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "Playlist"
+      "value": "Список воспроизведений"
     }
   ],
   "andGlobalModals__authCopy": [
@@ -3880,7 +3880,7 @@
   "newPrivacy": [
     {
       "type": 0,
-      "value": "Privacy"
+      "value": "Конфиденциальность"
     }
   ],
   "newPrivate": [
@@ -4260,7 +4260,7 @@
   "pl_description": [
     {
       "type": 0,
-      "value": "Description"
+      "value": "Описание"
     }
   ],
   "pl_title": [

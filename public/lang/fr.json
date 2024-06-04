@@ -2740,7 +2740,7 @@
     "string": "Young woman in a field wearing headphones while reading a book."
   },
   "Listen_Later": {
-    "string": "Listen Later"
+    "string": "Favoris"
   },
   "add_to_playlist": {
     "string": "Add To Playlist"
@@ -2768,7 +2768,7 @@
     "string": "Loading..."
   },
   "newPrivacy": {
-    "string": "Privacy"
+    "string": "Confidentialité"
   },
   "newPrivate": {
     "string": "Private"
