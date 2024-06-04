@@ -11,16 +11,12 @@ type Props = {
 };
 
 const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
-
-
 	const { addToPlaylist, removeFromPlaylist, isLoading } = useRecordingPlaylist(
 		playlist,
 		recordingId
 	);
 
-
 	if (!playlist) {
-		
 		return null;
 	}
 

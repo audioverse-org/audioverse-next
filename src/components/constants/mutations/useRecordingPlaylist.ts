@@ -36,7 +36,7 @@ export function useRecordingPlaylist(
 			playlistId: playlist.id,
 			recordingId,
 		};
-		
+
 		queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
 
 		graphqlFetcher<
@@ -65,7 +65,7 @@ export function useRecordingPlaylist(
 			playlistId: playlist.id,
 			recordingId,
 		};
-		
+
 		queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
 
 		graphqlFetcher<

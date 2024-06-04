@@ -12,12 +12,12 @@ interface PlaylistsPageProps {
 }
 
 const PlaylistsPage: React.FC<PlaylistsPageProps> = ({ language, recId }) => {
-	if(!recId){
-		return(
+	if (!recId) {
+		return (
 			<FormattedMessage
-			id="recording_id_missing"
-			defaultMessage="Sorry, a Recording Id missing!"
-		/>
+				id="recording_id_missing"
+				defaultMessage="Sorry, a Recording Id missing!"
+			/>
 		);
 	}
 	const languageFullForm = getLanguageIdByRoute(language);
