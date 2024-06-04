@@ -11,6 +11,13 @@
 	}
 }
 
+.iframe {
+	max-width: 400px;
+	min-width: 310px;
+	max-height: none !important;
+	margin-bottom: 16px;
+}
+
 .heading {
 	margin-bottom: 32px;
 }
@@ -23,25 +30,4 @@
 	margin-top: 16px;
 	font-size: 11px;
 	line-height: 1.21;
-}
-
-.twoUp {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	a {
-		display: block;
-		flex: 1 1 0;
-		min-width: 300px;
-		min-height: 0;
-	}
-	img {
-		display: block;
-		width: auto;
-		height: auto;
-		min-width: 0;
-		min-height: 0;
-		max-width: 100%;
-	}
 }

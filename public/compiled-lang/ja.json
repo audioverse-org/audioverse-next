@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Listen Later"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -9,6 +15,432 @@
     {
       "type": 0,
       "value": "お気に入りから削除"
+    }
+  ],
+  "about__navPurpose": [
+    {
+      "type": 0,
+      "value": "Our Purpose"
+    }
+  ],
+  "about__navSpirit": [
+    {
+      "type": 0,
+      "value": "Spirit of AudioVerse"
+    }
+  ],
+  "about__navStory": [
+    {
+      "type": 0,
+      "value": "Our Story"
+    }
+  ],
+  "about__navTestimonials": [
+    {
+      "type": 0,
+      "value": "Testimonials"
+    }
+  ],
+  "about__purposeExcellence": [
+    {
+      "type": 0,
+      "value": "Biblical Excellence"
+    }
+  ],
+  "about__purposeExcellenceDescription": [
+    {
+      "type": 0,
+      "value": "AudioVerse holds a high standard for the content that is presented on its website. The guidelines for these messages are called the Spirit of AudioVerse and you can read them here. This spirit of excellence extends also to the way the ministry operates and in all its dealings."
+    }
+  ],
+  "about__purposeGiving": [
+    {
+      "type": 0,
+      "value": "Giving Freely"
+    }
+  ],
+  "about__purposeGivingDescription": [
+    {
+      "type": 0,
+      "value": "All around the world there are people who yearn for the Gospel, but they cannot afford to pay for it. These may be individuals in developing countries or simply young people in school. If the Gospel is to go to them too, then as many barriers must be removed as possible, and cost is one of them. This is only possible through the generous financial support of donors who believe in this mission."
+    }
+  ],
+  "about__purposeImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman in a field wearing headphones while reading a book."
+    }
+  ],
+  "about__purposeImageLabel": [
+    {
+      "type": 0,
+      "value": "Our vision is to hasten the Second Coming of our Lord Jesus Christ by making high quality Bible-based and Christ-centered media available to the whole world."
+    }
+  ],
+  "about__purposeIntro": [
+    {
+      "type": 0,
+      "value": "Our mission is to be a trustworthy global provider of Bible-based and Christ-centered media."
+    }
+  ],
+  "about__purposeReaching": [
+    {
+      "type": 0,
+      "value": "Reaching the World"
+    }
+  ],
+  "about__purposeReachingDescription": [
+    {
+      "type": 0,
+      "value": "Nearly 3 billion people have access to the Internet as of 2014, and that number is increasing every day. This number includes countless closed countries into which physical missionaries cannot easily go. Leveraging the ubiquity and cost-effective nature of the Internet, AudioVerse seeks to light up the world with access to Bible truth."
+    }
+  ],
+  "about__purposeSupport": [
+    {
+      "type": 0,
+      "value": "Support of the Adventist Church"
+    }
+  ],
+  "about__purposeSupportDescription": [
+    {
+      "type": 0,
+      "value": "AudioVerse is a supporting ministry of the Seventh-day Adventist Church, and seeks to be in full harmony with the church’s purpose and mission. AudioVerse is also a member of ASI (Adventist-laymen’s Services and Industries)."
+    }
+  ],
+  "about__purposeTitle": [
+    {
+      "type": 0,
+      "value": "Our Purpose"
+    }
+  ],
+  "about__purposeWhat": [
+    {
+      "type": 0,
+      "value": "What drives AudioVerse?"
+    }
+  ],
+  "about__purposeWhy": [
+    {
+      "type": 0,
+      "value": "Why AudioVerse?"
+    }
+  ],
+  "about__purposeWhy1": [
+    {
+      "type": 0,
+      "value": "The Gospel must be preached to the world before Christ can come (Matt. 24:14). The world cannot hear the Gospel without a preacher (Rom. 10:14). AudioVerse exists to deliver the preacher freely to the whole world so that Jesus can come."
+    }
+  ],
+  "about__purposeWhy2": [
+    {
+      "type": 0,
+      "value": "Faith comes by hearing, and hearing by the Word of God (Rom 10:17). Man shall not live by bread alone, but by every word that proceeds from the mouth of God (Matt. 4:4). AudioVerse exists to nourish faith by giving easy access to the Word of God."
+    }
+  ],
+  "about__purposeWhy3": [
+    {
+      "type": 0,
+      "value": "Jesus is the Word (John 1:1). Jesus says that His Word is truth (John 17:17) and they are life (John 6:63). To know Jesus is to have eternal life (John 17:3). AudioVerse exists to help people know Jesus."
+    }
+  ],
+  "about__spirit1": [
+    {
+      "type": 0,
+      "value": "Materials should promote doctrines, theology, principles and values that have been established through a careful, thorough study of the Bible and the Spirit of Prophecy by trustworthy, experienced and godly people."
+    }
+  ],
+  "about__spirit10": [
+    {
+      "type": 0,
+      "value": "Materials should be completely truthful. Dishonesty or anything that is intentionally misleading is unacceptable."
+    }
+  ],
+  "about__spirit11": [
+    {
+      "type": 0,
+      "value": "Materials should be delivered in a spirit of reverence, respect, and humility, recognizing that they represent the Gospel of Jesus Christ. We reject an attitude that is spiteful, arrogant, vulgar, irreverent, flippant, frivolous, demeaning, or otherwise unChrist-like."
+    }
+  ],
+  "about__spirit12": [
+    {
+      "type": 0,
+      "value": "Materials should be from presenters who are associated with organizations or groups who uphold and represent the above-described spirit of AudioVerse, and are Seventh-day Adventists in good standing."
+    }
+  ],
+  "about__spirit2": [
+    {
+      "type": 0,
+      "value": "Materials should affirm the Bible and the Spirit of Prophecy as reflected by the stated fundamental beliefs of the Seventh-day Adventist Church."
+    }
+  ],
+  "about__spirit3": [
+    {
+      "type": 0,
+      "value": "Materials should promote the reality that victory over sin is possible through the believer's dependence on the grace and power of Jesus Christ."
+    }
+  ],
+  "about__spirit4": [
+    {
+      "type": 0,
+      "value": "Materials should promote lifestyle and behavioral choices that are in harmony with principles from Scripture and the Spirit of Prophecy."
+    }
+  ],
+  "about__spirit5": [
+    {
+      "type": 0,
+      "value": "Materials should represent the historical-grammatical/historical-Biblical method of Biblical interpretation along with the historicist method of prophetic interpretation rather than futurism, preterism, higher criticism, imposed allegorical, or other speculative and unacceptable hermeneutics."
+    }
+  ],
+  "about__spirit6": [
+    {
+      "type": 0,
+      "value": "Materials should predominantly appeal to the mind and reason, rather than the speculative or sensational; neither hype, an unwarranted excitement, nor extra-Biblical predictions about the future, are acceptable."
+    }
+  ],
+  "about__spirit7": [
+    {
+      "type": 0,
+      "value": "Materials should represent a balanced and disciplined view of Scripture and the Spirit of Prophecy that reflects the entirety of these inspired writings. We do not advocate the overemphasis of one aspect to the exclusion of other equally important aspects nor do we condone viewpoints that extend beyond the proper application of Biblical and Spirit of Prophecy principles."
+    }
+  ],
+  "about__spirit8": [
+    {
+      "type": 0,
+      "value": "Materials should seek to provide lessons from history rather than revising or criticizing it to the detriment of our doctrines or teachings."
+    }
+  ],
+  "about__spirit9": [
+    {
+      "type": 0,
+      "value": "Materials should be supportive of the Seventh-day Adventist Church as well as her leadership and institutions. They are not to seek to tarnish or vilify the reputations of individuals or institutions."
+    }
+  ],
+  "about__spiritIntro": [
+    {
+      "type": 0,
+      "value": "AudioVerse provides free Bible-based and Christ-centered audiovisual resources aimed at inspiring and educating Seventh-day Adventists and all spiritually interested people around the world."
+    }
+  ],
+  "about__spiritPurpose": [
+    {
+      "type": 0,
+      "value": "Our main purpose is to proclaim the everlasting Gospel of Jesus Christ in order to hasten and to prepare the world for His imminent Second Coming. In view of this, AudioVerse upholds the following set of principles regarding the materials that we make available on this website:"
+    }
+  ],
+  "about__spiritTitle": [
+    {
+      "type": 0,
+      "value": "Spirit of AudioVerse"
+    }
+  ],
+  "about__story1": [
+    {
+      "type": 0,
+      "value": "They were excited about this idea not only because it would fulfill the immediate need (and make less work producing CDs!), but because they saw that these messages of hope, love, and the soon return of our Savior Jesus Christ, could be a blessing to people worldwide who were seeking knowledge and wisdom about God."
+    }
+  ],
+  "about__story2": [
+    {
+      "type": 0,
+      "value": "Curtis put the idea into action and quickly began developing a sermon website. A contest was held at Advent HOPE Sabbath School to choose the name, during which over 100 names were submitted. \"AudioVerse\" was the winner, and the AudioVerse.org website was launched on October 22, 2005."
+    }
+  ],
+  "about__story3": [
+    {
+      "type": 0,
+      "value": "Since that humble beginning, God demonstrated His providential leading of this ministry many times. The initial bandwidth for the website was donated by a friend of the ministry who operated his own Internet service provider, which was crucial in meeting the traffic generated early on. Later, an unsolicited donation enabled us to upgrade and expand our entire server infrastructure to better serve the whole world. Not to mention, tremendous partnerships have been developed with various ministries like ASI, AMEN, and GYC (along with many smaller affiliate GYCs)."
+    }
+  ],
+  "about__story4": [
+    {
+      "type": 0,
+      "value": "Website traffic has also grown tremendously. Now millions of sermons are downloaded and listened to every year! The people accessing these messages come from over 200 countries from all corners of the world including many closed or developing countries in the 10/40 window such as countries in the Middle East and China."
+    }
+  ],
+  "about__story5": [
+    {
+      "type": 0,
+      "value": "As this website has grown, we have had the opportunity to feature recordings in other languages than English. In an effort to reach as many people as possible, messages in Spanish, French, German, and Chinese are now available with more to come."
+    }
+  ],
+  "about__storyAncientScreenshotAlt": [
+    {
+      "type": 0,
+      "value": "Screenshot of an old version of the AudioVerse website"
+    }
+  ],
+  "about__storyImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman in a field wearing headphones while reading a book."
+    }
+  ],
+  "about__storyImageCaption": [
+    {
+      "type": 0,
+      "value": "The original AudioVerse design, in use from October 2005 to August 2006."
+    }
+  ],
+  "about__storyIntro": [
+    {
+      "type": 0,
+      "value": "AudioVerse began in 2005 as an idea by Tim Arakawa and Curtis Farnham, both poor graduate students at the time. It was spurred by increasing requests for sermon recordings from various ministries with which Tim and Curtis had been involved, including Advent HOPE Sabbath School, Restoration Ministry, and GYC Southwest (formerly Southwest Youth Conference)."
+    }
+  ],
+  "about__storyTitle": [
+    {
+      "type": 0,
+      "value": "Our Story"
+    }
+  ],
+  "about__team": [
+    {
+      "type": 0,
+      "value": "Digital Marketing Coordinator"
+    }
+  ],
+  "about__teamAlistairBio": [
+    {
+      "type": 0,
+      "value": "From his stand-up desk, Alistair oversees the strategy and day-to-day management by ensuring that we are doing the right things and that we are doing things right."
+    }
+  ],
+  "about__teamAnnetteBio": [
+    {
+      "type": 0,
+      "value": "All the media on AudioVerse has Annette’s fingerprints on it. She works with partners, obtains content, edits them, and publishes them on AudioVerse."
+    }
+  ],
+  "about__teamAssistantOperationsCoordinator": [
+    {
+      "type": 0,
+      "value": "Assistant Operations Coordinator"
+    }
+  ],
+  "about__teamBoard": [
+    {
+      "type": 0,
+      "value": "Board of Directors"
+    }
+  ],
+  "about__teamBoardArakawaTitle": [
+    {
+      "type": 0,
+      "value": "Chairman (Co-founder) | Physician, Albany, Oregon"
+    }
+  ],
+  "about__teamBoardClarkTitle": [
+    {
+      "type": 0,
+      "value": "Vice President for Administration, Georgia-Cumberland Conference"
+    }
+  ],
+  "about__teamBoardHuongTitle": [
+    {
+      "type": 0,
+      "value": "Secretary | Executive Director, AudioVerse"
+    }
+  ],
+  "about__teamBoardIntro": [
+    {
+      "type": 0,
+      "value": "The AudioVerse Board of Directors provides guidance and vision for the ministry. This dedicated group of individuals with their collective experience and wisdom helps the ministry steer a true course in advancing the work of the Lord."
+    }
+  ],
+  "about__teamBoardIrizarryTitle": [
+    {
+      "type": 0,
+      "value": "Physician, Amity, Arkansas"
+    }
+  ],
+  "about__teamBoardKimTitle": [
+    {
+      "type": 0,
+      "value": "Physician, Chattanooga, Tennessee"
+    }
+  ],
+  "about__teamBoardMackintoshTitle": [
+    {
+      "type": 0,
+      "value": "Director, NEWSTART Global"
+    }
+  ],
+  "about__teamBoardWilliamsTitle": [
+    {
+      "type": 0,
+      "value": "Treasurer | Finance Professional, Chattanooga, Tennessee"
+    }
+  ],
+  "about__teamBoardZwikerTitle": [
+    {
+      "type": 0,
+      "value": "President, Hyve International"
+    }
+  ],
+  "about__teamBusinessManager": [
+    {
+      "type": 0,
+      "value": "Business Manager"
+    }
+  ],
+  "about__teamDebbyBio": [
+    {
+      "type": 0,
+      "value": "With her background as a CPA, wife, and mother, Debby capably manages the finances, HR, and correspondence for the ministry."
+    }
+  ],
+  "about__teamExecutive": [
+    {
+      "type": 0,
+      "value": "Executive Team"
+    }
+  ],
+  "about__teamExecutiveDirector": [
+    {
+      "type": 0,
+      "value": "Executive Director"
+    }
+  ],
+  "about__teamIntro": [
+    {
+      "type": 0,
+      "value": "The AudioVerse Executive Team are responsible for the day-to-day operations of the ministry. This group of dedicated individuals with their their common passion for the proclamation of the three angels' messages is what keeps this ministry running."
+    }
+  ],
+  "about__teamLizBio": [
+    {
+      "type": 0,
+      "value": "A social media dynamo, e-commerce go-getter, and energetic marketer, Liz helps grow our social media audience and oversees our digital marketing efforts."
+    }
+  ],
+  "about__teamMatthewBio": [
+    {
+      "type": 0,
+      "value": "Frontend, backend, full-stack and more. Matthew churns out code and builds beautiful things all while walking on a treadmill."
+    }
+  ],
+  "about__teamNathanBio": [
+    {
+      "type": 0,
+      "value": "Nathan contributes to the ministry by solving big problems, managing development projects, and keeping the ministry’s technology humming."
+    }
+  ],
+  "about__teamSoftwareEngineer": [
+    {
+      "type": 0,
+      "value": "Software Engineer"
+    }
+  ],
+  "about__teamTechnologyDirector": [
+    {
+      "type": 0,
+      "value": "Technology Director"
+    }
+  ],
+  "about__teamTitle": [
+    {
+      "type": 0,
+      "value": "The Team"
     }
   ],
   "accountNav__audiopreferences": [
@@ -23,46 +455,40 @@
       "value": "プロフィール"
     }
   ],
-  "accountPlaylists__buttonLabelSubmit": [
+  "add_to_playlist": [
     {
       "type": 0,
-      "value": "プレイリストを新規作成"
+      "value": "Add To Playlist"
     }
   ],
-  "accountPlaylists__errorMissingTitle": [
+  "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "タイトル欄が入力されていません。"
+      "value": "Playlist"
     }
   ],
-  "accountPlaylists__inputLabelPublic": [
+  "andGlobalModals__authCopy": [
     {
       "type": 0,
-      "value": "公開"
+      "value": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
     }
   ],
-  "accountPlaylists__inputLabelSummary": [
+  "andGlobalModals__authLoginTitle": [
     {
       "type": 0,
-      "value": "概要"
+      "value": "Login"
     }
   ],
-  "accountPlaylists__inputLabelTitle": [
+  "andGlobalModals__authRegisterTitle": [
     {
       "type": 0,
-      "value": "タイトル"
+      "value": "Create Account"
     }
   ],
-  "accountPlaylists__labelPrivate": [
+  "andGlobalModals__authTitle": [
     {
       "type": 0,
-      "value": "非公開"
-    }
-  ],
-  "accountPlaylists__labelPublic": [
-    {
-      "type": 0,
-      "value": "公開"
+      "value": "Create a Free Account"
     }
   ],
   "andGlobalModals__confirmRemoveFavorite-confirm": [
@@ -89,28 +515,10 @@
       "value": "アイテムを保存"
     }
   ],
-  "andGlobalModals__continueAsGuest": [
-    {
-      "type": 0,
-      "value": "ゲストとして続行"
-    }
-  ],
-  "andGlobalModals__copy": [
-    {
-      "type": 0,
-      "value": "オーディオをブックマークして、後でマイアカウントからアクセスできます。他の機能としては、ライブラリーにオーディオの追加が出来ます。"
-    }
-  ],
   "andGlobalModals__createAccount": [
     {
       "type": 0,
       "value": "アカウントを作成"
-    }
-  ],
-  "andGlobalModals__heading": [
-    {
-      "type": 0,
-      "value": "メンバー限定機能"
     }
   ],
   "andGlobalModals__logIn": [
@@ -125,10 +533,22 @@
       "value": "ご支援"
     }
   ],
+  "andNavigation__playing": [
+    {
+      "type": 0,
+      "value": "Playing"
+    }
+  ],
   "andOnboarding__intro": [
     {
       "type": 0,
       "value": "ご自分で調べて確かな教理を見出すために、ますます追加されていっている様々な項目にアクセスするには、今すぐログインまたはアカウトを作成してみませんか。"
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Anyone with the link can view"
     }
   ],
   "app__features1Cta": [
@@ -141,6 +561,12 @@
     {
       "type": 0,
       "value": "倉からの新しい宝と古い宝"
+    }
+  ],
+  "app__features1ImageAlt": [
+    {
+      "type": 0,
+      "value": "Media on the Audioverse website"
     }
   ],
   "app__features1Kicker": [
@@ -161,6 +587,12 @@
       "value": "現代の真理"
     }
   ],
+  "app__features2ImageAlt": [
+    {
+      "type": 0,
+      "value": "List of recent sermons from Sebastien Braxton"
+    }
+  ],
   "app__features2Kicker": [
     {
       "type": 0,
@@ -177,6 +609,12 @@
     {
       "type": 0,
       "value": "つながった調和"
+    }
+  ],
+  "app__features3ImageAlt": [
+    {
+      "type": 0,
+      "value": "A diagram of AudioVerse’s card UI"
     }
   ],
   "app__features3Kicker": [
@@ -197,6 +635,12 @@
       "value": "愛する人たちの救い"
     }
   ],
+  "app__features4ImageAlt": [
+    {
+      "type": 0,
+      "value": "The save button on a sermon by Katie Chitwood"
+    }
+  ],
   "app__features4Kicker": [
     {
       "type": 0,
@@ -213,6 +657,12 @@
     {
       "type": 0,
       "value": "宝をたくわえなさい・・・"
+    }
+  ],
+  "app__features5ImageAlt": [
+    {
+      "type": 0,
+      "value": "The download button on a sermon by Don Mackintosh"
     }
   ],
   "app__features5Kicker": [
@@ -233,10 +683,10 @@
       "value": "全てのオーディオブック"
     }
   ],
-  "backButton__back": [
+  "bibleBook__backToChapter": [
     {
       "type": 0,
-      "value": "戻る"
+      "value": "Back to Chapter Info"
     }
   ],
   "bibleBook__chapterListTitle": [
@@ -249,6 +699,18 @@
     {
       "type": 0,
       "value": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
+    }
+  ],
+  "bibleBook__readAlong": [
+    {
+      "type": 0,
+      "value": "Read Along"
+    }
+  ],
+  "bibleBook__typeLabel": [
+    {
+      "type": 0,
+      "value": "KJV Bible"
     }
   ],
   "bibleVersionTypeLockup__type": [
@@ -275,6 +737,12 @@
       "value": "主催者"
     }
   ],
+  "bibleVersion__websiteLabel": [
+    {
+      "type": 0,
+      "value": "Website"
+    }
+  ],
   "bibleVersions__heading": [
     {
       "type": 0,
@@ -285,6 +753,12 @@
     {
       "type": 0,
       "value": "確実な教理を学ぶ方法は、神の御言葉を聞くのがベスト。オーディオバイブルを通して最も偉大な教師から最も大切な教え聞くことができます。"
+    }
+  ],
+  "bible__title": [
+    {
+      "type": 0,
+      "value": "聖書"
     }
   ],
   "blogDetailPage__moreBlogPosts": [
@@ -303,10 +777,58 @@
       "value": "分"
     }
   ],
-  "buttonShare__emailSubject": [
+  "blog__title": [
     {
       "type": 0,
-      "value": "この恵を分ちたいです"
+      "value": "All Blog Posts"
+    }
+  ],
+  "books__title": [
+    {
+      "type": 0,
+      "value": "全てのオーディオブック"
+    }
+  ],
+  "browse__topicsNext": [
+    {
+      "type": 0,
+      "value": "Next topics"
+    }
+  ],
+  "browse__topicsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous topics"
+    }
+  ],
+  "browse_topicsHeading": [
+    {
+      "type": 0,
+      "value": "Topics"
+    }
+  ],
+  "buttonShareRecording__emailSubject": [
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " by "
+    },
+    {
+      "type": 1,
+      "value": "presenters"
+    }
+  ],
+  "buttonShare__emailSubjectSuffix": [
+    {
+      "type": 1,
+      "value": "subject"
+    },
+    {
+      "type": 0,
+      "value": " on AudioVerse"
     }
   ],
   "cardAudiobookTrack_readByLabel": [
@@ -351,6 +873,18 @@
       "value": "66巻"
     }
   ],
+  "cardBibleVersion__showAll": [
+    {
+      "type": 0,
+      "value": "Show All"
+    }
+  ],
+  "cardCollection__showAll": [
+    {
+      "type": 0,
+      "value": "Show All"
+    }
+  ],
   "cardCollection__teachingsCountLabel": [
     {
       "type": 0,
@@ -365,6 +899,16 @@
       "value": "個"
     }
   ],
+  "cardCollection_booksLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " books"
+    }
+  ],
   "cardCollection_sequenceLabel": [
     {
       "type": 1,
@@ -373,6 +917,24 @@
     {
       "type": 0,
       "value": "シリーズ"
+    }
+  ],
+  "cardHatSponsor__addSponsor": [
+    {
+      "type": 0,
+      "value": "Add Sponsor"
+    }
+  ],
+  "cardHatSponsor__removeSponsor": [
+    {
+      "type": 0,
+      "value": "Remove Sponsor"
+    }
+  ],
+  "cardHatSponsor__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "主催者"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -409,6 +971,32 @@
     {
       "type": 0,
       "value": "巻"
+    }
+  ],
+  "cardSequence_chaptersLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "章"
+    }
+  ],
+  "cardSequence_egwAudiobookType": [
+    {
+      "type": 0,
+      "value": "ELLEN WHITE"
+    }
+  ],
+  "cardSequence_readByLabel": [
+    {
+      "type": 0,
+      "value": "Read By "
+    },
+    {
+      "type": 1,
+      "value": "name"
     }
   ],
   "cardSequence_scriptureSongsType": [
@@ -545,6 +1133,12 @@
       "value": "ストーリー"
     }
   ],
+  "cardTopic__hatLabel": [
+    {
+      "type": 0,
+      "value": "Topic"
+    }
+  ],
   "ccollectionTeachingsDetail__heading": [
     {
       "type": 0,
@@ -597,18 +1191,6 @@
       "value": "シリーズ"
     }
   ],
-  "collectionDetail__speakersAllLabel": [
-    {
-      "type": 0,
-      "value": "全てのスピーカーを表示"
-    }
-  ],
-  "collectionDetail__speakersLabel": [
-    {
-      "type": 0,
-      "value": "スピーカー"
-    }
-  ],
   "collectionDetail__sponsorLabel": [
     {
       "type": 0,
@@ -653,16 +1235,16 @@
       "value": "全てのシリーズ"
     }
   ],
-  "collectionTypeLockup_type": [
-    {
-      "type": 0,
-      "value": "大会・総会"
-    }
-  ],
   "collectionType__audiobookSeries": [
     {
       "type": 0,
       "value": "ブックシリーズ"
+    }
+  ],
+  "collectionType__bibleVersion": [
+    {
+      "type": 0,
+      "value": "聖書バージョン"
     }
   ],
   "collectionType__conference": [
@@ -689,10 +1271,40 @@
       "value": "大会・総会"
     }
   ],
-  "contact__bodyLabel": [
+  "conferencesPresenters__title": [
     {
       "type": 0,
-      "value": "本文"
+      "value": "Presenters from "
+    },
+    {
+      "type": 1,
+      "value": "conferenceName"
+    }
+  ],
+  "conferencesSequences__title": [
+    {
+      "type": 0,
+      "value": "Series from "
+    },
+    {
+      "type": 1,
+      "value": "conferenceName"
+    }
+  ],
+  "conferencesTeachings__title": [
+    {
+      "type": 0,
+      "value": "Teachings from "
+    },
+    {
+      "type": 1,
+      "value": "conferenceName"
+    }
+  ],
+  "conferences__title": [
+    {
+      "type": 0,
+      "value": "大会・総会"
     }
   ],
   "contact__emailLabel": [
@@ -719,6 +1331,12 @@
       "value": "Hanako"
     }
   ],
+  "contact__help": [
+    {
+      "type": 0,
+      "value": "View help articles"
+    }
+  ],
   "contact__intro": [
     {
       "type": 0,
@@ -735,6 +1353,48 @@
     {
       "type": 0,
       "value": "Suzuki"
+    }
+  ],
+  "contact__mailingAddress": [
+    {
+      "type": 0,
+      "value": "AudioVerse"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "PO Box 2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Collegedale, TN 37315-2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "USA"
+    }
+  ],
+  "contact__messageLabel": [
+    {
+      "type": 0,
+      "value": "Message"
+    }
+  ],
+  "contact__messageSubmitted": [
+    {
+      "type": 0,
+      "value": "Your message has been submitted."
     }
   ],
   "contact__recipient": [
@@ -767,22 +1427,40 @@
       "value": "提出送信"
     }
   ],
-  "contact__success": [
+  "contact__thankYou": [
     {
       "type": 0,
-      "value": "ご連絡ありがとうございました。確かに通知を承りました！"
-    }
-  ],
-  "contact__testimonyLabel": [
-    {
-      "type": 0,
-      "value": "個人的体験の証"
+      "value": "Thank you!"
     }
   ],
   "contact__title": [
     {
       "type": 0,
       "value": "お問い合わせ"
+    }
+  ],
+  "contact_footer": [
+    {
+      "type": 0,
+      "value": "お問い合わせ"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Create New"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Delete Playlist"
+    }
+  ],
+  "discoverCollections__title": [
+    {
+      "type": 0,
+      "value": "Discover Collections"
     }
   ],
   "discoverCollections_audiobooksHeading": [
@@ -797,64 +1475,70 @@
       "value": "大会・総会"
     }
   ],
-  "discoverCollections_featuredCollectionHeading": [
+  "discoverCollections_egwAudiobooksHeading": [
     {
       "type": 0,
-      "value": "お勧めのコレクション"
+      "value": "Discover Ellen White"
     }
   ],
-  "discoverCollections_presentersHeading": [
-    {
-      "type": 0,
-      "value": "プリゼンター"
-    }
-  ],
-  "discoverCollections_scriptureSongsHeading": [
-    {
-      "type": 0,
-      "value": "聖句ソング"
-    }
-  ],
-  "discoverCollections_seeAll": [
-    {
-      "type": 0,
-      "value": "全てを表示"
-    }
-  ],
-  "discoverCollections_seriesHeading": [
-    {
-      "type": 0,
-      "value": "シリーズ"
-    }
-  ],
-  "discoverCollections_speakersHeading": [
-    {
-      "type": 0,
-      "value": "スピーカー"
-    }
-  ],
-  "discoverCollections_sponsorsHeading": [
-    {
-      "type": 0,
-      "value": "主催者"
-    }
-  ],
-  "discoverCollections_storiesHeading": [
+  "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
       "value": "ストーリー"
     }
   ],
-  "discover__conferencesSeeAll": [
+  "discover__conferencesNext": [
     {
       "type": 0,
-      "value": "最近の大会・総会を全て表示"
+      "value": "Next recent conferences"
     }
   ],
-  "discover__recentTeachingsSeeAll": [
+  "discover__conferencesPrevious": [
     {
       "type": 0,
-      "value": "最近のレッスンを全て表示"
+      "value": "Previous recent conferences"
+    }
+  ],
+  "discover__featuredTeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next featured teachings"
+    }
+  ],
+  "discover__featuredTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous featured teachings"
+    }
+  ],
+  "discover__recentBlogNext": [
+    {
+      "type": 0,
+      "value": "Next recent blog posts"
+    }
+  ],
+  "discover__recentBlogPrevious": [
+    {
+      "type": 0,
+      "value": "Previous recent blog posts"
+    }
+  ],
+  "discover__recentTeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next recent teachings"
+    }
+  ],
+  "discover__recentTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous recent teachings"
+    }
+  ],
+  "discover__seeAll": [
+    {
+      "type": 0,
+      "value": "See All"
     }
   ],
   "discover__storiesHeading": [
@@ -863,16 +1547,64 @@
       "value": "最近のストーリー"
     }
   ],
-  "discover__storiesSeeAll": [
+  "discover__storiesNext": [
     {
       "type": 0,
-      "value": "最近のストーリーを全て表示"
+      "value": "Next recent stories"
     }
   ],
-  "discover__trendingTeachingsSeeAll": [
+  "discover__storiesPrevious": [
     {
       "type": 0,
-      "value": "人気のレッスンを全て表示"
+      "value": "Previous recent stories"
+    }
+  ],
+  "discover__title": [
+    {
+      "type": 0,
+      "value": "Discover"
+    }
+  ],
+  "discover__topicsNext": [
+    {
+      "type": 0,
+      "value": "Next topics"
+    }
+  ],
+  "discover__topicsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous topics"
+    }
+  ],
+  "discover__trendingMusicNext": [
+    {
+      "type": 0,
+      "value": "Next trending scripture songs"
+    }
+  ],
+  "discover__trendingMusicPrevious": [
+    {
+      "type": 0,
+      "value": "Previous trending scripture songs"
+    }
+  ],
+  "discover__trendingTeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next trending teachings"
+    }
+  ],
+  "discover__trendingTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous trending teachings"
+    }
+  ],
+  "discover_bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "Discover Bible Books"
     }
   ],
   "discover_conferencesHeading": [
@@ -881,10 +1613,40 @@
       "value": "最近の大会・総会"
     }
   ],
+  "discover_featuredTeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Featured Teachings"
+    }
+  ],
+  "discover_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Discover Presenters"
+    }
+  ],
+  "discover_recentBlogHeading": [
+    {
+      "type": 0,
+      "value": "Recent Blog Posts"
+    }
+  ],
   "discover_recentTeachingsHeading": [
     {
       "type": 0,
       "value": "最近のレッスン"
+    }
+  ],
+  "discover_topicsHeading": [
+    {
+      "type": 0,
+      "value": "Topics"
+    }
+  ],
+  "discover_trendingMusicHeading": [
+    {
+      "type": 0,
+      "value": "Trending Scripture Songs"
     }
   ],
   "discover_trendingTeachingsHeading": [
@@ -955,6 +1717,24 @@
       "value": "分"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "Edit Playlist"
+    }
+  ],
+  "egwAudiobookList__heading": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
+  "egwbooks__title": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
   "embed__partInfo": [
     {
       "type": 1,
@@ -971,6 +1751,12 @@
     {
       "type": 0,
       "value": "部分を表示"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Error"
     }
   ],
   "generateFeed__audio": [
@@ -1015,48 +1801,6 @@
     {
       "type": 0,
       "value": "年のもの個々の動画またはオーディオは所有者によって著作権で保護されています。"
-    }
-  ],
-  "give__amazonCta": [
-    {
-      "type": 0,
-      "value": "ショッピング Now"
-    }
-  ],
-  "give__amazonDescription": [
-    {
-      "type": 0,
-      "value": "毎回 AmazonSmileでお買い物をされる都度に、 AudioVerseにお買い上げの 0.5%."
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 0,
-      "value": " が寄付されます。もっと知りたいですか?このボタンをクリックするだけです。"
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 0,
-      "value": "　それで完了！開いたAmazonSmile のホームページをフラウザーでブックマーク(お気に入り)に登録をしてください。登録をされなければ、次回から元のAmazonのホームページに戻ってしまします。"
-    }
-  ],
-  "give__amazonTitle": [
-    {
-      "type": 0,
-      "value": "Amazon Smile"
     }
   ],
   "give__checkDescription": [
@@ -1117,6 +1861,12 @@
     {
       "type": 0,
       "value": "小切手の郵送"
+    }
+  ],
+  "give__donorboxTitle": [
+    {
+      "type": 0,
+      "value": "Donation form"
     }
   ],
   "give__estateCta": [
@@ -1209,16 +1959,22 @@
       "value": "Paypal寄付基金"
     }
   ],
+  "give__title": [
+    {
+      "type": 0,
+      "value": "ご支援"
+    }
+  ],
   "header__navItemBible": [
     {
       "type": 0,
       "value": "聖書"
     }
   ],
-  "header__navItemBlog": [
+  "header__navItemBrowse": [
     {
       "type": 0,
-      "value": "ブログ"
+      "value": "Browse"
     }
   ],
   "header__navItemCollections-all": [
@@ -1227,22 +1983,10 @@
       "value": "全てのコレクション"
     }
   ],
-  "header__navItemCollections-book": [
-    {
-      "type": 0,
-      "value": "巻"
-    }
-  ],
   "header__navItemCollections-books": [
     {
       "type": 0,
       "value": "図書"
-    }
-  ],
-  "header__navItemCollections-conference": [
-    {
-      "type": 0,
-      "value": "大会・総会"
     }
   ],
   "header__navItemCollections-conferences": [
@@ -1251,34 +1995,22 @@
       "value": "大会・総会"
     }
   ],
+  "header__navItemCollections-egwbooks": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
   "header__navItemCollections-presenters": [
     {
       "type": 0,
       "value": "プリゼンター"
     }
   ],
-  "header__navItemCollections-series": [
-    {
-      "type": 0,
-      "value": "シリーズ"
-    }
-  ],
   "header__navItemCollections-songs": [
     {
       "type": 0,
       "value": "聖句ソング"
-    }
-  ],
-  "header__navItemCollections-speaker": [
-    {
-      "type": 0,
-      "value": "スピーカー"
-    }
-  ],
-  "header__navItemCollections-sponsor": [
-    {
-      "type": 0,
-      "value": "主催者"
     }
   ],
   "header__navItemCollections-sponsors": [
@@ -1291,6 +2023,12 @@
     {
       "type": 0,
       "value": "ストーリー"
+    }
+  ],
+  "header__navItemCollections-topics": [
+    {
+      "type": 0,
+      "value": "Topics"
     }
   ],
   "header__navItemContact": [
@@ -1377,6 +2115,18 @@
       "value": "もっと表示・・・"
     }
   ],
+  "header__navItemMore-help": [
+    {
+      "type": 0,
+      "value": "Get Help"
+    }
+  ],
+  "header__navItemMore-ju": [
+    {
+      "type": 0,
+      "value": "Journeys Unscripted"
+    }
+  ],
   "header__navItemMore-legal": [
     {
       "type": 0,
@@ -1387,6 +2137,18 @@
     {
       "type": 0,
       "value": "プライバシー"
+    }
+  ],
+  "header__navItemMore-store": [
+    {
+      "type": 0,
+      "value": "AudioVerse Store"
+    }
+  ],
+  "header__navItemMore-swj": [
+    {
+      "type": 0,
+      "value": "Starting With Jesus"
     }
   ],
   "header__navItemMore-terms": [
@@ -1431,12 +2193,6 @@
       "value": "AudioVerseの心"
     }
   ],
-  "header__navItemStory-team": [
-    {
-      "type": 0,
-      "value": "AudioVerseチーム紹介"
-    }
-  ],
   "header__navItemStory-testimonials": [
     {
       "type": 0,
@@ -1461,28 +2217,586 @@
       "value": "プロフィール"
     }
   ],
-  "homePage__addToLibraryPlaceholder": [
+  "helpScout.addReply": [
     {
       "type": 0,
-      "value": "ライブラリーに追加"
+      "value": "Add a reply"
     }
   ],
-  "homePage__createAccountSectionCTA": [
+  "helpScout.addYourMessageHere": [
     {
       "type": 0,
-      "value": "今すぐマイアカウントを登録する"
+      "value": "Add your message here..."
     }
   ],
-  "homePage__createAccountSectionText": [
+  "helpScout.answer": [
     {
       "type": 0,
-      "value": "AudioVerseを最大限に活用するために今すぐアカウントを作成する Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
+      "value": "Answers"
     }
   ],
-  "homePage__createAccountSectionTitle": [
+  "helpScout.ask": [
     {
       "type": 0,
-      "value": "今すぐマイアカウントを作成する"
+      "value": "Ask"
+    }
+  ],
+  "helpScout.attachAFile": [
+    {
+      "type": 0,
+      "value": "Attach a file"
+    }
+  ],
+  "helpScout.attachmentErrorText": [
+    {
+      "type": 0,
+      "value": "There was a problem uploading your attachment. Please try again in a moment."
+    }
+  ],
+  "helpScout.attachmentSizeErrorText": [
+    {
+      "type": 0,
+      "value": "Attachments may be no larger than 10MB"
+    }
+  ],
+  "helpScout.beaconButtonChatMinimize": [
+    {
+      "type": 0,
+      "value": "Minimize chat"
+    }
+  ],
+  "helpScout.beaconButtonChatOpen": [
+    {
+      "type": 0,
+      "value": "Open chat"
+    }
+  ],
+  "helpScout.beaconButtonClose": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "helpScout.cantFindAnswer": [
+    {
+      "type": 0,
+      "value": "Can’t find an answer?"
+    }
+  ],
+  "helpScout.chatAvailabilityChangeMessage": [
+    {
+      "type": 0,
+      "value": "Our team’s availability has changed and there’s no longer anyone available to chat. Send us a message instead and we’ll get back to you."
+    }
+  ],
+  "helpScout.chatButtonDescription": [
+    {
+      "type": 0,
+      "value": "We’re online right now, talk with our team in real-time"
+    }
+  ],
+  "helpScout.chatButtonLabel": [
+    {
+      "type": 0,
+      "value": "Chat"
+    }
+  ],
+  "helpScout.chatConnected": [
+    {
+      "type": 0,
+      "value": "Connected to"
+    }
+  ],
+  "helpScout.chatEndCalloutHeading": [
+    {
+      "type": 0,
+      "value": "All done!"
+    }
+  ],
+  "helpScout.chatEndCalloutLink": [
+    {
+      "type": 0,
+      "value": "Return home"
+    }
+  ],
+  "helpScout.chatEndCalloutMessage": [
+    {
+      "type": 0,
+      "value": "A copy of this conversation will land in your inbox shortly."
+    }
+  ],
+  "helpScout.chatEndUnassignedCalloutHeading": [
+    {
+      "type": 0,
+      "value": "Sorry about that"
+    }
+  ],
+  "helpScout.chatEndUnassignedCalloutMessage": [
+    {
+      "type": 0,
+      "value": "It looks like nobody made it to your chat. We’ll send you an email response as soon as possible."
+    }
+  ],
+  "helpScout.chatEndWaitingCustomerHeading": [
+    {
+      "type": 0,
+      "value": "Sorry about that"
+    }
+  ],
+  "helpScout.chatEndWaitingCustomerMessage": [
+    {
+      "type": 0,
+      "value": "Your question has been added to our email queue and we’ll get back to you shortly."
+    }
+  ],
+  "helpScout.chatEnded": [
+    {
+      "type": 0,
+      "value": "ended the chat"
+    }
+  ],
+  "helpScout.chatHeadingSublabel": [
+    {
+      "type": 0,
+      "value": "We'll be with you soon"
+    }
+  ],
+  "helpScout.chatHeadingTitle": [
+    {
+      "type": 0,
+      "value": "Chat with our team"
+    }
+  ],
+  "helpScout.chatbotAgentDisconnectedMessage": [
+    {
+      "type": 0,
+      "value": "has disconnected from the chat. It’s possible they lost their internet connection, so I’m looking for someone else to take over. Sorry for the delay!"
+    }
+  ],
+  "helpScout.chatbotConfirmationMessage": [
+    {
+      "type": 0,
+      "value": "Thanks! Someone from our team will jump into the chat soon."
+    }
+  ],
+  "helpScout.chatbotGenericErrorMessage": [
+    {
+      "type": 0,
+      "value": "Something went wrong sending your message, please try again in a few minutes."
+    }
+  ],
+  "helpScout.chatbotGreet": [
+    {
+      "type": 0,
+      "value": "Hi there! You can begin by asking your question below. Someone will be with you shortly."
+    }
+  ],
+  "helpScout.chatbotInactivityPrompt": [
+    {
+      "type": 0,
+      "value": "Since the chat has gone idle, I’ll end this chat in a few minutes."
+    }
+  ],
+  "helpScout.chatbotInvalidEmailMessage": [
+    {
+      "type": 0,
+      "value": "Looks like you’ve entered an invalid email address. Want to try again?"
+    }
+  ],
+  "helpScout.chatbotName": [
+    {
+      "type": 0,
+      "value": "Help Bot"
+    }
+  ],
+  "helpScout.chatbotPromptEmail": [
+    {
+      "type": 0,
+      "value": "Got it. Real quick, what’s your email address? We’ll use it for any follow-up messages."
+    }
+  ],
+  "helpScout.continueEditing": [
+    {
+      "type": 0,
+      "value": "Continue writing..."
+    }
+  ],
+  "helpScout.customFieldsValidationLabel": [
+    {
+      "type": 0,
+      "value": "Please complete all fields"
+    }
+  ],
+  "helpScout.defaultMessageErrorText": [
+    {
+      "type": 0,
+      "value": "There was a problem sending your message. Please try again in a moment."
+    }
+  ],
+  "helpScout.docsArticleErrorText": [
+    {
+      "type": 0,
+      "value": "There was a problem retrieving this article. Please double-check your internet connection and try again."
+    }
+  ],
+  "helpScout.docsSearchEmptyText": [
+    {
+      "type": 0,
+      "value": "We couldn’t find any articles that match your search."
+    }
+  ],
+  "helpScout.docsSearchErrorText": [
+    {
+      "type": 0,
+      "value": "There was a problem retrieving articles. Please double-check your internet connection and try again."
+    }
+  ],
+  "helpScout.emailContinueConversation": [
+    {
+      "type": 0,
+      "value": "If you’ve got any other questions, feel free to hit reply and continue the conversation."
+    }
+  ],
+  "helpScout.emailCopyOfDiscussion": [
+    {
+      "type": 0,
+      "value": "Here’s a copy of your discussion"
+    }
+  ],
+  "helpScout.emailEndedLineItem": [
+    {
+      "type": 0,
+      "value": "ended the chat"
+    }
+  ],
+  "helpScout.emailGreeting": [
+    {
+      "type": 0,
+      "value": "Hey"
+    }
+  ],
+  "helpScout.emailHeading": [
+    {
+      "type": 0,
+      "value": "Today's chat with"
+    }
+  ],
+  "helpScout.emailJoinedLineItem": [
+    {
+      "type": 0,
+      "value": "joined the chat"
+    }
+  ],
+  "helpScout.emailLabel": [
+    {
+      "type": 0,
+      "value": "メールアドレス"
+    }
+  ],
+  "helpScout.emailValidationLabel": [
+    {
+      "type": 0,
+      "value": "Please use a valid email address"
+    }
+  ],
+  "helpScout.emailYou": [
+    {
+      "type": 0,
+      "value": "You"
+    }
+  ],
+  "helpScout.endChat": [
+    {
+      "type": 0,
+      "value": "End chat"
+    }
+  ],
+  "helpScout.ending": [
+    {
+      "type": 0,
+      "value": "Ending..."
+    }
+  ],
+  "helpScout.escalationQuestionFeedback": [
+    {
+      "type": 0,
+      "value": "Did this answer your question?"
+    }
+  ],
+  "helpScout.escalationQuestionFeedbackNo": [
+    {
+      "type": 0,
+      "value": "No"
+    }
+  ],
+  "helpScout.escalationQuestionFeedbackYes": [
+    {
+      "type": 0,
+      "value": "Yes"
+    }
+  ],
+  "helpScout.escalationSearchText": [
+    {
+      "type": 0,
+      "value": "Browse our help docs for an answer to your question"
+    }
+  ],
+  "helpScout.escalationTalkText": [
+    {
+      "type": 0,
+      "value": "Talk with a friendly member of our support team"
+    }
+  ],
+  "helpScout.escalationTalkTitle": [
+    {
+      "type": 0,
+      "value": "Talk to us"
+    }
+  ],
+  "helpScout.escalationThanksFeedback": [
+    {
+      "type": 0,
+      "value": "Thanks for the feedback"
+    }
+  ],
+  "helpScout.escalationWhatNext": [
+    {
+      "type": 0,
+      "value": "What next?"
+    }
+  ],
+  "helpScout.firstAFewQuestions": [
+    {
+      "type": 0,
+      "value": "Let's begin with a few questions."
+    }
+  ],
+  "helpScout.getInTouch": [
+    {
+      "type": 0,
+      "value": "Get in touch"
+    }
+  ],
+  "helpScout.history": [
+    {
+      "type": 0,
+      "value": "履歴"
+    }
+  ],
+  "helpScout.howCanWeHelp": [
+    {
+      "type": 0,
+      "value": "How can we help?"
+    }
+  ],
+  "helpScout.justNow": [
+    {
+      "type": 0,
+      "value": "Just Now"
+    }
+  ],
+  "helpScout.lastUpdated": [
+    {
+      "type": 0,
+      "value": "Last updated"
+    }
+  ],
+  "helpScout.mayNotBeEmpty": [
+    {
+      "type": 0,
+      "value": "May not be empty"
+    }
+  ],
+  "helpScout.messageButtonLabel": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "helpScout.messageConfirmationText": [
+    {
+      "type": 0,
+      "value": "You'll receive an email reply within a few hours."
+    }
+  ],
+  "helpScout.messageLabel": [
+    {
+      "type": 0,
+      "value": "How can we help?"
+    }
+  ],
+  "helpScout.messageSubmitLabel": [
+    {
+      "type": 0,
+      "value": "Send a message"
+    }
+  ],
+  "helpScout.nameLabel": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "helpScout.next": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
+  "helpScout.noTimeToWaitAround": [
+    {
+      "type": 0,
+      "value": "No time to wait around? We usually respond within a few hours"
+    }
+  ],
+  "helpScout.nothingFound": [
+    {
+      "type": 0,
+      "value": "Hmm..."
+    }
+  ],
+  "helpScout.previousMessageErrorText": [
+    {
+      "type": 0,
+      "value": "There was a problem retrieving this message. Please double-check your Internet connection and try again."
+    }
+  ],
+  "helpScout.previousMessages": [
+    {
+      "type": 0,
+      "value": "Previous Conversations"
+    }
+  ],
+  "helpScout.received": [
+    {
+      "type": 0,
+      "value": "Received"
+    }
+  ],
+  "helpScout.relatedArticles": [
+    {
+      "type": 0,
+      "value": "Related Articles"
+    }
+  ],
+  "helpScout.responseTime": [
+    {
+      "type": 0,
+      "value": "We usually respond within a few hours"
+    }
+  ],
+  "helpScout.searchLabel": [
+    {
+      "type": 0,
+      "value": "What can we help you with?"
+    }
+  ],
+  "helpScout.sendAMessage": [
+    {
+      "type": 0,
+      "value": "Send a message"
+    }
+  ],
+  "helpScout.sendMessage": [
+    {
+      "type": 0,
+      "value": "Send message"
+    }
+  ],
+  "helpScout.subjectLabel": [
+    {
+      "type": 0,
+      "value": "Subject"
+    }
+  ],
+  "helpScout.suggestedForYou": [
+    {
+      "type": 0,
+      "value": "Instant Answers"
+    }
+  ],
+  "helpScout.tryAgain": [
+    {
+      "type": 0,
+      "value": "Try again"
+    }
+  ],
+  "helpScout.tryBroaderTerm": [
+    {
+      "type": 0,
+      "value": "Try searching a broader term, or"
+    }
+  ],
+  "helpScout.uploadAnImage": [
+    {
+      "type": 0,
+      "value": "Upload an image"
+    }
+  ],
+  "helpScout.viewAndUpdateMessage": [
+    {
+      "type": 0,
+      "value": "You can view and update your message in"
+    }
+  ],
+  "helpScout.waitingForAnAnswer": [
+    {
+      "type": 0,
+      "value": "Waiting for an answer"
+    }
+  ],
+  "helpScout.weAreOnIt": [
+    {
+      "type": 0,
+      "value": "We're on it!"
+    }
+  ],
+  "helpScout.wereHereToHelp": [
+    {
+      "type": 0,
+      "value": "Start a conversation"
+    }
+  ],
+  "helpScout.whatMethodWorks": [
+    {
+      "type": 0,
+      "value": "What channel do you prefer?"
+    }
+  ],
+  "helpScout.you": [
+    {
+      "type": 0,
+      "value": "You"
+    }
+  ],
+  "helpWidget__buttonLabel": [
+    {
+      "type": 0,
+      "value": "Help"
+    }
+  ],
+  "homePage__CreateAccountButtonLabel": [
+    {
+      "type": 0,
+      "value": "Create an Account"
+    }
+  ],
+  "homePage__DiscoverAudioButtonLabel": [
+    {
+      "type": 0,
+      "value": "ディスカバー オーディオ"
+    }
+  ],
+  "homePage__bannerImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman with headphones listening to music and reading a book."
+    }
+  ],
+  "homePage__downloadAppImageAlt": [
+    {
+      "type": 0,
+      "value": "Smartphones with AudioVerse app"
     }
   ],
   "homePage__downloadAppSectionText": [
@@ -1497,118 +2811,30 @@
       "value": "アプリをダウンロードする"
     }
   ],
-  "homePage__downloadNowButtonLabel": [
+  "homePage__latestContentSectionText": [
     {
       "type": 0,
-      "value": "今すぐダウンロード"
+      "value": "Explore a sample of some of our recent audio pieces. Then when you’re ready, "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "visit the Discover page"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " to see more."
     }
   ],
-  "homePage__downloadQueuePlaceholder": [
+  "homePage__latestContentSectionTitle": [
     {
       "type": 0,
-      "value": "ダウンロードの順番"
-    }
-  ],
-  "homePage__emailSignupButton": [
-    {
-      "type": 0,
-      "value": "今、購読に登録する"
-    }
-  ],
-  "homePage__followFunctionalityPlaceholder": [
-    {
-      "type": 0,
-      "value": "Follow Functionality"
-    }
-  ],
-  "homePage__footerDonateLink": [
-    {
-      "type": 0,
-      "value": "ご支援"
-    }
-  ],
-  "homePage__footerDownloadAppButton": [
-    {
-      "type": 0,
-      "value": "今すぐアプリをダウンロード"
-    }
-  ],
-  "homePage__footerFacebookLink": [
-    {
-      "type": 0,
-      "value": "Facebook"
-    }
-  ],
-  "homePage__footerInstagramLink": [
-    {
-      "type": 0,
-      "value": "Instagram"
-    }
-  ],
-  "homePage__footerLinksTitle": [
-    {
-      "type": 0,
-      "value": "リンク"
-    }
-  ],
-  "homePage__footerNewsletterSignup": [
-    {
-      "type": 0,
-      "value": "ニュスレターが定期的に届くように今すぐ登録"
-    }
-  ],
-  "homePage__footerSocialTitle": [
-    {
-      "type": 0,
-      "value": "AudioVerse SNSサービス"
-    }
-  ],
-  "homePage__footerTwitterLink": [
-    {
-      "type": 0,
-      "value": "Twitter"
-    }
-  ],
-  "homePage__joinAudioVerseButtonLabel": [
-    {
-      "type": 0,
-      "value": "今すぐAudioVerse会員になる"
-    }
-  ],
-  "homePage__learnStoryButtonLabel": [
-    {
-      "type": 0,
-      "value": "AudioVerse の形成展開のストーリー"
-    }
-  ],
-  "homePage__newsletterEmail": [
-    {
-      "type": 0,
-      "value": "メールアドレス"
-    }
-  ],
-  "homePage__newsletterEmailPlaceholder": [
-    {
-      "type": 0,
-      "value": "taro_suzuki@email.com"
-    }
-  ],
-  "homePage__newsletterHatTitle": [
-    {
-      "type": 0,
-      "value": "ニュースレターを購読する"
-    }
-  ],
-  "homePage__newsletterName": [
-    {
-      "type": 0,
-      "value": "氏名"
-    }
-  ],
-  "homePage__newsletterNamePlaceholder": [
-    {
-      "type": 0,
-      "value": "Taro Suzuki"
+      "value": "Latest Content"
     }
   ],
   "homePage__newsletterSectionText": [
@@ -1623,40 +2849,6 @@
       "value": "更新情報のお知らせを購読する"
     }
   ],
-  "homePage__newsletterSubscribe": [
-    {
-      "type": 0,
-      "value": "今、購読に登録する"
-    }
-  ],
-  "homePage__recentContentSectionText": [
-    {
-      "type": 0,
-      "value": "厳選されたオーディオセレクションを聴いてみる。もっと聴きたい、観たいときに"
-    },
-    {
-      "children": [
-        {
-          "type": 0,
-          "value": "アカウントを作成"
-        }
-      ],
-      "type": 8,
-      "value": "a"
-    }
-  ],
-  "homePage__recentContentSectionTitle": [
-    {
-      "type": 0,
-      "value": "最近のレッスンと内容"
-    }
-  ],
-  "homePage__recentPostsButtonLabel": [
-    {
-      "type": 0,
-      "value": "全てのブログ投稿を表示"
-    }
-  ],
   "homePage__recentPostsSectionText": [
     {
       "type": 0,
@@ -1667,6 +2859,12 @@
     {
       "type": 0,
       "value": "最近のブログ投稿"
+    }
+  ],
+  "homePage__recentPostsSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Blog Posts"
     }
   ],
   "homePage__soundDoctrineText": [
@@ -1687,10 +2885,10 @@
       "value": "支援をする"
     }
   ],
-  "homePage__supportSectionImagePlaceholder": [
+  "homePage__supportSectionImageAlt": [
     {
       "type": 0,
-      "value": "イメージ"
+      "value": "People having a discussion in a meeting"
     }
   ],
   "homePage__supportSectionText": [
@@ -1711,10 +2909,24 @@
       "value": "確実な教理"
     }
   ],
-  "homePage__testimoniesSectionText": [
+  "homePage__testimoniesIntro": [
     {
       "type": 0,
-      "value": "AudioVerseを利用している方々の声"
+      "value": "See what some of our listeners have shared about using AudioVerse. "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Visit the Testimonials page"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " to see even more."
     }
   ],
   "home__testimonialsTitle": [
@@ -1735,10 +2947,10 @@
       "value": "支援者と国際パートナーのお陰様でAudioVerseは複数の言語で提供することが可能となっています。ありがとうございます。言語をメニューで変えても、ここで変えることができます。"
     }
   ],
-  "libraryCollections__collectionsHeading": [
+  "legal_footer": [
     {
       "type": 0,
-      "value": "コレクション"
+      "value": "法律情報"
     }
   ],
   "libraryCollections__emptyCopy": [
@@ -1751,24 +2963,6 @@
     {
       "type": 0,
       "value": "あなたはまだコレクションに何も保存していません。"
-    }
-  ],
-  "libraryCollections__personsHeading": [
-    {
-      "type": 0,
-      "value": "スピーカー"
-    }
-  ],
-  "libraryCollections__playlistsHeading": [
-    {
-      "type": 0,
-      "value": "プレイリスト"
-    }
-  ],
-  "libraryCollections__sponsorsHeading": [
-    {
-      "type": 0,
-      "value": "主催者"
     }
   ],
   "libraryError__cta": [
@@ -1799,18 +2993,6 @@
     {
       "type": 0,
       "value": "読み込み中・・・"
-    }
-  ],
-  "libraryNav__all": [
-    {
-      "type": 0,
-      "value": "全て"
-    }
-  ],
-  "libraryNav__collections": [
-    {
-      "type": 0,
-      "value": "コレクション"
     }
   ],
   "libraryNav__contentType": [
@@ -1921,12 +3103,6 @@
       "value": "絞り込み"
     }
   ],
-  "libraryNav__finished": [
-    {
-      "type": 0,
-      "value": "終了"
-    }
-  ],
   "libraryNav__history": [
     {
       "type": 0,
@@ -2029,52 +3205,10 @@
       "value": "Z〜A"
     }
   ],
-  "libraryNav__started": [
+  "library__createAccountHeading": [
     {
       "type": 0,
-      "value": "途中まで聴いたアイテム"
-    }
-  ],
-  "libraryNav__unstarted": [
-    {
-      "type": 0,
-      "value": "まだ聴き始めていない"
-    }
-  ],
-  "libraryPlaybackStatus__emptyCopy": [
-    {
-      "type": 0,
-      "value": "ディスカバーページで聴きたいものを見つけよう"
-    }
-  ],
-  "libraryPlaybackStatus__finishedEmptyHeading": [
-    {
-      "type": 0,
-      "value": "聴き終わっているレッスンはないです"
-    }
-  ],
-  "libraryPlaybackStatus__startedEmptyHeading": [
-    {
-      "type": 0,
-      "value": "まだアイテムのどれもまだ聴き終えてないですよ。"
-    }
-  ],
-  "libraryPlaybackStatus__unstartedEmptyHeading": [
-    {
-      "type": 0,
-      "value": "保存されているアイテムがないです"
-    }
-  ],
-  "library__collectionsHeading": [
-    {
-      "type": 0,
-      "value": "コレクション"
-    }
-  ],
-  "library__collectionsSeeAll": [
-    {
-      "type": 0,
-      "value": "全てのコレクションを見る"
+      "value": "Create a free account"
     }
   ],
   "library__emptyCopy": [
@@ -2089,46 +3223,16 @@
       "value": "保存されているアイテムがないです"
     }
   ],
-  "library__finishedHeading": [
+  "library__freeAccountCopy": [
     {
       "type": 0,
-      "value": "終了"
-    }
-  ],
-  "library__finishedSeeAll": [
-    {
-      "type": 0,
-      "value": "終了したアイテムを全て見る"
-    }
-  ],
-  "library__historyHeading": [
-    {
-      "type": 0,
-      "value": "履歴"
-    }
-  ],
-  "library__historySeeAll": [
-    {
-      "type": 0,
-      "value": "履歴を全て見る"
-    }
-  ],
-  "library__membersOnlyCopy": [
-    {
-      "type": 0,
-      "value": "ライブラリーの機能にアクセするにはログインされるか、アカウントを作成してください。"
+      "value": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
     }
   ],
   "library__membersOnlyCta": [
     {
       "type": 0,
       "value": "アカウントを作成・ログイン"
-    }
-  ],
-  "library__membersOnlyHeading": [
-    {
-      "type": 0,
-      "value": "会員限定内容"
     }
   ],
   "library__noMatchingCopy": [
@@ -2143,22 +3247,10 @@
       "value": "一致するアイテムはまだ保存されていません"
     }
   ],
-  "library__startedHeading": [
+  "loading": [
     {
       "type": 0,
-      "value": "途中まで聴いたアイテム"
-    }
-  ],
-  "library__startedSeeAll": [
-    {
-      "type": 0,
-      "value": "全ての途中まで聴いたアイテム"
-    }
-  ],
-  "library__unstartedHeading": [
-    {
-      "type": 0,
-      "value": "まだ聴き始めていない"
+      "value": "Loading..."
     }
   ],
   "loadingCards-ariaLabel": [
@@ -2233,6 +3325,12 @@
       "value": "ログイン"
     }
   ],
+  "loginForm__loginFailureMessage": [
+    {
+      "type": 0,
+      "value": "Login failed"
+    }
+  ],
   "loginForm__passwordLabel": [
     {
       "type": 0,
@@ -2269,16 +3367,124 @@
       "value": "アカウントを作成されていいないですか？"
     }
   ],
+  "loginLanding__title": [
+    {
+      "type": 0,
+      "value": "Login Landing"
+    }
+  ],
+  "loginRedirect__message": [
+    {
+      "type": 0,
+      "value": "Redirecting..."
+    }
+  ],
+  "login__title": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
   "logout__inProcess": [
     {
       "type": 0,
       "value": "ログアウト中・・・"
     }
   ],
+  "mediaFormatSwitcher__audio": [
+    {
+      "type": 0,
+      "value": "オーディオ"
+    }
+  ],
+  "mediaFormatSwitcher__video": [
+    {
+      "type": 0,
+      "value": "動画"
+    }
+  ],
+  "miniplayer__increaseVolume": [
+    {
+      "type": 0,
+      "value": "Increase volume"
+    }
+  ],
+  "miniplayer__label": [
+    {
+      "type": 0,
+      "value": "miniplayer"
+    }
+  ],
+  "miniplayer__reduceVolume": [
+    {
+      "type": 0,
+      "value": "Reduce volume"
+    }
+  ],
+  "miniplayer__series": [
+    {
+      "type": 0,
+      "value": "シリーズ"
+    }
+  ],
+  "miniplayer__volume": [
+    {
+      "type": 0,
+      "value": "Volume"
+    }
+  ],
+  "molecule-button-SignUp": [
+    {
+      "type": 0,
+      "value": "Sign Up with Email"
+    }
+  ],
   "molecule-buttonDownload__buttonLabel": [
     {
       "type": 0,
       "value": "様々なダウンロード"
+    }
+  ],
+  "molecule-buttonDownload__linkLabelHigh": [
+    {
+      "type": 0,
+      "value": "High Quality ("
+    },
+    {
+      "type": 1,
+      "value": "size"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "molecule-buttonDownload__linkLabelLow": [
+    {
+      "type": 0,
+      "value": "Low Quality ("
+    },
+    {
+      "type": 1,
+      "value": "size"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "molecule-buttonDownload__linkLabelMedium": [
+    {
+      "type": 0,
+      "value": "Medium Quality ("
+    },
+    {
+      "type": 1,
+      "value": "size"
+    },
+    {
+      "type": 0,
+      "value": ")"
     }
   ],
   "molecule-buttonDownload__menuAudioHeading": [
@@ -2293,28 +3499,22 @@
       "value": "動画ダウンロード"
     }
   ],
-  "molecule-buttonGuest__downloadQuality": [
+  "molecule-buttonGuestDownload__modalParagraph": [
     {
       "type": 0,
-      "value": "ダウンロードの質を調節中"
+      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
     }
   ],
-  "molecule-buttonGuest__feature1": [
+  "molecule-buttonGuestDownload__modalTitle": [
     {
       "type": 0,
-      "value": "Lorem ipsum dolor"
+      "value": "Create a Free Account"
     }
   ],
-  "molecule-buttonGuest__feature2": [
+  "molecule-buttonGuest__Download": [
     {
       "type": 0,
-      "value": "Et exictur purim multatim"
-    }
-  ],
-  "molecule-buttonGuest__feature3": [
-    {
-      "type": 0,
-      "value": "Dulipscum erudis fesin"
+      "value": "Download content for offline access"
     }
   ],
   "molecule-buttonGuest__label": [
@@ -2329,10 +3529,16 @@
       "value": "アカウントを作成"
     }
   ],
-  "molecule-buttonGuest__modalButtonLabelGuest": [
+  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": [
     {
       "type": 0,
-      "value": "ゲストとして続行"
+      "value": "Create account"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelGuestSkip2": [
+    {
+      "type": 0,
+      "value": "Skip"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelLogIn": [
@@ -2341,10 +3547,28 @@
       "value": "ログイン"
     }
   ],
+  "molecule-buttonGuest__modalButtonLabelSkip": [
+    {
+      "type": 0,
+      "value": "Skip"
+    }
+  ],
   "molecule-buttonGuest__modalParagraph": [
     {
       "type": 0,
       "value": "アカウントがないと、次のようないくつかの重要な機能を見逃してしまいます。"
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph1-2": [
+    {
+      "type": 0,
+      "value": "Please consider signing up or logging in to help our mission of sharing sound doctrine."
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph2": [
+    {
+      "type": 0,
+      "value": "With a free account,you can"
     }
   ],
   "molecule-buttonGuest__modalTitle": [
@@ -2353,16 +3577,28 @@
       "value": "ゲストとしてこのまま続ける"
     }
   ],
-  "molecule-buttonGuest__saving": [
+  "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "図書の中にあるものを保存中"
+      "value": "削除されます。よろしいですか？"
     }
   ],
-  "molecule-buttonGuest__syncing": [
+  "molecule-buttonGuest__requests": [
     {
       "type": 0,
-      "value": "全てのディバイスと同期中"
+      "value": "Avoid annoying login requests"
+    }
+  ],
+  "molecule-buttonGuest__save": [
+    {
+      "type": 0,
+      "value": "Save your content to listen later"
+    }
+  ],
+  "molecule-buttonGuest__sync": [
+    {
+      "type": 0,
+      "value": "Pick up where you left off across devices"
     }
   ],
   "molecule-buttonShareRecording__audioEmbedLabel": [
@@ -2441,6 +3677,12 @@
       "value": "アルバムを追加"
     }
   ],
+  "molecule-cardRecordingSequenceHat__addBibleBook": [
+    {
+      "type": 0,
+      "value": "Add Book"
+    }
+  ],
   "molecule-cardRecordingSequenceHat__addBook": [
     {
       "type": 0,
@@ -2483,6 +3725,12 @@
       "value": "アルバムをライブラリーから削除する"
     }
   ],
+  "molecule-cardRecordingSequenceHat__removeBibleBook": [
+    {
+      "type": 0,
+      "value": "Remove Book"
+    }
+  ],
   "molecule-cardRecordingSequenceHat__removeBook": [
     {
       "type": 0,
@@ -2501,10 +3749,46 @@
       "value": "アルバムをライブラリーから削除する"
     }
   ],
+  "molecule-searchBar__ariaLabel": [
+    {
+      "type": 0,
+      "value": "search"
+    }
+  ],
+  "molecule-searchBar__cancel": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
   "molecule-searchBar__label": [
     {
       "type": 0,
       "value": "検索"
+    }
+  ],
+  "molecule-teaseRecording__individualChapter": [
+    {
+      "type": 0,
+      "value": "Individual Chapter"
+    }
+  ],
+  "molecule-teaseRecording__individualStory": [
+    {
+      "type": 0,
+      "value": "Individual Story"
+    }
+  ],
+  "molecule-teaseRecording__individualTeaching": [
+    {
+      "type": 0,
+      "value": "Individual Teaching"
+    }
+  ],
+  "molecule-teaseRecording__individualTrack": [
+    {
+      "type": 0,
+      "value": "Individual Track"
     }
   ],
   "molecule-teaseRecording__lessPersons": [
@@ -2571,6 +3855,12 @@
       "value": "つぎ"
     }
   ],
+  "molecules-pagination__nextLabelMobile": [
+    {
+      "type": 0,
+      "value": "Next"
+    }
+  ],
   "molecules-pagination__previousLabel": [
     {
       "type": 0,
@@ -2587,6 +3877,84 @@
     {
       "type": 0,
       "value": "ログイン・会員登録"
+    }
+  ],
+  "navigation__nameFallback": [
+    {
+      "type": 0,
+      "value": "User Account"
+    }
+  ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Privacy"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Shareable"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "New playlist"
+    }
+  ],
+  "newsLetterForm__checkboxNewsletter": [
+    {
+      "type": 0,
+      "value": "Newsletter (typically about once a month)"
+    }
+  ],
+  "newsLetterForm__checkboxWeeklyPics": [
+    {
+      "type": 0,
+      "value": "Weekly Picks (goes out every Monday)"
+    }
+  ],
+  "newsLetterForm__newsletterEmail": [
+    {
+      "type": 0,
+      "value": "Email Address"
+    }
+  ],
+  "newsLetterForm__newsletterEmailPlaceholder": [
+    {
+      "type": 0,
+      "value": "josephbates@email.com"
+    }
+  ],
+  "newsLetterForm__newsletterHatTitle": [
+    {
+      "type": 0,
+      "value": "Sign up for our Emails"
+    }
+  ],
+  "newsLetterForm__newsletterName": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "newsLetterForm__newsletterNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Joseph Bates"
+    }
+  ],
+  "newsLetterForm__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Subscribe"
     }
   ],
   "notFound__header": [
@@ -2619,16 +3987,52 @@
       "value": "ディスカバーに戻る"
     }
   ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "This Playlist is Private."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "onlyYow": [
+    {
+      "type": 0,
+      "value": "Only you can view"
+    }
+  ],
+  "organism-mobileHeader__more": [
+    {
+      "type": 0,
+      "value": "more"
+    }
+  ],
   "organism-modal__close": [
     {
       "type": 0,
       "value": "閉じる"
     }
   ],
+  "organism-navigation__exit": [
+    {
+      "type": 0,
+      "value": "Exit"
+    }
+  ],
   "organism-recording__albumListTitle": [
     {
       "type": 0,
       "value": "このアルバムにあるの他の歌を表示"
+    }
+  ],
+  "organism-recording__backToChapterInfo": [
+    {
+      "type": 0,
+      "value": "Back to Chapter Info"
     }
   ],
   "organism-recording__buttonLabelNext": [
@@ -2641,6 +4045,12 @@
     {
       "type": 0,
       "value": "前のに戻る"
+    }
+  ],
+  "organism-recording__collectionInfoTitle": [
+    {
+      "type": 0,
+      "value": "Parent Bible"
     }
   ],
   "organism-recording__conferenceInfoTitle": [
@@ -2669,6 +4079,12 @@
     {
       "type": 0,
       "value": "プレイリスト内のその他のアイテム"
+    }
+  ],
+  "organism-recording__readAlongLabel": [
+    {
+      "type": 0,
+      "value": "Read Along"
     }
   ],
   "organism-recording__readByLabel": [
@@ -2705,10 +4121,160 @@
       "value": "主催者"
     }
   ],
+  "organismSection__audiobooksHeading": [
+    {
+      "type": 0,
+      "value": "全てのオーディオブック"
+    }
+  ],
+  "organismSection__audiobooksNext": [
+    {
+      "type": 0,
+      "value": "Next audiobooks"
+    }
+  ],
+  "organismSection__audiobooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous audiobooks"
+    }
+  ],
+  "organismSection__bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "Bible Books"
+    }
+  ],
+  "organismSection__bibleBooksNext": [
+    {
+      "type": 0,
+      "value": "Next Bible books"
+    }
+  ],
+  "organismSection__bibleBooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Bible books"
+    }
+  ],
+  "organismSection__egwAudiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
+  "organismSection__egwAudiobooksNext": [
+    {
+      "type": 0,
+      "value": "Next EGW audiobooks"
+    }
+  ],
+  "organismSection__egwAudiobooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous EGW audiobooks"
+    }
+  ],
+  "organismSection_presentersHeading": [
+    {
+      "type": 0,
+      "value": "プリゼンター"
+    }
+  ],
+  "organismSection_presentersNext": [
+    {
+      "type": 0,
+      "value": "Next presenters"
+    }
+  ],
+  "organismSection_presentersPrevious": [
+    {
+      "type": 0,
+      "value": "Previous presenters"
+    }
+  ],
+  "organismSection_scriptureSongsHeading": [
+    {
+      "type": 0,
+      "value": "聖句ソング"
+    }
+  ],
+  "organismSection_scriptureSongsNext": [
+    {
+      "type": 0,
+      "value": "Next scripture songs"
+    }
+  ],
+  "organismSection_scriptureSongsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous scripture songs"
+    }
+  ],
+  "organismSection_seriesHeading": [
+    {
+      "type": 0,
+      "value": "シリーズ"
+    }
+  ],
+  "organismSection_seriesNext": [
+    {
+      "type": 0,
+      "value": "Next series"
+    }
+  ],
+  "organismSection_seriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous series"
+    }
+  ],
+  "organismSection_sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "主催者"
+    }
+  ],
+  "organismSection_sponsorsNext": [
+    {
+      "type": 0,
+      "value": "Next sponsors"
+    }
+  ],
+  "organismSection_sponsorsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous sponsors"
+    }
+  ],
+  "ourPurpose__title": [
+    {
+      "type": 0,
+      "value": "Our Purpose"
+    }
+  ],
+  "ourStory__title": [
+    {
+      "type": 0,
+      "value": "Our Story"
+    }
+  ],
   "personTypeLockup_type": [
     {
       "type": 0,
       "value": "スピーカー"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Title"
     }
   ],
   "playButton__pauseLabel": [
@@ -3031,6 +4597,16 @@
       "value": "最も人気"
     }
   ],
+  "presentersAppears__title": [
+    {
+      "type": 1,
+      "value": "personName"
+    },
+    {
+      "type": 0,
+      "value": " Also Appears In"
+    }
+  ],
   "presentersFeed__description": [
     {
       "type": 1,
@@ -3051,10 +4627,64 @@
       "value": "による説教"
     }
   ],
+  "presentersListAll__all": [
+    {
+      "type": 0,
+      "value": "全て"
+    }
+  ],
+  "presentersList__all": [
+    {
+      "type": 0,
+      "value": "全て"
+    }
+  ],
   "presentersList__title": [
     {
       "type": 0,
       "value": "全てのスピーカー"
+    }
+  ],
+  "presentersSequences__title": [
+    {
+      "type": 0,
+      "value": "Series by "
+    },
+    {
+      "type": 1,
+      "value": "personName"
+    }
+  ],
+  "presentersTeachings__title": [
+    {
+      "type": 0,
+      "value": "Teachings by "
+    },
+    {
+      "type": 1,
+      "value": "personName"
+    }
+  ],
+  "presentersTop__title": [
+    {
+      "type": 0,
+      "value": "Most Listened by "
+    },
+    {
+      "type": 1,
+      "value": "personName"
+    }
+  ],
+  "presenters__title": [
+    {
+      "type": 0,
+      "value": "全てのスピーカー"
+    }
+  ],
+  "privacy_footer": [
+    {
+      "type": 0,
+      "value": "Privacy Policy"
     }
   ],
   "profile__buttonLabelDeleteAccount": [
@@ -3067,6 +4697,54 @@
     {
       "type": 0,
       "value": "編集したものを保存"
+    }
+  ],
+  "profile__deleteConfirmAcknowledgeStatements": [
+    {
+      "type": 0,
+      "value": "Please acknowledge all the above statements."
+    }
+  ],
+  "profile__deleteConfirmDelete": [
+    {
+      "type": 0,
+      "value": "Delete account"
+    }
+  ],
+  "profile__deleteConfirmImmediatelyDeleted": [
+    {
+      "type": 0,
+      "value": "I understand that my account will be immediately deleted."
+    }
+  ],
+  "profile__deleteConfirmIntro": [
+    {
+      "type": 0,
+      "value": "Do you want to delete your account? You cannot undo this action."
+    }
+  ],
+  "profile__deleteConfirmLibraryLost": [
+    {
+      "type": 0,
+      "value": "I understand that all my saved library will be lost."
+    }
+  ],
+  "profile__deleteConfirmNevermind": [
+    {
+      "type": 0,
+      "value": "Never mind"
+    }
+  ],
+  "profile__deleteConfirmNoLogin": [
+    {
+      "type": 0,
+      "value": "I understand that I will no longer be able to log in unless I create a new account."
+    }
+  ],
+  "profile__deleteConfirmTitle": [
+    {
+      "type": 0,
+      "value": "削除されます。よろしいですか？"
     }
   ],
   "profile__heading": [
@@ -3135,6 +4813,12 @@
       "value": "動画"
     }
   ],
+  "recording_id_missing": [
+    {
+      "type": 0,
+      "value": "Sorry, a Recording Id missing!"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -3156,7 +4840,7 @@
   "register__firstNamePlaceholder": [
     {
       "type": 0,
-      "value": "Jane"
+      "value": "Hanako"
     }
   ],
   "register__lastNameLabel": [
@@ -3168,7 +4852,7 @@
   "register__lastNamePlaceholder": [
     {
       "type": 0,
-      "value": "Doe"
+      "value": "Suzuki"
     }
   ],
   "register__loadingMessage": [
@@ -3189,12 +4873,6 @@
       "value": "すでにアカウントをお持ちですか？"
     }
   ],
-  "register__newsletterSubscribe": [
-    {
-      "type": 0,
-      "value": "ニュースレターを購読する"
-    }
-  ],
   "register__passwordLabel": [
     {
       "type": 0,
@@ -3213,10 +4891,106 @@
       "value": "ログイン・会員登録"
     }
   ],
-  "register__successMessage": [
+  "register__title": [
     {
       "type": 0,
-      "value": "完成しました。"
+      "value": "Register"
+    }
+  ],
+  "regularLogin__login": [
+    {
+      "type": 0,
+      "value": "すでにアカウントをお持ちですか？"
+    }
+  ],
+  "regularLogin__loginTxt": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
+  "release__address1": [
+    {
+      "type": 0,
+      "value": "Address line 1"
+    }
+  ],
+  "release__address2": [
+    {
+      "type": 0,
+      "value": "Address line 2"
+    }
+  ],
+  "release__city": [
+    {
+      "type": 0,
+      "value": "City"
+    }
+  ],
+  "release__comments": [
+    {
+      "type": 0,
+      "value": "Comments"
+    }
+  ],
+  "release__country": [
+    {
+      "type": 0,
+      "value": "Country"
+    }
+  ],
+  "release__email": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "release__givenName": [
+    {
+      "type": 0,
+      "value": "Given name"
+    }
+  ],
+  "release__messageSubmitted": [
+    {
+      "type": 0,
+      "value": "Your form has been submitted."
+    }
+  ],
+  "release__phone": [
+    {
+      "type": 0,
+      "value": "Phone"
+    }
+  ],
+  "release__province": [
+    {
+      "type": 0,
+      "value": "State / Province"
+    }
+  ],
+  "release__surname": [
+    {
+      "type": 0,
+      "value": "Surname"
+    }
+  ],
+  "release__thankYou": [
+    {
+      "type": 0,
+      "value": "Thank you!"
+    }
+  ],
+  "release__title": [
+    {
+      "type": 0,
+      "value": "Media Release Agreement"
+    }
+  ],
+  "release__zip": [
+    {
+      "type": 0,
+      "value": "Postal Code"
     }
   ],
   "reset__confirmPasswordLabel": [
@@ -3289,6 +5063,12 @@
       "value": "RSSフィード"
     }
   ],
+  "scroll-down": [
+    {
+      "type": 0,
+      "value": "Scroll down for more"
+    }
+  ],
   "searchCollections__heading": [
     {
       "type": 0,
@@ -3319,6 +5099,36 @@
       "value": "一致するレッスンを全て表示"
     }
   ],
+  "search__allHeading": [
+    {
+      "type": 0,
+      "value": "全て"
+    }
+  ],
+  "search__bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "聖書"
+    }
+  ],
+  "search__bileBooksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Bible books"
+    }
+  ],
+  "search__booksHeading": [
+    {
+      "type": 0,
+      "value": "オーディオブック"
+    }
+  ],
+  "search__booksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Audiobooks"
+    }
+  ],
   "search__conferencesHeading": [
     {
       "type": 0,
@@ -3331,38 +5141,64 @@
       "value": "全ての大会・総会を表示"
     }
   ],
-  "search__personsHeading": [
+  "search__egwbooksHeading": [
     {
       "type": 0,
-      "value": "スピーカー"
+      "value": "EGW"
     }
   ],
-  "search__personsSeeAll": [
+  "search__egwbooksSeeAll": [
     {
       "type": 0,
-      "value": "全てのスピーカーを表示"
+      "value": "See All Matching Ellen White Audiobooks"
     }
   ],
-  "search__resultsCount": [
-    {
-      "type": 1,
-      "value": "count"
-    },
+  "search__emptyStateMessage": [
     {
       "type": 0,
-      "value": "個の結果"
+      "value": "Try searching for something else"
     }
   ],
-  "search__sequencesHeading": [
+  "search__emptyStateTitle": [
+    {
+      "type": 0,
+      "value": "No results found"
+    }
+  ],
+  "search__musicHeading": [
+    {
+      "type": 0,
+      "value": "音楽"
+    }
+  ],
+  "search__musicSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Music"
+    }
+  ],
+  "search__presentersHeading": [
+    {
+      "type": 0,
+      "value": "プリゼンター"
+    }
+  ],
+  "search__presentersSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Presenters"
+    }
+  ],
+  "search__seriesHeading": [
     {
       "type": 0,
       "value": "シリーズ"
     }
   ],
-  "search__sequencesSeeAll": [
+  "search__seriesSeeAll": [
     {
       "type": 0,
-      "value": "全てのシリーズを表示"
+      "value": "See All Matching Series"
     }
   ],
   "search__sponsorsHeading": [
@@ -3377,6 +5213,18 @@
       "value": "全ての主催者を表示"
     }
   ],
+  "search__storiesHeading": [
+    {
+      "type": 0,
+      "value": "ストーリー"
+    }
+  ],
+  "search__storiesSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Stories"
+    }
+  ],
   "search__teachingsHeading": [
     {
       "type": 0,
@@ -3389,10 +5237,36 @@
       "value": "全てのレッスンを表示"
     }
   ],
+  "search__title": [
+    {
+      "type": 0,
+      "value": "検索"
+    }
+  ],
+  "search__titleDynamic": [
+    {
+      "type": 0,
+      "value": "Search | \""
+    },
+    {
+      "type": 1,
+      "value": "term"
+    },
+    {
+      "type": 0,
+      "value": "\" | AudioVerse"
+    }
+  ],
   "sequenceType__audiobookTitle": [
     {
       "type": 0,
       "value": "巻"
+    }
+  ],
+  "sequenceType__bibleBookTitle": [
+    {
+      "type": 0,
+      "value": "Bible Book"
     }
   ],
   "sequenceType__musicTrackTitle": [
@@ -3447,13 +5321,13 @@
       "value": "主催者"
     }
   ],
-  "seriesDetail__type": [
+  "seriesList__heading": [
     {
       "type": 0,
-      "value": "シリーズ"
+      "value": "全てのシリーズ"
     }
   ],
-  "seriesList__heading": [
+  "seriesList__title": [
     {
       "type": 0,
       "value": "全てのシリーズ"
@@ -3495,6 +5369,56 @@
       "value": "この動画・オーディオ録の内容は寄稿者の見解であり、必ずしもAudioVerseの見解を反映しているとは限りません。"
     }
   ],
+  "sermonDetailPage__openGraphDescription_audiobook": [
+    {
+      "type": 0,
+      "value": "Audiobook provided by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_bibleChapter": [
+    {
+      "type": 0,
+      "value": "Bible Chapter provided by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_music": [
+    {
+      "type": 0,
+      "value": "Music by "
+    },
+    {
+      "type": 1,
+      "value": "speakerName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_sermon": [
+    {
+      "type": 0,
+      "value": "Teaching by "
+    },
+    {
+      "type": 1,
+      "value": "speakerName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_story": [
+    {
+      "type": 0,
+      "value": "Story by "
+    },
+    {
+      "type": 1,
+      "value": "writerName"
+    }
+  ],
   "sermonDetailPage__recordedTitle": [
     {
       "type": 0,
@@ -3519,6 +5443,12 @@
       "value": "Googleでログイン"
     }
   ],
+  "socialLogin__loginOr": [
+    {
+      "type": 0,
+      "value": "Or"
+    }
+  ],
   "socialLogin__registerFacebookButton": [
     {
       "type": 0,
@@ -3535,6 +5465,16 @@
     {
       "type": 0,
       "value": "完成しました。"
+    }
+  ],
+  "songBook__title": [
+    {
+      "type": 1,
+      "value": "book"
+    },
+    {
+      "type": 0,
+      "value": " Scripture Songs"
     }
   ],
   "songsBooksDetail__contributors": [
@@ -3557,424 +5497,10 @@
       "value": "曲"
     }
   ],
-  "songsListPage__1ChroniclesLabel": [
-    {
-      "type": 0,
-      "value": "歴代誌上"
-    }
-  ],
-  "songsListPage__1CorinthiansLabel": [
-    {
-      "type": 0,
-      "value": "コリント人への第1の手紙"
-    }
-  ],
-  "songsListPage__1JohnLabel": [
-    {
-      "type": 0,
-      "value": "ヨハネの第1の手紙"
-    }
-  ],
-  "songsListPage__1KingsLabel": [
-    {
-      "type": 0,
-      "value": "列王記上"
-    }
-  ],
-  "songsListPage__1PeterLabel": [
-    {
-      "type": 0,
-      "value": "ペテロの第1の手紙"
-    }
-  ],
-  "songsListPage__1SamuelLabel": [
-    {
-      "type": 0,
-      "value": "サムエル記上"
-    }
-  ],
-  "songsListPage__1ThessaloniansLabel": [
-    {
-      "type": 0,
-      "value": "テサロニケ人への第1の手紙"
-    }
-  ],
-  "songsListPage__1TimothyLabel": [
-    {
-      "type": 0,
-      "value": "テモテへの第1の手紙"
-    }
-  ],
-  "songsListPage__2ChroniclesLabel": [
-    {
-      "type": 0,
-      "value": "歴代誌下"
-    }
-  ],
-  "songsListPage__2CorinthiansLabel": [
-    {
-      "type": 0,
-      "value": "コリント人への第2の手紙"
-    }
-  ],
-  "songsListPage__2JohnLabel": [
-    {
-      "type": 0,
-      "value": "ヨハネの第2の手紙"
-    }
-  ],
-  "songsListPage__2KingsLabel": [
-    {
-      "type": 0,
-      "value": "列王記下"
-    }
-  ],
-  "songsListPage__2PeterLabel": [
-    {
-      "type": 0,
-      "value": "ペテロの第2の手紙"
-    }
-  ],
-  "songsListPage__2SamuelLabel": [
-    {
-      "type": 0,
-      "value": "サムエル記下"
-    }
-  ],
-  "songsListPage__2ThessaloniansLabel": [
-    {
-      "type": 0,
-      "value": "テサロニケ人への第2の手紙"
-    }
-  ],
-  "songsListPage__2TimothyLabel": [
-    {
-      "type": 0,
-      "value": "テモテへの第2の手紙"
-    }
-  ],
-  "songsListPage__3JohnLabel": [
-    {
-      "type": 0,
-      "value": "ヨハネの第3の手紙"
-    }
-  ],
-  "songsListPage__ActsLabel": [
-    {
-      "type": 0,
-      "value": "使徒行伝"
-    }
-  ],
-  "songsListPage__AmosLabel": [
-    {
-      "type": 0,
-      "value": "アモス書"
-    }
-  ],
-  "songsListPage__ColossiansLabel": [
-    {
-      "type": 0,
-      "value": "コロサイ人への手紙"
-    }
-  ],
-  "songsListPage__DanielLabel": [
-    {
-      "type": 0,
-      "value": "ダニエル書"
-    }
-  ],
-  "songsListPage__DeuteronomyLabel": [
-    {
-      "type": 0,
-      "value": "申命記"
-    }
-  ],
-  "songsListPage__EcclesiastesLabel": [
-    {
-      "type": 0,
-      "value": "伝道の書"
-    }
-  ],
-  "songsListPage__EphesiansLabel": [
-    {
-      "type": 0,
-      "value": "エペソ人への手紙"
-    }
-  ],
-  "songsListPage__EstherLabel": [
-    {
-      "type": 0,
-      "value": "エステル記"
-    }
-  ],
-  "songsListPage__ExodusLabel": [
-    {
-      "type": 0,
-      "value": "出エジプト記"
-    }
-  ],
-  "songsListPage__EzekielLabel": [
-    {
-      "type": 0,
-      "value": "エゼキエル書"
-    }
-  ],
-  "songsListPage__EzraLabel": [
-    {
-      "type": 0,
-      "value": "エズラ記"
-    }
-  ],
-  "songsListPage__GalatiansLabel": [
-    {
-      "type": 0,
-      "value": "ガラテヤ人への手紙"
-    }
-  ],
-  "songsListPage__GenesisLabel": [
-    {
-      "type": 0,
-      "value": "創世記"
-    }
-  ],
-  "songsListPage__HabakkukLabel": [
-    {
-      "type": 0,
-      "value": "ハバクク書"
-    }
-  ],
-  "songsListPage__HaggaiLabel": [
-    {
-      "type": 0,
-      "value": "ハガイ書"
-    }
-  ],
-  "songsListPage__HebrewsLabel": [
-    {
-      "type": 0,
-      "value": "ヘブル人への手紙"
-    }
-  ],
-  "songsListPage__HoseaLabel": [
-    {
-      "type": 0,
-      "value": "ホセア書"
-    }
-  ],
-  "songsListPage__IsaiahLabel": [
-    {
-      "type": 0,
-      "value": "イザヤ書"
-    }
-  ],
-  "songsListPage__JamesLabel": [
-    {
-      "type": 0,
-      "value": "ヤコブ書"
-    }
-  ],
-  "songsListPage__JeremiahLabel": [
-    {
-      "type": 0,
-      "value": "エレミヤ書"
-    }
-  ],
-  "songsListPage__JobLabel": [
-    {
-      "type": 0,
-      "value": "ヨブ記"
-    }
-  ],
-  "songsListPage__JoelLabel": [
-    {
-      "type": 0,
-      "value": "ヨエル書"
-    }
-  ],
-  "songsListPage__JohnLabel": [
-    {
-      "type": 0,
-      "value": "ヨハネの福音書"
-    }
-  ],
-  "songsListPage__JonahLabel": [
-    {
-      "type": 0,
-      "value": "ヨナ書"
-    }
-  ],
-  "songsListPage__JoshuaLabel": [
-    {
-      "type": 0,
-      "value": "ヨシュア記"
-    }
-  ],
-  "songsListPage__JudeLabel": [
-    {
-      "type": 0,
-      "value": "ユダの手紙"
-    }
-  ],
-  "songsListPage__JudgesLabel": [
-    {
-      "type": 0,
-      "value": "士師記"
-    }
-  ],
-  "songsListPage__LamentationsLabel": [
-    {
-      "type": 0,
-      "value": "哀歌"
-    }
-  ],
-  "songsListPage__LeviticusLabel": [
-    {
-      "type": 0,
-      "value": "レビ記"
-    }
-  ],
-  "songsListPage__LukeLabel": [
-    {
-      "type": 0,
-      "value": "ルカの福音書"
-    }
-  ],
-  "songsListPage__MalachiLabel": [
-    {
-      "type": 0,
-      "value": "マラキ書"
-    }
-  ],
-  "songsListPage__MarkLabel": [
-    {
-      "type": 0,
-      "value": "マルコの福音書"
-    }
-  ],
-  "songsListPage__MatthewLabel": [
-    {
-      "type": 0,
-      "value": "マタイの福音書"
-    }
-  ],
-  "songsListPage__MicahLabel": [
-    {
-      "type": 0,
-      "value": "ミカ書"
-    }
-  ],
-  "songsListPage__NahumLabel": [
-    {
-      "type": 0,
-      "value": "ナホム書"
-    }
-  ],
-  "songsListPage__NehemiahLabel": [
-    {
-      "type": 0,
-      "value": "ネヘミヤ書"
-    }
-  ],
-  "songsListPage__NumbersLabel": [
-    {
-      "type": 0,
-      "value": "民数記"
-    }
-  ],
-  "songsListPage__ObadiahLabel": [
-    {
-      "type": 0,
-      "value": "オバデヤ書"
-    }
-  ],
-  "songsListPage__PhilemonLabel": [
-    {
-      "type": 0,
-      "value": "ピレモンへの手紙"
-    }
-  ],
-  "songsListPage__PhilippiansLabel": [
-    {
-      "type": 0,
-      "value": "ピリピ人への手紙"
-    }
-  ],
-  "songsListPage__ProverbsLabel": [
-    {
-      "type": 0,
-      "value": "箴言"
-    }
-  ],
-  "songsListPage__PsalmsLabel": [
-    {
-      "type": 0,
-      "value": "詩篇"
-    }
-  ],
-  "songsListPage__RevelationLabel": [
-    {
-      "type": 0,
-      "value": "ヨハネの黙示録"
-    }
-  ],
-  "songsListPage__RomansLabel": [
-    {
-      "type": 0,
-      "value": "ローマ人への手紙"
-    }
-  ],
-  "songsListPage__RuthLabel": [
-    {
-      "type": 0,
-      "value": "ルツ記"
-    }
-  ],
-  "songsListPage__Song of SolomonLabel": [
-    {
-      "type": 0,
-      "value": "雅歌"
-    }
-  ],
-  "songsListPage__TitusLabel": [
-    {
-      "type": 0,
-      "value": "テトスへの手紙"
-    }
-  ],
-  "songsListPage__ZechariahLabel": [
-    {
-      "type": 0,
-      "value": "ゼカリヤ書"
-    }
-  ],
-  "songsListPage__ZephaniahLabel": [
-    {
-      "type": 0,
-      "value": "ゼパニヤ書"
-    }
-  ],
-  "songsListPage__albumTabLabel": [
-    {
-      "type": 0,
-      "value": "アルバム"
-    }
-  ],
-  "songsListPage__bookTabLabel": [
-    {
-      "type": 0,
-      "value": "図書"
-    }
-  ],
   "songsListPage__intro": [
     {
       "type": 0,
       "value": "聖書の箇所を音楽に合わせて聴くと暗記しやすいです。アルバム別に聴く、もしくは聖書の書簡別に聴く。"
-    }
-  ],
-  "songsListPage__sponsorTabLabel": [
-    {
-      "type": 0,
-      "value": "主催者"
     }
   ],
   "songsListPage__tabAlbums": [
@@ -3989,12 +5515,6 @@
       "value": "聖書の箇所"
     }
   ],
-  "songsListPage__tagTabLabel": [
-    {
-      "type": 0,
-      "value": "タッグ"
-    }
-  ],
   "songsListPage__title": [
     {
       "type": 0,
@@ -4005,6 +5525,12 @@
     {
       "type": 0,
       "value": "主催者"
+    }
+  ],
+  "spiritOfAv__title": [
+    {
+      "type": 0,
+      "value": "Spirit Of AudioVerse"
     }
   ],
   "sponsorConferencesDetail__heading": [
@@ -4133,10 +5659,70 @@
       "value": "による説教"
     }
   ],
+  "sponsorsConferences__title": [
+    {
+      "type": 0,
+      "value": "Conferences by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sponsorsListAll__all": [
+    {
+      "type": 0,
+      "value": "全て"
+    }
+  ],
+  "sponsorsList__all": [
+    {
+      "type": 0,
+      "value": "全て"
+    }
+  ],
   "sponsorsList__title": [
     {
       "type": 0,
       "value": "全ての主催者"
+    }
+  ],
+  "sponsorsSequences__title": [
+    {
+      "type": 0,
+      "value": "Series by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sponsorsTeachings__title": [
+    {
+      "type": 0,
+      "value": "Teachings by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sponsors__title": [
+    {
+      "type": 0,
+      "value": "全ての主催者"
+    }
+  ],
+  "storyAlbumList__emptyStateMessage": [
+    {
+      "type": 0,
+      "value": "There are no story albums to show."
+    }
+  ],
+  "storyAlbumList__emptyStateTitle": [
+    {
+      "type": 0,
+      "value": "Nothing here!"
     }
   ],
   "storyAlbumList__heading": [
@@ -4175,6 +5761,12 @@
       "value": "のナレーション"
     }
   ],
+  "storyAlbums__title": [
+    {
+      "type": 0,
+      "value": "聖句ソング"
+    }
+  ],
   "teachingsFeed__description": [
     {
       "type": 1,
@@ -4199,6 +5791,24 @@
       "value": ")語"
     }
   ],
+  "teachings__title": [
+    {
+      "type": 0,
+      "value": "全てのレッスン"
+    }
+  ],
+  "team__title": [
+    {
+      "type": 0,
+      "value": "Our Team"
+    }
+  ],
+  "terms_footer": [
+    {
+      "type": 0,
+      "value": "利用規約"
+    }
+  ],
   "testimonies__heading": [
     {
       "type": 0,
@@ -4211,22 +5821,16 @@
       "value": "いい証がありますかあなたのストーリーを共有して下さい！"
     }
   ],
-  "testimonies__seeAll": [
-    {
-      "type": 0,
-      "value": "全ての証を表示"
-    }
-  ],
   "testimonies__shareYourStory": [
     {
       "type": 0,
       "value": "あなたのストーリーをシェアして下さい！"
     }
   ],
-  "testimonies__submitTestimonial": [
+  "testimonies__title": [
     {
       "type": 0,
-      "value": "個人体験の証を投稿"
+      "value": "Testimonials"
     }
   ],
   "time__hoursMinutesAndSeconds": [
@@ -4269,16 +5873,148 @@
       "value": "秒"
     }
   ],
+  "topicDetail__description": [
+    {
+      "type": 0,
+      "value": "内容詳細"
+    }
+  ],
+  "topicDetail__label": [
+    {
+      "type": 0,
+      "value": "Topic"
+    }
+  ],
+  "topicDetail__parentTopic": [
+    {
+      "type": 0,
+      "value": "Parent Topic"
+    }
+  ],
+  "topicDetail__series": [
+    {
+      "type": 0,
+      "value": "シリーズ"
+    }
+  ],
+  "topicDetail__teachings": [
+    {
+      "type": 0,
+      "value": "レッスン"
+    }
+  ],
+  "topicItemCount__items": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " item"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "topicItemCount__series": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " series"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " series"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "topicItemCount__teachings": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " teaching"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " teachings"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "topicListPage__title": [
+    {
+      "type": 0,
+      "value": "All Topics"
+    }
+  ],
   "trendingTeachings__heading": [
     {
       "type": 0,
       "value": "最近人気のレッスン"
     }
   ],
-  "unstartedSeeAll": [
+  "trending__title": [
     {
       "type": 0,
-      "value": "始められていないものを全部表示"
+      "value": "最近人気のレッスン"
     }
   ]
 }

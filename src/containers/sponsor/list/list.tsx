@@ -63,7 +63,7 @@ export default function Sponsors({
 						<a className={styles.container}>
 							{image && (
 								<div className={styles.image}>
-									<RoundImage image={image.url} />
+									<RoundImage image={image.url} alt={title} />
 								</div>
 							)}
 							<span className={styles.sponsorName}>{title}</span>

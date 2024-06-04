@@ -71,6 +71,12 @@
 	}
 }
 
+.exitButton {
+	&:hover:global(.hover-bg--darkened-cream) {
+		background-color: transparent;
+	}
+}
+
 .iconDisclosure {
 	height: 32px;
 	width: 32px;

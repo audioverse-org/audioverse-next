@@ -169,7 +169,7 @@ export default function CardSequence({
 				>
 					{title}
 				</Heading2>
-				{(isBibleBook || egw) && (
+				{(isBibleBook || egw) && (speakers.nodes || [])[0]?.name && (
 					<Heading6
 						loose
 						sans
@@ -177,15 +177,13 @@ export default function CardSequence({
 						ultralight
 						className={egw ? styles.bookReadBy : styles.bibleReadBy}
 					>
-						{(speakers.nodes || [])[0]?.name && (
-							<FormattedMessage
-								id="cardSequence_readByLabel"
-								defaultMessage="Read By {name}"
-								values={{
-									name: (speakers.nodes || [])[0]?.name,
-								}}
-							/>
-						)}
+						<FormattedMessage
+							id="cardSequence_readByLabel"
+							defaultMessage="Read By {name}"
+							values={{
+								name: (speakers.nodes || [])[0]?.name,
+							}}
+						/>
 					</Heading6>
 				)}
 				{summary && (

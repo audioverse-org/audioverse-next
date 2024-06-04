@@ -13,34 +13,6 @@
   "accountNav__profile": {
     "string": "Profil"
   },
-  "accountPlaylists__buttonLabelSubmit": {
-    "comment": "account playlists page submit button label",
-    "string": "Ajouter une playlist"
-  },
-  "accountPlaylists__errorMissingTitle": {
-    "comment": "account playlists page missing title error message",
-    "string": "titre manquant"
-  },
-  "accountPlaylists__inputLabelPublic": {
-    "comment": "account playlists page input label public",
-    "string": "publique"
-  },
-  "accountPlaylists__inputLabelSummary": {
-    "comment": "account playlists page input label summary",
-    "string": "description"
-  },
-  "accountPlaylists__inputLabelTitle": {
-    "comment": "account playlists page input label title",
-    "string": "titre"
-  },
-  "accountPlaylists__labelPrivate": {
-    "comment": "account playlists page playlist private label",
-    "string": "privée"
-  },
-  "accountPlaylists__labelPublic": {
-    "comment": "account playlists page playlist public label",
-    "string": "publique"
-  },
   "andGlobalModals__confirmRemoveFavorite-confirm": {
     "string": "Enlever l'élément"
   },
@@ -53,17 +25,8 @@
   "andGlobalModals__confirmRemoveFavorite-keep": {
     "string": "Garder l'élément"
   },
-  "andGlobalModals__continueAsGuest": {
-    "string": "Continuer en tant qu'invité(e)"
-  },
-  "andGlobalModals__copy": {
-    "string": "Vous pouvez ajouter l'audio aux favoris pour y avoir accès ultérieurement sur votre compte. Parmi les autres options disponibles, il y a l'ajout d'audios à votre bibliothèque."
-  },
   "andGlobalModals__createAccount": {
     "string": "Créer un compte"
-  },
-  "andGlobalModals__heading": {
-    "string": "Fonction réservée aux membres"
   },
   "andGlobalModals__logIn": {
     "string": "Connexion"
@@ -77,9 +40,6 @@
   },
   "audiobookList__heading": {
     "string": "Tous les livres audio"
-  },
-  "backButton__back": {
-    "string": "Retour"
   },
   "bibleBook__chapterListTitle": {
     "string": "Autres chapitres du livre"
@@ -214,13 +174,6 @@
     "comment": "Collection Detail series label",
     "string": "Séries"
   },
-  "collectionDetail__speakersAllLabel": {
-    "string": "Voir tous les orateurs"
-  },
-  "collectionDetail__speakersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Orateurs"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "Sponsor"
   },
@@ -240,9 +193,6 @@
   },
   "collectionSequencesDetail__heading": {
     "string": "Toutes les séries"
-  },
-  "collectionTypeLockup_type": {
-    "string": "Conférence"
   },
   "conferenceListPage__title": {
     "string": "Conférences"
@@ -265,41 +215,8 @@
   "discoverCollections_conferencesHeading": {
     "string": "Conférences"
   },
-  "discoverCollections_featuredCollectionHeading": {
-    "string": "Collection en vedette"
-  },
-  "discoverCollections_scriptureSongsHeading": {
-    "string": "Chants bibliques"
-  },
-  "discoverCollections_seeAll": {
-    "string": "Voir tout"
-  },
-  "discoverCollections_seriesHeading": {
-    "string": "Séries"
-  },
-  "discoverCollections_speakersHeading": {
-    "string": "Orateurs"
-  },
-  "discoverCollections_sponsorsHeading": {
-    "string": "Collaborateurs"
-  },
-  "discoverCollections_storiesHeading": {
-    "string": "Histoires"
-  },
-  "discover__conferencesSeeAll": {
-    "string": "Voir toutes les conférences récentes"
-  },
-  "discover__recentTeachingsSeeAll": {
-    "string": "Voir tous les enseignements récents"
-  },
   "discover__storiesHeading": {
     "string": "Histoires récentes"
-  },
-  "discover__storiesSeeAll": {
-    "string": "Voir toutes les histoires récentes"
-  },
-  "discover__trendingTeachingsSeeAll": {
-    "string": "Voir tous les enseignements les plus écoutés"
   },
   "discover_conferencesHeading": {
     "string": "Conférences récentes"
@@ -343,10 +260,6 @@
   "generatedFeed__copyright": {
     "string": "Ce fil est sous copyright Audioverse {year}. Les enregistrements individuels sont protégés par les droits d'auteurs de leurs propriétaires respectifs."
   },
-  "header__navItemBlog": {
-    "comment": "Header nav link name: Blog",
-    "string": "Blog"
-  },
   "header__navItemDiscover": {
     "comment": "Header nav link name: Discover",
     "string": "Découvrir"
@@ -371,9 +284,6 @@
   "header__navItemStory-spiritOfAudioVerse": {
     "string": "L'esprit d'AudioVerse"
   },
-  "header__navItemStory-team": {
-    "string": "L'équipe"
-  },
   "header__navItemStory-testimonials": {
     "string": "Témoignages"
   },
@@ -388,23 +298,8 @@
   "header__navItemCollections-all": {
     "string": "Toutes les collections"
   },
-  "header__navItemCollections-book": {
-    "string": "Livre"
-  },
-  "header__navItemCollections-conference": {
-    "string": "Conférence"
-  },
-  "header__navItemCollections-series": {
-    "string": "Séries"
-  },
   "header__navItemCollections-songs": {
     "string": "Chants bibliques"
-  },
-  "header__navItemCollections-speaker": {
-    "string": "Orateur"
-  },
-  "header__navItemCollections-sponsor": {
-    "string": "Sponsor"
   },
   "header__navItemCollections-stories": {
     "string": "Histoires"
@@ -424,22 +319,6 @@
   "header__navItemUser-profile": {
     "string": "Profil"
   },
-  "homePage__addToLibraryPlaceholder": {
-    "comment": "home page add to library placeholder",
-    "string": "Ajouter à la bibliothèque"
-  },
-  "homePage__createAccountSectionCTA": {
-    "comment": "home page create account section cta",
-    "string": "Inscrivez-vous maintenant"
-  },
-  "homePage__createAccountSectionText": {
-    "comment": "home page create account section text",
-    "string": "Créez un compte pour profiter un maximum d'AudioVerse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
-  },
-  "homePage__createAccountSectionTitle": {
-    "comment": "home page create account section title",
-    "string": "Créer un compte"
-  },
   "homePage__downloadAppSectionText": {
     "comment": "home page download app section text",
     "string": "Si vous avez un smartphone, téléchargez l'application pour emporter AudioVerse partout avec vous. Écoutez des enseignements de n'importe où via votre connexion internet ou téléchargez-les à l'avance pour les écouter en déplacement sans utiliser votre forfait de données."
@@ -448,58 +327,6 @@
     "comment": "home page download app section title",
     "string": "Télécharger l'application"
   },
-  "homePage__downloadNowButtonLabel": {
-    "comment": "home page download now button label",
-    "string": "Télécharger maintenant"
-  },
-  "homePage__downloadQueuePlaceholder": {
-    "comment": "home page downloaed queue placeholder",
-    "string": "File d'attente de téléchargement"
-  },
-  "homePage__emailSignupButton": {
-    "comment": "homePage__emailSignupButton",
-    "string": "S'abonner"
-  },
-  "homePage__followFunctionalityPlaceholder": {
-    "comment": "home page follow functionality placeholder",
-    "string": "Follow Functionality"
-  },
-  "homePage__footerDonateLink": {
-    "comment": "home page footer donate link",
-    "string": "Faire un don"
-  },
-  "homePage__footerDownloadAppButton": {
-    "comment": "home page footer download app button",
-    "string": "Télécharger l'application"
-  },
-  "homePage__footerFacebookLink": {
-    "comment": "home page footer facebook link",
-    "string": "Facebook"
-  },
-  "homePage__footerInstagramLink": {
-    "comment": "home page footer instagram link",
-    "string": "Instagram"
-  },
-  "homePage__footerLinksTitle": {
-    "comment": "home page footer links title",
-    "string": "Liens"
-  },
-  "homePage__footerNewsletterSignup": {
-    "comment": "homePage__footerNewsletterSignup",
-    "string": "S'inscrire à la lettre d'information"
-  },
-  "homePage__footerSocialTitle": {
-    "comment": "home page footer social title",
-    "string": "Réseaux sociaux"
-  },
-  "homePage__footerTwitterLink": {
-    "comment": "home page footer twitter link",
-    "string": "Twitter"
-  },
-  "homePage__joinAudioVerseButtonLabel": {
-    "comment": "home page join audioverse button label",
-    "string": "Rejoindre AudioVerse"
-  },
   "homePage__newsletterSectionText": {
     "comment": "home page newsletter section text",
     "string": "Voulez-vous savoir quand nous sortons de nouvelles fonctionnalités, allons à des conférences ou sortons un nouveau Swag AudioVerse ? S'abonner à notre newsletter pour recevoir les nouveautés."
@@ -507,18 +334,6 @@
   "homePage__newsletterSectionTitle": {
     "comment": "home page newsletter section title",
     "string": "S'abonner aux nouveautés"
-  },
-  "homePage__recentContentSectionText": {
-    "comment": "home page recent content section text",
-    "string": "Découvrez quelques-uns de nos audios. Ensuite, lorsque vous êtes prêt(e), <a>créez un compte</a> pour en voir encore plus."
-  },
-  "homePage__recentContentSectionTitle": {
-    "comment": "home page recent content section title",
-    "string": "Contenu récent"
-  },
-  "homePage__recentPostsButtonLabel": {
-    "comment": "home page recent posts button label",
-    "string": "Voir tous les articles du blog"
   },
   "homePage__recentPostsSectionText": {
     "comment": "home page recent posts section text",
@@ -540,10 +355,6 @@
     "comment": "home page support section cta",
     "string": "Faire un don"
   },
-  "homePage__supportSectionImagePlaceholder": {
-    "comment": "home page support section image placeholder",
-    "string": "image"
-  },
   "homePage__supportSectionText": {
     "comment": "home page support section text",
     "string": "AudioVerse est un ministère à but non lucratif qui existe grâce à nos soutiens. La création, la maintenance et l'amélioration d'une plate-forme technologique comme la nôtre nécessitent beaucoup de ressources et nous sommes reconnaissants envers notre généreux groupe de donateurs. Envisagez de contribuer aujourd'hui, même si ce n'est que de 5 euros par mois, et aidez-nous à faire en sorte que nous puissions continuer à diffuser une saine doctrine."
@@ -551,10 +362,6 @@
   "homePage__supportSectionTitle": {
     "comment": "home page support section title",
     "string": "Soutenez l'audio gratuit"
-  },
-  "homePage__testimoniesSectionText": {
-    "comment": "home page testimonies section text",
-    "string": "Écoutez le témoignage de quelques utilisateurs d'AudioVerse."
   },
   "home__testimonialsTitle": {
     "comment": "Testimonies slider title",
@@ -566,23 +373,11 @@
   "languageAlternativesAlert__message": {
     "string": "Grâce à nos soutiens et partenaires internationaux, AudioVerse est disponibles en plusieurs langues, constituants ainsi plusieurs sites internet. Changez votre langue ici ou dans le menu."
   },
-  "libraryCollections__collectionsHeading": {
-    "string": "Collections"
-  },
   "libraryCollections__emptyCopy": {
     "string": "Ajouter des éléments à vos favoris ou écoutez des audios à partir de la page Découvrir."
   },
   "libraryCollections__emptyHeading": {
     "string": "Vous n'avez encore aucun élément de collection enregistré"
-  },
-  "libraryCollections__personsHeading": {
-    "string": "Orateurs"
-  },
-  "libraryCollections__playlistsHeading": {
-    "string": "Playlists"
-  },
-  "libraryCollections__sponsorsHeading": {
-    "string": "Sponsors"
   },
   "libraryError__cta": {
     "string": "Aller à la page Découvrir"
@@ -596,17 +391,8 @@
   "libraryHistory__loadMore": {
     "string": "Charger la suite"
   },
-  "libraryNav__all": {
-    "string": "Tous"
-  },
-  "libraryNav__collections": {
-    "string": "Collections"
-  },
   "libraryNav__filter": {
     "string": "Filtre"
-  },
-  "libraryNav__finished": {
-    "string": "Terminé(es)"
   },
   "libraryNav__history": {
     "string": "Historique"
@@ -623,65 +409,14 @@
   "libraryNav__sortZtoA": {
     "string": "De Z à A"
   },
-  "libraryNav__started": {
-    "string": "En cours"
-  },
-  "libraryNav__unstarted": {
-    "string": "Non commencés"
-  },
-  "libraryPlaybackStatus__emptyCopy": {
-    "string": "Trouver quelque chose à écouter sur la page Découvrir."
-  },
-  "libraryPlaybackStatus__finishedEmptyHeading": {
-    "string": "Vous n'avez terminé aucun élément jusqu'à présent"
-  },
-  "libraryPlaybackStatus__startedEmptyHeading": {
-    "string": "Vous n'avez commencé aucun élément jusqu'à présent"
-  },
-  "libraryPlaybackStatus__unstartedEmptyHeading": {
-    "string": "Vous n'avez enregistré aucun élément jusqu'à présent"
-  },
-  "library__collectionsHeading": {
-    "string": "Collections"
-  },
-  "library__collectionsSeeAll": {
-    "string": "Voir toutes les collections"
-  },
   "library__emptyCopy": {
     "string": "Mettez des éléments en signet ou écoutez des éléments à partir de la page Découvrir."
   },
   "library__emptyHeading": {
     "string": "Vous n'avez enregistré aucun élément jusqu'à présent"
   },
-  "library__finishedHeading": {
-    "string": "Terminé(es)"
-  },
-  "library__finishedSeeAll": {
-    "string": "Voir tous les éléments terminés"
-  },
-  "library__historyHeading": {
-    "string": "Historique"
-  },
-  "library__historySeeAll": {
-    "string": "Voir tout l'historique"
-  },
-  "library__membersOnlyCopy": {
-    "string": "Connectez-vous ou créez un compte pour accéder aux fonctionnalités de la bibliothèque."
-  },
   "library__membersOnlyCta": {
     "string": "Créer un compte ou se connecter"
-  },
-  "library__membersOnlyHeading": {
-    "string": "Fonctionnalité réservée aux membres"
-  },
-  "library__startedHeading": {
-    "string": "En cours"
-  },
-  "library__startedSeeAll": {
-    "string": "Voir tous les éléments en cours"
-  },
-  "library__unstartedHeading": {
-    "string": "Non commencés"
   },
   "loadingCards-ariaLabel": {
     "string": "Chargement en cours…"
@@ -756,23 +491,11 @@
     "comment": "download button menu video heading",
     "string": "Téléchargements vidéo"
   },
-  "molecule-buttonGuest__feature1": {
-    "string": "Lorem ipsum dolor"
-  },
-  "molecule-buttonGuest__feature2": {
-    "string": "Et exictur purim multatim"
-  },
-  "molecule-buttonGuest__feature3": {
-    "string": "Dulipscum erudis fesin"
-  },
   "molecule-buttonGuest__label": {
     "string": "Continuer en tant qu'invité(e)"
   },
   "molecule-buttonGuest__modalButtonLabelCreateAccount": {
     "string": "Créer un compte"
-  },
-  "molecule-buttonGuest__modalButtonLabelGuest": {
-    "string": "Continuer en tant qu'invité(e)"
   },
   "molecule-buttonGuest__modalButtonLabelLogIn": {
     "string": "Connexion"
@@ -1172,9 +895,6 @@
   "register__loginIntro": {
     "string": "Vous avez déjà un compte ?"
   },
-  "register__newsletterSubscribe": {
-    "string": "S'abonner à notre newsletter"
-  },
   "register__passwordLabel": {
     "string": "Mot de passe"
   },
@@ -1183,10 +903,6 @@
   },
   "register__submitButton": {
     "string": "S'inscrire"
-  },
-  "register__successMessage": {
-    "comment": "register success message",
-    "string": "succès"
   },
   "reset__confirmPasswordLabel": {
     "string": "Confirmer le nouveau mot de passe"
@@ -1246,23 +962,8 @@
   "search__conferencesSeeAll": {
     "string": "Voir toutes les conférences"
   },
-  "search__personsHeading": {
-    "string": "Orateurs"
-  },
-  "search__personsSeeAll": {
-    "string": "Voir tous les orateurs"
-  },
-  "search__resultsCount": {
-    "string": "{count} résultats"
-  },
-  "search__sequencesHeading": {
-    "string": "Séries"
-  },
-  "search__sequencesSeeAll": {
-    "string": "Voir toutes les séries"
-  },
   "search__sponsorsHeading": {
-    "string": "Sponsors"
+    "string": "Collaborateurs"
   },
   "search__sponsorsSeeAll": {
     "string": "Voir tous les sponsors"
@@ -1300,10 +1001,6 @@
   },
   "seriesDetail__sponsorLabel": {
     "string": "Sponsor"
-  },
-  "seriesDetail__type": {
-    "comment": "Series Detail type label",
-    "string": "Séries"
   },
   "seriesList__heading": {
     "string": "Toutes les séries"
@@ -1348,286 +1045,6 @@
   "socialLogin__successMessage": {
     "comment": "social login success message",
     "string": "succès"
-  },
-  "songsListPage__1ChroniclesLabel": {
-    "comment": "Songs list page 1 Chronicles link label",
-    "string": "1 Chroniques"
-  },
-  "songsListPage__1CorinthiansLabel": {
-    "comment": "Songs list page 1 Corinthians link label",
-    "string": "1 Corinthiens"
-  },
-  "songsListPage__1JohnLabel": {
-    "comment": "Songs list page 1 John link label",
-    "string": "1 Jean"
-  },
-  "songsListPage__1KingsLabel": {
-    "comment": "Songs list page 1 Kings link label",
-    "string": "1 Rois"
-  },
-  "songsListPage__1PeterLabel": {
-    "comment": "Songs list page 1 Peter link label",
-    "string": "1 Pierre"
-  },
-  "songsListPage__1SamuelLabel": {
-    "comment": "Songs list page 1 Samuel link label",
-    "string": "1 Samuel"
-  },
-  "songsListPage__1ThessaloniansLabel": {
-    "comment": "Songs list page 1 Thessalonians link label",
-    "string": "1 Thessaloniciens"
-  },
-  "songsListPage__1TimothyLabel": {
-    "comment": "Songs list page 1 Timothy link label",
-    "string": "1 Timothée"
-  },
-  "songsListPage__2ChroniclesLabel": {
-    "comment": "Songs list page 2 Chronicles link label",
-    "string": "2 Chroniques"
-  },
-  "songsListPage__2CorinthiansLabel": {
-    "comment": "Songs list page 2 Corinthians link label",
-    "string": "2 Corinthiens"
-  },
-  "songsListPage__2JohnLabel": {
-    "comment": "Songs list page 2 John link label",
-    "string": "2 Jean"
-  },
-  "songsListPage__2KingsLabel": {
-    "comment": "Songs list page 2 Kings link label",
-    "string": "2 Rois"
-  },
-  "songsListPage__2PeterLabel": {
-    "comment": "Songs list page 2 Peter link label",
-    "string": "2 Pierre"
-  },
-  "songsListPage__2SamuelLabel": {
-    "comment": "Songs list page 2 Samuel link label",
-    "string": "2 Samuel"
-  },
-  "songsListPage__2ThessaloniansLabel": {
-    "comment": "Songs list page 2 Thessalonians link label",
-    "string": "2 Thessaloniciens"
-  },
-  "songsListPage__2TimothyLabel": {
-    "comment": "Songs list page 2 Timothy link label",
-    "string": "2 Timothée"
-  },
-  "songsListPage__3JohnLabel": {
-    "comment": "Songs list page 3 John link label",
-    "string": "3 Jean"
-  },
-  "songsListPage__ActsLabel": {
-    "comment": "Songs list page Acts link label",
-    "string": "Actes"
-  },
-  "songsListPage__AmosLabel": {
-    "comment": "Songs list page Amos link label",
-    "string": "Amos"
-  },
-  "songsListPage__ColossiansLabel": {
-    "comment": "Songs list page Colossians link label",
-    "string": "Colossiens"
-  },
-  "songsListPage__DanielLabel": {
-    "comment": "Songs list page Daniel link label",
-    "string": "Daniel"
-  },
-  "songsListPage__DeuteronomyLabel": {
-    "comment": "Songs list page Deuteronomy link label",
-    "string": "Deutéronome"
-  },
-  "songsListPage__EcclesiastesLabel": {
-    "comment": "Songs list page Ecclesiastes link label",
-    "string": "Ecclésiaste"
-  },
-  "songsListPage__EphesiansLabel": {
-    "comment": "Songs list page Ephesians link label",
-    "string": "Ephésiens"
-  },
-  "songsListPage__EstherLabel": {
-    "comment": "Songs list page Esther link label",
-    "string": "Esther"
-  },
-  "songsListPage__ExodusLabel": {
-    "comment": "Songs list page Exodus link label",
-    "string": "Exode"
-  },
-  "songsListPage__EzekielLabel": {
-    "comment": "Songs list page Ezekiel link label",
-    "string": "Ezéchiel"
-  },
-  "songsListPage__EzraLabel": {
-    "comment": "Songs list page Ezra link label",
-    "string": "Esdras"
-  },
-  "songsListPage__GalatiansLabel": {
-    "comment": "Songs list page Galatians link label",
-    "string": "Galates"
-  },
-  "songsListPage__GenesisLabel": {
-    "comment": "Songs list page Genesis link label",
-    "string": "Genèse"
-  },
-  "songsListPage__HabakkukLabel": {
-    "comment": "Songs list page Habakkuk link label",
-    "string": "Habakuk"
-  },
-  "songsListPage__HaggaiLabel": {
-    "comment": "Songs list page Haggai link label",
-    "string": "Aggée"
-  },
-  "songsListPage__HebrewsLabel": {
-    "comment": "Songs list page Hebrews link label",
-    "string": "Hébreux"
-  },
-  "songsListPage__HoseaLabel": {
-    "comment": "Songs list page Hosea link label",
-    "string": "Osée"
-  },
-  "songsListPage__IsaiahLabel": {
-    "comment": "Songs list page Isaiah link label",
-    "string": "Esaïe"
-  },
-  "songsListPage__JamesLabel": {
-    "comment": "Songs list page James link label",
-    "string": "Jacques"
-  },
-  "songsListPage__JeremiahLabel": {
-    "comment": "Songs list page Jeremiah link label",
-    "string": "Jérémie"
-  },
-  "songsListPage__JobLabel": {
-    "comment": "Songs list page Job link label",
-    "string": "Job"
-  },
-  "songsListPage__JoelLabel": {
-    "comment": "Songs list page Joel link label",
-    "string": "Joël"
-  },
-  "songsListPage__JohnLabel": {
-    "comment": "Songs list page John link label",
-    "string": "Jean"
-  },
-  "songsListPage__JonahLabel": {
-    "comment": "Songs list page Jonah link label",
-    "string": "Jonas"
-  },
-  "songsListPage__JoshuaLabel": {
-    "comment": "Songs list page Joshua link label",
-    "string": "Josué"
-  },
-  "songsListPage__JudeLabel": {
-    "comment": "Songs list page Jude link label",
-    "string": "Jude"
-  },
-  "songsListPage__JudgesLabel": {
-    "comment": "Songs list page Judges link label",
-    "string": "Juges"
-  },
-  "songsListPage__LamentationsLabel": {
-    "comment": "Songs list page Lamentations link label",
-    "string": "Lamentations"
-  },
-  "songsListPage__LeviticusLabel": {
-    "comment": "Songs list page Leviticus link label",
-    "string": "Lévitique"
-  },
-  "songsListPage__LukeLabel": {
-    "comment": "Songs list page Luke link label",
-    "string": "Luc"
-  },
-  "songsListPage__MalachiLabel": {
-    "comment": "Songs list page Malachi link label",
-    "string": "Malachie"
-  },
-  "songsListPage__MarkLabel": {
-    "comment": "Songs list page Mark link label",
-    "string": "Marc"
-  },
-  "songsListPage__MatthewLabel": {
-    "comment": "Songs list page Matthew link label",
-    "string": "Matthieu"
-  },
-  "songsListPage__MicahLabel": {
-    "comment": "Songs list page Micah link label",
-    "string": "Michée"
-  },
-  "songsListPage__NahumLabel": {
-    "comment": "Songs list page Nahum link label",
-    "string": "Nahum"
-  },
-  "songsListPage__NehemiahLabel": {
-    "comment": "Songs list page Nehemiah link label",
-    "string": "Néhémie"
-  },
-  "songsListPage__NumbersLabel": {
-    "comment": "Songs list page Numbers link label",
-    "string": "Nombres"
-  },
-  "songsListPage__ObadiahLabel": {
-    "comment": "Songs list page Obadiah link label",
-    "string": "Abdias"
-  },
-  "songsListPage__PhilemonLabel": {
-    "comment": "Songs list page Philemon link label",
-    "string": "Philémon"
-  },
-  "songsListPage__PhilippiansLabel": {
-    "comment": "Songs list page Philippians link label",
-    "string": "Philippiens"
-  },
-  "songsListPage__ProverbsLabel": {
-    "comment": "Songs list page Proverbs link label",
-    "string": "Proverbes"
-  },
-  "songsListPage__PsalmsLabel": {
-    "comment": "Songs list page Psalms link label",
-    "string": "Psaumes"
-  },
-  "songsListPage__RevelationLabel": {
-    "comment": "Songs list page Revelation link label",
-    "string": "Apocalypse"
-  },
-  "songsListPage__RomansLabel": {
-    "comment": "Songs list page Romans link label",
-    "string": "Romains"
-  },
-  "songsListPage__RuthLabel": {
-    "comment": "Songs list page Ruth link label",
-    "string": "Ruth"
-  },
-  "songsListPage__Song of SolomonLabel": {
-    "comment": "Songs list page Detail of Solomon link label",
-    "string": "Cantique des cantiques"
-  },
-  "songsListPage__TitusLabel": {
-    "comment": "Songs list page Titus link label",
-    "string": "Tite"
-  },
-  "songsListPage__ZechariahLabel": {
-    "comment": "Songs list page Zechariah link label",
-    "string": "Zacharie"
-  },
-  "songsListPage__ZephaniahLabel": {
-    "comment": "Songs list page Zephaniah link label",
-    "string": "Sophonie"
-  },
-  "songsListPage__albumTabLabel": {
-    "comment": "Songs list page album tab label",
-    "string": "Albums"
-  },
-  "songsListPage__bookTabLabel": {
-    "comment": "Songs list page book tab label",
-    "string": "Livres"
-  },
-  "songsListPage__sponsorTabLabel": {
-    "comment": "Songs list page sponsor tab label",
-    "string": "Sponsors"
-  },
-  "songsListPage__tagTabLabel": {
-    "comment": "Songs list page tag tab label",
-    "string": "Mots-clés"
   },
   "sopnsorTypeLockup_type": {
     "string": "Sponsor"
@@ -1718,9 +1135,6 @@
   "trendingTeachings__heading": {
     "string": "Enseignements les plus écoutés"
   },
-  "unstartedSeeAll": {
-    "string": "Vous tous les éléments non commencés"
-  },
   "andOnboarding__intro": {
     "string": "Créer un compte ou se connecter pour accéder à des fonctionnalités de plus en plus nombreuses et pour vous accompagner dans l'exploration de la saine doctrine."
   },
@@ -1772,9 +1186,6 @@
   "bibleBook__disclaimer": {
     "string": "Les conditions contractuelles d'usage des Bibles audio issues de Faith Comes By Hearing empêchent qu'elles soient disponibles au téléchargement et limitent leur intégration à certaines fonctionnalités de notre plate-forme."
   },
-  "buttonShare__emailSubject": {
-    "string": "Vivez cette bénédiction"
-  },
   "cardPost__typeLabel": {
     "string": "Blog"
   },
@@ -1805,9 +1216,6 @@
   },
   "collectionType__storyProgram": {
     "string": "Programme d'histoires"
-  },
-  "contact__bodyLabel": {
-    "string": "Corps"
   },
   "contact__emailLabel": {
     "string": "Adresse e-mail"
@@ -1845,32 +1253,14 @@
   "contact__submitLabel": {
     "string": "Envoyer"
   },
-  "contact__success": {
-    "string": "Envoi réussi !"
-  },
-  "contact__testimonyLabel": {
-    "string": "Témoignage"
-  },
   "contact__title": {
     "string": "Contact"
-  },
-  "discoverCollections_presentersHeading": {
-    "string": "Présentateurs"
   },
   "downloadAppButton__altLabel": {
     "string": "Télécharger maintenant"
   },
   "embed__partInfo": {
     "string": "Partie {index} de {count}"
-  },
-  "give__amazonCta": {
-    "string": "Faire du shopping"
-  },
-  "give__amazonDescription": {
-    "string": "Pour chaque achat sur AmazonSmile, AudioVerse reçoit 0,5%.{br}{br}Comment ? Cliquez tout simplement sur le bouton.{br}{br}C'est tout ! Pensez à ajouter à vos favoris le nouveau site AmazonSmile, sinon votre navigateur vous ramènera automatiquement sur le site Amazon classique."
-  },
-  "give__amazonTitle": {
-    "string": "Amazon Smile"
   },
   "give__checkDescription": {
     "string": "Merci de veiller à ce que vos chèques puissent être perçus par AudioVerse.{br}{br}Notre adresse postale est :{br}{br}AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
@@ -1961,27 +1351,6 @@
   },
   "header__navItemStory-blog": {
     "string": "Blog"
-  },
-  "homePage__learnStoryButtonLabel": {
-    "string": "En savoir plus sur notre histoire"
-  },
-  "homePage__newsletterEmail": {
-    "string": "Adresse e-mail"
-  },
-  "homePage__newsletterEmailPlaceholder": {
-    "string": "jeandupont@email.com"
-  },
-  "homePage__newsletterHatTitle": {
-    "string": "Inscrivez-vous à notre newsletter"
-  },
-  "homePage__newsletterName": {
-    "string": "Nom"
-  },
-  "homePage__newsletterNamePlaceholder": {
-    "string": "Jean Dupont"
-  },
-  "homePage__newsletterSubscribe": {
-    "string": "S'abonner"
   },
   "homePage__tagline": {
     "string": "La saine doctrine"
@@ -2082,15 +1451,6 @@
   "library__noMatchingHeading": {
     "string": "Vous n'avez pas encore d'éléments correspondants parmi vos favoris"
   },
-  "molecule-buttonGuest__downloadQuality": {
-    "string": "Ajustement de la qualité du téléchargement"
-  },
-  "molecule-buttonGuest__saving": {
-    "string": "Ajout à votre bibliothèque"
-  },
-  "molecule-buttonGuest__syncing": {
-    "string": "Synchronisation avec vos appareils"
-  },
   "molecule-buttonShare__copied": {
     "string": "Copié !"
   },
@@ -2112,14 +1472,1332 @@
   "songsListPage__title": {
     "string": "Chants bibliques"
   },
-  "testimonies__seeAll": {
-    "string": "Voir tous les témoignages"
-  },
-  "testimonies__submitTestimonial": {
-    "string": "Envoyer un témoignage"
-  },
   "time__hoursMinutesAndSeconds": {
     "comment": "time hours, minutes and seconds",
     "string": "{h}:{m}:{s}"
+  },
+  "about__navPurpose": {
+    "string": "Our Purpose"
+  },
+  "about__navSpirit": {
+    "string": "Spirit of AudioVerse"
+  },
+  "about__navStory": {
+    "string": "Our Story"
+  },
+  "about__navTestimonials": {
+    "string": "Testimonials"
+  },
+  "about__purposeExcellence": {
+    "string": "Biblical Excellence"
+  },
+  "about__purposeExcellenceDescription": {
+    "string": "AudioVerse holds a high standard for the content that is presented on its website. The guidelines for these messages are called the Spirit of AudioVerse and you can read them here. This spirit of excellence extends also to the way the ministry operates and in all its dealings."
+  },
+  "about__purposeGiving": {
+    "string": "Giving Freely"
+  },
+  "about__purposeGivingDescription": {
+    "string": "All around the world there are people who yearn for the Gospel, but they cannot afford to pay for it. These may be individuals in developing countries or simply young people in school. If the Gospel is to go to them too, then as many barriers must be removed as possible, and cost is one of them. This is only possible through the generous financial support of donors who believe in this mission."
+  },
+  "about__purposeImageAlt": {
+    "comment": "Alt text for the purpose image",
+    "string": "Young woman in a field wearing headphones while reading a book."
+  },
+  "about__purposeImageLabel": {
+    "string": "Our vision is to hasten the Second Coming of our Lord Jesus Christ by making high quality Bible-based and Christ-centered media available to the whole world."
+  },
+  "about__purposeIntro": {
+    "string": "Our mission is to be a trustworthy global provider of Bible-based and Christ-centered media."
+  },
+  "about__purposeReaching": {
+    "string": "Reaching the World"
+  },
+  "about__purposeReachingDescription": {
+    "string": "Nearly 3 billion people have access to the Internet as of 2014, and that number is increasing every day. This number includes countless closed countries into which physical missionaries cannot easily go. Leveraging the ubiquity and cost-effective nature of the Internet, AudioVerse seeks to light up the world with access to Bible truth."
+  },
+  "about__purposeSupport": {
+    "string": "Support of the Adventist Church"
+  },
+  "about__purposeSupportDescription": {
+    "string": "AudioVerse is a supporting ministry of the Seventh-day Adventist Church, and seeks to be in full harmony with the church’s purpose and mission. AudioVerse is also a member of ASI (Adventist-laymen’s Services and Industries)."
+  },
+  "about__purposeTitle": {
+    "string": "Our Purpose"
+  },
+  "about__purposeWhat": {
+    "string": "What drives AudioVerse?"
+  },
+  "about__purposeWhy": {
+    "string": "Why AudioVerse?"
+  },
+  "about__purposeWhy1": {
+    "string": "The Gospel must be preached to the world before Christ can come (Matt. 24:14). The world cannot hear the Gospel without a preacher (Rom. 10:14). AudioVerse exists to deliver the preacher freely to the whole world so that Jesus can come."
+  },
+  "about__purposeWhy2": {
+    "string": "Faith comes by hearing, and hearing by the Word of God (Rom 10:17). Man shall not live by bread alone, but by every word that proceeds from the mouth of God (Matt. 4:4). AudioVerse exists to nourish faith by giving easy access to the Word of God."
+  },
+  "about__purposeWhy3": {
+    "string": "Jesus is the Word (John 1:1). Jesus says that His Word is truth (John 17:17) and they are life (John 6:63). To know Jesus is to have eternal life (John 17:3). AudioVerse exists to help people know Jesus."
+  },
+  "about__spirit1": {
+    "string": "Materials should promote doctrines, theology, principles and values that have been established through a careful, thorough study of the Bible and the Spirit of Prophecy by trustworthy, experienced and godly people."
+  },
+  "about__spirit10": {
+    "string": "Materials should be completely truthful. Dishonesty or anything that is intentionally misleading is unacceptable."
+  },
+  "about__spirit11": {
+    "string": "Materials should be delivered in a spirit of reverence, respect, and humility, recognizing that they represent the Gospel of Jesus Christ. We reject an attitude that is spiteful, arrogant, vulgar, irreverent, flippant, frivolous, demeaning, or otherwise unChrist-like."
+  },
+  "about__spirit12": {
+    "string": "Materials should be from presenters who are associated with organizations or groups who uphold and represent the above-described spirit of AudioVerse, and are Seventh-day Adventists in good standing."
+  },
+  "about__spirit2": {
+    "string": "Materials should affirm the Bible and the Spirit of Prophecy as reflected by the stated fundamental beliefs of the Seventh-day Adventist Church."
+  },
+  "about__spirit3": {
+    "string": "Materials should promote the reality that victory over sin is possible through the believer's dependence on the grace and power of Jesus Christ."
+  },
+  "about__spirit4": {
+    "string": "Materials should promote lifestyle and behavioral choices that are in harmony with principles from Scripture and the Spirit of Prophecy."
+  },
+  "about__spirit5": {
+    "string": "Materials should represent the historical-grammatical/historical-Biblical method of Biblical interpretation along with the historicist method of prophetic interpretation rather than futurism, preterism, higher criticism, imposed allegorical, or other speculative and unacceptable hermeneutics."
+  },
+  "about__spirit6": {
+    "string": "Materials should predominantly appeal to the mind and reason, rather than the speculative or sensational; neither hype, an unwarranted excitement, nor extra-Biblical predictions about the future, are acceptable."
+  },
+  "about__spirit7": {
+    "string": "Materials should represent a balanced and disciplined view of Scripture and the Spirit of Prophecy that reflects the entirety of these inspired writings. We do not advocate the overemphasis of one aspect to the exclusion of other equally important aspects nor do we condone viewpoints that extend beyond the proper application of Biblical and Spirit of Prophecy principles."
+  },
+  "about__spirit8": {
+    "string": "Materials should seek to provide lessons from history rather than revising or criticizing it to the detriment of our doctrines or teachings."
+  },
+  "about__spirit9": {
+    "string": "Materials should be supportive of the Seventh-day Adventist Church as well as her leadership and institutions. They are not to seek to tarnish or vilify the reputations of individuals or institutions."
+  },
+  "about__spiritIntro": {
+    "string": "AudioVerse provides free Bible-based and Christ-centered audiovisual resources aimed at inspiring and educating Seventh-day Adventists and all spiritually interested people around the world."
+  },
+  "about__spiritPurpose": {
+    "string": "Our main purpose is to proclaim the everlasting Gospel of Jesus Christ in order to hasten and to prepare the world for His imminent Second Coming. In view of this, AudioVerse upholds the following set of principles regarding the materials that we make available on this website:"
+  },
+  "about__spiritTitle": {
+    "string": "Spirit of AudioVerse"
+  },
+  "about__story1": {
+    "string": "They were excited about this idea not only because it would fulfill the immediate need (and make less work producing CDs!), but because they saw that these messages of hope, love, and the soon return of our Savior Jesus Christ, could be a blessing to people worldwide who were seeking knowledge and wisdom about God."
+  },
+  "about__story2": {
+    "string": "Curtis put the idea into action and quickly began developing a sermon website. A contest was held at Advent HOPE Sabbath School to choose the name, during which over 100 names were submitted. \"AudioVerse\" was the winner, and the AudioVerse.org website was launched on October 22, 2005."
+  },
+  "about__story3": {
+    "string": "Since that humble beginning, God demonstrated His providential leading of this ministry many times. The initial bandwidth for the website was donated by a friend of the ministry who operated his own Internet service provider, which was crucial in meeting the traffic generated early on. Later, an unsolicited donation enabled us to upgrade and expand our entire server infrastructure to better serve the whole world. Not to mention, tremendous partnerships have been developed with various ministries like ASI, AMEN, and GYC (along with many smaller affiliate GYCs)."
+  },
+  "about__story4": {
+    "string": "Website traffic has also grown tremendously. Now millions of sermons are downloaded and listened to every year! The people accessing these messages come from over 200 countries from all corners of the world including many closed or developing countries in the 10/40 window such as countries in the Middle East and China."
+  },
+  "about__story5": {
+    "string": "As this website has grown, we have had the opportunity to feature recordings in other languages than English. In an effort to reach as many people as possible, messages in Spanish, French, German, and Chinese are now available with more to come."
+  },
+  "about__storyImageCaption": {
+    "string": "The original AudioVerse design, in use from October 2005 to August 2006."
+  },
+  "about__storyIntro": {
+    "string": "AudioVerse began in 2005 as an idea by Tim Arakawa and Curtis Farnham, both poor graduate students at the time. It was spurred by increasing requests for sermon recordings from various ministries with which Tim and Curtis had been involved, including Advent HOPE Sabbath School, Restoration Ministry, and GYC Southwest (formerly Southwest Youth Conference)."
+  },
+  "about__storyTitle": {
+    "string": "Our Story"
+  },
+  "about__team": {
+    "string": "Digital Marketing Coordinator"
+  },
+  "about__teamAlistairBio": {
+    "string": "From his stand-up desk, Alistair oversees the strategy and day-to-day management by ensuring that we are doing the right things and that we are doing things right."
+  },
+  "about__teamAnnetteBio": {
+    "string": "All the media on AudioVerse has Annette’s fingerprints on it. She works with partners, obtains content, edits them, and publishes them on AudioVerse."
+  },
+  "about__teamAssistantOperationsCoordinator": {
+    "string": "Assistant Operations Coordinator"
+  },
+  "about__teamBoard": {
+    "string": "Board of Directors"
+  },
+  "about__teamBoardArakawaTitle": {
+    "string": "Chairman (Co-founder) | Physician, Albany, Oregon"
+  },
+  "about__teamBoardClarkTitle": {
+    "string": "Vice President for Administration, Georgia-Cumberland Conference"
+  },
+  "about__teamBoardHuongTitle": {
+    "string": "Secretary | Executive Director, AudioVerse"
+  },
+  "about__teamBoardIntro": {
+    "string": "The AudioVerse Board of Directors provides guidance and vision for the ministry. This dedicated group of individuals with their collective experience and wisdom helps the ministry steer a true course in advancing the work of the Lord."
+  },
+  "about__teamBoardIrizarryTitle": {
+    "string": "Physician, Amity, Arkansas"
+  },
+  "about__teamBoardKimTitle": {
+    "string": "Physician, Chattanooga, Tennessee"
+  },
+  "about__teamBoardMackintoshTitle": {
+    "string": "Director, NEWSTART Global"
+  },
+  "about__teamBoardWilliamsTitle": {
+    "string": "Treasurer | Finance Professional, Chattanooga, Tennessee"
+  },
+  "about__teamBoardZwikerTitle": {
+    "string": "President, Hyve International"
+  },
+  "about__teamBusinessManager": {
+    "string": "Business Manager"
+  },
+  "about__teamDebbyBio": {
+    "string": "With her background as a CPA, wife, and mother, Debby capably manages the finances, HR, and correspondence for the ministry."
+  },
+  "about__teamExecutive": {
+    "string": "Executive Team"
+  },
+  "about__teamExecutiveDirector": {
+    "string": "Executive Director"
+  },
+  "about__teamIntro": {
+    "string": "The AudioVerse Executive Team are responsible for the day-to-day operations of the ministry. This group of dedicated individuals with their their common passion for the proclamation of the three angels' messages is what keeps this ministry running."
+  },
+  "about__teamLizBio": {
+    "string": "A social media dynamo, e-commerce go-getter, and energetic marketer, Liz helps grow our social media audience and oversees our digital marketing efforts."
+  },
+  "about__teamMatthewBio": {
+    "string": "Frontend, backend, full-stack and more. Matthew churns out code and builds beautiful things all while walking on a treadmill."
+  },
+  "about__teamNathanBio": {
+    "string": "Nathan contributes to the ministry by solving big problems, managing development projects, and keeping the ministry’s technology humming."
+  },
+  "about__teamSoftwareEngineer": {
+    "string": "Software Engineer"
+  },
+  "about__teamTechnologyDirector": {
+    "string": "Technology Director"
+  },
+  "about__teamTitle": {
+    "string": "The Team"
+  },
+  "andGlobalModals__authCopy": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
+  },
+  "andGlobalModals__authLoginTitle": {
+    "string": "Login"
+  },
+  "andGlobalModals__authRegisterTitle": {
+    "string": "Create Account"
+  },
+  "andGlobalModals__authTitle": {
+    "string": "Create a Free Account"
+  },
+  "andNavigation__playing": {
+    "string": "Playing"
+  },
+  "app__features1ImageAlt": {
+    "comment": "Image alt text for the first feature",
+    "string": "Media on the Audioverse website"
+  },
+  "app__features2ImageAlt": {
+    "comment": "Image alt text for the second feature",
+    "string": "List of recent sermons from Sebastien Braxton"
+  },
+  "app__features3ImageAlt": {
+    "comment": "Image alt text for the third feature",
+    "string": "A diagram of AudioVerse’s card UI"
+  },
+  "app__features4ImageAlt": {
+    "comment": "Image alt text for the fourth feature",
+    "string": "The save button on a sermon by Katie Chitwood"
+  },
+  "app__features5ImageAlt": {
+    "comment": "Image alt text for the fifth feature",
+    "string": "The download button on a sermon by Don Mackintosh"
+  },
+  "bibleBook__backToChapter": {
+    "string": "Back to Chapter Info"
+  },
+  "bibleBook__readAlong": {
+    "string": "Read Along"
+  },
+  "bibleBook__typeLabel": {
+    "string": "KJV Bible"
+  },
+  "bibleVersion__websiteLabel": {
+    "string": "Website"
+  },
+  "bible__title": {
+    "string": "Bible"
+  },
+  "blog__title": {
+    "string": "All Blog Posts"
+  },
+  "books__title": {
+    "string": "Tous les livres audio"
+  },
+  "browse__topicsNext": {
+    "string": "Next topics"
+  },
+  "browse__topicsPrevious": {
+    "string": "Previous topics"
+  },
+  "browse_topicsHeading": {
+    "string": "Topics"
+  },
+  "buttonShareRecording__emailSubject": {
+    "string": "{title} by {presenters}"
+  },
+  "buttonShare__emailSubjectSuffix": {
+    "string": "{subject} on AudioVerse"
+  },
+  "cardBibleVersion__showAll": {
+    "string": "Show All"
+  },
+  "cardCollection__showAll": {
+    "string": "Show All"
+  },
+  "cardCollection_booksLabel": {
+    "string": "{count} books"
+  },
+  "cardHatSponsor__addSponsor": {
+    "string": "Add Sponsor"
+  },
+  "cardHatSponsor__removeSponsor": {
+    "string": "Remove Sponsor"
+  },
+  "cardHatSponsor__sponsorLabel": {
+    "string": "Sponsor"
+  },
+  "cardSequence_chaptersLabel": {
+    "string": "{count} chapitres"
+  },
+  "cardSequence_egwAudiobookType": {
+    "string": "ELLEN WHITE"
+  },
+  "cardSequence_readByLabel": {
+    "string": "Read By {name}"
+  },
+  "cardTopic__hatLabel": {
+    "string": "Topic"
+  },
+  "collectionType__bibleVersion": {
+    "string": "Version de la Bible"
+  },
+  "conferencesPresenters__title": {
+    "string": "Presenters from {conferenceName}"
+  },
+  "conferencesSequences__title": {
+    "string": "Series from {conferenceName}"
+  },
+  "conferencesTeachings__title": {
+    "string": "Teachings from {conferenceName}"
+  },
+  "conferences__title": {
+    "string": "Conférences"
+  },
+  "contact__help": {
+    "string": "View help articles"
+  },
+  "contact__mailingAddress": {
+    "string": "AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
+  },
+  "contact__messageLabel": {
+    "string": "Message"
+  },
+  "contact__messageSubmitted": {
+    "string": "Your message has been submitted."
+  },
+  "contact__thankYou": {
+    "string": "Thank you!"
+  },
+  "contact_footer": {
+    "string": "Contact"
+  },
+  "discoverCollections__title": {
+    "string": "Discover Collections"
+  },
+  "discoverCollections_egwAudiobooksHeading": {
+    "string": "Discover Ellen White"
+  },
+  "discoverCollections_storySeasonsHeading": {
+    "string": "Histoires"
+  },
+  "discover__conferencesNext": {
+    "string": "Next recent conferences"
+  },
+  "discover__conferencesPrevious": {
+    "string": "Previous recent conferences"
+  },
+  "discover__featuredTeachingsNext": {
+    "string": "Next featured teachings"
+  },
+  "discover__featuredTeachingsPrevious": {
+    "string": "Previous featured teachings"
+  },
+  "discover__recentBlogNext": {
+    "string": "Next recent blog posts"
+  },
+  "discover__recentBlogPrevious": {
+    "string": "Previous recent blog posts"
+  },
+  "discover__recentTeachingsNext": {
+    "string": "Next recent teachings"
+  },
+  "discover__recentTeachingsPrevious": {
+    "string": "Previous recent teachings"
+  },
+  "discover__seeAll": {
+    "string": "See All"
+  },
+  "discover__storiesNext": {
+    "string": "Next recent stories"
+  },
+  "discover__storiesPrevious": {
+    "string": "Previous recent stories"
+  },
+  "discover__title": {
+    "string": "Discover"
+  },
+  "discover__topicsNext": {
+    "string": "Next topics"
+  },
+  "discover__topicsPrevious": {
+    "string": "Previous topics"
+  },
+  "discover__trendingMusicNext": {
+    "string": "Next trending scripture songs"
+  },
+  "discover__trendingMusicPrevious": {
+    "string": "Previous trending scripture songs"
+  },
+  "discover__trendingTeachingsNext": {
+    "string": "Next trending teachings"
+  },
+  "discover__trendingTeachingsPrevious": {
+    "string": "Previous trending teachings"
+  },
+  "discover_bibleBooksHeading": {
+    "string": "Discover Bible Books"
+  },
+  "discover_featuredTeachingsHeading": {
+    "string": "Featured Teachings"
+  },
+  "discover_presentersHeading": {
+    "string": "Discover Presenters"
+  },
+  "discover_recentBlogHeading": {
+    "string": "Recent Blog Posts"
+  },
+  "discover_topicsHeading": {
+    "string": "Topics"
+  },
+  "discover_trendingMusicHeading": {
+    "string": "Trending Scripture Songs"
+  },
+  "egwAudiobookList__heading": {
+    "string": "Ellen White"
+  },
+  "egwbooks__title": {
+    "string": "Ellen White"
+  },
+  "give__donorboxTitle": {
+    "comment": "Title for the donorbox iframe",
+    "string": "Donation form"
+  },
+  "give__title": {
+    "string": "Faire un don"
+  },
+  "header__navItemBrowse": {
+    "comment": "Header nav link name: Browse",
+    "string": "Browse"
+  },
+  "header__navItemCollections-egwbooks": {
+    "string": "Ellen White"
+  },
+  "header__navItemCollections-topics": {
+    "string": "Topics"
+  },
+  "header__navItemMore-help": {
+    "string": "Get Help"
+  },
+  "header__navItemMore-ju": {
+    "string": "Journeys Unscripted"
+  },
+  "header__navItemMore-store": {
+    "string": "AudioVerse Store"
+  },
+  "header__navItemMore-swj": {
+    "string": "Starting With Jesus"
+  },
+  "helpScout.addReply": {
+    "string": "Add a reply"
+  },
+  "helpScout.addYourMessageHere": {
+    "string": "Add your message here..."
+  },
+  "helpScout.answer": {
+    "string": "Answers"
+  },
+  "helpScout.ask": {
+    "string": "Ask"
+  },
+  "helpScout.attachAFile": {
+    "string": "Attach a file"
+  },
+  "helpScout.attachmentErrorText": {
+    "string": "There was a problem uploading your attachment. Please try again in a moment."
+  },
+  "helpScout.attachmentSizeErrorText": {
+    "string": "Attachments may be no larger than 10MB"
+  },
+  "helpScout.beaconButtonChatMinimize": {
+    "string": "Minimize chat"
+  },
+  "helpScout.beaconButtonChatOpen": {
+    "string": "Open chat"
+  },
+  "helpScout.beaconButtonClose": {
+    "string": "Close"
+  },
+  "helpScout.cantFindAnswer": {
+    "string": "Can’t find an answer?"
+  },
+  "helpScout.chatAvailabilityChangeMessage": {
+    "string": "Our team’s availability has changed and there’s no longer anyone available to chat. Send us a message instead and we’ll get back to you."
+  },
+  "helpScout.chatButtonDescription": {
+    "string": "We’re online right now, talk with our team in real-time"
+  },
+  "helpScout.chatButtonLabel": {
+    "string": "Chat"
+  },
+  "helpScout.chatConnected": {
+    "string": "Connected to"
+  },
+  "helpScout.chatEndCalloutHeading": {
+    "string": "All done!"
+  },
+  "helpScout.chatEndCalloutLink": {
+    "string": "Return home"
+  },
+  "helpScout.chatEndCalloutMessage": {
+    "string": "A copy of this conversation will land in your inbox shortly."
+  },
+  "helpScout.chatEndUnassignedCalloutHeading": {
+    "string": "Sorry about that"
+  },
+  "helpScout.chatEndUnassignedCalloutMessage": {
+    "string": "It looks like nobody made it to your chat. We’ll send you an email response as soon as possible."
+  },
+  "helpScout.chatEndWaitingCustomerHeading": {
+    "string": "Sorry about that"
+  },
+  "helpScout.chatEndWaitingCustomerMessage": {
+    "string": "Your question has been added to our email queue and we’ll get back to you shortly."
+  },
+  "helpScout.chatEnded": {
+    "string": "ended the chat"
+  },
+  "helpScout.chatHeadingSublabel": {
+    "string": "We'll be with you soon"
+  },
+  "helpScout.chatHeadingTitle": {
+    "string": "Chat with our team"
+  },
+  "helpScout.chatbotAgentDisconnectedMessage": {
+    "string": "has disconnected from the chat. It’s possible they lost their internet connection, so I’m looking for someone else to take over. Sorry for the delay!"
+  },
+  "helpScout.chatbotConfirmationMessage": {
+    "string": "Thanks! Someone from our team will jump into the chat soon."
+  },
+  "helpScout.chatbotGenericErrorMessage": {
+    "string": "Something went wrong sending your message, please try again in a few minutes."
+  },
+  "helpScout.chatbotGreet": {
+    "string": "Hi there! You can begin by asking your question below. Someone will be with you shortly."
+  },
+  "helpScout.chatbotInactivityPrompt": {
+    "string": "Since the chat has gone idle, I’ll end this chat in a few minutes."
+  },
+  "helpScout.chatbotInvalidEmailMessage": {
+    "string": "Looks like you’ve entered an invalid email address. Want to try again?"
+  },
+  "helpScout.chatbotName": {
+    "string": "Help Bot"
+  },
+  "helpScout.chatbotPromptEmail": {
+    "string": "Got it. Real quick, what’s your email address? We’ll use it for any follow-up messages."
+  },
+  "helpScout.continueEditing": {
+    "string": "Continue writing..."
+  },
+  "helpScout.customFieldsValidationLabel": {
+    "string": "Please complete all fields"
+  },
+  "helpScout.defaultMessageErrorText": {
+    "string": "There was a problem sending your message. Please try again in a moment."
+  },
+  "helpScout.docsArticleErrorText": {
+    "string": "There was a problem retrieving this article. Please double-check your internet connection and try again."
+  },
+  "helpScout.docsSearchEmptyText": {
+    "string": "We couldn’t find any articles that match your search."
+  },
+  "helpScout.docsSearchErrorText": {
+    "string": "There was a problem retrieving articles. Please double-check your internet connection and try again."
+  },
+  "helpScout.emailContinueConversation": {
+    "string": "If you’ve got any other questions, feel free to hit reply and continue the conversation."
+  },
+  "helpScout.emailCopyOfDiscussion": {
+    "string": "Here’s a copy of your discussion"
+  },
+  "helpScout.emailEndedLineItem": {
+    "string": "ended the chat"
+  },
+  "helpScout.emailGreeting": {
+    "string": "Hey"
+  },
+  "helpScout.emailHeading": {
+    "string": "Today's chat with"
+  },
+  "helpScout.emailJoinedLineItem": {
+    "string": "joined the chat"
+  },
+  "helpScout.emailLabel": {
+    "string": "Adresse e-mail"
+  },
+  "helpScout.emailValidationLabel": {
+    "string": "Please use a valid email address"
+  },
+  "helpScout.emailYou": {
+    "string": "You"
+  },
+  "helpScout.endChat": {
+    "string": "End chat"
+  },
+  "helpScout.ending": {
+    "string": "Ending..."
+  },
+  "helpScout.escalationQuestionFeedback": {
+    "string": "Did this answer your question?"
+  },
+  "helpScout.escalationQuestionFeedbackNo": {
+    "string": "No"
+  },
+  "helpScout.escalationQuestionFeedbackYes": {
+    "string": "Yes"
+  },
+  "helpScout.escalationSearchText": {
+    "string": "Browse our help docs for an answer to your question"
+  },
+  "helpScout.escalationTalkText": {
+    "string": "Talk with a friendly member of our support team"
+  },
+  "helpScout.escalationTalkTitle": {
+    "string": "Talk to us"
+  },
+  "helpScout.escalationThanksFeedback": {
+    "string": "Thanks for the feedback"
+  },
+  "helpScout.escalationWhatNext": {
+    "string": "What next?"
+  },
+  "helpScout.firstAFewQuestions": {
+    "string": "Let's begin with a few questions."
+  },
+  "helpScout.getInTouch": {
+    "string": "Get in touch"
+  },
+  "helpScout.history": {
+    "string": "Historique"
+  },
+  "helpScout.howCanWeHelp": {
+    "string": "How can we help?"
+  },
+  "helpScout.justNow": {
+    "string": "Just Now"
+  },
+  "helpScout.lastUpdated": {
+    "string": "Last updated"
+  },
+  "helpScout.mayNotBeEmpty": {
+    "string": "May not be empty"
+  },
+  "helpScout.messageButtonLabel": {
+    "string": "Email"
+  },
+  "helpScout.messageConfirmationText": {
+    "string": "You'll receive an email reply within a few hours."
+  },
+  "helpScout.messageLabel": {
+    "string": "How can we help?"
+  },
+  "helpScout.messageSubmitLabel": {
+    "string": "Send a message"
+  },
+  "helpScout.nameLabel": {
+    "string": "Name"
+  },
+  "helpScout.next": {
+    "string": "Next"
+  },
+  "helpScout.noTimeToWaitAround": {
+    "string": "No time to wait around? We usually respond within a few hours"
+  },
+  "helpScout.nothingFound": {
+    "string": "Hmm..."
+  },
+  "helpScout.previousMessageErrorText": {
+    "string": "There was a problem retrieving this message. Please double-check your Internet connection and try again."
+  },
+  "helpScout.previousMessages": {
+    "string": "Previous Conversations"
+  },
+  "helpScout.received": {
+    "string": "Received"
+  },
+  "helpScout.relatedArticles": {
+    "string": "Related Articles"
+  },
+  "helpScout.responseTime": {
+    "string": "We usually respond within a few hours"
+  },
+  "helpScout.searchLabel": {
+    "string": "What can we help you with?"
+  },
+  "helpScout.sendAMessage": {
+    "string": "Send a message"
+  },
+  "helpScout.sendMessage": {
+    "string": "Send message"
+  },
+  "helpScout.subjectLabel": {
+    "string": "Subject"
+  },
+  "helpScout.suggestedForYou": {
+    "string": "Instant Answers"
+  },
+  "helpScout.tryAgain": {
+    "string": "Try again"
+  },
+  "helpScout.tryBroaderTerm": {
+    "string": "Try searching a broader term, or"
+  },
+  "helpScout.uploadAnImage": {
+    "string": "Upload an image"
+  },
+  "helpScout.viewAndUpdateMessage": {
+    "string": "You can view and update your message in"
+  },
+  "helpScout.waitingForAnAnswer": {
+    "string": "Waiting for an answer"
+  },
+  "helpScout.weAreOnIt": {
+    "string": "We're on it!"
+  },
+  "helpScout.wereHereToHelp": {
+    "string": "Start a conversation"
+  },
+  "helpScout.whatMethodWorks": {
+    "string": "What channel do you prefer?"
+  },
+  "helpScout.you": {
+    "string": "You"
+  },
+  "helpWidget__buttonLabel": {
+    "string": "Help"
+  },
+  "homePage__CreateAccountButtonLabel": {
+    "string": "Create an Account"
+  },
+  "homePage__DiscoverAudioButtonLabel": {
+    "string": "Découvrir en audio"
+  },
+  "homePage__bannerImageAlt": {
+    "comment": "home page banner image alt",
+    "string": "Young woman with headphones listening to music and reading a book."
+  },
+  "homePage__downloadAppImageAlt": {
+    "comment": "home page download app image alt",
+    "string": "Smartphones with AudioVerse app"
+  },
+  "homePage__latestContentSectionText": {
+    "comment": "home page latest content section text",
+    "string": "Explore a sample of some of our recent audio pieces. Then when you’re ready, <a>visit the Discover page</a> to see more."
+  },
+  "homePage__latestContentSectionTitle": {
+    "comment": "home page latest content section title",
+    "string": "Latest Content"
+  },
+  "homePage__recentPostsSeeAll": {
+    "string": "See All Blog Posts"
+  },
+  "homePage__supportSectionImageAlt": {
+    "comment": "home page support section image alt",
+    "string": "People having a discussion in a meeting"
+  },
+  "homePage__testimoniesIntro": {
+    "string": "See what some of our listeners have shared about using AudioVerse. <a>Visit the Testimonials page</a> to see even more."
+  },
+  "legal_footer": {
+    "string": "Mentions légales"
+  },
+  "library__createAccountHeading": {
+    "string": "Create a free account"
+  },
+  "library__freeAccountCopy": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
+  },
+  "loginForm__loginFailureMessage": {
+    "string": "Login failed"
+  },
+  "loginLanding__title": {
+    "string": "Login Landing"
+  },
+  "loginRedirect__message": {
+    "string": "Redirecting..."
+  },
+  "login__title": {
+    "string": "Login"
+  },
+  "mediaFormatSwitcher__audio": {
+    "string": "Audio"
+  },
+  "mediaFormatSwitcher__video": {
+    "string": "Vidéo"
+  },
+  "miniplayer__increaseVolume": {
+    "string": "Increase volume"
+  },
+  "miniplayer__label": {
+    "string": "miniplayer"
+  },
+  "miniplayer__reduceVolume": {
+    "string": "Reduce volume"
+  },
+  "miniplayer__series": {
+    "string": "Séries"
+  },
+  "miniplayer__volume": {
+    "string": "Volume"
+  },
+  "molecule-button-SignUp": {
+    "string": "Sign Up with Email"
+  },
+  "molecule-buttonDownload__linkLabelHigh": {
+    "string": "High Quality ({size})"
+  },
+  "molecule-buttonDownload__linkLabelLow": {
+    "string": "Low Quality ({size})"
+  },
+  "molecule-buttonDownload__linkLabelMedium": {
+    "string": "Medium Quality ({size})"
+  },
+  "molecule-buttonGuestDownload__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonGuestDownload__modalTitle": {
+    "string": "Create a Free Account"
+  },
+  "molecule-buttonGuest__Download": {
+    "string": "Download content for offline access"
+  },
+  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
+  },
+  "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
+    "string": "Skip"
+  },
+  "molecule-buttonGuest__modalButtonLabelSkip": {
+    "string": "Skip"
+  },
+  "molecule-buttonGuest__modalParagraph1-2": {
+    "string": "Please consider signing up or logging in to help our mission of sharing sound doctrine."
+  },
+  "molecule-buttonGuest__modalParagraph2": {
+    "string": "With a free account,you can"
+  },
+  "molecule-buttonGuest__modalTitle2": {
+    "string": "Êtes-vous sûr(e) ?"
+  },
+  "molecule-buttonGuest__requests": {
+    "string": "Avoid annoying login requests"
+  },
+  "molecule-buttonGuest__save": {
+    "string": "Save your content to listen later"
+  },
+  "molecule-buttonGuest__sync": {
+    "string": "Pick up where you left off across devices"
+  },
+  "molecule-cardRecordingSequenceHat__addBibleBook": {
+    "string": "Add Book"
+  },
+  "molecule-cardRecordingSequenceHat__removeBibleBook": {
+    "string": "Remove Book"
+  },
+  "molecule-searchBar__ariaLabel": {
+    "comment": "search bar label",
+    "string": "search"
+  },
+  "molecule-searchBar__cancel": {
+    "string": "Cancel"
+  },
+  "molecule-teaseRecording__individualChapter": {
+    "string": "Individual Chapter"
+  },
+  "molecule-teaseRecording__individualStory": {
+    "string": "Individual Story"
+  },
+  "molecule-teaseRecording__individualTeaching": {
+    "string": "Individual Teaching"
+  },
+  "molecule-teaseRecording__individualTrack": {
+    "string": "Individual Track"
+  },
+  "molecules-pagination__nextLabelMobile": {
+    "string": "Next"
+  },
+  "navigation__nameFallback": {
+    "string": "User Account"
+  },
+  "organism-mobileHeader__more": {
+    "comment": "more button label",
+    "string": "more"
+  },
+  "organism-navigation__exit": {
+    "comment": "Exit button label",
+    "string": "Exit"
+  },
+  "organism-recording__backToChapterInfo": {
+    "string": "Back to Chapter Info"
+  },
+  "organism-recording__collectionInfoTitle": {
+    "string": "Parent Bible"
+  },
+  "organism-recording__readAlongLabel": {
+    "string": "Read Along"
+  },
+  "organismSection__audiobooksHeading": {
+    "string": "Tous les livres audio"
+  },
+  "organismSection__audiobooksNext": {
+    "string": "Next audiobooks"
+  },
+  "organismSection__audiobooksPrevious": {
+    "string": "Previous audiobooks"
+  },
+  "organismSection__bibleBooksHeading": {
+    "string": "Bible Books"
+  },
+  "organismSection__bibleBooksNext": {
+    "string": "Next Bible books"
+  },
+  "organismSection__bibleBooksPrevious": {
+    "string": "Previous Bible books"
+  },
+  "organismSection__egwAudiobooksHeading": {
+    "string": "Ellen White"
+  },
+  "organismSection__egwAudiobooksNext": {
+    "string": "Next EGW audiobooks"
+  },
+  "organismSection__egwAudiobooksPrevious": {
+    "string": "Previous EGW audiobooks"
+  },
+  "organismSection_presentersHeading": {
+    "string": "Présentateurs"
+  },
+  "organismSection_presentersNext": {
+    "string": "Next presenters"
+  },
+  "organismSection_presentersPrevious": {
+    "string": "Previous presenters"
+  },
+  "organismSection_scriptureSongsHeading": {
+    "string": "Chants bibliques"
+  },
+  "organismSection_scriptureSongsNext": {
+    "string": "Next scripture songs"
+  },
+  "organismSection_scriptureSongsPrevious": {
+    "string": "Previous scripture songs"
+  },
+  "organismSection_seriesHeading": {
+    "string": "Séries"
+  },
+  "organismSection_seriesNext": {
+    "string": "Next series"
+  },
+  "organismSection_seriesPrevious": {
+    "string": "Previous series"
+  },
+  "organismSection_sponsorsHeading": {
+    "string": "Collaborateurs"
+  },
+  "organismSection_sponsorsNext": {
+    "string": "Next sponsors"
+  },
+  "organismSection_sponsorsPrevious": {
+    "string": "Previous sponsors"
+  },
+  "ourPurpose__title": {
+    "string": "Our Purpose"
+  },
+  "ourStory__title": {
+    "string": "Our Story"
+  },
+  "presentersAppears__title": {
+    "string": "{personName} Also Appears In"
+  },
+  "presentersListAll__all": {
+    "string": "Tous"
+  },
+  "presentersList__all": {
+    "string": "Tous"
+  },
+  "presentersSequences__title": {
+    "string": "Series by {personName}"
+  },
+  "presentersTeachings__title": {
+    "string": "Teachings by {personName}"
+  },
+  "presentersTop__title": {
+    "string": "Most Listened by {personName}"
+  },
+  "presenters__title": {
+    "string": "Présentateurs"
+  },
+  "privacy_footer": {
+    "string": "Privacy Policy"
+  },
+  "profile__deleteConfirmAcknowledgeStatements": {
+    "string": "Please acknowledge all the above statements."
+  },
+  "profile__deleteConfirmDelete": {
+    "string": "Delete account"
+  },
+  "profile__deleteConfirmImmediatelyDeleted": {
+    "string": "I understand that my account will be immediately deleted."
+  },
+  "profile__deleteConfirmIntro": {
+    "string": "Do you want to delete your account? You cannot undo this action."
+  },
+  "profile__deleteConfirmLibraryLost": {
+    "string": "I understand that all my saved library will be lost."
+  },
+  "profile__deleteConfirmNevermind": {
+    "string": "Never mind"
+  },
+  "profile__deleteConfirmNoLogin": {
+    "string": "I understand that I will no longer be able to log in unless I create a new account."
+  },
+  "profile__deleteConfirmTitle": {
+    "string": "Êtes-vous sûr(e) ?"
+  },
+  "register__title": {
+    "string": "Register"
+  },
+  "regularLogin__login": {
+    "string": "Vous avez déjà un compte ?"
+  },
+  "regularLogin__loginTxt": {
+    "string": "Log In"
+  },
+  "release__address1": {
+    "string": "Address line 1"
+  },
+  "release__address2": {
+    "string": "Address line 2"
+  },
+  "release__city": {
+    "string": "City"
+  },
+  "release__comments": {
+    "string": "Comments"
+  },
+  "release__country": {
+    "string": "Country"
+  },
+  "release__email": {
+    "string": "Email"
+  },
+  "release__givenName": {
+    "string": "Given name"
+  },
+  "release__messageSubmitted": {
+    "string": "Your form has been submitted."
+  },
+  "release__phone": {
+    "string": "Phone"
+  },
+  "release__province": {
+    "string": "State / Province"
+  },
+  "release__surname": {
+    "string": "Surname"
+  },
+  "release__thankYou": {
+    "string": "Thank you!"
+  },
+  "release__title": {
+    "string": "Media Release Agreement"
+  },
+  "release__zip": {
+    "string": "Postal Code"
+  },
+  "search__allHeading": {
+    "string": "Tous"
+  },
+  "search__bibleBooksHeading": {
+    "string": "Bible"
+  },
+  "search__bileBooksSeeAll": {
+    "string": "See All Matching Bible books"
+  },
+  "search__booksHeading": {
+    "string": "Livres audio"
+  },
+  "search__booksSeeAll": {
+    "string": "See All Matching Audiobooks"
+  },
+  "search__egwbooksHeading": {
+    "string": "EGW"
+  },
+  "search__egwbooksSeeAll": {
+    "string": "See All Matching Ellen White Audiobooks"
+  },
+  "search__emptyStateMessage": {
+    "string": "Try searching for something else"
+  },
+  "search__emptyStateTitle": {
+    "string": "No results found"
+  },
+  "search__musicHeading": {
+    "string": "Musiques"
+  },
+  "search__musicSeeAll": {
+    "string": "See All Matching Music"
+  },
+  "search__presentersHeading": {
+    "string": "Présentateurs"
+  },
+  "search__presentersSeeAll": {
+    "string": "See All Matching Presenters"
+  },
+  "search__seriesHeading": {
+    "string": "Séries"
+  },
+  "search__seriesSeeAll": {
+    "string": "See All Matching Series"
+  },
+  "search__storiesHeading": {
+    "string": "Histoires"
+  },
+  "search__storiesSeeAll": {
+    "string": "See All Matching Stories"
+  },
+  "search__title": {
+    "string": "Rechercher"
+  },
+  "search__titleDynamic": {
+    "string": "Search | \"{term}\" | AudioVerse"
+  },
+  "sequenceType__bibleBookTitle": {
+    "string": "Bible Book"
+  },
+  "seriesList__title": {
+    "string": "Toutes les séries"
+  },
+  "sermonDetailPage__openGraphDescription_audiobook": {
+    "string": "Audiobook provided by {sponsorName}"
+  },
+  "sermonDetailPage__openGraphDescription_bibleChapter": {
+    "string": "Bible Chapter provided by {sponsorName}"
+  },
+  "sermonDetailPage__openGraphDescription_music": {
+    "string": "Music by {speakerName}"
+  },
+  "sermonDetailPage__openGraphDescription_sermon": {
+    "string": "Teaching by {speakerName}"
+  },
+  "sermonDetailPage__openGraphDescription_story": {
+    "string": "Story by {writerName}"
+  },
+  "socialLogin__loginOr": {
+    "string": "Or"
+  },
+  "songBook__title": {
+    "string": "{book} Scripture Songs"
+  },
+  "spiritOfAv__title": {
+    "string": "Spirit Of AudioVerse"
+  },
+  "sponsorsConferences__title": {
+    "string": "Conferences by {sponsorName}"
+  },
+  "sponsorsListAll__all": {
+    "string": "Tous"
+  },
+  "sponsorsList__all": {
+    "string": "Tous"
+  },
+  "sponsorsSequences__title": {
+    "string": "Series by {sponsorName}"
+  },
+  "sponsorsTeachings__title": {
+    "string": "Teachings by {sponsorName}"
+  },
+  "sponsors__title": {
+    "string": "Tous les sponsors"
+  },
+  "storyAlbumList__emptyStateMessage": {
+    "string": "There are no story albums to show."
+  },
+  "storyAlbumList__emptyStateTitle": {
+    "string": "Nothing here!"
+  },
+  "storyAlbums__title": {
+    "string": "Chants bibliques"
+  },
+  "teachings__title": {
+    "string": "Tous les enseignements"
+  },
+  "team__title": {
+    "string": "Our Team"
+  },
+  "terms_footer": {
+    "string": "Conditions d'utilisation"
+  },
+  "testimonies__title": {
+    "string": "Testimonials"
+  },
+  "topicDetail__description": {
+    "string": "Description"
+  },
+  "topicDetail__label": {
+    "string": "Topic"
+  },
+  "topicDetail__parentTopic": {
+    "string": "Parent Topic"
+  },
+  "topicDetail__series": {
+    "string": "Séries"
+  },
+  "topicDetail__teachings": {
+    "string": "Enseignements"
+  },
+  "topicItemCount__items": {
+    "string": "{count, plural, one {# item} other {# items}}"
+  },
+  "topicItemCount__series": {
+    "string": "{count, plural, one {# series} other {# series}}"
+  },
+  "topicItemCount__teachings": {
+    "string": "{count, plural, one {# teaching} other {# teachings}}"
+  },
+  "topicListPage__title": {
+    "string": "All Topics"
+  },
+  "trending__title": {
+    "string": "Enseignements les plus écoutés"
+  },
+  "newsLetterForm__checkboxNewsletter": {
+    "string": "Newsletter (typically about once a month)"
+  },
+  "newsLetterForm__checkboxWeeklyPics": {
+    "string": "Weekly Picks (goes out every Monday)"
+  },
+  "newsLetterForm__newsletterEmail": {
+    "string": "Email Address"
+  },
+  "newsLetterForm__newsletterEmailPlaceholder": {
+    "string": "josephbates@email.com"
+  },
+  "newsLetterForm__newsletterHatTitle": {
+    "string": "Sign up for our Emails"
+  },
+  "newsLetterForm__newsletterName": {
+    "string": "Name"
+  },
+  "newsLetterForm__newsletterNamePlaceholder": {
+    "string": "Joseph Bates"
+  },
+  "newsLetterForm__newsletterSubscribe": {
+    "string": "Subscribe"
+  },
+  "about__storyAncientScreenshotAlt": {
+    "comment": "Alt text for the ancient screenshot image",
+    "string": "Screenshot of an old version of the AudioVerse website"
+  },
+  "about__storyImageAlt": {
+    "comment": "Alt text for the story image",
+    "string": "Young woman in a field wearing headphones while reading a book."
+  },
+  "Listen_Later": {
+    "string": "Listen Later"
+  },
+  "add_to_playlist": {
+    "string": "Add To Playlist"
+  },
+  "add_to_playlist_btn": {
+    "comment": "Add to Playlist button label",
+    "string": "Playlist"
+  },
+  "anyoneWithLink": {
+    "string": "Anyone with the link can view"
+  },
+  "create_new": {
+    "string": "Create New"
+  },
+  "deletePlaylists": {
+    "string": "Delete Playlist"
+  },
+  "edit_playlist": {
+    "string": "Edit Playlist"
+  },
+  "error": {
+    "string": "Error"
+  },
+  "loading": {
+    "string": "Loading..."
+  },
+  "newPrivacy": {
+    "string": "Privacy"
+  },
+  "newPrivate": {
+    "string": "Private"
+  },
+  "newShareable": {
+    "string": "Shareable"
+  },
+  "new_playlist": {
+    "string": "New playlist"
+  },
+  "not_shareable": {
+    "string": "This Playlist is Private."
+  },
+  "not_shareable_title": {
+    "string": "Private"
+  },
+  "onlyYow": {
+    "string": "Only you can view"
+  },
+  "pl_description": {
+    "string": "Description"
+  },
+  "pl_title": {
+    "string": "Title"
+  },
+  "recording_id_missing": {
+    "string": "Sorry, a Recording Id missing!"
+  },
+  "scroll-down": {
+    "string": "Scroll down for more"
   }
 }

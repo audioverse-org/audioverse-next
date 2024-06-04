@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Listen Later"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -29,12 +35,6 @@
       "value": "Nossa História"
     }
   ],
-  "about__navTeam": [
-    {
-      "type": 0,
-      "value": "A Equipe"
-    }
-  ],
   "about__navTestimonials": [
     {
       "type": 0,
@@ -63,6 +63,12 @@
     {
       "type": 0,
       "value": "Em todo o mundo há pessoas que anseiam pelo evangelho, mas não têm condições de pagar por ele. Podem ser indivíduos em países em desenvolvimento ou simplesmente jovens na escola. Para que o Evangelho vá até essas pessoas também, é preciso remover o máximo de barreiras possível, e o preço é uma delas. Isso só é possível por meio do apoio financeiro generoso de doadores que acreditam na missão."
+    }
+  ],
+  "about__purposeImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman in a field wearing headphones while reading a book."
     }
   ],
   "about__purposeImageLabel": [
@@ -257,6 +263,18 @@
       "value": "Com o crescimento do site, tivemos a oportunidade de apresentar gravações em outros idiomas além do inglês. Em um esforço para alcançar o maior número possível de pessoas, mensagens em espanhol, portugues, francês, alemão e chinês estão agora disponíveis com mais novidades chegando."
     }
   ],
+  "about__storyAncientScreenshotAlt": [
+    {
+      "type": 0,
+      "value": "Screenshot of an old version of the AudioVerse website"
+    }
+  ],
+  "about__storyImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman in a field wearing headphones while reading a book."
+    }
+  ],
   "about__storyImageCaption": [
     {
       "type": 0,
@@ -437,40 +455,16 @@
       "value": "Perfil"
     }
   ],
-  "accountPlaylists__buttonLabelSubmit": [
+  "add_to_playlist": [
     {
       "type": 0,
-      "value": "Adicionar na lista de reprodução"
+      "value": "Add To Playlist"
     }
   ],
-  "accountPlaylists__errorMissingTitle": [
+  "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "título em falta"
-    }
-  ],
-  "accountPlaylists__inputLabelPublic": [
-    {
-      "type": 0,
-      "value": "público"
-    }
-  ],
-  "accountPlaylists__inputLabelTitle": [
-    {
-      "type": 0,
-      "value": "Título"
-    }
-  ],
-  "accountPlaylists__labelPrivate": [
-    {
-      "type": 0,
-      "value": "privado"
-    }
-  ],
-  "accountPlaylists__labelPublic": [
-    {
-      "type": 0,
-      "value": "público"
+      "value": "Playlist"
     }
   ],
   "andGlobalModals__authCopy": [
@@ -551,6 +545,12 @@
       "value": "Criar ou acessar uma conta e acessar um conjunto de recursos crescente para ajudá-lo a explorar a sã doutrina."
     }
   ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Anyone with the link can view"
+    }
+  ],
   "app__features1Cta": [
     {
       "type": 0,
@@ -561,6 +561,12 @@
     {
       "type": 0,
       "value": "Tesouros novos e antigos"
+    }
+  ],
+  "app__features1ImageAlt": [
+    {
+      "type": 0,
+      "value": "Media on the Audioverse website"
     }
   ],
   "app__features1Kicker": [
@@ -581,6 +587,12 @@
       "value": "Verdade Presente"
     }
   ],
+  "app__features2ImageAlt": [
+    {
+      "type": 0,
+      "value": "List of recent sermons from Sebastien Braxton"
+    }
+  ],
   "app__features2Kicker": [
     {
       "type": 0,
@@ -597,6 +609,12 @@
     {
       "type": 0,
       "value": "Em conexão e harmonia"
+    }
+  ],
+  "app__features3ImageAlt": [
+    {
+      "type": 0,
+      "value": "A diagram of AudioVerse’s card UI"
     }
   ],
   "app__features3Kicker": [
@@ -617,6 +635,12 @@
       "value": "Salve aqueles que você gostar"
     }
   ],
+  "app__features4ImageAlt": [
+    {
+      "type": 0,
+      "value": "The save button on a sermon by Katie Chitwood"
+    }
+  ],
   "app__features4Kicker": [
     {
       "type": 0,
@@ -635,6 +659,12 @@
       "value": "Faça você mesmo..."
     }
   ],
+  "app__features5ImageAlt": [
+    {
+      "type": 0,
+      "value": "The download button on a sermon by Don Mackintosh"
+    }
+  ],
   "app__features5Kicker": [
     {
       "type": 0,
@@ -651,12 +681,6 @@
     {
       "type": 0,
       "value": "Todos Audiolivros"
-    }
-  ],
-  "backButton__back": [
-    {
-      "type": 0,
-      "value": "Voltar"
     }
   ],
   "bibleBook__backToChapter": [
@@ -763,6 +787,24 @@
     {
       "type": 0,
       "value": "Todos Audiolivros"
+    }
+  ],
+  "browse__topicsNext": [
+    {
+      "type": 0,
+      "value": "Next topics"
+    }
+  ],
+  "browse__topicsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous topics"
+    }
+  ],
+  "browse_topicsHeading": [
+    {
+      "type": 0,
+      "value": "Topics"
     }
   ],
   "buttonShareRecording__emailSubject": [
@@ -933,6 +975,12 @@
       "value": " capítulos"
     }
   ],
+  "cardSequence_egwAudiobookType": [
+    {
+      "type": 0,
+      "value": "ELLEN WHITE"
+    }
+  ],
   "cardSequence_readByLabel": [
     {
       "type": 0,
@@ -1067,6 +1115,12 @@
     {
       "type": 0,
       "value": "Histórias"
+    }
+  ],
+  "cardTopic__hatLabel": [
+    {
+      "type": 0,
+      "value": "Topic"
     }
   ],
   "ccollectionTeachingsDetail__heading": [
@@ -1365,6 +1419,24 @@
       "value": "Contato"
     }
   ],
+  "contact_footer": [
+    {
+      "type": 0,
+      "value": "Contato"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Create New"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Delete Playlist"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1383,64 +1455,70 @@
       "value": "Congressos"
     }
   ],
-  "discoverCollections_featuredCollectionHeading": [
+  "discoverCollections_egwAudiobooksHeading": [
     {
       "type": 0,
-      "value": "Coleção em Destaque"
+      "value": "Discover Ellen White"
     }
   ],
-  "discoverCollections_presentersHeading": [
-    {
-      "type": 0,
-      "value": "Oradores"
-    }
-  ],
-  "discoverCollections_scriptureSongsHeading": [
-    {
-      "type": 0,
-      "value": "Canções das Escrituras"
-    }
-  ],
-  "discoverCollections_seeAll": [
-    {
-      "type": 0,
-      "value": "Ver todos"
-    }
-  ],
-  "discoverCollections_seriesHeading": [
-    {
-      "type": 0,
-      "value": "Séries"
-    }
-  ],
-  "discoverCollections_sponsorsHeading": [
-    {
-      "type": 0,
-      "value": "Patrocinadores"
-    }
-  ],
-  "discoverCollections_storiesHeading": [
+  "discoverCollections_storySeasonsHeading": [
     {
       "type": 0,
       "value": "Histórias"
     }
   ],
-  "discover__conferencesSeeAll": [
+  "discover__conferencesNext": [
     {
       "type": 0,
-      "value": "Ver todos Congressos"
+      "value": "Next recent conferences"
     }
   ],
-  "discover__recentBlogSeeAll": [
+  "discover__conferencesPrevious": [
     {
       "type": 0,
-      "value": "Ver todas as postagens do blog"
+      "value": "Previous recent conferences"
     }
   ],
-  "discover__recentTeachingsSeeAll": [
+  "discover__featuredTeachingsNext": [
     {
       "type": 0,
-      "value": "Ver todos Ensinamentos"
+      "value": "Next featured teachings"
+    }
+  ],
+  "discover__featuredTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous featured teachings"
+    }
+  ],
+  "discover__recentBlogNext": [
+    {
+      "type": 0,
+      "value": "Next recent blog posts"
+    }
+  ],
+  "discover__recentBlogPrevious": [
+    {
+      "type": 0,
+      "value": "Previous recent blog posts"
+    }
+  ],
+  "discover__recentTeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next recent teachings"
+    }
+  ],
+  "discover__recentTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous recent teachings"
+    }
+  ],
+  "discover__seeAll": [
+    {
+      "type": 0,
+      "value": "See All"
     }
   ],
   "discover__storiesHeading": [
@@ -1449,10 +1527,16 @@
       "value": "Histórias recentes"
     }
   ],
-  "discover__storiesSeeAll": [
+  "discover__storiesNext": [
     {
       "type": 0,
-      "value": "Ver todas Histórias"
+      "value": "Next recent stories"
+    }
+  ],
+  "discover__storiesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous recent stories"
     }
   ],
   "discover__title": [
@@ -1461,10 +1545,46 @@
       "value": "Descobrir"
     }
   ],
-  "discover__trendingTeachingsSeeAll": [
+  "discover__topicsNext": [
     {
       "type": 0,
-      "value": "Ver todos Ensinamentos em alta"
+      "value": "Next topics"
+    }
+  ],
+  "discover__topicsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous topics"
+    }
+  ],
+  "discover__trendingMusicNext": [
+    {
+      "type": 0,
+      "value": "Next trending scripture songs"
+    }
+  ],
+  "discover__trendingMusicPrevious": [
+    {
+      "type": 0,
+      "value": "Previous trending scripture songs"
+    }
+  ],
+  "discover__trendingTeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next trending teachings"
+    }
+  ],
+  "discover__trendingTeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous trending teachings"
+    }
+  ],
+  "discover_bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "Discover Bible Books"
     }
   ],
   "discover_conferencesHeading": [
@@ -1479,6 +1599,12 @@
       "value": "Ensinamentos em Destaque"
     }
   ],
+  "discover_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Discover Presenters"
+    }
+  ],
   "discover_recentBlogHeading": [
     {
       "type": 0,
@@ -1489,6 +1615,18 @@
     {
       "type": 0,
       "value": "Ensinamentos recentes"
+    }
+  ],
+  "discover_topicsHeading": [
+    {
+      "type": 0,
+      "value": "Topics"
+    }
+  ],
+  "discover_trendingMusicHeading": [
+    {
+      "type": 0,
+      "value": "Trending Scripture Songs"
     }
   ],
   "discover_trendingTeachingsHeading": [
@@ -1559,6 +1697,24 @@
       "value": "m"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "Edit Playlist"
+    }
+  ],
+  "egwAudiobookList__heading": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
+  "egwbooks__title": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
   "embed__partInfo": [
     {
       "type": 0,
@@ -1575,6 +1731,12 @@
     {
       "type": 1,
       "value": "count"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Error"
     }
   ],
   "generateFeed__audio": [
@@ -1627,48 +1789,6 @@
     {
       "type": 0,
       "value": " ao AudioVerse. As gravações individuais são protegidas por direitos autorais de seus respectivos proprietários."
-    }
-  ],
-  "give__amazonCta": [
-    {
-      "type": 0,
-      "value": "Comprar agora"
-    }
-  ],
-  "give__amazonDescription": [
-    {
-      "type": 0,
-      "value": "A cada compra na AmazonSmile, o AudioVerse recebe 0,5%."
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 0,
-      "value": "Como? Apenas clique no botão."
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 0,
-      "value": " É só isso! Apenas certifique-se de selecionar o novo site AmazonSmile ou então seu navegador provavelmente voltará ao site normal da Amazon."
-    }
-  ],
-  "give__amazonTitle": [
-    {
-      "type": 0,
-      "value": "Amazon Smile"
     }
   ],
   "give__checkDescription": [
@@ -1729,6 +1849,12 @@
     {
       "type": 0,
       "value": "Cheque pelo correio"
+    }
+  ],
+  "give__donorboxTitle": [
+    {
+      "type": 0,
+      "value": "Donation form"
     }
   ],
   "give__estateCta": [
@@ -1861,6 +1987,12 @@
       "value": "Congressos"
     }
   ],
+  "header__navItemCollections-egwbooks": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
   "header__navItemCollections-presenters": [
     {
       "type": 0,
@@ -1883,6 +2015,12 @@
     {
       "type": 0,
       "value": "Histórias"
+    }
+  ],
+  "header__navItemCollections-topics": [
+    {
+      "type": 0,
+      "value": "Topics"
     }
   ],
   "header__navItemContact": [
@@ -2045,12 +2183,6 @@
     {
       "type": 0,
       "value": "Espírito do AudioVerse"
-    }
-  ],
-  "header__navItemStory-team": [
-    {
-      "type": 0,
-      "value": "A Equipe"
     }
   ],
   "header__navItemStory-testimonials": [
@@ -2647,6 +2779,18 @@
       "value": "Explorar áudios"
     }
   ],
+  "homePage__bannerImageAlt": [
+    {
+      "type": 0,
+      "value": "Young woman with headphones listening to music and reading a book."
+    }
+  ],
+  "homePage__downloadAppImageAlt": [
+    {
+      "type": 0,
+      "value": "Smartphones with AudioVerse app"
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -2685,36 +2829,6 @@
       "value": "Conteúdo mais recente"
     }
   ],
-  "homePage__newsletterEmail": [
-    {
-      "type": 0,
-      "value": "Endereço de e-mail"
-    }
-  ],
-  "homePage__newsletterEmailPlaceholder": [
-    {
-      "type": 0,
-      "value": "josephbates@email.com"
-    }
-  ],
-  "homePage__newsletterHatTitle": [
-    {
-      "type": 0,
-      "value": "Assine nosso boletim informativo"
-    }
-  ],
-  "homePage__newsletterName": [
-    {
-      "type": 0,
-      "value": "Nome"
-    }
-  ],
-  "homePage__newsletterNamePlaceholder": [
-    {
-      "type": 0,
-      "value": "Joseph Bates"
-    }
-  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -2725,12 +2839,6 @@
     {
       "type": 0,
       "value": "Inscreva-se para atualizações"
-    }
-  ],
-  "homePage__newsletterSubscribe": [
-    {
-      "type": 0,
-      "value": " Se inscrever"
     }
   ],
   "homePage__recentPostsSectionText": [
@@ -2767,6 +2875,12 @@
     {
       "type": 0,
       "value": "Fazer uma doação"
+    }
+  ],
+  "homePage__supportSectionImageAlt": [
+    {
+      "type": 0,
+      "value": "People having a discussion in a meeting"
     }
   ],
   "homePage__supportSectionText": [
@@ -2823,6 +2937,12 @@
     {
       "type": 0,
       "value": "Graças a nossos patrocinadores e parceiros internacionais, o AudioVerse existe emmuitos sites, disponíveis em vários idiomas. Mude seu idioma aqui ou no menu."
+    }
+  ],
+  "legal_footer": [
+    {
+      "type": 0,
+      "value": "Jurídico"
     }
   ],
   "libraryCollections__emptyCopy": [
@@ -3119,6 +3239,12 @@
       "value": "Você ainda não tem nenhum item correspondente salvo"
     }
   ],
+  "loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "loadingCards-ariaLabel": [
     {
       "type": 0,
@@ -3233,6 +3359,12 @@
       "value": "Não tem uma conta?"
     }
   ],
+  "loginLanding__title": [
+    {
+      "type": 0,
+      "value": "Login Landing"
+    }
+  ],
   "loginRedirect__message": [
     {
       "type": 0,
@@ -3291,6 +3423,12 @@
     {
       "type": 0,
       "value": "Volume"
+    }
+  ],
+  "molecule-button-SignUp": [
+    {
+      "type": 0,
+      "value": "Sign Up with Email"
     }
   ],
   "molecule-buttonDownload__buttonLabel": [
@@ -3353,10 +3491,22 @@
       "value": "Vídeos baixados"
     }
   ],
-  "molecule-buttonGuest__downloadQuality": [
+  "molecule-buttonGuestDownload__modalParagraph": [
     {
       "type": 0,
-      "value": "Ajustando a qualidade do download"
+      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+    }
+  ],
+  "molecule-buttonGuestDownload__modalTitle": [
+    {
+      "type": 0,
+      "value": "Criar uma conta gratuita"
+    }
+  ],
+  "molecule-buttonGuest__Download": [
+    {
+      "type": 0,
+      "value": "Download content for offline access"
     }
   ],
   "molecule-buttonGuest__label": [
@@ -3371,10 +3521,16 @@
       "value": "Criar conta"
     }
   ],
-  "molecule-buttonGuest__modalButtonLabelGuest": [
+  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": [
     {
       "type": 0,
-      "value": "Continuar como visitante"
+      "value": "Create account"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelGuestSkip2": [
+    {
+      "type": 0,
+      "value": "Skip"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelLogIn": [
@@ -3383,10 +3539,28 @@
       "value": "Entrar"
     }
   ],
+  "molecule-buttonGuest__modalButtonLabelSkip": [
+    {
+      "type": 0,
+      "value": "Skip"
+    }
+  ],
   "molecule-buttonGuest__modalParagraph": [
     {
       "type": 0,
       "value": "Você estará perdendo algumas funcionalidades importantes sem uma conta, tais como:"
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph1-2": [
+    {
+      "type": 0,
+      "value": "Please consider signing up or logging in to help our mission of sharing sound doctrine."
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph2": [
+    {
+      "type": 0,
+      "value": "With a free account,you can"
     }
   ],
   "molecule-buttonGuest__modalTitle": [
@@ -3395,16 +3569,28 @@
       "value": "Continuar como visitante?"
     }
   ],
-  "molecule-buttonGuest__saving": [
+  "molecule-buttonGuest__modalTitle2": [
     {
       "type": 0,
-      "value": "Salvando em sua biblioteca"
+      "value": "Tem certeza?"
     }
   ],
-  "molecule-buttonGuest__syncing": [
+  "molecule-buttonGuest__requests": [
     {
       "type": 0,
-      "value": "Sincronizando em seus dispositivos"
+      "value": "Avoid annoying login requests"
+    }
+  ],
+  "molecule-buttonGuest__save": [
+    {
+      "type": 0,
+      "value": "Save your content to listen later"
+    }
+  ],
+  "molecule-buttonGuest__sync": [
+    {
+      "type": 0,
+      "value": "Pick up where you left off across devices"
     }
   ],
   "molecule-buttonShareRecording__audioEmbedLabel": [
@@ -3555,6 +3741,18 @@
       "value": "Remover álbum"
     }
   ],
+  "molecule-searchBar__ariaLabel": [
+    {
+      "type": 0,
+      "value": "search"
+    }
+  ],
+  "molecule-searchBar__cancel": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
   "molecule-searchBar__label": [
     {
       "type": 0,
@@ -3649,6 +3847,12 @@
       "value": "Próximo"
     }
   ],
+  "molecules-pagination__nextLabelMobile": [
+    {
+      "type": 0,
+      "value": "Próximo"
+    }
+  ],
   "molecules-pagination__previousLabel": [
     {
       "type": 0,
@@ -3671,6 +3875,78 @@
     {
       "type": 0,
       "value": "Conta do usuário"
+    }
+  ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Privacy"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Shareable"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "New playlist"
+    }
+  ],
+  "newsLetterForm__checkboxNewsletter": [
+    {
+      "type": 0,
+      "value": "Newsletter (typically about once a month)"
+    }
+  ],
+  "newsLetterForm__checkboxWeeklyPics": [
+    {
+      "type": 0,
+      "value": "Weekly Picks (goes out every Monday)"
+    }
+  ],
+  "newsLetterForm__newsletterEmail": [
+    {
+      "type": 0,
+      "value": "Email Address"
+    }
+  ],
+  "newsLetterForm__newsletterEmailPlaceholder": [
+    {
+      "type": 0,
+      "value": "josephbates@email.com"
+    }
+  ],
+  "newsLetterForm__newsletterHatTitle": [
+    {
+      "type": 0,
+      "value": "Sign up for our Emails"
+    }
+  ],
+  "newsLetterForm__newsletterName": [
+    {
+      "type": 0,
+      "value": "Nome"
+    }
+  ],
+  "newsLetterForm__newsletterNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Joseph Bates"
+    }
+  ],
+  "newsLetterForm__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Subscribe"
     }
   ],
   "notFound__header": [
@@ -3703,10 +3979,40 @@
       "value": "Volte para Descobrir"
     }
   ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "This Playlist is Private."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "onlyYow": [
+    {
+      "type": 0,
+      "value": "Only you can view"
+    }
+  ],
+  "organism-mobileHeader__more": [
+    {
+      "type": 0,
+      "value": "more"
+    }
+  ],
   "organism-modal__close": [
     {
       "type": 0,
       "value": "Fechar"
+    }
+  ],
+  "organism-navigation__exit": [
+    {
+      "type": 0,
+      "value": "Exit"
     }
   ],
   "organism-recording__albumListTitle": [
@@ -3807,6 +4113,132 @@
       "value": "Patrocinador"
     }
   ],
+  "organismSection__audiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Todos Audiolivros"
+    }
+  ],
+  "organismSection__audiobooksNext": [
+    {
+      "type": 0,
+      "value": "Next audiobooks"
+    }
+  ],
+  "organismSection__audiobooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous audiobooks"
+    }
+  ],
+  "organismSection__bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "Bible Books"
+    }
+  ],
+  "organismSection__bibleBooksNext": [
+    {
+      "type": 0,
+      "value": "Next Bible books"
+    }
+  ],
+  "organismSection__bibleBooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Bible books"
+    }
+  ],
+  "organismSection__egwAudiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Ellen White"
+    }
+  ],
+  "organismSection__egwAudiobooksNext": [
+    {
+      "type": 0,
+      "value": "Next EGW audiobooks"
+    }
+  ],
+  "organismSection__egwAudiobooksPrevious": [
+    {
+      "type": 0,
+      "value": "Previous EGW audiobooks"
+    }
+  ],
+  "organismSection_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Oradores"
+    }
+  ],
+  "organismSection_presentersNext": [
+    {
+      "type": 0,
+      "value": "Next presenters"
+    }
+  ],
+  "organismSection_presentersPrevious": [
+    {
+      "type": 0,
+      "value": "Previous presenters"
+    }
+  ],
+  "organismSection_scriptureSongsHeading": [
+    {
+      "type": 0,
+      "value": "Canções das Escrituras"
+    }
+  ],
+  "organismSection_scriptureSongsNext": [
+    {
+      "type": 0,
+      "value": "Next scripture songs"
+    }
+  ],
+  "organismSection_scriptureSongsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous scripture songs"
+    }
+  ],
+  "organismSection_seriesHeading": [
+    {
+      "type": 0,
+      "value": "Séries"
+    }
+  ],
+  "organismSection_seriesNext": [
+    {
+      "type": 0,
+      "value": "Next series"
+    }
+  ],
+  "organismSection_seriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous series"
+    }
+  ],
+  "organismSection_sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Patrocinadores"
+    }
+  ],
+  "organismSection_sponsorsNext": [
+    {
+      "type": 0,
+      "value": "Next sponsors"
+    }
+  ],
+  "organismSection_sponsorsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous sponsors"
+    }
+  ],
   "ourPurpose__title": [
     {
       "type": 0,
@@ -3823,6 +4255,18 @@
     {
       "type": 0,
       "value": "Orador"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Title"
     }
   ],
   "playButton__pauseLabel": [
@@ -4155,6 +4599,18 @@
       "value": "nome"
     }
   ],
+  "presentersListAll__all": [
+    {
+      "type": 0,
+      "value": "Todos"
+    }
+  ],
+  "presentersList__all": [
+    {
+      "type": 0,
+      "value": "Todos"
+    }
+  ],
   "presentersList__title": [
     {
       "type": 0,
@@ -4195,6 +4651,12 @@
     {
       "type": 0,
       "value": "Todos Oradores"
+    }
+  ],
+  "privacy_footer": [
+    {
+      "type": 0,
+      "value": "Privacy Policy"
     }
   ],
   "profile__buttonLabelDeleteAccount": [
@@ -4323,6 +4785,12 @@
       "value": "Vídeo"
     }
   ],
+  "recording_id_missing": [
+    {
+      "type": 0,
+      "value": "Sorry, a Recording Id missing!"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -4399,6 +4867,18 @@
     {
       "type": 0,
       "value": "Cadastre-se"
+    }
+  ],
+  "regularLogin__login": [
+    {
+      "type": 0,
+      "value": "Já tem uma conta?"
+    }
+  ],
+  "regularLogin__loginTxt": [
+    {
+      "type": 0,
+      "value": "Log In"
     }
   ],
   "release__address1": [
@@ -4559,6 +5039,12 @@
       "value": "Feed RSS"
     }
   ],
+  "scroll-down": [
+    {
+      "type": 0,
+      "value": "Scroll down for more"
+    }
+  ],
   "searchCollections__heading": [
     {
       "type": 0,
@@ -4589,10 +5075,34 @@
       "value": "Todos Ensinamentos correspondentes"
     }
   ],
+  "search__allHeading": [
+    {
+      "type": 0,
+      "value": "Todos"
+    }
+  ],
+  "search__bibleBooksHeading": [
+    {
+      "type": 0,
+      "value": "Bíblia"
+    }
+  ],
+  "search__bileBooksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Bible books"
+    }
+  ],
   "search__booksHeading": [
     {
       "type": 0,
       "value": "Audiolivros"
+    }
+  ],
+  "search__booksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Audiobooks"
     }
   ],
   "search__conferencesHeading": [
@@ -4601,10 +5111,34 @@
       "value": "Congressos"
     }
   ],
-  "search__conferencesSeeAllMatching": [
+  "search__conferencesSeeAll": [
     {
       "type": 0,
-      "value": "Ver todos Congressos correspondentes."
+      "value": "See All Matching Conferences"
+    }
+  ],
+  "search__egwbooksHeading": [
+    {
+      "type": 0,
+      "value": "EGW"
+    }
+  ],
+  "search__egwbooksSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Ellen White Audiobooks"
+    }
+  ],
+  "search__emptyStateMessage": [
+    {
+      "type": 0,
+      "value": "Try searching for something else"
+    }
+  ],
+  "search__emptyStateTitle": [
+    {
+      "type": 0,
+      "value": "No results found"
     }
   ],
   "search__musicHeading": [
@@ -4613,16 +5147,10 @@
       "value": "Musica"
     }
   ],
-  "search__personsHeading": [
+  "search__musicSeeAll": [
     {
       "type": 0,
-      "value": "Oradores"
-    }
-  ],
-  "search__personsSeeAllMatching": [
-    {
-      "type": 0,
-      "value": "Ver todos Oradores correspondentes"
+      "value": "See All Matching Music"
     }
   ],
   "search__presentersHeading": [
@@ -4631,26 +5159,22 @@
       "value": "Oradores"
     }
   ],
-  "search__resultsCount": [
-    {
-      "type": 1,
-      "value": "count"
-    },
+  "search__presentersSeeAll": [
     {
       "type": 0,
-      "value": " Resultados"
+      "value": "See All Matching Presenters"
     }
   ],
-  "search__sequencesHeading": [
+  "search__seriesHeading": [
     {
       "type": 0,
       "value": "Séries"
     }
   ],
-  "search__sequencesSeeAllMatching": [
+  "search__seriesSeeAll": [
     {
       "type": 0,
-      "value": "Ver todas as séries correspondentes"
+      "value": "See All Matching Series"
     }
   ],
   "search__sponsorsHeading": [
@@ -4659,10 +5183,10 @@
       "value": "Patrocinadores"
     }
   ],
-  "search__sponsorsSeeAllMatching": [
+  "search__sponsorsSeeAll": [
     {
       "type": 0,
-      "value": "Ver todos Patrocinadores correspondentes"
+      "value": "See All Matching Sponsors"
     }
   ],
   "search__storiesHeading": [
@@ -4671,16 +5195,22 @@
       "value": "Historias"
     }
   ],
+  "search__storiesSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Matching Stories"
+    }
+  ],
   "search__teachingsHeading": [
     {
       "type": 0,
       "value": "Ensinamentos"
     }
   ],
-  "search__teachingsSeeAllMatching": [
+  "search__teachingsSeeAll": [
     {
       "type": 0,
-      "value": "Ver todos Ensinamentos correspondentes"
+      "value": "See All Matching Teachings"
     }
   ],
   "search__title": [
@@ -4887,6 +5417,12 @@
     {
       "type": 0,
       "value": "Entrar com o Google"
+    }
+  ],
+  "socialLogin__loginOr": [
+    {
+      "type": 0,
+      "value": "Or"
     }
   ],
   "socialLogin__registerFacebookButton": [
@@ -5105,6 +5641,18 @@
       "value": "patrocinadorNome"
     }
   ],
+  "sponsorsListAll__all": [
+    {
+      "type": 0,
+      "value": "Todos"
+    }
+  ],
+  "sponsorsList__all": [
+    {
+      "type": 0,
+      "value": "Todos"
+    }
+  ],
   "sponsorsList__title": [
     {
       "type": 0,
@@ -5135,6 +5683,18 @@
     {
       "type": 0,
       "value": "Todos patrocinadores"
+    }
+  ],
+  "storyAlbumList__emptyStateMessage": [
+    {
+      "type": 0,
+      "value": "There are no story albums to show."
+    }
+  ],
+  "storyAlbumList__emptyStateTitle": [
+    {
+      "type": 0,
+      "value": "Nothing here!"
     }
   ],
   "storyAlbumList__heading": [
@@ -5207,6 +5767,12 @@
       "value": "Nossa equipe"
     }
   ],
+  "terms_footer": [
+    {
+      "type": 0,
+      "value": "Termos de uso"
+    }
+  ],
   "testimonies__heading": [
     {
       "type": 0,
@@ -5265,6 +5831,138 @@
     {
       "type": 1,
       "value": "s"
+    }
+  ],
+  "topicDetail__description": [
+    {
+      "type": 0,
+      "value": "Descrição"
+    }
+  ],
+  "topicDetail__label": [
+    {
+      "type": 0,
+      "value": "Topic"
+    }
+  ],
+  "topicDetail__parentTopic": [
+    {
+      "type": 0,
+      "value": "Parent Topic"
+    }
+  ],
+  "topicDetail__series": [
+    {
+      "type": 0,
+      "value": "Séries"
+    }
+  ],
+  "topicDetail__teachings": [
+    {
+      "type": 0,
+      "value": "Ensinamentos"
+    }
+  ],
+  "topicItemCount__items": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " item"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " items"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "topicItemCount__series": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " series"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " series"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "topicItemCount__teachings": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " teaching"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " teachings"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
+    }
+  ],
+  "topicListPage__title": [
+    {
+      "type": 0,
+      "value": "All Topics"
     }
   ],
   "trendingTeachings__heading": [
