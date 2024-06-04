@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -41,6 +42,7 @@ function LibraryPlaylistDetail({
 	playlist,
 }: Must<ILibraryPlaylistDetailProps>): JSX.Element {
 	const { title, recordings, createdAt, summary, id } = playlist;
+	const router = useRouter();
 	const languageRoute = useLanguageRoute();
 	const [isPlaylistEditModalOpen, setIsPlaylistEditModalOpen] = useState(false);
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
@@ -48,7 +50,6 @@ function LibraryPlaylistDetail({
 	const handleCloseNewModal = () => {
 		setIsPlaylistEditModalOpen(false);
 	};
-
 	const details: IDefinitionListTerm[] = [];
 	if (summary) {
 		details.push({
@@ -112,16 +113,19 @@ function LibraryPlaylistDetail({
 							light={true}
 						/>
 					)}
-
-					<IconButton
-						Icon={EditIcon}
-						color={BaseColors.DARK}
-						onClick={(e) => {
-							e.preventDefault();
-							setIsPlaylistEditModalOpen(true);
-						}}
-						backgroundColor={BaseColors.CREAM}
-					/>
+					{router.route === '/[language]/playlists/[playlist]' ? (
+						''
+					) : (
+						<IconButton
+							Icon={EditIcon}
+							color={BaseColors.DARK}
+							onClick={(e) => {
+								e.preventDefault();
+								setIsPlaylistEditModalOpen(true);
+							}}
+							backgroundColor={BaseColors.CREAM}
+						/>
+					)}
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />

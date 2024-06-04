@@ -99,6 +99,7 @@ export default function TeaseRecording({
 
 	const handleCloseNewModal = () => {
 		setIsPlaylistModalNewOpen(false);
+		setIsPlaylistModalOpen(true);
 	};
 
 	const inner = (
@@ -319,6 +320,7 @@ export default function TeaseRecording({
 				titleLink={
 					<Button
 						onClick={() => {
+							setIsPlaylistModalOpen(false);
 							setIsPlaylistModalNewOpen(true);
 						}}
 						className={styles.modalLink}
