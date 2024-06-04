@@ -1,6 +1,6 @@
 import Image from 'next/legacy/image';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import Button from '~components/molecules/button';
@@ -13,6 +13,7 @@ import IconForward from '~public/img/icons/icon-forward-light.svg';
 import sharedStyles from './shared.module.scss';
 
 export default function Story(): JSX.Element {
+	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
 
 	return (
@@ -23,6 +24,12 @@ export default function Story(): JSX.Element {
 			</Heading1>
 			<div className={sharedStyles.image}>
 				<Image
+					alt={intl.formatMessage({
+						id: 'about__storyImageAlt',
+						defaultMessage:
+							'Young woman in a field wearing headphones while reading a book.',
+						description: 'Alt text for the story image',
+					})}
 					src="/img/hero-av-full.jpg"
 					layout="fill"
 					objectFit="cover"
@@ -40,6 +47,12 @@ export default function Story(): JSX.Element {
 					<p>
 						<figure>
 							<Image
+								alt={intl.formatMessage({
+									id: 'about__storyAncientScreenshotAlt',
+									defaultMessage:
+										'Screenshot of an old version of the AudioVerse website',
+									description: 'Alt text for the ancient screenshot image',
+								})}
 								src="/img/audioverse-ancient-screenshot.jpeg"
 								width={858}
 								height={602}

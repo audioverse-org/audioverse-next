@@ -71,6 +71,8 @@ function SermonEmbed({ recording }: Must<SermonEmbedProps>) {
 							</Heading1>
 						</div>
 						<a
+							/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
+							aria-label="AudioVerse"
 							className={styles.logo}
 							href="https://www.audioverse.org/"
 							target="_top"
