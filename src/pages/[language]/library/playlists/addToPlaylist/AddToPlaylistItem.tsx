@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PlaylistCardFragment } from '~src/components/molecules/card/__generated__/PlaylistCard';
 
-import { useRecordingPlaylist } from '../../../../components/constants/mutations/useRecordingPlaylist';
+import { useRecordingPlaylist } from '../../../../../components/constants/mutations/useRecordingPlaylist';
 import PlaylistItem from './PlaylistItem';
 
 type Props = {
@@ -15,10 +15,6 @@ const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
 		playlist,
 		recordingId
 	);
-
-	if (!playlist) {
-		return null;
-	}
 
 	const isRecordingInPlaylist = playlist.recordings.edges?.find(
 		(item) => item.node.id === recordingId

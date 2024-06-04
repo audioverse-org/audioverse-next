@@ -1898,7 +1898,7 @@
   "not_shareable_title": {
     "string": "Private"
   },
-  "onlyYow": {
+  "onlyYou": {
     "string": "Only you can view"
   },
   "organism-mobileHeader__more": {
@@ -2299,9 +2299,6 @@
   "recordingHasVideoFilter__filterVideo": {
     "comment": "recording has video filter video",
     "string": "Video"
-  },
-  "recording_id_missing": {
-    "string": "Sorry, a Recording Id missing!"
   },
   "register__emailLabel": {
     "string": "Email"

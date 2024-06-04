@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
@@ -12,14 +11,6 @@ interface PlaylistsPageProps {
 }
 
 const PlaylistsPage: React.FC<PlaylistsPageProps> = ({ language, recId }) => {
-	if (!recId) {
-		return (
-			<FormattedMessage
-				id="recording_id_missing"
-				defaultMessage="Sorry, a Recording Id missing!"
-			/>
-		);
-	}
 	const languageFullForm = getLanguageIdByRoute(language);
 
 	return (

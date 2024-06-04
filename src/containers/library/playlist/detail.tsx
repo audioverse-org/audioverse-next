@@ -113,9 +113,7 @@ function LibraryPlaylistDetail({
 							light={true}
 						/>
 					)}
-					{router.route === '/[language]/playlists/[playlist]' ? (
-						''
-					) : (
+					{!(router.route === '/[language]/playlists/[playlist]') && (
 						<IconButton
 							Icon={EditIcon}
 							color={BaseColors.DARK}
@@ -166,7 +164,7 @@ function LibraryPlaylistDetail({
 				title={
 					<FormattedMessage id="edit_playlist" defaultMessage="Edit Playlist" />
 				}
-				titleLink={
+				rightElmt={
 					<Button
 						onClick={callDeletePlaylistFunction}
 						className={styles.modalLink}

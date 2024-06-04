@@ -3991,7 +3991,7 @@
       "value": "Private"
     }
   ],
-  "onlyYow": [
+  "onlyYou": [
     {
       "type": 0,
       "value": "Only you can view"
@@ -4783,12 +4783,6 @@
     {
       "type": 0,
       "value": "Видео"
-    }
-  ],
-  "recording_id_missing": [
-    {
-      "type": 0,
-      "value": "Sorry, a Recording Id missing!"
     }
   ],
   "register__emailLabel": [

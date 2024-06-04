@@ -2785,19 +2785,16 @@
   "not_shareable_title": {
     "string": "Private"
   },
-  "onlyYow": {
-    "string": "Only you can view"
-  },
   "pl_description": {
     "string": "Descripción"
   },
   "pl_title": {
     "string": "Title"
   },
-  "recording_id_missing": {
-    "string": "Sorry, a Recording Id missing!"
-  },
   "scroll-down": {
     "string": "Scroll down for more"
+  },
+  "onlyYou": {
+    "string": "Only you can view"
   }
 }

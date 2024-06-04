@@ -37,8 +37,6 @@ export function useRecordingPlaylist(
 			recordingId,
 		};
 
-		queryClient.fetchQuery(PLAYLIST_REFETCH_QUERIES);
-
 		graphqlFetcher<
 			PlaylistRecordingAddMutation,
 			PlaylistRecordingAddMutationVariables
@@ -65,8 +63,6 @@ export function useRecordingPlaylist(
 			playlistId: playlist.id,
 			recordingId,
 		};
-
-		queryClient.fetchQuery(PLAYLIST_REFETCH_QUERIES);
 
 		graphqlFetcher<
 			PlaylistRecordingRemoveMutation,

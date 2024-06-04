@@ -119,7 +119,7 @@ export default function PlaylistForm({
 							<FormattedMessage id="newPrivate" defaultMessage="Private" />
 							<p className={styles.privacyOptionSubtitle}>
 								<FormattedMessage
-									id="onlyYow"
+									id="onlyYou"
 									defaultMessage="Only you can view"
 								/>
 							</p>

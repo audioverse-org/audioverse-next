@@ -7,7 +7,7 @@ import Loader from '~src/components/atoms/Loader';
 import {
 	GetLibraryPlaylistsQueryVariables,
 	useGetLibraryPlaylistsQuery,
-} from '../../../../graphql/__generated__/query';
+} from '../../../../../graphql/__generated__/query';
 import AddToPlaylistItem from './AddToPlaylistItem';
 import styles from './PlaylistList.module.css';
 

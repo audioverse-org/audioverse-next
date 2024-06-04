@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { useIsRecordingFavorited } from '~src/lib/api/useIsRecordingFavorited';
@@ -11,13 +11,11 @@ type Props = {
 
 const ListenLaterItem = ({ id }: Props) => {
 	const intl = useIntl();
-	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(id);
-	const [isLoading, setIsLoading] = useState(false);
+	const { isFavorited, toggleFavorited, isLoading } =
+		useIsRecordingFavorited(id);
 
 	const toggleFavorite = () => {
-		setIsLoading(true);
 		toggleFavorited();
-		setIsLoading(false);
 	};
 
 	return (

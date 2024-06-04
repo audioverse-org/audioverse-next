@@ -13,12 +13,11 @@ import styles from './modal.module.scss';
 
 interface ModalProps {
 	title: string | JSX.Element;
-	titleLink?: string | JSX.Element;
+	rightElmt?: string | JSX.Element;
 	children: ReactNode;
 	onClose?: () => void;
 	open: boolean;
 	hideClose?: boolean;
-	leftTitle?: boolean;
 	actions?: ReactNode;
 }
 
@@ -26,10 +25,9 @@ export default function Modal({
 	children,
 	onClose,
 	open,
-	titleLink,
+	rightElmt,
 	title,
 	hideClose,
-	leftTitle,
 	actions,
 }: ModalProps): JSX.Element {
 	const intl = useIntl();
@@ -64,10 +62,10 @@ export default function Modal({
 					) : (
 						''
 					)}
-					{titleLink || leftTitle ? (
+					{rightElmt ? (
 						<div className={styles.head}>
 							<h5 className={styles.leftText}>{title}</h5>
-							<div className={styles.link}>{titleLink}</div>
+							<div className={styles.link}>{rightElmt}</div>
 						</div>
 					) : (
 						<Heading2 className={styles.centerText}>{title}</Heading2>

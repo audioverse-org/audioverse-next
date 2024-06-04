@@ -47,10 +47,6 @@ const NewPlaylist: React.FC<NewPlaylistProps> = ({ id, onClose }) => {
 		}
 	};
 
-	const cancel = () => {
-		onClose();
-	};
-
 	return (
 		<div>
 			{isLoading && (
@@ -58,7 +54,7 @@ const NewPlaylist: React.FC<NewPlaylistProps> = ({ id, onClose }) => {
 			)}
 			{error && <p style={{ color: 'red' }}>{error}</p>}
 			{success && <p style={{ color: 'green' }}>{success}</p>}
-			<PlaylistForm onSubmit={add} onCancel={cancel} />
+			<PlaylistForm onSubmit={add} onCancel={onClose} />
 		</div>
 	);
 };

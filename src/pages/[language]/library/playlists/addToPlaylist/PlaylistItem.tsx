@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import AddIcon from '../../../../../public/img/icons/add-light.svg';
-import LoadIcon from '../../../../../public/img/icons/loading-icon.svg';
-import PrivateIcon from '../../../../../public/img/icons/private-light.svg';
-import PublicIcon from '../../../../../public/img/icons/public-light.svg';
-import SuccessIcon from '../../../../../public/img/icons/success-light.svg';
+import AddIcon from '../../../../../../public/img/icons/add-light.svg';
+import LoadIcon from '../../../../../../public/img/icons/loading-icon.svg';
+import PrivateIcon from '../../../../../../public/img/icons/private-light.svg';
+import PublicIcon from '../../../../../../public/img/icons/public-light.svg';
+import SuccessIcon from '../../../../../../public/img/icons/success-light.svg';
 import styles from './PlaylistItem.module.css';
 
 type Props = {
@@ -24,7 +24,10 @@ const PlaylistItem: React.FC<Props> = ({
 	isLoading,
 }) => {
 	return (
-		<div onClick={onPress} className={styles.pressable}>
+		<div
+			onClick={!isLoading ? onPress : undefined}
+			className={styles.pressable}
+		>
 			<div className={styles.line} />
 			<div className={styles.container}>
 				<div className={styles.leftContainer}>
