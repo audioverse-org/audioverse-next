@@ -16,6 +16,10 @@ const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
 		recordingId
 	);
 
+	if (!playlist) {
+		return null;
+	}
+
 	const isRecordingInPlaylist = playlist.recordings.edges?.find(
 		(item) => item.node.id === recordingId
 	);
