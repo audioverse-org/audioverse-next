@@ -2292,6 +2292,9 @@
     "comment": "recording has video filter video",
     "string": "Video"
   },
+  "recording_id_missing": {
+    "string": "Sorry, a Recording Id missing!"
+  },
   "register__emailLabel": {
     "string": "Email"
   },

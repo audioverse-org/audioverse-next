@@ -45,7 +45,6 @@ function LibraryPlaylistDetail({
 	const [isPlaylistEditModalOpen, setIsPlaylistEditModalOpen] = useState(false);
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
 	const editPlaylistRef = useRef<EditPlaylistRef>(null);
-
 	const handleCloseNewModal = () => {
 		setIsPlaylistEditModalOpen(false);
 	};
