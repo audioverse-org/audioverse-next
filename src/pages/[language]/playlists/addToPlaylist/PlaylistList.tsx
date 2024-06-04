@@ -34,7 +34,6 @@ const PlaylistList: React.FC<Props> = ({ language, recordingId }) => {
 
 		checkScrollable();
 
-		// Check if the content changes size
 		const resizeObserver = new ResizeObserver(checkScrollable);
 		if (containerRef.current) {
 			resizeObserver.observe(containerRef.current);

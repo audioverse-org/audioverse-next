@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { graphqlFetcher } from '~lib/api/graphqlFetcher';
@@ -17,8 +17,8 @@ import {
 export const PLAYLIST_REFETCH_QUERIES = ['getLibraryPlaylists'];
 
 export function useRecordingPlaylist(
-	playlist: Pick<UserPlaylist, 'id'>,
-	recordingId: Recording['id']
+	playlist?: Pick<UserPlaylist, 'id'>,
+	recordingId?: Recording['id']
 ): {
 	addToPlaylist: () => void;
 	removeFromPlaylist: () => void;
@@ -28,83 +28,67 @@ export function useRecordingPlaylist(
 	const queryClient = useQueryClient();
 	const [isLoading, setIsLoading] = useState(false);
 
-	const variablesAdd: PlaylistRecordingAddMutationVariables = {
-		playlistId: playlist.id,
-		recordingId,
-	};
+	const addToPlaylist = () => {
+		if (!playlist || !recordingId) return;
 
-	const variablesRemove: PlaylistRecordingRemoveMutationVariables = {
-		playlistId: playlist.id,
-		recordingId,
-	};
+		setIsLoading(true);
+		const variablesAdd: PlaylistRecordingAddMutationVariables = {
+			playlistId: playlist.id,
+			recordingId,
+		};
+		
+		queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
 
-	const addToPlaylistMutation = useMutation<
-		PlaylistRecordingAddMutation,
-		unknown,
-		PlaylistRecordingAddMutationVariables
-	>(
-		(variables) =>
-			graphqlFetcher<
-				PlaylistRecordingAddMutation,
-				PlaylistRecordingAddMutationVariables
-			>(PlaylistRecordingAddDocument, variables)(),
-		{
-			onMutate: async () => {
-				setIsLoading(true);
-				await queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
-			},
-			onSuccess: (data) => {
+		graphqlFetcher<
+			PlaylistRecordingAddMutation,
+			PlaylistRecordingAddMutationVariables
+		>(PlaylistRecordingAddDocument, variablesAdd)()
+			.then((data) => {
 				if (data?.playlistRecordingAdd) {
 					console.log('added');
 				}
-			},
-			onError: (error) => {
+			})
+			.catch((error) => {
 				console.error('Error adding to playlist:', error);
-			},
-			onSettled: () => {
+			})
+			.finally(() => {
 				setIsLoading(false);
 				queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
-			},
-		}
-	);
+			});
+	};
 
-	const removeFromPlaylistMutation = useMutation<
-		PlaylistRecordingRemoveMutation,
-		unknown,
-		PlaylistRecordingRemoveMutationVariables
-	>(
-		(variables) =>
-			graphqlFetcher<
-				PlaylistRecordingRemoveMutation,
-				PlaylistRecordingRemoveMutationVariables
-			>(PlaylistRecordingRemoveDocument, variables)(),
-		{
-			onMutate: async () => {
-				setIsLoading(true);
-				await queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
-			},
-			onSuccess: (data) => {
+	const removeFromPlaylist = () => {
+		if (!playlist || !recordingId) return;
+
+		setIsLoading(true);
+		const variablesRemove: PlaylistRecordingRemoveMutationVariables = {
+			playlistId: playlist.id,
+			recordingId,
+		};
+		
+		queryClient.cancelQueries(PLAYLIST_REFETCH_QUERIES);
+
+		graphqlFetcher<
+			PlaylistRecordingRemoveMutation,
+			PlaylistRecordingRemoveMutationVariables
+		>(PlaylistRecordingRemoveDocument, variablesRemove)()
+			.then((data) => {
 				if (data?.playlistRecordingRemove) {
 					console.log('removed');
 				}
-			},
-			onError: (error) => {
+			})
+			.catch((error) => {
 				console.error('Error removing from playlist:', error);
-			},
-			onSettled: () => {
+			})
+			.finally(() => {
 				setIsLoading(false);
 				queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
-			},
-		}
-	);
+			});
+	};
 
 	return {
-		addToPlaylist: requireUser(() =>
-			addToPlaylistMutation.mutate(variablesAdd)
-		),
-		removeFromPlaylist: requireUser(() =>
-			removeFromPlaylistMutation.mutate(variablesRemove)
-		),
+		addToPlaylist: requireUser(addToPlaylist),
+		removeFromPlaylist: requireUser(removeFromPlaylist),
 		isLoading,
 	};
 }
