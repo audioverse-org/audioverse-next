@@ -46,9 +46,14 @@
 }
 
 .privacyOption {
+	all: unset;
 	display: flex;
 	flex-direction: row;
 	margin-bottom: 10px;
+}
+.privacyOption:hover {
+	color: $ts-red;
+	text-decoration: underline;
 }
 
 .pressed {
@@ -78,4 +83,11 @@
 .cancel {
 	margin-left: 16px;
 	align-self: center;
+}
+.privacyButton {
+	all: unset;
+	display: block;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
 }

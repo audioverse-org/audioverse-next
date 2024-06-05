@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -79,8 +78,8 @@ export default function PlaylistForm({
 			<div className={styles.privacyLabel}>
 				<FormattedMessage id="newPrivacy" defaultMessage="Privacy" />
 			</div>
-			<Link
-				href="#"
+			<button
+				className={styles.privacyButton}
 				onClick={(e) => {
 					e.preventDefault();
 					setIsPrivacyVisible(!isPrivacyVisible);
@@ -103,12 +102,11 @@ export default function PlaylistForm({
 						<ClosureIcon color={BaseColors.DARK} />
 					)}
 				</div>
-			</Link>
+			</button>
 			{isPrivacyVisible && (
 				<div className={styles.privacyContainer}>
-					<Link
+					<button
 						className={styles.privacyOption}
-						href="#"
 						onClick={(e) => {
 							e.preventDefault();
 							setPrivacy(false);
@@ -124,10 +122,9 @@ export default function PlaylistForm({
 								/>
 							</p>
 						</div>
-					</Link>
-					<Link
+					</button>
+					<button
 						className={styles.privacyOption}
-						href="#"
 						onClick={(e) => {
 							e.preventDefault();
 							setPrivacy(true);
@@ -143,7 +140,7 @@ export default function PlaylistForm({
 								/>
 							</p>
 						</div>
-					</Link>
+					</button>
 				</div>
 			)}
 			<div className={styles.footer}>
