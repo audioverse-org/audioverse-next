@@ -149,7 +149,7 @@ export default function PlaylistForm({
 			<div className={styles.footer}>
 				<Button
 					text={!id ? 'Create' : 'Done'}
-					type={!id ? 'primary' : 'primaryInverse'}
+					type="primary"
 					onClick={submit}
 					disabled={loading}
 				/>

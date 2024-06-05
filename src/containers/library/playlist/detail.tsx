@@ -25,9 +25,7 @@ import { Must } from '~src/types/types';
 
 import EditIcon from '../../../../public/img/icons/edit-light.svg';
 import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';
-import EditPlaylist, {
-	EditPlaylistRef,
-} from '../../../../src/pages/[language]/library/playlists/edit';
+import EditPlaylist from '../../../../src/pages/[language]/library/playlists/edit';
 import Modal from '../../../components/organisms/modal';
 import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
@@ -46,10 +44,14 @@ function LibraryPlaylistDetail({
 	const languageRoute = useLanguageRoute();
 	const [isPlaylistEditModalOpen, setIsPlaylistEditModalOpen] = useState(false);
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
-	const editPlaylistRef = useRef<EditPlaylistRef>(null);
-	const handleCloseNewModal = () => {
+	const deletePlaylistRef = useRef<{
+		deletePlaylist: () => Promise<void>;
+	} | null>(null);
+
+	const handleCloseEditModal = () => {
 		setIsPlaylistEditModalOpen(false);
 	};
+
 	const details: IDefinitionListTerm[] = [];
 	if (summary) {
 		details.push({
@@ -76,8 +78,8 @@ function LibraryPlaylistDetail({
 	}
 
 	const callDeletePlaylistFunction = () => {
-		if (editPlaylistRef.current) {
-			editPlaylistRef.current.deletePlaylist();
+		if (deletePlaylistRef.current) {
+			deletePlaylistRef.current.deletePlaylist();
 		}
 	};
 
@@ -160,7 +162,7 @@ function LibraryPlaylistDetail({
 			</Modal>
 			<Modal
 				open={isPlaylistEditModalOpen}
-				onClose={handleCloseNewModal}
+				onClose={handleCloseEditModal}
 				title={
 					<FormattedMessage id="edit_playlist" defaultMessage="Edit Playlist" />
 				}
@@ -180,12 +182,12 @@ function LibraryPlaylistDetail({
 				hideClose
 			>
 				<EditPlaylist
-					ref={editPlaylistRef}
+					deletePlaylistRef={deletePlaylistRef}
 					id={playlist.id}
 					title={playlist.title}
 					summary={playlist.summary}
 					isPublic={playlist.isPublic}
-					onClose={handleCloseNewModal}
+					onClose={handleCloseEditModal}
 				/>
 			</Modal>
 		</Tease>

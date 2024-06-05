@@ -340,7 +340,7 @@ export default function TeaseRecording({
 				title={
 					<FormattedMessage id="new_playlist" defaultMessage="New playlist" />
 				}
-				rightElmt={<></>}
+				rightElmt
 				hideClose
 			>
 				<NewPlaylist id={recording.id} onClose={handleCloseNewModal} />

@@ -13,7 +13,7 @@ import styles from './modal.module.scss';
 
 interface ModalProps {
 	title: string | JSX.Element;
-	rightElmt?: string | JSX.Element;
+	rightElmt?: string | JSX.Element | boolean;
 	children: ReactNode;
 	onClose?: () => void;
 	open: boolean;

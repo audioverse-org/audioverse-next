@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { useEffect } from 'react';
 
 import {
 	playlistDelete,
@@ -15,71 +15,79 @@ type EditPlaylistProps = {
 	summary: string;
 	title: string;
 	onClose: () => void;
+	deletePlaylistRef: React.MutableRefObject<{
+		deletePlaylist: () => Promise<void>;
+	} | null>;
 };
 
-export type EditPlaylistRef = {
-	deletePlaylist: () => Promise<void>;
-};
+const useEditPlaylist = (id: number | string, onClose: () => void) => {
+	const router = useRouter();
 
-const EditPlaylist = forwardRef<EditPlaylistRef, EditPlaylistProps>(
-	(props, ref) => {
-		const { id, title, summary, isPublic, onClose } = props;
-		const router = useRouter();
-		//const language = useLanguageRoute();
-		const update = async (playlist: PlaylistProps) => {
+	const update = async (playlist: PlaylistProps) => {
+		try {
+			const data = await playlistUpdate<PlaylistUpdateMutationVariables>({
+				input: { ...playlist },
+				playlistId: id as string,
+			});
+			if (data) {
+				router.replace(router.asPath);
+				onClose();
+			}
+		} catch (error) {
+			console.error('Error updating playlist:', error);
+		}
+	};
+
+	const deletePlaylist = async () => {
+		if (
+			confirm(
+				'Are you sure? Deleting this playlist cannot be undone, and any links to it will break.'
+			)
+		) {
 			try {
-				const data = await playlistUpdate<PlaylistUpdateMutationVariables>({
-					input: {
-						...playlist,
-					},
+				const data = await playlistDelete<PlaylistDeleteMutationVariables>({
 					playlistId: id as string,
 				});
 				if (data) {
 					onClose();
+					router.back();
 				}
 			} catch (error) {
-				console.error('Error updating playlist:', error);
+				console.error('Error deleting playlist:', error);
 			}
-		};
+		}
+	};
 
-		const deletePlaylist = async () => {
-			if (
-				confirm(
-					'Are you sure? Deleting this playlist cannot be undone, and any links to it will break.'
-				)
-			) {
-				try {
-					const data = await playlistDelete<PlaylistDeleteMutationVariables>({
-						playlistId: id as string,
-					});
-					if (data) {
-						onClose();
-						router.back();
-					}
-				} catch (error) {
-					console.error('Error deleting playlist:', error);
-				}
-			}
-		};
+	return { update, deletePlaylist };
+};
 
-		useImperativeHandle(ref, () => ({
-			deletePlaylist,
-		}));
+const EditPlaylist: React.FC<EditPlaylistProps> = ({
+	id,
+	title,
+	summary,
+	isPublic,
+	onClose,
+	deletePlaylistRef,
+}) => {
+	const { update, deletePlaylist } = useEditPlaylist(id, onClose);
 
-		return (
-			<PlaylistForm
-				onSubmit={update}
-				onCancel={onClose}
-				id={id}
-				title={title}
-				isPublic={isPublic}
-				summary={summary}
-				onDelete={deletePlaylist}
-			/>
-		);
-	}
-);
+	useEffect(() => {
+		if (deletePlaylistRef) {
+			deletePlaylistRef.current = { deletePlaylist };
+		}
+	}, [deletePlaylist, deletePlaylistRef]);
 
-EditPlaylist.displayName = 'EditPlaylist';
+	return (
+		<PlaylistForm
+			onSubmit={update}
+			onCancel={onClose}
+			id={id}
+			title={title}
+			isPublic={isPublic}
+			summary={summary}
+			onDelete={deletePlaylist}
+		/>
+	);
+};
 
 export default EditPlaylist;
