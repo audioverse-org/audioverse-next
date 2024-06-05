@@ -43,7 +43,7 @@ export function useRecordingPlaylist(
 		>(PlaylistRecordingAddDocument, variablesAdd)()
 			.then((data) => {
 				if (data?.playlistRecordingAdd) {
-					console.log('added');
+					queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
 				}
 			})
 			.catch((error) => {
@@ -51,7 +51,6 @@ export function useRecordingPlaylist(
 			})
 			.finally(() => {
 				setIsLoading(false);
-				queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
 			});
 	};
 
@@ -70,7 +69,7 @@ export function useRecordingPlaylist(
 		>(PlaylistRecordingRemoveDocument, variablesRemove)()
 			.then((data) => {
 				if (data?.playlistRecordingRemove) {
-					console.log('removed');
+					queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
 				}
 			})
 			.catch((error) => {
@@ -78,7 +77,6 @@ export function useRecordingPlaylist(
 			})
 			.finally(() => {
 				setIsLoading(false);
-				queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
 			});
 	};
 

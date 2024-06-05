@@ -14,13 +14,9 @@ const ListenLaterItem = ({ id }: Props) => {
 	const { isFavorited, toggleFavorited, isLoading } =
 		useIsRecordingFavorited(id);
 
-	const toggleFavorite = () => {
-		toggleFavorited();
-	};
-
 	return (
 		<PlaylistItem
-			onPress={toggleFavorite}
+			onPress={toggleFavorited}
 			isAdded={!!isFavorited}
 			title={intl.formatMessage({
 				id: `Listen_Later`,
