@@ -2796,5 +2796,8 @@
   },
   "onlyYou": {
     "string": "Only you can view"
+  },
+  "no-data": {
+    "string": "No recording data"
   }
 }

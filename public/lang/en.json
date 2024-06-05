@@ -1877,6 +1877,9 @@
   "newsLetterForm__newsletterSubscribe": {
     "string": "Subscribe"
   },
+  "no-data": {
+    "string": "No recording data"
+  },
   "notFound__header": {
     "string": "Sorry!"
   },

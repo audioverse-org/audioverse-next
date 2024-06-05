@@ -44,6 +44,12 @@ const PlaylistList: React.FC<Props> = ({ language, recordingId }) => {
 		};
 	}, [data]);
 
+	if (!data)
+		return (
+			<div>
+				<FormattedMessage id="no-data" defaultMessage="No recording data" />
+			</div>
+		);
 	if (isLoading)
 		return (
 			<div>
