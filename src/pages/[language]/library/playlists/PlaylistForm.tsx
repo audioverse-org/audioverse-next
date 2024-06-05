@@ -155,7 +155,7 @@ export default function PlaylistForm({
 				/>
 				<Button
 					text="Cancel"
-					type="secondary"
+					type="tertiary"
 					onClick={onCancel}
 					disabled={loading}
 					className={styles.cancel}

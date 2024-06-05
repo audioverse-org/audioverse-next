@@ -7,7 +7,7 @@ import useLanguageRoute from '~src/lib/useLanguageRoute';
 import {
 	playlistAdd,
 	PlaylistAddMutationVariables,
-} from '../../../../../graphql/__generated__/query';
+} from '../../../../../containers/library/playlist/__generated__/query';
 import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
 
 type NewPlaylistProps = {

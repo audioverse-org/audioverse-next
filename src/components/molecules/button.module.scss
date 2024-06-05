@@ -98,6 +98,21 @@ $button-height: 31px;
 	}
 }
 
+.tertiary {
+	text-decoration: underline;
+	color: inherit;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font: inherit;
+	padding: 0;
+	height: auto;
+}
+.tertiary:hover,
+.tertiary:focus {
+	color: $ts-red;
+}
+
 .super,
 .primary,
 .primaryInverse,

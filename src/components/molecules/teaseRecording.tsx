@@ -327,7 +327,7 @@ export default function TeaseRecording({
 						text={
 							<FormattedMessage id="create_new" defaultMessage="Create New" />
 						}
-						type="none"
+						type="tertiary"
 					/>
 				}
 				hideClose

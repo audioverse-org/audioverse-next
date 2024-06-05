@@ -174,7 +174,7 @@ function LibraryPlaylistDetail({
 								defaultMessage="Delete Playlist"
 							/>
 						}
-						type="none"
+						type="tertiary"
 					/>
 				}
 				hideClose
