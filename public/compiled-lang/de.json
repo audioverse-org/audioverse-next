@@ -458,7 +458,7 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "Add To Playlist"
+      "value": "Zur Wiedergabeliste hinzufügen"
     }
   ],
   "add_to_playlist_btn": [
@@ -548,7 +548,7 @@
   "anyoneWithLink": [
     {
       "type": 0,
-      "value": "Anyone with the link can view"
+      "value": "Jeder mit dem Link kann es ansehen"
     }
   ],
   "app__features1Cta": [
@@ -1428,13 +1428,13 @@
   "create_new": [
     {
       "type": 0,
-      "value": "Create New"
+      "value": "Erstelle neu"
     }
   ],
   "deletePlaylists": [
     {
       "type": 0,
-      "value": "Delete Playlist"
+      "value": "Playlist löschen"
     }
   ],
   "discoverCollections__title": [
@@ -1700,7 +1700,7 @@
   "edit_playlist": [
     {
       "type": 0,
-      "value": "Edit Playlist"
+      "value": "Playlist bearbeiten"
     }
   ],
   "egwAudiobookList__heading": [
@@ -1734,10 +1734,6 @@
     }
   ],
   "error": [
-    {
-      "type": 0,
-      "value": "Error"
-    }
   ],
   "generateFeed__audio": [
     {
@@ -3754,7 +3750,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Stornieren"
     }
   ],
   "molecule-searchBar__label": [
@@ -3890,19 +3886,19 @@
   "newPrivate": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privat"
     }
   ],
   "newShareable": [
     {
       "type": 0,
-      "value": "Shareable"
+      "value": "Teilbar"
     }
   ],
   "new_playlist": [
     {
       "type": 0,
-      "value": "New playlist"
+      "value": "Neue Playlist"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [
@@ -3992,13 +3988,13 @@
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privat"
     }
   ],
   "onlyYou": [
     {
       "type": 0,
-      "value": "Only you can view"
+      "value": "Nur Sie können es sehen"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4270,7 +4266,7 @@
   "pl_title": [
     {
       "type": 0,
-      "value": "Title"
+      "value": "Titel"
     }
   ],
   "playButton__pauseLabel": [

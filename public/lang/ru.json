@@ -2343,7 +2343,7 @@
     "string": "search"
   },
   "molecule-searchBar__cancel": {
-    "string": "Cancel"
+    "string": "Отменить"
   },
   "molecule-teaseRecording__individualChapter": {
     "string": "Individual Chapter"
@@ -2743,26 +2743,26 @@
     "string": "Сохранено"
   },
   "add_to_playlist": {
-    "string": "Add To Playlist"
+    "string": "Добавить в плейлист"
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
     "string": "Список воспроизведений"
   },
   "anyoneWithLink": {
-    "string": "Anyone with the link can view"
+    "string": "Посмотреть может любой, у кого есть ссылка"
   },
   "create_new": {
-    "string": "Create New"
+    "string": "Создавать новое"
   },
   "deletePlaylists": {
-    "string": "Delete Playlist"
+    "string": "Удалить плейлист"
   },
   "edit_playlist": {
-    "string": "Edit Playlist"
+    "string": "Редактировать плейлист"
   },
   "error": {
-    "string": "Error"
+    "string": "Ошибка"
   },
   "loading": {
     "string": "Loading..."
@@ -2771,30 +2771,30 @@
     "string": "Конфиденциальность"
   },
   "newPrivate": {
-    "string": "Private"
+    "string": "Частный"
   },
   "newShareable": {
-    "string": "Shareable"
+    "string": "Общий доступ"
   },
   "new_playlist": {
-    "string": "New playlist"
+    "string": "Новый плейлист"
   },
   "not_shareable": {
     "string": "This Playlist is Private."
   },
   "not_shareable_title": {
-    "string": "Private"
+    "string": "Частный"
   },
   "pl_description": {
     "string": "Описание"
   },
   "pl_title": {
-    "string": "Title"
+    "string": "Заголовок"
   },
   "scroll-down": {
     "string": "Scroll down for more"
   },
   "onlyYou": {
-    "string": "Only you can view"
+    "string": "Только вы можете просматривать"
   }
 }

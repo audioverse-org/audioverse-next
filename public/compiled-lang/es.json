@@ -458,7 +458,7 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "Add To Playlist"
+      "value": "Agregar a lista de reproducción"
     }
   ],
   "add_to_playlist_btn": [
@@ -548,7 +548,7 @@
   "anyoneWithLink": [
     {
       "type": 0,
-      "value": "Anyone with the link can view"
+      "value": "Cualquier persona con el enlace puede ver"
     }
   ],
   "app__features1Cta": [
@@ -1448,13 +1448,13 @@
   "create_new": [
     {
       "type": 0,
-      "value": "Create New"
+      "value": "Crear nueva"
     }
   ],
   "deletePlaylists": [
     {
       "type": 0,
-      "value": "Delete Playlist"
+      "value": "Eliminar lista de reproducción"
     }
   ],
   "discoverCollections__title": [
@@ -1720,7 +1720,7 @@
   "edit_playlist": [
     {
       "type": 0,
-      "value": "Edit Playlist"
+      "value": "Editar lista de reproducción"
     }
   ],
   "egwAudiobookList__heading": [
@@ -3766,7 +3766,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Cancelar"
     }
   ],
   "molecule-searchBar__label": [
@@ -3902,19 +3902,19 @@
   "newPrivate": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privada"
     }
   ],
   "newShareable": [
     {
       "type": 0,
-      "value": "Shareable"
+      "value": "Compartible"
     }
   ],
   "new_playlist": [
     {
       "type": 0,
-      "value": "New playlist"
+      "value": "Nueva lista de reproducción"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [
@@ -4004,13 +4004,13 @@
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privada"
     }
   ],
   "onlyYou": [
     {
       "type": 0,
-      "value": "Only you can view"
+      "value": "Sólo tú puedes ver"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4282,7 +4282,7 @@
   "pl_title": [
     {
       "type": 0,
-      "value": "Title"
+      "value": "Título"
     }
   ],
   "playButton__pauseLabel": [

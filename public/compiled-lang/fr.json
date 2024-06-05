@@ -458,7 +458,7 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "Add To Playlist"
+      "value": "Ajouter à la playlist"
     }
   ],
   "add_to_playlist_btn": [
@@ -548,7 +548,7 @@
   "anyoneWithLink": [
     {
       "type": 0,
-      "value": "Anyone with the link can view"
+      "value": "Toute personne disposant du lien peut voir"
     }
   ],
   "app__features1Cta": [
@@ -1428,13 +1428,13 @@
   "create_new": [
     {
       "type": 0,
-      "value": "Create New"
+      "value": "Créer un nouveau"
     }
   ],
   "deletePlaylists": [
     {
       "type": 0,
-      "value": "Delete Playlist"
+      "value": "Supprimer la liste de lecture"
     }
   ],
   "discoverCollections__title": [
@@ -1700,7 +1700,7 @@
   "edit_playlist": [
     {
       "type": 0,
-      "value": "Edit Playlist"
+      "value": "Modifier la liste de lecture"
     }
   ],
   "egwAudiobookList__heading": [
@@ -1736,7 +1736,7 @@
   "error": [
     {
       "type": 0,
-      "value": "Error"
+      "value": "Erreur"
     }
   ],
   "generateFeed__audio": [
@@ -3742,7 +3742,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Annuler"
     }
   ],
   "molecule-searchBar__label": [
@@ -3878,19 +3878,19 @@
   "newPrivate": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privée"
     }
   ],
   "newShareable": [
     {
       "type": 0,
-      "value": "Shareable"
+      "value": "Partageable"
     }
   ],
   "new_playlist": [
     {
       "type": 0,
-      "value": "New playlist"
+      "value": "Nouvelle playlist"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [
@@ -3980,13 +3980,13 @@
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privée"
     }
   ],
   "onlyYou": [
     {
       "type": 0,
-      "value": "Only you can view"
+      "value": "Vous seul pouvez voir"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4258,7 +4258,7 @@
   "pl_title": [
     {
       "type": 0,
-      "value": "Title"
+      "value": "Titre"
     }
   ],
   "playButton__pauseLabel": [

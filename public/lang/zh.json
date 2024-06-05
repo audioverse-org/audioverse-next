@@ -2346,7 +2346,7 @@
     "string": "search"
   },
   "molecule-searchBar__cancel": {
-    "string": "Cancel"
+    "string": "取消"
   },
   "molecule-teaseRecording__individualChapter": {
     "string": "Individual Chapter"
@@ -2743,26 +2743,26 @@
     "string": "已保存"
   },
   "add_to_playlist": {
-    "string": "Add To Playlist"
+    "string": "新增到播放列表"
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
     "string": "播放清单"
   },
   "anyoneWithLink": {
-    "string": "Anyone with the link can view"
+    "string": "知道連結的人都可以查看"
   },
   "create_new": {
-    "string": "Create New"
+    "string": "創建新的"
   },
   "deletePlaylists": {
-    "string": "Delete Playlist"
+    "string": "刪除播放清單"
   },
   "edit_playlist": {
-    "string": "Edit Playlist"
+    "string": "編輯播放列表"
   },
   "error": {
-    "string": "Error"
+    "string": "錯誤"
   },
   "loading": {
     "string": "Loading..."
@@ -2771,30 +2771,30 @@
     "string": "隐私"
   },
   "newPrivate": {
-    "string": "Private"
+    "string": "私人的"
   },
   "newShareable": {
-    "string": "Shareable"
+    "string": "可分享"
   },
   "new_playlist": {
-    "string": "New playlist"
+    "string": "新播放列表"
   },
   "not_shareable": {
     "string": "This Playlist is Private."
   },
   "not_shareable_title": {
-    "string": "Private"
+    "string": "私人的"
   },
   "pl_description": {
     "string": "描述"
   },
   "pl_title": {
-    "string": "Title"
+    "string": "標題"
   },
   "scroll-down": {
     "string": "Scroll down for more"
   },
   "onlyYou": {
-    "string": "Only you can view"
+    "string": "只有您可以查看"
   }
 }

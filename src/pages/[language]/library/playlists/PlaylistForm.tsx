@@ -92,7 +92,11 @@ export default function PlaylistForm({
 						<ShareableIcon color={BaseColors.DARK} />
 					)}
 					<p className={styles.privacyInputLeftLabel}>
-						{!isPublic ? 'Private' : 'Shareable'}
+						{!isPublic ? (
+							<FormattedMessage id="newPrivate" defaultMessage="Private" />
+						) : (
+							<FormattedMessage id="newShareable" defaultMessage="Shareable" />
+						)}
 					</p>
 				</div>
 				<div className={styles.privacyInputRightIcon}>
@@ -145,13 +149,26 @@ export default function PlaylistForm({
 			)}
 			<div className={styles.footer}>
 				<Button
-					text={!id ? 'Create' : 'Done'}
+					text={
+						!id
+							? intl.formatMessage({
+									id: 'create',
+									defaultMessage: 'Create',
+							  })
+							: intl.formatMessage({
+									id: 'done',
+									defaultMessage: 'Done',
+							  })
+					}
 					type="primary"
 					onClick={submit}
 					disabled={loading}
 				/>
 				<Button
-					text="Cancel"
+					text={intl.formatMessage({
+						id: 'molecule-searchBar__cancel',
+						defaultMessage: 'Cancle',
+					})}
 					type="tertiary"
 					onClick={onCancel}
 					disabled={loading}

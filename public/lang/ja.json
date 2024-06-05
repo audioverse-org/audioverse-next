@@ -2346,7 +2346,7 @@
     "string": "search"
   },
   "molecule-searchBar__cancel": {
-    "string": "Cancel"
+    "string": "キャンセル"
   },
   "molecule-teaseRecording__individualChapter": {
     "string": "Individual Chapter"
@@ -2743,26 +2743,26 @@
     "string": "図書に保存"
   },
   "add_to_playlist": {
-    "string": "Add To Playlist"
+    "string": "プレイリストに追加する"
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
     "string": "プレイリスト"
   },
   "anyoneWithLink": {
-    "string": "Anyone with the link can view"
+    "string": "リンクを知っている人は誰でも閲覧できます"
   },
   "create_new": {
-    "string": "Create New"
+    "string": "新しく作る"
   },
   "deletePlaylists": {
-    "string": "Delete Playlist"
+    "string": "プレイリストの削除"
   },
   "edit_playlist": {
-    "string": "Edit Playlist"
+    "string": "プレイリストを編集する"
   },
   "error": {
-    "string": "Error"
+    "string": "エラー"
   },
   "loading": {
     "string": "Loading..."
@@ -2771,30 +2771,30 @@
     "string": "プライバシー"
   },
   "newPrivate": {
-    "string": "Private"
+    "string": "プライベート"
   },
   "newShareable": {
-    "string": "Shareable"
+    "string": "共有可能"
   },
   "new_playlist": {
-    "string": "New playlist"
+    "string": "新規プレイリスト"
   },
   "not_shareable": {
     "string": "This Playlist is Private."
   },
   "not_shareable_title": {
-    "string": "Private"
+    "string": "プライベート"
   },
   "pl_description": {
     "string": "内容詳細"
   },
   "pl_title": {
-    "string": "Title"
+    "string": "タイトル"
   },
   "scroll-down": {
     "string": "Scroll down for more"
   },
   "onlyYou": {
-    "string": "Only you can view"
+    "string": "あなただけが閲覧できます"
   }
 }

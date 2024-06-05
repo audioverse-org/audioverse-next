@@ -458,7 +458,7 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "Add To Playlist"
+      "value": "プレイリストに追加する"
     }
   ],
   "add_to_playlist_btn": [
@@ -548,7 +548,7 @@
   "anyoneWithLink": [
     {
       "type": 0,
-      "value": "Anyone with the link can view"
+      "value": "リンクを知っている人は誰でも閲覧できます"
     }
   ],
   "app__features1Cta": [
@@ -1448,13 +1448,13 @@
   "create_new": [
     {
       "type": 0,
-      "value": "Create New"
+      "value": "新しく作る"
     }
   ],
   "deletePlaylists": [
     {
       "type": 0,
-      "value": "Delete Playlist"
+      "value": "プレイリストの削除"
     }
   ],
   "discoverCollections__title": [
@@ -1720,7 +1720,7 @@
   "edit_playlist": [
     {
       "type": 0,
-      "value": "Edit Playlist"
+      "value": "プレイリストを編集する"
     }
   ],
   "egwAudiobookList__heading": [
@@ -1756,7 +1756,7 @@
   "error": [
     {
       "type": 0,
-      "value": "Error"
+      "value": "エラー"
     }
   ],
   "generateFeed__audio": [
@@ -3758,7 +3758,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "キャンセル"
     }
   ],
   "molecule-searchBar__label": [
@@ -3894,19 +3894,19 @@
   "newPrivate": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "プライベート"
     }
   ],
   "newShareable": [
     {
       "type": 0,
-      "value": "Shareable"
+      "value": "共有可能"
     }
   ],
   "new_playlist": [
     {
       "type": 0,
-      "value": "New playlist"
+      "value": "新規プレイリスト"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [
@@ -3996,13 +3996,13 @@
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "プライベート"
     }
   ],
   "onlyYou": [
     {
       "type": 0,
-      "value": "Only you can view"
+      "value": "あなただけが閲覧できます"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4274,7 +4274,7 @@
   "pl_title": [
     {
       "type": 0,
-      "value": "Title"
+      "value": "タイトル"
     }
   ],
   "playButton__pauseLabel": [

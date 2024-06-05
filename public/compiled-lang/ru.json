@@ -458,7 +458,7 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "Add To Playlist"
+      "value": "Добавить в плейлист"
     }
   ],
   "add_to_playlist_btn": [
@@ -548,7 +548,7 @@
   "anyoneWithLink": [
     {
       "type": 0,
-      "value": "Anyone with the link can view"
+      "value": "Посмотреть может любой, у кого есть ссылка"
     }
   ],
   "app__features1Cta": [
@@ -1428,13 +1428,13 @@
   "create_new": [
     {
       "type": 0,
-      "value": "Create New"
+      "value": "Создавать новое"
     }
   ],
   "deletePlaylists": [
     {
       "type": 0,
-      "value": "Delete Playlist"
+      "value": "Удалить плейлист"
     }
   ],
   "discoverCollections__title": [
@@ -1696,7 +1696,7 @@
   "edit_playlist": [
     {
       "type": 0,
-      "value": "Edit Playlist"
+      "value": "Редактировать плейлист"
     }
   ],
   "egwAudiobookList__heading": [
@@ -1732,7 +1732,7 @@
   "error": [
     {
       "type": 0,
-      "value": "Error"
+      "value": "Ошибка"
     }
   ],
   "generateFeed__audio": [
@@ -3750,7 +3750,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Отменить"
     }
   ],
   "molecule-searchBar__label": [
@@ -3886,19 +3886,19 @@
   "newPrivate": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Частный"
     }
   ],
   "newShareable": [
     {
       "type": 0,
-      "value": "Shareable"
+      "value": "Общий доступ"
     }
   ],
   "new_playlist": [
     {
       "type": 0,
-      "value": "New playlist"
+      "value": "Новый плейлист"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [
@@ -3988,13 +3988,13 @@
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Частный"
     }
   ],
   "onlyYou": [
     {
       "type": 0,
-      "value": "Only you can view"
+      "value": "Только вы можете просматривать"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4266,7 +4266,7 @@
   "pl_title": [
     {
       "type": 0,
-      "value": "Title"
+      "value": "Заголовок"
     }
   ],
   "playButton__pauseLabel": [

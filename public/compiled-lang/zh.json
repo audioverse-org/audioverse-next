@@ -458,7 +458,7 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "Add To Playlist"
+      "value": "新增到播放列表"
     }
   ],
   "add_to_playlist_btn": [
@@ -548,7 +548,7 @@
   "anyoneWithLink": [
     {
       "type": 0,
-      "value": "Anyone with the link can view"
+      "value": "知道連結的人都可以查看"
     }
   ],
   "app__features1Cta": [
@@ -1436,13 +1436,13 @@
   "create_new": [
     {
       "type": 0,
-      "value": "Create New"
+      "value": "創建新的"
     }
   ],
   "deletePlaylists": [
     {
       "type": 0,
-      "value": "Delete Playlist"
+      "value": "刪除播放清單"
     }
   ],
   "discoverCollections__title": [
@@ -1708,7 +1708,7 @@
   "edit_playlist": [
     {
       "type": 0,
-      "value": "Edit Playlist"
+      "value": "編輯播放列表"
     }
   ],
   "egwAudiobookList__heading": [
@@ -1748,7 +1748,7 @@
   "error": [
     {
       "type": 0,
-      "value": "Error"
+      "value": "錯誤"
     }
   ],
   "generateFeed__audio": [
@@ -3762,7 +3762,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "取消"
     }
   ],
   "molecule-searchBar__label": [
@@ -3906,19 +3906,19 @@
   "newPrivate": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "私人的"
     }
   ],
   "newShareable": [
     {
       "type": 0,
-      "value": "Shareable"
+      "value": "可分享"
     }
   ],
   "new_playlist": [
     {
       "type": 0,
-      "value": "New playlist"
+      "value": "新播放列表"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [
@@ -4008,13 +4008,13 @@
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "私人的"
     }
   ],
   "onlyYou": [
     {
       "type": 0,
-      "value": "Only you can view"
+      "value": "只有您可以查看"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4294,7 +4294,7 @@
   "pl_title": [
     {
       "type": 0,
-      "value": "Title"
+      "value": "標題"
     }
   ],
   "playButton__pauseLabel": [
