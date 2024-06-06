@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
@@ -18,17 +18,10 @@ import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg
 import IconPlay from '~public/img/icons/icon-play.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
-import { getSessionToken } from '~src/lib/cookies';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
-import NewPlaylist from '~src/pages/[language]/library/playlists/new';
 
-import AddToPlaylistIcon from '../../../public/img/icons/in-queue-light.svg';
 import { analytics } from '../../lib/analytics';
-import PlaylistsPage from '../../pages/[language]/library/playlists/addToPlaylist/AddToPlaylist';
-import Modal from '../organisms/modal';
-import { GlobalModalsContext } from '../templates/andGlobalModals';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
-import Button from './button';
+import ButtonAddToPlaylist from './buttonAddToPlaylist';
 import { CardTheme } from './card/base/withCardTheme';
 import IconButton from './iconButton';
 import PersonLockup from './personLockup';
@@ -60,17 +53,13 @@ export default function TeaseRecording({
 	disableUserFeatures,
 	disablePlayback = false,
 }: Props): JSX.Element {
-	const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
-	const [isPlaylistModalNewOpen, setIsPlaylistModalNewOpen] = useState(false);
 	const intl = useIntl();
 	const router = useRouter();
 	const session = usePlaybackSession(recording, { playlistRecordings });
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
-	const language = useLanguageRoute();
 	const index = recording.sequenceIndex;
 	const count = recording.sequence?.recordings.aggregate?.count;
-	const context = useContext(GlobalModalsContext);
 
 	const backgroundColor = {
 		audiobookTrack: BaseColors.BOOK_B,
@@ -90,17 +79,6 @@ export default function TeaseRecording({
 		(theme === 'song' && small);
 
 	const iconColor = BaseColors.MID_TONE;
-
-	const label = intl.formatMessage({
-		id: 'add_to_playlist_btn',
-		defaultMessage: 'Playlist',
-		description: 'Add to Playlist button label',
-	});
-
-	const handleCloseNewModal = () => {
-		setIsPlaylistModalNewOpen(false);
-		setIsPlaylistModalOpen(true);
-	};
 
 	const inner = (
 		<>
@@ -281,70 +259,17 @@ export default function TeaseRecording({
 						</a>
 					</Link>
 				)}
-
-				{!disableUserFeatures && (
-					<IconButton
-						Icon={AddToPlaylistIcon}
-						onClick={(e) => {
-							e.preventDefault();
-							const isLoggedOut = !getSessionToken();
-							if (isLoggedOut) {
-								return context.challengeAuth(() =>
-									setIsPlaylistModalOpen(true)
-								);
-							}
-							setIsPlaylistModalOpen(true);
-						}}
-						backgroundColor={backgroundColor}
-						className={clsx(
-							styles.like,
-							unpadded && styles.likeUnpadded,
-							styles.likeActive
-						)}
-						color={iconColor}
-						{...{
-							'aria-label': label,
-						}}
-					/>
-				)}
+				<div className={clsx(styles.like, unpadded && styles.likeUnpadded)}>
+					{!disableUserFeatures && (
+						<ButtonAddToPlaylist
+							recordingId={recording.id}
+							backgroundColor={backgroundColor}
+							iconColor={iconColor}
+							iconLight
+						/>
+					)}
+				</div>
 			</div>
-			<Modal
-				open={isPlaylistModalOpen}
-				onClose={() => setIsPlaylistModalOpen(false)}
-				title={
-					<FormattedMessage
-						id="add_to_playlist"
-						defaultMessage="Add To Playlist"
-					/>
-				}
-				rightElmt={
-					<Button
-						onClick={() => {
-							setIsPlaylistModalOpen(false);
-							setIsPlaylistModalNewOpen(true);
-						}}
-						className={styles.modalLink}
-						text={
-							<FormattedMessage id="create_new" defaultMessage="Create New" />
-						}
-						type="tertiary"
-					/>
-				}
-				hideClose
-			>
-				<PlaylistsPage language={language} recId={recording.id} />
-			</Modal>
-			<Modal
-				open={isPlaylistModalNewOpen}
-				onClose={handleCloseNewModal}
-				title={
-					<FormattedMessage id="new_playlist" defaultMessage="New playlist" />
-				}
-				rightElmt
-				hideClose
-			>
-				<NewPlaylist id={recording.id} onClose={handleCloseNewModal} />
-			</Modal>
 		</>
 	);
 }
