@@ -187,12 +187,12 @@ describe('sermon detail page', () => {
 		expect(getByLabelText('Loading…')).toBeInTheDocument();
 	});
 
-	it('has favorite button', async () => {
+	it('has playlist button', async () => {
 		loadSermonDetailData();
 
 		const { getByLabelText } = await renderPage();
 
-		expect(getByLabelText('Favorite')).toBeInTheDocument();
+		expect(getByLabelText('Playlist')).toBeInTheDocument();
 	});
 
 	it('includes player', async () => {
@@ -1213,7 +1213,7 @@ describe('sermon detail page', () => {
 		});
 	});
 
-	it('displays favorite button for sequence recordings', async () => {
+	it('displays playlist button for sequence recordings', async () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
