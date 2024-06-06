@@ -1428,7 +1428,7 @@
   "create": [
     {
       "type": 0,
-      "value": "Create"
+      "value": "Créer"
     }
   ],
   "create_new": [
@@ -3986,7 +3986,7 @@
   "not_shareable": [
     {
       "type": 0,
-      "value": "This Playlist is Private."
+      "value": "Cette playlist est privée."
     }
   ],
   "not_shareable_title": [

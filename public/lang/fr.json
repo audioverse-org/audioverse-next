@@ -2780,7 +2780,7 @@
     "string": "Nouvelle playlist"
   },
   "not_shareable": {
-    "string": "This Playlist is Private."
+    "string": "Cette playlist est privée."
   },
   "not_shareable_title": {
     "string": "Privée"
@@ -2798,7 +2798,7 @@
     "string": "Vous seul pouvez voir"
   },
   "create": {
-    "string": "Create"
+    "string": "Créer"
   },
   "done": {
     "string": "Terminé"

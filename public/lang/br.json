@@ -2523,7 +2523,7 @@
     "string": "search"
   },
   "molecule-searchBar__cancel": {
-    "string": "Cancel"
+    "string": "Cancelar"
   },
   "molecules-pagination__nextLabelMobile": {
     "string": "Próximo"
@@ -2743,23 +2743,23 @@
     "string": "Escute Depois"
   },
   "add_to_playlist": {
-    "string": "Add To Playlist"
+    "string": "Adicionar à Playlist"
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
     "string": "Playlist"
   },
   "anyoneWithLink": {
-    "string": "Anyone with the link can view"
+    "string": "Qualquer pessoa com o link pode visualizar"
   },
   "create_new": {
-    "string": "Create New"
+    "string": "Crie um novo"
   },
   "deletePlaylists": {
-    "string": "Delete Playlist"
+    "string": "Excluir Playlist"
   },
   "edit_playlist": {
-    "string": "Edit Playlist"
+    "string": "Editar playlist"
   },
   "error": {
     "string": "Error"
@@ -2771,34 +2771,34 @@
     "string": "Privacidade"
   },
   "newPrivate": {
-    "string": "Private"
+    "string": "Privada"
   },
   "newShareable": {
-    "string": "Shareable"
+    "string": "Compartilhável"
   },
   "new_playlist": {
-    "string": "New playlist"
+    "string": "Nova Playlist"
   },
   "not_shareable": {
-    "string": "This Playlist is Private."
+    "string": "Esta playlist é privada."
   },
   "not_shareable_title": {
-    "string": "Private"
+    "string": "Privada"
   },
   "pl_description": {
     "string": "Descrição"
   },
   "pl_title": {
-    "string": "Title"
+    "string": "Título"
   },
   "scroll-down": {
     "string": "Scroll down for more"
   },
   "onlyYou": {
-    "string": "Only you can view"
+    "string": "Só você pode visualizar"
   },
   "create": {
-    "string": "Create"
+    "string": "Criar"
   },
   "done": {
     "string": "Concluído"

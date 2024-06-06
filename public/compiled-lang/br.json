@@ -458,7 +458,7 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "Add To Playlist"
+      "value": "Adicionar à Playlist"
     }
   ],
   "add_to_playlist_btn": [
@@ -548,7 +548,7 @@
   "anyoneWithLink": [
     {
       "type": 0,
-      "value": "Anyone with the link can view"
+      "value": "Qualquer pessoa com o link pode visualizar"
     }
   ],
   "app__features1Cta": [
@@ -1428,19 +1428,19 @@
   "create": [
     {
       "type": 0,
-      "value": "Create"
+      "value": "Criar"
     }
   ],
   "create_new": [
     {
       "type": 0,
-      "value": "Create New"
+      "value": "Crie um novo"
     }
   ],
   "deletePlaylists": [
     {
       "type": 0,
-      "value": "Delete Playlist"
+      "value": "Excluir Playlist"
     }
   ],
   "discoverCollections__title": [
@@ -1712,7 +1712,7 @@
   "edit_playlist": [
     {
       "type": 0,
-      "value": "Edit Playlist"
+      "value": "Editar playlist"
     }
   ],
   "egwAudiobookList__heading": [
@@ -3762,7 +3762,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Cancelar"
     }
   ],
   "molecule-searchBar__label": [
@@ -3898,19 +3898,19 @@
   "newPrivate": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privada"
     }
   ],
   "newShareable": [
     {
       "type": 0,
-      "value": "Shareable"
+      "value": "Compartilhável"
     }
   ],
   "new_playlist": [
     {
       "type": 0,
-      "value": "New playlist"
+      "value": "Nova Playlist"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [
@@ -3994,19 +3994,19 @@
   "not_shareable": [
     {
       "type": 0,
-      "value": "This Playlist is Private."
+      "value": "Esta playlist é privada."
     }
   ],
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privada"
     }
   ],
   "onlyYou": [
     {
       "type": 0,
-      "value": "Only you can view"
+      "value": "Só você pode visualizar"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4278,7 +4278,7 @@
   "pl_title": [
     {
       "type": 0,
-      "value": "Title"
+      "value": "Título"
     }
   ],
   "playButton__pauseLabel": [

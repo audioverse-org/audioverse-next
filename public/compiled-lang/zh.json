@@ -1436,7 +1436,7 @@
   "create": [
     {
       "type": 0,
-      "value": "Create"
+      "value": "創造"
     }
   ],
   "create_new": [
@@ -4014,7 +4014,7 @@
   "not_shareable": [
     {
       "type": 0,
-      "value": "This Playlist is Private."
+      "value": "該播放清單是私人的。"
     }
   ],
   "not_shareable_title": [

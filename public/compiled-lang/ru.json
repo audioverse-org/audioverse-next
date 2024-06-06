@@ -1428,7 +1428,7 @@
   "create": [
     {
       "type": 0,
-      "value": "Create"
+      "value": "Создавать"
     }
   ],
   "create_new": [
@@ -3994,7 +3994,7 @@
   "not_shareable": [
     {
       "type": 0,
-      "value": "This Playlist is Private."
+      "value": "Этот плейлист является частным."
     }
   ],
   "not_shareable_title": [

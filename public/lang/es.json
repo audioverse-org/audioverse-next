@@ -2780,7 +2780,7 @@
     "string": "Nueva lista de reproducción"
   },
   "not_shareable": {
-    "string": "This Playlist is Private."
+    "string": "Esta lista de reproducción es privada."
   },
   "not_shareable_title": {
     "string": "Privada"
@@ -2798,7 +2798,7 @@
     "string": "Sólo tú puedes ver"
   },
   "create": {
-    "string": "Create"
+    "string": "Crear"
   },
   "done": {
     "string": "Terminado"
