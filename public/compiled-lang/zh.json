@@ -1433,6 +1433,12 @@
       "value": "联系"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
   "create_new": [
     {
       "type": 0,
@@ -1641,6 +1647,12 @@
     {
       "type": 0,
       "value": "热门证道"
+    }
+  ],
+  "done": [
+    {
+      "type": 0,
+      "value": "已完成的"
     }
   ],
   "downloadAppButton__altLabel": [

@@ -1445,6 +1445,12 @@
       "value": "Contacto"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
   "create_new": [
     {
       "type": 0,
@@ -1653,6 +1659,12 @@
     {
       "type": 0,
       "value": "Lecciones que son tendencia"
+    }
+  ],
+  "done": [
+    {
+      "type": 0,
+      "value": "Terminado"
     }
   ],
   "downloadAppButton__altLabel": [

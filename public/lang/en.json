@@ -681,6 +681,9 @@
   "contact_footer": {
     "string": "Contact"
   },
+  "create": {
+    "string": "Create"
+  },
   "create_new": {
     "string": "Create New"
   },
@@ -785,6 +788,9 @@
   },
   "discover_trendingTeachingsHeading": {
     "string": "Trending Teachings"
+  },
+  "done": {
+    "string": "Done"
   },
   "downloadAppButton__altLabel": {
     "string": "Download Now"

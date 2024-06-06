@@ -2796,5 +2796,11 @@
   },
   "onlyYou": {
     "string": "Only you can view"
+  },
+  "create": {
+    "string": "Create"
+  },
+  "done": {
+    "string": "Concluído"
   }
 }

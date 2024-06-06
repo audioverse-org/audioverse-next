@@ -167,7 +167,7 @@ export default function PlaylistForm({
 				<Button
 					text={intl.formatMessage({
 						id: 'molecule-searchBar__cancel',
-						defaultMessage: 'Cancle',
+						defaultMessage: 'Cancel',
 					})}
 					type="tertiary"
 					onClick={onCancel}

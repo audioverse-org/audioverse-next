@@ -2796,5 +2796,11 @@
   },
   "onlyYou": {
     "string": "只有您可以查看"
+  },
+  "create": {
+    "string": "Create"
+  },
+  "done": {
+    "string": "已完成的"
   }
 }

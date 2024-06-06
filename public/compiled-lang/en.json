@@ -1425,6 +1425,12 @@
       "value": "Contact"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
   "create_new": [
     {
       "type": 0,
@@ -1633,6 +1639,12 @@
     {
       "type": 0,
       "value": "Trending Teachings"
+    }
+  ],
+  "done": [
+    {
+      "type": 0,
+      "value": "Done"
     }
   ],
   "downloadAppButton__altLabel": [
