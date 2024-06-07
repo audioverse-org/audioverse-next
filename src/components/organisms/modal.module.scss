@@ -50,6 +50,7 @@
 	text-align: center;
 }
 .leftText {
+	all: unset;
 	float: left;
 	color: $ts-red;
 	text-transform: uppercase;
@@ -63,4 +64,5 @@
 }
 .link {
 	margin-bottom: 1px;
+	float: right;
 }

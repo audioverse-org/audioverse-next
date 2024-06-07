@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withAuthGuard from '~components/HOCs/withAuthGuard';
@@ -24,13 +24,7 @@ function LibraryPlaylists({ language }: ILibraryPlaylistsProps): JSX.Element {
 		offset: 0,
 	});
 
-	const [playlistData, setPlaylistData] = useState(
-		data?.me?.user.playlists.nodes || []
-	);
-
-	useEffect(() => {
-		setPlaylistData([...(data?.me?.user.playlists.nodes || [])]);
-	}, [data?.me?.user.playlists.nodes]);
+	const playlistData = data?.me?.user.playlists.nodes || [];
 
 	return (
 		<div className={baseStyles.wrapper}>

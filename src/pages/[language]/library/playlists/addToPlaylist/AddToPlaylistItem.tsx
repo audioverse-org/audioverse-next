@@ -32,8 +32,8 @@ const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
 		<PlaylistItem
 			onPress={toggleFromPlaylist}
 			isAdded={!!isRecordingInPlaylist}
-			title={playlist?.title}
-			isPublic={playlist?.isPublic}
+			title={playlist.title}
+			isPublic={playlist.isPublic}
 			isLoading={isLoading}
 		/>
 	);

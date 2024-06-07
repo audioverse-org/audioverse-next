@@ -111,8 +111,7 @@ export default function PlaylistForm({
 				<div className={styles.privacyContainer}>
 					<button
 						className={styles.privacyOption}
-						onClick={(e) => {
-							e.preventDefault();
+						onClick={() => {
 							setPrivacy(false);
 						}}
 					>
@@ -129,8 +128,7 @@ export default function PlaylistForm({
 					</button>
 					<button
 						className={styles.privacyOption}
-						onClick={(e) => {
-							e.preventDefault();
+						onClick={() => {
 							setPrivacy(true);
 						}}
 					>

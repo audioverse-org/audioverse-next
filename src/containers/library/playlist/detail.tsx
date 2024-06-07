@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
@@ -15,7 +15,6 @@ import DefinitionList, {
 import Tease from '~components/molecules/tease';
 import { BaseColors } from '~lib/constants';
 import { formatLongDateTime } from '~lib/date';
-import Button from '~src/components/molecules/button';
 import ButtonShare from '~src/components/molecules/buttonShare';
 import IconButton from '~src/components/molecules/iconButton';
 import PlaylistTypeLockup from '~src/components/molecules/playlistTypeLockup';
@@ -23,7 +22,6 @@ import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
-import EditIcon from '../../../../public/img/icons/edit-light.svg';
 import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';
 import EditPlaylist from '../../../../src/pages/[language]/library/playlists/edit';
 import Modal from '../../../components/organisms/modal';
@@ -42,15 +40,7 @@ function LibraryPlaylistDetail({
 	const { title, recordings, createdAt, summary, id } = playlist;
 	const router = useRouter();
 	const languageRoute = useLanguageRoute();
-	const [isPlaylistEditModalOpen, setIsPlaylistEditModalOpen] = useState(false);
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
-	const deletePlaylistRef = useRef<{
-		deletePlaylist: () => Promise<void>;
-	} | null>(null);
-
-	const handleCloseEditModal = () => {
-		setIsPlaylistEditModalOpen(false);
-	};
 
 	const details: IDefinitionListTerm[] = [];
 	if (summary) {
@@ -76,12 +66,6 @@ function LibraryPlaylistDetail({
 			definition: <p>{formatLongDateTime(createdAt)}</p>,
 		});
 	}
-
-	const callDeletePlaylistFunction = () => {
-		if (deletePlaylistRef.current) {
-			deletePlaylistRef.current.deletePlaylist();
-		}
-	};
 
 	return (
 		<Tease className={styles.container}>
@@ -116,14 +100,11 @@ function LibraryPlaylistDetail({
 						/>
 					)}
 					{!(router.route === '/[language]/playlists/[playlist]') && (
-						<IconButton
-							Icon={EditIcon}
-							color={BaseColors.DARK}
-							onClick={(e) => {
-								e.preventDefault();
-								setIsPlaylistEditModalOpen(true);
-							}}
-							backgroundColor={BaseColors.CREAM}
+						<EditPlaylist
+							id={playlist.id}
+							title={playlist.title}
+							summary={playlist.summary}
+							isPublic={playlist.isPublic}
 						/>
 					)}
 				</div>
@@ -158,36 +139,6 @@ function LibraryPlaylistDetail({
 				<FormattedMessage
 					id="not_shareable"
 					defaultMessage="This Playlist is Private."
-				/>
-			</Modal>
-			<Modal
-				open={isPlaylistEditModalOpen}
-				onClose={handleCloseEditModal}
-				title={
-					<FormattedMessage id="edit_playlist" defaultMessage="Edit Playlist" />
-				}
-				rightElmt={
-					<Button
-						onClick={callDeletePlaylistFunction}
-						className={styles.modalLink}
-						text={
-							<FormattedMessage
-								id="deletePlaylists"
-								defaultMessage="Delete Playlist"
-							/>
-						}
-						type="tertiary"
-					/>
-				}
-				hideClose
-			>
-				<EditPlaylist
-					deletePlaylistRef={deletePlaylistRef}
-					id={playlist.id}
-					title={playlist.title}
-					summary={playlist.summary}
-					isPublic={playlist.isPublic}
-					onClose={handleCloseEditModal}
 				/>
 			</Modal>
 		</Tease>

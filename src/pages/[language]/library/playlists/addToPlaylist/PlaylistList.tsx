@@ -61,8 +61,8 @@ const PlaylistList: React.FC<Props> = ({ language, recordingId }) => {
 		<div className={styles.playlistList} ref={containerRef}>
 			{data?.me?.user?.playlists?.edges?.map((edge) => (
 				<AddToPlaylistItem
-					key={edge.node.id}
-					item={edge.node}
+					key={edge?.node.id}
+					item={edge?.node}
 					recordingId={recordingId}
 				/>
 			))}

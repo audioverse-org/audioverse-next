@@ -1,6 +1,7 @@
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import MuiModal from '@material-ui/core/Modal';
+import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -13,11 +14,12 @@ import styles from './modal.module.scss';
 
 interface ModalProps {
 	title: string | JSX.Element;
-	rightElmt?: string | JSX.Element | boolean;
+	rightElmt?: string | JSX.Element;
 	children: ReactNode;
 	onClose?: () => void;
 	open: boolean;
 	hideClose?: boolean;
+	titleLeft?: boolean;
 	actions?: ReactNode;
 }
 
@@ -28,6 +30,7 @@ export default function Modal({
 	rightElmt,
 	title,
 	hideClose,
+	titleLeft,
 	actions,
 }: ModalProps): JSX.Element {
 	const intl = useIntl();
@@ -62,14 +65,18 @@ export default function Modal({
 					) : (
 						''
 					)}
-					{rightElmt ? (
-						<div className={styles.head}>
-							<h5 className={styles.leftText}>{title}</h5>
-							<div className={styles.link}>{rightElmt}</div>
-						</div>
-					) : (
-						<Heading2 className={styles.centerText}>{title}</Heading2>
-					)}
+
+					<div className={styles.head}>
+						<Heading2
+							className={clsx(
+								styles.centerText,
+								(rightElmt || titleLeft) && styles.leftText
+							)}
+						>
+							{title}
+						</Heading2>
+						{rightElmt && <div className={styles.link}>{rightElmt}</div>}
+					</div>
 
 					{children}
 					{actions && <div className={styles.buttonCol}>{actions}</div>}

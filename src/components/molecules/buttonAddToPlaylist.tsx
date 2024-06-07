@@ -93,6 +93,7 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 				title={
 					<FormattedMessage id="new_playlist" defaultMessage="New playlist" />
 				}
+				titleLeft
 				hideClose
 			>
 				<NewPlaylist id={recordingId} onClose={handleCloseNewModal} />

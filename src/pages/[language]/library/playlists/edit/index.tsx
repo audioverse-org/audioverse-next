@@ -1,6 +1,13 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
+import { BaseColors } from '~lib/constants';
+import Button from '~src/components/molecules/button';
+import IconButton from '~src/components/molecules/iconButton';
+
+import EditIcon from '../../../../../../public/img/icons/edit-light.svg';
+import Modal from '../../../../../components/organisms/modal';
 import {
 	playlistDelete,
 	PlaylistDeleteMutationVariables,
@@ -14,15 +21,21 @@ type EditPlaylistProps = {
 	isPublic: boolean;
 	summary: string;
 	title: string;
-	onClose: () => void;
-	deletePlaylistRef: React.MutableRefObject<{
-		deletePlaylist: () => Promise<void>;
-	} | null>;
 };
 
-const useEditPlaylist = (id: number | string, onClose: () => void) => {
-	const router = useRouter();
+const EditPlaylist: React.FC<EditPlaylistProps> = ({
+	id,
+	title,
+	summary,
+	isPublic,
+}) => {
+	const [isPlaylistEditModalOpen, setIsPlaylistEditModalOpen] = useState(false);
 
+	const handleCloseEditModal = () => {
+		setIsPlaylistEditModalOpen(false);
+	};
+
+	const router = useRouter();
 	const update = async (playlist: PlaylistProps) => {
 		try {
 			const data = await playlistUpdate<PlaylistUpdateMutationVariables>({
@@ -31,7 +44,7 @@ const useEditPlaylist = (id: number | string, onClose: () => void) => {
 			});
 			if (data) {
 				router.replace(router.asPath);
-				onClose();
+				handleCloseEditModal();
 			}
 		} catch (error) {
 			console.error('Error updating playlist:', error);
@@ -49,7 +62,7 @@ const useEditPlaylist = (id: number | string, onClose: () => void) => {
 					playlistId: id as string,
 				});
 				if (data) {
-					onClose();
+					handleCloseEditModal();
 					router.back();
 				}
 			} catch (error) {
@@ -58,35 +71,49 @@ const useEditPlaylist = (id: number | string, onClose: () => void) => {
 		}
 	};
 
-	return { update, deletePlaylist };
-};
-
-const EditPlaylist: React.FC<EditPlaylistProps> = ({
-	id,
-	title,
-	summary,
-	isPublic,
-	onClose,
-	deletePlaylistRef,
-}) => {
-	const { update, deletePlaylist } = useEditPlaylist(id, onClose);
-
-	useEffect(() => {
-		if (deletePlaylistRef) {
-			deletePlaylistRef.current = { deletePlaylist };
-		}
-	}, [deletePlaylist, deletePlaylistRef]);
-
 	return (
-		<PlaylistForm
-			onSubmit={update}
-			onCancel={onClose}
-			id={id}
-			title={title}
-			isPublic={isPublic}
-			summary={summary}
-			onDelete={deletePlaylist}
-		/>
+		<>
+			<IconButton
+				Icon={EditIcon}
+				color={BaseColors.DARK}
+				onClick={(e) => {
+					e.preventDefault();
+					setIsPlaylistEditModalOpen(true);
+				}}
+				backgroundColor={BaseColors.CREAM}
+			/>
+
+			<Modal
+				open={isPlaylistEditModalOpen}
+				onClose={handleCloseEditModal}
+				title={
+					<FormattedMessage id="edit_playlist" defaultMessage="Edit Playlist" />
+				}
+				rightElmt={
+					<Button
+						onClick={deletePlaylist}
+						text={
+							<FormattedMessage
+								id="deletePlaylists"
+								defaultMessage="Delete Playlist"
+							/>
+						}
+						type="tertiary"
+					/>
+				}
+				hideClose
+			>
+				<PlaylistForm
+					onSubmit={update}
+					onCancel={handleCloseEditModal}
+					id={id}
+					title={title}
+					isPublic={isPublic}
+					summary={summary}
+					onDelete={deletePlaylist}
+				/>
+			</Modal>
+		</>
 	);
 };
 
