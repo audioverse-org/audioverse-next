@@ -8,7 +8,7 @@ import NewPlaylist from '~src/pages/[language]/library/playlists/new';
 
 import AddToPlaylistIcon from '../../../public/img/icons/in-queue.svg';
 import AddToPlaylistIconLight from '../../../public/img/icons/in-queue-light.svg';
-import PlaylistsPage from '../../pages/[language]/library/playlists/addToPlaylist/AddToPlaylist';
+import AddToPlaylist from '../../pages/[language]/library/playlists/addToPlaylist/AddToPlaylist';
 import Modal from '../organisms/modal';
 import { GlobalModalsContext } from '../templates/andGlobalModals';
 import Button from './button';
@@ -85,7 +85,7 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 				}
 				hideClose
 			>
-				<PlaylistsPage language={language} recId={recordingId} />
+				<AddToPlaylist language={language} recId={recordingId} />
 			</Modal>
 			<Modal
 				open={isPlaylistModalNewOpen}

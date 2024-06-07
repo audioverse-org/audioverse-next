@@ -14,7 +14,7 @@ import {
 	PlaylistRecordingRemoveMutationVariables,
 } from '../mutations/__generated__/recordingPlaylist';
 
-export const PLAYLIST_REFETCH_QUERIES = ['getLibraryPlaylists'];
+export const PLAYLIST_REFETCH_QUERIES = ['getLibraryPlaylistsData'];
 
 export function useRecordingPlaylist(
 	playlist?: Pick<UserPlaylist, 'id'>,

@@ -12,20 +12,3 @@ mutation playlistUpdate($input: UserPlaylistUpdateInput!, $playlistId: ID!) {
 mutation playlistDelete($playlistId: ID!) {
 	playlistDelete(playlistId: $playlistId)
 }
-query getLibraryPlaylists($language: Language!) {
-	me {
-		user {
-			playlists(
-				language: $language
-				first: 1500
-				orderBy: [{ field: CREATED_AT, direction: DESC }]
-			) {
-				edges {
-					node {
-						...PlaylistCard
-					}
-				}
-			}
-		}
-	}
-}

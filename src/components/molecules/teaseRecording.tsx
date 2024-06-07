@@ -78,8 +78,6 @@ export default function TeaseRecording({
 		['audiobookTrack', 'chapter'].includes(theme) ||
 		(theme === 'song' && small);
 
-	const iconColor = BaseColors.MID_TONE;
-
 	const inner = (
 		<>
 			{!playlistRecordings && (
@@ -230,9 +228,7 @@ export default function TeaseRecording({
 							styles.contentOptionalLink,
 							unpadded && styles.unpadded
 						)}
-						onClick={(e) => {
-							e.stopPropagation();
-
+						onClick={() => {
 							analytics.track('Card click', {
 								type: recording.recordingContentType,
 								id: recording.id,
@@ -259,12 +255,14 @@ export default function TeaseRecording({
 						</a>
 					</Link>
 				)}
-				<div className={clsx(styles.like, unpadded && styles.likeUnpadded)}>
+				<div
+					className={clsx(styles.playlist, unpadded && styles.playlistUnpadded)}
+				>
 					{!disableUserFeatures && (
 						<ButtonAddToPlaylist
 							recordingId={recording.id}
 							backgroundColor={backgroundColor}
-							iconColor={iconColor}
+							iconColor={BaseColors.MID_TONE}
 							iconLight
 						/>
 					)}

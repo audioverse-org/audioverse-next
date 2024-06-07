@@ -2764,9 +2764,6 @@
   "error": {
     "string": "Erreur"
   },
-  "loading": {
-    "string": "Loading..."
-  },
   "newPrivacy": {
     "string": "Confidentialité"
   },
@@ -2790,9 +2787,6 @@
   },
   "pl_title": {
     "string": "Titre"
-  },
-  "scroll-down": {
-    "string": "Scroll down for more"
   },
   "onlyYou": {
     "string": "Vous seul pouvez voir"

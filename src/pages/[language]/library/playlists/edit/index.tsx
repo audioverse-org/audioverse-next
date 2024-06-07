@@ -21,6 +21,7 @@ type EditPlaylistProps = {
 	isPublic: boolean;
 	summary: string;
 	title: string;
+	onEdit: () => void;
 };
 
 const EditPlaylist: React.FC<EditPlaylistProps> = ({
@@ -28,13 +29,13 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({
 	title,
 	summary,
 	isPublic,
+	onEdit,
 }) => {
 	const [isPlaylistEditModalOpen, setIsPlaylistEditModalOpen] = useState(false);
 
 	const handleCloseEditModal = () => {
 		setIsPlaylistEditModalOpen(false);
 	};
-
 	const router = useRouter();
 	const update = async (playlist: PlaylistProps) => {
 		try {
@@ -45,6 +46,7 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({
 			if (data) {
 				router.replace(router.asPath);
 				handleCloseEditModal();
+				onEdit();
 			}
 		} catch (error) {
 			console.error('Error updating playlist:', error);

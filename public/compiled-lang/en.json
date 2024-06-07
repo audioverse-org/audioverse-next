@@ -3247,12 +3247,6 @@
       "value": "You don’t have any matching items saved yet"
     }
   ],
-  "loading": [
-    {
-      "type": 0,
-      "value": "Loading..."
-    }
-  ],
   "loadingCards-ariaLabel": [
     {
       "type": 0,
@@ -5039,12 +5033,6 @@
     {
       "type": 0,
       "value": "RSS feed"
-    }
-  ],
-  "scroll-down": [
-    {
-      "type": 0,
-      "value": "Scroll down for more"
     }
   ],
   "searchCollections__heading": [

@@ -1539,9 +1539,6 @@
   "library__noMatchingHeading": {
     "string": "You don’t have any matching items saved yet"
   },
-  "loading": {
-    "string": "Loading..."
-  },
   "loadingCards-ariaLabel": {
     "string": "Loading…"
   },
@@ -2430,9 +2427,6 @@
   },
   "rssAlternate__title": {
     "string": "RSS feed"
-  },
-  "scroll-down": {
-    "string": "Scroll down for more"
   },
   "searchCollections__heading": {
     "string": "All Matching Collections"

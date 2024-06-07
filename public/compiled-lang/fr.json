@@ -3243,12 +3243,6 @@
       "value": "Vous n'avez pas encore d'éléments correspondants parmi vos favoris"
     }
   ],
-  "loading": [
-    {
-      "type": 0,
-      "value": "Loading..."
-    }
-  ],
   "loadingCards-ariaLabel": [
     {
       "type": 0,
@@ -5035,12 +5029,6 @@
     {
       "type": 0,
       "value": "Flux RSS"
-    }
-  ],
-  "scroll-down": [
-    {
-      "type": 0,
-      "value": "Scroll down for more"
     }
   ],
   "searchCollections__heading": [

@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import AddIcon from '../../../../../../public/img/icons/add-light.svg';
 import LoadIcon from '../../../../../../public/img/icons/loading-icon.svg';
@@ -32,7 +31,7 @@ const PlaylistItem: React.FC<Props> = ({
 			<div className={styles.container}>
 				<div className={styles.leftContainer}>
 					{isLoading ? (
-						<LoadIcon />
+						<LoadIcon className={styles.leftIcon} />
 					) : (
 						<>
 							{!isAdded ? (
@@ -42,11 +41,8 @@ const PlaylistItem: React.FC<Props> = ({
 							)}
 						</>
 					)}
-					{isLoading ? (
-						<FormattedMessage id="loading" defaultMessage="Loading..." />
-					) : (
-						<span className={styles.title}>{title}</span>
-					)}
+
+					<span className={styles.title}>{title}</span>
 				</div>
 				{isPublic ? (
 					<PublicIcon className={styles.rightIcon} />

@@ -2764,9 +2764,6 @@
   "error": {
     "string": ""
   },
-  "loading": {
-    "string": "Loading..."
-  },
   "newPrivacy": {
     "string": "Datenschutz"
   },
@@ -2790,9 +2787,6 @@
   },
   "pl_title": {
     "string": "Titel"
-  },
-  "scroll-down": {
-    "string": "Scroll down for more"
   },
   "onlyYou": {
     "string": "Nur Sie können es sehen"

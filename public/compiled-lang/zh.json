@@ -3259,12 +3259,6 @@
       "value": "你尚未保存任何匹配项目"
     }
   ],
-  "loading": [
-    {
-      "type": 0,
-      "value": "Loading..."
-    }
-  ],
   "loadingCards-ariaLabel": [
     {
       "type": 0,
@@ -5071,12 +5065,6 @@
     {
       "type": 0,
       "value": "RSS订阅"
-    }
-  ],
-  "scroll-down": [
-    {
-      "type": 0,
-      "value": "Scroll down for more"
     }
   ],
   "searchCollections__heading": [

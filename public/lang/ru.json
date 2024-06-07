@@ -2764,9 +2764,6 @@
   "error": {
     "string": "Ошибка"
   },
-  "loading": {
-    "string": "Loading..."
-  },
   "newPrivacy": {
     "string": "Конфиденциальность"
   },
@@ -2790,9 +2787,6 @@
   },
   "pl_title": {
     "string": "Заголовок"
-  },
-  "scroll-down": {
-    "string": "Scroll down for more"
   },
   "onlyYou": {
     "string": "Только вы можете просматривать"

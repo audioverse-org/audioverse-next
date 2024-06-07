@@ -5,12 +5,12 @@ import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 import ListenLaterItem from './ListenLaterItem';
 import PlaylistList from './PlaylistList';
 
-interface PlaylistsPageProps {
+interface AddToPlaylistProps {
 	language: string;
 	recId: string | number;
 }
 
-const PlaylistsPage: React.FC<PlaylistsPageProps> = ({ language, recId }) => {
+const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ language, recId }) => {
 	const languageFullForm = getLanguageIdByRoute(language);
 
 	return (
@@ -21,4 +21,4 @@ const PlaylistsPage: React.FC<PlaylistsPageProps> = ({ language, recId }) => {
 	);
 };
 
-export default PlaylistsPage;
+export default AddToPlaylist;

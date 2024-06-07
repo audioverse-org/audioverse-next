@@ -2764,9 +2764,6 @@
   "error": {
     "string": "錯誤"
   },
-  "loading": {
-    "string": "Loading..."
-  },
   "newPrivacy": {
     "string": "隐私"
   },
@@ -2790,9 +2787,6 @@
   },
   "pl_title": {
     "string": "標題"
-  },
-  "scroll-down": {
-    "string": "Scroll down for more"
   },
   "onlyYou": {
     "string": "只有您可以查看"

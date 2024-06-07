@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -28,6 +29,10 @@ import Modal from '../../../components/organisms/modal';
 import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
+export const PLAYLIST_PAGE_REFETCH_QUERIES = [
+	'GetLibraryPlaylistPageDataQuery',
+];
+
 export type ILibraryPlaylistDetailProps = {
 	playlist: NonNullable<
 		GetLibraryPlaylistPageDataQuery['me']
@@ -37,7 +42,14 @@ export type ILibraryPlaylistDetailProps = {
 function LibraryPlaylistDetail({
 	playlist,
 }: Must<ILibraryPlaylistDetailProps>): JSX.Element {
+	const queryClient = useQueryClient();
+
+	const refetchPlaylistData = () => {
+		queryClient.refetchQueries(PLAYLIST_PAGE_REFETCH_QUERIES);
+	};
+
 	const { title, recordings, createdAt, summary, id } = playlist;
+
 	const router = useRouter();
 	const languageRoute = useLanguageRoute();
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
@@ -94,7 +106,7 @@ function LibraryPlaylistDetail({
 						/>
 					) : (
 						<ButtonShare
-							shareUrl={`https://audioverse.org/${languageRoute}/playlists/${playlist.id}`}
+							shareUrl={`https://audioverse.org/${playlist.language}/playlists/${playlist.id}`}
 							backgroundColor={BaseColors.CREAM}
 							light={true}
 						/>
@@ -105,6 +117,7 @@ function LibraryPlaylistDetail({
 							title={playlist.title}
 							summary={playlist.summary}
 							isPublic={playlist.isPublic}
+							onEdit={refetchPlaylistData}
 						/>
 					)}
 				</div>
