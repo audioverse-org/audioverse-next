@@ -464,7 +464,7 @@
   "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "Playlist"
+      "value": "Zur Wiedergabeliste hinzufügen"
     }
   ],
   "andGlobalModals__authCopy": [

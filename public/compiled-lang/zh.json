@@ -464,7 +464,7 @@
   "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "播放清单"
+      "value": "新增到播放列表"
     }
   ],
   "andGlobalModals__authCopy": [

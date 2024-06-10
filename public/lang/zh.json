@@ -2747,7 +2747,7 @@
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
-    "string": "播放清单"
+    "string": "新增到播放列表"
   },
   "anyoneWithLink": {
     "string": "知道連結的人都可以查看"

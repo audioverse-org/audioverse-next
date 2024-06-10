@@ -464,7 +464,7 @@
   "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "Список воспроизведений"
+      "value": "Добавить в плейлист"
     }
   ],
   "andGlobalModals__authCopy": [

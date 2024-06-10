@@ -464,7 +464,7 @@
   "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "プレイリスト"
+      "value": "プレイリストに追加する"
     }
   ],
   "andGlobalModals__authCopy": [

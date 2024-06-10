@@ -2747,7 +2747,7 @@
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
-    "string": "プレイリスト"
+    "string": "プレイリストに追加する"
   },
   "anyoneWithLink": {
     "string": "リンクを知っている人は誰でも閲覧できます"

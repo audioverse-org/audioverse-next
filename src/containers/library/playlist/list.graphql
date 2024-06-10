@@ -8,7 +8,7 @@ query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
 				orderBy: [{ field: CREATED_AT, direction: DESC }]
 			) {
 				nodes {
-					...PlaylistCard
+					...cardPlaylist
 				}
 				aggregate {
 					count

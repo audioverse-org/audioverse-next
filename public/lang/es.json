@@ -2747,7 +2747,7 @@
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
-    "string": "Lista de reproducción"
+    "string": "Agregar a lista de reproducción"
   },
   "anyoneWithLink": {
     "string": "Cualquier persona con el enlace puede ver"

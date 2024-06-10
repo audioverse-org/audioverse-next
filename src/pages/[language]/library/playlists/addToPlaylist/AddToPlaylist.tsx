@@ -8,15 +8,24 @@ import PlaylistList from './PlaylistList';
 interface AddToPlaylistProps {
 	language: string;
 	recId: string | number;
+	refreshKey: number;
 }
 
-const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ language, recId }) => {
+const AddToPlaylist: React.FC<AddToPlaylistProps> = ({
+	language,
+	recId,
+	refreshKey,
+}) => {
 	const languageFullForm = getLanguageIdByRoute(language);
 
 	return (
 		<div>
 			<ListenLaterItem id={recId} />
-			<PlaylistList language={languageFullForm} recordingId={recId} />
+			<PlaylistList
+				language={languageFullForm}
+				recordingId={recId}
+				refreshKey={refreshKey}
+			/>
 		</div>
 	);
 };

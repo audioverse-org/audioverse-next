@@ -52,12 +52,8 @@
 	margin-top: 10px;
 	width: 100%;
 }
-.privacyOption:hover {
-	color: $ts-red;
-	text-decoration: underline;
-}
 
-.pressed {
+.privacyOption:focus {
 	background-color: $ts-darkened-white;
 }
 

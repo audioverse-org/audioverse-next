@@ -237,7 +237,7 @@
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
-    "string": "Playlist"
+    "string": "Add to playlist"
   },
   "andGlobalModals__authCopy": {
     "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { PlaylistCardFragment } from '~src/components/molecules/card/__generated__/PlaylistCard';
+import { CardPlaylistFragment } from '~src/components/molecules/card/__generated__/playlist';
 
 import { useRecordingPlaylist } from '../../../../../components/constants/mutations/useRecordingPlaylist';
 import PlaylistItem from './PlaylistItem';
 
 type Props = {
-	item: PlaylistCardFragment;
+	item: CardPlaylistFragment;
 	recordingId: string | number;
 };
 
@@ -16,7 +16,7 @@ const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
 		recordingId
 	);
 
-	const isRecordingInPlaylist = playlist?.recordings?.edges?.find(
+	const isRecordingInPlaylist = playlist.recordings.edges?.find(
 		(item) => item.node.id === recordingId
 	);
 

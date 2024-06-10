@@ -30,18 +30,19 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 }) => {
 	const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
 	const [isPlaylistModalNewOpen, setIsPlaylistModalNewOpen] = useState(false);
+	const [refreshKey, setRefreshKey] = useState(0); // Add state for refresh
 	const intl = useIntl();
 	const language = useLanguageRoute();
 	const context = useContext(GlobalModalsContext);
 	const label = intl.formatMessage({
 		id: 'add_to_playlist_btn',
-		defaultMessage: 'Playlist',
+		defaultMessage: 'Add to playlist',
 		description: 'Add to Playlist button label',
 	});
 
 	const handleCloseNewModal = () => {
 		setIsPlaylistModalNewOpen(false);
-		setIsPlaylistModalOpen(true);
+		setRefreshKey((prevKey) => prevKey + 1); // Trigger refresh
 	};
 
 	return (
@@ -73,7 +74,6 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 				rightElmt={
 					<Button
 						onClick={() => {
-							setIsPlaylistModalOpen(false);
 							setIsPlaylistModalNewOpen(true);
 						}}
 						className={styles.modalLink}
@@ -85,7 +85,11 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 				}
 				hideClose
 			>
-				<AddToPlaylist language={language} recId={recordingId} />
+				<AddToPlaylist
+					language={language}
+					recId={recordingId}
+					refreshKey={refreshKey}
+				/>
 			</Modal>
 			<Modal
 				open={isPlaylistModalNewOpen}
