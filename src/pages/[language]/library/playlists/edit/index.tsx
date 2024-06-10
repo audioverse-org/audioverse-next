@@ -21,7 +21,7 @@ type EditPlaylistProps = {
 	isPublic: boolean;
 	summary: string;
 	title: string;
-	onEdit: () => void;
+	onEditSuccess: () => void;
 };
 
 const EditPlaylist: React.FC<EditPlaylistProps> = ({
@@ -29,7 +29,7 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({
 	title,
 	summary,
 	isPublic,
-	onEdit,
+	onEditSuccess,
 }) => {
 	const [isPlaylistEditModalOpen, setIsPlaylistEditModalOpen] = useState(false);
 
@@ -44,9 +44,8 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({
 				playlistId: id as string,
 			});
 			if (data) {
-				router.replace(router.asPath);
 				handleCloseEditModal();
-				onEdit();
+				onEditSuccess();
 			}
 		} catch (error) {
 			console.error('Error updating playlist:', error);
