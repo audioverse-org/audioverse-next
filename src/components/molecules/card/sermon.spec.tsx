@@ -65,6 +65,6 @@ describe('card sermon', () => {
 	it('has favorite button', async () => {
 		const { getByLabelText } = await renderComponent();
 
-		expect(getByLabelText('Playlist')).toBeInTheDocument();
+		expect(getByLabelText('Add to playlist')).toBeInTheDocument();
 	});
 });

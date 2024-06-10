@@ -192,7 +192,7 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText } = await renderPage();
 
-		expect(getByLabelText('Playlist')).toBeInTheDocument();
+		expect(getByLabelText('Add to playlist')).toBeInTheDocument();
 	});
 
 	it('includes player', async () => {
@@ -1235,7 +1235,7 @@ describe('sermon detail page', () => {
 
 		const sidebar = result.getByLabelText('series list');
 
-		expect(getByLabelText(sidebar, 'Playlist')).toBeInTheDocument();
+		expect(getByLabelText(sidebar, 'Add to playlist')).toBeInTheDocument();
 	});
 
 	it('displays part info', async () => {
