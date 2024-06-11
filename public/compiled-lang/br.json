@@ -3705,30 +3705,6 @@
       "value": "Buscar"
     }
   ],
-  "molecule-teaseRecording__individualChapter": [
-    {
-      "type": 0,
-      "value": "Capítulo Individual"
-    }
-  ],
-  "molecule-teaseRecording__individualStory": [
-    {
-      "type": 0,
-      "value": "História individual"
-    }
-  ],
-  "molecule-teaseRecording__individualTeaching": [
-    {
-      "type": 0,
-      "value": "Ensinamento Individual"
-    }
-  ],
-  "molecule-teaseRecording__individualTrack": [
-    {
-      "type": 0,
-      "value": "Trilha individual"
-    }
-  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,
@@ -3743,24 +3719,6 @@
     {
       "type": 0,
       "value": " mais"
-    }
-  ],
-  "molecule-teaseRecording__partInfo": [
-    {
-      "type": 0,
-      "value": "Parte "
-    },
-    {
-      "type": 1,
-      "value": "index"
-    },
-    {
-      "type": 0,
-      "value": " de "
-    },
-    {
-      "type": 1,
-      "value": "count"
     }
   ],
   "molecule-transcript__disclaimer": [

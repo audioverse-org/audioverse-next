@@ -7,7 +7,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading2 from '~components/atoms/heading2';
 import Heading3 from '~components/atoms/heading3';
 import Heading6 from '~components/atoms/heading6';
-import ProgressBar from '~components/atoms/progressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { useIsRecordingFavorited } from '~lib/api/useIsRecordingFavorited';
 import { BaseColors } from '~lib/constants';
@@ -16,9 +15,8 @@ import usePlaybackSession, { PlaySource } from '~lib/usePlaybackSession';
 import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg';
-import IconPlay from '~public/img/icons/icon-play.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
-import { RecordingContentType } from '~src/__generated__/graphql';
+import IconPlay from '~public/img/icons/play-circle.svg';
 
 import { analytics } from '../../lib/analytics';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
@@ -37,7 +35,6 @@ type Props = {
 	unpadded?: boolean;
 	playlistRecordings?: AndMiniplayerFragment[];
 	small?: boolean;
-	hideSinglePart?: boolean;
 	isOptionalLink?: boolean;
 	disableUserFeatures?: boolean;
 	disablePlayback?: boolean;
@@ -49,7 +46,6 @@ export default function TeaseRecording({
 	unpadded,
 	playlistRecordings,
 	small,
-	hideSinglePart,
 	isOptionalLink,
 	disableUserFeatures,
 	disablePlayback = false,
@@ -64,9 +60,6 @@ export default function TeaseRecording({
 	const session = usePlaybackSession(recording, { playlistRecordings });
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
-
-	const index = recording.sequenceIndex;
-	const count = recording.sequence?.recordings.aggregate?.count;
 
 	const backgroundColor = {
 		audiobookTrack: BaseColors.BOOK_B,
@@ -87,44 +80,6 @@ export default function TeaseRecording({
 
 	const inner = (
 		<>
-			{!playlistRecordings && (
-				<div className={styles.part}>
-					{index && count ? (
-						<FormattedMessage
-							id="molecule-teaseRecording__partInfo"
-							defaultMessage="Part {index} of {count}"
-							description="recording tease part info"
-							values={{ index, count }}
-						/>
-					) : (
-						!hideSinglePart &&
-						(recording.recordingContentType ===
-						RecordingContentType.AudiobookTrack ? (
-							<FormattedMessage
-								id="molecule-teaseRecording__individualChapter"
-								defaultMessage="Individual Chapter"
-							/>
-						) : recording.recordingContentType ===
-						  RecordingContentType.MusicTrack ? (
-							<FormattedMessage
-								id="molecule-teaseRecording__individualTrack"
-								defaultMessage="Individual Track"
-							/>
-						) : recording.recordingContentType ===
-						  RecordingContentType.Sermon ? (
-							<FormattedMessage
-								id="molecule-teaseRecording__individualTeaching"
-								defaultMessage="Individual Teaching"
-							/>
-						) : (
-							<FormattedMessage
-								id="molecule-teaseRecording__individualStory"
-								defaultMessage="Individual Story"
-							/>
-						))
-					)}
-				</div>
-			)}
 			<div className={styles.title}>
 				{small ? (
 					<Heading3 unpadded className={styles.heading}>
@@ -132,35 +87,6 @@ export default function TeaseRecording({
 					</Heading3>
 				) : (
 					<Heading2>{recording.title}</Heading2>
-				)}
-				{!disablePlayback && (
-					<div className={styles.play}>
-						{session.isPlaying ? (
-							<IconButton
-								Icon={IconListeningAnimated}
-								onClick={() => {
-									// let propagate to recording push
-								}}
-								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
-								backgroundColor={backgroundColor}
-							/>
-						) : (
-							<IconButton
-								Icon={IconPlay}
-								onClick={(e) => {
-									e.preventDefault();
-									session.play(PlaySource.Tease);
-								}}
-								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
-								backgroundColor={backgroundColor}
-								aria-label={intl.formatMessage({
-									id: 'playButton__playLabel',
-									defaultMessage: 'play',
-									description: 'play button play label',
-								})}
-							/>
-						)}
-					</div>
 				)}
 			</div>
 			{!hidePresenters && (
@@ -216,15 +142,41 @@ export default function TeaseRecording({
 						isFavorited && styles.detailsWithLike
 					)}
 				>
+					{/* Play should be here */}
+					{!disablePlayback && (
+						<div className={styles.play}>
+							{session.isPlaying ? (
+								<IconButton
+									Icon={IconListeningAnimated}
+									onClick={() => {
+										// let propagate to recording push
+									}}
+									color={isDarkTheme ? BaseColors.WHITE : BaseColors.RED}
+									backgroundColor={backgroundColor}
+								/>
+							) : (
+								<IconButton
+									Icon={IconPlay}
+									onClick={(e) => {
+										e.preventDefault();
+										session.play(PlaySource.Tease);
+									}}
+									color={isDarkTheme ? BaseColors.WHITE : BaseColors.RED}
+									backgroundColor={backgroundColor}
+									aria-label={intl.formatMessage({
+										id: 'playButton__playLabel',
+										defaultMessage: 'play',
+										description: 'play button play label',
+									})}
+								/>
+							)}
+						</div>
+					)}
+					{/* Play should end here */}
 					<span className={styles.duration}>
 						{useFormattedDuration(recording.duration)}
 					</span>
 					{progress >= 1 && <SuccessIcon />}
-					{progress > 0 && (progress < 1 || session.isLoaded) && (
-						<span className={styles.progress}>
-							<ProgressBar progress={progress} />
-						</span>
-					)}
 				</div>
 			</div>
 		</>

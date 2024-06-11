@@ -3697,30 +3697,6 @@
       "value": "Rechercher"
     }
   ],
-  "molecule-teaseRecording__individualChapter": [
-    {
-      "type": 0,
-      "value": "Individual Chapter"
-    }
-  ],
-  "molecule-teaseRecording__individualStory": [
-    {
-      "type": 0,
-      "value": "Individual Story"
-    }
-  ],
-  "molecule-teaseRecording__individualTeaching": [
-    {
-      "type": 0,
-      "value": "Individual Teaching"
-    }
-  ],
-  "molecule-teaseRecording__individualTrack": [
-    {
-      "type": 0,
-      "value": "Individual Track"
-    }
-  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,
@@ -3735,24 +3711,6 @@
     {
       "type": 0,
       "value": " de plus"
-    }
-  ],
-  "molecule-teaseRecording__partInfo": [
-    {
-      "type": 0,
-      "value": "Partie "
-    },
-    {
-      "type": 1,
-      "value": "index"
-    },
-    {
-      "type": 0,
-      "value": " de "
-    },
-    {
-      "type": 1,
-      "value": "count"
     }
   ],
   "molecule-transcript__disclaimer": [

@@ -576,10 +576,6 @@
   "molecule-teaseRecording__morePersons": {
     "string": "{count}個を表示"
   },
-  "molecule-teaseRecording__partInfo": {
-    "comment": "recording tease part info",
-    "string": "{count}個の内の{index}部分を表示"
-  },
   "molecule-transcript__disclaimer": {
     "comment": "transcript disclaimer",
     "string": "このトランスクリプト(原稿)はコンピュータ自動生成されている場合もございます"
@@ -2347,18 +2343,6 @@
   },
   "molecule-searchBar__cancel": {
     "string": "Cancel"
-  },
-  "molecule-teaseRecording__individualChapter": {
-    "string": "Individual Chapter"
-  },
-  "molecule-teaseRecording__individualStory": {
-    "string": "Individual Story"
-  },
-  "molecule-teaseRecording__individualTeaching": {
-    "string": "Individual Teaching"
-  },
-  "molecule-teaseRecording__individualTrack": {
-    "string": "Individual Track"
   },
   "molecules-pagination__nextLabelMobile": {
     "string": "Next"
