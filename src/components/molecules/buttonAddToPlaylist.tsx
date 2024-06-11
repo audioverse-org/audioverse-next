@@ -30,7 +30,6 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 }) => {
 	const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
 	const [isPlaylistModalNewOpen, setIsPlaylistModalNewOpen] = useState(false);
-	const [refreshKey, setRefreshKey] = useState(0); // Add state for refresh
 	const intl = useIntl();
 	const language = useLanguageRoute();
 	const context = useContext(GlobalModalsContext);
@@ -42,15 +41,13 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 
 	const handleCloseNewModal = () => {
 		setIsPlaylistModalNewOpen(false);
-		setRefreshKey((prevKey) => prevKey + 1); // Trigger refresh
 	};
 
 	return (
 		<>
 			<IconButton
 				Icon={iconLight ? AddToPlaylistIconLight : AddToPlaylistIcon}
-				onClick={(e) => {
-					e.preventDefault();
+				onClick={() => {
 					const isLoggedOut = !getSessionToken();
 					if (isLoggedOut) {
 						return context.challengeAuth(() => setIsPlaylistModalOpen(true));
@@ -85,11 +82,7 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 				}
 				hideClose
 			>
-				<AddToPlaylist
-					language={language}
-					recId={recordingId}
-					refreshKey={refreshKey}
-				/>
+				<AddToPlaylist language={language} recId={recordingId} />
 			</Modal>
 			<Modal
 				open={isPlaylistModalNewOpen}

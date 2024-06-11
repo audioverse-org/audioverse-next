@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Language } from '~src/__generated__/graphql';
@@ -14,25 +14,15 @@ import styles from './PlaylistList.module.scss';
 type Props = {
 	language: Language;
 	recordingId: string | number;
-	refreshKey: number;
 };
 
-const PlaylistList: React.FC<Props> = ({
-	language,
-	recordingId,
-	refreshKey,
-}) => {
+const PlaylistList: React.FC<Props> = ({ language, recordingId }) => {
 	const variables: GetLibraryPlaylistsDataQueryVariables = {
 		language,
 		first: 1500,
 		offset: 0,
 	};
-	const { data, error, isLoading, refetch } =
-		useGetLibraryPlaylistsDataQuery(variables);
-
-	useEffect(() => {
-		refetch();
-	}, [refreshKey, refetch]);
+	const { data, error, isLoading } = useGetLibraryPlaylistsDataQuery(variables);
 
 	if (isLoading)
 		return (

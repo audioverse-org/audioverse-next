@@ -80,8 +80,7 @@ export default function PlaylistForm({
 			</div>
 			<button
 				className={styles.privacyButton}
-				onClick={(e) => {
-					e.preventDefault();
+				onClick={() => {
 					setIsPrivacyVisible(!isPrivacyVisible);
 				}}
 			>
