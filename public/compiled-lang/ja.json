@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "図書に保存"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -449,6 +455,18 @@
       "value": "プロフィール"
     }
   ],
+  "add_to_playlist": [
+    {
+      "type": 0,
+      "value": "プレイリストに追加する"
+    }
+  ],
+  "add_to_playlist_btn": [
+    {
+      "type": 0,
+      "value": "プレイリストに追加する"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -525,6 +543,12 @@
     {
       "type": 0,
       "value": "ご自分で調べて確かな教理を見出すために、ますます追加されていっている様々な項目にアクセスするには、今すぐログインまたはアカウトを作成してみませんか。"
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "リンクを知っている人は誰でも閲覧できます"
     }
   ],
   "app__features1Cta": [
@@ -1421,6 +1445,24 @@
       "value": "お問い合わせ"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "作成する"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "新しく作る"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "プレイリストの削除"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1619,6 +1661,12 @@
       "value": "最近人気のレッスン"
     }
   ],
+  "done": [
+    {
+      "type": 0,
+      "value": "終了"
+    }
+  ],
   "downloadAppButton__altLabel": [
     {
       "type": 0,
@@ -1681,6 +1729,12 @@
       "value": "分"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "プレイリストを編集する"
+    }
+  ],
   "egwAudiobookList__heading": [
     {
       "type": 0,
@@ -1709,6 +1763,12 @@
     {
       "type": 0,
       "value": "部分を表示"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "エラー"
     }
   ],
   "generateFeed__audio": [
@@ -3704,7 +3764,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "キャンセル"
     }
   ],
   "molecule-searchBar__label": [
@@ -3831,6 +3891,30 @@
       "value": "User Account"
     }
   ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "プライバシー"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "プライベート"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "共有可能"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "新規プレイリスト"
+    }
+  ],
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
@@ -3907,6 +3991,24 @@
     {
       "type": 0,
       "value": "ディスカバーに戻る"
+    }
+  ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "このプレイリストは非公開です。"
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "プライベート"
+    }
+  ],
+  "onlyYou": [
+    {
+      "type": 0,
+      "value": "あなただけが閲覧できます"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4167,6 +4269,18 @@
     {
       "type": 0,
       "value": "スピーカー"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "内容詳細"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "タイトル"
     }
   ],
   "playButton__pauseLabel": [

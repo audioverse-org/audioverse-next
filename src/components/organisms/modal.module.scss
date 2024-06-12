@@ -8,8 +8,8 @@
 .modal {
 	position: absolute;
 	left: 50%;
-	top: 80px;
-	transform: translate(-50%, 0%);
+	top: 50%;
+	transform: translate(-50%, -50%);
 	width: 500px;
 	max-width: calc(100% - 48px);
 	outline: none;
@@ -48,4 +48,22 @@
 }
 .centerText {
 	text-align: center;
+}
+.leftText {
+	all: unset;
+	float: left;
+	color: $ts-red;
+	text-transform: uppercase;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	margin-bottom: 1px;
+}
+
+.head {
+	margin-bottom: 20px;
+	padding: 0 0 10px 0;
+}
+.link {
+	margin-bottom: 1px;
+	float: right;
 }

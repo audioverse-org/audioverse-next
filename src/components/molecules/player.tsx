@@ -27,10 +27,10 @@ import IconPlay from '~public/img/icons/icon-play-large.svg';
 
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';
+import ButtonAddToPlaylist from './buttonAddToPlaylist';
 import ButtonDownloadBlank from './buttonDownloadBlank';
 import CircleButton from './circleButton';
 import styles from './player.module.scss';
-import RecordingButtonFavorite from './recordingButtonFavorite';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
@@ -259,10 +259,10 @@ const Player = ({
 						}}
 					/>
 					{!disableUserFeatures && (
-						<RecordingButtonFavorite
-							id={recording.id}
-							title={recording.title}
+						<ButtonAddToPlaylist
+							recordingId={recording.id}
 							backgroundColor={backgroundColor}
+							iconColor={iconColor}
 						/>
 					)}
 				</div>

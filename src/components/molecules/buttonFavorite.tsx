@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import React, { forwardRef, Ref } from 'react';
 import { useIntl } from 'react-intl';
 
 import { BaseColors } from '~lib/constants';
@@ -22,7 +22,7 @@ type Props = {
 	ref?: Ref<HTMLButtonElement>;
 };
 
-const ButtonFavorite: React.VoidFunctionComponent<Props> = React.forwardRef(
+const ButtonFavorite = forwardRef<HTMLButtonElement, Props>(
 	function ButtonFavorite(
 		{
 			favoritedType,
@@ -33,10 +33,11 @@ const ButtonFavorite: React.VoidFunctionComponent<Props> = React.forwardRef(
 			light,
 			backgroundColor,
 			className,
-		}: Props,
-		ref: Ref<HTMLButtonElement>
+		},
+		ref
 	): JSX.Element {
 		const intl = useIntl();
+
 		const label = isFavorited
 			? intl.formatMessage({
 					id: 'RecordingFavorite__unfavorite',
@@ -49,7 +50,7 @@ const ButtonFavorite: React.VoidFunctionComponent<Props> = React.forwardRef(
 					description: 'Recording favorite button label',
 			  });
 
-		const IconUnavorite = light ? IconLikeLight : IconLike;
+		const IconUnfavorite = light ? IconLikeLight : IconLike;
 		const isDarkTheme = isBackgroundColorDark(backgroundColor);
 
 		const iconColor = isFavorited
@@ -62,7 +63,7 @@ const ButtonFavorite: React.VoidFunctionComponent<Props> = React.forwardRef(
 
 		return (
 			<IconButton
-				Icon={isFavorited ? IconLikeActive : IconUnavorite}
+				Icon={isFavorited ? IconLikeActive : IconUnfavorite}
 				onClick={(e) => {
 					e.preventDefault();
 					e.stopPropagation();

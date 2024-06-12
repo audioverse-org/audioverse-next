@@ -2343,7 +2343,7 @@
     "string": "search"
   },
   "molecule-searchBar__cancel": {
-    "string": "Cancel"
+    "string": "Отменить"
   },
   "molecule-teaseRecording__individualChapter": {
     "string": "Individual Chapter"
@@ -2738,5 +2738,63 @@
   "about__storyImageAlt": {
     "comment": "Alt text for the story image",
     "string": "Young woman in a field wearing headphones while reading a book."
+  },
+  "Listen_Later": {
+    "string": "Сохранено"
+  },
+  "add_to_playlist": {
+    "string": "Добавить в плейлист"
+  },
+  "add_to_playlist_btn": {
+    "comment": "Add to Playlist button label",
+    "string": "Добавить в плейлист"
+  },
+  "anyoneWithLink": {
+    "string": "Посмотреть может любой, у кого есть ссылка"
+  },
+  "create_new": {
+    "string": "Создавать новое"
+  },
+  "deletePlaylists": {
+    "string": "Удалить плейлист"
+  },
+  "edit_playlist": {
+    "string": "Редактировать плейлист"
+  },
+  "error": {
+    "string": "Ошибка"
+  },
+  "newPrivacy": {
+    "string": "Конфиденциальность"
+  },
+  "newPrivate": {
+    "string": "Частный"
+  },
+  "newShareable": {
+    "string": "Общий доступ"
+  },
+  "new_playlist": {
+    "string": "Новый плейлист"
+  },
+  "not_shareable": {
+    "string": "Этот плейлист является частным."
+  },
+  "not_shareable_title": {
+    "string": "Частный"
+  },
+  "pl_description": {
+    "string": "Описание"
+  },
+  "pl_title": {
+    "string": "Заголовок"
+  },
+  "onlyYou": {
+    "string": "Только вы можете просматривать"
+  },
+  "create": {
+    "string": "Создавать"
+  },
+  "done": {
+    "string": "Выполнено"
   }
 }

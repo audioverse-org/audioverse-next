@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Favoris"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -449,6 +455,18 @@
       "value": "Profil"
     }
   ],
+  "add_to_playlist": [
+    {
+      "type": 0,
+      "value": "Ajouter à la playlist"
+    }
+  ],
+  "add_to_playlist_btn": [
+    {
+      "type": 0,
+      "value": "Ajouter à la playlist"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -525,6 +543,12 @@
     {
       "type": 0,
       "value": "Créer un compte ou se connecter pour accéder à des fonctionnalités de plus en plus nombreuses et pour vous accompagner dans l'exploration de la saine doctrine."
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Toute personne disposant du lien peut voir"
     }
   ],
   "app__features1Cta": [
@@ -1401,6 +1425,24 @@
       "value": "Contact"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Créer"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Créer un nouveau"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Supprimer la liste de lecture"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1599,6 +1641,12 @@
       "value": "Enseignements les plus écoutés"
     }
   ],
+  "done": [
+    {
+      "type": 0,
+      "value": "Terminé"
+    }
+  ],
   "downloadAppButton__altLabel": [
     {
       "type": 0,
@@ -1661,6 +1709,12 @@
       "value": "min"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "Modifier la liste de lecture"
+    }
+  ],
   "egwAudiobookList__heading": [
     {
       "type": 0,
@@ -1689,6 +1743,12 @@
     {
       "type": 1,
       "value": "count"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Erreur"
     }
   ],
   "generateFeed__audio": [
@@ -3688,7 +3748,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Annuler"
     }
   ],
   "molecule-searchBar__label": [
@@ -3815,6 +3875,30 @@
       "value": "User Account"
     }
   ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Confidentialité"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Privée"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Partageable"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "Nouvelle playlist"
+    }
+  ],
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
@@ -3891,6 +3975,24 @@
     {
       "type": 0,
       "value": "Revenir à la page Découvrir"
+    }
+  ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "Cette playlist est privée."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "Privée"
+    }
+  ],
+  "onlyYou": [
+    {
+      "type": 0,
+      "value": "Vous seul pouvez voir"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4151,6 +4253,18 @@
     {
       "type": 0,
       "value": "Orateur"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Titre"
     }
   ],
   "playButton__pauseLabel": [

@@ -2346,7 +2346,7 @@
     "string": "search"
   },
   "molecule-searchBar__cancel": {
-    "string": "Cancel"
+    "string": "キャンセル"
   },
   "molecule-teaseRecording__individualChapter": {
     "string": "Individual Chapter"
@@ -2738,5 +2738,63 @@
   "about__storyImageAlt": {
     "comment": "Alt text for the story image",
     "string": "Young woman in a field wearing headphones while reading a book."
+  },
+  "Listen_Later": {
+    "string": "図書に保存"
+  },
+  "add_to_playlist": {
+    "string": "プレイリストに追加する"
+  },
+  "add_to_playlist_btn": {
+    "comment": "Add to Playlist button label",
+    "string": "プレイリストに追加する"
+  },
+  "anyoneWithLink": {
+    "string": "リンクを知っている人は誰でも閲覧できます"
+  },
+  "create_new": {
+    "string": "新しく作る"
+  },
+  "deletePlaylists": {
+    "string": "プレイリストの削除"
+  },
+  "edit_playlist": {
+    "string": "プレイリストを編集する"
+  },
+  "error": {
+    "string": "エラー"
+  },
+  "newPrivacy": {
+    "string": "プライバシー"
+  },
+  "newPrivate": {
+    "string": "プライベート"
+  },
+  "newShareable": {
+    "string": "共有可能"
+  },
+  "new_playlist": {
+    "string": "新規プレイリスト"
+  },
+  "not_shareable": {
+    "string": "このプレイリストは非公開です。"
+  },
+  "not_shareable_title": {
+    "string": "プライベート"
+  },
+  "pl_description": {
+    "string": "内容詳細"
+  },
+  "pl_title": {
+    "string": "タイトル"
+  },
+  "onlyYou": {
+    "string": "あなただけが閲覧できます"
+  },
+  "create": {
+    "string": "作成する"
+  },
+  "done": {
+    "string": "終了"
   }
 }

@@ -1,9 +1,15 @@
 fragment cardPlaylist on UserPlaylist {
 	id
 	title
+	isPublic
 	recordings {
 		aggregate {
 			count
+		}
+		edges {
+			node {
+				id
+			}
 		}
 	}
 }

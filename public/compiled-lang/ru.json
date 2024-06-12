@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Сохранено"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -449,6 +455,18 @@
       "value": "Профиль"
     }
   ],
+  "add_to_playlist": [
+    {
+      "type": 0,
+      "value": "Добавить в плейлист"
+    }
+  ],
+  "add_to_playlist_btn": [
+    {
+      "type": 0,
+      "value": "Добавить в плейлист"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -525,6 +543,12 @@
     {
       "type": 0,
       "value": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам понять здравое библейское учение."
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Посмотреть может любой, у кого есть ссылка"
     }
   ],
   "app__features1Cta": [
@@ -1401,6 +1425,24 @@
       "value": "Контакт"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Создавать"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Создавать новое"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Удалить плейлист"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1599,6 +1641,12 @@
       "value": "Популяные проповеди"
     }
   ],
+  "done": [
+    {
+      "type": 0,
+      "value": "Выполнено"
+    }
+  ],
   "downloadAppButton__altLabel": [
     {
       "type": 0,
@@ -1657,6 +1705,12 @@
       "value": "m"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "Редактировать плейлист"
+    }
+  ],
   "egwAudiobookList__heading": [
     {
       "type": 0,
@@ -1685,6 +1739,12 @@
     {
       "type": 1,
       "value": "count"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Ошибка"
     }
   ],
   "generateFeed__audio": [
@@ -3696,7 +3756,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Отменить"
     }
   ],
   "molecule-searchBar__label": [
@@ -3823,6 +3883,30 @@
       "value": "User Account"
     }
   ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Конфиденциальность"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Частный"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Общий доступ"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "Новый плейлист"
+    }
+  ],
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
@@ -3899,6 +3983,24 @@
     {
       "type": 0,
       "value": "Назад на страницу Проповеди"
+    }
+  ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "Этот плейлист является частным."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "Частный"
+    }
+  ],
+  "onlyYou": [
+    {
+      "type": 0,
+      "value": "Только вы можете просматривать"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4159,6 +4261,18 @@
     {
       "type": 0,
       "value": "Проповедующий"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Описание"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Заголовок"
     }
   ],
   "playButton__pauseLabel": [
