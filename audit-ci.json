@@ -17,6 +17,7 @@
 		"GHSA-hhhv-q57g-882q", // Not used at runtime
 		"GHSA-ghr5-ch3p-vcr6", // Not used at runtime because this is only used via a rollup plugin
 		"GHSA-rv95-896h-c2vc", // Not used at runtime because this is only used via @lhci/cli
-		"GHSA-fr5h-rqp8-mj6g" // Does not apply to Vercel-hosted applications
+		"GHSA-fr5h-rqp8-mj6g", // Does not apply to Vercel-hosted applications
+		"GHSA-grv7-fg5c-xmjg" // Not used at runtime
 	]
 }
