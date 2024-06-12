@@ -5,11 +5,13 @@ import { PLAYLIST_REFETCH_QUERIES } from '~src/components/constants/mutations/us
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
+import PlaylistForm, {
+	PlaylistProps,
+} from '../../../../../components/organisms/PlaylistForm';
 import {
 	playlistAdd,
 	PlaylistAddMutationVariables,
 } from '../../../../../containers/library/playlist/__generated__/query';
-import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
 
 type NewPlaylistProps = {
 	id: number | string;

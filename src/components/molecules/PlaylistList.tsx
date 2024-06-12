@@ -7,7 +7,7 @@ import Loader from '~src/components/atoms/Loader';
 import {
 	GetLibraryPlaylistsDataQueryVariables,
 	useGetLibraryPlaylistsDataQuery,
-} from '../../../../../containers/library/playlist/__generated__/list';
+} from '../../containers/library/playlist/__generated__/list';
 import AddToPlaylistItem from './AddToPlaylistItem';
 import styles from './PlaylistList.module.scss';
 

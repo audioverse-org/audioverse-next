@@ -8,13 +8,15 @@ import IconButton from '~src/components/molecules/iconButton';
 
 import EditIcon from '../../../../../../public/img/icons/edit-light.svg';
 import Modal from '../../../../../components/organisms/modal';
+import PlaylistForm, {
+	PlaylistProps,
+} from '../../../../../components/organisms/PlaylistForm';
 import {
 	playlistDelete,
 	PlaylistDeleteMutationVariables,
 	playlistUpdate,
 	PlaylistUpdateMutationVariables,
 } from '../../../../../containers/library/playlist/__generated__/query';
-import PlaylistForm, { PlaylistProps } from '../PlaylistForm';
 
 type EditPlaylistProps = {
 	id: number | string;

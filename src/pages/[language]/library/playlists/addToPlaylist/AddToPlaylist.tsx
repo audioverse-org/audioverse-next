@@ -2,8 +2,8 @@ import React from 'react';
 
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
-import ListenLaterItem from './ListenLaterItem';
-import PlaylistList from './PlaylistList';
+import ListenLaterItem from '../../../../../components/molecules/ListenLaterItem';
+import PlaylistList from '../../../../../components/molecules/PlaylistList';
 
 interface AddToPlaylistProps {
 	language: string;
