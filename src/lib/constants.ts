@@ -68,7 +68,7 @@ export const IS_DEVELOPMENT =
 export const IS_PRODUCTION_DEPLOYMENT = process.env.VERCEL_ENV === 'production';
 export const DETAIL_PRERENDER_LIMIT = IS_PRODUCTION_DEPLOYMENT ? 25 : 2;
 export const LIST_PRERENDER_LIMIT = IS_PRODUCTION_DEPLOYMENT ? 10 : 1;
-export const REVALIDATE = 1 * 60 * 60;
+export const REVALIDATE = 4 * 60 * 60;
 export const REVALIDATE_FAILURE = 1 * 60;
 export const FACEBOOK_APP_ID = IS_DEVELOPMENT
 	? '804579714840682'
