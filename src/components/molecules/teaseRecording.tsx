@@ -19,6 +19,7 @@ import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import IconPlay from '~public/img/icons/play-circle.svg';
 
 import { analytics } from '../../lib/analytics';
+//import PlayProgress from '../atoms/playProgress';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';
@@ -146,6 +147,8 @@ export default function TeaseRecording({
 					{!disablePlayback && (
 						<div className={styles.play}>
 							{session.isPlaying ? (
+								// isPlaying, progressPercentage=0, activeColor, inactiveColor, isCurrentTrack
+								//<PlayProgress isPlaying={session.isPlaying } activeColor='' inactiveColor='' progressPercentage={session.progress} isCurrentTrack={session.}/>,
 								<IconButton
 									Icon={IconListeningAnimated}
 									onClick={() => {
