@@ -55,7 +55,7 @@ const ButtonAddToPlaylist: React.FC<ButtonAddToPlaylistProps> = ({
 					setIsPlaylistModalOpen(true);
 				}}
 				backgroundColor={backgroundColor}
-				className={styles.like}
+				className={styles.add}
 				color={iconColor}
 				aria-label={label}
 			/>
