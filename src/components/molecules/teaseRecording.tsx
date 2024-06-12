@@ -219,55 +219,53 @@ export default function TeaseRecording({
 	);
 
 	return (
-	
-			<div className={clsx(styles.container, small && styles.small)}>
-				{isOptionalLink ? (
-					<div
-						className={clsx(
-							styles.content,
-							styles.contentOptionalLink,
-							unpadded && styles.unpadded
-						)}
+		<div className={clsx(styles.container, small && styles.small)}>
+			{isOptionalLink ? (
+				<div
+					className={clsx(
+						styles.content,
+						styles.contentOptionalLink,
+						unpadded && styles.unpadded
+					)}
+					onClick={() => {
+						analytics.track('Card click', {
+							type: recording.recordingContentType,
+							id: recording.id,
+							title: recording.title,
+						});
+						router.push(recording.canonicalPath);
+					}}
+				>
+					{inner}
+				</div>
+			) : (
+				<Link href={recording.canonicalPath} legacyBehavior>
+					<a
+						className={clsx(styles.content, unpadded && styles.unpadded)}
 						onClick={() => {
 							analytics.track('Card click', {
 								type: recording.recordingContentType,
 								id: recording.id,
 								title: recording.title,
 							});
-							router.push(recording.canonicalPath);
 						}}
 					>
 						{inner}
-					</div>
-				) : (
-					<Link href={recording.canonicalPath} legacyBehavior>
-						<a
-							className={clsx(styles.content, unpadded && styles.unpadded)}
-							onClick={() => {
-								analytics.track('Card click', {
-									type: recording.recordingContentType,
-									id: recording.id,
-									title: recording.title,
-								});
-							}}
-						>
-							{inner}
-						</a>
-					</Link>
+					</a>
+				</Link>
+			)}
+			<div
+				className={clsx(styles.playlist, unpadded && styles.playlistUnpadded)}
+			>
+				{!disableUserFeatures && (
+					<ButtonAddToPlaylist
+						recordingId={recording.id}
+						backgroundColor={backgroundColor}
+						iconColor={BaseColors.MID_TONE}
+						iconLight
+					/>
 				)}
-				<div
-					className={clsx(styles.playlist, unpadded && styles.playlistUnpadded)}
-				>
-					{!disableUserFeatures && (
-						<ButtonAddToPlaylist
-							recordingId={recording.id}
-							backgroundColor={backgroundColor}
-							iconColor={BaseColors.MID_TONE}
-							iconLight
-						/>
-					)}
-				</div>
 			</div>
-		
+		</div>
 	);
 }
