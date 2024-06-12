@@ -67,7 +67,7 @@ export default function TeaseRecording({
 		sermon: BaseColors.WHITE,
 		song: BaseColors.SONG_B,
 		story: BaseColors.STORY_B,
-		playlistItem: BaseColors.PLAYLIST_B,
+		playlistItem: BaseColors.WHITE,
 		topic: BaseColors.TOPIC_B,
 	}[theme];
 	const isDarkTheme = isThemeDark(theme);
@@ -219,7 +219,7 @@ export default function TeaseRecording({
 	);
 
 	return (
-		<>
+	
 			<div className={clsx(styles.container, small && styles.small)}>
 				{isOptionalLink ? (
 					<div
@@ -268,6 +268,6 @@ export default function TeaseRecording({
 					)}
 				</div>
 			</div>
-		</>
+		
 	);
 }
