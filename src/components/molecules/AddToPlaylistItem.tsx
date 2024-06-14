@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 
 import { CardPlaylistFragment } from '~src/components/molecules/card/__generated__/playlist';
@@ -11,6 +12,7 @@ type Props = {
 };
 
 const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
+	const queryClient = useQueryClient();
 	const { addToPlaylist, removeFromPlaylist, isLoading } = useRecordingPlaylist(
 		playlist,
 		recordingId
@@ -25,6 +27,7 @@ const AddToPlaylistItem = ({ item: playlist, recordingId }: Props) => {
 			addToPlaylist();
 		} else {
 			removeFromPlaylist();
+			queryClient.refetchQueries(['playlist', playlist.id]);
 		}
 	};
 

@@ -1,10 +1,16 @@
+// getServerSideProps.tsx
+
+import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getLibraryPlaylistPageData } from '~containers/library/playlist/__generated__/detail';
 import LibraryPlaylistDetail, {
 	ILibraryPlaylistDetailProps,
 } from '~containers/library/playlist/detail';
 import { storeRequest } from '~lib/api/storeRequest';
+import {
+	fetchPlaylist,
+	prefetchPlaylist,
+} from '~src/components/atoms/fetchPlaylist';
 
 export default LibraryPlaylistDetail;
 
@@ -14,19 +20,27 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext<{
 	language: string;
 	id: string;
-}>): Promise<GetServerSidePropsResult<ILibraryPlaylistDetailProps>> {
+}>): Promise<
+	GetServerSidePropsResult<
+		ILibraryPlaylistDetailProps & {
+			dehydratedState: DehydratedState;
+		}
+	>
+> {
 	storeRequest(req);
-	const { me } = params?.id
-		? await getLibraryPlaylistPageData({
-				id: params.id,
-		  }).catch(() => ({
-				me: null,
-		  }))
-		: { me: null };
+
+	const id = params?.id.toString(); // Ensure id is treated as a string
+
+	const queryClient = new QueryClient();
+
+	await prefetchPlaylist(queryClient, id as string);
+
+	const playlist = await fetchPlaylist(id as string);
 
 	return {
 		props: {
-			playlist: me?.user.playlist || null,
+			playlist,
+			dehydratedState: dehydrate(queryClient),
 		},
 	};
 }

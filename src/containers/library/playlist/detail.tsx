@@ -1,5 +1,6 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
@@ -15,6 +16,10 @@ import DefinitionList, {
 import Tease from '~components/molecules/tease';
 import { BaseColors } from '~lib/constants';
 import { formatLongDateTime } from '~lib/date';
+import {
+	invalidatePlaylist,
+	usePlaylist,
+} from '~src/components/atoms/fetchPlaylist';
 import Loader from '~src/components/atoms/Loader';
 import ButtonShare from '~src/components/molecules/buttonShare';
 import IconButton from '~src/components/molecules/iconButton';
@@ -26,10 +31,7 @@ import { Must } from '~src/types/types';
 import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';
 import EditPlaylist from '../../../../src/pages/[language]/library/playlists/edit';
 import Modal from '../../../components/organisms/modal';
-import {
-	getLibraryPlaylistPageData,
-	GetLibraryPlaylistPageDataQuery,
-} from './__generated__/detail';
+import { GetLibraryPlaylistPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
 export type ILibraryPlaylistDetailProps = {
@@ -41,40 +43,41 @@ export type ILibraryPlaylistDetailProps = {
 function LibraryPlaylistDetail({
 	playlist,
 }: Must<ILibraryPlaylistDetailProps>): JSX.Element {
-	const [currentPlaylist, setCurrentPlaylist] = useState<
-		ILibraryPlaylistDetailProps['playlist'] | null
-	>(playlist);
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
 	const router = useRouter();
 	const languageRoute = useLanguageRoute();
+	const queryClient = useQueryClient();
 
-	const fetchPlaylist = async (id: string) => {
-		try {
-			const { me } = id
-				? await getLibraryPlaylistPageData({
-						id: id,
-				  }).catch(() => ({
-						me: null,
-				  }))
-				: { me: null };
+	const { data: updatedPlaylist, refetch } = usePlaylist(
+		router.query.id as string
+	);
 
-			setCurrentPlaylist(me?.user?.playlist || null);
-		} catch (err) {
-			console.error('Error loading playlist:', err);
-		}
-	};
+	const fetchUpdatedPlaylist = useCallback(
+		async (id: string) => {
+			try {
+				await invalidatePlaylist(queryClient, id);
+				await refetch();
+			} catch (err) {
+				console.error('Error loading playlist:', err);
+			}
+		},
+		[queryClient, refetch]
+	);
 
 	useEffect(() => {
 		if (router.query.id) {
-			fetchPlaylist(router.query.id as string);
+			fetchUpdatedPlaylist(router.query.id as string);
 		}
-	}, [router.query.id]);
+	}, [router.query.id, fetchUpdatedPlaylist]);
+
+	const currentPlaylist = updatedPlaylist || playlist;
 
 	if (!currentPlaylist) {
 		return <Loader />;
 	}
 
-	const { title, recordings, createdAt, summary } = currentPlaylist;
+	const { id, title, recordings, createdAt, summary, isPublic } =
+		currentPlaylist;
 
 	const details: IDefinitionListTerm[] = [];
 	if (summary) {
@@ -115,7 +118,7 @@ function LibraryPlaylistDetail({
 							values={{ count: recordings.aggregate?.count }}
 						/>
 					</Heading6>
-					{!currentPlaylist.isPublic ? (
+					{!isPublic ? (
 						<IconButton
 							Icon={ShareIcon}
 							color={BaseColors.DARK}
@@ -127,18 +130,18 @@ function LibraryPlaylistDetail({
 						/>
 					) : (
 						<ButtonShare
-							shareUrl={`https://audioverse.org/${currentPlaylist.language}/playlists/${currentPlaylist.id}`}
+							shareUrl={`https://audioverse.org/${playlist.language}/playlists/${id}`}
 							backgroundColor={BaseColors.CREAM}
 							light={true}
 						/>
 					)}
 					{!(router.route === '/[language]/playlists/[playlist]') && (
 						<EditPlaylist
-							id={currentPlaylist.id}
-							title={currentPlaylist.title}
-							summary={currentPlaylist.summary}
-							isPublic={currentPlaylist.isPublic}
-							onEditSuccess={() => fetchPlaylist(currentPlaylist.id + '')} // Fetch playlist on edit success
+							id={id}
+							title={title}
+							summary={summary}
+							isPublic={isPublic}
+							onEditSuccess={() => fetchUpdatedPlaylist(id as string)}
 						/>
 					)}
 				</div>
@@ -153,7 +156,7 @@ function LibraryPlaylistDetail({
 								...recording,
 								canonicalPath: root
 									.lang(languageRoute)
-									.playlists.playlist(currentPlaylist.id)
+									.playlists.playlist(id)
 									.items(recording.canonicalPath)
 									.get(),
 							}}
