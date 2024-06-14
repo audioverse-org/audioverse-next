@@ -1,4 +1,7 @@
 {
+  "Listen_Later": {
+    "string": "Listen Later"
+  },
   "RecordingFavorite__favorite": {
     "comment": "Recording favorite button label",
     "string": "Favorite"
@@ -229,6 +232,13 @@
   "accountNav__profile": {
     "string": "Profile"
   },
+  "add_to_playlist": {
+    "string": "Add To Playlist"
+  },
+  "add_to_playlist_btn": {
+    "comment": "Add to Playlist button label",
+    "string": "Add to playlist"
+  },
   "andGlobalModals__authCopy": {
     "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
   },
@@ -267,6 +277,9 @@
   },
   "andOnboarding__intro": {
     "string": "Create or login to an account and access a growing set of features to help you explore sound doctrine."
+  },
+  "anyoneWithLink": {
+    "string": "Anyone with the link can view"
   },
   "app__features1Cta": {
     "string": "Discover Audio"
@@ -668,6 +681,15 @@
   "contact_footer": {
     "string": "Contact"
   },
+  "create": {
+    "string": "Create"
+  },
+  "create_new": {
+    "string": "Create New"
+  },
+  "deletePlaylists": {
+    "string": "Delete Playlist"
+  },
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
@@ -767,6 +789,9 @@
   "discover_trendingTeachingsHeading": {
     "string": "Trending Teachings"
   },
+  "done": {
+    "string": "Done"
+  },
   "downloadAppButton__altLabel": {
     "string": "Download Now"
   },
@@ -791,6 +816,9 @@
     "comment": "duration minutes",
     "string": "{minutes}m"
   },
+  "edit_playlist": {
+    "string": "Edit Playlist"
+  },
   "egwAudiobookList__heading": {
     "string": "Ellen White"
   },
@@ -799,6 +827,9 @@
   },
   "embed__partInfo": {
     "string": "Part {index} of {count}"
+  },
+  "error": {
+    "string": "Error"
   },
   "generateFeed__audio": {
     "string": "Audio"
@@ -1797,6 +1828,18 @@
   "navigation__nameFallback": {
     "string": "User Account"
   },
+  "newPrivacy": {
+    "string": "Privacy"
+  },
+  "newPrivate": {
+    "string": "Private"
+  },
+  "newShareable": {
+    "string": "Shareable"
+  },
+  "new_playlist": {
+    "string": "New playlist"
+  },
   "newsLetterForm__checkboxNewsletter": {
     "string": "Newsletter (typically about once a month)"
   },
@@ -1835,6 +1878,15 @@
   },
   "notFound__toDiscover": {
     "string": "Go back to Discover"
+  },
+  "not_shareable": {
+    "string": "This Playlist is Private."
+  },
+  "not_shareable_title": {
+    "string": "Private"
+  },
+  "onlyYou": {
+    "string": "Only you can view"
   },
   "organism-mobileHeader__more": {
     "comment": "more button label",
@@ -1972,6 +2024,12 @@
   },
   "personTypeLockup_type": {
     "string": "Presenter"
+  },
+  "pl_description": {
+    "string": "Description"
+  },
+  "pl_title": {
+    "string": "Title"
   },
   "playButton__pauseLabel": {
     "comment": "play button pause label",

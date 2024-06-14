@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Escute Depois"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -449,6 +455,18 @@
       "value": "Perfil"
     }
   ],
+  "add_to_playlist": [
+    {
+      "type": 0,
+      "value": "Adicionar à Playlist"
+    }
+  ],
+  "add_to_playlist_btn": [
+    {
+      "type": 0,
+      "value": "Adicionar à Playlist"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -525,6 +543,12 @@
     {
       "type": 0,
       "value": "Criar ou acessar uma conta e acessar um conjunto de recursos crescente para ajudá-lo a explorar a sã doutrina."
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Qualquer pessoa com o link pode visualizar"
     }
   ],
   "app__features1Cta": [
@@ -1401,6 +1425,24 @@
       "value": "Contato"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Criar"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Crie um novo"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Excluir Playlist"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1599,6 +1641,12 @@
       "value": "Ensinamentos em alta"
     }
   ],
+  "done": [
+    {
+      "type": 0,
+      "value": "Concluído"
+    }
+  ],
   "downloadAppButton__altLabel": [
     {
       "type": 0,
@@ -1661,6 +1709,12 @@
       "value": "m"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "Editar playlist"
+    }
+  ],
   "egwAudiobookList__heading": [
     {
       "type": 0,
@@ -1689,6 +1743,12 @@
     {
       "type": 1,
       "value": "count"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Error"
     }
   ],
   "generateFeed__audio": [
@@ -3696,7 +3756,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Cancelar"
     }
   ],
   "molecule-searchBar__label": [
@@ -3781,6 +3841,30 @@
       "value": "Conta do usuário"
     }
   ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Privacidade"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Privada"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Compartilhável"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "Nova Playlist"
+    }
+  ],
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
@@ -3857,6 +3941,24 @@
     {
       "type": 0,
       "value": "Volte para Descobrir"
+    }
+  ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "Esta playlist é privada."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "Privada"
+    }
+  ],
+  "onlyYou": [
+    {
+      "type": 0,
+      "value": "Só você pode visualizar"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4117,6 +4219,18 @@
     {
       "type": 0,
       "value": "Orador"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Descrição"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Título"
     }
   ],
   "playButton__pauseLabel": [

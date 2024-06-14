@@ -8,7 +8,6 @@ import Heading2 from '~components/atoms/heading2';
 import Heading3 from '~components/atoms/heading3';
 import Heading6 from '~components/atoms/heading6';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
-import { useIsRecordingFavorited } from '~lib/api/useIsRecordingFavorited';
 import { BaseColors } from '~lib/constants';
 import { useFormattedDuration } from '~lib/time';
 import usePlaybackSession, { PlaySource } from '~lib/usePlaybackSession';
@@ -21,7 +20,7 @@ import IconPlay from '~public/img/icons/play-circle.svg';
 import { analytics } from '../../lib/analytics';
 //import PlayProgress from '../atoms/playProgress';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
-import ButtonFavorite from './buttonFavorite';
+import ButtonAddToPlaylist from './buttonAddToPlaylist';
 import { CardTheme } from './card/base/withCardTheme';
 import IconButton from './iconButton';
 import PersonLockup from './personLockup';
@@ -52,11 +51,6 @@ export default function TeaseRecording({
 	disablePlayback = false,
 }: Props): JSX.Element {
 	const intl = useIntl();
-	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
-		recording.id,
-		recording.sequence?.id,
-		disableUserFeatures
-	);
 	const router = useRouter();
 	const session = usePlaybackSession(recording, { playlistRecordings });
 	const progress = session.progress;
@@ -137,12 +131,7 @@ export default function TeaseRecording({
 				</div>
 			)}
 			<div className={styles.flexGrow}>
-				<div
-					className={clsx(
-						styles.details,
-						isFavorited && styles.detailsWithLike
-					)}
-				>
+				<div className={clsx(styles.details, styles.detailsWithLike)}>
 					{/* Play should be here */}
 					{!disablePlayback && (
 						<div className={styles.play}>
@@ -194,9 +183,7 @@ export default function TeaseRecording({
 						styles.contentOptionalLink,
 						unpadded && styles.unpadded
 					)}
-					onClick={(e) => {
-						e.stopPropagation();
-
+					onClick={() => {
 						analytics.track('Card click', {
 							type: recording.recordingContentType,
 							id: recording.id,
@@ -223,23 +210,18 @@ export default function TeaseRecording({
 					</a>
 				</Link>
 			)}
-
-			{!disableUserFeatures && (
-				<ButtonFavorite
-					favoritedType="Recording"
-					favoritedId={recording.id}
-					favoritedTitle={recording.title}
-					isFavorited={!!isFavorited}
-					toggleFavorited={toggleFavorited}
-					backgroundColor={backgroundColor}
-					className={clsx(
-						styles.like,
-						unpadded && styles.likeUnpadded,
-						isFavorited && styles.likeActive
-					)}
-					light
-				/>
-			)}
+			<div
+				className={clsx(styles.playlist, unpadded && styles.playlistUnpadded)}
+			>
+				{!disableUserFeatures && (
+					<ButtonAddToPlaylist
+						recordingId={recording.id}
+						backgroundColor={backgroundColor}
+						iconColor={BaseColors.MID_TONE}
+						iconLight
+					/>
+				)}
+			</div>
 		</div>
 	);
 }

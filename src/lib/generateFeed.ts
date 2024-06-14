@@ -13,7 +13,7 @@ import getIntl from './getIntl';
 
 export const sendRSSHeaders = (res: GetServerSidePropsContext['res']) => {
 	res.setHeader('Content-Type', 'text/xml');
-	res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
+	res.setHeader('Cache-Control', 's-maxage=14400, stale-while-revalidate');
 };
 
 export async function generateFeed(

@@ -2507,7 +2507,7 @@
     "string": "search"
   },
   "molecule-searchBar__cancel": {
-    "string": "Cancel"
+    "string": "Cancelar"
   },
   "molecules-pagination__nextLabelMobile": {
     "string": "Próximo"
@@ -2722,5 +2722,63 @@
   "about__storyImageAlt": {
     "comment": "Alt text for the story image",
     "string": "Young woman in a field wearing headphones while reading a book."
+  },
+  "Listen_Later": {
+    "string": "Escute Depois"
+  },
+  "add_to_playlist": {
+    "string": "Adicionar à Playlist"
+  },
+  "add_to_playlist_btn": {
+    "comment": "Add to Playlist button label",
+    "string": "Adicionar à Playlist"
+  },
+  "anyoneWithLink": {
+    "string": "Qualquer pessoa com o link pode visualizar"
+  },
+  "create_new": {
+    "string": "Crie um novo"
+  },
+  "deletePlaylists": {
+    "string": "Excluir Playlist"
+  },
+  "edit_playlist": {
+    "string": "Editar playlist"
+  },
+  "error": {
+    "string": "Error"
+  },
+  "newPrivacy": {
+    "string": "Privacidade"
+  },
+  "newPrivate": {
+    "string": "Privada"
+  },
+  "newShareable": {
+    "string": "Compartilhável"
+  },
+  "new_playlist": {
+    "string": "Nova Playlist"
+  },
+  "not_shareable": {
+    "string": "Esta playlist é privada."
+  },
+  "not_shareable_title": {
+    "string": "Privada"
+  },
+  "pl_description": {
+    "string": "Descrição"
+  },
+  "pl_title": {
+    "string": "Título"
+  },
+  "onlyYou": {
+    "string": "Só você pode visualizar"
+  },
+  "create": {
+    "string": "Criar"
+  },
+  "done": {
+    "string": "Concluído"
   }
 }

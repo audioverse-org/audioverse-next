@@ -1,0 +1,91 @@
+@import '../../styles/common.scss';
+.container {
+	display: flex;
+	flex: 1;
+	background-color: $ts-white;
+	padding: 24px;
+}
+
+.header {
+	margin-bottom: 8px;
+}
+
+.privacyLabel {
+	margin-bottom: 4px;
+}
+
+.privacyInput {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.privacyInputLeft {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	float: left;
+}
+
+.privacyInputLeftLabel {
+	margin-left: 4px;
+}
+
+.privacyInputRightIcon {
+	float: right;
+	padding-top: 15px;
+}
+
+.privacyContainer {
+	margin-top: 4px;
+	border: 1px solid $ts-red;
+	border-radius: 4px;
+	padding: 4px 16px 16px;
+	clear: both;
+}
+
+.privacyOption {
+	all: unset;
+	display: flex;
+	flex-direction: row;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.privacyOption:focus {
+	background-color: $ts-darkened-white;
+}
+
+.privacyOptionRight {
+	margin-left: 4px;
+}
+
+.privacyOptionSubtitle {
+	margin: 0;
+	font-size: 11px;
+	line-height: 13px;
+}
+
+.privacyOptionShareable {
+	margin-top: 16px;
+}
+
+.footer {
+	display: flex;
+	flex-direction: row;
+	margin-top: 16px;
+	clear: both;
+}
+
+.cancel {
+	margin-left: 16px;
+	align-self: center;
+}
+.privacyButton {
+	all: unset;
+	display: block;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}

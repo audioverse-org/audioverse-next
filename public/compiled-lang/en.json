@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Listen Later"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -449,6 +455,18 @@
       "value": "Profile"
     }
   ],
+  "add_to_playlist": [
+    {
+      "type": 0,
+      "value": "Add To Playlist"
+    }
+  ],
+  "add_to_playlist_btn": [
+    {
+      "type": 0,
+      "value": "Add to playlist"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -525,6 +543,12 @@
     {
       "type": 0,
       "value": "Create or login to an account and access a growing set of features to help you explore sound doctrine."
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Anyone with the link can view"
     }
   ],
   "app__features1Cta": [
@@ -1401,6 +1425,24 @@
       "value": "Contact"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Create New"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Delete Playlist"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1599,6 +1641,12 @@
       "value": "Trending Teachings"
     }
   ],
+  "done": [
+    {
+      "type": 0,
+      "value": "Done"
+    }
+  ],
   "downloadAppButton__altLabel": [
     {
       "type": 0,
@@ -1661,6 +1709,12 @@
       "value": "m"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "Edit Playlist"
+    }
+  ],
   "egwAudiobookList__heading": [
     {
       "type": 0,
@@ -1689,6 +1743,12 @@
     {
       "type": 1,
       "value": "count"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Error"
     }
   ],
   "generateFeed__audio": [
@@ -3777,6 +3837,30 @@
       "value": "User Account"
     }
   ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Privacy"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Shareable"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "New playlist"
+    }
+  ],
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
@@ -3853,6 +3937,24 @@
     {
       "type": 0,
       "value": "Go back to Discover"
+    }
+  ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "This Playlist is Private."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "onlyYou": [
+    {
+      "type": 0,
+      "value": "Only you can view"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4113,6 +4215,18 @@
     {
       "type": 0,
       "value": "Presenter"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Title"
     }
   ],
   "playButton__pauseLabel": [

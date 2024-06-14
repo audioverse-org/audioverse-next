@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Gespeichert "
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -449,6 +455,18 @@
       "value": "Profil"
     }
   ],
+  "add_to_playlist": [
+    {
+      "type": 0,
+      "value": "Zur Wiedergabeliste hinzufügen"
+    }
+  ],
+  "add_to_playlist_btn": [
+    {
+      "type": 0,
+      "value": "Zur Wiedergabeliste hinzufügen"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -525,6 +543,12 @@
     {
       "type": 0,
       "value": "Erstelle ein Konto oder melde dich an, um eine immer größer werdende Anzahl an Funktionen zum Studium der gesunden Lehre zu nutzen."
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Jeder mit dem Link kann es ansehen"
     }
   ],
   "app__features1Cta": [
@@ -1401,6 +1425,24 @@
       "value": "Kontakt"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Erstellen"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Erstelle neu"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Playlist löschen"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1599,6 +1641,12 @@
       "value": "Beliebte Lehren"
     }
   ],
+  "done": [
+    {
+      "type": 0,
+      "value": "Fertig"
+    }
+  ],
   "downloadAppButton__altLabel": [
     {
       "type": 0,
@@ -1661,6 +1709,12 @@
       "value": " Minute(n)"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "Playlist bearbeiten"
+    }
+  ],
   "egwAudiobookList__heading": [
     {
       "type": 0,
@@ -1690,6 +1744,8 @@
       "type": 1,
       "value": "count"
     }
+  ],
+  "error": [
   ],
   "generateFeed__audio": [
     {
@@ -3700,7 +3756,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Stornieren"
     }
   ],
   "molecule-searchBar__label": [
@@ -3785,6 +3841,30 @@
       "value": "User Account"
     }
   ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Datenschutz"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Privat"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Teilbar"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "Neue Playlist"
+    }
+  ],
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
@@ -3861,6 +3941,24 @@
     {
       "type": 0,
       "value": "Zurückkehren zu \"Entdecken\""
+    }
+  ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "Diese Playlist ist privat."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "Privat"
+    }
+  ],
+  "onlyYou": [
+    {
+      "type": 0,
+      "value": "Nur Sie können es sehen"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4121,6 +4219,18 @@
     {
       "type": 0,
       "value": "Sprecher"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Beschreibung"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Titel"
     }
   ],
   "playButton__pauseLabel": [

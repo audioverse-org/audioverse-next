@@ -1,0 +1,41 @@
+.pressable {
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.line {
+	height: 1px;
+	background-color: #6b7680;
+	margin: 8px 0;
+}
+
+.leftContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.leftIcon {
+	margin: 4px;
+}
+
+.title {
+	font-family: var(--font-sans);
+	font-size: 14px;
+	color: #323e48;
+}
+
+.rightIcon {
+	margin-left: 8px;
+}
+
+.loading {
+	margin-left: 8px;
+	font-size: 14px;
+}

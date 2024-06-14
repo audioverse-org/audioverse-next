@@ -2342,7 +2342,7 @@
     "string": "search"
   },
   "molecule-searchBar__cancel": {
-    "string": "Cancel"
+    "string": "取消"
   },
   "molecules-pagination__nextLabelMobile": {
     "string": "Next"
@@ -2722,5 +2722,63 @@
   "about__storyImageAlt": {
     "comment": "Alt text for the story image",
     "string": "Young woman in a field wearing headphones while reading a book."
+  },
+  "Listen_Later": {
+    "string": "已保存"
+  },
+  "add_to_playlist": {
+    "string": "新增到播放列表"
+  },
+  "add_to_playlist_btn": {
+    "comment": "Add to Playlist button label",
+    "string": "新增到播放列表"
+  },
+  "anyoneWithLink": {
+    "string": "知道連結的人都可以查看"
+  },
+  "create_new": {
+    "string": "創建新的"
+  },
+  "deletePlaylists": {
+    "string": "刪除播放清單"
+  },
+  "edit_playlist": {
+    "string": "編輯播放列表"
+  },
+  "error": {
+    "string": "錯誤"
+  },
+  "newPrivacy": {
+    "string": "隐私"
+  },
+  "newPrivate": {
+    "string": "私人的"
+  },
+  "newShareable": {
+    "string": "可分享"
+  },
+  "new_playlist": {
+    "string": "新播放列表"
+  },
+  "not_shareable": {
+    "string": "該播放清單是私人的。"
+  },
+  "not_shareable_title": {
+    "string": "私人的"
+  },
+  "pl_description": {
+    "string": "描述"
+  },
+  "pl_title": {
+    "string": "標題"
+  },
+  "onlyYou": {
+    "string": "只有您可以查看"
+  },
+  "create": {
+    "string": "創造"
+  },
+  "done": {
+    "string": "已完成的"
   }
 }

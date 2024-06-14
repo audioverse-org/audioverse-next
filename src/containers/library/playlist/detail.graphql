@@ -6,6 +6,8 @@ query getLibraryPlaylistPageData($id: ID!) {
 				title
 				createdAt
 				summary
+				isPublic
+				language
 				recordings(offset: 0, first: 1500) {
 					nodes {
 						...cardRecording
@@ -25,6 +27,8 @@ query getPlaylistPageData($id: ID!) {
 		title
 		createdAt
 		summary
+		isPublic
+		language
 		recordings(offset: 0, first: 1500) {
 			nodes {
 				...cardRecording

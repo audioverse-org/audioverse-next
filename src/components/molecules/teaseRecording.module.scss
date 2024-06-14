@@ -106,7 +106,7 @@ $like-icon-padding: 8px;
 	margin-left: 6px;
 }
 
-.like {
+.playlist {
 	display: none;
 	position: absolute;
 	bottom: #{$container-padding + $right-icon-offset};
@@ -134,5 +134,15 @@ $like-icon-padding: 8px;
 	}
 	.heading {
 		margin-bottom: 4px;
+	}
+	.like {
+		bottom: -1px;
+	}
+}
+
+.rightButtons > *:not(:first-child) {
+	margin-left: 8px;
+	@media (min-width: $breakpoint-sm) {
+		margin-left: 16px;
 	}
 }

@@ -3,8 +3,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading6 from '~components/atoms/heading6';
 import { BaseColors } from '~lib/constants';
-import IconShare from '~public/img/icons/icon-share.svg';
-import IconShareLight from '~public/img/icons/icon-share-light.svg';
+import ShareIcon from '~public/img/icons/share-alt.svg';
+import ShareIconLight from '~public/img/icons/share-alt-light.svg';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonShare.module.scss';
@@ -128,7 +128,7 @@ export default function ButtonShare({
 				id="shareMenu"
 				trigger={({ isOpen, ...props }) => (
 					<IconButton
-						Icon={light ? IconShareLight : IconShare}
+						Icon={light ? ShareIconLight : ShareIcon}
 						color={
 							isBackgroundColorDark(backgroundColor)
 								? isOpen

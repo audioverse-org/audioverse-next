@@ -1,4 +1,10 @@
 {
+  "Listen_Later": [
+    {
+      "type": 0,
+      "value": "Guardado"
+    }
+  ],
   "RecordingFavorite__favorite": [
     {
       "type": 0,
@@ -449,6 +455,18 @@
       "value": "Perfil"
     }
   ],
+  "add_to_playlist": [
+    {
+      "type": 0,
+      "value": "Agregar a lista de reproducción"
+    }
+  ],
+  "add_to_playlist_btn": [
+    {
+      "type": 0,
+      "value": "Agregar a lista de reproducción"
+    }
+  ],
   "andGlobalModals__authCopy": [
     {
       "type": 0,
@@ -525,6 +543,12 @@
     {
       "type": 0,
       "value": "Cree una cuenta o inicie sesión y acceda a un conjunto de características cada vez mayor para ayudarle a explorar la sana doctrina."
+    }
+  ],
+  "anyoneWithLink": [
+    {
+      "type": 0,
+      "value": "Cualquier persona con el enlace puede ver"
     }
   ],
   "app__features1Cta": [
@@ -1421,6 +1445,24 @@
       "value": "Contacto"
     }
   ],
+  "create": [
+    {
+      "type": 0,
+      "value": "Crear"
+    }
+  ],
+  "create_new": [
+    {
+      "type": 0,
+      "value": "Crear nueva"
+    }
+  ],
+  "deletePlaylists": [
+    {
+      "type": 0,
+      "value": "Eliminar lista de reproducción"
+    }
+  ],
   "discoverCollections__title": [
     {
       "type": 0,
@@ -1619,6 +1661,12 @@
       "value": "Lecciones que son tendencia"
     }
   ],
+  "done": [
+    {
+      "type": 0,
+      "value": "Terminado"
+    }
+  ],
   "downloadAppButton__altLabel": [
     {
       "type": 0,
@@ -1681,6 +1729,12 @@
       "value": "m"
     }
   ],
+  "edit_playlist": [
+    {
+      "type": 0,
+      "value": "Editar lista de reproducción"
+    }
+  ],
   "egwAudiobookList__heading": [
     {
       "type": 0,
@@ -1709,6 +1763,12 @@
     {
       "type": 1,
       "value": "count"
+    }
+  ],
+  "error": [
+    {
+      "type": 0,
+      "value": "Error"
     }
   ],
   "generateFeed__audio": [
@@ -3712,7 +3772,7 @@
   "molecule-searchBar__cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "Cancelar"
     }
   ],
   "molecule-searchBar__label": [
@@ -3797,6 +3857,30 @@
       "value": "User Account"
     }
   ],
+  "newPrivacy": [
+    {
+      "type": 0,
+      "value": "Privacidad"
+    }
+  ],
+  "newPrivate": [
+    {
+      "type": 0,
+      "value": "Privada"
+    }
+  ],
+  "newShareable": [
+    {
+      "type": 0,
+      "value": "Compartible"
+    }
+  ],
+  "new_playlist": [
+    {
+      "type": 0,
+      "value": "Nueva lista de reproducción"
+    }
+  ],
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
@@ -3873,6 +3957,24 @@
     {
       "type": 0,
       "value": "Volver a “Descubrir”"
+    }
+  ],
+  "not_shareable": [
+    {
+      "type": 0,
+      "value": "Esta lista de reproducción es privada."
+    }
+  ],
+  "not_shareable_title": [
+    {
+      "type": 0,
+      "value": "Privada"
+    }
+  ],
+  "onlyYou": [
+    {
+      "type": 0,
+      "value": "Sólo tú puedes ver"
     }
   ],
   "organism-mobileHeader__more": [
@@ -4133,6 +4235,18 @@
     {
       "type": 0,
       "value": "Presentador"
+    }
+  ],
+  "pl_description": [
+    {
+      "type": 0,
+      "value": "Descripción"
+    }
+  ],
+  "pl_title": [
+    {
+      "type": 0,
+      "value": "Título"
     }
   ],
   "playButton__pauseLabel": [
