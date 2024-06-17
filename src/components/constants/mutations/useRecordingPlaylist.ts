@@ -14,8 +14,6 @@ import {
 	PlaylistRecordingRemoveMutationVariables,
 } from '../mutations/__generated__/recordingPlaylist';
 
-export const PLAYLIST_REFETCH_QUERIES = ['getLibraryPlaylistsData'];
-
 export function useRecordingPlaylist(
 	playlist?: Pick<UserPlaylist, 'id'>,
 	recordingId?: Recording['id']
@@ -27,6 +25,7 @@ export function useRecordingPlaylist(
 	const requireUser = useRequireUser();
 	const queryClient = useQueryClient();
 	const [isLoading, setIsLoading] = useState(false);
+	const invalidateQueries = ['getLibraryPlaylistsData'];
 
 	const addToPlaylist = () => {
 		if (!playlist || !recordingId) return;
@@ -43,7 +42,11 @@ export function useRecordingPlaylist(
 		>(PlaylistRecordingAddDocument, variablesAdd)()
 			.then((data) => {
 				if (data?.playlistRecordingAdd) {
-					queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
+					queryClient.invalidateQueries(invalidateQueries);
+					queryClient.invalidateQueries([
+						'getLibraryPlaylistPageData',
+						{ id: playlist.id },
+					]);
 				}
 			})
 			.catch((error) => {
@@ -69,7 +72,11 @@ export function useRecordingPlaylist(
 		>(PlaylistRecordingRemoveDocument, variablesRemove)()
 			.then((data) => {
 				if (data?.playlistRecordingRemove) {
-					queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
+					queryClient.invalidateQueries(invalidateQueries);
+					queryClient.invalidateQueries([
+						'getLibraryPlaylistPageData',
+						{ id: playlist.id },
+					]);
 				}
 			})
 			.catch((error) => {

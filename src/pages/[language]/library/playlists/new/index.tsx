@@ -1,7 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 
-import { PLAYLIST_REFETCH_QUERIES } from '~src/components/constants/mutations/useRecordingPlaylist';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
@@ -30,9 +29,9 @@ const NewPlaylist: React.FC<NewPlaylistProps> = ({ id, onClose }) => {
 					...playlist,
 				},
 			});
-			if (data) {
+			if (data.playlistAdd) {
+				await queryClient.invalidateQueries(['getLibraryPlaylistsData']);
 				onClose();
-				queryClient.invalidateQueries(PLAYLIST_REFETCH_QUERIES);
 			}
 		} catch (error) {
 			console.error('Error adding playlist:', error);
