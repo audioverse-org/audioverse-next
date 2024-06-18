@@ -1,28 +1,29 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React from 'react';
 
+//import { FormattedMessage } from 'react-intl';
 import Heading2 from '~components/atoms/heading2';
 import Heading3 from '~components/atoms/heading3';
-import Heading6 from '~components/atoms/heading6';
+//import Heading6 from '~components/atoms/heading6';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
 import { useFormattedDuration } from '~lib/time';
-import usePlaybackSession, { PlaySource } from '~lib/usePlaybackSession';
-import IconClosure from '~public/img/icons/icon-closure.svg';
-import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
-import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg';
+import usePlaybackSession from '~lib/usePlaybackSession';
+//import IconClosure from '~public/img/icons/icon-closure.svg';
+//import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
+//import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
-import IconPlay from '~public/img/icons/play-circle.svg';
 
+//import IconPlay from '~public/img/icons/play-circle.svg';
 import { analytics } from '../../lib/analytics';
 //import PlayProgress from '../atoms/playProgress';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonAddToPlaylist from './buttonAddToPlaylist';
+import PlayButton from './buttonPlayCircle';
 import { CardTheme } from './card/base/withCardTheme';
-import IconButton from './iconButton';
+//import IconButton from './iconButton';
 import PersonLockup from './personLockup';
 import styles from './teaseRecording.module.scss';
 
@@ -50,11 +51,11 @@ export default function TeaseRecording({
 	disableUserFeatures,
 	disablePlayback = false,
 }: Props): JSX.Element {
-	const intl = useIntl();
+	//const intl = useIntl();
 	const router = useRouter();
 	const session = usePlaybackSession(recording, { playlistRecordings });
 	const progress = session.progress;
-	const [personsExpanded, setPersonsExpanded] = useState(false);
+	//const [personsExpanded, setPersonsExpanded] = useState(false);
 
 	const backgroundColor = {
 		audiobookTrack: BaseColors.BOOK_B,
@@ -85,11 +86,8 @@ export default function TeaseRecording({
 				)}
 			</div>
 			{!hidePresenters && (
-				<div>
-					{(personsExpanded
-						? recording.persons
-						: recording.persons.slice(0, 2)
-					).map((p) => (
+				<div className={styles.presenters}>
+					{recording.persons.slice(0, 3).map((p) => (
 						<div key={p.canonicalPath} className={styles.presenter}>
 							<PersonLockup
 								person={p}
@@ -101,7 +99,7 @@ export default function TeaseRecording({
 							/>
 						</div>
 					))}
-					{recording.persons.length > 2 && (
+					{/* {recording.persons.length > 2 && (
 						<div
 							className={clsx(styles.morePersons, isDarkTheme && styles.dark)}
 							onClick={(e) => {
@@ -127,44 +125,19 @@ export default function TeaseRecording({
 								)}
 							</Heading6>
 						</div>
-					)}
+					)} */}
 				</div>
 			)}
 			<div className={styles.flexGrow}>
 				<div className={clsx(styles.details, styles.detailsWithLike)}>
-					{/* Play should be here */}
 					{!disablePlayback && (
-						<div className={styles.play}>
-							{session.isPlaying ? (
-								// isPlaying, progressPercentage=0, activeColor, inactiveColor, isCurrentTrack
-								//<PlayProgress isPlaying={session.isPlaying } activeColor='' inactiveColor='' progressPercentage={session.progress} isCurrentTrack={session.}/>,
-								<IconButton
-									Icon={IconListeningAnimated}
-									onClick={() => {
-										// let propagate to recording push
-									}}
-									color={isDarkTheme ? BaseColors.WHITE : BaseColors.RED}
-									backgroundColor={backgroundColor}
-								/>
-							) : (
-								<IconButton
-									Icon={IconPlay}
-									onClick={(e) => {
-										e.preventDefault();
-										session.play(PlaySource.Tease);
-									}}
-									color={isDarkTheme ? BaseColors.WHITE : BaseColors.RED}
-									backgroundColor={backgroundColor}
-									aria-label={intl.formatMessage({
-										id: 'playButton__playLabel',
-										defaultMessage: 'play',
-										description: 'play button play label',
-									})}
-								/>
-							)}
-						</div>
+						<PlayButton
+							recording={recording}
+							playlistRecordings={playlistRecordings}
+							isDarkTheme={isDarkTheme}
+							backgroundColor={backgroundColor}
+						/>
 					)}
-					{/* Play should end here */}
 					<span className={styles.duration}>
 						{useFormattedDuration(recording.duration)}
 					</span>

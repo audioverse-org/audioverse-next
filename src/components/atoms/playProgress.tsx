@@ -63,7 +63,7 @@ const PlayProgress: React.FC<Props> = ({
 		const startAnimation = () => {
 			setAnimationProgress(0);
 			const animate = () => {
-				setAnimationProgress((prev) => (prev + 0.01) % 1);
+				setAnimationProgress((prev) => (prev + 0.025) % 1);
 				animationFrameId = requestAnimationFrame(animate);
 			};
 			animationFrameId = requestAnimationFrame(animate);

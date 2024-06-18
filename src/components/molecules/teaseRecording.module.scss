@@ -40,6 +40,7 @@ $container-padding: 16px;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	overflow: hidden;
 	margin-bottom: 16px;
 	color: var(--headingColor, $ts-dark);
 	h2 {
@@ -49,10 +50,6 @@ $container-padding: 16px;
 }
 
 $right-icon-offset: -4px;
-.play {
-	margin-top: $right-icon-offset;
-	margin-right: $right-icon-offset;
-}
 
 .flexGrow {
 	flex-grow: 1;
@@ -61,8 +58,14 @@ $right-icon-offset: -4px;
 	justify-content: flex-end;
 }
 
+.presenters {
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+}
 .presenter {
 	margin-bottom: 8px;
+	margin-right: 6px;
 }
 
 .morePersons {
