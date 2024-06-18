@@ -1,11 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
-import withFailStates from '~components/HOCs/withFailStates';
 import CardPlaylistItem from '~components/molecules/card/playlistItem';
 import CardGroup from '~components/molecules/cardGroup';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
@@ -13,15 +13,15 @@ import DefinitionList, {
 	IDefinitionListTerm,
 } from '~components/molecules/definitionList';
 import Tease from '~components/molecules/tease';
+import NotFound from '~components/organisms/notFound';
 import { BaseColors } from '~lib/constants';
 import { formatLongDateTime } from '~lib/date';
-import Loader from '~src/components/atoms/Loader';
 import ButtonShare from '~src/components/molecules/buttonShare';
 import IconButton from '~src/components/molecules/iconButton';
+import LoadingCards from '~src/components/molecules/loadingCards';
 import PlaylistTypeLockup from '~src/components/molecules/playlistTypeLockup';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
-import { Must } from '~src/types/types';
 
 import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';
 import EditPlaylist from '../../../../src/pages/[language]/library/playlists/edit';
@@ -38,43 +38,29 @@ export type ILibraryPlaylistDetailProps = {
 	>['user']['playlist'];
 };
 
-function LibraryPlaylistDetail({
-	playlist,
-}: Must<ILibraryPlaylistDetailProps>): JSX.Element {
-	const [currentPlaylist, setCurrentPlaylist] = useState<
-		ILibraryPlaylistDetailProps['playlist'] | null
-	>(playlist);
+function LibraryPlaylistDetail(): JSX.Element {
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
 	const router = useRouter();
 	const languageRoute = useLanguageRoute();
+	const playlistId = router.query.id as string;
 
-	const fetchPlaylist = async (id: string) => {
-		try {
-			const { me } = id
-				? await getLibraryPlaylistPageData({
-						id: id,
-				  }).catch(() => ({
-						me: null,
-				  }))
-				: { me: null };
+	const { data, isLoading } = useQuery(
+		['getLibraryPlaylistPageData', { id: playlistId }],
+		() => getLibraryPlaylistPageData({ id: playlistId }),
+		{ staleTime: Infinity }
+	);
 
-			setCurrentPlaylist(me?.user?.playlist || null);
-		} catch (err) {
-			console.error('Error loading playlist:', err);
-		}
-	};
-
-	useEffect(() => {
-		if (router.query.id) {
-			fetchPlaylist(router.query.id as string);
-		}
-	}, [router.query.id]);
-
-	if (!currentPlaylist) {
-		return <Loader />;
+	if (isLoading) {
+		return <LoadingCards />;
 	}
 
-	const { title, recordings, createdAt, summary } = currentPlaylist;
+	const playlist = data?.me?.user.playlist;
+
+	if (!playlist) {
+		return <NotFound />;
+	}
+
+	const { id, title, recordings, createdAt, summary, isPublic } = playlist;
 
 	const details: IDefinitionListTerm[] = [];
 	if (summary) {
@@ -115,7 +101,7 @@ function LibraryPlaylistDetail({
 							values={{ count: recordings.aggregate?.count }}
 						/>
 					</Heading6>
-					{!currentPlaylist.isPublic ? (
+					{!isPublic ? (
 						<IconButton
 							Icon={ShareIcon}
 							color={BaseColors.DARK}
@@ -127,18 +113,17 @@ function LibraryPlaylistDetail({
 						/>
 					) : (
 						<ButtonShare
-							shareUrl={`https://audioverse.org/${currentPlaylist.language}/playlists/${currentPlaylist.id}`}
+							shareUrl={`https://audioverse.org/${playlist.language}/playlists/${id}`}
 							backgroundColor={BaseColors.CREAM}
 							light={true}
 						/>
 					)}
 					{!(router.route === '/[language]/playlists/[playlist]') && (
 						<EditPlaylist
-							id={currentPlaylist.id}
-							title={currentPlaylist.title}
-							summary={currentPlaylist.summary}
-							isPublic={currentPlaylist.isPublic}
-							onEditSuccess={() => fetchPlaylist(currentPlaylist.id + '')} // Fetch playlist on edit success
+							id={id}
+							title={title}
+							summary={summary}
+							isPublic={isPublic}
 						/>
 					)}
 				</div>
@@ -153,7 +138,7 @@ function LibraryPlaylistDetail({
 								...recording,
 								canonicalPath: root
 									.lang(languageRoute)
-									.playlists.playlist(currentPlaylist.id)
+									.playlists.playlist(id)
 									.items(recording.canonicalPath)
 									.get(),
 							}}
@@ -179,6 +164,4 @@ function LibraryPlaylistDetail({
 	);
 }
 
-export default withFailStates(LibraryPlaylistDetail, {
-	useShould404: ({ playlist }) => !playlist,
-});
+export default LibraryPlaylistDetail;
