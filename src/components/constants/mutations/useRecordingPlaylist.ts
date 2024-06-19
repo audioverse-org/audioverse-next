@@ -43,7 +43,10 @@ export function useRecordingPlaylist(
 			.then((data) => {
 				if (data?.playlistRecordingAdd) {
 					queryClient.invalidateQueries(invalidateQueries);
-					queryClient.invalidateQueries(['playlistData', { id: playlist.id }]);
+					queryClient.invalidateQueries([
+						'getLibraryPlaylistPageData',
+						{ id: playlist.id },
+					]);
 				}
 			})
 			.catch((error) => {
@@ -70,7 +73,10 @@ export function useRecordingPlaylist(
 			.then((data) => {
 				if (data?.playlistRecordingRemove) {
 					queryClient.invalidateQueries(invalidateQueries);
-					queryClient.invalidateQueries(['playlistData', { id: playlist.id }]);
+					queryClient.invalidateQueries([
+						'getLibraryPlaylistPageData',
+						{ id: playlist.id },
+					]);
 				}
 			})
 			.catch((error) => {
