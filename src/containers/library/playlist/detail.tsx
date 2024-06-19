@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -13,52 +12,31 @@ import DefinitionList, {
 	IDefinitionListTerm,
 } from '~components/molecules/definitionList';
 import Tease from '~components/molecules/tease';
-import NotFound from '~components/organisms/notFound';
 import { BaseColors } from '~lib/constants';
 import { formatLongDateTime } from '~lib/date';
+import withFailStates from '~src/components/HOCs/withFailStates';
 import ButtonShare from '~src/components/molecules/buttonShare';
 import IconButton from '~src/components/molecules/iconButton';
-import LoadingCards from '~src/components/molecules/loadingCards';
 import PlaylistTypeLockup from '~src/components/molecules/playlistTypeLockup';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
+import { Must } from '~src/types/types';
 
 import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';
 import EditPlaylist from '../../../../src/pages/[language]/library/playlists/edit';
 import Modal from '../../../components/organisms/modal';
-import {
-	getLibraryPlaylistPageData,
-	GetLibraryPlaylistPageDataQuery,
-} from './__generated__/detail';
+import { GetPlaylistPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
-export type ILibraryPlaylistDetailProps = {
-	playlist: NonNullable<
-		GetLibraryPlaylistPageDataQuery['me']
-	>['user']['playlist'];
+export type IPlaylistDetailProps = {
+	playlist: GetPlaylistPageDataQuery['playlist'];
 };
 
-function LibraryPlaylistDetail(): JSX.Element {
+function PlaylistDetail({ playlist }: Must<IPlaylistDetailProps>): JSX.Element {
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
 	const router = useRouter();
+	const isPublicRoute = router.route === '/[language]/playlists/[playlist]';
 	const languageRoute = useLanguageRoute();
-	const playlistId = router.query.id as string;
-
-	const { data, isLoading } = useQuery(
-		['getLibraryPlaylistPageData', { id: playlistId }],
-		() => getLibraryPlaylistPageData({ id: playlistId }),
-		{ staleTime: Infinity }
-	);
-
-	if (isLoading) {
-		return <LoadingCards />;
-	}
-
-	const playlist = data?.me?.user.playlist;
-
-	if (!playlist) {
-		return <NotFound />;
-	}
 
 	const { id, title, recordings, createdAt, summary, isPublic } = playlist;
 
@@ -75,7 +53,7 @@ function LibraryPlaylistDetail(): JSX.Element {
 		});
 	}
 
-	if (createdAt) {
+	if (createdAt && !isPublicRoute) {
 		details.push({
 			term: (
 				<FormattedMessage
@@ -113,12 +91,12 @@ function LibraryPlaylistDetail(): JSX.Element {
 						/>
 					) : (
 						<ButtonShare
-							shareUrl={`https://audioverse.org/${playlist.language}/playlists/${id}`}
+							shareUrl={`https://audioverse.org/${languageRoute}/playlists/${id}`}
 							backgroundColor={BaseColors.CREAM}
 							light={true}
 						/>
 					)}
-					{!(router.route === '/[language]/playlists/[playlist]') && (
+					{!isPublicRoute && (
 						<EditPlaylist
 							id={id}
 							title={title}
@@ -164,4 +142,6 @@ function LibraryPlaylistDetail(): JSX.Element {
 	);
 }
 
-export default LibraryPlaylistDetail;
+export default withFailStates(PlaylistDetail, {
+	useShould404: ({ playlist }) => !playlist,
+});
