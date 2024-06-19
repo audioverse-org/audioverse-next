@@ -29,6 +29,7 @@ import Modal from '../../../components/organisms/modal';
 import {
 	getLibraryPlaylistPageData,
 	GetLibraryPlaylistPageDataQuery,
+	getPlaylistPageData,
 } from './__generated__/detail';
 import styles from './detail.module.scss';
 
@@ -41,12 +42,25 @@ export type ILibraryPlaylistDetailProps = {
 function LibraryPlaylistDetail(): JSX.Element {
 	const [isNotShareableOpen, setIsNotShareableOpen] = useState(false);
 	const router = useRouter();
+	const isPublicRoute = router.route === '/[language]/playlists/[playlist]';
 	const languageRoute = useLanguageRoute();
-	const playlistId = router.query.id as string;
+	const playlistId = isPublicRoute
+		? (router.query.playlist as string)
+		: (router.query.id as string);
+
+	const fetchPlaylistData = async () => {
+		if (isPublicRoute) {
+			const data = await getPlaylistPageData({ id: playlistId });
+			return { playlist: data.playlist };
+		} else {
+			const data = await getLibraryPlaylistPageData({ id: playlistId });
+			return { playlist: data.me?.user.playlist };
+		}
+	};
 
 	const { data, isLoading } = useQuery(
-		['getLibraryPlaylistPageData', { id: playlistId }],
-		() => getLibraryPlaylistPageData({ id: playlistId }),
+		['playlistData', { id: playlistId }],
+		fetchPlaylistData,
 		{ staleTime: Infinity }
 	);
 
@@ -54,7 +68,7 @@ function LibraryPlaylistDetail(): JSX.Element {
 		return <LoadingCards />;
 	}
 
-	const playlist = data?.me?.user.playlist;
+	const playlist = data?.playlist;
 
 	if (!playlist) {
 		return <NotFound />;
@@ -75,7 +89,7 @@ function LibraryPlaylistDetail(): JSX.Element {
 		});
 	}
 
-	if (createdAt) {
+	if (createdAt && !isPublicRoute) {
 		details.push({
 			term: (
 				<FormattedMessage
@@ -118,7 +132,7 @@ function LibraryPlaylistDetail(): JSX.Element {
 							light={true}
 						/>
 					)}
-					{!(router.route === '/[language]/playlists/[playlist]') && (
+					{!isPublicRoute && (
 						<EditPlaylist
 							id={id}
 							title={title}
