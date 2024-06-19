@@ -11,7 +11,7 @@
 
 :global(.body--with-miniplayer) .base {
 	@media (min-width: $breakpoint-lg) {
-		height: calc(100vh - $miniplayer-height)
+		height: calc(100vh - $miniplayer-height);
 	}
 }
 
