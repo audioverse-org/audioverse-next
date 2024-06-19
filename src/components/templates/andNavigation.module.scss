@@ -9,6 +9,12 @@
 	height: 100vh;
 }
 
+:global(.body--with-miniplayer) .base {
+	@media (min-width: $breakpoint-lg) {
+		height: calc(100vh - $miniplayer-height)
+	}
+}
+
 .content {
 	min-height: 0;
 	flex: 1 1 auto;

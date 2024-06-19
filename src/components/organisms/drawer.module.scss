@@ -1,10 +1,6 @@
 @import '../../styles/common';
 
-.header {
-	display: none;
-}
-
-.navigation {
+.drawer {
 	position: fixed;
 	width: 100vw;
 	top: 0;
@@ -23,17 +19,16 @@
 	}
 }
 
-.navigationShown {
+.open {
 	transform: translateX(0%);
 }
 
-@media (min-width: $breakpoint-lg) {
-	.header {
-		display: block;
-		margin: 32px;
-	}
+.header {
+	display: none;
+}
 
-	.navigation {
+@media (min-width: $breakpoint-lg) {
+	.drawer {
 		position: static;
 		flex: 0 0 $sidebar-width;
 		padding: 0;
@@ -42,9 +37,18 @@
 		animation: none;
 		background: $ts-white;
 		z-index: unset;
+		min-height: 100%;
+		max-height: 100vh;
 	}
 
-	:global(.andMiniplayer--withPlayer) .navigation {
-		padding-bottom: $miniplayer-height;
+	.header {
+		display: block;
+		margin: 32px;
+	}
+
+	.navigation {
+		flex: 0 1 100vh;
+		display: flex;
+		flex-direction: column;
 	}
 }
