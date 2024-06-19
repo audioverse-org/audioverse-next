@@ -10,7 +10,6 @@ import { AndMiniplayerFragment } from '../templates/__generated__/andMiniplayer'
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import styles from './buttonPlayCircle.module.scss';
-//import IconButton from './iconButton';
 
 type PlayButtonProps = {
 	recording: TeaseRecordingFragment;
@@ -38,9 +37,11 @@ const PlayButtonCurrentLockup: React.FC<PlayButtonCurrentProps> = ({
 	iconActiveColor,
 	trackColor,
 }) => {
+	//const context = useContext(PlaybackContext);
+	//const trackProgress = context.getProgress();
 	const progress =
 		isCurrentTrack && (isPlaying || isPaused) && positionPercentage > 0
-			? (positionPercentage * 1000) / duration
+			? (positionPercentage * 900) / duration
 			: positionPercentage;
 
 	return (
@@ -58,23 +59,15 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 	recording,
 	playlistRecordings,
 	isDarkTheme,
-	//backgroundColor,
 }) => {
 	const session = usePlaybackSession(recording, { playlistRecordings });
 	const context = useContext(PlaybackContext);
 	const currentTrack = context.getRecording();
 	const isCurrentTrack = currentTrack?.id === recording.id;
-	//, setIsCurrentTrack] = useState(session.isPlaying);
 	const intl = useIntl();
 
-	// useEffect(() => {
-	// 	setIsCurrentTrack(session.isPlaying);
-	// 	console.log('session.isPlaying:', session.isPlaying);
-	// }, [session.isPlaying]);
-
 	const handlePlayClick = () => {
-		session.play(PlaySource.Tease);
-		console.log('Play button clicked');
+		session.isPlaying ? session.pause() : session.play(PlaySource.Tease);
 	};
 
 	return (
