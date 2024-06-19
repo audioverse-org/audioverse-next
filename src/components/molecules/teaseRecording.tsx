@@ -135,7 +135,6 @@ export default function TeaseRecording({
 							recording={recording}
 							playlistRecordings={playlistRecordings}
 							isDarkTheme={isDarkTheme}
-							backgroundColor={backgroundColor}
 						/>
 					)}
 					<span className={styles.duration}>

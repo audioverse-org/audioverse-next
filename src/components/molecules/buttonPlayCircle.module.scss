@@ -1,6 +1,7 @@
 @import '../../styles/common';
 $right-icon-offset: -4px;
 .play {
+	all: unset;
 	margin-top: $right-icon-offset;
 	margin-right: $right-icon-offset;
 }

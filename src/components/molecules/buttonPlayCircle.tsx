@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useIntl } from 'react-intl';
 
 import { BaseColors } from '~lib/constants';
@@ -7,16 +7,16 @@ import IconPlay from '~public/img/icons/play-circle.svg';
 
 import PlayProgress from '../atoms/playProgress';
 import { AndMiniplayerFragment } from '../templates/__generated__/andMiniplayer';
-//import { PlaybackContext } from '../templates/andPlaybackContext';
+import { PlaybackContext } from '../templates/andPlaybackContext';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import styles from './buttonPlayCircle.module.scss';
-import IconButton from './iconButton';
+//import IconButton from './iconButton';
 
 type PlayButtonProps = {
 	recording: TeaseRecordingFragment;
 	playlistRecordings?: AndMiniplayerFragment[];
 	isDarkTheme: boolean;
-	backgroundColor: BaseColors;
+	//backgroundColor: BaseColors;
 };
 
 type PlayButtonCurrentProps = {
@@ -40,7 +40,7 @@ const PlayButtonCurrentLockup: React.FC<PlayButtonCurrentProps> = ({
 }) => {
 	const progress =
 		isCurrentTrack && (isPlaying || isPaused) && positionPercentage > 0
-			? (positionPercentage / duration) * 100
+			? (positionPercentage * 1000) / duration
 			: positionPercentage;
 
 	return (
@@ -58,25 +58,38 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 	recording,
 	playlistRecordings,
 	isDarkTheme,
-	backgroundColor,
+	//backgroundColor,
 }) => {
 	const session = usePlaybackSession(recording, { playlistRecordings });
-	const [isCurrentTrack, setIsCurrentTrack] = useState(session.isPlaying);
+	const context = useContext(PlaybackContext);
+	const currentTrack = context.getRecording();
+	const isCurrentTrack = currentTrack?.id === recording.id;
+	//, setIsCurrentTrack] = useState(session.isPlaying);
 	const intl = useIntl();
 
-	useEffect(() => {
-		setIsCurrentTrack(session.isPlaying);
-		console.log('session.isPlaying:', session.isPlaying);
-	}, [session.isPlaying]);
+	// useEffect(() => {
+	// 	setIsCurrentTrack(session.isPlaying);
+	// 	console.log('session.isPlaying:', session.isPlaying);
+	// }, [session.isPlaying]);
 
 	const handlePlayClick = () => {
 		session.play(PlaySource.Tease);
-		setIsCurrentTrack(true);
 		console.log('Play button clicked');
 	};
 
 	return (
-		<div className={styles.play}>
+		<button
+			onClick={(e) => {
+				e.preventDefault();
+				handlePlayClick();
+			}}
+			className={styles.play}
+			aria-label={intl.formatMessage({
+				id: 'playButton__playLabel',
+				defaultMessage: 'play',
+				description: 'play button play label',
+			})}
+		>
 			{isCurrentTrack ? (
 				<>
 					{console.log('current track')}
@@ -85,15 +98,15 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 						isPaused={session.isPaused}
 						duration={session.duration}
 						positionPercentage={session.progress}
-						iconActiveColor={BaseColors.DARK}
-						trackColor={BaseColors.RED}
+						iconActiveColor={BaseColors.RED}
+						trackColor={BaseColors.WHITE}
 						isCurrentTrack={true}
 					/>
 				</>
 			) : (
 				<>
 					{console.log('not current track')}
-					{session.progress ? (
+					{session.progress && isCurrentTrack ? (
 						<PlayProgress
 							isPlaying={true}
 							activeColor={BaseColors.DARK}
@@ -102,24 +115,11 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 							isCurrentTrack={false}
 						/>
 					) : (
-						<IconButton
-							Icon={IconPlay}
-							onClick={(e) => {
-								e.preventDefault();
-								handlePlayClick;
-							}}
-							color={isDarkTheme ? BaseColors.WHITE : BaseColors.RED}
-							backgroundColor={backgroundColor}
-							aria-label={intl.formatMessage({
-								id: 'playButton__playLabel',
-								defaultMessage: 'play',
-								description: 'play button play label',
-							})}
-						/>
+						<IconPlay color={isDarkTheme ? BaseColors.WHITE : BaseColors.RED} />
 					)}
 				</>
 			)}
-		</div>
+		</button>
 	);
 };
 
