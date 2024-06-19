@@ -8,11 +8,11 @@ import Modal from '~components/organisms/modal';
 import root, { isRedirectRouteAllowed } from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import IconDownload from '~public/img/icons/icon-download.svg';
-import IconButton from './iconButton';
+import { BaseColors } from '~src/lib/constants';
 
 import styles from './buttonDownloadBlank.module.scss';
-import { BaseColors } from '~src/lib/constants';
 import { isBackgroundColorDark } from './buttonPlay';
+import IconButton from './iconButton';
 
 export default function ButtonDownloadBlank({
 	className,
