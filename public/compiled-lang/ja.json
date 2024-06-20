@@ -455,6 +455,12 @@
       "value": "プロフィール"
     }
   ],
+  "account__heading": [
+    {
+      "type": 0,
+      "value": "アカウントの設定"
+    }
+  ],
   "add_to_playlist": [
     {
       "type": 0,
@@ -3445,6 +3451,30 @@
       "value": "Sign Up with Email"
     }
   ],
+  "molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload": [
+    {
+      "type": 0,
+      "value": "Create account"
+    }
+  ],
+  "molecule-buttonDownloadBlank__modalButtonLabelLogIn": [
+    {
+      "type": 0,
+      "value": "ログイン"
+    }
+  ],
+  "molecule-buttonDownloadBlank__modalParagraph": [
+    {
+      "type": 0,
+      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+    }
+  ],
+  "molecule-buttonDownloadBlank__modalTitle": [
+    {
+      "type": 0,
+      "value": "Create a Free Account"
+    }
+  ],
   "molecule-buttonDownload__buttonLabel": [
     {
       "type": 0,
@@ -3505,18 +3535,6 @@
       "value": "動画ダウンロード"
     }
   ],
-  "molecule-buttonGuestDownload__modalParagraph": [
-    {
-      "type": 0,
-      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
-    }
-  ],
-  "molecule-buttonGuestDownload__modalTitle": [
-    {
-      "type": 0,
-      "value": "Create a Free Account"
-    }
-  ],
   "molecule-buttonGuest__Download": [
     {
       "type": 0,
@@ -3533,12 +3551,6 @@
     {
       "type": 0,
       "value": "アカウントを作成"
-    }
-  ],
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": [
-    {
-      "type": 0,
-      "value": "Create account"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": [
@@ -4387,12 +4399,6 @@
       "value": "オーディオファイルのダウンロード方法の好みを設定。"
     }
   ],
-  "preferences__heading": [
-    {
-      "type": 0,
-      "value": "アカウントの設定"
-    }
-  ],
   "preferences__inputAutoplay": [
     {
       "type": 0,
@@ -4639,6 +4645,18 @@
       "value": "全て"
     }
   ],
+  "presentersListAll__listEnd": [
+    {
+      "type": 0,
+      "value": "No more presenters"
+    }
+  ],
+  "presentersListAll__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "presentersList__all": [
     {
       "type": 0,
@@ -4751,12 +4769,6 @@
     {
       "type": 0,
       "value": "削除されます。よろしいですか？"
-    }
-  ],
-  "profile__heading": [
-    {
-      "type": 0,
-      "value": "アカウントの設定"
     }
   ],
   "profile__inputLabelForEmail": [

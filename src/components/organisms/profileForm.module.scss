@@ -23,6 +23,7 @@
 .deleteButton {
 	margin-top: 8px;
 	margin-bottom: 24px;
+
 	&,
 	&:hover {
 		border-color: $ts-red;
@@ -34,6 +35,7 @@
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+
 	.label {
 		margin-left: 24px;
 	}

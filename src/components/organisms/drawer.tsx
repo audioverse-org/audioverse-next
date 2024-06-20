@@ -29,17 +29,17 @@ export default function Drawer({
 	}, [showingMenu]);
 
 	return (
-		<div
-			className={clsx(styles.navigation, showingMenu && styles.navigationShown)}
-		>
+		<div className={clsx(styles.drawer, showingMenu && styles.open)}>
 			<div className={styles.header}>
 				<Header />
 			</div>
-			<Navigation
-				onExit={onExit}
-				searchTerm={searchTerm}
-				onSearchChange={onSearchChange}
-			/>
+			<div className={styles.navigation}>
+				<Navigation
+					onExit={onExit}
+					searchTerm={searchTerm}
+					onSearchChange={onSearchChange}
+				/>
+			</div>
 		</div>
 	);
 }

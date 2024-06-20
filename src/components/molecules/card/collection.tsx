@@ -158,7 +158,7 @@ export default function CardCollection({
 							<div className={styles.subItems} ref={subRef}>
 								{sequences?.map((sequence) => (
 									<div className={styles.subItem} key={sequence.canonicalPath}>
-										<CardSequence sequence={sequence} slim />
+										<CardSequence sequence={sequence} />
 									</div>
 								))}
 								{!sequences?.length &&

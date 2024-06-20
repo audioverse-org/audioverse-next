@@ -556,7 +556,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'profile',
-					href: root.lang(languageRoute).account.profile.get(),
+					href: root.lang(languageRoute).account.get(),
 					Icon: iconMap.fa_user_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemUser-profile`,

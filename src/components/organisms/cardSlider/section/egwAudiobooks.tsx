@@ -18,7 +18,7 @@ const EgwAudiobooks: React.FC<EgwAudiobooksProps> = ({ heading }) => {
 	const lang = useLanguageId();
 
 	const renderCard = (p: { node: CardSequenceFragment }) => {
-		return <CardSequence sequence={p.node} slim={true} egw={true} />;
+		return <CardSequence sequence={p.node} egw={true} />;
 	};
 
 	return (

@@ -3,27 +3,24 @@ import { useRouter } from 'next/router';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading1 from '~components/atoms/heading1';
 import Heading2 from '~components/atoms/heading2';
-import withAuthGuard from '~components/HOCs/withAuthGuard';
 import Button from '~components/molecules/button';
 import Checkbox from '~components/molecules/form/checkbox';
 import Input from '~components/molecules/form/input';
-import AccountNav from '~components/organisms/accountNav';
 import Modal from '~components/organisms/modal';
-import { refetchUserQueries, resetUserQueries } from '~lib/api/login';
-import { clearSessionToken } from '~lib/cookies';
-import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import { refetchUserQueries, resetUserQueries } from '~src/lib/api/login';
+import { clearSessionToken } from '~src/lib/cookies';
+import root from '~src/lib/routes';
+import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import {
 	useDeleteAccountMutation,
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
-} from './__generated__/profile';
-import styles from './profile.module.scss';
+} from './__generated__/profileForm';
+import styles from './profileForm.module.scss';
 
-function Profile(): JSX.Element {
+export default function ProfileForm(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const queryClient = useQueryClient();
 	const router = useRouter();
@@ -94,13 +91,6 @@ function Profile(): JSX.Element {
 
 	return (
 		<>
-			<Heading1>
-				<FormattedMessage
-					id="profile__heading"
-					defaultMessage="Account Settings"
-				/>
-			</Heading1>
-			<AccountNav current="profile" />
 			<div className={styles.container}>
 				<Heading2 className={styles.subheading}>
 					<FormattedMessage id="profile__subheading" defaultMessage="Profile" />
@@ -293,5 +283,3 @@ function Profile(): JSX.Element {
 		</>
 	);
 }
-
-export default withAuthGuard(Profile);
