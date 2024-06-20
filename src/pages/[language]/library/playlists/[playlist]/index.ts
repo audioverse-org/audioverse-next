@@ -13,7 +13,7 @@ export async function getServerSideProps({
 	params,
 }: GetServerSidePropsContext<{
 	language: string;
-	id: string;
+	playlist: string;
 }>): Promise<
 	GetServerSidePropsResult<{
 		dehydratedState: DehydratedState;
@@ -21,7 +21,7 @@ export async function getServerSideProps({
 > {
 	storeRequest(req);
 	const client = await prefetchQueries({
-		getLibraryPlaylistPageData: { id: params?.id.toString() as string },
+		getLibraryPlaylistPageData: { id: params?.playlist.toString() as string },
 	});
 
 	return getDehydratedProps(client);
