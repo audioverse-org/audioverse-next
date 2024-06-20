@@ -2799,5 +2799,11 @@
   },
   "molecule-buttonDownloadBlank__modalTitle": {
     "string": "Create a Free Account"
+  },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
   }
 }

@@ -2215,6 +2215,12 @@
   "presentersListAll__all": {
     "string": "All"
   },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
+  },
   "presentersList__all": {
     "string": "All"
   },
