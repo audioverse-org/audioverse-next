@@ -455,6 +455,12 @@
       "value": "プロフィール"
     }
   ],
+  "account__heading": [
+    {
+      "type": 0,
+      "value": "Account Settings"
+    }
+  ],
   "add_to_playlist": [
     {
       "type": 0,
@@ -4393,12 +4399,6 @@
       "value": "オーディオファイルのダウンロード方法の好みを設定。"
     }
   ],
-  "preferences__heading": [
-    {
-      "type": 0,
-      "value": "アカウントの設定"
-    }
-  ],
   "preferences__inputAutoplay": [
     {
       "type": 0,
@@ -4769,12 +4769,6 @@
     {
       "type": 0,
       "value": "削除されます。よろしいですか？"
-    }
-  ],
-  "profile__heading": [
-    {
-      "type": 0,
-      "value": "アカウントの設定"
     }
   ],
   "profile__inputLabelForEmail": [

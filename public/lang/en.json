@@ -232,6 +232,9 @@
   "accountNav__profile": {
     "string": "Profile"
   },
+  "account__heading": {
+    "string": "Account Settings"
+  },
   "add_to_playlist": {
     "string": "Add To Playlist"
   },
@@ -2108,9 +2111,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Choose how you want to download audio."
   },
-  "preferences__heading": {
-    "string": "Account Settings"
-  },
   "preferences__inputAutoplay": {
     "string": "Autoplay recordings"
   },
@@ -2271,9 +2271,6 @@
   },
   "profile__deleteConfirmTitle": {
     "string": "Are you sure?"
-  },
-  "profile__heading": {
-    "string": "Account Settings"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",

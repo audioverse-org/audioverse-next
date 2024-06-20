@@ -1750,9 +1750,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Escolha como deseja baixar o áudio."
   },
-  "preferences__heading": {
-    "string": "Configurações da conta"
-  },
   "preferences__inputAutoplay": {
     "string": "Gravações em auto-reprodução"
   },
@@ -1898,9 +1895,6 @@
   },
   "profile__deleteConfirmTitle": {
     "string": "Tem certeza?"
-  },
-  "profile__heading": {
-    "string": "Configurações da conta"
   },
   "profile__inputLabelForEmail": {
     "comment": "etiqueta de entrada para e-mail",
@@ -2805,5 +2799,8 @@
   },
   "presentersListAll__loading": {
     "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "Account Settings"
   }
 }

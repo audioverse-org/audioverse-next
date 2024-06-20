@@ -732,9 +732,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Выбрать, как Вы хотите скачать аудио файл."
   },
-  "preferences__heading": {
-    "string": "Настройки учетной записи"
-  },
   "preferences__inputAutoplay": {
     "string": "Записи с автовоспроизведением"
   },
@@ -841,9 +838,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "Сохранить изменения"
-  },
-  "profile__heading": {
-    "string": "Настройки учетной записи"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",
@@ -2805,5 +2799,8 @@
   },
   "presentersListAll__loading": {
     "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "Account Settings"
   }
 }
