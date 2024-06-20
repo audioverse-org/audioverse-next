@@ -267,7 +267,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'playlists',
-					href: root.lang(languageRoute).library.playlists.get(),
+					href: root.lang(languageRoute).library.playlists().get(),
 					Icon: iconMap.fa_stream,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-playlists`,

@@ -114,11 +114,17 @@ function PlaylistDetail({ playlist }: Must<IPlaylistDetailProps>): JSX.Element {
 						<CardPlaylistItem
 							recording={{
 								...recording,
-								canonicalPath: root
-									.lang(languageRoute)
-									.playlists.playlist(id)
-									.items(recording.canonicalPath)
-									.get(),
+								canonicalPath: playlist.isPublic
+									? root
+											.lang(languageRoute)
+											.playlists.playlist(id)
+											.items(recording.canonicalPath)
+											.get()
+									: root
+											.lang(languageRoute)
+											.library.playlists(id)
+											.items(recording.canonicalPath)
+											.get(),
 							}}
 							key={recording.id}
 						/>

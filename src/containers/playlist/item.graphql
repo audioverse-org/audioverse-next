@@ -1,16 +1,33 @@
-query getPlaylistItemDetailData($id: ID!, $playlistId: ID!) {
+fragment PlaylistRecordingDetail on UserPlaylist {
+	id
+	title
+	summary
+	isPublic
+	recordings(first: 1000) {
+		nodes {
+			...teaseRecording
+		}
+	}
+}
+
+query getPublicPlaylistItemDetailData($id: ID!, $playlistId: ID!) {
 	playlist(id: $playlistId) {
-		id
-		title
-		summary
-		recordings(first: 1000) {
-			nodes {
-				...teaseRecording
+		...PlaylistRecordingDetail
+	}
+	recording(id: $id) {
+		...recording
+	}
+}
+
+query getPlaylistItemDetailData($playlistId: ID!, $id: ID!) {
+	me {
+		user {
+			playlist(id: $playlistId) {
+				...PlaylistRecordingDetail
 			}
 		}
 	}
 	recording(id: $id) {
 		...recording
-		language
 	}
 }

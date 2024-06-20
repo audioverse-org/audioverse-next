@@ -10,7 +10,7 @@ import { getLibraryPlaylistPageData } from './__generated__/detail';
 
 function LibraryPlaylistDetail(): JSX.Element {
 	const router = useRouter();
-	const playlistId = router.query.id as string;
+	const playlistId = router.query.playlist as string;
 
 	const { data, isLoading } = useQuery(
 		['getLibraryPlaylistPageData', { id: playlistId }],
