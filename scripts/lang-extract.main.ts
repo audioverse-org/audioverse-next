@@ -53,12 +53,6 @@ export default async function main() {
 			});
 		}
 
-		if (outDatedIds.length) {
-			outDatedIds.forEach((id) => {
-				delete langs[id];
-			});
-		}
-
 		if (renamedIds.length) {
 			const baseLangs: Langs = JSON.parse(
 				showMergeBase(`public/lang/${langFile}`)
@@ -69,6 +63,12 @@ export default async function main() {
 				);
 				if (!enId || !(enId in baseLangs)) return;
 				langs[id].string = baseLangs[enId].string;
+			});
+		}
+
+		if (outDatedIds.length) {
+			outDatedIds.forEach((id) => {
+				delete langs[id];
 			});
 		}
 

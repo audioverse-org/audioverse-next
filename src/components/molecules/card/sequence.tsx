@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -36,14 +35,12 @@ import styles from './sequence.module.scss';
 interface CardCollectionProps {
 	sequence: CardSequenceFragment;
 	recordings?: CardRecordingFragment[] | null;
-	slim?: boolean;
-	egw?: boolean; //egw
+	egw?: boolean;
 }
 
 export default function CardSequence({
 	sequence,
 	recordings,
-	slim,
 	egw,
 }: CardCollectionProps): JSX.Element {
 	const [ref, isHovered] = useHover<HTMLButtonElement>();
@@ -52,8 +49,6 @@ export default function CardSequence({
 	const { isFavorited, toggleFavorited, playbackCompletedPercentage } =
 		useIsSequenceFavorited(sequence.id);
 	const [personsExpanded, setPersonsExpanded] = useState(false);
-	//const [thisPerson, setThisPerson] = useState(false);
-	const router = useRouter();
 	const isBibleBook = sequence.contentType === SequenceContentType.BibleBook;
 
 	const {
@@ -305,39 +300,20 @@ export default function CardSequence({
 
 	return (
 		<Card>
-			{slim ? (
-				<div
+			<Link href={linkUrl} legacyBehavior>
+				<a
 					className={className}
-					onClick={(e) => {
-						e.preventDefault();
-						e.stopPropagation();
-
+					onClick={() => {
 						analytics.track('Card click', {
 							type: sequence.contentType,
 							id,
 							title,
 						});
-						router.push(linkUrl);
 					}}
 				>
 					{inner}
-				</div>
-			) : (
-				<Link href={linkUrl} legacyBehavior>
-					<a
-						className={className}
-						onClick={() => {
-							analytics.track('Card click', {
-								type: sequence.contentType,
-								id,
-								title,
-							});
-						}}
-					>
-						{inner}
-					</a>
-				</Link>
-			)}
+				</a>
+			</Link>
 		</Card>
 	);
 }
