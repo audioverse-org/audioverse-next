@@ -7,6 +7,7 @@
 }
 
 $container-padding: 16px;
+
 .content {
 	display: flex;
 	flex-direction: column;
@@ -22,6 +23,15 @@ $container-padding: 16px;
 	}
 	&:hover {
 		background-color: var(--cardHoverColor);
+		/* Update gradients for .presenters::after and .title::after */
+		.presenters::after,
+		.title::after {
+			background: linear-gradient(
+				to left,
+				var(--cardHoverColor),
+				/* Adjust gradient colors here */ rgba(255, 255, 255, 0)
+			);
+		}
 	}
 	&.unpadded {
 		padding: 0;
@@ -47,6 +57,12 @@ $container-padding: 16px;
 		margin-top: 0;
 		margin-bottom: 0;
 	}
+	position: relative;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 $right-icon-offset: -4px;
@@ -59,13 +75,28 @@ $right-icon-offset: -4px;
 }
 
 .presenters {
+	margin-bottom: 16px;
 	display: flex;
 	flex-direction: row;
 	overflow: hidden;
+	position: relative;
 }
-.presenter {
-	margin-bottom: 8px;
-	margin-right: 6px;
+
+.presenters::after,
+.title::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100px;
+	height: 100%;
+	background: linear-gradient(
+		to left,
+		var(--cardBg),
+		rgba(255, 255, 255, 0)
+	);
+	z-index: 1;
+	pointer-events: none;
 }
 
 .morePersons {

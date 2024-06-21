@@ -87,45 +87,20 @@ export default function TeaseRecording({
 			</div>
 			{!hidePresenters && (
 				<div className={styles.presenters}>
-					{recording.persons.slice(0, 3).map((p) => (
-						<div key={p.canonicalPath} className={styles.presenter}>
-							<PersonLockup
-								person={p}
-								textColor={personTextColor}
-								isLinked
-								isOptionalLink
-								hoverColor={isDarkTheme ? BaseColors.SALMON : BaseColors.RED}
-								small={small}
-							/>
-						</div>
+					{recording.persons.map((p) => (
+						//<div key={p.canonicalPath} className={styles.presenter}>
+
+						<PersonLockup
+							key={p.name}
+							person={p}
+							textColor={personTextColor}
+							isLinked
+							isOptionalLink
+							hoverColor={isDarkTheme ? BaseColors.SALMON : BaseColors.RED}
+							small={small}
+						/>
+						//</div>
 					))}
-					{/* {recording.persons.length > 2 && (
-						<div
-							className={clsx(styles.morePersons, isDarkTheme && styles.dark)}
-							onClick={(e) => {
-								e.preventDefault();
-								setPersonsExpanded(!personsExpanded);
-							}}
-						>
-							{personsExpanded ? <IconClosure /> : <IconDisclosure />}
-							<Heading6 sans loose unpadded uppercase>
-								{personsExpanded ? (
-									<FormattedMessage
-										id="molecule-teaseRecording__lessPersons"
-										defaultMessage="Show less"
-									/>
-								) : (
-									<FormattedMessage
-										id="molecule-teaseRecording__morePersons"
-										defaultMessage="{count} more"
-										values={{
-											count: recording.persons.length - 2,
-										}}
-									/>
-								)}
-							</Heading6>
-						</div>
-					)} */}
 				</div>
 			)}
 			<div className={styles.flexGrow}>

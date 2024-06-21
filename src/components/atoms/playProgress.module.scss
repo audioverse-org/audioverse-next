@@ -1,3 +1,4 @@
+@import '../../styles/common';
 .loading_indicator {
 	width: 24px;
 	height: 24px;
@@ -14,4 +15,23 @@
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.progressContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.circleBackground {
+	fill: none;
+}
+
+.circleProgress {
+	fill: none;
+	stroke: #e6e6e6;
+	transition: stroke-dashoffset 0.35s;
+	transform: rotate(-90deg);
+	transform-origin: 50% 50%;
 }
