@@ -8,13 +8,18 @@ import Modal from '~components/organisms/modal';
 import root, { isRedirectRouteAllowed } from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import IconDownload from '~public/img/icons/icon-download.svg';
+import { BaseColors } from '~src/lib/constants';
 
-import styles from './buttonGuest.module.scss';
+import styles from './buttonDownloadBlank.module.scss';
+import { isBackgroundColorDark } from './buttonPlay';
+import IconButton from './iconButton';
 
 export default function ButtonDownloadBlank({
 	className,
+	backgroundColor,
 }: {
 	className?: string;
+	backgroundColor: BaseColors;
 }): JSX.Element {
 	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
 	const language = useLanguageRoute();
@@ -30,8 +35,14 @@ export default function ButtonDownloadBlank({
 	return (
 		<>
 			<div className={clsx(styles.wrapper, className)}>
-				<button
-					className={styles.link}
+				<IconButton
+					color={
+						isBackgroundColorDark(backgroundColor)
+							? BaseColors.WHITE
+							: BaseColors.DARK
+					}
+					backgroundColor={backgroundColor}
+					Icon={IconDownload}
 					data-testid="guest-download-button"
 					onClick={(e) => {
 						e.preventDefault();
@@ -42,16 +53,14 @@ export default function ButtonDownloadBlank({
 						defaultMessage: 'downloads',
 						description: 'download button label',
 					})}
-				>
-					<IconDownload />
-				</button>
+				/>
 			</div>
 			<Modal
 				open={isGuestModalOpen}
 				onClose={() => setIsGuestModalOpen(false)}
 				title={
 					<FormattedMessage
-						id="molecule-buttonGuestDownload__modalTitle"
+						id="molecule-buttonDownloadBlank__modalTitle"
 						defaultMessage="Create a Free Account"
 					/>
 				}
@@ -68,7 +77,7 @@ export default function ButtonDownloadBlank({
 							type="super"
 							text={
 								<FormattedMessage
-									id="molecule-buttonGuest__modalButtonLabelCreateAccountDownload"
+									id="molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload"
 									defaultMessage="Create account"
 								/>
 							}
@@ -84,7 +93,7 @@ export default function ButtonDownloadBlank({
 							type="primary"
 							text={
 								<FormattedMessage
-									id="molecule-buttonGuest__modalButtonLabelLogIn"
+									id="molecule-buttonDownloadBlank__modalButtonLabelLogIn"
 									defaultMessage="Log in"
 								/>
 							}
@@ -94,7 +103,7 @@ export default function ButtonDownloadBlank({
 			>
 				<p className={styles.intro}>
 					<FormattedMessage
-						id="molecule-buttonGuestDownload__modalParagraph"
+						id="molecule-buttonDownloadBlank__modalParagraph"
 						defaultMessage="Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
 					/>
 				</p>
