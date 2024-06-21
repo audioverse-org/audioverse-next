@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -23,7 +24,6 @@ type EditPlaylistProps = {
 	isPublic: boolean;
 	summary: string;
 	title: string;
-	onEditSuccess: () => void;
 };
 
 const EditPlaylist: React.FC<EditPlaylistProps> = ({
@@ -31,9 +31,9 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({
 	title,
 	summary,
 	isPublic,
-	onEditSuccess,
 }) => {
 	const [isPlaylistEditModalOpen, setIsPlaylistEditModalOpen] = useState(false);
+	const queryClient = useQueryClient();
 
 	const handleCloseEditModal = () => {
 		setIsPlaylistEditModalOpen(false);
@@ -45,9 +45,13 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({
 				input: { ...playlist },
 				playlistId: id as string,
 			});
-			if (data) {
+			if (data.playlistUpdate) {
+				queryClient.invalidateQueries(['getLibraryPlaylistsData']);
+				await queryClient.invalidateQueries([
+					'getLibraryPlaylistPageData',
+					{ id },
+				]);
 				handleCloseEditModal();
-				onEditSuccess();
 			}
 		} catch (error) {
 			console.error('Error updating playlist:', error);

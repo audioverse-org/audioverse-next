@@ -66,7 +66,11 @@ export default function TeaseRecording({
 		playlistItem: BaseColors.PLAYLIST_B,
 		topic: BaseColors.TOPIC_B,
 	}[theme];
+
 	const isDarkTheme = isThemeDark(theme);
+
+	const iconColor = isDarkTheme ? BaseColors.WHITE : BaseColors.DARK;
+
 	const personTextColor = isDarkTheme
 		? BaseColors.LIGHT_TONE
 		: BaseColors.MID_TONE;
@@ -164,7 +168,7 @@ export default function TeaseRecording({
 					<ButtonAddToPlaylist
 						recordingId={recording.id}
 						backgroundColor={backgroundColor}
-						iconColor={BaseColors.MID_TONE}
+						iconColor={iconColor}
 						iconLight
 					/>
 				)}
