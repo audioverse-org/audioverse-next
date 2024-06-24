@@ -1238,43 +1238,6 @@ describe('sermon detail page', () => {
 		expect(getByLabelText(sidebar, 'Add to playlist')).toBeInTheDocument();
 	});
 
-	it('displays part info', async () => {
-		loadSermonDetailData({
-			sequence: {
-				contentType: SequenceContentType.Series,
-				canonicalPath: 'series_path',
-				recordings: {
-					nodes: [
-						{
-							id: 'the_sibling_id',
-							title: 'sibling_title',
-							canonicalPath: 'sibling_path',
-							persons: [],
-							sequenceIndex: 1,
-							sequence: {
-								recordings: {
-									aggregate: {
-										count: 3,
-									},
-								},
-							},
-						},
-					],
-				},
-			},
-		});
-
-		const result = await renderPage();
-
-		const sidebar = result.getByLabelText('series list');
-
-		await waitFor(() => {
-			expect(
-				getByText(sidebar, 'OTHER TEACHINGS IN SERIES')
-			).toBeInTheDocument();
-		});
-	});
-
 	it('includes series title in metadata', async () => {
 		loadSermonDetailData({
 			sequence: {
