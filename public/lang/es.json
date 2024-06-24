@@ -2780,5 +2780,8 @@
   },
   "done": {
     "string": "Terminado"
+  },
+  "timeLeft": {
+    "string": "{time} faltante"
   }
 }

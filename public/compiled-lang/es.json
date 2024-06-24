@@ -5769,6 +5769,16 @@
       "value": "Testimonials"
     }
   ],
+  "timeLeft": [
+    {
+      "type": 1,
+      "value": "time"
+    },
+    {
+      "type": 0,
+      "value": " faltante"
+    }
+  ],
   "time__hoursMinutesAndSeconds": [
     {
       "type": 1,

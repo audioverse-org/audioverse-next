@@ -2780,5 +2780,8 @@
   },
   "done": {
     "string": "終了"
+  },
+  "timeLeft": {
+    "string": "{time} left"
   }
 }

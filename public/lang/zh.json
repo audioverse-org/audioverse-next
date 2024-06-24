@@ -2780,5 +2780,8 @@
   },
   "done": {
     "string": "已完成的"
+  },
+  "timeLeft": {
+    "string": "{time} left"
   }
 }

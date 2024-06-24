@@ -6,20 +6,20 @@ import PlayProgress from '../atoms/playProgress';
 
 type PlayButtonCurrentProps = {
 	isPlaying: boolean;
-	isLoading: boolean;
 	isCurrentTrack: boolean;
 	position: number;
 	iconActiveColor: BaseColors;
 	trackColor: BaseColors;
+	bufferedProgress: number;
 };
 
 const PlayButtonCurrentLockup: React.FC<PlayButtonCurrentProps> = ({
 	isPlaying,
-	isLoading,
 	isCurrentTrack,
 	position,
 	iconActiveColor,
 	trackColor,
+	bufferedProgress,
 }) => {
 	return (
 		<PlayProgress
@@ -28,7 +28,7 @@ const PlayButtonCurrentLockup: React.FC<PlayButtonCurrentProps> = ({
 			activeColor={trackColor}
 			inactiveColor={iconActiveColor}
 			isCurrentTrack={isCurrentTrack}
-			isLoading={isLoading}
+			bufferedProgress={bufferedProgress}
 		/>
 	);
 };

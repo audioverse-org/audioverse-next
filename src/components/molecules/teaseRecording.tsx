@@ -3,27 +3,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-//import { FormattedMessage } from 'react-intl';
 import Heading2 from '~components/atoms/heading2';
 import Heading3 from '~components/atoms/heading3';
-//import Heading6 from '~components/atoms/heading6';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
-import { useFormattedDuration } from '~lib/time';
-import usePlaybackSession from '~lib/usePlaybackSession';
-//import IconClosure from '~public/img/icons/icon-closure.svg';
-//import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
-//import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg';
-import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 
-//import IconPlay from '~public/img/icons/play-circle.svg';
 import { analytics } from '../../lib/analytics';
-//import PlayProgress from '../atoms/playProgress';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonAddToPlaylist from './buttonAddToPlaylist';
 import PlayButton from './buttonPlayCircle';
 import { CardTheme } from './card/base/withCardTheme';
-//import IconButton from './iconButton';
 import PersonLockup from './personLockup';
 import styles from './teaseRecording.module.scss';
 
@@ -51,11 +40,7 @@ export default function TeaseRecording({
 	disableUserFeatures,
 	disablePlayback = false,
 }: Props): JSX.Element {
-	//const intl = useIntl();
 	const router = useRouter();
-	const session = usePlaybackSession(recording, { playlistRecordings });
-	const progress = session.progress;
-	//const [personsExpanded, setPersonsExpanded] = useState(false);
 
 	const backgroundColor = {
 		audiobookTrack: BaseColors.BOOK_B,
@@ -92,8 +77,6 @@ export default function TeaseRecording({
 			{!hidePresenters && (
 				<div className={styles.presenters}>
 					{recording.persons.map((p) => (
-						//<div key={p.canonicalPath} className={styles.presenter}>
-
 						<PersonLockup
 							key={p.name}
 							person={p}
@@ -103,7 +86,6 @@ export default function TeaseRecording({
 							hoverColor={isDarkTheme ? BaseColors.SALMON : BaseColors.RED}
 							small={small}
 						/>
-						//</div>
 					))}
 				</div>
 			)}
@@ -116,10 +98,6 @@ export default function TeaseRecording({
 							isDarkTheme={isDarkTheme}
 						/>
 					)}
-					<span className={styles.duration}>
-						{useFormattedDuration(recording.duration)}
-					</span>
-					{progress >= 1 && <SuccessIcon />}
 				</div>
 			</div>
 		</>

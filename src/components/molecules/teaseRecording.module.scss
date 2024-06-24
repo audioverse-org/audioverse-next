@@ -23,19 +23,31 @@ $container-padding: 16px;
 	}
 	&:hover {
 		background-color: var(--cardHoverColor);
-		/* Update gradients for .presenters::after and .title::after */
-		.presenters::after,
-		.title::after {
-			background: linear-gradient(
-				to left,
-				var(--cardHoverColor),
-				/* Adjust gradient colors here */ rgba(255, 255, 255, 0)
-			);
-		}
 	}
 	&.unpadded {
 		padding: 0;
 	}
+}
+
+.content::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100px;
+	height: 70%;
+	background: linear-gradient(to left, var(--cardBg), rgba(255, 255, 255, 0));
+	z-index: 1;
+	pointer-events: none;
+	transition: background 0.3s ease;
+}
+
+.content:hover::after {
+	background: linear-gradient(
+		to left,
+		var(--cardHoverColor),
+		rgba(255, 255, 255, 0)
+	);
 }
 
 .part {
@@ -51,7 +63,8 @@ $container-padding: 16px;
 	justify-content: space-between;
 	align-items: flex-start;
 	overflow: hidden;
-	margin-bottom: 16px;
+	margin-bottom: 10px;
+	padding-bottom: 4px;
 	color: var(--headingColor, $ts-dark);
 	h2 {
 		margin-top: 0;
@@ -80,19 +93,6 @@ $right-icon-offset: -4px;
 	flex-direction: row;
 	overflow: hidden;
 	position: relative;
-}
-
-.presenters::after,
-.title::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 100px;
-	height: 100%;
-	background: linear-gradient(to left, var(--cardBg), rgba(255, 255, 255, 0));
-	z-index: 1;
-	pointer-events: none;
 }
 
 .morePersons {

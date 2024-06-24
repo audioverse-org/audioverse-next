@@ -8,7 +8,7 @@ type Props = {
 	activeColor?: string;
 	inactiveColor: string;
 	isCurrentTrack?: boolean;
-	isLoading: boolean;
+	bufferedProgress?: number;
 };
 
 const PlayProgress: React.FC<Props> = ({
@@ -16,7 +16,7 @@ const PlayProgress: React.FC<Props> = ({
 	progressPercentage = 0,
 	inactiveColor,
 	isCurrentTrack,
-	isLoading,
+	bufferedProgress = 0,
 }) => {
 	const radius = 11.5; // Radius of the circle
 	const circumference = 2 * Math.PI * radius;
@@ -25,7 +25,7 @@ const PlayProgress: React.FC<Props> = ({
 		return circumference - (value / 100) * circumference;
 	};
 
-	return isCurrentTrack && !isLoading ? (
+	return isCurrentTrack && bufferedProgress * 100 < 1 ? (
 		<div className={Styles.loading_indicator}></div>
 	) : (
 		<div className={Styles.progressContainer}>
@@ -88,19 +88,30 @@ const PlayProgress: React.FC<Props> = ({
 							cx="12"
 							cy="12"
 							r={radius}
-							strokeWidth="1.5"
+							strokeWidth="1.3"
 							strokeDasharray={circumference}
 							strokeDashoffset={calculateOffset(progressPercentage * 100)}
 						/>
 					</>
 				) : (
-					<path
-						d="M9 17V7L17 12L9 17Z"
-						fill={inactiveColor}
-						stroke={inactiveColor}
-						strokeWidth="1"
-						strokeLinejoin="round"
-					/>
+					<>
+						<circle
+							className={Styles.circleProgress}
+							cx="12"
+							cy="12"
+							r={radius}
+							strokeWidth="1.3"
+							strokeDasharray={circumference}
+							strokeDashoffset={calculateOffset(progressPercentage * 100)}
+						/>
+						<path
+							d="M9 17V7L17 12L9 17Z"
+							fill={inactiveColor}
+							stroke={inactiveColor}
+							strokeWidth="1"
+							strokeLinejoin="round"
+						/>
+					</>
 				)}
 			</svg>
 		</div>

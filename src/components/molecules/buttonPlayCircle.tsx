@@ -7,6 +7,7 @@ import IconPlay from '~public/img/icons/play-circle.svg';
 
 import PlayButtonCurrentLockup from '../atoms/playButtonCurrentLockup';
 import PlayProgress from '../atoms/playProgress';
+import PlayTime from '../atoms/playTime';
 import { AndMiniplayerFragment } from '../templates/__generated__/andMiniplayer';
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
@@ -28,6 +29,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 	const currentTrack = context.getRecording();
 	const isCurrentTrack = currentTrack?.id === recording.id;
 	const iconColor = isDarkTheme ? BaseColors.SALMON : BaseColors.RED;
+	const timeColor = isDarkTheme ? BaseColors.WHITE : BaseColors.DARK;
 	const intl = useIntl();
 
 	const handlePlayClick = () => {
@@ -35,46 +37,53 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 	};
 
 	return (
-		<button
-			onClick={(e) => {
-				e.preventDefault();
-				handlePlayClick();
-			}}
-			className={styles.play}
-			aria-label={intl.formatMessage({
-				id: 'playButton__playLabel',
-				defaultMessage: 'play',
-				description: 'play button play label',
-			})}
-		>
-			{isCurrentTrack ? (
-				<>
-					<PlayButtonCurrentLockup
-						isPlaying={session.isPlaying}
-						position={session.progress}
-						isLoading={session.isLoaded}
-						iconActiveColor={iconColor}
-						trackColor={BaseColors.WHITE}
-						isCurrentTrack={true}
-					/>
-				</>
-			) : (
-				<>
-					{session.progress && isCurrentTrack ? (
-						<PlayProgress
-							isPlaying={true}
-							activeColor={BaseColors.DARK}
-							inactiveColor={iconColor}
-							progressPercentage={session.progress}
-							isCurrentTrack={false}
-							isLoading={false}
+		<div className={styles.rowUnpadded}>
+			<button
+				onClick={(e) => {
+					e.preventDefault();
+					handlePlayClick();
+				}}
+				className={styles.play}
+				aria-label={intl.formatMessage({
+					id: 'playButton__playLabel',
+					defaultMessage: 'play',
+					description: 'play button play label',
+				})}
+			>
+				{isCurrentTrack ? (
+					<>
+						<PlayButtonCurrentLockup
+							isPlaying={session.isPlaying}
+							position={session.progress}
+							iconActiveColor={iconColor}
+							trackColor={BaseColors.WHITE}
+							isCurrentTrack={true}
+							bufferedProgress={session.bufferedProgress}
 						/>
-					) : (
-						<IconPlay color={iconColor} />
-					)}
-				</>
-			)}
-		</button>
+					</>
+				) : (
+					<>
+						{session.progress ? (
+							<PlayProgress
+								isPlaying={false}
+								activeColor={BaseColors.WHITE}
+								inactiveColor={iconColor}
+								progressPercentage={session.progress}
+								isCurrentTrack={false}
+							/>
+						) : (
+							<IconPlay color={iconColor} />
+						)}
+					</>
+				)}
+			</button>
+			<PlayTime
+				progress={session.progress}
+				duration={session.duration}
+				iconSecondaryColor={timeColor}
+				textSecondaryColor={timeColor}
+			/>
+		</div>
 	);
 };
 

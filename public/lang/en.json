@@ -2740,6 +2740,9 @@
   "testimonies__title": {
     "string": "Testimonials"
   },
+  "timeLeft": {
+    "string": "{time} left"
+  },
   "time__hoursMinutesAndSeconds": {
     "comment": "time hours, minutes and seconds",
     "string": "{h}:{m}:{s}"
