@@ -1269,7 +1269,9 @@ describe('sermon detail page', () => {
 		const sidebar = result.getByLabelText('series list');
 
 		await waitFor(() => {
-			expect(getByText(sidebar, 'Part 1 of 3')).toBeInTheDocument();
+			expect(
+				getByText(sidebar, 'OTHER TEACHINGS IN SERIES')
+			).toBeInTheDocument();
 		});
 	});
 
