@@ -101,7 +101,7 @@ function BasePage() {
 const renderComponent = buildRenderer(BasePage);
 
 describe('AndPlaybackContext', () => {
-	it('renders', async () => {
+	it('moves player from detail to miniplayer', async () => {
 		jest.unmock('video.js');
 		jest.unmock('@silvermine/videojs-airplay');
 		jest.unmock('@silvermine/videojs-chromecast');
