@@ -4,7 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import LoginLanding from '~components/molecules/loginLanding';
+import LoginLanding from '~containers/account/loginLanding';
 import { IBaseProps } from '~containers/base';
 import { REVALIDATE } from '~lib/constants';
 import getIntl from '~lib/getIntl';
