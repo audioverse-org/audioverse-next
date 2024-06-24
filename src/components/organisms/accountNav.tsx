@@ -2,15 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Mininav from '~components/molecules/mininav';
-import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 
 type Props = {
 	current: 'profile' | 'preferences';
+	onClick: (id: 'profile' | 'preferences') => void;
 };
 
-export default function AccountNav({ current }: Props): JSX.Element {
-	const languageRoute = useLanguageRoute();
+export default function AccountNav({ current, onClick }: Props): JSX.Element {
 	return (
 		<Mininav
 			items={[
@@ -22,8 +20,8 @@ export default function AccountNav({ current }: Props): JSX.Element {
 							defaultMessage="Profile"
 						/>
 					),
-					url: root.lang(languageRoute).account.profile.get(),
 					isActive: current === 'profile',
+					onClick: () => onClick('profile'),
 				},
 				{
 					id: 'preferences',
@@ -33,8 +31,8 @@ export default function AccountNav({ current }: Props): JSX.Element {
 							defaultMessage="Preferences"
 						/>
 					),
-					url: root.lang(languageRoute).account.preferences.get(),
 					isActive: current === 'preferences',
+					onClick: () => onClick('preferences'),
 				},
 			]}
 		/>

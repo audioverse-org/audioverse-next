@@ -732,9 +732,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Elija cómo quiere descargar el audio."
   },
-  "preferences__heading": {
-    "string": "Configuración de la cuenta"
-  },
   "preferences__inputAutoplay": {
     "string": "Grabaciones de reproducción automática"
   },
@@ -841,9 +838,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "Guardar cambios"
-  },
-  "profile__heading": {
-    "string": "Configuración de la cuenta"
   },
   "profile__inputLabelForEmail": {
     "comment": "etiqueta de entrada para correo electrónico",
@@ -2299,17 +2293,8 @@
   "molecule-buttonDownload__linkLabelMedium": {
     "string": "Medium Quality ({size})"
   },
-  "molecule-buttonGuestDownload__modalParagraph": {
-    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
-  },
-  "molecule-buttonGuestDownload__modalTitle": {
-    "string": "Create a Free Account"
-  },
   "molecule-buttonGuest__Download": {
     "string": "Download content for offline access"
-  },
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
-    "string": "Create account"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
     "string": "Skip"
@@ -2796,5 +2781,26 @@
   },
   "done": {
     "string": "Terminado"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelLogIn": {
+    "string": "Iniciar sesión"
+  },
+  "molecule-buttonDownloadBlank__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonDownloadBlank__modalTitle": {
+    "string": "Create a Free Account"
+  },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "Configuración de la cuenta"
   }
 }

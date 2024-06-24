@@ -1,11 +1,11 @@
 import { GetServerSidePropsContext } from 'next';
 
-import Profile from '~containers/account/profile';
+import Account from '~containers/account/index';
 import { storeRequest } from '~lib/api/storeRequest';
 import getDehydratedProps, { DehydratedProps } from '~lib/getDehydratedProps';
 import { prefetchQueries } from '~src/__generated__/prefetch';
 
-export default Profile;
+export default Account;
 
 export async function getServerSideProps({
 	req,
@@ -14,6 +14,7 @@ export async function getServerSideProps({
 
 	const client = await prefetchQueries({
 		getProfileData: {},
+		getAccountPreferencesData: {},
 	});
 
 	return getDehydratedProps(client);

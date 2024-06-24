@@ -2,7 +2,7 @@
 
 .contentWithPlayer {
 	@media (min-width: $breakpoint-lg) {
-		padding-bottom: $miniplayer-height;
+		height: calc(100vh - $miniplayer-height);
 	}
 }
 

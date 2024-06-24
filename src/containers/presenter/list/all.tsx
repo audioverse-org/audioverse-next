@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { fetchApi } from '~lib/api/fetchApi';
 import useOnScreen from '~lib/hooks/useOnScreen';
@@ -11,6 +11,7 @@ import {
 	GetPresenterListAllPageDataDocument,
 	GetPresenterListAllPageDataQuery,
 } from './__generated__/all';
+import styles from './all.module.scss';
 import List, { PresentersProps } from './list';
 
 export default function All(props: PresentersProps) {
@@ -19,7 +20,7 @@ export default function All(props: PresentersProps) {
 	const hasReachedEnd = useOnScreen(endRef);
 	const language = useLanguageId();
 
-	const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery(
+	const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
 		['presenters'],
 		({ pageParam = null }) =>
 			fetchApi(GetPresenterListAllPageDataDocument, {
@@ -39,9 +40,9 @@ export default function All(props: PresentersProps) {
 	useEffect(() => {
 		if (!hasNextPage) return;
 		if (!hasReachedEnd) return;
-		if (isLoading) return;
+		if (isFetching) return;
 		fetchNextPage();
-	}, [hasNextPage, hasReachedEnd, fetchNextPage, isLoading]);
+	}, [hasNextPage, hasReachedEnd, fetchNextPage, isFetching]);
 
 	const persons = data?.pages.flatMap((p) => p?.persons.nodes || []) || [];
 
@@ -55,6 +56,20 @@ export default function All(props: PresentersProps) {
 				})}
 				persons={persons}
 			/>
+			<p className={styles.endMessage}>
+				{isFetching && (
+					<FormattedMessage
+						id="presentersListAll__loading"
+						defaultMessage="Loading..."
+					/>
+				)}
+				{!hasNextPage && !isFetching && (
+					<FormattedMessage
+						id="presentersListAll__listEnd"
+						defaultMessage="No more presenters"
+					/>
+				)}
+			</p>
 			<div ref={endRef} />
 		</>
 	);
