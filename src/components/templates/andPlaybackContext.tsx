@@ -1,23 +1,21 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import throttle from 'lodash/throttle';
+import { useQueryClient } from '@tanstack/react-query';
 import Script from 'next/script';
 import React, {
 	MutableRefObject,
 	ReactNode,
 	useCallback,
 	useEffect,
-	useMemo,
 	useRef,
 	useState,
 } from 'react';
 import type * as VideoJs from 'video.js';
 
-import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/media/hasVideo';
 import { Scalars } from '~src/__generated__/graphql';
 import getVideoJs from '~src/lib/media/getVideoJs';
 import moveVideo from '~src/lib/media/moveVideo';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
+import useUpdateProgress from '~src/lib/media/useUpdateProgress';
 
 import { analytics } from '../../lib/analytics';
 import { getSources } from '../../lib/media/getSources';
@@ -25,8 +23,6 @@ import {
 	AndMiniplayerFragment,
 	GetRecordingExtraDataQuery,
 	GetRecordingPlaybackProgressQuery,
-	recordingPlaybackProgressSet,
-	RecordingPlaybackProgressSetMutationVariables,
 } from './__generated__/andMiniplayer';
 
 // Source:
@@ -136,8 +132,6 @@ interface AndMiniplayerProps {
 	children: ReactNode;
 }
 
-const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
-
 type VideoJsType = typeof VideoJs;
 
 export default function AndPlaybackContext({
@@ -175,20 +169,6 @@ export default function AndPlaybackContext({
 
 	const queryClient = useQueryClient();
 
-	const { mutate: updateProgress } = useMutation(
-		({
-			percentage,
-		}: Pick<RecordingPlaybackProgressSetMutationVariables, 'percentage'>) => {
-			if (!getSessionToken() || !recording) {
-				return Promise.resolve() as Promise<unknown>;
-			}
-			return recordingPlaybackProgressSet({
-				id: recording.id,
-				percentage,
-			});
-		}
-	);
-
 	const sourcesRef = useRef<Playable[]>([]);
 	useEffect(() => {
 		if (!recording) return;
@@ -207,10 +187,8 @@ export default function AndPlaybackContext({
 		setBufferedProgress(newBufferedProgress);
 	}, [bufferedProgress, playerBufferedEnd, progress, duration]);
 
-	const throttledUpdateProgress = useMemo(
-		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
-		[updateProgress]
-	);
+	const throttledUpdateProgress = useUpdateProgress(recording?.id);
+
 	const setProgress = useCallback(
 		(p: number) => {
 			throttledUpdateProgress({
