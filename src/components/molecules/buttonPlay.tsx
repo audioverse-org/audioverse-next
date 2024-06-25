@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
-import usePlaybackSession from '~lib/usePlaybackSession';
+import usePlaybackSession from '~lib/media/usePlaybackSession';
 import IconPauseLarge from '~public/img/icons/icon-pause-large.svg';
 import IconPause from '~public/img/icons/icon-pause-medium.svg';
 import IconPlayLarge from '~public/img/icons/icon-play-large.svg';

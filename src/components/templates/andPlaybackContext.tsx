@@ -13,11 +13,11 @@ import React, {
 import type * as VideoJs from 'video.js';
 
 import { getSessionToken } from '~lib/cookies';
-import hasVideo from '~lib/hasVideo';
+import hasVideo from '~lib/media/hasVideo';
 import { Scalars } from '~src/__generated__/graphql';
 import getVideoJs from '~src/lib/media/getVideoJs';
 import moveVideo from '~src/lib/media/moveVideo';
-import { PlaySource } from '~src/lib/usePlaybackSession';
+import { PlaySource } from '~src/lib/media/usePlaybackSession';
 
 import { analytics } from '../../lib/analytics';
 import {

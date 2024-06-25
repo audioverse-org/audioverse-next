@@ -11,7 +11,7 @@ import ProgressBar from '~components/atoms/progressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
 import { useFormattedDuration } from '~lib/time';
-import usePlaybackSession, { PlaySource } from '~lib/usePlaybackSession';
+import usePlaybackSession, { PlaySource } from '~lib/media/usePlaybackSession';
 import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg';

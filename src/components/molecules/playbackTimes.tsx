@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useFormattedTime } from '~lib/time';
-import usePlaybackSession from '~lib/usePlaybackSession';
+import usePlaybackSession from '~lib/media/usePlaybackSession';
 
 import { PlayerFragment } from './__generated__/player';
 import styles from './playbackTimes.module.scss';
