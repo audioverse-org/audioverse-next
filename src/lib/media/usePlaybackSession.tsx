@@ -154,8 +154,8 @@ export default function usePlaybackSession(
 		});
 	}
 
-	function setProgress(percent: number) {
-		afterLoad((c) => c.setProgress(percent));
+	function setProgress(percentage: number) {
+		afterLoad((c) => c.setProgress({ percentage, recordingId: recording?.id }));
 	}
 
 	function pause() {

@@ -200,6 +200,7 @@ describe('player', () => {
 		const input = getByLabelText('progress');
 
 		await act(async () => {
+			console.log('scrub');
 			ReactTestUtils.Simulate.input(input, {
 				target: {
 					value: 50,
@@ -207,7 +208,10 @@ describe('player', () => {
 			} as any);
 		});
 
-		await waitFor(() => expect(input).toHaveValue('50'));
+		await waitFor(() => {
+			console.log('looking');
+			expect(input).toHaveValue('50');
+		});
 	});
 
 	it('does not reload player on play', async () => {
@@ -715,7 +719,9 @@ describe('player', () => {
 			} as any);
 		});
 
-		expect(mockPlayer.currentTime).toBeCalledWith(70);
+		await waitFor(() => {
+			expect(mockPlayer.currentTime).toBeCalledWith(70);
+		});
 	});
 
 	it('displays series in miniplayer', async () => {

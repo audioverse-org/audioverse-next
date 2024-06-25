@@ -41,7 +41,11 @@ export default function AndMiniplayer({
 								const t = player.currentTime();
 								const d = player.duration();
 								const p = d ? t / d : 0;
-								playbackContext.setProgress(p, false);
+								playbackContext.setProgress({
+									percentage: p,
+									recordingId: recording?.id,
+									updatePlayer: false,
+								});
 							}}
 							onPause={() => playbackContext.setIsPaused(true)}
 							onPlay={() => playbackContext.setIsPaused(false)}

@@ -22,7 +22,6 @@ import { getSources } from '../../lib/media/getSources';
 import {
 	AndMiniplayerFragment,
 	GetRecordingExtraDataQuery,
-	GetRecordingPlaybackProgressQuery,
 } from './__generated__/andMiniplayer';
 
 // Source:
@@ -50,7 +49,11 @@ export type PlaybackContextType = {
 	getPrefersAudio: () => boolean;
 	getProgress: () => number;
 	getBufferedProgress: () => number;
-	setProgress: (p: number, updatePlayer?: boolean) => void;
+	setProgress: (options: {
+		percentage: number;
+		recordingId?: number | string | undefined;
+		updatePlayer?: boolean;
+	}) => void;
 	getRecording: () => AndMiniplayerFragment | undefined;
 	loadRecording: (
 		recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
@@ -172,9 +175,14 @@ export default function AndPlaybackContext({
 
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
 	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
-	const { progress, setProgress, setProgressLocal } = useProgress(
-		recording?.id
-	);
+
+	const isShowingVideoRef = useRef(false);
+	isShowingVideoRef.current =
+		!!recording && hasVideo(recording) && !prefersAudio;
+
+	const recordingRef = useRef<AndMiniplayerFragment>();
+
+	const { progress, setProgress } = useProgress(recordingRef.current?.id);
 
 	useEffect(() => {
 		let newBufferedProgress = +Math.max(
@@ -186,11 +194,6 @@ export default function AndPlaybackContext({
 		setBufferedProgress(newBufferedProgress);
 	}, [bufferedProgress, playerBufferedEnd, progress, duration]);
 
-	const isShowingVideoRef = useRef(false);
-	isShowingVideoRef.current =
-		!!recording && hasVideo(recording) && !prefersAudio;
-
-	const recordingRef = useRef<AndMiniplayerFragment>();
 	const playback: PlaybackContextType = {
 		play: () => {
 			playerRef.current?.play();
@@ -214,7 +217,7 @@ export default function AndPlaybackContext({
 			0,
 		setTime: (t: number) => {
 			if (!playerRef.current) return;
-			setProgress(t / playerRef.current.duration());
+			setProgress({ percentage: t / playerRef.current.duration() });
 			playerRef.current.currentTime(t);
 		},
 		setPrefersAudio: (prefersAudio: boolean) => {
@@ -241,12 +244,19 @@ export default function AndPlaybackContext({
 		},
 		getProgress: () => progress,
 		getBufferedProgress: () => bufferedProgress,
-		setProgress: (p: number, updatePlayer = true) => {
-			setProgress(p);
+		setProgress: ({ percentage, recordingId, updatePlayer = true }) => {
+			setProgress({ percentage, recordingId });
 			const duration = playback.getDuration();
-			if (!playerRef.current || !duration || isNaN(duration) || !updatePlayer)
+			if (!playerRef.current || !duration || isNaN(duration) || !updatePlayer) {
+				console.log('Not updating player', {
+					playerRef: !!playerRef.current,
+					duration,
+					isNaN: isNaN(duration),
+					updatePlayer,
+				});
 				return;
-			playerRef.current.currentTime(p * duration);
+			}
+			playerRef.current.currentTime(percentage * duration);
 			playerRef.current.play();
 		},
 		getRecording: () => {
@@ -281,6 +291,7 @@ export default function AndPlaybackContext({
 
 			const newRecording = recordingsArray[currentIndex];
 			setRecording(newRecording);
+			console.log('setting recording ref');
 			recordingRef.current = newRecording;
 			if (typeof prefersAudio === 'boolean') {
 				setPrefersAudio(prefersAudio);
@@ -406,17 +417,6 @@ export default function AndPlaybackContext({
 				}
 
 				setIsPaused(true);
-
-				const serverProgress =
-					queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
-						'getRecordingPlaybackProgress',
-						{ id: recording.id },
-					]);
-				const progress =
-					serverProgress?.recording?.viewerPlaybackSession
-						?.positionPercentage || 0;
-				setProgressLocal(progress);
-
 				setBufferedProgress(0);
 
 				playerRef.current?.currentTime(progress * playback.getDuration());

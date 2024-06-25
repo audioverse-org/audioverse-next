@@ -40,10 +40,12 @@ export default function ProgressBar({
 					description: 'progress bar label',
 				})}
 				readOnly={!setProgress}
-				onInput={(e) =>
-					setProgress &&
-					setProgress(parseFloat((e.target as HTMLInputElement).value) / 100)
-				}
+				onInput={(e) => {
+					if (!setProgress) return;
+					const p = parseFloat((e.target as HTMLInputElement).value) / 100;
+					console.log('progress bar updated', p);
+					setProgress(p);
+				}}
 				disabled={!setProgress}
 			/>
 		</span>
