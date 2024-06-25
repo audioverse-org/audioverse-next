@@ -15,6 +15,7 @@ import type * as VideoJs from 'video.js';
 import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
 import { Scalars } from '~src/__generated__/graphql';
+import getVideoJs from '~src/lib/media/getVideoJs';
 import moveVideo from '~src/lib/media/moveVideo';
 import { PlaySource } from '~src/lib/usePlaybackSession';
 
@@ -184,7 +185,9 @@ export default function AndPlaybackContext({
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
 
-	const [videojs] = useState<Promise<VideoJsType>>(() => import('video.js'));
+	const [videojs] = useState<Promise<VideoJsType>>(
+		() => getVideoJs() as Promise<VideoJsType>
+	);
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
