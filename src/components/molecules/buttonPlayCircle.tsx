@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BaseColors } from '~lib/constants';
 import usePlaybackSession, { PlaySource } from '~lib/usePlaybackSession';
+import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import IconPlay from '~public/img/icons/play-circle.svg';
+import { useFormattedDuration } from '~src/lib/time';
 
-import PlayButtonCurrentLockup from '../atoms/playButtonCurrentLockup';
+import Heading6 from '../atoms/heading6';
 import PlayProgress from '../atoms/playProgress';
-import PlayTime from '../atoms/playTime';
 import { AndMiniplayerFragment } from '../templates/__generated__/andMiniplayer';
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
@@ -29,7 +30,11 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 	const currentTrack = context.getRecording();
 	const isCurrentTrack = currentTrack?.id === recording.id;
 	const iconColor = isDarkTheme ? BaseColors.SALMON : BaseColors.RED;
-	const timeColor = isDarkTheme ? BaseColors.WHITE : BaseColors.DARK;
+	const successColor = isDarkTheme ? BaseColors.WHITE : BaseColors.DARK;
+	const formattedDuration = useFormattedDuration(session.duration);
+	const remainingDuration = useFormattedDuration(
+		session.duration * (1 - session.progress)
+	);
 	const intl = useIntl();
 
 	const handlePlayClick = () => {
@@ -52,12 +57,11 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 			>
 				{isCurrentTrack ? (
 					<>
-						<PlayButtonCurrentLockup
+						<PlayProgress
 							isPlaying={session.isPlaying}
-							position={session.progress}
-							iconActiveColor={iconColor}
-							trackColor={BaseColors.WHITE}
-							isCurrentTrack={true}
+							progressPercentage={session.progress}
+							inactiveColor={iconColor}
+							isCurrentTrack
 							bufferedProgress={session.bufferedProgress}
 						/>
 					</>
@@ -66,10 +70,8 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 						{session.progress ? (
 							<PlayProgress
 								isPlaying={false}
-								activeColor={BaseColors.WHITE}
 								inactiveColor={iconColor}
 								progressPercentage={session.progress}
-								isCurrentTrack={false}
 							/>
 						) : (
 							<IconPlay color={iconColor} />
@@ -77,12 +79,25 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 					</>
 				)}
 			</button>
-			<PlayTime
-				progress={session.progress}
-				duration={session.duration}
-				iconSecondaryColor={timeColor}
-				textSecondaryColor={timeColor}
-			/>
+			<>
+				<Heading6 large className={styles.duration}>
+					{session.progress > 0 && session.progress < 1 ? (
+						<FormattedMessage
+							id="timeLeft"
+							defaultMessage="{time} left"
+							values={{ time: remainingDuration }}
+						/>
+					) : (
+						formattedDuration
+					)}
+				</Heading6>
+				{session.progress >= 1 && (
+					<SuccessIcon
+						className={styles.successIcon}
+						style={{ color: successColor }}
+					/>
+				)}
+			</>
 		</div>
 	);
 };

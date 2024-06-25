@@ -5,7 +5,6 @@ import Styles from './playProgress.module.scss';
 type Props = {
 	isPlaying: boolean;
 	progressPercentage?: number;
-	activeColor?: string;
 	inactiveColor: string;
 	isCurrentTrack?: boolean;
 	bufferedProgress?: number;

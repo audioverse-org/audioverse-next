@@ -2782,6 +2782,6 @@
     "string": "Fertig"
   },
   "timeLeft": {
-    "string": "{time} left"
+    "string": "{time} übrig"
   }
 }

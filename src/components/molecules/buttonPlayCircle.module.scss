@@ -14,3 +14,17 @@ $right-icon-offset: -4px;
 	flex-direction: row;
 	align-items: center;
 }
+.duration {
+	font-family: inherit;
+	margin-left: 10px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 1px;
+}
+.successIcon {
+	flex: 1;
+	flex-direction: 'row';
+	margin-left: 4px;
+	align-items: center;
+	margin-bottom: 1px;
+}
