@@ -13,6 +13,7 @@ import hasVideo from '~lib/media/hasVideo';
 import { Scalars } from '~src/__generated__/graphql';
 import getVideoJs from '~src/lib/media/getVideoJs';
 import moveVideo from '~src/lib/media/moveVideo';
+import useIsPaused from '~src/lib/media/useIsPaused';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import useProgress from '~src/lib/media/useProgress';
 
@@ -152,10 +153,7 @@ export default function AndPlaybackContext({
 	const playerRef = useRef<VideoJs.VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
 
-	const isPausedRef = useRef<boolean>(true);
-	// WORKAROUND: This componenent needs isPaused to trigger rerenders
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [isPaused, setIsPaused] = useState<boolean>(true);
+	const { isPausedRef, setIsPaused } = useIsPaused();
 
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
@@ -201,7 +199,6 @@ export default function AndPlaybackContext({
 	const playback: PlaybackContextType = {
 		play: () => {
 			playerRef.current?.play();
-			isPausedRef.current = false;
 			setIsPaused(false);
 		},
 		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
@@ -212,7 +209,6 @@ export default function AndPlaybackContext({
 			} catch (e) {
 				console.warn(e);
 			}
-			isPausedRef.current = true;
 			setIsPaused(true);
 		},
 		paused: () => isPausedRef.current,
@@ -381,10 +377,7 @@ export default function AndPlaybackContext({
 				);
 			}
 		},
-		setIsPaused: (paused) => {
-			isPausedRef.current = paused;
-			setIsPaused(paused);
-		},
+		setIsPaused,
 		getRefs: () => ({
 			origin: originRef,
 			video: videoRef,
@@ -417,7 +410,6 @@ export default function AndPlaybackContext({
 					});
 				}
 
-				isPausedRef.current = true;
 				setIsPaused(true);
 
 				const serverProgress =
