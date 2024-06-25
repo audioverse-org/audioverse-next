@@ -7,9 +7,9 @@ import {
 import {
 	PlaybackContext,
 	PlaybackContextType,
-	shouldLoadRecordingPlaybackProgress,
 } from '~components/templates/andPlaybackContext';
 import { getSources } from '~src/lib/media/getSources';
+import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRecordingPlaybackProgress';
 
 export enum PlaySource {
 	Tease = 'Tease',

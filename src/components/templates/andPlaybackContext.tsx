@@ -41,13 +41,6 @@ export interface Playable extends VideoJs.default.Tech.SourceObject {
 	logUrl?: string | null;
 }
 
-export const shouldLoadRecordingPlaybackProgress = (
-	recording: AndMiniplayerFragment | null | undefined
-) =>
-	!!recording?.id &&
-	!(recording.id + '').includes('/') && // Bible ids
-	!!getSessionToken();
-
 export type PlaybackContextType = {
 	player: () => VideoJs.VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
 	play: () => void;
