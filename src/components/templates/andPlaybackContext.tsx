@@ -13,6 +13,7 @@ import hasVideo from '~lib/media/hasVideo';
 import { Scalars } from '~src/__generated__/graphql';
 import getVideoJs from '~src/lib/media/getVideoJs';
 import moveVideo from '~src/lib/media/moveVideo';
+import useBuffered from '~src/lib/media/useBuffered';
 import useIsPaused from '~src/lib/media/useIsPaused';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import useProgress from '~src/lib/media/useProgress';
@@ -140,6 +141,24 @@ type VideoJsType = typeof VideoJs;
 export default function AndPlaybackContext({
 	children,
 }: AndMiniplayerProps): JSX.Element {
+	// DONE:
+	const { isPausedRef, setIsPaused } = useIsPaused();
+
+	// IN PROGRESS:
+	const recordingRef = useRef<AndMiniplayerFragment>();
+	const { progress, setProgress } = useProgress(recordingRef.current?.id);
+
+	const playerRef = useRef<VideoJs.VideoJsPlayer>();
+	const sourcesRef = useRef<Playable[]>([]);
+	const [recording, setRecording] = useState<AndMiniplayerFragment>();
+	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
+	const { bufferedProgress, setBufferedProgress } = useBuffered({
+		recordingId: recordingRef.current?.id,
+		player: playerRef.current,
+		duration,
+	});
+
+	// TODO:
 	const videoRef = useRef<HTMLDivElement>(null);
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
@@ -150,12 +169,8 @@ export default function AndPlaybackContext({
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
-	const [recording, setRecording] = useState<AndMiniplayerFragment>();
-	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
-	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
-	const playerRef = useRef<VideoJs.VideoJsPlayer>();
 
-	const { isPausedRef, setIsPaused } = useIsPaused();
+	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
@@ -167,32 +182,14 @@ export default function AndPlaybackContext({
 
 	const queryClient = useQueryClient();
 
-	const sourcesRef = useRef<Playable[]>([]);
 	useEffect(() => {
 		if (!recording) return;
 		sourcesRef.current = getSources(recording, prefersAudio);
 	}, [recording, prefersAudio]);
 
-	const playerBufferedEnd = playerRef.current?.bufferedEnd();
-	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
-
 	const isShowingVideoRef = useRef(false);
 	isShowingVideoRef.current =
 		!!recording && hasVideo(recording) && !prefersAudio;
-
-	const recordingRef = useRef<AndMiniplayerFragment>();
-
-	const { progress, setProgress } = useProgress(recordingRef.current?.id);
-
-	useEffect(() => {
-		let newBufferedProgress = +Math.max(
-			bufferedProgress, // Don't ever reduce the buffered amount
-			progress, // We've always buffered as much as we're playing
-			(playerBufferedEnd || 0) / duration // Actually compute current buffered progress
-		).toFixed(2);
-		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
-		setBufferedProgress(newBufferedProgress);
-	}, [bufferedProgress, playerBufferedEnd, progress, duration]);
 
 	const playback: PlaybackContextType = {
 		play: () => {
