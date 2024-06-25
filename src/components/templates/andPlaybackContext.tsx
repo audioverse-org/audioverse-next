@@ -17,6 +17,7 @@ import useBuffered from '~src/lib/media/useBuffered';
 import useIsPaused from '~src/lib/media/useIsPaused';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import useProgress from '~src/lib/media/useProgress';
+import useVolume from '~src/lib/media/useVolume';
 
 import { analytics } from '../../lib/analytics';
 import { getSources } from '../../lib/media/getSources';
@@ -149,6 +150,8 @@ export default function AndPlaybackContext({
 	const { progress, setProgress } = useProgress(recordingRef.current?.id);
 
 	const playerRef = useRef<VideoJs.VideoJsPlayer>();
+	const { getVolume, setVolume } = useVolume(playerRef.current);
+
 	const sourcesRef = useRef<Playable[]>([]);
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
 	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
@@ -177,7 +180,7 @@ export default function AndPlaybackContext({
 	const [videoHandlerId, setVideoHandlerId] =
 		useState<Scalars['ID']['output']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']['output']>();
-	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
+
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
 
 	const queryClient = useQueryClient();
@@ -350,11 +353,8 @@ export default function AndPlaybackContext({
 			return 'miniplayer';
 		},
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
-		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
-		setVolume: (volume: number) => {
-			setVolume(volume);
-			playerRef.current?.volume(volume / 100);
-		},
+		getVolume,
+		setVolume,
 		getSpeed: () => _speed,
 		setSpeed: (s: number) => {
 			playerRef.current?.playbackRate(s);
