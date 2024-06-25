@@ -20,7 +20,7 @@ import moveVideo from '~src/lib/media/moveVideo';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 
 import { analytics } from '../../lib/analytics';
-import { getFiles } from '../../lib/media/getFiles';
+import { getSources } from '../../lib/media/getSources';
 import {
 	AndMiniplayerFragment,
 	GetRecordingExtraDataQuery,
@@ -36,24 +36,10 @@ import {
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
-interface Playable extends VideoJs.default.Tech.SourceObject {
+export interface Playable extends VideoJs.default.Tech.SourceObject {
 	duration: number;
 	logUrl?: string | null;
 }
-
-export const getSources = (
-	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
-): Playable[] => {
-	const files = getFiles(recording, prefersAudio) || [];
-
-	return files.map((f) => ({
-		src: f.url,
-		type: f.mimeType,
-		duration: f.duration,
-		logUrl: 'logUrl' in f ? f.logUrl : undefined,
-	}));
-};
 
 export const shouldLoadRecordingPlaybackProgress = (
 	recording: AndMiniplayerFragment | null | undefined

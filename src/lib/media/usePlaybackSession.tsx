@@ -5,11 +5,11 @@ import {
 	useGetRecordingPlaybackProgressQuery,
 } from '~components/templates/__generated__/andMiniplayer';
 import {
-	getSources,
 	PlaybackContext,
 	PlaybackContextType,
 	shouldLoadRecordingPlaybackProgress,
 } from '~components/templates/andPlaybackContext';
+import { getSources } from '~src/lib/media/getSources';
 
 export enum PlaySource {
 	Tease = 'Tease',
