@@ -2135,6 +2135,12 @@
       "value": "Confidentialité"
     }
   ],
+  "header__navItemMore-sharingtools": [
+    {
+      "type": 0,
+      "value": "Sharing Tools"
+    }
+  ],
   "header__navItemMore-store": [
     {
       "type": 0,

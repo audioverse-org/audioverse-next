@@ -2796,5 +2796,8 @@
   },
   "done": {
     "string": "終了"
+  },
+  "header__navItemMore-sharingtools": {
+    "string": "Sharing Tools"
   }
 }

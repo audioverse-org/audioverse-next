@@ -471,6 +471,16 @@ export function useNavigationItems(): INavigationItem[] {
 					}),
 				},
 				{
+					key: 'sharingtools',
+					href: 'http://share.audioverse.org/',
+					isTargetBlank: true,
+					Icon: iconMap.fa_link,
+					label: intl.formatMessage({
+						id: `header__navItemMore-sharingtools`,
+						defaultMessage: 'Sharing Tools',
+					}),
+				},
+				{
 					key: 'store',
 					href: 'https://audioversestore.org',
 					isTargetBlank: true,

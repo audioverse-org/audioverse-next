@@ -2796,5 +2796,8 @@
   },
   "done": {
     "string": "Concluído"
+  },
+  "header__navItemMore-sharingtools": {
+    "string": "Sharing Tools"
   }
 }

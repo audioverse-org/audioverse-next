@@ -2796,5 +2796,8 @@
   },
   "done": {
     "string": "已完成的"
+  },
+  "header__navItemMore-sharingtools": {
+    "string": "Sharing Tools"
   }
 }
