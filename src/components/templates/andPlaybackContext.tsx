@@ -15,6 +15,7 @@ import type * as VideoJs from 'video.js';
 import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
 import { Scalars } from '~src/__generated__/graphql';
+import moveVideo from '~src/lib/media/moveVideo';
 import { PlaySource } from '~src/lib/usePlaybackSession';
 
 import { analytics } from '../../lib/analytics';
@@ -106,6 +107,7 @@ export type PlaybackContextType = {
 		handler: (el: Element) => void
 	) => void;
 	unsetVideoHandler: (id: Scalars['ID']['output']) => void;
+	getVideoHandler: () => ((el: Element) => void) | undefined;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	supportsFullscreen: () => boolean;
@@ -147,6 +149,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	loadRecording: () => undefined,
 	setVideoHandler: () => undefined,
 	unsetVideoHandler: () => undefined,
+	getVideoHandler: () => undefined,
 	hasPlayer: () => false,
 	hasVideo: () => false,
 	isShowingVideo: () => false,
@@ -173,10 +176,6 @@ interface AndMiniplayerProps {
 const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
 
 type VideoJsType = typeof VideoJs;
-type Airplay = { default: (vjs: unknown) => unknown };
-type Chromecast = {
-	default: (vjs: unknown, options: Record<string, unknown>) => unknown;
-};
 
 export default function AndPlaybackContext({
 	children,
@@ -186,12 +185,6 @@ export default function AndPlaybackContext({
 	const originRef = useRef<HTMLDivElement>(null);
 
 	const [videojs] = useState<Promise<VideoJsType>>(() => import('video.js'));
-	const [airplay] = useState<Promise<Airplay>>(
-		() => import('@silvermine/videojs-airplay')
-	);
-	const [chromecast] = useState<Promise<Chromecast>>(
-		() => import('@silvermine/videojs-chromecast')
-	);
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
@@ -201,7 +194,10 @@ export default function AndPlaybackContext({
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 	const playerRef = useRef<VideoJs.VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
-	const [isPaused, setIsPaused] = useState<boolean>(true);
+
+	const isPausedRef = useRef<boolean>(true);
+	const [, setIsPaused] = useState<boolean>(true);
+
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] =
@@ -258,7 +254,9 @@ export default function AndPlaybackContext({
 		[throttledUpdateProgress]
 	);
 
-	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
+	const isShowingVideoRef = useRef(false);
+	isShowingVideoRef.current =
+		!!recording && hasVideo(recording) && !prefersAudio;
 
 	useEffect(() => {
 		progressRef.current = progress;
@@ -268,15 +266,21 @@ export default function AndPlaybackContext({
 	const playback: PlaybackContextType = {
 		play: () => {
 			playerRef.current?.play();
+			isPausedRef.current = false;
 			setIsPaused(false);
 		},
 		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
 		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
 		pause: () => {
-			playerRef.current?.pause();
+			try {
+				playerRef.current?.pause();
+			} catch (e) {
+				console.warn(e);
+			}
+			isPausedRef.current = true;
 			setIsPaused(true);
 		},
-		paused: () => isPaused,
+		paused: () => isPausedRef.current,
 		player: () => playerRef.current,
 		getTime: () =>
 			(!onLoadRef.current && playerRef.current?.currentTime()) ||
@@ -290,6 +294,15 @@ export default function AndPlaybackContext({
 		setPrefersAudio: (prefersAudio: boolean) => {
 			if (!recording) return;
 			setPrefersAudio(prefersAudio);
+			moveVideo({
+				isShowingVideo: !!recording && hasVideo(recording) && !prefersAudio,
+				isPaused: isPausedRef.current,
+				pause: playback.pause,
+				play: playback.play,
+				video: videoElRef.current,
+				origin: originRef.current,
+				videoHandler,
+			});
 		},
 		getPrefersAudio: () => prefersAudio,
 		getDuration: () => {
@@ -310,13 +323,25 @@ export default function AndPlaybackContext({
 			playerRef.current.currentTime(p * duration);
 			playerRef.current.play();
 		},
-		getRecording: () => recording,
+		getRecording: () => {
+			moveVideo({
+				isShowingVideo: isShowingVideoRef.current,
+				isPaused: isPausedRef.current,
+				pause: playback.pause,
+				play: playback.play,
+				video: videoElRef.current,
+				origin: originRef.current,
+				videoHandler,
+			});
+			return recording;
+		},
 		loadRecording: (
 			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 			recordingId: string | number,
 			options = {},
 			source?: PlaySource
 		) => {
+			console.log('loadRecording');
 			const { onLoad, prefersAudio } = options;
 			onLoadRef.current = onLoad;
 			const recordingsArray = Array.isArray(recordingOrRecordings)
@@ -347,17 +372,44 @@ export default function AndPlaybackContext({
 			setVideoHandlerId(id);
 			videoHandlerIdRef.current = id;
 			setVideoHandler(() => handler);
+			moveVideo({
+				isShowingVideo: isShowingVideoRef.current,
+				isPaused: isPausedRef.current,
+				pause: playback.pause,
+				play: playback.play,
+				video: videoElRef.current,
+				origin: originRef.current,
+				videoHandler: handler,
+			});
 		},
 		unsetVideoHandler: (id: Scalars['ID']['output']) => {
 			if (id !== videoHandlerIdRef.current) return;
 			setVideoHandlerId(undefined);
 			setVideoHandler(undefined);
+			console.log('Unsetting video handler', {
+				isShowingVideo: isShowingVideoRef.current,
+				recording: !!recording,
+				hasVideo: !!recording && hasVideo(recording),
+				prefersAudio,
+			});
+			moveVideo({
+				isShowingVideo: isShowingVideoRef.current,
+				isPaused: isPausedRef.current,
+				pause: playback.pause,
+				play: playback.play,
+				video: videoElRef.current,
+				origin: originRef.current,
+				videoHandler: undefined,
+			});
+		},
+		getVideoHandler: () => {
+			return videoHandler;
 		},
 		hasPlayer: () => !!playerRef.current,
 		hasVideo: () => !!recording && hasVideo(recording),
-		isShowingVideo: () => isShowingVideo,
+		isShowingVideo: () => isShowingVideoRef.current,
 		getVideoLocation: () => {
-			if (!isShowingVideo) return null;
+			if (!isShowingVideoRef.current) return null;
 
 			if (videoHandler) return 'portal';
 
@@ -378,6 +430,7 @@ export default function AndPlaybackContext({
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
+			console.log('advanceRecording');
 			if (!sourceRecordings) {
 				return;
 			}
@@ -393,7 +446,10 @@ export default function AndPlaybackContext({
 				);
 			}
 		},
-		setIsPaused: (paused) => setIsPaused(paused),
+		setIsPaused: (paused) => {
+			isPausedRef.current = paused;
+			setIsPaused(paused);
+		},
 		getRefs: () => ({
 			origin: originRef,
 			video: videoRef,
@@ -405,12 +461,17 @@ export default function AndPlaybackContext({
 			source: PlaySource | undefined
 		) => {
 			const currentVideoEl = videoElRef.current;
-			if (!currentVideoEl) return;
+			if (!currentVideoEl) {
+				console.log('No video element found');
+				return;
+			}
 
 			const sources = getSources(recording, prefersAudio || false);
 			sourcesRef.current = sources;
 
 			const resetPlayer = () => {
+				console.log('resetting player');
+
 				const logUrl = sources.find((s) => s.logUrl)?.logUrl;
 				if (logUrl) {
 					fetch(logUrl, {
@@ -421,7 +482,9 @@ export default function AndPlaybackContext({
 					});
 				}
 
+				isPausedRef.current = true;
 				setIsPaused(true);
+
 				const serverProgress =
 					queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
 						'getRecordingPlaybackProgress',
@@ -467,26 +530,27 @@ export default function AndPlaybackContext({
 				preload: 'auto',
 				defaultVolume: 1,
 				sources,
-				techOrder: ['chromecast', 'html5'],
+				techOrder: [
+					// 'chromecast',
+					'html5',
+				],
 				plugins: {
-					chromecast: {
-						addButtonToControlBar: true, // Use custom designed button
-					},
-					airPlay: {
-						addButtonToControlBar: true, // Use custom designed button
-					},
+					// chromecast: {
+					// 	addButtonToControlBar: true, // Use custom designed button
+					// },
+					// airPlay: {
+					// 	addButtonToControlBar: true, // Use custom designed button
+					// },
 				},
 			};
 
 			if (playerRef.current) {
+				console.log('resetting existing player');
 				playerRef.current.src(sources);
 				resetPlayer();
 			} else {
+				console.log('resetting new player');
 				videojs.then(async (v) => {
-					(await airplay).default(v.default);
-					(await chromecast).default(v.default, {
-						preloadWebComponents: true,
-					});
 					const p = v.default(currentVideoEl, options);
 					p.on('fullscreenchange', () => {
 						p.controls(p.isFullscreen());
@@ -495,55 +559,18 @@ export default function AndPlaybackContext({
 					resetPlayer();
 				});
 			}
+
+			moveVideo({
+				isShowingVideo: hasVideo(recording) && !prefersAudio,
+				isPaused: true,
+				pause: playback.pause,
+				play: playback.play,
+				video: videoElRef.current,
+				origin: originRef.current,
+				videoHandler: undefined,
+			});
 		},
 	};
-
-	useEffect(() => {
-		const video = videoRef.current;
-
-		if (!video) {
-			return;
-		}
-
-		if (videoHandler) {
-			setTimeout(() => {
-				// Move the video on the next tick to avoid FOPV (flash-of-previous-video ;))
-				videoHandler(video);
-			}, 0);
-			return;
-		}
-
-		const _paused = playback.paused();
-
-		function findDestination() {
-			if (isShowingVideo) {
-				// TODO: use ref instead of ID
-				return document.getElementById('mini-player');
-			}
-
-			return originRef.current;
-		}
-
-		const destination = findDestination();
-
-		if (!destination) {
-			return;
-		}
-
-		if (destination === video.parentElement) {
-			return;
-		}
-
-		destination.appendChild(video);
-
-		// WORKAROUND: player pauses when moving to miniplayer
-		if (_paused) {
-			playback.pause();
-		} else {
-			playback.play();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [videoHandlerId, videoHandler, isShowingVideo]);
 
 	return (
 		<>

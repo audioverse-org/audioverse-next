@@ -1039,6 +1039,7 @@ describe('sermon detail page', () => {
 		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await waitFor(() => {
+			console.log('looking');
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
 
@@ -1077,6 +1078,7 @@ describe('sermon detail page', () => {
 		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await waitFor(() => {
+			console.log('looking');
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
 

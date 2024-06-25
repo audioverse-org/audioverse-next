@@ -93,6 +93,7 @@ export default function usePlaybackSession(
 			_setProgress(data?.recording?.viewerPlaybackSession.positionPercentage);
 		}
 	}, [data, isLoading]);
+
 	useEffect(() => {
 		if (!isLoaded && shouldLoadPlaybackProgress) {
 			refetch();
@@ -113,6 +114,10 @@ export default function usePlaybackSession(
 		() => () => {
 			if (!isPortalActive || !recording) return;
 			// TODO: provide recording ID when unloading?
+			console.log('unset video handler', {
+				isPortalActive,
+				recording: !!recording,
+			});
 			context.unsetVideoHandler(recording.id);
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
