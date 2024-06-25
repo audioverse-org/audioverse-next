@@ -151,7 +151,6 @@ export default function AndPlaybackContext({
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 	const playerRef = useRef<VideoJs.VideoJsPlayer>();
-	const progressRef = useRef<number>(0);
 
 	const { isPausedRef, setIsPaused } = useIsPaused();
 
@@ -190,10 +189,6 @@ export default function AndPlaybackContext({
 	const isShowingVideoRef = useRef(false);
 	isShowingVideoRef.current =
 		!!recording && hasVideo(recording) && !prefersAudio;
-
-	useEffect(() => {
-		progressRef.current = progress;
-	}, [progress]);
 
 	const recordingRef = useRef<AndMiniplayerFragment>();
 	const playback: PlaybackContextType = {
