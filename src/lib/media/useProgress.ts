@@ -1,20 +1,10 @@
-import {
-	QueryClient,
-	useMutation,
-	useQueryClient,
-} from '@tanstack/react-query';
-import throttle from 'lodash/throttle';
-import { useEffect, useMemo, useState } from 'react';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 
-import {
-	GetRecordingPlaybackProgressQuery,
-	recordingPlaybackProgressSet,
-	RecordingPlaybackProgressSetMutationVariables,
-} from '~src/components/templates/__generated__/andMiniplayer';
+import { GetRecordingPlaybackProgressQuery } from '~src/components/templates/__generated__/andMiniplayer';
 
-import { getSessionToken } from '../cookies';
+import useUpdateServerProgress from './useUpdateServerProgress';
 
-const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
 const RECORDING_PROGRESSES = new Map<string | number, number>();
 
 function getServerProgress(
@@ -31,6 +21,7 @@ function getServerProgress(
 
 export default function useProgress(recordingId?: string | number) {
 	const client = useQueryClient();
+	const throttledUpdateProgress = useUpdateServerProgress(recordingId);
 	const [progress, _setProgress] = useState<number>(0);
 
 	useEffect(() => {
@@ -50,25 +41,6 @@ export default function useProgress(recordingId?: string | number) {
 		RECORDING_PROGRESSES.set(recordingId, p);
 	}, [client, recordingId]);
 
-	const { mutate } = useMutation(
-		({
-			percentage,
-		}: Pick<RecordingPlaybackProgressSetMutationVariables, 'percentage'>) => {
-			if (!getSessionToken() || !recordingId) {
-				return Promise.resolve() as Promise<unknown>;
-			}
-			return recordingPlaybackProgressSet({
-				id: recordingId,
-				percentage,
-			});
-		}
-	);
-
-	const throttledUpdateProgress = useMemo(
-		() => throttle(mutate, SERVER_UPDATE_WAIT_TIME, { leading: true }),
-		[mutate]
-	);
-
 	return {
 		progress,
 		setProgress: ({
@@ -83,11 +55,6 @@ export default function useProgress(recordingId?: string | number) {
 			if (_id) RECORDING_PROGRESSES.set(_id, percentage);
 			if (_id !== recordingId) return;
 			throttledUpdateProgress({ percentage });
-			_setProgress(percentage);
-		},
-		setProgressLocal: (percentage: number) => {
-			console.log('setProgressLocal', recordingId, percentage);
-			if (recordingId) RECORDING_PROGRESSES.set(recordingId, percentage);
 			_setProgress(percentage);
 		},
 	};
