@@ -1,6 +1,6 @@
-import { getFiles } from './getFiles';
 import { AndMiniplayerFragment } from '../../components/templates/__generated__/andMiniplayer';
 import { Playable } from '../../components/templates/andPlaybackContext';
+import { getFiles } from './getFiles';
 
 export const getSources = (
 	recording: AndMiniplayerFragment,
