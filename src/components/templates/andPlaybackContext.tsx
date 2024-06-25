@@ -137,8 +137,6 @@ interface AndMiniplayerProps {
 	children: ReactNode;
 }
 
-type VideoJsType = typeof VideoJs;
-
 export default function AndPlaybackContext({
 	children,
 }: AndMiniplayerProps): JSX.Element {
@@ -165,10 +163,6 @@ export default function AndPlaybackContext({
 	const videoRef = useRef<HTMLDivElement>(null);
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
-
-	const [videojs] = useState<Promise<VideoJsType>>(
-		() => getVideoJs() as Promise<VideoJsType>
-	);
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
@@ -469,8 +463,8 @@ export default function AndPlaybackContext({
 				resetPlayer();
 			} else {
 				console.log('resetting new player');
-				videojs.then(async (v) => {
-					const p = v.default(currentVideoEl, options);
+				getVideoJs().then((v) => {
+					const p = v(currentVideoEl, options);
 					p.on('fullscreenchange', () => {
 						p.controls(p.isFullscreen());
 					});
