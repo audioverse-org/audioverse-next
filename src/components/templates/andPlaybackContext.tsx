@@ -20,6 +20,7 @@ import moveVideo from '~src/lib/media/moveVideo';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 
 import { analytics } from '../../lib/analytics';
+import { getFiles } from '../../lib/media/getFiles';
 import {
 	AndMiniplayerFragment,
 	GetRecordingExtraDataQuery,
@@ -39,24 +40,6 @@ interface Playable extends VideoJs.default.Tech.SourceObject {
 	duration: number;
 	logUrl?: string | null;
 }
-
-const getFiles = (
-	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
-):
-	| AndMiniplayerFragment['audioFiles']
-	| AndMiniplayerFragment['videoFiles']
-	| AndMiniplayerFragment['videoStreams'] => {
-	if (!recording) return [];
-
-	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
-
-	if (prefersAudio) return audioFiles;
-	if (videoStreams.length > 0) return videoStreams;
-	if (videoFiles.length > 0) return videoFiles;
-
-	return audioFiles;
-};
 
 export const getSources = (
 	recording: AndMiniplayerFragment,
