@@ -196,7 +196,9 @@ export default function AndPlaybackContext({
 	const progressRef = useRef<number>(0);
 
 	const isPausedRef = useRef<boolean>(true);
-	const [, setIsPaused] = useState<boolean>(true);
+	// WORKAROUND: This componenent needs isPaused to trigger rerenders
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [isPaused, setIsPaused] = useState<boolean>(true);
 
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
