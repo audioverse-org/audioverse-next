@@ -3,7 +3,6 @@ import Script from 'next/script';
 import React, {
 	MutableRefObject,
 	ReactNode,
-	useCallback,
 	useEffect,
 	useRef,
 	useState,
@@ -15,7 +14,7 @@ import { Scalars } from '~src/__generated__/graphql';
 import getVideoJs from '~src/lib/media/getVideoJs';
 import moveVideo from '~src/lib/media/moveVideo';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
-import useUpdateProgress from '~src/lib/media/useUpdateProgress';
+import useProgress from '~src/lib/media/useProgress';
 
 import { analytics } from '../../lib/analytics';
 import { getSources } from '../../lib/media/getSources';
@@ -148,7 +147,6 @@ export default function AndPlaybackContext({
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
-	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 	const playerRef = useRef<VideoJs.VideoJsPlayer>();
@@ -177,6 +175,10 @@ export default function AndPlaybackContext({
 
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
 	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
+	const { progress, setProgress, setProgressLocal } = useProgress(
+		recording?.id
+	);
+
 	useEffect(() => {
 		let newBufferedProgress = +Math.max(
 			bufferedProgress, // Don't ever reduce the buffered amount
@@ -186,18 +188,6 @@ export default function AndPlaybackContext({
 		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
 		setBufferedProgress(newBufferedProgress);
 	}, [bufferedProgress, playerBufferedEnd, progress, duration]);
-
-	const throttledUpdateProgress = useUpdateProgress(recording?.id);
-
-	const setProgress = useCallback(
-		(p: number) => {
-			throttledUpdateProgress({
-				percentage: p,
-			});
-			_setProgress(p);
-		},
-		[throttledUpdateProgress]
-	);
 
 	const isShowingVideoRef = useRef(false);
 	isShowingVideoRef.current =
@@ -438,7 +428,7 @@ export default function AndPlaybackContext({
 				const progress =
 					serverProgress?.recording?.viewerPlaybackSession
 						?.positionPercentage || 0;
-				_setProgress(progress);
+				setProgressLocal(progress);
 
 				setBufferedProgress(0);
 
