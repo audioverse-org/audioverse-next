@@ -16,6 +16,7 @@ import IconExitSmall from '~public/img/icons/icon-exit-small.svg';
 import MoreIcon from '~public/img/icons/icon-more.svg';
 
 import { analytics } from '../../lib/analytics';
+import OpenAppButton from '../molecules/openAppButton';
 import styles from './mobileHeader.module.scss';
 import useScrollDirection, {
 	SCROLL_DIRECTIONS,
@@ -54,7 +55,9 @@ export default function MobileHeader({
 			<div className={styles.wrapper}>
 				<div className={styles.title}>
 					<Header />
+					<OpenAppButton />
 					<Button
+						className={styles.donate}
 						type="super"
 						onClick={() => {
 							analytics.track('Donate');

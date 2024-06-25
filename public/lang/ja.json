@@ -2796,5 +2796,8 @@
   },
   "done": {
     "string": "終了"
+  },
+  "open_app": {
+    "string": "Open App"
   }
 }
