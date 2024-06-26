@@ -576,10 +576,6 @@
   "molecule-teaseRecording__morePersons": {
     "string": "{count} mehr"
   },
-  "molecule-teaseRecording__partInfo": {
-    "comment": "recording tease part info",
-    "string": "Teil {index} von {count}"
-  },
   "molecule-transcript__disclaimer": {
     "comment": "transcript disclaimer",
     "string": "Dieses Transkript könnte automatisch generiert sein."
@@ -2348,18 +2344,6 @@
   "molecule-searchBar__cancel": {
     "string": "Stornieren"
   },
-  "molecule-teaseRecording__individualChapter": {
-    "string": "Individual Chapter"
-  },
-  "molecule-teaseRecording__individualStory": {
-    "string": "Individual Story"
-  },
-  "molecule-teaseRecording__individualTeaching": {
-    "string": "Individual Teaching"
-  },
-  "molecule-teaseRecording__individualTrack": {
-    "string": "Individual Track"
-  },
   "molecules-pagination__nextLabelMobile": {
     "string": "Next"
   },
@@ -2797,7 +2781,10 @@
   "done": {
     "string": "Fertig"
   },
+  "timeLeft": {
+    "string": "{time} übrig"
+  },
   "open_app": {
-    "string": "App öffnen"
+    "string": "Offnen App"
   }
 }

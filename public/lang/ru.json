@@ -576,10 +576,6 @@
   "molecule-teaseRecording__morePersons": {
     "string": "{count} больше"
   },
-  "molecule-teaseRecording__partInfo": {
-    "comment": "recording tease part info",
-    "string": "Часть {index} из {count}"
-  },
   "molecule-transcript__disclaimer": {
     "comment": "transcript disclaimer",
     "string": "Данная транскрипция может быть сделана роботом."
@@ -2345,18 +2341,6 @@
   "molecule-searchBar__cancel": {
     "string": "Отменить"
   },
-  "molecule-teaseRecording__individualChapter": {
-    "string": "Individual Chapter"
-  },
-  "molecule-teaseRecording__individualStory": {
-    "string": "Individual Story"
-  },
-  "molecule-teaseRecording__individualTeaching": {
-    "string": "Individual Teaching"
-  },
-  "molecule-teaseRecording__individualTrack": {
-    "string": "Individual Track"
-  },
   "molecules-pagination__nextLabelMobile": {
     "string": "Next"
   },
@@ -2796,6 +2780,9 @@
   },
   "done": {
     "string": "Выполнено"
+  },
+  "timeLeft": {
+    "string": "{time} Осталось"
   },
   "open_app": {
     "string": "Открыть приложение"
