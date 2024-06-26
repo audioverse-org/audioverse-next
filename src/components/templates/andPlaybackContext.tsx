@@ -1,12 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import Script from 'next/script';
-import React, {
-	MutableRefObject,
-	ReactNode,
-	useEffect,
-	useRef,
-	useState,
-} from 'react';
+import React, { MutableRefObject, ReactNode, useRef, useState } from 'react';
 import type * as VideoJs from 'video.js';
 
 import hasVideo from '~lib/media/hasVideo';
@@ -171,11 +165,6 @@ export default function AndPlaybackContext({
 	const { speed, setSpeed } = useSpeed(playerRef.current);
 
 	const queryClient = useQueryClient();
-
-	useEffect(() => {
-		if (!recording) return;
-		setSources({ recording, prefersAudio });
-	}, [recording, prefersAudio, setSources]);
 
 	const isShowingVideo = useIsShowingVideo({
 		recording,
