@@ -462,7 +462,7 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'help',
-					href: 'https://help.audioverse.org/',
+					href: 'https://help.audioverse.org',
 					isTargetBlank: true,
 					Icon: iconMap.fa_question_circle,
 					label: intl.formatMessage({
