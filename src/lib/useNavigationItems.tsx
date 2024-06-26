@@ -472,7 +472,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'sharingtools',
-					href: 'http://share.audioverse.org/',
+					href: 'https://share.audioverse.org/',
 					isTargetBlank: true,
 					Icon: iconMap.fa_link,
 					label: intl.formatMessage({
