@@ -76,7 +76,6 @@ export default function usePlaybackSession(
 	const progress = isLoaded ? context.getProgress() : _progress;
 	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
 	const time = isLoaded ? context.getTime() : duration * progress;
-	const [, setSpeedFingerprint] = useState<number>(speed);
 	const isPaused = !isLoaded || context.paused();
 	const isPlaying = isLoaded && !context.paused();
 	const [isPortalActive, setIsPortalActive] = useState<boolean>(false);
@@ -194,7 +193,6 @@ export default function usePlaybackSession(
 
 	function setSpeed(speed: number) {
 		afterLoad(() => _setSpeed(speed));
-		setSpeedFingerprint(speed);
 	}
 
 	function requestFullscreen() {
