@@ -334,9 +334,7 @@ export default function AndPlaybackContext({
 				videoHandler: undefined,
 			});
 		},
-		getVideoHandler: () => {
-			return videoHandler;
-		},
+		getVideoHandler: () => videoHandler,
 		hasPlayer: () => !!playerRef.current,
 		hasVideo: () => !!recording && hasVideo(recording),
 		isShowingVideo: () => isShowingVideoRef.current,
