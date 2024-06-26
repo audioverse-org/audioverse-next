@@ -72,7 +72,6 @@ export type PlaybackContextType = {
 		handler: (el: Element) => void
 	) => void;
 	unsetVideoHandler: (id: Scalars['ID']['output']) => void;
-	getVideoHandler: () => ((el: Element) => void) | undefined;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	supportsFullscreen: () => boolean;
@@ -114,7 +113,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	loadRecording: () => undefined,
 	setVideoHandler: () => undefined,
 	unsetVideoHandler: () => undefined,
-	getVideoHandler: () => undefined,
 	hasPlayer: () => false,
 	hasVideo: () => false,
 	isShowingVideo: () => false,
@@ -334,7 +332,6 @@ export default function AndPlaybackContext({
 				videoHandler: undefined,
 			});
 		},
-		getVideoHandler: () => videoHandler,
 		hasPlayer: () => !!playerRef.current,
 		hasVideo: () => !!recording && hasVideo(recording),
 		isShowingVideo: () => isShowingVideoRef.current,
