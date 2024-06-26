@@ -12,6 +12,7 @@ import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRe
 
 import useIsShowingVideo from './useIsShowingVideo';
 import usePlayerSources from './usePlayerSources';
+import useSpeed from './useSpeed';
 
 export enum PlaySource {
 	Tease = 'Tease',
@@ -61,7 +62,7 @@ export default function usePlaybackSession(
 	});
 	const isAudioLoaded = isLoaded && !isShowingVideo;
 	const isVideoLoaded = isLoaded && isShowingVideo;
-	const speed = context.getSpeed();
+	const { speed, setSpeed: _setSpeed } = useSpeed(context.player());
 
 	const { getSources } = usePlayerSources({
 		recording,
@@ -192,7 +193,7 @@ export default function usePlaybackSession(
 	}
 
 	function setSpeed(speed: number) {
-		afterLoad((c) => c.setSpeed(speed));
+		afterLoad(() => _setSpeed(speed));
 		setSpeedFingerprint(speed);
 	}
 

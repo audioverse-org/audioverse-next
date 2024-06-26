@@ -13,7 +13,6 @@ import useIsShowingVideo from '~src/lib/media/useIsShowingVideo';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import usePlayerSources from '~src/lib/media/usePlayerSources';
 import useProgress from '~src/lib/media/useProgress';
-import useSpeed from '~src/lib/media/useSpeed';
 import useVideoHandler from '~src/lib/media/useVideoHandler';
 
 import { analytics } from '../../lib/analytics';
@@ -66,8 +65,6 @@ export type PlaybackContextType = {
 	) => void;
 	unsetVideoHandler: (id: Scalars['ID']['output']) => void;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
-	setSpeed: (s: number) => void;
-	getSpeed: () => number;
 	getDuration: () => number;
 	requestFullscreen: () => void;
 	advanceRecording: () => void;
@@ -101,8 +98,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	unsetVideoHandler: () => undefined,
 	getVideoLocation: () => null,
 	getRecording: () => undefined,
-	setSpeed: () => undefined,
-	getSpeed: () => 1,
 	getDuration: () => 0,
 	requestFullscreen: () => undefined,
 	advanceRecording: () => undefined,
@@ -156,8 +151,6 @@ export default function AndPlaybackContext({
 		setVideoHandler,
 		unsetVideoHandler,
 	} = useVideoHandler();
-
-	const { speed, setSpeed } = useSpeed(playerRef.current);
 
 	const queryClient = useQueryClient();
 
@@ -314,8 +307,6 @@ export default function AndPlaybackContext({
 
 			return 'miniplayer';
 		},
-		getSpeed: () => speed,
-		setSpeed,
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
 			console.log('advanceRecording');
