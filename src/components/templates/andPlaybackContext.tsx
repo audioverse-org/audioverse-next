@@ -17,12 +17,12 @@ import useBuffered from '~src/lib/media/useBuffered';
 import useIsPaused from '~src/lib/media/useIsPaused';
 import useIsShowingVideo from '~src/lib/media/useIsShowingVideo';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
+import usePlayerSources from '~src/lib/media/usePlayerSources';
 import useProgress from '~src/lib/media/useProgress';
 import useSpeed from '~src/lib/media/useSpeed';
 import useVolume from '~src/lib/media/useVolume';
 
 import { analytics } from '../../lib/analytics';
-import { getSources } from '../../lib/media/getSources';
 import {
 	AndMiniplayerFragment,
 	GetRecordingExtraDataQuery,
@@ -146,9 +146,13 @@ export default function AndPlaybackContext({
 	const playerRef = useRef<VideoJs.VideoJsPlayer>();
 	const { getVolume, setVolume } = useVolume(playerRef.current);
 
-	const sourcesRef = useRef<Playable[]>([]);
+	const [prefersAudio, setPrefersAudio] = useState(false);
+	const { getSources, setSources } = usePlayerSources({
+		recording: recordingRef.current,
+		prefersAudio,
+	});
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
-	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
+	const duration = getSources()[0]?.duration || recording?.duration || 0;
 	const { bufferedProgress, setBufferedProgress } = useBuffered({
 		recordingId: recordingRef.current?.id,
 		player: playerRef.current,
@@ -165,7 +169,6 @@ export default function AndPlaybackContext({
 
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 
-	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] =
 		useState<Scalars['ID']['output']>();
@@ -177,8 +180,8 @@ export default function AndPlaybackContext({
 
 	useEffect(() => {
 		if (!recording) return;
-		sourcesRef.current = getSources(recording, prefersAudio);
-	}, [recording, prefersAudio]);
+		setSources({ recording, prefersAudio });
+	}, [recording, prefersAudio, setSources]);
 
 	const isShowingVideo = useIsShowingVideo({
 		recording,
@@ -228,7 +231,7 @@ export default function AndPlaybackContext({
 		getDuration: () => {
 			return (
 				playerRef.current?.duration() ||
-				sourcesRef.current[0]?.duration ||
+				getSources()[0]?.duration ||
 				recordingRef.current?.duration ||
 				0
 			);
@@ -378,13 +381,12 @@ export default function AndPlaybackContext({
 				return;
 			}
 
-			const sources = getSources(recording, prefersAudio || false);
-			sourcesRef.current = sources;
+			setSources({ recording, prefersAudio: prefersAudio || false });
 
 			const resetPlayer = () => {
 				console.log('resetting player');
 
-				const logUrl = sources.find((s) => s.logUrl)?.logUrl;
+				const logUrl = getSources().find((s) => s.logUrl)?.logUrl;
 				if (logUrl) {
 					fetch(logUrl, {
 						method: 'HEAD',
@@ -429,7 +431,7 @@ export default function AndPlaybackContext({
 				controls: false,
 				preload: 'auto',
 				defaultVolume: 1,
-				sources,
+				sources: getSources(),
 				techOrder: [
 					// 'chromecast',
 					'html5',
@@ -446,7 +448,7 @@ export default function AndPlaybackContext({
 
 			if (playerRef.current) {
 				console.log('resetting existing player');
-				playerRef.current.src(sources);
+				playerRef.current.src(getSources());
 				resetPlayer();
 			} else {
 				console.log('resetting new player');

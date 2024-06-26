@@ -8,8 +8,9 @@ import {
 	PlaybackContext,
 	PlaybackContextType,
 } from '~components/templates/andPlaybackContext';
-import { getSources } from '~src/lib/media/getSources';
 import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRecordingPlaybackProgress';
+
+import usePlayerSources from './usePlayerSources';
 
 export enum PlaySource {
 	Tease = 'Tease',
@@ -56,11 +57,15 @@ export default function usePlaybackSession(
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const prefersAudio = context.getPrefersAudio();
 	const speed = context.getSpeed();
+
+	const { getSources } = usePlayerSources({
+		recording,
+		prefersAudio,
+	});
+
 	const duration = isLoaded
 		? context.getDuration()
-		: (recording &&
-				(getSources(recording, false)[0]?.duration || recording?.duration)) ||
-		  0;
+		: (recording && (getSources()[0]?.duration || recording?.duration)) || 0;
 	const [_progress, _setProgress] = useState<number>(0);
 	const progress = isLoaded ? context.getProgress() : _progress;
 	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
