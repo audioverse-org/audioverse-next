@@ -201,11 +201,11 @@ export default function usePlaybackSession(
 	}
 
 	function chromecastTrigger() {
-		afterLoad((c) => c.chromecastTrigger());
+		afterLoad((c) => c.player()?.trigger('chromecastRequested'));
 	}
 
 	function airPlayTrigger() {
-		afterLoad((c) => c.airPlayTrigger());
+		afterLoad((c) => c.player()?.trigger('airPlayRequested'));
 	}
 
 	return {

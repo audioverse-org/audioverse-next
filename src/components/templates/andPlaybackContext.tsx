@@ -36,8 +36,6 @@ export interface Playable extends VideoJs.default.Tech.SourceObject {
 export type PlaybackContextType = {
 	player: () => VideoJs.VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
 	play: () => void;
-	chromecastTrigger: () => void;
-	airPlayTrigger: () => void;
 	pause: () => void;
 	paused: () => boolean;
 	getTime: () => number;
@@ -114,8 +112,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setIsPaused: () => undefined,
 	getRefs: () => ({}),
 	_setRecording: () => undefined,
-	chromecastTrigger: () => undefined,
-	airPlayTrigger: () => undefined,
 });
 
 interface AndMiniplayerProps {
@@ -176,8 +172,6 @@ export default function AndPlaybackContext({
 			playerRef.current?.play();
 			setIsPaused(false);
 		},
-		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
-		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
 		pause: () => {
 			try {
 				playerRef.current?.pause();
