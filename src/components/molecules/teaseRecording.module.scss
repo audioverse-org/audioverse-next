@@ -26,6 +26,7 @@ $container-padding: 16px;
 	}
 	&.unpadded {
 		padding: 0;
+		max-width: 285px;
 	}
 }
 
@@ -35,7 +36,7 @@ $container-padding: 16px;
 	top: 0;
 	right: 0;
 	width: 100px;
-	height: 70%;
+	height: 65%;
 	background: linear-gradient(to left, var(--cardBg), rgba(255, 255, 255, 0));
 	z-index: 1;
 	pointer-events: none;
