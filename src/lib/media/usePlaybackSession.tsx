@@ -196,7 +196,7 @@ export default function usePlaybackSession(
 	}
 
 	function requestFullscreen() {
-		afterLoad((c) => c.requestFullscreen());
+		afterLoad((c) => c.player()?.requestFullscreen());
 	}
 
 	function getVideo() {

@@ -66,7 +66,6 @@ export type PlaybackContextType = {
 	unsetVideoHandler: (id: Scalars['ID']['output']) => void;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
 	getDuration: () => number;
-	requestFullscreen: () => void;
 	advanceRecording: () => void;
 	setIsPaused: (paused: boolean) => void;
 	getRefs: () => {
@@ -99,7 +98,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getVideoLocation: () => null,
 	getRecording: () => undefined,
 	getDuration: () => 0,
-	requestFullscreen: () => undefined,
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
 	getRefs: () => ({}),
@@ -307,7 +305,6 @@ export default function AndPlaybackContext({
 
 			return 'miniplayer';
 		},
-		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
 			console.log('advanceRecording');
 			if (!sourceRecordings) {
