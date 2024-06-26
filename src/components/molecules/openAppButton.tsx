@@ -6,32 +6,27 @@ import styles from './openAppButton.module.scss';
 
 const OpenAppButton: React.FC = () => {
 	const [isMobile, setIsMobile] = useState<boolean>(false);
-	const [os, setOs] = useState<string | null>(null);
+	const [isIOS, setIsIOS] = useState<boolean>(false);
+	const [isAndroid, setIsAndroid] = useState<boolean>(false);
 
 	useEffect(() => {
 		const userAgent = navigator.userAgent || navigator.vendor;
 		const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !('MSStream' in window);
 		const isAndroid = /android/i.test(userAgent);
 
-		if (isIOS) {
-			setOs('iOS');
-		} else if (isAndroid) {
-			setOs('Android');
-		} else {
-			setOs(null);
-		}
-
 		setIsMobile(isIOS || isAndroid);
+		setIsIOS(isIOS);
+		setIsAndroid(isAndroid);
 	}, []);
 
 	const handleButtonClick = () => {
-		if (os === 'iOS') {
+		if (isIOS) {
 			window.location.href = 'fb2085245451868293://';
 			setTimeout(() => {
 				window.location.href =
 					'https://apps.apple.com/us/app/audioverse/id726998810';
 			}, 25);
-		} else if (os === 'Android') {
+		} else if (isAndroid) {
 			window.location.href =
 				'intent://org.audioverse.exodus/#Intent;scheme=fb2085245451868293;package=org.audioverse.exodus;end';
 			setTimeout(() => {
