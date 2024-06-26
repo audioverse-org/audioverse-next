@@ -38,7 +38,6 @@ interface PlaybackSessionInfo {
 	time: number;
 	duration: number;
 	getVideo: () => JSX.Element;
-	supportsFullscreen: boolean;
 }
 
 export default function usePlaybackSession(
@@ -56,7 +55,6 @@ export default function usePlaybackSession(
 	const isAudioLoaded = isLoaded && !context.isShowingVideo();
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const prefersAudio = context.getPrefersAudio();
-	const supportsFullscreen = context.supportsFullscreen();
 	const speed = context.getSpeed();
 	const duration = isLoaded
 		? context.getDuration()
@@ -227,6 +225,5 @@ export default function usePlaybackSession(
 		prefersAudio,
 		getVideo,
 		speed,
-		supportsFullscreen,
 	};
 }
