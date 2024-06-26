@@ -73,7 +73,6 @@ export type PlaybackContextType = {
 	) => void;
 	unsetVideoHandler: (id: Scalars['ID']['output']) => void;
 	hasPlayer: () => boolean;
-	supportsFullscreen: () => boolean;
 	isShowingVideo: () => boolean;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
 	getVolume: () => number;
@@ -108,7 +107,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getProgress: () => 0,
 	getBufferedProgress: () => 0,
 	setProgress: () => undefined,
-	supportsFullscreen: () => false,
 	loadRecording: () => undefined,
 	setVideoHandler: () => undefined,
 	unsetVideoHandler: () => undefined,
@@ -339,7 +337,6 @@ export default function AndPlaybackContext({
 
 			return 'miniplayer';
 		},
-		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume,
 		setVolume,
 		getSpeed: () => speed,
