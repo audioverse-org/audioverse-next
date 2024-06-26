@@ -55,28 +55,16 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 					description: 'play button play label',
 				})}
 			>
-				{isCurrentTrack ? (
-					<>
-						<PlayProgress
-							isPlaying={session.isPlaying}
-							progressPercentage={session.progress}
-							inactiveColor={iconColor}
-							isCurrentTrack
-							bufferedProgress={session.bufferedProgress}
-						/>
-					</>
+				{session.progress ? (
+					<PlayProgress
+						isPlaying={session.isPlaying}
+						inactiveColor={iconColor}
+						progressPercentage={session.progress}
+						bufferedProgress={session.bufferedProgress}
+						isCurrentTrack={isCurrentTrack}
+					/>
 				) : (
-					<>
-						{session.progress ? (
-							<PlayProgress
-								isPlaying={false}
-								inactiveColor={iconColor}
-								progressPercentage={session.progress}
-							/>
-						) : (
-							<IconPlay color={iconColor} />
-						)}
-					</>
+					<IconPlay color={iconColor} />
 				)}
 			</button>
 			<>
