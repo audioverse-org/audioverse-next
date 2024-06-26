@@ -17,6 +17,7 @@ import useBuffered from '~src/lib/media/useBuffered';
 import useIsPaused from '~src/lib/media/useIsPaused';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import useProgress from '~src/lib/media/useProgress';
+import useSpeed from '~src/lib/media/useSpeed';
 import useVolume from '~src/lib/media/useVolume';
 
 import { analytics } from '../../lib/analytics';
@@ -175,7 +176,7 @@ export default function AndPlaybackContext({
 		useState<Scalars['ID']['output']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']['output']>();
 
-	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
+	const { getSpeed, setSpeed } = useSpeed(playerRef.current);
 
 	const queryClient = useQueryClient();
 
@@ -349,13 +350,8 @@ export default function AndPlaybackContext({
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume,
 		setVolume,
-		getSpeed: () => _speed,
-		setSpeed: (s: number) => {
-			playerRef.current?.playbackRate(s);
-			playerRef.current?.defaultPlaybackRate(s);
-			playerRef.current?.play();
-			_setSpeed(s);
-		},
+		getSpeed,
+		setSpeed,
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
 			console.log('advanceRecording');
