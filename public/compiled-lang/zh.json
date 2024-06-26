@@ -3977,6 +3977,12 @@
       "value": "只有您可以查看"
     }
   ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "打开应用"
+    }
+  ],
   "organism-mobileHeader__more": [
     {
       "type": 0,

@@ -3961,6 +3961,12 @@
       "value": "Nur Sie können es sehen"
     }
   ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "Offnen App"
+    }
+  ],
   "organism-mobileHeader__more": [
     {
       "type": 0,

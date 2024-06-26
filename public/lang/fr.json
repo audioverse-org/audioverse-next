@@ -2783,5 +2783,8 @@
   },
   "timeLeft": {
     "string": "{time} restantes"
+  },
+  "open_app": {
+    "string": "Ouvrir l'application"
   }
 }

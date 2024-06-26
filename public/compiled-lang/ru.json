@@ -3961,6 +3961,12 @@
       "value": "Только вы можете просматривать"
     }
   ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "Открыть приложение"
+    }
+  ],
   "organism-mobileHeader__more": [
     {
       "type": 0,
