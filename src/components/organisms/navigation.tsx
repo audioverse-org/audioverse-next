@@ -231,18 +231,20 @@ const Navigation = ({
 												) : (
 													<Link
 														href={href as string}
-														onClick={
-															onClick
-																? () =>
-																		onClick({
-																			popSubmenu: () => setSubmenu(''),
-																		})
-																: undefined
-														}
 														target={isTargetBlank ? '_blank' : '_self'}
 														legacyBehavior
 													>
-														<a className={styles.navLink}>
+														<a
+															className={styles.navLink}
+															onClick={
+																onClick
+																	? () =>
+																			onClick({
+																				popSubmenu: () => setSubmenu(''),
+																			})
+																	: undefined
+															}
+														>
 															{Icon && (
 																<span className={styles.icon}>
 																	<Icon />

@@ -1750,9 +1750,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Escolha como deseja baixar o áudio."
   },
-  "preferences__heading": {
-    "string": "Configurações da conta"
-  },
   "preferences__inputAutoplay": {
     "string": "Gravações em auto-reprodução"
   },
@@ -1898,9 +1895,6 @@
   },
   "profile__deleteConfirmTitle": {
     "string": "Tem certeza?"
-  },
-  "profile__heading": {
-    "string": "Configurações da conta"
   },
   "profile__inputLabelForEmail": {
     "comment": "etiqueta de entrada para e-mail",
@@ -2482,17 +2476,8 @@
   "molecule-button-SignUp": {
     "string": "Sign Up with Email"
   },
-  "molecule-buttonGuestDownload__modalParagraph": {
-    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
-  },
-  "molecule-buttonGuestDownload__modalTitle": {
-    "string": "Criar uma conta gratuita"
-  },
   "molecule-buttonGuest__Download": {
     "string": "Download content for offline access"
-  },
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
-    "string": "Create account"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
     "string": "Skip"
@@ -2796,5 +2781,26 @@
   },
   "done": {
     "string": "Concluído"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelLogIn": {
+    "string": "Entrar"
+  },
+  "molecule-buttonDownloadBlank__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonDownloadBlank__modalTitle": {
+    "string": "Criar uma conta gratuita"
+  },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "Configurações da conta"
   }
 }

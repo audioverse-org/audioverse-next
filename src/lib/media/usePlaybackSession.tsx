@@ -5,11 +5,11 @@ import {
 	useGetRecordingPlaybackProgressQuery,
 } from '~components/templates/__generated__/andMiniplayer';
 import {
-	getSources,
 	PlaybackContext,
 	PlaybackContextType,
-	shouldLoadRecordingPlaybackProgress,
 } from '~components/templates/andPlaybackContext';
+import { getSources } from '~src/lib/media/getSources';
+import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRecordingPlaybackProgress';
 
 export enum PlaySource {
 	Tease = 'Tease',
@@ -38,7 +38,6 @@ interface PlaybackSessionInfo {
 	time: number;
 	duration: number;
 	getVideo: () => JSX.Element;
-	supportsFullscreen: boolean;
 }
 
 export default function usePlaybackSession(
@@ -56,7 +55,6 @@ export default function usePlaybackSession(
 	const isAudioLoaded = isLoaded && !context.isShowingVideo();
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const prefersAudio = context.getPrefersAudio();
-	const supportsFullscreen = context.supportsFullscreen();
 	const speed = context.getSpeed();
 	const duration = isLoaded
 		? context.getDuration()
@@ -93,6 +91,7 @@ export default function usePlaybackSession(
 			_setProgress(data?.recording?.viewerPlaybackSession.positionPercentage);
 		}
 	}, [data, isLoading]);
+
 	useEffect(() => {
 		if (!isLoaded && shouldLoadPlaybackProgress) {
 			refetch();
@@ -113,6 +112,10 @@ export default function usePlaybackSession(
 		() => () => {
 			if (!isPortalActive || !recording) return;
 			// TODO: provide recording ID when unloading?
+			console.log('unset video handler', {
+				isPortalActive,
+				recording: !!recording,
+			});
 			context.unsetVideoHandler(recording.id);
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -149,8 +152,8 @@ export default function usePlaybackSession(
 		});
 	}
 
-	function setProgress(percent: number) {
-		afterLoad((c) => c.setProgress(percent));
+	function setProgress(percentage: number) {
+		afterLoad((c) => c.setProgress({ percentage, recordingId: recording?.id }));
 	}
 
 	function pause() {
@@ -222,6 +225,5 @@ export default function usePlaybackSession(
 		prefersAudio,
 		getVideo,
 		speed,
-		supportsFullscreen,
 	};
 }

@@ -732,9 +732,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "オーディオファイルのダウンロード方法の好みを設定。"
   },
-  "preferences__heading": {
-    "string": "アカウントの設定"
-  },
   "preferences__inputAutoplay": {
     "string": "自動再生開始する"
   },
@@ -841,9 +838,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "編集したものを保存"
-  },
-  "profile__heading": {
-    "string": "アカウントの設定"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",
@@ -2299,17 +2293,8 @@
   "molecule-buttonDownload__linkLabelMedium": {
     "string": "Medium Quality ({size})"
   },
-  "molecule-buttonGuestDownload__modalParagraph": {
-    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
-  },
-  "molecule-buttonGuestDownload__modalTitle": {
-    "string": "Create a Free Account"
-  },
   "molecule-buttonGuest__Download": {
     "string": "Download content for offline access"
-  },
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
-    "string": "Create account"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
     "string": "Skip"
@@ -2796,5 +2781,26 @@
   },
   "done": {
     "string": "終了"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelLogIn": {
+    "string": "ログイン"
+  },
+  "molecule-buttonDownloadBlank__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonDownloadBlank__modalTitle": {
+    "string": "Create a Free Account"
+  },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "アカウントの設定"
   }
 }

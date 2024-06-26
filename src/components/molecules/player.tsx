@@ -16,9 +16,9 @@ import RecordingProgressBar from '~components/molecules/recordingProgressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
 import { getSessionToken } from '~lib/cookies';
-import hasVideo from '~lib/hasVideo';
+import hasVideo from '~lib/media/hasVideo';
+import usePlaybackSession from '~lib/media/usePlaybackSession';
 import useGlobalSpaceDown from '~lib/useGlobalSpaceDown';
-import usePlaybackSession from '~lib/usePlaybackSession';
 import IconAirPlayAudio from '~public/img/icon-airplay-audio.svg';
 import IconChromeCast from '~public/img/icon-chromecast.svg';
 import IconFullscreen from '~public/img/icons/icon-fullscreen.svg';
@@ -247,7 +247,7 @@ const Player = ({
 					{user ? (
 						<ButtonDownload {...{ recording, backgroundColor }} />
 					) : (
-						<ButtonDownloadBlank />
+						<ButtonDownloadBlank backgroundColor={backgroundColor} />
 					)}
 
 					<ButtonShareRecording

@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import hasVideo from '~lib/hasVideo';
-import usePlaybackSession from '~lib/usePlaybackSession';
+import hasVideo from '~lib/media/hasVideo';
+import usePlaybackSession from '~lib/media/usePlaybackSession';
 
 import { PlayerFragment } from './__generated__/player';
 import styles from './mediaFormatSwitcher.module.scss';

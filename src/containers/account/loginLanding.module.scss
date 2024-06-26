@@ -1,0 +1,45 @@
+.buttonRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	> * {
+		flex: 0 1 calc(50% - 16px);
+	}
+}
+
+.buttonColLanding,
+.buttonCol {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center;
+	flex-wrap: wrap-reverse;
+
+	> * {
+		margin-top: 16px;
+		margin-left: 16px;
+	}
+}
+
+.buttonColLanding {
+	> * {
+		margin-left: 0px;
+	}
+}
+
+.centerText {
+	justify-content: center;
+}
+
+.centerTxt {
+	text-align: center;
+}
+
+.colorGreen {
+	color: green;
+}
+
+.loginText {
+	padding: 4px;
+}
