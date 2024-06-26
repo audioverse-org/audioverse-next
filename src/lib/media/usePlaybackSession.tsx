@@ -10,6 +10,7 @@ import {
 } from '~components/templates/andPlaybackContext';
 import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRecordingPlaybackProgress';
 
+import useIsShowingVideo from './useIsShowingVideo';
 import usePlayerSources from './usePlayerSources';
 
 export enum PlaySource {
@@ -53,9 +54,13 @@ export default function usePlaybackSession(
 	const loadedRecording = context.getRecording();
 	const isLoaded =
 		!!recording && !!loadedRecording && loadedRecording.id === recording.id;
-	const isAudioLoaded = isLoaded && !context.isShowingVideo();
-	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const prefersAudio = context.getPrefersAudio();
+	const isShowingVideo = useIsShowingVideo({
+		recording,
+		prefersAudio,
+	});
+	const isAudioLoaded = isLoaded && !isShowingVideo;
+	const isVideoLoaded = isLoaded && isShowingVideo;
 	const speed = context.getSpeed();
 
 	const { getSources } = usePlayerSources({

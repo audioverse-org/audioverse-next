@@ -8,7 +8,7 @@ export default function useIsShowingVideo({
 	recording,
 	prefersAudio,
 }: {
-	recording?: AndMiniplayerFragment;
+	recording?: AndMiniplayerFragment | null;
 	prefersAudio: boolean;
 }) {
 	const isShowingVideoRef = useRef(false);
