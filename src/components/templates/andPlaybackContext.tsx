@@ -176,7 +176,7 @@ export default function AndPlaybackContext({
 		useState<Scalars['ID']['output']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']['output']>();
 
-	const { getSpeed, setSpeed } = useSpeed(playerRef.current);
+	const { speed, setSpeed } = useSpeed(playerRef.current);
 
 	const queryClient = useQueryClient();
 
@@ -350,7 +350,7 @@ export default function AndPlaybackContext({
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume,
 		setVolume,
-		getSpeed,
+		getSpeed: () => speed,
 		setSpeed,
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
