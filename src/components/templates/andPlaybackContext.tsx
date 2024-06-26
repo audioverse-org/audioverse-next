@@ -20,7 +20,6 @@ import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import usePlayerSources from '~src/lib/media/usePlayerSources';
 import useProgress from '~src/lib/media/useProgress';
 import useSpeed from '~src/lib/media/useSpeed';
-import useVolume from '~src/lib/media/useVolume';
 
 import { analytics } from '../../lib/analytics';
 import {
@@ -76,8 +75,6 @@ export type PlaybackContextType = {
 	hasPlayer: () => boolean;
 	isShowingVideo: () => boolean;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
-	getVolume: () => number;
-	setVolume: (v: number) => void;
 	setSpeed: (s: number) => void;
 	getSpeed: () => number;
 	getDuration: () => number;
@@ -115,8 +112,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	isShowingVideo: () => false,
 	getVideoLocation: () => null,
 	getRecording: () => undefined,
-	getVolume: () => 100,
-	setVolume: () => undefined,
 	setSpeed: () => undefined,
 	getSpeed: () => 1,
 	getDuration: () => 0,
@@ -144,7 +139,6 @@ export default function AndPlaybackContext({
 	const { progress, setProgress } = useProgress(recordingRef.current?.id);
 
 	const playerRef = useRef<VideoJs.VideoJsPlayer>();
-	const { getVolume, setVolume } = useVolume(playerRef.current);
 
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const { getSources, setSources } = usePlayerSources({
@@ -342,8 +336,6 @@ export default function AndPlaybackContext({
 
 			return 'miniplayer';
 		},
-		getVolume,
-		setVolume,
 		getSpeed: () => speed,
 		setSpeed,
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),

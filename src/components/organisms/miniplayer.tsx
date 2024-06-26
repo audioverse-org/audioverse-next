@@ -16,17 +16,18 @@ import { useFormattedTime } from '~lib/time';
 import IconVolumeHigh from '~public/img/icons/icon-volume-high.svg';
 import IconVolumeLow from '~public/img/icons/icon-volume-low.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
+import useVolume from '~src/lib/media/useVolume';
 
 import styles from './miniplayer.module.scss';
 
 export default function Miniplayer(): JSX.Element | null {
 	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
-	const volume = playbackContext.getVolume();
 	const recording = playbackContext.getRecording();
 	const isShowingVideo = playbackContext.getVideoLocation() === 'miniplayer';
 	const timeString = useFormattedTime(playbackContext.getTime());
 	const durationString = useFormattedTime(playbackContext.getDuration());
+	const { getVolume, setVolume } = useVolume(playbackContext.player());
 
 	if (!recording) return null;
 
@@ -99,14 +100,14 @@ export default function Miniplayer(): JSX.Element | null {
 						id: 'miniplayer__reduceVolume',
 						defaultMessage: 'Reduce volume',
 					})}
-					onClick={() => playbackContext.setVolume(volume - 10)}
+					onClick={() => setVolume(getVolume() - 10)}
 				>
 					<IconVolumeLow />
 				</button>
 				<Slider
 					className={styles.slider}
-					value={volume}
-					onChange={(e, val) => playbackContext.setVolume(val as number)}
+					value={getVolume()}
+					onChange={(e, val) => setVolume(val as number)}
 					aria-label={intl.formatMessage({
 						id: 'miniplayer__volume',
 						defaultMessage: 'Volume',
@@ -117,7 +118,7 @@ export default function Miniplayer(): JSX.Element | null {
 						id: 'miniplayer__increaseVolume',
 						defaultMessage: 'Increase volume',
 					})}
-					onClick={() => playbackContext.setVolume(volume + 10)}
+					onClick={() => setVolume(getVolume() + 10)}
 				>
 					<IconVolumeHigh />
 				</button>
