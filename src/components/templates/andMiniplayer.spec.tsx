@@ -17,7 +17,7 @@ function ContextUser({
 	func: (context: PlaybackContextType, setText: (t: string) => void) => void;
 }): JSX.Element {
 	const playbackContext = useContext(PlaybackContext);
-	const hasPlayer = playbackContext.hasPlayer();
+	const hasPlayer = !!playbackContext.player();
 	const [text, setText] = useState<string>('child');
 
 	useEffect(() => {

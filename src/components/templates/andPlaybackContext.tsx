@@ -65,7 +65,6 @@ export type PlaybackContextType = {
 		handler: (el: Element) => void
 	) => void;
 	unsetVideoHandler: (id: Scalars['ID']['output']) => void;
-	hasPlayer: () => boolean;
 	isShowingVideo: () => boolean;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
 	setSpeed: (s: number) => void;
@@ -101,7 +100,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	loadRecording: () => undefined,
 	setVideoHandler: () => undefined,
 	unsetVideoHandler: () => undefined,
-	hasPlayer: () => false,
 	isShowingVideo: () => false,
 	getVideoLocation: () => null,
 	getRecording: () => undefined,
@@ -311,7 +309,6 @@ export default function AndPlaybackContext({
 				videoHandler: undefined,
 			});
 		},
-		hasPlayer: () => !!playerRef.current,
 		isShowingVideo: () => isShowingVideo,
 		getVideoLocation: () => {
 			if (!isShowingVideo) return null;
