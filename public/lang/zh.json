@@ -576,10 +576,6 @@
   "molecule-teaseRecording__morePersons": {
     "string": "多{count}个"
   },
-  "molecule-teaseRecording__partInfo": {
-    "comment": "recording tease part info",
-    "string": "第{index}部分，共{count}部分"
-  },
   "molecule-transcript__disclaimer": {
     "comment": "transcript disclaimer",
     "string": "该文字本可能是自动生成。"
@@ -2348,18 +2344,6 @@
   "molecule-searchBar__cancel": {
     "string": "取消"
   },
-  "molecule-teaseRecording__individualChapter": {
-    "string": "Individual Chapter"
-  },
-  "molecule-teaseRecording__individualStory": {
-    "string": "Individual Story"
-  },
-  "molecule-teaseRecording__individualTeaching": {
-    "string": "Individual Teaching"
-  },
-  "molecule-teaseRecording__individualTrack": {
-    "string": "Individual Track"
-  },
   "molecules-pagination__nextLabelMobile": {
     "string": "Next"
   },
@@ -2796,5 +2780,11 @@
   },
   "done": {
     "string": "已完成的"
+  },
+  "timeLeft": {
+    "string": "{time} 还剩"
+  },
+  "open_app": {
+    "string": "打开应用"
   }
 }

@@ -7,6 +7,7 @@
 }
 
 $container-padding: 16px;
+
 .content {
 	display: flex;
 	flex-direction: column;
@@ -25,7 +26,29 @@ $container-padding: 16px;
 	}
 	&.unpadded {
 		padding: 0;
+		max-width: 285px;
 	}
+}
+
+.content::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100px;
+	height: 65%;
+	background: linear-gradient(to left, var(--cardBg), rgba(255, 255, 255, 0));
+	z-index: 1;
+	pointer-events: none;
+	transition: background 0.3s ease;
+}
+
+.content:hover::after {
+	background: linear-gradient(
+		to left,
+		var(--cardHoverColor),
+		rgba(255, 255, 255, 0)
+	);
 }
 
 .part {
@@ -40,19 +63,23 @@ $container-padding: 16px;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-	margin-bottom: 16px;
+	overflow: hidden;
+	margin-bottom: 10px;
+	padding-bottom: 2px;
 	color: var(--headingColor, $ts-dark);
 	h2 {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
+	position: relative;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 $right-icon-offset: -4px;
-.play {
-	margin-top: $right-icon-offset;
-	margin-right: $right-icon-offset;
-}
 
 .flexGrow {
 	flex-grow: 1;
@@ -61,8 +88,12 @@ $right-icon-offset: -4px;
 	justify-content: flex-end;
 }
 
-.presenter {
-	margin-bottom: 8px;
+.presenters {
+	margin-bottom: 16px;
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+	position: relative;
 }
 
 .morePersons {
@@ -102,9 +133,8 @@ $like-icon-padding: 8px;
 	}
 }
 
-.progress {
-	margin-left: 16px;
-	flex-grow: 1;
+.duration {
+	margin-left: 6px;
 }
 
 .playlist {
