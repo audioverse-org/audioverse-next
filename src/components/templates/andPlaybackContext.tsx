@@ -14,6 +14,7 @@ import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import usePlayerSources from '~src/lib/media/usePlayerSources';
 import useProgress from '~src/lib/media/useProgress';
 import useSpeed from '~src/lib/media/useSpeed';
+import useVideoHandler from '~src/lib/media/useVideoHandler';
 
 import { analytics } from '../../lib/analytics';
 import {
@@ -153,10 +154,12 @@ export default function AndPlaybackContext({
 
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 
-	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
-	const [videoHandlerId, setVideoHandlerId] =
-		useState<Scalars['ID']['output']>();
-	const videoHandlerIdRef = useRef<Scalars['ID']['output']>();
+	const {
+		getVideoHandler,
+		getVideoHandlerId,
+		setVideoHandler,
+		unsetVideoHandler,
+	} = useVideoHandler();
 
 	const { speed, setSpeed } = useSpeed(playerRef.current);
 
@@ -201,7 +204,7 @@ export default function AndPlaybackContext({
 				play: playback.play,
 				video: videoElRef.current,
 				origin: originRef.current,
-				videoHandler,
+				videoHandler: getVideoHandler(),
 			});
 		},
 		getPrefersAudio: () => prefersAudio,
@@ -238,7 +241,7 @@ export default function AndPlaybackContext({
 				play: playback.play,
 				video: videoElRef.current,
 				origin: originRef.current,
-				videoHandler,
+				videoHandler: getVideoHandler(),
 			});
 			return recording;
 		},
@@ -267,6 +270,7 @@ export default function AndPlaybackContext({
 			if (typeof prefersAudio === 'boolean') {
 				setPrefersAudio(prefersAudio);
 			}
+			const videoHandlerId = getVideoHandlerId();
 			if (videoHandlerId && newRecording.id !== videoHandlerId) {
 				playback.unsetVideoHandler(videoHandlerId);
 			}
@@ -277,9 +281,7 @@ export default function AndPlaybackContext({
 			id: Scalars['ID']['output'],
 			handler: (el: Element) => void
 		) => {
-			setVideoHandlerId(id);
-			videoHandlerIdRef.current = id;
-			setVideoHandler(() => handler);
+			setVideoHandler(id, handler);
 			moveVideo({
 				isShowingVideo: isShowingVideo,
 				isPaused: isPausedRef.current,
@@ -291,9 +293,8 @@ export default function AndPlaybackContext({
 			});
 		},
 		unsetVideoHandler: (id: Scalars['ID']['output']) => {
-			if (id !== videoHandlerIdRef.current) return;
-			setVideoHandlerId(undefined);
-			setVideoHandler(undefined);
+			if (id !== getVideoHandlerId()) return;
+			unsetVideoHandler();
 			console.log('Unsetting video handler', {
 				isShowingVideo: isShowingVideo,
 				recording: !!recording,
@@ -315,7 +316,7 @@ export default function AndPlaybackContext({
 		getVideoLocation: () => {
 			if (!isShowingVideo) return null;
 
-			if (videoHandler) return 'portal';
+			if (getVideoHandler()) return 'portal';
 
 			return 'miniplayer';
 		},
