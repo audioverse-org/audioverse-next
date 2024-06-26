@@ -15,6 +15,7 @@ import getVideoJs from '~src/lib/media/getVideoJs';
 import moveVideo from '~src/lib/media/moveVideo';
 import useBuffered from '~src/lib/media/useBuffered';
 import useIsPaused from '~src/lib/media/useIsPaused';
+import useIsShowingVideo from '~src/lib/media/useIsShowingVideo';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import useProgress from '~src/lib/media/useProgress';
 import useSpeed from '~src/lib/media/useSpeed';
@@ -179,9 +180,10 @@ export default function AndPlaybackContext({
 		sourcesRef.current = getSources(recording, prefersAudio);
 	}, [recording, prefersAudio]);
 
-	const isShowingVideoRef = useRef(false);
-	isShowingVideoRef.current =
-		!!recording && hasVideo(recording) && !prefersAudio;
+	const isShowingVideo = useIsShowingVideo({
+		recording,
+		prefersAudio,
+	});
 
 	const playback: PlaybackContextType = {
 		play: () => {
@@ -250,7 +252,7 @@ export default function AndPlaybackContext({
 		},
 		getRecording: () => {
 			moveVideo({
-				isShowingVideo: isShowingVideoRef.current,
+				isShowingVideo: isShowingVideo,
 				isPaused: isPausedRef.current,
 				pause: playback.pause,
 				play: playback.play,
@@ -299,7 +301,7 @@ export default function AndPlaybackContext({
 			videoHandlerIdRef.current = id;
 			setVideoHandler(() => handler);
 			moveVideo({
-				isShowingVideo: isShowingVideoRef.current,
+				isShowingVideo: isShowingVideo,
 				isPaused: isPausedRef.current,
 				pause: playback.pause,
 				play: playback.play,
@@ -313,13 +315,13 @@ export default function AndPlaybackContext({
 			setVideoHandlerId(undefined);
 			setVideoHandler(undefined);
 			console.log('Unsetting video handler', {
-				isShowingVideo: isShowingVideoRef.current,
+				isShowingVideo: isShowingVideo,
 				recording: !!recording,
 				hasVideo: !!recording && hasVideo(recording),
 				prefersAudio,
 			});
 			moveVideo({
-				isShowingVideo: isShowingVideoRef.current,
+				isShowingVideo: isShowingVideo,
 				isPaused: isPausedRef.current,
 				pause: playback.pause,
 				play: playback.play,
@@ -329,9 +331,9 @@ export default function AndPlaybackContext({
 			});
 		},
 		hasPlayer: () => !!playerRef.current,
-		isShowingVideo: () => isShowingVideoRef.current,
+		isShowingVideo: () => isShowingVideo,
 		getVideoLocation: () => {
-			if (!isShowingVideoRef.current) return null;
+			if (!isShowingVideo) return null;
 
 			if (videoHandler) return 'portal';
 
