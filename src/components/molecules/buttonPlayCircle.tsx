@@ -67,25 +67,24 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 					<IconPlay color={iconColor} />
 				)}
 			</button>
-			<>
-				<Heading6 large className={styles.duration}>
-					{session.progress > 0 && session.progress < 1 ? (
-						<FormattedMessage
-							id="timeLeft"
-							defaultMessage="{time} left"
-							values={{ time: remainingDuration }}
-						/>
-					) : (
-						formattedDuration
-					)}
-				</Heading6>
-				{session.progress >= 1 && (
-					<SuccessIcon
-						className={styles.successIcon}
-						style={{ color: successColor }}
+
+			<Heading6 large className={styles.duration}>
+				{session.progress > 0 && session.progress < 1 ? (
+					<FormattedMessage
+						id="timeLeft"
+						defaultMessage="{time} left"
+						values={{ time: remainingDuration }}
 					/>
+				) : (
+					formattedDuration
 				)}
-			</>
+			</Heading6>
+			{session.progress >= 1 && (
+				<SuccessIcon
+					className={styles.successIcon}
+					style={{ color: successColor }}
+				/>
+			)}
 		</div>
 	);
 };
