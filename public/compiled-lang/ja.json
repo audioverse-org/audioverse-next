@@ -4011,6 +4011,12 @@
       "value": "あなただけが閲覧できます"
     }
   ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "アプリを開く"
+    }
+  ],
   "organism-mobileHeader__more": [
     {
       "type": 0,

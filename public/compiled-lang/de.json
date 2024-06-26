@@ -4003,6 +4003,12 @@
       "value": "Nur Sie können es sehen"
     }
   ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "App öffnen"
+    }
+  ],
   "organism-mobileHeader__more": [
     {
       "type": 0,

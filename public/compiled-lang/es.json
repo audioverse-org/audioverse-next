@@ -4019,6 +4019,12 @@
       "value": "Sólo tú puedes ver"
     }
   ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "Abrir App"
+    }
+  ],
   "organism-mobileHeader__more": [
     {
       "type": 0,

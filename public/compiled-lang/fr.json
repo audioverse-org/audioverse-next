@@ -3995,6 +3995,12 @@
       "value": "Vous seul pouvez voir"
     }
   ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "Ouvrir l'application"
+    }
+  ],
   "organism-mobileHeader__more": [
     {
       "type": 0,

@@ -4003,6 +4003,12 @@
       "value": "Só você pode visualizar"
     }
   ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "Abrir App"
+    }
+  ],
   "organism-mobileHeader__more": [
     {
       "type": 0,

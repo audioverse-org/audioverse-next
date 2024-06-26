@@ -1904,6 +1904,9 @@
   "onlyYou": {
     "string": "Only you can view"
   },
+  "open_app": {
+    "string": "Open App"
+  },
   "organism-mobileHeader__more": {
     "comment": "more button label",
     "string": "more"
