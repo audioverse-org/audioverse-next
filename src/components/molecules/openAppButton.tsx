@@ -4,19 +4,26 @@ import { FormattedMessage } from 'react-intl';
 import Button from './button';
 import styles from './openAppButton.module.scss';
 
-const OpenAppButton: React.FC = () => {
+type Props = {
+	isSide?: boolean;
+};
+
+const OpenAppButton: React.FC<Props> = ({ isSide }) => {
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const [isIOS, setIsIOS] = useState<boolean>(false);
 	const [isAndroid, setIsAndroid] = useState<boolean>(false);
 
 	useEffect(() => {
-		const userAgent = navigator.userAgent || navigator.vendor;
-		const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !('MSStream' in window);
-		const isAndroid = /android/i.test(userAgent);
+		if (typeof window !== 'undefined') {
+			const userAgent = navigator.userAgent || navigator.vendor;
+			const isIOS =
+				/iPad|iPhone|iPod/.test(userAgent) && !('MSStream' in window);
+			const isAndroid = /android/i.test(userAgent);
 
-		setIsMobile(isIOS || isAndroid);
-		setIsIOS(isIOS);
-		setIsAndroid(isAndroid);
+			setIsMobile(isIOS || isAndroid);
+			setIsIOS(isIOS);
+			setIsAndroid(isAndroid);
+		}
 	}, []);
 
 	const handleButtonClick = () => {
@@ -43,7 +50,7 @@ const OpenAppButton: React.FC = () => {
 			key="openAppButton"
 			type="primary"
 			onClick={handleButtonClick}
-			className={styles.open_app}
+			className={isSide ? styles.side : styles.open_app}
 			text={<FormattedMessage id="open_app" defaultMessage="Open App" />}
 		/>
 	);

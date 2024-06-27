@@ -275,5 +275,7 @@
 	.desktopDonate {
 		display: inherit;
 		align-self: flex-start;
+		justify-content: center;
+		min-width: 50%;
 	}
 }
