@@ -1,13 +1,31 @@
-import React, { createContext, ReactNode } from 'react';
+import React, { createContext, ReactNode, useMemo } from 'react';
+import { VideoJsPlayer } from 'video.js';
 
-export type MediaContextType = object;
+import usePlayer from '~src/lib/media/usePlayer';
 
-const DEFAULT_MEDIA_CONTEXT: MediaContextType = {};
+export type MediaContextType = {
+	player: VideoJsPlayer | null;
+	movePlayer: (newParent: HTMLDivElement) => void;
+};
+
+const DEFAULT_MEDIA_CONTEXT: MediaContextType = {
+	player: null,
+	movePlayer: () => void 0,
+};
 
 export const MediaContext = createContext<MediaContextType>(
 	DEFAULT_MEDIA_CONTEXT
 );
 
 export default function AndMediaContext({ children }: { children: ReactNode }) {
-	return <MediaContext.Provider value={{}}>{children}</MediaContext.Provider>;
+	const { player, movePlayer } = usePlayer();
+
+	const context: MediaContextType = useMemo(
+		() => ({ player, movePlayer }),
+		[player, movePlayer]
+	);
+
+	return (
+		<MediaContext.Provider value={context}>{children}</MediaContext.Provider>
+	);
 }
