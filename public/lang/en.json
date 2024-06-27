@@ -1791,27 +1791,11 @@
     "comment": "search bar label",
     "string": "Search"
   },
-  "molecule-teaseRecording__individualChapter": {
-    "string": "Individual Chapter"
-  },
-  "molecule-teaseRecording__individualStory": {
-    "string": "Individual Story"
-  },
-  "molecule-teaseRecording__individualTeaching": {
-    "string": "Individual Teaching"
-  },
-  "molecule-teaseRecording__individualTrack": {
-    "string": "Individual Track"
-  },
   "molecule-teaseRecording__lessPersons": {
     "string": "Show less"
   },
   "molecule-teaseRecording__morePersons": {
     "string": "{count} more"
-  },
-  "molecule-teaseRecording__partInfo": {
-    "comment": "recording tease part info",
-    "string": "Part {index} of {count}"
   },
   "molecule-transcript__disclaimer": {
     "comment": "transcript disclaimer",
@@ -1906,6 +1890,9 @@
   },
   "onlyYou": {
     "string": "Only you can view"
+  },
+  "open_app": {
+    "string": "Open App"
   },
   "organism-mobileHeader__more": {
     "comment": "more button label",
@@ -2758,6 +2745,9 @@
   },
   "testimonies__title": {
     "string": "Testimonials"
+  },
+  "timeLeft": {
+    "string": "{time} left"
   },
   "time__hoursMinutesAndSeconds": {
     "comment": "time hours, minutes and seconds",
