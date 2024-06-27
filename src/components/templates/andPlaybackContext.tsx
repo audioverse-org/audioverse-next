@@ -20,6 +20,7 @@ import {
 	AndMiniplayerFragment,
 	GetRecordingExtraDataQuery,
 } from './__generated__/andMiniplayer';
+import AndMediaContext from './andMediaContext';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -433,11 +434,11 @@ export default function AndPlaybackContext({
 	};
 
 	return (
-		<>
+		<AndMediaContext>
 			<Script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" />
 			<PlaybackContext.Provider value={playback}>
 				{children}
 			</PlaybackContext.Provider>
-		</>
+		</AndMediaContext>
 	);
 }
