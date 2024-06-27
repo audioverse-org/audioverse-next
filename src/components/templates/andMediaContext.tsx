@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useMemo } from 'react';
 import { VideoJsPlayer } from 'video.js';
 
-import usePlayer from '~src/lib/media/usePlayer';
+import usePlayerManager from '~src/lib/media/usePlayerManager';
 
 export type MediaContextType = {
 	player: VideoJsPlayer | null;
@@ -18,7 +18,7 @@ export const MediaContext = createContext<MediaContextType>(
 );
 
 export default function AndMediaContext({ children }: { children: ReactNode }) {
-	const { player, movePlayer } = usePlayer();
+	const { player, movePlayer } = usePlayerManager();
 
 	const context: MediaContextType = useMemo(
 		() => ({ player, movePlayer }),

@@ -3,7 +3,7 @@ import { VideoJsPlayer } from 'video.js';
 
 import getVideoJs from './getVideoJs';
 
-export default function usePlayer() {
+export default function usePlayerManager() {
 	const [parent, setParent] = useState<HTMLDivElement | null>(null);
 	const [player, setPlayer] = useState<VideoJsPlayer | null>(null);
 
