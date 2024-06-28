@@ -13,7 +13,6 @@ import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRe
 import useIsShowingVideo from './useIsShowingVideo';
 import usePlayerRecording from './usePlayerRecording';
 import usePlayerSources from './usePlayerSources';
-import useSpeed from './useSpeed';
 
 export enum PlaySource {
 	Tease = 'Tease',
@@ -29,7 +28,6 @@ interface PlaybackSessionInfo {
 	airPlayTrigger: () => void;
 	requestFullscreen: () => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
-	setSpeed: (speed: number) => void;
 	isLoaded: boolean;
 	progress: number;
 	bufferedProgress: number;
@@ -38,7 +36,6 @@ interface PlaybackSessionInfo {
 	isVideoLoaded: boolean;
 	isPaused: boolean;
 	isPlaying: boolean;
-	speed: number;
 	time: number;
 	duration: number;
 }
@@ -62,7 +59,6 @@ export default function usePlaybackSession(
 	});
 	const isAudioLoaded = isLoaded && !isShowingVideo;
 	const isVideoLoaded = isLoaded && isShowingVideo;
-	const { speed, setSpeed: _setSpeed } = useSpeed();
 
 	const { getSources } = usePlayerSources({
 		recording,
@@ -163,10 +159,6 @@ export default function usePlaybackSession(
 		});
 	}
 
-	function setSpeed(speed: number) {
-		afterLoad(() => _setSpeed(speed));
-	}
-
 	function requestFullscreen() {
 		afterLoad((c) => c.player()?.requestFullscreen());
 	}
@@ -185,7 +177,6 @@ export default function usePlaybackSession(
 		pause,
 		play,
 		setPrefersAudio,
-		setSpeed,
 		requestFullscreen,
 		chromecastTrigger,
 		airPlayTrigger,
@@ -199,6 +190,5 @@ export default function usePlaybackSession(
 		isPaused,
 		isPlaying,
 		prefersAudio,
-		speed,
 	};
 }
