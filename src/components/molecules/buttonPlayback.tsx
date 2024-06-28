@@ -7,11 +7,13 @@ import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import { BaseColors } from '~lib/constants';
 import IconListening from '~public/img/icons/icon-listening.svg';
 import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg';
+import usePlayerRecording from '~src/lib/media/usePlayerRecording';
 
 export default function ButtonPlayback(): JSX.Element {
 	const context = useContext(PlaybackContext);
 	const intl = useIntl();
 	const { push } = useRouter();
+	const { recording } = usePlayerRecording();
 
 	// TODO: Figure out how to use an anchor element instead of a button element for this component.
 	// Could do this by updating the IconButton component to accept an href prop and choose which
@@ -19,11 +21,7 @@ export default function ButtonPlayback(): JSX.Element {
 	return (
 		<IconButton
 			Icon={context.paused() ? IconListening : IconListeningAnimated}
-			onClick={() => {
-				const recording = context.getRecording();
-				const path = recording?.canonicalPath || '';
-				push(path);
-			}}
+			onClick={() => push(recording?.canonicalPath || '')}
 			color={BaseColors.RED}
 			backgroundColor={BaseColors.CREAM}
 			aria-label={intl.formatMessage({
