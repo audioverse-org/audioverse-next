@@ -11,6 +11,7 @@ import {
 import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRecordingPlaybackProgress';
 
 import useIsShowingVideo from './useIsShowingVideo';
+import usePlayerRecording from './usePlayerRecording';
 import usePlayerSources from './usePlayerSources';
 import useSpeed from './useSpeed';
 
@@ -51,7 +52,7 @@ export default function usePlaybackSession(
 ): PlaybackSessionInfo {
 	const { playlistRecordings } = options;
 	const context = useContext(PlaybackContext);
-	const loadedRecording = context.getRecording();
+	const { recording: loadedRecording } = usePlayerRecording();
 	const isLoaded =
 		!!recording && !!loadedRecording && loadedRecording.id === recording.id;
 	const prefersAudio = context.getPrefersAudio();
