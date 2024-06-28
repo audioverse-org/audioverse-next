@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import {
 	AndMiniplayerFragment,
@@ -40,7 +40,6 @@ interface PlaybackSessionInfo {
 	speed: number;
 	time: number;
 	duration: number;
-	getVideo: () => JSX.Element;
 }
 
 export default function usePlaybackSession(
@@ -78,11 +77,6 @@ export default function usePlaybackSession(
 	const time = isLoaded ? context.getTime() : duration * progress;
 	const isPaused = !isLoaded || context.paused();
 	const isPlaying = isLoaded && !context.paused();
-	const [isPortalActive, setIsPortalActive] = useState<boolean>(false);
-	const portalContainerRef = useRef<HTMLDivElement>(null);
-	const [video] = useState<JSX.Element>(
-		<div ref={portalContainerRef} data-testid="portal" />
-	);
 
 	const shouldLoadPlaybackProgress =
 		shouldLoadRecordingPlaybackProgress(recording);
@@ -176,11 +170,6 @@ export default function usePlaybackSession(
 		afterLoad((c) => c.player()?.requestFullscreen());
 	}
 
-	function getVideo() {
-		if (!isPortalActive) setIsPortalActive(true);
-		return video;
-	}
-
 	function chromecastTrigger() {
 		afterLoad((c) => c.player()?.trigger('chromecastRequested'));
 	}
@@ -209,7 +198,6 @@ export default function usePlaybackSession(
 		isPaused,
 		isPlaying,
 		prefersAudio,
-		getVideo,
 		speed,
 	};
 }
