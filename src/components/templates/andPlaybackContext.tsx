@@ -116,7 +116,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	const duration = getSources()[0]?.duration || recording?.duration || 0;
 	const { bufferedProgress, setBufferedProgress } = useBuffered({
 		recordingId: recording?.id,
-		player: playerRef.current,
 		duration,
 	});
 

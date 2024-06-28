@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
-import type * as VideoJs from 'video.js';
 
+import usePlayer from './usePlayer';
 import useProgress from './useProgress';
 
 export default function useBuffered({
 	recordingId,
-	player,
 	duration,
 }: {
 	recordingId?: string | number;
-	player?: VideoJs.VideoJsPlayer | null;
 	duration: number;
 }) {
+	const { player } = usePlayer();
 	const { progress } = useProgress(recordingId);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const playerBufferedEnd = player?.bufferedEnd();
