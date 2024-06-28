@@ -17,6 +17,7 @@ import IconVolumeHigh from '~public/img/icons/icon-volume-high.svg';
 import IconVolumeLow from '~public/img/icons/icon-volume-low.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
 import usePlayerLocation from '~src/lib/media/usePlayerLocation';
+import usePlayerRecording from '~src/lib/media/usePlayerRecording';
 import useVolume from '~src/lib/media/useVolume';
 
 import styles from './miniplayer.module.scss';
@@ -24,7 +25,7 @@ import styles from './miniplayer.module.scss';
 export default function Miniplayer(): JSX.Element | null {
 	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
-	const recording = playbackContext.getRecording();
+	const { recording } = usePlayerRecording();
 	const timeString = useFormattedTime(playbackContext.getTime());
 	const durationString = useFormattedTime(playbackContext.getDuration());
 	const { getVolume, setVolume } = useVolume(playbackContext.player());

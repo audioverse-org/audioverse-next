@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '~components/molecules/button';
@@ -8,12 +8,12 @@ import ButtonPlayback from '~components/molecules/buttonPlayback';
 import Mininav from '~components/molecules/mininav';
 import SearchBar from '~components/molecules/searchBar';
 import Header from '~components/organisms/header';
-import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { useNavigationItems } from '~lib/useNavigationItems';
 import IconExitSmall from '~public/img/icons/icon-exit-small.svg';
 import MoreIcon from '~public/img/icons/icon-more.svg';
+import usePlayerRecording from '~src/lib/media/usePlayerRecording';
 
 import { analytics } from '../../lib/analytics';
 import styles from './mobileHeader.module.scss';
@@ -41,7 +41,7 @@ export default function MobileHeader({
 	const { asPath } = useRouter();
 	const lang = useLanguageRoute();
 	const navItems = useNavigationItems();
-	const { getRecording } = useContext(PlaybackContext);
+	const { recording } = usePlayerRecording();
 	const scrollDirection = useScrollDirection(scrollRef);
 
 	return (
@@ -67,7 +67,7 @@ export default function MobileHeader({
 						}
 						href={root.lang(lang).give.get()}
 					/>
-					{getRecording() && <ButtonPlayback />}
+					{recording && <ButtonPlayback />}
 				</div>
 				<div className={styles.subnav}>
 					<Mininav
