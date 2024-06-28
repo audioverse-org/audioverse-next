@@ -16,9 +16,7 @@ import useIsPaused from '~src/lib/media/useIsPaused';
 import useOnPlayerLoad from '~src/lib/media/useOnPlayerLoad';
 import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import usePlayer from '~src/lib/media/usePlayer';
-import usePlayerLocation, {
-	LocationId,
-} from '~src/lib/media/usePlayerLocation';
+import usePlayerLocation from '~src/lib/media/usePlayerLocation';
 import usePlayerRecording from '~src/lib/media/usePlayerRecording';
 import usePlayerSources from '~src/lib/media/usePlayerSources';
 import usePrefersAudio from '~src/lib/media/usePrefersAudio';
@@ -69,7 +67,6 @@ export type PlaybackContextType = {
 		},
 		source?: PlaySource
 	) => void;
-	getVideoLocation: () => LocationId;
 	getDuration: () => number;
 	advanceRecording: () => void;
 	setIsPaused: (paused: boolean) => void;
@@ -98,7 +95,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getBufferedProgress: () => 0,
 	setProgress: () => undefined,
 	loadRecording: () => undefined,
-	getVideoLocation: () => 'origin',
 	getRecording: () => null,
 	getDuration: () => 0,
 	advanceRecording: () => undefined,
@@ -241,7 +237,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 					playback._setRecording(newRecording, prefersAudio, source);
 				});
 			},
-			getVideoLocation: () => playerLocation,
 			advanceRecording: () => {
 				console.log('advanceRecording');
 				if (!sourceRecordings) {
@@ -328,7 +323,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 			getSources,
 			isPausedRef,
 			onLoad,
-			playerLocation,
 			prefersAudio,
 			progress,
 			queryClient,
