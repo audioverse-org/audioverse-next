@@ -62,7 +62,7 @@ export default function usePlaybackSession(
 	});
 	const isAudioLoaded = isLoaded && !isShowingVideo;
 	const isVideoLoaded = isLoaded && isShowingVideo;
-	const { speed, setSpeed: _setSpeed } = useSpeed(context.player());
+	const { speed, setSpeed: _setSpeed } = useSpeed();
 
 	const { getSources } = usePlayerSources({
 		recording,
