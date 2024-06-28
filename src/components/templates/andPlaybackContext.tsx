@@ -196,7 +196,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				source?: PlaySource
 			) => {
 				onLoad(() => {
-					console.log('loadRecording');
 					const { onLoad, prefersAudio } = options;
 					onLoadRef.current = onLoad;
 					const recordingsArray = Array.isArray(recordingOrRecordings)

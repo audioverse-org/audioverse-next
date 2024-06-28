@@ -16,13 +16,13 @@ export default function useBuffered({
 	const playerBufferedEnd = player?.bufferedEnd();
 
 	useEffect(() => {
-		let newBufferedProgress = +Math.max(
+		let b = +Math.max(
 			bufferedProgress, // Don't ever reduce the buffered amount
 			progress, // We've always buffered as much as we're playing
 			(playerBufferedEnd || 0) / duration // Actually compute current buffered progress
 		).toFixed(2);
-		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
-		setBufferedProgress(newBufferedProgress);
+		if (b >= 0.99) b = 1;
+		setBufferedProgress(b);
 	}, [bufferedProgress, playerBufferedEnd, progress, duration]);
 
 	return { bufferedProgress, setBufferedProgress };
