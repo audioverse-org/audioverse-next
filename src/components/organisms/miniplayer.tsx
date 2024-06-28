@@ -3,7 +3,7 @@ import 'video.js/dist/video-js.css';
 import Slider from '@material-ui/core/Slider';
 import clsx from 'clsx';
 import Link from 'next/link';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 
 import ButtonNudge from '~components/molecules/buttonNudge';
@@ -16,6 +16,7 @@ import { useFormattedTime } from '~lib/time';
 import IconVolumeHigh from '~public/img/icons/icon-volume-high.svg';
 import IconVolumeLow from '~public/img/icons/icon-volume-low.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
+import usePlayerLocation from '~src/lib/media/usePlayerLocation';
 import useVolume from '~src/lib/media/useVolume';
 
 import styles from './miniplayer.module.scss';
@@ -24,15 +25,22 @@ export default function Miniplayer(): JSX.Element | null {
 	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
 	const recording = playbackContext.getRecording();
-	const isShowingVideo = playbackContext.getVideoLocation() === 'miniplayer';
 	const timeString = useFormattedTime(playbackContext.getTime());
 	const durationString = useFormattedTime(playbackContext.getDuration());
 	const { getVolume, setVolume } = useVolume(playbackContext.player());
+	const { playerLocation, registerPlayerLocation } = usePlayerLocation();
 
-	if (!recording) return null;
+	useEffect(() => {
+		const el = document.getElementById('location-miniplayer');
+		if (!el) return;
+		registerPlayerLocation({
+			locationId: 'miniplayer',
+			locationEl: el as HTMLDivElement,
+		});
+	}, [registerPlayerLocation]);
 
 	let sequenceLine = null;
-	if (recording.sequence) {
+	if (recording?.sequence) {
 		const { Icon } = getSequenceTypeTheme(recording.sequence.contentType);
 		sequenceLine = (
 			<div
@@ -52,47 +60,60 @@ export default function Miniplayer(): JSX.Element | null {
 
 	return (
 		<div
-			className={styles.miniplayer}
+			className={clsx(styles.miniplayer, !recording && styles.hidden)}
 			aria-label={intl.formatMessage({
 				id: 'miniplayer__label',
 				defaultMessage: 'miniplayer',
 			})}
+			aria-hidden={!recording}
 		>
 			<div className={styles.player}>
-				{/*TODO: Get rid of ID; use ref instead*/}
-				<div id="mini-player" className={styles.pane} />
-				<div className={clsx(styles.controls, isShowingVideo && styles.hidden)}>
-					<ButtonNudge
-						recording={recording}
-						reverse={true}
-						backgroundColor={BaseColors.WHITE}
-						large
-					/>
-					<ButtonPlay
-						recording={recording}
-						backgroundColor={BaseColors.WHITE}
-					/>
-					<ButtonNudge
-						recording={recording}
-						backgroundColor={BaseColors.WHITE}
-						large
-					/>
+				<div id="location-miniplayer" className={styles.pane} />
+				<div
+					className={clsx(
+						styles.controls,
+						playerLocation === 'miniplayer' && styles.hidden
+					)}
+				>
+					{recording && (
+						<>
+							<ButtonNudge
+								recording={recording}
+								reverse={true}
+								backgroundColor={BaseColors.WHITE}
+								large
+							/>
+							<ButtonPlay
+								recording={recording}
+								backgroundColor={BaseColors.WHITE}
+							/>
+							<ButtonNudge
+								recording={recording}
+								backgroundColor={BaseColors.WHITE}
+								large
+							/>
+						</>
+					)}
 				</div>
 			</div>
 			<div className={styles.meta}>
-				<Link href={recording.canonicalPath} legacyBehavior>
-					<a className={styles.link}>
-						{sequenceLine}
-						<h4 className={styles.title}>{recording.title}</h4>
-					</a>
-				</Link>
-				<div className={styles.progress}>
-					<span>{timeString}</span>
-					<span className={styles.bar}>
-						<RecordingProgressBar recording={recording} />
-					</span>
-					<span>{durationString}</span>
-				</div>
+				{recording && (
+					<>
+						<Link href={recording.canonicalPath} legacyBehavior>
+							<a className={styles.link}>
+								{sequenceLine}
+								<h4 className={styles.title}>{recording.title}</h4>
+							</a>
+						</Link>
+						<div className={styles.progress}>
+							<span>{timeString}</span>
+							<span className={styles.bar}>
+								<RecordingProgressBar recording={recording} />
+							</span>
+							<span>{durationString}</span>
+						</div>
+					</>
+				)}
 			</div>
 			<div className={styles.volume}>
 				<button

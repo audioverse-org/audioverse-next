@@ -9,7 +9,7 @@ export default function useBuffered({
 	duration,
 }: {
 	recordingId?: string | number;
-	player?: VideoJs.VideoJsPlayer;
+	player?: VideoJs.VideoJsPlayer | null;
 	duration: number;
 }) {
 	const { progress } = useProgress(recordingId);

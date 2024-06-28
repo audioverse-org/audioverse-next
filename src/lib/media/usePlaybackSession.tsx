@@ -108,30 +108,6 @@ export default function usePlaybackSession(
 		}
 	}, [isLoaded, shouldLoadPlaybackProgress, refetch]);
 
-	useEffect(() => {
-		if (!recording || !isLoaded || !isPortalActive) return;
-
-		context.setVideoHandler(recording.id, (el) => {
-			if (!el) return;
-			portalContainerRef.current?.appendChild(el);
-		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [recording, isLoaded, isPortalActive]);
-
-	useEffect(
-		() => () => {
-			if (!isPortalActive || !recording) return;
-			// TODO: provide recording ID when unloading?
-			console.log('unset video handler', {
-				isPortalActive,
-				recording: !!recording,
-			});
-			context.unsetVideoHandler(recording.id);
-		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[]
-	);
-
 	function afterLoad(
 		func: (c: PlaybackContextType) => void,
 		source?: PlaySource
@@ -174,6 +150,7 @@ export default function usePlaybackSession(
 	}
 
 	function play(source?: PlaySource) {
+		console.log('afterLoad(play)');
 		afterLoad((c) => {
 			c.play();
 		}, source);

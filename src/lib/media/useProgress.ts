@@ -26,16 +26,13 @@ export default function useProgress(recordingId?: string | number) {
 
 	useEffect(() => {
 		if (!recordingId) {
-			console.warn('no recording id; not updating progress');
 			return;
 		}
 		if (RECORDING_PROGRESSES.has(recordingId)) {
-			console.log('updating progress from memory');
 			const p = RECORDING_PROGRESSES.get(recordingId);
 			_setProgress(p || 0);
 			return;
 		}
-		console.log('updating progress from server');
 		const p = getServerProgress(recordingId, client);
 		_setProgress(p);
 		RECORDING_PROGRESSES.set(recordingId, p);
@@ -51,7 +48,6 @@ export default function useProgress(recordingId?: string | number) {
 			recordingId?: number | string;
 		}) => {
 			const _id = id || recordingId;
-			console.log('setProgress', _id, percentage);
 			if (_id) RECORDING_PROGRESSES.set(_id, percentage);
 			if (_id !== recordingId) return;
 			throttledUpdateProgress({ percentage });

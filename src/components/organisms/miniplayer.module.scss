@@ -16,9 +16,14 @@
 	justify-content: space-between;
 	align-items: center;
 	border-top: 1px solid $ts-cream;
+
 	@media (min-width: $breakpoint-lg) {
 		display: flex;
 		z-index: 1001;
+	}
+
+	&.hidden {
+		display: none;
 	}
 }
 
@@ -27,9 +32,11 @@
 	grid-template-areas: 'cell';
 	max-height: 100%;
 	flex-grow: 0;
+
 	.pane {
 		grid-area: cell;
 	}
+
 	.controls {
 		grid-area: cell;
 		z-index: 100;
@@ -39,14 +46,17 @@
 		padding-left: 30px;
 		padding-right: 30px;
 		background-color: rgba(255, 255, 255, 0.7);
+
 		&.hidden {
 			opacity: 0;
 			transition: opacity $transition-quick;
+
 			&:hover {
 				opacity: 1;
 			}
 		}
 	}
+
 	:global(.video-js) {
 		// handle responsive manually
 		width: auto;
@@ -75,6 +85,7 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+
 	svg {
 		color: $ts-red;
 		margin-right: 4px;
@@ -98,9 +109,11 @@
 	font-size: 14px;
 	font-weight: 400;
 	color: $ts-midTone;
+
 	> span {
 		font-variant-numeric: tabular-nums;
 	}
+
 	.bar {
 		flex-grow: 1;
 		margin-left: 16px;
@@ -113,29 +126,35 @@
 	display: flex;
 	align-items: center;
 	margin-right: 24px;
+
 	button {
 		padding: 0;
 		margin: 0;
 		border: none;
 		background: none;
 		cursor: pointer;
+
 		&:first-child {
 			margin-right: 8px;
 		}
+
 		&:last-child {
 			margin-left: 8px;
 		}
 	}
+
 	svg {
 		flex: 0 0 auto;
 		box-sizing: content-box;
 		padding: 8px;
 	}
 }
+
 .slider {
 	:global(.MuiSlider-rail) {
 		width: calc(100% + 16px);
 	}
+
 	:global(.MuiSlider-rail),
 	:global(.MuiSlider-track) {
 		left: -8px !important;

@@ -27,6 +27,7 @@ type MockPlayer = Pick<
 	| 'controls'
 	| 'supportsFullScreen'
 	| 'on'
+	| 'dispose'
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
 	_fire: (event: string, data?: any) => void;
@@ -101,6 +102,7 @@ export default function setPlayerMock(
 			handlers[event].push(fn);
 		}) as any,
 		bufferedEnd: jest.fn(),
+		dispose: jest.fn(),
 		...functions,
 	};
 

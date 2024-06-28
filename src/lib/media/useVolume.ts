@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { VideoJsPlayer } from 'video.js';
 
-export default function useVolume(player?: VideoJsPlayer) {
+export default function useVolume(player?: VideoJsPlayer | null) {
 	// WORKAROUND: Ensure that volume changes trigger rerenders
 	const [, setVolume] = useState<number>(100);
 

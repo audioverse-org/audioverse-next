@@ -1,5 +1,4 @@
 import {
-	act,
 	findByLabelText,
 	getByLabelText,
 	getByTestId,
@@ -11,7 +10,6 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadQuery, __loadRouter } from 'next/router';
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
 import AndMiniplayer from '~components/templates/andMiniplayer';
@@ -215,34 +213,9 @@ describe('sermon detail page', () => {
 		});
 	});
 
-	it('sets poster', async () => {
-		loadSermonDetailData({
-			audioFiles: [
-				{
-					url: 'the_source_src',
-					mimeType: 'the_source_type',
-					filesize: 'the_source_size',
-				},
-			],
-		});
-
-		const { getByLabelText } = await renderPage();
-
-		await userEvent.click(getByLabelText('play'));
-
-		await waitFor(() => {
-			expect(videojs).toBeCalled();
-		});
-
-		expect(videojs).toBeCalledWith(
-			expect.anything(),
-			expect.objectContaining({
-				poster: expect.anything(),
-			})
-		);
-	});
-
 	it('toggles sources', async () => {
+		const mockPlayer = setPlayerMock();
+
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			speakers: [],
@@ -255,25 +228,20 @@ describe('sermon detail page', () => {
 		await userEvent.click(getByText('Audio'));
 
 		await waitFor(() => {
-			expect(videojs).toBeCalled();
-		});
-
-		const calls = (videojs as any as jest.Mock).mock.calls;
-		const sourceSets = calls.map((c) => c[1].sources);
-
-		expect(sourceSets).toEqual(
-			expect.arrayContaining([
-				[
-					{
+			expect(mockPlayer.src).toHaveBeenCalledWith(
+				expect.arrayContaining([
+					expect.objectContaining({
 						src: 'audio_url',
 						type: 'audio_mimetype',
-					},
-				],
-			])
-		);
+					}),
+				])
+			);
+		});
 	});
 
 	it('falls back to video files', async () => {
+		const mockPlayer = setPlayerMock();
+
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			speakers: [],
@@ -289,25 +257,20 @@ describe('sermon detail page', () => {
 		await userEvent.click(poster.parentElement as HTMLElement);
 
 		await waitFor(() => {
-			expect(videojs).toBeCalled();
-		});
-
-		const calls = (videojs as any as jest.Mock).mock.calls;
-		const sourceSets = calls.map((c) => c[1].sources);
-
-		expect(sourceSets).toEqual(
-			expect.arrayContaining([
-				[
-					{
+			expect(mockPlayer.src).toHaveBeenCalledWith(
+				expect.arrayContaining([
+					expect.objectContaining({
 						src: 'video_url',
 						type: 'video_mimetype',
-					},
-				],
-			])
-		);
+					}),
+				])
+			);
+		});
 	});
 
 	it('falls back to audio files', async () => {
+		const mockPlayer = setPlayerMock();
+
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			speakers: [],
@@ -321,22 +284,15 @@ describe('sermon detail page', () => {
 		await userEvent.click(getByLabelText('play'));
 
 		await waitFor(() => {
-			expect(videojs).toBeCalled();
-		});
-
-		const calls = (videojs as any as jest.Mock).mock.calls;
-		const sourceSets = calls.map((c) => c[1].sources);
-
-		expect(sourceSets).toEqual(
-			expect.arrayContaining([
-				[
-					{
+			expect(mockPlayer.src).toHaveBeenCalledWith(
+				expect.arrayContaining([
+					expect.objectContaining({
 						src: 'audio_url',
 						type: 'audio_mimetype',
-					},
-				],
-			])
-		);
+					}),
+				])
+			);
+		});
 	});
 
 	it('hides toggle if no video', async () => {
@@ -1116,16 +1072,14 @@ describe('sermon detail page', () => {
 			expect(getByLabelText(player, 'pause')).toBeInTheDocument();
 		});
 
+		await waitFor(() => {
+			expect(mockPlayer.on).toBeCalledWith('timeupdate', expect.anything());
+		});
+
 		const miniplayer = result.getByLabelText('miniplayer');
 
 		mockPlayer.currentTime(50);
-
-		await act(async () => {
-			ReactTestUtils.Simulate.timeUpdate(
-				result.getByTestId('video-element'),
-				{} as any
-			);
-		});
+		mockPlayer._fire('timeupdate');
 
 		await waitFor(() => {
 			expect(getByText(player, '0:50')).toBeInTheDocument();
@@ -1141,51 +1095,6 @@ describe('sermon detail page', () => {
 			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('0');
 		});
 	});
-
-	// it('displays progress bar for sequence recordings', async () => {
-	// 	loadSermonDetailData({
-	// 		sequence: {
-	// 			recordings: {
-	// 				nodes: [
-	// 					{
-	// 						id: 'the_sibling_id',
-	// 						title: 'sibling_title',
-	// 						canonicalPath: 'sibling_path',
-	// 					},
-	// 				],
-	// 			},
-	// 		},
-	// 	});
-
-	// 	const result = await renderPage();
-
-	// 	const sidebar = result.getByLabelText('series list');
-
-	// 	expect(getByLabelText(sidebar, 'progress')).toBeInTheDocument();
-	// });
-
-	// it('disables sidebar progress bar interactivity', async () => {
-	// 	loadSermonDetailData({
-	// 		sequence: {
-	// 			recordings: {
-	// 				nodes: [
-	// 					{
-	// 						id: 'the_sibling_id',
-	// 						title: 'sibling_title',
-	// 						canonicalPath: 'sibling_path',
-	// 					},
-	// 				],
-	// 			},
-	// 		},
-	// 	});
-
-	// 	const result = await renderPage();
-
-	// 	const sidebar = result.getByLabelText('series list');
-
-	// 	expect(getByLabelText(sidebar, 'progress')).toBeDisabled();
-	// });
-	// TODO: reimplement when usePlaybackSession uses server-side progress
 
 	it('displays durations in sidebar', async () => {
 		loadSermonDetailData({

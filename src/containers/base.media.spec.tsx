@@ -1,18 +1,14 @@
 import {
-	act,
 	findByLabelText,
-	findByTestId,
 	getByLabelText,
 	getByTestId,
-	queryByTestId,
-	render,
 	screen,
 	waitFor,
+	within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
-import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
+import React, { useState } from 'react';
 import videojs from 'video.js';
 
 import { RecordingFragment } from '~components/organisms/__generated__/recording';
@@ -24,6 +20,8 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
+import getPlayerLocation from '~src/lib/media/getPlayerLocation';
+import { buildRenderer } from '~src/lib/test/buildRenderer';
 
 const sequence = {
 	id: 'the_sequence_id',
@@ -106,70 +104,66 @@ const recordingAudioVideo: Partial<RecordingFragment> = {
 	imageWithFallback: { url: '' },
 };
 
-const Page = ({
+const App = ({
 	includePlayer,
 	recording,
 }: {
 	includePlayer: boolean;
 	recording: Partial<RecordingFragment>;
-}) => (
-	<div>
-		{includePlayer && <Recording recording={recording as RecordingFragment} />}
-	</div>
-);
+}) => {
+	const [showRecording, setShowRecording] = useState(includePlayer);
+	const toggleRecording = () => setShowRecording(!showRecording);
+	const ComponentToShow = showRecording ? Recording : () => null;
 
-const renderApp = async (
-	includePlayer: boolean,
-	recording: Partial<RecordingFragment>,
-	container: any = undefined
-) => {
-	__loadRouter({
-		pathname: '/[language]/discover',
-		query: {},
-		asPath: '',
-	});
-
-	const result = render(
-		<MyApp
-			Component={Page as any}
-			pageProps={{ includePlayer, recording } as any}
-		/>,
-		{ container }
+	return (
+		<div>
+			<button onClick={toggleRecording}>toggle</button>
+			<MyApp
+				Component={ComponentToShow as any}
+				pageProps={{ includePlayer: showRecording, recording } as any}
+			/>
+		</div>
 	);
-
-	await __awaitIntlMessages();
-
-	return {
-		...result,
-		getMiniplayer: () => result.getByLabelText('miniplayer'),
-		getPlayer: () => result.getByLabelText('player'),
-		expectVideoLocation: (location: HTMLElement) =>
-			expect(getByTestId(location, 'video-element')).toBeInTheDocument(),
-		rerender: (includePlayer: boolean) => {
-			return renderApp(includePlayer, recording, result.container);
-		},
-	};
 };
+
+const renderApp = buildRenderer(App);
 
 describe('app media playback', () => {
 	beforeEach(() => setPlayerMock());
 
 	it('moves video to and from miniplayer', async () => {
-		const result = await renderApp(true, recordingVideo);
+		const result = await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingVideo,
+			},
+		});
 
 		await userEvent.click(result.getByAltText('the_sermon_title'));
 
-		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
-
-		await result.rerender(false);
-
 		await waitFor(() => {
-			result.expectVideoLocation(result.getMiniplayer());
+			console.log('expecting in detail');
+			const location = getPlayerLocation();
+			expect(location).toBe('detail');
 		});
 
-		await result.rerender(true);
+		const toggle = await screen.findByText('toggle');
 
-		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+		userEvent.click(toggle);
+
+		await waitFor(() => {
+			console.log('expecting in miniplayer');
+			const location = getPlayerLocation();
+			expect(location).toBe('miniplayer');
+		});
+
+		userEvent.click(toggle);
+
+		await waitFor(() => {
+			console.log('expecting in detail');
+			const location = getPlayerLocation();
+			expect(location).toBe('detail');
+		});
 
 		await userEvent.click(screen.getByLabelText('pause'));
 
@@ -177,23 +171,37 @@ describe('app media playback', () => {
 	});
 
 	it('hides controls when video in miniplayer', async () => {
-		const { rerender } = await renderApp(true, recordingVideo);
+		await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingVideo,
+			},
+		});
+
+		const toggle = screen.getByText('toggle');
 
 		await userEvent.click(screen.getByAltText('the_sermon_title'));
 
 		const miniplayer = await screen.findByLabelText('miniplayer');
 
-		await rerender(false);
+		userEvent.click(toggle);
 
 		await findByLabelText(miniplayer, 'pause');
 
 		const controls = getByLabelText(miniplayer, 'pause').parentElement;
 
-		expect(controls).toHaveClass('hidden');
+		await waitFor(() => {
+			expect(controls).toHaveClass('hidden');
+		});
 	});
 
 	it('shows controls when video not in miniplayer', async () => {
-		const result = await renderApp(true, recordingVideo);
+		const result = await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingVideo,
+			},
+		});
 
 		await userEvent.click(result.getByAltText('the_sermon_title'));
 
@@ -209,7 +217,12 @@ describe('app media playback', () => {
 	});
 
 	it('shows controls when not playing video', async () => {
-		await renderApp(true, recordingAudio);
+		await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingAudio,
+			},
+		});
 
 		await userEvent.click(screen.getByLabelText('play'));
 
@@ -219,11 +232,20 @@ describe('app media playback', () => {
 
 		const controls = getByLabelText(miniplayer, 'pause').parentElement;
 
-		expect(controls).not.toHaveClass('hidden');
+		await waitFor(() => {
+			expect(controls).not.toHaveClass('hidden');
+		});
 	});
 
 	it('handles pause event', async () => {
-		await renderApp(true, recordingVideo);
+		const player = setPlayerMock();
+
+		await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingVideo,
+			},
+		});
 
 		await userEvent.click(screen.getByAltText('the_sermon_title'));
 
@@ -231,18 +253,20 @@ describe('app media playback', () => {
 
 		await findByLabelText(miniplayer, 'pause');
 
-		const portal = screen.getByTestId('portal');
-		const video = await findByTestId(portal, 'video-element');
-
-		await act(async () => {
-			ReactTestUtils.Simulate.pause(video, {} as any);
-		});
+		player._fire('pause');
 
 		await findByLabelText(miniplayer, 'play');
 	});
 
 	it('handles play event', async () => {
-		await renderApp(true, recordingVideo);
+		const player = setPlayerMock();
+
+		await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingVideo,
+			},
+		});
 
 		await userEvent.click(screen.getByAltText('the_sermon_title'));
 
@@ -254,27 +278,21 @@ describe('app media playback', () => {
 
 		await findByLabelText(miniplayer, 'play');
 
-		const portal = screen.getByTestId('portal');
-
-		await waitFor(() => {
-			expect(getByTestId(portal, 'video-element')).toBeInTheDocument();
-		});
-
-		const video = getByTestId(portal, 'video-element');
-
-		await act(async () => {
-			ReactTestUtils.Simulate.play(video, {} as any);
-		});
+		player._fire('play');
 
 		await findByLabelText(miniplayer, 'pause');
 	});
 
 	it('moves player out of miniplayer when not showing video', async () => {
-		const result = await renderApp(true, recordingAudioVideo);
-
-		await waitFor(() => {
-			expect(result.getByText('Audio')).toBeInTheDocument();
+		const result = await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingAudioVideo,
+			},
 		});
+		const miniplayer = await screen.findByLabelText('miniplayer');
+
+		await screen.findByText('Audio');
 
 		await userEvent.click(result.getByText('Audio'));
 
@@ -282,15 +300,21 @@ describe('app media playback', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const miniplayer = result.getByLabelText('miniplayer');
-
 		await findByLabelText(miniplayer, 'play');
 
-		expect(queryByTestId(miniplayer, 'video-element')).not.toBeInTheDocument();
+		await waitFor(() => {
+			const matches = within(miniplayer).queryAllByTestId('video-element');
+			expect(matches).toHaveLength(0);
+		});
 	});
 
 	it('never shows video in miniplayer when still on detail page', async () => {
-		const result = await renderApp(true, recordingAudioVideo);
+		const result = await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingAudioVideo,
+			},
+		});
 
 		await waitFor(() => {
 			expect(result.getByText('Audio')).toBeInTheDocument();
@@ -317,7 +341,12 @@ describe('app media playback', () => {
 	});
 
 	it('never shows video in miniplayer when loading recording by audio select', async () => {
-		const result = await renderApp(true, recordingAudioVideo);
+		const result = await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingAudioVideo,
+			},
+		});
 
 		await waitFor(() => {
 			expect(result.getByText('Audio')).toBeInTheDocument();
@@ -330,7 +359,7 @@ describe('app media playback', () => {
 		});
 
 		const miniplayer = result.getByLabelText('miniplayer');
-		const pane = miniplayer.querySelector('#mini-player');
+		const pane = miniplayer.querySelector('#location-miniplayer');
 
 		if (!pane) throw new Error('unable to find pane');
 
@@ -344,7 +373,12 @@ describe('app media playback', () => {
 	});
 
 	it('does not load video when audio selected for recording with video', async () => {
-		const result = await renderApp(true, recordingAudioVideo);
+		const result = await renderApp({
+			props: {
+				includePlayer: true,
+				recording: recordingAudioVideo,
+			},
+		});
 
 		await waitFor(() => {
 			expect(result.getByText('Audio')).toBeInTheDocument();

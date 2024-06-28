@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { VideoJsPlayer } from 'video.js';
 
-export default function useSpeed(player: VideoJsPlayer | undefined) {
+export default function useSpeed(player: VideoJsPlayer | undefined | null) {
 	// WORKAROUND: Ensure that speed changes trigger rerenders and are
 	// preserved across tracks
 	const [speed, setSpeed] = useState<number>(1);

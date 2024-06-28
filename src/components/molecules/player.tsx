@@ -24,6 +24,7 @@ import IconChromeCast from '~public/img/icon-chromecast.svg';
 import IconFullscreen from '~public/img/icons/icon-fullscreen.svg';
 import IconPause from '~public/img/icons/icon-pause-large.svg';
 import IconPlay from '~public/img/icons/icon-play-large.svg';
+import usePlayerLocation from '~src/lib/media/usePlayerLocation';
 
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';
@@ -62,9 +63,23 @@ const Player = ({
 	const shouldShowAudioControls =
 		!hasVideo(recording) || session.isAudioLoaded || prefersAudio;
 	const shouldShowVideoControls = !shouldShowAudioControls;
-	const video = session.getVideo();
 	const [posterHovered, setPosterHovered] = useState(false);
 	const [browser, setBrowser] = useState<string | null>(null);
+	const { registerPlayerLocation, unregisterPlayerLocation } =
+		usePlayerLocation();
+
+	useEffect(() => {
+		const el = document.getElementById('location-detail');
+		if (!el) return;
+		registerPlayerLocation({
+			locationId: 'detail',
+			locationEl: el as HTMLDivElement,
+			recordingId: recording.id,
+		});
+		return () => {
+			unregisterPlayerLocation('detail');
+		};
+	}, [registerPlayerLocation, recording.id, unregisterPlayerLocation]);
 
 	useGlobalSpaceDown(() => {
 		session.isPaused ? session.play() : session.pause();
@@ -118,7 +133,17 @@ const Player = ({
 							onTouchEnd={() => setPosterHovered(false)}
 						>
 							{session.isVideoLoaded ? (
-								video
+								<div
+									id="location-detail"
+									ref={(el) => {
+										if (!el) return;
+										registerPlayerLocation({
+											locationId: 'detail',
+											locationEl: el as HTMLDivElement,
+											recordingId: recording.id,
+										});
+									}}
+								/>
 							) : (
 								<Image
 									src="/img/poster.jpg"
