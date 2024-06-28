@@ -1,13 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import Script from 'next/script';
-import React, {
-	MutableRefObject,
-	ReactNode,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from 'react';
+import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import type * as VideoJs from 'video.js';
 
 import hasVideo from '~lib/media/hasVideo';
@@ -69,11 +62,6 @@ export type PlaybackContextType = {
 	getDuration: () => number;
 	advanceRecording: () => void;
 	setIsPaused: (paused: boolean) => void;
-	getRefs: () => {
-		origin?: MutableRefObject<HTMLDivElement | null>;
-		video?: MutableRefObject<HTMLDivElement | null>;
-		videoEl?: MutableRefObject<HTMLVideoElement | null>;
-	};
 	_setRecording: (
 		recording: AndMiniplayerFragment,
 		prefersAudio?: boolean,
@@ -98,7 +86,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getDuration: () => 0,
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
-	getRefs: () => ({}),
 	_setRecording: () => undefined,
 });
 
@@ -134,10 +121,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	});
 
 	// TODO:
-	const videoRef = useRef<HTMLDivElement>(null);
-	const videoElRef = useRef<HTMLVideoElement>(null);
-	const originRef = useRef<HTMLDivElement>(null);
-
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
 
@@ -253,11 +236,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				}
 			},
 			setIsPaused,
-			getRefs: () => ({
-				origin: originRef,
-				video: videoRef,
-				videoEl: videoElRef,
-			}),
 			_setRecording: (
 				recording: AndMiniplayerFragment,
 				prefersAudio: boolean | undefined,
