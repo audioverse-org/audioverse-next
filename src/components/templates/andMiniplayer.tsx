@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import React, { PropsWithChildren, useContext, useEffect } from 'react';
 
 import useOnPlayerLoad from '~src/lib/media/useOnPlayerLoad';
+import usePlayerRecording from '~src/lib/media/usePlayerRecording';
 
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
@@ -15,7 +16,7 @@ export default function AndMiniplayer({
 }: PropsWithChildren<unknown>): JSX.Element {
 	const playbackContext = useContext(PlaybackContext);
 	const onLoad = useOnPlayerLoad();
-	const recording = playbackContext.getRecording();
+	const { recording } = usePlayerRecording();
 
 	useEffect(() => {
 		document.body.classList.toggle('body--with-miniplayer', !!recording);

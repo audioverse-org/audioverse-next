@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
@@ -18,7 +18,6 @@ import Player from '~components/molecules/player';
 import SequenceNav from '~components/molecules/sequenceNav';
 import Tease from '~components/molecules/tease';
 import TeaseRecording from '~components/molecules/teaseRecording';
-import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import {
 	IBibleBook,
 	IBibleBookChapter,
@@ -30,6 +29,7 @@ import useLanguageRoute from '~lib/useLanguageRoute';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import usePlayerRecording from '~src/lib/media/usePlayerRecording';
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
@@ -42,26 +42,23 @@ export interface BookProps {
 }
 
 const Book = (params: Must<BookProps>) => {
-	const chapter = params.chapters.find(
-		({ number }) => number === +params.chapterNumber
-	);
-	const currentChapterNumber = chapter?.number || 1;
-	const playbackContext = useContext(PlaybackContext);
-	const currentRecordingId = playbackContext.getRecording()?.id;
+	const { recording } = usePlayerRecording();
 	const router = useRouter();
+
 	useEffect(() => {
-		if (!currentRecordingId || !(currentRecordingId + '').includes('/')) {
+		if (!recording || !recording.id.toString().includes('/')) {
 			return;
 		}
-		const currentRecordingIdChapter = (currentRecordingId + '').split('/')[1];
-		if (+currentRecordingIdChapter !== currentChapterNumber) {
-			router.replace(router.asPath.replace(/\d+$/, currentRecordingIdChapter));
+		const paramChapter =
+			params.chapters.find(({ number }) => number === +params.chapterNumber)
+				?.number || 1;
+		const idChapter = recording.id.toString().split('/')[1];
+		if (+idChapter !== paramChapter) {
+			router.replace(router.asPath.replace(/\d+$/, idChapter));
 		}
-	}, [currentChapterNumber, currentRecordingId, router]);
+	}, [params, recording, router]);
 
-	return useMemo(() => {
-		return <BookInner {...params} />;
-	}, [params]);
+	return useMemo(() => <BookInner {...params} />, [params]);
 };
 
 function BookInner({
