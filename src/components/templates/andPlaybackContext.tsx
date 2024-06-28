@@ -130,16 +130,11 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	const playback: PlaybackContextType = useMemo(
 		() => ({
 			play: () => {
-				console.log('play');
 				setIsPaused(false);
 				onLoad((p) => p.play());
 			},
 			pause: () => {
-				try {
-					playerRef.current?.pause();
-				} catch (e) {
-					console.warn(e);
-				}
+				playerRef.current?.pause();
 				setIsPaused(true);
 			},
 			paused: () => isPausedRef.current,
@@ -177,12 +172,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 					isNaN(duration) ||
 					!updatePlayer
 				) {
-					console.log('Not updating player', {
-						playerRef: !!playerRef.current,
-						duration,
-						isNaN: isNaN(duration),
-						updatePlayer,
-					});
 					return;
 				}
 				playerRef.current.currentTime(percentage * duration);
@@ -217,7 +206,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				});
 			},
 			advanceRecording: () => {
-				console.log('advanceRecording');
 				if (!sourceRecordings) {
 					return;
 				}
@@ -242,8 +230,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				setSources({ recording, prefersAudio: prefersAudio || false });
 
 				const resetPlayer = () => {
-					console.log('resetting player');
-
 					const logUrl = getSources().find((s) => s.logUrl)?.logUrl;
 					if (logUrl) {
 						fetch(logUrl, {
@@ -285,9 +271,7 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				};
 
 				onLoad((p) => {
-					console.log('setting sources for recording', recording.id);
 					p.src(getSources());
-
 					resetPlayer();
 				});
 			},
