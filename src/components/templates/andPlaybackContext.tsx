@@ -49,7 +49,6 @@ export type PlaybackContextType = {
 		recordingId?: number | string | undefined;
 		updatePlayer?: boolean;
 	}) => void;
-	getRecording: () => AndMiniplayerFragment | null;
 	loadRecording: (
 		recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 		recordingId: string | number,
@@ -82,7 +81,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getBufferedProgress: () => 0,
 	setProgress: () => undefined,
 	loadRecording: () => undefined,
-	getRecording: () => null,
 	getDuration: () => 0,
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
@@ -177,7 +175,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				playerRef.current.currentTime(percentage * duration);
 				playerRef.current.play();
 			},
-			getRecording: () => recording,
 			loadRecording: (
 				recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 				recordingId: string | number,
