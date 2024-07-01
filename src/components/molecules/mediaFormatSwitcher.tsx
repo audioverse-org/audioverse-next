@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import hasVideo from '~lib/media/hasVideo';
-import usePlaybackSession from '~lib/media/usePlaybackSession';
+import useOnRecordingLoad from '~src/lib/media/useOnRecordingLoad';
+import usePrefersAudio from '~src/lib/media/usePrefersAudio';
 
 import { PlayerFragment } from './__generated__/player';
 import styles from './mediaFormatSwitcher.module.scss';
@@ -12,7 +13,19 @@ export default function MediaFormatSwitcher({
 }: {
 	recording: PlayerFragment;
 }): JSX.Element | null {
-	const session = usePlaybackSession(recording);
+	const { prefersAudio, setPrefersAudio } = usePrefersAudio();
+	const onLoad = useOnRecordingLoad();
+
+	const setPref = useCallback(
+		(pref: boolean) => {
+			onLoad({
+				recording,
+				prefersAudio: pref,
+				fn: () => setPrefersAudio(pref),
+			});
+		},
+		[onLoad, recording, setPrefersAudio]
+	);
 
 	if (!hasVideo(recording)) return null;
 
@@ -20,8 +33,8 @@ export default function MediaFormatSwitcher({
 		<div className={styles.container}>
 			<button
 				className={styles.button}
-				onClick={() => session.setPrefersAudio(true)}
-				aria-pressed={session.prefersAudio}
+				onClick={() => setPref(true)}
+				aria-pressed={prefersAudio}
 			>
 				<FormattedMessage
 					id="mediaFormatSwitcher__audio"
@@ -30,8 +43,8 @@ export default function MediaFormatSwitcher({
 			</button>
 			<button
 				className={styles.button}
-				onClick={() => session.setPrefersAudio(false)}
-				aria-pressed={!session.prefersAudio}
+				onClick={() => setPref(false)}
+				aria-pressed={!prefersAudio}
 			>
 				<FormattedMessage
 					id="mediaFormatSwitcher__video"

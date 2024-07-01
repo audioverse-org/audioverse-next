@@ -1,12 +1,30 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 
 import { MediaContext } from '~src/components/templates/andMediaContext';
 
-export default function usePrefersAudio() {
-	const context = useContext(MediaContext);
+import useIsPaused from './useIsPaused';
 
-	return {
-		prefersAudio: context.prefersAudio,
-		setPrefersAudio: context.setPrefersAudio,
-	};
+export default function usePrefersAudio(): {
+	prefersAudio: boolean;
+	setPrefersAudio: (prefersAudio: boolean) => void;
+} {
+	const context = useContext(MediaContext);
+	const { setIsPaused } = useIsPaused();
+
+	const setPrefersAudio = useCallback(
+		(prefersAudio: boolean): void => {
+			console.log('setPrefersAudio', prefersAudio);
+			context.setPrefersAudio(prefersAudio);
+			setIsPaused(true);
+		},
+		[context, setIsPaused]
+	);
+
+	return useMemo(
+		() => ({
+			prefersAudio: context.prefersAudio,
+			setPrefersAudio,
+		}),
+		[context.prefersAudio, setPrefersAudio]
+	);
 }

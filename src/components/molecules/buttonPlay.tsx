@@ -4,11 +4,11 @@ import { useIntl } from 'react-intl';
 
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
-import usePlaybackSession from '~lib/media/usePlaybackSession';
 import IconPauseLarge from '~public/img/icons/icon-pause-large.svg';
 import IconPause from '~public/img/icons/icon-pause-medium.svg';
 import IconPlayLarge from '~public/img/icons/icon-play-large.svg';
 import IconPlay from '~public/img/icons/icon-play-medium.svg';
+import useIsPaused from '~src/lib/media/useIsPaused';
 
 import styles from './buttonPlay.module.scss';
 import IconButton from './iconButton';
@@ -26,11 +26,9 @@ export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
 
 export default function ButtonPlay({
 	recording,
-	playlistRecordings,
 	backgroundColor,
 	large,
 	active,
-	prefersAudio,
 	className,
 }: {
 	recording: AndMiniplayerFragment;
@@ -41,10 +39,7 @@ export default function ButtonPlay({
 	prefersAudio?: boolean;
 	className?: string;
 }): JSX.Element {
-	const { isPaused, play, pause } = usePlaybackSession(recording, {
-		playlistRecordings,
-		prefersAudio,
-	});
+	const { isPaused, setIsPaused } = useIsPaused(recording);
 	const intl = useIntl();
 
 	const label = isPaused
@@ -70,7 +65,7 @@ export default function ButtonPlay({
 					? IconPauseLarge
 					: IconPause
 			}
-			onClick={() => (isPaused ? play() : pause())}
+			onClick={() => setIsPaused(!isPaused)}
 			color={
 				active
 					? isBackgroundColorDark(backgroundColor)

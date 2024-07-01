@@ -34,8 +34,6 @@ export default function AndMiniplayer({
 					updatePlayer: false,
 				});
 			});
-			player.on('pause', () => playbackContext.setIsPaused(true));
-			player.on('play', () => playbackContext.setIsPaused(false));
 			player.on('ended', () => playbackContext.advanceRecording());
 		});
 	}, [onLoad, playbackContext, recording]);

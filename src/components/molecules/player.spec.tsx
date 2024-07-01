@@ -1011,11 +1011,9 @@ describe('player', () => {
 	});
 
 	it('displays zero time if recording not loaded', async () => {
-		const { getByText } = await renderComponent();
+		await renderComponent();
 
-		await waitFor(() => {
-			expect(getByText('0:00')).toBeInTheDocument();
-		});
+		expect(screen.getAllByText('0:00').length).toBeGreaterThan(0);
 	});
 
 	it('displays times for videos', async () => {

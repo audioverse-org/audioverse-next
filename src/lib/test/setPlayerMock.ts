@@ -28,6 +28,7 @@ type MockPlayer = Pick<
 	| 'supportsFullScreen'
 	| 'on'
 	| 'dispose'
+	| 'off'
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
 	_fire: (event: string, data?: any) => void;
@@ -67,9 +68,11 @@ export default function setPlayerMock(
 		},
 		play: jest.fn(async () => {
 			isPaused = false;
+			mockPlayer._fire('play');
 		}),
 		pause: jest.fn(() => {
 			isPaused = true;
+			mockPlayer._fire('pause');
 			return mockPlayer as unknown as videojs.Player;
 		}),
 		paused: jest.fn(() => isPaused),
@@ -82,7 +85,14 @@ export default function setPlayerMock(
 			return volume;
 		}) as any,
 		duration: jest.fn(() => duration),
-		src: jest.fn(),
+		src: jest.fn(() => {
+			try {
+				throw new Error('trace');
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			} catch (e: any) {
+				console.log('src', e.stack);
+			}
+		}) as any,
 		options: jest.fn(),
 		controlBar: {
 			createEl: jest.fn(),
@@ -100,6 +110,12 @@ export default function setPlayerMock(
 		on: jest.fn((event: string, fn: (data: any) => any) => {
 			if (!(event in handlers)) handlers[event] = [];
 			handlers[event].push(fn);
+		}) as any,
+		off: jest.fn((event: string, fn: (data: any) => any) => {
+			if (!(event in handlers)) return;
+			const index = handlers[event].indexOf(fn);
+			if (index === -1) return;
+			handlers[event].splice(index, 1);
 		}) as any,
 		bufferedEnd: jest.fn(),
 		dispose: jest.fn(),

@@ -48,6 +48,7 @@ function loadPageData() {
 			},
 		],
 	} as bibleBrain.IBibleVersion);
+
 	jest.spyOn(bibleBrain, 'getBibleBookChapters').mockResolvedValue([
 		{
 			id: 'GEN/1',
@@ -61,10 +62,12 @@ function loadPageData() {
 
 describe('Bible book detail page', () => {
 	let scrollToProto: any;
+
 	beforeAll(() => {
 		scrollToProto = Element.prototype.scrollTo;
 		Element.prototype.scrollTo = () => void 0;
 	});
+
 	afterAll(() => {
 		Element.prototype.scrollTo = scrollToProto;
 	});
@@ -159,6 +162,6 @@ describe('Bible book detail page', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		expect(window.fetch).toBeCalled();
+		await waitFor(() => expect(window.fetch).toBeCalled());
 	});
 });

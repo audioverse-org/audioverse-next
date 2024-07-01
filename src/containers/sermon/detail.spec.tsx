@@ -775,15 +775,18 @@ describe('sermon detail page', () => {
 		});
 
 		const result = await renderPage();
-
 		const player = result.getByLabelText('player');
 
 		await userEvent.click(result.getByText('Audio'));
+
 		await findByLabelText(player, 'play');
+
 		await userEvent.click(getByLabelText(player, 'play'));
 		await userEvent.click(result.getByText('Video'));
 		await userEvent.click(result.getByText('Audio'));
+
 		await findByLabelText(player, 'play');
+
 		expect(getByLabelText(player, 'play')).toBeInTheDocument();
 	});
 
@@ -1068,9 +1071,8 @@ describe('sermon detail page', () => {
 
 		await userEvent.click(getByLabelText(player, 'play'));
 
-		await waitFor(() => {
-			expect(getByLabelText(player, 'pause')).toBeInTheDocument();
-		});
+		console.log('looking for pause button');
+		await findByLabelText(player, 'pause');
 
 		await waitFor(() => {
 			expect(mockPlayer.on).toBeCalledWith('timeupdate', expect.anything());

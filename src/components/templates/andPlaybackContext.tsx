@@ -94,7 +94,7 @@ interface AndMiniplayerProps {
 function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	// DONE:
 	const { player } = usePlayer();
-	const { isPausedRef, setIsPaused } = useIsPaused();
+	const { isPaused, setIsPaused } = useIsPaused();
 	const onLoad = useOnPlayerLoad();
 
 	// IN PROGRESS:
@@ -107,11 +107,8 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	}, [player]);
 
 	const { prefersAudio, setPrefersAudio } = usePrefersAudio();
-	const { getSources, setSources } = usePlayerSources({
-		recording,
-		prefersAudio,
-	});
-	const duration = getSources()[0]?.duration || recording?.duration || 0;
+	const { sources, setSources } = usePlayerSources();
+	const duration = sources[0]?.duration || recording?.duration || 0;
 	const { bufferedProgress, setBufferedProgress } = useBuffered({
 		recordingId: recording?.id,
 		duration,
@@ -135,7 +132,7 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				playerRef.current?.pause();
 				setIsPaused(true);
 			},
-			paused: () => isPausedRef.current,
+			paused: () => isPaused,
 			player: () => playerRef.current,
 			getTime: () =>
 				(!onLoadRef.current && playerRef.current?.currentTime()) ||
@@ -154,7 +151,7 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 			getDuration: () => {
 				return (
 					playerRef.current?.duration() ||
-					getSources()[0]?.duration ||
+					sources[0]?.duration ||
 					recording?.duration ||
 					0
 				);
@@ -182,7 +179,7 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				source?: PlaySource
 			) => {
 				onLoad(() => {
-					const { onLoad, prefersAudio } = options;
+					const { onLoad, prefersAudio: _prefersAudio } = options;
 					onLoadRef.current = onLoad;
 					const recordingsArray = Array.isArray(recordingOrRecordings)
 						? recordingOrRecordings
@@ -199,7 +196,11 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 						setPrefersAudio(prefersAudio);
 					}
 
-					playback._setRecording(newRecording, prefersAudio, source);
+					playback._setRecording(
+						newRecording,
+						_prefersAudio ?? prefersAudio,
+						source
+					);
 				});
 			},
 			advanceRecording: () => {
@@ -227,16 +228,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				setSources({ recording, prefersAudio: prefersAudio || false });
 
 				const resetPlayer = () => {
-					const logUrl = getSources().find((s) => s.logUrl)?.logUrl;
-					if (logUrl) {
-						fetch(logUrl, {
-							method: 'HEAD',
-							mode: 'no-cors',
-						}).catch(() => {
-							// We don't want Promise rejections here to clutter the console
-						});
-					}
-
 					setIsPaused(true);
 					setBufferedProgress(0);
 
@@ -267,16 +258,12 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 					});
 				};
 
-				onLoad((p) => {
-					p.src(getSources());
-					resetPlayer();
-				});
+				onLoad(resetPlayer);
 			},
 		}),
 		[
 			bufferedProgress,
-			getSources,
-			isPausedRef,
+			isPaused,
 			onLoad,
 			prefersAudio,
 			progress,
@@ -289,6 +276,7 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 			setRecording,
 			setSources,
 			sourceRecordings,
+			sources,
 		]
 	);
 

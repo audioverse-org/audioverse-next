@@ -25,6 +25,7 @@ import IconFullscreen from '~public/img/icons/icon-fullscreen.svg';
 import IconPause from '~public/img/icons/icon-pause-large.svg';
 import IconPlay from '~public/img/icons/icon-play-large.svg';
 import usePlayerLocation from '~src/lib/media/usePlayerLocation';
+import usePrefersAudio from '~src/lib/media/usePrefersAudio';
 
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';
@@ -47,11 +48,11 @@ const Player = ({
 	backgroundColor,
 	disableUserFeatures,
 	playlistRecordings,
-	prefersAudio,
 	compact,
 }: PlayerProps): JSX.Element => {
 	useContext(PlaybackContext);
 	const intl = useIntl();
+	const { prefersAudio } = usePrefersAudio();
 	const session = usePlaybackSession(recording, {
 		playlistRecordings,
 		prefersAudio,
