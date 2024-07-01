@@ -36,7 +36,6 @@ export interface Playable extends VideoJs.default.Tech.SourceObject {
 export type PlaybackContextType = {
 	player: () => VideoJs.VideoJsPlayer | undefined | null;
 	play: () => void;
-	paused: () => boolean;
 	getTime: () => number;
 	setTime: (t: number) => void;
 	getProgress: () => number;
@@ -67,7 +66,6 @@ export type PlaybackContextType = {
 export const PlaybackContext = React.createContext<PlaybackContextType>({
 	player: () => undefined,
 	play: () => undefined,
-	paused: () => true,
 	getTime: () => 0,
 	setTime: () => undefined,
 	getProgress: () => 0,
@@ -86,7 +84,7 @@ interface AndMiniplayerProps {
 function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	// DONE:
 	const { player } = usePlayer();
-	const { isPaused, setIsPaused } = useIsPaused();
+	const { setIsPaused } = useIsPaused();
 	const onLoad = useOnPlayerLoad();
 
 	// IN PROGRESS:
@@ -114,7 +112,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 			play: () => {
 				setIsPaused(false);
 			},
-			paused: () => isPaused,
 			player: () => player,
 			getTime: () =>
 				(!onLoadRef.current && player?.currentTime()) ||
@@ -231,7 +228,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 		}),
 		[
 			bufferedProgress,
-			isPaused,
 			onLoad,
 			player,
 			prefersAudio,
