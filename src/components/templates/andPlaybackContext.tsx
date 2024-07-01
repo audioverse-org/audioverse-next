@@ -93,11 +93,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	const { recording, setRecording } = usePlayerRecording();
 	const { progress, setProgress } = useProgress(recording?.id);
 
-	const playerRef = useRef<VideoJs.VideoJsPlayer | null>(player);
-	useEffect(() => {
-		playerRef.current = player;
-	}, [player]);
-
 	const { prefersAudio, setPrefersAudio } = usePrefersAudio();
 	const { sources, setSources } = usePlayerSources();
 	const duration = sources[0]?.duration || recording?.duration || 0;
@@ -120,22 +115,19 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				setIsPaused(false);
 			},
 			paused: () => isPaused,
-			player: () => playerRef.current,
+			player: () => player,
 			getTime: () =>
-				(!onLoadRef.current && playerRef.current?.currentTime()) ||
+				(!onLoadRef.current && player?.currentTime()) ||
 				progress * playback.getDuration() ||
 				0,
 			setTime: (t: number) => {
-				if (!playerRef.current) return;
-				setProgress({ percentage: t / playerRef.current.duration() });
-				playerRef.current.currentTime(t);
+				if (!player) return;
+				setProgress({ percentage: t / player.duration() });
+				player.currentTime(t);
 			},
 			getDuration: () => {
 				return (
-					playerRef.current?.duration() ||
-					sources[0]?.duration ||
-					recording?.duration ||
-					0
+					player?.duration() || sources[0]?.duration || recording?.duration || 0
 				);
 			},
 			getProgress: () => progress,
@@ -143,16 +135,11 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 			setProgress: ({ percentage, recordingId, updatePlayer = true }) => {
 				setProgress({ percentage, recordingId });
 				const duration = playback.getDuration();
-				if (
-					!playerRef.current ||
-					!duration ||
-					isNaN(duration) ||
-					!updatePlayer
-				) {
+				if (!player || !duration || isNaN(duration) || !updatePlayer) {
 					return;
 				}
-				playerRef.current.currentTime(percentage * duration);
-				playerRef.current.play();
+				player.currentTime(percentage * duration);
+				player.play();
 			},
 			loadRecording: (
 				recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
@@ -212,7 +199,7 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 					setIsPaused(true);
 					setBufferedProgress(0);
 
-					playerRef.current?.currentTime(progress * playback.getDuration());
+					player?.currentTime(progress * playback.getDuration());
 
 					onLoadRef.current && onLoadRef.current(playback);
 					onLoadRef.current = undefined;
