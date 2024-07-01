@@ -71,7 +71,7 @@ export default function usePlaybackSession(
 	const progress = isLoaded ? context.getProgress() : _progress;
 	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
 	const time = isLoaded ? context.getTime() : duration * progress;
-	const { isPaused: _isPaused } = useIsPaused();
+	const { isPaused: _isPaused, setIsPaused } = useIsPaused();
 	const isPaused = !isLoaded || _isPaused;
 	const isPlaying = isLoaded && !_isPaused;
 
@@ -134,16 +134,12 @@ export default function usePlaybackSession(
 	}
 
 	function pause() {
-		// TODO: Maybe only if `isLoaded` is true
-		// Or perhaps throw an exception, since the user should never be presented
-		// with a pause button for a recording that isn't loaded.
-		context.pause();
+		setIsPaused(true);
 	}
 
 	function play(source?: PlaySource) {
-		console.log('afterLoad(play)');
-		afterLoad((c) => {
-			c.play();
+		afterLoad(() => {
+			setIsPaused(false);
 		}, source);
 	}
 
