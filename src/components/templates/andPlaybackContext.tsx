@@ -57,7 +57,6 @@ export type PlaybackContextType = {
 	) => void;
 	getDuration: () => number;
 	advanceRecording: () => void;
-	setIsPaused: (paused: boolean) => void;
 	_setRecording: (
 		recording: AndMiniplayerFragment,
 		prefersAudio?: boolean,
@@ -77,7 +76,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	loadRecording: () => undefined,
 	getDuration: () => 0,
 	advanceRecording: () => undefined,
-	setIsPaused: () => undefined,
 	_setRecording: () => undefined,
 });
 
@@ -203,7 +201,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 					);
 				}
 			},
-			setIsPaused,
 			_setRecording: (
 				recording: AndMiniplayerFragment,
 				prefersAudio: boolean | undefined,
