@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import Script from 'next/script';
-import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import type * as VideoJs from 'video.js';
 
 import hasVideo from '~lib/media/hasVideo';
@@ -233,10 +233,12 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 			bufferedProgress,
 			isPaused,
 			onLoad,
+			player,
 			prefersAudio,
 			progress,
 			queryClient,
-			recording,
+			recording?.duration,
+			recording?.id,
 			setBufferedProgress,
 			setIsPaused,
 			setPrefersAudio,
