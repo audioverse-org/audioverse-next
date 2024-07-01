@@ -141,7 +141,7 @@ const Navigation = ({
 							href={root.lang(languageRoute).give.get()}
 							className={styles.desktopDonate}
 						/>
-						<OpenAppButton isSide />
+						<OpenAppButton className={styles.open_app_side} />
 						<div className={styles.account}>
 							{user ? (
 								<>

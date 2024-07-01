@@ -1,15 +1,15 @@
+import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from './button';
 import styles from './openAppButton.module.scss';
 
-type Props = {
-	isSide?: boolean;
+type OpenAppButtonProps = {
+	className?: string;
 };
 
-const OpenAppButton: React.FC<Props> = ({ isSide }) => {
-	const [isMobile, setIsMobile] = useState<boolean>(false);
+const OpenAppButton: React.FC<OpenAppButtonProps> = ({ className }) => {
 	const [isIOS, setIsIOS] = useState<boolean>(false);
 	const [isAndroid, setIsAndroid] = useState<boolean>(false);
 
@@ -20,7 +20,6 @@ const OpenAppButton: React.FC<Props> = ({ isSide }) => {
 				/iPad|iPhone|iPod/.test(userAgent) && !('MSStream' in window);
 			const isAndroid = /android/i.test(userAgent);
 
-			setIsMobile(isIOS || isAndroid);
 			setIsIOS(isIOS);
 			setIsAndroid(isAndroid);
 		}
@@ -43,14 +42,14 @@ const OpenAppButton: React.FC<Props> = ({ isSide }) => {
 		}
 	};
 
-	if (!isMobile) return null;
+	if (!isIOS && !isAndroid) return null;
 
 	return (
 		<Button
 			key="openAppButton"
 			type="primary"
 			onClick={handleButtonClick}
-			className={isSide ? styles.side : styles.open_app}
+			className={clsx(styles.open_app, className)}
 			text={<FormattedMessage id="open_app" defaultMessage="Open App" />}
 		/>
 	);
