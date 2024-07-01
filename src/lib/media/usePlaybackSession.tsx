@@ -29,11 +29,9 @@ interface PlaybackSessionInfo {
 	chromecastTrigger: () => void;
 	airPlayTrigger: () => void;
 	requestFullscreen: () => void;
-	setPrefersAudio: (prefersAudio: boolean) => void;
 	isLoaded: boolean;
 	progress: number;
 	bufferedProgress: number;
-	prefersAudio: boolean;
 	isAudioLoaded: boolean;
 	isVideoLoaded: boolean;
 	isPaused: boolean;
@@ -143,18 +141,6 @@ export default function usePlaybackSession(
 		}, source);
 	}
 
-	function setPrefersAudio(prefersAudio: boolean) {
-		if (!recording) return;
-
-		if (isLoaded) {
-			_setPrefersAudio(prefersAudio);
-		}
-
-		context.loadRecording(recording, recording.id, {
-			prefersAudio,
-		});
-	}
-
 	function requestFullscreen() {
 		afterLoad((c) => c.player()?.requestFullscreen());
 	}
@@ -172,7 +158,6 @@ export default function usePlaybackSession(
 		setProgress,
 		pause,
 		play,
-		setPrefersAudio,
 		requestFullscreen,
 		chromecastTrigger,
 		airPlayTrigger,
@@ -185,6 +170,5 @@ export default function usePlaybackSession(
 		isVideoLoaded,
 		isPaused,
 		isPlaying,
-		prefersAudio,
 	};
 }
