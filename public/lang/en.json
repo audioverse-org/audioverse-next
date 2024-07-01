@@ -981,6 +981,9 @@
   "header__navItemMore-privacy": {
     "string": "Privacy"
   },
+  "header__navItemMore-sharingtools": {
+    "string": "Sharing Tools"
+  },
   "header__navItemMore-store": {
     "string": "AudioVerse Store"
   },

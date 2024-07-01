@@ -462,12 +462,22 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'help',
-					href: 'https://help.audioverse.org/',
+					href: 'https://help.audioverse.org',
 					isTargetBlank: true,
 					Icon: iconMap.fa_question_circle,
 					label: intl.formatMessage({
 						id: `header__navItemMore-help`,
 						defaultMessage: 'Get Help',
+					}),
+				},
+				{
+					key: 'sharingtools',
+					href: 'https://share.audioverse.org/',
+					isTargetBlank: true,
+					Icon: iconMap.fa_link,
+					label: intl.formatMessage({
+						id: `header__navItemMore-sharingtools`,
+						defaultMessage: 'Sharing Tools',
 					}),
 				},
 				{

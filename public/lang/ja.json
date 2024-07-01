@@ -2781,10 +2781,5 @@
   "done": {
     "string": "終了"
   },
-  "timeLeft": {
-    "string": "{time} 残り"
-  },
-  "open_app": {
-    "string": "アプリを開く"
   }
 }
