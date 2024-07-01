@@ -122,10 +122,8 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 		() => ({
 			play: () => {
 				setIsPaused(false);
-				onLoad((p) => p.play());
 			},
 			pause: () => {
-				playerRef.current?.pause();
 				setIsPaused(true);
 			},
 			paused: () => isPaused,
