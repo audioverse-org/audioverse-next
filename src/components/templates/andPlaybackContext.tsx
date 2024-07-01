@@ -40,8 +40,6 @@ export type PlaybackContextType = {
 	paused: () => boolean;
 	getTime: () => number;
 	setTime: (t: number) => void;
-	setPrefersAudio: (prefersAudio: boolean) => void;
-	getPrefersAudio: () => boolean;
 	getProgress: () => number;
 	getBufferedProgress: () => number;
 	setProgress: (options: {
@@ -75,8 +73,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	paused: () => true,
 	getTime: () => 0,
 	setTime: () => undefined,
-	setPrefersAudio: () => undefined,
-	getPrefersAudio: () => false,
 	getProgress: () => 0,
 	getBufferedProgress: () => 0,
 	setProgress: () => undefined,
@@ -143,11 +139,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				setProgress({ percentage: t / playerRef.current.duration() });
 				playerRef.current.currentTime(t);
 			},
-			setPrefersAudio: (prefersAudio: boolean) => {
-				if (!recording) return;
-				setPrefersAudio(prefersAudio);
-			},
-			getPrefersAudio: () => prefersAudio,
 			getDuration: () => {
 				return (
 					playerRef.current?.duration() ||
