@@ -14,6 +14,7 @@ import useIsPaused from './useIsPaused';
 import useIsShowingVideo from './useIsShowingVideo';
 import usePlayerRecording from './usePlayerRecording';
 import usePlayerSources from './usePlayerSources';
+import usePrefersAudio from './usePrefersAudio';
 
 export enum PlaySource {
 	Tease = 'Tease',
@@ -53,7 +54,7 @@ export default function usePlaybackSession(
 	const { recording: loadedRecording } = usePlayerRecording();
 	const isLoaded =
 		!!recording && !!loadedRecording && loadedRecording.id === recording.id;
-	const prefersAudio = context.getPrefersAudio();
+	const { prefersAudio, setPrefersAudio: _setPrefersAudio } = usePrefersAudio();
 	const isShowingVideo = useIsShowingVideo({
 		recording,
 		prefersAudio,
@@ -116,7 +117,7 @@ export default function usePlaybackSession(
 				onLoad: (c: PlaybackContextType) => {
 					func(c);
 				},
-				prefersAudio: options.prefersAudio,
+				prefersAudio,
 			},
 			source
 		);
@@ -150,7 +151,7 @@ export default function usePlaybackSession(
 		if (!recording) return;
 
 		if (isLoaded) {
-			context.setPrefersAudio(prefersAudio);
+			_setPrefersAudio(prefersAudio);
 		}
 
 		context.loadRecording(recording, recording.id, {
