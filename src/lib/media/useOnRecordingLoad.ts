@@ -1,6 +1,7 @@
 import { useCallback, useContext } from 'react';
 
 import { AndMiniplayerFragment } from '~src/components/templates/__generated__/andMiniplayer';
+import { MediaContext } from '~src/components/templates/andMediaContext';
 import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
 
 import useOnPlayerLoad from './useOnPlayerLoad';
@@ -10,6 +11,7 @@ export default function useOnRecordingLoad() {
 	const onPlayerLoad = useOnPlayerLoad();
 	const { recording: loadedRecording } = usePlayerRecording();
 	const context = useContext(PlaybackContext);
+	const { prefersAudio: _prefersAudio } = useContext(MediaContext);
 
 	const onLoad = useCallback(
 		({
@@ -22,7 +24,6 @@ export default function useOnRecordingLoad() {
 			fn: () => void;
 		}) => {
 			onPlayerLoad(() => {
-				const _prefersAudio = context.getPrefersAudio();
 				const shouldLoadRecording =
 					recording &&
 					(loadedRecording?.id !== recording.id ||
@@ -46,7 +47,7 @@ export default function useOnRecordingLoad() {
 				}
 			});
 		},
-		[context, loadedRecording, onPlayerLoad]
+		[_prefersAudio, context, loadedRecording?.id, onPlayerLoad]
 	);
 
 	return onLoad;
