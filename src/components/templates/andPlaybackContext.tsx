@@ -36,7 +36,6 @@ export interface Playable extends VideoJs.default.Tech.SourceObject {
 export type PlaybackContextType = {
 	player: () => VideoJs.VideoJsPlayer | undefined | null;
 	play: () => void;
-	pause: () => void;
 	paused: () => boolean;
 	getTime: () => number;
 	setTime: (t: number) => void;
@@ -69,7 +68,6 @@ export type PlaybackContextType = {
 export const PlaybackContext = React.createContext<PlaybackContextType>({
 	player: () => undefined,
 	play: () => undefined,
-	pause: () => undefined,
 	paused: () => true,
 	getTime: () => 0,
 	setTime: () => undefined,
@@ -122,9 +120,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 		() => ({
 			play: () => {
 				setIsPaused(false);
-			},
-			pause: () => {
-				setIsPaused(true);
 			},
 			paused: () => isPaused,
 			player: () => playerRef.current,
