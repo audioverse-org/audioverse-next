@@ -94,6 +94,8 @@ function PlaylistDetail({ playlist }: Must<IPlaylistDetailProps>): JSX.Element {
 							shareUrl={`https://audioverse.org/${languageRoute}/playlists/${id}`}
 							backgroundColor={BaseColors.CREAM}
 							light={true}
+							type="Playlist"
+							id={id}
 						/>
 					)}
 					{!isPublicRoute && (
