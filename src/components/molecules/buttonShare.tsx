@@ -96,7 +96,7 @@ export default function ButtonShare({
 				defaultMessage="Twitter"
 				key="twitter"
 			/>,
-			() => shareTracking('Twitter'),
+			() => shareTracking('X'),
 		],
 		[
 			emailLink,
