@@ -19,6 +19,7 @@ import { SequenceContentType } from '~src/__generated__/graphql';
 import usePlayer from '~src/lib/media/usePlayer';
 import usePlayerLocation from '~src/lib/media/usePlayerLocation';
 import usePlayerRecording from '~src/lib/media/usePlayerRecording';
+import usePlayerTime from '~src/lib/media/usePlayerTime';
 import useVolume from '~src/lib/media/useVolume';
 
 import styles from './miniplayer.module.scss';
@@ -27,7 +28,8 @@ export default function Miniplayer(): JSX.Element | null {
 	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
 	const { recording } = usePlayerRecording();
-	const timeString = useFormattedTime(playbackContext.getTime());
+	const { time } = usePlayerTime();
+	const timeString = useFormattedTime(time);
 	const durationString = useFormattedTime(playbackContext.getDuration());
 	const { player } = usePlayer();
 	const { getVolume, setVolume } = useVolume(player);
