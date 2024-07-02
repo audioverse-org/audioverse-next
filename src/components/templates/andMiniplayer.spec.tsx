@@ -1,4 +1,3 @@
-import { waitFor } from '@testing-library/react';
 import React, { useContext, useEffect, useState } from 'react';
 
 import AndMiniplayer from '~components/templates/andMiniplayer';
@@ -8,7 +7,6 @@ import AndPlaybackContext, {
 } from '~components/templates/andPlaybackContext';
 import { buildRenderer } from '~lib/test/buildRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
-import { SequenceContentType } from '~src/__generated__/graphql';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 
@@ -38,52 +36,6 @@ describe('miniplayer template', () => {
 		});
 
 		expect(getByText('testing')).toBeInTheDocument();
-	});
-
-	it('plays media', async () => {
-		const mockPlayer = setPlayerMock();
-
-		await renderComponent({
-			props: {
-				children: (
-					<AndMiniplayer>
-						<ContextUser
-							func={(c) => {
-								c.loadRecording(
-									{
-										id: 'the_recording_id',
-										title: 'the_recording_title',
-										canonicalPath: 'the_recording_path',
-										duration: 60,
-										sequence: {
-											contentType: SequenceContentType.Series,
-											title: 'the_sequence_title',
-										},
-										videoFiles: [
-											{
-												url: 'the_video_url',
-												filesize: 'the_video_size',
-												mimeType: 'the_video_type',
-												duration: 1234,
-											},
-										],
-										audioFiles: [],
-										videoStreams: [],
-										collection: null,
-									},
-									'the_recording_id'
-								);
-								c.play();
-							}}
-						/>
-					</AndMiniplayer>
-				),
-			},
-		});
-
-		await waitFor(() => {
-			expect(mockPlayer.play).toBeCalled();
-		});
 	});
 
 	it('loads recording', async () => {

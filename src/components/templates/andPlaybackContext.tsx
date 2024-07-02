@@ -35,7 +35,6 @@ export interface Playable extends VideoJs.default.Tech.SourceObject {
 
 export type PlaybackContextType = {
 	player: () => VideoJs.VideoJsPlayer | undefined | null;
-	play: () => void;
 	getTime: () => number;
 	setTime: (t: number) => void;
 	getProgress: () => number;
@@ -65,7 +64,6 @@ export type PlaybackContextType = {
 
 export const PlaybackContext = React.createContext<PlaybackContextType>({
 	player: () => undefined,
-	play: () => undefined,
 	getTime: () => 0,
 	setTime: () => undefined,
 	getProgress: () => 0,
@@ -109,9 +107,6 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 
 	const playback: PlaybackContextType = useMemo(
 		() => ({
-			play: () => {
-				setIsPaused(false);
-			},
 			player: () => player,
 			getTime: () =>
 				(!onLoadRef.current && player?.currentTime()) ||
@@ -178,7 +173,7 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 				);
 				if (currentIndex !== -1 && currentIndex + 1 < sourceRecordings.length) {
 					setRecording(sourceRecordings[currentIndex + 1]);
-					onLoadRef.current = () => playback.play();
+					onLoadRef.current = () => setIsPaused(false);
 					playback._setRecording(
 						sourceRecordings[currentIndex + 1],
 						prefersAudio
