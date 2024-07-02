@@ -15,6 +15,7 @@ import useIsShowingVideo from './useIsShowingVideo';
 import useOnRecordingLoad from './useOnRecordingLoad';
 import usePlayerRecording from './usePlayerRecording';
 import usePlayerSources from './usePlayerSources';
+import usePlayerTime from './usePlayerTime';
 import usePrefersAudio from './usePrefersAudio';
 
 export enum PlaySource {
@@ -62,7 +63,8 @@ export default function usePlaybackSession(
 	const [_progress, _setProgress] = useState<number>(0);
 	const progress = isLoaded ? context.getProgress() : _progress;
 	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
-	const time = isLoaded ? context.getTime() : duration * progress;
+	const { time: _time } = usePlayerTime();
+	const time = isLoaded ? _time : duration * progress;
 	const { isPaused: _isPaused } = useIsPaused();
 	const isPaused = !isLoaded || _isPaused;
 	const isPlaying = isLoaded && !_isPaused;
