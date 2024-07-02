@@ -1,22 +1,28 @@
+import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from './button';
 import styles from './openAppButton.module.scss';
 
-const OpenAppButton: React.FC = () => {
-	const [isMobile, setIsMobile] = useState<boolean>(false);
+type OpenAppButtonProps = {
+	className?: string;
+};
+
+const OpenAppButton: React.FC<OpenAppButtonProps> = ({ className }) => {
 	const [isIOS, setIsIOS] = useState<boolean>(false);
 	const [isAndroid, setIsAndroid] = useState<boolean>(false);
 
 	useEffect(() => {
-		const userAgent = navigator.userAgent || navigator.vendor;
-		const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !('MSStream' in window);
-		const isAndroid = /android/i.test(userAgent);
+		if (typeof window !== 'undefined') {
+			const userAgent = navigator.userAgent || navigator.vendor;
+			const isIOS =
+				/iPad|iPhone|iPod/.test(userAgent) && !('MSStream' in window);
+			const isAndroid = /android/i.test(userAgent);
 
-		setIsMobile(isIOS || isAndroid);
-		setIsIOS(isIOS);
-		setIsAndroid(isAndroid);
+			setIsIOS(isIOS);
+			setIsAndroid(isAndroid);
+		}
 	}, []);
 
 	const handleButtonClick = () => {
@@ -36,14 +42,14 @@ const OpenAppButton: React.FC = () => {
 		}
 	};
 
-	if (!isMobile) return null;
+	if (!isIOS && !isAndroid) return null;
 
 	return (
 		<Button
 			key="openAppButton"
 			type="primary"
 			onClick={handleButtonClick}
-			className={styles.open_app}
+			className={clsx(styles.open_app, className)}
 			text={<FormattedMessage id="open_app" defaultMessage="Open App" />}
 		/>
 	);

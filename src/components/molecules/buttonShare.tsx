@@ -5,6 +5,7 @@ import Heading6 from '~components/atoms/heading6';
 import { BaseColors } from '~lib/constants';
 import ShareIcon from '~public/img/icons/share-alt.svg';
 import ShareIconLight from '~public/img/icons/share-alt-light.svg';
+import { analytics } from '~src/lib/analytics';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonShare.module.scss';
@@ -19,6 +20,8 @@ type Props = {
 	rssUrl?: string;
 	light?: boolean;
 	triggerClassName?: string;
+	type?: string;
+	id?: string | number;
 };
 
 export default function ButtonShare({
@@ -29,6 +32,8 @@ export default function ButtonShare({
 	children,
 	light,
 	triggerClassName,
+	type,
+	id,
 }: PropsWithChildren<Props>): JSX.Element {
 	const intl = useIntl();
 	const [justCopied, setJustCopied] = useState(false);
@@ -53,6 +58,14 @@ export default function ButtonShare({
 	}`;
 	const copyLink = shareUrl;
 
+	const shareTracking = (source: string) => {
+		if (type)
+			analytics.track('Share', {
+				id,
+				source,
+				type,
+			});
+	};
 	const onCopyLink = (e: MouseEvent) => {
 		e.preventDefault();
 		if (navigator.clipboard) {
@@ -63,6 +76,7 @@ export default function ButtonShare({
 		} else {
 			window.open(shareUrl);
 		}
+		shareTracking('Copy');
 	};
 
 	const shareOptions = [
@@ -73,6 +87,7 @@ export default function ButtonShare({
 				defaultMessage="Facebook"
 				key="facebook"
 			/>,
+			() => shareTracking('Facebook'),
 		],
 		[
 			twitterLink,
@@ -81,6 +96,7 @@ export default function ButtonShare({
 				defaultMessage="Twitter"
 				key="twitter"
 			/>,
+			() => shareTracking('X'),
 		],
 		[
 			emailLink,
@@ -89,6 +105,7 @@ export default function ButtonShare({
 				defaultMessage="Email"
 				key="email"
 			/>,
+			() => shareTracking('Email'),
 		],
 		[
 			copyLink,
@@ -116,6 +133,7 @@ export default function ButtonShare({
 							defaultMessage="Copy RSS Link"
 							key="copyRSS"
 						/>,
+						() => shareTracking('RSS'),
 					],
 			  ] as const)
 			: []),
