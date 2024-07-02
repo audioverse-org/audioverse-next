@@ -3978,7 +3978,7 @@
   "open_app": [
     {
       "type": 0,
-      "value": "アプリを開く"
+      "value": "Open App"
     }
   ],
   "organism-mobileHeader__more": [
@@ -5804,7 +5804,7 @@
     },
     {
       "type": 0,
-      "value": " 残り"
+      "value": " left"
     }
   ],
   "time__hoursMinutesAndSeconds": [

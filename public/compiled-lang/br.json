@@ -3970,7 +3970,7 @@
   "open_app": [
     {
       "type": 0,
-      "value": "Abrir App"
+      "value": "Open App"
     }
   ],
   "organism-mobileHeader__more": [
@@ -5768,7 +5768,7 @@
     },
     {
       "type": 0,
-      "value": " restante"
+      "value": " left"
     }
   ],
   "time__hoursMinutesAndSeconds": [
