@@ -5,6 +5,7 @@ import { MediaContext } from '~src/components/templates/andMediaContext';
 import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
 
 import useOnPlayerLoad from './useOnPlayerLoad';
+import { PlaySource } from './usePlaybackSession';
 import usePlayerRecording from './usePlayerRecording';
 
 export default function useOnRecordingLoad() {
@@ -18,10 +19,12 @@ export default function useOnRecordingLoad() {
 			recording,
 			prefersAudio,
 			fn,
+			source,
 		}: {
 			recording?: AndMiniplayerFragment | null;
 			prefersAudio?: boolean;
 			fn: () => void;
+			source?: PlaySource;
 		}) => {
 			onPlayerLoad(() => {
 				const shouldLoadRecording =
@@ -31,10 +34,15 @@ export default function useOnRecordingLoad() {
 
 				if (shouldLoadRecording) {
 					console.log('loading recording with onLoad: fn');
-					context.loadRecording(recording, recording.id, {
-						onLoad: fn,
-						prefersAudio,
-					});
+					context.loadRecording(
+						recording,
+						recording.id,
+						{
+							onLoad: fn,
+							prefersAudio,
+						},
+						source
+					);
 					return;
 				}
 

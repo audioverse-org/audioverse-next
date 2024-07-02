@@ -12,6 +12,7 @@ import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRe
 
 import useIsPaused from './useIsPaused';
 import useIsShowingVideo from './useIsShowingVideo';
+import useOnRecordingLoad from './useOnRecordingLoad';
 import usePlayerRecording from './usePlayerRecording';
 import usePlayerSources from './usePlayerSources';
 import usePrefersAudio from './usePrefersAudio';
@@ -41,13 +42,8 @@ interface PlaybackSessionInfo {
 }
 
 export default function usePlaybackSession(
-	recording: AndMiniplayerFragment | null,
-	options: {
-		playlistRecordings?: AndMiniplayerFragment[];
-		prefersAudio?: boolean;
-	} = {}
+	recording: AndMiniplayerFragment | null
 ): PlaybackSessionInfo {
-	const { playlistRecordings } = options;
 	const context = useContext(PlaybackContext);
 	const { recording: loadedRecording } = usePlayerRecording();
 	const isLoaded =
@@ -72,6 +68,7 @@ export default function usePlaybackSession(
 	const { isPaused: _isPaused, setIsPaused } = useIsPaused();
 	const isPaused = !isLoaded || _isPaused;
 	const isPlaying = isLoaded && !_isPaused;
+	const onLoad = useOnRecordingLoad();
 
 	const shouldLoadPlaybackProgress =
 		shouldLoadRecordingPlaybackProgress(recording);
@@ -103,22 +100,14 @@ export default function usePlaybackSession(
 	) {
 		if (!recording) return;
 
-		if (isLoaded) {
-			func(context);
-			return;
-		}
-
-		context.loadRecording(
-			playlistRecordings || recording,
-			recording.id,
-			{
-				onLoad: (c: PlaybackContextType) => {
-					func(c);
-				},
-				prefersAudio,
+		onLoad({
+			recording,
+			prefersAudio,
+			fn: () => {
+				func(context);
 			},
-			source
-		);
+			source,
+		});
 	}
 
 	function shiftTime(delta: number) {

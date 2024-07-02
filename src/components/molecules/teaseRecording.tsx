@@ -55,7 +55,7 @@ export default function TeaseRecording({
 }: Props): JSX.Element {
 	const intl = useIntl();
 	const router = useRouter();
-	const session = usePlaybackSession(recording, { playlistRecordings });
+	const session = usePlaybackSession(recording);
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 	const index = recording.sequenceIndex;

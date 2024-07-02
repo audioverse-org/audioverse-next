@@ -53,10 +53,7 @@ const Player = ({
 	useContext(PlaybackContext);
 	const intl = useIntl();
 	const { prefersAudio } = usePrefersAudio();
-	const session = usePlaybackSession(recording, {
-		playlistRecordings,
-		prefersAudio,
-	});
+	const session = usePlaybackSession(recording);
 	const shouldShowPoster =
 		hasVideo(recording) &&
 		!prefersAudio &&
