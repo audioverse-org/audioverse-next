@@ -25,7 +25,6 @@ export enum PlaySource {
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
 	setProgress: (percent: number) => void;
-	pause: () => void;
 	play: (source?: PlaySource) => void;
 	chromecastTrigger: () => void;
 	airPlayTrigger: () => void;
@@ -120,10 +119,6 @@ export default function usePlaybackSession(
 		afterLoad((c) => c.setProgress({ percentage, recordingId: recording?.id }));
 	}
 
-	function pause() {
-		setIsPaused(true);
-	}
-
 	function play(source?: PlaySource) {
 		afterLoad(() => {
 			setIsPaused(false);
@@ -145,7 +140,6 @@ export default function usePlaybackSession(
 	return {
 		shiftTime,
 		setProgress,
-		pause,
 		play,
 		requestFullscreen,
 		chromecastTrigger,

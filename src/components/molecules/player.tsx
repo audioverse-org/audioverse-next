@@ -24,6 +24,7 @@ import IconChromeCast from '~public/img/icon-chromecast.svg';
 import IconFullscreen from '~public/img/icons/icon-fullscreen.svg';
 import IconPause from '~public/img/icons/icon-pause-large.svg';
 import IconPlay from '~public/img/icons/icon-play-large.svg';
+import useIsPaused from '~src/lib/media/useIsPaused';
 import usePlayerLocation from '~src/lib/media/usePlayerLocation';
 import usePrefersAudio from '~src/lib/media/usePrefersAudio';
 
@@ -65,6 +66,7 @@ const Player = ({
 	const [browser, setBrowser] = useState<string | null>(null);
 	const { registerPlayerLocation, unregisterPlayerLocation } =
 		usePlayerLocation();
+	const { isPaused, setIsPaused } = useIsPaused(recording);
 
 	useEffect(() => {
 		const el = document.getElementById('location-detail');
@@ -80,7 +82,7 @@ const Player = ({
 	}, [registerPlayerLocation, recording.id, unregisterPlayerLocation]);
 
 	useGlobalSpaceDown(() => {
-		session.isPaused ? session.play() : session.pause();
+		setIsPaused(!isPaused);
 	});
 
 	useEffect(() => {
@@ -124,9 +126,7 @@ const Player = ({
 								styles.poster,
 								(shouldShowPoster || posterHovered) && styles.posterPlayShown
 							)}
-							onClick={() =>
-								session.isPaused ? session.play() : session.pause()
-							}
+							onClick={() => setIsPaused(!isPaused)}
 							onTouchStart={() => setPosterHovered(true)}
 							onTouchEnd={() => setPosterHovered(false)}
 						>

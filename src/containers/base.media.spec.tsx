@@ -278,6 +278,7 @@ describe('app media playback', () => {
 
 		await findByLabelText(miniplayer, 'play');
 
+		// Simulate user clicking play button from within videojs player
 		player._fire('play');
 
 		await findByLabelText(miniplayer, 'pause');
