@@ -2151,6 +2151,12 @@
       "value": "隐私"
     }
   ],
+  "header__navItemMore-sharingtools": [
+    {
+      "type": 0,
+      "value": "Sharing Tools"
+    }
+  ],
   "header__navItemMore-store": [
     {
       "type": 0,
@@ -3980,7 +3986,7 @@
   "open_app": [
     {
       "type": 0,
-      "value": "打开应用"
+      "value": "Open App"
     }
   ],
   "organism-mobileHeader__more": [
@@ -5794,7 +5800,7 @@
     },
     {
       "type": 0,
-      "value": " 还剩"
+      "value": " left"
     }
   ],
   "time__hoursMinutesAndSeconds": [

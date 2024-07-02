@@ -240,10 +240,12 @@ const Navigation = ({
 																		})
 																: undefined
 														}
-														target={isTargetBlank ? '_blank' : '_self'}
 														legacyBehavior
 													>
-														<a className={styles.navLink}>
+														<a
+															className={styles.navLink}
+															target={isTargetBlank ? '_blank' : '_self'}
+														>
 															{Icon && (
 																<span className={styles.icon}>
 																	<Icon />

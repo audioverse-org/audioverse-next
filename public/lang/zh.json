@@ -2781,10 +2781,13 @@
   "done": {
     "string": "已完成的"
   },
-  "timeLeft": {
-    "string": "{time} 还剩"
+  "header__navItemMore-sharingtools": {
+    "string": "Sharing Tools"
   },
   "open_app": {
-    "string": "打开应用"
+    "string": "Open App"
+  },
+  "timeLeft": {
+    "string": "{time} left"
   }
 }

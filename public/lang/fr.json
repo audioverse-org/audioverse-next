@@ -2781,10 +2781,13 @@
   "done": {
     "string": "Terminé"
   },
-  "timeLeft": {
-    "string": "{time} restantes"
+  "header__navItemMore-sharingtools": {
+    "string": "Sharing Tools"
   },
   "open_app": {
-    "string": "Ouvrir l'application"
+    "string": "Open App"
+  },
+  "timeLeft": {
+    "string": "{time} left"
   }
 }
