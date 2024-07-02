@@ -16,6 +16,7 @@ import { useFormattedTime } from '~lib/time';
 import IconVolumeHigh from '~public/img/icons/icon-volume-high.svg';
 import IconVolumeLow from '~public/img/icons/icon-volume-low.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
+import usePlayer from '~src/lib/media/usePlayer';
 import usePlayerLocation from '~src/lib/media/usePlayerLocation';
 import usePlayerRecording from '~src/lib/media/usePlayerRecording';
 import useVolume from '~src/lib/media/useVolume';
@@ -28,7 +29,8 @@ export default function Miniplayer(): JSX.Element | null {
 	const { recording } = usePlayerRecording();
 	const timeString = useFormattedTime(playbackContext.getTime());
 	const durationString = useFormattedTime(playbackContext.getDuration());
-	const { getVolume, setVolume } = useVolume(playbackContext.player());
+	const { player } = usePlayer();
+	const { getVolume, setVolume } = useVolume(player);
 	const { playerLocation, registerPlayerLocation } = usePlayerLocation();
 
 	useEffect(() => {
