@@ -10,11 +10,11 @@ import {
 } from '~components/templates/andPlaybackContext';
 import { shouldLoadRecordingPlaybackProgress } from '~src/lib/media/shouldLoadRecordingPlaybackProgress';
 
+import useDuration from './useDuration';
 import useIsPaused from './useIsPaused';
 import useIsShowingVideo from './useIsShowingVideo';
 import useOnRecordingLoad from './useOnRecordingLoad';
 import usePlayerRecording from './usePlayerRecording';
-import usePlayerSources from './usePlayerSources';
 import usePlayerTime from './usePlayerTime';
 import usePrefersAudio from './usePrefersAudio';
 
@@ -53,12 +53,7 @@ export default function usePlaybackSession(
 	});
 	const isAudioLoaded = isLoaded && !isShowingVideo;
 	const isVideoLoaded = isLoaded && isShowingVideo;
-
-	const { sources } = usePlayerSources();
-
-	const duration = isLoaded
-		? context.getDuration()
-		: (recording && (sources[0]?.duration || recording?.duration)) || 0;
+	const duration = useDuration(recording);
 	const [_progress, _setProgress] = useState<number>(0);
 	const progress = isLoaded ? context.getProgress() : _progress;
 	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
