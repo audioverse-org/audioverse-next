@@ -63,7 +63,7 @@ export default function usePlaybackSession(
 	const [_progress, _setProgress] = useState<number>(0);
 	const progress = isLoaded ? context.getProgress() : _progress;
 	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
-	const { time: _time } = usePlayerTime();
+	const { time: _time, setTime } = usePlayerTime();
 	const time = isLoaded ? _time : duration * progress;
 	const { isPaused: _isPaused } = useIsPaused();
 	const isPaused = !isLoaded || _isPaused;
@@ -111,8 +111,8 @@ export default function usePlaybackSession(
 	}
 
 	function shiftTime(delta: number) {
-		afterLoad((c) => {
-			c.setTime(c.getTime() + delta);
+		afterLoad(() => {
+			setTime(time + delta);
 		});
 	}
 
