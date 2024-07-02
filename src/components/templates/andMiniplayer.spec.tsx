@@ -7,6 +7,7 @@ import AndPlaybackContext, {
 } from '~components/templates/andPlaybackContext';
 import { buildRenderer } from '~lib/test/buildRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
+import usePlayer from '~src/lib/media/usePlayer';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 
@@ -16,7 +17,8 @@ function ContextUser({
 	func: (context: PlaybackContextType, setText: (t: string) => void) => void;
 }): JSX.Element {
 	const playbackContext = useContext(PlaybackContext);
-	const hasPlayer = !!playbackContext.player();
+	const { player } = usePlayer();
+	const hasPlayer = !!player;
 	const [text, setText] = useState<string>('child');
 
 	useEffect(() => {
