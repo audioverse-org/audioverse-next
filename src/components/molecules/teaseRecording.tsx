@@ -10,7 +10,7 @@ import Heading6 from '~components/atoms/heading6';
 import ProgressBar from '~components/atoms/progressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
-import usePlaybackSession, { PlaySource } from '~lib/media/usePlaybackSession';
+import usePlaybackSession from '~lib/media/usePlaybackSession';
 import { useFormattedDuration } from '~lib/time';
 import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
@@ -18,6 +18,7 @@ import IconListeningAnimated from '~public/img/icons/icon-listening-animated.svg
 import IconPlay from '~public/img/icons/icon-play.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import useIsPaused from '~src/lib/media/useIsPaused';
 
 import { analytics } from '../../lib/analytics';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
@@ -60,6 +61,7 @@ export default function TeaseRecording({
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 	const index = recording.sequenceIndex;
 	const count = recording.sequence?.recordings.aggregate?.count;
+	const { isPaused, setIsPaused } = useIsPaused(recording);
 
 	const backgroundColor = {
 		audiobookTrack: BaseColors.BOOK_B,
@@ -132,7 +134,7 @@ export default function TeaseRecording({
 				)}
 				{!disablePlayback && (
 					<div className={styles.play}>
-						{session.isPlaying ? (
+						{!isPaused ? (
 							<IconButton
 								Icon={IconListeningAnimated}
 								onClick={() => {
@@ -146,7 +148,7 @@ export default function TeaseRecording({
 								Icon={IconPlay}
 								onClick={(e) => {
 									e.preventDefault();
-									session.play(PlaySource.Tease);
+									setIsPaused(false);
 								}}
 								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
 								backgroundColor={backgroundColor}
