@@ -106,7 +106,7 @@
         "@types/react-facebook-login": "^4.1.5",
         "@types/react-is": "^17.0.3",
         "@types/video.js": "^7.3.31",
-        "@typescript-eslint/eslint-plugin": "^5.60.0",
+        "@typescript-eslint/eslint-plugin": "^6.13.1",
         "@typescript-eslint/parser": "^5.12.0",
         "audit-ci": "^6.3.0",
         "babel-jest": "^27.5.1",
