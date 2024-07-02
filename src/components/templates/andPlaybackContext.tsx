@@ -11,6 +11,7 @@ import { PlaySource } from '~src/lib/media/usePlaybackSession';
 import usePlayer from '~src/lib/media/usePlayer';
 import usePlayerRecording from '~src/lib/media/usePlayerRecording';
 import usePlayerSources from '~src/lib/media/usePlayerSources';
+import usePlayerTime from '~src/lib/media/usePlayerTime';
 import usePrefersAudio from '~src/lib/media/usePrefersAudio';
 import useProgress from '~src/lib/media/useProgress';
 
@@ -84,6 +85,7 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	const { player } = usePlayer();
 	const { setIsPaused } = useIsPaused();
 	const onLoad = useOnPlayerLoad();
+	const { time, setTime } = usePlayerTime();
 
 	// IN PROGRESS:
 	const { recording, setRecording } = usePlayerRecording();
@@ -108,15 +110,8 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 	const playback: PlaybackContextType = useMemo(
 		() => ({
 			player: () => player,
-			getTime: () =>
-				(!onLoadRef.current && player?.currentTime()) ||
-				progress * playback.getDuration() ||
-				0,
-			setTime: (t: number) => {
-				if (!player) return;
-				setProgress({ percentage: t / player.duration() });
-				player.currentTime(t);
-			},
+			getTime: () => time,
+			setTime,
 			getDuration: () => {
 				return (
 					player?.duration() || sources[0]?.duration || recording?.duration || 0
@@ -236,8 +231,10 @@ function AndPlaybackContext({ children }: AndMiniplayerProps): JSX.Element {
 			setProgress,
 			setRecording,
 			setSources,
+			setTime,
 			sourceRecordings,
 			sources,
+			time,
 		]
 	);
 

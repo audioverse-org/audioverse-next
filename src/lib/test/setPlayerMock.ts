@@ -77,7 +77,10 @@ export default function setPlayerMock(
 		}),
 		paused: jest.fn(() => isPaused),
 		currentTime: jest.fn((newTime: number | null = null) => {
-			if (newTime !== null) time = newTime;
+			if (newTime !== null) {
+				time = newTime;
+				mockPlayer._fire('timeupdate');
+			}
 			return time;
 		}),
 		volume: jest.fn((newVolume: number | null = null) => {
