@@ -43,7 +43,6 @@ export default function useIsPaused(recording?: AndMiniplayerFragment | null) {
 
 	const setIsPaused = useCallback(
 		(paused: boolean): void => {
-			console.log('setIsPaused', paused);
 			onLoad({
 				recording,
 				fn: () => {

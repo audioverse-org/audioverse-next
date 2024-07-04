@@ -1,3 +1,4 @@
+import { act } from '@testing-library/react';
 import videojs from 'video.js';
 
 interface SetPlayerMockOptions {
@@ -64,7 +65,9 @@ export default function setPlayerMock(
 			functions = update('functions', functions);
 		},
 		_fire: (event: string, data: any = null) => {
-			handlers[event]?.map((fn: (data: any) => any) => fn(data));
+			act(() => {
+				handlers[event]?.map((fn: (data: any) => any) => fn(data));
+			});
 		},
 		play: jest.fn(async () => {
 			isPaused = false;
@@ -88,14 +91,7 @@ export default function setPlayerMock(
 			return volume;
 		}) as any,
 		duration: jest.fn(() => duration),
-		src: jest.fn(() => {
-			try {
-				throw new Error('trace');
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			} catch (e: any) {
-				console.log('src', e.stack);
-			}
-		}) as any,
+		src: jest.fn(),
 		options: jest.fn(),
 		controlBar: {
 			createEl: jest.fn(),

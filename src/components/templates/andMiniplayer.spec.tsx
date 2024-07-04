@@ -30,6 +30,10 @@ function ContextUser({
 }
 
 describe('miniplayer template', () => {
+	beforeEach(() => {
+		setPlayerMock();
+	});
+
 	it('renders children', async () => {
 		const { getByText } = await renderComponent({
 			props: {

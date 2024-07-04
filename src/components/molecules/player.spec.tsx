@@ -193,7 +193,6 @@ describe('player', () => {
 		const input = getByLabelText('progress');
 
 		await act(async () => {
-			console.log('scrub');
 			ReactTestUtils.Simulate.input(input, {
 				target: {
 					value: 50,
@@ -202,7 +201,6 @@ describe('player', () => {
 		});
 
 		await waitFor(() => {
-			console.log('looking');
 			expect(input).toHaveValue('50');
 		});
 	});

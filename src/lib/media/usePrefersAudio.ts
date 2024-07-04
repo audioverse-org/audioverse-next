@@ -13,7 +13,6 @@ export default function usePrefersAudio(): {
 
 	const setPrefersAudio = useCallback(
 		(prefersAudio: boolean): void => {
-			console.log('setPrefersAudio', prefersAudio);
 			context.setPrefersAudio(prefersAudio);
 			setIsPaused(true);
 		},

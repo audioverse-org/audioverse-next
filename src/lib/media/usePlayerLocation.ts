@@ -20,25 +20,16 @@ export default function usePlayerLocation() {
 
 	const setPlayerLocation = useCallback(
 		(locationId: LocationId) => {
-			console.log('executing move to', locationId);
 			if (locationId === playerLocation) {
-				console.log('cancelling move -- same location');
 				return;
 			}
 			if (!videoEl) {
-				console.log('cancelling move -- no video element found');
 				return;
 			}
 			const location = context[locationId];
 			if (!location) {
-				console.log('cancelling move -- no location found');
 				return;
 			}
-			console.log('moving player', {
-				locationId,
-				location: location.outerHTML,
-				videoEl: videoEl.outerHTML,
-			});
 			location.appendChild(videoEl);
 			_setPlayerLocation(locationId);
 		},
@@ -48,13 +39,6 @@ export default function usePlayerLocation() {
 	useEffect(() => {
 		onLoad(() => {
 			const _hasVideo = recording && hasVideo(recording);
-			console.log({
-				recording: !!recording,
-				prefersAudio,
-				loadedRecordingId: recording?.id,
-				registeredRecordingId: context.detailId,
-				_hasVideo,
-			});
 			if (!recording || prefersAudio || !_hasVideo) {
 				setPlayerLocation('origin');
 			} else if (recording.id === context.detailId) {

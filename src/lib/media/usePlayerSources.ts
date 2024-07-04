@@ -33,7 +33,6 @@ export default function usePlayerSources() {
 				_setSources(newSources);
 				player.src(newSources);
 				const logUrl = newSources.find((s) => s.logUrl)?.logUrl;
-				console.log({ logUrl });
 				if (logUrl) {
 					fetch(logUrl, {
 						method: 'HEAD',

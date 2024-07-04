@@ -15,7 +15,6 @@ export default function useOnPlayerLoad() {
 
 		const runFns = () => {
 			if (!fns.length) return;
-			console.log('running fns', fns);
 			fns.forEach((fn) => fn(player));
 			fns = [];
 		};

@@ -5,6 +5,7 @@ import React from 'react';
 
 import { __awaitIntlMessages } from '~lib/getIntlMessages';
 import MyApp from '~pages/_app';
+import setPlayerMock from '~src/lib/test/setPlayerMock';
 
 const renderApp = async (component: any, props: any) => {
 	const view = render(<MyApp Component={component} pageProps={props} />);
@@ -21,6 +22,8 @@ describe('app', () => {
 			query: {},
 			asPath: '',
 		});
+
+		setPlayerMock();
 	});
 
 	it('sets title', async () => {

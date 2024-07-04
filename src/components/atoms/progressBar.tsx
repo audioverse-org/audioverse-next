@@ -43,7 +43,6 @@ export default function ProgressBar({
 				onInput={(e) => {
 					if (!setProgress) return;
 					const p = parseFloat((e.target as HTMLInputElement).value) / 100;
-					console.log('progress bar updated', p);
 					setProgress(p);
 				}}
 				disabled={!setProgress}

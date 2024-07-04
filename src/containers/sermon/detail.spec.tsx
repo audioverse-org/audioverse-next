@@ -998,7 +998,6 @@ describe('sermon detail page', () => {
 		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await waitFor(() => {
-			console.log('looking');
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
 
@@ -1037,7 +1036,6 @@ describe('sermon detail page', () => {
 		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await waitFor(() => {
-			console.log('looking');
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
 
@@ -1071,7 +1069,6 @@ describe('sermon detail page', () => {
 
 		await userEvent.click(getByLabelText(player, 'play'));
 
-		console.log('looking for pause button');
 		await findByLabelText(player, 'pause');
 
 		await waitFor(() => {

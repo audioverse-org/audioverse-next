@@ -33,7 +33,6 @@ export default function useOnRecordingLoad() {
 						prefersAudio !== _prefersAudio);
 
 				if (shouldLoadRecording) {
-					console.log('loading recording with onLoad: fn');
 					context.loadRecording(
 						recording,
 						recording.id,
@@ -50,7 +49,6 @@ export default function useOnRecordingLoad() {
 					!recording || loadedRecording?.id === recording.id;
 
 				if (shouldRunImmediately) {
-					console.log('running fn immediately');
 					fn();
 				}
 			});

@@ -142,7 +142,6 @@ describe('app media playback', () => {
 		await userEvent.click(result.getByAltText('the_sermon_title'));
 
 		await waitFor(() => {
-			console.log('expecting in detail');
 			const location = getPlayerLocation();
 			expect(location).toBe('detail');
 		});
@@ -152,7 +151,6 @@ describe('app media playback', () => {
 		userEvent.click(toggle);
 
 		await waitFor(() => {
-			console.log('expecting in miniplayer');
 			const location = getPlayerLocation();
 			expect(location).toBe('miniplayer');
 		});
@@ -160,7 +158,6 @@ describe('app media playback', () => {
 		userEvent.click(toggle);
 
 		await waitFor(() => {
-			console.log('expecting in detail');
 			const location = getPlayerLocation();
 			expect(location).toBe('detail');
 		});
