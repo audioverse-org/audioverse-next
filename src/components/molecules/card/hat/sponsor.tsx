@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -15,14 +16,18 @@ import styles from './sponsor.module.scss';
 
 interface Props {
 	sponsor: NonNullable<CardRecordingFragment['sponsor']>;
+	className?: string;
 }
 
-export default function CardHatSponsor({ sponsor }: Props): JSX.Element {
+export default function CardHatSponsor({
+	sponsor,
+	className,
+}: Props): JSX.Element {
 	const router = useRouter();
 	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={clsx(className ? className : styles.wrapper)}>
 			<CardHat
 				title={sponsor.title}
 				label={

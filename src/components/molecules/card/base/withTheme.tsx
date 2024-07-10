@@ -13,7 +13,7 @@ export default function CardWithTheme({
 	...props
 }: PropsWithChildren<Props>): JSX.Element {
 	return (
-		<Card>
+		<Card className={props.className}>
 			<WithCardTheme {...props}>{children}</WithCardTheme>
 		</Card>
 	);

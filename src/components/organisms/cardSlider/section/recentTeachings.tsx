@@ -30,9 +30,9 @@ export default function RecentTeachings(): JSX.Element {
 			})}
 			seeAllUrl={root.lang(route).teachings.all.get()}
 			Card={(p: { node: CardRecordingFragment }) => (
-				<CardRecording recording={p.node} />
+				<CardRecording recording={p.node} fullBleed />
 			)}
-			rows={2}
+			rows={3}
 		/>
 	);
 }

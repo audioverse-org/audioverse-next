@@ -1,0 +1,19 @@
+@import '../../../styles/common';
+
+.card_unpadded {
+	position: relative;
+	overflow: hidden;
+	border-bottom: 1px solid rgb(239, 239, 239);
+	border-radius: 0;
+	box-shadow: none;
+	*:hover {
+		text-decoration: none;
+	}
+	--cardHoverColor: #{$ts-white};
+	--hatBg: #{$ts-white};
+	--hatHoverColor: #{$ts-white};
+}
+.sponsor {
+	--hatBg: #{$ts-white} !important;
+	--hatHoverColor: #{$ts-white} !important;
+}
