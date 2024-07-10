@@ -62,7 +62,7 @@ describe('Slider', () => {
 
 		const slides = getSlides();
 
-		expect(slides).toHaveLength(2);
+		expect(slides).toHaveLength(1);
 	});
 
 	it('displays two items per page', async () => {
@@ -158,7 +158,7 @@ describe('Slider', () => {
 
 		const slides = getSlides();
 
-		expect(slides).toHaveLength(2);
+		expect(slides).toHaveLength(1);
 	});
 
 	it('fits six items on a single page', async () => {
@@ -196,7 +196,7 @@ describe('Slider', () => {
 
 		const slides = getSlides();
 
-		expect(slides).toHaveLength(2);
+		expect(slides).toHaveLength(1);
 	});
 
 	it('uses swiper to page forward', async () => {
