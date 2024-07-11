@@ -9,6 +9,6 @@ export const calculateItemsPerPage = (
 	const usableSpace = width + GRID_GAP;
 	const minSpace = minItemWidth + GRID_GAP;
 	const perRow = Math.max(Math.floor(usableSpace / minSpace), 1);
-	const rowCount = perRow > 1 ? rows : 1;
+	const rowCount = perRow > 1 || rows > 2 ? rows : 1;
 	return perRow * rowCount;
 };
