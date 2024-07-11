@@ -28,7 +28,7 @@ export default function CardSermon({
 	return (
 		<CardWithTheme
 			theme={theme}
-			className={fullBleed ? style.card_unpadded : undefined}
+			className={fullBleed ? style.card_fullBleed : undefined}
 		>
 			{!hideHat && sequence ? (
 				<CardHatSermon sequence={sequence} />
@@ -45,6 +45,7 @@ export default function CardSermon({
 				recording={recording}
 				theme={theme}
 				isOptionalLink={isOptionalLink}
+				fullBleed={fullBleed}
 			/>
 		</CardWithTheme>
 	);

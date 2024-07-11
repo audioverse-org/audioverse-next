@@ -1,11 +1,12 @@
 @import '../../../styles/common';
 
-.card_unpadded {
+.card_fullBleed {
 	position: relative;
 	overflow: hidden;
-	border-bottom: 1px solid rgb(239, 239, 239);
+	border-bottom: 1px solid #ddd;
 	border-radius: 0;
 	box-shadow: none;
+	padding-bottom: 0;
 	*:hover {
 		text-decoration: none;
 	}
@@ -14,6 +15,7 @@
 	--hatHoverColor: #{$ts-white};
 }
 .sponsor {
+	margin-bottom: 0 !important;
 	--hatBg: #{$ts-white} !important;
 	--hatHoverColor: #{$ts-white} !important;
 }

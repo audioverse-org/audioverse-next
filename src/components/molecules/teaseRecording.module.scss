@@ -28,6 +28,10 @@ $container-padding: 16px;
 		padding: 0;
 		max-width: 285px;
 	}
+	&.fullBleed {
+		padding-top: 0;
+		padding-bottom: 8px;
+	}
 }
 
 .content::after {
@@ -77,6 +81,10 @@ $container-padding: 16px;
 	-webkit-line-clamp: 2; /* number of lines to show */
 	line-clamp: 2;
 	-webkit-box-orient: vertical;
+	&FullBleed {
+		-webkit-line-clamp: 1;
+		line-clamp: 1;
+	}
 }
 
 $right-icon-offset: -4px;
@@ -89,7 +97,7 @@ $right-icon-offset: -4px;
 }
 
 .presenters {
-	margin-bottom: 16px;
+	margin-bottom: 10px;
 	display: flex;
 	flex-direction: row;
 	overflow: hidden;
@@ -153,6 +161,9 @@ $like-icon-padding: 8px;
 	&Unpadded {
 		bottom: $right-icon-offset;
 		right: $right-icon-offset;
+	}
+	&FullBleed {
+		bottom: 1px;
 	}
 }
 
