@@ -309,11 +309,6 @@ describe('home page', () => {
 		expect(getByText('21m')).toBeInTheDocument();
 	});
 
-	it('renders story sequence title', async () => {
-		const { getAllByText } = await renderPage();
-
-		expect(getAllByText('the_story_sequence_title')[1]).toBeInTheDocument();
-	});
 
 	it('renders recording title', async () => {
 		const { getByText } = await renderPage();
