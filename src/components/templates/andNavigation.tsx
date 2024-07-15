@@ -55,7 +55,11 @@ export default function AndNavigation({
 
 	const hideMobileSearch =
 		contextualFilterId === 'all' &&
-		!['/[language]/discover', '/[language]'].includes(pathname);
+		![
+			'/[language]/discover',
+			'/[language]/discover/collections',
+			'/[language]',
+		].includes(pathname);
 
 	return (
 		<div className={styles.base}>
