@@ -6,11 +6,11 @@ import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
-import { GetPlaylistItemDetailDataQuery } from './__generated__/item';
+import { GetPublicPlaylistItemDetailDataQuery } from './__generated__/item';
 
 export interface PlaylistItemProps {
-	playlist: GetPlaylistItemDetailDataQuery['playlist'];
-	recording: GetPlaylistItemDetailDataQuery['recording'];
+	playlist: GetPublicPlaylistItemDetailDataQuery['playlist'];
+	recording: GetPublicPlaylistItemDetailDataQuery['recording'];
 }
 
 function PlaylistItem({
@@ -20,11 +20,17 @@ function PlaylistItem({
 	const languageRoute = useLanguageRoute();
 	const items = (playlist.recordings.nodes || []).map((r) => ({
 		...r,
-		canonicalPath: root
-			.lang(languageRoute)
-			.playlists.playlist(playlist.id)
-			.items(r.canonicalPath)
-			.get(),
+		canonicalPath: playlist.isPublic
+			? root
+					.lang(languageRoute)
+					.playlists.playlist(playlist.id)
+					.items(r.canonicalPath)
+					.get()
+			: root
+					.lang(languageRoute)
+					.library.playlists(playlist.id)
+					.items(r.canonicalPath)
+					.get(),
 	}));
 	const currentRecordingIndex =
 		items.findIndex((r) => r.id === recording.id) || 0;
@@ -39,6 +45,7 @@ function PlaylistItem({
 			}}
 			overrideSequence={{
 				playlistId: playlist.id,
+				publicPlaylist: playlist.isPublic,
 				title: playlist.title,
 				items,
 			}}
