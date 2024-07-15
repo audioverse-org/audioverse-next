@@ -230,20 +230,17 @@ const Navigation = ({
 												{isDivider ? (
 													<div className={styles.divider} />
 												) : (
-													<Link
-														href={href as string}
-														onClick={
-															onClick
-																? () =>
-																		onClick({
-																			popSubmenu: () => setSubmenu(''),
-																		})
-																: undefined
-														}
-														legacyBehavior
-													>
+													<Link href={href as string} legacyBehavior>
 														<a
 															className={styles.navLink}
+															onClick={
+																onClick
+																	? () =>
+																			onClick({
+																				popSubmenu: () => setSubmenu(''),
+																			})
+																	: undefined
+															}
 															target={isTargetBlank ? '_blank' : '_self'}
 														>
 															{Icon && (
