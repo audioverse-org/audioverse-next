@@ -3431,6 +3431,30 @@
       "value": "Sign Up with Email"
     }
   ],
+  "molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload": [
+    {
+      "type": 0,
+      "value": "Create account"
+    }
+  ],
+  "molecule-buttonDownloadBlank__modalButtonLabelLogIn": [
+    {
+      "type": 0,
+      "value": "Entrar"
+    }
+  ],
+  "molecule-buttonDownloadBlank__modalParagraph": [
+    {
+      "type": 0,
+      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+    }
+  ],
+  "molecule-buttonDownloadBlank__modalTitle": [
+    {
+      "type": 0,
+      "value": "Criar uma conta gratuita"
+    }
+  ],
   "molecule-buttonDownload__buttonLabel": [
     {
       "type": 0,
@@ -3491,18 +3515,6 @@
       "value": "Vídeos baixados"
     }
   ],
-  "molecule-buttonGuestDownload__modalParagraph": [
-    {
-      "type": 0,
-      "value": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
-    }
-  ],
-  "molecule-buttonGuestDownload__modalTitle": [
-    {
-      "type": 0,
-      "value": "Criar uma conta gratuita"
-    }
-  ],
   "molecule-buttonGuest__Download": [
     {
       "type": 0,
@@ -3519,12 +3531,6 @@
     {
       "type": 0,
       "value": "Criar conta"
-    }
-  ],
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": [
-    {
-      "type": 0,
-      "value": "Create account"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": [

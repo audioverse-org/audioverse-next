@@ -247,7 +247,7 @@ const Player = ({
 					{user ? (
 						<ButtonDownload {...{ recording, backgroundColor }} />
 					) : (
-						<ButtonDownloadBlank />
+						<ButtonDownloadBlank backgroundColor={backgroundColor} />
 					)}
 
 					<ButtonShareRecording
