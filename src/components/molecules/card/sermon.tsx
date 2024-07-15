@@ -34,7 +34,6 @@ export default function CardSermon({
 					recording,
 					theme,
 					isOptionalLink,
-					hideSinglePart: hideSponsorHat,
 				}}
 			/>
 		</CardWithTheme>

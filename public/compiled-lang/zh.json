@@ -2151,6 +2151,12 @@
       "value": "隐私"
     }
   ],
+  "header__navItemMore-sharingtools": [
+    {
+      "type": 0,
+      "value": "Sharing Tools"
+    }
+  ],
   "header__navItemMore-store": [
     {
       "type": 0,
@@ -3783,30 +3789,6 @@
       "value": "搜索"
     }
   ],
-  "molecule-teaseRecording__individualChapter": [
-    {
-      "type": 0,
-      "value": "Individual Chapter"
-    }
-  ],
-  "molecule-teaseRecording__individualStory": [
-    {
-      "type": 0,
-      "value": "Individual Story"
-    }
-  ],
-  "molecule-teaseRecording__individualTeaching": [
-    {
-      "type": 0,
-      "value": "Individual Teaching"
-    }
-  ],
-  "molecule-teaseRecording__individualTrack": [
-    {
-      "type": 0,
-      "value": "Individual Track"
-    }
-  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,
@@ -3825,28 +3807,6 @@
     {
       "type": 0,
       "value": "个"
-    }
-  ],
-  "molecule-teaseRecording__partInfo": [
-    {
-      "type": 0,
-      "value": "第"
-    },
-    {
-      "type": 1,
-      "value": "index"
-    },
-    {
-      "type": 0,
-      "value": "部分，共"
-    },
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": "部分"
     }
   ],
   "molecule-transcript__disclaimer": [
@@ -4027,6 +3987,12 @@
     {
       "type": 0,
       "value": "只有您可以查看"
+    }
+  ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "Open App"
     }
   ],
   "organism-mobileHeader__more": [
@@ -5831,6 +5797,16 @@
     {
       "type": 0,
       "value": "Testimonials"
+    }
+  ],
+  "timeLeft": [
+    {
+      "type": 1,
+      "value": "time"
+    },
+    {
+      "type": 0,
+      "value": " left"
     }
   ],
   "time__hoursMinutesAndSeconds": [
