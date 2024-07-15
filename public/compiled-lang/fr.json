@@ -2135,6 +2135,12 @@
       "value": "Confidentialité"
     }
   ],
+  "header__navItemMore-sharingtools": [
+    {
+      "type": 0,
+      "value": "Sharing Tools"
+    }
+  ],
   "header__navItemMore-store": [
     {
       "type": 0,
@@ -3763,30 +3769,6 @@
       "value": "Rechercher"
     }
   ],
-  "molecule-teaseRecording__individualChapter": [
-    {
-      "type": 0,
-      "value": "Individual Chapter"
-    }
-  ],
-  "molecule-teaseRecording__individualStory": [
-    {
-      "type": 0,
-      "value": "Individual Story"
-    }
-  ],
-  "molecule-teaseRecording__individualTeaching": [
-    {
-      "type": 0,
-      "value": "Individual Teaching"
-    }
-  ],
-  "molecule-teaseRecording__individualTrack": [
-    {
-      "type": 0,
-      "value": "Individual Track"
-    }
-  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,
@@ -3801,24 +3783,6 @@
     {
       "type": 0,
       "value": " de plus"
-    }
-  ],
-  "molecule-teaseRecording__partInfo": [
-    {
-      "type": 0,
-      "value": "Partie "
-    },
-    {
-      "type": 1,
-      "value": "index"
-    },
-    {
-      "type": 0,
-      "value": " de "
-    },
-    {
-      "type": 1,
-      "value": "count"
     }
   ],
   "molecule-transcript__disclaimer": [
@@ -3999,6 +3963,12 @@
     {
       "type": 0,
       "value": "Vous seul pouvez voir"
+    }
+  ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "Open App"
     }
   ],
   "organism-mobileHeader__more": [
@@ -5791,6 +5761,16 @@
     {
       "type": 0,
       "value": "Testimonials"
+    }
+  ],
+  "timeLeft": [
+    {
+      "type": 1,
+      "value": "time"
+    },
+    {
+      "type": 0,
+      "value": " left"
     }
   ],
   "time__hoursMinutesAndSeconds": [

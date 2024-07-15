@@ -46,6 +46,7 @@ interface RecordingProps {
 	recording: RecordingFragment;
 	overrideSequence?: {
 		playlistId?: string | number;
+		publicPlaylist?: boolean;
 		title: string;
 		items: TeaseRecordingFragment[];
 	};
@@ -329,10 +330,15 @@ export function Recording({
 				makeHat(
 					<PlaylistTypeLockup unpadded />,
 					startCase(overrideSequence.title),
-					root
-						.lang(languageRoute)
-						.playlists.playlist(overrideSequence.playlistId)
-						.get()
+					overrideSequence.publicPlaylist
+						? root
+								.lang(languageRoute)
+								.playlists.playlist(overrideSequence.playlistId)
+								.get()
+						: root
+								.lang(languageRoute)
+								.library.playlists(overrideSequence.playlistId)
+								.get()
 				)
 			) : overrideSequence ? (
 				makeHat(

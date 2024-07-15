@@ -309,12 +309,6 @@ describe('home page', () => {
 		expect(getByText('21m')).toBeInTheDocument();
 	});
 
-	it('renders story parts total', async () => {
-		const { getByText } = await renderPage();
-
-		expect(getByText('Part 1 of 7')).toBeInTheDocument();
-	});
-
 	it('renders story sequence title', async () => {
 		const { getAllByText } = await renderPage();
 
@@ -331,12 +325,6 @@ describe('home page', () => {
 		const { getAllByText } = await renderPage();
 
 		expect(getAllByText('the_recording_sequence_title')[1]).toBeInTheDocument();
-	});
-
-	it('renders recording sequence part info', async () => {
-		const { getByText } = await renderPage();
-
-		expect(getByText('Part 1 of 15')).toBeInTheDocument();
 	});
 
 	it('renders post titles', async () => {
