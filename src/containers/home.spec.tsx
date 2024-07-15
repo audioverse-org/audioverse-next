@@ -309,7 +309,6 @@ describe('home page', () => {
 		expect(getByText('21m')).toBeInTheDocument();
 	});
 
-
 	it('renders recording title', async () => {
 		const { getByText } = await renderPage();
 
