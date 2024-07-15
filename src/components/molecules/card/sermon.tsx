@@ -31,13 +31,14 @@ export default function CardSermon({
 			className={fullBleed ? style.card_fullBleed : undefined}
 		>
 			{!hideHat && sequence ? (
-				<CardHatSermon sequence={sequence} />
+				<CardHatSermon sequence={sequence} fullBleed={fullBleed} />
 			) : (
 				!hideSponsorHat &&
 				sponsor && (
 					<CardHatSponsor
 						sponsor={sponsor}
 						className={fullBleed ? style.sponsor : undefined}
+						fullBleed={fullBleed}
 					/>
 				)
 			)}

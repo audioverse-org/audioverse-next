@@ -1,11 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { PropsWithChildren, useState } from 'react';
-
-import Heading6 from '~components/atoms/heading6';
-import ClosureIcon from '~public/img/icons/icon-closure-slim.svg';
-import DisclosureIcon from '~public/img/icons/icon-disclosure-slim.svg';
+import React, { PropsWithChildren } from 'react';
 
 import styles from './index.module.scss';
 
@@ -13,6 +8,7 @@ type SimpleProps = {
 	icon?: React.ReactElement;
 	title: string | JSX.Element;
 	url: string;
+	fullBleed?: boolean;
 };
 
 type ExpandableProps = PropsWithChildren<
@@ -29,15 +25,18 @@ const isSimple = (p: SimpleProps | ExpandableProps): p is SimpleProps => {
 export default function CardHat(
 	props: SimpleProps | ExpandableProps
 ): JSX.Element {
-	const router = useRouter();
-	const [hatExpanded, setHatExpanded] = useState(false);
-	const { title, url, icon } = props;
+	const { title, url, icon, fullBleed } = props;
 
 	if (isSimple(props)) {
 		return (
 			<Link href={url} legacyBehavior>
 				<a className={clsx(styles.hat)}>
-					<div className={styles.hatBar}>
+					<div
+						className={clsx(
+							styles.hatBar,
+							fullBleed ? styles.fullBleed : undefined
+						)}
+					>
 						<span className={styles.hatIcon}>{icon}</span>
 						<span className={styles.hatTitle}>{title}</span>
 					</div>
@@ -46,29 +45,18 @@ export default function CardHat(
 		);
 	}
 
-	const { label, longHat, children } = props;
+	const { longHat } = props;
 
 	return (
-		<div
-			className={clsx(
-				styles.hat,
-				hatExpanded && styles.hatExpanded,
-				longHat && styles.longHat
-			)}
-			onClick={() => setHatExpanded(!hatExpanded)}
-		>
-			<div className={styles.hatBar}>
+		<div className={clsx(styles.hat, longHat && styles.longHat)}>
+			<div
+				className={clsx(
+					styles.hatBar,
+					fullBleed ? styles.fullBleed : undefined
+				)}
+			>
 				<span className={styles.hatIcon}>{icon}</span>
 				<span className={styles.hatTitle}>{title}</span>
-				<Heading6 loose sans unpadded uppercase className={styles.hatLabel}>
-					{label}
-				</Heading6>
-				<span className={styles.hatCaret}>
-					{hatExpanded ? <ClosureIcon /> : <DisclosureIcon />}
-				</span>
-			</div>
-			<div className={styles.hatContent} onClick={() => router.push(url)}>
-				{children}
 			</div>
 		</div>
 	);

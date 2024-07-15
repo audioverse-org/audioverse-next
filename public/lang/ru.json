@@ -1757,12 +1757,6 @@
   "cardCollection_booksLabel": {
     "string": "{count} books"
   },
-  "cardHatSponsor__addSponsor": {
-    "string": "Add Sponsor"
-  },
-  "cardHatSponsor__removeSponsor": {
-    "string": "Remove Sponsor"
-  },
   "cardHatSponsor__sponsorLabel": {
     "string": "Организатор"
   },

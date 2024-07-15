@@ -453,12 +453,6 @@
     "comment": "Card collection sequence count label",
     "string": "{count} series"
   },
-  "cardHatSponsor__addSponsor": {
-    "string": "Add Sponsor"
-  },
-  "cardHatSponsor__removeSponsor": {
-    "string": "Remove Sponsor"
-  },
   "cardHatSponsor__sponsorLabel": {
     "string": "Sponsor"
   },

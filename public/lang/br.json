@@ -399,12 +399,6 @@
     "comment": "Sequência de coleta de cartões etiqueta de contagem",
     "string": "{contagem} séries"
   },
-  "cardHatSponsor__addSponsor": {
-    "string": "Adicionar Patrocinador"
-  },
-  "cardHatSponsor__removeSponsor": {
-    "string": "Remover Patrocinador"
-  },
   "cardHatSponsor__sponsorLabel": {
     "string": "Patrocinador"
   },

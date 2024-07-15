@@ -915,18 +915,6 @@
       "value": " séries"
     }
   ],
-  "cardHatSponsor__addSponsor": [
-    {
-      "type": 0,
-      "value": "Adicionar Patrocinador"
-    }
-  ],
-  "cardHatSponsor__removeSponsor": [
-    {
-      "type": 0,
-      "value": "Remover Patrocinador"
-    }
-  ],
   "cardHatSponsor__sponsorLabel": [
     {
       "type": 0,
