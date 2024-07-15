@@ -230,10 +230,7 @@ const Navigation = ({
 												{isDivider ? (
 													<div className={styles.divider} />
 												) : (
-													<Link
-														href={href as string}
-														legacyBehavior
-													>
+													<Link href={href as string} legacyBehavior>
 														<a
 															className={styles.navLink}
 															onClick={
