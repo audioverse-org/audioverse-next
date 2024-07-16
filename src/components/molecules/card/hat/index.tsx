@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 
 import styles from './index.module.scss';
 
@@ -11,23 +11,10 @@ type SimpleProps = {
 	fullBleed?: boolean;
 };
 
-type ExpandableProps = PropsWithChildren<
-	{
-		label: string | JSX.Element;
-		longHat?: true;
-	} & SimpleProps
->;
-
-const isSimple = (p: SimpleProps | ExpandableProps): p is SimpleProps => {
-	return (p as ExpandableProps).label === undefined;
-};
-
-export default function CardHat(
-	props: SimpleProps | ExpandableProps
-): JSX.Element {
+export default function CardHat(props: SimpleProps): JSX.Element {
 	const { title, url, icon, fullBleed } = props;
 
-	if (isSimple(props)) {
+	if (!fullBleed) {
 		return (
 			<Link href={url} legacyBehavior>
 				<a className={clsx(styles.hat)}>
@@ -45,10 +32,8 @@ export default function CardHat(
 		);
 	}
 
-	const { longHat } = props;
-
 	return (
-		<div className={clsx(styles.hat, longHat && styles.longHat)}>
+		<div className={clsx(styles.hat)}>
 			<div
 				className={clsx(
 					styles.hatBar,

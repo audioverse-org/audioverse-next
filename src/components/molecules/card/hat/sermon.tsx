@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import HatIcon from '~public/img/icons/fa-list-alt.svg';
 
@@ -18,12 +17,6 @@ export default function CardHatSermon({
 	return (
 		<CardHat
 			title={sequence.title}
-			label={
-				<FormattedMessage
-					id="cardSermon_sequenceLabel"
-					defaultMessage="Series"
-				/>
-			}
 			url={sequence.canonicalPath}
 			icon={<HatIcon />}
 			fullBleed={fullBleed}

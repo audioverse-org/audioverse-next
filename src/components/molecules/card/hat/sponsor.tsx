@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import HatIcon from '~public/img/icons/fa-user-plus.svg';
 
@@ -23,12 +22,6 @@ export default function CardHatSponsor({
 		<div className={clsx(className ? className : styles.wrapper)}>
 			<CardHat
 				title={sponsor.title}
-				label={
-					<FormattedMessage
-						id="cardHatSponsor__sponsorLabel"
-						defaultMessage="Sponsor"
-					/>
-				}
 				url={sponsor.canonicalPath}
 				icon={<HatIcon />}
 				fullBleed={fullBleed}

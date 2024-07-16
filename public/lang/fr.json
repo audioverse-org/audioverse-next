@@ -70,12 +70,6 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} de lecture"
   },
-  "cardAudiobookTrack_readByLabel": {
-    "string": "Lu par {name}"
-  },
-  "cardAudiobookTrack_sequenceLabel": {
-    "string": "Livre"
-  },
   "cardBibleBook__chaptersLabel": {
     "string": "{count} chapitres"
   },
@@ -117,9 +111,6 @@
   "cardSequence_storiesType": {
     "string": "Histoires"
   },
-  "cardSermon_sequenceLabel": {
-    "string": "Séries"
-  },
   "cardSlider__nextPageLabel": {
     "comment": "card slider next page label",
     "string": "Page suivante"
@@ -131,9 +122,6 @@
   "cardSlider__previousPageLabel": {
     "comment": "card slider previous page label",
     "string": "Page précédente"
-  },
-  "cardSong_sequenceLabel": {
-    "string": "Chants bibliques"
   },
   "cardSponsor__collectionCountLabel": {
     "comment": "Sponsor Detail collection count label",
@@ -150,9 +138,6 @@
   "cardSponsor_hatTitle": {
     "comment": "Card sponsor hat title",
     "string": "Collaborateur"
-  },
-  "cardStory_sequenceLabel": {
-    "string": "Histoires"
   },
   "ccollectionTeachingsDetail__heading": {
     "string": "Tous les enseignements individuels"
@@ -538,33 +523,6 @@
   "molecule-buttonSpeed__buttonLabel": {
     "comment": "button speed button label",
     "string": "{speed}x"
-  },
-  "molecule-cardRecordingSequenceHat__addAlbum": {
-    "string": "Ajouter un album"
-  },
-  "molecule-cardRecordingSequenceHat__addBook": {
-    "string": "Ajouter un livre"
-  },
-  "molecule-cardRecordingSequenceHat__addSeries": {
-    "string": "Ajouter une série"
-  },
-  "molecule-cardRecordingSequenceHat__addStoryAlbum": {
-    "string": "Ajouter un album"
-  },
-  "molecule-cardRecordingSequenceHat__inLibrary": {
-    "string": "{inLibraryCount} de {totalCount} dans votre bibliothèque"
-  },
-  "molecule-cardRecordingSequenceHat__removeAlbum": {
-    "string": "Enlever l'album"
-  },
-  "molecule-cardRecordingSequenceHat__removeBook": {
-    "string": "Enlever le livre"
-  },
-  "molecule-cardRecordingSequenceHat__removeSeries": {
-    "string": "Enlever la série"
-  },
-  "molecule-cardRecordingSequenceHat__removeStoryAlbum": {
-    "string": "Enlever l'album"
   },
   "molecule-searchBar__label": {
     "comment": "search bar label",
@@ -1760,9 +1718,6 @@
   "cardCollection_booksLabel": {
     "string": "{count} books"
   },
-  "cardHatSponsor__sponsorLabel": {
-    "string": "Sponsor"
-  },
   "cardSequence_chaptersLabel": {
     "string": "{count} chapitres"
   },
@@ -2315,12 +2270,6 @@
   },
   "molecule-buttonGuest__sync": {
     "string": "Pick up where you left off across devices"
-  },
-  "molecule-cardRecordingSequenceHat__addBibleBook": {
-    "string": "Add Book"
-  },
-  "molecule-cardRecordingSequenceHat__removeBibleBook": {
-    "string": "Remove Book"
   },
   "molecule-searchBar__ariaLabel": {
     "comment": "search bar label",
