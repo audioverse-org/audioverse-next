@@ -33,6 +33,8 @@ export default async function main() {
 	const baseEnIds = Object.keys(baseEnLangs);
 	const enIds = Object.keys(enLangs);
 
+	const writeQueue = new Map<string, string>();
+
 	langFiles.forEach((langFile) => {
 		if (langFile === 'en.json') return;
 		const jsonString = fs.readFileSync(`./public/lang/${langFile}`).toString();
@@ -72,9 +74,10 @@ export default async function main() {
 			});
 		}
 
-		fs.writeFileSync(
-			`./public/lang/${langFile}`,
-			JSON.stringify(langs, null, 2)
-		);
+		writeQueue.set(langFile, JSON.stringify(langs, null, 2));
+	});
+
+	writeQueue.forEach((content, langFile) => {
+		fs.writeFileSync(`./public/lang/${langFile}`, content);
 	});
 }

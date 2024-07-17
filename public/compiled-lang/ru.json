@@ -455,6 +455,12 @@
       "value": "Профиль"
     }
   ],
+  "account__heading": [
+    {
+      "type": 0,
+      "value": "Настройки учетной записи"
+    }
+  ],
   "add_to_playlist": [
     {
       "type": 0,
@@ -4351,12 +4357,6 @@
       "value": "Выбрать, как Вы хотите скачать аудио файл."
     }
   ],
-  "preferences__heading": [
-    {
-      "type": 0,
-      "value": "Настройки учетной записи"
-    }
-  ],
   "preferences__inputAutoplay": [
     {
       "type": 0,
@@ -4711,12 +4711,6 @@
     {
       "type": 0,
       "value": "Вы уверены?"
-    }
-  ],
-  "profile__heading": [
-    {
-      "type": 0,
-      "value": "Настройки учетной записи"
     }
   ],
   "profile__inputLabelForEmail": [

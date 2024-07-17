@@ -455,6 +455,12 @@
       "value": "档案"
     }
   ],
+  "account__heading": [
+    {
+      "type": 0,
+      "value": "账户设置"
+    }
+  ],
   "add_to_playlist": [
     {
       "type": 0,
@@ -4375,12 +4381,6 @@
       "value": "选择您想下载音频的方式。"
     }
   ],
-  "preferences__heading": [
-    {
-      "type": 0,
-      "value": "账户设置"
-    }
-  ],
   "preferences__inputAutoplay": [
     {
       "type": 0,
@@ -4735,12 +4735,6 @@
     {
       "type": 0,
       "value": "确定吗？"
-    }
-  ],
-  "profile__heading": [
-    {
-      "type": 0,
-      "value": "账户设置"
     }
   ],
   "profile__inputLabelForEmail": [

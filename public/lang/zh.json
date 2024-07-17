@@ -728,9 +728,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "选择您想下载音频的方式。"
   },
-  "preferences__heading": {
-    "string": "账户设置"
-  },
   "preferences__inputAutoplay": {
     "string": "自动播放录音"
   },
@@ -837,9 +834,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "保存更改"
-  },
-  "profile__heading": {
-    "string": "账户设置"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",
@@ -2798,5 +2792,8 @@
   },
   "presentersListAll__loading": {
     "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "账户设置"
   }
 }

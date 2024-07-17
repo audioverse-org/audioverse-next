@@ -728,9 +728,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Choisissez comment vous voulez télécharger l'audio."
   },
-  "preferences__heading": {
-    "string": "Paramètres du compte"
-  },
   "preferences__inputAutoplay": {
     "string": "Lire automatiquement les enregistrements"
   },
@@ -837,9 +834,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "Sauvegarder les modifications"
-  },
-  "profile__heading": {
-    "string": "Paramètres du compte"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",
@@ -2798,5 +2792,8 @@
   },
   "presentersListAll__loading": {
     "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "Paramètres du compte"
   }
 }

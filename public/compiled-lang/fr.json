@@ -455,6 +455,12 @@
       "value": "Profil"
     }
   ],
+  "account__heading": [
+    {
+      "type": 0,
+      "value": "Paramètres du compte"
+    }
+  ],
   "add_to_playlist": [
     {
       "type": 0,
@@ -4343,12 +4349,6 @@
       "value": "Choisissez comment vous voulez télécharger l'audio."
     }
   ],
-  "preferences__heading": [
-    {
-      "type": 0,
-      "value": "Paramètres du compte"
-    }
-  ],
   "preferences__inputAutoplay": [
     {
       "type": 0,
@@ -4703,12 +4703,6 @@
     {
       "type": 0,
       "value": "Êtes-vous sûr(e) ?"
-    }
-  ],
-  "profile__heading": [
-    {
-      "type": 0,
-      "value": "Paramètres du compte"
     }
   ],
   "profile__inputLabelForEmail": [

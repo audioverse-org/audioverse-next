@@ -728,9 +728,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "オーディオファイルのダウンロード方法の好みを設定。"
   },
-  "preferences__heading": {
-    "string": "アカウントの設定"
-  },
   "preferences__inputAutoplay": {
     "string": "自動再生開始する"
   },
@@ -837,9 +834,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "編集したものを保存"
-  },
-  "profile__heading": {
-    "string": "アカウントの設定"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",
@@ -2798,5 +2792,8 @@
   },
   "presentersListAll__loading": {
     "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "アカウントの設定"
   }
 }
