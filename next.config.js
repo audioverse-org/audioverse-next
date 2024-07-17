@@ -172,16 +172,6 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
-					source: '/:lang/account/profile',
-					destination: '/:lang/account',
-					permanent: true,
-				},
-				{
-					source: '/:lang/account/preferences',
-					destination: '/:lang/account',
-					permanent: true,
-				},
-				{
 					source: '/:lang/blog/page/1',
 					destination: '/:lang/blog',
 					permanent: true,
