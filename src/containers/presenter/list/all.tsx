@@ -1,16 +1,10 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { fetchApi } from '~lib/api/fetchApi';
 import useOnScreen from '~lib/hooks/useOnScreen';
 import { useLanguageId } from '~lib/useLanguageId';
-import { Maybe } from '~src/__generated__/graphql';
 
-import {
-	GetPresenterListAllPageDataDocument,
-	GetPresenterListAllPageDataQuery,
-} from './__generated__/all';
+import { useInfiniteGetPresenterListAllPageDataQuery } from './__generated__/all';
 import styles from './all.module.scss';
 import List, { PresentersProps } from './list';
 
@@ -20,22 +14,22 @@ export default function All(props: PresentersProps) {
 	const hasReachedEnd = useOnScreen(endRef);
 	const language = useLanguageId();
 
-	const { data, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
-		['presenters'],
-		({ pageParam = null }) =>
-			fetchApi(GetPresenterListAllPageDataDocument, {
-				variables: {
-					language,
-					after: pageParam,
-				},
-			}),
-		{
-			getNextPageParam: (lastPage: Maybe<GetPresenterListAllPageDataQuery>) =>
-				lastPage?.persons.pageInfo.hasNextPage
-					? lastPage.persons.pageInfo.endCursor
-					: undefined,
-		}
-	);
+	const { data, hasNextPage, fetchNextPage, isFetching } =
+		useInfiniteGetPresenterListAllPageDataQuery(
+			'after',
+			{
+				language,
+				after: null,
+			},
+			{
+				getNextPageParam: (lastPage) =>
+					lastPage?.persons.pageInfo.hasNextPage
+						? {
+								after: lastPage.persons.pageInfo.endCursor,
+						  }
+						: undefined,
+			}
+		);
 
 	useEffect(() => {
 		if (!hasNextPage) return;
