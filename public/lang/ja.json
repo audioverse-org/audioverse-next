@@ -2792,5 +2792,11 @@
   },
   "timeLeft": {
     "string": "{time} left"
+  },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
   }
 }
