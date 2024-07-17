@@ -275,5 +275,14 @@
 	.desktopDonate {
 		display: inherit;
 		align-self: flex-start;
+		justify-content: center;
+		min-width: 50%;
 	}
+}
+.open_app_side {
+	margin-left: 0 !important;
+	margin-top: 10px;
+	align-self: flex-start;
+	justify-content: center;
+	min-width: 50%;
 }

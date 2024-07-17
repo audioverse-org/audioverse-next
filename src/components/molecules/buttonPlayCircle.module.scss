@@ -1,0 +1,30 @@
+@import '../../styles/common';
+$right-icon-offset: -4px;
+
+.rowUnpadded {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+.play {
+	all: unset;
+	margin-right: $right-icon-offset;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.duration {
+	font-family: inherit;
+	margin-left: 10px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 1px;
+}
+.successIcon {
+	flex: 1;
+	flex-direction: 'row';
+	margin-left: 4px;
+	align-items: center;
+	margin-bottom: 1px;
+}

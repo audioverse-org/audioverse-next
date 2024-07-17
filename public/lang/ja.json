@@ -576,10 +576,6 @@
   "molecule-teaseRecording__morePersons": {
     "string": "{count}個を表示"
   },
-  "molecule-teaseRecording__partInfo": {
-    "comment": "recording tease part info",
-    "string": "{count}個の内の{index}部分を表示"
-  },
   "molecule-transcript__disclaimer": {
     "comment": "transcript disclaimer",
     "string": "このトランスクリプト(原稿)はコンピュータ自動生成されている場合もございます"
@@ -2339,18 +2335,6 @@
   "molecule-searchBar__cancel": {
     "string": "キャンセル"
   },
-  "molecule-teaseRecording__individualChapter": {
-    "string": "Individual Chapter"
-  },
-  "molecule-teaseRecording__individualStory": {
-    "string": "Individual Story"
-  },
-  "molecule-teaseRecording__individualTeaching": {
-    "string": "Individual Teaching"
-  },
-  "molecule-teaseRecording__individualTrack": {
-    "string": "Individual Track"
-  },
   "molecules-pagination__nextLabelMobile": {
     "string": "Next"
   },
@@ -2799,6 +2783,15 @@
   },
   "molecule-buttonDownloadBlank__modalTitle": {
     "string": "Create a Free Account"
+  },
+  "header__navItemMore-sharingtools": {
+    "string": "Sharing Tools"
+  },
+  "open_app": {
+    "string": "Open App"
+  },
+  "timeLeft": {
+    "string": "{time} left"
   },
   "presentersListAll__listEnd": {
     "string": "No more presenters"
