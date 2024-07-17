@@ -1558,27 +1558,11 @@
     "comment": "etiqueta da barra de busca",
     "string": "Buscar"
   },
-  "molecule-teaseRecording__individualChapter": {
-    "string": "Capítulo Individual"
-  },
-  "molecule-teaseRecording__individualStory": {
-    "string": "História individual"
-  },
-  "molecule-teaseRecording__individualTeaching": {
-    "string": "Ensinamento Individual"
-  },
-  "molecule-teaseRecording__individualTrack": {
-    "string": "Trilha individual"
-  },
   "molecule-teaseRecording__lessPersons": {
     "string": "Mostrar menos"
   },
   "molecule-teaseRecording__morePersons": {
     "string": "{count} mais"
-  },
-  "molecule-teaseRecording__partInfo": {
-    "comment": "informações sobre a seção de gravação",
-    "string": "Parte {index} de {count}"
   },
   "molecule-transcript__disclaimer": {
     "comment": "aviso de transcrição",
@@ -2793,6 +2777,15 @@
   },
   "molecule-buttonDownloadBlank__modalTitle": {
     "string": "Criar uma conta gratuita"
+  },
+  "header__navItemMore-sharingtools": {
+    "string": "Sharing Tools"
+  },
+  "open_app": {
+    "string": "Open App"
+  },
+  "timeLeft": {
+    "string": "{time} left"
   },
   "presentersListAll__listEnd": {
     "string": "No more presenters"
