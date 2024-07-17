@@ -1,7 +1,7 @@
 import { DehydratedState } from '@tanstack/react-query';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import LibraryPlaylistDetail from '~containers/library/playlist/detail';
+import LibraryPlaylistDetail from '~containers/library/playlist/libraryPlaylistDetail';
 import { storeRequest } from '~lib/api/storeRequest';
 import { prefetchQueries } from '~src/__generated__/prefetch';
 import getDehydratedProps from '~src/lib/getDehydratedProps';
@@ -13,7 +13,7 @@ export async function getServerSideProps({
 	params,
 }: GetServerSidePropsContext<{
 	language: string;
-	id: string;
+	playlist: string;
 }>): Promise<
 	GetServerSidePropsResult<{
 		dehydratedState: DehydratedState;
@@ -21,7 +21,7 @@ export async function getServerSideProps({
 > {
 	storeRequest(req);
 	const client = await prefetchQueries({
-		getLibraryPlaylistPageData: { id: params?.id.toString() as string },
+		getLibraryPlaylistPageData: { id: params?.playlist.toString() as string },
 	});
 
 	return getDehydratedProps(client);

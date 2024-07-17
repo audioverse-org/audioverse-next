@@ -267,7 +267,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'playlists',
-					href: root.lang(languageRoute).library.playlists.get(),
+					href: root.lang(languageRoute).library.playlists().get(),
 					Icon: iconMap.fa_stream,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-playlists`,
@@ -462,12 +462,22 @@ export function useNavigationItems(): INavigationItem[] {
 			children: [
 				{
 					key: 'help',
-					href: 'https://help.audioverse.org/',
+					href: 'https://help.audioverse.org',
 					isTargetBlank: true,
 					Icon: iconMap.fa_question_circle,
 					label: intl.formatMessage({
 						id: `header__navItemMore-help`,
 						defaultMessage: 'Get Help',
+					}),
+				},
+				{
+					key: 'sharingtools',
+					href: 'https://share.audioverse.org/',
+					isTargetBlank: true,
+					Icon: iconMap.fa_link,
+					label: intl.formatMessage({
+						id: `header__navItemMore-sharingtools`,
+						defaultMessage: 'Sharing Tools',
 					}),
 				},
 				{

@@ -24,6 +24,7 @@ import { BaseColors } from '~src/lib/constants';
 
 import { analytics } from '../../lib/analytics';
 import IconButton from '../molecules/iconButton';
+import OpenAppButton from '../molecules/openAppButton';
 import styles from './navigation.module.scss';
 
 const Navigation = ({
@@ -140,7 +141,7 @@ const Navigation = ({
 							href={root.lang(languageRoute).give.get()}
 							className={styles.desktopDonate}
 						/>
-
+						<OpenAppButton className={styles.open_app_side} />
 						<div className={styles.account}>
 							{user ? (
 								<>
@@ -229,11 +230,7 @@ const Navigation = ({
 												{isDivider ? (
 													<div className={styles.divider} />
 												) : (
-													<Link
-														href={href as string}
-														target={isTargetBlank ? '_blank' : '_self'}
-														legacyBehavior
-													>
+													<Link href={href as string} legacyBehavior>
 														<a
 															className={styles.navLink}
 															onClick={
@@ -244,6 +241,7 @@ const Navigation = ({
 																			})
 																	: undefined
 															}
+															target={isTargetBlank ? '_blank' : '_self'}
 														>
 															{Icon && (
 																<span className={styles.icon}>

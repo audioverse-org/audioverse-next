@@ -2157,6 +2157,12 @@
       "value": "プライバシー"
     }
   ],
+  "header__navItemMore-sharingtools": [
+    {
+      "type": 0,
+      "value": "Sharing Tools"
+    }
+  ],
   "header__navItemMore-store": [
     {
       "type": 0,
@@ -3785,30 +3791,6 @@
       "value": "検索"
     }
   ],
-  "molecule-teaseRecording__individualChapter": [
-    {
-      "type": 0,
-      "value": "Individual Chapter"
-    }
-  ],
-  "molecule-teaseRecording__individualStory": [
-    {
-      "type": 0,
-      "value": "Individual Story"
-    }
-  ],
-  "molecule-teaseRecording__individualTeaching": [
-    {
-      "type": 0,
-      "value": "Individual Teaching"
-    }
-  ],
-  "molecule-teaseRecording__individualTrack": [
-    {
-      "type": 0,
-      "value": "Individual Track"
-    }
-  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,
@@ -3823,24 +3805,6 @@
     {
       "type": 0,
       "value": "個を表示"
-    }
-  ],
-  "molecule-teaseRecording__partInfo": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": "個の内の"
-    },
-    {
-      "type": 1,
-      "value": "index"
-    },
-    {
-      "type": 0,
-      "value": "部分を表示"
     }
   ],
   "molecule-transcript__disclaimer": [
@@ -4021,6 +3985,12 @@
     {
       "type": 0,
       "value": "あなただけが閲覧できます"
+    }
+  ],
+  "open_app": [
+    {
+      "type": 0,
+      "value": "Open App"
     }
   ],
   "organism-mobileHeader__more": [
@@ -5837,6 +5807,16 @@
     {
       "type": 0,
       "value": "Testimonials"
+    }
+  ],
+  "timeLeft": [
+    {
+      "type": 1,
+      "value": "time"
+    },
+    {
+      "type": 0,
+      "value": " left"
     }
   ],
   "time__hoursMinutesAndSeconds": [
