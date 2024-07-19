@@ -4,14 +4,14 @@ import React from 'react';
 
 import styles from './index.module.scss';
 
-type SimpleProps = {
+type Props = {
 	icon?: React.ReactElement;
 	title: string | JSX.Element;
 	url: string;
 	fullBleed?: boolean;
 };
 
-export default function CardHat(props: SimpleProps): JSX.Element {
+export default function CardHat(props: Props): JSX.Element {
 	const { title, url, icon, fullBleed } = props;
 
 	if (!fullBleed) {
