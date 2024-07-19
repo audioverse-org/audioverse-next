@@ -455,6 +455,12 @@
       "value": "プロフィール"
     }
   ],
+  "account__heading": [
+    {
+      "type": 0,
+      "value": "アカウントの設定"
+    }
+  ],
   "add_to_playlist": [
     {
       "type": 0,
@@ -4233,12 +4239,6 @@
       "value": "オーディオファイルのダウンロード方法の好みを設定。"
     }
   ],
-  "preferences__heading": [
-    {
-      "type": 0,
-      "value": "アカウントの設定"
-    }
-  ],
   "preferences__inputAutoplay": [
     {
       "type": 0,
@@ -4485,6 +4485,18 @@
       "value": "全て"
     }
   ],
+  "presentersListAll__listEnd": [
+    {
+      "type": 0,
+      "value": "No more presenters"
+    }
+  ],
+  "presentersListAll__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "presentersList__all": [
     {
       "type": 0,
@@ -4597,12 +4609,6 @@
     {
       "type": 0,
       "value": "削除されます。よろしいですか？"
-    }
-  ],
-  "profile__heading": [
-    {
-      "type": 0,
-      "value": "アカウントの設定"
     }
   ],
   "profile__inputLabelForEmail": [

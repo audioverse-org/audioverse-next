@@ -3,14 +3,11 @@ import capitalize from 'lodash/capitalize';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading1 from '~components/atoms/heading1';
 import Heading2 from '~components/atoms/heading2';
 import Heading3 from '~components/atoms/heading3';
-import withAuthGuard from '~components/HOCs/withAuthGuard';
 import Button from '~components/molecules/button';
 import Checkbox from '~components/molecules/form/checkbox';
 import Select from '~components/molecules/form/select';
-import AccountNav from '~components/organisms/accountNav';
 import {
 	Language,
 	RecordingQuality,
@@ -20,10 +17,10 @@ import {
 import {
 	useGetAccountPreferencesDataQuery,
 	useUpdateAccountPreferencesMutation,
-} from './__generated__/preferences';
-import styles from './preferences.module.scss';
+} from './__generated__/preferencesForm';
+import styles from './preferencesForm.module.scss';
 
-function Profile(): JSX.Element {
+export default function PreferencesForm(): JSX.Element {
 	const queryClient = useQueryClient();
 	const { data } = useGetAccountPreferencesDataQuery() || {};
 
@@ -77,13 +74,6 @@ function Profile(): JSX.Element {
 
 	return (
 		<>
-			<Heading1>
-				<FormattedMessage
-					id="preferences__heading"
-					defaultMessage="Account Settings"
-				/>
-			</Heading1>
-			<AccountNav current="preferences" />
 			<div className={styles.container}>
 				<Heading2 className={styles.subheading}>
 					<FormattedMessage
@@ -216,5 +206,3 @@ function Profile(): JSX.Element {
 		</>
 	);
 }
-
-export default withAuthGuard(Profile);

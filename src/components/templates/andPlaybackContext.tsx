@@ -513,6 +513,8 @@ export default function AndPlaybackContext({
 			return;
 		}
 
+		const _paused = playback.paused();
+
 		function findDestination() {
 			if (isShowingVideo) {
 				// TODO: use ref instead of ID
@@ -533,6 +535,14 @@ export default function AndPlaybackContext({
 		}
 
 		destination.appendChild(video);
+
+		// WORKAROUND: player pauses when moving to miniplayer
+		if (_paused) {
+			playback.pause();
+		} else {
+			playback.play();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [videoHandlerId, videoHandler, isShowingVideo]);
 
 	return (

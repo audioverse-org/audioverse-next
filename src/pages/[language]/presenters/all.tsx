@@ -1,3 +1,4 @@
+import { DehydratedState } from '@tanstack/react-query';
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
 import {
@@ -9,18 +10,30 @@ import { REVALIDATE } from '~lib/constants';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '~lib/getLanguageRoutes';
 import root from '~lib/routes';
+import { prefetchQueries } from '~src/__generated__/prefetch';
+import serializableDehydrate from '~src/lib/serializableDehydrate';
 
 export default All;
 
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string }>): Promise<
-	GetStaticPropsResult<GetPersonListLetterCountsQuery>
+	GetStaticPropsResult<
+		GetPersonListLetterCountsQuery & {
+			dehydratedState: DehydratedState;
+		}
+	>
 > {
+	const language = getLanguageIdByRoute(params?.language);
+	const counts = await getPersonListLetterCounts({
+		language,
+	});
+	const client = await prefetchQueries({
+		getPresenterListAllPageData: { language, after: null },
+	});
+
 	return {
-		props: await getPersonListLetterCounts({
-			language: getLanguageIdByRoute(params?.language),
-		}),
+		props: { ...counts, dehydratedState: serializableDehydrate(client) },
 		revalidate: REVALIDATE,
 	};
 }

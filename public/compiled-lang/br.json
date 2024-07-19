@@ -455,6 +455,12 @@
       "value": "Perfil"
     }
   ],
+  "account__heading": [
+    {
+      "type": 0,
+      "value": "Configurações da conta"
+    }
+  ],
   "add_to_playlist": [
     {
       "type": 0,
@@ -4221,12 +4227,6 @@
       "value": "Escolha como deseja baixar o áudio."
     }
   ],
-  "preferences__heading": [
-    {
-      "type": 0,
-      "value": "Configurações da conta"
-    }
-  ],
   "preferences__inputAutoplay": [
     {
       "type": 0,
@@ -4457,6 +4457,18 @@
       "value": "Todos"
     }
   ],
+  "presentersListAll__listEnd": [
+    {
+      "type": 0,
+      "value": "No more presenters"
+    }
+  ],
+  "presentersListAll__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "presentersList__all": [
     {
       "type": 0,
@@ -4569,12 +4581,6 @@
     {
       "type": 0,
       "value": "Tem certeza?"
-    }
-  ],
-  "profile__heading": [
-    {
-      "type": 0,
-      "value": "Configurações da conta"
     }
   ],
   "profile__inputLabelForEmail": [

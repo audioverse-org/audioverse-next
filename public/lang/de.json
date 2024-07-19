@@ -686,9 +686,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Wähle aus, wie du Audiodateien herunterladen möchtest."
   },
-  "preferences__heading": {
-    "string": "Kontoeinstellungen"
-  },
   "preferences__inputAutoplay": {
     "string": "Aufnahmen automatisch abspielen"
   },
@@ -795,9 +792,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "Änderungen speichern"
-  },
-  "profile__heading": {
-    "string": "Kontoeinstellungen"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",
@@ -2735,5 +2729,14 @@
   },
   "timeLeft": {
     "string": "{time} left"
+  },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "Kontoeinstellungen"
   }
 }
