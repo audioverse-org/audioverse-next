@@ -34,13 +34,7 @@ export default function CardSermon({
 				<CardHatSermon sequence={sequence} fullBleed={fullBleed} />
 			) : (
 				!hideSponsorHat &&
-				sponsor && (
-					<CardHatSponsor
-						sponsor={sponsor}
-						className={fullBleed ? style.sponsor : undefined}
-						fullBleed={fullBleed}
-					/>
-				)
+				sponsor && <CardHatSponsor sponsor={sponsor} fullBleed={fullBleed} />
 			)}
 			<TeaseRecording
 				recording={recording}
