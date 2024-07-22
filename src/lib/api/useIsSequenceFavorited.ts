@@ -12,7 +12,6 @@ import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 import { RECORDING_FAVORITED_QUERY_KEY_PREFIX } from './useIsRecordingFavorited';
 
 interface IUseIsSequenceFavoritedResult extends IUseIsFavoritedResult {
-	recordingsFavoritedCount: number | undefined;
 	playbackCompletedPercentage: number;
 }
 
@@ -41,12 +40,10 @@ export function useIsSequenceFavorited(
 			generatedQueryKey,
 		]
 	);
-	const recordingsFavoritedCount = data?.sequence?.recordings.aggregate?.count;
 	const playbackCompletedPercentage =
 		data?.sequence?.viewerPlaybackCompletedPercentage || 0;
 	return {
 		...result,
-		recordingsFavoritedCount,
 		playbackCompletedPercentage,
 	};
 }

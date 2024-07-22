@@ -1,6 +1,11 @@
 # ------------------------------------------------------
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------ 
+"""
+Indicates exactly one field must be supplied and this field must not be `null`.
+"""
+directive @oneOf on INPUT_OBJECT
+
 type Aggregate {
   count: Int!
 }
@@ -947,7 +952,7 @@ type Image implements Node {
   name: String!
   updatedAt: DateTime
   url(
-    cropMode: ImageCropMode = DEFAULT
+    cropMode: ImageCropMode! = DEFAULT
     size: Int!
 
     """Enable to avoid cached image URLs."""
@@ -1236,7 +1241,7 @@ type MediaFileUpload implements Node {
   recording: Recording
   transcodingStatus: MediaFileTranscodingStatus!
   updatedAt: DateTime
-  url: URL
+  url: String
 }
 
 type MediaFileUploadConnection {
@@ -1359,7 +1364,7 @@ type MediaReleaseForm implements Node {
   type: MediaReleaseFormType!
 
   """The URL for media release form."""
-  url: URL
+  url: String
 }
 
 type MediaReleaseFormConnection {
@@ -2123,7 +2128,7 @@ type Person implements Node & UniformResourceLocatable {
   surname: String!
   title: String!
   viewerHasFavorited: Boolean!
-  website: URL
+  website: String
 }
 
 type PersonConnection {
@@ -2158,7 +2163,7 @@ input PersonCreateInput {
   summary: String
   surname: String!
   title: String
-  website: URL
+  website: String
 }
 
 type PersonEdge {
@@ -2195,7 +2200,7 @@ input PersonUpdateInput {
   summary: String
   surname: String
   title: String
-  website: URL
+  website: String
 }
 
 input PersonsOrder {
@@ -4595,7 +4600,7 @@ type Sponsor implements Node & UniformResourceLocatable {
   summary: String!
   title: String!
   viewerHasFavorited: Boolean!
-  website: URL
+  website: String
 }
 
 type SponsorConnection {
@@ -4625,7 +4630,7 @@ input SponsorCreateInput {
   skipLegalScreening: Boolean
   summary: String
   title: String!
-  website: URL
+  website: String
 }
 
 input SponsorDistributionAgreementInput {
@@ -4665,7 +4670,7 @@ input SponsorUpdateInput {
   skipLegalScreening: Boolean
   summary: String
   title: String
-  website: URL
+  website: String
 }
 
 input SponsorsOrder {
@@ -6185,7 +6190,7 @@ type VideoFile implements Node {
   id: ID!
 
   """The URL to record video views for analytics."""
-  logUrl: URL
+  logUrl: String
   mimeType: String!
   recording: Recording!
   transcodingStatus: MediaFileTranscodingStatus!

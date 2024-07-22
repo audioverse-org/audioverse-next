@@ -1,21 +1,9 @@
 fragment cardRecordingSequenceHat on Recording {
 	sequence {
-		id
 		canonicalPath(useFuturePath: true)
-		contentType
-		image {
-			url(size: 100)
-		}
-		recordings {
-			aggregate {
-				count
-			}
-		}
+
 		collection {
 			title
 		}
-	}
-	writers: persons(role: WRITER) {
-		...personLockup
 	}
 }

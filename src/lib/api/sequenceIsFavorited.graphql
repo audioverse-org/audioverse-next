@@ -2,10 +2,5 @@ query sequenceIsFavorited($id: ID!) {
 	sequence(id: $id) {
 		viewerHasFavorited
 		viewerPlaybackCompletedPercentage
-		recordings(viewerHasFavorited: true) {
-			aggregate {
-				count
-			}
-		}
 	}
 }
