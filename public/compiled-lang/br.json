@@ -2,7 +2,7 @@
   "Listen_Later": [
     {
       "type": 0,
-      "value": "Escute Depois"
+      "value": "Ouvir Depois"
     }
   ],
   "RecordingFavorite__favorite": [
@@ -458,13 +458,13 @@
   "add_to_playlist": [
     {
       "type": 0,
-      "value": "Adicionar à Playlist"
+      "value": "Adicionar ao Playlist"
     }
   ],
   "add_to_playlist_btn": [
     {
       "type": 0,
-      "value": "Adicionar à Playlist"
+      "value": "Adicionar ao Playlist"
     }
   ],
   "andGlobalModals__authCopy": [
@@ -792,19 +792,19 @@
   "browse__topicsNext": [
     {
       "type": 0,
-      "value": "Next topics"
+      "value": "Topicos Anteriores"
     }
   ],
   "browse__topicsPrevious": [
     {
       "type": 0,
-      "value": "Previous topics"
+      "value": "Proximos Topics"
     }
   ],
   "browse_topicsHeading": [
     {
       "type": 0,
-      "value": "Topics"
+      "value": "Topicos"
     }
   ],
   "buttonShareRecording__emailSubject": [
@@ -994,7 +994,7 @@
   "cardSequence_scriptureSongsType": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "cardSequence_sequenceLabel": [
@@ -1072,7 +1072,7 @@
   "cardSong_sequenceLabel": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "cardSponsor__collectionCountLabel": [
@@ -1120,7 +1120,7 @@
   "cardTopic__hatLabel": [
     {
       "type": 0,
-      "value": "Topic"
+      "value": "Topico"
     }
   ],
   "ccollectionTeachingsDetail__heading": [
@@ -1464,7 +1464,7 @@
   "discoverCollections_egwAudiobooksHeading": [
     {
       "type": 0,
-      "value": "Discover Ellen White"
+      "value": "Descubra Ellen White"
     }
   ],
   "discoverCollections_storySeasonsHeading": [
@@ -1476,55 +1476,55 @@
   "discover__conferencesNext": [
     {
       "type": 0,
-      "value": "Next recent conferences"
+      "value": "Proximas Conferencias Recentes"
     }
   ],
   "discover__conferencesPrevious": [
     {
       "type": 0,
-      "value": "Previous recent conferences"
+      "value": "Conferencias Anteriores"
     }
   ],
   "discover__featuredTeachingsNext": [
     {
       "type": 0,
-      "value": "Next featured teachings"
+      "value": "Proximos Ensinamentos em Destaque"
     }
   ],
   "discover__featuredTeachingsPrevious": [
     {
       "type": 0,
-      "value": "Previous featured teachings"
+      "value": "Ensinamentos Anteriores em Destaque"
     }
   ],
   "discover__recentBlogNext": [
     {
       "type": 0,
-      "value": "Next recent blog posts"
+      "value": "Proximas Postagens do Blog"
     }
   ],
   "discover__recentBlogPrevious": [
     {
       "type": 0,
-      "value": "Previous recent blog posts"
+      "value": "Postagens Anteriores do Blog"
     }
   ],
   "discover__recentTeachingsNext": [
     {
       "type": 0,
-      "value": "Next recent teachings"
+      "value": "Proximos Ensinamentos"
     }
   ],
   "discover__recentTeachingsPrevious": [
     {
       "type": 0,
-      "value": "Previous recent teachings"
+      "value": "Ensinamentos Anteriores"
     }
   ],
   "discover__seeAll": [
     {
       "type": 0,
-      "value": "See All"
+      "value": "Ver todos"
     }
   ],
   "discover__storiesHeading": [
@@ -1536,13 +1536,13 @@
   "discover__storiesNext": [
     {
       "type": 0,
-      "value": "Next recent stories"
+      "value": "Proximas Historias"
     }
   ],
   "discover__storiesPrevious": [
     {
       "type": 0,
-      "value": "Previous recent stories"
+      "value": "Historias Anteriores"
     }
   ],
   "discover__title": [
@@ -1554,43 +1554,43 @@
   "discover__topicsNext": [
     {
       "type": 0,
-      "value": "Next topics"
+      "value": "Proximos Topicos"
     }
   ],
   "discover__topicsPrevious": [
     {
       "type": 0,
-      "value": "Previous topics"
+      "value": "Topicos Anteriores"
     }
   ],
   "discover__trendingMusicNext": [
     {
       "type": 0,
-      "value": "Next trending scripture songs"
+      "value": "Proximas Canções Biblicas em alta"
     }
   ],
   "discover__trendingMusicPrevious": [
     {
       "type": 0,
-      "value": "Previous trending scripture songs"
+      "value": "Canções Anteriores Biblicas em alta"
     }
   ],
   "discover__trendingTeachingsNext": [
     {
       "type": 0,
-      "value": "Next trending teachings"
+      "value": "Proximos Ensinamentos em Alta"
     }
   ],
   "discover__trendingTeachingsPrevious": [
     {
       "type": 0,
-      "value": "Previous trending teachings"
+      "value": "Ensinamentos Anteriores em Alta"
     }
   ],
   "discover_bibleBooksHeading": [
     {
       "type": 0,
-      "value": "Discover Bible Books"
+      "value": "Descubra Livros Biblicos"
     }
   ],
   "discover_conferencesHeading": [
@@ -1608,7 +1608,7 @@
   "discover_presentersHeading": [
     {
       "type": 0,
-      "value": "Discover Presenters"
+      "value": "Descubra Oradores"
     }
   ],
   "discover_recentBlogHeading": [
@@ -1626,7 +1626,7 @@
   "discover_topicsHeading": [
     {
       "type": 0,
-      "value": "Topics"
+      "value": "Topicos"
     }
   ],
   "discover_trendingMusicHeading": [
@@ -1748,7 +1748,7 @@
   "error": [
     {
       "type": 0,
-      "value": "Error"
+      "value": "Erro"
     }
   ],
   "generateFeed__audio": [
@@ -2014,7 +2014,7 @@
   "header__navItemCollections-songs": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "header__navItemCollections-sponsors": [
@@ -2032,7 +2032,7 @@
   "header__navItemCollections-topics": [
     {
       "type": 0,
-      "value": "Topics"
+      "value": "Topicos"
     }
   ],
   "header__navItemContact": [
@@ -3536,13 +3536,13 @@
   "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": [
     {
       "type": 0,
-      "value": "Create account"
+      "value": "Criar Conta"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": [
     {
       "type": 0,
-      "value": "Skip"
+      "value": "Pular"
     }
   ],
   "molecule-buttonGuest__modalButtonLabelLogIn": [
@@ -3554,7 +3554,7 @@
   "molecule-buttonGuest__modalButtonLabelSkip": [
     {
       "type": 0,
-      "value": "Skip"
+      "value": "Pular"
     }
   ],
   "molecule-buttonGuest__modalParagraph": [
@@ -3566,13 +3566,13 @@
   "molecule-buttonGuest__modalParagraph1-2": [
     {
       "type": 0,
-      "value": "Please consider signing up or logging in to help our mission of sharing sound doctrine."
+      "value": "Por favor, considere se inscrever ou fazer login para apoiar nossa missão de compartilhar uma doutrina sólida."
     }
   ],
   "molecule-buttonGuest__modalParagraph2": [
     {
       "type": 0,
-      "value": "With a free account,you can"
+      "value": "Com uma conta gratuita, você pode"
     }
   ],
   "molecule-buttonGuest__modalTitle": [
@@ -3590,19 +3590,19 @@
   "molecule-buttonGuest__requests": [
     {
       "type": 0,
-      "value": "Avoid annoying login requests"
+      "value": "Evite solicitações de login incômodas"
     }
   ],
   "molecule-buttonGuest__save": [
     {
       "type": 0,
-      "value": "Save your content to listen later"
+      "value": "Salve seu conteúdo para ouvir mais tarde"
     }
   ],
   "molecule-buttonGuest__sync": [
     {
       "type": 0,
-      "value": "Pick up where you left off across devices"
+      "value": "Continue ouvindo de onde parou em diferentes dispositivos"
     }
   ],
   "molecule-buttonShareRecording__audioEmbedLabel": [
@@ -3756,7 +3756,7 @@
   "molecule-searchBar__ariaLabel": [
     {
       "type": 0,
-      "value": "search"
+      "value": "busca"
     }
   ],
   "molecule-searchBar__cancel": [
@@ -3868,25 +3868,25 @@
   "new_playlist": [
     {
       "type": 0,
-      "value": "Nova Playlist"
+      "value": "Novo Playlist"
     }
   ],
   "newsLetterForm__checkboxNewsletter": [
     {
       "type": 0,
-      "value": "Newsletter (typically about once a month)"
+      "value": "Newsletter (geralmente uma vez por mês)"
     }
   ],
   "newsLetterForm__checkboxWeeklyPics": [
     {
       "type": 0,
-      "value": "Weekly Picks (goes out every Monday)"
+      "value": "Destaques da Semana (enviado toda segunda-feira)"
     }
   ],
   "newsLetterForm__newsletterEmail": [
     {
       "type": 0,
-      "value": "Email Address"
+      "value": "E-mail"
     }
   ],
   "newsLetterForm__newsletterEmailPlaceholder": [
@@ -3898,7 +3898,7 @@
   "newsLetterForm__newsletterHatTitle": [
     {
       "type": 0,
-      "value": "Sign up for our Emails"
+      "value": "Inscreva-se para receber nossos e-mails"
     }
   ],
   "newsLetterForm__newsletterName": [
@@ -3916,7 +3916,7 @@
   "newsLetterForm__newsletterSubscribe": [
     {
       "type": 0,
-      "value": "Subscribe"
+      "value": "Increva-se"
     }
   ],
   "notFound__header": [
@@ -3952,13 +3952,13 @@
   "not_shareable": [
     {
       "type": 0,
-      "value": "Esta playlist é privada."
+      "value": "Este playlist é privado."
     }
   ],
   "not_shareable_title": [
     {
       "type": 0,
-      "value": "Privada"
+      "value": "Privado"
     }
   ],
   "onlyYou": [
@@ -3970,13 +3970,13 @@
   "open_app": [
     {
       "type": 0,
-      "value": "Open App"
+      "value": "Abrir App"
     }
   ],
   "organism-mobileHeader__more": [
     {
       "type": 0,
-      "value": "more"
+      "value": "Mais"
     }
   ],
   "organism-modal__close": [
@@ -4098,31 +4098,31 @@
   "organismSection__audiobooksNext": [
     {
       "type": 0,
-      "value": "Next audiobooks"
+      "value": "Proximo Audio Livros"
     }
   ],
   "organismSection__audiobooksPrevious": [
     {
       "type": 0,
-      "value": "Previous audiobooks"
+      "value": "Audio Livros Anteriores"
     }
   ],
   "organismSection__bibleBooksHeading": [
     {
       "type": 0,
-      "value": "Bible Books"
+      "value": "Livros Biblicos"
     }
   ],
   "organismSection__bibleBooksNext": [
     {
       "type": 0,
-      "value": "Next Bible books"
+      "value": "Next Livros Biblicos"
     }
   ],
   "organismSection__bibleBooksPrevious": [
     {
       "type": 0,
-      "value": "Previous Bible books"
+      "value": "Previous Livros Biblicos"
     }
   ],
   "organismSection__egwAudiobooksHeading": [
@@ -4134,13 +4134,13 @@
   "organismSection__egwAudiobooksNext": [
     {
       "type": 0,
-      "value": "Next EGW audiobooks"
+      "value": "Proximo Audio Livros EGW"
     }
   ],
   "organismSection__egwAudiobooksPrevious": [
     {
       "type": 0,
-      "value": "Previous EGW audiobooks"
+      "value": "Audio Livros EGW Anteriores"
     }
   ],
   "organismSection_presentersHeading": [
@@ -4152,31 +4152,31 @@
   "organismSection_presentersNext": [
     {
       "type": 0,
-      "value": "Next presenters"
+      "value": "Proximos Oradores"
     }
   ],
   "organismSection_presentersPrevious": [
     {
       "type": 0,
-      "value": "Previous presenters"
+      "value": "Oradores Anteriores"
     }
   ],
   "organismSection_scriptureSongsHeading": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "organismSection_scriptureSongsNext": [
     {
       "type": 0,
-      "value": "Next scripture songs"
+      "value": "Proximas Canções Biblicas"
     }
   ],
   "organismSection_scriptureSongsPrevious": [
     {
       "type": 0,
-      "value": "Previous scripture songs"
+      "value": "Canções Biblicas Anteriores"
     }
   ],
   "organismSection_seriesHeading": [
@@ -4188,13 +4188,13 @@
   "organismSection_seriesNext": [
     {
       "type": 0,
-      "value": "Next series"
+      "value": "Proximas series"
     }
   ],
   "organismSection_seriesPrevious": [
     {
       "type": 0,
-      "value": "Previous series"
+      "value": "Series Anteriores"
     }
   ],
   "organismSection_sponsorsHeading": [
@@ -4206,13 +4206,13 @@
   "organismSection_sponsorsNext": [
     {
       "type": 0,
-      "value": "Next sponsors"
+      "value": "Proximos Patrocinadores"
     }
   ],
   "organismSection_sponsorsPrevious": [
     {
       "type": 0,
-      "value": "Previous sponsors"
+      "value": "Patrocinadores Anteriores"
     }
   ],
   "ourPurpose__title": [
@@ -5054,7 +5054,7 @@
   "search__bileBooksSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Bible books"
+      "value": "Ver todos Livros Biblicos encontrados"
     }
   ],
   "search__booksHeading": [
@@ -5066,7 +5066,7 @@
   "search__booksSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Audiobooks"
+      "value": "Ver todos Audio Livros enconrados"
     }
   ],
   "search__conferencesHeading": [
@@ -5078,7 +5078,7 @@
   "search__conferencesSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Conferences"
+      "value": "Ver todas Conferencias encontradas"
     }
   ],
   "search__egwbooksHeading": [
@@ -5090,19 +5090,19 @@
   "search__egwbooksSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Ellen White Audiobooks"
+      "value": "Ver todos Audio Livros de Ellen White encontrados"
     }
   ],
   "search__emptyStateMessage": [
     {
       "type": 0,
-      "value": "Try searching for something else"
+      "value": "Tente outro Termo em sua Pesquisa"
     }
   ],
   "search__emptyStateTitle": [
     {
       "type": 0,
-      "value": "No results found"
+      "value": "Nenhum Resultado Encontrado"
     }
   ],
   "search__musicHeading": [
@@ -5114,7 +5114,7 @@
   "search__musicSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Music"
+      "value": "Ver todos Cancoes Biblicas encontradas"
     }
   ],
   "search__presentersHeading": [
@@ -5126,7 +5126,7 @@
   "search__presentersSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Presenters"
+      "value": "Ver todos Oradores encontrados"
     }
   ],
   "search__seriesHeading": [
@@ -5138,7 +5138,7 @@
   "search__seriesSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Series"
+      "value": "Ver todas Series encontradas"
     }
   ],
   "search__sponsorsHeading": [
@@ -5150,7 +5150,7 @@
   "search__sponsorsSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Sponsors"
+      "value": "Ver todos Patrocinadores encontrados"
     }
   ],
   "search__storiesHeading": [
@@ -5162,7 +5162,7 @@
   "search__storiesSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Stories"
+      "value": "Ver todos Historias encontradas"
     }
   ],
   "search__teachingsHeading": [
@@ -5174,7 +5174,7 @@
   "search__teachingsSeeAll": [
     {
       "type": 0,
-      "value": "See All Matching Teachings"
+      "value": "Ver todos Ensinamentos encontrados"
     }
   ],
   "search__title": [
@@ -5212,7 +5212,7 @@
   "sequenceType__musicTrackTitle": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "sequenceType__seriesTitle": [
@@ -5386,7 +5386,7 @@
   "socialLogin__loginOr": [
     {
       "type": 0,
-      "value": "Or"
+      "value": "Ou"
     }
   ],
   "socialLogin__registerFacebookButton": [
@@ -5414,7 +5414,7 @@
     },
     {
       "type": 0,
-      "value": " Canções das Escrituras"
+      "value": " Canções Biblicas"
     }
   ],
   "songsBooksDetail__contributors": [
@@ -5454,7 +5454,7 @@
   "songsListPage__title": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "sopnsorTypeLockup_type": [
@@ -5652,13 +5652,13 @@
   "storyAlbumList__emptyStateMessage": [
     {
       "type": 0,
-      "value": "There are no story albums to show."
+      "value": "Não há álbuns de histórias para mostrar."
     }
   ],
   "storyAlbumList__emptyStateTitle": [
     {
       "type": 0,
-      "value": "Nothing here!"
+      "value": "Nada aqui!"
     }
   ],
   "storyAlbumList__heading": [
@@ -5692,7 +5692,7 @@
   "storyAlbums__title": [
     {
       "type": 0,
-      "value": "Canções das Escrituras"
+      "value": "Canções Biblicas"
     }
   ],
   "teachingsFeed__description": [
@@ -5816,13 +5816,13 @@
   "topicDetail__label": [
     {
       "type": 0,
-      "value": "Topic"
+      "value": "Topico"
     }
   ],
   "topicDetail__parentTopic": [
     {
       "type": 0,
-      "value": "Parent Topic"
+      "value": "Tópico Principal"
     }
   ],
   "topicDetail__series": [
@@ -5936,7 +5936,7 @@
   "topicListPage__title": [
     {
       "type": 0,
-      "value": "All Topics"
+      "value": "Todos Topicos"
     }
   ],
   "trendingTeachings__heading": [
