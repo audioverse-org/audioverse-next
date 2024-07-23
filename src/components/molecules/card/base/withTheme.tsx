@@ -6,6 +6,7 @@ import WithCardTheme, { ExtendedCardTheme } from './withCardTheme';
 interface Props {
 	theme: ExtendedCardTheme;
 	className?: string;
+	fullBleed?: boolean;
 }
 
 export default function CardWithTheme({
@@ -13,7 +14,7 @@ export default function CardWithTheme({
 	...props
 }: PropsWithChildren<Props>): JSX.Element {
 	return (
-		<Card className={props.className}>
+		<Card fullBleed={props.fullBleed}>
 			<WithCardTheme {...props}>{children}</WithCardTheme>
 		</Card>
 	);

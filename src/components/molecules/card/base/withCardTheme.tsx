@@ -29,15 +29,24 @@ export type ExtendedCardTheme = (typeof EXTENDED_CARD_THEMES)[number];
 interface Props {
 	theme: ExtendedCardTheme;
 	className?: string;
+	fullBleed?: boolean;
 }
 
 export default function WithCardTheme({
 	theme,
 	children,
 	className,
+	fullBleed,
 }: PropsWithChildren<Props>): JSX.Element {
 	return (
-		<div className={clsx(styles.base, styles[theme], className)}>
+		<div
+			className={clsx(
+				styles.base,
+				styles[theme],
+				fullBleed && styles.fullBleed,
+				className
+			)}
+		>
 			{children}
 		</div>
 	);

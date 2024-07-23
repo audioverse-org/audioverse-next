@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React from 'react';
 
 import HatIcon from '~public/img/icons/fa-user-plus.svg';
@@ -17,7 +16,7 @@ export default function CardHatSponsor({
 	fullBleed,
 }: Props): JSX.Element {
 	return (
-		<div className={clsx(fullBleed ? styles.fullBleed : styles.wrapper)}>
+		<div className={fullBleed ? '' : styles.wrapper}>
 			<CardHat
 				title={sponsor.title}
 				url={sponsor.canonicalPath}

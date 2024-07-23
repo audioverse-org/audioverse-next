@@ -14,35 +14,22 @@ type Props = {
 export default function CardHat(props: Props): JSX.Element {
 	const { title, url, icon, fullBleed } = props;
 
+	const content = (
+		<div
+			className={clsx(styles.hatBar, fullBleed ? styles.fullBleed : undefined)}
+		>
+			<span className={styles.hatIcon}>{icon}</span>
+			<span className={styles.hatTitle}>{title}</span>
+		</div>
+	);
+
 	if (!fullBleed) {
 		return (
 			<Link href={url} legacyBehavior>
-				<a className={clsx(styles.hat)}>
-					<div
-						className={clsx(
-							styles.hatBar,
-							fullBleed ? styles.fullBleed : undefined
-						)}
-					>
-						<span className={styles.hatIcon}>{icon}</span>
-						<span className={styles.hatTitle}>{title}</span>
-					</div>
-				</a>
+				<a className={clsx(styles.hat)}>{content}</a>
 			</Link>
 		);
 	}
 
-	return (
-		<div className={clsx(styles.hat)}>
-			<div
-				className={clsx(
-					styles.hatBar,
-					fullBleed ? styles.fullBleed : undefined
-				)}
-			>
-				<span className={styles.hatIcon}>{icon}</span>
-				<span className={styles.hatTitle}>{title}</span>
-			</div>
-		</div>
-	);
+	return <div className={clsx(styles.hat)}>{content}</div>;
 }

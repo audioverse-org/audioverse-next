@@ -4,7 +4,6 @@
 	display: flex;
 	flex-direction: column;
 	background: var(--cardBg);
-	border-bottom: 0 !important;
 }
 
 .audiobookTrack {
@@ -117,4 +116,10 @@
 .songBook {
 	--cardBg: #{$ts-songH};
 	--cardHoverColor: #{$ts-darkened-songH};
+}
+
+.fullBleed {
+	--cardHoverColor: #{$ts-white};
+	--hatBg: #{$ts-white};
+	--hatHoverColor: #{$ts-white};
 }

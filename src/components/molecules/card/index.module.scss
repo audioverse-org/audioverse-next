@@ -1,10 +1,8 @@
 @import '../../../styles/common';
 
-.card {
+%common-styles {
 	position: relative;
 	display: flex;
-	border-radius: 16px;
-	box-shadow: $ts-shadow-small-default;
 	overflow: hidden;
 	text-align: left;
 
@@ -16,4 +14,15 @@
 	*:hover {
 		text-decoration: none;
 	}
+}
+
+.card {
+	@extend %common-styles;
+	border-radius: 16px;
+	box-shadow: $ts-shadow-small-default;
+}
+
+.card_fullBleed {
+	@extend %common-styles;
+	border-bottom: 1px solid #ddd;
 }

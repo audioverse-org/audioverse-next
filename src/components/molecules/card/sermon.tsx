@@ -5,7 +5,6 @@ import { CardRecordingFragment } from './__generated__/recording';
 import CardWithTheme from './base/withTheme';
 import CardHatSermon from './hat/sermon';
 import CardHatSponsor from './hat/sponsor';
-import style from './sermon.module.scss';
 
 export interface CardSermonProps {
 	recording: CardRecordingFragment;
@@ -26,10 +25,7 @@ export default function CardSermon({
 	const theme = 'sermon';
 
 	return (
-		<CardWithTheme
-			theme={theme}
-			className={fullBleed ? style.card_fullBleed : undefined}
-		>
+		<CardWithTheme theme={theme} fullBleed={fullBleed}>
 			{!hideHat && sequence ? (
 				<CardHatSermon sequence={sequence} fullBleed={fullBleed} />
 			) : (

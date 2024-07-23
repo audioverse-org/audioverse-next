@@ -1,7 +1,6 @@
 fragment cardRecordingSequenceHat on Recording {
 	sequence {
 		canonicalPath(useFuturePath: true)
-
 		collection {
 			title
 		}
