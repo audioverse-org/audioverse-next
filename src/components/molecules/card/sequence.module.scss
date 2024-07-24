@@ -1,6 +1,7 @@
 @import '../../../styles/common';
 
 $container-padding: 16px;
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -8,6 +9,7 @@ $container-padding: 16px;
 	border-radius: 16px;
 	overflow: hidden;
 	transition-duration: $transition-medium;
+
 	&.EGWAUDIOBOOK {
 		//egw
 		--sequenceHeadingColor: #{$ts-white};
@@ -16,6 +18,7 @@ $container-padding: 16px;
 		background-color: $ts-egw;
 		--sequenceBackgroundColorHover: #{$ts-darkened-egw};
 	}
+
 	&.AUDIOBOOK {
 		--sequenceHeadingColor: #{$ts-white};
 		--sequenceTextColor: #{$ts-white};
@@ -23,6 +26,7 @@ $container-padding: 16px;
 		background-color: $ts-bookH;
 		--sequenceBackgroundColorHover: #{$ts-darkened-bookH};
 	}
+
 	&.BIBLE_BOOK {
 		--sequenceHeadingColor: #{$ts-white};
 		--sequenceTextColor: #{$ts-white};
@@ -30,6 +34,7 @@ $container-padding: 16px;
 		background-color: $ts-bibleH;
 		--sequenceBackgroundColorHover: #{$ts-darkened-bibleH};
 	}
+
 	&.MUSIC_ALBUM {
 		--sequenceHeadingColor: #{$ts-dark};
 		--sequenceTextColor: #{$ts-midTone};
@@ -37,6 +42,7 @@ $container-padding: 16px;
 		background-color: $ts-songH;
 		--sequenceBackgroundColorHover: #{$ts-darkened-songH};
 	}
+
 	&.SERIES {
 		--sequenceHeadingColor: #{$ts-dark};
 		--sequenceTextColor: #{$ts-dark};
@@ -44,28 +50,26 @@ $container-padding: 16px;
 		background-color: $ts-cream;
 		--sequenceBackgroundColorHover: #{$ts-darkened-cream};
 	}
+
 	&.STORY_SEASON {
 		--sequenceHeadingColor: #{$ts-white};
 		--sequenceTextColor: #{$ts-lightTone};
 		--sequenceTextSecondaryColor: #{$ts-lightTone};
 		background-color: $ts-storyH;
 		--sequenceBackgroundColorHover: #{$ts-darkened-storyH};
+
 		.subRecordings {
 			--cardBg: #{$ts-darkened-storyB};
 		}
 	}
+
 	&,
 	&:hover {
 		color: var(--sequenceTextColor);
 	}
+
 	&:hover:not(.otherHovered) {
 		background-color: var(--sequenceBackgroundColorHover);
-	}
-}
-
-.containerSlim {
-	@media (pointer: coarse) {
-		pointer-events: none;
 	}
 }
 
@@ -77,9 +81,11 @@ $container-padding: 16px;
 	margin-bottom: 8px;
 	flex-grow: 1;
 	color: var(--sequenceHeadingColor);
+
 	&.audiobookTitle {
 		font-weight: 400;
 	}
+
 	&.bibleBookTitle {
 		text-align: center;
 		margin-bottom: 4px;
@@ -87,6 +93,7 @@ $container-padding: 16px;
 		font-size: 19px;
 		letter-spacing: 0.2em;
 	}
+
 	&.storyTitle {
 		font-weight: 600;
 	}
@@ -121,10 +128,12 @@ $container-padding: 16px;
 .morePersons {
 	display: flex;
 	align-items: center;
+
 	> svg {
 		margin-right: 12px;
 		transition: none;
 	}
+
 	&:hover {
 		color: $ts-red;
 	}
@@ -154,12 +163,15 @@ $container-padding: 16px;
 
 .like {
 	display: none;
+
 	@media (any-pointer: fine) {
 		display: inherit;
 	}
+
 	@media (pointer: coarse) {
 		pointer-events: none;
 	}
+
 	&Active {
 		display: inherit;
 	}

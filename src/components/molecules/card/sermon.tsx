@@ -11,6 +11,7 @@ export interface CardSermonProps {
 	hideHat?: boolean;
 	hideSponsorHat?: boolean;
 	isOptionalLink?: boolean;
+	fullBleed?: boolean;
 }
 
 export default function CardSermon({
@@ -18,23 +19,24 @@ export default function CardSermon({
 	hideHat,
 	hideSponsorHat,
 	isOptionalLink,
+	fullBleed,
 }: CardSermonProps): JSX.Element {
 	const { sequence, sponsor } = recording;
 	const theme = 'sermon';
 
 	return (
-		<CardWithTheme {...{ theme }}>
+		<CardWithTheme theme={theme} fullBleed={fullBleed}>
 			{!hideHat && sequence ? (
-				<CardHatSermon sequence={sequence} />
+				<CardHatSermon sequence={sequence} fullBleed={fullBleed} />
 			) : (
-				!hideSponsorHat && sponsor && <CardHatSponsor sponsor={sponsor} />
+				!hideSponsorHat &&
+				sponsor && <CardHatSponsor sponsor={sponsor} fullBleed={fullBleed} />
 			)}
 			<TeaseRecording
-				{...{
-					recording,
-					theme,
-					isOptionalLink,
-				}}
+				recording={recording}
+				theme={theme}
+				isOptionalLink={isOptionalLink}
+				fullBleed={fullBleed}
 			/>
 		</CardWithTheme>
 	);

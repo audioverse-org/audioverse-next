@@ -70,12 +70,6 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} прочитано"
   },
-  "cardAudiobookTrack_readByLabel": {
-    "string": "Прочитано (кем-то) {name}"
-  },
-  "cardAudiobookTrack_sequenceLabel": {
-    "string": "Книга"
-  },
   "cardBibleBook__chaptersLabel": {
     "string": "{count} главы"
   },
@@ -117,9 +111,6 @@
   "cardSequence_storiesType": {
     "string": "Истории"
   },
-  "cardSermon_sequenceLabel": {
-    "string": "Семинары"
-  },
   "cardSlider__nextPageLabel": {
     "comment": "card slider next page label",
     "string": "Следующая страница"
@@ -131,9 +122,6 @@
   "cardSlider__previousPageLabel": {
     "comment": "card slider previous page label",
     "string": "Предыдущая страница"
-  },
-  "cardSong_sequenceLabel": {
-    "string": "Песни на библейские тексты"
   },
   "cardSponsor__collectionCountLabel": {
     "comment": "Sponsor Detail collection count label",
@@ -150,9 +138,6 @@
   "cardSponsor_hatTitle": {
     "comment": "Card sponsor hat title",
     "string": "Организатор"
-  },
-  "cardStory_sequenceLabel": {
-    "string": "Истории"
   },
   "ccollectionTeachingsDetail__heading": {
     "string": "Все темы по отдельности"
@@ -539,33 +524,6 @@
     "comment": "button speed button label",
     "string": "{speed}X"
   },
-  "molecule-cardRecordingSequenceHat__addAlbum": {
-    "string": "Добавить альбом"
-  },
-  "molecule-cardRecordingSequenceHat__addBook": {
-    "string": "Добавить книгу"
-  },
-  "molecule-cardRecordingSequenceHat__addSeries": {
-    "string": "Добавить серию"
-  },
-  "molecule-cardRecordingSequenceHat__addStoryAlbum": {
-    "string": "Добавить альбом"
-  },
-  "molecule-cardRecordingSequenceHat__inLibrary": {
-    "string": "{inLibraryCount} из {totalCount} в Вашей библиотеке"
-  },
-  "molecule-cardRecordingSequenceHat__removeAlbum": {
-    "string": "Удалить альбом"
-  },
-  "molecule-cardRecordingSequenceHat__removeBook": {
-    "string": "Удалить книгу"
-  },
-  "molecule-cardRecordingSequenceHat__removeSeries": {
-    "string": "Удалить серию"
-  },
-  "molecule-cardRecordingSequenceHat__removeStoryAlbum": {
-    "string": "Удалить альбом"
-  },
   "molecule-searchBar__label": {
     "comment": "search bar label",
     "string": "Поиск"
@@ -728,9 +686,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Выбрать, как Вы хотите скачать аудио файл."
   },
-  "preferences__heading": {
-    "string": "Настройки учетной записи"
-  },
   "preferences__inputAutoplay": {
     "string": "Записи с автовоспроизведением"
   },
@@ -837,9 +792,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "Сохранить изменения"
-  },
-  "profile__heading": {
-    "string": "Настройки учетной записи"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",
@@ -1757,15 +1709,6 @@
   "cardCollection_booksLabel": {
     "string": "{count} books"
   },
-  "cardHatSponsor__addSponsor": {
-    "string": "Add Sponsor"
-  },
-  "cardHatSponsor__removeSponsor": {
-    "string": "Remove Sponsor"
-  },
-  "cardHatSponsor__sponsorLabel": {
-    "string": "Организатор"
-  },
   "cardSequence_chaptersLabel": {
     "string": "{count} главы"
   },
@@ -2292,17 +2235,8 @@
   "molecule-buttonDownload__linkLabelMedium": {
     "string": "Medium Quality ({size})"
   },
-  "molecule-buttonGuestDownload__modalParagraph": {
-    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
-  },
-  "molecule-buttonGuestDownload__modalTitle": {
-    "string": "Create a Free Account"
-  },
   "molecule-buttonGuest__Download": {
     "string": "Download content for offline access"
-  },
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
-    "string": "Create account"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
     "string": "Skip"
@@ -2327,12 +2261,6 @@
   },
   "molecule-buttonGuest__sync": {
     "string": "Pick up where you left off across devices"
-  },
-  "molecule-cardRecordingSequenceHat__addBibleBook": {
-    "string": "Add Book"
-  },
-  "molecule-cardRecordingSequenceHat__removeBibleBook": {
-    "string": "Remove Book"
   },
   "molecule-searchBar__ariaLabel": {
     "comment": "search bar label",
@@ -2781,6 +2709,18 @@
   "done": {
     "string": "Выполнено"
   },
+  "molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelLogIn": {
+    "string": "Войти"
+  },
+  "molecule-buttonDownloadBlank__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonDownloadBlank__modalTitle": {
+    "string": "Create a Free Account"
+  },
   "header__navItemMore-sharingtools": {
     "string": "Sharing Tools"
   },
@@ -2789,5 +2729,14 @@
   },
   "timeLeft": {
     "string": "{time} left"
+  },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "Настройки учетной записи"
   }
 }

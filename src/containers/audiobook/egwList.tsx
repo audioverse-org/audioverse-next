@@ -30,12 +30,7 @@ export function EgwAudiobooksList({
 			makeRoute={(l, i) => root.lang(l).egwbooks.page(i).get()}
 		>
 			{nodes.map((node) => (
-				<CardSequence
-					sequence={node}
-					slim={true}
-					egw={true}
-					key={node.canonicalPath}
-				/>
+				<CardSequence sequence={node} egw={true} key={node.canonicalPath} />
 			))}
 		</PaginatedCardList>
 	);

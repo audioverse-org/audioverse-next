@@ -27,7 +27,7 @@ export default function CardRecordingStack({
 		{
 			[SequenceContentType.Audiobook]: {
 				theme: 'audiobookTrack',
-				hat: <CardHatAudiobook {...{ sequence, recording }} />,
+				hat: <CardHatAudiobook {...{ sequence }} />,
 			},
 			[SequenceContentType.BibleBook]: {
 				theme: 'chapter',

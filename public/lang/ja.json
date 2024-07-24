@@ -70,12 +70,6 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration}分"
   },
-  "cardAudiobookTrack_readByLabel": {
-    "string": "語り手{name}"
-  },
-  "cardAudiobookTrack_sequenceLabel": {
-    "string": "巻"
-  },
   "cardBibleBook__chaptersLabel": {
     "string": "{count}章"
   },
@@ -117,9 +111,6 @@
   "cardSequence_storiesType": {
     "string": "ストーリー"
   },
-  "cardSermon_sequenceLabel": {
-    "string": "シリーズ"
-  },
   "cardSlider__nextPageLabel": {
     "comment": "card slider next page label",
     "string": "次のページ"
@@ -131,9 +122,6 @@
   "cardSlider__previousPageLabel": {
     "comment": "card slider previous page label",
     "string": "前のページ"
-  },
-  "cardSong_sequenceLabel": {
-    "string": "聖句ソング"
   },
   "cardSponsor__collectionCountLabel": {
     "comment": "Sponsor Detail collection count label",
@@ -150,9 +138,6 @@
   "cardSponsor_hatTitle": {
     "comment": "Card sponsor hat title",
     "string": "主催者"
-  },
-  "cardStory_sequenceLabel": {
-    "string": "ストーリー"
   },
   "ccollectionTeachingsDetail__heading": {
     "string": "レッスンの全ての個々のセクション"
@@ -539,33 +524,6 @@
     "comment": "button speed button label",
     "string": "{speed}x倍速"
   },
-  "molecule-cardRecordingSequenceHat__addAlbum": {
-    "string": "アルバムを追加"
-  },
-  "molecule-cardRecordingSequenceHat__addBook": {
-    "string": "本を追加"
-  },
-  "molecule-cardRecordingSequenceHat__addSeries": {
-    "string": "シリーズを追加"
-  },
-  "molecule-cardRecordingSequenceHat__addStoryAlbum": {
-    "string": "アルバムを追加"
-  },
-  "molecule-cardRecordingSequenceHat__inLibrary": {
-    "string": "{totalCount}の内{inLibraryCount}がライブラリーに入れられています"
-  },
-  "molecule-cardRecordingSequenceHat__removeAlbum": {
-    "string": "アルバムをライブラリーから削除する"
-  },
-  "molecule-cardRecordingSequenceHat__removeBook": {
-    "string": "本をライブラリーから削除する"
-  },
-  "molecule-cardRecordingSequenceHat__removeSeries": {
-    "string": "シリーズをライブラリーから除去する"
-  },
-  "molecule-cardRecordingSequenceHat__removeStoryAlbum": {
-    "string": "アルバムをライブラリーから削除する"
-  },
   "molecule-searchBar__label": {
     "comment": "search bar label",
     "string": "検索"
@@ -728,9 +686,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "オーディオファイルのダウンロード方法の好みを設定。"
   },
-  "preferences__heading": {
-    "string": "アカウントの設定"
-  },
   "preferences__inputAutoplay": {
     "string": "自動再生開始する"
   },
@@ -837,9 +792,6 @@
   },
   "profile__buttonLabelSaveChanges": {
     "string": "編集したものを保存"
-  },
-  "profile__heading": {
-    "string": "アカウントの設定"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",
@@ -1760,15 +1712,6 @@
   "cardCollection_booksLabel": {
     "string": "{count} books"
   },
-  "cardHatSponsor__addSponsor": {
-    "string": "Add Sponsor"
-  },
-  "cardHatSponsor__removeSponsor": {
-    "string": "Remove Sponsor"
-  },
-  "cardHatSponsor__sponsorLabel": {
-    "string": "主催者"
-  },
   "cardSequence_chaptersLabel": {
     "string": "{count}章"
   },
@@ -2295,17 +2238,8 @@
   "molecule-buttonDownload__linkLabelMedium": {
     "string": "Medium Quality ({size})"
   },
-  "molecule-buttonGuestDownload__modalParagraph": {
-    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
-  },
-  "molecule-buttonGuestDownload__modalTitle": {
-    "string": "Create a Free Account"
-  },
   "molecule-buttonGuest__Download": {
     "string": "Download content for offline access"
-  },
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
-    "string": "Create account"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
     "string": "Skip"
@@ -2330,12 +2264,6 @@
   },
   "molecule-buttonGuest__sync": {
     "string": "Pick up where you left off across devices"
-  },
-  "molecule-cardRecordingSequenceHat__addBibleBook": {
-    "string": "Add Book"
-  },
-  "molecule-cardRecordingSequenceHat__removeBibleBook": {
-    "string": "Remove Book"
   },
   "molecule-searchBar__ariaLabel": {
     "comment": "search bar label",
@@ -2781,6 +2709,18 @@
   "done": {
     "string": "終了"
   },
+  "molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelLogIn": {
+    "string": "ログイン"
+  },
+  "molecule-buttonDownloadBlank__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonDownloadBlank__modalTitle": {
+    "string": "Create a Free Account"
+  },
   "header__navItemMore-sharingtools": {
     "string": "Sharing Tools"
   },
@@ -2789,5 +2729,14 @@
   },
   "timeLeft": {
     "string": "{time} left"
+  },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
+  },
+  "account__heading": {
+    "string": "アカウントの設定"
   }
 }

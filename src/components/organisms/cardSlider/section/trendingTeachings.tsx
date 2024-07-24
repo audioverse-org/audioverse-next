@@ -31,9 +31,9 @@ export default function TrendingTeachings(): JSX.Element {
 			seeAllUrl={root.lang(route).teachings.trending.get()}
 			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
 			Card={(p: { node: CardRecordingFragment }) => (
-				<CardRecording recording={p.node} />
+				<CardRecording recording={p.node} fullBleed />
 			)}
-			rows={2}
+			rows={3}
 		/>
 	);
 }

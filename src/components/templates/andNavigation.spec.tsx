@@ -30,7 +30,6 @@ const teaching: CardRecordingFragment = {
 	duration: 0,
 	recordingContentType: 'AUDIOBOOK_TRACK',
 	sequence: null,
-	writers: [],
 	sponsor: null,
 	persons: [],
 	collection: null,

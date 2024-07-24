@@ -232,6 +232,9 @@
   "accountNav__profile": {
     "string": "Profile"
   },
+  "account__heading": {
+    "string": "Account Settings"
+  },
   "add_to_playlist": {
     "string": "Add To Playlist"
   },
@@ -421,12 +424,6 @@
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
   },
-  "cardAudiobookTrack_readByLabel": {
-    "string": "Read by {name}"
-  },
-  "cardAudiobookTrack_sequenceLabel": {
-    "string": "Book"
-  },
   "cardBibleBook__chaptersLabel": {
     "string": "{count} chapters"
   },
@@ -452,15 +449,6 @@
   "cardCollection_sequenceLabel": {
     "comment": "Card collection sequence count label",
     "string": "{count} series"
-  },
-  "cardHatSponsor__addSponsor": {
-    "string": "Add Sponsor"
-  },
-  "cardHatSponsor__removeSponsor": {
-    "string": "Remove Sponsor"
-  },
-  "cardHatSponsor__sponsorLabel": {
-    "string": "Sponsor"
   },
   "cardPerson_teachingsLabel": {
     "comment": "Card person teachings count label",
@@ -498,9 +486,6 @@
   "cardSequence_storiesType": {
     "string": "Stories"
   },
-  "cardSermon_sequenceLabel": {
-    "string": "Series"
-  },
   "cardSlider__nextPageLabel": {
     "comment": "card slider next page label",
     "string": "Next page"
@@ -522,9 +507,6 @@
   "cardSongBook__numSongs": {
     "string": "{count} songs"
   },
-  "cardSong_sequenceLabel": {
-    "string": "Scripture Songs"
-  },
   "cardSponsor__collectionCountLabel": {
     "comment": "Sponsor Detail collection count label",
     "string": "{count} Conferences"
@@ -540,9 +522,6 @@
   "cardSponsor_hatTitle": {
     "comment": "Card sponsor hat title",
     "string": "Sponsor"
-  },
-  "cardStory_sequenceLabel": {
-    "string": "Stories"
   },
   "cardTopic__hatLabel": {
     "string": "Topic"
@@ -1639,6 +1618,18 @@
   "molecule-button-SignUp": {
     "string": "Sign Up with Email"
   },
+  "molecule-buttonDownloadBlank__modalButtonLabelCreateAccountDownload": {
+    "string": "Create account"
+  },
+  "molecule-buttonDownloadBlank__modalButtonLabelLogIn": {
+    "string": "Log in"
+  },
+  "molecule-buttonDownloadBlank__modalParagraph": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
+  },
+  "molecule-buttonDownloadBlank__modalTitle": {
+    "string": "Create a Free Account"
+  },
   "molecule-buttonDownload__buttonLabel": {
     "comment": "download button label",
     "string": "downloads"
@@ -1660,12 +1651,6 @@
     "comment": "download button menu video heading",
     "string": "Video Downloads"
   },
-  "molecule-buttonGuestDownload__modalParagraph": {
-    "string": "Create a free account or login to access the Library features, like saving, viewing your downloads & history, and syncing across devices."
-  },
-  "molecule-buttonGuestDownload__modalTitle": {
-    "string": "Create a Free Account"
-  },
   "molecule-buttonGuest__Download": {
     "string": "Download content for offline access"
   },
@@ -1674,9 +1659,6 @@
   },
   "molecule-buttonGuest__modalButtonLabelCreateAccount": {
     "string": "Sign Up"
-  },
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
-    "string": "Create account"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
     "string": "Skip"
@@ -1746,39 +1728,6 @@
   "molecule-buttonSpeed__buttonLabel": {
     "comment": "button speed button label",
     "string": "{speed}x"
-  },
-  "molecule-cardRecordingSequenceHat__addAlbum": {
-    "string": "Add Album"
-  },
-  "molecule-cardRecordingSequenceHat__addBibleBook": {
-    "string": "Add Book"
-  },
-  "molecule-cardRecordingSequenceHat__addBook": {
-    "string": "Add Book"
-  },
-  "molecule-cardRecordingSequenceHat__addSeries": {
-    "string": "Add Series"
-  },
-  "molecule-cardRecordingSequenceHat__addStoryAlbum": {
-    "string": "Add Album"
-  },
-  "molecule-cardRecordingSequenceHat__inLibrary": {
-    "string": "{inLibraryCount} out of {totalCount} in your library"
-  },
-  "molecule-cardRecordingSequenceHat__removeAlbum": {
-    "string": "Remove Album"
-  },
-  "molecule-cardRecordingSequenceHat__removeBibleBook": {
-    "string": "Remove Book"
-  },
-  "molecule-cardRecordingSequenceHat__removeBook": {
-    "string": "Remove Book"
-  },
-  "molecule-cardRecordingSequenceHat__removeSeries": {
-    "string": "Remove Series"
-  },
-  "molecule-cardRecordingSequenceHat__removeStoryAlbum": {
-    "string": "Remove Album"
   },
   "molecule-searchBar__ariaLabel": {
     "comment": "search bar label",
@@ -2095,9 +2044,6 @@
   "preferences__downloadSettingsIntro": {
     "string": "Choose how you want to download audio."
   },
-  "preferences__heading": {
-    "string": "Account Settings"
-  },
   "preferences__inputAutoplay": {
     "string": "Autoplay recordings"
   },
@@ -2202,6 +2148,12 @@
   "presentersListAll__all": {
     "string": "All"
   },
+  "presentersListAll__listEnd": {
+    "string": "No more presenters"
+  },
+  "presentersListAll__loading": {
+    "string": "Loading..."
+  },
   "presentersList__all": {
     "string": "All"
   },
@@ -2252,9 +2204,6 @@
   },
   "profile__deleteConfirmTitle": {
     "string": "Are you sure?"
-  },
-  "profile__heading": {
-    "string": "Account Settings"
   },
   "profile__inputLabelForEmail": {
     "comment": "input label for email",

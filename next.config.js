@@ -142,11 +142,6 @@ module.exports = withBundleAnalyzer(
 					permanent: false,
 				},
 				{
-					source: '/:lang/account',
-					destination: '/:lang/account/login',
-					permanent: true,
-				},
-				{
 					source: '/:lang/account/history',
 					destination: '/:lang/library/history',
 					permanent: true,
@@ -174,6 +169,16 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/registrar/help',
 					destination: '/:lang/account/login',
+					permanent: true,
+				},
+				{
+					source: '/:lang/account/profile',
+					destination: '/:lang/account',
+					permanent: true,
+				},
+				{
+					source: '/:lang/account/preferences',
+					destination: '/:lang/account',
 					permanent: true,
 				},
 				{
