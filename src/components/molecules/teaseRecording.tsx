@@ -23,6 +23,7 @@ type Props = {
 	recording: TeaseRecordingFragment;
 	theme: CardTheme;
 	unpadded?: boolean;
+	fullBleed?: boolean;
 	playlistRecordings?: AndMiniplayerFragment[];
 	small?: boolean;
 	isOptionalLink?: boolean;
@@ -34,6 +35,7 @@ export default function TeaseRecording({
 	recording,
 	theme,
 	unpadded,
+	fullBleed,
 	playlistRecordings,
 	small,
 	isOptionalLink,
@@ -65,8 +67,8 @@ export default function TeaseRecording({
 
 	const inner = (
 		<>
-			<div className={styles.title}>
-				{small ? (
+			<div className={clsx(styles.title, fullBleed && styles.titleFullBleed)}>
+				{small || fullBleed ? (
 					<Heading3 unpadded className={styles.heading}>
 						{recording.title}
 					</Heading3>
@@ -126,7 +128,11 @@ export default function TeaseRecording({
 			) : (
 				<Link href={recording.canonicalPath} legacyBehavior>
 					<a
-						className={clsx(styles.content, unpadded && styles.unpadded)}
+						className={clsx(
+							styles.content,
+							unpadded && styles.unpadded,
+							fullBleed && styles.fullBleed
+						)}
 						onClick={() => {
 							analytics.track('Card click', {
 								type: recording.recordingContentType,
@@ -140,7 +146,11 @@ export default function TeaseRecording({
 				</Link>
 			)}
 			<div
-				className={clsx(styles.playlist, unpadded && styles.playlistUnpadded)}
+				className={clsx(
+					styles.playlist,
+					unpadded && styles.playlistUnpadded,
+					fullBleed && styles.playlistFullBleed
+				)}
 			>
 				{!disableUserFeatures && (
 					<ButtonAddToPlaylist

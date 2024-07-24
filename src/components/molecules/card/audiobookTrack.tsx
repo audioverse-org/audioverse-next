@@ -21,9 +21,7 @@ export default function CardAudiobookTrack({
 
 	return (
 		<CardWithTheme {...{ theme }}>
-			{sequence && !hideHat && (
-				<CardHatAudiobook sequence={sequence} recording={track} />
-			)}
+			{sequence && !hideHat && <CardHatAudiobook sequence={sequence} />}
 			<TeaseRecording {...{ recording: track, theme, isOptionalLink }} />
 		</CardWithTheme>
 	);

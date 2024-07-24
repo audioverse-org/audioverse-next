@@ -837,22 +837,6 @@
       "value": " on AudioVerse"
     }
   ],
-  "cardAudiobookTrack_readByLabel": [
-    {
-      "type": 0,
-      "value": "Прочитано (кем-то) "
-    },
-    {
-      "type": 1,
-      "value": "name"
-    }
-  ],
-  "cardAudiobookTrack_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Книга"
-    }
-  ],
   "cardBibleBook__chaptersLabel": [
     {
       "type": 1,
@@ -919,24 +903,6 @@
     {
       "type": 0,
       "value": " серия"
-    }
-  ],
-  "cardHatSponsor__addSponsor": [
-    {
-      "type": 0,
-      "value": "Add Sponsor"
-    }
-  ],
-  "cardHatSponsor__removeSponsor": [
-    {
-      "type": 0,
-      "value": "Remove Sponsor"
-    }
-  ],
-  "cardHatSponsor__sponsorLabel": [
-    {
-      "type": 0,
-      "value": "Организатор"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -1025,12 +991,6 @@
       "value": "Истории"
     }
   ],
-  "cardSermon_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Семинары"
-    }
-  ],
   "cardSlider__nextPageLabel": [
     {
       "type": 0,
@@ -1075,12 +1035,6 @@
       "value": " песня"
     }
   ],
-  "cardSong_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Песни на библейские тексты"
-    }
-  ],
   "cardSponsor__collectionCountLabel": [
     {
       "type": 1,
@@ -1115,12 +1069,6 @@
     {
       "type": 0,
       "value": "Организатор"
-    }
-  ],
-  "cardStory_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Истории"
     }
   ],
   "cardTopic__hatLabel": [
@@ -3685,84 +3633,6 @@
     {
       "type": 0,
       "value": "X"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addAlbum": [
-    {
-      "type": 0,
-      "value": "Добавить альбом"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addBibleBook": [
-    {
-      "type": 0,
-      "value": "Add Book"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addBook": [
-    {
-      "type": 0,
-      "value": "Добавить книгу"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addSeries": [
-    {
-      "type": 0,
-      "value": "Добавить серию"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addStoryAlbum": [
-    {
-      "type": 0,
-      "value": "Добавить альбом"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__inLibrary": [
-    {
-      "type": 1,
-      "value": "inLibraryCount"
-    },
-    {
-      "type": 0,
-      "value": " из "
-    },
-    {
-      "type": 1,
-      "value": "totalCount"
-    },
-    {
-      "type": 0,
-      "value": " в Вашей библиотеке"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeAlbum": [
-    {
-      "type": 0,
-      "value": "Удалить альбом"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeBibleBook": [
-    {
-      "type": 0,
-      "value": "Remove Book"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeBook": [
-    {
-      "type": 0,
-      "value": "Удалить книгу"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeSeries": [
-    {
-      "type": 0,
-      "value": "Удалить серию"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeStoryAlbum": [
-    {
-      "type": 0,
-      "value": "Удалить альбом"
     }
   ],
   "molecule-searchBar__ariaLabel": [
