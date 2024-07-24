@@ -1035,12 +1035,6 @@
       "value": " músicas"
     }
   ],
-  "cardSong_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Canções Biblicas"
-    }
-  ],
   "cardSponsor__collectionCountLabel": [
     {
       "type": 1,
@@ -3505,12 +3499,6 @@
       "value": "Criar conta"
     }
   ],
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": [
-    {
-      "type": 0,
-      "value": "Criar Conta"
-    }
-  ],
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": [
     {
       "type": 0,
@@ -4472,13 +4460,13 @@
   "presentersListAll__listEnd": [
     {
       "type": 0,
-      "value": "No more presenters"
+      "value": "Não ha mais Oradores"
     }
   ],
   "presentersListAll__loading": [
     {
       "type": 0,
-      "value": "Loading..."
+      "value": "Carregando..."
     }
   ],
   "presentersList__all": [

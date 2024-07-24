@@ -447,9 +447,6 @@
   "cardSongBook__numSongs": {
     "string": "{contagem} músicas"
   },
-  "cardSong_sequenceLabel": {
-    "string": "Canções Biblicas"
-  },
   "cardSponsor__collectionCountLabel": {
     "comment": "Coleção de detalhes do patrocinador, etiqueta de contagem",
     "string": "{contagem} Congressos"
@@ -2408,9 +2405,6 @@
   },
   "molecule-buttonGuest__Download": {
     "string": "Download content for offline access"
-  },
-  "molecule-buttonGuest__modalButtonLabelCreateAccountDownload": {
-    "string": "Criar Conta"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
     "string": "Pular"
