@@ -837,22 +837,6 @@
       "value": " no AudioVerse"
     }
   ],
-  "cardAudiobookTrack_readByLabel": [
-    {
-      "type": 0,
-      "value": "Leia por "
-    },
-    {
-      "type": 1,
-      "value": "nome"
-    }
-  ],
-  "cardAudiobookTrack_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Livro"
-    }
-  ],
   "cardBibleBook__chaptersLabel": [
     {
       "type": 1,
@@ -919,24 +903,6 @@
     {
       "type": 0,
       "value": " séries"
-    }
-  ],
-  "cardHatSponsor__addSponsor": [
-    {
-      "type": 0,
-      "value": "Adicionar Patrocinador"
-    }
-  ],
-  "cardHatSponsor__removeSponsor": [
-    {
-      "type": 0,
-      "value": "Remover Patrocinador"
-    }
-  ],
-  "cardHatSponsor__sponsorLabel": [
-    {
-      "type": 0,
-      "value": "Patrocinador"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -1025,12 +991,6 @@
       "value": "Histórias"
     }
   ],
-  "cardSermon_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Séries"
-    }
-  ],
   "cardSlider__nextPageLabel": [
     {
       "type": 0,
@@ -1075,12 +1035,6 @@
       "value": " músicas"
     }
   ],
-  "cardSong_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Canções das Escrituras"
-    }
-  ],
   "cardSponsor__collectionCountLabel": [
     {
       "type": 1,
@@ -1115,12 +1069,6 @@
     {
       "type": 0,
       "value": "Patrocinador"
-    }
-  ],
-  "cardStory_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "Histórias"
     }
   ],
   "cardTopic__hatLabel": [
@@ -3685,84 +3633,6 @@
     {
       "type": 0,
       "value": "x"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addAlbum": [
-    {
-      "type": 0,
-      "value": "Adicionar álbum"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addBibleBook": [
-    {
-      "type": 0,
-      "value": "Adicionar livro"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addBook": [
-    {
-      "type": 0,
-      "value": "Adicionar livro"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addSeries": [
-    {
-      "type": 0,
-      "value": "Adicionar séries"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addStoryAlbum": [
-    {
-      "type": 0,
-      "value": "Adicionar álbum"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__inLibrary": [
-    {
-      "type": 1,
-      "value": "naLibraryCount"
-    },
-    {
-      "type": 0,
-      "value": " de "
-    },
-    {
-      "type": 1,
-      "value": "totalCount"
-    },
-    {
-      "type": 0,
-      "value": " em sua biblioteca"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeAlbum": [
-    {
-      "type": 0,
-      "value": "Remover álbum"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeBibleBook": [
-    {
-      "type": 0,
-      "value": "Remover livro"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeBook": [
-    {
-      "type": 0,
-      "value": "Remover livro"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeSeries": [
-    {
-      "type": 0,
-      "value": "Remover série"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeStoryAlbum": [
-    {
-      "type": 0,
-      "value": "Remover álbum"
     }
   ],
   "molecule-searchBar__ariaLabel": [

@@ -837,22 +837,6 @@
       "value": " on AudioVerse"
     }
   ],
-  "cardAudiobookTrack_readByLabel": [
-    {
-      "type": 0,
-      "value": "語り手"
-    },
-    {
-      "type": 1,
-      "value": "name"
-    }
-  ],
-  "cardAudiobookTrack_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "巻"
-    }
-  ],
   "cardBibleBook__chaptersLabel": [
     {
       "type": 1,
@@ -923,24 +907,6 @@
     {
       "type": 0,
       "value": "シリーズ"
-    }
-  ],
-  "cardHatSponsor__addSponsor": [
-    {
-      "type": 0,
-      "value": "Add Sponsor"
-    }
-  ],
-  "cardHatSponsor__removeSponsor": [
-    {
-      "type": 0,
-      "value": "Remove Sponsor"
-    }
-  ],
-  "cardHatSponsor__sponsorLabel": [
-    {
-      "type": 0,
-      "value": "主催者"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -1033,12 +999,6 @@
       "value": "ストーリー"
     }
   ],
-  "cardSermon_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "シリーズ"
-    }
-  ],
   "cardSlider__nextPageLabel": [
     {
       "type": 0,
@@ -1087,12 +1047,6 @@
       "value": "曲"
     }
   ],
-  "cardSong_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "聖句ソング"
-    }
-  ],
   "cardSponsor__collectionCountLabel": [
     {
       "type": 1,
@@ -1131,12 +1085,6 @@
     {
       "type": 0,
       "value": "主催者"
-    }
-  ],
-  "cardStory_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "ストーリー"
     }
   ],
   "cardTopic__hatLabel": [
@@ -3693,84 +3641,6 @@
     {
       "type": 0,
       "value": "x倍速"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addAlbum": [
-    {
-      "type": 0,
-      "value": "アルバムを追加"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addBibleBook": [
-    {
-      "type": 0,
-      "value": "Add Book"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addBook": [
-    {
-      "type": 0,
-      "value": "本を追加"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addSeries": [
-    {
-      "type": 0,
-      "value": "シリーズを追加"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__addStoryAlbum": [
-    {
-      "type": 0,
-      "value": "アルバムを追加"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__inLibrary": [
-    {
-      "type": 1,
-      "value": "totalCount"
-    },
-    {
-      "type": 0,
-      "value": "の内"
-    },
-    {
-      "type": 1,
-      "value": "inLibraryCount"
-    },
-    {
-      "type": 0,
-      "value": "がライブラリーに入れられています"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeAlbum": [
-    {
-      "type": 0,
-      "value": "アルバムをライブラリーから削除する"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeBibleBook": [
-    {
-      "type": 0,
-      "value": "Remove Book"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeBook": [
-    {
-      "type": 0,
-      "value": "本をライブラリーから削除する"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeSeries": [
-    {
-      "type": 0,
-      "value": "シリーズをライブラリーから除去する"
-    }
-  ],
-  "molecule-cardRecordingSequenceHat__removeStoryAlbum": [
-    {
-      "type": 0,
-      "value": "アルバムをライブラリーから削除する"
     }
   ],
   "molecule-searchBar__ariaLabel": [
