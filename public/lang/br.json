@@ -414,7 +414,7 @@
     "string": "Leia por {nome}"
   },
   "cardSequence_scriptureSongsType": {
-    "string": "Canções das Escrituras"
+    "string": "Canções Biblicas"
   },
   "cardSequence_sequenceLabel": {
     "comment": "Etiqueta de contagem de registros de sequência de cartões",
@@ -726,7 +726,7 @@
     "string": "Oradores"
   },
   "header__navItemCollections-songs": {
-    "string": "Canções das Escrituras"
+    "string": "Canções Biblicas"
   },
   "header__navItemCollections-sponsors": {
     "string": "Patrocinadores"
@@ -2016,7 +2016,7 @@
     "string": "Livro da Bíblia"
   },
   "sequenceType__musicTrackTitle": {
-    "string": "Canções das Escrituras"
+    "string": "Canções Biblicas"
   },
   "sequenceType__seriesTitle": {
     "string": "Séries"
@@ -2100,7 +2100,7 @@
     "string": "sucesso"
   },
   "songBook__title": {
-    "string": "{livro} Canções das Escrituras"
+    "string": "{livro} Canções Biblicas"
   },
   "songsBooksDetail__contributors": {
     "string": "Vários colaboradores"
@@ -2118,7 +2118,7 @@
     "string": "Passagem"
   },
   "songsListPage__title": {
-    "string": "Canções das Escrituras"
+    "string": "Canções Biblicas"
   },
   "sopnsorTypeLockup_type": {
     "string": "Patrocinador"
@@ -2203,7 +2203,7 @@
     "string": "{título}, por {autores}, narrado por {narradores}"
   },
   "storyAlbums__title": {
-    "string": "Canções das Escrituras"
+    "string": "Canções Biblicas"
   },
   "teachingsFeed__description": {
     "string": "Apresentação AudioVerse em {idioma}"
@@ -2280,88 +2280,88 @@
     "string": "The download button on a sermon by Don Mackintosh"
   },
   "browse__topicsNext": {
-    "string": "Next topics"
+    "string": "Topicos Anteriores"
   },
   "browse__topicsPrevious": {
-    "string": "Previous topics"
+    "string": "Proximos Topics"
   },
   "browse_topicsHeading": {
-    "string": "Topics"
+    "string": "Topicos"
   },
   "cardSequence_egwAudiobookType": {
     "string": "ELLEN WHITE"
   },
   "cardTopic__hatLabel": {
-    "string": "Topic"
+    "string": "Topico"
   },
   "contact_footer": {
     "string": "Contato"
   },
   "discoverCollections_egwAudiobooksHeading": {
-    "string": "Discover Ellen White"
+    "string": "Descubra Ellen White"
   },
   "discoverCollections_storySeasonsHeading": {
     "string": "Histórias"
   },
   "discover__conferencesNext": {
-    "string": "Next recent conferences"
+    "string": "Proximas Conferencias Recentes"
   },
   "discover__conferencesPrevious": {
-    "string": "Previous recent conferences"
+    "string": "Conferencias Anteriores"
   },
   "discover__featuredTeachingsNext": {
-    "string": "Next featured teachings"
+    "string": "Proximos Ensinamentos em Destaque"
   },
   "discover__featuredTeachingsPrevious": {
-    "string": "Previous featured teachings"
+    "string": "Ensinamentos Anteriores em Destaque"
   },
   "discover__recentBlogNext": {
-    "string": "Next recent blog posts"
+    "string": "Proximas Postagens do Blog"
   },
   "discover__recentBlogPrevious": {
-    "string": "Previous recent blog posts"
+    "string": "Postagens Anteriores do Blog"
   },
   "discover__recentTeachingsNext": {
-    "string": "Next recent teachings"
+    "string": "Proximos Ensinamentos"
   },
   "discover__recentTeachingsPrevious": {
-    "string": "Previous recent teachings"
+    "string": "Ensinamentos Anteriores"
   },
   "discover__seeAll": {
-    "string": "See All"
+    "string": "Ver todos"
   },
   "discover__storiesNext": {
-    "string": "Next recent stories"
+    "string": "Proximas Historias"
   },
   "discover__storiesPrevious": {
-    "string": "Previous recent stories"
+    "string": "Historias Anteriores"
   },
   "discover__topicsNext": {
-    "string": "Next topics"
+    "string": "Proximos Topicos"
   },
   "discover__topicsPrevious": {
-    "string": "Previous topics"
+    "string": "Topicos Anteriores"
   },
   "discover__trendingMusicNext": {
-    "string": "Next trending scripture songs"
+    "string": "Proximas Canções Biblicas em alta"
   },
   "discover__trendingMusicPrevious": {
-    "string": "Previous trending scripture songs"
+    "string": "Canções Anteriores Biblicas em alta"
   },
   "discover__trendingTeachingsNext": {
-    "string": "Next trending teachings"
+    "string": "Proximos Ensinamentos em Alta"
   },
   "discover__trendingTeachingsPrevious": {
-    "string": "Previous trending teachings"
+    "string": "Ensinamentos Anteriores em Alta"
   },
   "discover_bibleBooksHeading": {
-    "string": "Discover Bible Books"
+    "string": "Descubra Livros Biblicos"
   },
   "discover_presentersHeading": {
-    "string": "Discover Presenters"
+    "string": "Descubra Oradores"
   },
   "discover_topicsHeading": {
-    "string": "Topics"
+    "string": "Topicos"
   },
   "discover_trendingMusicHeading": {
     "string": "Trending Scripture Songs"
@@ -2380,7 +2380,7 @@
     "string": "Ellen White"
   },
   "header__navItemCollections-topics": {
-    "string": "Topics"
+    "string": "Topicos"
   },
   "homePage__bannerImageAlt": {
     "comment": "home page banner image alt",
@@ -2407,32 +2407,32 @@
     "string": "Download content for offline access"
   },
   "molecule-buttonGuest__modalButtonLabelGuestSkip2": {
-    "string": "Skip"
+    "string": "Pular"
   },
   "molecule-buttonGuest__modalButtonLabelSkip": {
-    "string": "Skip"
+    "string": "Pular"
   },
   "molecule-buttonGuest__modalParagraph1-2": {
-    "string": "Please consider signing up or logging in to help our mission of sharing sound doctrine."
+    "string": "Por favor, considere se inscrever ou fazer login para apoiar nossa missão de compartilhar uma doutrina sólida."
   },
   "molecule-buttonGuest__modalParagraph2": {
-    "string": "With a free account,you can"
+    "string": "Com uma conta gratuita, você pode"
   },
   "molecule-buttonGuest__modalTitle2": {
     "string": "Tem certeza?"
   },
   "molecule-buttonGuest__requests": {
-    "string": "Avoid annoying login requests"
+    "string": "Evite solicitações de login incômodas"
   },
   "molecule-buttonGuest__save": {
-    "string": "Save your content to listen later"
+    "string": "Salve seu conteúdo para ouvir mais tarde"
   },
   "molecule-buttonGuest__sync": {
-    "string": "Pick up where you left off across devices"
+    "string": "Continue ouvindo de onde parou em diferentes dispositivos"
   },
   "molecule-searchBar__ariaLabel": {
     "comment": "search bar label",
-    "string": "search"
+    "string": "busca"
   },
   "molecule-searchBar__cancel": {
     "string": "Cancelar"
@@ -2442,7 +2442,7 @@
   },
   "organism-mobileHeader__more": {
     "comment": "more button label",
-    "string": "more"
+    "string": "Mais"
   },
   "organism-navigation__exit": {
     "comment": "Exit button label",
@@ -2452,64 +2452,61 @@
     "string": "Todos Audiolivros"
   },
   "organismSection__audiobooksNext": {
-    "string": "Next audiobooks"
+    "string": "Proximo Audio Livros"
   },
   "organismSection__audiobooksPrevious": {
-    "string": "Previous audiobooks"
+    "string": "Audio Livros Anteriores"
   },
   "organismSection__bibleBooksHeading": {
-    "string": "Bible Books"
+    "string": "Livros Biblicos"
   },
   "organismSection__bibleBooksNext": {
-    "string": "Next Bible books"
+    "string": "Next Livros Biblicos"
   },
   "organismSection__bibleBooksPrevious": {
-    "string": "Previous Bible books"
+    "string": "Previous Livros Biblicos"
   },
   "organismSection__egwAudiobooksHeading": {
     "string": "Ellen White"
   },
   "organismSection__egwAudiobooksNext": {
-    "string": "Next EGW audiobooks"
+    "string": "Proximo Audio Livros EGW"
   },
   "organismSection__egwAudiobooksPrevious": {
-    "string": "Previous EGW audiobooks"
-  },
-  "organismSection_presentersHeading": {
-    "string": "Oradores"
+    "string": "Audio Livros EGW Anteriores"
   },
   "organismSection_presentersNext": {
-    "string": "Next presenters"
+    "string": "Proximos Oradores"
   },
   "organismSection_presentersPrevious": {
-    "string": "Previous presenters"
+    "string": "Oradores Anteriores"
   },
   "organismSection_scriptureSongsHeading": {
-    "string": "Canções das Escrituras"
+    "string": "Canções Biblicas"
   },
   "organismSection_scriptureSongsNext": {
-    "string": "Next scripture songs"
+    "string": "Proximas Canções Biblicas"
   },
   "organismSection_scriptureSongsPrevious": {
-    "string": "Previous scripture songs"
+    "string": "Canções Biblicas Anteriores"
   },
   "organismSection_seriesHeading": {
     "string": "Séries"
   },
   "organismSection_seriesNext": {
-    "string": "Next series"
+    "string": "Proximas series"
   },
   "organismSection_seriesPrevious": {
-    "string": "Previous series"
+    "string": "Series Anteriores"
   },
   "organismSection_sponsorsHeading": {
     "string": "Patrocinadores"
   },
   "organismSection_sponsorsNext": {
-    "string": "Next sponsors"
+    "string": "Proximos Patrocinadores"
   },
   "organismSection_sponsorsPrevious": {
-    "string": "Previous sponsors"
+    "string": "Patrocinadores Anteriores"
   },
   "presentersListAll__all": {
     "string": "Todos"
@@ -2533,49 +2530,49 @@
     "string": "Bíblia"
   },
   "search__bileBooksSeeAll": {
-    "string": "See All Matching Bible books"
+    "string": "Ver todos Livros Biblicos encontrados"
   },
   "search__booksSeeAll": {
-    "string": "See All Matching Audiobooks"
+    "string": "Ver todos Audio Livros enconrados"
   },
   "search__conferencesSeeAll": {
-    "string": "See All Matching Conferences"
+    "string": "Ver todas Conferencias encontradas"
   },
   "search__egwbooksHeading": {
     "string": "EGW"
   },
   "search__egwbooksSeeAll": {
-    "string": "See All Matching Ellen White Audiobooks"
+    "string": "Ver todos Audio Livros de Ellen White encontrados"
   },
   "search__emptyStateMessage": {
-    "string": "Try searching for something else"
+    "string": "Tente outro Termo em sua Pesquisa"
   },
   "search__emptyStateTitle": {
-    "string": "No results found"
+    "string": "Nenhum Resultado Encontrado"
   },
   "search__musicSeeAll": {
-    "string": "See All Matching Music"
+    "string": "Ver todos Cancoes Biblicas encontradas"
   },
   "search__presentersSeeAll": {
-    "string": "See All Matching Presenters"
+    "string": "Ver todos Oradores encontrados"
   },
   "search__seriesHeading": {
     "string": "Séries"
   },
   "search__seriesSeeAll": {
-    "string": "See All Matching Series"
+    "string": "Ver todas Series encontradas"
   },
   "search__sponsorsSeeAll": {
-    "string": "See All Matching Sponsors"
+    "string": "Ver todos Patrocinadores encontrados"
   },
   "search__storiesSeeAll": {
-    "string": "See All Matching Stories"
+    "string": "Ver todos Historias encontradas"
   },
   "search__teachingsSeeAll": {
-    "string": "See All Matching Teachings"
+    "string": "Ver todos Ensinamentos encontrados"
   },
   "socialLogin__loginOr": {
-    "string": "Or"
+    "string": "Ou"
   },
   "sponsorsListAll__all": {
     "string": "Todos"
@@ -2584,10 +2581,10 @@
     "string": "Todos"
   },
   "storyAlbumList__emptyStateMessage": {
-    "string": "There are no story albums to show."
+    "string": "Não há álbuns de histórias para mostrar."
   },
   "storyAlbumList__emptyStateTitle": {
-    "string": "Nothing here!"
+    "string": "Nada aqui!"
   },
   "terms_footer": {
     "string": "Termos de uso"
@@ -2596,10 +2593,10 @@
     "string": "Descrição"
   },
   "topicDetail__label": {
-    "string": "Topic"
+    "string": "Topico"
   },
   "topicDetail__parentTopic": {
-    "string": "Parent Topic"
+    "string": "Tópico Principal"
   },
   "topicDetail__series": {
     "string": "Séries"
@@ -2617,22 +2614,22 @@
     "string": "{count, plural, one {# teaching} other {# teachings}}"
   },
   "topicListPage__title": {
-    "string": "All Topics"
+    "string": "Todos Topicos"
   },
   "newsLetterForm__checkboxNewsletter": {
-    "string": "Newsletter (typically about once a month)"
+    "string": "Newsletter (geralmente uma vez por mês)"
   },
   "newsLetterForm__checkboxWeeklyPics": {
-    "string": "Weekly Picks (goes out every Monday)"
+    "string": "Destaques da Semana (enviado toda segunda-feira)"
   },
   "newsLetterForm__newsletterEmail": {
-    "string": "Email Address"
+    "string": "E-mail"
   },
   "newsLetterForm__newsletterEmailPlaceholder": {
     "string": "josephbates@email.com"
   },
   "newsLetterForm__newsletterHatTitle": {
-    "string": "Sign up for our Emails"
+    "string": "Inscreva-se para receber nossos e-mails"
   },
   "newsLetterForm__newsletterName": {
     "string": "Nome"
@@ -2641,7 +2638,7 @@
     "string": "Joseph Bates"
   },
   "newsLetterForm__newsletterSubscribe": {
-    "string": "Subscribe"
+    "string": "Increva-se"
   },
   "about__storyAncientScreenshotAlt": {
     "comment": "Alt text for the ancient screenshot image",
@@ -2652,14 +2649,14 @@
     "string": "Young woman in a field wearing headphones while reading a book."
   },
   "Listen_Later": {
-    "string": "Escute Depois"
+    "string": "Ouvir Depois"
   },
   "add_to_playlist": {
-    "string": "Adicionar à Playlist"
+    "string": "Adicionar ao Playlist"
   },
   "add_to_playlist_btn": {
     "comment": "Add to Playlist button label",
-    "string": "Adicionar à Playlist"
+    "string": "Adicionar ao Playlist"
   },
   "anyoneWithLink": {
     "string": "Qualquer pessoa com o link pode visualizar"
@@ -2674,7 +2671,7 @@
     "string": "Editar playlist"
   },
   "error": {
-    "string": "Error"
+    "string": "Erro"
   },
   "newPrivacy": {
     "string": "Privacidade"
@@ -2686,13 +2683,13 @@
     "string": "Compartilhável"
   },
   "new_playlist": {
-    "string": "Nova Playlist"
+    "string": "Novo Playlist"
   },
   "not_shareable": {
-    "string": "Esta playlist é privada."
+    "string": "Este playlist é privado."
   },
   "not_shareable_title": {
-    "string": "Privada"
+    "string": "Privado"
   },
   "pl_description": {
     "string": "Descrição"
@@ -2725,16 +2722,19 @@
     "string": "Sharing Tools"
   },
   "open_app": {
-    "string": "Open App"
+    "string": "Abrir App"
   },
   "timeLeft": {
     "string": "{time} left"
   },
+  "organismSection_presentersHeading": {
+    "string": "Oradores"
+  },
   "presentersListAll__listEnd": {
-    "string": "No more presenters"
+    "string": "Não ha mais Oradores"
   },
   "presentersListAll__loading": {
-    "string": "Loading..."
+    "string": "Carregando..."
   },
   "account__heading": {
     "string": "Configurações da conta"
