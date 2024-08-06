@@ -38,7 +38,9 @@ export default function CardInferred({ entity }: { entity: InferrableEntity }) {
 				<CardPerson person={entity as CardPersonFragment} midinit={true} />
 			);
 		case Typename.Recording:
-			return <CardRecording recording={entity as CardRecordingFragment} />;
+			return (
+				<CardRecording recording={entity as CardRecordingFragment} fullBleed />
+			);
 		case Typename.Sequence:
 			return <CardSequence sequence={entity as CardSequenceFragment} />;
 		case Typename.Collection: {
