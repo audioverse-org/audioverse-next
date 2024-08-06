@@ -38,7 +38,11 @@ function TeachingsTrending({
 			</Heading1>
 			<CardGroup>
 				{nodes.map(({ recording }) => (
-					<CardRecording recording={recording} key={recording.canonicalPath} />
+					<CardRecording
+						recording={recording}
+						key={recording.canonicalPath}
+						fullBleed
+					/>
 				))}
 			</CardGroup>
 		</div>
