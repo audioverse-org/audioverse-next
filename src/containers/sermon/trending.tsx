@@ -22,20 +22,21 @@ function TeachingsTrending({
 }: Must<TrendingTeachingsProps>): JSX.Element {
 	return (
 		<div>
-			<div className={styles.filterRow}>
-				<RecordingHasVideoFilter
-					filter={filter}
-					makeRoute={(l: string, f: 'all' | 'audio' | 'video', i: number) =>
-						root.lang(l).teachings.trending[f].page(i).get()
-					}
-				/>
-			</div>
 			<Heading1>
 				<FormattedMessage
 					id="trendingTeachings__heading"
 					defaultMessage="Trending Teachings"
 				/>
+				<div className={styles.filterRow}>
+					<RecordingHasVideoFilter
+						filter={filter}
+						makeRoute={(l: string, f: 'all' | 'audio' | 'video', i: number) =>
+							root.lang(l).teachings.trending[f].page(i).get()
+						}
+					/>
+				</div>
 			</Heading1>
+
 			<CardGroup>
 				{nodes.map(({ recording }) => (
 					<CardRecording
