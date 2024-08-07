@@ -41,7 +41,7 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 		>
 			<RssAlternate url={root.lang(language).teachings.all.feed.get()} />
 			{nodes.map((node) => (
-				<CardRecording recording={node} key={node.canonicalPath} />
+				<CardRecording recording={node} key={node.canonicalPath} fullBleed />
 			))}
 		</PaginatedCardList>
 	);
