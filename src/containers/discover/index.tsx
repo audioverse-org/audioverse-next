@@ -17,6 +17,7 @@ import Presenters from '~src/components/organisms/cardSlider/section/presenters'
 export default function Discover(): JSX.Element {
 	return (
 		<div>
+			<FeaturedTeachings />
 			<RecentTeachings />
 			<Topics />
 			<Presenters
@@ -28,7 +29,6 @@ export default function Discover(): JSX.Element {
 				}
 			/>
 			<TrendingTeachings />
-			<FeaturedTeachings />
 			<EgwAudiobooks
 				heading={
 					<FormattedMessage
