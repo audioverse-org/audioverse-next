@@ -64,7 +64,7 @@
         "striptags": "^3.2.0",
         "swiper": "^9.4.1",
         "ts-node": "^10.9.1",
-        "use-debounce": "^9.0.4",
+        "use-debounce": "^10.0.2",
         "video.js": "^7.21.1"
     },
     "devDependencies": {
