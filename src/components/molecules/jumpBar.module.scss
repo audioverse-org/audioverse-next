@@ -3,7 +3,7 @@
 .jumpBar {
 	margin-bottom: 16px;
 	display: flex;
-	flex-wrap: wrap;
+	overflow-x: scroll;
 	align-items: center;
 	color: $ts-midTone;
 	font-weight: 700;
@@ -32,11 +32,14 @@
 
 	> a {
 		width: 26px;
-		margin-right: 8px;
+		margin-right: 16px;
 		line-height: 32px;
 
 		&:hover {
 			text-decoration: none;
+		}
+		&.active {
+			color: $ts-red;
 		}
 	}
 }
