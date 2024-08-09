@@ -4,14 +4,14 @@ import { useIntl } from 'react-intl';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 
-import { useInfiniteGetSectionFeaturedTeachingsQuery } from './__generated__/featuredTeachings';
+import { useInfiniteGetSectionContinueListeningQuery } from './__generated__/continueListening';
 import Section from './index';
 
 export default function ContinueListening(): JSX.Element {
 	const intl = useIntl();
 	return (
 		<Section
-			infiniteQuery={useInfiniteGetSectionFeaturedTeachingsQuery}
+			infiniteQuery={useInfiniteGetSectionContinueListeningQuery}
 			heading={intl.formatMessage({
 				id: 'discover_continueListeningHeading',
 				defaultMessage: 'Continue Listening',

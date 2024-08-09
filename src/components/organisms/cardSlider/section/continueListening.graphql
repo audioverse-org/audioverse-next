@@ -1,0 +1,27 @@
+query getSectionContinueListening($language: Language!, $first: Int! = 15) {
+	me {
+		user {
+			...continueListening
+		}
+	}
+}
+
+fragment continueListening on User {
+	downloadHistory(
+		language: $language
+		first: $first
+		hasIncompletePlaybackSession: true
+	) {
+		edges {
+			node {
+				recording {
+					...cardRecording
+				}
+			}
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}
