@@ -5,6 +5,9 @@
 /graphql-codegen/dist
 **/__generated__
 **/__generated__/**
+**/__queries__
+**/__queries__/**
+record.proxy.log
 
 # next-pwa
 /public/sw.js
