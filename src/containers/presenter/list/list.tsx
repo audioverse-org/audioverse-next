@@ -43,7 +43,7 @@ export default function Presenters({
 	];
 
 	return (
-		<>
+		<div className={styles.parent}>
 			<Heading1 className={styles.heading}>
 				<FormattedMessage
 					id="presentersList__title"
@@ -83,6 +83,6 @@ export default function Presenters({
 					</Link>
 				</Card>
 			))}
-		</>
+		</div>
 	);
 }

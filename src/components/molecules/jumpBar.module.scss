@@ -2,8 +2,6 @@
 
 .jumpBar {
 	margin-bottom: 16px;
-	display: flex;
-	overflow-x: scroll;
 	align-items: center;
 	color: $ts-midTone;
 	font-weight: 700;
@@ -29,6 +27,11 @@
 			height: 32px;
 		}
 	}
+}
+
+.jumpScroll {
+	overflow: scroll;
+	display: flex;
 
 	> a {
 		width: 26px;
