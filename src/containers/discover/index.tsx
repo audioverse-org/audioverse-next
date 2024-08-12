@@ -31,8 +31,7 @@ export default function Discover(): JSX.Element {
 
 	return (
 		<div>
-			{user ? <ContinueListening /> : ''}
-			<FeaturedTeachings />
+			{user ? <ContinueListening /> : <FeaturedTeachings />}
 			<RecentTeachings />
 			<Topics />
 			<Presenters
