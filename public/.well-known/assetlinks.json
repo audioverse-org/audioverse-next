@@ -4,18 +4,6 @@
       "delegate_permission/common.handle_all_urls"
     ],
     "target": {
-      "namespace": "AudioVerse",
-      "package_name": "org.audioverse.exodus",
-      "sha256_cert_fingerprints": [
-        "78:31:10:EC:92:2C:4F:22:D9:D6:16:1E:F9:D4:99:AA:AA:65:9F:A6:55:17:2B:E5:6F:03:59:93:BB:F2:18:F1"
-      ]
-    }
-  },
-  {
-    "relation": [
-      "delegate_permission/common.handle_all_urls"
-    ],
-    "target": {
       "namespace": "android_app",
       "package_name": "org.audioverse.exodus",
       "sha256_cert_fingerprints": [
