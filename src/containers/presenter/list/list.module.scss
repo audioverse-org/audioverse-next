@@ -26,6 +26,31 @@
 	}
 }
 
+.container::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 200px;
+	height: 100%;
+	background: linear-gradient(
+		to left,
+		$ts-smartPlaylistH,
+		rgba(255, 255, 255, 0)
+	);
+	z-index: 1;
+	pointer-events: none;
+	transition: background 0.3s ease;
+}
+
+.container:hover::after {
+	background: linear-gradient(
+		to left,
+		$ts-darkened-smartPlaylistH,
+		rgba(255, 255, 255, 0)
+	);
+}
+
 .heading {
 	position: relative;
 	z-index: 2;
