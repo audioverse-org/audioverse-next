@@ -9,6 +9,7 @@ import Section from './index';
 
 export default function ContinueListening(): JSX.Element {
 	const intl = useIntl();
+
 	return (
 		<Section
 			infiniteQuery={useInfiniteGetSectionContinueListeningQuery}
@@ -24,6 +25,9 @@ export default function ContinueListening(): JSX.Element {
 				id: 'discover__continueListeningNext',
 				defaultMessage: 'Next continue listening',
 			})}
+			selectNodes={(p) =>
+				p?.me?.user.continueListening.nodes?.map((n) => n.recording)
+			}
 			Card={(p: { node: CardRecordingFragment }) => (
 				<CardRecording recording={p.node} />
 			)}
