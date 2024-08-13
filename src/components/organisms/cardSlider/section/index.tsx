@@ -64,7 +64,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
 
-	const { data, fetchNextPage } = infiniteQuery(
+	const { data, fetchNextPage, isFetchingNextPage } = infiniteQuery(
 		'after',
 		{ language },
 		{
@@ -90,11 +90,11 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 
 	const preload = useCallback(
 		({ index, total }: { index: number; total: number }) => {
-			if (index + PRELOAD_COUNT >= total) {
+			if (index + PRELOAD_COUNT >= total && !isFetchingNextPage) {
 				fetchNextPage();
 			}
 		},
-		[fetchNextPage]
+		[fetchNextPage, isFetchingNextPage]
 	);
 
 	// Check if there's content to render, if not, return an empty JSX element
