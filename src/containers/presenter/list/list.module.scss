@@ -26,9 +26,34 @@
 	}
 }
 
+.container::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 200px;
+	height: 100%;
+	background: linear-gradient(
+		to left,
+		$ts-smartPlaylistH,
+		rgba(255, 255, 255, 0)
+	);
+	z-index: 1;
+	pointer-events: none;
+	transition: background 0.3s ease;
+}
+
+.container:hover::after {
+	background: linear-gradient(
+		to left,
+		$ts-darkened-smartPlaylistH,
+		rgba(255, 255, 255, 0)
+	);
+}
+
 .heading {
 	position: relative;
-	z-index: 2;
+	z-index: 3;
 }
 
 .image {
@@ -37,18 +62,33 @@
 }
 
 .nameLockup {
-	flex-grow: 1;
 	display: flex;
 	align-items: center;
 }
-
-.name {
+.textWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	flex-grow: 1;
+
+	@media (min-width: $breakpoint-lg) {
+		flex-direction: row;
+		align-items: center;
+	}
+}
+.name {
 	font-size: 20px;
+	width: 100%;
+	margin-bottom: 4px;
+	@media (min-width: $breakpoint-lg) {
+		width: auto;
+		margin-bottom: 0;
+		margin-right: 16px;
+	}
 }
 
 .summary {
-	margin-top: 8px;
+	width: 100%;
 	color: $ts-midTone;
 	font-size: 16px;
 	line-height: 1.21;
@@ -57,7 +97,6 @@
 	text-overflow: ellipsis;
 
 	@media (min-width: $breakpoint-lg) {
-		margin-top: 0;
-		flex: 0 0 67%;
+		width: auto;
 	}
 }

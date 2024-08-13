@@ -2145,9 +2145,6 @@
   "presentersFeed__title": {
     "string": "Sermons by {name}"
   },
-  "presentersListAll__all": {
-    "string": "All"
-  },
   "presentersListAll__listEnd": {
     "string": "No more presenters"
   },
