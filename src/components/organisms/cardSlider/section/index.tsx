@@ -27,6 +27,7 @@ type SectionRoot<T> = {
 };
 
 type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
+type RootSelector<T, N> = (page: T) => Maybe<SectionRoot<N>>;
 type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
 
 type SectionProps<T, N> = {
@@ -38,6 +39,10 @@ type SectionProps<T, N> = {
 	minCardWidth?: number;
 	seeAllUrl?: string;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
+	selectRoot?: RootSelector<
+		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>,
+		N
+	>;
 	Card: Card<N>;
 };
 
@@ -58,6 +63,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	infiniteQuery,
 	heading,
 	selectNodes = defaultSelectNodes,
+	selectRoot = selectSectionRoot,
 	Card,
 	seeAllUrl,
 	...props
@@ -68,8 +74,9 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 		'after',
 		{ language },
 		{
-			getNextPageParam: (last: Maybe<T>) => {
-				const r = selectSectionRoot<T, N>(last);
+			getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
+				if (!last) return;
+				const r = selectRoot(last);
 				if (!r) return;
 				return {
 					language,
