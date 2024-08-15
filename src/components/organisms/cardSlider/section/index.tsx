@@ -18,16 +18,17 @@ export type SectionNode<T> = T & {
 	canonicalPath: string;
 };
 
+type PageInfo = {
+	hasNextPage: boolean;
+	endCursor: string | null;
+};
 type SectionRoot<T> = {
 	nodes: SectionNode<T>[];
-	pageInfo: {
-		hasNextPage: boolean;
-		endCursor: string | null;
-	};
+	pageInfo: PageInfo;
 };
 
 type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
-type RootSelector<T, N> = (page: T) => Maybe<SectionRoot<N>>;
+type PageInfoSelector<T, _N> = (page?: T) => Maybe<PageInfo>;
 type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
 
 type SectionProps<T, N> = {
@@ -39,7 +40,7 @@ type SectionProps<T, N> = {
 	minCardWidth?: number;
 	seeAllUrl?: string;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
-	selectRoot?: RootSelector<
+	selectPageInfo?: PageInfoSelector<
 		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>,
 		N
 	>;
@@ -59,11 +60,15 @@ function defaultSelectNodes<T, N>(page?: T): Maybe<SectionNode<N>[]> {
 	return selectSectionRoot<T, N>(page)?.nodes || [];
 }
 
+function defaultSelectPageInfo<T, N>(page?: T): Maybe<PageInfo> {
+	return selectSectionRoot<T, N>(page)?.pageInfo || null;
+}
+
 export default function Section<T extends GraphqlInfiniteQuery, N>({
 	infiniteQuery,
 	heading,
 	selectNodes = defaultSelectNodes,
-	selectRoot = selectSectionRoot,
+	selectPageInfo = defaultSelectPageInfo,
 	Card,
 	seeAllUrl,
 	...props
@@ -77,11 +82,14 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 			{
 				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
 					if (!last) return;
-					const r = selectRoot(last);
-					if (!r) return;
+					const pageInfo = selectPageInfo(last);
+					if (!pageInfo?.hasNextPage) {
+						console.warn('No more pages to fetch');
+						return;
+					}
 					return {
 						language,
-						after: r.pageInfo.endCursor,
+						after: pageInfo.endCursor,
 					};
 				},
 			}
