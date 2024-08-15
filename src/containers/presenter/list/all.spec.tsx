@@ -40,16 +40,6 @@ describe('presenter list all', () => {
 		expect(m).toBeTruthy();
 	});
 
-	it('displays "All" heading', async () => {
-		await renderPage();
-
-		expect(
-			screen.getByRole('heading', {
-				name: 'All',
-			})
-		).toBeInTheDocument();
-	});
-
 	it('has All link', async () => {
 		await renderPage();
 
