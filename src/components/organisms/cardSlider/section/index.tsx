@@ -83,10 +83,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
 					if (!last) return;
 					const pageInfo = selectPageInfo(last);
-					if (!pageInfo?.hasNextPage) {
-						console.warn('No more pages to fetch');
-						return;
-					}
+					if (!pageInfo?.hasNextPage) return;
 					return {
 						language,
 						after: pageInfo.endCursor,
