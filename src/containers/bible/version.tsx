@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import withFailStates from '~components/HOCs/withFailStates';
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
 import CardBibleBook from '~components/molecules/card/bibleBook';

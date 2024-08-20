@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import startCase from 'lodash/startCase';
 import Head from 'next/head';
-import Link from 'next/link';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -9,6 +8,7 @@ import Heading1 from '~components/atoms/heading1';
 import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import { TeaseRecordingFragment } from '~components/molecules/__generated__/teaseRecording';
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
 import Button from '~components/molecules/button';

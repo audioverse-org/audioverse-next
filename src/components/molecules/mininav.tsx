@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import React, { MouseEvent } from 'react';
+
+import Link from '~components/atoms/linkWithoutPrefetch';
 
 import styles from './mininav.module.scss';
 

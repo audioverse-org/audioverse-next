@@ -1,10 +1,10 @@
 import Image from 'next/legacy/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading3 from '~components/atoms/heading3';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import isServerSide from '~lib/isServerSide';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';

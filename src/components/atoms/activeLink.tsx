@@ -1,9 +1,10 @@
 import clsx from 'clsx';
-import Link, { LinkProps } from 'next/link';
+import { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 
 import { analytics } from '../../lib/analytics';
+import Link from './linkWithoutPrefetch';
 
 type ActiveLinkProps = LinkProps & {
 	children: ReactElement;

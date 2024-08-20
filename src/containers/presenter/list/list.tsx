@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import CircleInitials from '~components/atoms/circleInitials';
 import Heading1 from '~components/atoms/heading1';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
 import JumpBar from '~components/molecules/jumpBar';

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import Link from '~components/atoms/linkWithoutPrefetch';
 import Button from '~components/molecules/button';
 import Dropdown from '~components/molecules/dropdown';
 import useLanguageRoute from '~lib/useLanguageRoute';

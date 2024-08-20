@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import Heading2 from '~components/atoms/heading2';
 import Heading3 from '~components/atoms/heading3';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
 

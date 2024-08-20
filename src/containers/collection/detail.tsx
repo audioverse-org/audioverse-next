@@ -1,5 +1,4 @@
 import Image from 'next/legacy/image';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,6 +7,7 @@ import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import InherentSizeImage from '~components/atoms/inherentSizeImage';
 import LineHeading from '~components/atoms/lineHeading';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import withFailStates from '~components/HOCs/withFailStates';
 import Button from '~components/molecules/button';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
