@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import CardSlider from '~components/organisms/cardSlider';
+import CardWithTheme from '~src/components/molecules/card/base/withTheme';
+import loadingStyles from '~src/components/molecules/loadingCards.module.scss';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import {
 	GraphqlInfiniteQuery,
@@ -45,6 +47,7 @@ type SectionProps<T, N> = {
 		N
 	>;
 	Card: Card<N>;
+	showLoading?: boolean;
 };
 
 function isSectionRoot<T>(v: unknown): v is SectionRoot<T> {
@@ -71,11 +74,12 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	selectPageInfo = defaultSelectPageInfo,
 	Card,
 	seeAllUrl,
+	showLoading = false,
 	...props
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
 
-	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
+	const { data, fetchNextPage, isFetchingNextPage, hasNextPage, isLoading } =
 		infiniteQuery(
 			'after',
 			{ language },
@@ -115,8 +119,16 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	);
 
 	// Check if there's content to render, if not, return an empty JSX element
-	if (cards.length < 1) {
+	if (cards.length < 1 && !(isLoading && showLoading)) {
 		return <></>;
+	}
+
+	const loadingCards: JSX.Element[] = [];
+
+	for (let i = 0; i < 6; i++) {
+		loadingCards.push(
+			<CardWithTheme theme="sermon" className={loadingStyles.card} />
+		);
 	}
 
 	return (
@@ -129,7 +141,11 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 					</a>
 				)}
 			</LineHeading>
-			<CardSlider {...props} onIndexChange={preload} items={cards} />
+			{isLoading && showLoading ? (
+				<CardSlider {...props} items={loadingCards} />
+			) : (
+				<CardSlider {...props} onIndexChange={preload} items={cards} />
+			)}
 		</div>
 	);
 }
