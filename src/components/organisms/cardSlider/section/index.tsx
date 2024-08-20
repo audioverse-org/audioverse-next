@@ -48,6 +48,7 @@ type SectionProps<T, N> = {
 	>;
 	Card: Card<N>;
 	showLoading?: boolean;
+	blankNode?: JSX.Element;
 };
 
 function isSectionRoot<T>(v: unknown): v is SectionRoot<T> {
@@ -75,6 +76,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	Card,
 	seeAllUrl,
 	showLoading = false,
+	blankNode = <></>,
 	...props
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
@@ -120,7 +122,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 
 	// Check if there's content to render, if not, return an empty JSX element
 	if (cards.length < 1 && !(isLoading && showLoading)) {
-		return <></>;
+		return blankNode;
 	}
 
 	const loadingCards: JSX.Element[] = [];

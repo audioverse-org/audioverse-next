@@ -5,6 +5,7 @@ import { CardRecordingFragment } from '~src/components/molecules/card/__generate
 import CardRecording from '~src/components/molecules/card/recording';
 
 import { useInfiniteGetSectionContinueListeningQuery } from './__generated__/continueListening';
+import FeaturedTeachings from './featuredTeachings';
 import Section from './index';
 
 export default function ContinueListening(): JSX.Element {
@@ -33,6 +34,7 @@ export default function ContinueListening(): JSX.Element {
 				<CardRecording recording={p.node} />
 			)}
 			showLoading
+			blankNode={<FeaturedTeachings />}
 		/>
 	);
 }
