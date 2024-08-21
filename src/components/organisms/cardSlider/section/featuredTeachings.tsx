@@ -7,10 +7,15 @@ import CardRecording from '~src/components/molecules/card/recording';
 import { useInfiniteGetSectionFeaturedTeachingsQuery } from './__generated__/featuredTeachings';
 import Section from './index';
 
-export default function FeaturedTeachings(): JSX.Element {
+export default function FeaturedTeachings({
+	hidden,
+}: {
+	hidden: boolean;
+}): JSX.Element {
 	const intl = useIntl();
 	return (
 		<Section
+			hidden={hidden}
 			infiniteQuery={useInfiniteGetSectionFeaturedTeachingsQuery}
 			heading={intl.formatMessage({
 				id: 'discover_featuredTeachingsHeading',
@@ -27,6 +32,7 @@ export default function FeaturedTeachings(): JSX.Element {
 			Card={(p: { node: CardRecordingFragment }) => (
 				<CardRecording recording={p.node} />
 			)}
+			showLoading
 		/>
 	);
 }

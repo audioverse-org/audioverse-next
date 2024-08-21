@@ -5,14 +5,18 @@ import { CardRecordingFragment } from '~src/components/molecules/card/__generate
 import CardRecording from '~src/components/molecules/card/recording';
 
 import { useInfiniteGetSectionContinueListeningQuery } from './__generated__/continueListening';
-import FeaturedTeachings from './featuredTeachings';
 import Section from './index';
 
-export default function ContinueListening(): JSX.Element {
+export default function ContinueListening({
+	hidden,
+}: {
+	hidden: boolean;
+}): JSX.Element {
 	const intl = useIntl();
 
 	return (
 		<Section
+			hidden={hidden}
 			infiniteQuery={useInfiniteGetSectionContinueListeningQuery}
 			heading={intl.formatMessage({
 				id: 'discover_continueListeningHeading',
@@ -34,7 +38,6 @@ export default function ContinueListening(): JSX.Element {
 				<CardRecording recording={p.node} />
 			)}
 			showLoading
-			blankNode={<FeaturedTeachings />}
 		/>
 	);
 }

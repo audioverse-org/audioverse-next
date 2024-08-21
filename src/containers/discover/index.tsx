@@ -17,11 +17,12 @@ import EgwAudiobooks from '~src/components/organisms/cardSlider/section/egwAudio
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
 
 export default function Discover(): JSX.Element {
-	const { isUserLoggedIn } = useIsAuthenticated();
+	const { isUserLoggedIn, isLoading } = useIsAuthenticated();
 
 	return (
 		<div>
-			{isUserLoggedIn ? <ContinueListening /> : <FeaturedTeachings />}
+			<ContinueListening hidden={!(isUserLoggedIn || isLoading)} />
+			<FeaturedTeachings hidden={isUserLoggedIn || isLoading} />
 			<RecentTeachings />
 			<Topics />
 			<Presenters
