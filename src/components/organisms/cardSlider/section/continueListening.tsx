@@ -9,14 +9,17 @@ import Section from './index';
 
 export default function ContinueListening({
 	hidden,
+	failureCallback,
 }: {
 	hidden: boolean;
+	failureCallback: () => void;
 }): JSX.Element {
 	const intl = useIntl();
 
 	return (
 		<Section
 			hidden={hidden}
+			failureCallback={failureCallback}
 			infiniteQuery={useInfiniteGetSectionContinueListeningQuery}
 			heading={intl.formatMessage({
 				id: 'discover_continueListeningHeading',

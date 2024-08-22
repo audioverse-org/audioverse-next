@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
@@ -33,6 +33,7 @@ type SectionRoot<T> = {
 type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
 type PageInfoSelector<T, _N> = (page?: T) => Maybe<PageInfo>;
 type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
+type FailureCallback = () => void;
 
 type SectionProps<T, N> = {
 	infiniteQuery: T;
@@ -50,6 +51,7 @@ type SectionProps<T, N> = {
 	Card: Card<N>;
 	showLoading?: boolean;
 	hidden?: boolean;
+	failureCallback?: FailureCallback;
 };
 
 function isSectionRoot<T>(v: unknown): v is SectionRoot<T> {
@@ -78,6 +80,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	seeAllUrl,
 	showLoading = false,
 	hidden = false,
+	failureCallback,
 	...props
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
@@ -122,7 +125,15 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	);
 
 	// Check if there's content to render, if not, return an empty JSX element
-	if (cards.length < 1 && !(isLoading && showLoading)) {
+	const renderFail = cards.length < 1 && !(isLoading && showLoading);
+
+	useEffect(() => {
+		if (renderFail) {
+			failureCallback?.();
+		}
+	}, [renderFail, failureCallback]);
+
+	if (renderFail) {
 		return <></>;
 	}
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import BlogPosts from '~components/organisms/cardSlider/section/blogPosts';
@@ -18,11 +18,19 @@ import Presenters from '~src/components/organisms/cardSlider/section/presenters'
 
 export default function Discover(): JSX.Element {
 	const { isUserLoggedIn, isLoading } = useIsAuthenticated();
+	const [showFeatured, setShowFeatured] = useState(false);
+
+	useEffect(() => {
+		setShowFeatured(!(isUserLoggedIn || isLoading));
+	}, [isUserLoggedIn, isLoading]);
 
 	return (
 		<div>
-			<ContinueListening hidden={!(isUserLoggedIn || isLoading)} />
-			<FeaturedTeachings hidden={isUserLoggedIn || isLoading} />
+			<ContinueListening
+				failureCallback={() => setShowFeatured(true)}
+				hidden={showFeatured}
+			/>
+			<FeaturedTeachings hidden={!showFeatured} />
 			<RecentTeachings />
 			<Topics />
 			<Presenters
