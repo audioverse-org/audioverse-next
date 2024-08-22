@@ -3,7 +3,6 @@ import Image from 'next/legacy/image';
 import React, { useContext, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { useGetWithAuthGuardDataQuery } from '~components/HOCs/__generated__/withAuthGuard';
 import ButtonDownload from '~components/molecules/buttonDownload';
 import ButtonNudge from '~components/molecules/buttonNudge';
 import ButtonPlay, {
@@ -17,6 +16,7 @@ import { AndMiniplayerFragment } from '~components/templates/__generated__/andMi
 import { BaseColors } from '~lib/constants';
 import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
+import { useGetIsAuthenticatedQuery } from '~lib/hooks/__generated__/useIsAuthenticated';
 import useGlobalSpaceDown from '~lib/useGlobalSpaceDown';
 import usePlaybackSession from '~lib/usePlaybackSession';
 import IconAirPlayAudio from '~public/img/icon-airplay-audio.svg';
@@ -85,7 +85,7 @@ const Player = ({
 		: BaseColors.DARK;
 
 	const sessionToken = getSessionToken(); // i will see if this give any issue
-	const authResult = useGetWithAuthGuardDataQuery(
+	const authResult = useGetIsAuthenticatedQuery(
 		{},
 		{
 			enabled: !!sessionToken,
