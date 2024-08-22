@@ -9,9 +9,8 @@ import React, { ReactElement } from 'react';
 import withAuthGuard from '~components/HOCs/withAuthGuard';
 import { RegisterSocialDocument } from '~containers/account/__generated__/register';
 import { fetchApi } from '~lib/api/fetchApi';
+import { GetIsAuthenticatedDocument } from '~lib/hooks/__generated__/useIsAuthenticated';
 import renderWithProviders from '~lib/test/renderWithProviders';
-
-import { GetWithAuthGuardDataDocument } from './__generated__/withAuthGuard';
 
 function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);
@@ -27,7 +26,7 @@ describe('withAuthGuard', () => {
 	beforeEach(() => __loadRouter({ query: {} }));
 	it('displays login if no email', async () => {
 		when(fetchApi)
-			.calledWith(GetWithAuthGuardDataDocument, expect.anything())
+			.calledWith(GetIsAuthenticatedDocument, expect.anything())
 			.mockResolvedValue({
 				me: {
 					user: {
@@ -74,7 +73,7 @@ describe('withAuthGuard', () => {
 			});
 
 		when(fetchApi)
-			.calledWith(GetWithAuthGuardDataDocument, expect.anything())
+			.calledWith(GetIsAuthenticatedDocument, expect.anything())
 			.mockResolvedValue({
 				me: {
 					user: {

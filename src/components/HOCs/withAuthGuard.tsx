@@ -11,9 +11,9 @@ function withAuthGuard<P extends React.JSX.IntrinsicAttributes>(
 ): React.ComponentType<P> {
 	function WithAuthGuard(props: P) {
 		const sessionToken = getSessionToken(getCurrentRequest());
-		const { isUserLoggedIn, isLoading } = useIsAuthenticated();
+		const { isUserLoggedIn, isFetching } = useIsAuthenticated();
 
-		return (sessionToken && isLoading) || isUserLoggedIn ? (
+		return (sessionToken && isFetching) || isUserLoggedIn ? (
 			<Component {...props} />
 		) : (
 			<LoggedOutComponent />

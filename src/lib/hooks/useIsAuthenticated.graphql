@@ -1,4 +1,4 @@
-query getWithAuthGuardData {
+query getIsAuthenticated {
 	me {
 		user {
 			email
