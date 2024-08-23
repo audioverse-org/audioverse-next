@@ -1,6 +1,6 @@
 import 'video.js/dist/video-js.css';
 
-import Slider from '@material-ui/core/Slider';
+import Slider from '@mui/material/Slider';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { useIntl } from 'react-intl';
