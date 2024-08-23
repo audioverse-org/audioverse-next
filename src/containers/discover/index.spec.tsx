@@ -4,8 +4,7 @@ import { __loadQuery } from 'next/router';
 import { mockWidth } from '~components/organisms/cardSlider/index.spec';
 import { __swiper } from '~lib/swiper';
 import { buildLoader } from '~lib/test/buildLoader';
-import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
-import Discover, { getStaticProps } from '~pages/[language]/discover';
+import Discover, { getServerSideProps } from '~pages/[language]/discover';
 import {
 	RecordingContentType,
 	SequenceContentType,
@@ -35,10 +34,9 @@ import {
 	GetSectionTrendingTeachingsQuery,
 } from '~src/components/organisms/cardSlider/section/__generated__/trendingTeachings';
 import { __apiDocumentMock } from '~src/lib/api/fetchApi';
+import { buildServerRenderer } from '~src/lib/test/buildServerRenderer';
 
-import { getTopSection } from '.';
-
-const renderPage = buildStaticRenderer(Discover, getStaticProps);
+const renderPage = buildServerRenderer(Discover, getServerSideProps);
 
 const base = {
 	pageInfo: {
@@ -213,89 +211,5 @@ describe('discover page', () => {
 		const next = await screen.findByLabelText('Next recent teachings');
 
 		expect(next).toBeDisabled();
-	});
-});
-
-describe('discover getTopSection', () => {
-	it('works', () => {
-		getTopSection({
-			isUserLoggedIn: false,
-			isLoading: false,
-			count: 0,
-			isLoadingCount: false,
-			isServerSide: false,
-		});
-	});
-
-	it('returns nothing when not logged in and is loading and no count and is loading count', () => {
-		const result = getTopSection({
-			isUserLoggedIn: false,
-			isLoading: true,
-			count: undefined,
-			isLoadingCount: true,
-			isServerSide: false,
-		});
-
-		expect(result).toEqual('nothing');
-	});
-
-	it('returns featured when not logged in and not loading and no count and is loading count', () => {
-		const result = getTopSection({
-			isUserLoggedIn: false,
-			isLoading: false,
-			count: undefined,
-			isLoadingCount: true,
-			isServerSide: false,
-		});
-
-		expect(result).toEqual('featured');
-	});
-
-	it('returns nothing when logged in and not loading and no count and is loading count', () => {
-		const result = getTopSection({
-			isUserLoggedIn: true,
-			isLoading: false,
-			count: undefined,
-			isLoadingCount: true,
-			isServerSide: false,
-		});
-
-		expect(result).toEqual('nothing');
-	});
-
-	it('returns continue listening when logged in and not loading and non-zero count and not loading count', () => {
-		const result = getTopSection({
-			isUserLoggedIn: true,
-			isLoading: false,
-			count: 1,
-			isLoadingCount: false,
-			isServerSide: false,
-		});
-
-		expect(result).toEqual('continueListening');
-	});
-
-	it('returns featured when logged in and not loading and zero count and not loading count', () => {
-		const result = getTopSection({
-			isUserLoggedIn: true,
-			isLoading: false,
-			count: 0,
-			isLoadingCount: false,
-			isServerSide: false,
-		});
-
-		expect(result).toEqual('featured');
-	});
-
-	it('returns nothing when isServerSide is true', () => {
-		const result = getTopSection({
-			isUserLoggedIn: true,
-			isLoading: false,
-			count: 0,
-			isLoadingCount: false,
-			isServerSide: true,
-		});
-
-		expect(result).toEqual('nothing');
 	});
 });

@@ -1,9 +1,12 @@
 import { UseQueryResult } from '@tanstack/react-query';
 
-import { useGetWithAuthGuardDataQuery } from '~components/HOCs/__generated__/withAuthGuard';
+import {
+	GetWithAuthGuardDataQuery,
+	useGetWithAuthGuardDataQuery,
+} from '~components/HOCs/__generated__/withAuthGuard';
 import { getSessionToken } from '~lib/cookies';
 
-import { GetWithAuthGuardDataQuery } from '../__generated__/useIsAuthenticated';
+import { getCurrentRequest } from '../api/storeRequest';
 
 export default function useIsAuthenticated(): UseQueryResult<
 	GetWithAuthGuardDataQuery,
@@ -11,7 +14,7 @@ export default function useIsAuthenticated(): UseQueryResult<
 > & {
 	isUserLoggedIn: boolean;
 } {
-	const token = getSessionToken();
+	const token = getSessionToken(getCurrentRequest());
 	const result = useGetWithAuthGuardDataQuery(
 		{},
 		{ retry: false, enabled: !!token }

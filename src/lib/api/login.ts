@@ -14,13 +14,16 @@ export const USER_SESSION_QUERY_KEYS = [
 	['isSequenceFavorited'],
 	['sequenceIsFavorited'],
 	['isSponsorFavorited'],
+	['getDiscoverPageData'],
+	['getSectionContinueListening'],
+	['getSectionContinueListening.infinite'],
 ];
 
 export async function resetUserQueries(
 	queryClient: QueryClient
 ): Promise<void> {
 	await Promise.all(
-		USER_SESSION_QUERY_KEYS.map((key) => queryClient.resetQueries(key))
+		USER_SESSION_QUERY_KEYS.map((key) => queryClient.removeQueries(key))
 	);
 }
 

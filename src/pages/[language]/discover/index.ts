@@ -1,34 +1,27 @@
-import { DehydratedState } from '@tanstack/react-query';
-import {
-	GetStaticPathsResult,
-	GetStaticPropsContext,
-	GetStaticPropsResult,
-} from 'next';
+import { GetServerSidePropsContext } from 'next';
 
-import { IBaseProps } from '~containers/base';
-import { REVALIDATE } from '~lib/constants';
 import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '~lib/getLanguageRoutes';
-import root from '~lib/routes';
 import { prefetchQueries } from '~src/__generated__/prefetch';
 import Discover from '~src/containers/discover';
-import serializableDehydrate from '~src/lib/serializableDehydrate';
+import { storeRequest } from '~src/lib/api/storeRequest';
+import getDehydratedProps, {
+	DehydratedProps,
+} from '~src/lib/getDehydratedProps';
 
 export default Discover;
 
-export async function getStaticProps({
+export async function getServerSideProps({
 	params,
-}: GetStaticPropsContext<{ language: string }>): Promise<
-	GetStaticPropsResult<
-		{
-			dehydratedState: DehydratedState;
-		} & IBaseProps
-	>
-> {
+	req,
+}: GetServerSidePropsContext<{ language: string }>): Promise<DehydratedProps> {
+	storeRequest(req);
+
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
 	const client = await prefetchQueries({
+		getDiscoverPageData: { language },
+		getSectionContinueListening: { language },
 		getSectionRecentTeachings: { language },
 		getSectionTrendingTeachings: { language },
 		getSectionFeaturedTeachings: { language },
@@ -42,23 +35,10 @@ export async function getStaticProps({
 		getSectionTrendingMusic: { language },
 	});
 
-	return {
-		props: {
-			title: intl.formatMessage({
-				id: 'discover__title',
-				defaultMessage: 'Discover',
-			}),
-			dehydratedState: serializableDehydrate(client),
-		},
-		revalidate: REVALIDATE,
-	};
-}
-
-export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	return {
-		paths: getLanguageRoutes().map((base_url) =>
-			root.lang(base_url).discover.get()
-		),
-		fallback: false,
-	};
+	return getDehydratedProps(client, {
+		title: intl.formatMessage({
+			id: 'discover__title',
+			defaultMessage: 'Discover',
+		}),
+	});
 }
