@@ -11,6 +11,8 @@ import React, {
 	useState,
 } from 'react';
 import type * as VideoJs from 'video.js';
+import Player from 'video.js/dist/types/player';
+import { SourceObject } from 'video.js/dist/types/tech/tech';
 
 import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
@@ -33,7 +35,7 @@ import {
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
-interface Playable extends VideoJs.default.Tech.SourceObject {
+interface Playable extends SourceObject {
 	duration: number;
 	logUrl?: string | null;
 }
@@ -78,7 +80,7 @@ export const shouldLoadRecordingPlaybackProgress = (
 	!!getSessionToken();
 
 export type PlaybackContextType = {
-	player: () => VideoJs.VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
+	player: () => Player | undefined; // TODO: remove this in favor of single-purpose methods
 	play: () => void;
 	chromecastTrigger: () => void;
 	airPlayTrigger: () => void;
@@ -199,7 +201,7 @@ export default function AndPlaybackContext({
 	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
-	const playerRef = useRef<VideoJs.VideoJsPlayer>();
+	const playerRef = useRef<Player>();
 	const progressRef = useRef<number>(0);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
@@ -284,7 +286,9 @@ export default function AndPlaybackContext({
 			0,
 		setTime: (t: number) => {
 			if (!playerRef.current) return;
-			setProgress(t / playerRef.current.duration());
+			const duration = playerRef.current.duration();
+			if (!duration) return;
+			setProgress(t / duration);
 			playerRef.current.currentTime(t);
 		},
 		setPrefersAudio: (prefersAudio: boolean) => {
@@ -461,7 +465,7 @@ export default function AndPlaybackContext({
 				});
 			};
 
-			const options: VideoJs.VideoJsPlayerOptions = {
+			const options = {
 				poster: '/img/poster.jpg',
 				controls: false,
 				preload: 'auto',

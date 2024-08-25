@@ -39,6 +39,7 @@ export default function AndMiniplayer({
 							onTimeUpdate={() => {
 								if (!player) return;
 								const t = player.currentTime();
+								if (t === undefined) return;
 								const d = player.duration();
 								const p = d ? t / d : 0;
 								playbackContext.setProgress(p, false);
