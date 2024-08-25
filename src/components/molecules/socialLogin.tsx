@@ -1,13 +1,9 @@
+import FacebookLogin from '@greatsumini/react-facebook-login';
+import { useGoogleLogin } from '@leecheuk/react-google-login';
 import { useQueryClient } from '@tanstack/react-query';
 import fafacebook from 'public/img/icons-raw/fa-facebook.svg';
 import fagoogle from 'public/img/icons-raw/fa-google.svg';
 import React, { useState } from 'react';
-import {
-	ReactFacebookFailureResponse,
-	ReactFacebookLoginInfo,
-} from 'react-facebook-login';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useRegisterSocialMutation } from '~containers/account/__generated__/register';
@@ -108,35 +104,31 @@ export default function SocialLogin({
 			<div className={styles.buttonCol}>
 				<FacebookLogin
 					appId={FACEBOOK_APP_ID}
-					render={(renderProps) => (
-						<Button
-							type="secondary"
-							text={
-								isRegister
-									? intl.formatMessage({
-											id: 'socialLogin__registerFacebookButton',
-											defaultMessage: 'Sign up with Facebook',
-									  })
-									: intl.formatMessage({
-											id: 'socialLogin__loginFacebookButton',
-											defaultMessage: 'Login with Facebook',
-									  })
-							}
-							onClick={renderProps.onClick}
-							centered
-							IconLeft={fafacebook}
-						/>
-					)}
-					callback={(response) => {
-						const isFailure = (
-							r: ReactFacebookLoginInfo | ReactFacebookFailureResponse
-						): r is ReactFacebookFailureResponse => 'status' in r;
-
-						if (isFailure(response)) {
-							setErrors([`${response.status}: Failed to login with Facebook`]);
-							return;
-						}
-
+					render={(renderProps) => {
+						return (
+							<Button
+								type="secondary"
+								text={
+									isRegister
+										? intl.formatMessage({
+												id: 'socialLogin__registerFacebookButton',
+												defaultMessage: 'Sign up with Facebook',
+										  })
+										: intl.formatMessage({
+												id: 'socialLogin__loginFacebookButton',
+												defaultMessage: 'Login with Facebook',
+										  })
+								}
+								onClick={renderProps.onClick}
+								centered
+								IconLeft={fafacebook}
+							/>
+						);
+					}}
+					onFail={({ status }) => {
+						setErrors([`${status}: Failed to login with Facebook`]);
+					}}
+					onProfileSuccess={(response) => {
 						const name = response.name || '';
 						const [givenName, surname] = name.split(' ');
 						const socialId = response.userID;
@@ -150,7 +142,6 @@ export default function SocialLogin({
 							surname,
 						});
 					}}
-					disableMobileRedirect
 				/>
 
 				<Button

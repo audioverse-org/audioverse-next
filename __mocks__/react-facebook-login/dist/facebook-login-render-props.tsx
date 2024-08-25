@@ -1,21 +1,17 @@
-import {
-	ReactFacebookFailureResponse,
-	ReactFacebookLoginInfo,
-} from 'react-facebook-login';
+import { LoginResponse, LoginStatus, ProfileSuccessResponse, SuccessResponse } from '@greatsumini/react-facebook-login';
 
-type Response =
-	| Partial<ReactFacebookLoginInfo>
-	| Partial<ReactFacebookFailureResponse>;
-
-let res: Response = {
+const res: LoginResponse = {
+	status: LoginStatus.Connected,
+	authResponse: {
 	accessToken: 'the_access_token',
 	id: 'the_id',
 	name: 'First Last',
 	userID: 'the_user_id',
+	},
 };
 
-export function __setFacebookResponse(response: Partial<Response>): void {
-	res = response;
+export function __setFacebookResponse(response: ProfileSuccessResponse): void {
+	res.authResponse = response;
 }
 
 export default function FacebookLogin({
