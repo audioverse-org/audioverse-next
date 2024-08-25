@@ -214,8 +214,8 @@ export default function AndPlaybackContext({
 
 	const queryClient = useQueryClient();
 
-	const { mutate: updateProgress } = useMutation(
-		({
+	const { mutate: updateProgress } = useMutation({
+        mutationFn: ({
 			percentage,
 		}: Pick<RecordingPlaybackProgressSetMutationVariables, 'percentage'>) => {
 			if (!getSessionToken() || !recording) {
@@ -226,7 +226,7 @@ export default function AndPlaybackContext({
 				percentage,
 			});
 		}
-	);
+    });
 
 	const sourcesRef = useRef<Playable[]>([]);
 	useEffect(() => {

@@ -46,11 +46,15 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({
 				playlistId: id as string,
 			});
 			if (data.playlistUpdate) {
-				queryClient.invalidateQueries(['getLibraryPlaylistsData']);
-				await queryClient.invalidateQueries([
-					'getLibraryPlaylistPageData',
-					{ id },
-				]);
+				queryClient.invalidateQueries({
+                    queryKey: ['getLibraryPlaylistsData']
+                });
+				await queryClient.invalidateQueries({
+                    queryKey: [
+                        'getLibraryPlaylistPageData',
+                        { id },
+                    ]
+                });
 				handleCloseEditModal();
 			}
 		} catch (error) {
@@ -69,7 +73,9 @@ const EditPlaylist: React.FC<EditPlaylistProps> = ({
 					playlistId: id as string,
 				});
 				if (data) {
-					queryClient.invalidateQueries(['getLibraryPlaylistsData']);
+					queryClient.invalidateQueries({
+                        queryKey: ['getLibraryPlaylistsData']
+                    });
 					handleCloseEditModal();
 					router.back();
 				}

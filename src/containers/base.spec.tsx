@@ -42,7 +42,10 @@ describe('app', () => {
 
 		await renderApp(
 			() => {
-				const { data: myQuery } = useQuery(['myQuery'], jest.fn());
+				const { data: myQuery } = useQuery({
+                    queryKey: ['myQuery'],
+                    ...jest.fn()
+                });
 
 				if (initial === undefined) {
 					initial = myQuery === undefined ? 'undefined' : myQuery;

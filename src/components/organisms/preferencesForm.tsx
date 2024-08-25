@@ -33,7 +33,9 @@ export default function PreferencesForm(): JSX.Element {
 
 	const { mutate } = useUpdateAccountPreferencesMutation({
 		onSuccess: () =>
-			queryClient.invalidateQueries(['getAccountPreferencesData']),
+			queryClient.invalidateQueries({
+                queryKey: ['getAccountPreferencesData']
+            }),
 	});
 	const intl = useIntl();
 

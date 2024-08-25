@@ -82,165 +82,163 @@ export default function LoginForm({
 		}
 	};
 
-	return (
-		<>
-			<form onSubmit={onSubmit} data-testid="loginForm" className={styles.form}>
-				{!!errors.length && (
-					<Alert className={styles.errorAlert}>
-						{errors.map((e) => (
-							<div key={e}>{e}</div>
-						))}
-					</Alert>
-				)}
-				{successMessage && <p>{successMessage}</p>}
+	return (<>
+        <form onSubmit={onSubmit} data-testid="loginForm" className={styles.form}>
+            {!!errors.length && (
+                <Alert className={styles.errorAlert}>
+                    {errors.map((e) => (
+                        <div key={e}>{e}</div>
+                    ))}
+                </Alert>
+            )}
+            {successMessage && <p>{successMessage}</p>}
 
-				<Input
-					label={intl.formatMessage({
-						id: 'loginForm__emailLabel',
-						defaultMessage: 'Email',
-					})}
-					placeholder={intl.formatMessage({
-						id: 'loginForm__emailPlaceholder',
-						defaultMessage: 'jane@example.com',
-					})}
-					type="email"
-					value={email}
-					setValue={setEmail}
-				/>
-				<Input
-					label={intl.formatMessage({
-						id: 'loginForm__passwordLabel',
-						defaultMessage: 'Password',
-					})}
-					placeholder={intl.formatMessage({
-						id: 'loginForm__passwordPlaceholder',
-						defaultMessage: '∗∗∗∗∗∗∗',
-					})}
-					type="password"
-					value={password}
-					setValue={setPassword}
-				/>
+            <Input
+                label={intl.formatMessage({
+                    id: 'loginForm__emailLabel',
+                    defaultMessage: 'Email',
+                })}
+                placeholder={intl.formatMessage({
+                    id: 'loginForm__emailPlaceholder',
+                    defaultMessage: 'jane@example.com',
+                })}
+                type="email"
+                value={email}
+                setValue={setEmail}
+            />
+            <Input
+                label={intl.formatMessage({
+                    id: 'loginForm__passwordLabel',
+                    defaultMessage: 'Password',
+                })}
+                placeholder={intl.formatMessage({
+                    id: 'loginForm__passwordPlaceholder',
+                    defaultMessage: '∗∗∗∗∗∗∗',
+                })}
+                type="password"
+                value={password}
+                setValue={setPassword}
+            />
 
-				<div className={styles.actions}>
-					<Button
-						type="super"
-						onClick={onSubmit}
-						text={
-							<FormattedMessage
-								id="loginForm__loginButton"
-								defaultMessage="Login"
-								description="login form login button"
-							/>
-						}
-						centered
-						className={styles.submit}
-						disabled={isSubmitting}
-					/>
-					<a
-						onClick={(e) => {
-							e.preventDefault();
-							setIsResetPasswordModalOpen(true);
-						}}
-						className={clsx(styles.resetPassword, 'decorated')}
-					>
-						<FormattedMessage
-							id="loginForm__forgotPasswordButton"
-							defaultMessage="Forgot password?"
-							description="login form forgot password button"
-						/>
-					</a>
-					<FormattedMessage
-						id="loginForm__signupIntro"
-						defaultMessage="Don’t have an account?"
-					/>
-					<Button
-						type="secondary"
-						text={
-							<FormattedMessage
-								id="loginForm__signup"
-								defaultMessage="Sign up"
-							/>
-						}
-						onClick={(e) => {
-							e.preventDefault();
-							showRegister();
-						}}
-						centered
-						className={styles.signup}
-					/>
-				</div>
-			</form>
-			<Modal
-				open={isResetPasswordModalOpen}
-				onClose={() => setIsResetPasswordModalOpen(false)}
-				title={
-					<FormattedMessage
-						id="loginForm-reset__modalTitle"
-						defaultMessage="Reset password"
-					/>
-				}
-				actions={
-					hasSentPasswordReset ? (
-						<Button
-							onClick={() => {
-								setIsResetPasswordModalOpen(false);
-								setHasSentPasswordReset(false);
-							}}
-							type="super"
-							text={
-								<FormattedMessage
-									id="loginForm-reset__doneButton"
-									defaultMessage="Done"
-								/>
-							}
-						/>
-					) : (
-						<Button
-							onClick={() => {
-								mutate({ email: resetEmail });
-								setHasSentPasswordReset(true);
-							}}
-							type="super"
-							text={
-								<FormattedMessage
-									id="loginForm-reset__sendLinkButton"
-									defaultMessage="Send reset link"
-								/>
-							}
-						/>
-					)
-				}
-			>
-				<p>
-					{hasSentPasswordReset ? (
-						/* TODO: This may be a lie, since it appears this message is displayed before the mutation has resolved. If the mutation fails, we don't want to show this success message. */
-						<FormattedMessage
-							id="loginForm-reset__modalParagraphSent"
-							defaultMessage="Reset link sent. Check your email and use the link to reset your password."
-						/>
-					) : (
-						<FormattedMessage
-							id="loginForm-reset__modalParagraph"
-							defaultMessage="Enter the email address associated with your account and we’ll send you a password reset link."
-						/>
-					)}
-				</p>
-				{!hasSentPasswordReset && (
-					<Input
-						label={intl.formatMessage({
-							id: 'loginForm-reset__emailLabel',
-							defaultMessage: 'Email address',
-						})}
-						placeholder={intl.formatMessage({
-							id: 'loginForm-reset__emailPlaceholder',
-							defaultMessage: 'Email address',
-						})}
-						type="email"
-						value={resetEmail}
-						setValue={setResetEmail}
-					/>
-				)}
-			</Modal>
-		</>
-	);
+            <div className={styles.actions}>
+                <Button
+                    type="super"
+                    onClick={onSubmit}
+                    text={
+                        <FormattedMessage
+                            id="loginForm__loginButton"
+                            defaultMessage="Login"
+                            description="login form login button"
+                        />
+                    }
+                    centered
+                    className={styles.submit}
+                    disabled={isSubmitting}
+                />
+                <a
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setIsResetPasswordModalOpen(true);
+                    }}
+                    className={clsx(styles.resetPassword, 'decorated')}
+                >
+                    <FormattedMessage
+                        id="loginForm__forgotPasswordButton"
+                        defaultMessage="Forgot password?"
+                        description="login form forgot password button"
+                    />
+                </a>
+                <FormattedMessage
+                    id="loginForm__signupIntro"
+                    defaultMessage="Don’t have an account?"
+                />
+                <Button
+                    type="secondary"
+                    text={
+                        <FormattedMessage
+                            id="loginForm__signup"
+                            defaultMessage="Sign up"
+                        />
+                    }
+                    onClick={(e) => {
+                        e.preventDefault();
+                        showRegister();
+                    }}
+                    centered
+                    className={styles.signup}
+                />
+            </div>
+        </form>
+        <Modal
+            open={isResetPasswordModalOpen}
+            onClose={() => setIsResetPasswordModalOpen(false)}
+            title={
+                <FormattedMessage
+                    id="loginForm-reset__modalTitle"
+                    defaultMessage="Reset password"
+                />
+            }
+            actions={
+                hasSentPasswordReset ? (
+                    <Button
+                        onClick={() => {
+                            setIsResetPasswordModalOpen(false);
+                            setHasSentPasswordReset(false);
+                        }}
+                        type="super"
+                        text={
+                            <FormattedMessage
+                                id="loginForm-reset__doneButton"
+                                defaultMessage="Done"
+                            />
+                        }
+                    />
+                ) : (
+                    <Button
+                        onClick={() => {
+                            mutate({ email: resetEmail });
+                            setHasSentPasswordReset(true);
+                        }}
+                        type="super"
+                        text={
+                            <FormattedMessage
+                                id="loginForm-reset__sendLinkButton"
+                                defaultMessage="Send reset link"
+                            />
+                        }
+                    />
+                )
+            }
+        >
+            <p>
+                {hasSentPasswordReset ? (
+                    /* TODO: This may be a lie, since it appears this message is displayed before the mutation has resolved. If the mutation fails, we don't want to show this success message. */
+                    (<FormattedMessage
+                        id="loginForm-reset__modalParagraphSent"
+                        defaultMessage="Reset link sent. Check your email and use the link to reset your password."
+                    />)
+                ) : (
+                    <FormattedMessage
+                        id="loginForm-reset__modalParagraph"
+                        defaultMessage="Enter the email address associated with your account and we’ll send you a password reset link."
+                    />
+                )}
+            </p>
+            {!hasSentPasswordReset && (
+                <Input
+                    label={intl.formatMessage({
+                        id: 'loginForm-reset__emailLabel',
+                        defaultMessage: 'Email address',
+                    })}
+                    placeholder={intl.formatMessage({
+                        id: 'loginForm-reset__emailPlaceholder',
+                        defaultMessage: 'Email address',
+                    })}
+                    type="email"
+                    value={resetEmail}
+                    setValue={setResetEmail}
+                />
+            )}
+        </Modal>
+    </>);
 }

@@ -28,15 +28,21 @@ export function useIsFavorited(
 	const queryClient = useQueryClient();
 	const router = useRouter();
 
-	const { data: isFavorited, isLoading } = useQuery(queryKey, () => {
-		if (getSessionToken()) {
-			return isFavoritedQueryFn();
-		}
-		return false;
-	});
+	const { data: isFavorited, isLoading } = useQuery({
+        queryKey: queryKey,
 
-	const { mutate } = useMutation(() => setFavoritedQueryFn(!isFavorited), {
-		onMutate: async () => {
+        queryFn: () => {
+            if (getSessionToken()) {
+                return isFavoritedQueryFn();
+            }
+            return false;
+        }
+    });
+
+	const { mutate } = useMutation({
+        mutationFn: () => setFavoritedQueryFn(!isFavorited),
+
+        onMutate: async () => {
 			await queryClient.cancelQueries(queryKey);
 
 			const snapshot = isFavorited;
@@ -45,16 +51,18 @@ export function useIsFavorited(
 
 			return { snapshot };
 		},
-		onError: (err, variables, context) => {
+
+        onError: (err, variables, context) => {
 			if (context?.snapshot !== undefined) {
 				queryClient.setQueryData(queryKey, context.snapshot);
 			}
 		},
-		onSettled: () => {
+
+        onSettled: () => {
 			const keys = [queryKey, ...invalidateQueryKeys, ['getLibraryData']];
 			keys.map((k) => queryClient.invalidateQueries(k));
-		},
-	});
+		}
+    });
 
 	const toggleFavorited = () => {
 		const isLoggedOut = !getSessionToken();

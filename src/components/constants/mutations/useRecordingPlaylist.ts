@@ -42,11 +42,15 @@ export function useRecordingPlaylist(
 		>(PlaylistRecordingAddDocument, variablesAdd)()
 			.then((data) => {
 				if (data?.playlistRecordingAdd) {
-					queryClient.invalidateQueries(invalidateQueries);
-					queryClient.invalidateQueries([
-						'getLibraryPlaylistPageData',
-						{ id: playlist.id },
-					]);
+					queryClient.invalidateQueries({
+                        queryKey: invalidateQueries
+                    });
+					queryClient.invalidateQueries({
+                        queryKey: [
+                            'getLibraryPlaylistPageData',
+                            { id: playlist.id },
+                        ]
+                    });
 				}
 			})
 			.catch((error) => {
@@ -72,11 +76,15 @@ export function useRecordingPlaylist(
 		>(PlaylistRecordingRemoveDocument, variablesRemove)()
 			.then((data) => {
 				if (data?.playlistRecordingRemove) {
-					queryClient.invalidateQueries(invalidateQueries);
-					queryClient.invalidateQueries([
-						'getLibraryPlaylistPageData',
-						{ id: playlist.id },
-					]);
+					queryClient.invalidateQueries({
+                        queryKey: invalidateQueries
+                    });
+					queryClient.invalidateQueries({
+                        queryKey: [
+                            'getLibraryPlaylistPageData',
+                            { id: playlist.id },
+                        ]
+                    });
 				}
 			})
 			.catch((error) => {
