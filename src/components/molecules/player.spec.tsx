@@ -2,6 +2,7 @@ import {
 	act,
 	findByLabelText,
 	findByTestId,
+	fireEvent,
 	getByLabelText,
 	getByText,
 	queryByLabelText,
@@ -586,13 +587,11 @@ describe('player', () => {
 
 		const control = getByLabelText('Volume');
 
-		await act(async () => {
-			ReactTestUtils.Simulate.change(control, {
-				target: {
-					value: 70,
-				},
-			} as any);
-		});
+		fireEvent.change(control, {
+			target: {
+				value: 70,
+			},
+		} as any);
 
 		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.7));
 	});
