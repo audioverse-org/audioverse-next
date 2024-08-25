@@ -39,8 +39,8 @@
         "@leecheuk/react-google-login": "^5.4.1",
         "@mui/material": "^5.16.7",
         "@segment/analytics-next": "^1.60.0",
-        "@silvermine/videojs-airplay": "^1.1.0",
-        "@silvermine/videojs-chromecast": "^1.3.3",
+        "@silvermine/videojs-airplay": "^1.3.0",
+        "@silvermine/videojs-chromecast": "^1.5.0",
         "@tanstack/react-query": "^4.29.12",
         "@tanstack/react-query-devtools": "^4.33.0",
         "clsx": "^1.2.1",
@@ -66,7 +66,7 @@
         "swiper": "^9.4.1",
         "ts-node": "^10.9.1",
         "use-debounce": "^9.0.4",
-        "video.js": "^7.21.1"
+        "video.js": "^8.17.3"
     },
     "devDependencies": {
         "@calm/eslint-plugin-react-intl": "^1.4.1",
