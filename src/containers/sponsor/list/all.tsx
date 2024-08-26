@@ -21,15 +21,15 @@ export default function AllSponsors(props: Props) {
 
 	const { data, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } =
 		useInfiniteGetSponsorListAllPageDataQuery(
-			'after',
-			{ language },
+			{ language, after: 'after' },
 			{
 				getNextPageParam: (lastPage: Maybe<GetSponsorListAllPageDataQuery>) => {
 					const pageInfo = lastPage?.sponsors.pageInfo;
 					if (!pageInfo?.hasNextPage) return;
 					return { language, after: pageInfo.endCursor };
 				},
-			}
+				initialPageParam: null,
+			},
 		);
 
 	useEffect(() => {

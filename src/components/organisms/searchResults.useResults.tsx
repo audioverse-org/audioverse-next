@@ -1,5 +1,6 @@
 import {
-	InfiniteQueryObserverResult,
+	InfiniteData,
+	UseInfiniteQueryResult,
 	useInfiniteQuery,
 } from '@tanstack/react-query';
 import { useMemo } from 'react';
@@ -28,7 +29,7 @@ type OuterData = {
 	[queryName: string]: InnerData | string;
 };
 
-type QueryResult = InfiniteQueryObserverResult<OuterData>;
+type QueryResult = UseInfiniteQueryResult<InfiniteData<OuterData>>;
 
 export type AugmentedFilter = EntityFilter & {
 	id: EntityFilterId;
@@ -67,18 +68,20 @@ function getNextPageParam(lastPage: OuterData) {
 	return p?.hasNextPage ? p?.endCursor : undefined;
 }
 
+type QueryVars = {
+	term: string;
+	language: string;
+	first: number;
+};
+
 function useFilterQuery(
 	filter: EntityFilterId,
-	vars: {
-		term: string;
-		language: string;
-		first: number;
-	},
-	activeFilter: EntityFilterId
+	vars: QueryVars,
+	activeFilter: EntityFilterId,
 ) {
 	const doc = filters[filter].document;
 	if (!doc) throw new Error('No document for filter');
-	const fn = ({ pageParam = null }) =>
+	const queryFn = async ({ pageParam = null }: { pageParam?: string | null }) =>
 		fetchApi<OuterData>(doc, {
 			variables: {
 				...vars,
@@ -87,9 +90,12 @@ function useFilterQuery(
 		});
 	const isActive = filter === activeFilter || activeFilter === 'all';
 	const enabled = !!vars.term && isActive;
-	return useInfiniteQuery(['search', filter, vars], fn, {
+	return useInfiniteQuery({
+		queryKey: ['search', filter, vars],
+		queryFn,
 		getNextPageParam,
 		enabled,
+		initialPageParam: null,
 	});
 }
 
@@ -103,7 +109,7 @@ function useQueryResults(filter: EntityFilterId, term: string) {
 			language,
 			first: PAGE_SIZE,
 		}),
-		[_term, language]
+		[_term, language],
 	);
 
 	const results: Record<EntityFilterId, QueryResult> = {
@@ -124,7 +130,7 @@ function useQueryResults(filter: EntityFilterId, term: string) {
 
 export default function useResults(
 	filter: EntityFilterId,
-	term: string
+	term: string,
 ): {
 	isLoading: boolean;
 	visible: AugmentedFilter[];

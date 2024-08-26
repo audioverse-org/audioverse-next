@@ -28,7 +28,9 @@ export async function refetchUserQueries(
 	queryClient: QueryClient
 ): Promise<void> {
 	await Promise.all(
-		USER_SESSION_QUERY_KEYS.map((key) => queryClient.refetchQueries(key))
+		USER_SESSION_QUERY_KEYS.map((queryKey) =>
+			queryClient.refetchQueries({ queryKey })
+		)
 	);
 }
 
