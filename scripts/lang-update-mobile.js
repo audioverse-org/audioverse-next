@@ -11,10 +11,10 @@ const englishWebsiteLangs = require('../public/lang/en.json');
 const englishWebsiteValues = lodash.values(
 	lodash.pick(
 		lodash.invert(
-			lodash.mapValues(englishWebsiteLangs, ({ string }) => string)
+			lodash.mapValues(englishWebsiteLangs, ({ string }) => string),
 		),
-		appKeys
-	)
+		appKeys,
+	),
 );
 
 for (const language of languages) {
@@ -24,15 +24,15 @@ for (const language of languages) {
 
 	const matchesByKey = lodash.mapValues(
 		lodash.pick(websiteLangs, appKeys),
-		({ string }) => string
+		({ string }) => string,
 	);
 
 	const matchesByEnglishValue = lodash.keys(
-		lodash.pick(websiteLangs, englishWebsiteValues)
+		lodash.pick(websiteLangs, englishWebsiteValues),
 	);
 	const mappedLanguageMatches = lodash.zipObject(
 		matchesByEnglishValue.map((key) => englishWebsiteLangs[key].string),
-		matchesByEnglishValue.map((key) => websiteLangs[key].string)
+		matchesByEnglishValue.map((key) => websiteLangs[key].string),
 	);
 
 	fs.writeFileSync(
@@ -41,6 +41,6 @@ for (const language of languages) {
 			...existingLangs,
 			...matchesByKey,
 			...mappedLanguageMatches,
-		})
+		}),
 	);
 }

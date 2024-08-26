@@ -78,14 +78,14 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const paths = [];
 	paths.push(
 		...response.map(({ id }) =>
-			root.lang(LANGUAGES.ENGLISH.base_urls[0]).bibles.versionId(id).get()
-		)
+			root.lang(LANGUAGES.ENGLISH.base_urls[0]).bibles.versionId(id).get(),
+		),
 	);
 	const apiBibles = await getAudiobibleVersionsData({
 		language: Language.English,
 	});
 	paths.push(
-		...(apiBibles.collections.nodes || []).map((c) => c.canonicalPath)
+		...(apiBibles.collections.nodes || []).map((c) => c.canonicalPath),
 	);
 
 	return {

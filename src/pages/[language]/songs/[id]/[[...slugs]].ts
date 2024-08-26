@@ -50,6 +50,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSongDetailStaticPaths,
 		(d) => d.musicTracks.nodes,
-		(baseUrl, { canonicalPath }) => canonicalPath
+		(baseUrl, { canonicalPath }) => canonicalPath,
 	);
 }

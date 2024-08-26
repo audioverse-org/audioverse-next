@@ -35,7 +35,7 @@ export async function getServerSideProps({
 				link: series.canonicalUrl,
 				title: series.title,
 			},
-			series.recordings.nodes || []
+			series.recordings.nodes || [],
 		);
 		res.write(feed);
 

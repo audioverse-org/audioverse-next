@@ -116,10 +116,10 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 				{'books' in version
 					? version.books.map((book) => (
 							<CardBibleBook book={book} key={book.book_id} />
-					  ))
+						))
 					: version.sequences.nodes?.map((s) => (
 							<CardSequence sequence={s} key={s.id} />
-					  ))}
+						))}
 			</CardGroup>
 		</Tease>
 	);

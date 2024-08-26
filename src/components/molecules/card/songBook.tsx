@@ -42,7 +42,7 @@ export default function CardSongBook({
 				<a
 					className={clsx(
 						styles.container,
-						isSubHovered && styles.otherHovered
+						isSubHovered && styles.otherHovered,
 					)}
 				>
 					<SequenceTypeLockup contentType={SequenceContentType.MusicAlbum} />

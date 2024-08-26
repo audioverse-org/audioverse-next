@@ -4,7 +4,7 @@ import {
 } from '@leecheuk/react-google-login';
 
 export function useGoogleLogin(
-	input: UseGoogleLoginProps
+	input: UseGoogleLoginProps,
 ): Partial<UseGoogleLoginResponse> {
 	return {
 		signIn: () => {

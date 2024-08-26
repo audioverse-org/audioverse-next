@@ -1,7 +1,7 @@
 import {
 	InfiniteData,
-	UseInfiniteQueryResult,
 	useInfiniteQuery,
+	UseInfiniteQueryResult,
 } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { useDebounce } from 'use-debounce';

@@ -68,7 +68,7 @@ const renderComponent = buildRenderer(
 		defaultProps: {
 			recording,
 		},
-	}
+	},
 );
 
 describe('player', () => {
@@ -184,12 +184,12 @@ describe('player', () => {
 		await act(async () => {
 			ReactTestUtils.Simulate.timeUpdate(
 				getByTestId('video-element'),
-				{} as any
+				{} as any,
 			);
 		});
 
 		await waitFor(() =>
-			expect(getAllByLabelText('progress')[0]).toHaveValue('25')
+			expect(getAllByLabelText('progress')[0]).toHaveValue('25'),
 		);
 	});
 
@@ -238,7 +238,7 @@ describe('player', () => {
 		await act(async () => {
 			ReactTestUtils.Simulate.timeUpdate(
 				result.getByTestId('video-element'),
-				{} as any
+				{} as any,
 			);
 		});
 
@@ -264,7 +264,7 @@ describe('player', () => {
 		await act(async () => {
 			ReactTestUtils.Simulate.timeUpdate(
 				result.getByTestId('video-element'),
-				{} as any
+				{} as any,
 			);
 		});
 
@@ -419,7 +419,7 @@ describe('player', () => {
 					/>
 				</AndMiniplayer>
 			</AndPlaybackContext>,
-			undefined
+			undefined,
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -438,7 +438,7 @@ describe('player', () => {
 					src: 'second_source_src',
 					type: 'second_source_type',
 				},
-			])
+			]),
 		);
 	});
 
@@ -542,7 +542,7 @@ describe('player', () => {
 					/>
 				</AndMiniplayer>
 			</AndPlaybackContext>,
-			undefined
+			undefined,
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -685,7 +685,7 @@ describe('player', () => {
 		await act(async () => {
 			ReactTestUtils.Simulate.timeUpdate(
 				screen.getByTestId('video-element'),
-				{} as any
+				{} as any,
 			);
 		});
 
@@ -814,7 +814,7 @@ describe('player', () => {
 		const miniplayer = result.getByLabelText('miniplayer');
 
 		expect(
-			getByLabelText(miniplayer, 'forward 15 seconds')
+			getByLabelText(miniplayer, 'forward 15 seconds'),
 		).toBeInTheDocument();
 	});
 
@@ -1075,7 +1075,7 @@ describe('player', () => {
 		await act(async () => {
 			ReactTestUtils.Simulate.timeUpdate(
 				result.getByTestId('video-element'),
-				{} as any
+				{} as any,
 			);
 		});
 
@@ -1132,12 +1132,12 @@ describe('player', () => {
 		await act(async () => {
 			ReactTestUtils.Simulate.timeUpdate(
 				getByTestId('video-element'),
-				{} as any
+				{} as any,
 			);
 		});
 
 		await waitFor(() =>
-			expect(getAllByLabelText('progress')[0]).toHaveValue('0')
+			expect(getAllByLabelText('progress')[0]).toHaveValue('0'),
 		);
 	});
 
@@ -1187,7 +1187,7 @@ describe('player', () => {
 		await act(async () => {
 			ReactTestUtils.Simulate.timeUpdate(
 				result.getByTestId('video-element'),
-				{} as any
+				{} as any,
 			);
 		});
 

@@ -48,6 +48,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSponsorDetailPathsData,
 		(d) => d.sponsors.nodes,
-		(l, { canonicalPath }) => canonicalPath
+		(l, { canonicalPath }) => canonicalPath,
 	);
 }

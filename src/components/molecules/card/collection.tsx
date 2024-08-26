@@ -75,7 +75,7 @@ export default function CardCollection({
 					className={clsx(
 						styles.container,
 						isBibleVersion && styles.bibleVersion,
-						(isHovered || isSubHovered) && styles.otherHovered
+						(isHovered || isSubHovered) && styles.otherHovered,
 					)}
 					onClick={() => {
 						analytics.track('Card click', {
@@ -130,7 +130,7 @@ export default function CardCollection({
 					<div
 						className={clsx(
 							styles.details,
-							isFavorited && styles.detailsWithLike
+							isFavorited && styles.detailsWithLike,
 						)}
 					>
 						<div className={styles.duration}>

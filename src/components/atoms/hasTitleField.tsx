@@ -6,7 +6,7 @@ interface ComponentWithTitleProps {
 }
 
 const hasTitleField = (
-	component: React.ReactElement<ComponentWithTitleProps>
+	component: React.ReactElement<ComponentWithTitleProps>,
 ): boolean => {
 	const { title } = component.props;
 

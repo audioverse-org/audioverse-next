@@ -13,10 +13,10 @@ function LibraryPlaylistDetail(): JSX.Element {
 	const playlistId = router.query.playlist as string;
 
 	const { data, isLoading } = useQuery({
-        queryKey: ['getLibraryPlaylistPageData', { id: playlistId }],
-        queryFn: () => getLibraryPlaylistPageData({ id: playlistId }),
-        staleTime: Infinity
-    });
+		queryKey: ['getLibraryPlaylistPageData', { id: playlistId }],
+		queryFn: () => getLibraryPlaylistPageData({ id: playlistId }),
+		staleTime: Infinity,
+	});
 
 	if (isLoading) {
 		return <LoadingCards />;

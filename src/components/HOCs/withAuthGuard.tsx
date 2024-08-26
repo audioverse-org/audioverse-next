@@ -7,7 +7,7 @@ import useIsAuthenticated from '~lib/hooks/useIsAuthenticated';
 
 function withAuthGuard<P extends React.JSX.IntrinsicAttributes>(
 	Component: React.ComponentType<P>,
-	LoggedOutComponent: React.ComponentType = Login
+	LoggedOutComponent: React.ComponentType = Login,
 ): React.ComponentType<P> {
 	function WithAuthGuard(props: P) {
 		const sessionToken = getSessionToken(getCurrentRequest());

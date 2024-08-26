@@ -241,8 +241,8 @@ export function Recording({
 		overrideSequence && overrideSequence
 			? overrideSequence.items
 			: contentType !== RecordingContentType.Sermon
-			? recording.sequence?.recordings.nodes
-			: undefined;
+				? recording.sequence?.recordings.nodes
+				: undefined;
 
 	const makeHat = (typeLockup: ReactElement, title: string, href: string) => (
 		<Link href={href} legacyBehavior>
@@ -273,7 +273,7 @@ export function Recording({
 								},
 								{
 									sponsorName: sponsor?.title || '',
-								}
+								},
 							),
 							[RecordingContentType.BibleChapter]: intl.formatMessage(
 								{
@@ -282,7 +282,7 @@ export function Recording({
 								},
 								{
 									sponsorName: sponsor?.title || '',
-								}
+								},
 							),
 							[RecordingContentType.MusicTrack]: intl.formatMessage(
 								{
@@ -291,7 +291,7 @@ export function Recording({
 								},
 								{
 									speakerName: speakers.map(({ name }) => name).join(','),
-								}
+								},
 							),
 							[RecordingContentType.Sermon]: intl.formatMessage(
 								{
@@ -300,7 +300,7 @@ export function Recording({
 								},
 								{
 									speakerName: speakers.map(({ name }) => name).join(','),
-								}
+								},
 							),
 							[RecordingContentType.Story]: intl.formatMessage(
 								{
@@ -309,7 +309,7 @@ export function Recording({
 								},
 								{
 									writerName: writers.map(({ name }) => name).join(','),
-								}
+								},
 							),
 						}[contentType]
 					}
@@ -338,7 +338,7 @@ export function Recording({
 						: root
 								.lang(languageRoute)
 								.library.playlists(overrideSequence.playlistId)
-								.get()
+								.get(),
 				)
 			) : overrideSequence ? (
 				makeHat(
@@ -347,7 +347,7 @@ export function Recording({
 						unpadded
 					/>,
 					startCase(overrideSequence.title),
-					root.lang(languageRoute).songs.book(overrideSequence.title).get()
+					root.lang(languageRoute).songs.book(overrideSequence.title).get(),
 				)
 			) : (
 				recording.sequence &&
@@ -357,7 +357,7 @@ export function Recording({
 						unpadded
 					/>,
 					recording.sequence.title,
-					recording.sequence.canonicalPath
+					recording.sequence.canonicalPath,
 				)
 			)}
 			<div className={styles.content}>
@@ -474,7 +474,7 @@ export function Recording({
 										<div
 											className={clsx(
 												styles.transcriptWrapper,
-												isShowingTranscript && styles.transcriptOpen
+												isShowingTranscript && styles.transcriptOpen,
 											)}
 										>
 											<Button
@@ -583,7 +583,7 @@ export function Recording({
 							style={{
 								opacity: Math.min(
 									1,
-									(scrollRef.current?.scrollTop || 0) - scrollPosition / 100
+									(scrollRef.current?.scrollTop || 0) - scrollPosition / 100,
 								),
 							}}
 						/>

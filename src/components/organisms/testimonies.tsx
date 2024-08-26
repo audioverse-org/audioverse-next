@@ -11,8 +11,8 @@ interface TestimoniesProps {
 
 const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 	return (
-        (<Slider>
-            {testimonies.map((t) => (
+		<Slider>
+			{testimonies.map((t) => (
 				<blockquote className={styles.testimony} key={t.id}>
 					<p
 						className={styles.body}
@@ -23,8 +23,8 @@ const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 					</footer>
 				</blockquote>
 			))}
-        </Slider>)
-    );
+		</Slider>
+	);
 };
 
 export default Testimonies;

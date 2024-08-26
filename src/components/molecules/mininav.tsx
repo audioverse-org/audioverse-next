@@ -50,7 +50,7 @@ export default function Mininav({
 				compact && styles.compact,
 				disabled && styles.miniNavDisabled,
 				className,
-				Theme[theme]
+				Theme[theme],
 			)}
 		>
 			{items.map(({ label, url, onClick, isActive, id }) => {

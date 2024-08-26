@@ -70,7 +70,7 @@ export default function Modal({
 						<Heading2
 							className={clsx(
 								styles.centerText,
-								(rightElmt || titleLeft) && styles.leftText
+								(rightElmt || titleLeft) && styles.leftText,
 							)}
 						>
 							{title}

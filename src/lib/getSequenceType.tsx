@@ -25,7 +25,7 @@ type ISequenceTypeTheme = {
 };
 
 export function getSequenceTypeTheme(
-	contentType: SequenceContentType
+	contentType: SequenceContentType,
 ): ISequenceTypeTheme {
 	return (
 		{

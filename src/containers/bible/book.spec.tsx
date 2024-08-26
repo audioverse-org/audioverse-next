@@ -142,7 +142,7 @@ describe('Bible book detail page', () => {
 
 		expect(getByText('the_sponsor_name')).toHaveAttribute(
 			'href',
-			'the_sponsor_url'
+			'the_sponsor_url',
 		);
 	});
 

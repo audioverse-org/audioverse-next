@@ -8,7 +8,7 @@ export interface PaginatedGetter<T, E> {
 export async function getPaginatedData<T, E>(
 	index: number | string,
 	getter: PaginatedGetter<T, E>,
-	extraVariables: E = {} as E
+	extraVariables: E = {} as E,
 ): Promise<T | null> {
 	return getter({
 		...extraVariables,

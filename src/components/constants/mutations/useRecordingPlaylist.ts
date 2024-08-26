@@ -16,7 +16,7 @@ import {
 
 export function useRecordingPlaylist(
 	playlist?: Pick<UserPlaylist, 'id'>,
-	recordingId?: Recording['id']
+	recordingId?: Recording['id'],
 ): {
 	addToPlaylist: () => void;
 	removeFromPlaylist: () => void;
@@ -43,14 +43,11 @@ export function useRecordingPlaylist(
 			.then((data) => {
 				if (data?.playlistRecordingAdd) {
 					queryClient.invalidateQueries({
-                        queryKey: invalidateQueries
-                    });
+						queryKey: invalidateQueries,
+					});
 					queryClient.invalidateQueries({
-                        queryKey: [
-                            'getLibraryPlaylistPageData',
-                            { id: playlist.id },
-                        ]
-                    });
+						queryKey: ['getLibraryPlaylistPageData', { id: playlist.id }],
+					});
 				}
 			})
 			.catch((error) => {
@@ -77,14 +74,11 @@ export function useRecordingPlaylist(
 			.then((data) => {
 				if (data?.playlistRecordingRemove) {
 					queryClient.invalidateQueries({
-                        queryKey: invalidateQueries
-                    });
+						queryKey: invalidateQueries,
+					});
 					queryClient.invalidateQueries({
-                        queryKey: [
-                            'getLibraryPlaylistPageData',
-                            { id: playlist.id },
-                        ]
-                    });
+						queryKey: ['getLibraryPlaylistPageData', { id: playlist.id }],
+					});
 				}
 			})
 			.catch((error) => {

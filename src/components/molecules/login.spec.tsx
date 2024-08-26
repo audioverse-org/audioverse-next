@@ -37,7 +37,7 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithProviders(
 			<Login />,
-			undefined
+			undefined,
 		);
 
 		await userEvent.click(getByText('Forgot password?'));
@@ -58,7 +58,7 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithProviders(
 			<Login />,
-			undefined
+			undefined,
 		);
 
 		await userEvent.click(getByText('Forgot password?'));
@@ -78,7 +78,7 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithProviders(
 			<Login />,
-			undefined
+			undefined,
 		);
 
 		await userEvent.click(getByText('Forgot password?'));
@@ -110,7 +110,7 @@ describe('login form', () => {
 		});
 
 		expect(
-			queryByText('Check your email for a password reset link')
+			queryByText('Check your email for a password reset link'),
 		).not.toBeInTheDocument();
 	});
 
@@ -121,7 +121,7 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithProviders(
 			<Login />,
-			undefined
+			undefined,
 		);
 
 		await userEvent.click(getByText('Forgot password?'));
@@ -132,8 +132,8 @@ describe('login form', () => {
 		await waitFor(() => {
 			expect(
 				getByText(
-					'Something went wrong while trying to send a password reset link'
-				)
+					'Something went wrong while trying to send a password reset link',
+				),
 			);
 		});
 	});
@@ -146,7 +146,7 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithProviders(
 			<Login />,
-			undefined
+			undefined,
 		);
 
 		await userEvent.click(getByText('Forgot password?'));

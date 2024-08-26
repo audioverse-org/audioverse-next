@@ -15,10 +15,10 @@ type Getter<DATA> = (variables: {
 export async function getDetailStaticPaths<DATA, NODE>(
 	getter: Getter<DATA>,
 	parseNodes: (data: DATA) => NODE[] | null | undefined,
-	pathMapper: (languageRoute: string, node: NODE) => string
+	pathMapper: (languageRoute: string, node: NODE) => string,
 ): Promise<GetStaticPathsResult> {
 	const languages = Object.values(Language).filter(
-		(l) => l !== Language.Nordic
+		(l) => l !== Language.Nordic,
 	) as SupportedLanguages[];
 
 	const pathSetPromises = languages.map(async (l) => {

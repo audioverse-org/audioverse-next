@@ -18,7 +18,7 @@ export default function Heading1({
 			className={clsx(
 				baseStyles.base,
 				unpadded && baseStyles.unpadded,
-				className
+				className,
 			)}
 		>
 			{children}

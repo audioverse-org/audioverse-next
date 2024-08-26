@@ -146,7 +146,7 @@ describe('collection detail page', () => {
 
 		expect(getAllByText('the_sponsor_title')[1]).toHaveAttribute(
 			'href',
-			'the_sponsor_path'
+			'the_sponsor_path',
 		);
 	});
 
@@ -175,7 +175,7 @@ describe('collection detail page', () => {
 
 		expect(getByText('Copy RSS Link')).toHaveAttribute(
 			'href',
-			'/en/conferences/the_collection_id/feed.xml'
+			'/en/conferences/the_collection_id/feed.xml',
 		);
 	});
 });

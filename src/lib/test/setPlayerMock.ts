@@ -35,7 +35,7 @@ type MockPlayer = Pick<
 export const mockVideojs = videojs as unknown as jest.Mock;
 
 export default function setPlayerMock(
-	options: SetPlayerMockOptions = {}
+	options: SetPlayerMockOptions = {},
 ): MockPlayer {
 	let {
 		isPaused = true,

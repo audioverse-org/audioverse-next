@@ -40,6 +40,6 @@ export function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getTopicDetailStaticPaths,
 		(d) => d.topics.nodes,
-		(l, n) => n.canonicalPath
+		(l, n) => n.canonicalPath,
 	);
 }

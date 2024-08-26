@@ -45,14 +45,14 @@ const iconMap = {
 	}),
 	icon_collections: dynamic(
 		() => import('~public/img/icons/icon-collections.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	fa_list_alt: dynamic(() => import('~public/img/icons/fa-list-alt.svg'), {
 		...opts,
 	}),
 	fa_user_plus_heavy: dynamic(
 		() => import('~public/img/icons/fa-user-plus-heavy.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	fa_calendar: dynamic(() => import('~public/img/icons/fa-calendar.svg'), {
 		...opts,
@@ -72,18 +72,18 @@ const iconMap = {
 	}),
 	icon_our_story: dynamic(
 		() => import('~public/img/icons/icon-our-story.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	fa_seedling: dynamic(() => import('~public/img/icons/fa-seedling.svg'), {
 		...opts,
 	}),
 	fa_users_heavy: dynamic(
 		() => import('~public/img/icons/fa-users-heavy.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	fa_bullseye_heavy: dynamic(
 		() => import('~public/img/icons/fa-bullseye-heavy.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	fa_fire_heavy: dynamic(() => import('~public/img/icons/fa-fire-heavy.svg'), {
 		...opts,
@@ -93,11 +93,11 @@ const iconMap = {
 	}),
 	fa_comment_heavy: dynamic(
 		() => import('~public/img/icons/fa-comment-heavy.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	fa_heart_heavy: dynamic(
 		() => import('~public/img/icons/fa-heart-heavy.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	icon_contact: dynamic(() => import('~public/img/icons/icon-contact.svg'), {
 		...opts,
@@ -122,19 +122,19 @@ const iconMap = {
 	}),
 	fa_question_circle: dynamic(
 		() => import('~public/img/icons/fa-question-circle.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	fa_link: dynamic(() => import('~public/img/icons/fa-link.svg'), { ...opts }),
 	fa_landmark_heavy: dynamic(
 		() => import('~public/img/icons/fa-landmark-heavy.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	fa_lock_heavy: dynamic(() => import('~public/img/icons/fa-lock-heavy.svg'), {
 		...opts,
 	}),
 	fa_newspaper_heavy: dynamic(
 		() => import('~public/img/icons/fa-newspaper-heavy.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 	icon_sign_out: dynamic(() => import('~public/img/icons/icon-sign-out.svg'), {
 		...opts,
@@ -144,7 +144,7 @@ const iconMap = {
 	}),
 	fa_layer_group: dynamic(
 		() => import('~public/img/icons/fa-layer-group.svg'),
-		{ ...opts }
+		{ ...opts },
 	),
 };
 
@@ -270,7 +270,7 @@ export function useNavigationItems(): INavigationItem[] {
 							description: `Header nav link name: Bible`,
 						}),
 					},
-			  ]
+				]
 			: []),
 		{
 			key: 'library',

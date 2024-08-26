@@ -81,7 +81,7 @@ export async function getBibles(): Promise<IBibleVersion[] | null> {
 }
 
 export async function getBible(
-	bibleId: string
+	bibleId: string,
 ): Promise<IBibleVersion | null | undefined> {
 	return getBibles().then((bibles) => bibles?.find(({ id }) => id === bibleId));
 }
@@ -158,13 +158,13 @@ const bookIdMap: { [k: string]: string } = {
 export async function getBibleBookChapters(
 	bibleId: string,
 	testament: string,
-	bookId: string
+	bookId: string,
 ): Promise<IBibleBookChapter[]> {
 	const filesetId = `${bibleId.substring(0, bibleId.length - 1)}${
 		testament === 'OT' ? 'O' : 'N'
 	}${bibleId.substring(bibleId.length - 1)}DA`;
 	const response = await getResponse<{ data: IBBFileset[] }>(
-		`/bibles/filesets/${filesetId}?`
+		`/bibles/filesets/${filesetId}?`,
 	);
 	if (!response) {
 		return [];
@@ -182,7 +182,7 @@ export async function getBibleBookChapters(
 			carry[key] = matches[0] || '';
 			return carry;
 		},
-		{}
+		{},
 	);
 	const filesets = response.data?.filter(({ book_id }) => book_id === bookId);
 
@@ -196,6 +196,6 @@ export async function getBibleBookChapters(
 			url: path,
 			duration,
 			text: textByChapterNumber[chapter_start],
-		})
+		}),
 	);
 }

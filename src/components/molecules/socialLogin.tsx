@@ -113,11 +113,11 @@ export default function SocialLogin({
 										? intl.formatMessage({
 												id: 'socialLogin__registerFacebookButton',
 												defaultMessage: 'Sign up with Facebook',
-										  })
+											})
 										: intl.formatMessage({
 												id: 'socialLogin__loginFacebookButton',
 												defaultMessage: 'Login with Facebook',
-										  })
+											})
 								}
 								onClick={renderProps.onClick}
 								centered
@@ -151,11 +151,11 @@ export default function SocialLogin({
 							? intl.formatMessage({
 									id: 'socialLogin__registerGoogleButton',
 									defaultMessage: 'Sign up with Google',
-							  })
+								})
 							: intl.formatMessage({
 									id: 'socialLogin__loginGoogleButton',
 									defaultMessage: 'Login with Google',
-							  })
+								})
 					}
 					onClick={signIn}
 					centered

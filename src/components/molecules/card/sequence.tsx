@@ -76,11 +76,11 @@ export default function CardSequence({
 					? intl.formatMessage({
 							id: 'cardSequence_egwAudiobookType',
 							defaultMessage: 'ELLEN WHITE',
-					  })
+						})
 					: intl.formatMessage({
 							id: 'cardSequence_audiobookType',
 							defaultMessage: 'Book',
-					  }),
+						}),
 				labelColor: BaseColors.WHITE,
 			},
 			[SequenceContentType.BibleBook]: {
@@ -137,7 +137,7 @@ export default function CardSequence({
 			: speakers.nodes) || [];
 
 	const isPersonMatched = persons.some((person) =>
-		NameMatcher({ person, targetName: 'Ellen G. White' })
+		NameMatcher({ person, targetName: 'Ellen G. White' }),
 	);
 	const inner = (
 		<>
@@ -159,7 +159,8 @@ export default function CardSequence({
 						(contentType === SequenceContentType.Audiobook || isBibleBook) &&
 							styles.audiobookTitle,
 						isBibleBook && styles.bibleBookTitle,
-						contentType === SequenceContentType.StorySeason && styles.storyTitle
+						contentType === SequenceContentType.StorySeason &&
+							styles.storyTitle,
 					)}
 				>
 					{title}
@@ -291,8 +292,8 @@ export default function CardSequence({
 		egw
 			? styles['EGWAUDIOBOOK']
 			: isPersonMatched
-			? styles['EGWAUDIOBOOK']
-			: styles[contentType]
+				? styles['EGWAUDIOBOOK']
+				: styles[contentType],
 	);
 	const linkUrl =
 		(isBibleBook && (sequence.allRecordings.nodes || [])[0].canonicalPath) ||

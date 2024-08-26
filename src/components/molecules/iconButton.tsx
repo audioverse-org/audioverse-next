@@ -12,7 +12,7 @@ type Props = {
 
 const IconButton = React.forwardRef(function IconButton(
 	{ Icon, color, ...props }: Props,
-	ref: Ref<HTMLButtonElement>
+	ref: Ref<HTMLButtonElement>,
 ) {
 	return (
 		<CircleButton {...props} ref={ref}>

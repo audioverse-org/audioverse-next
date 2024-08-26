@@ -22,7 +22,7 @@ export default function Heading3({
 				baseStyles.base,
 				sans && clsx(baseStyles.sans, styles.sans),
 				unpadded && baseStyles.unpadded,
-				className
+				className,
 			)}
 		>
 			{children}

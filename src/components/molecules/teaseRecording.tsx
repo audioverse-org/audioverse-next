@@ -112,7 +112,7 @@ export default function TeaseRecording({
 					className={clsx(
 						styles.content,
 						styles.contentOptionalLink,
-						unpadded && styles.unpadded
+						unpadded && styles.unpadded,
 					)}
 					onClick={() => {
 						analytics.track('Card click', {
@@ -131,7 +131,7 @@ export default function TeaseRecording({
 						className={clsx(
 							styles.content,
 							unpadded && styles.unpadded,
-							fullBleed && styles.fullBleed
+							fullBleed && styles.fullBleed,
 						)}
 						onClick={() => {
 							analytics.track('Card click', {
@@ -149,7 +149,7 @@ export default function TeaseRecording({
 				className={clsx(
 					styles.playlist,
 					unpadded && styles.playlistUnpadded,
-					fullBleed && styles.playlistFullBleed
+					fullBleed && styles.playlistFullBleed,
 				)}
 			>
 				{!disableUserFeatures && (

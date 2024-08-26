@@ -12,13 +12,13 @@ import styles from './pagination.module.scss';
 
 export function pagination(
 	current: number,
-	total: number
+	total: number,
 ): (number | string)[] {
 	if (total === 1) return [1];
 
 	const center = [current - 2, current - 1, current, current + 1, current + 2],
 		filteredCenter: (number | string)[] = center.filter(
-			(p) => p > 1 && p < total
+			(p) => p > 1 && p < total,
 		),
 		includeThreeLeft = current === 5,
 		includeThreeRight = current === total - 4,
@@ -53,7 +53,7 @@ const PaginationEntry = ({
 			className={clsx(
 				styles.link,
 				isActive && styles.active,
-				isOptional && styles.optional
+				isOptional && styles.optional,
 			)}
 			data-testid={isActive ? 'active' : ''}
 		>

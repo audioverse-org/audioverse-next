@@ -31,14 +31,14 @@ export async function getPaginatedStaticProps<T, N>(
 	getter: PaginatedGetter<T, { language: Language }>,
 	parseNodes: (data: T) => N[] | null | undefined,
 	parseCount: (count: T) => number | null | undefined,
-	parseExtraProps?: (data: T | null) => Record<string, unknown> & IBaseProps
+	parseExtraProps?: (data: T | null) => Record<string, unknown> & IBaseProps,
 ): Promise<PaginatedStaticProps<T, N>> {
 	const { i: pageIndex, language: languageRoute } = params || {
 		language: Language.English,
 		i: '1',
 	};
 	const languageConfig = Object.values(LANGUAGES).find((l) =>
-		l.base_urls.includes(languageRoute || '')
+		l.base_urls.includes(languageRoute || ''),
 	);
 
 	if (!languageConfig) {
@@ -60,7 +60,7 @@ export function formatPaginatedStaticProps<T, N>(
 	nodes: N[],
 	count: number,
 	current = 1,
-	extraProps: Record<string, unknown> & IBaseProps = {}
+	extraProps: Record<string, unknown> & IBaseProps = {},
 ): PaginatedStaticProps<T, N> {
 	const total = getPaginationPageCount(count);
 

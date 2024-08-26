@@ -26,7 +26,7 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 	const language = useLanguageId();
 
 	const [recipient, setRecipient] = useState<string>(
-		PageContactRecipient.General
+		PageContactRecipient.General,
 	);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -42,7 +42,7 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 				general: PageContactRecipient.General,
 				support: PageContactRecipient.Technical,
 				testimonies: PageContactRecipient.Testimony,
-			}[type] || PageContactRecipient.General
+			}[type] || PageContactRecipient.General,
 		);
 		reset();
 	}, [type, reset]);

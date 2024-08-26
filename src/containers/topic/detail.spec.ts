@@ -56,7 +56,7 @@ const loadData = buildLoader<GetTopicDetailDataQuery>(
 				],
 			},
 		},
-	}
+	},
 );
 const loadStaticPathsData = buildLoader<GetTopicDetailStaticPathsQuery>(
 	GetTopicDetailStaticPathsDocument,
@@ -70,7 +70,7 @@ const loadStaticPathsData = buildLoader<GetTopicDetailStaticPathsQuery>(
 				},
 			],
 		},
-	}
+	},
 );
 
 describe('Topic', () => {
@@ -91,7 +91,7 @@ describe('Topic', () => {
 		const result = await getStaticPaths();
 
 		expect(result.paths).toEqual(
-			expect.arrayContaining(['/en/topics/1/the-title'])
+			expect.arrayContaining(['/en/topics/1/the-title']),
 		);
 	});
 

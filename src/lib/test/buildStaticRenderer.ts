@@ -5,7 +5,7 @@ import { buildPageRenderer, PageRenderer } from './buildPageRenderer';
 
 export function buildStaticRenderer<T extends Record<string, any>>(
 	Component: ComponentType<T>,
-	getStaticProps: GetStaticProps<any, any>
+	getStaticProps: GetStaticProps<any, any>,
 ): PageRenderer<T> {
 	const getProps = async (p: any) =>
 		((await getStaticProps({ params: p })) as any).props;

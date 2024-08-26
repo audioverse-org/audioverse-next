@@ -51,9 +51,9 @@ export default function ButtonShare({
 						},
 						{
 							subject: emailSubject,
-						}
-					)
-			  )}`
+						},
+					),
+				)}`
 			: ''
 	}`;
 	const copyLink = shareUrl;
@@ -135,7 +135,7 @@ export default function ButtonShare({
 						/>,
 						() => shareTracking('RSS'),
 					],
-			  ] as const)
+				] as const)
 			: []),
 	] as const;
 
@@ -153,8 +153,8 @@ export default function ButtonShare({
 									? BaseColors.SALMON
 									: BaseColors.WHITE
 								: isOpen
-								? BaseColors.RED
-								: BaseColors.DARK
+									? BaseColors.RED
+									: BaseColors.DARK
 						}
 						backgroundColor={backgroundColor}
 						aria-label={intl.formatMessage({

@@ -67,7 +67,7 @@ const Navigation = ({
 
 	const navigationItems = useNavigationItems();
 	const submenuItem = navigationItems.find(
-		({ key }: INavigationItem) => submenu === key
+		({ key }: INavigationItem) => submenu === key,
 	);
 
 	return (
@@ -248,8 +248,8 @@ const Navigation = ({
 													</Link>
 												)}
 											</li>
-										)
-								  )
+										),
+									)
 								: null}
 							{submenuItem?.childNode}
 						</ul>

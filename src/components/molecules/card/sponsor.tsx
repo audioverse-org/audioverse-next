@@ -74,7 +74,7 @@ export default function CardSponsor({
 					<div
 						className={clsx(
 							styles.details,
-							isFavorited && styles.detailsWithLike
+							isFavorited && styles.detailsWithLike,
 						)}
 					>
 						<Heading6

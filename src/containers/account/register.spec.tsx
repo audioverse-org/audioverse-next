@@ -136,7 +136,7 @@ describe('register page', () => {
 		await renderPage();
 
 		expect(
-			await screen.findByText('Sign up with Facebook')
+			await screen.findByText('Sign up with Facebook'),
 		).toBeInTheDocument();
 	});
 
@@ -253,7 +253,7 @@ describe('register page', () => {
 
 		expect(fetchApi).not.toBeCalledWith(
 			RegisterSocialDocument,
-			expect.anything()
+			expect.anything(),
 		);
 	});
 
@@ -269,7 +269,7 @@ describe('register page', () => {
 
 		await waitFor(() => {
 			expect(
-				getByText('300: Failed to login with Facebook')
+				getByText('300: Failed to login with Facebook'),
 			).toBeInTheDocument();
 		});
 	});

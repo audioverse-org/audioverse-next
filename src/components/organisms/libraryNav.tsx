@@ -266,7 +266,7 @@ export default function LibraryNav({
 		title: JSX.Element,
 		options: [JSX.Element, string][],
 		currentOption: string,
-		queryKey: string
+		queryKey: string,
 	) => (
 		<div className={styles.optionGroupWrapper}>
 			<Heading6 sans uppercase loose large>
@@ -381,7 +381,7 @@ export default function LibraryNav({
 								disabled={disabled}
 								className={clsx(
 									styles.button,
-									(isOpen || filtersApplied) && styles.buttonOpen
+									(isOpen || filtersApplied) && styles.buttonOpen,
 								)}
 								{...props}
 							/>
@@ -397,7 +397,7 @@ export default function LibraryNav({
 									/>,
 									contentTypeOptions,
 									contentType,
-									'contentType'
+									'contentType',
 								)}
 								{makeOptionGroup(
 									<FormattedMessage
@@ -406,7 +406,7 @@ export default function LibraryNav({
 									/>,
 									playbackStatusOptions,
 									playbackStatus,
-									'playbackStatus'
+									'playbackStatus',
 								)}
 							</div>
 							<div>
@@ -417,7 +417,7 @@ export default function LibraryNav({
 									/>,
 									mediaTypeOptions,
 									mediaType,
-									'mediaType'
+									'mediaType',
 								)}
 								{makeOptionGroup(
 									<FormattedMessage
@@ -426,7 +426,7 @@ export default function LibraryNav({
 									/>,
 									durationOptions,
 									duration,
-									'duration'
+									'duration',
 								)}
 							</div>
 						</div>

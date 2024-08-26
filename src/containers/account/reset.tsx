@@ -37,7 +37,7 @@ function Reset(): JSX.Element {
 						id: 'reset__successMessage',
 						defaultMessage: 'Your password was successfully changed',
 						description: 'password reset success message',
-					})
+					}),
 				);
 				setIsLoggingIn(true);
 				try {

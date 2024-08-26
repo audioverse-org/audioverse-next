@@ -34,7 +34,7 @@ export async function getStaticProps({
 				id: 'conferences__title',
 				defaultMessage: 'All Conferences',
 			}),
-		})
+		}),
 	);
 }
 
@@ -42,6 +42,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'conferences',
 		getCollectionListPathsData,
-		(d) => d?.conferences.aggregate?.count
+		(d) => d?.conferences.aggregate?.count,
 	);
 }

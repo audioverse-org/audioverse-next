@@ -109,7 +109,7 @@ type Beacon = {
 	(
 		method: 'article',
 		articleId: string,
-		options?: { type?: 'sidebar' | 'modal' }
+		options?: { type?: 'sidebar' | 'modal' },
 	): unknown;
 	(method: 'navigate', route: string): unknown;
 	(
@@ -121,7 +121,7 @@ type Beacon = {
 			jobTitle?: string;
 			avatar?: string;
 			[propertyId: string]: string | number;
-		}
+		},
 	): unknown;
 	(
 		method: 'prefill',
@@ -131,14 +131,14 @@ type Beacon = {
 			subject?: string;
 			text?: string;
 			fields?: { id: number; value: number | string }[];
-		}
+		},
 	): unknown;
 	(method: 'reset'): unknown;
 	(
 		method: 'logout',
 		options?: {
 			endActiveChat?: boolean;
-		}
+		},
 	): unknown;
 	(
 		method: 'config',
@@ -172,12 +172,12 @@ type Beacon = {
 				};
 			};
 			labels?: Partial<HelpScoutLabels>;
-		}
+		},
 	): unknown;
 	(
 		method: 'on' | 'once',
 		event: 'open' | 'close' | 'ready',
-		callback: () => void
+		callback: () => void,
 	): unknown;
 	(
 		method: 'on' | 'once',
@@ -186,23 +186,23 @@ type Beacon = {
 			| 'message-clicked'
 			| 'message-closed'
 			| 'message-triggered',
-		callback: (id: string) => void
+		callback: (id: string) => void,
 	);
 	(
 		method: 'on' | 'once',
 		event: 'chat-started',
-		callback: (name: string, email: string, subject: string) => void
+		callback: (name: string, email: string, subject: string) => void,
 	);
 	(
 		method: 'on' | 'once',
 		event: 'email-sent',
-		callback: (name: string, email: string, text: string) => void
+		callback: (name: string, email: string, text: string) => void,
 	);
 	(method: 'on' | 'once', event: 'search', callback: (query: string) => void);
 	(
 		method: 'off',
 		event: string,
-		callback?: (...args: unknown[]) => void
+		callback?: (...args: unknown[]) => void,
 	): unknown;
 	(
 		method: 'event',
@@ -210,7 +210,7 @@ type Beacon = {
 			type: 'page-viewed';
 			url: string;
 			title: string;
-		}
+		},
 	): unknown;
 	(method: 'session-data', data: Record<string, string>): unknown;
 	(
@@ -219,7 +219,7 @@ type Beacon = {
 		options: {
 			delay?: number;
 			force?: boolean;
-		}
+		},
 	): unknown;
 	(method: 'info'): unknown;
 };

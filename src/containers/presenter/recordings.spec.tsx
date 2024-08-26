@@ -88,7 +88,7 @@ describe('presenter recordings page', () => {
 
 		expect(getByText('1')).toHaveAttribute(
 			'href',
-			'/en/presenters/the_presenter_id/teachings'
+			'/en/presenters/the_presenter_id/teachings',
 		);
 	});
 
@@ -107,7 +107,7 @@ describe('presenter recordings page', () => {
 
 		expect(getByAltText('the_presenter_name')).toHaveAttribute(
 			'src',
-			'the_presenter_image'
+			'the_presenter_image',
 		);
 	});
 

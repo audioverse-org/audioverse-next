@@ -54,8 +54,8 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		return personLetterCounts
 			.map(({ letter }) =>
 				config.base_urls.map((b) =>
-					root.lang(b).presenters.letter(letter).get()
-				)
+					root.lang(b).presenters.letter(letter).get(),
+				),
 			)
 			.flat();
 	});

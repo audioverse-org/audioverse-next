@@ -79,7 +79,7 @@ export function Sequence({
 		getSequenceTypeTheme(contentType);
 	const linkClasses = clsx(
 		'decorated',
-		isBackgroundColorDark(backgroundColor) && 'hover--salmon'
+		isBackgroundColorDark(backgroundColor) && 'hover--salmon',
 	);
 
 	const details: IDefinitionListTerm[] = [];

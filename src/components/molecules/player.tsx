@@ -101,7 +101,7 @@ const Player = ({
 						<button
 							className={clsx(
 								styles.poster,
-								(shouldShowPoster || posterHovered) && styles.posterPlayShown
+								(shouldShowPoster || posterHovered) && styles.posterPlayShown,
 							)}
 							onClick={() =>
 								session.isPaused ? session.play() : session.pause()
@@ -181,7 +181,7 @@ const Player = ({
 				<div
 					className={clsx(
 						styles.leftButtons,
-						compact && styles.leftButtonsCompact
+						compact && styles.leftButtonsCompact,
 					)}
 				>
 					<ButtonNudge

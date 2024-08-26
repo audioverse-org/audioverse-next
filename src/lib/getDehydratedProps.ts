@@ -11,7 +11,7 @@ export type DehydratedProps<T = Record<string, unknown>> =
 	>;
 
 export default async function getDehydratedProps<
-	T extends Record<string, unknown>
+	T extends Record<string, unknown>,
 >(client: QueryClient, otherProps?: T): Promise<DehydratedProps<T>> {
 	return {
 		props: {

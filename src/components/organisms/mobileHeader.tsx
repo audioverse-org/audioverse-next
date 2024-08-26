@@ -106,7 +106,7 @@ export default function MobileHeader({
 			<SearchBar
 				className={clsx(
 					styles.search,
-					term !== undefined && styles.searchActive
+					term !== undefined && styles.searchActive,
 				)}
 				inputClassName={styles.searchInput}
 				filtersClassName={styles.searchFilters}

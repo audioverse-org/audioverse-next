@@ -23,7 +23,7 @@ function Register(): JSX.Element {
 							params: {
 								back: router.query.back,
 							},
-						})
+						}),
 					)
 				}
 				onSuccess={() => {

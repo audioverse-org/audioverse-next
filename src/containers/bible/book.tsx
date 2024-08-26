@@ -43,7 +43,7 @@ export interface BookProps {
 
 const Book = (params: Must<BookProps>) => {
 	const chapter = params.chapters.find(
-		({ number }) => number === +params.chapterNumber
+		({ number }) => number === +params.chapterNumber,
 	);
 	const currentChapterNumber = chapter?.number || 1;
 	const playbackContext = useContext(PlaybackContext);
@@ -143,7 +143,7 @@ function BookInner({
 			videoStreams: [],
 			audioDownloads: [],
 			shareUrl: `https://www.audioverse.org${makeCanonicalPath(
-				toRecordingChapterNumber
+				toRecordingChapterNumber,
 			)}`,
 			sequence: null,
 			collection: null,
@@ -238,7 +238,7 @@ function BookInner({
 								<Player
 									recording={recording as PlayerFragment}
 									playlistRecordings={recordings.slice(
-										chapters.findIndex((c) => c.id === chapter?.id)
+										chapters.findIndex((c) => c.id === chapter?.id),
 									)}
 									backgroundColor={BaseColors.BIBLE_B}
 									disableUserFeatures
@@ -302,7 +302,7 @@ function BookInner({
 											persons: [],
 										}}
 										playlistRecordings={recordings.slice(
-											chapters.findIndex((c) => c.id === chapter.id)
+											chapters.findIndex((c) => c.id === chapter.id),
 										)}
 										theme="chapter"
 										unpadded

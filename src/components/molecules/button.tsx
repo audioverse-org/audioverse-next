@@ -45,7 +45,7 @@ export default function Button({
 			styles[type],
 			centered && styles.centered,
 			disabled && styles.disabled,
-			className
+			className,
 		),
 		...props,
 	};

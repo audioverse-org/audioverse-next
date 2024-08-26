@@ -71,7 +71,7 @@ export default function CardPerson({
 						<div
 							className={clsx(
 								styles.details,
-								isFavorited && styles.detailsWithLike
+								isFavorited && styles.detailsWithLike,
 							)}
 						>
 							<Heading6

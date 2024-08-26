@@ -28,7 +28,7 @@ describe('social login', () => {
 
 		await renderWithProviders(
 			<SocialLogin onSuccess={() => (didCallbackRun = true)} />,
-			undefined
+			undefined,
 		);
 
 		const button = screen.getByText('Login with Facebook');

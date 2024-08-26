@@ -26,7 +26,7 @@ export async function getStaticProps({
 		params,
 		getStoriesAlbumsPageData,
 		(d) => d.storySeasons.nodes,
-		(d) => d.storySeasons.aggregate?.count
+		(d) => d.storySeasons.aggregate?.count,
 	);
 }
 
@@ -34,6 +34,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'stories/albums',
 		getStoriesAlbumsPathData,
-		(d) => d.storySeasons.aggregate?.count
+		(d) => d.storySeasons.aggregate?.count,
 	);
 }

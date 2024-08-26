@@ -15,7 +15,7 @@ type Props = {
 	makeRoute: (
 		languageRoute: string,
 		filter: 'all' | 'audio' | 'video',
-		page: number
+		page: number,
 	) => string;
 };
 
@@ -47,7 +47,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 						<a
 							className={clsx(
 								styles.segmentedControl,
-								filter === 'all' && styles.segmentedControlActive
+								filter === 'all' && styles.segmentedControlActive,
 							)}
 						>
 							<FormattedMessage
@@ -61,7 +61,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 						<a
 							className={clsx(
 								styles.segmentedControl,
-								filter === 'video' && styles.segmentedControlActive
+								filter === 'video' && styles.segmentedControlActive,
 							)}
 						>
 							<FormattedMessage
@@ -75,7 +75,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 						<a
 							className={clsx(
 								styles.segmentedControl,
-								filter === 'audio' && styles.segmentedControlActive
+								filter === 'audio' && styles.segmentedControlActive,
 							)}
 						>
 							<FormattedMessage

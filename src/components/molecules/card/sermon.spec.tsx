@@ -37,7 +37,7 @@ describe('card sermon', () => {
 		});
 
 		expect(
-			screen.getByText('the_title').parentElement?.parentElement
+			screen.getByText('the_title').parentElement?.parentElement,
 		).toHaveAttribute('href', 'the_path');
 	});
 

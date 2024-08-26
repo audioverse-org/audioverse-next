@@ -21,7 +21,7 @@ function withProviders(ui: ReactNode, client: QueryClient) {
 
 export default async function renderWithProviders(
 	ui: React.ReactElement,
-	renderOptions?: RenderOptions
+	renderOptions?: RenderOptions,
 ): Promise<RenderResult & { queryClient: QueryClient }> {
 	const queryClient = makeQueryClient();
 	const WithProviders = withProviders(ui, queryClient);

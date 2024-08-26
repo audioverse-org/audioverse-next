@@ -123,7 +123,7 @@ describe('songs list page', () => {
 
 		expect(getByText('3 John').parentElement).toHaveAttribute(
 			'href',
-			'/en/songs/book/3-john'
+			'/en/songs/book/3-john',
 		);
 	});
 

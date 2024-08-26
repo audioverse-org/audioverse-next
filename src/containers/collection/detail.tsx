@@ -42,7 +42,7 @@ function CollectionDetail({
 	const intl = useIntl();
 	const lang = useLanguageRoute();
 	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
-		collection.id
+		collection.id,
 	);
 
 	const {

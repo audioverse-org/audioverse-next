@@ -22,7 +22,7 @@ import styles from './history.module.scss';
 import LibraryLoggedOut from './loggedOut';
 
 export const getLibraryHistoryPageDataDefaultVariables = (
-	language: Language
+	language: Language,
 ): GetLibraryHistoryPageDataQueryVariables => {
 	return {
 		language,
@@ -53,7 +53,7 @@ function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 					lastPage.me?.user.downloadHistory.pageInfo.hasNextPage
 						? pages.length * variables.first
 						: undefined,
-			}
+			},
 		);
 
 	const showLoadMore = hasNextPage || isFetchingNextPage;
@@ -74,7 +74,7 @@ function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 											recording={recording}
 											key={recording.canonicalPath}
 										/>
-									)
+									),
 								)}
 							</React.Fragment>
 						))}
