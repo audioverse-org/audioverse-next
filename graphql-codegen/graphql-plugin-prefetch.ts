@@ -22,7 +22,10 @@ type Vars = {
 	[K in Key]?: Parameters<typeof fns[K]>[0];
 };
 
-const options = { cacheTime: 24 * 60 * 60 * 1000 };
+const options = {
+    cacheTime: 24 * 60 * 60 * 1000,
+    initialPageParam: null,
+};
 
 async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) {
 	const r = await fns[k](v as any);

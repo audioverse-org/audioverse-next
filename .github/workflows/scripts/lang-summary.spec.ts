@@ -66,7 +66,7 @@ describe('lang-summary', () => {
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringMatching(/the_id.*the_id/s),
+			expect.not.stringMatching(/the_id[^]*the_id/),
 		);
 	});
 

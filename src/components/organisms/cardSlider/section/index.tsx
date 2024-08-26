@@ -77,8 +77,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 
 	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
 		infiniteQuery(
-			'after',
-			{ language },
+			{ language, after: 'after' },
 			{
 				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
 					if (!last) return;
@@ -96,8 +95,9 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 		() =>
 			data?.pages
 				.flatMap(selectNodes)
-				.filter((n): n is SectionNode<N> => !!n)
-				.map((n) => <Card node={n} key={n.canonicalPath} />) ?? [],
+				.filter((n: any): n is SectionNode<N> => !!n)
+				.map((n: SectionNode<N>) => <Card node={n} key={n.canonicalPath} />) ??
+			[],
 		[Card, data?.pages, selectNodes],
 	);
 

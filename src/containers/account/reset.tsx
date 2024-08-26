@@ -26,7 +26,7 @@ function Reset(): JSX.Element {
 	const [isLoggingIn, setIsLoggingIn] = useState(false);
 	const intl = useIntl();
 
-	const { mutate, isLoading } = useResetPasswordMutation({
+	const { mutate, isPending } = useResetPasswordMutation({
 		onSuccess: async (data) => {
 			const errors = data.userReset.errors;
 			if (errors.length) {
@@ -156,7 +156,7 @@ function Reset(): JSX.Element {
 						<FormattedMessage id="reset__submitButton" defaultMessage="Login" />
 					}
 					className={styles.submit}
-					disabled={isLoading || isLoggingIn}
+					disabled={isPending || isLoggingIn}
 				/>
 			</form>
 		</div>

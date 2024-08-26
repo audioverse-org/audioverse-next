@@ -29,7 +29,9 @@ export default function TrendingTeachings(): JSX.Element {
 				defaultMessage: 'Next trending teachings',
 			})}
 			seeAllUrl={root.lang(route).teachings.trending.get()}
-			selectNodes={(p) => p?.trendingTeachings.nodes?.map((n) => n.recording)}
+			selectNodes={(p: any) =>
+				p?.trendingTeachings.nodes?.map((n: any) => n.recording)
+			}
 			Card={(p: { node: CardRecordingFragment }) => (
 				<CardRecording recording={p.node} fullBleed />
 			)}

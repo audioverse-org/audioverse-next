@@ -1,6 +1,6 @@
 import {
 	DehydratedState,
-	Hydrate,
+	HydrationBoundary,
 	QueryClientProvider,
 } from '@tanstack/react-query';
 import Head from 'next/head';
@@ -86,7 +86,7 @@ function Base<P>({
 					}}
 				/>
 				<QueryClientProvider client={queryClient}>
-					<Hydrate state={dehydratedState}>
+					<HydrationBoundary state={dehydratedState}>
 						<AndGlobalModals>
 							<LoadingIndicator />
 							<AndPlaybackContext>
@@ -101,7 +101,7 @@ function Base<P>({
 								)}
 							</AndPlaybackContext>
 						</AndGlobalModals>
-					</Hydrate>
+					</HydrationBoundary>
 				</QueryClientProvider>
 			</React.StrictMode>
 		</div>

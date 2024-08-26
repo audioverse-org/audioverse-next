@@ -29,7 +29,9 @@ export default function TrendingMusic(): JSX.Element {
 				defaultMessage: 'Next trending scripture songs',
 			})}
 			seeAllUrl={root.lang(route).songs.albums.get()}
-			selectNodes={(p) => p?.trendingMusic.nodes?.map((n) => n.recording)}
+			selectNodes={(p: any) =>
+				p?.trendingMusic.nodes?.map((n: any) => n.recording)
+			}
 			Card={(p: { node: CardRecordingFragment }) => (
 				<CardRecording recording={p.node} />
 			)}

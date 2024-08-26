@@ -25,8 +25,8 @@ export default function ContinueListening(): JSX.Element {
 				id: 'discover__continueListeningNext',
 				defaultMessage: 'Next continue listening',
 			})}
-			selectNodes={(p) =>
-				p?.me?.user.continueListening.nodes?.map((n) => n.recording)
+			selectNodes={(p: any) =>
+				p?.me?.user.continueListening.nodes?.map((n: any) => n.recording)
 			}
 			selectPageInfo={(p) => p?.me?.user.continueListening.pageInfo}
 			Card={(p: { node: CardRecordingFragment }) => (
