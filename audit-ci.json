@@ -19,6 +19,7 @@
 		"GHSA-rv95-896h-c2vc", // Not used at runtime because this is only used via @lhci/cli
 		"GHSA-fr5h-rqp8-mj6g", // Does not apply to Vercel-hosted applications
 		"GHSA-grv7-fg5c-xmjg", // Not used at runtime
-		"GHSA-3h5v-q93c-6h6q" // Not used at runtime and is related to @lhci/cli
+		"GHSA-3h5v-q93c-6h6q", // Not used at runtime and is related to @lhci/cli
+		"GHSA-952p-6rrq-rcjv" // Not used at runtime
 	]
 }
