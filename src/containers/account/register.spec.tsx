@@ -15,7 +15,7 @@ import {
 const __setFacebookResponse = (arg: {}) => {};
 
 jest.mock('js-cookie');
-jest.mock('react-google-login');
+jest.mock('@leecheuk/react-google-login');
 
 const renderPage = buildRenderer(Register);
 
