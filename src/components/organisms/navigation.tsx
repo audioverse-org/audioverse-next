@@ -141,7 +141,7 @@ const Navigation = ({
 							href={root.lang(languageRoute).give.get()}
 							className={styles.desktopDonate}
 						/>
-						<OpenAppButton className={styles.open_app_side} />
+
 						<div className={styles.account}>
 							{user ? (
 								<>
@@ -191,6 +191,7 @@ const Navigation = ({
 								</Link>
 							)}
 						</div>
+						<OpenAppButton className={styles.open_app_side} />
 					</div>
 					<div
 						aria-hidden={submenuItem === undefined}
