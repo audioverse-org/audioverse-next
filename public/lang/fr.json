@@ -2724,6 +2724,6 @@
   },
   "collectionDetail__teachingsCountLabel": {
     "comment": "Collection Detail teachings count label",
-    "string": "{count} Teachings"
+    "string": "{count} enseignements"
   }
 }

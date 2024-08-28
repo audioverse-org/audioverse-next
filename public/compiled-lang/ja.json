@@ -1141,12 +1141,16 @@
   ],
   "collectionDetail__teachingsCountLabel": [
     {
+      "type": 0,
+      "value": "レッスン"
+    },
+    {
       "type": 1,
       "value": "count"
     },
     {
       "type": 0,
-      "value": " Teachings"
+      "value": "個"
     }
   ],
   "collectionDetail__teachingsLabel": [

@@ -1126,11 +1126,11 @@
   "collectionDetail__teachingsCountLabel": [
     {
       "type": 1,
-      "value": "count"
+      "value": "contagem"
     },
     {
       "type": 0,
-      "value": " Teachings"
+      "value": " ensinamentos"
     }
   ],
   "collectionDetail__teachingsLabel": [
