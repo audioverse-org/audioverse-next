@@ -11,7 +11,7 @@ const impl: typeof realFetchApi = <TData>(
 	query: string,
 	{ variables = {} } = {},
 ): Promise<TData> => {
-	return __documentMocks.get(query)?.(variables);
+	return __documentMocks.get(query)?.(variables) || null;
 };
 
 export const fetchApi = jest.fn(impl);
