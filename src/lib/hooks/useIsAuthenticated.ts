@@ -15,10 +15,7 @@ export default function useIsAuthenticated(): UseQueryResult<
 	isUserLoggedIn: boolean;
 } {
 	const token = getSessionToken(getCurrentRequest());
-	const result = useGetWithAuthGuardDataQuery(
-		{},
-		{ retry: false, enabled: !!token }
-	);
+	const result = useGetWithAuthGuardDataQuery({}, { retry: false });
 
 	return {
 		...result,
