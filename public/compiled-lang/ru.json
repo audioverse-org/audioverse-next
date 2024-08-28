@@ -1095,18 +1095,6 @@
       "value": "Местонахождение"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "Просмотреть всех проповедников"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Проповедники"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1135,12 +1123,6 @@
       "value": "Организатор"
     }
   ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "Смотреть все отдельные темы"
-    }
-  ],
   "collectionDetail__teachingsCountLabel": [
     {
       "type": 1,
@@ -1148,7 +1130,7 @@
     },
     {
       "type": 0,
-      "value": " темы"
+      "value": " Teachings"
     }
   ],
   "collectionDetail__teachingsLabel": [

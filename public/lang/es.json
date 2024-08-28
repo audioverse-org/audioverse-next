@@ -162,13 +162,6 @@
   "collectionDetail__sponsorLabel": {
     "string": "Patrocinador"
   },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "Ver todas las lecciones individuales"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Detalle de la colección teachings count label",
-    "string": "{count} lecciones"
-  },
   "collectionDetail__teachingsLabel": {
     "comment": "Detalle de la colección teachings label",
     "string": "Lecciones individuales"
@@ -1145,13 +1138,6 @@
   },
   "cardSongBook__numSongs": {
     "string": "{count} cantos"
-  },
-  "collectionDetail__presentersAllLabel": {
-    "string": "Ver todos los presentadores"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Presentadores"
   },
   "collectionType__audiobookSeries": {
     "string": "Series de libros"
@@ -2735,5 +2721,9 @@
   },
   "account__heading": {
     "string": "Configuración de la cuenta"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{count} Teachings"
   }
 }

@@ -1099,18 +1099,6 @@
       "value": "位置"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "查看所有讲员"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "讲员"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1139,12 +1127,6 @@
       "value": "赞助者"
     }
   ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "查看所有个别证道"
-    }
-  ],
   "collectionDetail__teachingsCountLabel": [
     {
       "type": 1,
@@ -1152,7 +1134,7 @@
     },
     {
       "type": 0,
-      "value": "篇证道"
+      "value": " Teachings"
     }
   ],
   "collectionDetail__teachingsLabel": [

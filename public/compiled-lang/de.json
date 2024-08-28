@@ -1095,18 +1095,6 @@
       "value": "Ort"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "Alle Sprecher anzeigen"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Sprecher"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1135,12 +1123,6 @@
       "value": "Sponsor"
     }
   ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "Alle einzelnen Lehren anzeigen"
-    }
-  ],
   "collectionDetail__teachingsCountLabel": [
     {
       "type": 1,
@@ -1148,7 +1130,7 @@
     },
     {
       "type": 0,
-      "value": " Lehren"
+      "value": " Teachings"
     }
   ],
   "collectionDetail__teachingsLabel": [

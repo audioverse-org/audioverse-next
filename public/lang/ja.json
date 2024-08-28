@@ -162,13 +162,6 @@
   "collectionDetail__sponsorLabel": {
     "string": "主催者"
   },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "レッスンの全ての個々のセクションを表示"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Collection Detail teachings count label",
-    "string": "レッスン{count}個"
-  },
   "collectionDetail__teachingsLabel": {
     "comment": "Collection Detail teachings label",
     "string": "レッスンの個々のセクション"
@@ -1145,13 +1138,6 @@
   },
   "cardSongBook__numSongs": {
     "string": "歌 {count}曲"
-  },
-  "collectionDetail__presentersAllLabel": {
-    "string": "全てのプリゼンターを表示"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "プリゼンター"
   },
   "collectionType__audiobookSeries": {
     "string": "ブックシリーズ"
@@ -2735,5 +2721,9 @@
   },
   "account__heading": {
     "string": "アカウントの設定"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{count} Teachings"
   }
 }

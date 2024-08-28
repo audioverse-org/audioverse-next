@@ -162,13 +162,6 @@
   "collectionDetail__sponsorLabel": {
     "string": "赞助者"
   },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "查看所有个别证道"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Collection Detail teachings count label",
-    "string": "{count}篇证道"
-  },
   "collectionDetail__teachingsLabel": {
     "comment": "Collection Detail teachings label",
     "string": "个别证道"
@@ -1145,13 +1138,6 @@
   },
   "cardSongBook__numSongs": {
     "string": "{count}首歌曲"
-  },
-  "collectionDetail__presentersAllLabel": {
-    "string": "查看所有讲员"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "讲员"
   },
   "collectionType__audiobookSeries": {
     "string": "书籍系列"
@@ -2735,5 +2721,9 @@
   },
   "account__heading": {
     "string": "账户设置"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{count} Teachings"
   }
 }

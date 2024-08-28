@@ -1095,18 +1095,6 @@
       "value": "Localização"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "Ver todos Oradores"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Oradores"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1135,20 +1123,14 @@
       "value": "Patrocinador"
     }
   ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "Ver todos ensinamentos individuais"
-    }
-  ],
   "collectionDetail__teachingsCountLabel": [
     {
       "type": 1,
-      "value": "contagem"
+      "value": "count"
     },
     {
       "type": 0,
-      "value": " ensinamentos"
+      "value": " Teachings"
     }
   ],
   "collectionDetail__teachingsLabel": [

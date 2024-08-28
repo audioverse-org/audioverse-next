@@ -535,13 +535,6 @@
   "collectionDetail__locationLabel": {
     "string": "Location"
   },
-  "collectionDetail__presentersAllLabel": {
-    "string": "See All Presenters"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Presenters"
-  },
   "collectionDetail__sequenceCountLabel": {
     "comment": "Collection Detail sequence count label",
     "string": "{count} Series"
@@ -555,9 +548,6 @@
   },
   "collectionDetail__sponsorLabel": {
     "string": "Sponsor"
-  },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "See All Individual Teachings"
   },
   "collectionDetail__teachingsCountLabel": {
     "comment": "Collection Detail teachings count label",

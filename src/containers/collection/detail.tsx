@@ -1,6 +1,6 @@
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
@@ -12,7 +12,6 @@ import withFailStates from '~components/HOCs/withFailStates';
 import Button from '~components/molecules/button';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
-import CardPerson from '~components/molecules/card/person';
 import CardRecording from '~components/molecules/card/recording';
 import CardSequence from '~components/molecules/card/sequence';
 import CardGroup from '~components/molecules/cardGroup';
@@ -29,16 +28,29 @@ import root from '~lib/routes';
 import { useFormattedDuration } from '~lib/time';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
+import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import { Must } from '~src/types/types';
 
-import { GetCollectionDetailPageDataQuery } from './__generated__/detail';
+import {
+	GetCollectionDetailPageDataQuery,
+	useInfiniteGetCollectionDetailPageDataQuery,
+} from './__generated__/detail';
 import styles from './detail.module.scss';
 
-export type CollectionDetailProps = GetCollectionDetailPageDataQuery;
+const PAGE_SIZE = 20;
+
+export type CollectionDetailProps = GetCollectionDetailPageDataQuery & {
+	endCursor: string | null;
+	hasNextPage: boolean;
+};
 
 function CollectionDetail({
 	collection,
 }: Must<CollectionDetailProps>): JSX.Element {
+	const [after, setAfter] = useState<string>('');
+	const [recordings, setRecordings] = React.useState<CardRecordingFragment[]>(
+		[]
+	);
 	const intl = useIntl();
 	const lang = useLanguageRoute();
 	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
@@ -57,10 +69,49 @@ function CollectionDetail({
 		endDate,
 		shareUrl,
 		sponsor,
-		persons,
-		recordings,
 		sequences,
+		recordings: rec,
 	} = collection;
+
+	const loadMoreTriggerRef = useRef<HTMLDivElement | null>(null);
+
+	const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+		useInfiniteGetCollectionDetailPageDataQuery(
+			'after', // Key for pagination
+			{
+				id,
+				first: PAGE_SIZE,
+				after: after,
+			},
+			{
+				getNextPageParam: (lastPage) =>
+					lastPage?.collection?.recordings?.pageInfo?.endCursor || null,
+			}
+		);
+
+	const formattedDuration = useFormattedDuration(duration);
+
+	useEffect(() => {
+		if (data) {
+			console.log('DATA UPDATED!!!!!!');
+			const newRecordings =
+				data.pages.flatMap((page) => page.collection?.recordings.nodes) ?? [];
+			const validRecordings = newRecordings.filter(
+				(recording): recording is CardRecordingFragment =>
+					recording !== null && recording !== undefined
+			);
+			setRecordings((prevRecordings) => {
+				const allRecordings = [...prevRecordings, ...validRecordings];
+				// Assuming 'id' is the unique identifier for recordings
+				const uniqueRecordings = Array.from(
+					new Map(
+						allRecordings.map((recording) => [recording.id, recording])
+					).values()
+				);
+				return uniqueRecordings;
+			});
+		}
+	}, [data]);
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -94,6 +145,51 @@ function CollectionDetail({
 			definition: <div>{location}</div>,
 		});
 	}
+
+	const observer = useRef<IntersectionObserver>();
+
+	const handleObserver = useCallback(
+		(entries: IntersectionObserverEntry[]) => {
+			console.log('Observer triggered');
+			const target = entries[0];
+			console.log('Target is intersecting:', target.isIntersecting);
+			if (target.isIntersecting && hasNextPage && !isFetchingNextPage) {
+				console.log('Fetching next page');
+				const newAfter =
+					data?.pages[data.pages.length - 1]?.collection?.recordings?.pageInfo
+						?.endCursor || '';
+				setAfter(newAfter);
+				fetchNextPage();
+			}
+		},
+		[data, fetchNextPage, hasNextPage, isFetchingNextPage]
+	);
+
+	useEffect(() => {
+		console.log('Observer effect');
+
+		if (observer.current) {
+			observer.current.disconnect();
+		}
+
+		observer.current = new IntersectionObserver(handleObserver, {
+			root: null, // Use the viewport as the root
+			rootMargin: '0px',
+			threshold: 0.1, // Trigger when 10% of the target is visible
+		});
+
+		const trigger = loadMoreTriggerRef.current;
+
+		if (trigger) {
+			observer.current.observe(trigger);
+		}
+
+		return () => {
+			if (observer.current) {
+				observer.current.disconnect();
+			}
+		};
+	}, [handleObserver, hasNextPage, isFetchingNextPage]);
 
 	return (
 		<Tease className={styles.container}>
@@ -134,26 +230,28 @@ function CollectionDetail({
 					)}
 
 					<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
-						{sequences.aggregate?.count ? (
-							<FormattedMessage
-								id="collectionDetail__sequenceCountLabel"
-								defaultMessage="{count} Series"
-								description="Collection Detail sequence count label"
-								values={{ count: sequences.aggregate?.count }}
-							/>
-						) : (
-							<FormattedMessage
-								id="collectionDetail__teachingsCountLabel"
-								defaultMessage="{count} Teachings"
-								description="Collection Detail teachings count label"
-								values={{ count: recordings.aggregate?.count }}
-							/>
-						)}
+						{
+							sequences.aggregate?.count ? (
+								<FormattedMessage
+									id="collectionDetail__sequenceCountLabel"
+									defaultMessage="{count} Series"
+									description="Collection Detail sequence count label"
+									values={{ count: sequences.aggregate?.count }}
+								/>
+							) : (
+								<FormattedMessage
+									id="collectionDetail__teachingsCountLabel"
+									defaultMessage="{count} Teachings"
+									description="Collection Detail teachings count label"
+									values={{ count: rec?.aggregate?.count }}
+								/>
+							)
+							//null
+						}
 					</Heading6>
 					<div className={styles.row}>
-						<div className={styles.duration}>
-							{useFormattedDuration(duration)}
-						</div>
+						<div className={styles.duration}>{formattedDuration}</div>
+
 						<ButtonShare
 							shareUrl={shareUrl}
 							backgroundColor={BaseColors.DARK}
@@ -202,7 +300,7 @@ function CollectionDetail({
 					)}
 				</>
 			) : null}
-			{recordings.nodes?.length ? (
+			{recordings?.length ? (
 				<>
 					<LineHeading color={BaseColors.SALMON}>
 						<FormattedMessage
@@ -212,57 +310,15 @@ function CollectionDetail({
 						/>
 					</LineHeading>
 					<CardGroup className={styles.cardGroup}>
-						{recordings.nodes.map((recording) => (
+						{recordings?.map((recording) => (
 							<CardRecording
 								recording={recording}
-								key={recording.canonicalPath}
+								key={recording?.id}
+								fullBleed
 							/>
 						))}
 					</CardGroup>
-					{recordings.pageInfo.hasNextPage && (
-						<Button
-							type="secondaryInverse"
-							href={root.lang(lang).conferences.id(id).teachings.get()}
-							text={intl.formatMessage({
-								id: 'collectionDetail__teachingsAllLabel',
-								defaultMessage: 'See All Individual Teachings',
-							})}
-							IconLeft={ForwardIcon}
-							className={styles.seeAllButton}
-						/>
-					)}
-				</>
-			) : null}
-			{persons.nodes?.length ? (
-				<>
-					<LineHeading color={BaseColors.SALMON}>
-						<FormattedMessage
-							id="collectionDetail__presentersLabel"
-							defaultMessage="Presenters"
-							description="Collection Detail speakers label"
-						/>
-					</LineHeading>
-					<CardGroup className={styles.cardGroup}>
-						{persons.nodes.map((person) => (
-							<CardPerson
-								person={person}
-								largeinit={true}
-								key={person.canonicalPath}
-							/>
-						))}
-					</CardGroup>
-					{persons.pageInfo.hasNextPage && (
-						<Button
-							type="secondaryInverse"
-							href={root.lang(lang).conferences.id(id).presenters.get()}
-							text={intl.formatMessage({
-								id: 'collectionDetail__presentersAllLabel',
-								defaultMessage: 'See All Presenters',
-							})}
-							IconLeft={ForwardIcon}
-							className={styles.seeAllButton}
-						/>
-					)}
+					<div ref={loadMoreTriggerRef}></div>
 				</>
 			) : null}
 		</Tease>

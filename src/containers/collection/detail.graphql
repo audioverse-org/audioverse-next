@@ -1,4 +1,4 @@
-query getCollectionDetailPageData($id: ID!) {
+query getCollectionDetailPageData($id: ID!, $first: Int!, $after: String) {
 	collection(id: $id) {
 		id
 		title
@@ -50,8 +50,8 @@ query getCollectionDetailPageData($id: ID!) {
 			}
 		}
 		recordings(
-			first: 3
-			sequenceId: 0
+			first: $first
+			after: $after
 			orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
 		) {
 			aggregate {
@@ -61,6 +61,7 @@ query getCollectionDetailPageData($id: ID!) {
 				...cardRecording
 			}
 			pageInfo {
+				endCursor
 				hasNextPage
 			}
 		}

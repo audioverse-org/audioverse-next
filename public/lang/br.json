@@ -472,13 +472,6 @@
   "collectionDetail__locationLabel": {
     "string": "Localização"
   },
-  "collectionDetail__presentersAllLabel": {
-    "string": "Ver todos Oradores"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Coleção detalhada da etiqueta dos alto-falantes",
-    "string": "Oradores"
-  },
   "collectionDetail__sequenceCountLabel": {
     "comment": "Etiqueta de contagem de sequência detalhada da coleção",
     "string": "{contagem} séries"
@@ -492,13 +485,6 @@
   },
   "collectionDetail__sponsorLabel": {
     "string": "Patrocinador"
-  },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "Ver todos ensinamentos individuais"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Rótulo de contagem de ensinamentos detalhados da coleção",
-    "string": "{contagem} ensinamentos"
   },
   "collectionDetail__teachingsLabel": {
     "comment": "Rótulo de ensinamentos detalhado da coleção",
@@ -2735,5 +2721,9 @@
   },
   "account__heading": {
     "string": "Configurações da conta"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{count} Teachings"
   }
 }

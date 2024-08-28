@@ -1111,18 +1111,6 @@
       "value": "現在地"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "全てのプリゼンターを表示"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "プリゼンター"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1151,24 +1139,14 @@
       "value": "主催者"
     }
   ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "レッスンの全ての個々のセクションを表示"
-    }
-  ],
   "collectionDetail__teachingsCountLabel": [
-    {
-      "type": 0,
-      "value": "レッスン"
-    },
     {
       "type": 1,
       "value": "count"
     },
     {
       "type": 0,
-      "value": "個"
+      "value": " Teachings"
     }
   ],
   "collectionDetail__teachingsLabel": [

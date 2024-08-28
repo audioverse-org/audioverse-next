@@ -162,13 +162,6 @@
   "collectionDetail__sponsorLabel": {
     "string": "Организатор"
   },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "Смотреть все отдельные темы"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Collection Detail teachings count label",
-    "string": "{count} темы"
-  },
   "collectionDetail__teachingsLabel": {
     "comment": "Collection Detail teachings label",
     "string": "Отдельные темы"
@@ -1142,13 +1135,6 @@
   },
   "cardSongBook__numSongs": {
     "string": "{count} песня"
-  },
-  "collectionDetail__presentersAllLabel": {
-    "string": "Просмотреть всех проповедников"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Проповедники"
   },
   "collectionType__audiobookSeries": {
     "string": "Серия книг"
@@ -2735,5 +2721,9 @@
   },
   "account__heading": {
     "string": "Настройки учетной записи"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{count} Teachings"
   }
 }

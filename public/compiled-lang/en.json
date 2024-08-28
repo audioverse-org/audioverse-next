@@ -1095,18 +1095,6 @@
       "value": "Location"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Presenters"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1133,12 +1121,6 @@
     {
       "type": 0,
       "value": "Sponsor"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Individual Teachings"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
