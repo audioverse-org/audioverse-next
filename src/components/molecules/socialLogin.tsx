@@ -1,9 +1,12 @@
-import FacebookLogin from '@greatsumini/react-facebook-login';
+import {
+	FacebookLoginClient,
+	ProfileSuccessResponse,
+} from '@greatsumini/react-facebook-login';
 import { useGoogleLogin } from '@leecheuk/react-google-login';
 import { useQueryClient } from '@tanstack/react-query';
 import fafacebook from 'public/img/icons-raw/fa-facebook.svg';
 import fagoogle from 'public/img/icons-raw/fa-google.svg';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useRegisterSocialMutation } from '~containers/account/__generated__/register';
@@ -49,6 +52,16 @@ export default function SocialLogin({
 				}
 			},
 		});
+
+	useEffect(() => {
+		const initFacebook = async () => {
+			await FacebookLoginClient.loadSdk('en');
+			window.fbAsyncInit = () =>
+				FacebookLoginClient.init({ appId: FACEBOOK_APP_ID, version: 'v16.0' });
+		};
+
+		initFacebook();
+	}, []);
 
 	const { signIn } = useGoogleLogin({
 		clientId: GOOGLE_CLIENT_ID,
@@ -102,46 +115,64 @@ export default function SocialLogin({
 			)}
 
 			<div className={styles.buttonCol}>
-				<FacebookLogin
-					appId={FACEBOOK_APP_ID}
-					render={(renderProps) => {
-						return (
-							<Button
-								type="secondary"
-								text={
-									isRegister
-										? intl.formatMessage({
-												id: 'socialLogin__registerFacebookButton',
-												defaultMessage: 'Sign up with Facebook',
-											})
-										: intl.formatMessage({
-												id: 'socialLogin__loginFacebookButton',
-												defaultMessage: 'Login with Facebook',
-											})
+				<Button
+					type="secondary"
+					text={
+						isRegister
+							? intl.formatMessage({
+									id: 'socialLogin__registerFacebookButton',
+									defaultMessage: 'Sign up with Facebook',
+								})
+							: intl.formatMessage({
+									id: 'socialLogin__loginFacebookButton',
+									defaultMessage: 'Login with Facebook',
+								})
+					}
+					onClick={() => {
+						FacebookLoginClient.login(
+							(response) => {
+								const { authResponse } = response;
+
+								if (!authResponse) {
+									setErrors([
+										`${response.status}: Failed to login with Facebook`,
+									]);
+									return;
 								}
-								onClick={renderProps.onClick}
-								centered
-								IconLeft={fafacebook}
-							/>
+
+								FacebookLoginClient.getProfile(
+									(response) => {
+										const isSuccessResponse = (
+											r: unknown,
+										): r is ProfileSuccessResponse => {
+											return (
+												'first_name' in (r as ProfileSuccessResponse) &&
+												'last_name' in (r as ProfileSuccessResponse) &&
+												(r as ProfileSuccessResponse)?.id !== undefined
+											);
+										};
+
+										if (isSuccessResponse(response)) {
+											const socialId = authResponse.userID;
+											const socialToken = authResponse.accessToken;
+
+											mutateSocial({
+												socialName: UserSocialServiceName.Facebook,
+												socialId,
+												socialToken,
+												givenName: response['first_name'],
+												surname: response['last_name'],
+											});
+										}
+									},
+									{ fields: 'id,first_name,last_name' },
+								);
+							},
+							{ scope: 'public_profile' },
 						);
 					}}
-					onFail={({ status }) => {
-						setErrors([`${status}: Failed to login with Facebook`]);
-					}}
-					onProfileSuccess={(response) => {
-						const name = response.name || '';
-						const [givenName, surname] = name.split(' ');
-						const socialId = response.userID;
-						const socialToken = response.accessToken;
-
-						mutateSocial({
-							socialName: UserSocialServiceName.Facebook,
-							socialId,
-							socialToken,
-							givenName,
-							surname,
-						});
-					}}
+					centered
+					IconLeft={fafacebook}
 				/>
 
 				<Button

@@ -1,3 +1,7 @@
+import {
+	FacebookLoginClient,
+	LoginStatus,
+} from '@greatsumini/react-facebook-login';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
@@ -11,8 +15,6 @@ import {
 	RegisterDocument,
 	RegisterSocialDocument,
 } from './__generated__/register';
-//import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
-const __setFacebookResponse = (arg: {}) => {};
 
 jest.mock('js-cookie');
 jest.mock('@leecheuk/react-google-login');
@@ -146,7 +148,7 @@ describe('register page', () => {
 		expect(getByText('Sign up with Google')).toBeInTheDocument();
 	});
 
-	xit('renders google signon errors', async () => {
+	it('renders google signon errors', async () => {
 		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
@@ -168,7 +170,7 @@ describe('register page', () => {
 		});
 	});
 
-	xit('renders facebook signon errors', async () => {
+	it('renders facebook signon errors', async () => {
 		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
@@ -190,7 +192,7 @@ describe('register page', () => {
 		});
 	});
 
-	xit('renders social login success', async () => {
+	it('renders social login success', async () => {
 		const { getByText } = await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
@@ -200,7 +202,7 @@ describe('register page', () => {
 		});
 	});
 
-	xit('hits api with facebook registration', async () => {
+	it('hits api with facebook registration', async () => {
 		await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
@@ -218,7 +220,7 @@ describe('register page', () => {
 		});
 	});
 
-	xit('saves facebook login session token', async () => {
+	it('saves facebook login session token', async () => {
 		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
@@ -240,16 +242,16 @@ describe('register page', () => {
 		});
 	});
 
-	xit('does not register failed login', async () => {
-		__setFacebookResponse({
-			status: 300,
-		});
+	it('does not register failed login', async () => {
+		FacebookLoginClient.login = jest
+			.fn()
+			.mockImplementation((cb) => cb({ status: 'not_authorized' }));
 
 		await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
-		await screen.findByText(/300/);
+		await screen.findByText('not_authorized', { exact: false });
 
 		expect(fetchApi).not.toBeCalledWith(
 			RegisterSocialDocument,
@@ -257,11 +259,10 @@ describe('register page', () => {
 		);
 	});
 
-	xit('displays facebook login error', async () => {
-		__setFacebookResponse({
-			status: 300,
-			statusText: 'FAILED',
-		});
+	it('displays facebook login error', async () => {
+		FacebookLoginClient.login = jest
+			.fn()
+			.mockImplementation((cb) => cb({ status: 'not_authorized' }));
 
 		const { getByText } = await renderPage();
 
@@ -269,7 +270,7 @@ describe('register page', () => {
 
 		await waitFor(() => {
 			expect(
-				getByText('300: Failed to login with Facebook'),
+				getByText(`not_authorized: Failed to login with Facebook`),
 			).toBeInTheDocument();
 		});
 	});
@@ -282,7 +283,7 @@ describe('register page', () => {
 		expect(queryByPlaceholderText('email')).not.toBeInTheDocument();
 	});
 
-	xit('sends Google login data to API', async () => {
+	it('sends Google login data to API', async () => {
 		const { getByText } = await renderPage();
 
 		await userEvent.click(getByText('Sign up with Google'));

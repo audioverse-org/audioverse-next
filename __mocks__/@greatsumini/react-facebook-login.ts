@@ -4,31 +4,27 @@ import {
 	ProfileSuccessResponse,
 } from '@greatsumini/react-facebook-login';
 
-let profileRes: ProfileSuccessResponse = {
-	id: 'the_user_id',
-	email: 'foo@bar.com',
-	name: 'First Last',
+export const FacebookLoginClient = {
+	loadSdk: (_: string) => {},
+	init: (_: any) => {},
+	login: (callback: (res: LoginResponse) => void) =>
+		callback({
+			status: LoginStatus.Connected,
+			authResponse: {
+				accessToken: 'the_access_token',
+				signedRequest: 'the_signed_request',
+				userID: 'the_user_id',
+				expiresIn: 'the_expires_in',
+				reauthorize_required_in: 'the_reauthorize_required_in',
+			},
+		}),
+	getProfile: (
+		callback: (res: ProfileSuccessResponse) => void,
+		_: { fields: string },
+	) =>
+		callback({
+			id: 'the_id',
+			first_name: 'First',
+			last_name: 'Last',
+		}),
 };
-
-let res: LoginResponse = {
-	status: LoginStatus.Connected,
-	authResponse: {
-		accessToken: 'the_access_token',
-		userID: 'the_user_id',
-		expiresIn: '1724768367',
-		reauthorize_required_in: '10000',
-		signedRequest: 'asdf',
-	},
-};
-
-export default function FacebookLogin({
-	onFail,
-	onProfileSuccess,
-	render,
-}: {
-	onFail: (response: any) => void;
-	onProfileSuccess: (response: any) => void;
-	render: (renderProps: { onClick: () => void }) => JSX.Element;
-}): JSX.Element {
-	return render({ onClick: () => onProfileSuccess(profileRes) });
-}

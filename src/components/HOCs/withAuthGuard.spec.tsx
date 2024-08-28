@@ -46,7 +46,7 @@ describe('withAuthGuard', () => {
 		expect(getByText('Login with Google')).toBeInTheDocument();
 	});
 
-	xit('displays content on successful social login', async () => {
+	it('displays content on successful social login', async () => {
 		Cookies.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
 
 		const { getByText, queryByText } = await render();

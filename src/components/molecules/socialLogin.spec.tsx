@@ -9,7 +9,7 @@ import { fetchApi } from '~lib/api/fetchApi';
 import renderWithProviders from '~lib/test/renderWithProviders';
 
 describe('social login', () => {
-	xit('does not run onSuccess callback if errors', async () => {
+	it('does not run onSuccess callback if errors', async () => {
 		const user = userEvent.setup();
 
 		when(fetchApi)
