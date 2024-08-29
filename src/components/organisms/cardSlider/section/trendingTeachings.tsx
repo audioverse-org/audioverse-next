@@ -6,7 +6,10 @@ import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
-import { useInfiniteGetSectionTrendingTeachingsQuery } from './__generated__/trendingTeachings';
+import {
+	GetSectionTrendingTeachingsQuery,
+	useInfiniteGetSectionTrendingTeachingsQuery,
+} from './__generated__/trendingTeachings';
 import Section from './index';
 
 export default function TrendingTeachings(): JSX.Element {
@@ -29,8 +32,10 @@ export default function TrendingTeachings(): JSX.Element {
 				defaultMessage: 'Next trending teachings',
 			})}
 			seeAllUrl={root.lang(route).teachings.trending.get()}
-			selectNodes={(p: any) =>
-				p?.trendingTeachings.nodes?.map((n: any) => n.recording)
+			selectNodes={(p) =>
+				(p as GetSectionTrendingTeachingsQuery)?.trendingTeachings.nodes?.map(
+					(n) => n.recording,
+				)
 			}
 			Card={(p: { node: CardRecordingFragment }) => (
 				<CardRecording recording={p.node} fullBleed />

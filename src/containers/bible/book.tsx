@@ -111,7 +111,7 @@ function BookInner({
 				new URL(chapter?.url || '').pathname.match(/(\d+)_([^_]+)/i) || [];
 			fakeAlias = `KJV_${urlPathnameComponents[2]}_${urlPathnameComponents[1]}`;
 		} catch (e) {
-			// ignore
+			console.log(e);
 		}
 		return {
 			id: chapter?.id || '',

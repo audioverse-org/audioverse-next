@@ -95,7 +95,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 		() =>
 			data?.pages
 				.flatMap(selectNodes)
-				.filter((n: any): n is SectionNode<N> => !!n)
+				.filter((n: Maybe<SectionNode<N>>): n is SectionNode<N> => !!n)
 				.map((n: SectionNode<N>) => <Card node={n} key={n.canonicalPath} />) ??
 			[],
 		[Card, data?.pages, selectNodes],

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { forwardRef, Ref } from 'react';
 import { useIntl } from 'react-intl';
 

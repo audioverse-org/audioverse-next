@@ -11,7 +11,7 @@ export default async function getResponse<T extends Record<string, unknown>>(
 	try {
 		return JSON.parse(await result.text());
 	} catch (e) {
-		// TODO: Log error
+		console.error(e);
 		return null;
 	}
 }
