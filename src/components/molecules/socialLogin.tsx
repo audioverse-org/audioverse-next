@@ -15,6 +15,8 @@ import { setSessionToken } from '~lib/cookies';
 import useDidUnmount from '~lib/useDidUnmount';
 import { UserSocialServiceName } from '~src/__generated__/graphql';
 import { analytics } from '~src/lib/analytics';
+import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
+import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import Button from './buttonSocial';
 import styles from './socialLogin.module.scss';
@@ -30,6 +32,8 @@ export default function SocialLogin({
 	const intl = useIntl();
 	const didUnmount = useDidUnmount();
 	const queryClient = useQueryClient();
+	const languageRoute = useLanguageRoute();
+	const languageId = getLanguageIdByRoute(languageRoute);
 
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
 		useRegisterSocialMutation({
@@ -55,13 +59,13 @@ export default function SocialLogin({
 
 	useEffect(() => {
 		const initFacebook = async () => {
-			await FacebookLoginClient.loadSdk('en');
+			await FacebookLoginClient.loadSdk(languageId);
 			window.fbAsyncInit = () =>
 				FacebookLoginClient.init({ appId: FACEBOOK_APP_ID, version: 'v16.0' });
 		};
 
 		initFacebook();
-	}, []);
+	}, [languageId]);
 
 	const { signIn } = useGoogleLogin({
 		clientId: GOOGLE_CLIENT_ID,
