@@ -93,7 +93,6 @@ function CollectionDetail({
 
 	useEffect(() => {
 		if (data) {
-			console.log('DATA UPDATED!!!!!!');
 			const newRecordings =
 				data.pages.flatMap((page) => page.collection?.recordings.nodes) ?? [];
 			const validRecordings = newRecordings.filter(
@@ -102,7 +101,7 @@ function CollectionDetail({
 			);
 			setRecordings((prevRecordings) => {
 				const allRecordings = [...prevRecordings, ...validRecordings];
-				// Assuming 'id' is the unique identifier for recordings
+
 				const uniqueRecordings = Array.from(
 					new Map(
 						allRecordings.map((recording) => [recording.id, recording])
@@ -150,11 +149,8 @@ function CollectionDetail({
 
 	const handleObserver = useCallback(
 		(entries: IntersectionObserverEntry[]) => {
-			console.log('Observer triggered');
 			const target = entries[0];
-			console.log('Target is intersecting:', target.isIntersecting);
 			if (target.isIntersecting && hasNextPage && !isFetchingNextPage) {
-				console.log('Fetching next page');
 				const newAfter =
 					data?.pages[data.pages.length - 1]?.collection?.recordings?.pageInfo
 						?.endCursor || '';
@@ -166,22 +162,22 @@ function CollectionDetail({
 	);
 
 	useEffect(() => {
-		console.log('Observer effect');
-
 		if (observer.current) {
 			observer.current.disconnect();
 		}
 
 		observer.current = new IntersectionObserver(handleObserver, {
-			root: null, // Use the viewport as the root
+			root: null,
 			rootMargin: '0px',
-			threshold: 0.1, // Trigger when 10% of the target is visible
+			threshold: 0.1,
 		});
 
 		const trigger = loadMoreTriggerRef.current;
 
 		if (trigger) {
 			observer.current.observe(trigger);
+		} else {
+			console.log('Trigger element not found');
 		}
 
 		return () => {
@@ -192,46 +188,52 @@ function CollectionDetail({
 	}, [handleObserver, hasNextPage, isFetchingNextPage]);
 
 	return (
-		<Tease className={styles.container}>
-			<div className={styles.imageRow}>
-				{image && (
-					<div className={styles.image}>
-						<div className={styles.imageBackdrop}>
-							<Image
-								alt={title}
-								src={image.url}
-								height="500"
-								width="500"
-								objectFit="cover"
-							/>
+		<>
+			<Tease className={styles.container}>
+				<div className={styles.imageRow}>
+					{image && (
+						<div className={styles.image}>
+							<div className={styles.imageBackdrop}>
+								<Image
+									alt={title}
+									src={image.url}
+									height="500"
+									width="500"
+									objectFit="cover"
+								/>
+							</div>
+							<InherentSizeImage src={image.url} title={title} />
 						</div>
-						<InherentSizeImage src={image.url} title={title} />
-					</div>
-				)}
-				<div>
-					<CollectionTypeLockup contentType={contentType} />
-
-					{!!(startDate && endDate) && (
-						<Heading6 sans unpadded className={styles.date}>
-							{formatDateRange(startDate, endDate)}
-						</Heading6>
 					)}
-					<Heading2 unpadded className={styles.title}>
-						{title}
-					</Heading2>
-					{sponsor && (
-						<SponsorLockup
-							sponsor={sponsor}
-							textColor={BaseColors.LIGHT_TONE}
-							hoverColor={BaseColors.SALMON}
-							isLinked
-							small
-						/>
-					)}
+					<div>
+						<CollectionTypeLockup contentType={contentType} />
 
-					<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
-						{
-							sequences.aggregate?.count ? (
+						{!!(startDate && endDate) && (
+							<Heading6 sans unpadded className={styles.date}>
+								{formatDateRange(startDate, endDate)}
+							</Heading6>
+						)}
+						<Heading2 unpadded className={styles.title}>
+							{title}
+						</Heading2>
+						{sponsor && (
+							<SponsorLockup
+								sponsor={sponsor}
+								textColor={BaseColors.LIGHT_TONE}
+								hoverColor={BaseColors.SALMON}
+								isLinked
+								small
+							/>
+						)}
+
+						<Heading6
+							sans
+							loose
+							uppercase
+							unpadded
+							className={styles.countLabel}
+						>
+							{sequences.aggregate?.count ? (
 								<FormattedMessage
 									id="collectionDetail__sequenceCountLabel"
 									defaultMessage="{count} Series"
@@ -245,83 +247,85 @@ function CollectionDetail({
 									description="Collection Detail teachings count label"
 									values={{ count: rec?.aggregate?.count }}
 								/>
-							)
-							//null
-						}
-					</Heading6>
-					<div className={styles.row}>
-						<div className={styles.duration}>{formattedDuration}</div>
+							)}
+						</Heading6>
+						<div className={styles.row}>
+							<div className={styles.duration}>{formattedDuration}</div>
 
-						<ButtonShare
-							shareUrl={shareUrl}
-							backgroundColor={BaseColors.DARK}
-							emailSubject={title}
-							light
-							triggerClassName={styles.iconButton}
-							rssUrl={root.lang(lang).conferences.id(id).feed.get()}
-						/>
-						<ButtonFavorite
-							isFavorited={!!isFavorited}
-							toggleFavorited={toggleFavorited}
-							backgroundColor={BaseColors.DARK}
-							light
-							className={styles.iconButton}
-						/>
-					</div>
-					<HorizontalRule color={BaseColors.MID_TONE} />
-					<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
-				</div>
-			</div>
-			{sequences.nodes?.length ? (
-				<>
-					<LineHeading color={BaseColors.SALMON}>
-						<FormattedMessage
-							id="collectionDetail__seriesLabel"
-							defaultMessage="Series"
-							description="Collection Detail series label"
-						/>
-					</LineHeading>
-					<CardGroup className={styles.cardGroup}>
-						{sequences.nodes.map((sequence) => (
-							<CardSequence sequence={sequence} key={sequence.canonicalPath} />
-						))}
-					</CardGroup>
-					{sequences.pageInfo.hasNextPage && (
-						<Button
-							type="secondaryInverse"
-							href={root.lang(lang).conferences.id(id).sequences.get()}
-							text={intl.formatMessage({
-								id: 'collectionDetail__seriesAllLabel',
-								defaultMessage: 'See All Series',
-							})}
-							IconLeft={ForwardIcon}
-							className={styles.seeAllButton}
-						/>
-					)}
-				</>
-			) : null}
-			{recordings?.length ? (
-				<>
-					<LineHeading color={BaseColors.SALMON}>
-						<FormattedMessage
-							id="collectionDetail__teachingsLabel"
-							defaultMessage="Individual Teachings"
-							description="Collection Detail teachings label"
-						/>
-					</LineHeading>
-					<CardGroup className={styles.cardGroup}>
-						{recordings?.map((recording) => (
-							<CardRecording
-								recording={recording}
-								key={recording?.id}
-								fullBleed
+							<ButtonShare
+								shareUrl={shareUrl}
+								backgroundColor={BaseColors.DARK}
+								emailSubject={title}
+								light
+								triggerClassName={styles.iconButton}
+								rssUrl={root.lang(lang).conferences.id(id).feed.get()}
 							/>
-						))}
-					</CardGroup>
-					<div ref={loadMoreTriggerRef}></div>
-				</>
-			) : null}
-		</Tease>
+							<ButtonFavorite
+								isFavorited={!!isFavorited}
+								toggleFavorited={toggleFavorited}
+								backgroundColor={BaseColors.DARK}
+								light
+								className={styles.iconButton}
+							/>
+						</div>
+						<HorizontalRule color={BaseColors.MID_TONE} />
+						<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
+					</div>
+				</div>
+				{sequences.nodes?.length ? (
+					<>
+						<LineHeading color={BaseColors.SALMON}>
+							<FormattedMessage
+								id="collectionDetail__seriesLabel"
+								defaultMessage="Series"
+								description="Collection Detail series label"
+							/>
+						</LineHeading>
+						<CardGroup className={styles.cardGroup}>
+							{sequences.nodes.map((sequence) => (
+								<CardSequence
+									sequence={sequence}
+									key={sequence.canonicalPath}
+								/>
+							))}
+						</CardGroup>
+						{sequences.pageInfo.hasNextPage && (
+							<Button
+								type="secondaryInverse"
+								href={root.lang(lang).conferences.id(id).sequences.get()}
+								text={intl.formatMessage({
+									id: 'collectionDetail__seriesAllLabel',
+									defaultMessage: 'See All Series',
+								})}
+								IconLeft={ForwardIcon}
+								className={styles.seeAllButton}
+							/>
+						)}
+					</>
+				) : null}
+				{recordings?.length ? (
+					<>
+						<LineHeading color={BaseColors.SALMON}>
+							<FormattedMessage
+								id="collectionDetail__teachingsLabel"
+								defaultMessage="Individual Teachings"
+								description="Collection Detail teachings label"
+							/>
+						</LineHeading>
+						<CardGroup className={styles.cardGroup}>
+							{recordings?.map((recording) => (
+								<CardRecording
+									recording={recording}
+									key={recording?.id}
+									fullBleed
+								/>
+							))}
+						</CardGroup>
+					</>
+				) : null}
+			</Tease>
+			<div ref={loadMoreTriggerRef}></div>
+		</>
 	);
 }
 
