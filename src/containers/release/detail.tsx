@@ -47,7 +47,7 @@ function ReleaseDetail({
 		postalCode &&
 		country;
 
-	const { mutate, isLoading, isSuccess } = useSubmitMediaReleaseFormMutation();
+	const { mutate, isPending, isSuccess } = useSubmitMediaReleaseFormMutation();
 
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault();
@@ -197,7 +197,7 @@ function ReleaseDetail({
 									type="super"
 									text="Submit"
 									onClick={onSubmit}
-									disabled={!formFilled || isLoading}
+									disabled={!formFilled || isPending}
 								/>
 							</form>
 						)}

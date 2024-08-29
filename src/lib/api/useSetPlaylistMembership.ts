@@ -26,7 +26,7 @@ export function useSetPlaylistMembership(
 		},
 
 		onSettled: async () => {
-			await queryClient.invalidateQueries(cacheKey);
+			await queryClient.invalidateQueries({ queryKey: cacheKey });
 		},
 	});
 

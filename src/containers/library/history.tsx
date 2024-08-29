@@ -38,23 +38,22 @@ export type ILibraryHistoryProps = {
 function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 	const variables = getLibraryHistoryPageDataDefaultVariables(language);
 	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-		useInfiniteQuery(
-			['getLibraryHistoryPageData', variables],
-			({ pageParam }) =>
+		useInfiniteQuery({
+			queryKey: ['getLibraryHistoryPageData', variables],
+			queryFn: ({ pageParam }) =>
 				graphqlFetcher<
 					GetLibraryHistoryPageDataQuery,
 					GetLibraryHistoryPageDataQueryVariables
 				>(GetLibraryHistoryPageDataDocument, {
 					...variables,
-					offset: pageParam || 0,
+					offset: pageParam,
 				})(),
-			{
-				getNextPageParam: (lastPage, pages) =>
-					lastPage.me?.user.downloadHistory.pageInfo.hasNextPage
-						? pages.length * variables.first
-						: undefined,
-			},
-		);
+			getNextPageParam: (lastPage, pages) =>
+				lastPage.me?.user.downloadHistory.pageInfo.hasNextPage
+					? pages.length * variables.first
+					: undefined,
+			initialPageParam: 0,
+		});
 
 	const showLoadMore = hasNextPage || isFetchingNextPage;
 	return (

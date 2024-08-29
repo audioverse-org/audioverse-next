@@ -33,7 +33,7 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 	const [email, setEmail] = useState('');
 	const [body, setBody] = useState('');
 
-	const { mutate, isLoading, isSuccess, reset } =
+	const { mutate, isPending, isSuccess, reset } =
 		useSubmitContactPageMutation();
 
 	useEffect(() => {
@@ -229,7 +229,7 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 							}
 							centered
 							className={styles.submit}
-							disabled={!formFilled || isLoading}
+							disabled={!formFilled || isPending}
 						/>
 					</div>
 				</form>
