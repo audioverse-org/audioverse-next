@@ -54,7 +54,7 @@ function loadPageData() {
 			duration: 123,
 			number: 1,
 			title: 'the_chapter_title',
-			url: 'someurl',
+			url: 'https://example.com',
 		},
 	] as bibleBrain.IBibleBookChapter[]);
 }
