@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -78,14 +77,12 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	selectPageInfo = defaultSelectPageInfo,
 	Card,
 	seeAllUrl,
-	showLoading = false,
-	hidden = false,
 	failureCallback,
 	...props
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
 
-	const { data, fetchNextPage, isFetchingNextPage, hasNextPage, isLoading } =
+	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
 		infiniteQuery(
 			'after',
 			{ language },
@@ -125,7 +122,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	);
 
 	// Check if there's content to render, if not, return an empty JSX element
-	const renderFail = cards.length < 1 && !(isLoading && showLoading);
+	const renderFail = cards.length < 1;
 
 	useEffect(() => {
 		if (renderFail) {
@@ -146,7 +143,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	}
 
 	return (
-		<div className={clsx(styles.section, hidden ? styles.hidden : '')}>
+		<div className={styles.section}>
 			<LineHeading variant="overline" unpadded>
 				<span>{heading}</span>
 				{seeAllUrl && (
@@ -155,11 +152,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 					</a>
 				)}
 			</LineHeading>
-			{isLoading && showLoading ? (
-				<CardSlider {...props} items={loadingCards} />
-			) : (
-				<CardSlider {...props} onIndexChange={preload} items={cards} />
-			)}
+			<CardSlider {...props} onIndexChange={preload} items={cards} />
 		</div>
 	);
 }
