@@ -145,5 +145,8 @@
     },
     "peerDependencies": {
         "webpack": "^5.94.0"
+    },
+    "engines": {
+        "node": "20.16.0"
     }
 }
