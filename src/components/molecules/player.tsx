@@ -14,9 +14,7 @@ import PlaybackTimes from '~components/molecules/playbackTimes';
 import RecordingProgressBar from '~components/molecules/recordingProgressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
-import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
-import { useGetIsAuthenticatedQuery } from '~lib/hooks/__generated__/useIsAuthenticated';
 import useGlobalSpaceDown from '~lib/useGlobalSpaceDown';
 import usePlaybackSession from '~lib/usePlaybackSession';
 import IconAirPlayAudio from '~public/img/icon-airplay-audio.svg';
@@ -24,6 +22,7 @@ import IconChromeCast from '~public/img/icon-chromecast.svg';
 import IconFullscreen from '~public/img/icons/icon-fullscreen.svg';
 import IconPause from '~public/img/icons/icon-pause-large.svg';
 import IconPlay from '~public/img/icons/icon-play-large.svg';
+import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';
@@ -84,15 +83,7 @@ const Player = ({
 		? BaseColors.WHITE
 		: BaseColors.DARK;
 
-	const sessionToken = getSessionToken(); // i will see if this give any issue
-	const authResult = useGetIsAuthenticatedQuery(
-		{},
-		{
-			enabled: !!sessionToken,
-			retry: false,
-		}
-	);
-	const user = authResult.data?.me?.user;
+	const { isUserLoggedIn } = useIsAuthenticated();
 
 	return (
 		<div
@@ -244,7 +235,7 @@ const Player = ({
 					)}
 
 					<ButtonSpeed {...{ recording, backgroundColor }} />
-					{user ? (
+					{isUserLoggedIn ? (
 						<ButtonDownload {...{ recording, backgroundColor }} />
 					) : (
 						<ButtonDownloadBlank backgroundColor={backgroundColor} />
