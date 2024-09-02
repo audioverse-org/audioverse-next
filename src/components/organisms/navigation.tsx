@@ -13,7 +13,6 @@ import NavItem from '~components/molecules/navItem';
 import SearchBar from '~components/molecules/searchBar';
 import Header from '~components/organisms/header';
 import { getSessionToken, setSessionToken } from '~lib/cookies';
-import { useGetIsAuthenticatedQuery } from '~lib/hooks/__generated__/useIsAuthenticated';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { INavigationItem, useNavigationItems } from '~lib/useNavigationItems';
@@ -21,6 +20,7 @@ import IconUser from '~public/img/icons/fa-user-heavy.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import IconExit from '~public/img/icons/icon-exit.svg';
 import { BaseColors } from '~src/lib/constants';
+import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 
 import { analytics } from '../../lib/analytics';
 import IconButton from '../molecules/iconButton';
@@ -62,14 +62,7 @@ const Navigation = ({
 		}
 	}, [router.asPath, sessionToken]);
 
-	const authResult = useGetIsAuthenticatedQuery(
-		{},
-		{
-			enabled: !!sessionToken,
-			retry: false,
-		}
-	);
-	const user = authResult.data?.me?.user;
+	const { user } = useIsAuthenticated();
 
 	const navigationItems = useNavigationItems();
 	const submenuItem = navigationItems.find(
