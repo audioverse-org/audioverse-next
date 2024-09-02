@@ -48,8 +48,6 @@ type SectionProps<T, N> = {
 		N
 	>;
 	Card: Card<N>;
-	showLoading?: boolean;
-	hidden?: boolean;
 	failureCallback?: FailureCallback;
 };
 

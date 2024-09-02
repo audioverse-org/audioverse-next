@@ -27,7 +27,6 @@ export default function FeaturedTeachings(): JSX.Element {
 			Card={(p: { node: CardRecordingFragment }) => (
 				<CardRecording recording={p.node} />
 			)}
-			showLoading
 		/>
 	);
 }
