@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { forwardRef, Ref } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -34,7 +33,7 @@ const ButtonFavorite = forwardRef<HTMLButtonElement, Props>(
 			light,
 			backgroundColor,
 			className,
-		},
+		}: Props,
 		ref,
 	): JSX.Element {
 		const intl = useIntl();
