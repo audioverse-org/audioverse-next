@@ -20,6 +20,9 @@ export type INavigationItem = {
 	childNode?: JSX.Element;
 };
 
+// We use the spread operator because next/dynamic requires an object
+// literal.
+// WORKAROUND: https://nextjs.org/docs/messages/invalid-dynamic-options-type
 const opts = {
 	ssr: false,
 };
