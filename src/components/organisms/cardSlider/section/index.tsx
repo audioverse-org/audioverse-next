@@ -1,11 +1,9 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import CardSlider from '~components/organisms/cardSlider';
-import CardWithTheme from '~src/components/molecules/card/base/withTheme';
-import loadingStyles from '~src/components/molecules/loadingCards.module.scss';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import {
 	GraphqlInfiniteQuery,
@@ -32,7 +30,6 @@ type SectionRoot<T> = {
 type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
 type PageInfoSelector<T, _N> = (page?: T) => Maybe<PageInfo>;
 type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
-type FailureCallback = () => void;
 
 type SectionProps<T, N> = {
 	infiniteQuery: T;
@@ -48,7 +45,6 @@ type SectionProps<T, N> = {
 		N
 	>;
 	Card: Card<N>;
-	failureCallback?: FailureCallback;
 };
 
 function isSectionRoot<T>(v: unknown): v is SectionRoot<T> {
@@ -75,7 +71,6 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	selectPageInfo = defaultSelectPageInfo,
 	Card,
 	seeAllUrl,
-	failureCallback,
 	...props
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
@@ -122,22 +117,8 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	// Check if there's content to render, if not, return an empty JSX element
 	const renderFail = cards.length < 1;
 
-	useEffect(() => {
-		if (renderFail) {
-			failureCallback?.();
-		}
-	}, [renderFail, failureCallback]);
-
 	if (renderFail) {
 		return <></>;
-	}
-
-	const loadingCards: JSX.Element[] = [];
-
-	for (let i = 0; i < PRELOAD_COUNT; i++) {
-		loadingCards.push(
-			<CardWithTheme theme="sermon" className={loadingStyles.card} key={i} />
-		);
 	}
 
 	return (
