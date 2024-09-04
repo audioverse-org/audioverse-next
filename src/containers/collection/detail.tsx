@@ -1,6 +1,6 @@
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
@@ -81,7 +81,7 @@ function CollectionDetail({
 			{
 				id,
 				first: PAGE_SIZE,
-				after: after,
+				after,
 			},
 			{
 				getNextPageParam: (lastPage) =>
@@ -145,47 +145,36 @@ function CollectionDetail({
 		});
 	}
 
-	const observer = useRef<IntersectionObserver>();
-
-	const handleObserver = useCallback(
-		(entries: IntersectionObserverEntry[]) => {
-			const target = entries[0];
-			if (target.isIntersecting && hasNextPage && !isFetchingNextPage) {
-				const newAfter =
-					data?.pages[data.pages.length - 1]?.collection?.recordings?.pageInfo
-						?.endCursor || '';
-				setAfter(newAfter);
-				fetchNextPage();
-			}
-		},
-		[data, fetchNextPage, hasNextPage, isFetchingNextPage]
-	);
-
 	useEffect(() => {
-		if (observer.current) {
-			observer.current.disconnect();
-		}
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting && !isFetchingNextPage && hasNextPage) {
+					const newAfter =
+						data?.pages[data.pages.length - 1]?.collection?.recordings?.pageInfo
+							?.endCursor || '';
+					setAfter(newAfter);
+					fetchNextPage();
+				}
+			},
+			{
+				root: null,
+				rootMargin: '0px',
+				threshold: 0.5, // Adjust the threshold as needed
+			}
+		);
 
-		observer.current = new IntersectionObserver(handleObserver, {
-			root: null,
-			rootMargin: '0px',
-			threshold: 0.1,
-		});
+		const currentTriggerRef = loadMoreTriggerRef.current;
 
-		const trigger = loadMoreTriggerRef.current;
-
-		if (trigger) {
-			observer.current.observe(trigger);
-		} else {
-			console.log('Trigger element not found');
+		if (currentTriggerRef) {
+			observer.observe(currentTriggerRef);
 		}
 
 		return () => {
-			if (observer.current) {
-				observer.current.disconnect();
+			if (currentTriggerRef) {
+				observer.unobserve(currentTriggerRef);
 			}
 		};
-	}, [handleObserver, hasNextPage, isFetchingNextPage]);
+	}, [isFetchingNextPage, fetchNextPage, hasNextPage, data]);
 
 	return (
 		<>
