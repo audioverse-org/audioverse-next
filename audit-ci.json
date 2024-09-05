@@ -22,7 +22,7 @@
 		"GHSA-3h5v-q93c-6h6q", // Not used at runtime and is related to @lhci/cli
 		"GHSA-952p-6rrq-rcjv", // Not used at runtime because it involves transitive dependencies
 		"GHSA-4vvj-4cpr-p986", // Not used at runtime because it involves transitive dependencies
-		"Pa11y-Issue-1", //Design element has insufficient contrast
-		"Pa11y-Issue-2" // Design element has insufficient contrast
+		"WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail", // Ignoring contrast issue due to third-party design
+		"WCAG2AA.Principle2.Guideline2_4.2_4_1.H64.1" // Ignoring iframe title issue as we cannot control third-party iframe
 	]
 }
