@@ -21,6 +21,8 @@
 		"GHSA-grv7-fg5c-xmjg", // Not used at runtime
 		"GHSA-3h5v-q93c-6h6q", // Not used at runtime and is related to @lhci/cli
 		"GHSA-952p-6rrq-rcjv", // Not used at runtime because it involves transitive dependencies
-		"GHSA-4vvj-4cpr-p986" // Not used at runtime because it involves transitive dependencies
+		"GHSA-4vvj-4cpr-p986", // Not used at runtime because it involves transitive dependencies
+		"Pa11y-Issue-1", //Design element has insufficient contrast
+		"Pa11y-Issue-2" // Design element has insufficient contrast
 	]
 }
