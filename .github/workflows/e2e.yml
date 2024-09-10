@@ -8,8 +8,6 @@ jobs:
     permissions:
       checks: read
       pull-requests: write
-    env:
-      SITE_URL: ${{github.event.deployment_status.target_url}}
     steps:
       - uses: narthur/pa11y-ratchet@v2
         with:
