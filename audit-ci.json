@@ -20,6 +20,7 @@
 		"GHSA-fr5h-rqp8-mj6g", // Does not apply to Vercel-hosted applications
 		"GHSA-grv7-fg5c-xmjg", // Not used at runtime
 		"GHSA-3h5v-q93c-6h6q", // Not used at runtime and is related to @lhci/cli
-		"GHSA-952p-6rrq-rcjv" // Not used at runtime
+		"GHSA-952p-6rrq-rcjv", // Not used at runtime
+		"GHSA-9wv6-86v2-598j" // Used by lighthouse CI, not at runtime
 	]
 }
