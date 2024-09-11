@@ -1,27 +1,34 @@
-import { GetServerSidePropsContext } from 'next';
+import { DehydratedState } from '@tanstack/react-query';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
+import { IBaseProps } from '~containers/base';
+import { REVALIDATE } from '~lib/constants';
 import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '~lib/getLanguageRoutes';
+import root from '~lib/routes';
 import { prefetchQueries } from '~src/__generated__/prefetch';
 import Discover from '~src/containers/discover';
-import { storeRequest } from '~src/lib/api/storeRequest';
-import getDehydratedProps, {
-	DehydratedProps,
-} from '~src/lib/getDehydratedProps';
+import serializableDehydrate from '~src/lib/serializableDehydrate';
 
 export default Discover;
 
-export async function getServerSideProps({
+export async function getStaticProps({
 	params,
-	req,
-}: GetServerSidePropsContext<{ language: string }>): Promise<DehydratedProps> {
-	storeRequest(req);
-
+}: GetStaticPropsContext<{ language: string }>): Promise<
+	GetStaticPropsResult<
+		{
+			dehydratedState: DehydratedState;
+		} & IBaseProps
+	>
+> {
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
 	const client = await prefetchQueries({
-		getDiscoverPageData: { language },
-		getSectionContinueListening: { language },
 		getSectionRecentTeachings: { language },
 		getSectionTrendingTeachings: { language },
 		getSectionFeaturedTeachings: { language },
@@ -35,10 +42,23 @@ export async function getServerSideProps({
 		getSectionTrendingMusic: { language },
 	});
 
-	return getDehydratedProps(client, {
-		title: intl.formatMessage({
-			id: 'discover__title',
-			defaultMessage: 'Discover',
-		}),
-	});
+	return {
+		props: {
+			title: intl.formatMessage({
+				id: 'discover__title',
+				defaultMessage: 'Discover',
+			}),
+			dehydratedState: serializableDehydrate(client),
+		},
+		revalidate: REVALIDATE,
+	};
+}
+
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+	return {
+		paths: getLanguageRoutes().map((base_url) =>
+			root.lang(base_url).discover.get()
+		),
+		fallback: false,
+	};
 }

@@ -6,15 +6,13 @@ import {
 } from '~components/HOCs/__generated__/withAuthGuard';
 import { getSessionToken } from '~lib/cookies';
 
-import { getCurrentRequest } from '../api/storeRequest';
-
 export default function useIsAuthenticated(): UseQueryResult<
 	GetWithAuthGuardDataQuery,
 	unknown
 > & {
 	isUserLoggedIn: boolean;
 } {
-	const token = getSessionToken(getCurrentRequest());
+	const token = getSessionToken();
 	const result = useGetWithAuthGuardDataQuery({}, { retry: false });
 
 	return {
