@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import BlogPosts from '~components/organisms/cardSlider/section/blogPosts';
@@ -40,22 +40,21 @@ export function getTopSection(options: {
 
 export default function Discover(): JSX.Element {
 	const language = useLanguageId();
+	const [topSection, setTopSection] = useState('nothing');
 	const { isUserLoggedIn, isFetching } = useIsAuthenticated();
 	const { data, isLoading: isLoadingCount } = useGetDiscoverPageDataQuery({
 		language,
 	});
 
-	const topSection = useMemo(():
-		| 'nothing'
-		| 'featured'
-		| 'continueListening' => {
-		return getTopSection({
+	useEffect(() => {
+		const newTopSection = getTopSection({
 			isUserLoggedIn,
 			isLoading: isFetching,
 			count: data?.me?.user.continueListening?.aggregate?.count,
 			isLoadingCount,
 			isServerSide: isServerSide(),
 		});
+		setTopSection(newTopSection);
 	}, [isUserLoggedIn, isFetching, data, isLoadingCount]);
 
 	return (
