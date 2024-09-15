@@ -29,8 +29,16 @@ const options = {
 
 async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) {
 	const r = await fns[k](v as any);
-	await client.prefetchQuery([k, v], () => r, options);
-	await client.prefetchInfiniteQuery([\`\${k}.infinite\`, v], () => r, options);	
+    await client.prefetchQuery({
+        queryKey: [k, v],
+        queryFn: () => r,
+        ...options,
+    });
+    await client.prefetchInfiniteQuery({
+        queryKey: [\`\${k}.infinite\`, v],
+        queryFn: () => r,
+        ...options,
+    });
 }
 
 export async function prefetchQueries(
