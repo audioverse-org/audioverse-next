@@ -15,7 +15,6 @@ import RecordingProgressBar from '~components/molecules/recordingProgressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
 import hasVideo from '~lib/hasVideo';
-import { useGetIsAuthenticatedQuery } from '~lib/hooks/__generated__/useIsAuthenticated';
 import useGlobalSpaceDown from '~lib/useGlobalSpaceDown';
 import usePlaybackSession from '~lib/usePlaybackSession';
 import IconAirPlayAudio from '~public/img/icon-airplay-audio.svg';

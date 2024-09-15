@@ -13,7 +13,6 @@ import NavItem from '~components/molecules/navItem';
 import SearchBar from '~components/molecules/searchBar';
 import Header from '~components/organisms/header';
 import { getSessionToken, setSessionToken } from '~lib/cookies';
-import { useGetIsAuthenticatedQuery } from '~lib/hooks/__generated__/useIsAuthenticated';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { INavigationItem, useNavigationItems } from '~lib/useNavigationItems';
