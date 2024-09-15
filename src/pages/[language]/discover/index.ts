@@ -59,7 +59,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes().map((base_url) =>
-			root.lang(base_url).discover.get()
+			root.lang(base_url).discover.get(),
 		),
 		fallback: false,
 	};
