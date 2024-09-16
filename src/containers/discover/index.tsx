@@ -31,7 +31,7 @@ export function getTopSection(options: {
 	if (!options.isUserLoggedIn && !options.isLoading) return 'featured';
 	if (options.isLoading || options.isLoadingCount) return 'nothing';
 	if (options.isUserLoggedIn && !options.isLoadingCount) {
-		if (options.count ?? 0 > 0) return 'continueListening';
+		if (options.count) return 'continueListening';
 		return 'featured';
 	}
 	if (!options.isUserLoggedIn) return 'featured';
