@@ -23,9 +23,9 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ language: string; id: string }>): Promise<
 	GetStaticPropsResult<CollectionDetailProps & IBaseProps>
 > {
-	const id = params?.id as string;
+	const collectionId = params?.id as string;
 	const { collection } = await getCollectionDetailPageData({
-		id,
+		collectionId,
 		first: 20,
 		after: null,
 	}).catch(() => ({

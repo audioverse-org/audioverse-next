@@ -4303,6 +4303,12 @@
       "value": " Hörbuch-Titel"
     }
   ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
+    }
+  ],
   "presenterDetail__descriptionLabel": [
     {
       "type": 0,

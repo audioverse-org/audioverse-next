@@ -1,5 +1,9 @@
-query getCollectionDetailPageData($id: ID!, $first: Int!, $after: String) {
-	collection(id: $id) {
+query getCollectionDetailPageData(
+	$collectionId: ID!
+	$first: Int!
+	$after: String
+) {
+	collection(id: $collectionId) {
 		id
 		title
 		contentType
@@ -83,6 +87,17 @@ query getCollectionFeedData($id: ID!) {
 			nodes {
 				...generateFeed
 			}
+		}
+	}
+}
+
+query getCollectionBasicData($id: ID!) {
+	collection(id: $id) {
+		title
+		canonicalUrl(useFuturePath: true)
+		language
+		image {
+			url(size: 600)
 		}
 	}
 }

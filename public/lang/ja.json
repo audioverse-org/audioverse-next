@@ -2722,6 +2722,9 @@
   "account__heading": {
     "string": "アカウントの設定"
   },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
+  },
   "collectionDetail__teachingsCountLabel": {
     "comment": "Collection Detail teachings count label",
     "string": "レッスン{count}個"

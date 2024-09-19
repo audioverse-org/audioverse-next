@@ -54,6 +54,7 @@ function CollectionDetail({
 	);
 	const intl = useIntl();
 	const lang = useLanguageRoute();
+	const altPath = `/${lang}/conferences/${collection.id}/presenters/`;
 	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
 		collection.id
 	);
@@ -81,7 +82,7 @@ function CollectionDetail({
 		useInfiniteGetCollectionDetailPageDataQuery(
 			'after', // Key for pagination
 			{
-				id,
+				collectionId: id,
 				first: PAGE_SIZE,
 				after,
 			},
@@ -309,6 +310,7 @@ function CollectionDetail({
 									person={person}
 									largeinit={true}
 									key={person.canonicalPath}
+									altPath={altPath + person.id}
 								/>
 							))}
 						</CardGroup>

@@ -2722,6 +2722,9 @@
   "account__heading": {
     "string": "Configuración de la cuenta"
   },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
+  },
   "collectionDetail__teachingsCountLabel": {
     "comment": "Collection Detail teachings count label",
     "string": "{count} lecciones"

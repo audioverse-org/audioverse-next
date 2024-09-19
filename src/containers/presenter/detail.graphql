@@ -1,4 +1,8 @@
-query getPresenterDetailPageData($id: ID!, $language: Language!) {
+query getPresenterDetailPageData(
+	$id: ID!
+	$collectionId: ID = null
+	$language: Language!
+) {
 	person(id: $id) {
 		id
 		name
@@ -57,6 +61,21 @@ query getPresenterDetailPageData($id: ID!, $language: Language!) {
 			first: 3
 			orderBy: [{ field: DOWNLOADS_ALL_TIME, direction: DESC }]
 		) {
+			nodes {
+				...cardRecording
+			}
+			pageInfo {
+				hasNextPage
+			}
+		}
+		confrenceRecordings: recordings(
+			collectionId: $collectionId
+			first: 20
+			orderBy: [{ field: DOWNLOADS_ALL_TIME, direction: DESC }]
+		) {
+			aggregate {
+				count
+			}
 			nodes {
 				...cardRecording
 			}

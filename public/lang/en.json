@@ -2081,6 +2081,9 @@
     "comment": "Presenter detail audiobook tracks count label",
     "string": "{count} Audiobook Tracks"
   },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
+  },
   "presenterDetail__descriptionLabel": {
     "string": "Description"
   },
