@@ -2725,5 +2725,12 @@
   "collectionDetail__teachingsCountLabel": {
     "comment": "Collection Detail teachings count label",
     "string": "{count} Lehren"
+  },
+  "collectionDetail__presentersAllLabel": {
+    "string": "See All Presenters"
+  },
+  "collectionDetail__presentersLabel": {
+    "comment": "Collection Detail speakers label",
+    "string": "Presenters"
   }
 }

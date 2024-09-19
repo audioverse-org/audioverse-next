@@ -1099,6 +1099,18 @@
       "value": "位置"
     }
   ],
+  "collectionDetail__presentersAllLabel": [
+    {
+      "type": 0,
+      "value": "See All Presenters"
+    }
+  ],
+  "collectionDetail__presentersLabel": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,

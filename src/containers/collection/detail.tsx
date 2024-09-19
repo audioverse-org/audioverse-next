@@ -29,6 +29,7 @@ import { useFormattedDuration } from '~lib/time';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
+import CardPerson from '~src/components/molecules/card/person';
 import { Must } from '~src/types/types';
 
 import {
@@ -70,6 +71,7 @@ function CollectionDetail({
 		shareUrl,
 		sponsor,
 		sequences,
+		persons,
 		recordings: rec,
 	} = collection;
 
@@ -285,6 +287,38 @@ function CollectionDetail({
 								text={intl.formatMessage({
 									id: 'collectionDetail__seriesAllLabel',
 									defaultMessage: 'See All Series',
+								})}
+								IconLeft={ForwardIcon}
+								className={styles.seeAllButton}
+							/>
+						)}
+					</>
+				) : null}
+				{persons.nodes?.length ? (
+					<>
+						<LineHeading color={BaseColors.SALMON}>
+							<FormattedMessage
+								id="collectionDetail__presentersLabel"
+								defaultMessage="Presenters"
+								description="Collection Detail speakers label"
+							/>
+						</LineHeading>
+						<CardGroup className={styles.cardGroup}>
+							{persons.nodes.map((person) => (
+								<CardPerson
+									person={person}
+									largeinit={true}
+									key={person.canonicalPath}
+								/>
+							))}
+						</CardGroup>
+						{persons.pageInfo.hasNextPage && (
+							<Button
+								type="secondaryInverse"
+								href={root.lang(lang).conferences.id(id).presenters.get()}
+								text={intl.formatMessage({
+									id: 'collectionDetail__presentersAllLabel',
+									defaultMessage: 'See All Presenters',
 								})}
 								IconLeft={ForwardIcon}
 								className={styles.seeAllButton}
