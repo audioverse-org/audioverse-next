@@ -23,11 +23,11 @@ export async function getStaticProps({
 	const languageRoute = params?.language as string;
 	const intl = await getIntl(languageRoute);
 
-	const id = params?.id as string;
+	const collectionId = params?.id as string;
 	return getPaginatedStaticProps(
 		params,
 		({ first, offset }) =>
-			getCollectionPresentersPageData({ id, first, offset }),
+			getCollectionPresentersPageData({ collectionId, first, offset }),
 		(d) => d.collection?.persons.nodes,
 		(d) => d.collection?.persons.aggregate?.count,
 		(d) => ({

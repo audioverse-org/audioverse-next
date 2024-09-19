@@ -2735,5 +2735,8 @@
   },
   "account__heading": {
     "string": "Configuración de la cuenta"
+  },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
   }
 }

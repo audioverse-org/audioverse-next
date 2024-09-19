@@ -4301,6 +4301,12 @@
       "value": " Pistes de livre audio"
     }
   ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
+    }
+  ],
   "presenterDetail__descriptionLabel": [
     {
       "type": 0,
