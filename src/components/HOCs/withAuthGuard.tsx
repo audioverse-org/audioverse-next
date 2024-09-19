@@ -3,8 +3,7 @@ import React from 'react';
 import Login from '~components/molecules/login';
 import { getCurrentRequest } from '~lib/api/storeRequest';
 import { getSessionToken } from '~lib/cookies';
-
-import { useGetWithAuthGuardDataQuery } from './__generated__/withAuthGuard';
+import useIsAuthenticated from '~lib/hooks/useIsAuthenticated';
 
 function withAuthGuard<P extends React.JSX.IntrinsicAttributes>(
 	Component: React.ComponentType<P>,
@@ -12,11 +11,7 @@ function withAuthGuard<P extends React.JSX.IntrinsicAttributes>(
 ): React.ComponentType<P> {
 	function WithAuthGuard(props: P) {
 		const sessionToken = getSessionToken(getCurrentRequest());
-		const { data, isLoading } = useGetWithAuthGuardDataQuery(
-			{},
-			{ retry: false }
-		);
-		const isUserLoggedIn = !!data?.me?.user.email;
+		const { isUserLoggedIn, isLoading } = useIsAuthenticated();
 
 		return (sessionToken && isLoading) || isUserLoggedIn ? (
 			<Component {...props} />

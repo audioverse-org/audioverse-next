@@ -1,0 +1,25 @@
+query getSectionContinueListening(
+	$language: Language!
+	$first: Int! = 3
+	$after: String = null
+) {
+	me {
+		user {
+			continueListening: downloadHistory(
+				language: $language
+				first: $first
+				after: $after
+			) {
+				nodes {
+					recording {
+						...cardRecording
+					}
+				}
+				pageInfo {
+					hasNextPage
+					endCursor
+				}
+			}
+		}
+	}
+}
