@@ -21,6 +21,11 @@
 		"GHSA-grv7-fg5c-xmjg", // Not used at runtime
 		"GHSA-3h5v-q93c-6h6q", // Not used at runtime and is related to @lhci/cli
 		"GHSA-952p-6rrq-rcjv", // Not used at runtime because it involves transitive dependencies
-		"GHSA-4vvj-4cpr-p986" // Not used at runtime because it involves transitive dependencies
+		"GHSA-4vvj-4cpr-p986", // Not used at runtime because it involves transitive dependencies
+		"GHSA-9wv6-86v2-598j", // Used by lighthouse CI, not at runtime
+		"GHSA-qwcr-r2fm-qrc7", // Used by lighthouse CI, not at runtime
+		"GHSA-qw6h-vgh9-j6wx", // Used by lighthouse CI, not at runtime
+		"GHSA-m6fv-jmcg-4jfg", // Used by lighthouse CI, not at runtime
+		"GHSA-cm22-4g7w-348p" // Used by lighthouse CI, not at runtime
 	]
 }

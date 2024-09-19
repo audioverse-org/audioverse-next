@@ -2722,6 +2722,15 @@
   "account__heading": {
     "string": "Configurações da conta"
   },
+  "discover__continueListeningNext": {
+    "string": "Next continue listening"
+  },
+  "discover__continueListeningPrevious": {
+    "string": "Previous continue listening"
+  },
+  "discover_continueListeningHeading": {
+    "string": "Continue Listening"
+  },
   "presenterDetail__conferenceRecordingsLabel": {
     "string": "{conferenceTitle}"
   },

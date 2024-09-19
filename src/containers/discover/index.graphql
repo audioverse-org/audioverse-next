@@ -1,0 +1,11 @@
+query getDiscoverPageData($language: Language!) {
+	me {
+		user {
+			continueListening: downloadHistory(language: $language) {
+				aggregate {
+					count
+				}
+			}
+		}
+	}
+}
