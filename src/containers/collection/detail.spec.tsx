@@ -104,7 +104,7 @@ describe('collection detail page', () => {
 
 		expect(fetchApi).toBeCalledWith(GetCollectionDetailPageDataDocument, {
 			variables: {
-				id: 'the_collection_id',
+				collectionId: 'the_collection_id',
 				first: 20,
 				after: null,
 			},
