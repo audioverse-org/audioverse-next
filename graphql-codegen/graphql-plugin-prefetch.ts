@@ -24,7 +24,6 @@ type Vars = {
 
 const options = {
     cacheTime: 24 * 60 * 60 * 1000,
-    initialPageParam: null,
 };
 
 async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) {
@@ -37,6 +36,7 @@ async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) 
     await client.prefetchInfiniteQuery({
         queryKey: [\`\${k}.infinite\`, v],
         queryFn: () => r,
+        initialPageParam: null,
         ...options,
     });
 }

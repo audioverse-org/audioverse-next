@@ -14,7 +14,7 @@ jest.mock('~lib/hooks/useElementWidth');
 const defaultProps = {
 	previous: 'previous',
 	next: 'next',
-	items: [],
+	items: [undefined],
 };
 
 const renderComponent = buildRenderer(Slider, {
