@@ -169,7 +169,7 @@ export default function SocialLogin({
 											});
 										}
 									},
-									{ fields: 'id,first_name,last_name' },
+									{ fields: 'id,first_name,last_name,email' },
 								);
 							},
 							{ scope: 'public_profile' },
