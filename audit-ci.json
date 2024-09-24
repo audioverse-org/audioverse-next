@@ -26,6 +26,7 @@
 		"GHSA-qw6h-vgh9-j6wx", // Lighthouse CI
 		"GHSA-m6fv-jmcg-4jfg", // Lighthouse CI, duplicate removed
 		"GHSA-cm22-4g7w-348p", // Lighthouse CI
-		"GHSA-gp8f-8m3g-qvj9"
+		"GHSA-gp8f-8m3g-qvj9",
+		"GHSA-gcx4-mw62-g8wm"
 	]
 }
