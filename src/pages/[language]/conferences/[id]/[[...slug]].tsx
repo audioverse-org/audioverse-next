@@ -23,12 +23,14 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ language: string; id: string }>): Promise<
 	GetStaticPropsResult<CollectionDetailProps & IBaseProps>
 > {
-	const id = params?.id as string;
-	const { collection } = await getCollectionDetailPageData({ id }).catch(
-		() => ({
-			collection: null,
-		})
-	);
+	const collectionId = params?.id as string;
+	const { collection } = await getCollectionDetailPageData({
+		collectionId,
+		first: 20,
+		after: null,
+	}).catch(() => ({
+		collection: null,
+	}));
 	if (
 		collection?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
 	) {
@@ -42,6 +44,8 @@ export async function getStaticProps({
 			collection,
 			title: collection?.title,
 			canonicalUrl: collection?.canonicalUrl,
+			endCursor: collection?.recordings.pageInfo.endCursor ?? null,
+			hasNextPage: collection?.recordings.pageInfo.hasNextPage ?? false,
 		},
 		revalidate: REVALIDATE,
 	};

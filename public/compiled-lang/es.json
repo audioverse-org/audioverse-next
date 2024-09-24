@@ -1118,13 +1118,13 @@
   "collectionDetail__presentersAllLabel": [
     {
       "type": 0,
-      "value": "Ver todos los presentadores"
+      "value": "See All Presenters"
     }
   ],
   "collectionDetail__presentersLabel": [
     {
       "type": 0,
-      "value": "Presentadores"
+      "value": "Presenters"
     }
   ],
   "collectionDetail__sequenceCountLabel": [
@@ -1153,12 +1153,6 @@
     {
       "type": 0,
       "value": "Patrocinador"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "Ver todas las lecciones individuales"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -4341,6 +4335,12 @@
     {
       "type": 0,
       "value": " Pistas de audiolibros"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [

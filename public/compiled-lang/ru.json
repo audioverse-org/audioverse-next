@@ -1098,13 +1098,13 @@
   "collectionDetail__presentersAllLabel": [
     {
       "type": 0,
-      "value": "Просмотреть всех проповедников"
+      "value": "See All Presenters"
     }
   ],
   "collectionDetail__presentersLabel": [
     {
       "type": 0,
-      "value": "Проповедники"
+      "value": "Presenters"
     }
   ],
   "collectionDetail__sequenceCountLabel": [
@@ -1133,12 +1133,6 @@
     {
       "type": 0,
       "value": "Организатор"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "Смотреть все отдельные темы"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -4325,6 +4319,12 @@
     {
       "type": 0,
       "value": " Дорожка аудиокниги"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [

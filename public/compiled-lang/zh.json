@@ -1102,13 +1102,13 @@
   "collectionDetail__presentersAllLabel": [
     {
       "type": 0,
-      "value": "查看所有讲员"
+      "value": "See All Presenters"
     }
   ],
   "collectionDetail__presentersLabel": [
     {
       "type": 0,
-      "value": "讲员"
+      "value": "Presenters"
     }
   ],
   "collectionDetail__sequenceCountLabel": [
@@ -1137,12 +1137,6 @@
     {
       "type": 0,
       "value": "赞助者"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "查看所有个别证道"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -4341,6 +4335,12 @@
     {
       "type": 0,
       "value": " 部有声书"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [

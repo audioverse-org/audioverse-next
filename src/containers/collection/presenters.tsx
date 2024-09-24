@@ -9,6 +9,7 @@ import Pagination from '~components/molecules/pagination';
 import { BaseColors } from '~lib/constants';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import useLanguageRoute from '~src/lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { CollectionPivotFragment } from './__generated__/pivot';
@@ -33,6 +34,9 @@ function CollectionPresenters({
 }: Must<CollectionPresentersProps> & {
 	data: { collection: Must<CollectionPivotFragment> };
 }): JSX.Element {
+	const lang = useLanguageRoute();
+	const altPath = `/${lang}/conferences/${collection.id}/presenters/`;
+
 	return (
 		<CollectionPivot collection={collection}>
 			<LineHeading color={BaseColors.SALMON}>
@@ -43,7 +47,12 @@ function CollectionPresenters({
 			</LineHeading>
 			<CardGroup>
 				{nodes.map((node) => (
-					<CardPerson person={node} key={node.canonicalPath} midinit={true} />
+					<CardPerson
+						person={node}
+						key={node.canonicalPath}
+						midinit={true}
+						altPath={altPath + node.id}
+					/>
 				))}
 			</CardGroup>
 			<Pagination

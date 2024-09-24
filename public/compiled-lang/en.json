@@ -1135,12 +1135,6 @@
       "value": "Sponsor"
     }
   ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Individual Teachings"
-    }
-  ],
   "collectionDetail__teachingsCountLabel": [
     {
       "type": 1,
@@ -4321,6 +4315,12 @@
     {
       "type": 0,
       "value": " Audiobook Tracks"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [

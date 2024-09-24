@@ -1098,13 +1098,13 @@
   "collectionDetail__presentersAllLabel": [
     {
       "type": 0,
-      "value": "Alle Sprecher anzeigen"
+      "value": "See All Presenters"
     }
   ],
   "collectionDetail__presentersLabel": [
     {
       "type": 0,
-      "value": "Sprecher"
+      "value": "Presenters"
     }
   ],
   "collectionDetail__sequenceCountLabel": [
@@ -1133,12 +1133,6 @@
     {
       "type": 0,
       "value": "Sponsor"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "Alle einzelnen Lehren anzeigen"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -4325,6 +4319,12 @@
     {
       "type": 0,
       "value": " Hörbuch-Titel"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [
