@@ -26,8 +26,13 @@ const options = { cacheTime: 24 * 60 * 60 * 1000 };
 
 async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) {
 	const r = await fns[k](v as any);
-	await client.prefetchQuery([k, v], () => r, options);
-	await client.prefetchInfiniteQuery([\`\${k}.infinite\`, v], () => r, options);	
+
+	const hasVars = Object.keys(v as any).length > 0;
+	const queryKey = hasVars ? [k, v] : [k];
+	const infiniteQueryKey = hasVars ? [\`\${k}.infinite\`, v] : [\`\${k}.infinite\`];
+
+	await client.prefetchQuery(queryKey, () => r, options);
+	await client.prefetchInfiniteQuery(infiniteQueryKey, () => r, options);
 }
 
 export async function prefetchQueries(
