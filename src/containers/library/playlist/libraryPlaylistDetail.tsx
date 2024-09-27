@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -6,16 +5,13 @@ import NotFound from '~components/organisms/notFound';
 import PlaylistDetail from '~containers/library/playlist/detail';
 import LoadingCards from '~src/components/molecules/loadingCards';
 
-import { getLibraryPlaylistPageData } from './__generated__/detail';
+import { useGetLibraryPlaylistPageDataQuery } from './__generated__/detail';
 
 function LibraryPlaylistDetail(): JSX.Element {
 	const router = useRouter();
 	const playlistId = router.query.playlist as string;
-
-	const { data, isLoading } = useQuery({
-		queryKey: ['getLibraryPlaylistPageData', { id: playlistId }],
-		queryFn: () => getLibraryPlaylistPageData({ id: playlistId }),
-		staleTime: Infinity,
+	const { data, isLoading } = useGetLibraryPlaylistPageDataQuery({
+		id: playlistId,
 	});
 
 	if (isLoading) {
