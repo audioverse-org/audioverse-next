@@ -61,6 +61,7 @@
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-intl": "^6.6.8",
+        "rollup": "^2.79.2",
         "sass": "^1.79.3",
         "sharp": "^0.33.5",
         "striptags": "^3.2.0",
@@ -138,6 +139,11 @@
         "tsx": "^4.19.1",
         "type-fest": "^4.26.1",
         "typescript": "^5.6.2"
+    },
+    "overrides": {
+        "next-pwa": {
+            "rollup": "$rollup"
+        }
     },
     "nextBundleAnalysis": {
         "budget": 230400,
