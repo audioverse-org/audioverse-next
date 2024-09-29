@@ -11,10 +11,16 @@ import { GRID_GAP, MIN_CARD_WIDTH } from './index.helpers';
 
 jest.mock('~lib/hooks/useElementWidth');
 
-const defaultProps = {
+const defaultProps: {
+	previous: string;
+	next: string;
+	items: JSX.Element[];
+	rows?: number;
+	onIndexChange?: (state: { index: number; total: number }) => void;
+} = {
 	previous: 'previous',
 	next: 'next',
-	items: [undefined],
+	items: [],
 };
 
 const renderComponent = buildRenderer(Slider, {
