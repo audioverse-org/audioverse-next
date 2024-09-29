@@ -47,7 +47,6 @@ describe('app', () => {
 			() => {
 				const { data: myQuery } = useQuery({
 					queryKey: ['myQuery'],
-					...jest.fn(),
 				});
 
 				if (initial === undefined) {
