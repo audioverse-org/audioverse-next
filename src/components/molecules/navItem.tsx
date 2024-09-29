@@ -40,7 +40,7 @@ export default function NavItem({
 					className={styles.navLink}
 					onClick={() => {
 						analytics.track('Menu click', { label });
-						return setSubmenu(key);
+						setSubmenu(key);
 					}}
 				>
 					{inner}
