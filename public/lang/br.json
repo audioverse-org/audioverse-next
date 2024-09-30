@@ -2728,7 +2728,7 @@
     "string": "{contagem} ensinamentos"
   },
   "organismSection_SeriesHeading": {
-    "string": "Series"
+    "string": "Séries"
   },
   "organismSection_SeriesNext": {
     "string": "Next Series"
@@ -2737,7 +2737,7 @@
     "string": "Previous Series"
   },
   "organismSection_TeachingsHeading": {
-    "string": "Teachings"
+    "string": "Ensinamentos"
   },
   "organismSection_TeachingsNext": {
     "string": "Next Teachings"

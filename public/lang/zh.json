@@ -2728,7 +2728,7 @@
     "string": "{count}篇证道"
   },
   "organismSection_SeriesHeading": {
-    "string": "Series"
+    "string": "系列"
   },
   "organismSection_SeriesNext": {
     "string": "Next Series"
@@ -2737,7 +2737,7 @@
     "string": "Previous Series"
   },
   "organismSection_TeachingsHeading": {
-    "string": "Teachings"
+    "string": "证道"
   },
   "organismSection_TeachingsNext": {
     "string": "Next Teachings"
