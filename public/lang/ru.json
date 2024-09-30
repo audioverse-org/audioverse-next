@@ -2364,9 +2364,6 @@
   "presentersAppears__title": {
     "string": "{personName} Also Appears In"
   },
-  "presentersListAll__all": {
-    "string": "Все"
-  },
   "presentersList__all": {
     "string": "Все"
   },
@@ -2738,5 +2735,14 @@
   },
   "account__heading": {
     "string": "Настройки учетной записи"
+  },
+  "discover__continueListeningNext": {
+    "string": "Next continue listening"
+  },
+  "discover__continueListeningPrevious": {
+    "string": "Previous continue listening"
+  },
+  "discover_continueListeningHeading": {
+    "string": "Continue Listening"
   }
 }

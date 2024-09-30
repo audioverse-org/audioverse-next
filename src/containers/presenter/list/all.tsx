@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import useOnScreen from '~lib/hooks/useOnScreen';
 import { useLanguageId } from '~lib/useLanguageId';
@@ -10,7 +10,6 @@ import List, { PresentersProps } from './list';
 
 export default function All(props: PresentersProps) {
 	const endRef = useRef<HTMLDivElement>(null);
-	const intl = useIntl();
 	const hasReachedEnd = useOnScreen(endRef);
 	const language = useLanguageId();
 
@@ -42,14 +41,7 @@ export default function All(props: PresentersProps) {
 
 	return (
 		<>
-			<List
-				{...props}
-				title={intl.formatMessage({
-					id: 'presentersListAll__all',
-					defaultMessage: 'All',
-				})}
-				persons={persons}
-			/>
+			<List {...props} persons={persons} />
 			<p className={styles.endMessage}>
 				{isFetching && (
 					<FormattedMessage

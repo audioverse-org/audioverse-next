@@ -60,6 +60,7 @@
         "react-facebook-login": "^4.1.1",
         "react-google-login": "^5.2.2",
         "react-intl": "^6.4.4",
+        "rollup": "^2.79.2",
         "sass": "^1.42.1",
         "sharp": "^0.33.4",
         "striptags": "^3.2.0",
@@ -148,9 +149,17 @@
         "type-fest": "^4.3.1",
         "typescript": "^5.1.6"
     },
+    "overrides": {
+        "next-pwa": {
+            "rollup": "$rollup"
+        }
+    },
     "nextBundleAnalysis": {
         "budget": 230400,
         "budgetPercentIncreaseRed": 5,
         "showDetails": true
+    },
+    "peerDependencies": {
+        "webpack": "^5.94.0"
     }
 }

@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import CircleInitials from '~components/atoms/circleInitials';
 import Heading1 from '~components/atoms/heading1';
-import Heading2 from '~components/atoms/heading2';
 import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
 import JumpBar from '~components/molecules/jumpBar';
@@ -20,14 +19,12 @@ import styles from './list.module.scss';
 export type PresentersProps = {
 	persons: PresenterListEntryFragment[];
 	personLetterCounts: GetPersonListLetterCountsQuery['personLetterCounts'];
-	title: string;
 };
 // TODO: replace with presenters landing page (featured, recent, trending, etc.)
 
 export default function Presenters({
 	persons,
 	personLetterCounts,
-	title,
 }: PresentersProps): JSX.Element {
 	const language = useLanguageRoute();
 	const intl = useIntl();
@@ -46,7 +43,7 @@ export default function Presenters({
 	];
 
 	return (
-		<>
+		<div className={styles.parent}>
 			<Heading1 className={styles.heading}>
 				<FormattedMessage
 					id="presentersList__title"
@@ -54,8 +51,7 @@ export default function Presenters({
 				/>
 			</Heading1>
 			<JumpBar links={jumpLinks} />
-			{/* <Heading2>{persons[0].surname.substring(0, 1).toUpperCase()}</Heading2> */}
-			<Heading2>{title}</Heading2>
+
 			{persons.map(({ canonicalPath, image, givenName, surname, summary }) => (
 				<Card className={styles.card} key={canonicalPath}>
 					<Link href={canonicalPath} legacyBehavior>
@@ -71,20 +67,22 @@ export default function Presenters({
 								) : (
 									<CircleInitials name={givenName + ' ' + surname} mid={true} />
 								)}
-								<span className={styles.name}>
-									{surname}, {givenName}
-								</span>
+								<div className={styles.textWrapper}>
+									<span className={styles.name}>
+										{surname}, {givenName}
+									</span>
+									{summary && (
+										<span
+											className={styles.summary}
+											dangerouslySetInnerHTML={{ __html: summary }}
+										/>
+									)}
+								</div>
 							</div>
-							{summary && (
-								<span
-									className={styles.summary}
-									dangerouslySetInnerHTML={{ __html: summary }}
-								/>
-							)}
 						</a>
 					</Link>
 				</Card>
 			))}
-		</>
+		</div>
 	);
 }

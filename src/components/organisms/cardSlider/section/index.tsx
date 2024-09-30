@@ -18,15 +18,17 @@ export type SectionNode<T> = T & {
 	canonicalPath: string;
 };
 
+type PageInfo = {
+	hasNextPage: boolean;
+	endCursor: string | null;
+};
 type SectionRoot<T> = {
 	nodes: SectionNode<T>[];
-	pageInfo: {
-		hasNextPage: boolean;
-		endCursor: string | null;
-	};
+	pageInfo: PageInfo;
 };
 
 type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
+type PageInfoSelector<T, _N> = (page?: T) => Maybe<PageInfo>;
 type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
 
 type SectionProps<T, N> = {
@@ -38,6 +40,10 @@ type SectionProps<T, N> = {
 	minCardWidth?: number;
 	seeAllUrl?: string;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
+	selectPageInfo?: PageInfoSelector<
+		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>,
+		N
+	>;
 	Card: Card<N>;
 };
 
@@ -54,30 +60,37 @@ function defaultSelectNodes<T, N>(page?: T): Maybe<SectionNode<N>[]> {
 	return selectSectionRoot<T, N>(page)?.nodes || [];
 }
 
+function defaultSelectPageInfo<T, N>(page?: T): Maybe<PageInfo> {
+	return selectSectionRoot<T, N>(page)?.pageInfo || null;
+}
+
 export default function Section<T extends GraphqlInfiniteQuery, N>({
 	infiniteQuery,
 	heading,
 	selectNodes = defaultSelectNodes,
+	selectPageInfo = defaultSelectPageInfo,
 	Card,
 	seeAllUrl,
 	...props
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
 
-	const { data, fetchNextPage } = infiniteQuery(
-		'after',
-		{ language },
-		{
-			getNextPageParam: (last: Maybe<T>) => {
-				const r = selectSectionRoot<T, N>(last);
-				if (!r) return;
-				return {
-					language,
-					after: r.pageInfo.endCursor,
-				};
-			},
-		}
-	);
+	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
+		infiniteQuery(
+			'after',
+			{ language },
+			{
+				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
+					if (!last) return;
+					const pageInfo = selectPageInfo(last);
+					if (!pageInfo?.hasNextPage) return;
+					return {
+						language,
+						after: pageInfo.endCursor,
+					};
+				},
+			}
+		);
 
 	const cards = useMemo(
 		() =>
@@ -90,11 +103,15 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 
 	const preload = useCallback(
 		({ index, total }: { index: number; total: number }) => {
-			if (index + PRELOAD_COUNT >= total) {
+			if (
+				index + PRELOAD_COUNT >= total &&
+				!isFetchingNextPage &&
+				hasNextPage
+			) {
 				fetchNextPage();
 			}
 		},
-		[fetchNextPage]
+		[fetchNextPage, isFetchingNextPage, hasNextPage]
 	);
 
 	// Check if there's content to render, if not, return an empty JSX element

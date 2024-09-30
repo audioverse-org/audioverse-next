@@ -1459,6 +1459,18 @@
       "value": "Previous recent conferences"
     }
   ],
+  "discover__continueListeningNext": [
+    {
+      "type": 0,
+      "value": "Next continue listening"
+    }
+  ],
+  "discover__continueListeningPrevious": [
+    {
+      "type": 0,
+      "value": "Previous continue listening"
+    }
+  ],
   "discover__featuredTeachingsNext": [
     {
       "type": 0,
@@ -1571,6 +1583,12 @@
     {
       "type": 0,
       "value": "Conferencias recientes"
+    }
+  ],
+  "discover_continueListeningHeading": [
+    {
+      "type": 0,
+      "value": "Continue Listening"
     }
   ],
   "discover_featuredTeachingsHeading": [
@@ -4465,12 +4483,6 @@
     {
       "type": 1,
       "value": "name"
-    }
-  ],
-  "presentersListAll__all": [
-    {
-      "type": 0,
-      "value": "Todo"
     }
   ],
   "presentersListAll__listEnd": [

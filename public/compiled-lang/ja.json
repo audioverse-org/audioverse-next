@@ -1459,6 +1459,18 @@
       "value": "Previous recent conferences"
     }
   ],
+  "discover__continueListeningNext": [
+    {
+      "type": 0,
+      "value": "Next continue listening"
+    }
+  ],
+  "discover__continueListeningPrevious": [
+    {
+      "type": 0,
+      "value": "Previous continue listening"
+    }
+  ],
   "discover__featuredTeachingsNext": [
     {
       "type": 0,
@@ -1571,6 +1583,12 @@
     {
       "type": 0,
       "value": "最近の大会・総会"
+    }
+  ],
+  "discover_continueListeningHeading": [
+    {
+      "type": 0,
+      "value": "Continue Listening"
     }
   ],
   "discover_featuredTeachingsHeading": [
@@ -4477,12 +4495,6 @@
     {
       "type": 0,
       "value": "による説教"
-    }
-  ],
-  "presentersListAll__all": [
-    {
-      "type": 0,
-      "value": "全て"
     }
   ],
   "presentersListAll__listEnd": [

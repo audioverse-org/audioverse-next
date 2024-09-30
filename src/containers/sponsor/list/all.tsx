@@ -1,15 +1,13 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { useIntl } from 'react-intl';
 
-import { fetchApi } from '~lib/api/fetchApi';
 import useOnScreen from '~lib/hooks/useOnScreen';
 import { useLanguageId } from '~lib/useLanguageId';
 import { Maybe } from '~src/__generated__/graphql';
 
 import {
-	GetSponsorListAllPageDataDocument,
 	GetSponsorListAllPageDataQuery,
+	useInfiniteGetSponsorListAllPageDataQuery,
 } from './__generated__/all';
 import Sponsors, { SponsorsProps } from './list';
 
@@ -21,29 +19,32 @@ export default function AllSponsors(props: Props) {
 	const hasReachedEnd = useOnScreen(endRef);
 	const language = useLanguageId();
 
-	const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery(
-		['sponsors'],
-		({ pageParam = null }) =>
-			fetchApi(GetSponsorListAllPageDataDocument, {
-				variables: {
-					language,
-					after: pageParam,
+	const { data, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } =
+		useInfiniteGetSponsorListAllPageDataQuery(
+			'after',
+			{ language },
+			{
+				getNextPageParam: (lastPage: Maybe<GetSponsorListAllPageDataQuery>) => {
+					const pageInfo = lastPage?.sponsors.pageInfo;
+					if (!pageInfo?.hasNextPage) return;
+					return { language, after: pageInfo.endCursor };
 				},
-			}),
-		{
-			getNextPageParam: (lastPage: Maybe<GetSponsorListAllPageDataQuery>) =>
-				lastPage?.sponsors.pageInfo.hasNextPage
-					? lastPage.sponsors.pageInfo.endCursor
-					: undefined,
-		}
-	);
+			}
+		);
 
 	useEffect(() => {
 		if (!hasNextPage) return;
 		if (!hasReachedEnd) return;
 		if (isLoading) return;
+		if (isFetchingNextPage) return;
 		fetchNextPage();
-	}, [hasNextPage, hasReachedEnd, fetchNextPage, isLoading]);
+	}, [
+		hasNextPage,
+		hasReachedEnd,
+		fetchNextPage,
+		isLoading,
+		isFetchingNextPage,
+	]);
 
 	const sponsors = data?.pages.flatMap((p) => p?.sponsors.nodes || []) || [];
 

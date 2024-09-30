@@ -1,4 +1,4 @@
-query getSponsorListAllPageData($language: Language!, $after: String) {
+query getSponsorListAllPageData($language: Language!, $after: String = null) {
 	sponsors(
 		language: $language
 		orderBy: [{ field: TITLE, direction: ASC }]

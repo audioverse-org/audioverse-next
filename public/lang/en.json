@@ -690,6 +690,12 @@
   "discover__conferencesPrevious": {
     "string": "Previous recent conferences"
   },
+  "discover__continueListeningNext": {
+    "string": "Next continue listening"
+  },
+  "discover__continueListeningPrevious": {
+    "string": "Previous continue listening"
+  },
   "discover__featuredTeachingsNext": {
     "string": "Next featured teachings"
   },
@@ -746,6 +752,9 @@
   },
   "discover_conferencesHeading": {
     "string": "Recent Conferences"
+  },
+  "discover_continueListeningHeading": {
+    "string": "Continue Listening"
   },
   "discover_featuredTeachingsHeading": {
     "string": "Featured Teachings"
@@ -2144,9 +2153,6 @@
   },
   "presentersFeed__title": {
     "string": "Sermons by {name}"
-  },
-  "presentersListAll__all": {
-    "string": "All"
   },
   "presentersListAll__listEnd": {
     "string": "No more presenters"

@@ -7,12 +7,7 @@ import Presenters, { PresentersProps } from './list';
 export type { PresentersProps } from './list';
 
 function Letter(props: PresentersProps) {
-	return (
-		<Presenters
-			{...props}
-			title={props.persons[0].surname.substring(0, 1).toUpperCase()}
-		/>
-	);
+	return <Presenters {...props} />;
 }
 
 export default withFailStates(Letter, {
