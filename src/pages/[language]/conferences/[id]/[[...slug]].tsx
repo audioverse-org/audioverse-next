@@ -44,8 +44,6 @@ export async function getStaticProps({
 			collection,
 			title: collection?.title,
 			canonicalUrl: collection?.canonicalUrl,
-			endCursor: collection?.recordings.pageInfo.endCursor ?? null,
-			hasNextPage: collection?.recordings.pageInfo.hasNextPage ?? false,
 		},
 		revalidate: REVALIDATE,
 	};
