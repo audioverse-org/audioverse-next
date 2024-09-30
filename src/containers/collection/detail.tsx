@@ -32,7 +32,7 @@ import styles from './detail.module.scss';
 
 const PAGE_SIZE = 20;
 
-export type CollectionDetailProps = GetCollectionDetailPageDataQuery& {
+export type CollectionDetailProps = GetCollectionDetailPageDataQuery & {
 	endCursor: string | null;
 	hasNextPage: boolean;
 };
