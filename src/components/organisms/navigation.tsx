@@ -6,7 +6,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading3 from '~components/atoms/heading3';
 import Heading6 from '~components/atoms/heading6';
-import { useGetWithAuthGuardDataQuery } from '~components/HOCs/__generated__/withAuthGuard';
 import Button from '~components/molecules/button';
 import DownloadAppButton from '~components/molecules/downloadAppButton';
 import LanguageButton from '~components/molecules/languageButton';
@@ -21,6 +20,7 @@ import IconUser from '~public/img/icons/fa-user-heavy.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import IconExit from '~public/img/icons/icon-exit.svg';
 import { BaseColors } from '~src/lib/constants';
+import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 
 import { analytics } from '../../lib/analytics';
 import IconButton from '../molecules/iconButton';
@@ -62,14 +62,7 @@ const Navigation = ({
 		}
 	}, [router.asPath, sessionToken]);
 
-	const authResult = useGetWithAuthGuardDataQuery(
-		{},
-		{
-			enabled: !!sessionToken,
-			retry: false,
-		}
-	);
-	const user = authResult.data?.me?.user;
+	const { user } = useIsAuthenticated();
 
 	const navigationItems = useNavigationItems();
 	const submenuItem = navigationItems.find(

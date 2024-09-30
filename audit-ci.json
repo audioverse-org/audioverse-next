@@ -16,17 +16,19 @@
 		"GHSA-hjrf-2m68-5959", // Dev CI
 		"GHSA-prr3-c3m5-p7q2", // Not used at runtime
 		"GHSA-67hx-6x53-jw92", // Not used at runtime
-		"GHSA-grv7-fg5c-xmjg", // Still needed: monitor for updates
-		"GHSA-rv95-896h-c2vc", // @lhci/cli, not runtime
-		"GHSA-fr5h-rqp8-mj6g", // Vercel-hosted apps unaffected
-		"GHSA-3h5v-q93c-6h6q", // @lhci/cli, not runtime
-		"GHSA-952p-6rrq-rcjv", // Not runtime (Lighthouse CI)
-		"GHSA-9wv6-86v2-598j", // Lighthouse CI
-		"GHSA-qwcr-r2fm-qrc7", // Lighthouse CI, monitored
-		"GHSA-qw6h-vgh9-j6wx", // Lighthouse CI
-		"GHSA-m6fv-jmcg-4jfg", // Lighthouse CI, duplicate removed
-		"GHSA-cm22-4g7w-348p", // Lighthouse CI
-		"GHSA-gp8f-8m3g-qvj9",
-		"GHSA-gcx4-mw62-g8wm"
+		"GHSA-hhhv-q57g-882q", // Not used at runtime
+		"GHSA-ghr5-ch3p-vcr6", // Not used at runtime because this is only used via a rollup plugin
+		"GHSA-rv95-896h-c2vc", // Not used at runtime because this is only used via @lhci/cli
+		"GHSA-fr5h-rqp8-mj6g", // Does not apply to Vercel-hosted applications
+		"GHSA-grv7-fg5c-xmjg", // Not used at runtime
+		"GHSA-3h5v-q93c-6h6q", // Not used at runtime and is related to @lhci/cli
+		"GHSA-952p-6rrq-rcjv", // Not used at runtime
+		"GHSA-9wv6-86v2-598j", // Used by lighthouse CI, not at runtime
+		"GHSA-qwcr-r2fm-qrc7", // Used by lighthouse CI, not at runtime
+		"GHSA-qw6h-vgh9-j6wx", // Used by lighthouse CI, not at runtime
+		"GHSA-m6fv-jmcg-4jfg", // Used by lighthouse CI, not at runtime
+		"GHSA-m6fv-jmcg-4jfg", // Used by lighthouse CI, not at runtime
+		"GHSA-cm22-4g7w-348p", // Used by lighthouse CI, not at runtime
+		"GHSA-gp8f-8m3g-qvj9" // Deployments on Vercel are not affected
 	]
 }
