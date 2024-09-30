@@ -1,20 +1,15 @@
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import InherentSizeImage from '~components/atoms/inherentSizeImage';
-import LineHeading from '~components/atoms/lineHeading';
 import withFailStates from '~components/HOCs/withFailStates';
-import Button from '~components/molecules/button';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
-import CardRecording from '~components/molecules/card/recording';
-import CardSequence from '~components/molecules/card/sequence';
-import CardGroup from '~components/molecules/cardGroup';
 import CollectionTypeLockup from '~components/molecules/collectionTypeLockup';
 import DefinitionList, {
 	IDefinitionListTerm,
@@ -27,15 +22,12 @@ import { formatDateRange } from '~lib/date';
 import root from '~lib/routes';
 import { useFormattedDuration } from '~lib/time';
 import useLanguageRoute from '~lib/useLanguageRoute';
-import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
-import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
-import CardPerson from '~src/components/molecules/card/person';
+import ConferencePresenters from '~src/components/organisms/cardSlider/section/conferencePresenters';
+import ConferenceSeries from '~src/components/organisms/cardSlider/section/conferenceSeries';
+import ConferenceTeachings from '~src/components/organisms/cardSlider/section/conferenceTeachings';
 import { Must } from '~src/types/types';
 
-import {
-	GetCollectionDetailPageDataQuery,
-	useInfiniteGetCollectionDetailPageDataQuery,
-} from './__generated__/detail';
+import { GetCollectionDetailPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
 const PAGE_SIZE = 20;
@@ -48,10 +40,6 @@ export type CollectionDetailProps = GetCollectionDetailPageDataQuery & {
 function CollectionDetail({
 	collection,
 }: Must<CollectionDetailProps>): JSX.Element {
-	const [after, setAfter] = useState<string>('');
-	const [recordings, setRecordings] = React.useState<CardRecordingFragment[]>(
-		[]
-	);
 	const intl = useIntl();
 	const lang = useLanguageRoute();
 	const altPath = `/${lang}/conferences/${collection.id}/presenters/`;
@@ -72,48 +60,10 @@ function CollectionDetail({
 		shareUrl,
 		sponsor,
 		sequences,
-		persons,
 		recordings: rec,
 	} = collection;
 
-	const loadMoreTriggerRef = useRef<HTMLDivElement | null>(null);
-
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-		useInfiniteGetCollectionDetailPageDataQuery(
-			'after', // Key for pagination
-			{
-				collectionId: id,
-				first: PAGE_SIZE,
-				after,
-			},
-			{
-				getNextPageParam: (lastPage) =>
-					lastPage?.collection?.recordings?.pageInfo?.endCursor || null,
-			}
-		);
-
 	const formattedDuration = useFormattedDuration(duration);
-
-	useEffect(() => {
-		if (data) {
-			const newRecordings =
-				data.pages.flatMap((page) => page.collection?.recordings.nodes) ?? [];
-			const validRecordings = newRecordings.filter(
-				(recording): recording is CardRecordingFragment =>
-					recording !== null && recording !== undefined
-			);
-			setRecordings((prevRecordings) => {
-				const allRecordings = [...prevRecordings, ...validRecordings];
-
-				const uniqueRecordings = Array.from(
-					new Map(
-						allRecordings.map((recording) => [recording.id, recording])
-					).values()
-				);
-				return uniqueRecordings;
-			});
-		}
-	}, [data]);
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -147,37 +97,6 @@ function CollectionDetail({
 			definition: <div>{location}</div>,
 		});
 	}
-
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				if (entries[0].isIntersecting && !isFetchingNextPage && hasNextPage) {
-					const newAfter =
-						data?.pages[data.pages.length - 1]?.collection?.recordings?.pageInfo
-							?.endCursor || '';
-					setAfter(newAfter);
-					fetchNextPage();
-				}
-			},
-			{
-				root: null,
-				rootMargin: '0px',
-				threshold: 0.5, // Adjust the threshold as needed
-			}
-		);
-
-		const currentTriggerRef = loadMoreTriggerRef.current;
-
-		if (currentTriggerRef) {
-			observer.observe(currentTriggerRef);
-		}
-
-		return () => {
-			if (currentTriggerRef) {
-				observer.unobserve(currentTriggerRef);
-			}
-		};
-	}, [isFetchingNextPage, fetchNextPage, hasNextPage, data]);
 
 	return (
 		<>
@@ -264,92 +183,18 @@ function CollectionDetail({
 						<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
 					</div>
 				</div>
-				{sequences.nodes?.length ? (
-					<>
-						<LineHeading color={BaseColors.SALMON}>
-							<FormattedMessage
-								id="collectionDetail__seriesLabel"
-								defaultMessage="Series"
-								description="Collection Detail series label"
-							/>
-						</LineHeading>
-						<CardGroup className={styles.cardGroup}>
-							{sequences.nodes.map((sequence) => (
-								<CardSequence
-									sequence={sequence}
-									key={sequence.canonicalPath}
-								/>
-							))}
-						</CardGroup>
-						{sequences.pageInfo.hasNextPage && (
-							<Button
-								type="secondaryInverse"
-								href={root.lang(lang).conferences.id(id).sequences.get()}
-								text={intl.formatMessage({
-									id: 'collectionDetail__seriesAllLabel',
-									defaultMessage: 'See All Series',
-								})}
-								IconLeft={ForwardIcon}
-								className={styles.seeAllButton}
-							/>
-						)}
-					</>
-				) : null}
-				{persons.nodes?.length ? (
-					<>
-						<LineHeading color={BaseColors.SALMON}>
-							<FormattedMessage
-								id="collectionDetail__presentersLabel"
-								defaultMessage="Presenters"
-								description="Collection Detail speakers label"
-							/>
-						</LineHeading>
-						<CardGroup className={styles.cardGroup}>
-							{persons.nodes.map((person) => (
-								<CardPerson
-									person={person}
-									largeinit={true}
-									key={person.canonicalPath}
-									altPath={altPath + person.id}
-								/>
-							))}
-						</CardGroup>
-						{persons.pageInfo.hasNextPage && (
-							<Button
-								type="secondaryInverse"
-								href={root.lang(lang).conferences.id(id).presenters.get()}
-								text={intl.formatMessage({
-									id: 'collectionDetail__presentersAllLabel',
-									defaultMessage: 'See All Presenters',
-								})}
-								IconLeft={ForwardIcon}
-								className={styles.seeAllButton}
-							/>
-						)}
-					</>
-				) : null}
-				{recordings?.length ? (
-					<>
-						<LineHeading color={BaseColors.SALMON}>
-							<FormattedMessage
-								id="collectionDetail__teachingsLabel"
-								defaultMessage="Individual Teachings"
-								description="Collection Detail teachings label"
-							/>
-						</LineHeading>
-						<CardGroup className={styles.cardGroup}>
-							{recordings?.map((recording) => (
-								<CardRecording
-									recording={recording}
-									key={recording?.id}
-									fullBleed
-								/>
-							))}
-						</CardGroup>
-					</>
-				) : null}
+
+				<ConferenceSeries collectionId={collection.id + ''} isDarkBg />
+
+				<ConferencePresenters
+					collectionId={collection.id + ''}
+					altPath={altPath}
+					altSeeAll={root.lang(lang).conferences.id(id).presenters.get()}
+					isDarkBg
+				/>
+
+				<ConferenceTeachings collectionId={collection.id + ''} isDarkBg />
 			</Tease>
-			<div ref={loadMoreTriggerRef}></div>
 		</>
 	);
 }

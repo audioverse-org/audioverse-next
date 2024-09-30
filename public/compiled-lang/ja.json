@@ -1111,35 +1111,11 @@
       "value": "現在地"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Presenters"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
       "value": "count"
     },
-    {
-      "type": 0,
-      "value": "シリーズ"
-    }
-  ],
-  "collectionDetail__seriesAllLabel": [
-    {
-      "type": 0,
-      "value": "全てのシリーズを表示"
-    }
-  ],
-  "collectionDetail__seriesLabel": [
     {
       "type": 0,
       "value": "シリーズ"
@@ -1163,12 +1139,6 @@
     {
       "type": 0,
       "value": "個"
-    }
-  ],
-  "collectionDetail__teachingsLabel": [
-    {
-      "type": 0,
-      "value": "レッスンの個々のセクション"
     }
   ],
   "collectionPresenterssDetail__heading": [
@@ -3989,6 +3959,42 @@
     {
       "type": 0,
       "value": "主催者"
+    }
+  ],
+  "organismSection_SeriesHeading": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "organismSection_SeriesNext": [
+    {
+      "type": 0,
+      "value": "Next Series"
+    }
+  ],
+  "organismSection_SeriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Series"
+    }
+  ],
+  "organismSection_TeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Teachings"
+    }
+  ],
+  "organismSection_TeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next Teachings"
+    }
+  ],
+  "organismSection_TeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Teachings"
     }
   ],
   "organismSection__audiobooksHeading": [

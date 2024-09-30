@@ -476,19 +476,8 @@
     "comment": "Etiqueta de contagem de sequência detalhada da coleção",
     "string": "{contagem} séries"
   },
-  "collectionDetail__seriesAllLabel": {
-    "string": "Ver todas as séries"
-  },
-  "collectionDetail__seriesLabel": {
-    "comment": "Rótulo da série detalhe de coleção",
-    "string": "Séries"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "Patrocinador"
-  },
-  "collectionDetail__teachingsLabel": {
-    "comment": "Rótulo de ensinamentos detalhado da coleção",
-    "string": "Ensinamentos individuais"
   },
   "collectionPresenterssDetail__heading": {
     "string": "Todos Oradores"
@@ -2738,11 +2727,22 @@
     "comment": "Collection Detail teachings count label",
     "string": "{contagem} ensinamentos"
   },
-  "collectionDetail__presentersAllLabel": {
-    "string": "See All Presenters"
+  "organismSection_SeriesHeading": {
+    "string": "Series"
   },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Presenters"
+  "organismSection_SeriesNext": {
+    "string": "Next Series"
+  },
+  "organismSection_SeriesPrevious": {
+    "string": "Previous Series"
+  },
+  "organismSection_TeachingsHeading": {
+    "string": "Teachings"
+  },
+  "organismSection_TeachingsNext": {
+    "string": "Next Teachings"
+  },
+  "organismSection_TeachingsPrevious": {
+    "string": "Previous Teachings"
   }
 }

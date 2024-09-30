@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import CardSlider from '~components/organisms/cardSlider';
+import { BaseColors } from '~src/lib/constants';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import {
 	GraphqlInfiniteQuery,
@@ -39,6 +40,8 @@ type SectionProps<T, N> = {
 	rows?: number;
 	minCardWidth?: number;
 	seeAllUrl?: string;
+	isDarkBg?: boolean;
+	hasBg?: boolean;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
 	selectPageInfo?: PageInfoSelector<
 		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>,
@@ -71,6 +74,8 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	selectPageInfo = defaultSelectPageInfo,
 	Card,
 	seeAllUrl,
+	isDarkBg,
+	hasBg,
 	...props
 }: SectionProps<T, N>): JSX.Element {
 	const language = useLanguageId();
@@ -118,18 +123,27 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	if (cards.length < 1) {
 		return <></>;
 	}
-
+	const color = isDarkBg ? BaseColors.SALMON : BaseColors.RED;
 	return (
 		<div className={styles.section}>
-			<LineHeading variant="overline" unpadded>
+			<LineHeading variant="overline" color={color} unpadded>
 				<span>{heading}</span>
 				{seeAllUrl && (
-					<a className={styles.seeAll} href={seeAllUrl}>
+					<a
+						className={isDarkBg ? styles.seeAlldbg : styles.seeAll}
+						href={seeAllUrl}
+					>
 						<FormattedMessage id="discover__seeAll" defaultMessage="See All" />
 					</a>
 				)}
 			</LineHeading>
-			<CardSlider {...props} onIndexChange={preload} items={cards} />
+			<CardSlider
+				{...props}
+				onIndexChange={preload}
+				items={cards}
+				isDarkBg={isDarkBg}
+				hasBg={hasBg}
+			/>
 		</div>
 	);
 }

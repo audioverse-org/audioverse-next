@@ -152,19 +152,8 @@
     "comment": "Collection Detail sequence count label",
     "string": "{count}シリーズ"
   },
-  "collectionDetail__seriesAllLabel": {
-    "string": "全てのシリーズを表示"
-  },
-  "collectionDetail__seriesLabel": {
-    "comment": "Collection Detail series label",
-    "string": "シリーズ"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "主催者"
-  },
-  "collectionDetail__teachingsLabel": {
-    "comment": "Collection Detail teachings label",
-    "string": "レッスンの個々のセクション"
   },
   "collectionPresenterssDetail__heading": {
     "string": "全てのスピーカー"
@@ -2738,11 +2727,22 @@
     "comment": "Collection Detail teachings count label",
     "string": "レッスン{count}個"
   },
-  "collectionDetail__presentersAllLabel": {
-    "string": "See All Presenters"
+  "organismSection_SeriesHeading": {
+    "string": "Series"
   },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Presenters"
+  "organismSection_SeriesNext": {
+    "string": "Next Series"
+  },
+  "organismSection_SeriesPrevious": {
+    "string": "Previous Series"
+  },
+  "organismSection_TeachingsHeading": {
+    "string": "Teachings"
+  },
+  "organismSection_TeachingsNext": {
+    "string": "Next Teachings"
+  },
+  "organismSection_TeachingsPrevious": {
+    "string": "Previous Teachings"
   }
 }

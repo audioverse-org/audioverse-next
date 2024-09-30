@@ -152,19 +152,8 @@
     "comment": "Collection Detail sequence count label",
     "string": "{count} Семинар"
   },
-  "collectionDetail__seriesAllLabel": {
-    "string": "Смотреть все части"
-  },
-  "collectionDetail__seriesLabel": {
-    "comment": "Collection Detail series label",
-    "string": "Семинары"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "Организатор"
-  },
-  "collectionDetail__teachingsLabel": {
-    "comment": "Collection Detail teachings label",
-    "string": "Отдельные темы"
   },
   "collectionPresenterssDetail__heading": {
     "string": "Все проповедники"
@@ -2738,11 +2727,22 @@
     "comment": "Collection Detail teachings count label",
     "string": "{count} темы"
   },
-  "collectionDetail__presentersAllLabel": {
-    "string": "See All Presenters"
+  "organismSection_SeriesHeading": {
+    "string": "Series"
   },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Presenters"
+  "organismSection_SeriesNext": {
+    "string": "Next Series"
+  },
+  "organismSection_SeriesPrevious": {
+    "string": "Previous Series"
+  },
+  "organismSection_TeachingsHeading": {
+    "string": "Teachings"
+  },
+  "organismSection_TeachingsNext": {
+    "string": "Next Teachings"
+  },
+  "organismSection_TeachingsPrevious": {
+    "string": "Previous Teachings"
   }
 }

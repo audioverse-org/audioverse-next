@@ -1,0 +1,25 @@
+query getSectionConferenceTeachings(
+	$language: Language!
+	$collectionId: ID!
+	$first: Int! = 30
+	$after: String = null
+) {
+	recordings(
+		collectionId: $collectionId
+		language: $language
+		first: $first
+		after: $after
+		orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardRecording
+		}
+		pageInfo {
+			endCursor
+			hasNextPage
+		}
+	}
+}

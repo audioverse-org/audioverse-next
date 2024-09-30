@@ -1115,18 +1115,6 @@
       "value": "Ubicación"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Presenters"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1135,18 +1123,6 @@
     {
       "type": 0,
       "value": " series"
-    }
-  ],
-  "collectionDetail__seriesAllLabel": [
-    {
-      "type": 0,
-      "value": "Ver todas las series"
-    }
-  ],
-  "collectionDetail__seriesLabel": [
-    {
-      "type": 0,
-      "value": "Serie"
     }
   ],
   "collectionDetail__sponsorLabel": [
@@ -1163,12 +1139,6 @@
     {
       "type": 0,
       "value": " lecciones"
-    }
-  ],
-  "collectionDetail__teachingsLabel": [
-    {
-      "type": 0,
-      "value": "Lecciones individuales"
     }
   ],
   "collectionPresenterssDetail__heading": [
@@ -3997,6 +3967,42 @@
     {
       "type": 0,
       "value": "Patrocinador"
+    }
+  ],
+  "organismSection_SeriesHeading": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "organismSection_SeriesNext": [
+    {
+      "type": 0,
+      "value": "Next Series"
+    }
+  ],
+  "organismSection_SeriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Series"
+    }
+  ],
+  "organismSection_TeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Teachings"
+    }
+  ],
+  "organismSection_TeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next Teachings"
+    }
+  ],
+  "organismSection_TeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Teachings"
     }
   ],
   "organismSection__audiobooksHeading": [

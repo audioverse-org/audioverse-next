@@ -1099,18 +1099,6 @@
       "value": "位置"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Presenters"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1119,18 +1107,6 @@
     {
       "type": 0,
       "value": "个系列"
-    }
-  ],
-  "collectionDetail__seriesAllLabel": [
-    {
-      "type": 0,
-      "value": "查看所有系列"
-    }
-  ],
-  "collectionDetail__seriesLabel": [
-    {
-      "type": 0,
-      "value": "系列"
     }
   ],
   "collectionDetail__sponsorLabel": [
@@ -1147,12 +1123,6 @@
     {
       "type": 0,
       "value": "篇证道"
-    }
-  ],
-  "collectionDetail__teachingsLabel": [
-    {
-      "type": 0,
-      "value": "个别证道"
     }
   ],
   "collectionPresenterssDetail__heading": [
@@ -3997,6 +3967,42 @@
     {
       "type": 0,
       "value": "赞助者"
+    }
+  ],
+  "organismSection_SeriesHeading": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "organismSection_SeriesNext": [
+    {
+      "type": 0,
+      "value": "Next Series"
+    }
+  ],
+  "organismSection_SeriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Series"
+    }
+  ],
+  "organismSection_TeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Teachings"
+    }
+  ],
+  "organismSection_TeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next Teachings"
+    }
+  ],
+  "organismSection_TeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Teachings"
     }
   ],
   "organismSection__audiobooksHeading": [
