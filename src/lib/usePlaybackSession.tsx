@@ -84,7 +84,6 @@ export default function usePlaybackSession(
 			id: recording?.id || 0,
 		},
 		{
-			queryKey: ['playback-progress', recording?.id || 0],
 			enabled: shouldLoadPlaybackProgress,
 		},
 	);
