@@ -16,6 +16,7 @@ export default function Series(props: {
 	heading?: string | JSX.Element;
 	collectionId: string;
 	isDarkBg?: boolean;
+	altPath?: string;
 }): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageId();
@@ -27,6 +28,7 @@ export default function Series(props: {
 		}),
 		collectionId,
 		isDarkBg,
+		altPath,
 	} = props;
 
 	const infiniteQuery = (
@@ -56,7 +58,11 @@ export default function Series(props: {
 			})}
 			seeAllUrl={root.lang(lang).conferences.id(collectionId).sequences.get()}
 			Card={(s: { node: CardSequenceFragment }) => (
-				<CardSequence sequence={s.node} key={s.node.canonicalPath} />
+				<CardSequence
+					sequence={s.node}
+					key={s.node.canonicalPath}
+					altPath={altPath}
+				/>
 			)}
 			isDarkBg={isDarkBg}
 		/>

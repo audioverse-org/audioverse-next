@@ -16,6 +16,7 @@ export default function Teachings(props: {
 	heading?: string | JSX.Element;
 	collectionId: string;
 	isDarkBg?: boolean;
+	altPath?: string;
 }): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageId();
@@ -27,6 +28,7 @@ export default function Teachings(props: {
 		}),
 		collectionId,
 		isDarkBg,
+		altPath,
 	} = props;
 
 	const infiniteQuery = (
@@ -59,6 +61,7 @@ export default function Teachings(props: {
 					recording={t.node}
 					key={t.node.canonicalPath}
 					fullBleed
+					altPath={altPath}
 				/>
 			)}
 			isDarkBg={isDarkBg}

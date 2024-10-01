@@ -36,12 +36,14 @@ interface CardCollectionProps {
 	sequence: CardSequenceFragment;
 	recordings?: CardRecordingFragment[] | null;
 	egw?: boolean;
+	altPath?: string;
 }
 
 export default function CardSequence({
 	sequence,
 	recordings,
 	egw,
+	altPath,
 }: CardCollectionProps): JSX.Element {
 	const [ref, isHovered] = useHover<HTMLButtonElement>();
 	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
@@ -203,6 +205,7 @@ export default function CardSequence({
 									isLinked
 									isOptionalLink
 									small
+									altPath={altPath}
 								/>
 							))}
 							{persons.length > 2 && (

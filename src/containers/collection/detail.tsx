@@ -181,7 +181,11 @@ function CollectionDetail({
 					</div>
 				</div>
 
-				<ConferenceSeries collectionId={collection.id + ''} isDarkBg />
+				<ConferenceSeries
+					collectionId={collection.id + ''}
+					altPath={altPath}
+					isDarkBg
+				/>
 
 				<ConferencePresenters
 					collectionId={collection.id + ''}
@@ -190,7 +194,11 @@ function CollectionDetail({
 					isDarkBg
 				/>
 
-				<ConferenceTeachings collectionId={collection.id + ''} isDarkBg />
+				<ConferenceTeachings
+					collectionId={collection.id + ''}
+					altPath={altPath}
+					isDarkBg
+				/>
 			</Tease>
 		</>
 	);
