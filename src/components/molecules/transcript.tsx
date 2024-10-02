@@ -18,6 +18,7 @@ export default function Transcript({
 	const __html = isManuallyCreatedTranscript
 		? text
 		: text
+				.replace(/^\n+/, '')
 				.split('\n')
 				.map((paragraph) => `<p>${paragraph}</p>`)
 				.join('');
