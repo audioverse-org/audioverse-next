@@ -24,10 +24,10 @@
 			var(--max-outset) - var(--arrow-full-width),
 			var(--arrow-full-width)
 		);
-		--slider-full-width: calc(
-			100% + var(--arrow-outset) * 2 + var(--slide-padding) * 2
-		);
-		--slide-shift: calc(-1 * (var(--arrow-outset) + var(--slide-padding)));
+		// --slider-full-width: calc(
+		// 	100% + var(--arrow-outset) * 2 + var(--slide-padding) * 2
+		// );
+		// --slide-shift: calc(-1 * (var(--arrow-outset) + var(--slide-padding)));
 	}
 
 	display: flex;
