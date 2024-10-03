@@ -9,6 +9,12 @@ jobs:
       checks: read
       pull-requests: write
     steps:
+      - uses: actions/checkout@v4
+        name: Checkout configuration file
+        with:
+          sparse-checkout: |
+            pa11y-ci.json
+          sparse-checkout-cone-mode: false
       - uses: narthur/pa11y-ratchet@v2
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -18,6 +24,7 @@ jobs:
           include: 'https?:\/\/[\w\.-]+\/en\/'
           # Ignore contrast-related errors for now
           ignore: WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail,WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail
+          config-path: pa11y-ci.json
   lighthouse:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
