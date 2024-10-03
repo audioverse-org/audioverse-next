@@ -37,7 +37,7 @@ export default function Teachings(props: {
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		return useInfiniteGetSectionConferenceTeachingsQuery(pageParamKey, {
 			language: lang,
-			first: 30,
+			first: 36,
 			collectionId,
 		});
 	};

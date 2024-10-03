@@ -47,7 +47,6 @@ export default function Presenters(props: {
 	return (
 		<Section
 			rows={2}
-			minCardWidth={250}
 			infiniteQuery={infiniteQuery}
 			heading={heading}
 			previous={intl.formatMessage({

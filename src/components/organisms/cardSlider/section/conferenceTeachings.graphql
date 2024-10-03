@@ -1,7 +1,7 @@
 query getSectionConferenceTeachings(
 	$language: Language!
 	$collectionId: ID!
-	$first: Int! = 30
+	$first: Int! = 36
 	$after: String = null
 ) {
 	recordings(

@@ -45,7 +45,6 @@ export default function Series(props: {
 	return (
 		<Section
 			rows={1}
-			minCardWidth={250}
 			infiniteQuery={infiniteQuery}
 			heading={heading}
 			previous={intl.formatMessage({
