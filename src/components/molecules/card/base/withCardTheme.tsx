@@ -44,7 +44,7 @@ export default function WithCardTheme({
 				styles.base,
 				styles[theme],
 				fullBleed && styles.fullBleed,
-				className
+				className,
 			)}
 		>
 			{children}

@@ -32,7 +32,7 @@ export async function getStaticProps({
 				id: 'blog__title',
 				defaultMessage: 'All Blog Posts',
 			}),
-		})
+		}),
 	);
 }
 
@@ -40,6 +40,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'blog',
 		getBlogPathsData,
-		(d) => d.blogPosts.aggregate?.count
+		(d) => d.blogPosts.aggregate?.count,
 	);
 }

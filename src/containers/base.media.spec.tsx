@@ -121,7 +121,7 @@ const Page = ({
 const renderApp = async (
 	includePlayer: boolean,
 	recording: Partial<RecordingFragment>,
-	container: any = undefined
+	container: any = undefined,
 ) => {
 	__loadRouter({
 		pathname: '/[language]/discover',
@@ -134,7 +134,7 @@ const renderApp = async (
 			Component={Page as any}
 			pageProps={{ includePlayer, recording } as any}
 		/>,
-		{ container }
+		{ container },
 	);
 
 	await __awaitIntlMessages();
@@ -360,7 +360,7 @@ describe('app media playback', () => {
 			expect.anything(),
 			expect.objectContaining({
 				sources: [{ src: 'video_source_src' }],
-			})
+			}),
 		);
 	});
 });

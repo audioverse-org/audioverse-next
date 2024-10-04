@@ -25,7 +25,7 @@ const makeSlides = (
 	items: JSX.Element[],
 	rows: number,
 	minItemWidth: number,
-	width?: number
+	width?: number,
 ): JSX.Element[] => {
 	if (!width) return [];
 
@@ -37,7 +37,7 @@ const makeSlides = (
 			acc[setIndex] = [...(acc[setIndex] || []), item];
 			return acc;
 		},
-		[[]]
+		[[]],
 	);
 
 	return itemSets.map((itemSet, i) => (
@@ -62,7 +62,7 @@ export default function Slider({
 
 	const slides = useMemo(
 		() => makeSlides(items, rows, minCardWidth, width),
-		[items, rows, minCardWidth, width]
+		[items, rows, minCardWidth, width],
 	);
 
 	const handlers = useMemo(() => {
@@ -85,7 +85,7 @@ export default function Slider({
 					onIndexChange?.({
 						index: swiper.realIndex,
 						total: swiper.slides.length,
-					})
+					}),
 				);
 			},
 			slidesLengthChange: (swiper: Swiper) => {
@@ -95,7 +95,7 @@ export default function Slider({
 					onIndexChange?.({
 						index: swiper.realIndex,
 						total: swiper.slides.length,
-					})
+					}),
 				);
 			},
 			resize: (swiper: Swiper) => {

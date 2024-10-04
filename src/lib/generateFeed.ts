@@ -31,7 +31,7 @@ export async function generateFeed(
 		subtitle?: string;
 		image?: string;
 	},
-	recordings: GenerateFeedFragment[]
+	recordings: GenerateFeedFragment[],
 ): Promise<string> {
 	const intl = await getIntl(languageRoute);
 
@@ -49,7 +49,7 @@ export async function generateFeed(
 			},
 			{
 				year: new Date().getFullYear(),
-			}
+			},
 		),
 		namespaces: {
 			'xmlns:itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd',
@@ -137,13 +137,13 @@ export async function generateFeed(
 						? intl.formatMessage({
 								id: 'generateFeed__video',
 								defaultMessage: 'Video',
-						  })
+							})
 						: intl.formatMessage({
 								id: 'generateFeed__audio',
 								defaultMessage: 'Audio',
-						  }),
+							}),
 					bitrate: file.bitrate,
-				}
+				},
 			),
 			'itunes:author': author,
 			'itunes:summary': description

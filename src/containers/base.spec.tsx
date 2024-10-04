@@ -29,20 +29,25 @@ describe('app', () => {
 		const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
 
 		expect(heads).toEqual(
-			expect.arrayContaining([expect.stringContaining('AudioVerse')])
+			expect.arrayContaining([expect.stringContaining('AudioVerse')]),
 		);
 	});
 
 	it('rehydrates react-query', async () => {
 		const queryClient = new QueryClient();
 
-		await queryClient.prefetchQuery(['myQuery'], async () => 'myResult');
+		await queryClient.prefetchQuery({
+			queryKey: ['myQuery'],
+			queryFn: async () => 'myResult',
+		});
 
 		let initial: any;
 
 		await renderApp(
 			() => {
-				const { data: myQuery } = useQuery(['myQuery'], jest.fn());
+				const { data: myQuery } = useQuery({
+					queryKey: ['myQuery'],
+				});
 
 				if (initial === undefined) {
 					initial = myQuery === undefined ? 'undefined' : myQuery;
@@ -50,7 +55,7 @@ describe('app', () => {
 			},
 			{
 				dehydratedState: dehydrate(queryClient),
-			}
+			},
 		);
 
 		expect(initial).toEqual('myResult');
@@ -80,7 +85,7 @@ describe('app', () => {
 		expect(heads).toEqual(
 			expect.arrayContaining([
 				expect.stringContaining(`the_prop_title | AudioVerse`),
-			])
+			]),
 		);
 	});
 });

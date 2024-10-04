@@ -119,7 +119,7 @@ describe('sermon detail page', () => {
 					language: 'ENGLISH',
 					first: DETAIL_PRERENDER_LIMIT,
 				},
-			})
+			}),
 		);
 	});
 
@@ -134,7 +134,7 @@ describe('sermon detail page', () => {
 					language: 'SPANISH',
 					first: DETAIL_PRERENDER_LIMIT,
 				},
-			})
+			}),
 		);
 	});
 
@@ -181,7 +181,7 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText } = await renderWithProviders(
 			<SermonDetail recording={null} />,
-			undefined
+			undefined,
 		);
 
 		expect(getByLabelText('Loading…')).toBeInTheDocument();
@@ -238,7 +238,7 @@ describe('sermon detail page', () => {
 			expect.anything(),
 			expect.objectContaining({
 				poster: expect.anything(),
-			})
+			}),
 		);
 	});
 
@@ -269,7 +269,7 @@ describe('sermon detail page', () => {
 						type: 'audio_mimetype',
 					},
 				],
-			])
+			]),
 		);
 	});
 
@@ -303,7 +303,7 @@ describe('sermon detail page', () => {
 						type: 'video_mimetype',
 					},
 				],
-			])
+			]),
 		);
 	});
 
@@ -335,7 +335,7 @@ describe('sermon detail page', () => {
 						type: 'audio_mimetype',
 					},
 				],
-			])
+			]),
 		);
 	});
 
@@ -581,8 +581,8 @@ describe('sermon detail page', () => {
 		await waitFor(() =>
 			expect(fetchApi).toBeCalledWith(
 				GetSermonDetailDataDocument,
-				expect.anything()
-			)
+				expect.anything(),
+			),
 		);
 
 		expect(getByText('sibling_title')).toBeInTheDocument();
@@ -614,7 +614,9 @@ describe('sermon detail page', () => {
 		await userEvent.click(screen.getByText('Read Transcript'));
 
 		expect(
-			await screen.findByText('This transcript may be automatically generated.')
+			await screen.findByText(
+				'This transcript may be automatically generated.',
+			),
 		).toBeInTheDocument();
 	});
 
@@ -657,7 +659,7 @@ describe('sermon detail page', () => {
 		await userEvent.click(getByLabelText('share'));
 
 		expect((getByText('Copy Link') as HTMLAnchorElement).href).toContain(
-			'the_share_url'
+			'the_share_url',
 		);
 	});
 
@@ -705,7 +707,7 @@ describe('sermon detail page', () => {
 		const input = getByText('Audio Embed Code').nextSibling as HTMLInputElement;
 
 		expect(input.value).toContain(
-			'https://www.audioverse.org/english/embed/media/the_sermon_id'
+			'https://www.audioverse.org/english/embed/media/the_sermon_id',
 		);
 	});
 
@@ -1121,7 +1123,7 @@ describe('sermon detail page', () => {
 		await act(async () => {
 			ReactTestUtils.Simulate.timeUpdate(
 				result.getByTestId('video-element'),
-				{} as any
+				{} as any,
 			);
 		});
 
@@ -1271,7 +1273,7 @@ describe('sermon detail page', () => {
 
 		expect(link).toHaveAttribute(
 			'href',
-			expect.stringContaining('/series_path')
+			expect.stringContaining('/series_path'),
 		);
 	});
 
@@ -1305,7 +1307,7 @@ describe('sermon detail page', () => {
 
 		expect(link).toHaveAttribute(
 			'href',
-			expect.stringContaining('/conference_path')
+			expect.stringContaining('/conference_path'),
 		);
 	});
 

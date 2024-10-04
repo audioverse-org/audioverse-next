@@ -30,7 +30,9 @@ const NewPlaylist: React.FC<NewPlaylistProps> = ({ id, onClose }) => {
 				},
 			});
 			if (data.playlistAdd) {
-				await queryClient.invalidateQueries(['getLibraryPlaylistsData']);
+				await queryClient.invalidateQueries({
+					queryKey: ['getLibraryPlaylistsData'],
+				});
 				onClose();
 			}
 		} catch (error) {

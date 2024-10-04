@@ -15,7 +15,7 @@ export type IAppFeature = {
 
 export function getAppFeatures(
 	languageRoute: string,
-	intl: IntlShape
+	intl: IntlShape,
 ): IAppFeature[] {
 	return [
 		{

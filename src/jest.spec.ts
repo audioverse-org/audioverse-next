@@ -31,7 +31,7 @@ describe('jest and helpers', () => {
 				'id',
 				expect.objectContaining({
 					k: 'v',
-				})
+				}),
 			)
 			.mockReturnValue(true);
 
@@ -39,7 +39,7 @@ describe('jest and helpers', () => {
 		expect(
 			fn('id', {
 				k: 'v',
-			})
+			}),
 		).toBeTruthy();
 	});
 
@@ -58,7 +58,7 @@ describe('jest and helpers', () => {
 		expect(
 			fn('id', {
 				k: 'v',
-			})
+			}),
 		).toBeTruthy();
 	});
 

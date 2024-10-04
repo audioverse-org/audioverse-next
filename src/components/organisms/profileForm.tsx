@@ -81,7 +81,7 @@ export default function ProfileForm(): JSX.Element {
 		});
 	}
 
-	const { isLoading, mutate: deleteAccountMutate } = useDeleteAccountMutation({
+	const { isPending, mutate: deleteAccountMutate } = useDeleteAccountMutation({
 		onSuccess: async () => {
 			clearSessionToken();
 			resetUserQueries(queryClient);
@@ -203,7 +203,7 @@ export default function ProfileForm(): JSX.Element {
 									defaultMessage="Delete account"
 								/>
 							}
-							disabled={isLoading}
+							disabled={isPending}
 						/>
 						<Button
 							onClick={() => setShowingDeleteConfirm(false)}
@@ -214,7 +214,7 @@ export default function ProfileForm(): JSX.Element {
 									defaultMessage="Never mind"
 								/>
 							}
-							disabled={isLoading}
+							disabled={isPending}
 						/>
 					</>
 				}

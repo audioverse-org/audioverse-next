@@ -32,7 +32,7 @@ export async function getStaticProps({
 				id: 'seriesList__title',
 				defaultMessage: 'All Series',
 			}),
-		})
+		}),
 	);
 }
 
@@ -40,6 +40,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'series',
 		getSeriesListPathsData,
-		(d) => d.serieses.aggregate?.count
+		(d) => d.serieses.aggregate?.count,
 	);
 }

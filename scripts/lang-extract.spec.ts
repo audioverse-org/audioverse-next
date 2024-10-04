@@ -52,7 +52,7 @@ describe('lang-extract', () => {
 
 		expect(fs.writeFileSync).toBeCalledWith(
 			expect.anything(),
-			expect.stringContaining('the_translated_string')
+			expect.stringContaining('the_translated_string'),
 		);
 	});
 
@@ -71,7 +71,7 @@ describe('lang-extract', () => {
 
 		expect(fs.writeFileSync).toBeCalledWith(
 			expect.anything(),
-			expect.stringContaining('the_translated_string2')
+			expect.stringContaining('the_translated_string2'),
 		);
 	});
 
@@ -112,7 +112,7 @@ describe('lang-extract', () => {
 
 		expect(fs.writeFileSync).toBeCalledWith(
 			expect.anything(),
-			expect.stringContaining('the_translated_string')
+			expect.stringContaining('the_translated_string'),
 		);
 	});
 

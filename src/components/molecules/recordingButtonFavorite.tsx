@@ -21,7 +21,7 @@ export default function RecordingButtonFavorite({
 }): JSX.Element {
 	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
 		id,
-		sequenceId
+		sequenceId,
 	);
 
 	return (

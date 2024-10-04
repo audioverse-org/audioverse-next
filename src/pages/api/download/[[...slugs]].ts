@@ -16,9 +16,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			sessionCookie
 				? `?${
 						req.query.logonly ? `logOnly=${req.query.logonly}&` : ''
-				  }${encryptedSessionTokenParameters(sessionCookie)}`
+					}${encryptedSessionTokenParameters(sessionCookie)}`
 				: ''
-		}`
+		}`,
 	);
 }
 

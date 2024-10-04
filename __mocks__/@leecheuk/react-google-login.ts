@@ -1,10 +1,10 @@
 import {
 	UseGoogleLoginProps,
 	UseGoogleLoginResponse,
-} from 'react-google-login';
+} from '@leecheuk/react-google-login';
 
 export function useGoogleLogin(
-	input: UseGoogleLoginProps
+	input: UseGoogleLoginProps,
 ): Partial<UseGoogleLoginResponse> {
 	return {
 		signIn: () => {

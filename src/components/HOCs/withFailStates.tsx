@@ -14,7 +14,7 @@ type WithFailStateOptions<P> = {
 
 const withFailStates = <P,>(
 	Component: React.ComponentType<Must<P>>,
-	options: WithFailStateOptions<P> = {}
+	options: WithFailStateOptions<P> = {},
 ): React.ComponentType<P> => {
 	const {
 		useShould404 = () => false,

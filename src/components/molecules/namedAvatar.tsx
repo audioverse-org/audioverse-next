@@ -47,7 +47,7 @@ export default function NamedAvatar({
 				className: clsx(
 					containerClasses,
 					styles.link,
-					hoverColor === BaseColors.SALMON && styles.linkSalmon
+					hoverColor === BaseColors.SALMON && styles.linkSalmon,
 				),
 			}}
 		>

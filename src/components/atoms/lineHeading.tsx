@@ -31,7 +31,7 @@ export default function LineHeading({
 				color === BaseColors.SALMON && styles.salmon,
 				small && styles.small,
 				unpadded && baseStyles.unpadded,
-				styles[variant]
+				styles[variant],
 			)}
 		>
 			{children}

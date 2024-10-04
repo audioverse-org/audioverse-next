@@ -27,7 +27,9 @@
 	z-index: 1;
 	padding-top: 24px;
 	padding-bottom: 14px;
-	transition: $transition-quick padding-top, $transition-quick padding-bottom;
+	transition:
+		$transition-quick padding-top,
+		$transition-quick padding-bottom;
 
 	> :first-child {
 		margin-right: 16px;

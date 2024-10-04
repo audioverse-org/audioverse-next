@@ -18,12 +18,12 @@ export const GlobalModalsContext = React.createContext<GlobalModalsContextType>(
 	{
 		challengeAuth: () => undefined,
 		confirmRemoveFavorite: () => void 0,
-	}
+	},
 );
 
 const LazyModal = dynamic(() => import('../organisms/modal'));
 const LazyModalRegisterForm = dynamic(
-	() => import('../organisms/modalRegisterForm')
+	() => import('../organisms/modalRegisterForm'),
 );
 const LazyModalLoginForm = dynamic(() => import('../organisms/modalLoginForm'));
 
@@ -40,10 +40,10 @@ export default function AndGlobalModals({
 		'auth' | 'confirmRemoveFavorite'
 	>('auth');
 	const [onConfirm, setOnConfirm] = useState<undefined | (() => unknown)>(
-		undefined
+		undefined,
 	);
 	const [authState, setAuthState] = useState<'intro' | 'register' | 'login'>(
-		'intro'
+		'intro',
 	);
 
 	const handleClose = () => {

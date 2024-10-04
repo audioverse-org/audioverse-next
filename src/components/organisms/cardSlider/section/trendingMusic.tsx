@@ -7,7 +7,10 @@ import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import Section from '.';
-import { useInfiniteGetSectionTrendingMusicQuery } from './__generated__/trendingMusic';
+import {
+	GetSectionTrendingMusicQuery,
+	useInfiniteGetSectionTrendingMusicQuery,
+} from './__generated__/trendingMusic';
 
 export default function TrendingMusic(): JSX.Element {
 	const route = useLanguageRoute();
@@ -29,7 +32,11 @@ export default function TrendingMusic(): JSX.Element {
 				defaultMessage: 'Next trending scripture songs',
 			})}
 			seeAllUrl={root.lang(route).songs.albums.get()}
-			selectNodes={(p) => p?.trendingMusic.nodes?.map((n) => n.recording)}
+			selectNodes={(p) =>
+				(p as GetSectionTrendingMusicQuery)?.trendingMusic.nodes?.map(
+					(n) => n.recording,
+				)
+			}
 			Card={(p: { node: CardRecordingFragment }) => (
 				<CardRecording recording={p.node} />
 			)}

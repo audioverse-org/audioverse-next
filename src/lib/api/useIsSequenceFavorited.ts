@@ -16,14 +16,14 @@ interface IUseIsSequenceFavoritedResult extends IUseIsFavoritedResult {
 }
 
 export function useIsSequenceFavorited(
-	id: Scalars['ID']['output']
+	id: Scalars['ID']['output'],
 ): IUseIsSequenceFavoritedResult {
 	const queryClient = useQueryClient();
 	const { data } = useSequenceIsFavoritedQuery(
 		{ id },
 		{
 			enabled: !!getSessionToken(),
-		}
+		},
 	);
 	const generatedQueryKey = ['sequenceIsFavorited', { id }];
 
@@ -38,7 +38,7 @@ export function useIsSequenceFavorited(
 		[
 			[RECORDING_FAVORITED_QUERY_KEY_PREFIX, { sequenceId: id }],
 			generatedQueryKey,
-		]
+		],
 	);
 	const playbackCompletedPercentage =
 		data?.sequence?.viewerPlaybackCompletedPercentage || 0;

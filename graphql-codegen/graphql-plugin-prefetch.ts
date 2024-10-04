@@ -22,7 +22,9 @@ type Vars = {
 	[K in Key]?: Parameters<typeof fns[K]>[0];
 };
 
-const options = { cacheTime: 24 * 60 * 60 * 1000 };
+const options = {
+    cacheTime: 24 * 60 * 60 * 1000,
+};
 
 async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) {
 	const r = await fns[k](v as any);
@@ -31,8 +33,17 @@ async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) 
 	const queryKey = hasVars ? [k, v] : [k];
 	const infiniteQueryKey = hasVars ? [\`\${k}.infinite\`, v] : [\`\${k}.infinite\`];
 
-	await client.prefetchQuery(queryKey, () => r, options);
-	await client.prefetchInfiniteQuery(infiniteQueryKey, () => r, options);
+    await client.prefetchQuery({
+        queryKey,
+        queryFn: () => r,
+        ...options
+    });
+    await client.prefetchInfiniteQuery({
+        queryKey: infiniteQueryKey,
+        queryFn: () => r,
+        initialPageParam: null,
+        ...options
+    });
 }
 
 export async function prefetchQueries(

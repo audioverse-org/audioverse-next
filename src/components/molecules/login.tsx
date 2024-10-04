@@ -21,7 +21,7 @@ export default function Login(): JSX.Element {
 							params: {
 								back: router.query.back,
 							},
-						})
+						}),
 					)
 				}
 			/>

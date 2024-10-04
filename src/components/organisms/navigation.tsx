@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import { Router, useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading3 from '~components/atoms/heading3';
 import Heading6 from '~components/atoms/heading6';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import Button from '~components/molecules/button';
 import DownloadAppButton from '~components/molecules/downloadAppButton';
 import LanguageButton from '~components/molecules/languageButton';
@@ -66,7 +66,7 @@ const Navigation = ({
 
 	const navigationItems = useNavigationItems();
 	const submenuItem = navigationItems.find(
-		({ key }: INavigationItem) => submenu === key
+		({ key }: INavigationItem) => submenu === key,
 	);
 
 	return (
@@ -247,8 +247,8 @@ const Navigation = ({
 													</Link>
 												)}
 											</li>
-										)
-								  )
+										),
+									)
 								: null}
 							{submenuItem?.childNode}
 						</ul>

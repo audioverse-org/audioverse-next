@@ -8,7 +8,7 @@ export type GraphqlInfiniteQuery<T = any, V = any> = (
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	pageParamKey: any,
 	variables: V,
-	options?: UseInfiniteQueryOptions<T, unknown, T>
+	options?: UseInfiniteQueryOptions<T, unknown, T>,
 ) => UseInfiniteQueryResult<T, unknown>;
 
 export type InferGraphqlInfiniteQueryType<T> = T extends GraphqlInfiniteQuery
@@ -16,7 +16,7 @@ export type InferGraphqlInfiniteQueryType<T> = T extends GraphqlInfiniteQuery
 			infer T,
 			unknown,
 			unknown
-	  >
+		>
 		? T
 		: never
 	: never;

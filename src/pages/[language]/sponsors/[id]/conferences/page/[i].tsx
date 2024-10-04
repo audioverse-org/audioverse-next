@@ -38,9 +38,9 @@ export async function getStaticProps({
 				},
 				{
 					sponsorName: d?.sponsor?.title,
-				}
+				},
 			),
-		})
+		}),
 	);
 }
 
@@ -48,6 +48,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSponsorConferencesPathsData,
 		(d) => d.sponsors.nodes,
-		(l, n) => `/${l}/sponsors/${n.id}/conferences/page/1`
+		(l, n) => `/${l}/sponsors/${n.id}/conferences/page/1`,
 	);
 }

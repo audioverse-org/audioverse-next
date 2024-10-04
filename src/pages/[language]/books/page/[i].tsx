@@ -35,7 +35,7 @@ export async function getStaticProps({
 				id: 'books__title',
 				defaultMessage: 'Books',
 			}),
-		})
+		}),
 	);
 }
 
@@ -43,6 +43,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'books',
 		getAudiobookListPathsData,
-		(d) => d.audiobooks.aggregate?.count
+		(d) => d.audiobooks.aggregate?.count,
 	);
 }

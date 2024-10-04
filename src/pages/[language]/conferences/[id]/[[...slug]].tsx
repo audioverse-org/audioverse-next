@@ -27,7 +27,7 @@ export async function getStaticProps({
 	const { collection } = await getCollectionDetailPageData({ id }).catch(
 		() => ({
 			collection: null,
-		})
+		}),
 	);
 	if (
 		collection?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
@@ -51,6 +51,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getCollectionDetailPathsData,
 		(d) => d.collections.nodes,
-		(l, { canonicalPath }) => canonicalPath
+		(l, { canonicalPath }) => canonicalPath,
 	);
 }

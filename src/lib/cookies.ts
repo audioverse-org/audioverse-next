@@ -6,13 +6,13 @@ const SESSION_KEY = 'avSession';
 const LANGUAGE_KEY = 'lang';
 
 export function getSessionToken(
-	req: IncomingMessage | null = null
+	req: IncomingMessage | null = null,
 ): string | undefined {
 	return getCookies(req)[SESSION_KEY];
 }
 
 export function getLanguageId(
-	req: IncomingMessage | null = null
+	req: IncomingMessage | null = null,
 ): string | undefined {
 	return getCookies(req)[LANGUAGE_KEY];
 }

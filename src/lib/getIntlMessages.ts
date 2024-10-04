@@ -3,7 +3,7 @@ import { ResolvedIntlConfig } from 'react-intl';
 import getLanguageByBaseUrl from '~lib/getLanguageByBaseUrl';
 
 export default function getIntlMessages(
-	languageRoute: string
+	languageRoute: string,
 ): Promise<ResolvedIntlConfig['messages']> {
 	const lang = getLanguageByBaseUrl(languageRoute, 'en');
 

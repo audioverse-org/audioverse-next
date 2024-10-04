@@ -4,7 +4,10 @@ import { useIntl } from 'react-intl';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 
-import { useInfiniteGetSectionContinueListeningQuery } from './__generated__/continueListening';
+import {
+	GetSectionContinueListeningQuery,
+	useInfiniteGetSectionContinueListeningQuery,
+} from './__generated__/continueListening';
 import Section from './index';
 
 export default function ContinueListening(): JSX.Element {
@@ -26,7 +29,9 @@ export default function ContinueListening(): JSX.Element {
 				defaultMessage: 'Next continue listening',
 			})}
 			selectNodes={(p) =>
-				p?.me?.user.continueListening.nodes?.map((n) => n.recording)
+				(
+					p as GetSectionContinueListeningQuery
+				)?.me?.user.continueListening.nodes?.map((n) => n.recording)
 			}
 			selectPageInfo={(p) => p?.me?.user.continueListening.pageInfo}
 			Card={(p: { node: CardRecordingFragment }) => (

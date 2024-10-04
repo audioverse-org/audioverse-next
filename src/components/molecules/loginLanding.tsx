@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import Link from '~components/atoms/linkWithoutPrefetch';
 import AndOnboarding from '~components/templates/andOnboarding';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';

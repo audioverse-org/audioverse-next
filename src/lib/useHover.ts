@@ -2,7 +2,7 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 
 export default function useHover<Element extends HTMLElement>(): [
 	RefObject<Element>,
-	boolean
+	boolean,
 ] {
 	const [value, setValue] = useState(false);
 	const ref = useRef<Element>(null);

@@ -41,7 +41,7 @@ export async function getServerSideProps({
 				title: collection.title,
 				image: collection.image?.url,
 			},
-			collection.recordings.nodes || []
+			collection.recordings.nodes || [],
 		);
 		res.write(feed);
 

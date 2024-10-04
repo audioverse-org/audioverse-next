@@ -11,7 +11,7 @@ export default function useRequireUser() {
 			}
 			callback();
 		},
-		[sessionToken]
+		[sessionToken],
 	);
 
 	return requireUser;

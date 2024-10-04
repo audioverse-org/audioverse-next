@@ -11,6 +11,6 @@ describe('cardSlider helpers', () => {
 		(width: number, rows: number, minItemWidth: number, expected: number) => {
 			const r = calculateItemsPerPage(width, rows, minItemWidth);
 			expect(r).toEqual(expected);
-		}
+		},
 	);
 });

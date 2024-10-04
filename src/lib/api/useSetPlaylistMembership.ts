@@ -12,28 +12,27 @@ interface MutateVariables {
 type ReturnType = (
 	recordingId: Scalars['ID']['output'],
 	playlistId: Scalars['ID']['output'],
-	add: boolean
+	add: boolean,
 ) => void;
 
 export function useSetPlaylistMembership(
-	cacheKey: QueryKey | undefined = undefined
+	cacheKey: QueryKey | undefined = undefined,
 ): ReturnType {
 	const queryClient = useQueryClient();
-	const { mutate } = useMutation(
-		(variables: MutateVariables): Promise<boolean> => {
+	const { mutate } = useMutation({
+		mutationFn: (variables: MutateVariables): Promise<boolean> => {
 			const { recordingId, playlistId, add } = variables;
 			return setPlaylistMembership(recordingId, playlistId, add);
 		},
-		{
-			onSettled: async () => {
-				await queryClient.invalidateQueries(cacheKey);
-			},
-		}
-	);
+
+		onSettled: async () => {
+			await queryClient.invalidateQueries({ queryKey: cacheKey });
+		},
+	});
 
 	return (
 		recordingId: Scalars['ID']['output'],
 		playlistId: Scalars['ID']['output'],
-		add: boolean
+		add: boolean,
 	) => mutate({ recordingId, playlistId, add });
 }

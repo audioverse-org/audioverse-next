@@ -63,7 +63,7 @@ const recentTeachingsDefaults = {
 
 const loadRecentTeachings = buildLoader<GetSectionRecentTeachingsQuery>(
 	GetSectionRecentTeachingsDocument,
-	recentTeachingsDefaults
+	recentTeachingsDefaults,
 );
 
 const loadTrendingTeachings = buildLoader<GetSectionTrendingTeachingsQuery>(
@@ -82,7 +82,7 @@ const loadTrendingTeachings = buildLoader<GetSectionTrendingTeachingsQuery>(
 			],
 			...base,
 		},
-	}
+	},
 );
 
 const loadFeaturedTeachings = buildLoader<GetSectionFeaturedTeachingsQuery>(
@@ -99,7 +99,7 @@ const loadFeaturedTeachings = buildLoader<GetSectionFeaturedTeachingsQuery>(
 			],
 			...base,
 		},
-	}
+	},
 );
 
 const loadStorySeasons = buildLoader<GetSectionStorySeasonsQuery>(
@@ -126,7 +126,7 @@ const loadStorySeasons = buildLoader<GetSectionStorySeasonsQuery>(
 			],
 			...base,
 		},
-	}
+	},
 );
 
 const loadConferences = buildLoader<GetSectionConferencesQuery>(
@@ -157,7 +157,7 @@ const loadConferences = buildLoader<GetSectionConferencesQuery>(
 			],
 			...base,
 		},
-	}
+	},
 );
 
 const loadBlogPosts = buildLoader<GetSectionBlogPostsQuery>(
@@ -178,7 +178,7 @@ const loadBlogPosts = buildLoader<GetSectionBlogPostsQuery>(
 			],
 			...base,
 		},
-	}
+	},
 );
 
 const loadData = () => {

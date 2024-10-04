@@ -9,7 +9,7 @@ const API_URL =
 async function getResponse(
 	headers: HeadersInit,
 	query: string,
-	variables: unknown
+	variables: unknown,
 ) {
 	return fetch(API_URL, {
 		method: 'POST',
@@ -23,7 +23,7 @@ async function getResponse(
 
 export async function fetchApi<TData>(
 	query: string,
-	{ variables = {} } = {}
+	{ variables = {} } = {},
 ): Promise<TData> {
 	const headers: HeadersInit = {
 		'Content-Type': 'application/json',

@@ -7,16 +7,5 @@ export default function makeQueryClient() {
 				retry: false,
 			},
 		},
-		logger: {
-			log: () => {
-				// noop
-			},
-			warn: () => {
-				// noop
-			},
-			error: () => {
-				// noop
-			},
-		},
 	});
 }

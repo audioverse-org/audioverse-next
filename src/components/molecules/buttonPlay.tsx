@@ -52,12 +52,12 @@ export default function ButtonPlay({
 				id: 'playButton__playLabel',
 				defaultMessage: 'play',
 				description: 'play button play label',
-		  })
+			})
 		: intl.formatMessage({
 				id: 'playButton__pauseLabel',
 				defaultMessage: 'pause',
 				description: 'play button pause label',
-		  });
+			});
 
 	return (
 		<IconButton
@@ -67,8 +67,8 @@ export default function ButtonPlay({
 						? IconPlayLarge
 						: IconPlay
 					: large
-					? IconPauseLarge
-					: IconPause
+						? IconPauseLarge
+						: IconPause
 			}
 			onClick={() => (isPaused ? play() : pause())}
 			color={
@@ -77,8 +77,8 @@ export default function ButtonPlay({
 						? BaseColors.SALMON
 						: BaseColors.RED
 					: isBackgroundColorDark(backgroundColor)
-					? BaseColors.WHITE
-					: BaseColors.DARK
+						? BaseColors.WHITE
+						: BaseColors.DARK
 			}
 			backgroundColor={backgroundColor}
 			className={clsx(styles.base, large && styles.large, className)}

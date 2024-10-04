@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -6,6 +5,7 @@ import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import RoundImage from '~components/atoms/roundImage';
 import withFailStates from '~components/HOCs/withFailStates';
 import Button from '~components/molecules/button';

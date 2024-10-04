@@ -41,6 +41,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getMediaReleaseFormsPathsData,
 		(d) => d.mediaReleaseForms.nodes,
-		(l, { id }) => root.lang(l).releases.id(id).get()
+		(l, { id }) => root.lang(l).releases.id(id).get(),
 	);
 }

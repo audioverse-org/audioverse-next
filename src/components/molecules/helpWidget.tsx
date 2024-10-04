@@ -28,7 +28,7 @@ export default function HelpWidget(): JSX.Element {
 			}
 			return (window.Beacon as any)(...p);
 		},
-		[didLoad]
+		[didLoad],
 	);
 	/* eslint-enable @typescript-eslint/no-explicit-any */
 
@@ -53,7 +53,7 @@ export default function HelpWidget(): JSX.Element {
 				...acc,
 				[k]: v?.toString() || 'undefined',
 			}),
-			{}
+			{},
 		);
 
 		doBeacon('session-data', sessionData);

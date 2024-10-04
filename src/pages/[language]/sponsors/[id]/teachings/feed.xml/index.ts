@@ -43,17 +43,17 @@ export async function getServerSideProps({
 						id: 'sponsorTeachingsFeed__title',
 						defaultMessage: 'Sermons by {name}',
 					},
-					{ name: sponsor.title }
+					{ name: sponsor.title },
 				),
 				description: intl.formatMessage(
 					{
 						id: 'sponsorTeachingsFeed__description',
 						defaultMessage: 'The latest recordings from {title} at AudioVerse',
 					},
-					{ title: sponsor.title }
+					{ title: sponsor.title },
 				),
 			},
-			sponsor.recordings.nodes || []
+			sponsor.recordings.nodes || [],
 		);
 		res.write(feed);
 

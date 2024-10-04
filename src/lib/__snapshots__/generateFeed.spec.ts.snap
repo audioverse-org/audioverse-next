@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`generateFeed matches handles no recordings 1`] = `
-"<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
-<rss version=\\"2.0\\" xmlns:itunes=\\"http://www.itunes.com/dtds/podcast-1.0.dtd\\" xmlns:googleplay=\\"http://www.google.com/schemas/play-podcasts/1.0\\">
+"<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
     <channel>
         <title>GYC 2019: By Many Or By Few</title>
         <link>https://www.audioverse.org/en/conferences/378/gyc-2019-by-many-or-by-few.html</link>
@@ -18,16 +18,16 @@ exports[`generateFeed matches handles no recordings 1`] = `
             <itunes:name>AudioVerse</itunes:name>
             <itunes:email>contact@audioverse.org</itunes:email>
         </itunes:owner>
-        <itunes:category text=\\"Religion &amp; Spirituality\\">
-            <itunes:category text=\\"Christianity\\"/>
+        <itunes:category text="Religion &amp; Spirituality">
+            <itunes:category text="Christianity"/>
         </itunes:category>
     </channel>
 </rss>"
 `;
 
 exports[`generateFeed matches prior conference feed 1`] = `
-"<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
-<rss version=\\"2.0\\" xmlns:itunes=\\"http://www.itunes.com/dtds/podcast-1.0.dtd\\" xmlns:googleplay=\\"http://www.google.com/schemas/play-podcasts/1.0\\">
+"<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
     <channel>
         <title>GYC 2019: By Many Or By Few</title>
         <link>https://www.audioverse.org/en/conferences/378/gyc-2019-by-many-or-by-few.html</link>
@@ -44,14 +44,14 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <itunes:name>AudioVerse</itunes:name>
             <itunes:email>contact@audioverse.org</itunes:email>
         </itunes:owner>
-        <itunes:category text=\\"Religion &amp; Spirituality\\">
-            <itunes:category text=\\"Christianity\\"/>
+        <itunes:category text="Religion &amp; Spirituality">
+            <itunes:category text="Christianity"/>
         </itunes:category>
         <item>
             <title><![CDATA[Dean Cullinane: A Thousand Shall Run]]></title>
             <guid>21136-73420</guid>
             <pubDate>Mon, 03 Feb 2020 06:51:59 GMT</pubDate>
-            <enclosure length=\\"20729713\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73420/2020/01/21136/20200101-1800-21136-8060b7b0508e04cdb832225bf2c426a1-64k.mp3\\"/>
+            <enclosure length="20729713" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73420/2020/01/21136/20200101-1800-21136-8060b7b0508e04cdb832225bf2c426a1-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Dean Cullinane</itunes:author>
             <itunes:summary>1 Sam 14:6 tells of Jonathan’s brave foray against the camp of the Philistines. Was this really faith? Or was it presumption? How can we be sure of the difference between the two, and what significance might this have for God’s last day church?</itunes:summary>
@@ -61,7 +61,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sikhu Daco: Elkanah and Hannah]]></title>
             <guid>21137-73185</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:40 GMT</pubDate>
-            <enclosure length=\\"20295624\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73185/2020/01/21137/20200102-0700-21137-e92fa3e2c08cfb1c85e5ad3dccf5c881-64k.mp3\\"/>
+            <enclosure length="20295624" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73185/2020/01/21137/20200102-0700-21137-e92fa3e2c08cfb1c85e5ad3dccf5c881-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sikhu Daco</itunes:author>
             <itunes:summary/>
@@ -71,7 +71,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter: The Life of Sabbath School]]></title>
             <guid>21170-73256</guid>
             <pubDate>Mon, 03 Feb 2020 06:48:10 GMT</pubDate>
-            <enclosure length=\\"28288896\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73256/2020/01/21170/20200102-0915-21170-5d3e1b5139e2248f65947f47bbd7f6b5-64k.mp3\\"/>
+            <enclosure length="28288896" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73256/2020/01/21170/20200102-0915-21170-5d3e1b5139e2248f65947f47bbd7f6b5-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter</itunes:author>
             <itunes:summary>Discover the purpose of Sabbath School, why it may be weak in some churches, and learn some principles to bring it back to its original goal.</itunes:summary>
@@ -81,7 +81,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Kyle Allen: Mission, Miracles, and You]]></title>
             <guid>21191-73171</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:21 GMT</pubDate>
-            <enclosure length=\\"30407519\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73171/2020/01/21191/20200102-0915-21191-731fb639a626b7566bdf2c2129ae93cf-64k.mp3\\"/>
+            <enclosure length="30407519" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73171/2020/01/21191/20200102-0915-21191-731fb639a626b7566bdf2c2129ae93cf-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Kyle Allen</itunes:author>
             <itunes:summary>Do you want to be inspired by current miracle stories from around the world? Join us to hear how God is reaching assassins, rebels, prisoners, closed countries, and those in the hardest-to-reach places on the planet! Do you also want to learn how you can be an evangelist from the palm of your hand? Join us to learn how to use your cell phone and social media to reach your friends, coworkers and others all over the world. Come and gain practical tools that will help you take the gospel to the world in this generation!</itunes:summary>
@@ -91,7 +91,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Anil Kanda: Abraham and the Heathen: Does God Actually Listen to the Prayers of Hindus, Buddhists and Muslims?]]></title>
             <guid>21138-73188</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:45 GMT</pubDate>
-            <enclosure length=\\"28681018\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73188/2020/01/21138/20200102-0930-21138-97ff5b1f64ce4b5826f7c928d293ac27-64k.mp3\\"/>
+            <enclosure length="28681018" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73188/2020/01/21138/20200102-0930-21138-97ff5b1f64ce4b5826f7c928d293ac27-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Anil Kanda</itunes:author>
             <itunes:summary>Tackle the big ideas of God, sex, relationships, the gospel and how to do life well! Grasp inspirational and relevant lessons from the incredible story of Abraham. These practical presentations will combine the most up-to-date Biblical and apologetic research o many hot topics in the world and church today.</itunes:summary>
@@ -101,7 +101,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sebastien Braxton, Jesse Zwiker: Are You Entrepreneurial Material?]]></title>
             <guid>21142-73193</guid>
             <pubDate>Mon, 03 Feb 2020 06:48:46 GMT</pubDate>
-            <enclosure length=\\"32689846\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73193/2020/01/21142/20200102-0930-21142-ae567a108959e303b2265e3154e02398-64k.mp3\\"/>
+            <enclosure length="32689846" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73193/2020/01/21142/20200102-0930-21142-ae567a108959e303b2265e3154e02398-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sebastien Braxton, Jesse Zwiker</itunes:author>
             <itunes:summary>Join Sebastien and Jesse on an in-depth, hands-on, and practical dive into Christian entrepreneurship. Explore why business is important to God, if you are entrepreneurial material, how to get started with no money and how to share the gospel through your business.</itunes:summary>
@@ -111,7 +111,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Jay Gallimore: Be Done with Fear]]></title>
             <guid>21146-73198</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:11 GMT</pubDate>
-            <enclosure length=\\"27966207\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73198/2020/01/21146/20200102-0930-21146-d7bbc940e74cab07b9a4f298762a96a4-64k.mp3\\"/>
+            <enclosure length="27966207" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73198/2020/01/21146/20200102-0930-21146-d7bbc940e74cab07b9a4f298762a96a4-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Jay Gallimore</itunes:author>
             <itunes:summary>Learn how to take a sledge hammer to Satan’s kingdom and build up the walls of Zion! Faith, rightly understood, will change your life from boring to amazing, from feebleness to power, and from failure to triumph! Paul Ratsara, who faced the guns of kidnappers and the crocodiles of the Congo, with nothing but faith, will join Jay Gallimore in this powerful life-changing seminar. They want young Christians to have great influence, to go up against Babylon and rescue multitudes of Satan’s victims. If put this seminar into practice, it will change your life and the world around you!</itunes:summary>
@@ -121,7 +121,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Michael Hasel: How to Interpret Scripture: How did we get Here? Tracing the Origin of the Bible in History]]></title>
             <guid>21150-73750</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:31 GMT</pubDate>
-            <enclosure length=\\"29226156\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73750/2020/01/21150/20200102-0930-21150-c6e155d63d7e9686c2cf15e07f48e0af-64k.mp3\\"/>
+            <enclosure length="29226156" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73750/2020/01/21150/20200102-0930-21150-c6e155d63d7e9686c2cf15e07f48e0af-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Michael Hasel</itunes:author>
             <itunes:summary>How do we face the crucial questions that confront us in society and culture? How do we interpret the Bible in the face of significant challenges in science, history and prophecy? What about the bigger issues facing our church? This seminar seeks to answer these crucial questions by pointing us back to basic principles of biblical interpretation that will guide our understanding of the living Word of God with the assurance that it is more relevant today than it has ever been.</itunes:summary>
@@ -131,7 +131,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Ben Martin, Brianna Martin: How to be a Match-Maker]]></title>
             <guid>21154-73208</guid>
             <pubDate>Mon, 03 Feb 2020 06:45:43 GMT</pubDate>
-            <enclosure length=\\"20485762\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73208/2020/01/21154/20200102-0930-21154-3e15e18bdced653e23cf98726e2470e6-64k.mp3\\"/>
+            <enclosure length="20485762" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73208/2020/01/21154/20200102-0930-21154-3e15e18bdced653e23cf98726e2470e6-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Ben Martin, Brianna Martin</itunes:author>
             <itunes:summary>Do you feel the need to become equipped as parents to be able to disciple your children? Join Ben and Brianna as they explore the different facets and challenges of Christian parenting. You’ll leave with actionable next-steps for your family discipleship plan.</itunes:summary>
@@ -141,7 +141,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Scott Ritsema: How to be Human Again]]></title>
             <guid>21158-73271</guid>
             <pubDate>Mon, 10 Feb 2020 03:45:31 GMT</pubDate>
-            <enclosure length=\\"30004158\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73271/2020/01/21158/20200102-0930-21158-f4ba434b994c20e322c5c99678ce918f-64k.mp3\\"/>
+            <enclosure length="30004158" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73271/2020/01/21158/20200102-0930-21158-f4ba434b994c20e322c5c99678ce918f-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Scott Ritsema</itunes:author>
             <itunes:summary>It goes without saying - media use is out of control and may be the single biggest stumbling block in spiritual, social and family life today. Which begs the question: what does the latest research say about the stranglehold of ‘big tech’ upon our lives and how to break free? What are the essential biblical principles for establishing a balanced use of technological tools? And how can we truly restore spirituality and relationships in the digital age?</itunes:summary>
@@ -151,7 +151,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[David Wright: Mission of the Word]]></title>
             <guid>21162-73266</guid>
             <pubDate>Mon, 03 Feb 2020 06:49:52 GMT</pubDate>
-            <enclosure length=\\"29224958\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73266/2020/01/21162/20200102-0930-21162-14212dcf7c930ebe1420954b65ed0590-64k.mp3\\"/>
+            <enclosure length="29224958" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73266/2020/01/21162/20200102-0930-21162-14212dcf7c930ebe1420954b65ed0590-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>David Wright</itunes:author>
             <itunes:summary>Explore ways that you, as young people, can really impact your local church, engage the community where you live, and work for God right where you are.</itunes:summary>
@@ -161,7 +161,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Clive Coutet, Charlene Coutet: Stop Playing Games]]></title>
             <guid>21166-73262</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:18 GMT</pubDate>
-            <enclosure length=\\"28409178\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73262/2020/01/21166/20200102-0930-21166-eb783b4da145c05fe07cbc7d9e0ce64d-64k.mp3\\"/>
+            <enclosure length="28409178" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73262/2020/01/21166/20200102-0930-21166-eb783b4da145c05fe07cbc7d9e0ce64d-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Clive Coutet, Charlene Coutet</itunes:author>
             <itunes:summary>Ever had questions about the whole ‘finding love’ thing? Like why is it so hard to find that someone? Am I doing something wrong? Will my heart ever heal from the pain I’ve experienced along the way? More than just finding that special someone, how do I love them right when I do find them? What is marriage really like anyway? How do I prepare for it and how do I survive its challenges? Clive and Charlene Coutet desire to share their hearts with you and give real, honest and practical answers to many of these questions.</itunes:summary>
@@ -171,7 +171,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Christian Martin: The Roots of Postmodern Logic]]></title>
             <guid>21174-73250</guid>
             <pubDate>Mon, 10 Feb 2020 03:45:57 GMT</pubDate>
-            <enclosure length=\\"30287961\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73250/2020/01/21174/20200102-0930-21174-6d9d780caf4887743a92b740dab7bc4a-64k.mp3\\"/>
+            <enclosure length="30287961" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73250/2020/01/21174/20200102-0930-21174-6d9d780caf4887743a92b740dab7bc4a-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Christian Martin</itunes:author>
             <itunes:summary>While there are growing churches in both urban and country settings, church-goers and students today are actually less likely to keep a Christian worldview than in the past. In fact, the greater part of our contemporary society today does not even believe in absolute truth. A modern-day disciple of Christ out of touch with this culture is like an uninformed missionary trying to teach in a foreign country. To share God’s Word effectively in the twenty-first century, soul-winners need to know how to connect with and confront a society of postmodern thinkers. In this seminar, Pastor Christian Martin shows how we can reach the present age with the everlasting gospel.</itunes:summary>
@@ -181,7 +181,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sam Walters: When I don’t Feel Like It]]></title>
             <guid>21178-73246</guid>
             <pubDate>Mon, 03 Feb 2020 06:46:29 GMT</pubDate>
-            <enclosure length=\\"30367542\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73246/2020/01/21178/20200102-0930-21178-23dd2e28a3ee128f6128688a038b1190-64k.mp3\\"/>
+            <enclosure length="30367542" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73246/2020/01/21178/20200102-0930-21178-23dd2e28a3ee128f6128688a038b1190-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sam Walters</itunes:author>
             <itunes:summary>Sam Walters will be unpacking what it means to live life evangelistically. Many times people live lives that are segregated into different sectors, where their spirituality does not necessarily permeate the rest of their lives. Discover how your relationship with God can become visible, audible and tangible to those around you, whether at your workplace, university, with family or whatever setting you find yourself in.</itunes:summary>
@@ -191,7 +191,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Amy Ratsara: Original Leadership]]></title>
             <guid>21192-73170</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:26 GMT</pubDate>
-            <enclosure length=\\"30006375\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73170/2020/01/21192/20200102-0930-21192-54815ba681134f3d467e13c8a4ca6921-64k.mp3\\"/>
+            <enclosure length="30006375" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73170/2020/01/21192/20200102-0930-21192-54815ba681134f3d467e13c8a4ca6921-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Amy Ratsara</itunes:author>
             <itunes:summary>Many feel overwhelmed by the thought of taking on a leadership position, often because of preconceived ideas of the type of skills required to fulfill the role. Yet, through studying scripture and seeking out illustrations in every day life, you will find out that anyone can be a leader because the best leaders are those that lead from who they are--their character. Come for inspiration on how to embrace being the type of leader God has created you to be in the spheres of influence he has placed you.</itunes:summary>
@@ -201,7 +201,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Chad Bernard: Walking Dead]]></title>
             <guid>21193-73169</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:30 GMT</pubDate>
-            <enclosure length=\\"26679484\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73169/2020/01/21193/20200102-0930-21193-3bf99d9b7476fa9f8d74ccb7322229ca-64k.mp3\\"/>
+            <enclosure length="26679484" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73169/2020/01/21193/20200102-0930-21193-3bf99d9b7476fa9f8d74ccb7322229ca-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Chad Bernard</itunes:author>
             <itunes:summary>Have you ever visited a church, school, restaurant, or store that was dead? They didn’t know they were dead, but you knew. How did you know? What influenced your thinking? In this seminar, we will be discussing what causes this death and how God can use you to bring it back to life again. Caution, this presentation will probably offend you or it might convict you. Either way, you will hear straight talk on this issue utilizing group discussions, stories, and principles learned over 20 years in ministry.</itunes:summary>
@@ -211,7 +211,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sam Walters: Drifting vs Driven]]></title>
             <guid>21179-73244</guid>
             <pubDate>Mon, 03 Feb 2020 06:46:33 GMT</pubDate>
-            <enclosure length=\\"28144612\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73244/2020/01/21179/20200102-0945-21179-3f59c58223f501e0d48cab4980149f6d-64k.mp3\\"/>
+            <enclosure length="28144612" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73244/2020/01/21179/20200102-0945-21179-3f59c58223f501e0d48cab4980149f6d-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sam Walters</itunes:author>
             <itunes:summary>Sam Walters will be unpacking what it means to live life evangelistically. Many times people live lives that are segregated into different sectors, where their spirituality does not necessarily permeate the rest of their lives. Discover how your relationship with God can become visible, audible and tangible to those around you, whether at your workplace, university, with family or whatever setting you find yourself in.</itunes:summary>
@@ -221,7 +221,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter: The Death of Sabbath School]]></title>
             <guid>21171-73255</guid>
             <pubDate>Mon, 03 Feb 2020 06:48:19 GMT</pubDate>
-            <enclosure length=\\"30153414\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73255/2020/01/21171/20200102-1000-21171-2ef1d72d1ca0a04c52b8bffe7cc75074-64k.mp3\\"/>
+            <enclosure length="30153414" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73255/2020/01/21171/20200102-1000-21171-2ef1d72d1ca0a04c52b8bffe7cc75074-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter</itunes:author>
             <itunes:summary>Discover the purpose of Sabbath School, why it may be weak in some churches, and learn some principles to bring it back to its original goal.</itunes:summary>
@@ -231,7 +231,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Anil Kanda: Romance and Courtship: Who has a Better Love Story?]]></title>
             <guid>21139-73189</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:52 GMT</pubDate>
-            <enclosure length=\\"26028346\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73189/2020/01/21139/20200102-1045-21139-733f06264035bb0efd7128a8f3bcfc15-64k.mp3\\"/>
+            <enclosure length="26028346" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73189/2020/01/21139/20200102-1045-21139-733f06264035bb0efd7128a8f3bcfc15-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Anil Kanda</itunes:author>
             <itunes:summary>Tackle the big ideas of God, sex, relationships, the gospel and how to do life well! Grasp inspirational and relevant lessons from the incredible story of Abraham. These practical presentations will combine the most up-to-date Biblical and apologetic research o many hot topics in the world and church today.</itunes:summary>
@@ -241,7 +241,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sebastien Braxton, Jesse Zwiker: Is your Idea Feasible?]]></title>
             <guid>21143-73194</guid>
             <pubDate>Mon, 03 Feb 2020 06:48:51 GMT</pubDate>
-            <enclosure length=\\"31869579\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73194/2020/01/21143/20200102-1045-21143-6485fb496f6d40c3bf02bfd3cc485e0e-64k.mp3\\"/>
+            <enclosure length="31869579" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73194/2020/01/21143/20200102-1045-21143-6485fb496f6d40c3bf02bfd3cc485e0e-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sebastien Braxton, Jesse Zwiker</itunes:author>
             <itunes:summary>Join Sebastien and Jesse on an in-depth, hands-on, and practical dive into Christian entrepreneurship. Explore why business is important to God, if you are entrepreneurial material, how to get started with no money and how to share the gospel through your business.</itunes:summary>
@@ -251,7 +251,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Jay Gallimore: Be Done With Doubt!]]></title>
             <guid>21147-73199</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:15 GMT</pubDate>
-            <enclosure length=\\"28797532\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73199/2020/01/21147/20200102-1045-21147-85e335df824b8300a06655bc5dcfd856-64k.mp3\\"/>
+            <enclosure length="28797532" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73199/2020/01/21147/20200102-1045-21147-85e335df824b8300a06655bc5dcfd856-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Jay Gallimore</itunes:author>
             <itunes:summary>Learn how to take a sledge hammer to Satan’s kingdom and build up the walls of Zion! Faith, rightly understood, will change your life from boring to amazing, from feebleness to power, and from failure to triumph! Paul Ratsara, who faced the guns of kidnappers and the crocodiles of the Congo, with nothing but faith, will join Jay Gallimore in this powerful life-changing seminar. They want young Christians to have great influence, to go up against Babylon and rescue multitudes of Satan’s victims. If put this seminar into practice, it will change your life and the world around you!</itunes:summary>
@@ -261,7 +261,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Ben Martin, Brianna Martin: How to be a Super Model]]></title>
             <guid>21155-73209</guid>
             <pubDate>Mon, 03 Feb 2020 06:45:49 GMT</pubDate>
-            <enclosure length=\\"28064825\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73209/2020/01/21155/20200102-1045-21155-31b80652e368daff51d59d11da3f727c-64k.mp3\\"/>
+            <enclosure length="28064825" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73209/2020/01/21155/20200102-1045-21155-31b80652e368daff51d59d11da3f727c-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Ben Martin, Brianna Martin</itunes:author>
             <itunes:summary>Do you feel the need to become equipped as parents to be able to disciple your children? Join Ben and Brianna as they explore the different facets and challenges of Christian parenting. You’ll leave with actionable next-steps for your family discipleship plan.</itunes:summary>
@@ -271,7 +271,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Scott Ritsema: Antisocial Media and Digital Pharmakeia]]></title>
             <guid>21159-73270</guid>
             <pubDate>Mon, 10 Feb 2020 03:45:36 GMT</pubDate>
-            <enclosure length=\\"28728374\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73270/2020/01/21159/20200102-1045-21159-4626f0c055d4d0f729b4b4571678b459-64k.mp3\\"/>
+            <enclosure length="28728374" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73270/2020/01/21159/20200102-1045-21159-4626f0c055d4d0f729b4b4571678b459-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Scott Ritsema</itunes:author>
             <itunes:summary>It goes without saying - media use is out of control and may be the single biggest stumbling block in spiritual, social and family life today. Which begs the question: what does the latest research say about the stranglehold of ‘big tech’ upon our lives and how to break free? What are the essential biblical principles for establishing a balanced use of technological tools? And how can we truly restore spirituality and relationships in the digital age?</itunes:summary>
@@ -281,7 +281,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[David Wright: Mission of Attendance and Involvement]]></title>
             <guid>21163-73264</guid>
             <pubDate>Mon, 03 Feb 2020 06:49:57 GMT</pubDate>
-            <enclosure length=\\"31025353\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73264/2020/01/21163/20200102-1045-21163-645cb83b6ce257965c1b85845f6681f6-64k.mp3\\"/>
+            <enclosure length="31025353" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73264/2020/01/21163/20200102-1045-21163-645cb83b6ce257965c1b85845f6681f6-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>David Wright</itunes:author>
             <itunes:summary>Explore ways that you, as young people, can really impact your local church, engage the community where you live, and work for God right where you are.</itunes:summary>
@@ -291,7 +291,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Charlene Coutet, Clive Coutet: The Gateway]]></title>
             <guid>21167-73260</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:23 GMT</pubDate>
-            <enclosure length=\\"29009562\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73260/2020/01/21167/20200102-1045-21167-da67466428eceeff91341833c0e4e375-64k.mp3\\"/>
+            <enclosure length="29009562" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73260/2020/01/21167/20200102-1045-21167-da67466428eceeff91341833c0e4e375-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Charlene Coutet, Clive Coutet</itunes:author>
             <itunes:summary>Ever had questions about the whole ‘finding love’ thing? Like why is it so hard to find that someone? Am I doing something wrong? Will my heart ever heal from the pain I’ve experienced along the way? More than just finding that special someone, how do I love them right when I do find them? What is marriage really like anyway? How do I prepare for it and how do I survive its challenges? Clive and Charlene Coutet desire to share their hearts with you and give real, honest and practical answers to many of these questions.</itunes:summary>
@@ -301,7 +301,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Christian Martin: The Postmodern way of Thinking and Modus Operandi]]></title>
             <guid>21175-73249</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:03 GMT</pubDate>
-            <enclosure length=\\"26032551\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73249/2020/01/21175/20200102-1045-21175-dfc2f1cbba3120028dec101bf34d3d59-64k.mp3\\"/>
+            <enclosure length="26032551" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73249/2020/01/21175/20200102-1045-21175-dfc2f1cbba3120028dec101bf34d3d59-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Christian Martin</itunes:author>
             <itunes:summary>While there are growing churches in both urban and country settings, church-goers and students today are actually less likely to keep a Christian worldview than in the past. In fact, the greater part of our contemporary society today does not even believe in absolute truth. A modern-day disciple of Christ out of touch with this culture is like an uninformed missionary trying to teach in a foreign country. To share God’s Word effectively in the twenty-first century, soul-winners need to know how to connect with and confront a society of postmodern thinkers. In this seminar, Pastor Christian Martin shows how we can reach the present age with the everlasting gospel.</itunes:summary>
@@ -311,7 +311,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Andrew Park: So... Should I take Time off for God?]]></title>
             <guid>21194-73168</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:35 GMT</pubDate>
-            <enclosure length=\\"24544938\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73168/2020/01/21194/20200102-1045-21194-465c5060c59b7efbd6fd72bd03f77893-64k.mp3\\"/>
+            <enclosure length="24544938" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73168/2020/01/21194/20200102-1045-21194-465c5060c59b7efbd6fd72bd03f77893-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Andrew Park</itunes:author>
             <itunes:summary>Okay, what’s this missions thing REALLY about? I don’t have time to postpone my life! What would I actually be doing? Is it worth it? Maybe these are all thoughts or questions you’ve had about taking time off for God. Whether just interested, or you’re seriously considering a decision along these lines, find answers as Andrew breaks down his one year in mission experience in Hong Kong. Hear about what actually happened, the lessons learned, and honest thoughts as you consider this potentially life-changing decision.</itunes:summary>
@@ -321,7 +321,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Kristyn Dolinsky, Ryan Dolinsky: Our Greatest Need: Testimony]]></title>
             <guid>21195-73167</guid>
             <pubDate>Mon, 03 Feb 2020 06:47:13 GMT</pubDate>
-            <enclosure length=\\"31109923\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73167/2020/01/21195/20200102-1045-21195-664e3941f5c4ab8f55a22258665f6f45-64k.mp3\\"/>
+            <enclosure length="31109923" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73167/2020/01/21195/20200102-1045-21195-664e3941f5c4ab8f55a22258665f6f45-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Kristyn Dolinsky, Ryan Dolinsky</itunes:author>
             <itunes:summary>Ryan and Kristyn share their testimony of how God reached them.</itunes:summary>
@@ -331,7 +331,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Dee Casper: Why I Don’t get the Gospel]]></title>
             <guid>21196-73166</guid>
             <pubDate>Mon, 03 Feb 2020 06:47:19 GMT</pubDate>
-            <enclosure length=\\"29905917\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73166/2020/01/21196/20200102-1045-21196-99590e83893c08bd7ddd6856e8cb098d-64k.mp3\\"/>
+            <enclosure length="29905917" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73166/2020/01/21196/20200102-1045-21196-99590e83893c08bd7ddd6856e8cb098d-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Dee Casper</itunes:author>
             <itunes:summary>It’s easy to assume that the message of Christ Our Righteousness is just a theological concept. But it’s actually a beautiful truth that is meant to transform every area of our lives. Spiritually, physically, and psychologically. This breakout session will show what God intended this most precious message to do in our daily life.</itunes:summary>
@@ -341,7 +341,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Anil Kanda: Sodom and Sexuality: God Created Sex!]]></title>
             <guid>21140-73190</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:57 GMT</pubDate>
-            <enclosure length=\\"28717885\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73190/2020/01/21140/20200102-1200-21140-3659cea39f42ccbf045e73e4fa65411d-64k.mp3\\"/>
+            <enclosure length="28717885" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73190/2020/01/21140/20200102-1200-21140-3659cea39f42ccbf045e73e4fa65411d-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Anil Kanda</itunes:author>
             <itunes:summary>Tackle the big ideas of God, sex, relationships, the gospel and how to do life well! Grasp inspirational and relevant lessons from the incredible story of Abraham. These practical presentations will combine the most up-to-date Biblical and apologetic research o many hot topics in the world and church today.</itunes:summary>
@@ -351,7 +351,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sebastien Braxton, Jesse Zwiker: What is a Business Model and How do I Create One?]]></title>
             <guid>21144-73196</guid>
             <pubDate>Mon, 03 Feb 2020 06:48:56 GMT</pubDate>
-            <enclosure length=\\"20901966\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73196/2020/01/21144/20200102-1200-21144-ab328fc8238dd97413224e6452e0ee78-64k.mp3\\"/>
+            <enclosure length="20901966" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73196/2020/01/21144/20200102-1200-21144-ab328fc8238dd97413224e6452e0ee78-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sebastien Braxton, Jesse Zwiker</itunes:author>
             <itunes:summary>Join Sebastien and Jesse on an in-depth, hands-on, and practical dive into Christian entrepreneurship. Explore why business is important to God, if you are entrepreneurial material, how to get started with no money and how to share the gospel through your business.</itunes:summary>
@@ -361,7 +361,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Jay Gallimore: Moving Mountains!]]></title>
             <guid>21148-73200</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:20 GMT</pubDate>
-            <enclosure length=\\"22460640\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73200/2020/01/21148/20200102-1200-21148-0f3a73c6e74a9e39db10de999b3a318a-64k.mp3\\"/>
+            <enclosure length="22460640" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73200/2020/01/21148/20200102-1200-21148-0f3a73c6e74a9e39db10de999b3a318a-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Jay Gallimore</itunes:author>
             <itunes:summary>Learn how to take a sledge hammer to Satan’s kingdom and build up the walls of Zion! Faith, rightly understood, will change your life from boring to amazing, from feebleness to power, and from failure to triumph! Paul Ratsara, who faced the guns of kidnappers and the crocodiles of the Congo, with nothing but faith, will join Jay Gallimore in this powerful life-changing seminar. They want young Christians to have great influence, to go up against Babylon and rescue multitudes of Satan’s victims. If put this seminar into practice, it will change your life and the world around you!</itunes:summary>
@@ -371,7 +371,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Ben Martin, Brianna Martin: How to Tell the Story]]></title>
             <guid>21156-73273</guid>
             <pubDate>Mon, 03 Feb 2020 06:45:53 GMT</pubDate>
-            <enclosure length=\\"24063489\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73273/2020/01/21156/20200102-1200-21156-b6015e1fd7be11f33a7bbc4df4dea060-64k.mp3\\"/>
+            <enclosure length="24063489" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73273/2020/01/21156/20200102-1200-21156-b6015e1fd7be11f33a7bbc4df4dea060-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Ben Martin, Brianna Martin</itunes:author>
             <itunes:summary>Do you feel the need to become equipped as parents to be able to disciple your children? Join Ben and Brianna as they explore the different facets and challenges of Christian parenting. You’ll leave with actionable next-steps for your family discipleship plan.</itunes:summary>
@@ -381,7 +381,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Scott Ritsema: People of the Book in the Age of the App]]></title>
             <guid>21160-73269</guid>
             <pubDate>Mon, 10 Feb 2020 03:45:41 GMT</pubDate>
-            <enclosure length=\\"30291961\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73269/2020/01/21160/20200102-1200-21160-0a5b38515dbff9d3d684e75b1e93dc7a-64k.mp3\\"/>
+            <enclosure length="30291961" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73269/2020/01/21160/20200102-1200-21160-0a5b38515dbff9d3d684e75b1e93dc7a-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Scott Ritsema</itunes:author>
             <itunes:summary>It goes without saying - media use is out of control and may be the single biggest stumbling block in spiritual, social and family life today. Which begs the question: what does the latest research say about the stranglehold of ‘big tech’ upon our lives and how to break free? What are the essential biblical principles for establishing a balanced use of technological tools? And how can we truly restore spirituality and relationships in the digital age?</itunes:summary>
@@ -391,7 +391,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[David Wright: Mission to the Community]]></title>
             <guid>21164-73263</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:02 GMT</pubDate>
-            <enclosure length=\\"22461134\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73263/2020/01/21164/20200102-1200-21164-a7a0d4adf6844006eff12f8bc9580a43-64k.mp3\\"/>
+            <enclosure length="22461134" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73263/2020/01/21164/20200102-1200-21164-a7a0d4adf6844006eff12f8bc9580a43-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>David Wright</itunes:author>
             <itunes:summary>Explore ways that you, as young people, can really impact your local church, engage the community where you live, and work for God right where you are.</itunes:summary>
@@ -401,7 +401,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Charlene Coutet, Clive Coutet: The Heart of It]]></title>
             <guid>21168-73259</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:29 GMT</pubDate>
-            <enclosure length=\\"25302481\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73259/2020/01/21168/20200102-1200-21168-40faeba83e06d3959fff8c87ced3fff2-64k.mp3\\"/>
+            <enclosure length="25302481" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73259/2020/01/21168/20200102-1200-21168-40faeba83e06d3959fff8c87ced3fff2-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Charlene Coutet, Clive Coutet</itunes:author>
             <itunes:summary>Ever had questions about the whole ‘finding love’ thing? Like why is it so hard to find that someone? Am I doing something wrong? Will my heart ever heal from the pain I’ve experienced along the way? More than just finding that special someone, how do I love them right when I do find them? What is marriage really like anyway? How do I prepare for it and how do I survive its challenges? Clive and Charlene Coutet desire to share their hearts with you and give real, honest and practical answers to many of these questions.</itunes:summary>
@@ -411,7 +411,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter: The Resurrection of the Sabbath School]]></title>
             <guid>21172-73254</guid>
             <pubDate>Mon, 03 Feb 2020 06:48:25 GMT</pubDate>
-            <enclosure length=\\"29656901\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73254/2020/01/21172/20200102-1200-21172-9e23f0bca41306dc150dd3913ab025ad-64k.mp3\\"/>
+            <enclosure length="29656901" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73254/2020/01/21172/20200102-1200-21172-9e23f0bca41306dc150dd3913ab025ad-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter</itunes:author>
             <itunes:summary>Discover the purpose of Sabbath School, why it may be weak in some churches, and learn some principles to bring it back to its original goal.</itunes:summary>
@@ -421,7 +421,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[David Paño: Infinite Movement]]></title>
             <guid>21197-73164</guid>
             <pubDate>Mon, 03 Feb 2020 06:47:24 GMT</pubDate>
-            <enclosure length=\\"28832739\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73164/2020/01/21197/20200102-1200-21197-3045d21b00a0095e68943784bb4f8455-64k.mp3\\"/>
+            <enclosure length="28832739" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73164/2020/01/21197/20200102-1200-21197-3045d21b00a0095e68943784bb4f8455-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>David Paño</itunes:author>
             <itunes:summary>What is a successful youth ministry? How does it look like? Our youth are desiring something beyond what they can see. Come and see what is moving these young people in this generation.</itunes:summary>
@@ -431,7 +431,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Alanna Rodriguez: When the Mission Field Comes to You]]></title>
             <guid>21199-73162</guid>
             <pubDate>Mon, 03 Feb 2020 06:47:30 GMT</pubDate>
-            <enclosure length=\\"26630769\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73162/2020/01/21199/20200102-1200-21199-a3e63160d245b730c16c0b40a54508bb-64k.mp3\\"/>
+            <enclosure length="26630769" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73162/2020/01/21199/20200102-1200-21199-a3e63160d245b730c16c0b40a54508bb-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Alanna Rodriguez</itunes:author>
             <itunes:summary>Learn how to share with those that God has sent to your campus from overseas or just down the street. There are close to twenty million student currently enrolled at a college or campus. One percent of these students are from international countries. God is giving us an opportunity to reach one of the most ripe fields on the secular campuses. Come learn who these people are and how God can use you to impact them for eternity.</itunes:summary>
@@ -441,7 +441,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Christian Martin: Provactive Challenges and Real Opportunities]]></title>
             <guid>21176-73248</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:08 GMT</pubDate>
-            <enclosure length=\\"24484420\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73248/2020/01/21176/20200102-1400-21176-77ffa393e735afe9323e7906abb9c47f-64k.mp3\\"/>
+            <enclosure length="24484420" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73248/2020/01/21176/20200102-1400-21176-77ffa393e735afe9323e7906abb9c47f-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Christian Martin</itunes:author>
             <itunes:summary>While there are growing churches in both urban and country settings, church-goers and students today are actually less likely to keep a Christian worldview than in the past. In fact, the greater part of our contemporary society today does not even believe in absolute truth. A modern-day disciple of Christ out of touch with this culture is like an uninformed missionary trying to teach in a foreign country. To share God’s Word effectively in the twenty-first century, soul-winners need to know how to connect with and confront a society of postmodern thinkers. In this seminar, Pastor Christian Martin shows how we can reach the present age with the everlasting gospel.</itunes:summary>
@@ -451,7 +451,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter: Questions and Answers]]></title>
             <guid>21173-73253</guid>
             <pubDate>Mon, 03 Feb 2020 06:48:34 GMT</pubDate>
-            <enclosure length=\\"30281925\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73253/2020/01/21173/20200102-1415-21173-904e6525da8e65fb4e7e64c52f841188-64k.mp3\\"/>
+            <enclosure length="30281925" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73253/2020/01/21173/20200102-1415-21173-904e6525da8e65fb4e7e64c52f841188-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter</itunes:author>
             <itunes:summary>Discover the purpose of Sabbath School, why it may be weak in some churches, and learn some principles to bring it back to its original goal.</itunes:summary>
@@ -461,7 +461,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Anil Kanda: Build Your House: How to Die Like Abraham]]></title>
             <guid>21141-73191</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:01 GMT</pubDate>
-            <enclosure length=\\"34186471\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73191/2020/01/21141/20200102-1430-21141-be7b1332e2e1c56e4c8802c29805523d-64k.mp3\\"/>
+            <enclosure length="34186471" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73191/2020/01/21141/20200102-1430-21141-be7b1332e2e1c56e4c8802c29805523d-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Anil Kanda</itunes:author>
             <itunes:summary>Tackle the big ideas of God, sex, relationships, the gospel and how to do life well! Grasp inspirational and relevant lessons from the incredible story of Abraham. These practical presentations will combine the most up-to-date Biblical and apologetic research o many hot topics in the world and church today.</itunes:summary>
@@ -471,7 +471,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sebastien Braxton, Jesse Zwiker: Branding: How to Share the Gospel Through my Business]]></title>
             <guid>21145-73197</guid>
             <pubDate>Mon, 03 Feb 2020 06:49:00 GMT</pubDate>
-            <enclosure length=\\"37136345\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73197/2020/01/21145/20200102-1430-21145-c2cd6693696a0e9b7251f2143a31389e-64k.mp3\\"/>
+            <enclosure length="37136345" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73197/2020/01/21145/20200102-1430-21145-c2cd6693696a0e9b7251f2143a31389e-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sebastien Braxton, Jesse Zwiker</itunes:author>
             <itunes:summary>Join Sebastien and Jesse on an in-depth, hands-on, and practical dive into Christian entrepreneurship. Explore why business is important to God, if you are entrepreneurial material, how to get started with no money and how to share the gospel through your business.</itunes:summary>
@@ -481,7 +481,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Jay Gallimore: Paying the Price!]]></title>
             <guid>21149-73201</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:23 GMT</pubDate>
-            <enclosure length=\\"30698825\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73201/2020/01/21149/20200102-1430-21149-1609dab1fdbce1ddd1454fb275eda827-64k.mp3\\"/>
+            <enclosure length="30698825" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73201/2020/01/21149/20200102-1430-21149-1609dab1fdbce1ddd1454fb275eda827-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Jay Gallimore</itunes:author>
             <itunes:summary>Learn how to take a sledge hammer to Satan’s kingdom and build up the walls of Zion! Faith, rightly understood, will change your life from boring to amazing, from feebleness to power, and from failure to triumph! Paul Ratsara, who faced the guns of kidnappers and the crocodiles of the Congo, with nothing but faith, will join Jay Gallimore in this powerful life-changing seminar. They want young Christians to have great influence, to go up against Babylon and rescue multitudes of Satan’s victims. If put this seminar into practice, it will change your life and the world around you!</itunes:summary>
@@ -491,7 +491,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Michael Hasel: How to Interpret Scripture: How do we Approach the Bible with Serious Questions? Facing the Major (and Minor) Issues]]></title>
             <guid>21153-73207</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:39 GMT</pubDate>
-            <enclosure length=\\"37454971\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73207/2020/01/21153/20200102-1430-21153-2e21e123b1dbd1a0ebf438cedeeacd2a-64k.mp3\\"/>
+            <enclosure length="37454971" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73207/2020/01/21153/20200102-1430-21153-2e21e123b1dbd1a0ebf438cedeeacd2a-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Michael Hasel</itunes:author>
             <itunes:summary>How do we face the crucial questions that confront us in society and culture? How do we interpret the Bible in the face of significant challenges in science, history and prophecy? What about the bigger issues facing our church? This seminar seeks to answer these crucial questions by pointing us back to basic principles of biblical interpretation that will guide our understanding of the living Word of God with the assurance that it is more relevant today than it has ever been.</itunes:summary>
@@ -501,7 +501,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Ben Martin, Brianna Martin: How to Define Success]]></title>
             <guid>21157-73272</guid>
             <pubDate>Mon, 03 Feb 2020 06:45:58 GMT</pubDate>
-            <enclosure length=\\"28295326\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73272/2020/01/21157/20200102-1430-21157-96921dd2f1596d99a2fb0bd20c2b9d90-64k.mp3\\"/>
+            <enclosure length="28295326" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73272/2020/01/21157/20200102-1430-21157-96921dd2f1596d99a2fb0bd20c2b9d90-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Ben Martin, Brianna Martin</itunes:author>
             <itunes:summary>Do you feel the need to become equipped as parents to be able to disciple your children? Join Ben and Brianna as they explore the different facets and challenges of Christian parenting. You’ll leave with actionable next-steps for your family discipleship plan.</itunes:summary>
@@ -511,7 +511,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Scott Ritsema: Media on the Brain, Revisited]]></title>
             <guid>21161-73267</guid>
             <pubDate>Mon, 10 Feb 2020 03:45:45 GMT</pubDate>
-            <enclosure length=\\"29931660\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73267/2020/01/21161/20200102-1430-21161-b02dfbfaf78b61b4ab22b5f38b55abd9-64k.mp3\\"/>
+            <enclosure length="29931660" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73267/2020/01/21161/20200102-1430-21161-b02dfbfaf78b61b4ab22b5f38b55abd9-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Scott Ritsema</itunes:author>
             <itunes:summary>It goes without saying - media use is out of control and may be the single biggest stumbling block in spiritual, social and family life today. Which begs the question: what does the latest research say about the stranglehold of ‘big tech’ upon our lives and how to break free? What are the essential biblical principles for establishing a balanced use of technological tools? And how can we truly restore spirituality and relationships in the digital age?</itunes:summary>
@@ -521,7 +521,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[David Wright: Q and A and Final Charge]]></title>
             <guid>21165-73277</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:06 GMT</pubDate>
-            <enclosure length=\\"28936785\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73277/2020/01/21165/20200102-1430-21165-627df16d82c8307e89c71efacfa6ee1b-64k.mp3\\"/>
+            <enclosure length="28936785" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73277/2020/01/21165/20200102-1430-21165-627df16d82c8307e89c71efacfa6ee1b-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>David Wright</itunes:author>
             <itunes:summary>Explore ways that you, as young people, can really impact your local church, engage the community where you live, and work for God right where you are.</itunes:summary>
@@ -531,7 +531,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Charlene Coutet, Clive Coutet: Real Talk: The Morning After]]></title>
             <guid>21169-73257</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:34 GMT</pubDate>
-            <enclosure length=\\"32518782\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73257/2020/01/21169/20200102-1430-21169-263dd572e11c7fcd0d716771dcd588d7-64k.mp3\\"/>
+            <enclosure length="32518782" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73257/2020/01/21169/20200102-1430-21169-263dd572e11c7fcd0d716771dcd588d7-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Charlene Coutet, Clive Coutet</itunes:author>
             <itunes:summary>Ever had questions about the whole ‘finding love’ thing? Like why is it so hard to find that someone? Am I doing something wrong? Will my heart ever heal from the pain I’ve experienced along the way? More than just finding that special someone, how do I love them right when I do find them? What is marriage really like anyway? How do I prepare for it and how do I survive its challenges? Clive and Charlene Coutet desire to share their hearts with you and give real, honest and practical answers to many of these questions.</itunes:summary>
@@ -541,7 +541,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sam Walters: Work Your Cycle in Your Circle]]></title>
             <guid>21181-73179</guid>
             <pubDate>Mon, 03 Feb 2020 06:46:44 GMT</pubDate>
-            <enclosure length=\\"30143108\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73179/2020/01/21181/20200102-1430-21181-17a7d5681866e5f8eb6390e5e8afb925-64k.mp3\\"/>
+            <enclosure length="30143108" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73179/2020/01/21181/20200102-1430-21181-17a7d5681866e5f8eb6390e5e8afb925-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sam Walters</itunes:author>
             <itunes:summary>Sam Walters will be unpacking what it means to live life evangelistically. Many times people live lives that are segregated into different sectors, where their spirituality does not necessarily permeate the rest of their lives. Discover how your relationship with God can become visible, audible and tangible to those around you, whether at your workplace, university, with family or whatever setting you find yourself in.</itunes:summary>
@@ -551,7 +551,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Jason Sliger: God’s Call to the Jungle]]></title>
             <guid>21200-73161</guid>
             <pubDate>Mon, 03 Feb 2020 06:49:35 GMT</pubDate>
-            <enclosure length=\\"29993436\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73161/2020/01/21200/20200102-1430-21200-43405716124ebe56572b2ce9ad4cfa80-64k.mp3\\"/>
+            <enclosure length="29993436" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73161/2020/01/21200/20200102-1430-21200-43405716124ebe56572b2ce9ad4cfa80-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Jason Sliger</itunes:author>
             <itunes:summary>Have you ever sensed God calling you? How do you know for sure? And how can you get up the nerve to take that leap of faith? Jason will tell how he and his family went from living a comfortable life as a pastor to wholeheartedly heading to work in the jungle of Papua New Guinea. God is calling you, too. Will you put yourself on the launch pad?</itunes:summary>
@@ -561,7 +561,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Michael Lemon, René Lemon: How you can be an Effective Witness for Jesus in Post-Christian Culture]]></title>
             <guid>21201-73160</guid>
             <pubDate>Mon, 03 Feb 2020 06:47:34 GMT</pubDate>
-            <enclosure length=\\"35048771\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73160/2020/01/21201/20200102-1430-21201-de71bde92e709c28cd34b77385bd22de-64k.mp3\\"/>
+            <enclosure length="35048771" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73160/2020/01/21201/20200102-1430-21201-de71bde92e709c28cd34b77385bd22de-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Michael Lemon, René Lemon</itunes:author>
             <itunes:summary>There are so many lost and lonely people, locked behind closed doors of darkness, depression and sin. These people have an urgent need for the abundant life that is only found in a vibrant relationship with Jesus Christ. The real question we want to answer is how? How do we do evangelism in a world where social scientists tell us we are now living an un-Christian and un-churched culture, a world where people do not see any relevance in Christianity or in attending church? Our objective in our breakout session is to show you how you can reach this world, where people definitely have a need for the life-giving message of the gospel, although they may not see their need. We are going to look at how you can bring people to Christ right where you are. Yes, whether you are a carpenter, a physician, a mechanic, hairdresser, chef, waitress or a student, God is calling you to reach lost and lonely people with the life-giving message of God’s love.</itunes:summary>
@@ -571,7 +571,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Amy Whitsett, Greg Whitsett: When Translation isn’t Enough: How to Communicate Present Truth Cross-Culturally]]></title>
             <guid>21202-73159</guid>
             <pubDate>Mon, 03 Feb 2020 06:47:37 GMT</pubDate>
-            <enclosure length=\\"33402660\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73159/2020/01/21202/20200102-1430-21202-022d0eb719c102bf5de46ebaf8918c36-64k.mp3\\"/>
+            <enclosure length="33402660" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73159/2020/01/21202/20200102-1430-21202-022d0eb719c102bf5de46ebaf8918c36-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Amy Whitsett, Greg Whitsett</itunes:author>
             <itunes:summary>Whether by many or by few, it is only God and His method that will result in end-time mission success. God has modeled what true missionary work looks like—He came and dwelled among us and used imperfect human speech so that human beings with dulled senses could comprehend His love and understand His plan to restore us to perfection. God’s communication model is sinner-centered. We will demonstrate how this type of communication can be applied in cross-cultural settings with anecdotes and stories from our time living in South-east Asia.</itunes:summary>
@@ -581,7 +581,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Dean Cullinane: The Great Gates of Hell]]></title>
             <guid>21182-73178</guid>
             <pubDate>Mon, 03 Feb 2020 06:52:06 GMT</pubDate>
-            <enclosure length=\\"19246382\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73178/2020/01/21182/20200102-1830-21182-34d42095d6e6b0d3349c5383942f50b0-64k.mp3\\"/>
+            <enclosure length="19246382" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73178/2020/01/21182/20200102-1830-21182-34d42095d6e6b0d3349c5383942f50b0-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Dean Cullinane</itunes:author>
             <itunes:summary>The second plenary will be looking at the importance of True Education as it relates to the Three Angels Message. What is the purpose of our academic institutions today, and how can we make a difference as mere students?</itunes:summary>
@@ -591,7 +591,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sikhu Daco: The Sidekick]]></title>
             <guid>21184-73176</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:44 GMT</pubDate>
-            <enclosure length=\\"21364542\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73176/2020/01/21184/20200103-0700-21184-b1f156e8c1d31eb2a12097d33124fac6-64k.mp3\\"/>
+            <enclosure length="21364542" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73176/2020/01/21184/20200103-0700-21184-b1f156e8c1d31eb2a12097d33124fac6-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sikhu Daco</itunes:author>
             <itunes:summary>Poured Out: Consecrated, Committed, and Connected to Christ.</itunes:summary>
@@ -601,7 +601,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Jonathan Walter: GYC Prayer Mission: Iceland]]></title>
             <guid>21186-73174</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:16 GMT</pubDate>
-            <enclosure length=\\"23779272\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73174/2020/01/21186/20200103-0930-21186-0b591df9a636d09190281655e5669601-64k.mp3\\"/>
+            <enclosure length="23779272" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73174/2020/01/21186/20200103-0930-21186-0b591df9a636d09190281655e5669601-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Jonathan Walter</itunes:author>
             <itunes:summary/>
@@ -611,7 +611,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Dean Cullinane: Kingmakers]]></title>
             <guid>21183-73177</guid>
             <pubDate>Mon, 03 Feb 2020 06:52:11 GMT</pubDate>
-            <enclosure length=\\"18892762\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73177/2020/01/21183/20200103-1830-21183-d6ef282e726ffede1b1ae0d899bc92fe-64k.mp3\\"/>
+            <enclosure length="18892762" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73177/2020/01/21183/20200103-1830-21183-d6ef282e726ffede1b1ae0d899bc92fe-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Dean Cullinane</itunes:author>
             <itunes:summary>The final plenary will be something of a character study on the life of Jonathan and specifically his relationship with David, as expressed in 1 Sam 18. What can we learn from these ancient friends, and how might this relationship change the future of adventism?</itunes:summary>
@@ -621,7 +621,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sikhu Daco: Little David]]></title>
             <guid>21185-73175</guid>
             <pubDate>Mon, 10 Feb 2020 03:47:49 GMT</pubDate>
-            <enclosure length=\\"22703475\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73175/2020/01/21185/20200104-0700-21185-95b5b61454d69105a629bd379f5d4a07-64k.mp3\\"/>
+            <enclosure length="22703475" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73175/2020/01/21185/20200104-0700-21185-95b5b61454d69105a629bd379f5d4a07-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sikhu Daco</itunes:author>
             <itunes:summary/>
@@ -631,7 +631,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sebastien Braxton, Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter: Sabbath School]]></title>
             <guid>21187-73173</guid>
             <pubDate>Mon, 03 Feb 2020 06:52:17 GMT</pubDate>
-            <enclosure length=\\"20054931\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73173/2020/01/21187/20200104-0930-21187-025b5f6167a1a9a7e3f83cd370b15430-64k.mp3\\"/>
+            <enclosure length="20054931" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73173/2020/01/21187/20200104-0930-21187-025b5f6167a1a9a7e3f83cd370b15430-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sebastien Braxton, Sikhu Daco, Justin Kim, Israel Ramos, Jonathan Walter</itunes:author>
             <itunes:summary/>
@@ -641,7 +641,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Samuel Thomas: What About the Few]]></title>
             <guid>21188-73172</guid>
             <pubDate>Mon, 03 Feb 2020 06:52:21 GMT</pubDate>
-            <enclosure length=\\"25405275\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73172/2020/01/21188/20200104-1100-21188-d057f032618d6305a811d183d9aa8158-64k.mp3\\"/>
+            <enclosure length="25405275" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73172/2020/01/21188/20200104-1100-21188-d057f032618d6305a811d183d9aa8158-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Samuel Thomas</itunes:author>
             <itunes:summary>Jesus told us in Matthew 24, the world will increase in conflict, become more unpredictable in natural disasters, and intensify in deception. September 12th, 2019 Pope Francis announced an initiative inviting global heads of state, business leaders, academic leaders, and sport personalities to Rome May 14, 2020. His theme: Reinventing the Global Educational Alliance. His purpose: Reeducating the world to a new perspective in environmental stewardship. His goal: The unification of people and religions.</itunes:summary>
@@ -651,7 +651,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Israel Ramos: Final Charge: Make Adventism Good Again]]></title>
             <guid>21190-73276</guid>
             <pubDate>Mon, 03 Feb 2020 06:52:24 GMT</pubDate>
-            <enclosure length=\\"23040971\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73276/2020/01/21190/20200104-1730-21190-47150ae08e899bd2d15b97fb3a40f171-64k.mp3\\"/>
+            <enclosure length="23040971" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73276/2020/01/21190/20200104-1730-21190-47150ae08e899bd2d15b97fb3a40f171-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Israel Ramos</itunes:author>
             <itunes:summary/>
@@ -661,7 +661,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Michael Hasel: How to Interpret Scripture: Do Historical Matters Really Matter? Reconciling the Bible with Science]]></title>
             <guid>21151-73204</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:32 GMT</pubDate>
-            <enclosure length=\\"33799675\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73204/2020/01/21151/20200108-1045-21151-d1a02c0c96e235f72d081e730c1d58ec-64k.mp3\\"/>
+            <enclosure length="33799675" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73204/2020/01/21151/20200108-1045-21151-d1a02c0c96e235f72d081e730c1d58ec-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Michael Hasel</itunes:author>
             <itunes:summary>How do we face the crucial questions that confront us in society and culture? How do we interpret the Bible in the face of significant challenges in science, history and prophecy? What about the bigger issues facing our church? This seminar seeks to answer these crucial questions by pointing us back to basic principles of biblical interpretation that will guide our understanding of the living Word of God with the assurance that it is more relevant today than it has ever been.</itunes:summary>
@@ -671,7 +671,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Michael Hasel: How to Interpret Scripture: Does the Bible Really Reveal the Future? Prophecy and the New World Order]]></title>
             <guid>21152-73205</guid>
             <pubDate>Mon, 03 Feb 2020 06:50:36 GMT</pubDate>
-            <enclosure length=\\"30093635\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73205/2020/01/21152/20200108-1200-21152-88aea9c7915de83b946fb136a3858d6e-64k.mp3\\"/>
+            <enclosure length="30093635" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73205/2020/01/21152/20200108-1200-21152-88aea9c7915de83b946fb136a3858d6e-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Michael Hasel</itunes:author>
             <itunes:summary>How do we face the crucial questions that confront us in society and culture? How do we interpret the Bible in the face of significant challenges in science, history and prophecy? What about the bigger issues facing our church? This seminar seeks to answer these crucial questions by pointing us back to basic principles of biblical interpretation that will guide our understanding of the living Word of God with the assurance that it is more relevant today than it has ever been.</itunes:summary>
@@ -681,7 +681,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Christian Martin: Strategies on how to Reach Postmoderns]]></title>
             <guid>21177-73247</guid>
             <pubDate>Mon, 10 Feb 2020 03:46:12 GMT</pubDate>
-            <enclosure length=\\"30080671\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73247/2020/01/21177/20200108-1412-21177-b1856c25c7a0480df15b57b930d7543b-64k.mp3\\"/>
+            <enclosure length="30080671" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73247/2020/01/21177/20200108-1412-21177-b1856c25c7a0480df15b57b930d7543b-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Christian Martin</itunes:author>
             <itunes:summary>While there are growing churches in both urban and country settings, church-goers and students today are actually less likely to keep a Christian worldview than in the past. In fact, the greater part of our contemporary society today does not even believe in absolute truth. A modern-day disciple of Christ out of touch with this culture is like an uninformed missionary trying to teach in a foreign country. To share God’s Word effectively in the twenty-first century, soul-winners need to know how to connect with and confront a society of postmodern thinkers. In this seminar, Pastor Christian Martin shows how we can reach the present age with the everlasting gospel.</itunes:summary>
@@ -691,7 +691,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
             <title><![CDATA[Sam Walters: Christ on the Shop Floor]]></title>
             <guid>21180-73243</guid>
             <pubDate>Mon, 03 Feb 2020 06:46:38 GMT</pubDate>
-            <enclosure length=\\"25919827\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/73243/2020/01/21180/20200108-1426-21180-ae2a471ce356f0b989aba52c85826168-64k.mp3\\"/>
+            <enclosure length="25919827" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/73243/2020/01/21180/20200108-1426-21180-ae2a471ce356f0b989aba52c85826168-64k.mp3"/>
             <itunes:subtitle>MP3 Audio, 64 kbps</itunes:subtitle>
             <itunes:author>Sam Walters</itunes:author>
             <itunes:summary>Sam Walters will be unpacking what it means to live life evangelistically. Many times people live lives that are segregated into different sectors, where their spirituality does not necessarily permeate the rest of their lives. Discover how your relationship with God can become visible, audible and tangible to those around you, whether at your workplace, university, with family or whatever setting you find yourself in.</itunes:summary>
@@ -702,8 +702,8 @@ exports[`generateFeed matches prior conference feed 1`] = `
 `;
 
 exports[`generateFeed matches prior story season feed 1`] = `
-"<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
-<rss version=\\"2.0\\" xmlns:itunes=\\"http://www.itunes.com/dtds/podcast-1.0.dtd\\" xmlns:googleplay=\\"http://www.google.com/schemas/play-podcasts/1.0\\">
+"<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
     <channel>
         <title>Acts of the Apostles</title>
         <link>https://www.audioverse.org/english/audiobooks/books/1167/acts-of-the-apostles.html</link>
@@ -721,20 +721,20 @@ exports[`generateFeed matches prior story season feed 1`] = `
             <itunes:email>contact@audioverse.org</itunes:email>
         </itunes:owner>
         <image>https://s.audioverse.org/english/gallery/seriess/2/350/350/AA-YSH.jpg</image>
-        <itunes:image href=\\"https://s.audioverse.org/english/gallery/seriess/2/350/350/AA-YSH.jpg\\"/>
-        <itunes:category text=\\"Religion &amp; Spirituality\\">
-            <itunes:category text=\\"Christianity\\"/>
+        <itunes:image href="https://s.audioverse.org/english/gallery/seriess/2/350/350/AA-YSH.jpg"/>
+        <itunes:category text="Religion &amp; Spirituality">
+            <itunes:category text="Christianity"/>
         </itunes:category>
         <item>
             <title><![CDATA[Acts of the Apostles: The Persecutor From Tarsus]]></title>
             <guid>15565-41097</guid>
             <pubDate>Thu, 19 Jan 2017 05:10:47 GMT</pubDate>
-            <enclosure length=\\"15495259\\" type=\\"audio/mpeg\\" url=\\"https://www.audioverse.org/english/download/dl/41097/2016/11/15565/_narr_AuntSueUncleDan-ThePersecutorFromTarsus-80k.mp3\\"/>
+            <enclosure length="15495259" type="audio/mpeg" url="https://www.audioverse.org/english/download/dl/41097/2016/11/15565/_narr_AuntSueUncleDan-ThePersecutorFromTarsus-80k.mp3"/>
             <itunes:subtitle>MP3 Audio, 80 kbps</itunes:subtitle>
             <itunes:author>Acts of the Apostles</itunes:author>
             <itunes:summary>Saul’s persecution of the early church and Stephen’s stoning - Acts 6, 7 &amp; 8. AudioVerse is grateful to Your Story Hour for allowing our users to stream these stories completely for free. To purchase a copy that you can download or to get the entire set, please visit the Your Story Hour website for more information.</itunes:summary>
             <itunes:duration>1540</itunes:duration>
-            <itunes:image href=\\"https://s.audioverse.org/english/gallery/seriess/2/350/350/AA-YSH.jpg\\"/>
+            <itunes:image href="https://s.audioverse.org/english/gallery/seriess/2/350/350/AA-YSH.jpg"/>
         </item>
     </channel>
 </rss>"

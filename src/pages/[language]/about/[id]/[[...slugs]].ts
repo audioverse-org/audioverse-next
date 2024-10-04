@@ -42,6 +42,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getAboutStaticPaths,
 		(d) => d.pages.nodes?.filter((p) => p.type === PageType.About),
-		(l, { canonicalPath }) => canonicalPath
+		(l, { canonicalPath }) => canonicalPath,
 	);
 }

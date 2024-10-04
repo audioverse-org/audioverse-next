@@ -130,7 +130,7 @@ describe('sermons list page', () => {
 					offset: ENTRIES_PER_PAGE,
 					first: ENTRIES_PER_PAGE,
 				},
-			})
+			}),
 		);
 	});
 

@@ -38,9 +38,9 @@ export async function getStaticProps({
 				},
 				{
 					conferenceName: d?.collection?.title,
-				}
+				},
 			),
-		})
+		}),
 	);
 }
 
@@ -49,6 +49,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		getCollectionDetailPathsData,
 		(d) => d.collections.nodes,
 		(languageRoute, node) =>
-			`/${languageRoute}/conferences/${node.id}/teachings/page/1`
+			`/${languageRoute}/conferences/${node.id}/teachings/page/1`,
 	);
 }
