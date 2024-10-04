@@ -4,3 +4,5 @@
 /graphql-codegen/dist
 /node_modules
 schema.graphql
+**/__queries__/**/*
+record.proxy.log
