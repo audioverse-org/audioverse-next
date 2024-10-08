@@ -24,6 +24,10 @@
 			var(--max-outset) - var(--arrow-full-width),
 			var(--arrow-full-width)
 		);
+		--slider-full-width: calc(
+			100% + var(--arrow-outset) * 2 + var(--slide-padding) * 2
+		);
+		--slide-shift: calc(-1 * (var(--arrow-outset) + var(--slide-padding)));
 	}
 
 	display: flex;
@@ -31,10 +35,7 @@
 	position: relative;
 	left: var(--slide-shift);
 }
-.base_newpadding {
-	--slide-padding: 10px;
-	--arrow-margin: 16px;
-}
+
 .arrow {
 	cursor: pointer;
 	border: none;
@@ -165,8 +166,10 @@
 	background-color: $ts-white;
 	border-radius: 16px;
 	margin-top: 12px;
+	margin-left: 12px;
+	margin-right: 12px;
 }
 .whiteBg swiper-slide {
-	padding: 2px;
+	padding: 4px;
 	grid-gap: 12px;
 }

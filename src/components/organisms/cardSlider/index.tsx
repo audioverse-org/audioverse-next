@@ -112,7 +112,7 @@ export default function Slider({
 
 	return (
 		<div
-			className={`${styles.base} ${hasBg ? styles.base_newpadding : ''}`}
+			className={styles.base}
 			style={{
 				'--min-card-width': `${minCardWidth}px`,
 			}}
