@@ -31,7 +31,10 @@
 	position: relative;
 	left: var(--slide-shift);
 }
-
+.base_newpadding {
+	--slide-padding: 10px;
+	--arrow-margin: 16px;
+}
 .arrow {
 	cursor: pointer;
 	border: none;
