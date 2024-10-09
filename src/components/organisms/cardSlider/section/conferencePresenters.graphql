@@ -1,0 +1,26 @@
+query getSectionConferencePresenters(
+	$language: Language!
+	$first: Int! = 30
+	$after: String = null
+	$collectionId: ID!
+) {
+	persons(
+		language: $language
+		first: $first
+		after: $after
+		role: SPEAKER
+		collectionId: $collectionId
+		orderBy: [
+			{ field: RECORDING_COUNT, direction: DESC }
+			{ field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC }
+		]
+	) {
+		nodes {
+			...cardPerson
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+}

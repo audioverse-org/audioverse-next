@@ -1095,18 +1095,6 @@
       "value": "Localização"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "Ver todos Palestrantes"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Palestrantes"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1117,28 +1105,10 @@
       "value": " séries"
     }
   ],
-  "collectionDetail__seriesAllLabel": [
-    {
-      "type": 0,
-      "value": "Ver todas as séries"
-    }
-  ],
-  "collectionDetail__seriesLabel": [
-    {
-      "type": 0,
-      "value": "Séries"
-    }
-  ],
   "collectionDetail__sponsorLabel": [
     {
       "type": 0,
       "value": "Patrocinador"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "Ver todos ensinamentos individuais"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -1149,12 +1119,6 @@
     {
       "type": 0,
       "value": " ensinamentos"
-    }
-  ],
-  "collectionDetail__teachingsLabel": [
-    {
-      "type": 0,
-      "value": "Ensinamentos individuais"
     }
   ],
   "collectionPresenterssDetail__heading": [
@@ -3989,6 +3953,42 @@
       "value": "Patrocinador"
     }
   ],
+  "organismSection_SeriesHeading": [
+    {
+      "type": 0,
+      "value": "Séries"
+    }
+  ],
+  "organismSection_SeriesNext": [
+    {
+      "type": 0,
+      "value": "Next Series"
+    }
+  ],
+  "organismSection_SeriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Series"
+    }
+  ],
+  "organismSection_TeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Ensinamentos"
+    }
+  ],
+  "organismSection_TeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next Teachings"
+    }
+  ],
+  "organismSection_TeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Teachings"
+    }
+  ],
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
@@ -4325,6 +4325,12 @@
     {
       "type": 0,
       "value": " Trilhas de audiolivros"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [

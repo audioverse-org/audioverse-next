@@ -104,17 +104,11 @@ describe('collection detail page', () => {
 
 		expect(fetchApi).toBeCalledWith(GetCollectionDetailPageDataDocument, {
 			variables: {
-				id: 'the_collection_id',
+				collectionId: 'the_collection_id',
+				first: 20,
+				after: null,
 			},
 		});
-	});
-
-	it('lists sequences', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_sequence_title')).toBeInTheDocument();
 	});
 
 	it('renders page title', async () => {

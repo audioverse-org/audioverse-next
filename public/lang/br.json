@@ -472,37 +472,12 @@
   "collectionDetail__locationLabel": {
     "string": "Localização"
   },
-  "collectionDetail__presentersAllLabel": {
-    "string": "Ver todos Palestrantes"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Coleção detalhada da etiqueta dos alto-falantes",
-    "string": "Palestrantes"
-  },
   "collectionDetail__sequenceCountLabel": {
     "comment": "Etiqueta de contagem de sequência detalhada da coleção",
     "string": "{contagem} séries"
   },
-  "collectionDetail__seriesAllLabel": {
-    "string": "Ver todas as séries"
-  },
-  "collectionDetail__seriesLabel": {
-    "comment": "Rótulo da série detalhe de coleção",
-    "string": "Séries"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "Patrocinador"
-  },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "Ver todos ensinamentos individuais"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Rótulo de contagem de ensinamentos detalhados da coleção",
-    "string": "{contagem} ensinamentos"
-  },
-  "collectionDetail__teachingsLabel": {
-    "comment": "Rótulo de ensinamentos detalhado da coleção",
-    "string": "Ensinamentos individuais"
   },
   "collectionPresenterssDetail__heading": {
     "string": "Todos Palestrantes"
@@ -2744,5 +2719,30 @@
   },
   "discover_continueListeningHeading": {
     "string": "Continue Listening"
+  },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{contagem} ensinamentos"
+  },
+  "organismSection_SeriesHeading": {
+    "string": "Séries"
+  },
+  "organismSection_SeriesNext": {
+    "string": "Next Series"
+  },
+  "organismSection_SeriesPrevious": {
+    "string": "Previous Series"
+  },
+  "organismSection_TeachingsHeading": {
+    "string": "Ensinamentos"
+  },
+  "organismSection_TeachingsNext": {
+    "string": "Next Teachings"
+  },
+  "organismSection_TeachingsPrevious": {
+    "string": "Previous Teachings"
   }
 }

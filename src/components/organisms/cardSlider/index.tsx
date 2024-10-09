@@ -3,7 +3,9 @@ import React, { startTransition, useMemo, useState } from 'react';
 import type Swiper from 'swiper';
 
 import IconBack from '~public/img/icons/icon-back-light.svg';
+import IconBackWhite from '~public/img/icons/icon-back-white.svg';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
+import IconForwardWhite from '~public/img/icons/icon-forward-white.svg';
 
 import { calculateItemsPerPage, MIN_CARD_WIDTH } from './index.helpers';
 import styles from './index.module.scss';
@@ -14,6 +16,8 @@ type SliderProps = {
 	previous: string;
 	next: string;
 	rows?: number;
+	isDarkBg?: boolean;
+	hasBg?: boolean;
 	minCardWidth?: number;
 };
 
@@ -53,6 +57,8 @@ export default function Slider({
 	previous,
 	next,
 	rows = 1,
+	isDarkBg,
+	hasBg,
 	minCardWidth = MIN_CARD_WIDTH,
 }: SliderProps): JSX.Element {
 	const [swiper, setSwiper] = useState<Swiper>();
@@ -112,23 +118,25 @@ export default function Slider({
 			}}
 		>
 			<button
-				className={styles.arrow}
+				className={isDarkBg ? styles.arrowSalmon : styles.arrow}
 				onClick={() => swiper?.slidePrev()}
 				disabled={isBeginning}
 				aria-label={previous}
 			>
-				<IconBack />
+				{isDarkBg ? <IconBackWhite /> : <IconBack />}
 			</button>
 
-			<LazySwiper on={handlers}>{slides}</LazySwiper>
+			<LazySwiper on={handlers} className={hasBg ? styles.whiteBg : ''}>
+				{slides}
+			</LazySwiper>
 
 			<button
-				className={styles.arrow}
+				className={isDarkBg ? styles.arrowSalmon : styles.arrow}
 				onClick={() => swiper?.slideNext()}
 				disabled={isEnd}
 				aria-label={next}
 			>
-				<IconForward />
+				{isDarkBg ? <IconForwardWhite /> : <IconForward />}
 			</button>
 		</div>
 	);

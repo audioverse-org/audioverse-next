@@ -152,26 +152,8 @@
     "comment": "Etiqueta de recuento de secuencia de detalle de colección",
     "string": "{count} series"
   },
-  "collectionDetail__seriesAllLabel": {
-    "string": "Ver todas las series"
-  },
-  "collectionDetail__seriesLabel": {
-    "comment": "Detalle de la colección etiqueta de la serie",
-    "string": "Serie"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "Patrocinador"
-  },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "Ver todas las lecciones individuales"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Detalle de la colección teachings count label",
-    "string": "{count} lecciones"
-  },
-  "collectionDetail__teachingsLabel": {
-    "comment": "Detalle de la colección teachings label",
-    "string": "Lecciones individuales"
   },
   "collectionPresenterssDetail__heading": {
     "string": "Todos los presentadores"
@@ -1145,13 +1127,6 @@
   },
   "cardSongBook__numSongs": {
     "string": "{count} cantos"
-  },
-  "collectionDetail__presentersAllLabel": {
-    "string": "Ver todos los presentadores"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Presentadores"
   },
   "collectionType__audiobookSeries": {
     "string": "Series de libros"
@@ -2744,5 +2719,30 @@
   },
   "discover_continueListeningHeading": {
     "string": "Continue Listening"
+  },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{count} lecciones"
+  },
+  "organismSection_SeriesHeading": {
+    "string": "Serie"
+  },
+  "organismSection_SeriesNext": {
+    "string": "Next Series"
+  },
+  "organismSection_SeriesPrevious": {
+    "string": "Previous Series"
+  },
+  "organismSection_TeachingsHeading": {
+    "string": "Lecciones"
+  },
+  "organismSection_TeachingsNext": {
+    "string": "Next Teachings"
+  },
+  "organismSection_TeachingsPrevious": {
+    "string": "Previous Teachings"
   }
 }

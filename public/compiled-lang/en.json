@@ -1095,18 +1095,6 @@
       "value": "Location"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Presenters"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1117,28 +1105,10 @@
       "value": " Series"
     }
   ],
-  "collectionDetail__seriesAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Series"
-    }
-  ],
-  "collectionDetail__seriesLabel": [
-    {
-      "type": 0,
-      "value": "Series"
-    }
-  ],
   "collectionDetail__sponsorLabel": [
     {
       "type": 0,
       "value": "Sponsor"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Individual Teachings"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -1149,12 +1119,6 @@
     {
       "type": 0,
       "value": " Teachings"
-    }
-  ],
-  "collectionDetail__teachingsLabel": [
-    {
-      "type": 0,
-      "value": "Individual Teachings"
     }
   ],
   "collectionPresenterssDetail__heading": [
@@ -3985,6 +3949,42 @@
       "value": "Sponsor"
     }
   ],
+  "organismSection_SeriesHeading": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "organismSection_SeriesNext": [
+    {
+      "type": 0,
+      "value": "Next Series"
+    }
+  ],
+  "organismSection_SeriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Series"
+    }
+  ],
+  "organismSection_TeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Teachings"
+    }
+  ],
+  "organismSection_TeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next Teachings"
+    }
+  ],
+  "organismSection_TeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Teachings"
+    }
+  ],
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
@@ -4321,6 +4321,12 @@
     {
       "type": 0,
       "value": " Audiobook Tracks"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [

@@ -1095,18 +1095,6 @@
       "value": "Местонахождение"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "Просмотреть всех проповедников"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "Проповедники"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1117,28 +1105,10 @@
       "value": " Семинар"
     }
   ],
-  "collectionDetail__seriesAllLabel": [
-    {
-      "type": 0,
-      "value": "Смотреть все части"
-    }
-  ],
-  "collectionDetail__seriesLabel": [
-    {
-      "type": 0,
-      "value": "Семинары"
-    }
-  ],
   "collectionDetail__sponsorLabel": [
     {
       "type": 0,
       "value": "Организатор"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "Смотреть все отдельные темы"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -1149,12 +1119,6 @@
     {
       "type": 0,
       "value": " темы"
-    }
-  ],
-  "collectionDetail__teachingsLabel": [
-    {
-      "type": 0,
-      "value": "Отдельные темы"
     }
   ],
   "collectionPresenterssDetail__heading": [
@@ -3989,6 +3953,42 @@
       "value": "Организатор"
     }
   ],
+  "organismSection_SeriesHeading": [
+    {
+      "type": 0,
+      "value": "Семинары"
+    }
+  ],
+  "organismSection_SeriesNext": [
+    {
+      "type": 0,
+      "value": "Next Series"
+    }
+  ],
+  "organismSection_SeriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Series"
+    }
+  ],
+  "organismSection_TeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Проповеди"
+    }
+  ],
+  "organismSection_TeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next Teachings"
+    }
+  ],
+  "organismSection_TeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Teachings"
+    }
+  ],
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
@@ -4325,6 +4325,12 @@
     {
       "type": 0,
       "value": " Дорожка аудиокниги"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [
