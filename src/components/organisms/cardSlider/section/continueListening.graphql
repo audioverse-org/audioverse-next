@@ -9,6 +9,7 @@ query getSectionContinueListening(
 				language: $language
 				first: $first
 				after: $after
+				hasIncompletePlaybackSession: true
 			) {
 				nodes {
 					recording {
