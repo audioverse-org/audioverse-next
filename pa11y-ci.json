@@ -1,5 +1,4 @@
 {
-	// WORKAROUND: https://github.com/pa11y/pa11y/issues/652
 	"runner": "axe",
 	"hideElements": "iframe[src*=\"doubleclick.net\"]"
 }
