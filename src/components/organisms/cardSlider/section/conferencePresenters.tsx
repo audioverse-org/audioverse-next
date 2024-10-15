@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { CardPersonFragment } from '~src/components/molecules/card/__generated__/person';
+import { ConferencePersonFragment } from '~src/components/molecules/card/__generated__/conferencePerson';
 import CardPerson from '~src/components/molecules/card/person';
 import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
@@ -53,7 +53,7 @@ export default function Presenters(props: {
 				defaultMessage: 'Next presenters',
 			})}
 			seeAllUrl={root.lang(lang).conferences.id(collectionId).presenters.get()}
-			Card={(p: { node: CardPersonFragment }) => (
+			Card={(p: { node: ConferencePersonFragment }) => (
 				<CardPerson
 					person={{
 						...p.node,

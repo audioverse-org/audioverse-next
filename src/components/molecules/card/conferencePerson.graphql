@@ -1,0 +1,15 @@
+fragment conferencePerson on Person {
+	__typename
+	id
+	name
+	canonicalPath(useFuturePath: true)
+	image {
+		id
+		url(size: 128)
+	}
+	recordings(collectionId: $collectionId) {
+		aggregate {
+			count
+		}
+	}
+}

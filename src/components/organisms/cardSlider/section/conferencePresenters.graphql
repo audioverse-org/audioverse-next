@@ -16,7 +16,7 @@ query getSectionConferencePresenters(
 		]
 	) {
 		nodes {
-			...cardPerson
+			...conferencePerson
 		}
 		pageInfo {
 			hasNextPage
