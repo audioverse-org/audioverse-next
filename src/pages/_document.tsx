@@ -1,6 +1,8 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
+import { GTM_ID } from '~src/containers/base';
+
 class MyDocument extends Document {
 	render() {
 		return (
@@ -11,6 +13,11 @@ class MyDocument extends Document {
 				<body>
 					<Main />
 					<NextScript />
+					<noscript
+						dangerouslySetInnerHTML={{
+							__html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;" />`,
+						}}
+					/>
 				</body>
 			</Html>
 		);
