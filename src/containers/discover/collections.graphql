@@ -1,6 +1,6 @@
 # TODO: Consider if featured collection query needs to account for
 # different languages
-query getDiscoverCollectionsPageData($collectionId: ID = null) {
+query getDiscoverCollectionsPageData {
 	websiteFeaturedCollection {
 		...cardFavoriteEntity
 	}

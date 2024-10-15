@@ -35,8 +35,6 @@ function CollectionPresenters({
 	data: { collection: Must<CollectionPivotFragment> };
 }): JSX.Element {
 	const lang = useLanguageRoute();
-	const altPath = `/${lang}/conferences/${collection.id}/presenters/`;
-
 	return (
 		<CollectionPivot collection={collection}>
 			<LineHeading color={BaseColors.SALMON}>
@@ -48,10 +46,12 @@ function CollectionPresenters({
 			<CardGroup>
 				{nodes.map((node) => (
 					<CardPerson
-						person={node}
+						person={{
+							...node,
+							canonicalPath: `/${lang}/conferences/${collection.id}/presenters/${node.id}`,
+						}}
 						key={node.canonicalPath}
 						midinit={true}
-						altPath={altPath + node.id}
 					/>
 				))}
 			</CardGroup>

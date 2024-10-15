@@ -29,7 +29,6 @@ type Props = {
 	isOptionalLink?: boolean;
 	disableUserFeatures?: boolean;
 	disablePlayback?: boolean;
-	altPath?: string;
 };
 
 export default function TeaseRecording({
@@ -42,7 +41,6 @@ export default function TeaseRecording({
 	isOptionalLink,
 	disableUserFeatures,
 	disablePlayback = false,
-	altPath,
 }: Props): JSX.Element {
 	const router = useRouter();
 
@@ -89,7 +87,6 @@ export default function TeaseRecording({
 							isOptionalLink
 							hoverColor={isDarkTheme ? BaseColors.SALMON : BaseColors.RED}
 							small={small}
-							altPath={altPath}
 						/>
 					))}
 				</div>

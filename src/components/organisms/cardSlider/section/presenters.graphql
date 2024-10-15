@@ -2,7 +2,6 @@ query getSectionPresenters(
 	$language: Language!
 	$first: Int! = 12
 	$after: String = null
-	$collectionId: ID = null
 ) {
 	persons(
 		language: $language

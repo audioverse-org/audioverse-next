@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
@@ -22,27 +22,22 @@ import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import Heading6 from '~src/components/atoms/heading6';
-import { GetPresenterDetailPageDataQuery } from '~src/containers/presenter/__generated__/detail';
+import { GetConferencePresenterDetailPageDataQuery } from '~src/containers/collection/__generated__/presenter';
 import { Must } from '~src/types/types';
 
-import {
-	getCollectionBasicData,
-	GetCollectionBasicDataQuery,
-} from './__generated__/detail';
+import { GetCollectionBasicDataQuery } from './__generated__/detail';
 import styles from './presenter.module.scss';
 
-export type PresenterDetailProps = GetPresenterDetailPageDataQuery & {
-	collectionId: string; // Add collectionId as a prop
+export type PresenterDetailProps = GetConferencePresenterDetailPageDataQuery & {
+	collectionBasic: GetCollectionBasicDataQuery | null;
 };
 
 function PresenterDetail({
 	person,
-	collectionId, // Destructure collectionId from props
+	collectionBasic,
 }: Must<PresenterDetailProps>): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageRoute();
-	const [conferenceBasic, setConferenceBasic] =
-		useState<GetCollectionBasicDataQuery>(); // Manage state for collection data
 
 	const {
 		id,
@@ -51,19 +46,9 @@ function PresenterDetail({
 		imageWithFallback,
 		shareUrl,
 		website,
-		confrenceRecordings,
+		conferenceRecordings,
 	} = person;
-
 	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
-
-	// Fetch the collection data asynchronously
-	useEffect(() => {
-		const fetchCollectionData = async () => {
-			const result = await getCollectionBasicData({ id: collectionId });
-			setConferenceBasic(result);
-		};
-		fetchCollectionData();
-	}, [collectionId]);
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -82,12 +67,7 @@ function PresenterDetail({
 				defaultMessage: 'Website',
 			}),
 			definition: (
-				<Link
-					href={website}
-					target="_blank"
-					rel="noreferrer noopener"
-					legacyBehavior
-				>
+				<Link href={website} target="_blank" rel="noreferrer noopener">
 					<a className="decorated">{website}</a>
 				</Link>
 			),
@@ -109,15 +89,13 @@ function PresenterDetail({
 
 				<div className={styles.detailsRow}>
 					<Heading6 sans unpadded uppercase loose className={styles.countLabel}>
-						{!!confrenceRecordings.aggregate?.count && (
+						{!!conferenceRecordings.aggregate?.count && (
 							<span>
 								<FormattedMessage
 									id="presenterDetail__teachingsCountLabel"
 									defaultMessage="{count} Teachings"
 									description="Presenter detail teachings count label"
-									values={{
-										count: confrenceRecordings.aggregate?.count,
-									}}
+									values={{ count: conferenceRecordings.aggregate?.count }}
 								/>
 							</span>
 						)}
@@ -142,7 +120,7 @@ function PresenterDetail({
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
 			</ContentWidthLimiter>
 
-			{confrenceRecordings.nodes?.length ? (
+			{conferenceRecordings.nodes?.length ? (
 				<>
 					<LineHeading>
 						<FormattedMessage
@@ -150,12 +128,12 @@ function PresenterDetail({
 							defaultMessage="{conferenceTitle}"
 							values={{
 								conferenceTitle:
-									conferenceBasic?.collection?.title || 'Conference Recordings',
+									collectionBasic?.collection?.title || 'Conference Recordings',
 							}}
 						/>
 					</LineHeading>
 					<CardGroup className={styles.cardGroup}>
-						{confrenceRecordings.nodes.map((recording) => (
+						{conferenceRecordings.nodes.map((recording) => (
 							<CardRecording recording={recording} key={recording.id} />
 						))}
 					</CardGroup>

@@ -15,8 +15,6 @@ import {
 export default function Presenters(props: {
 	heading?: string | JSX.Element;
 	collectionId: string;
-	altPath?: string;
-	altSeeAll?: string;
 	isDarkBg?: boolean;
 }): JSX.Element {
 	const intl = useIntl();
@@ -28,15 +26,12 @@ export default function Presenters(props: {
 			defaultMessage: 'Presenters',
 		}),
 		collectionId,
-		altPath,
-		altSeeAll,
 		isDarkBg,
 	} = props;
 
-	const infiniteQuery = (
+	const useInfiniteQuery = (
 		pageParamKey: keyof GetSectionConferencePresentersQueryVariables
 	) => {
-		// eslint-disable-next-line react-hooks/rules-of-hooks
 		return useInfiniteGetSectionConferencePresentersQuery(pageParamKey, {
 			language: lang,
 			first: 30,
@@ -47,7 +42,7 @@ export default function Presenters(props: {
 	return (
 		<Section
 			rows={2}
-			infiniteQuery={infiniteQuery}
+			infiniteQuery={useInfiniteQuery}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'organismSection_presentersPrevious',
@@ -57,12 +52,14 @@ export default function Presenters(props: {
 				id: 'organismSection_presentersNext',
 				defaultMessage: 'Next presenters',
 			})}
-			seeAllUrl={altSeeAll ? altSeeAll : root.lang(lang).presenters.get()}
+			seeAllUrl={root.lang(lang).conferences.id(collectionId).presenters.get()}
 			Card={(p: { node: CardPersonFragment }) => (
 				<CardPerson
-					person={p.node}
+					person={{
+						...p.node,
+						canonicalPath: `/${lang}/conferences/${collectionId}/presenters/${p.node.id}`,
+					}}
 					midinit
-					altPath={altPath && altPath + p.node.id}
 					key={p.node.canonicalPath}
 				/>
 			)}

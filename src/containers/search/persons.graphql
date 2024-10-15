@@ -3,7 +3,6 @@ query getSearchResultsPersons(
 	$term: String!
 	$first: Int!
 	$offset: Int!
-	$collectionId: ID = null
 ) {
 	persons(language: $language, search: $term, first: $first, offset: $offset) {
 		aggregate {

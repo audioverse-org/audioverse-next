@@ -24,7 +24,6 @@ interface CardCollectionProps {
 	largeinit?: boolean;
 	midinit?: boolean;
 	smallinit?: boolean;
-	altPath?: string;
 }
 
 export default function CardPerson({
@@ -33,14 +32,13 @@ export default function CardPerson({
 	largeinit = false,
 	midinit = false,
 	smallinit = false,
-	altPath,
 }: CardCollectionProps): JSX.Element {
 	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
 	const { canonicalPath, image, name, recordings, id } = person;
 
 	return (
 		<Card className={clsx(compact && styles.compact)}>
-			<Link href={altPath ? altPath : canonicalPath} legacyBehavior>
+			<Link href={canonicalPath} legacyBehavior>
 				<a
 					className={styles.container}
 					onClick={() => {

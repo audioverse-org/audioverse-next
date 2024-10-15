@@ -1,78 +1,37 @@
-import {
-	GetStaticPathsResult,
-	GetStaticPropsContext,
-	GetStaticPropsResult,
-} from 'next';
+import { GetServerSidePropsContext } from 'next';
 
 import { IBaseProps } from '~containers/base';
+import { getConferencePresenterDetailPageData } from '~containers/collection/__generated__/presenter';
 import PresenterDetail, {
 	PresenterDetailProps,
 } from '~containers/collection/presenter';
-import {
-	getPresenterDetailPageData,
-	getPresenterDetailPathsData,
-} from '~containers/presenter/__generated__/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
-import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
+import { getCollectionBasicData } from '~src/containers/collection/__generated__/detail';
 
 export default PresenterDetail;
 
-export async function getStaticProps({
+export async function getServerSideProps({
 	params,
-}: GetStaticPropsContext<{
+}: GetServerSidePropsContext<{
 	language: string;
 	id: string;
 	presenterId: string;
-}>): Promise<GetStaticPropsResult<PresenterDetailProps & IBaseProps>> {
+}>): Promise<{ props: PresenterDetailProps & IBaseProps }> {
 	const id = params?.presenterId as string;
 	const collectionId = params?.id as string;
-	const routeLanguage = getLanguageIdByRoute(params?.language);
-	const result = await getPresenterDetailPageData({
-		id,
-		collectionId,
-		language: routeLanguage,
-	}).catch(() => ({
-		person: null,
-		sequences: {
-			nodes: [],
-			pageInfo: {
-				hasNextPage: false,
-			},
-		},
-		collections: {
-			nodes: [],
-			pageInfo: {
-				hasNextPage: false,
-			},
-		},
-	}));
 
-	if (result.person?.language !== routeLanguage) {
-		return {
-			notFound: true,
-			revalidate: REVALIDATE_FAILURE,
-		};
-	}
+	const [result, collectionBasic] = await Promise.all([
+		getConferencePresenterDetailPageData({ id, collectionId }).catch(() => ({
+			person: null,
+		})),
+		getCollectionBasicData({ id: collectionId }).catch(() => null),
+	]);
 
 	return {
 		props: {
 			...result,
-			collectionId,
 			title: result.person?.name,
 			canonicalUrl: result.person?.canonicalUrl,
+			collectionBasic,
 		},
-		revalidate: REVALIDATE,
 	};
-}
-
-export async function getStaticPaths(
-	collectionId: string
-): Promise<GetStaticPathsResult> {
-	return getDetailStaticPaths(
-		getPresenterDetailPathsData,
-		(d) => d.persons.nodes,
-		(languageRoute, node) =>
-			`/${languageRoute}/conferences/${collectionId}/presenters/${node.id}` // Adjust based on your actual data structure
-	);
 }

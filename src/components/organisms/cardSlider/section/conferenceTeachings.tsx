@@ -16,7 +16,6 @@ export default function Teachings(props: {
 	heading?: string | JSX.Element;
 	collectionId: string;
 	isDarkBg?: boolean;
-	altPath?: string;
 }): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageId();
@@ -28,13 +27,11 @@ export default function Teachings(props: {
 		}),
 		collectionId,
 		isDarkBg,
-		altPath,
 	} = props;
 
-	const infiniteQuery = (
+	const useInfiniteQuery = (
 		pageParamKey: keyof GetSectionConferenceTeachingsQueryVariables
 	) => {
-		// eslint-disable-next-line react-hooks/rules-of-hooks
 		return useInfiniteGetSectionConferenceTeachingsQuery(pageParamKey, {
 			language: lang,
 			first: 36,
@@ -45,7 +42,7 @@ export default function Teachings(props: {
 	return (
 		<Section
 			rows={3}
-			infiniteQuery={infiniteQuery}
+			infiniteQuery={useInfiniteQuery}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'organismSection_TeachingsPrevious',
@@ -61,7 +58,6 @@ export default function Teachings(props: {
 					recording={t.node}
 					key={t.node.canonicalPath}
 					fullBleed
-					altPath={altPath}
 				/>
 			)}
 			isDarkBg={isDarkBg}

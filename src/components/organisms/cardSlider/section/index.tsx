@@ -123,14 +123,18 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	if (cards.length < 1) {
 		return <></>;
 	}
-	const color = isDarkBg ? BaseColors.SALMON : BaseColors.RED;
+
 	return (
 		<div className={styles.section}>
-			<LineHeading variant="overline" color={color} unpadded>
+			<LineHeading
+				variant="overline"
+				color={isDarkBg ? BaseColors.SALMON : BaseColors.RED}
+				unpadded
+			>
 				<span>{heading}</span>
 				{seeAllUrl && (
 					<a
-						className={isDarkBg ? styles.seeAlldbg : styles.seeAll}
+						className={`${styles.seeAll} ${isDarkBg && styles.seeAlldbg}`}
 						href={seeAllUrl}
 					>
 						<FormattedMessage id="discover__seeAll" defaultMessage="See All" />

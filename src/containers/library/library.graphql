@@ -10,7 +10,6 @@ query getLibraryData(
 	$viewerPlaybackStatus: RecordingViewerPlaybackStatus
 	$sortField: FavoritesSortableField!
 	$sortDirection: OrderByDirection!
-	$collectionId: ID = null
 ) {
 	me {
 		user {

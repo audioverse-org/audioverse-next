@@ -16,7 +16,6 @@ export default function Series(props: {
 	heading?: string | JSX.Element;
 	collectionId: string;
 	isDarkBg?: boolean;
-	altPath?: string;
 }): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageId();
@@ -28,13 +27,11 @@ export default function Series(props: {
 		}),
 		collectionId,
 		isDarkBg,
-		altPath,
 	} = props;
 
-	const infiniteQuery = (
+	const useInfiniteQuery = (
 		pageParamKey: keyof GetSectionConferenceSeriesQueryVariables
 	) => {
-		// eslint-disable-next-line react-hooks/rules-of-hooks
 		return useInfiniteGetSectionConferenceSeriesQuery(pageParamKey, {
 			language: lang,
 			first: 15,
@@ -45,7 +42,7 @@ export default function Series(props: {
 	return (
 		<Section
 			rows={1}
-			infiniteQuery={infiniteQuery}
+			infiniteQuery={useInfiniteQuery}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'organismSection_SeriesPrevious',
@@ -57,11 +54,7 @@ export default function Series(props: {
 			})}
 			seeAllUrl={root.lang(lang).conferences.id(collectionId).sequences.get()}
 			Card={(s: { node: CardSequenceFragment }) => (
-				<CardSequence
-					sequence={s.node}
-					key={s.node.canonicalPath}
-					altPath={altPath}
-				/>
+				<CardSequence sequence={s.node} key={s.node.canonicalPath} />
 			)}
 			isDarkBg={isDarkBg}
 		/>

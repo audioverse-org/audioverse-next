@@ -12,7 +12,6 @@ export interface CardSermonProps {
 	hideSponsorHat?: boolean;
 	isOptionalLink?: boolean;
 	fullBleed?: boolean;
-	altPath?: string;
 }
 
 export default function CardSermon({
@@ -21,7 +20,6 @@ export default function CardSermon({
 	hideSponsorHat,
 	isOptionalLink,
 	fullBleed,
-	altPath,
 }: CardSermonProps): JSX.Element {
 	const { sequence, sponsor } = recording;
 	const theme = 'sermon';
@@ -39,7 +37,6 @@ export default function CardSermon({
 				theme={theme}
 				isOptionalLink={isOptionalLink}
 				fullBleed={fullBleed}
-				altPath={altPath}
 			/>
 		</CardWithTheme>
 	);

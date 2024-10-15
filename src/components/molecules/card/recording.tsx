@@ -16,7 +16,6 @@ interface CardSermonProps {
 	hideSponsorHat?: boolean;
 	isOptionalLink?: boolean;
 	fullBleed?: boolean;
-	altPath?: string;
 }
 
 export default function CardRecording({
@@ -25,7 +24,6 @@ export default function CardRecording({
 	hideSponsorHat,
 	isOptionalLink,
 	fullBleed,
-	altPath,
 }: CardSermonProps): JSX.Element {
 	const { recordingContentType } = recording;
 	switch (recordingContentType) {
@@ -43,7 +41,6 @@ export default function CardRecording({
 			return (
 				<CardSermon
 					{...{ recording, hideHat, isOptionalLink, hideSponsorHat, fullBleed }}
-					altPath={altPath}
 				/>
 			);
 		case RecordingContentType.Story:

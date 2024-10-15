@@ -39,7 +39,6 @@ function CollectionDetail({
 }: Must<CollectionDetailProps>): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageRoute();
-	const altPath = `/${lang}/conferences/${collection.id}/presenters/`;
 	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
 		collection.id
 	);
@@ -59,8 +58,6 @@ function CollectionDetail({
 		sequences,
 		recordings: rec,
 	} = collection;
-
-	const formattedDuration = useFormattedDuration(duration);
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -158,7 +155,9 @@ function CollectionDetail({
 							)}
 						</Heading6>
 						<div className={styles.row}>
-							<div className={styles.duration}>{formattedDuration}</div>
+							<div className={styles.duration}>
+								{useFormattedDuration(duration)}
+							</div>
 
 							<ButtonShare
 								shareUrl={shareUrl}
@@ -181,24 +180,11 @@ function CollectionDetail({
 					</div>
 				</div>
 
-				<ConferenceSeries
-					collectionId={collection.id + ''}
-					altPath={altPath}
-					isDarkBg
-				/>
+				<ConferenceSeries collectionId={collection.id + ''} isDarkBg />
 
-				<ConferencePresenters
-					collectionId={collection.id + ''}
-					altPath={altPath}
-					altSeeAll={root.lang(lang).conferences.id(id).presenters.get()}
-					isDarkBg
-				/>
+				<ConferencePresenters collectionId={collection.id + ''} isDarkBg />
 
-				<ConferenceTeachings
-					collectionId={collection.id + ''}
-					altPath={altPath}
-					isDarkBg
-				/>
+				<ConferenceTeachings collectionId={collection.id + ''} isDarkBg />
 			</Tease>
 		</>
 	);

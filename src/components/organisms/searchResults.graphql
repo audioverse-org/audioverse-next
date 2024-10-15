@@ -88,7 +88,6 @@ query getSearchPersons(
 	$term: String!
 	$first: Int!
 	$after: String
-	$collectionId: ID = null
 ) {
 	persons(language: $language, search: $term, first: $first, after: $after) {
 		aggregate {
