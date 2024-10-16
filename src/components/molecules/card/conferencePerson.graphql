@@ -7,7 +7,7 @@ fragment conferencePerson on Person {
 		id
 		url(size: 128)
 	}
-	recordings(collectionId: $collectionId) {
+	recordings(collectionId: $id) {
 		aggregate {
 			count
 		}

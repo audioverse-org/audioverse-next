@@ -35,7 +35,7 @@ export default function Presenters(props: {
 		return useInfiniteGetSectionConferencePresentersQuery(pageParamKey, {
 			language: lang,
 			first: 30,
-			collectionId,
+			id: collectionId,
 		});
 	};
 
