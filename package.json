@@ -43,7 +43,7 @@
         "@silvermine/videojs-chromecast": "^1.5.0",
         "@tanstack/react-query": "^5.56.2",
         "@tanstack/react-query-devtools": "^5.56.2",
-        "caniuse-lite": "^1.0.30001662",
+        "caniuse-lite": "^1.0.30001669",
         "clsx": "^2.1.1",
         "cookie": "^0.6.0",
         "dayjs": "^1.11.13",
