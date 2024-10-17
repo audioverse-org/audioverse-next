@@ -44,7 +44,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes().map((base_url) =>
-			root.lang(base_url).songs.albums.get()
+			root.lang(base_url).songs.albums.get(),
 		),
 		fallback: false,
 	};

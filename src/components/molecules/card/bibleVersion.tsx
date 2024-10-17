@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import { IBibleVersion } from '~lib/api/bibleBrain';
 import root from '~lib/routes';
 import useHover from '~lib/useHover';

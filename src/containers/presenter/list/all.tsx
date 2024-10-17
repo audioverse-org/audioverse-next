@@ -15,7 +15,6 @@ export default function All(props: PresentersProps) {
 
 	const { data, hasNextPage, fetchNextPage, isFetching } =
 		useInfiniteGetPresenterListAllPageDataQuery(
-			'after',
 			{
 				language,
 				after: null,
@@ -25,9 +24,10 @@ export default function All(props: PresentersProps) {
 					lastPage?.persons.pageInfo.hasNextPage
 						? {
 								after: lastPage.persons.pageInfo.endCursor,
-						  }
+							}
 						: undefined,
-			}
+				initialPageParam: null,
+			},
 		);
 
 	useEffect(() => {

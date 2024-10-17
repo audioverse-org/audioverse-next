@@ -33,8 +33,8 @@ const ButtonFavorite = forwardRef<HTMLButtonElement, Props>(
 			light,
 			backgroundColor,
 			className,
-		},
-		ref
+		}: Props,
+		ref,
 	): JSX.Element {
 		const intl = useIntl();
 
@@ -43,12 +43,12 @@ const ButtonFavorite = forwardRef<HTMLButtonElement, Props>(
 					id: 'RecordingFavorite__unfavorite',
 					defaultMessage: 'Unfavorite',
 					description: 'Recording unfavorite button label',
-			  })
+				})
 			: intl.formatMessage({
 					id: 'RecordingFavorite__favorite',
 					defaultMessage: 'Favorite',
 					description: 'Recording favorite button label',
-			  });
+				});
 
 		const IconUnfavorite = light ? IconLikeLight : IconLike;
 		const isDarkTheme = isBackgroundColorDark(backgroundColor);
@@ -58,8 +58,8 @@ const ButtonFavorite = forwardRef<HTMLButtonElement, Props>(
 				? BaseColors.SALMON
 				: BaseColors.RED
 			: isDarkTheme
-			? BaseColors.WHITE
-			: BaseColors.DARK;
+				? BaseColors.WHITE
+				: BaseColors.DARK;
 
 		return (
 			<IconButton
@@ -87,7 +87,7 @@ const ButtonFavorite = forwardRef<HTMLButtonElement, Props>(
 				}}
 			/>
 		);
-	}
+	},
 );
 
 export default ButtonFavorite;

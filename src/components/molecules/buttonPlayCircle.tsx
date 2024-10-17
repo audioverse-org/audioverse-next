@@ -33,7 +33,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({
 	const successColor = isDarkTheme ? BaseColors.WHITE : BaseColors.DARK;
 	const formattedDuration = useFormattedDuration(session.duration);
 	const remainingDuration = useFormattedDuration(
-		session.duration * (1 - session.progress)
+		session.duration * (1 - session.progress),
 	);
 	const intl = useIntl();
 

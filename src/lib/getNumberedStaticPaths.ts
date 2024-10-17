@@ -16,7 +16,7 @@ const makeLanguagePaths = async <T>(
 	language: SupportedLanguages,
 	innerSegment: string,
 	getter: Getter<T>,
-	parseCount: Parser<T>
+	parseCount: Parser<T>,
 ) => {
 	const data = await getter({ language });
 	const entryCount = parseCount(data) || 0;
@@ -33,11 +33,11 @@ const makeLanguagePaths = async <T>(
 export const getNumberedStaticPaths = async <T>(
 	innerSegment: string,
 	getter: Getter<T>,
-	parseCount: Parser<T>
+	parseCount: Parser<T>,
 ): Promise<GetStaticPathsResult> => {
 	const keys = getLanguageIds();
 	const pathSetPromises = keys.map((k) =>
-		makeLanguagePaths(k, innerSegment, getter, parseCount)
+		makeLanguagePaths(k, innerSegment, getter, parseCount),
 	);
 	const pathSets = await Promise.all(pathSetPromises);
 	const paths = pathSets.flat();

@@ -15,14 +15,14 @@ interface IUseIsCollectionFavoritedResult extends IUseIsFavoritedResult {
 }
 
 export function useIsCollectionFavorited(
-	id: Scalars['ID']['output']
+	id: Scalars['ID']['output'],
 ): IUseIsCollectionFavoritedResult {
 	const queryClient = useQueryClient();
 	const { data } = useCollectionIsFavoritedQuery(
 		{ id },
 		{
 			enabled: !!getSessionToken(),
-		}
+		},
 	);
 	const generatedQueryKey = ['collectionIsFavorited', { id }];
 
@@ -34,7 +34,7 @@ export function useIsCollectionFavorited(
 			return !!result?.collection?.viewerHasFavorited;
 		},
 		(isFavorited) => setCollectionFavorited(id, isFavorited),
-		[generatedQueryKey]
+		[generatedQueryKey],
 	);
 	const playbackCompletedPercentage =
 		data?.collection?.viewerPlaybackCompletedPercentage || 0;

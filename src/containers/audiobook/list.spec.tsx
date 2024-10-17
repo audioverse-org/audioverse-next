@@ -19,7 +19,7 @@ import {
 } from './__generated__/list';
 
 async function renderPage(
-	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {}
+	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {},
 ) {
 	__loadRouter({ query: params });
 
@@ -143,7 +143,7 @@ describe('audiobook list page', () => {
 
 		expect(link).toHaveAttribute(
 			'href',
-			expect.stringContaining('the_book_path')
+			expect.stringContaining('the_book_path'),
 		);
 	});
 

@@ -14,7 +14,7 @@ const renderNavigation = async () => {
 			searchTerm=""
 			onSearchChange={() => void 0}
 		/>,
-		undefined
+		undefined,
 	);
 };
 
@@ -33,7 +33,7 @@ describe('navigation', () => {
 		expect(
 			screen.getByRole('link', {
 				name: 'Discover',
-			})
+			}),
 		).toHaveAttribute('aria-current', 'page');
 	});
 });

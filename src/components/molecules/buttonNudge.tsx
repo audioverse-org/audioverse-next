@@ -33,12 +33,12 @@ export default function ButtonNudge({
 				id: 'player__nudgeBack',
 				defaultMessage: 'back 15 seconds',
 				description: 'player nudge-back label',
-		  })
+			})
 		: intl.formatMessage({
 				id: 'player__nudgeForward',
 				defaultMessage: 'forward 15 seconds',
 				description: 'player nudge-forward label',
-		  });
+			});
 
 	return (
 		<IconButton
@@ -48,8 +48,8 @@ export default function ButtonNudge({
 						? IconJumpBackMedium
 						: IconJumpBack
 					: large
-					? IconJumpForwardMedium
-					: IconJumpForward
+						? IconJumpForwardMedium
+						: IconJumpForward
 			}
 			onClick={() => session.shiftTime(reverse ? -15 : 15)}
 			aria-label={label}
@@ -62,7 +62,7 @@ export default function ButtonNudge({
 			className={clsx(
 				styles.base,
 				isBackgroundColorDark(backgroundColor) && styles.onDark,
-				large && styles.large
+				large && styles.large,
 			)}
 		/>
 	);

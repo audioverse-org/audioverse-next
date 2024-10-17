@@ -14,7 +14,7 @@ const renderPagination = ({
 } = {}) => {
 	return (async function (
 		ui: ReactElement,
-		renderOptions?: RenderOptions
+		renderOptions?: RenderOptions,
 	): Promise<RenderResult & { queryClient: QueryClient }> {
 		return renderWithProviders(ui, renderOptions);
 	})(<Pagination current={current} total={total} makeRoute={makeRoute} />);
@@ -125,14 +125,14 @@ describe('pagination algorithm', () => {
 			<Pagination
 				{...({ total: 3, base: 'base', makeRoute: () => '' } as any)}
 			/>,
-			undefined
+			undefined,
 		);
 	});
 
 	it('handles missing total', async () => {
 		await renderWithProviders(
 			<Pagination {...({ current: 1, base: 'base' } as any)} />,
-			undefined
+			undefined,
 		);
 	});
 
@@ -141,7 +141,7 @@ describe('pagination algorithm', () => {
 			<Pagination
 				{...({ current: 1, total: 3, makeRoute: () => '' } as any)}
 			/>,
-			undefined
+			undefined,
 		);
 	});
 });

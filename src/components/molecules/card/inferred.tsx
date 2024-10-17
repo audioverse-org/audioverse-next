@@ -59,7 +59,7 @@ export default function CardInferred({ entity }: { entity: InferrableEntity }) {
 				default:
 					console.log({ e });
 					throw new Error(
-						`Unknown collectionContentType: ${e.collectionContentType}`
+						`Unknown collectionContentType: ${e.collectionContentType}`,
 					);
 			}
 		}

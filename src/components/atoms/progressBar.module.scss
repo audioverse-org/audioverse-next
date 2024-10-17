@@ -61,7 +61,9 @@
 				background-color: $ts-red;
 				border: none;
 				border-radius: 4px;
-				transition: width $transition-quick, height $transition-quick,
+				transition:
+					width $transition-quick,
+					height $transition-quick,
 					border-radius $transition-quick;
 				cursor: pointer;
 				@media (pointer: coarse) {

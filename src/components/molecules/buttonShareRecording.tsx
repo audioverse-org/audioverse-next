@@ -37,7 +37,7 @@ export default function ButtonShareRecording({
 					{
 						title,
 						presenters: speakers.map(({ name }) => name).join(', '),
-					}
+					},
 				),
 			}}
 		>

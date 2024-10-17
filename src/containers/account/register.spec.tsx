@@ -1,8 +1,8 @@
+import { FacebookLoginClient } from '@greatsumini/react-facebook-login';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
-import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
 import { fetchApi } from '~lib/api/fetchApi';
 import { buildRenderer } from '~lib/test/buildRenderer';
@@ -14,7 +14,7 @@ import {
 } from './__generated__/register';
 
 jest.mock('js-cookie');
-jest.mock('react-google-login');
+jest.mock('@leecheuk/react-google-login');
 
 const renderPage = buildRenderer(Register);
 
@@ -135,7 +135,7 @@ describe('register page', () => {
 		await renderPage();
 
 		expect(
-			await screen.findByText('Sign up with Facebook')
+			await screen.findByText('Sign up with Facebook'),
 		).toBeInTheDocument();
 	});
 
@@ -240,27 +240,26 @@ describe('register page', () => {
 	});
 
 	it('does not register failed login', async () => {
-		__setFacebookResponse({
-			status: 300,
-		});
+		FacebookLoginClient.login = jest
+			.fn()
+			.mockImplementation((cb) => cb({ status: 'not_authorized' }));
 
 		await renderPage();
 
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
-		await screen.findByText(/300/);
+		await screen.findByText('not_authorized', { exact: false });
 
 		expect(fetchApi).not.toBeCalledWith(
 			RegisterSocialDocument,
-			expect.anything()
+			expect.anything(),
 		);
 	});
 
 	it('displays facebook login error', async () => {
-		__setFacebookResponse({
-			status: 300,
-			statusText: 'FAILED',
-		});
+		FacebookLoginClient.login = jest
+			.fn()
+			.mockImplementation((cb) => cb({ status: 'not_authorized' }));
 
 		const { getByText } = await renderPage();
 
@@ -268,7 +267,7 @@ describe('register page', () => {
 
 		await waitFor(() => {
 			expect(
-				getByText('300: Failed to login with Facebook')
+				getByText(`not_authorized: Failed to login with Facebook`),
 			).toBeInTheDocument();
 		});
 	});

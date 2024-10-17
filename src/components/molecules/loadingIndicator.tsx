@@ -28,7 +28,7 @@ const LoadingIndicator: React.VoidFunctionComponent = () => {
 			className={clsx(
 				styles.bar,
 				visible && styles.visible,
-				isAnyLoading && styles.loading
+				isAnyLoading && styles.loading,
 			)}
 			data-testid="loading-indicator"
 		>

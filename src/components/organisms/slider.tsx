@@ -53,7 +53,7 @@ export default function Slider({
 				grow && styles.grow,
 				floatingControls && styles.floatingControls,
 				responsiveOnMobile && styles.responsiveOnMobile,
-				styles[`slideActive${delta}`]
+				styles[`slideActive${delta}`],
 			)}
 			data-testid="slider"
 			style={{
@@ -95,7 +95,7 @@ export default function Slider({
 								},
 								{
 									number: i + 1,
-								}
+								},
 							)}
 						/>
 					))}

@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import 'jest-canvas-mock';
 
 import { resetAllWhenMocks } from 'jest-when';
@@ -82,7 +82,7 @@ beforeEach(() => {
 				observe: jest.fn(),
 				unobserve: jest.fn(),
 				disconnect: jest.fn(),
-			} as any)
+			}) as any,
 	);
 
 	global.MutationObserver = jest.fn(
@@ -90,7 +90,7 @@ beforeEach(() => {
 			({
 				observe: jest.fn(),
 				disconnect: jest.fn(),
-			} as any)
+			}) as any,
 	);
 
 	global.ResizeObserver = jest.fn(
@@ -99,6 +99,6 @@ beforeEach(() => {
 				observe: jest.fn(),
 				unobserve: jest.fn(),
 				disconnect: jest.fn(),
-			} as any)
+			}) as any,
 	);
 });

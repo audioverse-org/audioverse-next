@@ -74,7 +74,7 @@ describe('miniplayer template', () => {
 										videoStreams: [],
 										collection: null,
 									},
-									'the_recording_id'
+									'the_recording_id',
 								);
 								c.play();
 							}}
@@ -101,7 +101,7 @@ describe('miniplayer template', () => {
 										title: 'the_recording_title',
 										canonicalPath: 'the_recording_path',
 									} as any,
-									'the_recording_id'
+									'the_recording_id',
 								);
 							}}
 						/>
@@ -127,7 +127,7 @@ describe('miniplayer template', () => {
 										title: 'the_recording_title',
 										canonicalPath: 'the_recording_path',
 									} as any,
-									'the_recording_id'
+									'the_recording_id',
 								);
 							}}
 						/>

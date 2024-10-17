@@ -16,7 +16,7 @@ describe('generateFeed', () => {
 				link: 'https://www.audioverse.org/en/conferences/378/gyc-2019-by-many-or-by-few.html',
 				title: 'GYC 2019: By Many Or By Few',
 			},
-			[]
+			[],
 		);
 		expect(result).toMatchSnapshot();
 	});
@@ -82,7 +82,7 @@ describe('generateFeed', () => {
 						title: 'Your Story Hour',
 					},
 				},
-			]
+			],
 		);
 
 		expect(result).toMatchSnapshot();
@@ -3459,7 +3459,7 @@ describe('generateFeed', () => {
 						title: 'Generation. Youth. Christ.',
 					},
 				},
-			]
+			],
 		);
 		expect(result).toMatchSnapshot();
 	});

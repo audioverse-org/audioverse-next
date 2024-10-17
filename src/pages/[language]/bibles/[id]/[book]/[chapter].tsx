@@ -34,7 +34,7 @@ export async function getStaticProps({
 	}
 
 	const bibleBook = version.books.find(
-		({ book_id }) => `${id}/${book}` === book_id
+		({ book_id }) => `${id}/${book}` === book_id,
 	);
 	if (!bibleBook) {
 		return {
@@ -66,8 +66,8 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 						.lang(LANGUAGES.ENGLISH.base_urls[0])
 						.bibles.bookId(book_id)
 						.chapterNumber(1)
-						.get()
-				)
+						.get(),
+				),
 			)
 			.flat(2),
 		fallback: 'blocking',

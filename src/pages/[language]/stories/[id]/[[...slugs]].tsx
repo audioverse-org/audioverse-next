@@ -50,6 +50,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getStoryDetailStaticPaths,
 		(d) => d.stories.nodes,
-		(languageRoute, { canonicalPath }) => canonicalPath
+		(languageRoute, { canonicalPath }) => canonicalPath,
 	);
 }

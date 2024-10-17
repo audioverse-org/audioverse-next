@@ -16,7 +16,7 @@ function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);
 	return (async function (
 		ui: ReactElement,
-		renderOptions?: RenderOptions
+		renderOptions?: RenderOptions,
 	): Promise<RenderResult & { queryClient: QueryClient }> {
 		return renderWithProviders(ui, renderOptions);
 	})(<Comp />);
@@ -52,7 +52,7 @@ describe('withAuthGuard', () => {
 		const { getByText, queryByText } = await render();
 
 		await waitFor(() =>
-			expect(queryByText('hello world')).not.toBeInTheDocument()
+			expect(queryByText('hello world')).not.toBeInTheDocument(),
 		);
 
 		when(fetchApi)

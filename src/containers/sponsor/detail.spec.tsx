@@ -97,7 +97,7 @@ describe('sponsor detail page', () => {
 
 		expect(getByAltText('the_sponsor_title')).toHaveAttribute(
 			'src',
-			'the_sponsor_image'
+			'the_sponsor_image',
 		);
 	});
 

@@ -3,9 +3,9 @@ import { Scalars } from '~src/__generated__/graphql';
 import { sponsorIsFavorited as _sponsorIsFavorited } from './__generated__/sponsorIsFavorited';
 
 export function sponsorIsFavorited(
-	id: Scalars['ID']['output']
+	id: Scalars['ID']['output'],
 ): Promise<boolean> {
 	return _sponsorIsFavorited({ id }).then(
-		({ sponsor }) => !!sponsor?.viewerHasFavorited
+		({ sponsor }) => !!sponsor?.viewerHasFavorited,
 	);
 }

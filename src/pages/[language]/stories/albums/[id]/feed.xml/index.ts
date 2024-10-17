@@ -41,7 +41,7 @@ export async function getServerSideProps({
 				description: await formatBooksDescription(languageRoute, sequence),
 				image: sequence.image?.url,
 			},
-			sequence.recordings.nodes || []
+			sequence.recordings.nodes || [],
 		);
 		res.write(feed);
 		res.end();

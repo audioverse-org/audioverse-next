@@ -29,7 +29,7 @@ export default function ButtonDownload({
 
 	const formatLabel = (
 		quality: 'high' | 'medium' | 'low',
-		filesize: string
+		filesize: string,
 	) => {
 		const values = {
 			size: readableBytes(filesize),
@@ -41,7 +41,7 @@ export default function ButtonDownload({
 						id: 'molecule-buttonDownload__linkLabelHigh',
 						defaultMessage: 'High Quality ({size})',
 					},
-					values
+					values,
 				);
 			case 'medium':
 				return intl.formatMessage(
@@ -49,7 +49,7 @@ export default function ButtonDownload({
 						id: 'molecule-buttonDownload__linkLabelMedium',
 						defaultMessage: 'Medium Quality ({size})',
 					},
-					values
+					values,
 				);
 			case 'low':
 				return intl.formatMessage(
@@ -57,7 +57,7 @@ export default function ButtonDownload({
 						id: 'molecule-buttonDownload__linkLabelLow',
 						defaultMessage: 'Low Quality ({size})',
 					},
-					values
+					values,
 				);
 		}
 	};
@@ -75,8 +75,8 @@ export default function ButtonDownload({
 									? BaseColors.SALMON
 									: BaseColors.WHITE
 								: isOpen
-								? BaseColors.RED
-								: BaseColors.DARK
+									? BaseColors.RED
+									: BaseColors.DARK
 						}
 						backgroundColor={backgroundColor}
 						aria-label={intl.formatMessage({
@@ -102,7 +102,7 @@ export default function ButtonDownload({
 								<a href={url} target="_blank" rel="noreferrer noopener">
 									{formatLabel(
 										bitrate <= 24 ? 'low' : bitrate <= 48 ? 'medium' : 'high',
-										filesize
+										filesize,
 									)}
 								</a>
 							</p>
@@ -122,8 +122,8 @@ export default function ButtonDownload({
 										? BaseColors.SALMON
 										: BaseColors.WHITE
 									: isOpen
-									? BaseColors.RED
-									: BaseColors.DARK
+										? BaseColors.RED
+										: BaseColors.DARK
 							}
 							backgroundColor={backgroundColor}
 							aria-label={intl.formatMessage({
@@ -157,9 +157,9 @@ export default function ButtonDownload({
 												frameSize <= 200000
 													? 'low'
 													: frameSize <= 400000
-													? 'medium'
-													: 'high',
-												filesize
+														? 'medium'
+														: 'high',
+												filesize,
 											)}
 										</a>
 									</p>

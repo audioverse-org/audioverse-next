@@ -4,7 +4,7 @@ export type PromiseController<T = unknown> = {
 	promise: Promise<T>;
 };
 export const createControlledPromise = <
-	T = unknown
+	T = unknown,
 >(): PromiseController<T> => {
 	let resolve: (value?: T) => void = () => {
 		throw new Error('called resolve before definition');

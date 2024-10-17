@@ -14,33 +14,31 @@ export type ICircleButtonProps = PropsWithChildren<{
 	ref?: Ref<HTMLButtonElement>;
 }>;
 
-const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
-	function CircleButton(
-		{
-			onClick,
-			backgroundColor,
-			className,
-			children,
-			...props
-		}: ICircleButtonProps,
-		ref: Ref<HTMLButtonElement>
-	): JSX.Element {
-		return (
-			<button
-				onClick={onClick}
-				className={clsx(
-					styles.base,
-					className,
-					`hover-bg--darkened-${backgroundColor}`
-				)}
-				title={props['aria-label']}
-				{...props}
-				ref={ref}
-			>
-				{children}
-			</button>
-		);
-	}
-);
+const CircleButton = React.forwardRef(function CircleButton(
+	{
+		onClick,
+		backgroundColor,
+		className,
+		children,
+		...props
+	}: ICircleButtonProps,
+	ref: Ref<HTMLButtonElement>,
+): JSX.Element {
+	return (
+		<button
+			onClick={onClick}
+			className={clsx(
+				styles.base,
+				className,
+				`hover-bg--darkened-${backgroundColor}`,
+			)}
+			title={props['aria-label']}
+			{...props}
+			ref={ref}
+		>
+			{children}
+		</button>
+	);
+});
 
 export default CircleButton;

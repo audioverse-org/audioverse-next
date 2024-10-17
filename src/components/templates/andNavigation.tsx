@@ -83,7 +83,7 @@ export default function AndNavigation({
 					className={clsx(
 						styles.search,
 						term !== undefined && styles.searchActive,
-						hideMobileSearch && styles.hideMobileSearch
+						hideMobileSearch && styles.hideMobileSearch,
 					)}
 					term={term}
 					onTermChange={(v) => setTerm(v)}

@@ -26,24 +26,24 @@ export const formatLongDateTime = (date: string | Date): string => {
 export const formatDateRange = (
 	startDate: string,
 	endDate: string,
-	useLongMonthFormat = false
+	useLongMonthFormat = false,
 ): string => {
 	const monthFormat = useLongMonthFormat ? 'MMMM' : 'MMM';
 	const [startYear, startMonth, startDay] = startDate.split('-');
 	const [endYear, endMonth, endDay] = endDate.split('-');
 	if (startYear !== endYear) {
 		return `${dayjs(startDate).format(`${monthFormat} D, YYYY`)} – ${dayjs(
-			endDate
+			endDate,
 		).format(`${monthFormat} D, YYYY`)}`;
 	}
 	if (startMonth !== endMonth) {
 		return `${dayjs(startDate).format(`${monthFormat} D`)} – ${dayjs(
-			endDate
+			endDate,
 		).format(`${monthFormat} D, YYYY`)}`;
 	}
 	if (startDay !== endDay) {
 		return `${dayjs(startDate).format(`${monthFormat} D`)} – ${dayjs(
-			endDate
+			endDate,
 		).format('D, YYYY')}`;
 	}
 	return `${dayjs(startDate).format(`${monthFormat} D, YYYY`)}`;

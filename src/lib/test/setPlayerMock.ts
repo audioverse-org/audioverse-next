@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import Player from 'video.js/dist/types/player';
 
 interface SetPlayerMockOptions {
 	isPaused?: boolean;
@@ -6,13 +7,13 @@ interface SetPlayerMockOptions {
 	duration?: number;
 	volume?: number;
 	playbackRate?: number;
-	functions?: Partial<videojs.Player>;
+	functions?: Partial<Player>;
 	supportsFullScreen?: boolean;
 	isFullscreen?: boolean;
 }
 
 type MockPlayer = Pick<
-	videojs.Player,
+	Player,
 	| 'play'
 	| 'pause'
 	| 'paused'
@@ -21,7 +22,6 @@ type MockPlayer = Pick<
 	| 'src'
 	| 'volume'
 	| 'options'
-	| 'controlBar'
 	| 'playbackRate'
 	| 'requestFullscreen'
 	| 'controls'
@@ -35,7 +35,7 @@ type MockPlayer = Pick<
 export const mockVideojs = videojs as unknown as jest.Mock;
 
 export default function setPlayerMock(
-	options: SetPlayerMockOptions = {}
+	options: SetPlayerMockOptions = {},
 ): MockPlayer {
 	let {
 		isPaused = true,
@@ -69,11 +69,11 @@ export default function setPlayerMock(
 		}),
 		pause: jest.fn(() => {
 			isPaused = true;
-			return mockPlayer as unknown as videojs.Player;
+			return mockPlayer as unknown as Player;
 		}),
 		paused: jest.fn(() => isPaused),
-		currentTime: jest.fn((newTime: number | null = null) => {
-			if (newTime !== null) time = newTime;
+		currentTime: jest.fn((newTime: number | undefined) => {
+			if (newTime !== undefined) time = newTime;
 			return time;
 		}),
 		volume: jest.fn((newVolume: number | null = null) => {
@@ -83,10 +83,6 @@ export default function setPlayerMock(
 		duration: jest.fn(() => duration),
 		src: jest.fn(),
 		options: jest.fn(),
-		controlBar: {
-			createEl: jest.fn(),
-			dispose: jest.fn(),
-		} as any,
 		playbackRate: jest.fn((newRate?: number) => {
 			if (newRate) playbackRate = newRate;
 			return playbackRate;

@@ -37,9 +37,9 @@ export async function getStaticProps({
 				},
 				{
 					personName: d?.person?.name,
-				}
+				},
 			),
-		})
+		}),
 	);
 }
 
@@ -48,6 +48,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,
 		(languageRoute, node) =>
-			`/${languageRoute}/presenters/${node.id}/appears/page/1`
+			`/${languageRoute}/presenters/${node.id}/appears/page/1`,
 	);
 }

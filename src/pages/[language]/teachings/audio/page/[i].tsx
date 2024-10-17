@@ -31,7 +31,7 @@ export async function getStaticProps({
 			});
 		},
 		(d) => d.sermons.nodes,
-		(d) => d.sermons.aggregate?.count
+		(d) => d.sermons.aggregate?.count,
 	);
 
 	const intl = await getIntl(getLanguageIdByRoute(params?.language));
@@ -52,6 +52,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'teachings/audio',
 		({ language }) => getSermonListPagePathsData({ language, hasVideo: false }),
-		(d) => d?.sermons.aggregate?.count
+		(d) => d?.sermons.aggregate?.count,
 	);
 }

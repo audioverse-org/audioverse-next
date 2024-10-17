@@ -30,7 +30,7 @@ export default function RoundImage({
 				styles.base,
 				large && styles.large,
 				small && styles.small,
-				className
+				className,
 			)}
 			unoptimized
 		/>

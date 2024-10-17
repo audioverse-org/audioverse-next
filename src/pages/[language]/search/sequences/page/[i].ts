@@ -27,7 +27,7 @@ export async function getServerSideProps({
 				term: query?.q as string,
 			}),
 		(d) => d.sequences.nodes,
-		(d) => d.sequences.aggregate?.count
+		(d) => d.sequences.aggregate?.count,
 	);
 	return {
 		props,

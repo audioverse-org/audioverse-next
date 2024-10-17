@@ -3,7 +3,7 @@ export function filterByExpectation<T>(items: T[], expectation: unknown): T[] {
 		try {
 			expect(item).toEqual(expectation);
 			return true;
-		} catch (e) {
+		} catch (_e) {
 			// noop
 		}
 		return false;
@@ -15,7 +15,7 @@ export function filterExpectations<T, E>(item: T, expectations: E[]): E[] {
 		try {
 			expect(item).toEqual(expectation);
 			return true;
-		} catch (e) {
+		} catch (_e) {
 			// noop
 		}
 		return false;

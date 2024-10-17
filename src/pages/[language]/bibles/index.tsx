@@ -39,7 +39,7 @@ export async function getStaticProps({
 	return {
 		props: {
 			versions: [...(response || []), ...apiBibles.collections.nodes].sort(
-				(a, b) => a.title.localeCompare(b.title)
+				(a, b) => a.title.localeCompare(b.title),
 			),
 			title: intl.formatMessage({
 				id: 'bible__title',

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import Link from '~components/atoms/linkWithoutPrefetch';
 import Button from '~components/molecules/button';
 import Dropdown from '~components/molecules/dropdown';
 import useLanguageRoute from '~lib/useLanguageRoute';
@@ -15,7 +15,7 @@ type Props = {
 	makeRoute: (
 		languageRoute: string,
 		filter: 'all' | 'audio' | 'video',
-		page: number
+		page: number,
 	) => string;
 };
 
@@ -47,7 +47,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 						<a
 							className={clsx(
 								styles.segmentedControl,
-								filter === 'all' && styles.segmentedControlActive
+								filter === 'all' && styles.segmentedControlActive,
 							)}
 						>
 							<FormattedMessage
@@ -61,7 +61,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 						<a
 							className={clsx(
 								styles.segmentedControl,
-								filter === 'video' && styles.segmentedControlActive
+								filter === 'video' && styles.segmentedControlActive,
 							)}
 						>
 							<FormattedMessage
@@ -75,7 +75,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 						<a
 							className={clsx(
 								styles.segmentedControl,
-								filter === 'audio' && styles.segmentedControlActive
+								filter === 'audio' && styles.segmentedControlActive,
 							)}
 						>
 							<FormattedMessage

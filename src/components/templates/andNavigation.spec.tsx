@@ -191,7 +191,7 @@ describe('AndNavigation', () => {
 					variables: expect.objectContaining({
 						term: 'abc',
 					}),
-				})
+				}),
 			);
 		});
 
@@ -201,7 +201,7 @@ describe('AndNavigation', () => {
 				variables: expect.objectContaining({
 					term: 'ab',
 				}),
-			})
+			}),
 		);
 	});
 
@@ -222,7 +222,7 @@ describe('AndNavigation', () => {
 					variables: expect.objectContaining({
 						term: 'a',
 					}),
-				})
+				}),
 			);
 		});
 
@@ -241,7 +241,7 @@ describe('AndNavigation', () => {
 					variables: expect.objectContaining({
 						term: 'ab',
 					}),
-				})
+				}),
 			);
 		});
 
@@ -251,7 +251,7 @@ describe('AndNavigation', () => {
 				variables: expect.objectContaining({
 					term: 'ab',
 				}),
-			})
+			}),
 		);
 	});
 

@@ -11,6 +11,8 @@ import React, {
 	useState,
 } from 'react';
 import type * as VideoJs from 'video.js';
+import Player from 'video.js/dist/types/player';
+import { SourceObject } from 'video.js/dist/types/tech/tech';
 
 import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
@@ -33,14 +35,14 @@ import {
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
-interface Playable extends VideoJs.default.Tech.SourceObject {
+interface Playable extends SourceObject {
 	duration: number;
 	logUrl?: string | null;
 }
 
 const getFiles = (
 	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
+	prefersAudio: boolean,
 ):
 	| AndMiniplayerFragment['audioFiles']
 	| AndMiniplayerFragment['videoFiles']
@@ -58,7 +60,7 @@ const getFiles = (
 
 export const getSources = (
 	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
+	prefersAudio: boolean,
 ): Playable[] => {
 	const files = getFiles(recording, prefersAudio) || [];
 
@@ -71,14 +73,14 @@ export const getSources = (
 };
 
 export const shouldLoadRecordingPlaybackProgress = (
-	recording: AndMiniplayerFragment | null | undefined
+	recording: AndMiniplayerFragment | null | undefined,
 ) =>
 	!!recording?.id &&
 	!(recording.id + '').includes('/') && // Bible ids
 	!!getSessionToken();
 
 export type PlaybackContextType = {
-	player: () => VideoJs.VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
+	player: () => Player | undefined; // TODO: remove this in favor of single-purpose methods
 	play: () => void;
 	chromecastTrigger: () => void;
 	airPlayTrigger: () => void;
@@ -99,11 +101,11 @@ export type PlaybackContextType = {
 			onLoad?: (c: PlaybackContextType) => void;
 			prefersAudio?: boolean;
 		},
-		source?: PlaySource
+		source?: PlaySource,
 	) => void;
 	setVideoHandler: (
 		id: Scalars['ID']['output'],
-		handler: (el: Element) => void
+		handler: (el: Element) => void,
 	) => void;
 	unsetVideoHandler: (id: Scalars['ID']['output']) => void;
 	hasPlayer: () => boolean;
@@ -127,7 +129,7 @@ export type PlaybackContextType = {
 	_setRecording: (
 		recording: AndMiniplayerFragment,
 		prefersAudio?: boolean,
-		source?: PlaySource
+		source?: PlaySource,
 	) => void;
 };
 
@@ -187,10 +189,10 @@ export default function AndPlaybackContext({
 
 	const [videojs] = useState<Promise<VideoJsType>>(() => import('video.js'));
 	const [airplay] = useState<Promise<Airplay>>(
-		() => import('@silvermine/videojs-airplay')
+		() => import('@silvermine/videojs-airplay'),
 	);
 	const [chromecast] = useState<Promise<Chromecast>>(
-		() => import('@silvermine/videojs-chromecast')
+		() => import('@silvermine/videojs-chromecast'),
 	);
 
 	const [sourceRecordings, setSourceRecordings] =
@@ -199,7 +201,7 @@ export default function AndPlaybackContext({
 	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
-	const playerRef = useRef<VideoJs.VideoJsPlayer>();
+	const playerRef = useRef<Player>();
 	const progressRef = useRef<number>(0);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
@@ -212,8 +214,8 @@ export default function AndPlaybackContext({
 
 	const queryClient = useQueryClient();
 
-	const { mutate: updateProgress } = useMutation(
-		({
+	const { mutate: updateProgress } = useMutation({
+		mutationFn: ({
 			percentage,
 		}: Pick<RecordingPlaybackProgressSetMutationVariables, 'percentage'>) => {
 			if (!getSessionToken() || !recording) {
@@ -223,8 +225,8 @@ export default function AndPlaybackContext({
 				id: recording.id,
 				percentage,
 			});
-		}
-	);
+		},
+	});
 
 	const sourcesRef = useRef<Playable[]>([]);
 	useEffect(() => {
@@ -238,7 +240,7 @@ export default function AndPlaybackContext({
 		let newBufferedProgress = +Math.max(
 			bufferedProgress, // Don't ever reduce the buffered amount
 			progress, // We've always buffered as much as we're playing
-			(playerBufferedEnd || 0) / duration // Actually compute current buffered progress
+			(playerBufferedEnd || 0) / duration, // Actually compute current buffered progress
 		).toFixed(2);
 		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
 		setBufferedProgress(newBufferedProgress);
@@ -246,7 +248,7 @@ export default function AndPlaybackContext({
 
 	const throttledUpdateProgress = useMemo(
 		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
-		[updateProgress]
+		[updateProgress],
 	);
 	const setProgress = useCallback(
 		(p: number) => {
@@ -255,7 +257,7 @@ export default function AndPlaybackContext({
 			});
 			_setProgress(p);
 		},
-		[throttledUpdateProgress]
+		[throttledUpdateProgress],
 	);
 
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -284,7 +286,9 @@ export default function AndPlaybackContext({
 			0,
 		setTime: (t: number) => {
 			if (!playerRef.current) return;
-			setProgress(t / playerRef.current.duration());
+			const duration = playerRef.current.duration();
+			if (!duration) return;
+			setProgress(t / duration);
 			playerRef.current.currentTime(t);
 		},
 		setPrefersAudio: (prefersAudio: boolean) => {
@@ -315,7 +319,7 @@ export default function AndPlaybackContext({
 			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 			recordingId: string | number,
 			options = {},
-			source?: PlaySource
+			source?: PlaySource,
 		) => {
 			const { onLoad, prefersAudio } = options;
 			onLoadRef.current = onLoad;
@@ -342,7 +346,7 @@ export default function AndPlaybackContext({
 		},
 		setVideoHandler: (
 			id: Scalars['ID']['output'],
-			handler: (el: Element) => void
+			handler: (el: Element) => void,
 		) => {
 			setVideoHandlerId(id);
 			videoHandlerIdRef.current = id;
@@ -382,14 +386,14 @@ export default function AndPlaybackContext({
 				return;
 			}
 			const currentIndex = sourceRecordings.findIndex(
-				(item) => item.id === recording?.id
+				(item) => item.id === recording?.id,
 			);
 			if (currentIndex !== -1 && currentIndex + 1 < sourceRecordings.length) {
 				setRecording(sourceRecordings[currentIndex + 1]);
 				onLoadRef.current = () => playback.play();
 				playback._setRecording(
 					sourceRecordings[currentIndex + 1],
-					prefersAudio
+					prefersAudio,
 				);
 			}
 		},
@@ -402,7 +406,7 @@ export default function AndPlaybackContext({
 		_setRecording: (
 			recording: AndMiniplayerFragment,
 			prefersAudio: boolean | undefined,
-			source: PlaySource | undefined
+			source: PlaySource | undefined,
 		) => {
 			const currentVideoEl = videoElRef.current;
 			if (!currentVideoEl) return;
@@ -446,7 +450,7 @@ export default function AndPlaybackContext({
 					]);
 
 				const speakersNames = recordingExtraData?.recording?.speakers.map(
-					(speaker) => speaker.name
+					(speaker) => speaker.name,
 				);
 				analytics.track('Play', {
 					id: recording.id,
@@ -461,7 +465,7 @@ export default function AndPlaybackContext({
 				});
 			};
 
-			const options: VideoJs.VideoJsPlayerOptions = {
+			const options = {
 				poster: '/img/poster.jpg',
 				controls: false,
 				preload: 'auto',
