@@ -77,7 +77,7 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 
 	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
 		infiniteQuery(
-			{ language, after: 'after' },
+			{ language, after: null },
 			{
 				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
 					if (!last) return;

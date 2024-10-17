@@ -21,7 +21,7 @@ export default function AllSponsors(props: Props) {
 
 	const { data, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } =
 		useInfiniteGetSponsorListAllPageDataQuery(
-			{ language, after: 'after' },
+			{ language, after: null },
 			{
 				getNextPageParam: (lastPage: Maybe<GetSponsorListAllPageDataQuery>) => {
 					const pageInfo = lastPage?.sponsors.pageInfo;

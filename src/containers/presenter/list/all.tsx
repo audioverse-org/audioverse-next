@@ -17,7 +17,7 @@ export default function All(props: PresentersProps) {
 		useInfiniteGetPresenterListAllPageDataQuery(
 			{
 				language,
-				after: 'after',
+				after: null,
 			},
 			{
 				getNextPageParam: (lastPage) =>
