@@ -1,11 +1,11 @@
 query getSectionConferenceSeries(
 	$language: Language!
-	$collectionId: ID!
+	$id: ID!
 	$first: Int! = 15
 	$after: String = null
 ) {
 	sequences(
-		collectionId: $collectionId
+		collectionId: $id
 		language: $language
 		first: $first
 		after: $after

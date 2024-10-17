@@ -1,4 +1,4 @@
-query getConferencePresenterDetailPageData($id: ID!, $collectionId: ID = null) {
+query getConferencePresenterDetailPageData($id: ID!, $collectionId: ID!) {
 	person(id: $id) {
 		id
 		name
@@ -22,6 +22,9 @@ query getConferencePresenterDetailPageData($id: ID!, $collectionId: ID = null) {
 				...cardRecording
 			}
 		}
+	}
+	collection(id: $collectionId) {
+		title
 	}
 }
 

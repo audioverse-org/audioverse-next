@@ -29,11 +29,12 @@ type SectionRoot<T> = {
 };
 
 type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
-type PageInfoSelector<T, _N> = (page?: T) => Maybe<PageInfo>;
+type PageInfoSelector<T> = (page?: T) => Maybe<PageInfo>;
 type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
 
-type SectionProps<T, N> = {
+type SectionProps<T, V, N> = {
 	infiniteQuery: T;
+	variables?: V;
 	heading: string | JSX.Element;
 	previous: string;
 	next: string;
@@ -44,8 +45,7 @@ type SectionProps<T, N> = {
 	hasBg?: boolean;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
 	selectPageInfo?: PageInfoSelector<
-		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>,
-		N
+		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>
 	>;
 	Card: Card<N>;
 };
@@ -67,8 +67,9 @@ function defaultSelectPageInfo<T, N>(page?: T): Maybe<PageInfo> {
 	return selectSectionRoot<T, N>(page)?.pageInfo || null;
 }
 
-export default function Section<T extends GraphqlInfiniteQuery, N>({
+export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 	infiniteQuery,
+	variables,
 	heading,
 	selectNodes = defaultSelectNodes,
 	selectPageInfo = defaultSelectPageInfo,
@@ -77,13 +78,13 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 	isDarkBg,
 	hasBg,
 	...props
-}: SectionProps<T, N>): JSX.Element {
+}: SectionProps<T, V, N>): JSX.Element {
 	const language = useLanguageId();
 
 	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
 		infiniteQuery(
 			'after',
-			{ language },
+			{ language, ...variables },
 			{
 				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
 					if (!last) return;

@@ -8,7 +8,9 @@ const conferences = (r: string) => ({
 		node(`${r}/${conferenceId}`, (r) => ({
 			feed: node(`${r}/feed.xml`),
 			sequences: paginatedNode(`${r}/sequences`),
-			presenters: paginatedNode(`${r}/presenters`),
+			presenters: paginatedNode(`${r}/presenters`, (r) => ({
+				id: (id: Scalars['ID']['output']) => node(`${r}/${id}`),
+			})),
 			teachings: paginatedNode(`${r}/teachings`),
 		})),
 });

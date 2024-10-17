@@ -7,10 +7,7 @@ import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/useLanguageId';
 
 import Section from '.';
-import {
-	GetSectionConferenceTeachingsQueryVariables,
-	useInfiniteGetSectionConferenceTeachingsQuery,
-} from './__generated__/conferenceTeachings';
+import { useInfiniteGetSectionConferenceTeachingsQuery } from './__generated__/conferenceTeachings';
 
 export default function Teachings(props: {
 	heading?: string | JSX.Element;
@@ -29,20 +26,11 @@ export default function Teachings(props: {
 		isDarkBg,
 	} = props;
 
-	const useInfiniteQuery = (
-		pageParamKey: keyof GetSectionConferenceTeachingsQueryVariables
-	) => {
-		return useInfiniteGetSectionConferenceTeachingsQuery(pageParamKey, {
-			language: lang,
-			first: 36,
-			collectionId,
-		});
-	};
-
 	return (
 		<Section
 			rows={3}
-			infiniteQuery={useInfiniteQuery}
+			infiniteQuery={useInfiniteGetSectionConferenceTeachingsQuery}
+			variables={{ id: collectionId }}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'organismSection_TeachingsPrevious',

@@ -82,21 +82,13 @@
 		}
 	}
 }
-.arrowSalmonBg {
-	background: $ts-salmon;
-
-	@media (min-width: $breakpoint-lg) {
-		background: transparent;
-	}
-}
 
 .base:hover .arrow:not(:disabled) {
 	opacity: 1;
 }
-.base:hover .arrowSalmon:not(:disabled) {
-	opacity: 1;
-}
+
 .base swiper-container {
+	overflow: hidden;
 	flex-grow: 1;
 }
 

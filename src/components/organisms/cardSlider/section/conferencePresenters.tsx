@@ -4,13 +4,10 @@ import { useIntl } from 'react-intl';
 import { ConferencePersonFragment } from '~src/components/molecules/card/__generated__/conferencePerson';
 import CardPerson from '~src/components/molecules/card/person';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
+import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import Section from '.';
-import {
-	GetSectionConferencePresentersQueryVariables,
-	useInfiniteGetSectionConferencePresentersQuery,
-} from './__generated__/conferencePresenters';
+import { useInfiniteGetSectionConferencePresentersQuery } from './__generated__/conferencePresenters';
 
 export default function Presenters(props: {
 	heading?: string | JSX.Element;
@@ -18,7 +15,7 @@ export default function Presenters(props: {
 	isDarkBg?: boolean;
 }): JSX.Element {
 	const intl = useIntl();
-	const lang = useLanguageId();
+	const lang = useLanguageRoute();
 
 	const {
 		heading = intl.formatMessage({
@@ -29,20 +26,11 @@ export default function Presenters(props: {
 		isDarkBg,
 	} = props;
 
-	const useInfiniteQuery = (
-		pageParamKey: keyof GetSectionConferencePresentersQueryVariables
-	) => {
-		return useInfiniteGetSectionConferencePresentersQuery(pageParamKey, {
-			language: lang,
-			first: 30,
-			id: collectionId,
-		});
-	};
-
 	return (
 		<Section
 			rows={2}
-			infiniteQuery={useInfiniteQuery}
+			infiniteQuery={useInfiniteGetSectionConferencePresentersQuery}
+			variables={{ id: collectionId }}
 			heading={heading}
 			previous={intl.formatMessage({
 				id: 'organismSection_presentersPrevious',
@@ -57,7 +45,11 @@ export default function Presenters(props: {
 				<CardPerson
 					person={{
 						...p.node,
-						canonicalPath: `/${lang}/conferences/${collectionId}/presenters/${p.node.id}`,
+						canonicalPath: root
+							.lang(lang)
+							.conferences.id(collectionId)
+							.presenters.id(p.node.id)
+							.get(),
 					}}
 					midinit
 					key={p.node.canonicalPath}

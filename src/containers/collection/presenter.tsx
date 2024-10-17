@@ -25,16 +25,13 @@ import Heading6 from '~src/components/atoms/heading6';
 import { GetConferencePresenterDetailPageDataQuery } from '~src/containers/collection/__generated__/presenter';
 import { Must } from '~src/types/types';
 
-import { GetCollectionBasicDataQuery } from './__generated__/detail';
 import styles from './presenter.module.scss';
 
-export type PresenterDetailProps = GetConferencePresenterDetailPageDataQuery & {
-	collectionBasic: GetCollectionBasicDataQuery | null;
-};
+export type PresenterDetailProps = GetConferencePresenterDetailPageDataQuery;
 
 function PresenterDetail({
 	person,
-	collectionBasic,
+	collection,
 }: Must<PresenterDetailProps>): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageRoute();
@@ -127,8 +124,7 @@ function PresenterDetail({
 							id="presenterDetail__conferenceRecordingsLabel"
 							defaultMessage="{conferenceTitle}"
 							values={{
-								conferenceTitle:
-									collectionBasic?.collection?.title || 'Conference Recordings',
+								conferenceTitle: collection.title || 'Conference Recordings',
 							}}
 						/>
 					</LineHeading>

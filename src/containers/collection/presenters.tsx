@@ -48,7 +48,11 @@ function CollectionPresenters({
 					<CardPerson
 						person={{
 							...node,
-							canonicalPath: `/${lang}/conferences/${collection.id}/presenters/${node.id}`,
+							canonicalPath: root
+								.lang(lang)
+								.conferences.id(collection.id)
+								.presenters.id(node.id)
+								.get(),
 						}}
 						key={node.canonicalPath}
 						midinit={true}

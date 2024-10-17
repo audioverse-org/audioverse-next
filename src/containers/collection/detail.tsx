@@ -30,8 +30,6 @@ import { Must } from '~src/types/types';
 import { GetCollectionDetailPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
-const PAGE_SIZE = 20;
-
 export type CollectionDetailProps = GetCollectionDetailPageDataQuery;
 
 function CollectionDetail({
@@ -56,7 +54,7 @@ function CollectionDetail({
 		shareUrl,
 		sponsor,
 		sequences,
-		recordings: rec,
+		recordings,
 	} = collection;
 
 	const details: IDefinitionListTerm[] = [];
@@ -150,7 +148,7 @@ function CollectionDetail({
 									id="collectionDetail__teachingsCountLabel"
 									defaultMessage="{count} Teachings"
 									description="Collection Detail teachings count label"
-									values={{ count: rec?.aggregate?.count }}
+									values={{ count: recordings.aggregate?.count }}
 								/>
 							)}
 						</Heading6>

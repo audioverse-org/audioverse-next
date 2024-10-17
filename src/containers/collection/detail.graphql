@@ -56,17 +56,6 @@ query getCollectionFeedData($id: ID!) {
 	}
 }
 
-query getCollectionBasicData($id: ID!) {
-	collection(id: $id) {
-		title
-		canonicalUrl(useFuturePath: true)
-		language
-		image {
-			url(size: 600)
-		}
-	}
-}
-
 query getCollectionDetailPathsData($language: Language!, $first: Int) {
 	collections(language: $language, first: $first) {
 		nodes {
