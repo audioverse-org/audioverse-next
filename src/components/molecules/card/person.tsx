@@ -15,11 +15,12 @@ import { analytics } from '~src/lib/analytics';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonTypeLockup from '../personTypeLockup';
+import { ConferencePersonFragment } from './__generated__/conferencePerson';
 import { CardPersonFragment } from './__generated__/person';
 import styles from './person.module.scss';
 
 interface CardCollectionProps {
-	person: CardPersonFragment;
+	person: CardPersonFragment | ConferencePersonFragment;
 	compact?: boolean;
 	largeinit?: boolean;
 	midinit?: boolean;

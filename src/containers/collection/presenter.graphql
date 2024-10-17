@@ -1,0 +1,38 @@
+query getConferencePresenterDetailPageData($id: ID!, $collectionId: ID!) {
+	person(id: $id) {
+		id
+		name
+		description
+		canonicalUrl(useFuturePath: true)
+		language
+		shareUrl
+		imageWithFallback {
+			url(size: 128)
+		}
+		website
+
+		conferenceRecordings: recordings(
+			collectionId: $collectionId
+			orderBy: [{ field: DOWNLOADS_ALL_TIME, direction: DESC }]
+		) {
+			aggregate {
+				count
+			}
+			nodes {
+				...cardRecording
+			}
+		}
+	}
+	collection(id: $collectionId) {
+		title
+	}
+}
+
+query getConferencePresenterDetailPathsData($language: Language!, $first: Int) {
+	persons(language: $language, first: $first) {
+		nodes {
+			id
+			canonicalPath(useFuturePath: true)
+		}
+	}
+}

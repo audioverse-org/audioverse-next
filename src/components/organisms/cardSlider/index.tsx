@@ -14,6 +14,8 @@ type SliderProps = {
 	previous: string;
 	next: string;
 	rows?: number;
+	isDarkBg?: boolean;
+	hasBg?: boolean;
 	minCardWidth?: number;
 };
 
@@ -53,6 +55,8 @@ export default function Slider({
 	previous,
 	next,
 	rows = 1,
+	isDarkBg,
+	hasBg,
 	minCardWidth = MIN_CARD_WIDTH,
 }: SliderProps): JSX.Element {
 	const [swiper, setSwiper] = useState<Swiper>();
@@ -117,10 +121,12 @@ export default function Slider({
 				disabled={isBeginning}
 				aria-label={previous}
 			>
-				<IconBack />
+				<IconBack color={isDarkBg && '#fff'} />
 			</button>
 
-			<LazySwiper on={handlers}>{slides}</LazySwiper>
+			<LazySwiper on={handlers} className={hasBg ? styles.whiteBg : ''}>
+				{slides}
+			</LazySwiper>
 
 			<button
 				className={styles.arrow}
@@ -128,7 +134,7 @@ export default function Slider({
 				disabled={isEnd}
 				aria-label={next}
 			>
-				<IconForward />
+				<IconForward color={isDarkBg && '#fff'} />
 			</button>
 		</div>
 	);

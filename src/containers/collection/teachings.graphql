@@ -5,14 +5,17 @@ query getCollectionTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
 		recordings(
 			offset: $offset
 			first: $first
-			sequenceId: 0
-			orderBy: [{ field: TITLE, direction: ASC }]
+			orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
 		) {
 			nodes {
 				...cardRecording
 			}
 			aggregate {
 				count
+			}
+			pageInfo {
+				endCursor
+				hasNextPage
 			}
 		}
 	}

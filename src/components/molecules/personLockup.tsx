@@ -13,11 +13,13 @@ export default function PersonLockup({
 	isLinked,
 	...props
 }: Props): JSX.Element {
+	const href = isLinked ? canonicalPath : undefined;
+
 	return (
 		<NamedAvatar
 			name={name}
 			image={imageWithFallback.url}
-			href={isLinked ? canonicalPath : undefined}
+			href={href}
 			{...props}
 		/>
 	);
