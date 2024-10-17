@@ -79,13 +79,12 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 		infiniteQuery(
 			{ language, after: null },
 			{
-				initialPageParam: { language, after: null },
+				initialPageParam: null,
 				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
 					if (!last) return;
 					const pageInfo = selectPageInfo(last);
 					if (!pageInfo?.hasNextPage) return;
 					return {
-						language,
 						after: pageInfo.endCursor,
 					};
 				},

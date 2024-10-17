@@ -26,7 +26,7 @@ export default function AllSponsors(props: Props) {
 				getNextPageParam: (lastPage: Maybe<GetSponsorListAllPageDataQuery>) => {
 					const pageInfo = lastPage?.sponsors.pageInfo;
 					if (!pageInfo?.hasNextPage) return;
-					return { language, after: pageInfo.endCursor };
+					return { after: pageInfo.endCursor };
 				},
 				initialPageParam: null,
 			},
