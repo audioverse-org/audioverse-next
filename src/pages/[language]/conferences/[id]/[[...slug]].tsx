@@ -24,11 +24,11 @@ export async function getStaticProps({
 	GetStaticPropsResult<CollectionDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
-	const { collection } = await getCollectionDetailPageData({ id }).catch(
-		() => ({
-			collection: null,
-		})
-	);
+	const { collection } = await getCollectionDetailPageData({
+		id,
+	}).catch(() => ({
+		collection: null,
+	}));
 	if (
 		collection?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
 	) {

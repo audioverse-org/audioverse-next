@@ -24,5 +24,7 @@
 
 .card_fullBleed {
 	@extend %common-styles;
+	display: inline-block;
+	max-height: fit-content;
 	border-bottom: 1px solid #ddd;
 }

@@ -535,37 +535,16 @@
   "collectionDetail__locationLabel": {
     "string": "Location"
   },
-  "collectionDetail__presentersAllLabel": {
-    "string": "See All Presenters"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Presenters"
-  },
   "collectionDetail__sequenceCountLabel": {
     "comment": "Collection Detail sequence count label",
     "string": "{count} Series"
   },
-  "collectionDetail__seriesAllLabel": {
-    "string": "See All Series"
-  },
-  "collectionDetail__seriesLabel": {
-    "comment": "Collection Detail series label",
-    "string": "Series"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "Sponsor"
-  },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "See All Individual Teachings"
   },
   "collectionDetail__teachingsCountLabel": {
     "comment": "Collection Detail teachings count label",
     "string": "{count} Teachings"
-  },
-  "collectionDetail__teachingsLabel": {
-    "comment": "Collection Detail teachings label",
-    "string": "Individual Teachings"
   },
   "collectionPresenterssDetail__heading": {
     "string": "All Presenters"
@@ -1917,6 +1896,24 @@
     "comment": "recording sponsor info title",
     "string": "Sponsor"
   },
+  "organismSection_SeriesHeading": {
+    "string": "Series"
+  },
+  "organismSection_SeriesNext": {
+    "string": "Next Series"
+  },
+  "organismSection_SeriesPrevious": {
+    "string": "Previous Series"
+  },
+  "organismSection_TeachingsHeading": {
+    "string": "Teachings"
+  },
+  "organismSection_TeachingsNext": {
+    "string": "Next Teachings"
+  },
+  "organismSection_TeachingsPrevious": {
+    "string": "Previous Teachings"
+  },
   "organismSection__audiobooksHeading": {
     "string": "Books"
   },
@@ -2092,6 +2089,9 @@
   "presenterDetail__audiobookTracksCountLabel": {
     "comment": "Presenter detail audiobook tracks count label",
     "string": "{count} Audiobook Tracks"
+  },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
   },
   "presenterDetail__descriptionLabel": {
     "string": "Description"
