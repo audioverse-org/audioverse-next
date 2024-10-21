@@ -116,12 +116,12 @@ export default function Slider({
 			}}
 		>
 			<button
-				className={styles.arrow}
+				className={`${styles.arrow}${isDarkBg && ' ' + styles.arrowWhite}`}
 				onClick={() => swiper?.slidePrev()}
 				disabled={isBeginning}
 				aria-label={previous}
 			>
-				<IconBack color={isDarkBg && '#fff'} />
+				<IconBack />
 			</button>
 
 			<LazySwiper on={handlers} className={hasBg ? styles.whiteBg : ''}>
@@ -129,12 +129,12 @@ export default function Slider({
 			</LazySwiper>
 
 			<button
-				className={styles.arrow}
+				className={`${styles.arrow}${isDarkBg && ' ' + styles.arrowWhite}`}
 				onClick={() => swiper?.slideNext()}
 				disabled={isEnd}
 				aria-label={next}
 			>
-				<IconForward color={isDarkBg && '#fff'} />
+				<IconForward />
 			</button>
 		</div>
 	);

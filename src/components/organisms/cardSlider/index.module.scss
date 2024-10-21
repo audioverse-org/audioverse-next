@@ -82,6 +82,11 @@
 		}
 	}
 }
+.arrowWhite {
+	@media (min-width: $breakpoint-lg) {
+		color: $ts-white;
+	}
+}
 
 .base:hover .arrow:not(:disabled) {
 	opacity: 1;
