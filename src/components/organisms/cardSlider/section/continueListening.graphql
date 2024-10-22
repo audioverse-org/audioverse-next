@@ -2,6 +2,7 @@ query getSectionContinueListening(
 	$language: Language!
 	$first: Int! = 3
 	$after: String = null
+	$getFavorites: Boolean = false
 ) {
 	me {
 		user {
@@ -10,11 +11,24 @@ query getSectionContinueListening(
 				first: $first
 				after: $after
 				hasIncompletePlaybackSession: true
-			) {
+			) @skip(if: $getFavorites) {
 				nodes {
 					recording {
 						...cardRecording
 					}
+				}
+				pageInfo {
+					hasNextPage
+					endCursor
+				}
+			}
+			favoriteRecordings(
+				first: $first
+				after: $after
+				viewerPlaybackSessionStatus: UNSTARTED
+			) @include(if: $getFavorites) {
+				nodes {
+					...cardRecording
 				}
 				pageInfo {
 					hasNextPage

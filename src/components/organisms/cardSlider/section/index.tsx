@@ -32,9 +32,10 @@ type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
 type PageInfoSelector<T> = (page?: T) => Maybe<PageInfo>;
 type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
 
-type SectionProps<T, V, N> = {
+type SectionProps<T, V, O, N> = {
 	infiniteQuery: T;
 	variables?: V;
+	options?: O;
 	heading: string | JSX.Element;
 	previous: string;
 	next: string;
@@ -65,9 +66,10 @@ function defaultSelectPageInfo<T, N>(page?: T): Maybe<PageInfo> {
 	return selectSectionRoot<T, N>(page)?.pageInfo || null;
 }
 
-export default function Section<T extends GraphqlInfiniteQuery, V, N>({
+export default function Section<T extends GraphqlInfiniteQuery, V, O, N>({
 	infiniteQuery,
 	variables,
+	options,
 	heading,
 	selectNodes = defaultSelectNodes,
 	selectPageInfo = defaultSelectPageInfo,
@@ -76,7 +78,7 @@ export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 	isDarkBg,
 	hasBg,
 	...props
-}: SectionProps<T, V, N>): JSX.Element {
+}: SectionProps<T, V, O, N>): JSX.Element {
 	const language = useLanguageId();
 
 	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
@@ -92,6 +94,7 @@ export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 						after: pageInfo.endCursor,
 					};
 				},
+				...options,
 			},
 		);
 
