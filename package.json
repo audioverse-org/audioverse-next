@@ -45,7 +45,7 @@
         "@tanstack/react-query-devtools": "^5.56.2",
         "caniuse-lite": "^1.0.30001669",
         "clsx": "^2.1.1",
-        "cookie": "^0.6.0",
+        "cookie": "^0.7.0",
         "dayjs": "^1.11.13",
         "feed": "git+https://mattleff@github.com/mattleff/feed.git#custome-elements-build",
         "full-icu": "^1.5.0",
