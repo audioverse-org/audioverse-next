@@ -1111,18 +1111,6 @@
       "value": "現在地"
     }
   ],
-  "collectionDetail__presentersAllLabel": [
-    {
-      "type": 0,
-      "value": "全てのプリゼンターを表示"
-    }
-  ],
-  "collectionDetail__presentersLabel": [
-    {
-      "type": 0,
-      "value": "プリゼンター"
-    }
-  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -1133,28 +1121,10 @@
       "value": "シリーズ"
     }
   ],
-  "collectionDetail__seriesAllLabel": [
-    {
-      "type": 0,
-      "value": "全てのシリーズを表示"
-    }
-  ],
-  "collectionDetail__seriesLabel": [
-    {
-      "type": 0,
-      "value": "シリーズ"
-    }
-  ],
   "collectionDetail__sponsorLabel": [
     {
       "type": 0,
       "value": "主催者"
-    }
-  ],
-  "collectionDetail__teachingsAllLabel": [
-    {
-      "type": 0,
-      "value": "レッスンの全ての個々のセクションを表示"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -1169,12 +1139,6 @@
     {
       "type": 0,
       "value": "個"
-    }
-  ],
-  "collectionDetail__teachingsLabel": [
-    {
-      "type": 0,
-      "value": "レッスンの個々のセクション"
     }
   ],
   "collectionPresenterssDetail__heading": [
@@ -3997,6 +3961,42 @@
       "value": "主催者"
     }
   ],
+  "organismSection_SeriesHeading": [
+    {
+      "type": 0,
+      "value": "シリーズ"
+    }
+  ],
+  "organismSection_SeriesNext": [
+    {
+      "type": 0,
+      "value": "Next Series"
+    }
+  ],
+  "organismSection_SeriesPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Series"
+    }
+  ],
+  "organismSection_TeachingsHeading": [
+    {
+      "type": 0,
+      "value": "レッスン"
+    }
+  ],
+  "organismSection_TeachingsNext": [
+    {
+      "type": 0,
+      "value": "Next Teachings"
+    }
+  ],
+  "organismSection_TeachingsPrevious": [
+    {
+      "type": 0,
+      "value": "Previous Teachings"
+    }
+  ],
   "organismSection__audiobooksHeading": [
     {
       "type": 0,
@@ -4337,6 +4337,12 @@
     {
       "type": 0,
       "value": "電子本のトラック"
+    }
+  ],
+  "presenterDetail__conferenceRecordingsLabel": [
+    {
+      "type": 1,
+      "value": "conferenceTitle"
     }
   ],
   "presenterDetail__descriptionLabel": [

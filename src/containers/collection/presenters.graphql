@@ -9,7 +9,7 @@ query getCollectionPresentersPageData($id: ID!, $offset: Int, $first: Int) {
 			orderBy: [{ field: NAME, direction: ASC }]
 		) {
 			nodes {
-				...cardPerson
+				...conferencePerson
 			}
 			aggregate {
 				count

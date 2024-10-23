@@ -152,26 +152,8 @@
     "comment": "Collection Detail sequence count label",
     "string": "{count} Serien"
   },
-  "collectionDetail__seriesAllLabel": {
-    "string": "Alle Serien anzeigen"
-  },
-  "collectionDetail__seriesLabel": {
-    "comment": "Collection Detail series label",
-    "string": "Serien"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "Sponsor"
-  },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "Alle einzelnen Lehren anzeigen"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Collection Detail teachings count label",
-    "string": "{count} Lehren"
-  },
-  "collectionDetail__teachingsLabel": {
-    "comment": "Collection Detail teachings label",
-    "string": "Einzelne Lehren"
   },
   "collectionPresenterssDetail__heading": {
     "string": "Alle Sprecher"
@@ -1145,13 +1127,6 @@
   },
   "cardSongBook__numSongs": {
     "string": "{count} Lieder"
-  },
-  "collectionDetail__presentersAllLabel": {
-    "string": "Alle Sprecher anzeigen"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Collection Detail speakers label",
-    "string": "Sprecher"
   },
   "collectionType__audiobookSeries": {
     "string": "Buchserie"
@@ -2744,5 +2719,30 @@
   },
   "discover_continueListeningHeading": {
     "string": "Continue Listening"
+  },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{count} Lehren"
+  },
+  "organismSection_SeriesHeading": {
+    "string": "Serien"
+  },
+  "organismSection_SeriesNext": {
+    "string": "Next Series"
+  },
+  "organismSection_SeriesPrevious": {
+    "string": "Previous Series"
+  },
+  "organismSection_TeachingsHeading": {
+    "string": "Lehren"
+  },
+  "organismSection_TeachingsNext": {
+    "string": "Next Teachings"
+  },
+  "organismSection_TeachingsPrevious": {
+    "string": "Previous Teachings"
   }
 }
