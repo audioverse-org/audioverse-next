@@ -20,48 +20,18 @@ query getCollectionDetailPageData($id: ID!) {
 			canonicalPath(useFuturePath: true)
 			...sponsorLockup
 		}
-		persons(
-			first: 3
-			role: SPEAKER
-			orderBy: [
-				{ field: RECORDING_COUNT, direction: DESC }
-				{ field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC }
-			]
-		) {
-			nodes {
-				...cardPerson
-			}
-			pageInfo {
-				hasNextPage
-			}
-		}
-		sequences(
-			first: 3
-			orderBy: [{ field: RECORDING_COUNT, direction: DESC }]
-		) {
+
+		sequences(orderBy: [{ field: RECORDING_COUNT, direction: DESC }]) {
 			aggregate {
 				count
 			}
-			nodes {
-				...cardSequence
-			}
-			pageInfo {
-				hasNextPage
-			}
 		}
 		recordings(
-			first: 3
 			sequenceId: 0
 			orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
 		) {
 			aggregate {
 				count
-			}
-			nodes {
-				...cardRecording
-			}
-			pageInfo {
-				hasNextPage
 			}
 		}
 	}

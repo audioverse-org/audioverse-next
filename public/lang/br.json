@@ -77,7 +77,7 @@
     "string": "Os materiais devem ser entregues com espírito de reverência, respeito e humildade, pois reconhecemos que eles representam o Evangelho de Jesus Cristo. Rejeitamos uma atitude rancorosa, arrogante, vulgar, irreverente, petulante, frívola, humilhante, ou algo que não se pareça com uma atitude cristã."
   },
   "about__spirit12": {
-    "string": "Os materiais devem vir de oradores ligados a organizações ou grupos que defendem e representam o “Espirito do AudioVerse” descrito acima. Que eles sejam Adventistas do Sétimo Dia com uma boa reputação."
+    "string": "Os materiais devem vir de Palestrantes ligados a organizações ou grupos que defendem e representam o “Espirito do AudioVerse” descrito acima. Que eles sejam Adventistas do Sétimo Dia com uma boa reputação."
   },
   "about__spirit2": {
     "string": "Os materiais devem reafirmar a Bíblia e o Espírito de Profecia, à semelhanças das crenças fundamentais que a Igreja Adventista do Sétimo Dia prega."
@@ -233,7 +233,7 @@
     "string": "Remover item"
   },
   "andGlobalModals__confirmRemoveFavorite-copy": {
-    "string": "Você quer remover este item de sua biblioteca?"
+    "string": "Você quer remover este item de seu Acervo?"
   },
   "andGlobalModals__confirmRemoveFavorite-heading": {
     "string": "Tem certeza?"
@@ -272,7 +272,7 @@
     "string": "Verdade Presente"
   },
   "app__features2Kicker": {
-    "string": "O AudioVerse facilita encontrar conteúdos recentes de seus palestrantes, congressos e patrocinadores favoritos."
+    "string": "O AudioVerse facilita encontrar conteúdos recentes de seus palestrantes, conferencias e patrocinadores favoritos."
   },
   "app__features3Cta": {
     "string": "Explorar cartas"
@@ -362,7 +362,7 @@
     "string": "Todos Audiolivros"
   },
   "buttonShareRecording__emailSubject": {
-    "string": "{título} por {oradores}"
+    "string": "{título} por {Palestrantes}"
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{assunto} no AudioVerse"
@@ -387,7 +387,7 @@
     "string": "{contagem} ensinamentos"
   },
   "cardCollection_booksLabel": {
-    "string": "{contagem} livros"
+    "string": "{contagem} Audiolivros"
   },
   "cardCollection_sequenceLabel": {
     "comment": "Sequência de coleta de cartões etiqueta de contagem",
@@ -405,7 +405,7 @@
     "string": "Blog"
   },
   "cardSequence_audiobookType": {
-    "string": "Livro"
+    "string": "Audiolivro"
   },
   "cardSequence_chaptersLabel": {
     "string": "{contar} capítulos"
@@ -449,7 +449,7 @@
   },
   "cardSponsor__collectionCountLabel": {
     "comment": "Coleção de detalhes do patrocinador, etiqueta de contagem",
-    "string": "{contagem} Congressos"
+    "string": "{contagem} Conferencias"
   },
   "cardSponsor__recordingsCountLabel": {
     "comment": "Ensinamentos detalhados do Patrocinador, etiqueta de contagem",
@@ -472,52 +472,27 @@
   "collectionDetail__locationLabel": {
     "string": "Localização"
   },
-  "collectionDetail__presentersAllLabel": {
-    "string": "Ver todos Oradores"
-  },
-  "collectionDetail__presentersLabel": {
-    "comment": "Coleção detalhada da etiqueta dos alto-falantes",
-    "string": "Oradores"
-  },
   "collectionDetail__sequenceCountLabel": {
     "comment": "Etiqueta de contagem de sequência detalhada da coleção",
     "string": "{contagem} séries"
   },
-  "collectionDetail__seriesAllLabel": {
-    "string": "Ver todas as séries"
-  },
-  "collectionDetail__seriesLabel": {
-    "comment": "Rótulo da série detalhe de coleção",
-    "string": "Séries"
-  },
   "collectionDetail__sponsorLabel": {
     "string": "Patrocinador"
   },
-  "collectionDetail__teachingsAllLabel": {
-    "string": "Ver todos ensinamentos individuais"
-  },
-  "collectionDetail__teachingsCountLabel": {
-    "comment": "Rótulo de contagem de ensinamentos detalhados da coleção",
-    "string": "{contagem} ensinamentos"
-  },
-  "collectionDetail__teachingsLabel": {
-    "comment": "Rótulo de ensinamentos detalhado da coleção",
-    "string": "Ensinamentos individuais"
-  },
   "collectionPresenterssDetail__heading": {
-    "string": "Todos Oradores"
+    "string": "Todos Palestrantes"
   },
   "collectionSequencesDetail__heading": {
     "string": "Todas as séries"
   },
   "collectionType__audiobookSeries": {
-    "string": "Série de livros"
+    "string": "Série de Audiolivros"
   },
   "collectionType__bibleVersion": {
     "string": "Versão da Bíblia"
   },
   "collectionType__conference": {
-    "string": "Congressos"
+    "string": "Conferencias"
   },
   "collectionType__musicSeries": {
     "string": "Série de músicas"
@@ -526,10 +501,10 @@
     "string": "Programa de histórias"
   },
   "conferenceListPage__title": {
-    "string": "Todos Congressos"
+    "string": "Todos Conferencias"
   },
   "conferencesPresenters__title": {
-    "string": "Oradores do {conferenceName}"
+    "string": "Palestrantes do {conferenceName}"
   },
   "conferencesSequences__title": {
     "string": "Séries do {conferenceName}"
@@ -538,7 +513,7 @@
     "string": "Ensinamentos do {conferenceName}"
   },
   "conferences__title": {
-    "string": "Todos Congressos"
+    "string": "Todos Conferencias"
   },
   "contact__emailLabel": {
     "string": "Endereço de e-mail"
@@ -601,7 +576,7 @@
     "string": "Audiolivros"
   },
   "discoverCollections_conferencesHeading": {
-    "string": "Congressos"
+    "string": "Conferencias"
   },
   "discover__storiesHeading": {
     "string": "Histórias recentes"
@@ -610,7 +585,7 @@
     "string": "Descobrir"
   },
   "discover_conferencesHeading": {
-    "string": "Congressos recentes"
+    "string": "Conferencias recentes"
   },
   "discover_featuredTeachingsHeading": {
     "string": "Ensinamentos em Destaque"
@@ -710,20 +685,20 @@
     "string": "Bíblia"
   },
   "header__navItemBrowse": {
-    "comment": "Nome do link de navegação principal: Explorar",
-    "string": "Explorar"
+    "comment": "Nome do link de navegação principal: Navegar",
+    "string": "Navegar"
   },
   "header__navItemCollections-all": {
     "string": "Todas as coleções"
   },
   "header__navItemCollections-books": {
-    "string": "Livros"
+    "string": "Audiolivros"
   },
   "header__navItemCollections-conferences": {
-    "string": "Congressos"
+    "string": "Conferencias"
   },
   "header__navItemCollections-presenters": {
-    "string": "Oradores"
+    "string": "Palestrantes"
   },
   "header__navItemCollections-songs": {
     "string": "Canções Biblicas"
@@ -763,8 +738,8 @@
     "string": "Descobrir"
   },
   "header__navItemLibrary": {
-    "comment": "Nome do link de navegação principal: Biblioteca",
-    "string": "Biblioteca"
+    "comment": "Nome do link de navegação principal: Meu Acervo",
+    "string": "Meu Acervo"
   },
   "header__navItemLibrary-history": {
     "string": "Histórico"
@@ -801,7 +776,7 @@
     "string": "Termos de uso"
   },
   "header__navItemPresenters": {
-    "string": "Oradores"
+    "string": "Palestrantes"
   },
   "header__navItemStory": {
     "string": "Nossa História"
@@ -1134,7 +1109,7 @@
   },
   "homePage__newsletterSectionText": {
     "comment": "página inicial texto da seção newsletter",
-    "string": "Quer saber quando lançamos novos recursos, Vamos aos congressos, ou lançamos um novo AudioVerse Swag? Assine nossa newsletter para receber atualizações"
+    "string": "Quer saber quando lançamos novos recursos, vamos as conferencias, ou lançamos um novo AudioVerse Swag? Assine nossa newsletter para receber atualizações"
   },
   "homePage__newsletterSectionTitle": {
     "comment": "página inicial título da seção newsletter",
@@ -1142,7 +1117,7 @@
   },
   "homePage__recentPostsSectionText": {
     "comment": "página inicial texto da seção posts recentes",
-    "string": "Leia nosso blog para encontrar artigos sobre eventos recentes, sermões e congressos"
+    "string": "Leia nosso blog para encontrar artigos sobre eventos recentes, sermões e Conferencias"
   },
   "homePage__recentPostsSectionTitle": {
     "comment": "página inicial título da seção postagens recentes",
@@ -1218,7 +1193,7 @@
     "string": "Audiolivros"
   },
   "libraryNav__contentType-conferences": {
-    "string": "Congressos"
+    "string": "Conferencias"
   },
   "libraryNav__contentType-music": {
     "string": "Música"
@@ -1574,8 +1549,8 @@
     "string": "Bíblia Sagrada"
   },
   "organism-recording__conferenceInfoTitle": {
-    "comment": "Título do congresso de gravação",
-    "string": "Congresso principal"
+    "comment": "Título da Conferencia de gravação",
+    "string": "Conferencia principal"
   },
   "organism-recording__metadataLabel": {
     "comment": "etiqueta da seção de gravação de meta-dados",
@@ -1617,7 +1592,7 @@
     "string": "Nossa História"
   },
   "personTypeLockup_type": {
-    "string": "Orador"
+    "string": "Palestrante"
   },
   "playButton__pauseLabel": {
     "comment": "botão de play botão de pausa",
@@ -1779,7 +1754,7 @@
     "string": "Sermões por {nome}"
   },
   "presentersList__title": {
-    "string": "Todos Oradores"
+    "string": "Todos Palestrantes"
   },
   "presentersSequences__title": {
     "string": "Série por {personName}"
@@ -1791,7 +1766,7 @@
     "string": "Os mais ouvidos por {personName}"
   },
   "presenters__title": {
-    "string": "Todos Oradores"
+    "string": "Todos Palestrantes"
   },
   "profile__buttonLabelDeleteAccount": {
     "string": "Apagar conta"
@@ -1995,7 +1970,7 @@
     "string": "Todos Ensinamentos correspondentes"
   },
   "search__conferencesHeading": {
-    "string": "Congressos"
+    "string": "Conferencias"
   },
   "search__sponsorsHeading": {
     "string": "Patrocinadores"
@@ -2010,7 +1985,7 @@
     "string": "Pesquisa | \"{termo}\" | AudioVerse"
   },
   "sequenceType__audiobookTitle": {
-    "string": "Livro"
+    "string": "Audiolivro"
   },
   "sequenceType__bibleBookTitle": {
     "string": "Livro da Bíblia"
@@ -2025,7 +2000,7 @@
     "string": "Histórias"
   },
   "seriesDetail__conferenceLabel": {
-    "string": "Congresso principal"
+    "string": "Conferencia principal"
   },
   "seriesDetail__descriptionLabel": {
     "string": "Descrição"
@@ -2127,17 +2102,17 @@
     "string": "Espírito do AudioVerse"
   },
   "sponsorConferencesDetail__heading": {
-    "string": "Todos congressos"
+    "string": "Todos Conferencias"
   },
   "sponsorDetail__collectionCountLabel": {
     "comment": "Coleção de detalhes do patrocinador, etiqueta de contagem",
-    "string": "{contagem} Congressos"
+    "string": "{contagem} Conferencias"
   },
   "sponsorDetail__conferencesAllLabel": {
-    "string": "Ver todos congressos"
+    "string": "Ver todos Conferencias"
   },
   "sponsorDetail__conferencesLabel": {
-    "string": "Congressos"
+    "string": "Conferencias"
   },
   "sponsorDetail__descriptionLabel": {
     "string": "Descrição"
@@ -2182,7 +2157,7 @@
     "string": "Sermões por {nome}"
   },
   "sponsorsConferences__title": {
-    "string": "Congressos por {patrocinadorNome}"
+    "string": "Conferencias por {patrocinadorNome}"
   },
   "sponsorsList__title": {
     "string": "Todos patrocinadores"
@@ -2244,7 +2219,7 @@
     "string": "Ensinamentos em alta"
   },
   "search__presentersHeading": {
-    "string": "Oradores"
+    "string": "Palestrantes"
   },
   "search__musicHeading": {
     "string": "Musica"
@@ -2355,10 +2330,10 @@
     "string": "Ensinamentos Anteriores em Alta"
   },
   "discover_bibleBooksHeading": {
-    "string": "Descubra Livros Biblicos"
+    "string": "Descubra Audiolivros Biblicos"
   },
   "discover_presentersHeading": {
-    "string": "Descubra Oradores"
+    "string": "Descubra Palestrantes"
   },
   "discover_topicsHeading": {
     "string": "Topicos"
@@ -2452,34 +2427,34 @@
     "string": "Todos Audiolivros"
   },
   "organismSection__audiobooksNext": {
-    "string": "Proximo Audio Livros"
+    "string": "Proximo Audiolivros"
   },
   "organismSection__audiobooksPrevious": {
-    "string": "Audio Livros Anteriores"
+    "string": "Audiolivros Anteriores"
   },
   "organismSection__bibleBooksHeading": {
-    "string": "Livros Biblicos"
+    "string": "Audiolivros Biblicos"
   },
   "organismSection__bibleBooksNext": {
-    "string": "Next Livros Biblicos"
+    "string": "Next Audiolivros Biblicos"
   },
   "organismSection__bibleBooksPrevious": {
-    "string": "Previous Livros Biblicos"
+    "string": "Previous Audiolivros Biblicos"
   },
   "organismSection__egwAudiobooksHeading": {
     "string": "Ellen White"
   },
   "organismSection__egwAudiobooksNext": {
-    "string": "Proximo Audio Livros EGW"
+    "string": "Proximo Audiolivros EGW"
   },
   "organismSection__egwAudiobooksPrevious": {
     "string": "Audio Livros EGW Anteriores"
   },
   "organismSection_presentersNext": {
-    "string": "Proximos Oradores"
+    "string": "Proximos Palestrantes"
   },
   "organismSection_presentersPrevious": {
-    "string": "Oradores Anteriores"
+    "string": "Palestrantes Anteriores"
   },
   "organismSection_scriptureSongsHeading": {
     "string": "Canções Biblicas"
@@ -2539,7 +2514,7 @@
     "string": "EGW"
   },
   "search__egwbooksSeeAll": {
-    "string": "Ver todos Audio Livros de Ellen White encontrados"
+    "string": "Ver todos Audiolivros de Ellen White encontrados"
   },
   "search__emptyStateMessage": {
     "string": "Tente outro Termo em sua Pesquisa"
@@ -2551,7 +2526,7 @@
     "string": "Ver todos Cancoes Biblicas encontradas"
   },
   "search__presentersSeeAll": {
-    "string": "Ver todos Oradores encontrados"
+    "string": "Ver todos Palestrantes encontrados"
   },
   "search__seriesHeading": {
     "string": "Séries"
@@ -2725,10 +2700,10 @@
     "string": "{time} left"
   },
   "organismSection_presentersHeading": {
-    "string": "Oradores"
+    "string": "Palestrantes"
   },
   "presentersListAll__listEnd": {
-    "string": "Não ha mais Oradores"
+    "string": "Não ha mais Palestrantes"
   },
   "presentersListAll__loading": {
     "string": "Carregando..."
@@ -2744,5 +2719,30 @@
   },
   "discover_continueListeningHeading": {
     "string": "Continue Listening"
+  },
+  "presenterDetail__conferenceRecordingsLabel": {
+    "string": "{conferenceTitle}"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "{contagem} ensinamentos"
+  },
+  "organismSection_SeriesHeading": {
+    "string": "Séries"
+  },
+  "organismSection_SeriesNext": {
+    "string": "Next Series"
+  },
+  "organismSection_SeriesPrevious": {
+    "string": "Previous Series"
+  },
+  "organismSection_TeachingsHeading": {
+    "string": "Ensinamentos"
+  },
+  "organismSection_TeachingsNext": {
+    "string": "Next Teachings"
+  },
+  "organismSection_TeachingsPrevious": {
+    "string": "Previous Teachings"
   }
 }

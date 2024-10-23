@@ -6,16 +6,10 @@ import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import InherentSizeImage from '~components/atoms/inherentSizeImage';
-import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import withFailStates from '~components/HOCs/withFailStates';
-import Button from '~components/molecules/button';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
-import CardPerson from '~components/molecules/card/person';
-import CardRecording from '~components/molecules/card/recording';
-import CardSequence from '~components/molecules/card/sequence';
-import CardGroup from '~components/molecules/cardGroup';
 import CollectionTypeLockup from '~components/molecules/collectionTypeLockup';
 import DefinitionList, {
 	IDefinitionListTerm,
@@ -28,7 +22,9 @@ import { formatDateRange } from '~lib/date';
 import root from '~lib/routes';
 import { useFormattedDuration } from '~lib/time';
 import useLanguageRoute from '~lib/useLanguageRoute';
-import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
+import ConferencePresenters from '~src/components/organisms/cardSlider/section/conferencePresenters';
+import ConferenceSeries from '~src/components/organisms/cardSlider/section/conferenceSeries';
+import ConferenceTeachings from '~src/components/organisms/cardSlider/section/conferenceTeachings';
 import { Must } from '~src/types/types';
 
 import { GetCollectionDetailPageDataQuery } from './__generated__/detail';
@@ -57,9 +53,8 @@ function CollectionDetail({
 		endDate,
 		shareUrl,
 		sponsor,
-		persons,
-		recordings,
 		sequences,
+		recordings,
 	} = collection;
 
 	const details: IDefinitionListTerm[] = [];
@@ -96,176 +91,100 @@ function CollectionDetail({
 	}
 
 	return (
-		<Tease className={styles.container}>
-			<div className={styles.imageRow}>
-				{image && (
-					<div className={styles.image}>
-						<div className={styles.imageBackdrop}>
-							<Image
-								alt={title}
-								src={image.url}
-								height="500"
-								width="500"
-								objectFit="cover"
-							/>
+		<>
+			<Tease className={styles.container}>
+				<div className={styles.imageRow}>
+					{image && (
+						<div className={styles.image}>
+							<div className={styles.imageBackdrop}>
+								<Image
+									alt={title}
+									src={image.url}
+									height="500"
+									width="500"
+									objectFit="cover"
+								/>
+							</div>
+							<InherentSizeImage src={image.url} title={title} />
 						</div>
-						<InherentSizeImage src={image.url} title={title} />
-					</div>
-				)}
-				<div>
-					<CollectionTypeLockup contentType={contentType} />
-
-					{!!(startDate && endDate) && (
-						<Heading6 sans unpadded className={styles.date}>
-							{formatDateRange(startDate, endDate)}
-						</Heading6>
 					)}
-					<Heading2 unpadded className={styles.title}>
-						{title}
-					</Heading2>
-					{sponsor && (
-						<SponsorLockup
-							sponsor={sponsor}
-							textColor={BaseColors.LIGHT_TONE}
-							hoverColor={BaseColors.SALMON}
-							isLinked
-							small
-						/>
-					)}
+					<div>
+						<CollectionTypeLockup contentType={contentType} />
 
-					<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
-						{sequences.aggregate?.count ? (
-							<FormattedMessage
-								id="collectionDetail__sequenceCountLabel"
-								defaultMessage="{count} Series"
-								description="Collection Detail sequence count label"
-								values={{ count: sequences.aggregate?.count }}
-							/>
-						) : (
-							<FormattedMessage
-								id="collectionDetail__teachingsCountLabel"
-								defaultMessage="{count} Teachings"
-								description="Collection Detail teachings count label"
-								values={{ count: recordings.aggregate?.count }}
+						{!!(startDate && endDate) && (
+							<Heading6 sans unpadded className={styles.date}>
+								{formatDateRange(startDate, endDate)}
+							</Heading6>
+						)}
+						<Heading2 unpadded className={styles.title}>
+							{title}
+						</Heading2>
+						{sponsor && (
+							<SponsorLockup
+								sponsor={sponsor}
+								textColor={BaseColors.LIGHT_TONE}
+								hoverColor={BaseColors.SALMON}
+								isLinked
+								small
 							/>
 						)}
-					</Heading6>
-					<div className={styles.row}>
-						<div className={styles.duration}>
-							{useFormattedDuration(duration)}
+
+						<Heading6
+							sans
+							loose
+							uppercase
+							unpadded
+							className={styles.countLabel}
+						>
+							{sequences.aggregate?.count ? (
+								<FormattedMessage
+									id="collectionDetail__sequenceCountLabel"
+									defaultMessage="{count} Series"
+									description="Collection Detail sequence count label"
+									values={{ count: sequences.aggregate?.count }}
+								/>
+							) : (
+								<FormattedMessage
+									id="collectionDetail__teachingsCountLabel"
+									defaultMessage="{count} Teachings"
+									description="Collection Detail teachings count label"
+									values={{ count: recordings.aggregate?.count }}
+								/>
+							)}
+						</Heading6>
+						<div className={styles.row}>
+							<div className={styles.duration}>
+								{useFormattedDuration(duration)}
+							</div>
+
+							<ButtonShare
+								shareUrl={shareUrl}
+								backgroundColor={BaseColors.DARK}
+								emailSubject={title}
+								light
+								triggerClassName={styles.iconButton}
+								rssUrl={root.lang(lang).conferences.id(id).feed.get()}
+							/>
+							<ButtonFavorite
+								isFavorited={!!isFavorited}
+								toggleFavorited={toggleFavorited}
+								backgroundColor={BaseColors.DARK}
+								light
+								className={styles.iconButton}
+							/>
 						</div>
-						<ButtonShare
-							shareUrl={shareUrl}
-							backgroundColor={BaseColors.DARK}
-							emailSubject={title}
-							light
-							triggerClassName={styles.iconButton}
-							rssUrl={root.lang(lang).conferences.id(id).feed.get()}
-						/>
-						<ButtonFavorite
-							isFavorited={!!isFavorited}
-							toggleFavorited={toggleFavorited}
-							backgroundColor={BaseColors.DARK}
-							light
-							className={styles.iconButton}
-						/>
+						<HorizontalRule color={BaseColors.MID_TONE} />
+						<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
 					</div>
-					<HorizontalRule color={BaseColors.MID_TONE} />
-					<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
 				</div>
-			</div>
-			{sequences.nodes?.length ? (
-				<>
-					<LineHeading color={BaseColors.SALMON}>
-						<FormattedMessage
-							id="collectionDetail__seriesLabel"
-							defaultMessage="Series"
-							description="Collection Detail series label"
-						/>
-					</LineHeading>
-					<CardGroup className={styles.cardGroup}>
-						{sequences.nodes.map((sequence) => (
-							<CardSequence sequence={sequence} key={sequence.canonicalPath} />
-						))}
-					</CardGroup>
-					{sequences.pageInfo.hasNextPage && (
-						<Button
-							type="secondaryInverse"
-							href={root.lang(lang).conferences.id(id).sequences.get()}
-							text={intl.formatMessage({
-								id: 'collectionDetail__seriesAllLabel',
-								defaultMessage: 'See All Series',
-							})}
-							IconLeft={ForwardIcon}
-							className={styles.seeAllButton}
-						/>
-					)}
-				</>
-			) : null}
-			{recordings.nodes?.length ? (
-				<>
-					<LineHeading color={BaseColors.SALMON}>
-						<FormattedMessage
-							id="collectionDetail__teachingsLabel"
-							defaultMessage="Individual Teachings"
-							description="Collection Detail teachings label"
-						/>
-					</LineHeading>
-					<CardGroup className={styles.cardGroup}>
-						{recordings.nodes.map((recording) => (
-							<CardRecording
-								recording={recording}
-								key={recording.canonicalPath}
-							/>
-						))}
-					</CardGroup>
-					{recordings.pageInfo.hasNextPage && (
-						<Button
-							type="secondaryInverse"
-							href={root.lang(lang).conferences.id(id).teachings.get()}
-							text={intl.formatMessage({
-								id: 'collectionDetail__teachingsAllLabel',
-								defaultMessage: 'See All Individual Teachings',
-							})}
-							IconLeft={ForwardIcon}
-							className={styles.seeAllButton}
-						/>
-					)}
-				</>
-			) : null}
-			{persons.nodes?.length ? (
-				<>
-					<LineHeading color={BaseColors.SALMON}>
-						<FormattedMessage
-							id="collectionDetail__presentersLabel"
-							defaultMessage="Presenters"
-							description="Collection Detail speakers label"
-						/>
-					</LineHeading>
-					<CardGroup className={styles.cardGroup}>
-						{persons.nodes.map((person) => (
-							<CardPerson
-								person={person}
-								largeinit={true}
-								key={person.canonicalPath}
-							/>
-						))}
-					</CardGroup>
-					{persons.pageInfo.hasNextPage && (
-						<Button
-							type="secondaryInverse"
-							href={root.lang(lang).conferences.id(id).presenters.get()}
-							text={intl.formatMessage({
-								id: 'collectionDetail__presentersAllLabel',
-								defaultMessage: 'See All Presenters',
-							})}
-							IconLeft={ForwardIcon}
-							className={styles.seeAllButton}
-						/>
-					)}
-				</>
-			) : null}
-		</Tease>
+
+				<ConferenceSeries collectionId={collection.id + ''} isDarkBg />
+
+				<ConferencePresenters collectionId={collection.id + ''} isDarkBg />
+
+				<ConferenceTeachings collectionId={collection.id + ''} isDarkBg />
+			</Tease>
+		</>
 	);
 }
 

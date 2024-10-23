@@ -109,14 +109,6 @@ describe('collection detail page', () => {
 		});
 	});
 
-	it('lists sequences', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_sequence_title')).toBeInTheDocument();
-	});
-
 	it('renders page title', async () => {
 		loadData();
 

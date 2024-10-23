@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
 import CardSlider from '~components/organisms/cardSlider';
+import { BaseColors } from '~src/lib/constants';
 import { useLanguageId } from '~src/lib/useLanguageId';
 import {
 	GraphqlInfiniteQuery,
@@ -28,21 +29,23 @@ type SectionRoot<T> = {
 };
 
 type NodeSelector<T, N> = (page?: T) => Maybe<SectionNode<N>[]>;
-type PageInfoSelector<T, _N> = (page?: T) => Maybe<PageInfo>;
+type PageInfoSelector<T> = (page?: T) => Maybe<PageInfo>;
 type Card<T> = (props: { node: SectionNode<T> }) => JSX.Element;
 
-type SectionProps<T, N> = {
+type SectionProps<T, V, N> = {
 	infiniteQuery: T;
+	variables?: V;
 	heading: string | JSX.Element;
 	previous: string;
 	next: string;
 	rows?: number;
 	minCardWidth?: number;
 	seeAllUrl?: string;
+	isDarkBg?: boolean;
+	hasBg?: boolean;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
 	selectPageInfo?: PageInfoSelector<
-		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>,
-		N
+		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>
 	>;
 	Card: Card<N>;
 };
@@ -64,20 +67,23 @@ function defaultSelectPageInfo<T, N>(page?: T): Maybe<PageInfo> {
 	return selectSectionRoot<T, N>(page)?.pageInfo || null;
 }
 
-export default function Section<T extends GraphqlInfiniteQuery, N>({
+export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 	infiniteQuery,
+	variables,
 	heading,
 	selectNodes = defaultSelectNodes,
 	selectPageInfo = defaultSelectPageInfo,
 	Card,
 	seeAllUrl,
+	isDarkBg,
+	hasBg,
 	...props
-}: SectionProps<T, N>): JSX.Element {
+}: SectionProps<T, V, N>): JSX.Element {
 	const language = useLanguageId();
 
 	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
 		infiniteQuery(
-			{ language, after: null },
+			{ language, ...variables },
 			{
 				initialPageParam: null,
 				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
@@ -121,15 +127,28 @@ export default function Section<T extends GraphqlInfiniteQuery, N>({
 
 	return (
 		<div className={styles.section}>
-			<LineHeading variant="overline" unpadded>
+			<LineHeading
+				variant="overline"
+				color={isDarkBg ? BaseColors.SALMON : BaseColors.RED}
+				unpadded
+			>
 				<span>{heading}</span>
 				{seeAllUrl && (
-					<a className={styles.seeAll} href={seeAllUrl}>
+					<a
+						className={`${styles.seeAll} ${isDarkBg && styles.seeAlldbg}`}
+						href={seeAllUrl}
+					>
 						<FormattedMessage id="discover__seeAll" defaultMessage="See All" />
 					</a>
 				)}
 			</LineHeading>
-			<CardSlider {...props} onIndexChange={preload} items={cards} />
+			<CardSlider
+				{...props}
+				onIndexChange={preload}
+				items={cards}
+				isDarkBg={isDarkBg}
+				hasBg={hasBg}
+			/>
 		</div>
 	);
 }
