@@ -92,7 +92,7 @@ export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 						after: pageInfo.endCursor,
 					};
 				},
-			}
+			},
 		);
 
 	const cards = useMemo(
@@ -102,7 +102,7 @@ export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 				.filter((n: Maybe<SectionNode<N>>): n is SectionNode<N> => !!n)
 				.map((n: SectionNode<N>) => <Card node={n} key={n.canonicalPath} />) ??
 			[],
-		[Card, data?.pages, selectNodes]
+		[Card, data?.pages, selectNodes],
 	);
 
 	const preload = useCallback(
@@ -115,7 +115,7 @@ export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 				fetchNextPage();
 			}
 		},
-		[fetchNextPage, isFetchingNextPage, hasNextPage]
+		[fetchNextPage, isFetchingNextPage, hasNextPage],
 	);
 
 	// Check if there's content to render, if not, return an empty JSX element
