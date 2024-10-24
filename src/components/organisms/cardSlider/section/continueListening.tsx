@@ -22,7 +22,7 @@ export default function ContinueListening(): JSX.Element {
 			}}
 			options={{
 				getNextPageParam: (
-					lastPage: Maybe<GetSectionContinueListeningQuery>
+					lastPage: Maybe<GetSectionContinueListeningQuery>,
 				) => {
 					const hasMoreHistory =
 						lastPage?.me?.user.continueListening?.pageInfo.hasNextPage;
