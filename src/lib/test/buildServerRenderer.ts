@@ -5,7 +5,7 @@ import { buildPageRenderer, PageRenderer } from './buildPageRenderer';
 
 export function buildServerRenderer<T extends Record<string, unknown>>(
 	Component: ComponentType<T>,
-	getServerSideProps: (context: any) => Promise<GetServerSidePropsResult<any>>
+	getServerSideProps: (context: any) => Promise<GetServerSidePropsResult<any>>,
 ): PageRenderer<T> {
 	const getProps = async (p: any) => {
 		const r = await getServerSideProps({ params: p, query: p } as any);

@@ -16,7 +16,7 @@ const getter =
 		if (!filteredKeys.length) return r;
 		const filteredParams = filteredKeys.reduce(
 			(acc, k) => ({ ...acc, [k]: params[k] }),
-			{}
+			{},
 		);
 		const query = new URLSearchParams(filteredParams);
 		return `${r}?${query.toString()}`;

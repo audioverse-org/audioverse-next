@@ -29,7 +29,7 @@ const CircleInitials: React.FC<CircleInitialsProps> = ({
 				styles.circle,
 				large && styles.large,
 				mid && styles.mid,
-				small && styles.small
+				small && styles.small,
 			)}
 		>
 			<div className={clsx(styles.initial)}>{firstLetter}</div>

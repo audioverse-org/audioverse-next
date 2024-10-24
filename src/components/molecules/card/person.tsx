@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import CircleInitials from '~components/atoms/circleInitials';
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
 import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
@@ -72,7 +72,7 @@ export default function CardPerson({
 						<div
 							className={clsx(
 								styles.details,
-								isFavorited && styles.detailsWithLike
+								isFavorited && styles.detailsWithLike,
 							)}
 						>
 							<Heading6

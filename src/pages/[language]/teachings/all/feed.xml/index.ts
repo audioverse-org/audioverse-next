@@ -42,17 +42,17 @@ export async function getServerSideProps({
 						id: 'teachingsFeed__title',
 						defaultMessage: 'AudioVerse Presentations ({language})',
 					},
-					{ language }
+					{ language },
 				),
 				description: intl.formatMessage(
 					{
 						id: 'teachingsFeed__description',
 						defaultMessage: 'AudioVerse Presentation in {language}',
 					},
-					{ language }
+					{ language },
 				),
 			},
-			sermons.nodes || []
+			sermons.nodes || [],
 		);
 		res.write(feed);
 

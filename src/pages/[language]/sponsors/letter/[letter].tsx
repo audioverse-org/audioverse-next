@@ -53,7 +53,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		});
 		return sponsorLetterCounts
 			.map(({ letter }) =>
-				config.base_urls.map((b) => root.lang(b).sponsors.letter(letter).get())
+				config.base_urls.map((b) => root.lang(b).sponsors.letter(letter).get()),
 			)
 			.flat();
 	});

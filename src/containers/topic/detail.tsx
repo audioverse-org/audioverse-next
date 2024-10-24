@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import Link from '~components/atoms/linkWithoutPrefetch';
 import ButtonShare from '~components/molecules/buttonShare';
 import Icon from '~public/img/icons/fa-layer-group.svg';
 import Heading2 from '~src/components/atoms/heading2';

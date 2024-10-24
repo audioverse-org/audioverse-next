@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import Heading2 from '~components/atoms/heading2';
 import Heading3 from '~components/atoms/heading3';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
 
@@ -112,7 +112,7 @@ export default function TeaseRecording({
 					className={clsx(
 						styles.content,
 						styles.contentOptionalLink,
-						unpadded && styles.unpadded
+						unpadded && styles.unpadded,
 					)}
 					onClick={() => {
 						analytics.track('Card click', {
@@ -131,7 +131,7 @@ export default function TeaseRecording({
 						className={clsx(
 							styles.content,
 							unpadded && styles.unpadded,
-							fullBleed && styles.fullBleed
+							fullBleed && styles.fullBleed,
 						)}
 						onClick={() => {
 							analytics.track('Card click', {
@@ -149,7 +149,7 @@ export default function TeaseRecording({
 				className={clsx(
 					styles.playlist,
 					unpadded && styles.playlistUnpadded,
-					fullBleed && styles.playlistFullBleed
+					fullBleed && styles.playlistFullBleed,
 				)}
 			>
 				{!disableUserFeatures && (

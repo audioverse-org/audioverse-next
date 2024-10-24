@@ -18,7 +18,7 @@ jest.mock('js-cookie');
 const renderComponent = async () => {
 	const result = await renderWithProviders(
 		<RecordingButtonFavorite id="-1" backgroundColor={BaseColors.WHITE} />,
-		undefined
+		undefined,
 	);
 	const button =
 		result.queryByLabelText('Favorite') ||
@@ -74,7 +74,7 @@ describe('recording favorite button', () => {
 		await userEvent.click(button);
 
 		await waitFor(() =>
-			expect(setRecordingFavorited).toBeCalledWith('-1', true)
+			expect(setRecordingFavorited).toBeCalledWith('-1', true),
 		);
 	});
 
@@ -124,7 +124,7 @@ describe('recording favorite button', () => {
 
 		expect(getByLabelText('Favorite')).not.toHaveAttribute(
 			'aria-pressed',
-			'true'
+			'true',
 		);
 	});
 
@@ -135,7 +135,7 @@ describe('recording favorite button', () => {
 
 		await expect(findByLabelText('Unfavorite')).resolves.toHaveAttribute(
 			'aria-pressed',
-			'true'
+			'true',
 		);
 	});
 

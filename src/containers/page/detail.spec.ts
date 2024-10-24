@@ -34,7 +34,7 @@ const loadStaticPathsData = buildLoader(
 				},
 			],
 		},
-	}
+	},
 );
 
 describe('CustomPageDetail', () => {

@@ -17,7 +17,7 @@ describe('loading indicator', () => {
 
 		expect(screen.getByTestId('loading-indicator')).toHaveClass(
 			'visible',
-			'loading'
+			'loading',
 		);
 	});
 });

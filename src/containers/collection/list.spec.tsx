@@ -60,7 +60,7 @@ describe('conference list page', () => {
 
 		expect(fetchApi).toBeCalledWith(
 			GetCollectionListPageDataDocument,
-			expect.anything()
+			expect.anything(),
 		);
 	});
 
@@ -95,7 +95,7 @@ describe('conference list page', () => {
 
 		expect(getByText('the_conference_title').parentElement).toHaveAttribute(
 			'href',
-			'the_conference_path'
+			'the_conference_path',
 		);
 	});
 

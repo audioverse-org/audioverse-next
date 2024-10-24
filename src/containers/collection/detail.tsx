@@ -1,5 +1,4 @@
 import Image from 'next/legacy/image';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -7,6 +6,7 @@ import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import InherentSizeImage from '~components/atoms/inherentSizeImage';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import withFailStates from '~components/HOCs/withFailStates';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
@@ -38,7 +38,7 @@ function CollectionDetail({
 	const intl = useIntl();
 	const lang = useLanguageRoute();
 	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
-		collection.id
+		collection.id,
 	);
 
 	const {

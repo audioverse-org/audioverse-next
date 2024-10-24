@@ -60,6 +60,13 @@ module.exports = {
 				argsIgnorePattern: '_',
 			},
 		],
+		'@typescript-eslint/no-unused-expressions': [
+			'error',
+			{
+				allowShortCircuit: true,
+				allowTernary: true,
+			},
+		],
 		'no-mixed-spaces-and-tabs': 'off',
 		'@typescript-eslint/interface-name-prefix': 'off',
 		'testing-library/prefer-screen-queries': 'off',
@@ -96,6 +103,15 @@ module.exports = {
 				'@calm/react-intl/missing-formatted-message': 'off',
 				'@calm/react-intl/missing-attribute': 'off',
 				'@calm/react-intl/missing-values': 'off',
+				'@typescript-eslint/no-unused-vars': [
+					'error',
+					{
+						varsIgnorePattern: '_',
+						argsIgnorePattern: '_',
+						caughtErrorsIgnorePattern: '_',
+					},
+				],
+				'testing-library/no-node-access': 'off',
 			},
 		},
 	],

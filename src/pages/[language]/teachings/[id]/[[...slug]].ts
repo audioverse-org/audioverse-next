@@ -55,6 +55,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSermonDetailStaticPaths,
 		(d) => d.sermons.nodes,
-		(baseUrl, node) => node.canonicalPath
+		(baseUrl, node) => node.canonicalPath,
 	);
 }

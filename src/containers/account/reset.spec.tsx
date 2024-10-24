@@ -71,7 +71,7 @@ describe('password reset page', () => {
 		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 		await userEvent.type(
 			getByPlaceholderText('Confirm new password'),
-			'new_pass'
+			'new_pass',
 		);
 		await userEvent.click(getByText('Login'));
 
@@ -91,7 +91,7 @@ describe('password reset page', () => {
 		await userEvent.type(getByPlaceholderText('New password'), 'pass_one');
 		await userEvent.type(
 			getByPlaceholderText('Confirm new password'),
-			'pass_two'
+			'pass_two',
 		);
 		await userEvent.click(getByText('Login'));
 
@@ -107,7 +107,7 @@ describe('password reset page', () => {
 		await userEvent.type(getByPlaceholderText('New password'), 'pass_one');
 		await userEvent.type(
 			getByPlaceholderText('Confirm new password'),
-			'pass_two'
+			'pass_two',
 		);
 		await userEvent.click(getByText('Login'));
 
@@ -148,7 +148,7 @@ describe('password reset page', () => {
 		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 		await userEvent.type(
 			getByPlaceholderText('Confirm new password'),
-			'new_pass'
+			'new_pass',
 		);
 		await userEvent.click(getByText('Login'));
 
@@ -167,13 +167,13 @@ describe('password reset page', () => {
 		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 		await userEvent.type(
 			getByPlaceholderText('Confirm new password'),
-			'new_pass'
+			'new_pass',
 		);
 		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(
-				getByText('Something went wrong while trying to reset your password')
+				getByText('Something went wrong while trying to reset your password'),
 			).toBeInTheDocument();
 		});
 	});
@@ -189,13 +189,13 @@ describe('password reset page', () => {
 		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 		await userEvent.type(
 			getByPlaceholderText('Confirm new password'),
-			'new_pass'
+			'new_pass',
 		);
 		await userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(
-				getByText('Your password was successfully changed')
+				getByText('Your password was successfully changed'),
 			).toBeInTheDocument();
 		});
 	});
@@ -205,7 +205,7 @@ describe('password reset page', () => {
 
 		const fetchMock = when(fetchApi).calledWith(
 			ResetPasswordDocument,
-			expect.anything()
+			expect.anything(),
 		);
 
 		const { resolve } = loadControlledPromise(fetchMock);
@@ -217,7 +217,7 @@ describe('password reset page', () => {
 		await userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 		await userEvent.type(
 			getByPlaceholderText('Confirm new password'),
-			'new_pass'
+			'new_pass',
 		);
 		await userEvent.click(getByText('Login'));
 
@@ -233,7 +233,7 @@ describe('password reset page', () => {
 		await waitFor(() => expect(getByText('Login')).toBeEnabled());
 
 		expect(
-			queryByText('Your password was successfully changed')
+			queryByText('Your password was successfully changed'),
 		).not.toBeInTheDocument();
 	});
 
@@ -250,20 +250,20 @@ describe('password reset page', () => {
 
 		await userEvent.type(
 			await screen.findByPlaceholderText('New password'),
-			'new_pass'
+			'new_pass',
 		);
 		await userEvent.type(
 			screen.getByPlaceholderText('Confirm new password'),
-			'new_pass'
+			'new_pass',
 		);
 		await userEvent.click(screen.getByText('Login'));
 
 		expect(
-			await screen.findByText('Your password was successfully changed')
+			await screen.findByText('Your password was successfully changed'),
 		).toBeInTheDocument();
 
 		expect(
-			screen.queryByPlaceholderText('New password')
+			screen.queryByPlaceholderText('New password'),
 		).not.toBeInTheDocument();
 	});
 });

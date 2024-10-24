@@ -34,7 +34,7 @@ const awaitReady = async () => {
 const getRouteListener = async () => {
 	const matches = filterByExpectation(
 		(__mockedRouter.events.on as jest.Mock).mock.calls,
-		expect.arrayContaining(['routeChangeComplete', expect.any(Function)])
+		expect.arrayContaining(['routeChangeComplete', expect.any(Function)]),
 	);
 
 	return matches[matches.length - 1][1];
@@ -126,7 +126,7 @@ describe('help widget', () => {
 
 		const matches = filterByExpectation(
 			mockBeacon.mock.calls,
-			expect.arrayContaining(['on', 'close', expect.any(Function)])
+			expect.arrayContaining(['on', 'close', expect.any(Function)]),
 		);
 
 		await act(async () => {
@@ -204,7 +204,7 @@ describe('help widget', () => {
 
 		expect(router.events.off).toBeCalledWith(
 			'routeChangeComplete',
-			expect.any(Function)
+			expect.any(Function),
 		);
 	});
 
@@ -219,7 +219,7 @@ describe('help widget', () => {
 				labels: expect.objectContaining({
 					suggestedForYou: expect.any(String),
 				}),
-			})
+			}),
 		);
 	});
 
@@ -238,7 +238,7 @@ describe('help widget', () => {
 			expect.objectContaining({
 				id: 'beaconOnLoad',
 			}),
-			expect.anything()
+			expect.anything(),
 		);
 	});
 
@@ -268,7 +268,7 @@ describe('help widget', () => {
 					postalCode: 'the_postalCode',
 					province: 'the_province',
 					timezone: 'the_timezone',
-				})
+				}),
 			);
 		});
 	});
@@ -307,7 +307,7 @@ describe('help widget', () => {
 				'prefill',
 				expect.objectContaining({
 					name: 'the_name',
-				})
+				}),
 			);
 		});
 	});

@@ -46,7 +46,7 @@ export default function usePlaybackSession(
 	options: {
 		playlistRecordings?: AndMiniplayerFragment[];
 		prefersAudio?: boolean;
-	} = {}
+	} = {},
 ): PlaybackSessionInfo {
 	const { playlistRecordings } = options;
 	const context = useContext(PlaybackContext);
@@ -62,7 +62,7 @@ export default function usePlaybackSession(
 		? context.getDuration()
 		: (recording &&
 				(getSources(recording, false)[0]?.duration || recording?.duration)) ||
-		  0;
+			0;
 	const [_progress, _setProgress] = useState<number>(0);
 	const progress = isLoaded ? context.getProgress() : _progress;
 	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
@@ -73,7 +73,7 @@ export default function usePlaybackSession(
 	const [isPortalActive, setIsPortalActive] = useState<boolean>(false);
 	const portalContainerRef = useRef<HTMLDivElement>(null);
 	const [video] = useState<JSX.Element>(
-		<div ref={portalContainerRef} data-testid="portal" />
+		<div ref={portalContainerRef} data-testid="portal" />,
 	);
 
 	const shouldLoadPlaybackProgress =
@@ -85,7 +85,7 @@ export default function usePlaybackSession(
 		},
 		{
 			enabled: shouldLoadPlaybackProgress,
-		}
+		},
 	);
 
 	useEffect(() => {
@@ -116,12 +116,12 @@ export default function usePlaybackSession(
 			context.unsetVideoHandler(recording.id);
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[]
+		[],
 	);
 
 	function afterLoad(
 		func: (c: PlaybackContextType) => void,
-		source?: PlaySource
+		source?: PlaySource,
 	) {
 		if (!recording) return;
 
@@ -139,7 +139,7 @@ export default function usePlaybackSession(
 				},
 				prefersAudio: options.prefersAudio,
 			},
-			source
+			source,
 		);
 	}
 

@@ -27,7 +27,7 @@ export default function HorizontalRule({
 			className={clsx(
 				styles.base,
 				baseColors[`borderColor-${color}`],
-				className
+				className,
 			)}
 		/>
 	);

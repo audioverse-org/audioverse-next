@@ -49,6 +49,7 @@
 	}
 	:global(.video-js) {
 		// handle responsive manually
+		display: block;
 		width: auto;
 		height: $miniplayer-height;
 		padding-top: 0;

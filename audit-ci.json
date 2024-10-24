@@ -28,6 +28,7 @@
 		"GHSA-m6fv-jmcg-4jfg", // Used by lighthouse CI, not at runtime
 		"GHSA-cm22-4g7w-348p", // Used by lighthouse CI, not at runtime
 		"GHSA-gp8f-8m3g-qvj9", // Deployments on Vercel are not affected
+		"GHSA-c2qf-rxjj-qqgw", // Not used at runtime
 		"GHSA-pxg6-pf52-xh8x|@lhci/cli>*", // Used by lighthouse CI, not at runtime
 		"GHSA-pxg6-pf52-xh8x|@lhci/utils>*", // Used by lighthouse CI, not at runtime
 		"GHSA-pxg6-pf52-xh8x|express>cookie" // Used by lighthouse CI, not at runtime

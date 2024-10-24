@@ -1,6 +1,6 @@
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import MuiModal from '@material-ui/core/Modal';
+import Backdrop from '@mui/material/Backdrop';
+import Fade from '@mui/material/Fade';
+import MuiModal from '@mui/material/Modal';
 import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
@@ -70,7 +70,7 @@ export default function Modal({
 						<Heading2
 							className={clsx(
 								styles.centerText,
-								(rightElmt || titleLeft) && styles.leftText
+								(rightElmt || titleLeft) && styles.leftText,
 							)}
 						>
 							{title}

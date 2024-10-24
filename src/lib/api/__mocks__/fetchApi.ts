@@ -9,9 +9,9 @@ const __documentMocks = new Map<string, jest.Mock>();
 
 const impl: typeof realFetchApi = <TData>(
 	query: string,
-	{ variables = {} } = {}
+	{ variables = {} } = {},
 ): Promise<TData> => {
-	return __documentMocks.get(query)?.(variables);
+	return __documentMocks.get(query)?.(variables) || null;
 };
 
 export const fetchApi = jest.fn(impl);

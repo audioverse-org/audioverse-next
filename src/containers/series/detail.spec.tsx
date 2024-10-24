@@ -60,7 +60,7 @@ const loadPathsData = buildLoader<GetSeriesDetailPathsDataQuery>(
 	GetSeriesDetailPathsDataDocument,
 	{
 		serieses: { nodes: [] },
-	}
+	},
 );
 
 describe('series detail page', () => {
@@ -152,7 +152,7 @@ describe('series detail page', () => {
 
 		expect(getByAltText('the_series_title')).toHaveAttribute(
 			'src',
-			'the_series_image'
+			'the_series_image',
 		);
 	});
 
@@ -163,7 +163,7 @@ describe('series detail page', () => {
 
 		expect(getByText('the_sponsor_title')).toHaveAttribute(
 			'href',
-			'the_sponsor_path'
+			'the_sponsor_path',
 		);
 	});
 
@@ -174,7 +174,7 @@ describe('series detail page', () => {
 
 		expect(getByText('the_conference_title')).toHaveAttribute(
 			'href',
-			'the_conference_path'
+			'the_conference_path',
 		);
 	});
 
@@ -197,7 +197,7 @@ describe('series detail page', () => {
 
 		expect(getByText('Copy RSS Link')).toHaveAttribute(
 			'href',
-			'/en/series/the_series_id/feed.xml'
+			'/en/series/the_series_id/feed.xml',
 		);
 	});
 });

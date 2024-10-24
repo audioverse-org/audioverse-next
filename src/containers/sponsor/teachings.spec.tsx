@@ -96,7 +96,7 @@ describe('sponsor teachings page', () => {
 
 		expect(getByText('1')).toHaveAttribute(
 			'href',
-			'/en/sponsors/the_sponsor_id/teachings'
+			'/en/sponsors/the_sponsor_id/teachings',
 		);
 	});
 
@@ -117,7 +117,7 @@ describe('sponsor teachings page', () => {
 
 		expect(getByAltText('the_sponsor_title')).toHaveAttribute(
 			'src',
-			'the_sponsor_image'
+			'the_sponsor_image',
 		);
 	});
 

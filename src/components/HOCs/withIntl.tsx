@@ -8,7 +8,7 @@ import useLanguageRoute from '~lib/useLanguageRoute';
 type Messages = ResolvedIntlConfig['messages'];
 
 const withIntl = <P extends Record<string, unknown>>(
-	Component: React.ComponentType<P>
+	Component: React.ComponentType<P>,
 ): React.ComponentType<P> => {
 	function WithIntl(props: P) {
 		const language = useLanguageRoute();

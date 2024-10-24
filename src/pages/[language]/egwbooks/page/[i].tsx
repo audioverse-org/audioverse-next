@@ -35,7 +35,7 @@ export async function getStaticProps({
 				id: 'egwbooks__title',
 				defaultMessage: 'Ellen White',
 			}),
-		})
+		}),
 	);
 }
 
@@ -43,6 +43,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'egwbooks',
 		getEgwAudiobookListPathsData,
-		(d) => d.audiobooks.aggregate?.count
+		(d) => d.audiobooks.aggregate?.count,
 	);
 }

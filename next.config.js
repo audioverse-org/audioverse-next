@@ -647,7 +647,7 @@ module.exports = withBundleAnalyzer(
 			config.resolve.alias = {
 				...config.resolve.alias,
 				'video.js$': path.resolve(
-					'node_modules/video.js/dist/alt/video.novtt.js'
+					'node_modules/video.js/dist/alt/video.novtt.js',
 				),
 			};
 
@@ -662,5 +662,5 @@ module.exports = withBundleAnalyzer(
 		images: {
 			domains: ['ik.imagekit.io', 's3.amazonaws.com'],
 		},
-	})
+	}),
 );

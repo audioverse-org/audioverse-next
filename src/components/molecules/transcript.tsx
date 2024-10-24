@@ -47,7 +47,7 @@ export default function Transcript({
 				className={clsx(
 					styles.text,
 					recordingContentType === RecordingContentType.BibleChapter &&
-						styles.bibleText
+						styles.bibleText,
 				)}
 				dangerouslySetInnerHTML={{ __html }}
 			/>

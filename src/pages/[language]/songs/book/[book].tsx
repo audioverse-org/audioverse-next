@@ -43,7 +43,7 @@ export async function getStaticProps({
 				},
 				{
 					book: startCase(book),
-				}
+				},
 			),
 		},
 		revalidate: REVALIDATE,
@@ -53,7 +53,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const routes = getLanguageRoutes();
 	const sets = routes.map((r) =>
-		BIBLE_BOOKS.map((b) => root.lang(r).songs.book(b).get())
+		BIBLE_BOOKS.map((b) => root.lang(r).songs.book(b).get()),
 	);
 
 	return {

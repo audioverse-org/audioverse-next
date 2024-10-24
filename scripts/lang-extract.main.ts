@@ -27,7 +27,7 @@ export default async function main() {
 
 	const baseEnLangs: Langs = JSON.parse(showMergeBase('public/lang/en.json'));
 	const enLangs: Langs = JSON.parse(
-		fs.readFileSync(`./public/lang/en.json`).toString()
+		fs.readFileSync(`./public/lang/en.json`).toString(),
 	);
 	const langFiles = fs.readdirSync('./public/lang/');
 	const baseEnIds = Object.keys(baseEnLangs);
@@ -44,7 +44,7 @@ export default async function main() {
 		const outDatedIds = ids.filter((id) => !enIds.includes(id));
 		const renamedIds = ids.filter((id) => {
 			const stringMatch = baseEnIds.find(
-				(enId) => baseEnLangs[enId].string === langs[id].string
+				(enId) => baseEnLangs[enId].string === langs[id].string,
 			);
 			return stringMatch && stringMatch !== id;
 		});
@@ -57,11 +57,11 @@ export default async function main() {
 
 		if (renamedIds.length) {
 			const baseLangs: Langs = JSON.parse(
-				showMergeBase(`public/lang/${langFile}`)
+				showMergeBase(`public/lang/${langFile}`),
 			);
 			renamedIds.forEach((id) => {
 				const enId = baseEnIds.find(
-					(enId) => baseEnLangs[enId].string === langs[id].string
+					(enId) => baseEnLangs[enId].string === langs[id].string,
 				);
 				if (!enId || !(enId in baseLangs)) return;
 				langs[id].string = baseLangs[enId].string;

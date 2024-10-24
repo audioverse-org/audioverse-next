@@ -31,7 +31,7 @@ describe('card post', () => {
 		});
 
 		expect(
-			getByAltText('the_title').parentElement?.parentElement
+			getByAltText('the_title').parentElement?.parentElement,
 		).toHaveAttribute('href', 'the_path');
 	});
 });

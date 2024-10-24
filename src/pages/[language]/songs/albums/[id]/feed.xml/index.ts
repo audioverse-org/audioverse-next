@@ -17,7 +17,7 @@ export async function getServerSideProps({
 	const { musicAlbum: series } = await getSongAlbumFeedData({ id }).catch(
 		() => ({
 			musicAlbum: null,
-		})
+		}),
 	);
 	if (
 		!series ||
@@ -37,7 +37,7 @@ export async function getServerSideProps({
 				link: series.canonicalUrl,
 				title: series.title,
 			},
-			series.recordings.nodes || []
+			series.recordings.nodes || [],
 		);
 		res.write(feed);
 

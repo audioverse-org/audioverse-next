@@ -36,7 +36,7 @@ export default function Conferences(props: {
 			const r = includeSubItems && !s?.length ? node.recordings.nodes : null;
 			return <CardCollection collection={node} sequences={s} recordings={r} />;
 		},
-		[includeSubItems]
+		[includeSubItems],
 	);
 
 	return (

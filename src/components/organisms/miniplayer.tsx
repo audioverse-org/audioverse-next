@@ -1,11 +1,11 @@
 import 'video.js/dist/video-js.css';
 
-import Slider from '@material-ui/core/Slider';
+import Slider from '@mui/material/Slider';
 import clsx from 'clsx';
-import Link from 'next/link';
 import React, { useContext } from 'react';
 import { useIntl } from 'react-intl';
 
+import Link from '~components/atoms/linkWithoutPrefetch';
 import ButtonNudge from '~components/molecules/buttonNudge';
 import ButtonPlay from '~components/molecules/buttonPlay';
 import RecordingProgressBar from '~components/molecules/recordingProgressBar';

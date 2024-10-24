@@ -23,7 +23,7 @@ export default function ProgressBar({
 			className={clsx(
 				styles.progress,
 				className,
-				!setProgress && styles.pointerDisabled
+				!setProgress && styles.pointerDisabled,
 			)}
 			style={{
 				'--progress': `${progress * 100}%`,

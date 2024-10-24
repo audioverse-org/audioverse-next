@@ -8,7 +8,7 @@ import { useIntl } from 'react-intl';
 const divideWithRunoff = (
 	total: number,
 	divisors: number[],
-	results: number[] = []
+	results: number[] = [],
 ): number[] => {
 	if (!divisors.length) {
 		return [...results, total];
@@ -31,7 +31,7 @@ export const useFormattedDuration = (seconds: number): string => {
 				defaultMessage: '{hours}h {minutes}m',
 				description: 'duration hours and minutes',
 			},
-			{ hours, minutes }
+			{ hours, minutes },
 		);
 	}
 
@@ -42,7 +42,7 @@ export const useFormattedDuration = (seconds: number): string => {
 				defaultMessage: '{hours}h',
 				description: 'duration hours',
 			},
-			{ hours }
+			{ hours },
 		);
 	}
 
@@ -52,7 +52,7 @@ export const useFormattedDuration = (seconds: number): string => {
 			defaultMessage: '{minutes}m',
 			description: 'duration minutes',
 		},
-		{ minutes: minutes || 1 }
+		{ minutes: minutes || 1 },
 	);
 };
 
@@ -73,14 +73,14 @@ export const useFormattedTime = (seconds: number): string => {
 					h,
 					m: pad(m.toString()),
 					s: pad(s.toString()),
-				}
-		  )
+				},
+			)
 		: intl.formatMessage(
 				{
 					id: 'time__minutesAndSeconds',
 					defaultMessage: '{m}:{s}',
 					description: 'time minutes and seconds',
 				},
-				{ m, s: pad(s.toString()) }
-		  );
+				{ m, s: pad(s.toString()) },
+			);
 };

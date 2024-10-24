@@ -60,7 +60,7 @@ function SongBooksDetail({
 				<div className={styles.row}>
 					<div className={styles.duration}>
 						{useFormattedDuration(
-							musicTracks.reduce((c, t) => c + t.duration, 0)
+							musicTracks.reduce((c, t) => c + t.duration, 0),
 						)}
 					</div>
 					<ButtonShare

@@ -16,14 +16,14 @@ export type RendererResult<T> = Omit<RenderResult, 'rerender'> & {
 };
 
 export type Renderer<T> = (
-	options?: RendererOptions<T>
+	options?: RendererOptions<T>,
 ) => Promise<RendererResult<T>>;
 
 export function buildRenderer<T extends Record<string, any>>(
 	Component: ComponentType<T>,
 	options: {
 		defaultProps?: PartialDeepRecursive<T>;
-	} = {}
+	} = {},
 ): Renderer<T> {
 	const { defaultProps = {} } = options;
 	return async ({ props }: RendererOptions<T> = {}): Promise<
@@ -34,7 +34,7 @@ export function buildRenderer<T extends Record<string, any>>(
 		return {
 			...r,
 			rerender: (rerenderProps?: PartialDeepRecursive<T>) => {
-				const rp = { ...p, ...(rerenderProps || {}) };
+				const rp = { ...p, ...((rerenderProps || {}) as object) };
 				r.rerender(<Component {...rp} />);
 			},
 		};

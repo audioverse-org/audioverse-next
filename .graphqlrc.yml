@@ -48,6 +48,8 @@ generates:
     config:
       fetcher: '~lib/api/graphqlFetcher#graphqlFetcher'
       addInfiniteQuery: true
+      reactQueryVersion: 5
+      legacyMode: false
       dedupeFragments: true
       avoidOptionals: true
       defaultScalarType: unknown

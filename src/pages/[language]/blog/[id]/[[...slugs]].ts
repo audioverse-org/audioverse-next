@@ -51,6 +51,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getBlogDetailStaticPaths,
 		(d) => d.blogPosts.nodes,
-		(baseUrl, { canonicalPath }) => canonicalPath
+		(baseUrl, { canonicalPath }) => canonicalPath,
 	);
 }

@@ -8,7 +8,7 @@ export const SCROLL_DIRECTIONS = {
 };
 
 export default function useScrollDirection(
-	scrollRef: React.RefObject<HTMLDivElement>
+	scrollRef: React.RefObject<HTMLDivElement>,
 ) {
 	const scrollTop = useScrollTop(scrollRef);
 	const [lastScrollTop, setLastScrollTop] = useState<number>(0);

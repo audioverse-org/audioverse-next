@@ -24,7 +24,7 @@ function SearchHead({ term }: { term?: string }): JSX.Element {
 			id: 'search__titleDynamic',
 			defaultMessage: 'Search | "{term}" | AudioVerse',
 		},
-		{ term }
+		{ term },
 	);
 	return (
 		<Head>
@@ -91,7 +91,7 @@ const getTitle = (e: InferrableEntity) =>
 function sortSections(term: string, sections: AugmentedFilter[]) {
 	const t = normalize(term);
 	const a = sections.filter((s) =>
-		s.nodes.slice(0, 3).map(getTitle).map(normalize).includes(t)
+		s.nodes.slice(0, 3).map(getTitle).map(normalize).includes(t),
 	);
 	const b = sections.filter((s) => !a.find((hs) => hs.id === s.id));
 	return [...a, ...b];
@@ -129,7 +129,7 @@ export default function Search({
 				root: null,
 				rootMargin: '0px',
 				threshold: 0.5, // Adjust the threshold as needed
-			}
+			},
 		);
 
 		const currentEndRef = endRef.current; // Save the current value

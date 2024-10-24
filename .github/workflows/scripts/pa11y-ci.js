@@ -9,7 +9,7 @@ module.exports = async ({ context, core, github }) => {
 			owner: context.repo.owner,
 			repo: context.repo.repo,
 			commit_sha: context.sha,
-		}
+		},
 	);
 	const prNumber = data[0] && data[0].number;
 	if (!prNumber) {
@@ -71,7 +71,7 @@ module.exports = async ({ context, core, github }) => {
 
 	// Try to find an existing pa11y results comment
 	const previousComment = comments.find((comment) =>
-		comment.body.startsWith(process.env.BODY_PREFIX)
+		comment.body.startsWith(process.env.BODY_PREFIX),
 	);
 	if (previousComment) {
 		// Update the previous comment

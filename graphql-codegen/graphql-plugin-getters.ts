@@ -4,7 +4,7 @@ import { DefinitionNode, Kind, OperationDefinitionNode } from 'graphql';
 function generateCodeSnippets<T extends DefinitionNode>(
 	documents: Types.DocumentFile[],
 	shouldProcess: (def: DefinitionNode) => boolean,
-	makeSnippet: (def: T) => string
+	makeSnippet: (def: T) => string,
 ) {
 	return documents
 		.map((doc) => {
@@ -25,7 +25,7 @@ const template = (
 	fnName: string,
 	varType: string,
 	returnType: string,
-	docName: string
+	docName: string,
 ) => `
 export async function ${fnName}<T>(
 	variables: ExactAlt<T, ${varType}>
@@ -51,7 +51,7 @@ const plugin: CodegenPlugin = {
 				const docName = `${capitalName}Document`;
 
 				return template(fnName, varType, returnType, docName);
-			}
+			},
 		);
 
 		if (!result) return '';

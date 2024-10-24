@@ -9,7 +9,7 @@ const Masonry = dynamic<MasonryProps<unknown>>(
 	() => import('masonic').then((mod) => mod.Masonry),
 	{
 		ssr: false,
-	}
+	},
 );
 
 export default function CardMasonry<T>(props: MasonryProps<T>): JSX.Element {

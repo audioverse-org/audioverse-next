@@ -1,20 +1,8 @@
-declare module 'react-facebook-login/dist/facebook-login-render-props' {
-	import {
-		ReactFacebookLoginProps as _ReactFacebookLoginProps,
-		ReactFacebookLoginState,
-	} from 'react-facebook-login';
+import { FB } from '@greatsumini/react-facebook-login';
 
-	export interface ReactFacebookLoginProps extends _ReactFacebookLoginProps {
-		render: React.FC<{ onClick: () => void }>;
+declare global {
+	interface Window {
+		FB?: FB;
+		fbAsyncInit?: () => void;
 	}
-
-	export default class ReactFacebookLogin extends React.Component<
-		ReactFacebookLoginProps,
-		ReactFacebookLoginState
-	> {}
-
-	declare function __setFacebookResponse(response: Partial<Response>): void;
 }
-
-declare module '@silvermine/videojs-airplay';
-declare module '@silvermine/videojs-chromecast';

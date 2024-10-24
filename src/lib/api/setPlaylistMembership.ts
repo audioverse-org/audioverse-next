@@ -22,7 +22,7 @@ mutation($recordingId: ID!, $playlistId: ID!) {
 export async function setPlaylistMembership(
 	recordingId: Scalars['ID']['output'],
 	playlistId: Scalars['ID']['output'],
-	add: boolean
+	add: boolean,
 ): Promise<boolean> {
 	const mutation = add ? mutationAdd : mutationRemove;
 	const variables = { recordingId, playlistId };

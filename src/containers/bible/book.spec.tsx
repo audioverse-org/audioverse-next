@@ -54,7 +54,7 @@ function loadPageData() {
 			duration: 123,
 			number: 1,
 			title: 'the_chapter_title',
-			url: 'someurl',
+			url: 'https://example.com',
 		},
 	] as bibleBrain.IBibleBookChapter[]);
 }
@@ -142,7 +142,7 @@ describe('Bible book detail page', () => {
 
 		expect(getByText('the_sponsor_name')).toHaveAttribute(
 			'href',
-			'the_sponsor_url'
+			'the_sponsor_url',
 		);
 	});
 

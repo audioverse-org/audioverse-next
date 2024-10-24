@@ -49,7 +49,7 @@ export async function getStaticProps({
 				},
 				{
 					personName: person?.name,
-				}
+				},
 			),
 		},
 		revalidate: REVALIDATE,
@@ -60,6 +60,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,
-		(l, { id }) => root.lang(l).presenters.id(id).top.get()
+		(l, { id }) => root.lang(l).presenters.id(id).top.get(),
 	);
 }

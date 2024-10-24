@@ -32,7 +32,7 @@ export async function getStaticProps({
 				id: 'testimonies__title',
 				defaultMessage: 'Testimonials',
 			}),
-		})
+		}),
 	);
 }
 
@@ -40,6 +40,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return await getNumberedStaticPaths(
 		'testimonies',
 		getTestimoniesPathsData,
-		(d) => d?.testimonies?.aggregate?.count
+		(d) => d?.testimonies?.aggregate?.count,
 	);
 }

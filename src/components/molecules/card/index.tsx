@@ -18,7 +18,7 @@ export default function Card({
 		<div
 			className={clsx(
 				fullBleed ? styles.card_fullBleed : styles.card,
-				className
+				className,
 			)}
 		>
 			{children}

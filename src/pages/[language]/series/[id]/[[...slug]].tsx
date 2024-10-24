@@ -50,6 +50,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSeriesDetailPathsData,
 		(d) => d.serieses.nodes,
-		(_, n) => n.canonicalPath
+		(_, n) => n.canonicalPath,
 	);
 }

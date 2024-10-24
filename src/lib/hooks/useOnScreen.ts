@@ -9,9 +9,9 @@ export default function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 		() =>
 			!isServerSide() &&
 			new IntersectionObserver(([entry]) =>
-				setIntersecting(entry.isIntersecting)
+				setIntersecting(entry.isIntersecting),
 			),
-		[]
+		[],
 	);
 
 	useEffect(() => {

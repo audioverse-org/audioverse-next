@@ -4,7 +4,7 @@ export const GRID_GAP = 24;
 export const calculateItemsPerPage = (
 	width: number,
 	rows: number,
-	minItemWidth: number
+	minItemWidth: number,
 ) => {
 	const usableSpace = width + GRID_GAP;
 	const minSpace = minItemWidth + GRID_GAP;

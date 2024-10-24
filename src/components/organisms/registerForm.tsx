@@ -24,7 +24,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 
 	const {
 		mutate,
-		isLoading,
+		isPending,
 		data: dataRegister,
 		isSuccess,
 	} = useRegisterMutation();
@@ -150,7 +150,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 					}
 					centered
 					className={styles.submit}
-					disabled={isLoading}
+					disabled={isPending}
 				/>
 				<FormattedMessage
 					id="register__loginIntro"

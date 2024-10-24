@@ -34,7 +34,7 @@ export default function Heading6({
 				large && styles.large,
 				uppercase && styles.uppercase,
 				ultralight && styles.ultralight,
-				className
+				className,
 			)}
 		>
 			{children}

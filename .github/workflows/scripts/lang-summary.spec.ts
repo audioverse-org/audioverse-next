@@ -38,7 +38,7 @@ function run() {
 
 function loadFiles(
 	files1: Record<string, unknown>,
-	files2: Record<string, unknown>
+	files2: Record<string, unknown>,
 ) {
 	const fileNames = Object.keys(files2);
 	jest.mocked(fs.readdirSync).mockReturnValue(fileNames as any);
@@ -58,7 +58,7 @@ describe('lang-summary', () => {
 			{
 				'en.json': { the_id: { string: 'the_string' } },
 				'es.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 	});
 
@@ -66,7 +66,7 @@ describe('lang-summary', () => {
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringMatching(/the_id.*the_id/s)
+			expect.not.stringMatching(/the_id[^]*the_id/),
 		);
 	});
 
@@ -74,7 +74,7 @@ describe('lang-summary', () => {
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('the_id')
+			expect.stringContaining('the_id'),
 		);
 	});
 
@@ -82,7 +82,7 @@ describe('lang-summary', () => {
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('the_string')
+			expect.stringContaining('the_string'),
 		);
 	});
 
@@ -92,13 +92,13 @@ describe('lang-summary', () => {
 			{
 				'es.json': { the_id: { string: 'the_translated_string' } },
 				'en.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringContaining('the_translated_string')
+			expect.not.stringContaining('the_translated_string'),
 		);
 	});
 
@@ -108,13 +108,13 @@ describe('lang-summary', () => {
 				'es.json': { the_id: { string: 'the_translated_string' } },
 				'en.json': { the_id: { string: 'the_string' } },
 			},
-			{ 'es.json': {}, 'en.json': {} }
+			{ 'es.json': {}, 'en.json': {} },
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('the_string')
+			expect.stringContaining('the_string'),
 		);
 	});
 
@@ -122,7 +122,7 @@ describe('lang-summary', () => {
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('+en')
+			expect.stringContaining('+en'),
 		);
 	});
 
@@ -131,13 +131,13 @@ describe('lang-summary', () => {
 			{
 				'en.json': { the_id: { string: 'the_string' } },
 			},
-			{ 'en.json': {} }
+			{ 'en.json': {} },
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('-en')
+			expect.stringContaining('-en'),
 		);
 	});
 
@@ -147,13 +147,13 @@ describe('lang-summary', () => {
 			{
 				'es.json': { the_id: { string: 'the_string' } },
 				'en.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('es!')
+			expect.stringContaining('es!'),
 		);
 	});
 
@@ -163,13 +163,13 @@ describe('lang-summary', () => {
 			{
 				'es.json': { the_id: { string: 'the_translated_string' } },
 				'en.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringContaining('es!')
+			expect.not.stringContaining('es!'),
 		);
 	});
 
@@ -179,13 +179,13 @@ describe('lang-summary', () => {
 			{
 				'es.json': { the_id: { string: 'the_string' } },
 				'en.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringContaining('en!')
+			expect.not.stringContaining('en!'),
 		);
 	});
 
@@ -195,13 +195,13 @@ describe('lang-summary', () => {
 			{
 				'es.json': {},
 				'en.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('es?')
+			expect.stringContaining('es?'),
 		);
 	});
 
@@ -211,13 +211,13 @@ describe('lang-summary', () => {
 			{
 				'es.json': {},
 				'en.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringContaining('+es')
+			expect.not.stringContaining('+es'),
 		);
 	});
 
@@ -228,13 +228,13 @@ describe('lang-summary', () => {
 				'es.json': {},
 				'en.json': {},
 				'br.json': { the_id: { string: 'the_translated_string' } },
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringContaining('!?')
+			expect.not.stringContaining('!?'),
 		);
 	});
 
@@ -245,7 +245,7 @@ describe('lang-summary', () => {
 				'es.json': { the_id: { string: 'the_string' } },
 				'en.json': { the_id: { string: 'the_string' } },
 				'br.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
@@ -256,52 +256,52 @@ describe('lang-summary', () => {
 	it('skips unchanged strings', async () => {
 		loadFiles(
 			{ 'en.json': { the_id: { string: 'the_string' } } },
-			{ 'en.json': { the_id: { string: 'the_string' } } }
+			{ 'en.json': { the_id: { string: 'the_string' } } },
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringContaining('the_string')
+			expect.not.stringContaining('the_string'),
 		);
 	});
 
 	it('does not flag missing if not present in event commit', async () => {
 		loadFiles(
 			{ 'en.json': { the_id: { string: 'the_string' } } },
-			{ 'en.json': {} }
+			{ 'en.json': {} },
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.not.stringContaining('en?')
+			expect.not.stringContaining('en?'),
 		);
 	});
 
 	it('uses green light if string added', async () => {
 		loadFiles(
 			{ 'en.json': {} },
-			{ 'en.json': { the_id: { string: 'the_string' } } }
+			{ 'en.json': { the_id: { string: 'the_string' } } },
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('🟢 the_id')
+			expect.stringContaining('🟢 the_id'),
 		);
 	});
 
 	it('uses blue light if string removed', async () => {
 		loadFiles(
 			{ 'en.json': { the_id: { string: 'the_string' } } },
-			{ 'en.json': {} }
+			{ 'en.json': {} },
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('🔵 the_id')
+			expect.stringContaining('🔵 the_id'),
 		);
 	});
 
@@ -311,13 +311,13 @@ describe('lang-summary', () => {
 			{
 				'en.json': { the_id: { string: 'the_string' } },
 				'es.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('🟡 the_id')
+			expect.stringContaining('🟡 the_id'),
 		);
 	});
 
@@ -327,13 +327,13 @@ describe('lang-summary', () => {
 			{
 				'en.json': { the_id: { string: 'the_string' } },
 				'es.json': {},
-			}
+			},
 		);
 
 		await run();
 
 		expect(context.core.summary.addRaw).toBeCalledWith(
-			expect.stringContaining('🔴 the_id')
+			expect.stringContaining('🔴 the_id'),
 		);
 	});
 
@@ -349,14 +349,14 @@ describe('lang-summary', () => {
 		expect(context.github.rest.issues.createComment).toBeCalledWith(
 			expect.objectContaining({
 				body: expect.not.stringContaining('syntax'),
-			})
+			}),
 		);
 	});
 
 	it('includes unchanged count in pr comment', async () => {
 		loadFiles(
 			{ 'en.json': { the_id: { string: 'the_string' } } },
-			{ 'en.json': { the_id: { string: 'the_string' } } }
+			{ 'en.json': { the_id: { string: 'the_string' } } },
 		);
 
 		await run();
@@ -364,14 +364,14 @@ describe('lang-summary', () => {
 		expect(context.github.rest.issues.createComment).toBeCalledWith(
 			expect.objectContaining({
 				body: expect.stringContaining('1'),
-			})
+			}),
 		);
 	});
 
 	it('includes added count in pr comment', async () => {
 		loadFiles(
 			{ 'en.json': {} },
-			{ 'en.json': { the_id: { string: 'the_string' } } }
+			{ 'en.json': { the_id: { string: 'the_string' } } },
 		);
 
 		await run();
@@ -379,14 +379,14 @@ describe('lang-summary', () => {
 		expect(context.github.rest.issues.createComment).toBeCalledWith(
 			expect.objectContaining({
 				body: expect.stringContaining('1'),
-			})
+			}),
 		);
 	});
 
 	it('includes removed count in pr comment', async () => {
 		loadFiles(
 			{ 'en.json': { the_id: { string: 'the_string' } } },
-			{ 'en.json': {} }
+			{ 'en.json': {} },
 		);
 
 		await run();
@@ -394,7 +394,7 @@ describe('lang-summary', () => {
 		expect(context.github.rest.issues.createComment).toBeCalledWith(
 			expect.objectContaining({
 				body: expect.stringContaining('1'),
-			})
+			}),
 		);
 	});
 
@@ -404,7 +404,7 @@ describe('lang-summary', () => {
 			{
 				'en.json': { the_id: { string: 'the_string' } },
 				'es.json': { the_id: { string: 'the_string' } },
-			}
+			},
 		);
 
 		await run();
@@ -412,7 +412,7 @@ describe('lang-summary', () => {
 		expect(context.github.rest.issues.createComment).toBeCalledWith(
 			expect.objectContaining({
 				body: expect.stringContaining('0 | 1 | 0 | 1'),
-			})
+			}),
 		);
 	});
 });
