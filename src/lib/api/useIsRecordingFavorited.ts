@@ -11,7 +11,7 @@ export const RECORDING_FAVORITED_QUERY_KEY_PREFIX = 'isRecordingFavorited';
 export function useIsRecordingFavorited(
 	recordingId: Scalars['ID']['output'],
 	sequenceId?: Scalars['ID']['output'],
-	disabled?: boolean
+	disabled?: boolean,
 ): IUseIsFavoritedResult {
 	const queryClient = useQueryClient();
 
@@ -43,6 +43,6 @@ export function useIsRecordingFavorited(
 		queryKey,
 		favoritedQueryFn,
 		setFavoriteQueryFn,
-		invalidateQueryKeys
+		invalidateQueryKeys,
 	);
 }

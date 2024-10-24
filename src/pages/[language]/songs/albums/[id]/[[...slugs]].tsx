@@ -26,7 +26,7 @@ export async function getStaticProps({
 	const { musicAlbum } = await getSongAlbumsDetailPageData({ id }).catch(
 		() => ({
 			musicAlbum: null,
-		})
+		}),
 	);
 	if (
 		musicAlbum?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
@@ -51,6 +51,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSongAlbumsDetailPathsData,
 		(d) => d.musicAlbums.nodes,
-		(_, { canonicalPath }) => canonicalPath
+		(_, { canonicalPath }) => canonicalPath,
 	);
 }

@@ -22,7 +22,7 @@ type ISequenceTypeTheme = {
 };
 
 export function getRecordingTypeTheme(
-	contentType: RecordingContentType
+	contentType: RecordingContentType,
 ): ISequenceTypeTheme {
 	return (
 		{

@@ -44,9 +44,7 @@ type SectionProps<T, V, N> = {
 	isDarkBg?: boolean;
 	hasBg?: boolean;
 	selectNodes?: NodeSelector<InferGraphqlInfiniteQueryType<T>, N>;
-	selectPageInfo?: PageInfoSelector<
-		InferGraphqlInfiniteQueryType<GraphqlInfiniteQuery>
-	>;
+	selectPageInfo?: PageInfoSelector<InferGraphqlInfiniteQueryType<T>>;
 	Card: Card<N>;
 };
 
@@ -83,28 +81,28 @@ export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 
 	const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
 		infiniteQuery(
-			'after',
 			{ language, ...variables },
 			{
-				getNextPageParam: (last: Maybe<GraphqlInfiniteQuery>) => {
+				initialPageParam: null,
+				getNextPageParam: (last: Maybe<InferGraphqlInfiniteQueryType<T>>) => {
 					if (!last) return;
 					const pageInfo = selectPageInfo(last);
 					if (!pageInfo?.hasNextPage) return;
 					return {
-						language,
 						after: pageInfo.endCursor,
 					};
 				},
-			}
+			},
 		);
 
 	const cards = useMemo(
 		() =>
 			data?.pages
 				.flatMap(selectNodes)
-				.filter((n): n is SectionNode<N> => !!n)
-				.map((n) => <Card node={n} key={n.canonicalPath} />) ?? [],
-		[Card, data?.pages, selectNodes]
+				.filter((n: Maybe<SectionNode<N>>): n is SectionNode<N> => !!n)
+				.map((n: SectionNode<N>) => <Card node={n} key={n.canonicalPath} />) ??
+			[],
+		[Card, data?.pages, selectNodes],
 	);
 
 	const preload = useCallback(
@@ -117,7 +115,7 @@ export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 				fetchNextPage();
 			}
 		},
-		[fetchNextPage, isFetchingNextPage, hasNextPage]
+		[fetchNextPage, isFetchingNextPage, hasNextPage],
 	);
 
 	// Check if there's content to render, if not, return an empty JSX element

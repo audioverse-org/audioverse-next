@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # Check if nvm is available
 if command -v nvm >/dev/null 2>&1; then
     # Load nvm and install/use node

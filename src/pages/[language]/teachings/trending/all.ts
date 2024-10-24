@@ -19,7 +19,7 @@ export default TrendingTeachings;
 
 export async function trendingStaticProps(
 	params: { language: string } | undefined,
-	filter: string
+	filter: string,
 ): Promise<GetStaticPropsResult<TrendingTeachingsProps & IBaseProps>> {
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);

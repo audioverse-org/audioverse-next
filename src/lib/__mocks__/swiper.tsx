@@ -25,7 +25,7 @@ export function __runHandlers(event: keyof SwiperEvents, ...args: any) {
 
 function registerHandler(
 	event: keyof SwiperEvents,
-	handler: ValueOf<SwiperEvents>
+	handler: ValueOf<SwiperEvents>,
 ) {
 	if (__eventHandlers[event] === undefined) __eventHandlers[event] = [];
 	(__eventHandlers[event] as any).push(handler);

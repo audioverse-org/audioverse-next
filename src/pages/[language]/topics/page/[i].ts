@@ -24,7 +24,7 @@ export async function getStaticProps({
 		params,
 		getTopicListData,
 		(d) => d?.topics.nodes,
-		(d) => d?.topics.aggregate?.count
+		(d) => d?.topics.aggregate?.count,
 	);
 }
 
@@ -32,6 +32,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'topics',
 		getTopicListPathsData,
-		(d) => d?.topics.aggregate?.count
+		(d) => d?.topics.aggregate?.count,
 	);
 }

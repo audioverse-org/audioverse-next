@@ -4,7 +4,7 @@ type Extender<T> = (r: string) => T;
 
 const node = <T>(
 	r: string,
-	extend: Extender<T> = () => ({} as T)
+	extend: Extender<T> = () => ({}) as T,
 ): {
 	get: Getter;
 } & T => ({

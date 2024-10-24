@@ -68,7 +68,7 @@ describe('presenter list page', () => {
 		await renderPage();
 
 		expect(
-			screen.getByText('the_person_surname, the_person_givenName')
+			screen.getByText('the_person_surname, the_person_givenName'),
 		).toBeInTheDocument();
 	});
 
@@ -102,7 +102,7 @@ describe('presenter list page', () => {
 		await renderPage();
 
 		expect(
-			screen.getByAltText('the_person_surname, the_person_givenName')
+			screen.getByAltText('the_person_surname, the_person_givenName'),
 		).toHaveAttribute('src', 'the_person_image');
 	});
 

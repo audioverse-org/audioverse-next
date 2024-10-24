@@ -38,18 +38,18 @@ export async function getServerSideProps({
 				link: person.canonicalUrl,
 				title: intl.formatMessage(
 					{ id: 'presentersFeed__title', defaultMessage: 'Sermons by {name}' },
-					{ name: person.name }
+					{ name: person.name },
 				),
 				description: intl.formatMessage(
 					{
 						id: 'presentersFeed__description',
 						defaultMessage: 'The latest AudioVerse sermons by {name}',
 					},
-					{ name: person.name }
+					{ name: person.name },
 				),
 				image: person.image?.url,
 			},
-			person.recordings.nodes || []
+			person.recordings.nodes || [],
 		);
 		res.write(feed);
 

@@ -1,13 +1,13 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import withIntl from '~components/HOCs/withIntl';
 import { __awaitIntlMessages } from '~lib/getIntlMessages';
 
 import makeQueryClient from '../makeQueryClient';
 
-function withProviders(ui: React.ReactElement, client: QueryClient) {
+function withProviders(ui: ReactNode, client: QueryClient) {
 	const WithIntl = withIntl(() => ui);
 
 	return function WithProviders() {
@@ -21,7 +21,7 @@ function withProviders(ui: React.ReactElement, client: QueryClient) {
 
 export default async function renderWithProviders(
 	ui: React.ReactElement,
-	renderOptions?: RenderOptions
+	renderOptions?: RenderOptions,
 ): Promise<RenderResult & { queryClient: QueryClient }> {
 	const queryClient = makeQueryClient();
 	const WithProviders = withProviders(ui, queryClient);
@@ -33,7 +33,7 @@ export default async function renderWithProviders(
 	return {
 		...result,
 		queryClient,
-		rerender: (rerenderUi: React.ReactElement) => {
+		rerender: (rerenderUi: ReactNode) => {
 			const WithProviders = withProviders(rerenderUi, queryClient);
 			result.rerender(<WithProviders />);
 		},

@@ -65,6 +65,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,
-		(l, { canonicalPath }) => canonicalPath
+		(l, { canonicalPath }) => canonicalPath,
 	);
 }

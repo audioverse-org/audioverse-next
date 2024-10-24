@@ -38,7 +38,7 @@ export default function Section({
 				bleed && styles.bleed,
 				short && styles.short,
 				tall && styles.tall,
-				className
+				className,
 			)}
 		>
 			{media && <div className={styles.media}>{media}</div>}

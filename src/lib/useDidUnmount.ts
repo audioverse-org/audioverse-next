@@ -7,7 +7,7 @@ export default function useDidUnmount(): MutableRefObject<boolean> {
 		() => () => {
 			didUnmount.current = true;
 		},
-		[]
+		[],
 	);
 
 	return didUnmount;

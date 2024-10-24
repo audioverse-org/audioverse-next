@@ -3,7 +3,7 @@ import node from './node';
 
 const paginatedNode = <T>(
 	r: string,
-	extend: (r: string) => T = () => ({} as T)
+	extend: (r: string) => T = () => ({}) as T,
 ): {
 	get: Getter;
 	page: (page: string | number) => {

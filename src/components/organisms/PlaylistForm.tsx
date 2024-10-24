@@ -151,11 +151,11 @@ export default function PlaylistForm({
 							? intl.formatMessage({
 									id: 'create',
 									defaultMessage: 'Create',
-							  })
+								})
 							: intl.formatMessage({
 									id: 'done',
 									defaultMessage: 'Done',
-							  })
+								})
 					}
 					type="primary"
 					onClick={submit}

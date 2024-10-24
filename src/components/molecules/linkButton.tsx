@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
+
+import Link from '~components/atoms/linkWithoutPrefetch';
 
 import styles from './linkButton.module.scss';
 

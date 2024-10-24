@@ -5,7 +5,7 @@ import getLanguageByBaseUrl from '~lib/getLanguageByBaseUrl';
 import handleIntlError from '~lib/handleIntlError';
 
 export default async function getIntl(
-	languageRoute: string
+	languageRoute: string,
 ): Promise<IntlShape> {
 	const locale = getLanguageByBaseUrl(languageRoute)?.base_urls[0] || 'en';
 	const messages = await getIntlMessages(languageRoute);

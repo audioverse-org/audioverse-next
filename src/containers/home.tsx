@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
-import Link from 'next/link';
 import React, { ReactNode } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import Button from '~components/molecules/button';
 import CardPost from '~components/molecules/card/post';
 import CardRecording from '~components/molecules/card/recording';
@@ -148,14 +148,14 @@ export default function Home({ data }: HomeProps): JSX.Element {
 												({
 													type: 'recording',
 													data: r,
-												} as const)
+												}) as const,
 										),
 										...(languageRoute === 'en'
 											? [
 													{
 														type: 'bible',
 													} as const,
-											  ]
+												]
 											: []),
 									]}
 									render={({ data }) =>
@@ -196,7 +196,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							<div
 								className={clsx(
 									styles.posts,
-									posts.length === 4 && styles.postsSquare
+									posts.length === 4 && styles.postsSquare,
 								)}
 							>
 								{posts.map((p) => (
@@ -245,7 +245,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									theme={BaseColors.DARK}
 									className={styles.featureSlide}
 								/>
-							)
+							),
 						)}
 					</Slider>
 				</div>

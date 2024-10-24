@@ -115,7 +115,7 @@ describe('search', () => {
 
 		await waitFor(() => {
 			expect(screen.getByTestId('head')).toHaveTextContent(
-				'Search | "test" | AudioVerse'
+				'Search | "test" | AudioVerse',
 			);
 		});
 	});
@@ -154,7 +154,7 @@ describe('search', () => {
 		expect(
 			screen.queryByRole('heading', {
 				name: 'Presenters',
-			})
+			}),
 		).not.toBeInTheDocument();
 	});
 

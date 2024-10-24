@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import React, { MouseEvent } from 'react';
+
+import Link from '~components/atoms/linkWithoutPrefetch';
 
 import styles from './mininav.module.scss';
 
@@ -49,7 +50,7 @@ export default function Mininav({
 				compact && styles.compact,
 				disabled && styles.miniNavDisabled,
 				className,
-				Theme[theme]
+				Theme[theme],
 			)}
 		>
 			{items.map(({ label, url, onClick, isActive, id }) => {

@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import startCase from 'lodash/startCase';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
+import Link from '~components/atoms/linkWithoutPrefetch';
 import root from '~lib/routes';
 import useHover from '~lib/useHover';
 import useLanguageRoute from '~lib/useLanguageRoute';
@@ -42,7 +42,7 @@ export default function CardSongBook({
 				<a
 					className={clsx(
 						styles.container,
-						isSubHovered && styles.otherHovered
+						isSubHovered && styles.otherHovered,
 					)}
 				>
 					<SequenceTypeLockup contentType={SequenceContentType.MusicAlbum} />

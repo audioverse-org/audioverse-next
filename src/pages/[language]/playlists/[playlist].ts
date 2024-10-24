@@ -19,9 +19,9 @@ export async function getServerSideProps({
 	const { playlist } = params?.playlist
 		? await getPlaylistPageData({
 				id: params.playlist,
-		  }).catch(() => ({
+			}).catch(() => ({
 				playlist: null,
-		  }))
+			}))
 		: { playlist: null };
 
 	return {

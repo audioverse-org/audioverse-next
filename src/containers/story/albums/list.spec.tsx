@@ -94,7 +94,7 @@ describe('stories list page', () => {
 			},
 			{
 				useDefaults: false,
-			}
+			},
 		);
 
 		await renderPage();

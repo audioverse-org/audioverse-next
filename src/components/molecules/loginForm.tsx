@@ -46,7 +46,7 @@ export default function LoginForm({
 						id: 'loginForm__resetPasswordSuccessMessage',
 						defaultMessage: 'Check your email for a password reset link',
 						description: 'reset password success message',
-					})
+					}),
 				);
 			}
 		},

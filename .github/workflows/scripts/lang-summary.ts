@@ -26,15 +26,15 @@ function getLangFiles(paths: string[], hash: string): Record<string, Langs> {
 
 function getAllStringIds(
 	files1: Record<string, Langs>,
-	files2: Record<string, Langs>
+	files2: Record<string, Langs>,
 ): Set<string> {
 	const ids = new Set<string>();
 
 	Object.values(files1).forEach((langs) =>
-		Object.keys(langs).forEach((id) => ids.add(id))
+		Object.keys(langs).forEach((id) => ids.add(id)),
 	);
 	Object.values(files2).forEach((langs) =>
-		Object.keys(langs).forEach((id) => ids.add(id))
+		Object.keys(langs).forEach((id) => ids.add(id)),
 	);
 
 	return ids;
@@ -42,7 +42,7 @@ function getAllStringIds(
 
 function getAllLangIds(
 	files1: Record<string, Langs>,
-	files2: Record<string, Langs>
+	files2: Record<string, Langs>,
 ): Set<string> {
 	const ids = new Set<string>();
 
@@ -56,7 +56,7 @@ function getFlag(
 	stringId: string,
 	langId: string,
 	files1: Record<string, Langs>,
-	files2: Record<string, Langs>
+	files2: Record<string, Langs>,
 ) {
 	const lang1 = files1[`${langId}.json`]?.[stringId];
 	const lang2 = files2[`${langId}.json`]?.[stringId];
@@ -76,12 +76,12 @@ function getLight(flags: string) {
 	return flags.includes('?')
 		? '🔴 '
 		: flags.includes('!')
-		? '🟡 '
-		: flags.includes('+')
-		? '🟢 '
-		: flags.includes('-')
-		? '🔵 '
-		: '';
+			? '🟡 '
+			: flags.includes('+')
+				? '🟢 '
+				: flags.includes('-')
+					? '🔵 '
+					: '';
 }
 
 function getSummary(paths: string[], hash1: string, hash2: string): string {
@@ -141,7 +141,7 @@ function getBody(
 	paths: string[],
 	hash1: string,
 	hash2: string,
-	summaryUrl: string
+	summaryUrl: string,
 ) {
 	const files1 = getLangFiles(paths, hash1);
 	const files2 = getLangFiles(paths, hash2);
@@ -181,7 +181,7 @@ function getBody(
 		}).length;
 
 		lines.push(
-			`${langId} | ${unchangedCount} | ${addedCount} | ${removedCount} | ${untranslatedCount}`
+			`${langId} | ${unchangedCount} | ${addedCount} | ${removedCount} | ${untranslatedCount}`,
 		);
 	});
 
@@ -245,7 +245,7 @@ type Options = {
 async function upsertComment(
 	prNumber: number,
 	body: string,
-	{ github, context }: Options
+	{ github, context }: Options,
 ) {
 	body = `${BODY_PREFIX}\n\n${body}`;
 
@@ -256,7 +256,7 @@ async function upsertComment(
 	});
 
 	const prev = comments.find((c: { body: string }) =>
-		c.body.startsWith(BODY_PREFIX)
+		c.body.startsWith(BODY_PREFIX),
 	);
 
 	if (prev) {

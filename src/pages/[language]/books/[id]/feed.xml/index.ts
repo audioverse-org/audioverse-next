@@ -26,7 +26,7 @@ type BookFeedDescription = {
 
 export const formatBooksDescription = async (
 	languageRoute: string,
-	sequence: BookFeedDescription
+	sequence: BookFeedDescription,
 ): Promise<string> => {
 	const intl = await getIntl(languageRoute);
 	const formatNameString = (persons: { name: string }[]) =>
@@ -42,16 +42,16 @@ export const formatBooksDescription = async (
 			authors: formatNameString(
 				recordings.reduce<{ name: string }[]>(
 					(carry, { authors }) => [...carry, ...authors],
-					[]
-				)
+					[],
+				),
 			),
 			narrators: formatNameString(
 				recordings.reduce<{ name: string }[]>(
 					(carry, { narrators }) => [...carry, ...narrators],
-					[]
-				)
+					[],
+				),
 			),
-		}
+		},
 	);
 };
 
@@ -92,7 +92,7 @@ export async function getServerSideProps({
 				description: await formatBooksDescription(languageRoute, sequence),
 				image: sequence.image?.url,
 			},
-			sequence.recordings.nodes || []
+			sequence.recordings.nodes || [],
 		);
 		res.write(feed);
 

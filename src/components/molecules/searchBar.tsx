@@ -43,7 +43,7 @@ export default function SearchBar({
 
 	const handleSubmit = useCallback(
 		(e: KeyboardEvent) => e.key === 'Enter' && onSubmit?.(),
-		[onSubmit]
+		[onSubmit],
 	);
 
 	useEffect(() => {
@@ -74,7 +74,7 @@ export default function SearchBar({
 				className={clsx(
 					styles.input,
 					isFocused && styles.focused,
-					inputClassName
+					inputClassName,
 				)}
 			>
 				<IconSearch width={24} height={24} />
@@ -91,10 +91,11 @@ export default function SearchBar({
 						description: 'search bar label',
 					})}
 					onBlur={() => {
-						setIsFocused(false),
-							lastTerm != term && term != ''
-								? (analytics.track('Search', { term }), setLastTerm(term))
-								: '';
+						setIsFocused(false);
+						if (lastTerm != term && term != '') {
+							analytics.track('Search', { term });
+							setLastTerm(term);
+						}
 					}}
 					placeholder={
 						isFocused
@@ -103,7 +104,7 @@ export default function SearchBar({
 									id: 'molecule-searchBar__label',
 									defaultMessage: 'Search',
 									description: 'search bar label',
-							  })
+								})
 					}
 					ref={inputRef}
 				/>

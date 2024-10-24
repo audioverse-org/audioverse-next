@@ -32,7 +32,7 @@ export default function ButtonSpeed({
 			<div
 				className={clsx(
 					styles.speed,
-					isBackgroundColorDark(backgroundColor) && styles.light
+					isBackgroundColorDark(backgroundColor) && styles.light,
 				)}
 			>
 				<FormattedMessage

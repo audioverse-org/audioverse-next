@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import isServerSide from '../isServerSide';
 
 export default function useScrollTop(
-	scrollRef: React.RefObject<HTMLDivElement>
+	scrollRef: React.RefObject<HTMLDivElement>,
 ) {
 	const [scrollTop, setScrollTop] = useState<number>(0);
 

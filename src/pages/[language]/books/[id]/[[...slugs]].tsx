@@ -53,6 +53,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getAudiobookDetailPathsData,
 		(d) => d.audiobooks.nodes,
-		(l, { canonicalPath }) => canonicalPath
+		(l, { canonicalPath }) => canonicalPath,
 	);
 }

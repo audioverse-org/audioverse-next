@@ -27,13 +27,15 @@ export default function PreferencesForm(): JSX.Element {
 	const [autoplay, setAutoplay] = useState(false);
 	const [language, setLanguage] = useState<string>(Language.English);
 	const [preferredAudioQuality, setPreferredAudioQuality] = useState<string>(
-		RecordingQuality.Low
+		RecordingQuality.Low,
 	);
 	const [timezone, setTimezone] = useState<string>(Timezone.AmericaNewYork);
 
 	const { mutate } = useUpdateAccountPreferencesMutation({
 		onSuccess: () =>
-			queryClient.invalidateQueries(['getAccountPreferencesData']),
+			queryClient.invalidateQueries({
+				queryKey: ['getAccountPreferencesData'],
+			}),
 	});
 	const intl = useIntl();
 

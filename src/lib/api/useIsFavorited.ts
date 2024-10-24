@@ -22,22 +22,28 @@ export function useIsFavorited(
 	queryKey: IQueryKey,
 	isFavoritedQueryFn: () => boolean | Promise<boolean>,
 	setFavoritedQueryFn: (isFavorited: boolean) => Promise<boolean>,
-	invalidateQueryKeys: IQueryKey[] = []
+	invalidateQueryKeys: IQueryKey[] = [],
 ): IUseIsFavoritedResult {
 	const context = useContext(GlobalModalsContext);
 	const queryClient = useQueryClient();
 	const router = useRouter();
 
-	const { data: isFavorited, isLoading } = useQuery(queryKey, () => {
-		if (getSessionToken()) {
-			return isFavoritedQueryFn();
-		}
-		return false;
+	const { data: isFavorited, isLoading } = useQuery({
+		queryKey: queryKey,
+
+		queryFn: () => {
+			if (getSessionToken()) {
+				return isFavoritedQueryFn();
+			}
+			return false;
+		},
 	});
 
-	const { mutate } = useMutation(() => setFavoritedQueryFn(!isFavorited), {
+	const { mutate } = useMutation({
+		mutationFn: () => setFavoritedQueryFn(!isFavorited),
+
 		onMutate: async () => {
-			await queryClient.cancelQueries(queryKey);
+			await queryClient.cancelQueries({ queryKey });
 
 			const snapshot = isFavorited;
 
@@ -45,14 +51,16 @@ export function useIsFavorited(
 
 			return { snapshot };
 		},
+
 		onError: (err, variables, context) => {
 			if (context?.snapshot !== undefined) {
 				queryClient.setQueryData(queryKey, context.snapshot);
 			}
 		},
+
 		onSettled: () => {
 			const keys = [queryKey, ...invalidateQueryKeys, ['getLibraryData']];
-			keys.map((k) => queryClient.invalidateQueries(k));
+			keys.map((k) => queryClient.invalidateQueries({ queryKey: k }));
 		},
 	});
 
@@ -62,7 +70,7 @@ export function useIsFavorited(
 			return context.challengeAuth(() => mutate());
 		}
 		const requiresConfirmation = router.pathname.includes(
-			'/[language]/library'
+			'/[language]/library',
 		);
 		if (isFavorited && requiresConfirmation) {
 			return context.confirmRemoveFavorite(() => mutate());
