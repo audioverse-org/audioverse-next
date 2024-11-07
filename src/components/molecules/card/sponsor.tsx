@@ -10,8 +10,6 @@ import Card from '~components/molecules/card';
 import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 import { BaseColors } from '~lib/constants';
 import UserPlusIcon from '~public/img/icons/fa-user-plus.svg';
-import { CatalogEntityType } from '~src/__generated__/graphql';
-import { analytics } from '~src/lib/analytics';
 
 import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
@@ -28,29 +26,13 @@ export default function CardSponsor({
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
-	const {
-		canonicalPath,
-		image,
-		title,
-		collections,
-		sequences,
-		recordings,
-		id,
-	} = sponsor;
+	const { canonicalPath, image, title, collections, sequences, recordings } =
+		sponsor;
 
 	return (
 		<Card>
 			<Link href={canonicalPath} legacyBehavior>
-				<a
-					className={styles.container}
-					onClick={() => {
-						analytics.track('Card click', {
-							type: CatalogEntityType.Sponsor,
-							id,
-							title,
-						});
-					}}
-				>
+				<a className={styles.container}>
 					<TypeLockup
 						Icon={UserPlusIcon}
 						label={intl.formatMessage({

@@ -70,45 +70,6 @@
 	border: none;
 }
 
-.search {
-	display: none;
-	background: $ts-cream;
-	padding-top: 8px;
-
-	@include hpad();
-
-	.searchInput {
-		background: $ts-white;
-		border-bottom: none;
-		border-radius: 4px;
-		padding: 4px 12px 4px 8px;
-		height: 32px;
-
-		> svg {
-			color: $ts-red;
-		}
-
-		input,
-		input::placeholder {
-			font-size: 16px;
-			line-height: 24px;
-			font-weight: 400;
-		}
-	}
-
-	> button {
-		margin-left: 8px;
-	}
-}
-
-.searchActive {
-	display: flex;
-}
-
-.searchFilters {
-	padding-top: 8px;
-}
-
 @media (min-width: $breakpoint-lg) {
 	.base {
 		display: none;

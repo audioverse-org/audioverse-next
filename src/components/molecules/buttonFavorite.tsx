@@ -5,6 +5,7 @@ import { BaseColors } from '~lib/constants';
 import IconLike from '~public/img/icons/icon-like.svg';
 import IconLikeActive from '~public/img/icons/icon-like-active.svg';
 import IconLikeLight from '~public/img/icons/icon-like-light.svg';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import { analytics } from '../../lib/analytics';
 import { isBackgroundColorDark } from './buttonPlay';
@@ -68,6 +69,11 @@ const ButtonFavorite = forwardRef<HTMLButtonElement, Props>(
 					e.preventDefault();
 					e.stopPropagation();
 					toggleFavorited();
+					if (!isFavorited) {
+						gtmPushEvent({
+							event: 'favorite',
+						});
+					}
 					if (favoritedType) {
 						analytics.track(isFavorited ? 'Unfavorite' : 'Favorite', {
 							type: favoritedType,

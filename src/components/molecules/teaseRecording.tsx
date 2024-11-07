@@ -8,7 +8,6 @@ import Link from '~components/atoms/linkWithoutPrefetch';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
 
-import { analytics } from '../../lib/analytics';
 import { TeaseRecordingFragment } from './__generated__/teaseRecording';
 import ButtonAddToPlaylist from './buttonAddToPlaylist';
 import PlayButton from './buttonPlayCircle';
@@ -115,11 +114,6 @@ export default function TeaseRecording({
 						unpadded && styles.unpadded,
 					)}
 					onClick={() => {
-						analytics.track('Card click', {
-							type: recording.recordingContentType,
-							id: recording.id,
-							title: recording.title,
-						});
 						router.push(recording.canonicalPath);
 					}}
 				>
@@ -133,13 +127,6 @@ export default function TeaseRecording({
 							unpadded && styles.unpadded,
 							fullBleed && styles.fullBleed,
 						)}
-						onClick={() => {
-							analytics.track('Card click', {
-								type: recording.recordingContentType,
-								id: recording.id,
-								title: recording.title,
-							});
-						}}
 					>
 						{inner}
 					</a>

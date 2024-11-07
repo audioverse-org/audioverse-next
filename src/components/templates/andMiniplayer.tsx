@@ -36,6 +36,9 @@ export default function AndMiniplayer({
 							className="video-js"
 							playsInline
 							data-testid="video-element"
+							data-type={playbackContext.isShowingVideo() ? 'video' : 'audio'}
+							data-id={recording?.id}
+							data-title={recording?.title}
 							onTimeUpdate={() => {
 								if (!player) return;
 								const t = player.currentTime();

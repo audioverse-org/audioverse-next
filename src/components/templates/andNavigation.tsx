@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Router, { useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
@@ -53,38 +52,14 @@ export default function AndNavigation({
 		};
 	}, []);
 
-	const hideMobileSearch =
-		contextualFilterId === 'all' &&
-		![
-			'/[language]/discover',
-			'/[language]/discover/collections',
-			'/[language]',
-		].includes(pathname);
-
 	return (
 		<div className={styles.base}>
-			<MobileHeader
-				scrollRef={scrollRef}
-				setShowingMenu={setShowingMenu}
-				term={term}
-				onTermChange={(t) => setTerm(t)}
-				entityType={entityType}
-				onEntityTypeChange={setEntityType}
-			/>
-			<Drawer
-				showingMenu={showingMenu}
-				onExit={() => setShowingMenu(false)}
-				onSearchChange={(v) => setTerm(v)}
-				searchTerm={term}
-			/>
+			<MobileHeader scrollRef={scrollRef} setShowingMenu={setShowingMenu} />
+			<Drawer showingMenu={showingMenu} onExit={() => setShowingMenu(false)} />
 			<div ref={scrollRef} className={styles.content}>
 				<LanguageAlternativesAlert />
 				<SearchBar
-					className={clsx(
-						styles.search,
-						term !== undefined && styles.searchActive,
-						hideMobileSearch && styles.hideMobileSearch,
-					)}
+					className={styles.search}
 					term={term}
 					onTermChange={(v) => setTerm(v)}
 					entityType={entityType}

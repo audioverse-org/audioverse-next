@@ -29,11 +29,6 @@
 	margin-bottom: 24px;
 }
 
-.searchActive,
-.hideMobileSearch {
-	display: none;
-}
-
 @media (min-width: $breakpoint-lg) {
 	.base {
 		flex-direction: row;

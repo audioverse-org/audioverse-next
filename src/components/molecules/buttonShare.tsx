@@ -40,7 +40,7 @@ export default function ButtonShare({
 
 	// FUTURE: update sharing links
 	const facebookLink = `https://facebook.com/share.php?u=${shareUrl}`;
-	const twitterLink = `https://twitter.com/intent/tweet?url=${shareUrl}`;
+	const twitterLink = `https://x.com/intent/post?url=${shareUrl}`;
 	const emailLink = `mailto:?body=${shareUrl}${
 		emailSubject
 			? `&subject=${encodeURIComponent(
