@@ -5,6 +5,7 @@ import {
 } from 'next';
 
 import { IBaseProps } from '~containers/base';
+import Bible from '~containers/bible';
 import { getAudiobibleVersionsData } from '~containers/bible/__generated__/versions';
 import Versions, { VersionsProps } from '~containers/bible/versions';
 import { getBibles } from '~lib/api/bibleBrain';
@@ -13,7 +14,7 @@ import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import root from '~lib/routes';
 
-export default Versions;
+export default Bible;
 
 export async function getStaticProps({
 	params,

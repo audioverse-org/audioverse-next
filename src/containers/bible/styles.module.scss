@@ -1,0 +1,45 @@
+@import '../../styles/common';
+
+.base {
+	--bibleAccent: #{$ts-red};
+	--bibleBackground: #{$ts-bibleB};
+	--bibleHatTextColor: #{$ts-white};
+	--bibleHatBackground: #{$ts-bibleH};
+	--bibleHatHover: #{$ts-darkened-bibleH};
+	--bibleTextColor: #{$ts-dark};
+	--bibleTextSecondaryColor: #{$ts-midTone};
+	--bibleWavesColor: #{$ts-lightTone};
+}
+
+.hat {
+	background-color: var(--bibleHatBackground);
+	padding: 16px 24px;
+	display: flex;
+	text-decoration: none;
+	color: var(--bibleHatTextColor, --bibleTextColor);
+	gap: 10px;
+	align-items: center;
+	h4 {
+		margin: 0;
+		font-size: 16px;
+	}
+}
+
+.historyButton {
+	margin-left: auto;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	> * {
+		padding: 24px;
+	}
+	p {
+		margin-top: 8px;
+		margin-bottom: 16px;
+	}
+	@media (min-width: $breakpoint-xl) {
+		flex-direction: row;
+	}
+}
