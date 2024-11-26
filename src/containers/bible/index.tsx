@@ -12,9 +12,11 @@ import IconButton from '~src/components/molecules/iconButton';
 import Tease from '~src/components/molecules/tease';
 import PassageNavigation from '~src/components/organisms/passageNavigation';
 
+import { GetAudiobibleIndexDataQuery } from './__generated__';
 import styles from './index.module.scss';
 
-export default function Bible(): JSX.Element {
+export type BibleIndexProps = GetAudiobibleIndexDataQuery;
+export default function Bible(props: BibleIndexProps): JSX.Element {
 	return (
 		<Tease className={styles.base}>
 			<div className={styles.hat}>
@@ -76,7 +78,7 @@ export default function Bible(): JSX.Element {
 			</div>
 
 			<div className={styles.content}>
-				<PassageNavigation />
+				<PassageNavigation audiobibles={props.audiobibles} />
 			</div>
 		</Tease>
 	);

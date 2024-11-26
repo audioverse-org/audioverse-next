@@ -6,13 +6,20 @@ import { PassageNavigationFragment } from './__generated__/passageNavigation';
 import styles from './passageNavigation.module.scss';
 
 type Props = {
-	data: PassageNavigationFragment;
+	audiobibles: PassageNavigationFragment;
 };
 
 export default function PassageNavigation(props: Props): JSX.Element {
-	const [selectedBook, setSelectedBook] = useState<string | null>(null);
+	const [selectedBook, setSelectedBook] = useState<string | null>(
+		BIBLE_BOOKS[0],
+	);
 
-	const chapters = props.data.nodes[0];
+	const books = props.audiobibles.nodes?.[0].books;
+	const chapters = books?.find(
+		(book) => book?.title === selectedBook,
+	)?.chapters;
+
+	console.log({ chapters });
 
 	return (
 		<div className={styles.wrapper}>
@@ -30,11 +37,14 @@ export default function PassageNavigation(props: Props): JSX.Element {
 				))}
 			</ul>
 			<ul>
-				{chapters?.chapters.map((chapter) => (
-					<li key={chapter}>
-						<button>{chapter}</button>
-					</li>
-				))}
+				{chapters?.map(({ title }) => {
+					const n = title.split(' ').pop();
+					return (
+						<li key={title}>
+							<button>{n}</button>
+						</li>
+					);
+				})}
 			</ul>
 		</div>
 	);
