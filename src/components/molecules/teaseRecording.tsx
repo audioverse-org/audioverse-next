@@ -77,7 +77,7 @@ export default function TeaseRecording({
 			</div>
 			{!hidePresenters && (
 				<div className={styles.presenters}>
-					{recording.persons.map((p) => (
+					{recording.speakers.map((p) => (
 						<PersonLockup
 							key={p.name}
 							person={p}

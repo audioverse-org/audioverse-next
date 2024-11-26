@@ -93,6 +93,9 @@ function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
 						shareUrl={topic.shareUrl}
 						backgroundColor={BaseColors.TOPIC_B}
 						emailSubject={topic.title}
+						contentType="TOPIC"
+						id={topic.id}
+						title={topic.title}
 					/>
 				</div>
 				{hasDetails && (

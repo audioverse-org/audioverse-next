@@ -7,7 +7,10 @@ import AndPlaybackContext, {
 } from '~components/templates/andPlaybackContext';
 import { buildRenderer } from '~lib/test/buildRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
-import { SequenceContentType } from '~src/__generated__/graphql';
+import {
+	RecordingContentType,
+	SequenceContentType,
+} from '~src/__generated__/graphql';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 
@@ -58,6 +61,8 @@ describe('miniplayer template', () => {
 										title: 'the_recording_title',
 										canonicalPath: 'the_recording_path',
 										duration: 60,
+										recordingContentType: RecordingContentType.Sermon,
+										speakers: [],
 										sequence: {
 											contentType: SequenceContentType.Series,
 											title: 'the_sequence_title',
@@ -73,6 +78,7 @@ describe('miniplayer template', () => {
 										audioFiles: [],
 										videoStreams: [],
 										collection: null,
+										sponsor: null,
 									},
 									'the_recording_id',
 								);

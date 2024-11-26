@@ -4,7 +4,10 @@ declare global {
 	}
 }
 
-export const gtmPushEvent = (event: Record<string, string | number>) => {
+export const gtmPushEvent = (
+	event: string,
+	params: Record<string, string | number | undefined>,
+) => {
 	window.dataLayer = window.dataLayer || [];
-	window.dataLayer.push(event);
+	window.dataLayer.push({ event, ...params });
 };

@@ -10,6 +10,7 @@ import Card from '~components/molecules/card';
 import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 import { BaseColors } from '~lib/constants';
 import UserPlusIcon from '~public/img/icons/fa-user-plus.svg';
+import { CatalogEntityType } from '~src/__generated__/graphql';
 
 import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
@@ -26,8 +27,15 @@ export default function CardSponsor({
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
-	const { canonicalPath, image, title, collections, sequences, recordings } =
-		sponsor;
+	const {
+		id,
+		canonicalPath,
+		image,
+		title,
+		collections,
+		sequences,
+		recordings,
+	} = sponsor;
 
 	return (
 		<Card>
@@ -99,6 +107,9 @@ export default function CardSponsor({
 				backgroundColor={BaseColors.LIGHT_TONE}
 				light
 				className={clsx(styles.like, isFavorited && styles.likeActive)}
+				contentType={CatalogEntityType.Sponsor}
+				id={id}
+				title={title}
 			/>
 		</Card>
 	);

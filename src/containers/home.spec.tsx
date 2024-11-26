@@ -190,7 +190,7 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 					},
 					canonicalPath: 'the_sequence_path',
 					contentType: SequenceContentType.BibleBook,
-					speakers: {
+					sequenceSpeakers: {
 						nodes: [],
 					},
 					allRecordings: {

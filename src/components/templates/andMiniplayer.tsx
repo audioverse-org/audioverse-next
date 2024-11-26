@@ -36,9 +36,18 @@ export default function AndMiniplayer({
 							className="video-js"
 							playsInline
 							data-testid="video-element"
-							data-type={playbackContext.isShowingVideo() ? 'video' : 'audio'}
+							data-content-type={recording?.recordingContentType}
+							data-media-type={
+								playbackContext.isShowingVideo() ? 'video' : 'audio'
+							}
 							data-id={recording?.id}
 							data-title={recording?.title}
+							data-presenter={recording?.speakers
+								.map((item) => item.name)
+								.join(';')}
+							data-sponsor={recording?.sponsor?.title}
+							data-conference={recording?.collection?.title}
+							data-series={recording?.sequence?.title}
 							onTimeUpdate={() => {
 								if (!player) return;
 								const t = player.currentTime();

@@ -50,6 +50,7 @@ export default function CardCollection({
 		image,
 		startDate,
 		title,
+		id,
 	} = collection;
 	const heroImage = image?.url && (
 		<div className={styles.imageContainer}>
@@ -140,6 +141,9 @@ export default function CardCollection({
 							}
 							light
 							className={clsx(styles.like, isFavorited && styles.likeActive)}
+							contentType={contentType}
+							id={id}
+							title={title}
 						/>
 					</div>
 					{sequences?.length || recordings?.length ? (

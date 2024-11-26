@@ -6,7 +6,10 @@ fragment cardSequence on Sequence {
 	contentType
 	duration
 	summary
-	speakers: persons(role: SPEAKER, orderBy: [{ field: NAME, direction: ASC }]) {
+	sequenceSpeakers: persons(
+		role: SPEAKER
+		orderBy: [{ field: NAME, direction: ASC }]
+	) {
 		nodes {
 			...personLockup
 		}

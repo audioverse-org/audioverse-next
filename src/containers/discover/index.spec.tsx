@@ -76,7 +76,7 @@ const loadTrendingTeachings = buildLoader<GetSectionTrendingTeachingsQuery>(
 						title: 'trending_sermon_title',
 						canonicalPath: 'the_sermon_path2',
 						recordingContentType: RecordingContentType.Sermon,
-						persons: [],
+						speakers: [],
 					},
 				},
 			],
@@ -94,7 +94,7 @@ const loadFeaturedTeachings = buildLoader<GetSectionFeaturedTeachingsQuery>(
 					title: 'featured_sermon_title',
 					canonicalPath: 'the_sermon_path3',
 					recordingContentType: RecordingContentType.Sermon,
-					persons: [],
+					speakers: [],
 				},
 			],
 			...base,
@@ -111,7 +111,7 @@ const loadStorySeasons = buildLoader<GetSectionStorySeasonsQuery>(
 					title: 'the_story_title',
 					canonicalPath: 'the_story_path',
 					contentType: SequenceContentType.StorySeason,
-					speakers: {
+					sequenceSpeakers: {
 						nodes: [],
 					},
 					recordings: {

@@ -147,6 +147,10 @@ function BookInner({
 			)}`,
 			sequence: null,
 			collection: null,
+			recordingContentType: RecordingContentType.BibleChapter,
+			sponsor: {
+				title: 'Faith Comes By Hearing',
+			},
 		};
 	}
 
@@ -299,7 +303,7 @@ function BookInner({
 											...chapterToRecording(chapter),
 											recordingContentType: RecordingContentType.BibleChapter,
 											sequenceIndex: null,
-											persons: [],
+											speakers: [],
 										}}
 										playlistRecordings={recordings.slice(
 											chapters.findIndex((c) => c.id === chapter.id),

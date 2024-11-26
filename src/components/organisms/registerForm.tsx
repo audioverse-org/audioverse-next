@@ -5,6 +5,7 @@ import Button from '~components/molecules/button';
 import Input from '~components/molecules/form/input';
 import { useRegisterMutation } from '~containers/account/__generated__/register';
 import { setSessionToken } from '~lib/cookies';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import { analytics } from '../../lib/analytics';
 import styles from './registerForm.module.scss';
@@ -41,6 +42,10 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 				lastName: lastName,
 				email: email,
 				source: 'Sign up',
+			});
+			gtmPushEvent('sign_up', {
+				sign_up_method: 'email',
+				user_id: dataRegister.signup.authenticatedUser.user.id,
 			});
 
 			onSuccess();

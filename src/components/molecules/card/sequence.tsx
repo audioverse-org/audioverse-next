@@ -51,6 +51,7 @@ export default function CardSequence({
 	const isBibleBook = sequence.contentType === SequenceContentType.BibleBook;
 
 	const {
+		id,
 		contentType,
 		allRecordings,
 		canonicalPath,
@@ -58,7 +59,7 @@ export default function CardSequence({
 		duration,
 		summary,
 		title,
-		speakers,
+		sequenceSpeakers: speakers,
 		sequenceWriters: writers,
 	} = sequence;
 
@@ -268,6 +269,9 @@ export default function CardSequence({
 					backgroundColor={backgroundColor}
 					light
 					className={clsx(styles.like, isFavorited && styles.likeActive)}
+					contentType={contentType}
+					id={id}
+					title={title}
 				/>
 			</div>
 			{recordings?.length ? (
