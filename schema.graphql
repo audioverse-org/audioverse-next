@@ -58,6 +58,12 @@ type AuthenticatedUserPayload {
   errors: [InputValidationError!]!
 }
 
+type AuthenticatedUserSocialPayload {
+  authenticatedUser: AuthenticatedUser
+  errors: [InputValidationError!]!
+  isNewUser: Boolean
+}
+
 type Bible implements Node {
   abbreviation: String!
   book(id: ID!): BibleBook!
@@ -1637,7 +1643,7 @@ type Mutation {
   licenseHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, licenseId: ID!): CatalogHistoryItemPayload!
   licenseUpdate(input: LicenseUpdateInput!, licenseId: ID!): LicensePayload!
   login(input: UserLoginInput!): AuthenticatedUserPayload!
-  loginSocial(input: UserLoginSocialInput!): AuthenticatedUserPayload!
+  loginSocial(input: UserLoginSocialInput!): AuthenticatedUserSocialPayload!
   mediaFileDelete(mediaFileId: ID!): SuccessPayload!
   mediaFileUploadAbort(mediaFileUploadId: ID!): SuccessPayload!
   mediaFileUploadAssign(mediaFileUploadId: ID!, recordingId: ID!): SuccessPayload!
