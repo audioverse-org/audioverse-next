@@ -1,9 +1,15 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
+import {
+	act,
+	render,
+	RenderOptions,
+	RenderResult,
+} from '@testing-library/react';
 import React, { ReactNode } from 'react';
 
 import AndIntl from '~src/components/templates/andIntl';
 
+import getIntlMessages from '../getIntlMessages';
 import makeQueryClient from '../makeQueryClient';
 
 function withProviders(ui: ReactNode, client: QueryClient) {
@@ -24,6 +30,10 @@ export default async function renderWithProviders(
 	const WithProviders = withProviders(ui, queryClient);
 
 	const result = render(<WithProviders />, renderOptions);
+
+	await act(async () => {
+		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+	});
 
 	return {
 		...result,

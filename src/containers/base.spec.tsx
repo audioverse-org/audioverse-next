@@ -1,12 +1,17 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
 import MyApp from '~pages/_app';
+import getIntlMessages from '~src/lib/getIntlMessages';
 
 const renderApp = async (component: any, props: any) => {
 	const view = render(<MyApp Component={component} pageProps={props} />);
+
+	await act(async () => {
+		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+	});
 
 	return view;
 };
