@@ -1,15 +1,21 @@
 @import '../../styles/common.scss';
 
 .wrapper {
-	display: flex;
+    display: flex;
+    background-color: $ts-bibleVersionH;
 }
 
 .wrapper button {
-	background: none;
-	border: none;
+    background: none;
+    border: none;
+}
+
+.wrapper li,
+.wrapper li button {
+    color: $ts-lightTone;
 }
 
 .wrapper :global(.active),
 .wrapper :global(.active) button {
-	color: $ts-salmon;
+    color: $ts-salmon;
 }
