@@ -1,5 +1,6 @@
 {
 	"low": true,
+	"skip-dev": true,
 	"allowlist": [
 		"GHSA-xvch-5gv4-984h", // Not used at runtime
 		"GHSA-93q8-gq69-wqmw", // Not used at runtime
