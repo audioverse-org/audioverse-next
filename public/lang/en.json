@@ -398,6 +398,12 @@
   "bibles__history": {
     "string": "History"
   },
+  "bibles__version1": {
+    "string": "version 1"
+  },
+  "bibles__version2": {
+    "string": "version 2"
+  },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
     "string": "More Blog Posts"

@@ -2747,5 +2747,11 @@
   },
   "bibles__history": {
     "string": "Histórico"
+  },
+  "bibles__version1": {
+    "string": "version 1"
+  },
+  "bibles__version2": {
+    "string": "version 2"
   }
 }
