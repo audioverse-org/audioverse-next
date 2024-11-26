@@ -1,26 +1,30 @@
 @import '../../styles/common.scss';
 
 .wrapper {
-	display: flex;
-	background-color: $ts-bibleVersionH;
+    display: flex;
+    background-color: $ts-bibleVersionH;
 }
 
 .wrapper button {
-	background: none;
-	border: none;
+    background: none;
+    border: none;
+}
+
+.wrapper li {
+    margin: 20px 0;
 }
 
 .wrapper li,
 .wrapper li button {
-	color: $ts-lightTone;
-	font-weight: 700;
-	size: 16px;
-	line-height: 19.2px;
-	text-transform: uppercase;
-	list-style-type: none;
+    color: $ts-lightTone;
+    font-weight: 700;
+    size: 16px;
+    line-height: 19.2px;
+    text-transform: uppercase;
+    list-style-type: none;
 }
 
 .wrapper :global(.active),
 .wrapper :global(.active) button {
-	color: $ts-salmon;
+    color: $ts-salmon;
 }
