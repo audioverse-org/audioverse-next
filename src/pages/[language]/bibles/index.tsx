@@ -7,7 +7,7 @@ import {
 import { IBaseProps } from '~containers/base';
 import Bible from '~containers/bible';
 import { getAudiobibleVersionsData } from '~containers/bible/__generated__/versions';
-import Versions, { VersionsProps } from '~containers/bible/versions';
+import { VersionsProps } from '~containers/bible/versions';
 import { getBibles } from '~lib/api/bibleBrain';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import getIntl from '~lib/getIntl';

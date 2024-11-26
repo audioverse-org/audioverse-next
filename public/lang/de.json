@@ -2744,5 +2744,8 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "bibles__history": {
+    "string": "Verlauf"
   }
 }

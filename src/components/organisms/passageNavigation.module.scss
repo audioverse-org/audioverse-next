@@ -1,0 +1,15 @@
+@import '../../styles/common.scss';
+
+.wrapper {
+	display: flex;
+}
+
+.wrapper button {
+	background: none;
+	border: none;
+}
+
+.wrapper :global(.active),
+.wrapper :global(.active) button {
+	color: $ts-salmon;
+}

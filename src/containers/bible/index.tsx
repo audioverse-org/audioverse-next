@@ -10,8 +10,9 @@ import Button from '~src/components/molecules/button';
 import Dropdown from '~src/components/molecules/dropdown';
 import IconButton from '~src/components/molecules/iconButton';
 import Tease from '~src/components/molecules/tease';
+import PassageNavigation from '~src/components/organisms/passageNavigation';
 
-import styles from './styles.module.scss';
+import styles from './index.module.scss';
 
 export default function Bible(): JSX.Element {
 	return (
@@ -35,24 +36,30 @@ export default function Bible(): JSX.Element {
 				>
 					{(handleClose) => (
 						<div className={styles.dropdownContainer}>
-							<p key="bookid">
+							<p key="version1">
 								<a
 									onClick={(e) => {
 										e.preventDefault();
 										handleClose();
 									}}
 								>
-									Bookname
+									<FormattedMessage
+										id="bibles__version1"
+										defaultMessage="version 1"
+									/>
 								</a>
 							</p>
-							<p key="bookid2">
+							<p key="version2">
 								<a
 									onClick={(e) => {
 										e.preventDefault();
 										handleClose();
 									}}
 								>
-									Bookname 2
+									<FormattedMessage
+										id="bibles__version2"
+										defaultMessage="version 2"
+									/>
 								</a>
 							</p>
 						</div>
@@ -60,7 +67,7 @@ export default function Bible(): JSX.Element {
 				</Dropdown>
 				<IconButton
 					Icon={IconSearch}
-					onClick={function (event: React.MouseEvent<HTMLElement>): void {
+					onClick={function (): void {
 						throw new Error('Function not implemented.');
 					}}
 					color={BaseColors.WHITE}
@@ -68,7 +75,9 @@ export default function Bible(): JSX.Element {
 				/>
 			</div>
 
-			<div className={styles.content}>Hello, world!</div>
+			<div className={styles.content}>
+				<PassageNavigation />
+			</div>
 		</Tease>
 	);
 }

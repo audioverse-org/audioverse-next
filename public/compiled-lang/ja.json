@@ -767,6 +767,12 @@
       "value": "聖書"
     }
   ],
+  "bibles__history": [
+    {
+      "type": 0,
+      "value": "履歴"
+    }
+  ],
   "blogDetailPage__moreBlogPosts": [
     {
       "type": 0,
