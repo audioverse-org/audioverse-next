@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { BIBLE_BOOKS } from '../../lib/constants';
 import { PassageNavigationFragment } from './__generated__/passageNavigation';
+import { getChapters } from './passageNavigation.logic';
 import styles from './passageNavigation.module.scss';
 
 type Props = {
@@ -13,13 +14,7 @@ export default function PassageNavigation(props: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | null>(
 		BIBLE_BOOKS[0],
 	);
-
-	const books = props.audiobibles.nodes?.[0].books;
-	const chapters = books?.find(
-		(book) => book?.title === selectedBook,
-	)?.chapters;
-
-	console.log({ chapters });
+	const chapters = getChapters(props.audiobibles, selectedBook);
 
 	return (
 		<div className={styles.wrapper}>
