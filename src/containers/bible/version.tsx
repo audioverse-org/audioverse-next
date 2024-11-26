@@ -5,7 +5,6 @@ import Heading1 from '~components/atoms/heading1';
 import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import Link from '~components/atoms/linkWithoutPrefetch';
-import withFailStates from '~components/HOCs/withFailStates';
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
 import CardBibleBook from '~components/molecules/card/bibleBook';
 import CardSequence from '~components/molecules/card/sequence';
@@ -17,6 +16,7 @@ import DefinitionList, {
 import Tease from '~components/molecules/tease';
 import { IBibleVersion } from '~lib/api/bibleBrain';
 import { BaseColors } from '~lib/constants';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetAudiobibleVersionDataQuery } from './__generated__/version';
@@ -125,6 +125,11 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 	);
 }
 
-export default withFailStates(Version, {
-	useShould404: ({ version }) => !version,
-});
+const WithFailStates = (props: Parameters<typeof Version>[0]) => (
+	<AndFailStates
+		Component={Version}
+		componentProps={props}
+		options={{ should404: ({ version }) => !version }}
+	/>
+);
+export default WithFailStates;

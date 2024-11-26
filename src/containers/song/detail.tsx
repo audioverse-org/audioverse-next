@@ -3,13 +3,15 @@ import React from 'react';
 import { Recording } from '~components/organisms/recording';
 import AndFailStates from '~src/components/templates/andFailStates';
 
-import { GetStoryDetailDataQuery } from './__generated__/detail';
+import { GetSongDetailDataQuery } from './__generated__/detail';
 
-export interface StoryDetailProps {
-	recording: GetStoryDetailDataQuery['story'];
+export type SongTrack = NonNullable<GetSongDetailDataQuery['musicTrack']>;
+
+export interface SongDetailProps {
+	recording: SongTrack | null | undefined;
 }
 
-const WithFailStates = (props: StoryDetailProps) => (
+const WithFailStates = (props: SongDetailProps) => (
 	<AndFailStates
 		Component={Recording}
 		componentProps={props}

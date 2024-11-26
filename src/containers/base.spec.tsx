@@ -3,13 +3,10 @@ import { render, screen } from '@testing-library/react';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import { __awaitIntlMessages } from '~lib/getIntlMessages';
 import MyApp from '~pages/_app';
 
 const renderApp = async (component: any, props: any) => {
 	const view = render(<MyApp Component={component} pageProps={props} />);
-
-	await __awaitIntlMessages();
 
 	return view;
 };

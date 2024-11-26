@@ -6,7 +6,6 @@ import Heading2 from '~components/atoms/heading2';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
 import RoundImage from '~components/atoms/roundImage';
-import withFailStates from '~components/HOCs/withFailStates';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
 import CardRecording from '~components/molecules/card/recording';
@@ -22,6 +21,7 @@ import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import Heading6 from '~src/components/atoms/heading6';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { GetConferencePresenterDetailPageDataQuery } from '~src/containers/collection/__generated__/presenter';
 import { Must } from '~src/types/types';
 
@@ -139,6 +139,11 @@ function PresenterDetail({
 	);
 }
 
-export default withFailStates(PresenterDetail, {
-	useShould404: ({ person }) => !person,
-});
+const WithFailStates = (props: Parameters<typeof PresenterDetail>[0]) => (
+	<AndFailStates
+		Component={PresenterDetail}
+		componentProps={props}
+		options={{ should404: ({ person }) => !person }}
+	/>
+);
+export default WithFailStates;

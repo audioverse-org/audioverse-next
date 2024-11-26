@@ -2,13 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
-import withFailStates from '~components/HOCs/withFailStates';
 import CardCollection from '~components/molecules/card/collection';
 import CardGroup from '~components/molecules/cardGroup';
 import Pagination from '~components/molecules/pagination';
 import { BaseColors } from '~lib/constants';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetPresenterAppearsPageDataQuery } from './__generated__/appears';
@@ -56,6 +56,11 @@ function PresenterAppears({
 	);
 }
 
-export default withFailStates(PresenterAppears, {
-	useShould404: ({ nodes }) => !nodes.length,
-});
+const WithFailStates = (props: Parameters<typeof PresenterAppears>[0]) => (
+	<AndFailStates
+		Component={PresenterAppears}
+		componentProps={props}
+		options={{ should404: ({ nodes }) => !nodes.length }}
+	/>
+);
+export default WithFailStates;

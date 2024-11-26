@@ -15,6 +15,7 @@ import SermonList, {
 	getStaticProps,
 } from '~pages/[language]/teachings/all/page/[i]';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import getIntlMessages from '~src/lib/getIntlMessages';
 
 import {
 	GetSermonListPageDataDocument,
@@ -230,6 +231,21 @@ describe('sermons list page', () => {
 	});
 
 	it('links All button using lang', async () => {
+		jest.mocked(getIntlMessages).mockResolvedValue({
+			recordingHasVideoFilter__filter: [
+				{
+					type: 0,
+					value: 'Filtro',
+				},
+			],
+			recordingHasVideoFilter__filterAll: [
+				{
+					type: 0,
+					value: 'Todo',
+				},
+			],
+		});
+
 		loadSermonListData();
 		__loadQuery({ language: 'es' });
 

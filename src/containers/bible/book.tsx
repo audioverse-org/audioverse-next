@@ -5,7 +5,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '~components/atoms/heading1';
 import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
-import withFailStates from '~components/HOCs/withFailStates';
 import { PlayerFragment } from '~components/molecules/__generated__/player';
 import { SequenceNavFragment } from '~components/molecules/__generated__/sequenceNav';
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
@@ -30,6 +29,7 @@ import useLanguageRoute from '~lib/useLanguageRoute';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
@@ -322,6 +322,11 @@ function BookInner({
 	);
 }
 
-export default withFailStates(Book, {
-	useShould404: ({ chapters }: BookProps) => !chapters.length,
-});
+const WithFailStates = (props: Parameters<typeof Book>[0]) => (
+	<AndFailStates
+		Component={Book}
+		componentProps={props}
+		options={{ should404: ({ chapters }: BookProps) => !chapters.length }}
+	/>
+);
+export default WithFailStates;

@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 
 import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
-import withFailStates from '~components/HOCs/withFailStates';
 import CardColumn from '~components/molecules/card/column';
 import CardPost from '~components/molecules/card/post';
 import { BaseColors } from '~lib/constants';
 import { formatLongDate } from '~lib/date';
 import { useFormattedDuration } from '~lib/time';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetBlogDetailDataQuery } from './__generated__/detail';
@@ -83,6 +83,11 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 	);
 }
 
-export default withFailStates(BlogPostDetail, {
-	useShould404: (props) => !props.blogPost,
-});
+const WithFailStates = (props: Parameters<typeof BlogPostDetail>[0]) => (
+	<AndFailStates
+		Component={BlogPostDetail}
+		componentProps={props}
+		options={{ should404: (props) => !props.blogPost }}
+	/>
+);
+export default WithFailStates;

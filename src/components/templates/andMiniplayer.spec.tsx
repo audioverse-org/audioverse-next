@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/dom';
 import React, { useContext, useEffect, useState } from 'react';
 
 import AndMiniplayer from '~components/templates/andMiniplayer';
@@ -84,7 +85,9 @@ describe('miniplayer template', () => {
 			},
 		});
 
-		expect(mockPlayer.play).toBeCalled();
+		await waitFor(() => {
+			expect(mockPlayer.play).toBeCalled();
+		});
 	});
 
 	it('loads recording', async () => {

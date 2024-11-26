@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import Heading6 from '~components/atoms/heading6';
-import withFailStates from '~components/HOCs/withFailStates';
 import PersonLockup from '~components/molecules/personLockup';
 import Player from '~components/molecules/player';
 import AndMiniplayer from '~components/templates/andMiniplayer';
 import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
 import { getSequenceTypeTheme } from '~lib/getSequenceType';
 import Logo from '~public/img/logo-small.svg';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetSermonDetailDataQuery } from './__generated__/detail';
@@ -107,6 +107,11 @@ function SermonEmbed({ recording }: Must<SermonEmbedProps>) {
 	);
 }
 
-export default withFailStates<SermonEmbedProps>(SermonEmbed, {
-	useShould404: (props) => !props.recording,
-});
+const WithFailStates = (props: SermonEmbedProps) => (
+	<AndFailStates
+		Component={SermonEmbed}
+		componentProps={props}
+		options={{ should404: (props) => !props.recording }}
+	/>
+);
+export default WithFailStates;

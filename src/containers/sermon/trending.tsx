@@ -2,11 +2,11 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
-import withFailStates from '~components/HOCs/withFailStates';
 import CardRecording from '~components/molecules/card/recording';
 import CardGroup from '~components/molecules/cardGroup';
 import RecordingHasVideoFilter from '~components/molecules/recordingHasVideoFilter';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetTrendingTeachingsPageDataQuery } from './__generated__/trending';
@@ -50,6 +50,11 @@ function TeachingsTrending({
 	);
 }
 
-export default withFailStates(TeachingsTrending, {
-	useShould404: ({ nodes }) => !nodes?.length,
-});
+const WithFailStates = (props: Parameters<typeof TeachingsTrending>[0]) => (
+	<AndFailStates
+		Component={TeachingsTrending}
+		componentProps={props}
+		options={{ should404: ({ nodes }) => !nodes?.length }}
+	/>
+);
+export default WithFailStates;
