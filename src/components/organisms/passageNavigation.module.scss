@@ -16,6 +16,14 @@
     padding: 10px 24px;
 }
 
+.wrapper li:first-child button {
+    padding-top: 16px;
+}
+
+.wrapper li:last-child button {
+    padding-bottom: 16px;
+}
+
 .wrapper li,
 .wrapper li button {
     color: $ts-lightTone;
