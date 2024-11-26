@@ -33,9 +33,9 @@ export default function PassageNavigation(props: Props): JSX.Element {
 			</ul>
 			<ul>
 				{chapters?.map(({ title }) => {
-					const n = title.split(' ').pop();
+					const n = title.split(' ').pop()?.padStart(2, '0') ?? '';
 					return (
-						<li key={title}>
+						<li key={title} className={styles.chapter}>
 							<button>{n}</button>
 						</li>
 					);

@@ -38,3 +38,7 @@
 .wrapper :global(.active) button {
 	color: $ts-salmon;
 }
+
+.chapter button {
+	font-variant-numeric: tabular-nums;
+}
