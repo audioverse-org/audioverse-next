@@ -1,25 +1,23 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
 
+import { BIBLE_BOOKS } from '../../lib/constants';
+import { PassageNavigationFragment } from './__generated__/passageNavigation';
 import styles from './passageNavigation.module.scss';
 
-// TODO: Fetch from FCBH API probably
-const books: Record<string, Array<number>> = {
-	Genesis: [1, 2],
-	Exodus: [1, 2, 3],
-	Leviticus: [1, 2, 3],
-	Numbers: [1, 2, 3],
-	Deuteronomy: [1, 2, 3, 5],
-	Joshua: [1, 2, 3],
+type Props = {
+	data: PassageNavigationFragment;
 };
 
-export default function PassageNavigation(): JSX.Element {
+export default function PassageNavigation(props: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | null>(null);
+
+	const chapters = props.data.nodes[0];
 
 	return (
 		<div className={styles.wrapper}>
 			<ul>
-				{Object.keys(books).map((book) => (
+				{BIBLE_BOOKS.map((book) => (
 					<li key={book} className={clsx({ active: book === selectedBook })}>
 						<button
 							onClick={() => {
@@ -32,12 +30,11 @@ export default function PassageNavigation(): JSX.Element {
 				))}
 			</ul>
 			<ul>
-				{selectedBook &&
-					books[selectedBook].map((chapter) => (
-						<li key={chapter}>
-							<button>{chapter}</button>
-						</li>
-					))}
+				{chapters?.chapters.map((chapter) => (
+					<li key={chapter}>
+						<button>{chapter}</button>
+					</li>
+				))}
 			</ul>
 		</div>
 	);

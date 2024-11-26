@@ -1,0 +1,14 @@
+fragment passageNavigation on BibleConnection {
+	nodes {
+		title
+		books {
+			title
+			chapters {
+				title
+			}
+		}
+	}
+	aggregate {
+		count
+	}
+}
