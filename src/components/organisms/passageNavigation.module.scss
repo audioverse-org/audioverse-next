@@ -25,7 +25,8 @@
 }
 
 .wrapper li,
-.wrapper li button {
+.wrapper li button,
+.wrapper li a {
 	color: $ts-lightTone;
 	font-weight: 700;
 	size: 16px;
@@ -33,7 +34,6 @@
 	text-transform: uppercase;
 	list-style-type: none;
 }
-
 
 .wrapper :global(.active)>button {
 	color: $ts-salmon;
@@ -53,8 +53,15 @@
 	border-bottom: 1px solid $ts-salmon;
 }
 
-.chapter button {
+.chapter a {
 	width: 100%;
 	height: 100%;
 	padding: 24px 0;
+	display: block;
+	text-align: center;
+}
+
+.chapter a:hover {
+	text-decoration: none;
+	color: $ts-salmon;
 }
