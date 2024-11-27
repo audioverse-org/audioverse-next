@@ -1,4 +1,19 @@
 fragment buttonDownload on Recording {
+	id
+	title
+	recordingContentType: contentType
+	speakers: persons(role: SPEAKER) {
+		...personLockup
+	}
+	sponsor {
+		title
+	}
+	sequence {
+		title
+	}
+	collection {
+		title
+	}
 	isDownloadAllowed
 	videoDownloads: videoFiles(allowedContainers: MP4) {
 		url(requestType: DOWNLOAD)

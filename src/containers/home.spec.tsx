@@ -23,7 +23,7 @@ const audiobookTrack = {
 	title: 'the_audiobook_track_title',
 	canonicalPath: 'the_audiobook_track_path',
 	recordingContentType: RecordingContentType.AudiobookTrack,
-	persons: [
+	speakers: [
 		{
 			id: 'the_audiobook_track_person_id',
 			canonicalPath: 'the_person_path',
@@ -56,7 +56,7 @@ const song = {
 	title: 'the_song_title',
 	canonicalPath: 'the_song_path',
 	recordingContentType: RecordingContentType.MusicTrack,
-	persons: [
+	speakers: [
 		{
 			id: 'the_song_person_id',
 			canonicalPath: 'the_person_path',
@@ -89,7 +89,7 @@ const story = {
 	canonicalPath: 'the_story_path',
 	recordingContentType: RecordingContentType.Story,
 	duration: 21 * 60,
-	persons: [
+	speakers: [
 		{
 			id: 'the_story_person_id',
 			canonicalPath: 'the_person_path',
@@ -125,7 +125,7 @@ const recording = {
 	title: 'the_recording_title',
 	canonicalPath: 'the_recording_path',
 	recordingContentType: RecordingContentType.Sermon,
-	persons: [
+	speakers: [
 		{
 			id: 'the_recording_person_id',
 			canonicalPath: 'the_person_path',
@@ -190,7 +190,7 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 					},
 					canonicalPath: 'the_sequence_path',
 					contentType: SequenceContentType.BibleBook,
-					speakers: {
+					sequenceSpeakers: {
 						nodes: [],
 					},
 					allRecordings: {

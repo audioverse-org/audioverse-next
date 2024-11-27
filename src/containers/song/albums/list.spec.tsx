@@ -28,7 +28,7 @@ function loadData() {
 						imageWithFallback: {
 							url: 'the_album_cover',
 						},
-						speakers: {
+						sequenceSpeakers: {
 							nodes: [],
 						},
 						sponsor: {

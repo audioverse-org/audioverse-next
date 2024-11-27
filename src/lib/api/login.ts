@@ -1,6 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 
 import { setSessionToken } from '~lib/cookies';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import { analytics } from '../analytics';
 import { login as _login } from './__generated__/login';
@@ -49,6 +50,11 @@ export async function login(email: string, password: string): Promise<true> {
 			email,
 			source: 'Login',
 		});
+		gtmPushEvent('sign_in', {
+			sign_in_method: 'email',
+			user_id: authenticatedUser.user.id,
+		});
+
 		return true;
 	}
 	throw new Error((errors?.length && errors[0].message) || '');

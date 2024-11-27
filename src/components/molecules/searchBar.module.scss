@@ -92,6 +92,9 @@
 	letter-spacing: 0em;
 	text-align: left;
 	margin-left: 28px;
+	@media (max-width: $breakpoint-sm) {
+		display: none;
+	}
 }
 
 .filters {

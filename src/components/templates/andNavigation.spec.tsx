@@ -31,7 +31,7 @@ const teaching: CardRecordingFragment = {
 	recordingContentType: 'AUDIOBOOK_TRACK',
 	sequence: null,
 	sponsor: null,
-	persons: [],
+	speakers: [],
 	collection: null,
 	audioFiles: [],
 	videoFiles: [],
@@ -59,7 +59,7 @@ const series: CardSequenceFragment = {
 	contentType: SequenceContentType.Series,
 	duration: 0,
 	summary: '',
-	speakers: {
+	sequenceSpeakers: {
 		nodes: [],
 	},
 	sequenceWriters: {

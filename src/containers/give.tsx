@@ -135,7 +135,7 @@ export default function Blog(): JSX.Element {
 					text={
 						<FormattedMessage id="give__estateCta" defaultMessage="Give Now" />
 					}
-					href="http://www.wafsda.org/"
+					href="https://www.wafsda.org"
 					target="_blank"
 				/>
 				<p className={styles.paragraphSmall}>

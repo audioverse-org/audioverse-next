@@ -13,6 +13,7 @@ import Textarea from '~components/molecules/form/textarea';
 import { useLanguageId } from '~lib/useLanguageId';
 import { PageContactRecipient } from '~src/__generated__/graphql';
 import { Must } from '~src/types/types';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import { useSubmitContactPageMutation } from './__generated__/contact';
 import styles from './contact.module.scss';
@@ -54,6 +55,9 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 		if (!formFilled) {
 			return;
 		}
+		gtmPushEvent('contact', {
+			contact_type: recipient,
+		});
 		mutate({
 			language,
 			recipient: recipient as PageContactRecipient,

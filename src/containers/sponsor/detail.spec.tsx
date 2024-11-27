@@ -49,7 +49,7 @@ function loadData() {
 									count: 1,
 								},
 							},
-							speakers: [],
+							sequenceSpeakers: [],
 						},
 					],
 				},

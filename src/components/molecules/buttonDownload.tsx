@@ -6,6 +6,7 @@ import { BaseColors } from '~lib/constants';
 import { readableBytes } from '~lib/readableBytes';
 import iconDownloadAudio from '~public/img/icons/download-audio.svg';
 import iconDownloadVedio from '~public/img/icons/download-video.svg';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import { ButtonDownloadFragment } from './__generated__/buttonDownload';
 import styles from './buttonDownload.module.scss';
@@ -99,7 +100,25 @@ export default function ButtonDownload({
 						</Heading6>
 						{audioDownloads.map(({ url, filesize, bitrate }, index) => (
 							<p className={styles.paragraph} key={index} onClick={handleClose}>
-								<a href={url} target="_blank" rel="noreferrer noopener">
+								<a
+									href={url}
+									target="_blank"
+									rel="noreferrer noopener"
+									onClick={() => {
+										gtmPushEvent('download', {
+											content_type: recording.recordingContentType,
+											media_type: 'audio',
+											item_id: recording.id,
+											title: recording.title,
+											presenter: recording.speakers
+												.map((item) => item.name)
+												.join(';'),
+											sponsor: recording.sponsor?.title,
+											conference: recording.collection?.title,
+											series: recording.sequence?.title,
+										});
+									}}
+								>
 									{formatLabel(
 										bitrate <= 24 ? 'low' : bitrate <= 48 ? 'medium' : 'high',
 										filesize,
@@ -152,7 +171,25 @@ export default function ButtonDownload({
 										key={index}
 										onClick={handleClose}
 									>
-										<a href={url} target="_blank" rel="noreferrer noopener">
+										<a
+											href={url}
+											target="_blank"
+											rel="noreferrer noopener"
+											onClick={() => {
+												gtmPushEvent('download', {
+													content_type: recording.recordingContentType,
+													media_type: 'video',
+													item_id: recording.id,
+													title: recording.title,
+													presenter: recording.speakers
+														.map((item) => item.name)
+														.join(';'),
+													sponsor: recording.sponsor?.title,
+													conference: recording.collection?.title,
+													series: recording.sequence?.title,
+												});
+											}}
+										>
 											{formatLabel(
 												frameSize <= 200000
 													? 'low'

@@ -17,6 +17,7 @@ import { UserSocialServiceName } from '~src/__generated__/graphql';
 import { analytics } from '~src/lib/analytics';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import Button from './buttonSocial';
 import styles from './socialLogin.module.scss';
@@ -37,7 +38,7 @@ export default function SocialLogin({
 
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
 		useRegisterSocialMutation({
-			onSuccess: async (response) => {
+			onSuccess: async (response, variables) => {
 				const errors = response?.loginSocial.errors || [];
 				const token = response?.loginSocial.authenticatedUser?.sessionToken;
 
@@ -50,6 +51,17 @@ export default function SocialLogin({
 						email: user?.email,
 						source: 'Login',
 					});
+					if (response?.loginSocial.isNewUser) {
+						gtmPushEvent('sign_up', {
+							sign_up_method: variables?.socialName,
+							user_id: user?.id,
+						});
+					} else {
+						gtmPushEvent('sign_in', {
+							sign_in_method: variables?.socialName,
+							user_id: user?.id,
+						});
+					}
 					onSuccess ? onSuccess() : await queryClient.invalidateQueries();
 				} else if (!didUnmount.current) {
 					setErrors(errors.map((e) => e.message));

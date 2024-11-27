@@ -450,7 +450,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'instagram',
-					href: 'https://www.instagram.com/audioverse/',
+					href: 'https://www.instagram.com/audioverse',
 					Icon: iconMap.fa_instagram,
 					label: intl.formatMessage({
 						id: `header__navItemContact-instagram`,
@@ -460,7 +460,7 @@ export function useNavigationItems(): INavigationItem[] {
 				},
 				{
 					key: 'twitter',
-					href: 'https://www.twitter.com/audioverse/',
+					href: 'https://www.x.com/audioverse',
 					Icon: iconMap.fa_twitter,
 					label: intl.formatMessage({
 						id: `header__navItemContact-twitter`,
