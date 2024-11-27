@@ -14,29 +14,36 @@ export default function PassageNavigation(props: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | null>(
 		BIBLE_BOOKS[0],
 	);
-	const chapters = getChapters(props.audiobibles, selectedBook);
 
 	return (
 		<div className={styles.wrapper}>
-			<ul>
-				{BIBLE_BOOKS.map((book) => (
-					<li key={book} className={clsx({ active: book === selectedBook })}>
-						<button
-							onClick={() => {
-								setSelectedBook(book);
-							}}
-						>
-							{book}
-						</button>
-					</li>
-				))}
-			</ul>
-			<ul>
-				{chapters?.map(({ title }) => {
-					const n = title.split(' ').pop()?.padStart(2, '0') ?? '';
+			<ul className={styles.books}>
+				{BIBLE_BOOKS.map((book) => {
+					const chapters = getChapters(props.audiobibles, book);
 					return (
-						<li key={title} className={styles.chapter}>
-							<button>{n}</button>
+						<li
+							key={book}
+							className={clsx(styles.book, { active: book === selectedBook })}
+						>
+							<button
+								onClick={() => {
+									setSelectedBook(book);
+								}}
+							>
+								{book}
+							</button>
+							<ul className={styles.chapters}>
+								{book === selectedBook
+									? chapters?.map(({ title }) => {
+											const n = title.split(' ').pop()?.padStart(2, '0') ?? '';
+											return (
+												<li key={title} className={styles.chapter}>
+													<button>{n}</button>
+												</li>
+											);
+										})
+									: ''}
+							</ul>
 						</li>
 					);
 				})}
