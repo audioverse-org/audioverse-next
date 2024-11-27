@@ -34,8 +34,8 @@
 	list-style-type: none;
 }
 
-.wrapper :global(.active),
-.wrapper :global(.active) button {
+
+.wrapper :global(.active)>button {
 	color: $ts-salmon;
 }
 
@@ -49,6 +49,8 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
 	background-color: $ts-darkened-bibleH;
+	border-top: 1px solid $ts-salmon;
+	border-bottom: 1px solid $ts-salmon;
 }
 
 .chapter button {

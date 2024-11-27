@@ -32,18 +32,20 @@ export default function PassageNavigation(props: Props): JSX.Element {
 							>
 								{book}
 							</button>
-							<ul className={styles.chapters}>
-								{book === selectedBook
-									? chapters?.map(({ title }) => {
-											const n = title.split(' ').pop()?.padStart(2, '0') ?? '';
-											return (
-												<li key={title} className={styles.chapter}>
-													<button>{n}</button>
-												</li>
-											);
-										})
-									: ''}
-							</ul>
+							{book === selectedBook ? (
+								<ul className={styles.chapters}>
+									{chapters?.map(({ title }) => {
+										const n = title.split(' ').pop()?.padStart(2, '0') ?? '';
+										return (
+											<li key={title} className={styles.chapter}>
+												<button>{n}</button>
+											</li>
+										);
+									})}
+								</ul>
+							) : (
+								''
+							)}
 						</li>
 					);
 				})}
