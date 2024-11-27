@@ -106,6 +106,7 @@ describe('miniplayer template', () => {
 									{
 										title: 'the_recording_title',
 										canonicalPath: 'the_recording_path',
+										speakers: [],
 									} as any,
 									'the_recording_id',
 								);
@@ -132,6 +133,7 @@ describe('miniplayer template', () => {
 									{
 										title: 'the_recording_title',
 										canonicalPath: 'the_recording_path',
+										speakers: [],
 									} as any,
 									'the_recording_id',
 								);

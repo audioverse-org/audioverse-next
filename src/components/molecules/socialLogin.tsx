@@ -39,9 +39,8 @@ export default function SocialLogin({
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
 		useRegisterSocialMutation({
 			onSuccess: async (response, variables) => {
-				const result = response?.loginSocial;
-				const errors = result.errors;
-				const token = result.authenticatedUser?.sessionToken;
+				const errors = response?.loginSocial.errors || [];
+				const token = response?.loginSocial.authenticatedUser?.sessionToken;
 
 				if (token && !errors.length) {
 					setSessionToken(token);
@@ -52,14 +51,14 @@ export default function SocialLogin({
 						email: user?.email,
 						source: 'Login',
 					});
-					if (result.isNewUser) {
+					if (response?.loginSocial.isNewUser) {
 						gtmPushEvent('sign_up', {
-							sign_up_method: variables.socialName,
+							sign_up_method: variables?.socialName,
 							user_id: user?.id,
 						});
 					} else {
 						gtmPushEvent('sign_in', {
-							sign_in_method: variables.socialName,
+							sign_in_method: variables?.socialName,
 							user_id: user?.id,
 						});
 					}

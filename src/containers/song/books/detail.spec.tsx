@@ -25,7 +25,7 @@ function loadData() {
 						canonicalPath: 'first_song_path',
 						contentType: RecordingContentType.MusicTrack,
 						shareUrl: 'first_song_shareurl',
-						persons: [],
+						speakers: [],
 					},
 					{
 						id: 'second_song_id',
@@ -33,7 +33,7 @@ function loadData() {
 						canonicalPath: 'second_song_path',
 						contentType: RecordingContentType.MusicTrack,
 						shareUrl: 'second_song_shareurl',
-						persons: [],
+						speakers: [],
 					},
 				],
 			},

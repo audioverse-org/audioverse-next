@@ -51,7 +51,7 @@ const recentTeaching = {
 	title: 'recent_sermon_title',
 	canonicalPath: 'the_sermon_path',
 	recordingContentType: RecordingContentType.Sermon,
-	persons: [],
+	speakers: [],
 };
 
 const recentTeachingsDefaults = {
