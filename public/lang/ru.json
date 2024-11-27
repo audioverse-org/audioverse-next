@@ -2744,5 +2744,14 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "bibles__history": {
+    "string": "История"
+  },
+  "bibles__version1": {
+    "string": "version 1"
+  },
+  "bibles__version2": {
+    "string": "version 2"
   }
 }

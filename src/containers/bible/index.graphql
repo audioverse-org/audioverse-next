@@ -1,0 +1,5 @@
+query getAudiobibleIndexData {
+	audiobibles {
+		...passageNavigation
+	}
+}

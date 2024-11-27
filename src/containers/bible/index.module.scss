@@ -19,6 +19,7 @@
 	color: var(--bibleHatTextColor, --bibleTextColor);
 	gap: 10px;
 	align-items: center;
+
 	h4 {
 		margin: 0;
 		font-size: 16px;
@@ -32,13 +33,12 @@
 .content {
 	display: flex;
 	flex-direction: column;
-	> * {
-		padding: 24px;
-	}
+
 	p {
 		margin-top: 8px;
 		margin-bottom: 16px;
 	}
+
 	@media (min-width: $breakpoint-xl) {
 		flex-direction: row;
 	}

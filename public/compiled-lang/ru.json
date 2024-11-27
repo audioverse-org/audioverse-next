@@ -767,6 +767,24 @@
       "value": "Библия"
     }
   ],
+  "bibles__history": [
+    {
+      "type": 0,
+      "value": "История"
+    }
+  ],
+  "bibles__version1": [
+    {
+      "type": 0,
+      "value": "version 1"
+    }
+  ],
+  "bibles__version2": [
+    {
+      "type": 0,
+      "value": "version 2"
+    }
+  ],
   "blogDetailPage__moreBlogPosts": [
     {
       "type": 0,

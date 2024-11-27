@@ -1,0 +1,44 @@
+@import '../../styles/common.scss';
+
+.wrapper {
+	display: flex;
+	background-color: $ts-bibleVersionH;
+}
+
+.wrapper ul {
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper button {
+	background: none;
+	border: none;
+	padding: 10px 24px;
+}
+
+.wrapper li:first-child button {
+	padding-top: 16px;
+}
+
+.wrapper li:last-child button {
+	padding-bottom: 16px;
+}
+
+.wrapper li,
+.wrapper li button {
+	color: $ts-lightTone;
+	font-weight: 700;
+	size: 16px;
+	line-height: 19.2px;
+	text-transform: uppercase;
+	list-style-type: none;
+}
+
+.wrapper :global(.active),
+.wrapper :global(.active) button {
+	color: $ts-salmon;
+}
+
+.chapter button {
+	font-variant-numeric: tabular-nums;
+}

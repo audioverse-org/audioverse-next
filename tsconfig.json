@@ -32,6 +32,6 @@
 		},
 		"incremental": true
 	},
-	"exclude": ["./*.js"],
+	"exclude": ["./*.js", "**/*.graphql"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
