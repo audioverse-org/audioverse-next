@@ -16,11 +16,11 @@
 	padding: 10px 24px;
 }
 
-.wrapper .books>li:first-child button {
+.wrapper .books > li:first-child button {
 	padding-top: 16px;
 }
 
-.wrapper .books>li:last-child button {
+.wrapper .books > li:last-child button {
 	padding-bottom: 16px;
 }
 
@@ -35,7 +35,7 @@
 	list-style-type: none;
 }
 
-.wrapper :global(.active)>button {
+.wrapper :global(.active) > button {
 	color: $ts-salmon;
 }
 
