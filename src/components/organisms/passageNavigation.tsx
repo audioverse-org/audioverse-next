@@ -41,6 +41,7 @@ export default function PassageNavigation(props: Props): JSX.Element {
 							{book === selectedBook ? (
 								<ul className={styles.chapters}>
 									{chapters?.map(({ title }) => {
+										console.log('title', title);
 										const n = title.split(' ').pop()?.padStart(2, '0') ?? '';
 										return (
 											<li key={title} className={styles.chapter}>
@@ -48,13 +49,18 @@ export default function PassageNavigation(props: Props): JSX.Element {
 													href={root
 														.lang(languageRoute)
 														.bibles.bookId(
-															getBookId(title, props.audiobibles) ?? '',
+															getBookId('Exodus', props.audiobibles) ?? '',
 														)
 														.chapterNumber(n)
 														.get()}
 												>
 													{n}
 												</Link>
+
+												{/*
+												example good link: /en/bibles/chapters/27015/exodus-1 
+												Current Linking: /en/bibles/20
+												*/}
 											</li>
 										);
 									})}
