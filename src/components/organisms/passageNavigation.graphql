@@ -2,9 +2,11 @@ fragment passageNavigation on BibleConnection {
 	nodes {
 		title
 		books {
+			id
 			title
 			chapters {
 				title
+				url
 			}
 		}
 	}

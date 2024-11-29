@@ -9,3 +9,13 @@ export function getChapters(
 
 	return chapters;
 }
+
+export function getBookId(
+	title: string,
+	audiobibles: PassageNavigationFragment,
+) {
+	const books = audiobibles.nodes?.[0].books;
+	const book = books?.find((book) => book?.title === title);
+
+	return book?.id;
+}
