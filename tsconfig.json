@@ -28,7 +28,8 @@
 			"~components/*": ["src/components/*"],
 			"~containers/*": ["src/containers/*"],
 			"~pages/*": ["src/pages/*"],
-			"~public/*": ["public/*"]
+			"~public/*": ["public/*"],
+			"~services/*": ["src/services/*"]
 		},
 		"incremental": true
 	},

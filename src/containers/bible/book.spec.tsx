@@ -7,15 +7,16 @@ import videojs from 'video.js';
 import AndMiniplayer from '~components/templates/andMiniplayer';
 import AndPlaybackContext from '~components/templates/andPlaybackContext';
 import { BookProps } from '~containers/bible/book';
-import * as bibleBrain from '~lib/api/bibleBrain';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '~pages/[language]/bibles/[id]/[book]/[chapter]';
+import * as bibleBrain from '~src/services/fcbh/bibleBrain';
+import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
 
-jest.mock('~lib/api/bibleBrain');
+jest.mock('~services/fcbh/bibleBrain');
 jest.mock('video.js');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
@@ -47,7 +48,7 @@ function loadPageData() {
 				},
 			},
 		],
-	} as bibleBrain.IBibleVersion);
+	} as IBibleVersion);
 	jest.spyOn(bibleBrain, 'getBibleBookChapters').mockResolvedValue([
 		{
 			id: 'GEN/1',
@@ -56,7 +57,7 @@ function loadPageData() {
 			title: 'the_chapter_title',
 			url: 'https://example.com',
 		},
-	] as bibleBrain.IBibleBookChapter[]);
+	] as IBibleBookChapter[]);
 }
 
 describe('Bible book detail page', () => {
@@ -103,7 +104,7 @@ describe('Bible book detail page', () => {
 						chapters: [1],
 					},
 				],
-			} as bibleBrain.IBibleVersion,
+			} as IBibleVersion,
 		]);
 
 		const { paths } = await getStaticPaths();

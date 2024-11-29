@@ -1,4 +1,4 @@
-import { IBibleVersion } from '~src/lib/api/bibleBrain';
+import { IBibleVersion } from '~src/services/fcbh/types';
 
 export function getChapters(
 	audiobibles: IBibleVersion[],

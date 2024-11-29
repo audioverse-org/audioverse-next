@@ -12,7 +12,7 @@ import Dropdown from '~src/components/molecules/dropdown';
 import IconButton from '~src/components/molecules/iconButton';
 import Tease from '~src/components/molecules/tease';
 import PassageNavigation from '~src/components/organisms/passageNavigation';
-import { IBibleVersion } from '~src/lib/api/bibleBrain';
+import { IBibleVersion } from '~src/services/fcbh/types';
 
 import styles from './index.module.scss';
 
@@ -21,6 +21,7 @@ export type BibleIndexProps = {
 	audiobibles: IBibleVersion[];
 };
 function Bible(props: BibleIndexProps): JSX.Element {
+	console.log({ props });
 	return (
 		<Tease className={styles.base}>
 			<div className={styles.hat}>
@@ -42,7 +43,7 @@ function Bible(props: BibleIndexProps): JSX.Element {
 				>
 					{(handleClose) => (
 						<div className={styles.dropdownContainer}>
-							<p key="version1">
+							{/* <p key="version1">
 								<a
 									onClick={(e) => {
 										e.preventDefault();
@@ -67,7 +68,17 @@ function Bible(props: BibleIndexProps): JSX.Element {
 										defaultMessage="version 2"
 									/>
 								</a>
-							</p>
+							</p> */}
+							{props.audiobibles.map((audiobible) => (
+								<p key={audiobible.id}>
+									<a
+										href={`https://www.example.com/${audiobible.id}`}
+										onClick={handleClose}
+									>
+										{audiobible.title}
+									</a>
+								</p>
+							))}
 						</div>
 					)}
 				</Dropdown>
@@ -82,7 +93,7 @@ function Bible(props: BibleIndexProps): JSX.Element {
 			</div>
 
 			<div className={styles.content}>
-				<PassageNavigation audiobibles={props.audiobibles} />
+				<PassageNavigation books={props.audiobibles[0].books} />
 			</div>
 		</Tease>
 	);

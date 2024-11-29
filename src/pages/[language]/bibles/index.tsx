@@ -10,7 +10,7 @@ import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import root from '~lib/routes';
-import { getBibles } from '~src/lib/api/bibleBrain';
+import { getBibles } from '~src/services/fcbh/bibleBrain';
 
 export default Bible;
 

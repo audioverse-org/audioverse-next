@@ -1,57 +1,6 @@
-import { getBibleBookContent } from './__generated__/bibleContent';
+import { getBibleBookContent } from '../../lib/api/__generated__/bibleContent';
 import getResponse from './bibleBrain.getResponse';
-
-export interface IBibleVersion {
-	id: string;
-	title: string;
-	abbreviation: string;
-	description?: string;
-	books: IBibleBook[];
-	sponsor: {
-		title: string;
-		website: string;
-	};
-}
-export interface IBible {
-	abbr: string;
-	name: string;
-	vname: string;
-	language: string;
-	iso: string;
-	date: number | null;
-	books: IBibleBook[];
-}
-interface IBBFileset {
-	book_id: string;
-	book_name: string;
-	chapter_start: number;
-	path: string;
-	duration: number;
-}
-
-interface IBBBook {
-	book_id: string;
-	name: string;
-	name_short: string;
-	chapters: number[];
-	book_seq: string;
-	testament: string;
-}
-
-export interface IBibleBook extends IBBBook {
-	bible: {
-		abbreviation: string;
-	};
-}
-
-export interface IBibleBookChapter {
-	id: string;
-	number: number;
-	title: string;
-	url: string;
-	duration: number;
-	text: string;
-}
+import { IBBFileset, IBible, IBibleBookChapter, IBibleVersion } from './types';
 
 export async function getBibles(): Promise<IBibleVersion[] | null> {
 	const response = await getResponse<{ data: IBible }>('/bibles/ENGKJV?');
@@ -63,6 +12,11 @@ export async function getBibles(): Promise<IBibleVersion[] | null> {
 		{
 			id: 'ENGKJV2',
 			title: 'King James Version (Dramatized)',
+			abbreviation: 'KJV',
+		},
+		{
+			id: 'ENGKJV01DA',
+			title: 'King James Version',
 			abbreviation: 'KJV',
 		},
 	].map((v) => ({

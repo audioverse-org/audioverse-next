@@ -2,18 +2,17 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
-import { IBibleVersion } from '~src/lib/api/bibleBrain';
 import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/useLanguageRoute';
+import { IBibleBook } from '~src/services/fcbh/types';
 
 import styles from './passageNavigation.module.scss';
 
 type Props = {
-	audiobibles: IBibleVersion[];
+	books: IBibleBook[];
 };
 
-export default function PassageNavigation(props: Props): JSX.Element {
-	const books = props.audiobibles[0].books;
+export default function PassageNavigation({ books }: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | null>(
 		books[0]?.name,
 	);

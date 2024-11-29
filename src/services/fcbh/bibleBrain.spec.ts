@@ -1,5 +1,5 @@
-import { buildLoader } from '../test/buildLoader';
-import { GetBibleBookContentDocument } from './__generated__/bibleContent';
+import { GetBibleBookContentDocument } from '../../lib/api/__generated__/bibleContent';
+import { buildLoader } from '../../lib/test/buildLoader';
 import { getBibleBookChapters } from './bibleBrain';
 import getResponse from './bibleBrain.getResponse';
 

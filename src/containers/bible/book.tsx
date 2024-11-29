@@ -19,17 +19,17 @@ import SequenceNav from '~components/molecules/sequenceNav';
 import Tease from '~components/molecules/tease';
 import TeaseRecording from '~components/molecules/teaseRecording';
 import { PlaybackContext } from '~components/templates/andPlaybackContext';
-import {
-	IBibleBook,
-	IBibleBookChapter,
-	IBibleVersion,
-} from '~lib/api/bibleBrain';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import {
+	IBibleBook,
+	IBibleBookChapter,
+	IBibleVersion,
+} from '~src/services/fcbh/types';
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
