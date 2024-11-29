@@ -8,11 +8,9 @@ import { IBaseProps } from '~containers/base';
 import Book, { BookProps } from '~containers/bible/book';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import root from '~lib/routes';
-import {
-	getBible,
-	getBibleBookChapters,
-	getBibles,
-} from '~src/services/fcbh/bibleBrain';
+import { getBible } from '~src/services/fcbh/getBible';
+import { getBibleBookChapters } from '~src/services/fcbh/getBibleBookChapters';
+import { getBibles } from '~src/services/fcbh/getBibles';
 
 export default Book;
 

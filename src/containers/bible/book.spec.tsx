@@ -13,10 +13,13 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '~pages/[language]/bibles/[id]/[book]/[chapter]';
-import * as bibleBrain from '~src/services/fcbh/bibleBrain';
+import * as bibleBrain from '~src/services/fcbh/getBible';
+import { getBibleBookChapters } from '~src/services/fcbh/getBibleBookChapters';
+import { getBibles } from '~src/services/fcbh/getBibles';
 import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
 
-jest.mock('~services/fcbh/bibleBrain');
+jest.mock('~services/fcbh/getBibles');
+jest.mock('~services/fcbh/getBibleBookChapters');
 jest.mock('video.js');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
@@ -49,7 +52,7 @@ function loadPageData() {
 			},
 		],
 	} as IBibleVersion);
-	jest.spyOn(bibleBrain, 'getBibleBookChapters').mockResolvedValue([
+	jest.mocked(getBibleBookChapters).mockResolvedValue([
 		{
 			id: 'GEN/1',
 			duration: 123,
@@ -89,7 +92,7 @@ describe('Bible book detail page', () => {
 	});
 
 	it('generates paths', async () => {
-		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
+		jest.mocked(getBibles).mockResolvedValue([
 			{
 				id: 'the_version_id',
 				abbreviation: 'KJV',

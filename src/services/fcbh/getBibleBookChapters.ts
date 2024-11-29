@@ -1,44 +1,7 @@
-import { getBibleBookContent } from '../../lib/api/__generated__/bibleContent';
-import getResponse from './bibleBrain.getResponse';
-import { IBBFileset, IBible, IBibleBookChapter, IBibleVersion } from './types';
+import { getBibleBookContent } from '~src/lib/api/__generated__/bibleContent';
 
-export async function getBibles(): Promise<IBibleVersion[] | null> {
-	const response = await getResponse<{ data: IBible }>('/bibles/ENGKJV?');
-	if (!response) {
-		return null;
-	}
-
-	return [
-		{
-			id: 'ENGKJV2',
-			title: 'King James Version (Dramatized)',
-			abbreviation: 'KJV',
-		},
-		{
-			id: 'ENGKJV01DA',
-			title: 'King James Version',
-			abbreviation: 'KJV',
-		},
-	].map((v) => ({
-		...response.data,
-		books: (response.data?.books || []).map((b) => ({
-			...b,
-			book_id: `${v.id}/${b.book_id}`,
-			bible: { abbreviation: v.abbreviation },
-		})),
-		sponsor: {
-			title: 'Faith Comes By Hearing',
-			website: 'http://www.faithcomesbyhearing.com/',
-		},
-		...v,
-	}));
-}
-
-export async function getBible(
-	bibleId: string,
-): Promise<IBibleVersion | null | undefined> {
-	return getBibles().then((bibles) => bibles?.find(({ id }) => id === bibleId));
-}
+import getResponse from './getResponse';
+import { IBBFileset, IBibleBookChapter } from './types';
 
 const bookIdMap: { [k: string]: string } = {
 	GEN: 'Gen',
@@ -114,9 +77,7 @@ export async function getBibleBookChapters(
 	testament: string,
 	bookId: string,
 ): Promise<IBibleBookChapter[]> {
-	const filesetId = `${bibleId.substring(0, bibleId.length - 1)}${
-		testament === 'OT' ? 'O' : 'N'
-	}${bibleId.substring(bibleId.length - 1)}DA`;
+	const filesetId = `${bibleId.substring(0, bibleId.length - 1)}${testament === 'OT' ? 'O' : 'N'}${bibleId.substring(bibleId.length - 1)}DA`;
 	const response = await getResponse<{ data: IBBFileset[] }>(
 		`/bibles/filesets/${filesetId}?`,
 	);
