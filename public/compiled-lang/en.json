@@ -725,12 +725,6 @@
       "value": "Bible Version"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 Books"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -741,24 +735,6 @@
     {
       "type": 0,
       "value": "Sponsor"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Bible"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "The best way to learn sound doctrine is by listening to the Word of God. Our audio Bibles give you the ability to listen to great teachings from the greatest teacher of all."
     }
   ],
   "bible__title": [

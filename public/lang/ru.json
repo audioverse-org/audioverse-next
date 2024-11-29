@@ -47,20 +47,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "Версия Библии"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66 книг"
-  },
   "bibleVersion__description": {
     "string": "Описание"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Организатор"
-  },
-  "bibleVersions__heading": {
-    "string": "Библия"
-  },
-  "bibleVersions__intro": {
-    "string": "Лучший способ постичь здравое учение Иисеса Христа - слушать Слово Божье. Наша аудио Библия поможет вам в этом."
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -1647,9 +1638,6 @@
   },
   "bibleBook__typeLabel": {
     "string": "KJV Bible"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
   },
   "bible__title": {
     "string": "Библия"

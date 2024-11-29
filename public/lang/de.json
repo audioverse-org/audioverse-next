@@ -47,20 +47,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "Bibelversion"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66 Bücher"
-  },
   "bibleVersion__description": {
     "string": "Beschreibung"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Sponsor"
-  },
-  "bibleVersions__heading": {
-    "string": "Bibel"
-  },
-  "bibleVersions__intro": {
-    "string": "Gesunde Lehre wird am besten durch das Hören von Gottes Wort erlernt. Mit unseren Hörbuch-Bibeln kannst du den wertvollen Lektionen des größten Lehrers aller Zeiten lauschen."
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -1650,9 +1641,6 @@
   },
   "bibleBook__typeLabel": {
     "string": "KJV Bible"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
   },
   "bible__title": {
     "string": "Bibel"

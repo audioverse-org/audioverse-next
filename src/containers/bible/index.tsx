@@ -5,18 +5,22 @@ import { FormattedMessage } from 'react-intl';
 import { BaseColors } from '~lib/constants';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import IconSearch from '~public/img/icons/icon-search.svg';
+import withFailStates from '~src/components/HOCs/withFailStates';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import Button from '~src/components/molecules/button';
 import Dropdown from '~src/components/molecules/dropdown';
 import IconButton from '~src/components/molecules/iconButton';
 import Tease from '~src/components/molecules/tease';
 import PassageNavigation from '~src/components/organisms/passageNavigation';
+import { IBibleVersion } from '~src/lib/api/bibleBrain';
 
-import { GetAudiobibleIndexDataQuery } from './__generated__';
 import styles from './index.module.scss';
 
-export type BibleIndexProps = GetAudiobibleIndexDataQuery;
-export default function Bible(props: BibleIndexProps): JSX.Element {
+// export type BibleIndexProps = GetAudiobibleIndexDataQuery;
+export type BibleIndexProps = {
+	audiobibles: IBibleVersion[];
+};
+function Bible(props: BibleIndexProps): JSX.Element {
 	return (
 		<Tease className={styles.base}>
 			<div className={styles.hat}>
@@ -83,3 +87,7 @@ export default function Bible(props: BibleIndexProps): JSX.Element {
 		</Tease>
 	);
 }
+
+export default withFailStates(Bible, {
+	useShould404: ({ audiobibles }) => !audiobibles.length,
+});

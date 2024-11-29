@@ -725,12 +725,6 @@
       "value": "Versión bíblica"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 Libros"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -741,24 +735,6 @@
     {
       "type": 0,
       "value": "Patrocinador"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Biblia"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "La mejor manera de aprender la sana doctrina es escuchar la Palabra de Dios. Nuestras Audiobiblias le dan la posibilidad de escuchar grandes lecciones del mayor maestro de todos los tiempos."
     }
   ],
   "bible__title": [

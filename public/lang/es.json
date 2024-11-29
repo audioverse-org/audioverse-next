@@ -47,20 +47,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "Versión bíblica"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66 Libros"
-  },
   "bibleVersion__description": {
     "string": "Descripción"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Patrocinador"
-  },
-  "bibleVersions__heading": {
-    "string": "Biblia"
-  },
-  "bibleVersions__intro": {
-    "string": "La mejor manera de aprender la sana doctrina es escuchar la Palabra de Dios. Nuestras Audiobiblias le dan la posibilidad de escuchar grandes lecciones del mayor maestro de todos los tiempos."
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detalle más entradas de blog",
@@ -1650,9 +1641,6 @@
   },
   "bibleBook__typeLabel": {
     "string": "KJV Bible"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
   },
   "bible__title": {
     "string": "Biblia"

@@ -47,20 +47,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "Version de la Bible"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66 livres"
-  },
   "bibleVersion__description": {
     "string": "Description"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Sponsor"
-  },
-  "bibleVersions__heading": {
-    "string": "Bible"
-  },
-  "bibleVersions__intro": {
-    "string": "La meilleure façon d'apprendre la saine doctrine est en écoutant la Parole de Dieu. Nos bibles audio vous donne la possibilité d'écouter de grands enseignements donnés par le plus grand enseignant de tous les temps."
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -1650,9 +1641,6 @@
   },
   "bibleBook__typeLabel": {
     "string": "KJV Bible"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
   },
   "bible__title": {
     "string": "Bible"

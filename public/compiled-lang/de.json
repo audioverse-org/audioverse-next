@@ -725,12 +725,6 @@
       "value": "Bibelversion"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 Bücher"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -741,24 +735,6 @@
     {
       "type": 0,
       "value": "Sponsor"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Bibel"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "Gesunde Lehre wird am besten durch das Hören von Gottes Wort erlernt. Mit unseren Hörbuch-Bibeln kannst du den wertvollen Lektionen des größten Lehrers aller Zeiten lauschen."
     }
   ],
   "bible__title": [

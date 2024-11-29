@@ -47,20 +47,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "圣经版本"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66本书"
-  },
   "bibleVersion__description": {
     "string": "描述"
   },
   "bibleVersion__sponsorLabel": {
     "string": "赞助者"
-  },
-  "bibleVersions__heading": {
-    "string": "圣经"
-  },
-  "bibleVersions__intro": {
-    "string": "学习纯正教义的最佳方式是聆听“上帝的道”。我们的音频圣经让您能够聆听最伟大之教师的重要教导。"
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -1650,9 +1641,6 @@
   },
   "bibleBook__typeLabel": {
     "string": "KJV Bible"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
   },
   "bible__title": {
     "string": "圣经"
