@@ -7,7 +7,7 @@ jest.mock('./getResponse');
 
 const loadData = buildLoader(GetBibleBookContentDocument, {});
 
-describe('bibleBrain', () => {
+describe('getBibleBookChapters', () => {
 	beforeEach(() => {
 		jest.mocked(getResponse).mockResolvedValue({
 			data: [
