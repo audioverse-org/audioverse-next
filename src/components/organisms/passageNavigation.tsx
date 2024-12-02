@@ -14,9 +14,24 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | number | null>(
 		null,
 	);
+	const [selectedView, setSelectedView] = useState<'grid' | 'list'>('grid');
 
 	return (
 		<div className={styles.wrapper}>
+			<div className={styles.switch}>
+				<button
+					className={clsx({ active: selectedView === 'grid' })}
+					onClick={() => setSelectedView('grid')}
+				>
+					Grid
+				</button>
+				<button
+					className={clsx({ active: selectedView === 'list' })}
+					onClick={() => setSelectedView('list')}
+				>
+					List
+				</button>
+			</div>
 			<ul className={styles.books}>
 				{books.map((book) => {
 					const chapters = book.recordings.nodes;
