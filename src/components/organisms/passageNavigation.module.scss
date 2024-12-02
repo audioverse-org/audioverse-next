@@ -25,7 +25,7 @@
 
 .wrapper .books:global(.grid) {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
 }
 
 .wrapper li,
@@ -51,6 +51,10 @@
 .wrapper .books,
 .wrapper .chapters {
 	width: 100%;
+}
+
+.books:global(.grid) .chapters {
+	grid-column: 1 / -1;
 }
 
 .chapters {
@@ -89,4 +93,8 @@
 	line-height: 14.4px;
 	text-transform: uppercase;
 	display: inline-block;
+}
+
+.chaptersWrapper {
+	grid-column: 1 / -1;
 }

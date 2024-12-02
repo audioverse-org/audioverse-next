@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
 
@@ -38,36 +38,40 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 					const chapters = book.recordings.nodes;
 
 					return (
-						<li
-							key={book.id}
-							className={clsx(styles.book, {
-								active: book.id === selectedBook,
-							})}
-						>
-							<button
-								onClick={() => {
-									setSelectedBook(book.id);
-								}}
+						<>
+							<li
+								key={book.id}
+								className={clsx(styles.book, {
+									active: book.id === selectedBook,
+								})}
 							>
-								{selectedView === 'grid'
-									? book.title.replace(' ', '').substring(0, 3)
-									: book.title}
-							</button>
+								<button
+									onClick={() => {
+										setSelectedBook(book.id);
+									}}
+								>
+									{selectedView === 'grid'
+										? book.title.replace(' ', '').substring(0, 3)
+										: book.title}
+								</button>
+							</li>
 							{book.id === selectedBook && selectedView === 'list' ? (
-								<ul className={styles.chapters}>
-									{chapters?.map((chapter) => {
-										const n = Number(chapter.title.split(' ').pop());
-										return (
-											<li key={n} className={styles.chapter}>
-												<Link href={chapter.canonicalPath}>{n}</Link>
-											</li>
-										);
-									})}
-								</ul>
+								<li className={styles.chaptersWrapper}>
+									<ul className={styles.chapters}>
+										{chapters?.map((chapter) => {
+											const n = Number(chapter.title.split(' ').pop());
+											return (
+												<li key={n} className={styles.chapter}>
+													<Link href={chapter.canonicalPath}>{n}</Link>
+												</li>
+											);
+										})}
+									</ul>
+								</li>
 							) : (
 								''
 							)}
-						</li>
+						</>
 					);
 				})}
 			</ul>
