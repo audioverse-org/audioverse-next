@@ -32,9 +32,11 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 					List
 				</button>
 			</div>
-			<ul className={styles.books}>
+
+			<ul className={clsx(styles.books, { grid: selectedView === 'grid' })}>
 				{books.map((book) => {
 					const chapters = book.recordings.nodes;
+
 					return (
 						<li
 							key={book.id}
@@ -47,9 +49,11 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 									setSelectedBook(book.id);
 								}}
 							>
-								{book.title}
+								{selectedView === 'grid'
+									? book.title.replace(' ', '').substring(0, 3)
+									: book.title}
 							</button>
-							{book.id === selectedBook ? (
+							{book.id === selectedBook && selectedView === 'list' ? (
 								<ul className={styles.chapters}>
 									{chapters?.map((chapter) => {
 										const n = Number(chapter.title.split(' ').pop());
