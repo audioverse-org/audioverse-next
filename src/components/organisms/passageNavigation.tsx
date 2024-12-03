@@ -2,56 +2,45 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
-import root from '~src/lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
-import { IBibleBook } from '~src/services/fcbh/types';
 
+import { PassageNavigationFragment } from './__generated__/passageNavigation';
 import styles from './passageNavigation.module.scss';
 
 type Props = {
-	books: IBibleBook[];
+	books: Array<PassageNavigationFragment>;
 };
 
 export default function PassageNavigation({ books }: Props): JSX.Element {
-	const [selectedBook, setSelectedBook] = useState<string | null>(
-		books[0]?.name,
+	const [selectedBook, setSelectedBook] = useState<string | number | null>(
+		null,
 	);
-
-	const languageRoute = useLanguageRoute();
 
 	return (
 		<div className={styles.wrapper}>
 			<ul className={styles.books}>
 				{books.map((book) => {
-					const chapters = book.chapters;
+					const chapters = book.recordings.nodes;
 					return (
 						<li
-							key={book.name}
+							key={book.id}
 							className={clsx(styles.book, {
-								active: book.name === selectedBook,
+								active: book.id === selectedBook,
 							})}
 						>
 							<button
 								onClick={() => {
-									setSelectedBook(book.name);
+									setSelectedBook(book.id);
 								}}
 							>
-								{book.name}
+								{book.title}
 							</button>
-							{book.name === selectedBook ? (
+							{book.id === selectedBook ? (
 								<ul className={styles.chapters}>
-									{chapters?.map((n) => {
+									{chapters?.map((chapter) => {
+										const n = Number(chapter.title.split(' ').pop());
 										return (
 											<li key={n} className={styles.chapter}>
-												<Link
-													href={root
-														.lang(languageRoute)
-														.bibles.bookId(book.book_id)
-														.chapterNumber(n)
-														.get()}
-												>
-													{n}
-												</Link>
+												<Link href={chapter.canonicalPath}>{n}</Link>
 											</li>
 										);
 									})}

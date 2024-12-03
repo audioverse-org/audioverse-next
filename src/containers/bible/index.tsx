@@ -12,16 +12,17 @@ import Dropdown from '~src/components/molecules/dropdown';
 import IconButton from '~src/components/molecules/iconButton';
 import Tease from '~src/components/molecules/tease';
 import PassageNavigation from '~src/components/organisms/passageNavigation';
-import { IBibleVersion } from '~src/services/fcbh/types';
 
+import { GetAudiobibleIndexDataQuery } from './__generated__';
 import styles from './index.module.scss';
 
 // export type BibleIndexProps = GetAudiobibleIndexDataQuery;
 export type BibleIndexProps = {
-	audiobibles: IBibleVersion[];
+	data: GetAudiobibleIndexDataQuery;
 };
 function Bible(props: BibleIndexProps): JSX.Element {
 	console.log({ props });
+	const versions = props.data.collections.nodes || [];
 	return (
 		<Tease className={styles.base}>
 			<div className={styles.hat}>
@@ -69,7 +70,7 @@ function Bible(props: BibleIndexProps): JSX.Element {
 									/>
 								</a>
 							</p> */}
-							{props.audiobibles.map((audiobible) => (
+							{versions.map((audiobible) => (
 								<p key={audiobible.id}>
 									<a
 										href={`https://www.example.com/${audiobible.id}`}
@@ -93,12 +94,12 @@ function Bible(props: BibleIndexProps): JSX.Element {
 			</div>
 
 			<div className={styles.content}>
-				<PassageNavigation books={props.audiobibles[0].books} />
+				<PassageNavigation books={versions[0].sequences.nodes || []} />
 			</div>
 		</Tease>
 	);
 }
 
 export default withFailStates(Bible, {
-	useShould404: ({ audiobibles }) => !audiobibles.length,
+	useShould404: ({ data }) => !data.collections.nodes?.length,
 });
