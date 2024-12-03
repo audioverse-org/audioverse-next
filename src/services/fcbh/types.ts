@@ -26,7 +26,7 @@ export interface IBBFileset {
 	duration: number;
 }
 
-export interface IBBFilesetBook {
+export interface IBBFilesetBookChapter {
 	book_id: string;
 	book_name: string;
 	chapter_start: number;

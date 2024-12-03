@@ -1,11 +1,11 @@
 import getResponse from './getResponse';
-import type { IBBFilesetBook } from './types';
+import type { IBBFilesetBookChapter } from './types';
 
 export default function getFileSetBook(
 	filesetId: string,
 	bookId: string,
-): Promise<{ data: Array<IBBFilesetBook> } | null> {
-	return getResponse<{ data: Array<IBBFilesetBook> }>(
+): Promise<{ data: Array<IBBFilesetBookChapter> } | null> {
+	return getResponse<{ data: Array<IBBFilesetBookChapter> }>(
 		`/download/${filesetId}/${bookId}`,
 	);
 }
