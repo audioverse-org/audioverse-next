@@ -55,9 +55,17 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 										: book.title}
 								</button>
 							</li>
-							{book.id === selectedBook && selectedView === 'list' ? (
-								<li className={styles.chaptersWrapper}>
-									<ul className={styles.chapters}>
+							{book.id === selectedBook ? (
+								<li
+									className={clsx(styles.chaptersWrapper, {
+										active: book.id === selectedBook,
+									})}
+								>
+									<ul
+										className={clsx(styles.chapters, {
+											active: book.id === selectedBook,
+										})}
+									>
 										{chapters?.map((chapter) => {
 											const n = Number(chapter.title.split(' ').pop());
 											return (
