@@ -1,5 +1,4 @@
-import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BaseColors } from '~lib/constants';
@@ -17,12 +16,17 @@ import { getBibleAcronym } from '~src/lib/getBibleAcronym';
 import { GetAudiobibleIndexDataQuery } from './__generated__';
 import styles from './index.module.scss';
 
-// export type BibleIndexProps = GetAudiobibleIndexDataQuery;
+type Version = NonNullable<
+	GetAudiobibleIndexDataQuery['collections']['nodes']
+>[0];
+
 export type BibleIndexProps = {
-	data: NonNullable<GetAudiobibleIndexDataQuery['collections']['nodes']>;
+	data: Array<Version>;
 };
+
 function Bible({ data }: BibleIndexProps): JSX.Element {
-	console.log({ data });
+	const [selected, setSelected] = useState<Version>(data[0]);
+
 	return (
 		<Tease className={styles.base}>
 			<div className={styles.hat}>
@@ -32,12 +36,12 @@ function Bible({ data }: BibleIndexProps): JSX.Element {
 				</a>
 				<Dropdown
 					id="booksMenu"
-					trigger={({ isOpen, ...props }) => (
+					trigger={(props) => (
 						<Button
 							type="tertiary"
-							text="KJV"
+							text={getBibleAcronym(selected.title)}
 							IconRight={IconDisclosure}
-							className={clsx(isOpen && styles.buttonOpen)}
+							className={styles.dropdownButton}
 							{...props}
 						/>
 					)}
@@ -46,12 +50,14 @@ function Bible({ data }: BibleIndexProps): JSX.Element {
 						<div className={styles.dropdownContainer}>
 							{data.map((version) => (
 								<p key={version.id}>
-									<a
-										href={`https://www.example.com/${version.id}`}
-										onClick={handleClose}
-									>
-										{getBibleAcronym(version.title)}
-									</a>
+									<Button
+										type="tertiary"
+										onClick={() => {
+											setSelected(version);
+											handleClose();
+										}}
+										text={getBibleAcronym(version.title)}
+									/>
 								</p>
 							))}
 						</div>
@@ -68,7 +74,7 @@ function Bible({ data }: BibleIndexProps): JSX.Element {
 			</div>
 
 			<div className={styles.content}>
-				<PassageNavigation books={data[0].sequences.nodes || []} />
+				<PassageNavigation books={selected.sequences.nodes || []} />
 			</div>
 		</Tease>
 	);
