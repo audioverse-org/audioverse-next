@@ -18,11 +18,10 @@ import styles from './index.module.scss';
 
 // export type BibleIndexProps = GetAudiobibleIndexDataQuery;
 export type BibleIndexProps = {
-	data: GetAudiobibleIndexDataQuery;
+	data: NonNullable<GetAudiobibleIndexDataQuery['collections']['nodes']>;
 };
-function Bible(props: BibleIndexProps): JSX.Element {
-	console.log({ props });
-	const versions = props.data.collections.nodes || [];
+function Bible({ data }: BibleIndexProps): JSX.Element {
+	console.log({ data });
 	return (
 		<Tease className={styles.base}>
 			<div className={styles.hat}>
@@ -70,7 +69,7 @@ function Bible(props: BibleIndexProps): JSX.Element {
 									/>
 								</a>
 							</p> */}
-							{versions.map((audiobible) => (
+							{data.map((audiobible) => (
 								<p key={audiobible.id}>
 									<a
 										href={`https://www.example.com/${audiobible.id}`}
@@ -94,12 +93,12 @@ function Bible(props: BibleIndexProps): JSX.Element {
 			</div>
 
 			<div className={styles.content}>
-				<PassageNavigation books={versions[0].sequences.nodes || []} />
+				<PassageNavigation books={data[0].sequences.nodes || []} />
 			</div>
 		</Tease>
 	);
 }
 
 export default withFailStates(Bible, {
-	useShould404: ({ data }) => !data.collections.nodes?.length,
+	useShould404: ({ data }) => !data.length,
 });
