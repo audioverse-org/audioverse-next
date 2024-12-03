@@ -725,12 +725,6 @@
       "value": "聖書バージョン"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66巻"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -743,24 +737,6 @@
       "value": "主催者"
     }
   ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "聖書"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "確実な教理を学ぶ方法は、神の御言葉を聞くのがベスト。オーディオバイブルを通して最も偉大な教師から最も大切な教え聞くことができます。"
-    }
-  ],
   "bible__title": [
     {
       "type": 0,
@@ -771,18 +747,6 @@
     {
       "type": 0,
       "value": "履歴"
-    }
-  ],
-  "bibles__version1": [
-    {
-      "type": 0,
-      "value": "version 1"
-    }
-  ],
-  "bibles__version2": [
-    {
-      "type": 0,
-      "value": "version 2"
     }
   ],
   "blogDetailPage__moreBlogPosts": [

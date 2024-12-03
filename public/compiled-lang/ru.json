@@ -725,12 +725,6 @@
       "value": "Версия Библии"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 книг"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -743,24 +737,6 @@
       "value": "Организатор"
     }
   ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Библия"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "Лучший способ постичь здравое учение Иисеса Христа - слушать Слово Божье. Наша аудио Библия поможет вам в этом."
-    }
-  ],
   "bible__title": [
     {
       "type": 0,
@@ -771,18 +747,6 @@
     {
       "type": 0,
       "value": "История"
-    }
-  ],
-  "bibles__version1": [
-    {
-      "type": 0,
-      "value": "version 1"
-    }
-  ],
-  "bibles__version2": [
-    {
-      "type": 0,
-      "value": "version 2"
     }
   ],
   "blogDetailPage__moreBlogPosts": [

@@ -725,12 +725,6 @@
       "value": "Version de la Bible"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 livres"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -743,24 +737,6 @@
       "value": "Sponsor"
     }
   ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Bible"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "La meilleure façon d'apprendre la saine doctrine est en écoutant la Parole de Dieu. Nos bibles audio vous donne la possibilité d'écouter de grands enseignements donnés par le plus grand enseignant de tous les temps."
-    }
-  ],
   "bible__title": [
     {
       "type": 0,
@@ -771,18 +747,6 @@
     {
       "type": 0,
       "value": "Historique"
-    }
-  ],
-  "bibles__version1": [
-    {
-      "type": 0,
-      "value": "version 1"
-    }
-  ],
-  "bibles__version2": [
-    {
-      "type": 0,
-      "value": "version 2"
     }
   ],
   "blogDetailPage__moreBlogPosts": [

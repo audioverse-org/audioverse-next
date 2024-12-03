@@ -1,16 +1,11 @@
-fragment passageNavigation on BibleConnection {
-	nodes {
-		title
-		books {
+fragment passageNavigation on Sequence {
+	id
+	title
+	recordings(first: 150) {
+		nodes {
 			id
 			title
-			chapters {
-				title
-				url
-			}
+			canonicalPath
 		}
-	}
-	aggregate {
-		count
 	}
 }

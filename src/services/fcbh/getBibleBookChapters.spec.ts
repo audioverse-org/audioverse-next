@@ -1,13 +1,13 @@
-import { buildLoader } from '../test/buildLoader';
-import { GetBibleBookContentDocument } from './__generated__/bibleContent';
-import { getBibleBookChapters } from './bibleBrain';
-import getResponse from './bibleBrain.getResponse';
+import { GetBibleBookContentDocument } from '../../lib/api/__generated__/bibleContent';
+import { buildLoader } from '../../lib/test/buildLoader';
+import { getBibleBookChapters } from './getBibleBookChapters';
+import getResponse from './getResponse';
 
-jest.mock('./bibleBrain.getResponse');
+jest.mock('./getResponse');
 
 const loadData = buildLoader(GetBibleBookContentDocument, {});
 
-describe('bibleBrain', () => {
+describe('getBibleBookChapters', () => {
 	beforeEach(() => {
 		jest.mocked(getResponse).mockResolvedValue({
 			data: [

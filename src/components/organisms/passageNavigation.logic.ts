@@ -1,21 +1,21 @@
-import { PassageNavigationFragment } from './__generated__/passageNavigation';
+import { IBibleVersion } from '~src/services/fcbh/types';
 
 export function getChapters(
-	audiobibles: PassageNavigationFragment,
+	audiobibles: IBibleVersion[],
 	selected: string | null,
 ) {
-	const books = audiobibles.nodes?.[0].books;
-	const chapters = books?.find((book) => book?.title === selected)?.chapters;
+	const books = audiobibles[0].books;
+	console.log({ selected, books });
+	const chapters = books?.find(
+		(book) => book?.name.toLowerCase() === selected?.toLowerCase(),
+	)?.chapters;
 
 	return chapters;
 }
 
-export function getBookId(
-	title: string,
-	audiobibles: PassageNavigationFragment,
-) {
-	const books = audiobibles.nodes?.[0].books;
-	const book = books?.find((book) => book?.title === title);
+export function getBookId(title: string, audiobibles: IBibleVersion[]) {
+	const books = audiobibles[0].books;
+	const book = books?.find((book) => book?.name === title);
 
-	return book?.id;
+	return book?.book_id;
 }

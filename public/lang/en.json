@@ -374,35 +374,17 @@
   "bibleVersionTypeLockup__type": {
     "string": "Bible Version"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66 Books"
-  },
   "bibleVersion__description": {
     "string": "Description"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Sponsor"
   },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
-  },
-  "bibleVersions__heading": {
-    "string": "Bible"
-  },
-  "bibleVersions__intro": {
-    "string": "The best way to learn sound doctrine is by listening to the Word of God. Our audio Bibles give you the ability to listen to great teachings from the greatest teacher of all."
-  },
   "bible__title": {
     "string": "Bible"
   },
   "bibles__history": {
     "string": "History"
-  },
-  "bibles__version1": {
-    "string": "version 1"
-  },
-  "bibles__version2": {
-    "string": "version 2"
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",

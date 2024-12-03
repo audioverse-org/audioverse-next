@@ -47,20 +47,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "聖書バージョン"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66巻"
-  },
   "bibleVersion__description": {
     "string": "内容詳細"
   },
   "bibleVersion__sponsorLabel": {
     "string": "主催者"
-  },
-  "bibleVersions__heading": {
-    "string": "聖書"
-  },
-  "bibleVersions__intro": {
-    "string": "確実な教理を学ぶ方法は、神の御言葉を聞くのがベスト。オーディオバイブルを通して最も偉大な教師から最も大切な教え聞くことができます。"
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -1651,9 +1642,6 @@
   "bibleBook__typeLabel": {
     "string": "KJV Bible"
   },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
-  },
   "bible__title": {
     "string": "聖書"
   },
@@ -2747,11 +2735,5 @@
   },
   "bibles__history": {
     "string": "履歴"
-  },
-  "bibles__version1": {
-    "string": "version 1"
-  },
-  "bibles__version2": {
-    "string": "version 2"
   }
 }
