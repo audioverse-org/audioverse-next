@@ -13,11 +13,6 @@ export async function getBibles(): Promise<IBibleVersion[] | null> {
 			title: 'King James Version (Dramatized)',
 			abbreviation: 'KJV',
 		},
-		{
-			id: 'ENGKJV01DA',
-			title: 'King James Version',
-			abbreviation: 'KJV',
-		},
 	].map((v) => ({
 		...response.data,
 		books: (response.data?.books || []).map((b) => ({
