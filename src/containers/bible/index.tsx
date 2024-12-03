@@ -12,6 +12,7 @@ import Dropdown from '~src/components/molecules/dropdown';
 import IconButton from '~src/components/molecules/iconButton';
 import Tease from '~src/components/molecules/tease';
 import PassageNavigation from '~src/components/organisms/passageNavigation';
+import { getBibleAcronym } from '~src/lib/getBibleAcronym';
 
 import { GetAudiobibleIndexDataQuery } from './__generated__';
 import styles from './index.module.scss';
@@ -43,39 +44,13 @@ function Bible({ data }: BibleIndexProps): JSX.Element {
 				>
 					{(handleClose) => (
 						<div className={styles.dropdownContainer}>
-							{/* <p key="version1">
-								<a
-									onClick={(e) => {
-										e.preventDefault();
-										handleClose();
-									}}
-								>
-									<FormattedMessage
-										id="bibles__version1"
-										defaultMessage="version 1"
-									/>
-								</a>
-							</p>
-							<p key="version2">
-								<a
-									onClick={(e) => {
-										e.preventDefault();
-										handleClose();
-									}}
-								>
-									<FormattedMessage
-										id="bibles__version2"
-										defaultMessage="version 2"
-									/>
-								</a>
-							</p> */}
-							{data.map((audiobible) => (
-								<p key={audiobible.id}>
+							{data.map((version) => (
+								<p key={version.id}>
 									<a
-										href={`https://www.example.com/${audiobible.id}`}
+										href={`https://www.example.com/${version.id}`}
 										onClick={handleClose}
 									>
-										{audiobible.title}
+										{getBibleAcronym(version.title)}
 									</a>
 								</p>
 							))}
