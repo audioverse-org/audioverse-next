@@ -47,7 +47,7 @@ describe('withAuthGuard', () => {
 	});
 
 	it('displays content on successful social login', async () => {
-		Cookies.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		Cookies.get = jest.fn().mockReturnValue({ session_token: 'abc123' });
 
 		const { getByText, queryByText } = await render();
 

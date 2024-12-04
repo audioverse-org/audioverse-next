@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Button from '~components/molecules/button';
 import Input from '~components/molecules/form/input';
 import { useRegisterMutation } from '~containers/account/__generated__/register';
-import { setSessionToken } from '~lib/cookies';
+import { setSessionTokenAndUserId } from '~lib/cookies';
 import { gtmPushEvent } from '~src/utils/gtm';
 
 import { analytics } from '../../lib/analytics';
@@ -33,11 +33,21 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 	const intl = useIntl();
 
 	useEffect(() => {
-		if (dataRegister?.signup.errors.length) {
-			setErrors(dataRegister?.signup.errors.map((e) => e.message));
-		} else if (dataRegister?.signup.authenticatedUser?.sessionToken) {
-			setSessionToken(dataRegister?.signup.authenticatedUser?.sessionToken);
-			analytics.identify(dataRegister?.signup.authenticatedUser?.user.id + '', {
+		if (!dataRegister) {
+			return;
+		}
+
+		const {
+			signup: { errors, authenticatedUser },
+		} = dataRegister;
+		if (errors.length) {
+			setErrors(errors.map((e) => e.message));
+		} else if (authenticatedUser) {
+			setSessionTokenAndUserId(
+				authenticatedUser.sessionToken,
+				authenticatedUser.user.id.toString(),
+			);
+			analytics.identify(authenticatedUser.user.id + '', {
 				firstName: firstName,
 				lastName: lastName,
 				email: email,
@@ -45,7 +55,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 			});
 			gtmPushEvent('sign_up', {
 				sign_up_method: 'email',
-				user_id: dataRegister.signup.authenticatedUser.user.id,
+				user_id: authenticatedUser.user.id,
 			});
 
 			onSuccess();
