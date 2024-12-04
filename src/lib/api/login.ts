@@ -55,7 +55,6 @@ export async function login(email: string, password: string): Promise<true> {
 		});
 		gtmPushEvent('sign_in', {
 			sign_in_method: 'email',
-			user_id: authenticatedUser.user.id,
 		});
 
 		return true;

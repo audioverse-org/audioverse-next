@@ -55,7 +55,6 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 			});
 			gtmPushEvent('sign_up', {
 				sign_up_method: 'email',
-				user_id: authenticatedUser.user.id,
 			});
 
 			onSuccess();
