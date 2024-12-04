@@ -33,7 +33,7 @@ describe('card slider', () => {
 							{
 								title: 'the_recording_title',
 								canonicalPath: 'the_recording_path',
-								persons: [],
+								speakers: [],
 							} as any
 						}
 					/>

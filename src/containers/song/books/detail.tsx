@@ -68,6 +68,9 @@ function SongBooksDetail({
 						backgroundColor={BaseColors.SONG_H}
 						light
 						triggerClassName={styles.iconButton}
+						contentType={SequenceContentType.MusicAlbum}
+						id={undefined}
+						title={book}
 					/>
 				</div>
 			</ContentWidthLimiter>

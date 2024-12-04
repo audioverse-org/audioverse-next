@@ -32,7 +32,7 @@ const loadData = buildLoader(GetSponsorTeachingsPageDataDocument, {
 					title: 'the_recording_title',
 					recordingContentType: RecordingContentType.Sermon,
 					canonicalPath: 'the_recording_path',
-					persons: [],
+					speakers: [],
 				},
 			],
 			aggregate: {

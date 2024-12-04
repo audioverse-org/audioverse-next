@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
-import router from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -16,7 +15,6 @@ import { useFormattedDuration } from '~lib/time';
 import useHover from '~lib/useHover';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { CollectionContentType } from '~src/__generated__/graphql';
-import { analytics } from '~src/lib/analytics';
 
 import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
@@ -77,14 +75,6 @@ export default function CardCollection({
 						isBibleVersion && styles.bibleVersion,
 						(isHovered || isSubHovered) && styles.otherHovered,
 					)}
-					onClick={() => {
-						analytics.track('Card click', {
-							type: contentType,
-							id,
-							title,
-						});
-						router.push(canonicalPath);
-					}}
 				>
 					<CollectionTypeLockup contentType={contentType} />
 					{heroImage}
@@ -151,6 +141,9 @@ export default function CardCollection({
 							}
 							light
 							className={clsx(styles.like, isFavorited && styles.likeActive)}
+							contentType={contentType}
+							id={id}
+							title={title}
 						/>
 					</div>
 					{sequences?.length || recordings?.length ? (

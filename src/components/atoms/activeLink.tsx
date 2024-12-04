@@ -3,14 +3,12 @@ import { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 
-import { analytics } from '../../lib/analytics';
 import Link from './linkWithoutPrefetch';
 
 type ActiveLinkProps = LinkProps & {
 	children: ReactElement;
 	className?: string;
 	activeClassName: string;
-	linkLabel?: string;
 };
 
 // SOURCE: https://zaiste.net/programming/reactjs/howtos/create-activelink-nextjs/
@@ -19,7 +17,6 @@ const ActiveLink = ({
 	children,
 	className,
 	activeClassName,
-	linkLabel,
 	...props
 }: ActiveLinkProps): JSX.Element => {
 	const { asPath } = useRouter();
@@ -34,9 +31,6 @@ const ActiveLink = ({
 			<a
 				className={clsx(className, isActive && activeClassName)}
 				aria-current={isActive ? 'page' : false}
-				onClick={() => {
-					analytics.track('Menu click', { label: linkLabel });
-				}}
 			>
 				{children}
 			</a>

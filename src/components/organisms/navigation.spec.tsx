@@ -8,14 +8,7 @@ import renderWithProviders from '~lib/test/renderWithProviders';
 jest.mock('~lib/api/fetchApi');
 
 const renderNavigation = async () => {
-	return renderWithProviders(
-		<Navigation
-			onExit={() => void 0}
-			searchTerm=""
-			onSearchChange={() => void 0}
-		/>,
-		undefined,
-	);
+	return renderWithProviders(<Navigation onExit={() => void 0} />, undefined);
 };
 
 describe('navigation', () => {

@@ -49,6 +49,7 @@ mutation registerSocial(
 				email
 			}
 		}
+		isNewUser
 		errors {
 			message
 		}

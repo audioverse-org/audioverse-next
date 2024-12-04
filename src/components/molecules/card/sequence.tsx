@@ -22,7 +22,6 @@ import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
 import NameMatcher from '~src/components/atoms/nameMatcher';
-import { analytics } from '~src/lib/analytics';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonLockup from '../personLockup';
@@ -52,6 +51,7 @@ export default function CardSequence({
 	const isBibleBook = sequence.contentType === SequenceContentType.BibleBook;
 
 	const {
+		id,
 		contentType,
 		allRecordings,
 		canonicalPath,
@@ -59,9 +59,8 @@ export default function CardSequence({
 		duration,
 		summary,
 		title,
-		speakers,
+		sequenceSpeakers: speakers,
 		sequenceWriters: writers,
-		id,
 	} = sequence;
 
 	const { Icon, accentColor, backgroundColor, textColor, label, labelColor } = (
@@ -270,6 +269,9 @@ export default function CardSequence({
 					backgroundColor={backgroundColor}
 					light
 					className={clsx(styles.like, isFavorited && styles.likeActive)}
+					contentType={contentType}
+					id={id}
+					title={title}
 				/>
 			</div>
 			{recordings?.length ? (
@@ -302,18 +304,7 @@ export default function CardSequence({
 	return (
 		<Card>
 			<Link href={linkUrl} legacyBehavior>
-				<a
-					className={className}
-					onClick={() => {
-						analytics.track('Card click', {
-							type: sequence.contentType,
-							id,
-							title,
-						});
-					}}
-				>
-					{inner}
-				</a>
+				<a className={className}>{inner}</a>
 			</Link>
 		</Card>
 	);

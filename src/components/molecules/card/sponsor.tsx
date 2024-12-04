@@ -11,7 +11,6 @@ import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 import { BaseColors } from '~lib/constants';
 import UserPlusIcon from '~public/img/icons/fa-user-plus.svg';
 import { CatalogEntityType } from '~src/__generated__/graphql';
-import { analytics } from '~src/lib/analytics';
 
 import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
@@ -29,28 +28,19 @@ export default function CardSponsor({
 	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
 	const {
+		id,
 		canonicalPath,
 		image,
 		title,
 		collections,
 		sequences,
 		recordings,
-		id,
 	} = sponsor;
 
 	return (
 		<Card>
 			<Link href={canonicalPath} legacyBehavior>
-				<a
-					className={styles.container}
-					onClick={() => {
-						analytics.track('Card click', {
-							type: CatalogEntityType.Sponsor,
-							id,
-							title,
-						});
-					}}
-				>
+				<a className={styles.container}>
 					<TypeLockup
 						Icon={UserPlusIcon}
 						label={intl.formatMessage({
@@ -117,6 +107,9 @@ export default function CardSponsor({
 				backgroundColor={BaseColors.LIGHT_TONE}
 				light
 				className={clsx(styles.like, isFavorited && styles.likeActive)}
+				contentType={CatalogEntityType.Sponsor}
+				id={id}
+				title={title}
 			/>
 		</Card>
 	);

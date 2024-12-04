@@ -21,6 +21,7 @@ import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import { CatalogEntityType } from '~src/__generated__/graphql';
 import Heading6 from '~src/components/atoms/heading6';
 import { GetConferencePresenterDetailPageDataQuery } from '~src/containers/collection/__generated__/presenter';
 import { Must } from '~src/types/types';
@@ -104,6 +105,9 @@ function PresenterDetail({
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={root.lang(lang).presenters.id(id).feed.get()}
+						contentType={CatalogEntityType.Person}
+						id={id}
+						title={name}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
@@ -111,6 +115,9 @@ function PresenterDetail({
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
 						light
 						className={styles.iconButton}
+						contentType={CatalogEntityType.Person}
+						id={id}
+						title={name}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />

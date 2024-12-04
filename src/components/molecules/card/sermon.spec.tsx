@@ -18,7 +18,7 @@ const renderComponent = buildRenderer(Page, {
 		recording: {
 			id: 'the_sermon_id',
 			canonicalPath: 'the_sermon_path',
-			persons: [],
+			speakers: [],
 		},
 	},
 });
@@ -31,7 +31,7 @@ describe('card sermon', () => {
 					id: 'the_id',
 					title: 'the_title',
 					canonicalPath: 'the_path',
-					persons: [],
+					speakers: [],
 				},
 			},
 		});
@@ -53,7 +53,7 @@ describe('card sermon', () => {
 				recording: {
 					id: 'the_recording_id',
 					canonicalPath: 'the_sermon_path',
-					persons: [],
+					speakers: [],
 					duration: 0,
 				},
 			},

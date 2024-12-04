@@ -33,7 +33,7 @@ const loadData = buildLoader<GetTopicDetailDataQuery>(
 							__typename: 'Sequence',
 							title: 'The Sequence Title',
 							contentType: SequenceContentType.Series,
-							speakers: {
+							sequenceSpeakers: {
 								nodes: [],
 							},
 							allRecordings: {
@@ -49,7 +49,7 @@ const loadData = buildLoader<GetTopicDetailDataQuery>(
 							__typename: 'Recording',
 							title: 'The Recording Title',
 							recordingContentType: RecordingContentType.Sermon,
-							persons: [],
+							speakers: [],
 							canonicalPath: '',
 						},
 					},
