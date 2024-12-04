@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BaseColors } from '~lib/constants';
@@ -12,6 +12,7 @@ import IconButton from '~src/components/molecules/iconButton';
 import Tease from '~src/components/molecules/tease';
 import PassageNavigation from '~src/components/organisms/passageNavigation';
 import { getBibleAcronym } from '~src/lib/getBibleAcronym';
+import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
 import { GetAudiobibleIndexDataQuery } from './__generated__';
 import styles from './index.module.scss';
@@ -25,7 +26,10 @@ export type BibleIndexProps = {
 };
 
 function Bible({ data }: BibleIndexProps): JSX.Element {
-	const [selected, setSelected] = useState<Version>(data[0]);
+	const [selected, setSelected] = useLocalStorage<Version>(
+		'bibleVersion',
+		data[0],
+	);
 
 	return (
 		<Tease className={styles.base}>

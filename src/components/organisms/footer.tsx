@@ -6,8 +6,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading3 from '~components/atoms/heading3';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import isServerSide from '~lib/isServerSide';
-import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import root from '~src/lib/routes';
 
 import styles from './footer.module.scss';
 

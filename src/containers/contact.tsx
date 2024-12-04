@@ -10,8 +10,8 @@ import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import Input from '~components/molecules/form/input';
 import Select from '~components/molecules/form/select';
 import Textarea from '~components/molecules/form/textarea';
-import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 import { PageContactRecipient } from '~src/__generated__/graphql';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 import { Must } from '~src/types/types';
 
 import { useSubmitContactPageMutation } from './__generated__/contact';

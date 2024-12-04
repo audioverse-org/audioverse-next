@@ -4,8 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
 import AndOnboarding from '~components/templates/andOnboarding';
-import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import root from '~src/lib/routes';
 
 import Button from './buttonSocial';
 import SocialLogin from './socialLogin';

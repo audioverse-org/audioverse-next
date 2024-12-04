@@ -11,7 +11,6 @@ import { useIsSequenceFavorited } from '~lib/api/useIsSequenceFavorited';
 import { BaseColors } from '~lib/constants';
 import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
 import { useFormattedDuration } from '~lib/time';
-import useHover from '~src/lib/hooks/useHover';
 import BookIcon from '~public/img/icons/fa-book-light.svg';
 import FeatherIcon from '~public/img/icons/fa-feather-light.svg';
 import ListIcon from '~public/img/icons/fa-list-alt.svg';
@@ -23,6 +22,7 @@ import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
 import NameMatcher from '~src/components/atoms/nameMatcher';
 import { analytics } from '~src/lib/analytics';
+import useHover from '~src/lib/hooks/useHover';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonLockup from '../personLockup';

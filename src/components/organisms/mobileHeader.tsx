@@ -10,10 +10,10 @@ import SearchBar from '~components/molecules/searchBar';
 import Header from '~components/organisms/header';
 import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import root from '~lib/routes';
-import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import { useNavigationItems } from '~src/lib/hooks/useNavigationItems';
 import IconExitSmall from '~public/img/icons/icon-exit-small.svg';
 import MoreIcon from '~public/img/icons/icon-more.svg';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import { useNavigationItems } from '~src/lib/hooks/useNavigationItems';
 
 import { analytics } from '../../lib/analytics';
 import OpenAppButton from '../molecules/openAppButton';

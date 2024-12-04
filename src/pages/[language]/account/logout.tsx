@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { useLogout } from '~lib/api/useLogout';
 import root from '~lib/routes';
-import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { analytics } from '~src/lib/analytics';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 export default function Logout(): JSX.Element {
 	const router = useRouter();

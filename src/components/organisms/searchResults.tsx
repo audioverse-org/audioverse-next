@@ -9,8 +9,8 @@ import CardInferred, {
 } from '~components/molecules/card/inferred';
 import CardGroup from '~components/molecules/cardGroup';
 import LoadingCards from '~components/molecules/loadingCards';
-import { useQueryString } from '~src/lib/hooks/useQueryString';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
+import { useQueryString } from '~src/lib/hooks/useQueryString';
 
 import EmptyState from './emptyState';
 import { EntityFilterId } from './searchResults.filters';

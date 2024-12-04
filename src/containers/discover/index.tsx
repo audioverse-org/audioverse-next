@@ -15,8 +15,8 @@ import BibleBooks from '~src/components/organisms/cardSlider/section/bibleBooks'
 import ContinueListening from '~src/components/organisms/cardSlider/section/continueListening';
 import EgwAudiobooks from '~src/components/organisms/cardSlider/section/egwAudiobooks'; //egw
 import Presenters from '~src/components/organisms/cardSlider/section/presenters';
-import isServerSide from '~src/lib/isServerSide';
 import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import isServerSide from '~src/lib/isServerSide';
 
 import { useGetDiscoverPageDataQuery } from './__generated__/index';
 

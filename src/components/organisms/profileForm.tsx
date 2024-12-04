@@ -10,8 +10,8 @@ import Input from '~components/molecules/form/input';
 import Modal from '~components/organisms/modal';
 import { refetchUserQueries, resetUserQueries } from '~src/lib/api/login';
 import { clearSessionToken } from '~src/lib/cookies';
-import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import root from '~src/lib/routes';
 
 import {
 	useDeleteAccountMutation,

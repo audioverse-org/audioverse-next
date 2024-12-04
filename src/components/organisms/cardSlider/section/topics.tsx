@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
-import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import root from '~src/lib/routes';
 
 import { useInfiniteGetSectionTopicsQuery } from './__generated__/topics';
 import Section from './index';

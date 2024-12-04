@@ -24,8 +24,8 @@ import Tease from '~components/molecules/tease';
 import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
-import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { GetPresenterDetailPageDataQuery } from './__generated__/detail';

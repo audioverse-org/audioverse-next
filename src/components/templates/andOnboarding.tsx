@@ -4,8 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '~components/atoms/heading1';
 import Slider from '~components/organisms/slider';
 import { getAppFeatures } from '~lib/getAppFeatures';
-import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import LogoLarge from '~public/img/logo-large.svg';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import ButtonGuest from '../molecules/buttonGuest';
 import styles from './andOnboarding.module.scss';

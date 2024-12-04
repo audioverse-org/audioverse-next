@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { useIntl } from 'react-intl';
 
 import useOnScreen from '~lib/hooks/useOnScreen';
-import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 import { Maybe } from '~src/__generated__/graphql';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 
 import {
 	GetSponsorListAllPageDataQuery,

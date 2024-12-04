@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 
 import { CardPostFragment } from '~src/components/molecules/card/__generated__/post';
 import CardPost from '~src/components/molecules/card/post';
-import root from '~src/lib/routes';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import root from '~src/lib/routes';
 
 import Section from '.';
 import { useInfiniteGetSectionBlogPostsQuery } from './__generated__/blogPosts';

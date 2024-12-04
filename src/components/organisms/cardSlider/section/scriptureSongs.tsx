@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 
 import { CardSequenceFragment } from '~src/components/molecules/card/__generated__/sequence';
 import CardSequence from '~src/components/molecules/card/sequence';
-import root from '~src/lib/routes';
 import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import root from '~src/lib/routes';
 
 import Section from '.';
 import { useInfiniteGetSectionScriptureSongsQuery } from './__generated__/scriptureSongs';

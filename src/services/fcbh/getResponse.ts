@@ -13,10 +13,13 @@ async function getResponse<T extends Record<string, unknown>>(
 		method: 'GET',
 	});
 
+	const text = await result.text();
+
 	try {
-		return JSON.parse(await result.text());
+		return JSON.parse(text);
 	} catch (e) {
 		console.error(e);
+		console.log(text);
 		return null;
 	}
 }
