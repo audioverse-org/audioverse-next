@@ -11,7 +11,11 @@ import DownloadAppButton from '~components/molecules/downloadAppButton';
 import LanguageButton from '~components/molecules/languageButton';
 import NavItem from '~components/molecules/navItem';
 import Header from '~components/organisms/header';
-import { getSessionToken, setSessionToken } from '~lib/cookies';
+import {
+	getSessionToken,
+	getUserId,
+	setSessionTokenAndUserId,
+} from '~lib/cookies';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { INavigationItem, useNavigationItems } from '~lib/useNavigationItems';
@@ -32,6 +36,7 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 	const router = useRouter();
 	const [submenu, setSubmenu] = useState('');
 	const sessionToken = getSessionToken();
+	const userId = getUserId();
 
 	useEffect(() => {
 		const onRouteChange = (url: string) => {
@@ -48,10 +53,10 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 	}, []);
 
 	useEffect(() => {
-		if (sessionToken) {
-			setSessionToken(sessionToken);
+		if (sessionToken && userId) {
+			setSessionTokenAndUserId(sessionToken, userId);
 		}
-	}, [router.asPath, sessionToken]);
+	}, [router.asPath, sessionToken, userId]);
 
 	const { user } = useIsAuthenticated();
 
