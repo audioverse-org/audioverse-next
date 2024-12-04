@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
 
 import Section from '.';
 import { useInfiniteGetSectionConferenceTeachingsQuery } from './__generated__/conferenceTeachings';

@@ -65,4 +65,5 @@ export interface IBibleBookChapter {
 	url: string;
 	duration: number;
 	text: string;
+	book_name: string;
 }

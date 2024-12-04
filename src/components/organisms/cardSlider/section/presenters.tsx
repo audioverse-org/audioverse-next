@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 
 import { CardPersonFragment } from '~src/components/molecules/card/__generated__/person';
 import CardPerson from '~src/components/molecules/card/person';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
 
 import Section from '.';
 import { useInfiniteGetSectionPresentersQuery } from './__generated__/presenters';

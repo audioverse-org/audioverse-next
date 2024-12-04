@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import { HelpScoutLabels } from '../types/window';
+import { HelpScoutLabels } from '../../types/window';
 
 export default function useHelpScoutLabels(): HelpScoutLabels {
 	const intl = useIntl();

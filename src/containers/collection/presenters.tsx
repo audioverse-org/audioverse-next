@@ -9,7 +9,7 @@ import Pagination from '~components/molecules/pagination';
 import { BaseColors } from '~lib/constants';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { CollectionPivotFragment } from './__generated__/pivot';

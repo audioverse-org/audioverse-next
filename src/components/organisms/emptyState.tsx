@@ -5,7 +5,7 @@ import Alert from '~components/atoms/alert';
 import Heading2 from '~components/atoms/heading2';
 import Button from '~components/molecules/button';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import styles from './emptyState.module.scss';
 

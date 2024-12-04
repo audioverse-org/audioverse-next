@@ -3,7 +3,7 @@ import React from 'react';
 
 import LoadingIndicator from '~components/molecules/loadingIndicator';
 import renderWithProviders from '~lib/test/renderWithProviders';
-import useRouterLoading from '~lib/useRouterLoading';
+import useRouterLoading from '~src/lib/hooks/useRouterLoading';
 
 jest.mock('~lib/useRouterLoading');
 
