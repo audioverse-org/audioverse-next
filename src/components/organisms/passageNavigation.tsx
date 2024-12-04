@@ -1,9 +1,8 @@
 import clsx from 'clsx';
 import React, { useRef, useState } from 'react';
 
-import Link from '~components/atoms/linkWithoutPrefetch';
-
 import { PassageNavigationFragment } from './__generated__/passageNavigation';
+import ChapterGrid from './chapterGrid';
 import styles from './passageNavigation.module.scss';
 
 type Props = {
@@ -55,29 +54,8 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 										: book.title}
 								</button>
 							</li>
-							{book.id === selectedBook ? (
-								<li
-									className={clsx(styles.chaptersWrapper, {
-										active: book.id === selectedBook,
-									})}
-								>
-									<ul
-										className={clsx(styles.chapters, {
-											active: book.id === selectedBook,
-										})}
-									>
-										{chapters?.map((chapter) => {
-											const n = Number(chapter.title.split(' ').pop());
-											return (
-												<li key={n} className={styles.chapter}>
-													<Link href={chapter.canonicalPath}>{n}</Link>
-												</li>
-											);
-										})}
-									</ul>
-								</li>
-							) : (
-								''
+							{book.id === selectedBook && chapters && (
+								<ChapterGrid chapters={chapters} />
 							)}
 						</>
 					);
