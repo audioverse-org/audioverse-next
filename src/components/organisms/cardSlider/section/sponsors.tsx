@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { CardSponsorFragment } from '~src/components/molecules/card/__generated__/sponsor';
 import CardSponsor from '~src/components/molecules/card/sponsor';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 
 import Section from '.';
 import { useInfiniteGetSectionSponsorsQuery } from './__generated__/sponsors';

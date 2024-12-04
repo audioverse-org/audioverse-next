@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import CardRecording from '~src/components/molecules/card/recording';
 import root from '~src/lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import { useInfiniteGetSectionRecentTeachingsQuery } from './__generated__/recentTeachings';
 import Section from './index';

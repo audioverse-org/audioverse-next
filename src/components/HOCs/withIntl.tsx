@@ -3,7 +3,7 @@ import { IntlProvider, ResolvedIntlConfig } from 'react-intl';
 
 import getIntlMessages from '~lib/getIntlMessages';
 import handleIntlError from '~lib/handleIntlError';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 type Messages = ResolvedIntlConfig['messages'];
 

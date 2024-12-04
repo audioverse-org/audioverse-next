@@ -15,14 +15,14 @@ import RecordingProgressBar from '~components/molecules/recordingProgressBar';
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
 import hasVideo from '~lib/hasVideo';
-import useGlobalSpaceDown from '~lib/useGlobalSpaceDown';
-import usePlaybackSession from '~lib/usePlaybackSession';
 import IconAirPlayAudio from '~public/img/icon-airplay-audio.svg';
 import IconChromeCast from '~public/img/icon-chromecast.svg';
 import IconFullscreen from '~public/img/icons/icon-fullscreen.svg';
 import IconPause from '~public/img/icons/icon-pause-large.svg';
 import IconPlay from '~public/img/icons/icon-play-large.svg';
+import useGlobalSpaceDown from '~src/lib/hooks/useGlobalSpaceDown';
 import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
+import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
 
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';

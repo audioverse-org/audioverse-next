@@ -10,7 +10,7 @@ import Dropdown from '~components/molecules/dropdown';
 import Mininav from '~components/molecules/mininav';
 import { SORT_MAP } from '~containers/library/library';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import IconFilter from '~public/img/icons/icon-filter-light.svg';
 import IconSort from '~public/img/icons/icon-sort-light.svg';
 

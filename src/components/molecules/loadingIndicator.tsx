@@ -2,7 +2,7 @@ import { useIsFetching } from '@tanstack/react-query';
 import clsx from 'clsx';
 import React, { useEffect } from 'react';
 
-import useRouterLoading from '~lib/useRouterLoading';
+import useRouterLoading from '~src/lib/hooks/useRouterLoading';
 
 import styles from './loadingIndicator.module.scss';
 

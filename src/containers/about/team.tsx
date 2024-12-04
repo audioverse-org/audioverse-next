@@ -11,7 +11,7 @@ import TypeLockup from '~components/molecules/typeLockup';
 import AboutNav from '~components/organisms/aboutNav';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import IconUser from '~public/img/icons/fa-user-light.svg';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconForward from '~public/img/icons/icon-forward-light.svg';

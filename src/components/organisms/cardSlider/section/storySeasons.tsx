@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import CardSequence from '~src/components/molecules/card/sequence';
 import root from '~src/lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import {
 	GetSectionStorySeasonsQuery,

@@ -27,7 +27,7 @@ import Transcript from '~components/molecules/transcript';
 import { formatLongDateTime, parseRelativeDate } from '~lib/date';
 import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlogLight from '~public/img/icons/icon-blog-light-small.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';

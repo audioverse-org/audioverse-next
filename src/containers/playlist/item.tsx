@@ -3,7 +3,7 @@ import React from 'react';
 import withFailStates from '~components/HOCs/withFailStates';
 import { Recording } from '~components/organisms/recording';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { GetPublicPlaylistItemDetailDataQuery } from './__generated__/item';

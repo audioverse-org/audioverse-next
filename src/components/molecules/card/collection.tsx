@@ -13,7 +13,7 @@ import { useIsCollectionFavorited } from '~lib/api/useIsCollectionFavorited';
 import { BaseColors } from '~lib/constants';
 import { formatDateRange } from '~lib/date';
 import { useFormattedDuration } from '~lib/time';
-import useHover from '~lib/useHover';
+import useHover from '~src/lib/hooks/useHover';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { CollectionContentType } from '~src/__generated__/graphql';
 import { analytics } from '~src/lib/analytics';

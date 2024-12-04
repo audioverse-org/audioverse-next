@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import CardCollection from '~src/components/molecules/card/collection';
 import root from '~src/lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import {
 	GetSectionConferencesQuery,

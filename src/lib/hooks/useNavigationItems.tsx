@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import DownloadAppButton from '~components/molecules/downloadAppButton';
 import LanguageButton from '~components/molecules/languageButton';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 export type INavigationItem = {
 	key: string;

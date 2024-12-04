@@ -18,7 +18,7 @@ import { BaseColors } from '~lib/constants';
 import { getSessionToken } from '~lib/cookies';
 import { getAppFeatures } from '~lib/getAppFeatures';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
 import ImagePlayers from '~public/img/players.jpeg';
 

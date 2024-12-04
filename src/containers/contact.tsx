@@ -10,7 +10,7 @@ import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import Input from '~components/molecules/form/input';
 import Select from '~components/molecules/form/select';
 import Textarea from '~components/molecules/form/textarea';
-import { useLanguageId } from '~lib/useLanguageId';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 import { PageContactRecipient } from '~src/__generated__/graphql';
 import { Must } from '~src/types/types';
 

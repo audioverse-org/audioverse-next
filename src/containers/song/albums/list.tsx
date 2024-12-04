@@ -9,7 +9,7 @@ import CardGroup from '~components/molecules/cardGroup';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import Mininav from '~components/molecules/mininav';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import { GetSongAlbumsListPageDataQuery } from './__generated__/list';
 import styles from './list.module.scss';

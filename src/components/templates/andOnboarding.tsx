@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '~components/atoms/heading1';
 import Slider from '~components/organisms/slider';
 import { getAppFeatures } from '~lib/getAppFeatures';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import LogoLarge from '~public/img/logo-large.svg';
 
 import ButtonGuest from '../molecules/buttonGuest';

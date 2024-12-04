@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BaseColors } from '~lib/constants';
-import usePlaybackSession, { PlaySource } from '~lib/usePlaybackSession';
+import usePlaybackSession, {
+	PlaySource,
+} from '~src/lib/hooks/usePlaybackSession';
 import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import IconPlay from '~public/img/icons/play-circle.svg';
 import { useFormattedDuration } from '~src/lib/time';

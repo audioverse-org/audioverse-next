@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { CardTopicFragment } from '~src/components/molecules/card/__generated__/topic';
 import CardTopic from '~src/components/molecules/card/topic';
 import root from '~src/lib/routes';
-import { useLanguageId } from '~src/lib/useLanguageId';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 
 import { useInfiniteGetSectionTopicsBrowseQuery } from './__generated__/topicsBrowse';
 import Section from './index';

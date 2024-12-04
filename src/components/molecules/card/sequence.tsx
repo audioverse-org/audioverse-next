@@ -11,7 +11,7 @@ import { useIsSequenceFavorited } from '~lib/api/useIsSequenceFavorited';
 import { BaseColors } from '~lib/constants';
 import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
 import { useFormattedDuration } from '~lib/time';
-import useHover from '~lib/useHover';
+import useHover from '~src/lib/hooks/useHover';
 import BookIcon from '~public/img/icons/fa-book-light.svg';
 import FeatherIcon from '~public/img/icons/fa-feather-light.svg';
 import ListIcon from '~public/img/icons/fa-list-alt.svg';

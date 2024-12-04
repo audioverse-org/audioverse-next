@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '~components/molecules/button';
-import useHelpScoutLabels from '~lib/useHelpScoutLabels';
+import useHelpScoutLabels from '~src/lib/hooks/useHelpScoutLabels';
 import IconQuestionCircle from '~public/img/icons/icon-question-circle.svg';
 
 import { Beacon } from '../../types/window';

@@ -7,7 +7,7 @@ import Heading3 from '~components/atoms/heading3';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import isServerSide from '~lib/isServerSide';
 import root from '~src/lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import styles from './footer.module.scss';
 

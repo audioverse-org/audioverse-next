@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 export default function LoginRedirect(): JSX.Element {
 	const router = useRouter();

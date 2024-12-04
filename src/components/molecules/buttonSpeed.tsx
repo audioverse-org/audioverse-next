@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import { BaseColors } from '~lib/constants';
-import usePlaybackSession from '~lib/usePlaybackSession';
+import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonSpeed.module.scss';

@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import Button from '~components/molecules/button';
 import Dropdown from '~components/molecules/dropdown';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import IconFilter from '~public/img/icons/icon-filter-light.svg';
 
 import styles from './recordingHasVideoFilter.module.scss';

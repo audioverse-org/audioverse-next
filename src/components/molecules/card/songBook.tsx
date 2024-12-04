@@ -7,8 +7,8 @@ import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import root from '~lib/routes';
-import useHover from '~lib/useHover';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useHover from '~src/lib/hooks/useHover';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { SequenceContentType } from '~src/__generated__/graphql';
 
 import SequenceTypeLockup from '../sequenceTypeLockup';

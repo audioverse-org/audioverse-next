@@ -24,7 +24,7 @@ import { getSequenceTypeTheme } from '~lib/getSequenceType';
 import root from '~lib/routes';
 import { useFormattedDuration } from '~lib/time';
 import { UnreachableCaseError } from '~lib/typeHelpers';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { SequenceContentType } from '~src/__generated__/graphql';
 
 import { SequenceFragment } from './__generated__/sequence';

@@ -3,7 +3,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
 

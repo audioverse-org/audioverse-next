@@ -6,7 +6,7 @@ import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import AboutNav from '~components/organisms/aboutNav';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
 

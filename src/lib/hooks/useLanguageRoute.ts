@@ -1,4 +1,4 @@
-import useRouterQuery from '~lib/useRouterQuery';
+import useRouterQuery from '~src/lib/hooks/useRouterQuery';
 
 const useLanguageRoute = (): string => {
 	const { language = 'en' } = useRouterQuery();
