@@ -56,12 +56,10 @@ export default function SocialLogin({
 					if (response?.loginSocial.isNewUser) {
 						gtmPushEvent('sign_up', {
 							sign_up_method: variables?.socialName,
-							user_id: authenticatedUser.user.id,
 						});
 					} else {
 						gtmPushEvent('sign_in', {
 							sign_in_method: variables?.socialName,
-							user_id: authenticatedUser.user.id,
 						});
 					}
 					onSuccess ? onSuccess() : await queryClient.invalidateQueries();
