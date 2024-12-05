@@ -2,6 +2,7 @@
 
 .wrapper {
 	background-color: $ts-bibleVersionH;
+	padding: 12px 24px;
 }
 
 .wrapper ul {
@@ -12,7 +13,7 @@
 .wrapper button {
 	background: none;
 	border: none;
-	padding: 10px 24px;
+	padding: 18px 0px;
 }
 
 .wrapper .books > li:first-child button {
@@ -60,7 +61,7 @@
 .chapters {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-	background-color: $ts-darkened-bibleH;
+
 	border-top: 1px solid $ts-salmon;
 	border-bottom: 1px solid $ts-salmon;
 }
@@ -82,16 +83,13 @@
 	color: $ts-salmon;
 }
 
-.switch {
-	border-bottom: 1px solid $ts-salmon;
-}
-
 .switch > button {
 	color: $ts-lightTone;
 	font-weight: 700;
 	font-size: 12px;
 	line-height: 14.4px;
 	text-transform: uppercase;
+	padding-right: 12px;
 }
 
 .chaptersWrapper {
@@ -99,7 +97,11 @@
 	float: left;
 }
 
-.books:global(.grid) .book {
-	width: 70px;
+.books.grid {
+	border-top: 1px solid $ts-dark;
+}
+
+.books.grid .book {
+	width: 16%;
 	display: inline-block;
 }

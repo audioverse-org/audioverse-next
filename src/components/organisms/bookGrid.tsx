@@ -13,7 +13,7 @@ type Props = {
 
 export default function BookGrid({ books, selectedBook, selectBook }: Props) {
 	return (
-		<ul className={clsx(styles.books, 'grid')}>
+		<ul className={clsx(styles.books, styles.grid)}>
 			{books.map((book) => {
 				const chapters = book.recordings.nodes;
 
