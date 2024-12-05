@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
+
 import { PassageNavigationFragment } from './__generated__/passageNavigation';
 import BookGrid from './bookGrid';
 import BookList from './bookList';
@@ -58,7 +60,10 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | number | null>(
 		null,
 	);
-	const [selectedView, setSelectedView] = useState<'grid' | 'list'>('grid');
+	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
+		'passageNavLayout',
+		'grid',
+	);
 
 	return (
 		<div className={styles.wrapper}>
