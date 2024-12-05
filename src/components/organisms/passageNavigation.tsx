@@ -1,14 +1,57 @@
 import clsx from 'clsx';
 import React, { useRef, useState } from 'react';
 
-import Link from '~components/atoms/linkWithoutPrefetch';
-
 import { PassageNavigationFragment } from './__generated__/passageNavigation';
+import BookGrid from './bookGrid';
+import BookList from './bookList';
 import styles from './passageNavigation.module.scss';
 
 type Props = {
 	books: Array<PassageNavigationFragment>;
 };
+
+// FIXME
+const OT = [
+	'genesis',
+	'exodus',
+	'leviticus',
+	'numbers',
+	'deuteronomy',
+	'joshua',
+	'judges',
+	'ruth',
+	'1 samuel',
+	'2 samuel',
+	'1 kings',
+	'2 kings',
+	'1 chronicles',
+	'2 chronicles',
+	'ezra',
+	'nehemiah',
+	'esther',
+	'job',
+	'psalms',
+	'proverbs',
+	'ecclesiastes',
+	'song of solomon',
+	'isaiah',
+	'jeremiah',
+	'lamentations',
+	'ezekiel',
+	'daniel',
+	'hosea',
+	'joel',
+	'amos',
+	'obadiah',
+	'jonah',
+	'micah',
+	'nahum',
+	'habakkuk',
+	'zephaniah',
+	'haggai',
+	'zechariah',
+	'malachi',
+];
 
 export default function PassageNavigation({ books }: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | number | null>(
@@ -33,56 +76,30 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 				</button>
 			</div>
 
-			<ul className={clsx(styles.books, { grid: selectedView === 'grid' })}>
-				{books.map((book) => {
-					const chapters = book.recordings.nodes;
-
-					return (
-						<>
-							<li
-								key={book.id}
-								className={clsx(styles.book, {
-									active: book.id === selectedBook,
-								})}
-							>
-								<button
-									onClick={() => {
-										setSelectedBook(book.id);
-									}}
-								>
-									{selectedView === 'grid'
-										? book.title.replace(' ', '').substring(0, 3)
-										: book.title}
-								</button>
-							</li>
-							{book.id === selectedBook ? (
-								<li
-									className={clsx(styles.chaptersWrapper, {
-										active: book.id === selectedBook,
-									})}
-								>
-									<ul
-										className={clsx(styles.chapters, {
-											active: book.id === selectedBook,
-										})}
-									>
-										{chapters?.map((chapter) => {
-											const n = Number(chapter.title.split(' ').pop());
-											return (
-												<li key={n} className={styles.chapter}>
-													<Link href={chapter.canonicalPath}>{n}</Link>
-												</li>
-											);
-										})}
-									</ul>
-								</li>
-							) : (
-								''
-							)}
-						</>
-					);
-				})}
-			</ul>
+			{selectedView === 'list' ? (
+				<BookList
+					books={books}
+					selectedBook={selectedBook}
+					selectBook={setSelectedBook}
+				/>
+			) : (
+				<>
+					<BookGrid
+						books={books.filter((book) =>
+							OT.includes(book.title.toLocaleLowerCase()),
+						)}
+						selectedBook={selectedBook}
+						selectBook={setSelectedBook}
+					/>
+					<BookGrid
+						books={books.filter(
+							(book) => !OT.includes(book.title.toLocaleLowerCase()),
+						)}
+						selectedBook={selectedBook}
+						selectBook={setSelectedBook}
+					/>
+				</>
+			)}
 		</div>
 	);
 }
