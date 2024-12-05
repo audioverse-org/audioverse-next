@@ -31,10 +31,10 @@ async function transform(
 ): Promise<ApiBible> {
 	const books = Object.keys(BOOK_ID_MAP).map(
 		async (bookId, i): Promise<ApiBook> => {
-			const testiment = i < 39 ? 'OT' : 'NT';
+			const testament = i < 39 ? 'OT' : 'NT';
 			const bbChapters = await getBibleBookChapters(
 				bible.id,
-				testiment,
+				testament,
 				bookId,
 			);
 			const chapters = bbChapters.map(
@@ -55,9 +55,9 @@ async function transform(
 			const title = bbChapters[0].book_name;
 
 			if (!title) {
-				console.log({ bible, testiment, bookId, bbChapters });
+				console.log({ bible, testament, bookId, bbChapters });
 				throw new Error(
-					`Could not determine book title: ${bible.id} ${testiment} ${bookId}`,
+					`Could not determine book title: ${bible.id} ${testament} ${bookId}`,
 				);
 			}
 

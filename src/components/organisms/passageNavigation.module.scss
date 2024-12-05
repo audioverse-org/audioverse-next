@@ -96,11 +96,6 @@
 
 .chaptersWrapper {
 	width: 100%;
-	display: none;
-}
-
-.chaptersWrapper:global(.active) {
-	display: block;
 	float: left;
 }
 
