@@ -1,7 +1,6 @@
 @import '../../styles/common.scss';
 
 .wrapper {
-	display: flex;
 	background-color: $ts-bibleVersionH;
 }
 
@@ -24,12 +23,17 @@
 	padding-bottom: 16px;
 }
 
+// .wrapper .books:global(.grid) {
+// 	display: grid;
+// 	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+// }
+
 .wrapper li,
 .wrapper li button,
 .wrapper li a {
 	color: $ts-lightTone;
 	font-weight: 700;
-	size: 16px;
+	font-size: 16px;
 	line-height: 19.2px;
 	text-transform: uppercase;
 	list-style-type: none;
@@ -39,11 +43,19 @@
 	color: $ts-salmon;
 }
 
+.switch > :global(button.active) {
+	color: $ts-salmon;
+}
+
 .wrapper,
 .wrapper .books,
 .wrapper .chapters {
 	width: 100%;
 }
+
+// .books:global(.grid) .chapters {
+// 	grid-column: 1 / -1;
+// }
 
 .chapters {
 	display: grid;
@@ -68,4 +80,31 @@
 
 .books button:hover {
 	color: $ts-salmon;
+}
+
+.switch {
+	border-bottom: 1px solid $ts-salmon;
+}
+
+.switch > button {
+	color: $ts-lightTone;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 14.4px;
+	text-transform: uppercase;
+}
+
+.chaptersWrapper {
+	width: 100%;
+	display: none;
+}
+
+.chaptersWrapper:global(.active) {
+	display: block;
+	float: left;
+}
+
+.books:global(.grid) .book {
+	width: 70px;
+	display: inline-block;
 }
