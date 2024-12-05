@@ -10,9 +10,12 @@ import Button from '~components/molecules/button';
 import DownloadAppButton from '~components/molecules/downloadAppButton';
 import LanguageButton from '~components/molecules/languageButton';
 import NavItem from '~components/molecules/navItem';
-import SearchBar from '~components/molecules/searchBar';
 import Header from '~components/organisms/header';
-import { getSessionToken, setSessionToken } from '~lib/cookies';
+import {
+	getSessionToken,
+	getUserId,
+	setSessionTokenAndUserId,
+} from '~lib/cookies';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { INavigationItem, useNavigationItems } from '~lib/useNavigationItems';
@@ -27,20 +30,13 @@ import IconButton from '../molecules/iconButton';
 import OpenAppButton from '../molecules/openAppButton';
 import styles from './navigation.module.scss';
 
-const Navigation = ({
-	onExit,
-	searchTerm,
-	onSearchChange,
-}: {
-	onExit: () => void;
-	searchTerm: string | undefined;
-	onSearchChange: (term: string | undefined) => void;
-}): JSX.Element => {
+const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	const intl = useIntl();
 	const router = useRouter();
 	const [submenu, setSubmenu] = useState('');
 	const sessionToken = getSessionToken();
+	const userId = getUserId();
 
 	useEffect(() => {
 		const onRouteChange = (url: string) => {
@@ -57,10 +53,10 @@ const Navigation = ({
 	}, []);
 
 	useEffect(() => {
-		if (sessionToken) {
-			setSessionToken(sessionToken);
+		if (sessionToken && userId) {
+			setSessionTokenAndUserId(sessionToken, userId);
 		}
-	}, [router.asPath, sessionToken]);
+	}, [router.asPath, sessionToken, userId]);
 
 	const { user } = useIsAuthenticated();
 
@@ -85,13 +81,6 @@ const Navigation = ({
 						color={BaseColors.DARK}
 						backgroundColor={BaseColors.CREAM}
 						className={styles.exitButton}
-					/>
-				</div>
-				<div className={clsx(styles.mobileRow, styles.mobileSearch)}>
-					<SearchBar
-						term={searchTerm}
-						onTermChange={onSearchChange}
-						onSubmit={onExit}
 					/>
 				</div>
 			</div>
@@ -122,9 +111,6 @@ const Navigation = ({
 
 						<Button
 							type="super"
-							onClick={() => {
-								analytics.track('Donate');
-							}}
 							text={
 								<FormattedMessage
 									id="andNavigation__donate"

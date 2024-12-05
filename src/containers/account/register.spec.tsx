@@ -192,6 +192,19 @@ describe('register page', () => {
 	it('renders social login success', async () => {
 		const { getByText } = await renderPage();
 
+		when(fetchApi)
+			.calledWith(RegisterSocialDocument, expect.anything())
+			.mockResolvedValue({
+				loginSocial: {
+					authenticatedUser: {
+						sessionToken: 'the_token',
+						user: {
+							id: 1,
+						},
+					},
+				},
+			});
+
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
@@ -224,6 +237,9 @@ describe('register page', () => {
 				loginSocial: {
 					authenticatedUser: {
 						sessionToken: 'the_token',
+						user: {
+							id: 1,
+						},
 					},
 				},
 			});
@@ -233,7 +249,7 @@ describe('register page', () => {
 		await userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(Cookie.set).toBeCalledWith('avSession', 'the_token', {
+			expect(Cookie.set).toBeCalledWith('session_token', 'the_token', {
 				expires: 14,
 			});
 		});
@@ -273,7 +289,7 @@ describe('register page', () => {
 	});
 
 	it('does not display form if user logged in', async () => {
-		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		Cookie.get = jest.fn().mockReturnValue({ session_token: 'abc123' });
 
 		const { queryByPlaceholderText } = await renderPage();
 

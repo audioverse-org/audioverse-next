@@ -62,7 +62,7 @@ module.exports = withBundleAnalyzer(
 					has: [
 						{
 							type: 'cookie',
-							key: 'avSession',
+							key: 'session_token',
 							value: undefined,
 						},
 						{

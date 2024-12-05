@@ -33,7 +33,7 @@ const loadData = buildLoader(GetSponsorSeriesPageDataDocument, {
 				title: 'the_series_title',
 				canonicalPath: 'the_series_path',
 				contentType: SequenceContentType.Series,
-				speakers: [],
+				sequenceSpeakers: { nodes: [] },
 				allRecordings: {
 					aggregate: {
 						count: 0,

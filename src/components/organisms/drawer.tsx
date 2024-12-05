@@ -10,13 +10,9 @@ import styles from './drawer.module.scss';
 export default function Drawer({
 	showingMenu,
 	onExit,
-	onSearchChange,
-	searchTerm,
 }: {
 	showingMenu: boolean;
 	onExit: () => void;
-	onSearchChange: (term: string | undefined) => void;
-	searchTerm?: string;
 }): JSX.Element {
 	useEffect(() => {
 		Router.events.on('routeChangeStart', onExit);
@@ -34,11 +30,7 @@ export default function Drawer({
 				<Header />
 			</div>
 			<div className={styles.navigation}>
-				<Navigation
-					onExit={onExit}
-					searchTerm={searchTerm}
-					onSearchChange={onSearchChange}
-				/>
+				<Navigation onExit={onExit} />
 			</div>
 		</div>
 	);

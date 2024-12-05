@@ -25,6 +25,7 @@ import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
+import { CatalogEntityType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
@@ -135,6 +136,9 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={root.lang(languageRoute).sponsors.id(id).feed.get()}
+						contentType={CatalogEntityType.Sponsor}
+						id={id}
+						title={title}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
@@ -142,6 +146,9 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 						backgroundColor={BaseColors.LIGHT_TONE}
 						light
 						className={styles.iconButton}
+						contentType={CatalogEntityType.Sponsor}
+						id={id}
+						title={title}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />

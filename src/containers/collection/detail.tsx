@@ -164,6 +164,9 @@ function CollectionDetail({
 								light
 								triggerClassName={styles.iconButton}
 								rssUrl={root.lang(lang).conferences.id(id).feed.get()}
+								contentType={contentType}
+								id={id}
+								title={title}
 							/>
 							<ButtonFavorite
 								isFavorited={!!isFavorited}
@@ -171,6 +174,9 @@ function CollectionDetail({
 								backgroundColor={BaseColors.DARK}
 								light
 								className={styles.iconButton}
+								contentType={contentType}
+								id={id}
+								title={title}
 							/>
 						</div>
 						<HorizontalRule color={BaseColors.MID_TONE} />

@@ -51,7 +51,7 @@ export function loadSermonListData({
 					canonicalPath: 'the_sermon_path',
 					recordingContentType: RecordingContentType.Sermon,
 					videoFiles: [],
-					persons: [],
+					speakers: [],
 				},
 			],
 			aggregate: {
@@ -317,7 +317,7 @@ describe('sermons list page', () => {
 						title: 'the_sermon_title',
 						canonicalPath: 'the_sermon_path',
 						recordingContentType: RecordingContentType.Sermon,
-						persons: [
+						speakers: [
 							{
 								id: 'the_id',
 								name: 'the_name',

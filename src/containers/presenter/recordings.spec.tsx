@@ -33,7 +33,7 @@ function loadData() {
 							title: 'the_recording_title',
 							canonicalPath: 'the_recording_path',
 							recordingContentType: RecordingContentType.Sermon,
-							persons: [],
+							speakers: [],
 							recordings: {
 								aggregate: {
 									count: 0,

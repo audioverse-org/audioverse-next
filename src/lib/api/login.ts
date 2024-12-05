@@ -1,6 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import { setSessionToken } from '~lib/cookies';
+import { setSessionTokenAndUserId } from '~lib/cookies';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import { analytics } from '../analytics';
 import { login as _login } from './__generated__/login';
@@ -41,7 +42,10 @@ export async function login(email: string, password: string): Promise<true> {
 		login: { authenticatedUser, errors },
 	} = await _login({ email, password });
 	if (authenticatedUser) {
-		setSessionToken(authenticatedUser.sessionToken);
+		setSessionTokenAndUserId(
+			authenticatedUser.sessionToken,
+			authenticatedUser.user.id.toString(),
+		);
 		const user = authenticatedUser.user;
 		analytics.identify(user.id + '', {
 			firstName: user.givenName,
@@ -49,6 +53,10 @@ export async function login(email: string, password: string): Promise<true> {
 			email,
 			source: 'Login',
 		});
+		gtmPushEvent('sign_in', {
+			sign_in_method: 'email',
+		});
+
 		return true;
 	}
 	throw new Error((errors?.length && errors[0].message) || '');

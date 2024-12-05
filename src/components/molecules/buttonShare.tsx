@@ -5,13 +5,29 @@ import Heading6 from '~components/atoms/heading6';
 import { BaseColors } from '~lib/constants';
 import ShareIcon from '~public/img/icons/share-alt.svg';
 import ShareIconLight from '~public/img/icons/share-alt-light.svg';
+import {
+	CatalogEntityType,
+	CollectionContentType,
+	RecordingContentType,
+	SequenceContentType,
+} from '~src/__generated__/graphql';
 import { analytics } from '~src/lib/analytics';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonShare.module.scss';
 import Dropdown from './dropdown';
 import IconButton from './iconButton';
 import RssAlternate from './rssAlternate';
+
+export type ShareContentType =
+	| RecordingContentType
+	| SequenceContentType
+	| CollectionContentType
+	| typeof CatalogEntityType.Person
+	| typeof CatalogEntityType.Sponsor
+	| 'PLAYLIST'
+	| 'TOPIC';
 
 type Props = {
 	shareUrl: string;
@@ -20,8 +36,9 @@ type Props = {
 	rssUrl?: string;
 	light?: boolean;
 	triggerClassName?: string;
-	type?: string;
-	id?: string | number;
+	contentType: ShareContentType;
+	id: string | number | undefined;
+	title: string;
 };
 
 export default function ButtonShare({
@@ -32,15 +49,16 @@ export default function ButtonShare({
 	children,
 	light,
 	triggerClassName,
-	type,
+	contentType,
 	id,
+	title,
 }: PropsWithChildren<Props>): JSX.Element {
 	const intl = useIntl();
 	const [justCopied, setJustCopied] = useState(false);
 
 	// FUTURE: update sharing links
 	const facebookLink = `https://facebook.com/share.php?u=${shareUrl}`;
-	const twitterLink = `https://twitter.com/intent/tweet?url=${shareUrl}`;
+	const twitterLink = `https://x.com/intent/post?url=${shareUrl}`;
 	const emailLink = `mailto:?body=${shareUrl}${
 		emailSubject
 			? `&subject=${encodeURIComponent(
@@ -59,12 +77,11 @@ export default function ButtonShare({
 	const copyLink = shareUrl;
 
 	const shareTracking = (source: string) => {
-		if (type)
-			analytics.track('Share', {
-				id,
-				source,
-				type,
-			});
+		analytics.track('Share', {
+			id,
+			source,
+			type: contentType,
+		});
 	};
 	const onCopyLink = (e: MouseEvent) => {
 		e.preventDefault();
@@ -164,6 +181,15 @@ export default function ButtonShare({
 						})}
 						className={triggerClassName}
 						{...props}
+						onClick={(e) => {
+							// eslint-disable-next-line react/prop-types
+							props.onClick(e);
+							gtmPushEvent('share', {
+								content_type: contentType,
+								item_id: id,
+								title,
+							});
+						}}
 					/>
 				)}
 			>
