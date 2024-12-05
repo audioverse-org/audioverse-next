@@ -1,5 +1,8 @@
 import clsx from 'clsx';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
 import { PassageNavigationFragment } from './__generated__/passageNavigation';
 import BookGrid from './bookGrid';
@@ -57,7 +60,10 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | number | null>(
 		null,
 	);
-	const [selectedView, setSelectedView] = useState<'grid' | 'list'>('grid');
+	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
+		'passageNavLayout',
+		'grid',
+	);
 
 	return (
 		<div className={styles.wrapper}>
@@ -66,13 +72,21 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 					className={clsx({ active: selectedView === 'grid' })}
 					onClick={() => setSelectedView('grid')}
 				>
-					Grid
+					<FormattedMessage
+						id="passageNavigation__selector-grid"
+						defaultMessage="Grid"
+						description="Switch to grid view"
+					/>
 				</button>
 				<button
 					className={clsx({ active: selectedView === 'list' })}
 					onClick={() => setSelectedView('list')}
 				>
-					List
+					<FormattedMessage
+						id="passageNavigation__selector-list"
+						defaultMessage="List"
+						description="Switch to list view"
+					/>
 				</button>
 			</div>
 
