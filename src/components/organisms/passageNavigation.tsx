@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
 
@@ -23,13 +24,21 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 					className={clsx({ active: selectedView === 'grid' })}
 					onClick={() => setSelectedView('grid')}
 				>
-					Grid
+					<FormattedMessage
+						id="passageNavigation__selector-grid"
+						defaultMessage="Grid"
+						description="Switch to grid view"
+					/>
 				</button>
 				<button
 					className={clsx({ active: selectedView === 'list' })}
 					onClick={() => setSelectedView('list')}
 				>
-					List
+					<FormattedMessage
+						id="passageNavigation__selector-list"
+						defaultMessage="List"
+						description="Switch to list view"
+					/>
 				</button>
 			</div>
 
