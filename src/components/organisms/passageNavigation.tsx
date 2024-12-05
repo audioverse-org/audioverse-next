@@ -2,7 +2,8 @@ import clsx from 'clsx';
 import React, { useRef, useState } from 'react';
 
 import { PassageNavigationFragment } from './__generated__/passageNavigation';
-import ChapterGrid from './chapterGrid';
+import BookGrid from './bookGrid';
+import BookList from './bookList';
 import styles from './passageNavigation.module.scss';
 
 type Props = {
@@ -32,35 +33,19 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 				</button>
 			</div>
 
-			<ul className={clsx(styles.books, { grid: selectedView === 'grid' })}>
-				{books.map((book) => {
-					const chapters = book.recordings.nodes;
-
-					return (
-						<>
-							<li
-								key={book.id}
-								className={clsx(styles.book, {
-									active: book.id === selectedBook,
-								})}
-							>
-								<button
-									onClick={() => {
-										setSelectedBook(book.id);
-									}}
-								>
-									{selectedView === 'grid'
-										? book.title.replace(' ', '').substring(0, 3)
-										: book.title}
-								</button>
-							</li>
-							{book.id === selectedBook && chapters && (
-								<ChapterGrid chapters={chapters} />
-							)}
-						</>
-					);
-				})}
-			</ul>
+			{selectedView === 'list' ? (
+				<BookList
+					books={books}
+					selectedBook={selectedBook}
+					selectBook={setSelectedBook}
+				/>
+			) : (
+				<BookGrid
+					books={books}
+					selectedBook={selectedBook}
+					selectBook={setSelectedBook}
+				/>
+			)}
 		</div>
 	);
 }
