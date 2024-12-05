@@ -10,6 +10,49 @@ type Props = {
 	books: Array<PassageNavigationFragment>;
 };
 
+// FIXME
+const OT = [
+	'genesis',
+	'exodus',
+	'leviticus',
+	'numbers',
+	'deuteronomy',
+	'joshua',
+	'judges',
+	'ruth',
+	'1 samuel',
+	'2 samuel',
+	'1 kings',
+	'2 kings',
+	'1 chronicles',
+	'2 chronicles',
+	'ezra',
+	'nehemiah',
+	'esther',
+	'job',
+	'psalms',
+	'proverbs',
+	'ecclesiastes',
+	'song of solomon',
+	'isaiah',
+	'jeremiah',
+	'lamentations',
+	'ezekiel',
+	'daniel',
+	'hosea',
+	'joel',
+	'amos',
+	'obadiah',
+	'jonah',
+	'micah',
+	'nahum',
+	'habakkuk',
+	'zephaniah',
+	'haggai',
+	'zechariah',
+	'malachi',
+];
+
 export default function PassageNavigation({ books }: Props): JSX.Element {
 	const [selectedBook, setSelectedBook] = useState<string | number | null>(
 		null,
@@ -40,11 +83,22 @@ export default function PassageNavigation({ books }: Props): JSX.Element {
 					selectBook={setSelectedBook}
 				/>
 			) : (
-				<BookGrid
-					books={books}
-					selectedBook={selectedBook}
-					selectBook={setSelectedBook}
-				/>
+				<>
+					<BookGrid
+						books={books.filter((book) =>
+							OT.includes(book.title.toLocaleLowerCase()),
+						)}
+						selectedBook={selectedBook}
+						selectBook={setSelectedBook}
+					/>
+					<BookGrid
+						books={books.filter(
+							(book) => !OT.includes(book.title.toLocaleLowerCase()),
+						)}
+						selectedBook={selectedBook}
+						selectBook={setSelectedBook}
+					/>
+				</>
 			)}
 		</div>
 	);
