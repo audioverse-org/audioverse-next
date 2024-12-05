@@ -2735,5 +2735,13 @@
   },
   "bibles__history": {
     "string": "Historique"
+  },
+  "passageNavigation__selector-grid": {
+    "comment": "Switch to grid view",
+    "string": "Grid"
+  },
+  "passageNavigation__selector-list": {
+    "comment": "Switch to list view",
+    "string": "List"
   }
 }

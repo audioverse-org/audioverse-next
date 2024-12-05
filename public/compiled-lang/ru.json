@@ -4109,6 +4109,18 @@
       "value": "Our Story"
     }
   ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
+    }
+  ],
   "personTypeLockup_type": [
     {
       "type": 0,

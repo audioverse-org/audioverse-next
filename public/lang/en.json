@@ -1974,6 +1974,14 @@
   "ourStory__title": {
     "string": "Our Story"
   },
+  "passageNavigation__selector-grid": {
+    "comment": "Switch to grid view",
+    "string": "Grid"
+  },
+  "passageNavigation__selector-list": {
+    "comment": "Switch to list view",
+    "string": "List"
+  },
   "personTypeLockup_type": {
     "string": "Presenter"
   },
