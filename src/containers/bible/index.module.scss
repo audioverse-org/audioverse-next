@@ -3,15 +3,15 @@
 .base {
 	--bibleAccent: #{$ts-red};
 	--bibleBackground: #{$ts-bibleB};
-	--bibleHatTextColor: #{$ts-white};
-	--bibleHatBackground: #{$ts-bibleH};
-	--bibleHatHover: #{$ts-darkened-bibleH};
 	--bibleTextColor: #{$ts-dark};
 	--bibleTextSecondaryColor: #{$ts-midTone};
 	--bibleWavesColor: #{$ts-lightTone};
 }
 
 .hat {
+	--bibleHatTextColor: #{$ts-white};
+	--bibleHatBackground: #{$ts-bibleH};
+	--bibleHatHover: #{$ts-darkened-bibleH};
 	background-color: var(--bibleHatBackground);
 	padding: 16px 24px;
 	display: flex;

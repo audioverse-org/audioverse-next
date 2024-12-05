@@ -33,6 +33,7 @@ import {
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
+import BibleHat from './hat';
 
 export interface BookProps {
 	version: IBibleVersion;
@@ -188,22 +189,42 @@ function BookInner({
 
 	return (
 		<Tease>
-			<Link
-				href={root.lang(languageRoute).bibles.versionId(id).get()}
-				legacyBehavior
-			>
-				<a className={styles.hat}>
-					<BibleVersionTypeLockup
-						unpadded={true}
-						label={intl.formatMessage({
-							id: 'bibleBook__typeLabel',
-							// TODO: Make dynamic?
-							defaultMessage: 'KJV Bible',
-						})}
-					/>
-					<h4>{book.name}</h4>
-				</a>
-			</Link>
+			<BibleHat
+				selected={{
+					__typename: undefined,
+					id: '',
+					title: '',
+					sequences: {
+						__typename: undefined,
+						nodes: null,
+					},
+				}}
+				onSelect={function (version: {
+					__typename?: 'Collection';
+					id: string | number;
+					title: string;
+					sequences: {
+						__typename?: 'SequenceConnection';
+						nodes: Array<{
+							__typename?: 'Sequence';
+							id: string | number;
+							title: string;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								nodes: Array<{
+									__typename?: 'Recording';
+									id: string | number;
+									title: string;
+									canonicalPath: string;
+								}> | null;
+							};
+						}> | null;
+					};
+				}): void {
+					throw new Error('Function not implemented.');
+				}}
+				versions={[]}
+			/>
 			<div className={styles.content}>
 				<div className={styles.main}>
 					{showingText ? (
