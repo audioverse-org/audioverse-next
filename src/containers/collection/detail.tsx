@@ -7,7 +7,6 @@ import Heading6 from '~components/atoms/heading6';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import InherentSizeImage from '~components/atoms/inherentSizeImage';
 import Link from '~components/atoms/linkWithoutPrefetch';
-import withFailStates from '~components/HOCs/withFailStates';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
 import CollectionTypeLockup from '~components/molecules/collectionTypeLockup';
@@ -25,6 +24,7 @@ import useLanguageRoute from '~lib/useLanguageRoute';
 import ConferencePresenters from '~src/components/organisms/cardSlider/section/conferencePresenters';
 import ConferenceSeries from '~src/components/organisms/cardSlider/section/conferenceSeries';
 import ConferenceTeachings from '~src/components/organisms/cardSlider/section/conferenceTeachings';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetCollectionDetailPageDataQuery } from './__generated__/detail';
@@ -194,6 +194,11 @@ function CollectionDetail({
 	);
 }
 
-export default withFailStates(CollectionDetail, {
-	useShould404: ({ collection }) => !collection,
-});
+const WithFailStates = (props: Parameters<typeof CollectionDetail>[0]) => (
+	<AndFailStates
+		Component={CollectionDetail}
+		componentProps={props}
+		options={{ should404: ({ collection }) => !collection }}
+	/>
+);
+export default WithFailStates;

@@ -4,11 +4,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Alert from '~components/atoms/alert';
 import Heading1 from '~components/atoms/heading1';
 import Heading2 from '~components/atoms/heading2';
-import withFailStates from '~components/HOCs/withFailStates';
 import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import Input from '~components/molecules/form/input';
 import Textarea from '~components/molecules/form/textarea';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import {
@@ -208,6 +208,11 @@ function ReleaseDetail({
 	);
 }
 
-export default withFailStates(ReleaseDetail, {
-	useShould404: ({ mediaReleaseForm }) => !mediaReleaseForm,
-});
+const WithFailStates = (props: Parameters<typeof ReleaseDetail>[0]) => (
+	<AndFailStates
+		Component={ReleaseDetail}
+		componentProps={props}
+		options={{ should404: ({ mediaReleaseForm }) => !mediaReleaseForm }}
+	/>
+);
+export default WithFailStates;

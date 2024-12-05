@@ -15,12 +15,12 @@ import NewsletterForm from '~components/molecules/newsletterForm';
 import Slider from '~components/organisms/slider';
 import Testimonies from '~components/organisms/testimonies';
 import { BaseColors } from '~lib/constants';
-import { getSessionToken } from '~lib/cookies';
 import { getAppFeatures } from '~lib/getAppFeatures';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
 import ImagePlayers from '~public/img/players.jpeg';
+import useIsLoggedIn from '~src/lib/hooks/useIsLoggedIn';
 
 import { GetHomeStaticPropsQuery } from './__generated__/home';
 import styles from './home.module.scss';
@@ -33,14 +33,12 @@ export type HomeProps = {
 export default function Home({ data }: HomeProps): JSX.Element {
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
-	const isLoggedIn = !!getSessionToken();
+	const isLoggedIn = useIsLoggedIn();
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
 	const bibleChapters = data?.bibleChapters.nodes || [];
-
 	const features = getAppFeatures(languageRoute, intl);
-
 	const isEnglish = languageRoute === 'en';
 
 	return (

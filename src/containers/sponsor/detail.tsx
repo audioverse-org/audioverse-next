@@ -7,7 +7,6 @@ import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import RoundImage from '~components/atoms/roundImage';
-import withFailStates from '~components/HOCs/withFailStates';
 import Button from '~components/molecules/button';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
@@ -27,6 +26,7 @@ import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 import { CatalogEntityType } from '~src/__generated__/graphql';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetSponsorDetailPageDataQuery } from './__generated__/detail';
@@ -241,6 +241,11 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 	);
 }
 
-export default withFailStates(SponsorDetail, {
-	useShould404: ({ sponsor }) => !sponsor,
-});
+const WithFailStates = (props: Parameters<typeof SponsorDetail>[0]) => (
+	<AndFailStates
+		Component={SponsorDetail}
+		componentProps={props}
+		options={{ should404: ({ sponsor }) => !sponsor }}
+	/>
+);
+export default WithFailStates;

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import withFailStates from '~components/HOCs/withFailStates';
 import { Recording } from '~components/organisms/recording';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetPublicPlaylistItemDetailDataQuery } from './__generated__/item';
@@ -53,6 +53,11 @@ function PlaylistItem({
 	);
 }
 
-export default withFailStates(PlaylistItem, {
-	useShould404: (props) => !props.playlist || !props.recording,
-});
+const WithFailStates = (props: Parameters<typeof PlaylistItem>[0]) => (
+	<AndFailStates
+		Component={PlaylistItem}
+		componentProps={props}
+		options={{ should404: (props) => !props.playlist || !props.recording }}
+	/>
+);
+export default WithFailStates;

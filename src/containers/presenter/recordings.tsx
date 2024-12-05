@@ -2,7 +2,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
-import withFailStates from '~components/HOCs/withFailStates';
 import CardRecording from '~components/molecules/card/recording';
 import CardGroup from '~components/molecules/cardGroup';
 import Pagination from '~components/molecules/pagination';
@@ -11,6 +10,7 @@ import { BaseColors } from '~lib/constants';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { PresenterPivotFragment } from './__generated__/pivot';
@@ -66,6 +66,11 @@ function PresenterRecordings({
 	);
 }
 
-export default withFailStates(PresenterRecordings, {
-	useShould404: ({ nodes }) => !nodes.length,
-});
+const WithFailStates = (props: Parameters<typeof PresenterRecordings>[0]) => (
+	<AndFailStates
+		Component={PresenterRecordings}
+		componentProps={props}
+		options={{ should404: ({ nodes }) => !nodes.length }}
+	/>
+);
+export default WithFailStates;

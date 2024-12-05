@@ -2,13 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
-import withFailStates from '~components/HOCs/withFailStates';
 import CardBibleVersion from '~components/molecules/card/bibleVersion';
 import CardCollection from '~components/molecules/card/collection';
 import CardMasonry from '~components/molecules/cardMasonry';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import Tease from '~components/molecules/tease';
 import { IBibleVersion } from '~lib/api/bibleBrain';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetAudiobibleVersionsDataQuery } from './__generated__/versions';
 import styles from './versions.module.scss';
@@ -55,6 +55,11 @@ function Versions({ versions }: VersionsProps): JSX.Element {
 	);
 }
 
-export default withFailStates(Versions, {
-	useShould404: ({ versions }) => !versions.length,
-});
+const WithFailStates = (props: Parameters<typeof Versions>[0]) => (
+	<AndFailStates
+		Component={Versions}
+		componentProps={props}
+		options={{ should404: ({ versions }) => !versions.length }}
+	/>
+);
+export default WithFailStates;

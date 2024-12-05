@@ -9,7 +9,6 @@ import Heading6 from '~src/components/atoms/heading6';
 import HorizontalRule from '~src/components/atoms/horizontalRule';
 import LineHeading from '~src/components/atoms/lineHeading';
 import TopicItemCount from '~src/components/atoms/topicItemCount';
-import withFailStates from '~src/components/HOCs/withFailStates';
 import { CardRecordingFragment } from '~src/components/molecules/card/__generated__/recording';
 import { CardSequenceFragment } from '~src/components/molecules/card/__generated__/sequence';
 import Recording from '~src/components/molecules/card/recording';
@@ -21,6 +20,7 @@ import DefinitionList, {
 } from '~src/components/molecules/definitionList';
 import Tease from '~src/components/molecules/tease';
 import TypeLockup from '~src/components/molecules/typeLockup';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { BaseColors } from '~src/lib/constants';
 import { useFormattedDuration } from '~src/lib/time';
 import { Must } from '~src/types/types';
@@ -143,6 +143,11 @@ function Topic({ topic }: Must<GetTopicDetailDataQuery>): JSX.Element {
 	);
 }
 
-export default withFailStates(Topic, {
-	useShould404: ({ topic }) => !topic,
-});
+const WithFailStates = (props: Parameters<typeof Topic>[0]) => (
+	<AndFailStates
+		Component={Topic}
+		componentProps={props}
+		options={{ should404: ({ topic }) => !topic }}
+	/>
+);
+export default WithFailStates;

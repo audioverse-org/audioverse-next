@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withAuthGuard from '~components/HOCs/withAuthGuard';
 import CardFavorite from '~components/molecules/card/favorite';
 import CardMasonry from '~components/molecules/cardMasonry';
 import LoadingCards from '~components/molecules/loadingCards';
@@ -16,6 +15,7 @@ import {
 	RecordingContentType,
 	RecordingViewerPlaybackStatus,
 } from '~src/__generated__/graphql';
+import AndAuthGuard from '~src/components/templates/andAuthGuard';
 
 import {
 	GetLibraryDataQueryVariables,
@@ -133,50 +133,52 @@ function Library({ language }: ILibraryProps): JSX.Element {
 		Object.keys(router.query).filter((k) => router.query[k]).length > 0;
 
 	return (
-		<div className={baseStyles.wrapper}>
-			<LibraryNav currentNavHref="" />
+		<AndAuthGuard LoggedOutComponent={LibraryLoggedOut}>
+			<div className={baseStyles.wrapper}>
+				<LibraryNav currentNavHref="" />
 
-			{isLoading ? (
-				<LoadingCards />
-			) : items.length ? (
-				<CardMasonry
-					items={items}
-					render={({ data }) => <CardFavorite favorite={data} />}
-					key={`item-${items.length}`}
-				/>
-			) : filtersApplied ? (
-				<EmptyState
-					title={
-						<FormattedMessage
-							id="library__noMatchingHeading"
-							defaultMessage="You don’t have any matching items saved yet"
-						/>
-					}
-					message={
-						<FormattedMessage
-							id="library__noMatchingCopy"
-							defaultMessage="Bookmark items or listen to items from the Discover page."
-						/>
-					}
-				/>
-			) : (
-				<EmptyState
-					title={
-						<FormattedMessage
-							id="library__emptyHeading"
-							defaultMessage="You don’t have any items saved yet"
-						/>
-					}
-					message={
-						<FormattedMessage
-							id="library__emptyCopy"
-							defaultMessage="Bookmark items or listen to items from the Discover page."
-						/>
-					}
-				/>
-			)}
-		</div>
+				{isLoading ? (
+					<LoadingCards />
+				) : items.length ? (
+					<CardMasonry
+						items={items}
+						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`item-${items.length}`}
+					/>
+				) : filtersApplied ? (
+					<EmptyState
+						title={
+							<FormattedMessage
+								id="library__noMatchingHeading"
+								defaultMessage="You don’t have any matching items saved yet"
+							/>
+						}
+						message={
+							<FormattedMessage
+								id="library__noMatchingCopy"
+								defaultMessage="Bookmark items or listen to items from the Discover page."
+							/>
+						}
+					/>
+				) : (
+					<EmptyState
+						title={
+							<FormattedMessage
+								id="library__emptyHeading"
+								defaultMessage="You don’t have any items saved yet"
+							/>
+						}
+						message={
+							<FormattedMessage
+								id="library__emptyCopy"
+								defaultMessage="Bookmark items or listen to items from the Discover page."
+							/>
+						}
+					/>
+				)}
+			</div>
+		</AndAuthGuard>
 	);
 }
 
-export default withAuthGuard(Library, LibraryLoggedOut);
+export default Library;

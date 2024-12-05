@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '~components/HOCs/withFailStates';
 import CardSequence from '~components/molecules/card/sequence';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetEgwAudiobookListPageDataQuery } from './__generated__/egwList';
 
@@ -36,6 +36,11 @@ export function EgwAudiobooksList({
 	);
 }
 
-export default withFailStates(EgwAudiobooksList, {
-	useShould404: ({ nodes }) => !nodes.length,
-});
+const WithFailStates = (props: Parameters<typeof EgwAudiobooksList>[0]) => (
+	<AndFailStates
+		Component={EgwAudiobooksList}
+		componentProps={props}
+		options={{ should404: ({ nodes }) => !nodes.length }}
+	/>
+);
+export default WithFailStates;

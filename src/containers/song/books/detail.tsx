@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
-import withFailStates from '~components/HOCs/withFailStates';
 import ButtonShare from '~components/molecules/buttonShare';
 import CardSong from '~components/molecules/card/song';
 import CardGroup from '~components/molecules/cardGroup';
@@ -16,6 +15,7 @@ import root from '~lib/routes';
 import { useFormattedDuration } from '~lib/time';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import { SequenceContentType } from '~src/__generated__/graphql';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetSongBooksDetailPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
@@ -93,6 +93,11 @@ function SongBooksDetail({
 	);
 }
 
-export default withFailStates(SongBooksDetail, {
-	useShould404: ({ musicTracks }) => !musicTracks.length,
-});
+const WithFailStates = (props: Parameters<typeof SongBooksDetail>[0]) => (
+	<AndFailStates
+		Component={SongBooksDetail}
+		componentProps={props}
+		options={{ should404: ({ musicTracks }) => !musicTracks.length }}
+	/>
+);
+export default WithFailStates;

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import withFailStates from '~components/HOCs/withFailStates';
 import CardPost from '~components/molecules/card/post';
 import CardGroup from '~components/molecules/cardGroup';
 import Pagination from '~components/molecules/pagination';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetBlogPageDataQuery } from './__generated__/blog';
 
@@ -33,6 +33,11 @@ function Blog({ nodes: blogPosts, pagination }: BlogProps): JSX.Element {
 	);
 }
 
-export default withFailStates(Blog, {
-	useShould404: ({ nodes }) => !nodes.length,
-});
+const WithFailStates = (props: Parameters<typeof Blog>[0]) => (
+	<AndFailStates
+		Component={Blog}
+		componentProps={props}
+		options={{ should404: ({ nodes }) => !nodes.length }}
+	/>
+);
+export default WithFailStates;
