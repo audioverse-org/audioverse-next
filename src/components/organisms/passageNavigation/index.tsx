@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
-import { PassageNavigationFragment } from './__generated__/passageNavigation';
+import { PassageNavigationFragment } from './__generated__/index';
 import BookGrid from './bookGrid';
 import BookList from './bookList';
-import styles from './passageNavigation.module.scss';
+import styles from './index.module.scss';
 
 type Props = {
 	books: Array<PassageNavigationFragment>;

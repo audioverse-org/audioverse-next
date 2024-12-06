@@ -2,8 +2,8 @@ import React from 'react';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
 
-import { PassageNavigationFragment } from './__generated__/passageNavigation';
-import styles from './passageNavigation.module.scss';
+import { PassageNavigationFragment } from './__generated__/index';
+import styles from './index.module.scss';
 
 type Chapter = NonNullable<PassageNavigationFragment['recordings']['nodes']>[0];
 
