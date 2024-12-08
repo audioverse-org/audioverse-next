@@ -1,37 +1,85 @@
 @import '../../../styles/common.scss';
 
-.wrapper {
+.base {
+	--bibleAccent: #{$ts-red};
+	--bibleBackground: #{$ts-bibleB};
+	--bibleHatTextColor: #{$ts-white};
+	--bibleHatBackground: #{$ts-bibleH};
+	--bibleHatHover: #{$ts-darkened-bibleH};
+	--bibleTextColor: #{$ts-dark};
+	--bibleTextSecondaryColor: #{$ts-midTone};
+	--bibleWavesColor: #{$ts-lightTone};
+}
+
+.hat {
+	background-color: var(--bibleHatBackground);
+	padding: 16px 24px;
+	display: flex;
+	text-decoration: none;
+	color: var(--bibleHatTextColor, --bibleTextColor);
+	gap: 10px;
+	align-items: center;
+
+	h4 {
+		margin: 0;
+		font-size: 16px;
+	}
+}
+
+.historyButton {
+	margin-left: auto;
+}
+
+.dropdownButton {
+	text-decoration: none;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+
+	p {
+		margin-top: 8px;
+		margin-bottom: 16px;
+	}
+
+	@media (min-width: $breakpoint-xl) {
+		flex-direction: row;
+	}
+}
+
+.content {
 	background-color: $ts-bibleVersionH;
 	padding: 12px 24px;
 }
 
-.wrapper ul {
+.content ul {
 	margin: 0;
 	padding: 0;
 }
 
-.wrapper button {
+.content button {
 	background: none;
 	border: none;
 	padding: 18px 0px;
 }
 
-.wrapper .books > li:first-child button {
+.content .books > li:first-child button {
 	padding-top: 16px;
 }
 
-.wrapper .books > li:last-child button {
+.content .books > li:last-child button {
 	padding-bottom: 16px;
 }
 
-// .wrapper .books:global(.grid) {
+// .content .books:global(.grid) {
 // 	display: grid;
 // 	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
 // }
 
-.wrapper li,
-.wrapper li button,
-.wrapper li a {
+.content li,
+.content li button,
+.content li a {
 	color: $ts-lightTone;
 	font-weight: 700;
 	font-size: 16px;
@@ -40,7 +88,7 @@
 	list-style-type: none;
 }
 
-.wrapper :global(.active) > button {
+.content :global(.active) > button {
 	color: $ts-salmon;
 }
 
@@ -48,9 +96,9 @@
 	color: $ts-salmon;
 }
 
-.wrapper,
-.wrapper .books,
-.wrapper .chapters {
+.content,
+.content .books,
+.content .chapters {
 	width: 100%;
 }
 
