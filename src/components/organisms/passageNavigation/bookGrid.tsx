@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { PassageNavigationFragment } from './__generated__/passageNavigation';
+import { PassageNavigationFragment } from './__generated__/index';
 import ChapterGrid from './chapterGrid';
-import styles from './passageNavigation.module.scss';
+import styles from './index.module.scss';
 
 type Props = {
 	books: Array<PassageNavigationFragment>;
@@ -13,7 +13,7 @@ type Props = {
 
 export default function BookGrid({ books, selectedBook, selectBook }: Props) {
 	return (
-		<ul className={clsx(styles.books, 'grid')}>
+		<ul className={clsx(styles.books, styles.grid)}>
 			{books.map((book) => {
 				const chapters = book.recordings.nodes;
 
