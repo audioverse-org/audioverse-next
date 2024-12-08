@@ -8,7 +8,7 @@ import Link from '~components/atoms/linkWithoutPrefetch';
 import withFailStates from '~components/HOCs/withFailStates';
 import { PlayerFragment } from '~components/molecules/__generated__/player';
 import { SequenceNavFragment } from '~components/molecules/__generated__/sequenceNav';
-import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
+
 import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
@@ -33,6 +33,8 @@ import {
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
+import { BibleIndexProps } from '.';
+import PassageNavigation from '~src/components/organisms/passageNavigation';
 
 export interface BookProps {
 	version: IBibleVersion;
@@ -41,7 +43,7 @@ export interface BookProps {
 	chapterNumber: string | number;
 }
 
-const Book = (params: Must<BookProps>) => {
+const Book = (params: Must<BookProps & BibleIndexProps>) => {
 	const chapter = params.chapters.find(
 		({ number }) => number === +params.chapterNumber,
 	);
@@ -69,7 +71,8 @@ function BookInner({
 	book,
 	chapters,
 	chapterNumber,
-}: Must<BookProps>): JSX.Element {
+	data,
+}: Must<BookProps & BibleIndexProps>): JSX.Element {
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
 	const chapter = chapters.find(({ number }) => number === +chapterNumber);
