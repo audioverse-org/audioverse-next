@@ -126,7 +126,12 @@ export function Recording(
 			</Head>
 
 			{'data' in params ? (
-				<PassageNavigation versions={params.data} />
+				<PassageNavigation versions={params.data}>
+					<RecordingInner
+						recording={recording}
+						overrideSequence={overrideSequence}
+					/>
+				</PassageNavigation>
 			) : (
 				<RecordingInner
 					recording={recording}
@@ -338,50 +343,43 @@ function RecordingInner({
 
 	return (
 		<>
-			{isBibleChapter && recording.collection ? (
-				<Link href={recording.collection.canonicalPath} legacyBehavior>
-					<a className={styles.hat}>
-						<BibleVersionTypeLockup
-							label={recording.collection.title}
-							unpadded
-						/>
-						<h4>{recording.sequence?.title}</h4>
-					</a>
-				</Link>
-			) : overrideSequence && overrideSequence.playlistId ? (
-				makeHat(
-					<PlaylistTypeLockup unpadded />,
-					startCase(overrideSequence.title),
-					overrideSequence.publicPlaylist
-						? root
-								.lang(languageRoute)
-								.playlists.playlist(overrideSequence.playlistId)
-								.get()
-						: root
-								.lang(languageRoute)
-								.library.playlists(overrideSequence.playlistId)
-								.get(),
-				)
-			) : overrideSequence ? (
-				makeHat(
-					<SequenceTypeLockup
-						contentType={SequenceContentType.MusicAlbum}
-						unpadded
-					/>,
-					startCase(overrideSequence.title),
-					root.lang(languageRoute).songs.book(overrideSequence.title).get(),
-				)
-			) : (
-				recording.sequence &&
-				makeHat(
-					<SequenceTypeLockup
-						contentType={recording.sequence.contentType}
-						unpadded
-					/>,
-					recording.sequence.title,
-					recording.sequence.canonicalPath,
-				)
-			)}
+			{isBibleChapter && recording.collection
+				? ''
+				: overrideSequence && overrideSequence.playlistId
+					? makeHat(
+							<PlaylistTypeLockup unpadded />,
+							startCase(overrideSequence.title),
+							overrideSequence.publicPlaylist
+								? root
+										.lang(languageRoute)
+										.playlists.playlist(overrideSequence.playlistId)
+										.get()
+								: root
+										.lang(languageRoute)
+										.library.playlists(overrideSequence.playlistId)
+										.get(),
+						)
+					: overrideSequence
+						? makeHat(
+								<SequenceTypeLockup
+									contentType={SequenceContentType.MusicAlbum}
+									unpadded
+								/>,
+								startCase(overrideSequence.title),
+								root
+									.lang(languageRoute)
+									.songs.book(overrideSequence.title)
+									.get(),
+							)
+						: recording.sequence &&
+							makeHat(
+								<SequenceTypeLockup
+									contentType={recording.sequence.contentType}
+									unpadded
+								/>,
+								recording.sequence.title,
+								recording.sequence.canonicalPath,
+							)}
 			<div className={styles.content}>
 				<div className={styles.main}>
 					{isBibleChapter && isShowingTranscript && transcript ? (

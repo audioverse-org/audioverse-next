@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
@@ -25,6 +25,7 @@ type BookIndex = string | number | null;
 
 type Props = {
 	versions: Array<Version>;
+	children?: ReactNode;
 };
 
 // FIXME
@@ -70,7 +71,12 @@ const OT = [
 	'malachi',
 ];
 
-export default function PassageNavigation({ versions }: Props): JSX.Element {
+export default function PassageNavigation({
+	versions,
+	children,
+}: Props): ReactNode {
+	const [open, setOpen] = useState<boolean>(!children);
+
 	const [selectedVersion, setSelectedVersion] = useLocalStorage<Version>(
 		'bibleVersion',
 		versions[0],
@@ -90,7 +96,7 @@ export default function PassageNavigation({ versions }: Props): JSX.Element {
 
 	return (
 		<div className={styles.base}>
-			<div className={styles.hat}>
+			<div className={styles.hat} onClick={() => setOpen(!open)}>
 				<BibleVersionTypeLockup unpadded />
 				<a className={styles.historyButton} href="https://www.example.com">
 					<FormattedMessage id="bibles__history" defaultMessage="History" />
@@ -134,55 +140,59 @@ export default function PassageNavigation({ versions }: Props): JSX.Element {
 				/>
 			</div>
 
-			<div className={styles.content}>
-				<div className={styles.switch}>
-					<button
-						className={clsx({ active: selectedView === 'grid' })}
-						onClick={() => setSelectedView('grid')}
-					>
-						<FormattedMessage
-							id="passageNavigation__selector-grid"
-							defaultMessage="Grid"
-							description="Switch to grid view"
-						/>
-					</button>
-					<button
-						className={clsx({ active: selectedView === 'list' })}
-						onClick={() => setSelectedView('list')}
-					>
-						<FormattedMessage
-							id="passageNavigation__selector-list"
-							defaultMessage="List"
-							description="Switch to list view"
-						/>
-					</button>
-				</div>
+			{open || !children ? (
+				<div className={styles.content}>
+					<div className={styles.switch}>
+						<button
+							className={clsx({ active: selectedView === 'grid' })}
+							onClick={() => setSelectedView('grid')}
+						>
+							<FormattedMessage
+								id="passageNavigation__selector-grid"
+								defaultMessage="Grid"
+								description="Switch to grid view"
+							/>
+						</button>
+						<button
+							className={clsx({ active: selectedView === 'list' })}
+							onClick={() => setSelectedView('list')}
+						>
+							<FormattedMessage
+								id="passageNavigation__selector-list"
+								defaultMessage="List"
+								description="Switch to list view"
+							/>
+						</button>
+					</div>
 
-				{selectedView === 'list' ? (
-					<BookList
-						books={books}
-						selectedBook={selectedBook}
-						selectBook={setSelectedBook}
-					/>
-				) : (
-					<>
-						<BookGrid
-							books={books.filter((book) =>
-								OT.includes(book.title.toLocaleLowerCase()),
-							)}
+					{selectedView === 'list' ? (
+						<BookList
+							books={books}
 							selectedBook={selectedBook}
 							selectBook={setSelectedBook}
 						/>
-						<BookGrid
-							books={books.filter(
-								(book) => !OT.includes(book.title.toLocaleLowerCase()),
-							)}
-							selectedBook={selectedBook}
-							selectBook={setSelectedBook}
-						/>
-					</>
-				)}
-			</div>
+					) : (
+						<>
+							<BookGrid
+								books={books.filter((book) =>
+									OT.includes(book.title.toLocaleLowerCase()),
+								)}
+								selectedBook={selectedBook}
+								selectBook={setSelectedBook}
+							/>
+							<BookGrid
+								books={books.filter(
+									(book) => !OT.includes(book.title.toLocaleLowerCase()),
+								)}
+								selectedBook={selectedBook}
+								selectBook={setSelectedBook}
+							/>
+						</>
+					)}
+				</div>
+			) : (
+				children
+			)}
 		</div>
 	);
 }

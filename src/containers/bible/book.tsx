@@ -34,7 +34,7 @@ import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
 import { BibleIndexProps } from '.';
-import PassageNavigation from '~src/components/organisms/passageNavigation';
+import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 
 export interface BookProps {
 	version: IBibleVersion;
@@ -71,7 +71,6 @@ function BookInner({
 	book,
 	chapters,
 	chapterNumber,
-	data,
 }: Must<BookProps & BibleIndexProps>): JSX.Element {
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
