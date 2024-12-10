@@ -5,9 +5,9 @@ import PassageNavigation, {
 	Version,
 } from '~src/components/organisms/passageNavigation';
 
-export type BibleIndexProps = {
+export interface BibleIndexProps {
 	data: Array<Version>;
-};
+}
 
 function Bible({ data }: BibleIndexProps): JSX.Element {
 	return (

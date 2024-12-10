@@ -41,6 +41,8 @@ import { analytics } from '../../lib/analytics';
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
 import styles from './recording.module.scss';
+import { BibleIndexProps } from '~src/containers/bible';
+import PassageNavigation from './passageNavigation';
 
 interface RecordingProps {
 	recording: RecordingFragment;
@@ -52,11 +54,11 @@ interface RecordingProps {
 	};
 }
 
-export function Recording({
-	recording,
-	overrideSequence,
-}: RecordingProps): JSX.Element {
+export function Recording(
+	params: (RecordingProps & BibleIndexProps) | RecordingProps,
+): JSX.Element {
 	const intl = useIntl();
+	const { recording, overrideSequence } = params;
 	const { id, imageWithFallback, contentType, sponsor, speakers, writers } =
 		recording;
 	return (
@@ -123,10 +125,14 @@ export function Recording({
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
 
-			<RecordingInner
-				recording={recording}
-				overrideSequence={overrideSequence}
-			/>
+			{'data' in params ? (
+				<PassageNavigation versions={params.data} />
+			) : (
+				<RecordingInner
+					recording={recording}
+					overrideSequence={overrideSequence}
+				/>
+			)}
 		</Tease>
 	);
 }
