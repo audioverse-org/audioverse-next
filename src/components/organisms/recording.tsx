@@ -57,12 +57,89 @@ export function Recording({
 	overrideSequence,
 }: RecordingProps): JSX.Element {
 	const intl = useIntl();
+	const { id, imageWithFallback, contentType, sponsor, speakers, writers } =
+		recording;
+	return (
+		<Tease className={clsx(styles.base, styles[contentType])}>
+			<Head>
+				<meta
+					name="apple-itunes-app"
+					content={`app-id=726998810, app-argument=avorg://recordings?id=${id}`}
+				/>
+				<link href={imageWithFallback.url} rel="image_src" />
+				<meta property="og:title" content={recording.title} />
+				<meta
+					property="og:description"
+					content={
+						{
+							[RecordingContentType.AudiobookTrack]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_audiobook',
+									defaultMessage: 'Audiobook provided by {sponsorName}',
+								},
+								{
+									sponsorName: sponsor?.title || '',
+								},
+							),
+							[RecordingContentType.BibleChapter]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_bibleChapter',
+									defaultMessage: 'Bible Chapter provided by {sponsorName}',
+								},
+								{
+									sponsorName: sponsor?.title || '',
+								},
+							),
+							[RecordingContentType.MusicTrack]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_music',
+									defaultMessage: 'Music by {speakerName}',
+								},
+								{
+									speakerName: speakers.map(({ name }) => name).join(','),
+								},
+							),
+							[RecordingContentType.Sermon]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_sermon',
+									defaultMessage: 'Teaching by {speakerName}',
+								},
+								{
+									speakerName: speakers.map(({ name }) => name).join(','),
+								},
+							),
+							[RecordingContentType.Story]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_story',
+									defaultMessage: 'Story by {writerName}',
+								},
+								{
+									writerName: writers.map(({ name }) => name).join(','),
+								},
+							),
+						}[contentType]
+					}
+				/>
+				<meta property="og:image" content={imageWithFallback.url} />
+			</Head>
+
+			<RecordingInner
+				recording={recording}
+				overrideSequence={overrideSequence}
+			/>
+		</Tease>
+	);
+}
+
+function RecordingInner({
+	recording,
+	overrideSequence,
+}: RecordingProps): JSX.Element {
+	const intl = useIntl();
 	const {
-		id,
 		contentType,
 		collection,
 		description,
-		imageWithFallback,
 		recordingDate,
 		sequence,
 		sequenceIndex,
@@ -254,68 +331,7 @@ export function Recording({
 	);
 
 	return (
-		<Tease className={clsx(styles.base, styles[contentType])}>
-			<Head>
-				<meta
-					name="apple-itunes-app"
-					content={`app-id=726998810, app-argument=avorg://recordings?id=${id}`}
-				/>
-				<link href={imageWithFallback.url} rel="image_src" />
-				<meta property="og:title" content={recording.title} />
-				<meta
-					property="og:description"
-					content={
-						{
-							[RecordingContentType.AudiobookTrack]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_audiobook',
-									defaultMessage: 'Audiobook provided by {sponsorName}',
-								},
-								{
-									sponsorName: sponsor?.title || '',
-								},
-							),
-							[RecordingContentType.BibleChapter]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_bibleChapter',
-									defaultMessage: 'Bible Chapter provided by {sponsorName}',
-								},
-								{
-									sponsorName: sponsor?.title || '',
-								},
-							),
-							[RecordingContentType.MusicTrack]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_music',
-									defaultMessage: 'Music by {speakerName}',
-								},
-								{
-									speakerName: speakers.map(({ name }) => name).join(','),
-								},
-							),
-							[RecordingContentType.Sermon]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_sermon',
-									defaultMessage: 'Teaching by {speakerName}',
-								},
-								{
-									speakerName: speakers.map(({ name }) => name).join(','),
-								},
-							),
-							[RecordingContentType.Story]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_story',
-									defaultMessage: 'Story by {writerName}',
-								},
-								{
-									writerName: writers.map(({ name }) => name).join(','),
-								},
-							),
-						}[contentType]
-					}
-				/>
-				<meta property="og:image" content={imageWithFallback.url} />
-			</Head>
+		<>
 			{isBibleChapter && recording.collection ? (
 				<Link href={recording.collection.canonicalPath} legacyBehavior>
 					<a className={styles.hat}>
@@ -590,6 +606,6 @@ export function Recording({
 					</div>
 				)}
 			</div>
-		</Tease>
+		</>
 	);
 }
