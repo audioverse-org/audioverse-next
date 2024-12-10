@@ -14,12 +14,19 @@ import {
 import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import {
+	concatBibles,
+	getApiBibles,
+	getFcbhBibles,
+} from '~src/lib/getBibleStaticProps';
+import getIntl from '~src/lib/getIntl';
+import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
 export default Recording;
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ id: string }>): Promise<
+}: GetStaticPropsContext<{ id: string; language: string }>): Promise<
 	GetStaticPropsResult<
 		{
 			recording: RecordingFragment;
@@ -39,12 +46,27 @@ export async function getStaticProps({
 		};
 	}
 
+	const languageRoute = params?.language || 'en';
+	const languageId = getLanguageIdByRoute(languageRoute);
+
+	const apiBibles = await getApiBibles(languageId);
+
+	if (!apiBibles) {
+		return {
+			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
+		};
+	}
+
+	const fcbhBibles = await getFcbhBibles(languageRoute);
+
 	return {
 		props: {
+			data: concatBibles(fcbhBibles, apiBibles),
 			recording,
 			title: recording?.title,
 		},
-		revalidate: REVALIDATE,
+		revalidate: fcbhBibles ? REVALIDATE : REVALIDATE_FAILURE,
 	};
 }
 
