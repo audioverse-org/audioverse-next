@@ -21,7 +21,7 @@ export type Version = NonNullable<
 	GetAudiobibleIndexDataQuery['collections']['nodes']
 >[0];
 
-type BookIndex = string | number | null;
+type BookId = string | number | null;
 type ChapterId = string | number;
 
 type Props = {
@@ -73,6 +73,20 @@ const OT = [
 	'malachi',
 ];
 
+function findVersionAndBookId(
+	versions: Array<Version>,
+	chapterId: ChapterId,
+): [Version, BookId] {
+	for (let version of versions) {
+		for (let book of version.sequences.nodes || []) {
+			if (book.recordings.nodes?.find((r) => r.id === chapterId)) {
+				return [version, book.id];
+			}
+		}
+	}
+	throw Error("Couldn't find the chapter");
+}
+
 export default function PassageNavigation({
 	versions,
 	chapterId,
@@ -80,25 +94,29 @@ export default function PassageNavigation({
 }: Props): ReactNode {
 	const [open, setOpen] = useState<boolean>(!children);
 
-	const [selectedVersion, setSelectedVersion] = useLocalStorage<Version>(
-		'bibleVersion',
-		versions[0],
-	);
+	const [selectedVersion, setSelectedVersion] = useState<Version>(versions[0]);
 
 	const books = selectedVersion.sequences.nodes || [];
 
-	const [selectedBookId, setSelectedBookId] = useState<BookIndex>(books[0].id);
+	const [selectedBookId, setSelectedBookId] = useState<BookId>(books[0].id);
 
-	const [_, setSelectedChapterId] = useLocalStorage<ChapterId | null>(
-		'selectedChapterId',
-		chapterId || null,
-	);
+	const [selectedChapterId, setSelectedChapterId] =
+		useLocalStorage<ChapterId | null>('selectedChapterId', chapterId || null);
 
 	useEffect(() => {
 		if (chapterId !== undefined) {
 			setSelectedChapterId(chapterId);
 		}
-	}, []);
+
+		if (selectedChapterId !== null) {
+			const [version, bookId] = findVersionAndBookId(
+				versions,
+				selectedChapterId,
+			);
+			setSelectedVersion(version);
+			setSelectedBookId(bookId);
+		}
+	}, [selectedChapterId]);
 
 	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
 		'passageNavLayout',
