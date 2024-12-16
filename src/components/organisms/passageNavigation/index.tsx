@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
@@ -22,9 +22,11 @@ export type Version = NonNullable<
 >[0];
 
 type BookIndex = string | number | null;
+type ChapterId = string | number;
 
 type Props = {
 	versions: Array<Version>;
+	chapterId?: ChapterId;
 	children?: ReactNode;
 };
 
@@ -73,6 +75,7 @@ const OT = [
 
 export default function PassageNavigation({
 	versions,
+	chapterId,
 	children,
 }: Props): ReactNode {
 	const [open, setOpen] = useState<boolean>(!children);
@@ -84,7 +87,18 @@ export default function PassageNavigation({
 
 	const books = selectedVersion.sequences.nodes || [];
 
-	const [selectedBook, setSelectedBook] = useState<BookIndex>(books[0].id);
+	const [selectedBookId, setSelectedBookId] = useState<BookIndex>(books[0].id);
+
+	const [_, setSelectedChapterId] = useLocalStorage<ChapterId | null>(
+		'selectedChapterId',
+		chapterId || null,
+	);
+
+	useEffect(() => {
+		if (chapterId !== undefined) {
+			setSelectedChapterId(chapterId);
+		}
+	}, []);
 
 	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
 		'passageNavLayout',
@@ -165,8 +179,8 @@ export default function PassageNavigation({
 					{selectedView === 'list' ? (
 						<BookList
 							books={books}
-							selectedBook={selectedBook}
-							selectBook={setSelectedBook}
+							selectedBook={selectedBookId}
+							selectBook={setSelectedBookId}
 						/>
 					) : (
 						<>
@@ -174,15 +188,15 @@ export default function PassageNavigation({
 								books={books.filter((book) =>
 									OT.includes(book.title.toLocaleLowerCase()),
 								)}
-								selectedBook={selectedBook}
-								selectBook={setSelectedBook}
+								selectedBook={selectedBookId}
+								selectBook={setSelectedBookId}
 							/>
 							<BookGrid
 								books={books.filter(
 									(book) => !OT.includes(book.title.toLocaleLowerCase()),
 								)}
-								selectedBook={selectedBook}
-								selectBook={setSelectedBook}
+								selectedBook={selectedBookId}
+								selectBook={setSelectedBookId}
 							/>
 						</>
 					)}

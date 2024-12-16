@@ -96,6 +96,10 @@
 	color: $ts-salmon;
 }
 
+.active {
+	color: $ts-salmon !important;
+}
+
 .content,
 .content .books,
 .content .chapters {

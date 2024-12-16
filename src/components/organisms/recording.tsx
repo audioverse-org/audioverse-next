@@ -126,7 +126,7 @@ export function Recording(
 			</Head>
 
 			{'data' in params ? (
-				<PassageNavigation versions={params.data}>
+				<PassageNavigation versions={params.data} chapterId={recording.id}>
 					<RecordingInner
 						recording={recording}
 						overrideSequence={overrideSequence}
