@@ -84,10 +84,7 @@ export default function PassageNavigation({
 
 	const books = selectedVersion.sequences.nodes || [];
 
-	const [selectedBook, setSelectedBook] = useLocalStorage<BookIndex>(
-		'bibleBook',
-		books[0].id,
-	);
+	const [selectedBook, setSelectedBook] = useState<BookIndex>(books[0].id);
 
 	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
 		'passageNavLayout',
