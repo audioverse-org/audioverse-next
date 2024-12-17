@@ -11,7 +11,6 @@ import root from '~lib/routes';
 import {
 	concatBibles,
 	getApiBibles,
-	getBibleStaticProps,
 	getFcbhBibles,
 } from '~src/lib/getBibleStaticProps';
 import getIntl from '~src/lib/getIntl';

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
+import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
 import { PassageNavigationFragment } from './__generated__/index';
 import styles from './index.module.scss';
-import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
 type Chapter = NonNullable<PassageNavigationFragment['recordings']['nodes']>[0];
 type ChapterId = Chapter['id'];

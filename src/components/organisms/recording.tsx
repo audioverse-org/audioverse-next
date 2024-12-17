@@ -10,7 +10,6 @@ import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import { TeaseRecordingFragment } from '~components/molecules/__generated__/teaseRecording';
-import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
 import Button from '~components/molecules/button';
 import CopyrightInfo from '~components/molecules/copyrightInfo';
 import DefinitionList, {
@@ -35,14 +34,14 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
+import { BibleIndexProps } from '~src/containers/bible';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import { analytics } from '../../lib/analytics';
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
-import styles from './recording.module.scss';
-import { BibleIndexProps } from '~src/containers/bible';
 import PassageNavigation from './passageNavigation';
+import styles from './recording.module.scss';
 
 interface RecordingProps {
 	recording: RecordingFragment;

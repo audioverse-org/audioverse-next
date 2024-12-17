@@ -14,12 +14,12 @@ import {
 import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import { BibleIndexProps } from '~src/containers/bible';
 import {
 	concatBibles,
 	getApiBibles,
 	getFcbhBibles,
 } from '~src/lib/getBibleStaticProps';
-import getIntl from '~src/lib/getIntl';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
 export default Recording;
@@ -30,7 +30,8 @@ export async function getStaticProps({
 	GetStaticPropsResult<
 		{
 			recording: RecordingFragment;
-		} & IBaseProps
+		} & IBaseProps &
+			BibleIndexProps
 	>
 > {
 	const { recording } = await getAudiobibleBookDetailData({

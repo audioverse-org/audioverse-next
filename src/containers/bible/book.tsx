@@ -8,7 +8,6 @@ import Link from '~components/atoms/linkWithoutPrefetch';
 import withFailStates from '~components/HOCs/withFailStates';
 import { PlayerFragment } from '~components/molecules/__generated__/player';
 import { SequenceNavFragment } from '~components/molecules/__generated__/sequenceNav';
-
 import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
@@ -24,6 +23,7 @@ import root from '~lib/routes';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import {
 	IBibleBook,
@@ -33,8 +33,6 @@ import {
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
-import { BibleIndexProps } from '.';
-import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 
 export interface BookProps {
 	version: IBibleVersion;
@@ -43,7 +41,7 @@ export interface BookProps {
 	chapterNumber: string | number;
 }
 
-const Book = (params: Must<BookProps & BibleIndexProps>) => {
+const Book = (params: Must<BookProps>) => {
 	const chapter = params.chapters.find(
 		({ number }) => number === +params.chapterNumber,
 	);
@@ -71,7 +69,7 @@ function BookInner({
 	book,
 	chapters,
 	chapterNumber,
-}: Must<BookProps & BibleIndexProps>): JSX.Element {
+}: Must<BookProps>): JSX.Element {
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
 	const chapter = chapters.find(({ number }) => number === +chapterNumber);

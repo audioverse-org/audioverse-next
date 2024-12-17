@@ -1,16 +1,12 @@
 import { Language } from '~src/__generated__/graphql';
 import { BibleIndexProps } from '~src/containers/bible';
+import { getAudiobibleIndexData } from '~src/containers/bible/__generated__';
 import { BOOK_ID_MAP } from '~src/services/fcbh/constants';
 import { getBibleBookChapters } from '~src/services/fcbh/getBibleBookChapters';
-import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
-import root from './routes';
 import { getBibles } from '~src/services/fcbh/getBibles';
-import { getAudiobibleIndexData } from '~src/containers/bible/__generated__';
-import { GetStaticPropsResult } from 'next';
-import { IBaseProps } from '~src/containers/base';
-import { REVALIDATE, REVALIDATE_FAILURE } from './constants';
-import { getLanguageIdByRoute } from './getLanguageIdByRoute';
-import getIntl from './getIntl';
+import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
+
+import root from './routes';
 
 type ApiBible = BibleIndexProps['data'][0];
 type ApiBook = NonNullable<ApiBible['sequences']['nodes']>[0];

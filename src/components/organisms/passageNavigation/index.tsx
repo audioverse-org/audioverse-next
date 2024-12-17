@@ -2,20 +2,20 @@ import clsx from 'clsx';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
+import IconSearch from '~public/img/icons/icon-search.svg';
+import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
+import Button from '~src/components/molecules/button';
+import Dropdown from '~src/components/molecules/dropdown';
+import IconButton from '~src/components/molecules/iconButton';
+import { GetAudiobibleIndexDataQuery } from '~src/containers/bible/__generated__';
+import { BaseColors } from '~src/lib/constants';
+import { getBibleAcronym } from '~src/lib/getBibleAcronym';
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
-import IconSearch from '~public/img/icons/icon-search.svg';
-import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
 import BookGrid from './bookGrid';
 import BookList from './bookList';
 import styles from './index.module.scss';
-import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
-import Dropdown from '~src/components/molecules/dropdown';
-import Button from '~src/components/molecules/button';
-import { getBibleAcronym } from '~src/lib/getBibleAcronym';
-import { GetAudiobibleIndexDataQuery } from '~src/containers/bible/__generated__';
-import IconButton from '~src/components/molecules/iconButton';
-import { BaseColors } from '~src/lib/constants';
 
 export type Version = NonNullable<
 	GetAudiobibleIndexDataQuery['collections']['nodes']
@@ -77,8 +77,8 @@ function findVersionAndBookId(
 	versions: Array<Version>,
 	chapterId: ChapterId,
 ): [Version, BookId] {
-	for (let version of versions) {
-		for (let book of version.sequences.nodes || []) {
+	for (const version of versions) {
+		for (const book of version.sequences.nodes || []) {
 			if (book.recordings.nodes?.find((r) => r.id === chapterId)) {
 				return [version, book.id];
 			}
@@ -116,7 +116,7 @@ export default function PassageNavigation({
 			setSelectedVersion(version);
 			setSelectedBookId(bookId);
 		}
-	}, [selectedChapterId]);
+	}, [selectedChapterId, chapterId, setSelectedChapterId, versions]);
 
 	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
 		'passageNavLayout',

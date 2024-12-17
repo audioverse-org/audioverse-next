@@ -1,4 +1,5 @@
 import React from 'react';
+
 import withFailStates from '~src/components/HOCs/withFailStates';
 import Tease from '~src/components/molecules/tease';
 import PassageNavigation, {
