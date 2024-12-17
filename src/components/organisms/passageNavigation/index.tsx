@@ -21,6 +21,9 @@ export type Version = NonNullable<
 	GetAudiobibleIndexDataQuery['collections']['nodes']
 >[0];
 
+type Book = NonNullable<Version['sequences']['nodes']>[0];
+type Chapter = NonNullable<Book['recordings']['nodes']>[0];
+
 type BookId = string | number | null;
 type ChapterId = string | number;
 
@@ -73,18 +76,32 @@ const OT = [
 	'malachi',
 ];
 
-function findVersionAndBookId(
+function getBibleData(
 	versions: Array<Version>,
 	chapterId: ChapterId,
-): [Version, BookId] {
+): [Version, Book, Chapter] {
 	for (const version of versions) {
 		for (const book of version.sequences.nodes || []) {
-			if (book.recordings.nodes?.find((r) => r.id === chapterId)) {
-				return [version, book.id];
+			const chapter = book.recordings.nodes?.find((r) => r.id === chapterId);
+			if (chapter) {
+				return [version, book, chapter];
 			}
 		}
 	}
 	throw Error("Couldn't find the chapter");
+}
+
+function getLabelText(
+	versions: Array<Version>,
+	chapterId: ChapterId | null,
+): string {
+	if (chapterId) {
+		const [_version, _book, chapter] = getBibleData(versions, chapterId);
+
+		return `${chapter.title}`;
+	}
+
+	return `Bible`;
 }
 
 export default function PassageNavigation({
@@ -109,12 +126,9 @@ export default function PassageNavigation({
 		}
 
 		if (selectedChapterId !== null) {
-			const [version, bookId] = findVersionAndBookId(
-				versions,
-				selectedChapterId,
-			);
+			const [version, book] = getBibleData(versions, selectedChapterId);
 			setSelectedVersion(version);
-			setSelectedBookId(bookId);
+			setSelectedBookId(book.id);
 		}
 	}, [selectedChapterId, chapterId, setSelectedChapterId, versions]);
 
@@ -126,7 +140,10 @@ export default function PassageNavigation({
 	return (
 		<div className={styles.base}>
 			<div className={styles.hat} onClick={() => setOpen(!open)}>
-				<BibleVersionTypeLockup unpadded />
+				<BibleVersionTypeLockup
+					unpadded
+					label={getLabelText(versions, selectedChapterId)}
+				/>
 				<a className={styles.historyButton} href="https://www.example.com">
 					<FormattedMessage id="bibles__history" defaultMessage="History" />
 				</a>
