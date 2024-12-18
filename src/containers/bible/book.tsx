@@ -8,7 +8,6 @@ import Link from '~components/atoms/linkWithoutPrefetch';
 import withFailStates from '~components/HOCs/withFailStates';
 import { PlayerFragment } from '~components/molecules/__generated__/player';
 import { SequenceNavFragment } from '~components/molecules/__generated__/sequenceNav';
-import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
 import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
@@ -24,6 +23,7 @@ import root from '~lib/routes';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import {
 	IBibleBook,

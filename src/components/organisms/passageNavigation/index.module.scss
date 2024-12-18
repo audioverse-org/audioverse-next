@@ -1,0 +1,159 @@
+@import '../../../styles/common.scss';
+
+.base {
+	--bibleAccent: #{$ts-red};
+	--bibleBackground: #{$ts-bibleB};
+	--bibleHatTextColor: #{$ts-white};
+	--bibleHatBackground: #{$ts-bibleH};
+	--bibleHatHover: #{$ts-darkened-bibleH};
+	--bibleTextColor: #{$ts-dark};
+	--bibleTextSecondaryColor: #{$ts-midTone};
+	--bibleWavesColor: #{$ts-lightTone};
+}
+
+.hat {
+	background-color: var(--bibleHatBackground);
+	padding: 16px 24px;
+	display: flex;
+	text-decoration: none;
+	color: var(--bibleHatTextColor, --bibleTextColor);
+	gap: 10px;
+	align-items: center;
+
+	h4 {
+		margin: 0;
+		font-size: 16px;
+	}
+}
+
+.historyButton {
+	margin-left: auto;
+}
+
+.dropdownButton {
+	text-decoration: none;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+
+	p {
+		margin-top: 8px;
+		margin-bottom: 16px;
+	}
+
+	@media (min-width: $breakpoint-xl) {
+		flex-direction: row;
+	}
+}
+
+.content {
+	background-color: $ts-bibleVersionH;
+	padding: 12px 24px;
+}
+
+.content ul {
+	margin: 0;
+	padding: 0;
+}
+
+.content button {
+	background: none;
+	border: none;
+	padding: 18px 0px;
+}
+
+.content .books > li:first-child button {
+	padding-top: 16px;
+}
+
+.content .books > li:last-child button {
+	padding-bottom: 16px;
+}
+
+// .content .books:global(.grid) {
+// 	display: grid;
+// 	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+// }
+
+.content li,
+.content li button,
+.content li a {
+	color: $ts-lightTone;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19.2px;
+	text-transform: uppercase;
+	list-style-type: none;
+}
+
+.content :global(.active) > button {
+	color: $ts-salmon;
+}
+
+.switch > :global(button.active) {
+	color: $ts-salmon;
+}
+
+.active {
+	color: $ts-salmon !important;
+}
+
+.content,
+.content .books,
+.content .chapters {
+	width: 100%;
+}
+
+// .books:global(.grid) .chapters {
+// 	grid-column: 1 / -1;
+// }
+
+.chapters {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+
+	border-top: 1px solid $ts-salmon;
+	border-bottom: 1px solid $ts-salmon;
+}
+
+.chapter a {
+	width: 100%;
+	height: 100%;
+	padding: 24px 0;
+	display: block;
+	text-align: center;
+}
+
+.chapter a:hover {
+	text-decoration: none;
+	color: $ts-salmon;
+}
+
+.books button:hover {
+	color: $ts-salmon;
+}
+
+.switch > button {
+	color: $ts-lightTone;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 14.4px;
+	text-transform: uppercase;
+	padding-right: 12px;
+}
+
+.chaptersWrapper {
+	width: 100%;
+	float: left;
+}
+
+.books.grid {
+	border-top: 1px solid $ts-dark;
+}
+
+.books.grid .book {
+	width: 16%;
+	display: inline-block;
+}

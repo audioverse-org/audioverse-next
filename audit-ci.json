@@ -31,6 +31,7 @@
 		"GHSA-c2qf-rxjj-qqgw", // Not used at runtime
 		"GHSA-pxg6-pf52-xh8x|@lhci/cli>*", // Used by lighthouse CI, not at runtime
 		"GHSA-pxg6-pf52-xh8x|@lhci/utils>*", // Used by lighthouse CI, not at runtime
-		"GHSA-pxg6-pf52-xh8x|express>cookie" // Used by lighthouse CI, not at runtime
+		"GHSA-pxg6-pf52-xh8x|express>cookie", // Used by lighthouse CI, not at runtime
+		"GHSA-7gfc-8cq8-jh5f" // automatically mitigated by Vercel
 	]
 }

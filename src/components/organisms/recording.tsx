@@ -10,7 +10,6 @@ import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import { TeaseRecordingFragment } from '~components/molecules/__generated__/teaseRecording';
-import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
 import Button from '~components/molecules/button';
 import CopyrightInfo from '~components/molecules/copyrightInfo';
 import DefinitionList, {
@@ -35,11 +34,13 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
+import { BibleIndexProps } from '~src/containers/bible';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import { analytics } from '../../lib/analytics';
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
+import PassageNavigation from './passageNavigation';
 import styles from './recording.module.scss';
 
 interface RecordingProps {
@@ -52,17 +53,103 @@ interface RecordingProps {
 	};
 }
 
-export function Recording({
+export function Recording(
+	params: (RecordingProps & BibleIndexProps) | RecordingProps,
+): JSX.Element {
+	const intl = useIntl();
+	const { recording, overrideSequence } = params;
+	const { id, imageWithFallback, contentType, sponsor, speakers, writers } =
+		recording;
+	return (
+		<Tease className={clsx(styles.base, styles[contentType])}>
+			<Head>
+				<meta
+					name="apple-itunes-app"
+					content={`app-id=726998810, app-argument=avorg://recordings?id=${id}`}
+				/>
+				<link href={imageWithFallback.url} rel="image_src" />
+				<meta property="og:title" content={recording.title} />
+				<meta
+					property="og:description"
+					content={
+						{
+							[RecordingContentType.AudiobookTrack]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_audiobook',
+									defaultMessage: 'Audiobook provided by {sponsorName}',
+								},
+								{
+									sponsorName: sponsor?.title || '',
+								},
+							),
+							[RecordingContentType.BibleChapter]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_bibleChapter',
+									defaultMessage: 'Bible Chapter provided by {sponsorName}',
+								},
+								{
+									sponsorName: sponsor?.title || '',
+								},
+							),
+							[RecordingContentType.MusicTrack]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_music',
+									defaultMessage: 'Music by {speakerName}',
+								},
+								{
+									speakerName: speakers.map(({ name }) => name).join(','),
+								},
+							),
+							[RecordingContentType.Sermon]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_sermon',
+									defaultMessage: 'Teaching by {speakerName}',
+								},
+								{
+									speakerName: speakers.map(({ name }) => name).join(','),
+								},
+							),
+							[RecordingContentType.Story]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_story',
+									defaultMessage: 'Story by {writerName}',
+								},
+								{
+									writerName: writers.map(({ name }) => name).join(','),
+								},
+							),
+						}[contentType]
+					}
+				/>
+				<meta property="og:image" content={imageWithFallback.url} />
+			</Head>
+
+			{'data' in params ? (
+				<PassageNavigation versions={params.data} chapterId={recording.id}>
+					<RecordingInner
+						recording={recording}
+						overrideSequence={overrideSequence}
+					/>
+				</PassageNavigation>
+			) : (
+				<RecordingInner
+					recording={recording}
+					overrideSequence={overrideSequence}
+				/>
+			)}
+		</Tease>
+	);
+}
+
+function RecordingInner({
 	recording,
 	overrideSequence,
 }: RecordingProps): JSX.Element {
 	const intl = useIntl();
 	const {
-		id,
 		contentType,
 		collection,
 		description,
-		imageWithFallback,
 		recordingDate,
 		sequence,
 		sequenceIndex,
@@ -254,112 +341,44 @@ export function Recording({
 	);
 
 	return (
-		<Tease className={clsx(styles.base, styles[contentType])}>
-			<Head>
-				<meta
-					name="apple-itunes-app"
-					content={`app-id=726998810, app-argument=avorg://recordings?id=${id}`}
-				/>
-				<link href={imageWithFallback.url} rel="image_src" />
-				<meta property="og:title" content={recording.title} />
-				<meta
-					property="og:description"
-					content={
-						{
-							[RecordingContentType.AudiobookTrack]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_audiobook',
-									defaultMessage: 'Audiobook provided by {sponsorName}',
-								},
-								{
-									sponsorName: sponsor?.title || '',
-								},
-							),
-							[RecordingContentType.BibleChapter]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_bibleChapter',
-									defaultMessage: 'Bible Chapter provided by {sponsorName}',
-								},
-								{
-									sponsorName: sponsor?.title || '',
-								},
-							),
-							[RecordingContentType.MusicTrack]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_music',
-									defaultMessage: 'Music by {speakerName}',
-								},
-								{
-									speakerName: speakers.map(({ name }) => name).join(','),
-								},
-							),
-							[RecordingContentType.Sermon]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_sermon',
-									defaultMessage: 'Teaching by {speakerName}',
-								},
-								{
-									speakerName: speakers.map(({ name }) => name).join(','),
-								},
-							),
-							[RecordingContentType.Story]: intl.formatMessage(
-								{
-									id: 'sermonDetailPage__openGraphDescription_story',
-									defaultMessage: 'Story by {writerName}',
-								},
-								{
-									writerName: writers.map(({ name }) => name).join(','),
-								},
-							),
-						}[contentType]
-					}
-				/>
-				<meta property="og:image" content={imageWithFallback.url} />
-			</Head>
-			{isBibleChapter && recording.collection ? (
-				<Link href={recording.collection.canonicalPath} legacyBehavior>
-					<a className={styles.hat}>
-						<BibleVersionTypeLockup
-							label={recording.collection.title}
-							unpadded
-						/>
-						<h4>{recording.sequence?.title}</h4>
-					</a>
-				</Link>
-			) : overrideSequence && overrideSequence.playlistId ? (
-				makeHat(
-					<PlaylistTypeLockup unpadded />,
-					startCase(overrideSequence.title),
-					overrideSequence.publicPlaylist
-						? root
-								.lang(languageRoute)
-								.playlists.playlist(overrideSequence.playlistId)
-								.get()
-						: root
-								.lang(languageRoute)
-								.library.playlists(overrideSequence.playlistId)
-								.get(),
-				)
-			) : overrideSequence ? (
-				makeHat(
-					<SequenceTypeLockup
-						contentType={SequenceContentType.MusicAlbum}
-						unpadded
-					/>,
-					startCase(overrideSequence.title),
-					root.lang(languageRoute).songs.book(overrideSequence.title).get(),
-				)
-			) : (
-				recording.sequence &&
-				makeHat(
-					<SequenceTypeLockup
-						contentType={recording.sequence.contentType}
-						unpadded
-					/>,
-					recording.sequence.title,
-					recording.sequence.canonicalPath,
-				)
-			)}
+		<>
+			{isBibleChapter && recording.collection
+				? ''
+				: overrideSequence && overrideSequence.playlistId
+					? makeHat(
+							<PlaylistTypeLockup unpadded />,
+							startCase(overrideSequence.title),
+							overrideSequence.publicPlaylist
+								? root
+										.lang(languageRoute)
+										.playlists.playlist(overrideSequence.playlistId)
+										.get()
+								: root
+										.lang(languageRoute)
+										.library.playlists(overrideSequence.playlistId)
+										.get(),
+						)
+					: overrideSequence
+						? makeHat(
+								<SequenceTypeLockup
+									contentType={SequenceContentType.MusicAlbum}
+									unpadded
+								/>,
+								startCase(overrideSequence.title),
+								root
+									.lang(languageRoute)
+									.songs.book(overrideSequence.title)
+									.get(),
+							)
+						: recording.sequence &&
+							makeHat(
+								<SequenceTypeLockup
+									contentType={recording.sequence.contentType}
+									unpadded
+								/>,
+								recording.sequence.title,
+								recording.sequence.canonicalPath,
+							)}
 			<div className={styles.content}>
 				<div className={styles.main}>
 					{isBibleChapter && isShowingTranscript && transcript ? (
@@ -590,6 +609,6 @@ export function Recording({
 					</div>
 				)}
 			</div>
-		</Tease>
+		</>
 	);
 }
