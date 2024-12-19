@@ -3,13 +3,11 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
-import IconSearch from '~public/img/icons/icon-search.svg';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import Button from '~src/components/molecules/button';
 import Dropdown from '~src/components/molecules/dropdown';
-import IconButton from '~src/components/molecules/iconButton';
 import { GetAudiobibleIndexDataQuery } from '~src/containers/bible/__generated__';
-import { BaseColors, BIBLE_BOOKS } from '~src/lib/constants';
+import { BIBLE_BOOKS } from '~src/lib/constants';
 import { getBibleAcronym } from '~src/lib/getBibleAcronym';
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
@@ -85,9 +83,6 @@ export default function PassageNavigation({
 		<div className={styles.base}>
 			<div className={styles.hat} onClick={() => setOpen(!open)}>
 				<BibleVersionTypeLockup unpadded label={chapter?.title || 'Bible'} />
-				<a className={styles.historyButton} href="https://www.example.com">
-					<FormattedMessage id="bibles__history" defaultMessage="History" />
-				</a>
 				<Dropdown
 					id="booksMenu"
 					trigger={(props) => (
@@ -117,14 +112,6 @@ export default function PassageNavigation({
 						</div>
 					)}
 				</Dropdown>
-				<IconButton
-					Icon={IconSearch}
-					onClick={function (): void {
-						throw new Error('Function not implemented.');
-					}}
-					color={BaseColors.WHITE}
-					backgroundColor={BaseColors.DARK}
-				/>
 			</div>
 
 			{open || !children ? (

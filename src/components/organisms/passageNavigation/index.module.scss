@@ -19,15 +19,12 @@
 	color: var(--bibleHatTextColor, --bibleTextColor);
 	gap: 10px;
 	align-items: center;
+	justify-content: space-between;
 
 	h4 {
 		margin: 0;
 		font-size: 16px;
 	}
-}
-
-.historyButton {
-	margin-left: auto;
 }
 
 .dropdownButton {
@@ -64,11 +61,11 @@
 	padding: 18px 0px;
 }
 
-.content .books > li:first-child button {
+.content .books>li:first-child button {
 	padding-top: 16px;
 }
 
-.content .books > li:last-child button {
+.content .books>li:last-child button {
 	padding-bottom: 16px;
 }
 
@@ -88,11 +85,11 @@
 	list-style-type: none;
 }
 
-.content :global(.active) > button {
+.content :global(.active)>button {
 	color: $ts-salmon;
 }
 
-.switch > :global(button.active) {
+.switch> :global(button.active) {
 	color: $ts-salmon;
 }
 
@@ -135,7 +132,7 @@
 	color: $ts-salmon;
 }
 
-.switch > button {
+.switch>button {
 	color: $ts-lightTone;
 	font-weight: 700;
 	font-size: 12px;
