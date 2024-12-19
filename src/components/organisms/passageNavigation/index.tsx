@@ -9,7 +9,7 @@ import Button from '~src/components/molecules/button';
 import Dropdown from '~src/components/molecules/dropdown';
 import IconButton from '~src/components/molecules/iconButton';
 import { GetAudiobibleIndexDataQuery } from '~src/containers/bible/__generated__';
-import { BaseColors } from '~src/lib/constants';
+import { BaseColors, BIBLE_BOOKS } from '~src/lib/constants';
 import { getBibleAcronym } from '~src/lib/getBibleAcronym';
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
@@ -20,70 +20,23 @@ import styles from './index.module.scss';
 export type Version = NonNullable<
 	GetAudiobibleIndexDataQuery['collections']['nodes']
 >[0];
-
-type Book = NonNullable<Version['sequences']['nodes']>[0];
-type Chapter = NonNullable<Book['recordings']['nodes']>[0];
-
-type BookId = string | number | null;
-type ChapterId = string | number;
+export type Book = NonNullable<Version['sequences']['nodes']>[0];
+export type Chapter = NonNullable<Book['recordings']['nodes']>[0];
 
 type Props = {
 	versions: Array<Version>;
-	chapterId?: ChapterId;
+	chapter?: Chapter;
 	children?: ReactNode;
 };
 
-// FIXME
-const OT = [
-	'genesis',
-	'exodus',
-	'leviticus',
-	'numbers',
-	'deuteronomy',
-	'joshua',
-	'judges',
-	'ruth',
-	'1 samuel',
-	'2 samuel',
-	'1 kings',
-	'2 kings',
-	'1 chronicles',
-	'2 chronicles',
-	'ezra',
-	'nehemiah',
-	'esther',
-	'job',
-	'psalms',
-	'proverbs',
-	'ecclesiastes',
-	'song of solomon',
-	'isaiah',
-	'jeremiah',
-	'lamentations',
-	'ezekiel',
-	'daniel',
-	'hosea',
-	'joel',
-	'amos',
-	'obadiah',
-	'jonah',
-	'micah',
-	'nahum',
-	'habakkuk',
-	'zephaniah',
-	'haggai',
-	'zechariah',
-	'malachi',
-];
-
-function getBibleData(
+function resolveChapterPath(
 	versions: Array<Version>,
-	chapterId: ChapterId,
+	chapter: Chapter,
 ): [Version, Book, Chapter] {
 	for (const version of versions) {
 		for (const book of version.sequences.nodes || []) {
-			const chapter = book.recordings.nodes?.find((r) => r.id === chapterId);
-			if (chapter) {
+			const found = book.recordings.nodes?.some((r) => r.id === chapter.id);
+			if (found) {
 				return [version, book, chapter];
 			}
 		}
@@ -91,22 +44,9 @@ function getBibleData(
 	throw Error("Couldn't find the chapter");
 }
 
-function getLabelText(
-	versions: Array<Version>,
-	chapterId: ChapterId | null,
-): string {
-	if (chapterId) {
-		const [_version, _book, chapter] = getBibleData(versions, chapterId);
-
-		return `${chapter.title}`;
-	}
-
-	return `Bible`;
-}
-
 export default function PassageNavigation({
 	versions,
-	chapterId,
+	chapter,
 	children,
 }: Props): ReactNode {
 	const [open, setOpen] = useState<boolean>(!children);
@@ -115,22 +55,22 @@ export default function PassageNavigation({
 
 	const books = selectedVersion.sequences.nodes || [];
 
-	const [selectedBookId, setSelectedBookId] = useState<BookId>(books[0].id);
+	const [selectedBook, setSelectedBook] = useState<Book>(books[0]);
 
-	const [selectedChapterId, setSelectedChapterId] =
-		useLocalStorage<ChapterId | null>('selectedChapterId', chapterId || null);
+	const [selectedChapterId, setSelectedChapterId] = useLocalStorage(
+		'selectedChapterId',
+		chapter?.id || null,
+	);
 
 	useEffect(() => {
-		if (chapterId !== undefined) {
-			setSelectedChapterId(chapterId);
-		}
+		if (chapter) {
+			setSelectedChapterId(chapter.id);
 
-		if (selectedChapterId !== null) {
-			const [version, book] = getBibleData(versions, selectedChapterId);
+			const [version, book] = resolveChapterPath(versions, chapter);
 			setSelectedVersion(version);
-			setSelectedBookId(book.id);
+			setSelectedBook(book);
 		}
-	}, [selectedChapterId, chapterId, setSelectedChapterId, versions]);
+	}, [chapter, versions, setSelectedChapterId]);
 
 	useEffect(() => {
 		setOpen(false);
@@ -144,10 +84,7 @@ export default function PassageNavigation({
 	return (
 		<div className={styles.base}>
 			<div className={styles.hat} onClick={() => setOpen(!open)}>
-				<BibleVersionTypeLockup
-					unpadded
-					label={getLabelText(versions, selectedChapterId)}
-				/>
+				<BibleVersionTypeLockup unpadded label={chapter?.title || 'Bible'} />
 				<a className={styles.historyButton} href="https://www.example.com">
 					<FormattedMessage id="bibles__history" defaultMessage="History" />
 				</a>
@@ -218,26 +155,26 @@ export default function PassageNavigation({
 					{selectedView === 'list' ? (
 						<BookList
 							books={books}
-							selectedBook={selectedBookId}
-							selectBook={setSelectedBookId}
+							selectedBook={selectedBook}
+							selectBook={setSelectedBook}
 							chapterId={selectedChapterId}
 						/>
 					) : (
 						<>
 							<BookGrid
 								books={books.filter((book) =>
-									OT.includes(book.title.toLocaleLowerCase()),
+									BIBLE_BOOKS.slice(0, 39).includes(book.title),
 								)}
-								selectedBook={selectedBookId}
-								selectBook={setSelectedBookId}
+								selectedBook={selectedBook}
+								selectBook={setSelectedBook}
 								chapterId={selectedChapterId}
 							/>
 							<BookGrid
-								books={books.filter(
-									(book) => !OT.includes(book.title.toLocaleLowerCase()),
+								books={books.filter((book) =>
+									BIBLE_BOOKS.slice(39).includes(book.title),
 								)}
-								selectedBook={selectedBookId}
-								selectBook={setSelectedBookId}
+								selectedBook={selectedBook}
+								selectBook={setSelectedBook}
 								chapterId={selectedChapterId}
 							/>
 						</>

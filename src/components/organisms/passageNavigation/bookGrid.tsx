@@ -1,14 +1,15 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import { Book } from '.';
 import { PassageNavigationFragment } from './__generated__/index';
 import ChapterGrid, { ChapterId } from './chapterGrid';
 import styles from './index.module.scss';
 
 type Props = {
 	books: Array<PassageNavigationFragment>;
-	selectedBook: string | number | null;
-	selectBook: (id: string | number | null) => void;
+	selectedBook: Book;
+	selectBook: (book: Book) => void;
 	chapterId: ChapterId;
 };
 
@@ -28,14 +29,14 @@ export default function BookGrid({
 						<li
 							key={book.id}
 							className={clsx(styles.book, {
-								active: book.id === selectedBook,
+								active: book.id === selectedBook.id,
 							})}
 						>
-							<button onClick={() => selectBook(book.id)}>
+							<button onClick={() => selectBook(book)}>
 								{book.title.replace(' ', '').substring(0, 3)}
 							</button>
 						</li>
-						{book.id === selectedBook && chapters && (
+						{book.id === selectedBook.id && chapters && (
 							<ChapterGrid chapters={chapters} chapterId={chapterId} />
 						)}
 					</>
