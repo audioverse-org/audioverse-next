@@ -23,6 +23,7 @@ import IconPlay from '~public/img/icons/icon-play-large.svg';
 import useGlobalSpaceDown from '~src/lib/hooks/useGlobalSpaceDown';
 import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
+import isServerSide from '~src/lib/isServerSide';
 
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';
@@ -78,6 +79,10 @@ const Player = ({
 			setBrowser(null);
 		}
 	}, []);
+
+	useEffect(() => {
+		if (!isServerSide()) session.play();
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const iconColor = isBackgroundColorDark(backgroundColor)
 		? BaseColors.WHITE
