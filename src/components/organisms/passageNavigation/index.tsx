@@ -216,6 +216,7 @@ export default function PassageNavigation({
 							books={books}
 							selectedBook={selectedBookId}
 							selectBook={setSelectedBookId}
+							chapterId={selectedChapterId}
 						/>
 					) : (
 						<>
@@ -225,6 +226,7 @@ export default function PassageNavigation({
 								)}
 								selectedBook={selectedBookId}
 								selectBook={setSelectedBookId}
+								chapterId={selectedChapterId}
 							/>
 							<BookGrid
 								books={books.filter(
@@ -232,6 +234,7 @@ export default function PassageNavigation({
 								)}
 								selectedBook={selectedBookId}
 								selectBook={setSelectedBookId}
+								chapterId={selectedChapterId}
 							/>
 						</>
 					)}
