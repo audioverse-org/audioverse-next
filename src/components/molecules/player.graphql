@@ -1,6 +1,7 @@
 fragment player on Recording {
 	id
 	title
+	contentType
 	...andMiniplayer
 	...buttonDownload
 	...buttonShareRecording

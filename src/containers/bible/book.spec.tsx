@@ -65,16 +65,19 @@ function loadPageData() {
 
 describe('Bible book detail page', () => {
 	let scrollToProto: any;
+
 	beforeAll(() => {
 		scrollToProto = Element.prototype.scrollTo;
 		Element.prototype.scrollTo = () => void 0;
 	});
+
 	afterAll(() => {
 		Element.prototype.scrollTo = scrollToProto;
 	});
 
 	beforeEach(() => {
 		setPlayerMock();
+
 		__loadRouter({
 			asPath: '/en/bibles/ENGESVC/Gen/1',
 			query: {
@@ -82,6 +85,10 @@ describe('Bible book detail page', () => {
 				book: 'the_book_shortname',
 				chapter: '1',
 			},
+		});
+
+		window.fetch = jest.fn().mockReturnValueOnce({
+			catch: () => undefined,
 		});
 	});
 
@@ -151,10 +158,6 @@ describe('Bible book detail page', () => {
 	});
 
 	it('includes player', async () => {
-		window.fetch = jest.fn().mockReturnValueOnce({
-			catch: () => undefined,
-		});
-
 		loadPageData();
 
 		const { getAllByLabelText } = await renderPage();
