@@ -2733,9 +2733,6 @@
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
   },
-  "bibles__history": {
-    "string": "Historique"
-  },
   "passageNavigation__selector-grid": {
     "comment": "Switch to grid view",
     "string": "Grid"
