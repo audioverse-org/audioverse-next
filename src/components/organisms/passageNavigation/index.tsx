@@ -132,6 +132,10 @@ export default function PassageNavigation({
 		}
 	}, [selectedChapterId, chapterId, setSelectedChapterId, versions]);
 
+	useEffect(() => {
+		setOpen(false);
+	}, [selectedChapterId]);
+
 	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
 		'passageNavLayout',
 		'grid',
