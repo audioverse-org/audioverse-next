@@ -101,9 +101,9 @@ export default function PassageNavigation({
 								<p key={version.id}>
 									<Button
 										type="tertiary"
-										onClick={() => {
+										onClick={(e) => {
 											setSelectedVersion(version);
-											handleClose();
+											handleClose(e);
 										}}
 										text={getBibleAcronym(version.title)}
 									/>
