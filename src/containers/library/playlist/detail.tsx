@@ -91,7 +91,7 @@ function PlaylistDetail({ playlist }: Must<IPlaylistDetailProps>): JSX.Element {
 						/>
 					) : (
 						<ButtonShare
-							shareUrl={root.lang(languageRoute).playlists.playlist(id).get()}
+							shareUrl={`https://audioverse.org/${languageRoute}/playlists/${id}`}
 							rssUrl={root
 								.lang(languageRoute)
 								.playlists.playlist(id)

@@ -37,7 +37,10 @@ function SponsorTeachings({
 	return (
 		<SponsorPivot {...{ sponsor }}>
 			<RssAlternate
-				url={root.lang(languageRoute).sponsors.id(sponsor.id).feed.get()}
+				url={root
+					.lang(languageRoute)
+					.sponsors.id(sponsor.id)
+					.teachings.feed.get()}
 			/>
 			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
