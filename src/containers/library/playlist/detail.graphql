@@ -39,3 +39,16 @@ query getPlaylistPageData($id: ID!) {
 		}
 	}
 }
+
+query getPlaylistFeedData($id: ID!) {
+	playlist(id: $id) {
+		id
+		title
+		summary
+		recordings(offset: 0, first: 1500) {
+			nodes {
+				...generateFeed
+			}
+		}
+	}
+}
