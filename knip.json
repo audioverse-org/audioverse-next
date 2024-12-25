@@ -1,5 +1,6 @@
 {
     "project": [
+        "src/**/*.tsx",
         "src/**/*.ts",
         "!src/**/__mocks__/**"
     ]
