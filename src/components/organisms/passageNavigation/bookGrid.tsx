@@ -31,7 +31,7 @@ export default function BookGrid({
 						<li
 							key={book.id}
 							className={clsx(styles.book, {
-								active: book.id === selectedBook.id,
+								[styles.active]: book.id === selectedBook.id,
 							})}
 						>
 							<button onClick={() => selectBook(book)}>

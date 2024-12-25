@@ -15,3 +15,7 @@
 .books button:hover {
 	color: $ts-salmon;
 }
+
+.books li.active button {
+	color: $ts-salmon;
+}
