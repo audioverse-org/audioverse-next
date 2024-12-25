@@ -3,7 +3,7 @@ import React from 'react';
 import Link from '~components/atoms/linkWithoutPrefetch';
 
 import { PassageNavigationFragment } from './__generated__/index';
-import styles from './index.module.scss';
+import styles from './chapterGrid.module.scss';
 
 type Chapter = NonNullable<PassageNavigationFragment['recordings']['nodes']>[0];
 export type ChapterId = Chapter['id'] | null;
@@ -18,7 +18,9 @@ export default function ChapterGrid({ chapters, chapterId }: Props) {
 		<li className={styles.chaptersWrapper}>
 			<ul className={styles.chapters}>
 				{chapters?.map((chapter) => {
-					const n = Number(chapter.title.split(' ').pop());
+					const n = Number(chapter.title.split(' ').pop())
+						.toString()
+						.padStart(2, '0');
 					return (
 						<li key={n} className={styles.chapter}>
 							<Link

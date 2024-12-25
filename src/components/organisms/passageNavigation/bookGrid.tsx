@@ -3,8 +3,8 @@ import React from 'react';
 
 import { Book } from '.';
 import { PassageNavigationFragment } from './__generated__/index';
+import styles from './bookGrid.module.scss';
 import ChapterGrid, { ChapterId } from './chapterGrid';
-import styles from './index.module.scss';
 
 type Props = {
 	books: Array<PassageNavigationFragment>;

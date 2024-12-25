@@ -23,13 +23,29 @@
 	justify-content: space-between;
 	cursor: pointer;
 
-	h4 {
+	h6 {
 		margin: 0;
-		font-size: 16px;
+		font-size: 10px;
+		color: $ts-salmon;
 	}
 }
 
 .dropdownButton {
+	text-decoration: none;
+}
+
+.dropdownContainer {
+	padding: 0px 16px;
+}
+
+.dropdownContainer p {
+	font-size: 12px;
+	line-height: 15px;
+	margin: 16px 0;
+	padding: 0;
+}
+
+.dropdownContainer button {
 	text-decoration: none;
 }
 
@@ -59,14 +75,6 @@
 	padding: 18px 0px;
 }
 
-.content .books > li:first-child button {
-	padding-top: 16px;
-}
-
-.content .books > li:last-child button {
-	padding-bottom: 16px;
-}
-
 .content li,
 .content li button,
 .content li a {
@@ -78,51 +86,16 @@
 	list-style-type: none;
 }
 
-.content :global(.active) > button {
-	color: $ts-salmon;
-}
-
 .switch {
 	border-bottom: 1px solid $ts-midTone;
 }
 
-.switch > :global(button.active) {
+.switch > button.active {
 	color: $ts-salmon;
 }
 
-.active {
-	color: $ts-salmon !important;
-}
-
-.content,
-.content .books,
-.content .chapters {
+.content {
 	width: 100%;
-}
-
-.chapters {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-	border-top: 1px solid $ts-salmon;
-	border-bottom: 1px solid $ts-salmon;
-	background-color: $ts-darkened-bibleH;
-}
-
-.chapter a {
-	width: 100%;
-	height: 100%;
-	padding: 24px 0;
-	display: block;
-	text-align: center;
-}
-
-.chapter a:hover {
-	text-decoration: none;
-	color: $ts-salmon;
-}
-
-.books button:hover {
-	color: $ts-salmon;
 }
 
 .switch > button {
@@ -134,16 +107,6 @@
 	padding-right: 12px;
 }
 
-.chaptersWrapper {
-	width: 100%;
-	float: left;
-}
-
 .nt {
 	border-top: 1px solid $ts-midTone;
-}
-
-.books.grid .book {
-	width: 16%;
-	display: inline-block;
 }

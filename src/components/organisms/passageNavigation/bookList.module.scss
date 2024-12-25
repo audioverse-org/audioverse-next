@@ -1,0 +1,17 @@
+@import '../../../styles/common.scss';
+
+.books > li:first-child button {
+	padding-top: 16px;
+}
+
+.books > li:last-child button {
+	padding-bottom: 16px;
+}
+
+.books {
+	width: 100%;
+}
+
+.books button:hover {
+	color: $ts-salmon;
+}

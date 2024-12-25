@@ -127,7 +127,7 @@ export default function PassageNavigation({
 				<div className={styles.content}>
 					<div className={styles.switch}>
 						<button
-							className={clsx({ active: selectedView === 'grid' })}
+							className={clsx({ [styles.active]: selectedView === 'grid' })}
 							onClick={() => setSelectedView('grid')}
 						>
 							<FormattedMessage
@@ -137,7 +137,7 @@ export default function PassageNavigation({
 							/>
 						</button>
 						<button
-							className={clsx({ active: selectedView === 'list' })}
+							className={clsx({ [styles.active]: selectedView === 'list' })}
 							onClick={() => setSelectedView('list')}
 						>
 							<FormattedMessage
