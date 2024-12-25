@@ -34,19 +34,26 @@
 	text-decoration: none;
 }
 
+.dropdownButton:hover,
+.dropdownButton:focus,
+.dropdownButton:active {
+	color: $ts-salmon;
+}
+
 .dropdownContainer {
 	padding: 0px 16px;
 }
 
 .dropdownContainer p {
-	font-size: 12px;
-	line-height: 15px;
-	margin: 16px 0;
-	padding: 0;
+	margin: 0;
 }
 
 .dropdownContainer button {
 	text-decoration: none;
+	font-size: 12px;
+	line-height: 15px;
+	padding: 8px 0;
+	width: 100%;
 }
 
 .content {
