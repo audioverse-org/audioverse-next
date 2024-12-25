@@ -54,7 +54,6 @@ export default function PassageNavigation({
 
 	const [version, setVersion] = useState<Version>(() => {
 		const c = chapter?.collection || loadedRecording?.collection;
-		console.log({ collection: c });
 		const isVersion = c?.contentType === CollectionContentType.BibleVersion;
 		if (!isVersion) return versions[0];
 		return versions.find((v) => v.id === c.id) || versions[0];
