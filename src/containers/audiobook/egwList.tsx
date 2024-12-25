@@ -14,7 +14,7 @@ export type EgwAudiobooksListProps = PaginatedProps<
 	GetEgwAudiobookListPageDataQuery
 >;
 
-export function EgwAudiobooksList({
+function EgwAudiobooksList({
 	nodes,
 	pagination,
 }: EgwAudiobooksListProps): JSX.Element {
