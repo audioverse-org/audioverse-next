@@ -1,4 +1,9 @@
-import { Language, SequenceContentType } from '~src/__generated__/graphql';
+import {
+	CollectionContentType,
+	Language,
+	RecordingContentType,
+	SequenceContentType,
+} from '~src/__generated__/graphql';
 import { BibleIndexProps } from '~src/containers/bible';
 import { getAudiobibleIndexData } from '~src/containers/bible/__generated__';
 import { BOOK_ID_MAP } from '~src/services/fcbh/constants';
@@ -47,7 +52,9 @@ async function transform(
 							.chapterNumber(bbChapter.number)
 							.get(),
 						duration: bbChapter.duration,
+						recordingContentType: RecordingContentType.BibleChapter,
 						sequence: {
+							id: bbChapter.id,
 							title,
 							contentType: SequenceContentType.BibleBook,
 						},
@@ -55,7 +62,9 @@ async function transform(
 						videoFiles: [],
 						videoStreams: [],
 						collection: {
+							id: bible.id,
 							title: bible.title,
+							contentType: CollectionContentType.BibleVersion,
 						},
 					};
 				},

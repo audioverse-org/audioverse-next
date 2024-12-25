@@ -41,8 +41,9 @@ const recording: Partial<PlayerFragment> = {
 	videoDownloads: [],
 	speakers: [],
 	sequence: {
-		contentType: SequenceContentType.Series,
+		id: 'the_sequence_id',
 		title: 'the_sequence_title',
+		contentType: SequenceContentType.Series,
 	},
 	audioFiles: [
 		{

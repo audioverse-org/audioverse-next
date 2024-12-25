@@ -1,11 +1,23 @@
 import clsx from 'clsx';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, {
+	ReactNode,
+	useContext,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
+import {
+	CollectionContentType,
+	RecordingContentType,
+	SequenceContentType,
+} from '~src/__generated__/graphql';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import Button from '~src/components/molecules/button';
 import Dropdown from '~src/components/molecules/dropdown';
+import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
 import { GetAudiobibleIndexDataQuery } from '~src/containers/bible/__generated__';
 import { BIBLE_BOOKS } from '~src/lib/constants';
 import { getBibleAcronym } from '~src/lib/getBibleAcronym';
@@ -27,57 +39,90 @@ type Props = {
 	children?: ReactNode;
 };
 
-function resolveChapterPath(
-	versions: Array<Version>,
-	chapter: Chapter,
-): [Version, Book, Chapter] {
-	for (const version of versions) {
-		for (const book of version.sequences.nodes || []) {
-			const found = book.recordings.nodes?.some((r) => r.id === chapter.id);
-			if (found) {
-				return [version, book, chapter];
-			}
-		}
-	}
-	throw Error("Couldn't find the chapter");
-}
+// function resolveChapterPath(
+// 	versions: Array<Version>,
+// 	chapter: Chapter,
+// ): [Version, Book, Chapter] {
+// 	for (const version of versions) {
+// 		for (const book of version.sequences.nodes || []) {
+// 			const found = book.recordings.nodes?.some((r) => r.id === chapter.id);
+// 			if (found) {
+// 				return [version, book, chapter];
+// 			}
+// 		}
+// 	}
+// 	throw Error("Couldn't find the chapter");
+// }
 
 export default function PassageNavigation({
 	versions,
 	chapter,
 	children,
 }: Props): ReactNode {
+	const context = useContext(PlaybackContext);
+	const loadedRecording = context.getRecording();
 	const [open, setOpen] = useState<boolean>(!children);
 
-	const [selectedVersion, setSelectedVersion] = useState<Version>(versions[0]);
+	const [selectedVersion, setSelectedVersion] = useState<Version>(() => {
+		const c = chapter?.collection || loadedRecording?.collection;
+		console.log({ collection: c });
+		const isVersion = c?.contentType === CollectionContentType.BibleVersion;
+		if (!isVersion) return versions[0];
+		return versions.find((version) => (version.id = c.id)) || versions[0];
+	});
 
-	const books = selectedVersion.sequences.nodes || [];
+	const books = useMemo(() => {
+		return selectedVersion.sequences.nodes || [];
+	}, [selectedVersion.sequences.nodes]);
 
-	const [selectedBook, setSelectedBook] = useState<Book>(books[0]);
+	// const [selectedChapterId, setSelectedChapterId] = useLocalStorage(
+	// 	'selectedChapterId',
+	// 	chapter?.id || null,
+	// );
 
-	const [selectedChapterId, setSelectedChapterId] = useLocalStorage(
-		'selectedChapterId',
-		chapter?.id || null,
-	);
+	const selectedChapterId = useMemo(() => {
+		if (chapter) return chapter.id;
+		const r = loadedRecording;
+		const isChapter =
+			r && r.recordingContentType === RecordingContentType.BibleChapter;
+		if (!isChapter) return null;
+		return loadedRecording.id;
+	}, [loadedRecording, chapter]);
 
-	useEffect(() => {
-		if (chapter) {
-			setSelectedChapterId(chapter.id);
+	// const selectedBook = useMemo((): Book => {
+	// 	const sequence = loadedRecording?.sequence;
+	// 	const isBibleBook = sequence?.contentType === SequenceContentType.BibleBook;
+	// 	if (!isBibleBook) return books[0];
+	// 	return sequence;
+	// }, [loadedRecording, books]);
 
-			const [version, book] = resolveChapterPath(versions, chapter);
-			setSelectedVersion(version);
-			setSelectedBook(book);
-		}
-	}, [chapter, versions, setSelectedChapterId]);
+	const [selectedBook, setSelectedBook] = useState<Book>(() => {
+		const s = loadedRecording?.sequence;
+		const isBook = s?.contentType === SequenceContentType.BibleBook;
+		if (!isBook) return books[0];
+		return books.find((book) => book.id === s.id) || books[0];
+	});
 
-	useEffect(() => {
-		setOpen(false);
-	}, [selectedChapterId]);
+	console.log({ loadedRecording });
+
+	// useEffect(() => {
+	// 	if (chapter) {
+	// 		setSelectedChapterId(chapter.id);
+
+	// 		const [version, book] = resolveChapterPath(versions, chapter);
+	// 		setSelectedVersion(version);
+	// 		setSelectedBook(book);
+	// 	}
+	// }, [chapter, versions, setSelectedChapterId]);
 
 	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
 		'passageNavLayout',
 		'grid',
 	);
+
+	useEffect(() => {
+		setOpen(false);
+	}, [chapter]);
 
 	return (
 		<div className={styles.base}>
@@ -97,15 +142,15 @@ export default function PassageNavigation({
 				>
 					{(handleClose) => (
 						<div className={styles.dropdownContainer}>
-							{versions.map((version) => (
-								<p key={version.id}>
+							{versions.map((v) => (
+								<p key={v.id} data-key={v.id}>
 									<Button
 										type="tertiary"
 										onClick={(e) => {
-											setSelectedVersion(version);
+											setSelectedVersion(v);
 											handleClose(e);
 										}}
-										text={getBibleAcronym(version.title)}
+										text={getBibleAcronym(v.title)}
 									/>
 								</p>
 							))}

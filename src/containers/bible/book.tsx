@@ -118,6 +118,7 @@ function BookInner({
 			title: chapter?.title || '',
 			canonicalPath: makeCanonicalPath(toRecordingChapterNumber),
 			contentType: RecordingContentType.BibleChapter,
+			recordingContentType: RecordingContentType.BibleChapter,
 			duration: chapter?.duration || 0,
 			audioFiles: [
 				{
