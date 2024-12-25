@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
+import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import Button from '~src/components/molecules/button';
 import Dropdown from '~src/components/molecules/dropdown';
@@ -166,6 +166,7 @@ export default function PassageNavigation({
 								chapterId={selectedChapterId}
 							/>
 							<BookGrid
+								className={styles.nt}
 								books={books.filter((book) =>
 									BIBLE_BOOKS.slice(39).includes(book.title),
 								)}
