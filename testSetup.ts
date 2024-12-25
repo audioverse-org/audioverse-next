@@ -9,10 +9,10 @@ jest.mock('next/image');
 jest.mock('next/legacy/image');
 jest.mock('video.js');
 
-jest.mock('~lib/api/fetchApi');
-jest.mock('~lib/getIntlMessages');
-jest.mock('~lib/makeQueryClient');
-jest.mock('~lib/swiper');
+jest.mock('next/navigation', () => ({
+	useSearchParams: jest.fn(() => new URL('http://example.com').searchParams),
+}));
+
 jest.mock('@segment/analytics-next', () => {
 	const originalModule = jest.requireActual('@segment/analytics-next');
 
@@ -31,6 +31,11 @@ jest.mock('@segment/analytics-next', () => {
 		},
 	};
 });
+
+jest.mock('~lib/api/fetchApi');
+jest.mock('~lib/getIntlMessages');
+jest.mock('~lib/makeQueryClient');
+jest.mock('~lib/swiper');
 
 interface CustomMatchers<R = unknown> {
 	toAppearBefore: (argument: HTMLElement) => R;
