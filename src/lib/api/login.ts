@@ -5,7 +5,7 @@ import { setSessionToken } from '~lib/cookies';
 import { analytics } from '../analytics';
 import { login as _login } from './__generated__/login';
 
-export const USER_SESSION_QUERY_KEYS = [
+const USER_SESSION_QUERY_KEYS = [
 	['getIsAuthenticated'],
 	['getProfileData'],
 	['isCollectionFavorited'],

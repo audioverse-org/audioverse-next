@@ -21,7 +21,7 @@ import baseStyles from './base.module.scss';
 import styles from './history.module.scss';
 import LibraryLoggedOut from './loggedOut';
 
-export const getLibraryHistoryPageDataDefaultVariables = (
+const getLibraryHistoryPageDataDefaultVariables = (
 	language: Language,
 ): GetLibraryHistoryPageDataQueryVariables => {
 	return {

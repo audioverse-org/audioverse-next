@@ -31,14 +31,14 @@ export const SORT_MAP = {
 	z: [FavoritesSortableField.EntityTitle, OrderByDirection.Desc],
 } as Record<string, [FavoritesSortableField, OrderByDirection]>;
 
-export const CONTENT_TYPE_MAP = {
+const CONTENT_TYPE_MAP = {
 	people: [FavoritableCatalogEntityType.Person],
 	conferences: [FavoritableCatalogEntityType.Collection],
 	series: [FavoritableCatalogEntityType.Sequence],
 	sponsors: [FavoritableCatalogEntityType.Sponsor],
 } as Record<string, FavoritableCatalogEntityType[]>;
 
-export const RECORDING_CONTENT_TYPE_MAP = {
+const RECORDING_CONTENT_TYPE_MAP = {
 	teachings: RecordingContentType.Sermon,
 	music: RecordingContentType.MusicTrack,
 	audiobooks: RecordingContentType.AudiobookTrack,

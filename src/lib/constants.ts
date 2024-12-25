@@ -62,10 +62,10 @@ export const LANGUAGES: LanguageConfigurations = {
 	},
 };
 
-export const IS_DEVELOPMENT =
+const IS_DEVELOPMENT =
 	process.env.NODE_ENV === 'development' ||
 	process.env.ENV_OVERRIDE === 'development';
-export const IS_PRODUCTION_DEPLOYMENT = process.env.VERCEL_ENV === 'production';
+const IS_PRODUCTION_DEPLOYMENT = process.env.VERCEL_ENV === 'production';
 export const DETAIL_PRERENDER_LIMIT = IS_PRODUCTION_DEPLOYMENT ? 25 : 2;
 export const LIST_PRERENDER_LIMIT = IS_PRODUCTION_DEPLOYMENT ? 10 : 1;
 export const REVALIDATE = 4 * 60 * 60;
