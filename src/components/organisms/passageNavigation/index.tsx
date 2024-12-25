@@ -10,8 +10,6 @@ import { GetAudiobibleIndexDataQuery } from '~src/containers/bible/__generated__
 import { BIBLE_BOOKS } from '~src/lib/constants';
 import { getBibleAcronym } from '~src/lib/getBibleAcronym';
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
-import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
-import isServerSide from '~src/lib/isServerSide';
 
 import BookGrid from './bookGrid';
 import BookList from './bookList';
@@ -61,13 +59,6 @@ export default function PassageNavigation({
 		'selectedChapterId',
 		chapter?.id || null,
 	);
-
-	const session = usePlaybackSession(chapter ?? null);
-
-	useEffect(() => {
-		if (isServerSide() || !chapter) return;
-		session.play();
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
 		if (chapter) {

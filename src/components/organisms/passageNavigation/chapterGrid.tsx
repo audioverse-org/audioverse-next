@@ -25,7 +25,7 @@ export default function ChapterGrid({ chapters, chapterId }: Props) {
 						<li key={n} className={styles.chapter}>
 							<Link
 								className={chapter.id === chapterId ? styles.active : ''}
-								href={chapter.canonicalPath}
+								href={`${chapter.canonicalPath}?autoplay`}
 							>
 								{n}
 							</Link>

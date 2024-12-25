@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import startCase from 'lodash/startCase';
 import Head from 'next/head';
+import { useSearchParams } from 'next/navigation';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -36,6 +37,8 @@ import {
 } from '~src/__generated__/graphql';
 import { BibleIndexProps } from '~src/containers/bible';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
+import isServerSide from '~src/lib/isServerSide';
 
 import { analytics } from '../../lib/analytics';
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
@@ -53,13 +56,27 @@ interface RecordingProps {
 	};
 }
 
-export function Recording(
-	params: (RecordingProps & BibleIndexProps) | RecordingProps,
-): JSX.Element {
+export function Recording({
+	recording,
+	overrideSequence,
+	...props
+}: (RecordingProps & BibleIndexProps) | RecordingProps): JSX.Element {
 	const intl = useIntl();
-	const { recording, overrideSequence } = params;
 	const { id, imageWithFallback, contentType, sponsor, speakers, writers } =
 		recording;
+	const session = usePlaybackSession(recording ?? null);
+	const params = useSearchParams();
+
+	useEffect(() => {
+		console.log({
+			isServerSide: isServerSide(),
+			hasAutoplay: params.has('autoplay'),
+		});
+		if (isServerSide() || !params.has('autoplay')) return;
+		console.log('autoplay');
+		session.play();
+	}, [recording]); // eslint-disable-line react-hooks/exhaustive-deps
+
 	return (
 		<Tease className={clsx(styles.base, styles[contentType])}>
 			<Head>
@@ -124,8 +141,8 @@ export function Recording(
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
 
-			{'data' in params ? (
-				<PassageNavigation versions={params.data} chapter={recording}>
+			{'data' in props ? (
+				<PassageNavigation versions={props.data} chapter={recording}>
 					<RecordingInner
 						recording={recording}
 						overrideSequence={overrideSequence}
