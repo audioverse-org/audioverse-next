@@ -1,8 +1,11 @@
 import { ENTRIES_PER_PAGE } from '~lib/constants';
-import getPageOffset from '~lib/getPageOffset';
 
 export interface PaginatedGetter<T, E> {
 	(variables: { offset: number; first: number } & E): Promise<T>;
+}
+
+function getPageOffset(page: number | string): number {
+	return (+page - 1) * ENTRIES_PER_PAGE;
 }
 
 export async function getPaginatedData<T, E>(
