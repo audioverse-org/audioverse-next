@@ -39,21 +39,6 @@ type Props = {
 	children?: ReactNode;
 };
 
-// function resolveChapterPath(
-// 	versions: Array<Version>,
-// 	chapter: Chapter,
-// ): [Version, Book, Chapter] {
-// 	for (const version of versions) {
-// 		for (const book of version.sequences.nodes || []) {
-// 			const found = book.recordings.nodes?.some((r) => r.id === chapter.id);
-// 			if (found) {
-// 				return [version, book, chapter];
-// 			}
-// 		}
-// 	}
-// 	throw Error("Couldn't find the chapter");
-// }
-
 export default function PassageNavigation({
 	versions,
 	chapter,
@@ -62,25 +47,31 @@ export default function PassageNavigation({
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
 	const [open, setOpen] = useState<boolean>(!children);
+	const [view, setView] = useLocalStorage<'grid' | 'list'>(
+		'passageNavLayout',
+		'grid',
+	);
 
-	const [selectedVersion, setSelectedVersion] = useState<Version>(() => {
+	const [version, setVersion] = useState<Version>(() => {
 		const c = chapter?.collection || loadedRecording?.collection;
 		console.log({ collection: c });
 		const isVersion = c?.contentType === CollectionContentType.BibleVersion;
 		if (!isVersion) return versions[0];
-		return versions.find((version) => (version.id = c.id)) || versions[0];
+		return versions.find((v) => v.id === c.id) || versions[0];
 	});
 
 	const books = useMemo(() => {
-		return selectedVersion.sequences.nodes || [];
-	}, [selectedVersion.sequences.nodes]);
+		return version.sequences.nodes || [];
+	}, [version.sequences.nodes]);
 
-	// const [selectedChapterId, setSelectedChapterId] = useLocalStorage(
-	// 	'selectedChapterId',
-	// 	chapter?.id || null,
-	// );
+	const [book, setBook] = useState<Book>(() => {
+		const s = loadedRecording?.sequence;
+		const isBook = s?.contentType === SequenceContentType.BibleBook;
+		if (!isBook) return books[0];
+		return books.find((b) => b.id === s.id) || books[0];
+	});
 
-	const selectedChapterId = useMemo(() => {
+	const chapterId = useMemo(() => {
 		if (chapter) return chapter.id;
 		const r = loadedRecording;
 		const isChapter =
@@ -88,37 +79,6 @@ export default function PassageNavigation({
 		if (!isChapter) return null;
 		return loadedRecording.id;
 	}, [loadedRecording, chapter]);
-
-	// const selectedBook = useMemo((): Book => {
-	// 	const sequence = loadedRecording?.sequence;
-	// 	const isBibleBook = sequence?.contentType === SequenceContentType.BibleBook;
-	// 	if (!isBibleBook) return books[0];
-	// 	return sequence;
-	// }, [loadedRecording, books]);
-
-	const [selectedBook, setSelectedBook] = useState<Book>(() => {
-		const s = loadedRecording?.sequence;
-		const isBook = s?.contentType === SequenceContentType.BibleBook;
-		if (!isBook) return books[0];
-		return books.find((book) => book.id === s.id) || books[0];
-	});
-
-	console.log({ loadedRecording });
-
-	// useEffect(() => {
-	// 	if (chapter) {
-	// 		setSelectedChapterId(chapter.id);
-
-	// 		const [version, book] = resolveChapterPath(versions, chapter);
-	// 		setSelectedVersion(version);
-	// 		setSelectedBook(book);
-	// 	}
-	// }, [chapter, versions, setSelectedChapterId]);
-
-	const [selectedView, setSelectedView] = useLocalStorage<'grid' | 'list'>(
-		'passageNavLayout',
-		'grid',
-	);
 
 	useEffect(() => {
 		setOpen(false);
@@ -133,7 +93,7 @@ export default function PassageNavigation({
 					trigger={(props) => (
 						<Button
 							type="tertiary"
-							text={getBibleAcronym(selectedVersion.title)}
+							text={getBibleAcronym(version.title)}
 							IconRight={IconDisclosure}
 							className={styles.dropdownButton}
 							{...props}
@@ -147,7 +107,7 @@ export default function PassageNavigation({
 									<Button
 										type="tertiary"
 										onClick={(e) => {
-											setSelectedVersion(v);
+											setVersion(v);
 											handleClose(e);
 										}}
 										text={getBibleAcronym(v.title)}
@@ -163,8 +123,8 @@ export default function PassageNavigation({
 				<div className={styles.content}>
 					<div className={styles.switch}>
 						<button
-							className={clsx({ [styles.active]: selectedView === 'grid' })}
-							onClick={() => setSelectedView('grid')}
+							className={clsx({ [styles.active]: view === 'grid' })}
+							onClick={() => setView('grid')}
 						>
 							<FormattedMessage
 								id="passageNavigation__selector-grid"
@@ -173,8 +133,8 @@ export default function PassageNavigation({
 							/>
 						</button>
 						<button
-							className={clsx({ [styles.active]: selectedView === 'list' })}
-							onClick={() => setSelectedView('list')}
+							className={clsx({ [styles.active]: view === 'list' })}
+							onClick={() => setView('list')}
 						>
 							<FormattedMessage
 								id="passageNavigation__selector-list"
@@ -184,12 +144,12 @@ export default function PassageNavigation({
 						</button>
 					</div>
 
-					{selectedView === 'list' ? (
+					{view === 'list' ? (
 						<BookList
 							books={books}
-							selectedBook={selectedBook}
-							selectBook={setSelectedBook}
-							chapterId={selectedChapterId}
+							selectedBook={book}
+							selectBook={setBook}
+							chapterId={chapterId}
 						/>
 					) : (
 						<>
@@ -197,18 +157,18 @@ export default function PassageNavigation({
 								books={books.filter((book) =>
 									BIBLE_BOOKS.slice(0, 39).includes(book.title),
 								)}
-								selectedBook={selectedBook}
-								selectBook={setSelectedBook}
-								chapterId={selectedChapterId}
+								selectedBook={book}
+								selectBook={setBook}
+								chapterId={chapterId}
 							/>
 							<BookGrid
 								className={styles.nt}
 								books={books.filter((book) =>
 									BIBLE_BOOKS.slice(39).includes(book.title),
 								)}
-								selectedBook={selectedBook}
-								selectBook={setSelectedBook}
-								chapterId={selectedChapterId}
+								selectedBook={book}
+								selectBook={setBook}
+								chapterId={chapterId}
 							/>
 						</>
 					)}
