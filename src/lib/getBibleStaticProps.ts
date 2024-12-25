@@ -17,8 +17,6 @@ type ApiBible = BibleIndexProps['data'][0];
 type ApiBook = NonNullable<ApiBible['sequences']['nodes']>[0];
 type ApiChapter = NonNullable<ApiBook['recordings']['nodes']>[0];
 
-// https://www.audioverse.org/en/bibles/ENGKJV2/GEN/1
-
 async function transform(
 	languageRoute: string,
 	bible: IBibleVersion,
