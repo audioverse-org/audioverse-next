@@ -61,15 +61,6 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} прочитано"
   },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count} главы"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation} Библия"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66 книг"
-  },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
     "string": "{count} темы"
@@ -1662,9 +1653,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
   },
   "cardCollection__showAll": {
     "string": "Show All"

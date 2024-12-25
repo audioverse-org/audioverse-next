@@ -355,18 +355,6 @@
   "buttonShare__emailSubjectSuffix": {
     "string": "{assunto} no AudioVerse"
   },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{contar} capítulos"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abreviação} Bíblia"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66 livros"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Mostrar todos"
-  },
   "cardCollection__showAll": {
     "string": "Mostrar todos"
   },

@@ -412,18 +412,6 @@
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
   },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count} chapters"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation} Bible"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66 Books"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
-  },
   "cardCollection__showAll": {
     "string": "Show All"
   },

@@ -61,15 +61,6 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} lesen"
   },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count} Kapitel"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation} Bibel"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66 Bücher"
-  },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
     "string": "{count} Lehren"
@@ -1665,9 +1656,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
   },
   "cardCollection__showAll": {
     "string": "Show All"

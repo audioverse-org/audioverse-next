@@ -61,15 +61,6 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration}分"
   },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count}章"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation}聖書"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66巻"
-  },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
     "string": "レッスン{count}個"
@@ -1665,9 +1656,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
   },
   "cardCollection__showAll": {
     "string": "Show All"

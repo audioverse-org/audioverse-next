@@ -813,38 +813,6 @@
       "value": " on AudioVerse"
     }
   ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": " Kapitel"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abbreviation"
-    },
-    {
-      "type": 0,
-      "value": " Bibel"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 Bücher"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Show All"
-    }
-  ],
   "cardCollection__showAll": [
     {
       "type": 0,

@@ -813,38 +813,6 @@
       "value": " on AudioVerse"
     }
   ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": "章"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abbreviation"
-    },
-    {
-      "type": 0,
-      "value": "聖書"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66巻"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Show All"
-    }
-  ],
   "cardCollection__showAll": [
     {
       "type": 0,
