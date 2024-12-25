@@ -20,11 +20,9 @@ import IconChromeCast from '~public/img/icon-chromecast.svg';
 import IconFullscreen from '~public/img/icons/icon-fullscreen.svg';
 import IconPause from '~public/img/icons/icon-pause-large.svg';
 import IconPlay from '~public/img/icons/icon-play-large.svg';
-import { RecordingContentType } from '~src/__generated__/graphql';
 import useGlobalSpaceDown from '~src/lib/hooks/useGlobalSpaceDown';
 import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
-import isServerSide from '~src/lib/isServerSide';
 
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';
@@ -80,13 +78,6 @@ const Player = ({
 			setBrowser(null);
 		}
 	}, []);
-
-	useEffect(() => {
-		if (isServerSide()) return;
-		if (recording.contentType !== RecordingContentType.BibleChapter) return;
-
-		session.play();
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const iconColor = isBackgroundColorDark(backgroundColor)
 		? BaseColors.WHITE

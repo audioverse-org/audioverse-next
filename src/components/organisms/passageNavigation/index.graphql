@@ -5,7 +5,7 @@ fragment passageNavigation on Sequence {
 		nodes {
 			id
 			title
-			canonicalPath
+			...andMiniplayer
 		}
 	}
 }

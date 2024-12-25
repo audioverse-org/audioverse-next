@@ -23,10 +23,7 @@ import { BaseColors } from '~lib/constants';
 import { buildRenderer } from '~lib/test/buildRenderer';
 import renderWithProviders from '~lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '~lib/test/setPlayerMock';
-import {
-	RecordingContentType,
-	SequenceContentType,
-} from '~src/__generated__/graphql';
+import { SequenceContentType } from '~src/__generated__/graphql';
 
 import { PlayerFragment } from './__generated__/player';
 
@@ -1220,25 +1217,6 @@ describe('player', () => {
 			const miniplayer = result.getByLabelText('miniplayer');
 
 			expect(getByText(miniplayer, '2:00')).toBeInTheDocument();
-		});
-	});
-
-	it('autoplays if recording is Bible chapter', async () => {
-		const mockPlayer = setPlayerMock();
-
-		await renderComponent({
-			props: {
-				recording: {
-					...recording,
-					canonicalPath: 'the_sermon_path',
-					duration: 120,
-					contentType: RecordingContentType.BibleChapter,
-				},
-			},
-		});
-
-		await waitFor(() => {
-			expect(mockPlayer.play).toBeCalled();
 		});
 	});
 });

@@ -1,4 +1,4 @@
-import { Language } from '~src/__generated__/graphql';
+import { Language, SequenceContentType } from '~src/__generated__/graphql';
 import { BibleIndexProps } from '~src/containers/bible';
 import { getAudiobibleIndexData } from '~src/containers/bible/__generated__';
 import { BOOK_ID_MAP } from '~src/services/fcbh/constants';
@@ -26,6 +26,15 @@ async function transform(
 				testament,
 				bookId,
 			);
+			const title = bbChapters[0].book_name;
+
+			if (!title) {
+				console.log({ bible, testament, bookId, bbChapters });
+				throw new Error(
+					`Could not determine book title: ${bible.id} ${testament} ${bookId}`,
+				);
+			}
+
 			const chapters = bbChapters.map(
 				(bbChapter: IBibleBookChapter): ApiChapter => {
 					return {
@@ -37,18 +46,20 @@ async function transform(
 							.bookId(bookId)
 							.chapterNumber(bbChapter.number)
 							.get(),
+						duration: bbChapter.duration,
+						sequence: {
+							title,
+							contentType: SequenceContentType.BibleBook,
+						},
+						audioFiles: [],
+						videoFiles: [],
+						videoStreams: [],
+						collection: {
+							title: bible.title,
+						},
 					};
 				},
 			);
-
-			const title = bbChapters[0].book_name;
-
-			if (!title) {
-				console.log({ bible, testament, bookId, bbChapters });
-				throw new Error(
-					`Could not determine book title: ${bible.id} ${testament} ${bookId}`,
-				);
-			}
 
 			return {
 				id: bookId,
