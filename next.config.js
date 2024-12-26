@@ -1,29 +1,18 @@
-import { NextConfig } from 'next';
-import nextPwa, { PWAConfig } from 'next-pwa';
-import path from 'path';
-
-const withPWA = nextPwa({
+const withPWA = require('next-pwa')({
 	dest: 'public',
 	// WORKAROUND: https://github.com/shadowwalker/next-pwa/issues/288#issuecomment-955777098
 	buildExcludes: [/server\/middleware-manifest\.json$/],
 });
+const path = require('path');
 
-type WithBundleAnalyzer = (config: PWAConfig) => NextConfig & PWAConfig;
+const withBundleAnalyzer =
+	process.env.ANALYZE === 'true'
+		? require('@next/bundle-analyzer')()
+		: (x) => x;
 
-const getBundleAnalyzer = async (): Promise<WithBundleAnalyzer> => {
-	if (process.env.ANALYZE === 'true') {
-		const { default: withBundleAnalyzer } = await import(
-			'@next/bundle-analyzer'
-		);
-		return withBundleAnalyzer() as unknown as WithBundleAnalyzer;
-	}
-	return (config) => config;
-};
-const withBundleAnalyzer = await getBundleAnalyzer();
-
-const config: NextConfig = withBundleAnalyzer(
+module.exports = withBundleAnalyzer(
 	withPWA({
-		async headers() {
+		headers() {
 			return [
 				{
 					source: '/apple-app-site-association',
@@ -46,7 +35,7 @@ const config: NextConfig = withBundleAnalyzer(
 			];
 		},
 		async redirects() {
-			const languagePrefixMap: Record<string, string> = {
+			const languagePrefixMap = {
 				english: 'en',
 				deutsch: 'de',
 				german: 'de',
@@ -63,7 +52,7 @@ const config: NextConfig = withBundleAnalyzer(
 					permanent: true,
 				})),
 				...Object.keys(languagePrefixMap).map((prefix) => ({
-					source: `/${prefix}/:path((?!podcasts/latest|sermons/podcasts/latest|sermones/podcasts/ultima|predications/podcasts/plusrecent).*)`,
+					source: `/${prefix}/:path((?!podcasts\/latest|sermons\/podcasts\/latest|sermones\/podcasts\/ultima|predications\/podcasts\/plusrecent).*)`,
 					destination: `/${languagePrefixMap[prefix]}/:path*`,
 					statusCode: 301,
 				})),
@@ -642,7 +631,7 @@ const config: NextConfig = withBundleAnalyzer(
 				},
 			];
 		},
-		webpack: (config, { dev }) => {
+		webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
 			config.module.rules.push({
 				test: /\.(graphql|gql)$/,
 				exclude: /node_modules/,
@@ -675,5 +664,3 @@ const config: NextConfig = withBundleAnalyzer(
 		},
 	}),
 );
-
-export default config;

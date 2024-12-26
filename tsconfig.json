@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
-		"module": "esnext",
+		"module": "commonjs",
 		"declaration": true,
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"allowSyntheticDefaultImports": true,
-		"target": "esnext",
+		"target": "es6",
 		"lib": ["es2017", "es2019", "dom"],
 		"sourceMap": true,
 		"outDir": "./dist",
