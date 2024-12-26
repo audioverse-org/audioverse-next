@@ -15,11 +15,7 @@ import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import { BibleIndexProps } from '~src/containers/bible';
-import {
-	concatBibles,
-	getApiBibles,
-	getFcbhBibles,
-} from '~src/lib/getBibleStaticProps';
+import getBibles from '~src/lib/getBibles';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
 export default Recording;
@@ -37,6 +33,7 @@ export async function getStaticProps({
 	const { recording } = await getAudiobibleBookDetailData({
 		id: params?.id || '',
 	});
+
 	if (
 		!recording ||
 		recording.contentType !== RecordingContentType.BibleChapter
@@ -49,25 +46,22 @@ export async function getStaticProps({
 
 	const languageRoute = params?.language || 'en';
 	const languageId = getLanguageIdByRoute(languageRoute);
+	const { fcbh, api, all } = await getBibles(languageId);
 
-	const apiBibles = await getApiBibles(languageId);
-
-	if (!apiBibles) {
+	if (!api) {
 		return {
 			notFound: true,
 			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 
-	const fcbhBibles = await getFcbhBibles(languageRoute);
-
 	return {
 		props: {
-			versions: concatBibles(fcbhBibles, apiBibles),
+			versions: all,
 			recording,
 			title: recording?.title,
 		},
-		revalidate: fcbhBibles ? REVALIDATE : REVALIDATE_FAILURE,
+		revalidate: fcbh ? REVALIDATE : REVALIDATE_FAILURE,
 	};
 }
 

@@ -8,7 +8,7 @@ import { BibleIndexProps } from '~src/containers/bible';
 import { getAudiobibleIndexData } from '~src/containers/bible/__generated__';
 import { BOOK_ID_MAP } from '~src/services/fcbh/constants';
 import { getBibleBookChapters } from '~src/services/fcbh/getBibleBookChapters';
-import { getBibles } from '~src/services/fcbh/getBibles';
+import { getBibles as _getFcbhBibles } from '~src/services/fcbh/getBibles';
 import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
 
 import root from './routes';
@@ -87,11 +87,11 @@ async function transform(
 	};
 }
 
-export async function getFcbhBibles(
+async function getFcbhBibles(
 	languageRoute: string,
 ): Promise<ApiBible[] | null> {
 	try {
-		const response = await getBibles();
+		const response = await _getFcbhBibles();
 
 		if (!response) {
 			return null;
@@ -104,9 +104,7 @@ export async function getFcbhBibles(
 	}
 }
 
-export async function getApiBibles(
-	languageId: Language,
-): Promise<ApiBible[] | null> {
+async function getApiBibles(languageId: Language): Promise<ApiBible[] | null> {
 	const apiData = await getAudiobibleIndexData({
 		language: languageId,
 	}).catch(() => null);
@@ -114,11 +112,19 @@ export async function getApiBibles(
 	return apiData?.collections.nodes || null;
 }
 
-export function concatBibles(
+function concatBibles(
 	first: ApiBible[] | null,
 	second: ApiBible[] | null,
 ): ApiBible[] {
 	return [...(first || []), ...(second || [])].sort((a, b) =>
 		a.title.localeCompare(b.title),
 	);
+}
+
+export default async function getBibles(languageId: Language) {
+	const fcbh = await getFcbhBibles(languageId);
+	const api = await getApiBibles(languageId);
+	const all = concatBibles(fcbh, api);
+
+	return { fcbh, api, all };
 }

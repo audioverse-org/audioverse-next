@@ -8,11 +8,7 @@ import { IBaseProps } from '~containers/base';
 import Bible, { BibleIndexProps } from '~containers/bible';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import root from '~lib/routes';
-import {
-	concatBibles,
-	getApiBibles,
-	getFcbhBibles,
-} from '~src/lib/getBibleStaticProps';
+import getBibles from '~src/lib/getBibles';
 import getIntl from '~src/lib/getIntl';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
@@ -25,29 +21,25 @@ export async function getStaticProps({
 > {
 	const languageRoute = params?.language || 'en';
 	const languageId = getLanguageIdByRoute(languageRoute);
-
 	const intl = await getIntl(languageId);
+	const { fcbh, api, all } = await getBibles(languageId);
 
-	const apiBibles = await getApiBibles(languageId);
-
-	if (!apiBibles) {
+	if (!api) {
 		return {
 			notFound: true,
 			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 
-	const fcbhBibles = await getFcbhBibles(languageRoute);
-
 	return {
 		props: {
-			versions: concatBibles(fcbhBibles, apiBibles),
+			versions: all,
 			title: intl.formatMessage({
 				id: 'bible__title',
 				defaultMessage: 'Bible',
 			}),
 		},
-		revalidate: fcbhBibles ? REVALIDATE : REVALIDATE_FAILURE,
+		revalidate: fcbh ? REVALIDATE : REVALIDATE_FAILURE,
 	};
 }
 
