@@ -52,8 +52,8 @@ describe('Slider', () => {
 			},
 		});
 
-		expect(screen.getByText('1')).toBeInTheDocument();
-		expect(screen.getByText('2')).toBeInTheDocument();
+		expect(await screen.findByText('1')).toBeInTheDocument();
+		expect(await screen.findByText('2')).toBeInTheDocument();
 	});
 
 	it('displays one item per page on mobile', async () => {

@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading6 from '~components/atoms/heading6';
 import { BaseColors } from '~lib/constants';
 
-import { ButtonShareRecordingFragment } from './__generated__/buttonShareRecording';
+import { PlayerFragment } from './__generated__/player';
 import ButtonShare from './buttonShare';
 import styles from './buttonShareRecording.module.scss';
 
@@ -14,14 +14,17 @@ export default function ButtonShareRecording({
 	shareVideo,
 	disableEmbedCode,
 }: {
-	recording: ButtonShareRecordingFragment;
+	recording: Pick<
+		PlayerFragment,
+		'id' | 'shareUrl' | 'title' | 'speakers' | 'recordingContentType'
+	>;
 	backgroundColor: BaseColors;
 	shareVideo: boolean;
 	disableEmbedCode?: boolean;
 }): JSX.Element {
 	const intl = useIntl();
 
-	const { id, shareUrl, title, speakers } = recording;
+	const { id, shareUrl, title, speakers, recordingContentType } = recording;
 	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
 
 	return (
@@ -39,6 +42,9 @@ export default function ButtonShareRecording({
 						presenters: speakers.map(({ name }) => name).join(', '),
 					},
 				),
+				contentType: recordingContentType,
+				id,
+				title,
 			}}
 		>
 			{!disableEmbedCode && (

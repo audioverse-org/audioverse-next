@@ -1,9 +1,9 @@
 import React from 'react';
 
-import withFailStates from '~components/HOCs/withFailStates';
 import { Recording } from '~components/organisms/recording';
 import root from '~lib/routes';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { GetBookSongDetailDataQuery } from './__generated__/track';
@@ -49,6 +49,11 @@ function SongBookTrack({
 	);
 }
 
-export default withFailStates(SongBookTrack, {
-	useShould404: (props) => !props.recording,
-});
+const WithFailStates = (props: Parameters<typeof SongBookTrack>[0]) => (
+	<AndFailStates
+		Component={SongBookTrack}
+		componentProps={props}
+		options={{ should404: (props) => !props.recording }}
+	/>
+);
+export default WithFailStates;

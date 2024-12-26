@@ -5,7 +5,7 @@ import { fetchApi } from '~lib/api/fetchApi';
 import { GetIsAuthenticatedDocument } from '~lib/hooks/__generated__/useIsAuthenticated';
 
 export function loadAuthGuardData(email: any = 'the_email'): void {
-	Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+	Cookie.get = jest.fn().mockReturnValue({ session_token: 'abc123' });
 
 	when(fetchApi)
 		.calledWith(GetIsAuthenticatedDocument, expect.anything())

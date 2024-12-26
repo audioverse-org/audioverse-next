@@ -5,7 +5,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '~components/atoms/heading1';
 import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
-import withFailStates from '~components/HOCs/withFailStates';
 import { PlayerFragment } from '~components/molecules/__generated__/player';
 import { SequenceNavFragment } from '~components/molecules/__generated__/sequenceNav';
 import Button from '~components/molecules/button';
@@ -24,6 +23,7 @@ import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
+import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import {
 	IBibleBook,
@@ -149,6 +149,10 @@ function BookInner({
 			)}`,
 			sequence: null,
 			collection: null,
+			recordingContentType: RecordingContentType.BibleChapter,
+			sponsor: {
+				title: 'Faith Comes By Hearing',
+			},
 		};
 	}
 
@@ -301,7 +305,7 @@ function BookInner({
 											...chapterToRecording(chapter),
 											recordingContentType: RecordingContentType.BibleChapter,
 											sequenceIndex: null,
-											persons: [],
+											speakers: [],
 										}}
 										playlistRecordings={recordings.slice(
 											chapters.findIndex((c) => c.id === chapter.id),
@@ -324,6 +328,11 @@ function BookInner({
 	);
 }
 
-export default withFailStates(Book, {
-	useShould404: ({ chapters }: BookProps) => !chapters.length,
-});
+const WithFailStates = (props: Parameters<typeof Book>[0]) => (
+	<AndFailStates
+		Component={Book}
+		componentProps={props}
+		options={{ should404: ({ chapters }: BookProps) => !chapters.length }}
+	/>
+);
+export default WithFailStates;

@@ -9,7 +9,7 @@ import Checkbox from '~components/molecules/form/checkbox';
 import Input from '~components/molecules/form/input';
 import Modal from '~components/organisms/modal';
 import { refetchUserQueries, resetUserQueries } from '~src/lib/api/login';
-import { clearSessionToken } from '~src/lib/cookies';
+import { clearSessionTokenAndUserId } from '~src/lib/cookies';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
 
@@ -83,7 +83,7 @@ export default function ProfileForm(): JSX.Element {
 
 	const { isPending, mutate: deleteAccountMutate } = useDeleteAccountMutation({
 		onSuccess: async () => {
-			clearSessionToken();
+			clearSessionTokenAndUserId();
 			resetUserQueries(queryClient);
 			router.push(root.lang(languageRoute).discover.get());
 		},

@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/dom';
 import React, { useContext, useEffect, useState } from 'react';
 
 import AndMiniplayer from '~components/templates/andMiniplayer';
@@ -62,6 +63,8 @@ describe('miniplayer template', () => {
 										canonicalPath: 'the_recording_path',
 										recordingContentType: RecordingContentType.Sermon,
 										duration: 60,
+										recordingContentType: RecordingContentType.Sermon,
+										speakers: [],
 										sequence: {
 											id: 'the_sequence_id',
 											title: 'the_sequence_title',
@@ -78,6 +81,7 @@ describe('miniplayer template', () => {
 										audioFiles: [],
 										videoStreams: [],
 										collection: null,
+										sponsor: null,
 									},
 									'the_recording_id',
 								);
@@ -89,7 +93,9 @@ describe('miniplayer template', () => {
 			},
 		});
 
-		expect(mockPlayer.play).toBeCalled();
+		await waitFor(() => {
+			expect(mockPlayer.play).toBeCalled();
+		});
 	});
 
 	it('loads recording', async () => {
@@ -105,6 +111,7 @@ describe('miniplayer template', () => {
 									{
 										title: 'the_recording_title',
 										canonicalPath: 'the_recording_path',
+										speakers: [],
 									} as any,
 									'the_recording_id',
 								);
@@ -131,6 +138,7 @@ describe('miniplayer template', () => {
 									{
 										title: 'the_recording_title',
 										canonicalPath: 'the_recording_path',
+										speakers: [],
 									} as any,
 									'the_recording_id',
 								);

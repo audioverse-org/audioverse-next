@@ -24,7 +24,7 @@ const setRequest = (cookie = '') => {
 describe('fetchApi', () => {
 	it('uses saved request', async () => {
 		mockFetchResponse();
-		setRequest('avSession=the_token');
+		setRequest('session_token=the_token');
 
 		await fetchApi(noopQuery);
 

@@ -48,7 +48,7 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 					title: 'the_recording_title',
 					canonicalPath: 'the_recording_path',
 					recordingContentType: RecordingContentType.Sermon,
-					persons: [],
+					speakers: [],
 				},
 			],
 			aggregate: { count: 1 },

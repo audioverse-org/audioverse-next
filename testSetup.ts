@@ -3,6 +3,8 @@ import 'jest-canvas-mock';
 
 import { resetAllWhenMocks } from 'jest-when';
 
+import getIntlMessages from '~src/lib/getIntlMessages';
+
 jest.mock('@silvermine/videojs-airplay');
 jest.mock('@silvermine/videojs-chromecast');
 jest.mock('next/image');
@@ -80,6 +82,8 @@ beforeAll(() => {
 beforeEach(() => {
 	jest.clearAllMocks();
 	resetAllWhenMocks();
+
+	jest.mocked(getIntlMessages).mockResolvedValue({});
 
 	window.IntersectionObserver = jest.fn(
 		() =>

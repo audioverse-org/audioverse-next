@@ -14,10 +14,10 @@ import DefinitionList, {
 import Tease from '~components/molecules/tease';
 import { BaseColors } from '~lib/constants';
 import { formatLongDateTime } from '~lib/date';
-import withFailStates from '~src/components/HOCs/withFailStates';
 import ButtonShare from '~src/components/molecules/buttonShare';
 import IconButton from '~src/components/molecules/iconButton';
 import PlaylistTypeLockup from '~src/components/molecules/playlistTypeLockup';
+import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
 import { Must } from '~src/types/types';
@@ -94,8 +94,9 @@ function PlaylistDetail({ playlist }: Must<IPlaylistDetailProps>): JSX.Element {
 							shareUrl={`https://audioverse.org/${languageRoute}/playlists/${id}`}
 							backgroundColor={BaseColors.CREAM}
 							light={true}
-							type="Playlist"
+							contentType="PLAYLIST"
 							id={id}
+							title={title}
 						/>
 					)}
 					{!isPublicRoute && (
@@ -150,6 +151,11 @@ function PlaylistDetail({ playlist }: Must<IPlaylistDetailProps>): JSX.Element {
 	);
 }
 
-export default withFailStates(PlaylistDetail, {
-	useShould404: ({ playlist }) => !playlist,
-});
+const WithFailStates = (props: Parameters<typeof PlaylistDetail>[0]) => (
+	<AndFailStates
+		Component={PlaylistDetail}
+		componentProps={props}
+		options={{ should404: ({ playlist }) => !playlist }}
+	/>
+);
+export default WithFailStates;

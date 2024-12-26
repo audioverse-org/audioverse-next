@@ -17,7 +17,6 @@ import videojs from 'video.js';
 
 import { RecordingFragment } from '~components/organisms/__generated__/recording';
 import { Recording } from '~components/organisms/recording';
-import { __awaitIntlMessages } from '~lib/getIntlMessages';
 import setPlayerMock from '~lib/test/setPlayerMock';
 import MyApp from '~pages/_app';
 import {
@@ -136,8 +135,6 @@ const renderApp = async (
 		/>,
 		{ container },
 	);
-
-	await __awaitIntlMessages();
 
 	return {
 		...result,

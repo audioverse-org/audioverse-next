@@ -7,12 +7,12 @@ import Head from 'next/head';
 import Script from 'next/script';
 import React, { useEffect } from 'react';
 
-import withIntl from '~components/HOCs/withIntl';
 import LoadingIndicator from '~components/molecules/loadingIndicator';
 import AndGlobalModals from '~components/templates/andGlobalModals';
 import AndMiniplayer from '~components/templates/andMiniplayer';
 import AndNavigation from '~components/templates/andNavigation';
 import AndPlaybackContext from '~components/templates/andPlaybackContext';
+import AndIntl from '~src/components/templates/andIntl';
 import { analytics } from '~src/lib/analytics';
 import makeQueryClient from '~src/lib/makeQueryClient';
 
@@ -49,63 +49,65 @@ function Base<P>({
 	}, [disableSidebar]);
 
 	return (
-		<div className={styles.base}>
-			<React.StrictMode>
-				<Head>
-					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
-					<title>{title ? `${title} | AudioVerse` : 'AudioVerse'}</title>
-					{description && <meta name="description" content={description} />}
-					{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-					<meta
-						name="viewport"
-						content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
-					/>
-					<meta name="theme-color" content="#efebeb" />
+		<AndIntl>
+			<div className={styles.base}>
+				<React.StrictMode>
+					<Head>
+						{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
+						<title>{title ? `${title} | AudioVerse` : 'AudioVerse'}</title>
+						{description && <meta name="description" content={description} />}
+						{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+						<meta
+							name="viewport"
+							content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+						/>
+						<meta name="theme-color" content="#efebeb" />
 
-					<link rel="icon" href="/favicon.ico" sizes="any" />
-					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-				</Head>
+						<link rel="icon" href="/favicon.ico" sizes="any" />
+						<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+						<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+					</Head>
 
-				<Script
-					id="google-analytics"
-					strategy="afterInteractive"
-					dangerouslySetInnerHTML={{
-						__html: `
+					<Script
+						id="google-analytics"
+						strategy="afterInteractive"
+						dangerouslySetInnerHTML={{
+							__html: `
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer', '${GTM_ID}');
   `,
-					}}
-				/>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `<!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->`,
-					}}
-				/>
-				<QueryClientProvider client={queryClient}>
-					<HydrationBoundary state={dehydratedState}>
-						<AndGlobalModals>
-							<LoadingIndicator />
-							<AndPlaybackContext>
-								{disableSidebar ? (
-									<Component {...pageProps} />
-								) : (
-									<AndMiniplayer>
-										<AndNavigation>
-											<Component {...pageProps} />
-										</AndNavigation>
-									</AndMiniplayer>
-								)}
-							</AndPlaybackContext>
-						</AndGlobalModals>
-					</HydrationBoundary>
-				</QueryClientProvider>
-			</React.StrictMode>
-		</div>
+						}}
+					/>
+					<script
+						dangerouslySetInnerHTML={{
+							__html: `<!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->`,
+						}}
+					/>
+					<QueryClientProvider client={queryClient}>
+						<HydrationBoundary state={dehydratedState}>
+							<AndGlobalModals>
+								<LoadingIndicator />
+								<AndPlaybackContext>
+									{disableSidebar ? (
+										<Component {...pageProps} />
+									) : (
+										<AndMiniplayer>
+											<AndNavigation>
+												<Component {...pageProps} />
+											</AndNavigation>
+										</AndMiniplayer>
+									)}
+								</AndPlaybackContext>
+							</AndGlobalModals>
+						</HydrationBoundary>
+					</QueryClientProvider>
+				</React.StrictMode>
+			</div>
+		</AndIntl>
 	);
 }
 
-export default withIntl(Base);
+export default Base;

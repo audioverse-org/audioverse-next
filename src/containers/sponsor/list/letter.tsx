@@ -1,6 +1,6 @@
 import React from 'react';
 
-import withFailStates from '~components/HOCs/withFailStates';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import Sponsors, { SponsorsProps } from './list';
 
@@ -15,6 +15,11 @@ function LetterSponsors(props: SponsorsProps) {
 	);
 }
 
-export default withFailStates(LetterSponsors, {
-	useShould404: ({ sponsors }) => !sponsors?.length,
-});
+const WithFailStates = (props: Parameters<typeof LetterSponsors>[0]) => (
+	<AndFailStates
+		Component={LetterSponsors}
+		componentProps={props}
+		options={{ should404: ({ sponsors }) => !sponsors?.length }}
+	/>
+);
+export default WithFailStates;

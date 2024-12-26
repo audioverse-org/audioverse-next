@@ -6,23 +6,27 @@ import Cookies from 'js-cookie';
 import { __loadRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 
-import withAuthGuard from '~components/HOCs/withAuthGuard';
 import { RegisterSocialDocument } from '~containers/account/__generated__/register';
 import { fetchApi } from '~lib/api/fetchApi';
 import { GetIsAuthenticatedDocument } from '~lib/hooks/__generated__/useIsAuthenticated';
 import renderWithProviders from '~lib/test/renderWithProviders';
+import AndAuthGuard from '~src/components/templates/andAuthGuard';
 
 function render() {
-	const Comp = withAuthGuard(() => <>hello world</>);
+	const Comp = () => <>hello world</>;
 	return (async function (
 		ui: ReactElement,
 		renderOptions?: RenderOptions,
 	): Promise<RenderResult & { queryClient: QueryClient }> {
 		return renderWithProviders(ui, renderOptions);
-	})(<Comp />);
+	})(
+		<AndAuthGuard>
+			<Comp />
+		</AndAuthGuard>,
+	);
 }
 
-describe('withAuthGuard', () => {
+describe('andAuthGuard', () => {
 	beforeEach(() => __loadRouter({ query: {} }));
 	it('displays login if no email', async () => {
 		when(fetchApi)
@@ -47,7 +51,7 @@ describe('withAuthGuard', () => {
 	});
 
 	it('displays content on successful social login', async () => {
-		Cookies.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		Cookies.get = jest.fn().mockReturnValue({ session_token: 'abc123' });
 
 		const { getByText, queryByText } = await render();
 

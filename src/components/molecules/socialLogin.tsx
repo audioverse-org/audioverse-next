@@ -11,12 +11,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useRegisterSocialMutation } from '~containers/account/__generated__/register';
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '~lib/constants';
-import { setSessionToken } from '~lib/cookies';
+import { setSessionTokenAndUserId } from '~lib/cookies';
 import { UserSocialServiceName } from '~src/__generated__/graphql';
 import { analytics } from '~src/lib/analytics';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 import useDidUnmount from '~src/lib/hooks/useDidUnmount';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import Button from './buttonSocial';
 import styles from './socialLogin.module.scss';
@@ -37,19 +38,30 @@ export default function SocialLogin({
 
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
 		useRegisterSocialMutation({
-			onSuccess: async (response) => {
-				const errors = response?.loginSocial.errors || [];
-				const token = response?.loginSocial.authenticatedUser?.sessionToken;
+			onSuccess: async (response, variables) => {
+				const errors = response.loginSocial.errors || [];
+				const authenticatedUser = response.loginSocial.authenticatedUser;
 
-				if (token && !errors.length) {
-					setSessionToken(token);
-					const user = response?.loginSocial.authenticatedUser?.user;
-					analytics.identify(user?.id + '', {
-						firstName: user?.givenName,
-						lastName: user?.surname,
-						email: user?.email,
+				if (authenticatedUser && !errors.length) {
+					setSessionTokenAndUserId(
+						authenticatedUser.sessionToken,
+						authenticatedUser.user.id.toString(),
+					);
+					analytics.identify(authenticatedUser.user.id + '', {
+						firstName: authenticatedUser.user.givenName,
+						lastName: authenticatedUser.user.surname,
+						email: authenticatedUser.user.email,
 						source: 'Login',
 					});
+					if (response?.loginSocial.isNewUser) {
+						gtmPushEvent('sign_up', {
+							sign_up_method: variables?.socialName,
+						});
+					} else {
+						gtmPushEvent('sign_in', {
+							sign_in_method: variables?.socialName,
+						});
+					}
 					onSuccess ? onSuccess() : await queryClient.invalidateQueries();
 				} else if (!didUnmount.current) {
 					setErrors(errors.map((e) => e.message));

@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '~components/HOCs/withFailStates';
 import CardRecording from '~components/molecules/card/recording';
 import RecordingHasVideoFilter from '~components/molecules/recordingHasVideoFilter';
 import RssAlternate from '~components/molecules/rssAlternate';
@@ -9,6 +8,7 @@ import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetSermonListPageDataQuery } from './__generated__/list';
 
@@ -47,6 +47,11 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 	);
 }
 
-export default withFailStates(SermonList, {
-	useShould404: (props: SermonListProps) => !props.nodes?.length,
-});
+const WithFailStates = (props: Parameters<typeof SermonList>[0]) => (
+	<AndFailStates
+		Component={SermonList}
+		componentProps={props}
+		options={{ should404: (props: SermonListProps) => !props.nodes?.length }}
+	/>
+);
+export default WithFailStates;

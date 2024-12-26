@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '~components/HOCs/withFailStates';
 import CardPerson from '~components/molecules/card/person';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetSearchResultsPersonsQuery } from './__generated__/persons';
 
@@ -46,6 +46,11 @@ function SearchPersons({ nodes, pagination }: SearchPersonsProps) {
 	);
 }
 
-export default withFailStates(SearchPersons, {
-	useShould404: (props: SearchPersonsProps) => !props.nodes?.length,
-});
+const WithFailStates = (props: Parameters<typeof SearchPersons>[0]) => (
+	<AndFailStates
+		Component={SearchPersons}
+		componentProps={props}
+		options={{ should404: (props: SearchPersonsProps) => !props.nodes?.length }}
+	/>
+);
+export default WithFailStates;

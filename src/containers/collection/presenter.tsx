@@ -6,7 +6,6 @@ import Heading2 from '~components/atoms/heading2';
 import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
 import RoundImage from '~components/atoms/roundImage';
-import withFailStates from '~components/HOCs/withFailStates';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
 import CardRecording from '~components/molecules/card/recording';
@@ -20,7 +19,10 @@ import Tease from '~components/molecules/tease';
 import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
+import useLanguageRoute from '~lib/useLanguageRoute';
+import { CatalogEntityType } from '~src/__generated__/graphql';
 import Heading6 from '~src/components/atoms/heading6';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { GetConferencePresenterDetailPageDataQuery } from '~src/containers/collection/__generated__/presenter';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
@@ -104,6 +106,9 @@ function PresenterDetail({
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={root.lang(lang).presenters.id(id).feed.get()}
+						contentType={CatalogEntityType.Person}
+						id={id}
+						title={name}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
@@ -111,6 +116,9 @@ function PresenterDetail({
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
 						light
 						className={styles.iconButton}
+						contentType={CatalogEntityType.Person}
+						id={id}
+						title={name}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
@@ -139,6 +147,11 @@ function PresenterDetail({
 	);
 }
 
-export default withFailStates(PresenterDetail, {
-	useShould404: ({ person }) => !person,
-});
+const WithFailStates = (props: Parameters<typeof PresenterDetail>[0]) => (
+	<AndFailStates
+		Component={PresenterDetail}
+		componentProps={props}
+		options={{ should404: ({ person }) => !person }}
+	/>
+);
+export default WithFailStates;

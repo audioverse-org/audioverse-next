@@ -1,5 +1,6 @@
 {
 	"low": true,
+	"skip-dev": true,
 	"allowlist": [
 		"GHSA-xvch-5gv4-984h", // Not used at runtime
 		"GHSA-93q8-gq69-wqmw", // Not used at runtime
@@ -32,6 +33,7 @@
 		"GHSA-pxg6-pf52-xh8x|@lhci/cli>*", // Used by lighthouse CI, not at runtime
 		"GHSA-pxg6-pf52-xh8x|@lhci/utils>*", // Used by lighthouse CI, not at runtime
 		"GHSA-pxg6-pf52-xh8x|express>cookie", // Used by lighthouse CI, not at runtime
-		"GHSA-7gfc-8cq8-jh5f" // automatically mitigated by Vercel
+		"GHSA-7gfc-8cq8-jh5f", // automatically mitigated by Vercel
+		"GHSA-3xgq-45jj-v275" // cross-spawn is used by @next/eslint-plugin-next,  audit-ci, cross-env, eslint, and jest. It is not used at runtime
 	]
 }

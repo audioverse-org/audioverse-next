@@ -7,7 +7,6 @@ import HorizontalRule from '~components/atoms/horizontalRule';
 import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import RoundImage from '~components/atoms/roundImage';
-import withFailStates from '~components/HOCs/withFailStates';
 import Button from '~components/molecules/button';
 import ButtonFavorite from '~components/molecules/buttonFavorite';
 import ButtonShare from '~components/molecules/buttonShare';
@@ -25,6 +24,8 @@ import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
+import { CatalogEntityType } from '~src/__generated__/graphql';
+import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
@@ -158,6 +159,9 @@ function PresenterDetail({
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={root.lang(lang).presenters.id(id).feed.get()}
+						contentType={CatalogEntityType.Person}
+						id={id}
+						title={name}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
@@ -165,6 +169,9 @@ function PresenterDetail({
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
 						light
 						className={styles.iconButton}
+						contentType={CatalogEntityType.Person}
+						id={id}
+						title={name}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
@@ -304,6 +311,11 @@ function PresenterDetail({
 	);
 }
 
-export default withFailStates(PresenterDetail, {
-	useShould404: ({ person }) => !person,
-});
+const WithFailStates = (props: Parameters<typeof PresenterDetail>[0]) => (
+	<AndFailStates
+		Component={PresenterDetail}
+		componentProps={props}
+		options={{ should404: ({ person }) => !person }}
+	/>
+);
+export default WithFailStates;

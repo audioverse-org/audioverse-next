@@ -1,10 +1,4 @@
 fragment recording on Recording {
-	id
-	title
-	contentType
-	speakers: persons(role: SPEAKER) {
-		...personLockup
-	}
 	writers: persons(role: WRITER) {
 		...personLockup
 	}
@@ -52,7 +46,6 @@ fragment recording on Recording {
 		text
 	}
 	canonicalUrl(useFuturePath: true)
-	shareUrl
 	...sequenceNav
 	...copyrightInfo
 	...player

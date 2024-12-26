@@ -40,7 +40,6 @@ import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
 import isServerSide from '~src/lib/isServerSide';
 
-import { analytics } from '../../lib/analytics';
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
 import PassageNavigation from './passageNavigation';
@@ -317,12 +316,6 @@ function RecordingInner({
 							className={styles.attachment}
 							key={url}
 							rel="noreferrer"
-							onClick={() => {
-								analytics.track('Attachment click', {
-									recording: recording.title,
-									attachment: filename,
-								});
-							}}
 							download
 						>
 							{filename}

@@ -79,7 +79,7 @@ export default function SearchBar({
 			>
 				<IconSearch width={24} height={24} />
 				<input
-					name="q"
+					id="searchInput"
 					type="search"
 					autoComplete="off"
 					value={term ?? ''}

@@ -26,7 +26,7 @@ const loadData = buildLoader(GetStoriesAlbumsPageDataDocument, {
 				title: 'the_story_title',
 				canonicalPath: 'the_story_path',
 				contentType: SequenceContentType.StorySeason,
-				speakers: [],
+				sequenceSpeakers: [],
 				allRecordings: {
 					aggregate: {
 						count: 0,

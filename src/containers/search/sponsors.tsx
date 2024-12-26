@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '~components/HOCs/withFailStates';
 import CardSponsor from '~components/molecules/card/sponsor';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetSearchResultsSponsorsQuery } from './__generated__/sponsors';
 
@@ -46,6 +46,13 @@ function SearchSponsors({ nodes, pagination }: SearchSponsorsProps) {
 	);
 }
 
-export default withFailStates(SearchSponsors, {
-	useShould404: (props: SearchSponsorsProps) => !props.nodes?.length,
-});
+const WithFailStates = (props: Parameters<typeof SearchSponsors>[0]) => (
+	<AndFailStates
+		Component={SearchSponsors}
+		componentProps={props}
+		options={{
+			should404: (props: SearchSponsorsProps) => !props.nodes?.length,
+		}}
+	/>
+);
+export default WithFailStates;

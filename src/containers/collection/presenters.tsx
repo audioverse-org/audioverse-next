@@ -2,13 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
-import withFailStates from '~components/HOCs/withFailStates';
 import CardPerson from '~components/molecules/card/person';
 import CardGroup from '~components/molecules/cardGroup';
 import Pagination from '~components/molecules/pagination';
 import { BaseColors } from '~lib/constants';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
@@ -74,6 +74,11 @@ function CollectionPresenters({
 	);
 }
 
-export default withFailStates(CollectionPresenters, {
-	useShould404: ({ nodes }) => !nodes.length,
-});
+const WithFailStates = (props: Parameters<typeof CollectionPresenters>[0]) => (
+	<AndFailStates
+		Component={CollectionPresenters}
+		componentProps={props}
+		options={{ should404: ({ nodes }) => !nodes.length }}
+	/>
+);
+export default WithFailStates;

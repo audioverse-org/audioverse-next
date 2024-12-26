@@ -167,6 +167,9 @@ export function Sequence({
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={rssUrl}
+						contentType={contentType}
+						id={id}
+						title={title}
 					/>
 					<ButtonFavorite
 						isFavorited={!!isFavorited}
@@ -174,6 +177,9 @@ export function Sequence({
 						backgroundColor={backgroundColor}
 						light
 						className={styles.iconButton}
+						contentType={contentType}
+						id={id}
+						title={title}
 					/>
 				</div>
 				<HorizontalRule color={ruleColor} />

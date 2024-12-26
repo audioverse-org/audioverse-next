@@ -11,7 +11,6 @@ import Card from '~components/molecules/card';
 import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
 import { BaseColors } from '~lib/constants';
 import { CatalogEntityType } from '~src/__generated__/graphql';
-import { analytics } from '~src/lib/analytics';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonTypeLockup from '../personTypeLockup';
@@ -40,16 +39,7 @@ export default function CardPerson({
 	return (
 		<Card className={clsx(compact && styles.compact)}>
 			<Link href={canonicalPath} legacyBehavior>
-				<a
-					className={styles.container}
-					onClick={() => {
-						analytics.track('Card click', {
-							type: CatalogEntityType.Person,
-							id,
-							title: name,
-						});
-					}}
-				>
+				<a className={styles.container}>
 					<div className={styles.stretch}>
 						{!compact && <PersonTypeLockup />}
 						<Heading2 unpadded sans className={styles.title}>
@@ -100,6 +90,9 @@ export default function CardPerson({
 					backgroundColor={BaseColors.SMART_PLAYLIST_H}
 					light
 					className={clsx(styles.like, isFavorited && styles.likeActive)}
+					contentType={CatalogEntityType.Person}
+					id={id}
+					title={name}
 				/>
 			)}
 		</Card>

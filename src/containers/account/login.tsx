@@ -1,5 +1,13 @@
-import withAuthGuard from '~components/HOCs/withAuthGuard';
+import React from 'react';
+
+import AndAuthGuard from '~src/components/templates/andAuthGuard';
 
 import LoginRedirect from './loginRedirect';
 
-export default withAuthGuard(LoginRedirect);
+const Login = () => (
+	<AndAuthGuard>
+		<LoginRedirect />
+	</AndAuthGuard>
+);
+
+export default Login;

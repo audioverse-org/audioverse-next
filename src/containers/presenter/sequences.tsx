@@ -2,13 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '~components/atoms/lineHeading';
-import withFailStates from '~components/HOCs/withFailStates';
 import CardSequence from '~components/molecules/card/sequence';
 import CardGroup from '~components/molecules/cardGroup';
 import Pagination from '~components/molecules/pagination';
 import { BaseColors } from '~lib/constants';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
 
 import { PresenterPivotFragment } from './__generated__/pivot';
@@ -56,6 +56,11 @@ function PresenterSequences({
 	);
 }
 
-export default withFailStates(PresenterSequences, {
-	useShould404: ({ nodes }) => !nodes.length,
-});
+const WithFailStates = (props: Parameters<typeof PresenterSequences>[0]) => (
+	<AndFailStates
+		Component={PresenterSequences}
+		componentProps={props}
+		options={{ should404: ({ nodes }) => !nodes.length }}
+	/>
+);
+export default WithFailStates;

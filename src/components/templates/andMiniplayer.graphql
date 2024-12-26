@@ -4,6 +4,13 @@ fragment andMiniplayer on Recording {
 	recordingContentType: contentType
 	canonicalPath(useFuturePath: true)
 	duration
+	recordingContentType: contentType
+	speakers: persons(role: SPEAKER) {
+		...personLockup
+	}
+	sponsor {
+		title
+	}
 	sequence {
 		id
 		title

@@ -25,7 +25,7 @@ const loadData = buildLoader(GetSeriesListPageDataDocument, {
 				title: 'the_series_title',
 				contentType: SequenceContentType.Series,
 				canonicalPath: 'the_series_path',
-				speakers: [],
+				sequenceSpeakers: [],
 				allRecordings: {
 					aggregate: {
 						count: 0,

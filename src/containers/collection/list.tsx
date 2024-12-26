@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '~components/HOCs/withFailStates';
 import CardCollection from '~components/molecules/card/collection';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetCollectionListPageDataQuery } from './__generated__/list';
 
@@ -38,6 +38,11 @@ function CollectionList({
 	);
 }
 
-export default withFailStates(CollectionList, {
-	useShould404: ({ nodes }) => !nodes?.length,
-});
+const WithFailStates = (props: Parameters<typeof CollectionList>[0]) => (
+	<AndFailStates
+		Component={CollectionList}
+		componentProps={props}
+		options={{ should404: ({ nodes }) => !nodes?.length }}
+	/>
+);
+export default WithFailStates;
