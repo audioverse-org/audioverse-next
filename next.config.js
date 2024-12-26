@@ -272,52 +272,17 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
-					source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/1',
-					destination: '/:lang/bibles/472',
-					permanent: false,
-				},
-				{
-					source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/2',
-					destination: '/:lang/bibles/ENGKJV2',
-					permanent: false,
-				},
-				{
-					source: '/:lang/audiobibles/books/ENGESV/:testamentCode/:bookCode/2',
-					destination: '/:lang/bibles/',
-					permanent: false,
-				},
-				{
-					source: '/:lang/audiobibles/volumes',
+					source: '/:lang/audiobibles/:path*',
 					destination: '/:lang/bibles/',
 					permanent: true,
 				},
 				{
-					source: '/:lang/bibles/ENGKJV1',
-					destination: '/:lang/bibles/472',
+					source: '/:lang/bibles/:id',
+					destination: '/:lang/bibles/',
 					permanent: false,
 				},
 				{
 					source: '/:lang/bibles/ENGKJV1/:path*',
-					destination: '/:lang/bibles/472',
-					permanent: false,
-				},
-				{
-					source: '/:lang/audiobibles/books/ENGKJV/1',
-					destination: '/:lang/bibles/472',
-					permanent: true,
-				},
-				{
-					source: '/:lang/audiobibles/books/ENGKJV/2',
-					destination: '/:lang/bibles/ENGKJV2',
-					permanent: true,
-				},
-				{
-					source: '/:lang/audiobibles/books/ENGESV/2',
-					destination: '/:lang/bibles/',
-					permanent: false,
-				},
-				{
-					source: '/:lang/audiobibles/books/ENGESV/2',
 					destination: '/:lang/bibles/',
 					permanent: false,
 				},
