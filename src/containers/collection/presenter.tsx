@@ -19,7 +19,6 @@ import Tease from '~components/molecules/tease';
 import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import { CatalogEntityType } from '~src/__generated__/graphql';
 import Heading6 from '~src/components/atoms/heading6';
 import AndFailStates from '~src/components/templates/andFailStates';

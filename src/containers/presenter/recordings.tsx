@@ -9,8 +9,8 @@ import RssAlternate from '~components/molecules/rssAlternate';
 import { BaseColors } from '~lib/constants';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
-import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import AndFailStates from '~src/components/templates/andFailStates';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { PresenterPivotFragment } from './__generated__/pivot';

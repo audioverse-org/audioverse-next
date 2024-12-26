@@ -5,8 +5,8 @@ import SocialLogin from '~components/molecules/socialLogin';
 import RegisterForm from '~components/organisms/registerForm';
 import AndOnboarding from '~components/templates/andOnboarding';
 import root from '~lib/routes';
-import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import AndAuthGuard from '~src/components/templates/andAuthGuard';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import LoginRedirect from './loginRedirect';
 

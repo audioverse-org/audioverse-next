@@ -63,7 +63,6 @@ describe('miniplayer template', () => {
 										canonicalPath: 'the_recording_path',
 										recordingContentType: RecordingContentType.Sermon,
 										duration: 60,
-										recordingContentType: RecordingContentType.Sermon,
 										speakers: [],
 										sequence: {
 											id: 'the_sequence_id',

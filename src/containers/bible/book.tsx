@@ -149,7 +149,6 @@ function BookInner({
 			)}`,
 			sequence: null,
 			collection: null,
-			recordingContentType: RecordingContentType.BibleChapter,
 			sponsor: {
 				title: 'Faith Comes By Hearing',
 			},

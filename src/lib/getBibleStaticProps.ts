@@ -64,6 +64,8 @@ async function transform(
 							title: bible.title,
 							contentType: CollectionContentType.BibleVersion,
 						},
+						speakers: [],
+						sponsor: null,
 					};
 				},
 			);

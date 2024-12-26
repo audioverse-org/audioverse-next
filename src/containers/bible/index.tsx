@@ -1,10 +1,10 @@
 import React from 'react';
 
-import withFailStates from '~src/components/HOCs/withFailStates';
 import Tease from '~src/components/molecules/tease';
 import PassageNavigation, {
 	Version,
 } from '~src/components/organisms/passageNavigation';
+import AndFailStates from '~src/components/templates/andFailStates';
 
 export interface BibleIndexProps {
 	data: Array<Version>;
@@ -18,6 +18,12 @@ function Bible({ data }: BibleIndexProps): JSX.Element {
 	);
 }
 
-export default withFailStates(Bible, {
-	useShould404: ({ data }) => !data.length,
-});
+const WithFailStates = (props: BibleIndexProps) => (
+	<AndFailStates
+		Component={Bible}
+		componentProps={props}
+		options={{ should404: ({ data }) => !data.length }}
+	/>
+);
+
+export default WithFailStates;
