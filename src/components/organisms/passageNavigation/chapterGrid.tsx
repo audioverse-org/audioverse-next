@@ -15,24 +15,22 @@ type Props = {
 
 export default function ChapterGrid({ chapters, chapterId }: Props) {
 	return (
-		<li className={styles.chaptersWrapper}>
-			<ul className={styles.chapters}>
-				{chapters?.map((chapter) => {
-					const n = Number(chapter.title.split(' ').pop())
-						.toString()
-						.padStart(2, '0');
-					return (
-						<li key={n} className={styles.chapter}>
-							<Link
-								className={chapter.id === chapterId ? styles.active : ''}
-								href={`${chapter.canonicalPath}?autoplay`}
-							>
-								{n}
-							</Link>
-						</li>
-					);
-				})}
-			</ul>
-		</li>
+		<ul className={styles.chapters}>
+			{chapters?.map((chapter) => {
+				const n = Number(chapter.title.split(' ').pop())
+					.toString()
+					.padStart(2, '0');
+				return (
+					<li key={n} className={styles.chapter}>
+						<Link
+							className={chapter.id === chapterId ? styles.active : ''}
+							href={`${chapter.canonicalPath}?autoplay`}
+						>
+							{n}
+						</Link>
+					</li>
+				);
+			})}
+		</ul>
 	);
 }

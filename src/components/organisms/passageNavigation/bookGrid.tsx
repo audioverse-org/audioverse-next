@@ -39,7 +39,9 @@ export default function BookGrid({
 							</button>
 						</li>
 						{book.id === selectedBook.id && chapters && (
-							<ChapterGrid chapters={chapters} chapterId={chapterId} />
+							<li>
+								<ChapterGrid chapters={chapters} chapterId={chapterId} />
+							</li>
 						)}
 					</>
 				);
