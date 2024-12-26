@@ -279,7 +279,7 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/bibles/:id',
 					destination: '/:lang/bibles/',
-					permanent: false,
+					permanent: true,
 				},
 				{
 					source: '/:lang/bibles/ENGKJV1/:path*',
