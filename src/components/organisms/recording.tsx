@@ -135,8 +135,8 @@ export function Recording({
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
 
-			{'data' in props ? (
-				<PassageNavigation versions={props.data} chapter={recording}>
+			{'versions' in props ? (
+				<PassageNavigation versions={props.versions} chapter={recording}>
 					<RecordingInner
 						recording={recording}
 						overrideSequence={overrideSequence}

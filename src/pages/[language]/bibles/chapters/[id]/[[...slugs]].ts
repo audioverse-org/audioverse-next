@@ -63,7 +63,7 @@ export async function getStaticProps({
 
 	return {
 		props: {
-			data: concatBibles(fcbhBibles, apiBibles),
+			versions: concatBibles(fcbhBibles, apiBibles),
 			recording,
 			title: recording?.title,
 		},

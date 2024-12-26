@@ -41,7 +41,7 @@ export async function getStaticProps({
 
 	return {
 		props: {
-			data: concatBibles(fcbhBibles, apiBibles),
+			versions: concatBibles(fcbhBibles, apiBibles),
 			title: intl.formatMessage({
 				id: 'bible__title',
 				defaultMessage: 'Bible',

@@ -13,7 +13,7 @@ import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
 
 import root from './routes';
 
-type ApiBible = BibleIndexProps['data'][0];
+type ApiBible = BibleIndexProps['versions'][0];
 type ApiBook = NonNullable<ApiBible['sequences']['nodes']>[0];
 type ApiChapter = NonNullable<ApiBook['recordings']['nodes']>[0];
 

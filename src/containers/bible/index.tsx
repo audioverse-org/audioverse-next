@@ -7,13 +7,13 @@ import PassageNavigation, {
 import AndFailStates from '~src/components/templates/andFailStates';
 
 export interface BibleIndexProps {
-	data: Array<Version>;
+	versions: Array<Version>;
 }
 
-function Bible({ data }: BibleIndexProps): JSX.Element {
+function Bible({ versions }: BibleIndexProps): JSX.Element {
 	return (
 		<Tease>
-			<PassageNavigation versions={data} />
+			<PassageNavigation versions={versions} />
 		</Tease>
 	);
 }
@@ -22,7 +22,7 @@ const WithFailStates = (props: BibleIndexProps) => (
 	<AndFailStates
 		Component={Bible}
 		componentProps={props}
-		options={{ should404: ({ data }) => !data.length }}
+		options={{ should404: ({ versions }) => !versions.length }}
 	/>
 );
 
