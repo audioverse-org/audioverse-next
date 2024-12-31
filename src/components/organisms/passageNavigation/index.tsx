@@ -84,7 +84,7 @@ export default function PassageNavigation({
 	}, [chapter]);
 
 	return (
-		<div className={styles.base}>
+		<div className={clsx(styles.base, { [styles.hasChildren]: !!children })}>
 			<div className={styles.hat} onClick={() => setOpen(!open)}>
 				<BibleVersionTypeLockup unpadded label={chapter?.title || 'Bible'} />
 				<Dropdown
