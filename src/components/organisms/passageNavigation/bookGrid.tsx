@@ -39,7 +39,7 @@ export default function BookGrid({
 							</button>
 						</li>
 						{book.id === selectedBook.id && chapters && (
-							<li>
+							<li className={styles.drawer}>
 								<ChapterGrid chapters={chapters} chapterId={chapterId} />
 							</li>
 						)}
