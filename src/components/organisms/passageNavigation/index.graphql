@@ -1,4 +1,4 @@
-fragment passageNavigation on Sequence {
+fragment passageNavigationBook on Sequence {
 	id
 	title
 	recordings(first: 150) {
@@ -7,5 +7,25 @@ fragment passageNavigation on Sequence {
 			title
 			...andMiniplayer
 		}
+	}
+}
+
+fragment passageNavigationVersion on Collection {
+	id
+	title
+	sequences {
+		nodes {
+			...passageNavigationBook
+		}
+	}
+}
+
+fragment passageNavigationChapter on Recording {
+	id
+	title
+	canonicalPath(useFuturePath: true)
+	collection {
+		id
+		contentType
 	}
 }

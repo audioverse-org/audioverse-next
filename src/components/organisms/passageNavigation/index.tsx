@@ -18,20 +18,28 @@ import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLo
 import Button from '~src/components/molecules/button';
 import Dropdown from '~src/components/molecules/dropdown';
 import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
-import { GetAudiobibleIndexDataQuery } from '~src/containers/bible/__generated__';
 import { BIBLE_BOOKS } from '~src/lib/constants';
 import { getBibleAcronym } from '~src/lib/getBibleAcronym';
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 
+import {
+	PassageNavigationBookFragment,
+	PassageNavigationChapterFragment,
+	PassageNavigationVersionFragment,
+} from './__generated__';
 import BookGrid from './bookGrid';
 import BookList from './bookList';
 import styles from './index.module.scss';
 
-export type Version = NonNullable<
-	GetAudiobibleIndexDataQuery['collections']['nodes']
->[0];
-export type Book = NonNullable<Version['sequences']['nodes']>[0];
-export type Chapter = NonNullable<Book['recordings']['nodes']>[0];
+// export type Version = NonNullable<
+// 	GetAudiobibleIndexDataQuery['collections']['nodes']
+// >[0];
+// export type Book = NonNullable<Version['sequences']['nodes']>[0];
+// export type Chapter = NonNullable<Book['recordings']['nodes']>[0];
+
+export type Version = PassageNavigationVersionFragment;
+export type Book = PassageNavigationBookFragment;
+export type Chapter = PassageNavigationChapterFragment;
 
 type Props = {
 	versions: Array<Version>;

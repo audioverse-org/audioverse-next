@@ -121,7 +121,11 @@ function concatBibles(
 	);
 }
 
-export default async function getBibles(languageId: Language) {
+export default async function getBibles(languageId: Language): Promise<{
+	fcbh: ApiBible[] | null;
+	api: ApiBible[] | null;
+	all: ApiBible[];
+}> {
 	const fcbh = await getFcbhBibles(languageId);
 	const api = await getApiBibles(languageId);
 	const all = concatBibles(fcbh, api);
