@@ -5,6 +5,7 @@
 /graphql-codegen/dist
 **/__generated__
 **/__generated__/**
+.temp*
 
 # next-pwa
 /public/sw.js

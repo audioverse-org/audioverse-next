@@ -2,10 +2,9 @@ import React from 'react';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
 
-import { PassageNavigationFragment } from './__generated__/index';
+import { Chapter } from '.';
 import styles from './chapterGrid.module.scss';
 
-type Chapter = NonNullable<PassageNavigationFragment['recordings']['nodes']>[0];
 export type ChapterId = Chapter['id'] | null;
 
 type Props = {

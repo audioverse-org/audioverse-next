@@ -2,12 +2,11 @@ import clsx from 'clsx';
 import React from 'react';
 
 import { Book } from '.';
-import { PassageNavigationFragment } from './__generated__/index';
 import styles from './bookGrid.module.scss';
 import ChapterGrid, { ChapterId } from './chapterGrid';
 
 type Props = {
-	books: Array<PassageNavigationFragment>;
+	books: Array<Book>;
 	selectedBook: Book;
 	selectBook: (book: Book) => void;
 	chapterId: ChapterId;

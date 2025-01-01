@@ -10,7 +10,7 @@ query getAudiobibleIndexData($language: Language!) {
 			title
 			sequences(first: 66, orderBy: [{ field: ID, direction: ASC }]) {
 				nodes {
-					...passageNavigation
+					...passageNavigationBook
 				}
 			}
 		}

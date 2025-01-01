@@ -1,9 +1,6 @@
-import {
-	CollectionContentType,
-	Language,
-	RecordingContentType,
-	SequenceContentType,
-} from '~src/__generated__/graphql';
+import pMemoize from 'p-memoize';
+
+import { CollectionContentType, Language } from '~src/__generated__/graphql';
 import { BibleIndexProps } from '~src/containers/bible';
 import { getAudiobibleIndexData } from '~src/containers/bible/__generated__';
 import { BOOK_ID_MAP } from '~src/services/fcbh/constants';
@@ -49,23 +46,10 @@ async function transform(
 							.bookId(bookId)
 							.chapterNumber(bbChapter.number)
 							.get(),
-						duration: bbChapter.duration,
-						recordingContentType: RecordingContentType.BibleChapter,
-						sequence: {
-							id: bbChapter.id,
-							title,
-							contentType: SequenceContentType.BibleBook,
-						},
-						audioFiles: [],
-						videoFiles: [],
-						videoStreams: [],
 						collection: {
 							id: bible.id,
-							title: bible.title,
 							contentType: CollectionContentType.BibleVersion,
 						},
-						speakers: [],
-						sponsor: null,
 					};
 				},
 			);
@@ -121,10 +105,20 @@ function concatBibles(
 	);
 }
 
-export default async function getBibles(languageId: Language) {
-	const fcbh = await getFcbhBibles(languageId);
-	const api = await getApiBibles(languageId);
-	const all = concatBibles(fcbh, api);
+const getBibles = pMemoize(
+	async (
+		languageId: Language,
+	): Promise<{
+		fcbh: ApiBible[] | null;
+		api: ApiBible[] | null;
+		all: ApiBible[];
+	}> => {
+		const fcbh = await getFcbhBibles(languageId);
+		const api = await getApiBibles(languageId);
+		const all = concatBibles(fcbh, api);
 
-	return { fcbh, api, all };
-}
+		return { fcbh, api, all };
+	},
+);
+
+export default getBibles;

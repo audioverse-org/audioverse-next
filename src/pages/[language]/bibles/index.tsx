@@ -1,3 +1,4 @@
+// import fs from 'fs';
 import {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
@@ -30,6 +31,10 @@ export async function getStaticProps({
 			revalidate: REVALIDATE_FAILURE,
 		};
 	}
+
+	// write `all` to a file
+	// fs.writeFileSync('.temp.bibles.json', JSON.stringify(all, null, 2));
+	// throw new Error('write `all` to a file');
 
 	return {
 		props: {

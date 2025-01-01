@@ -1,3 +1,5 @@
+import pMemoize from 'p-memoize';
+
 import { getCurrentRequest } from '~lib/api/storeRequest';
 import { getSessionToken } from '~lib/cookies';
 import { sleep } from '~lib/sleep';
@@ -21,6 +23,53 @@ async function getResponse(
 	});
 }
 
+const fetchJson = pMemoize(
+	async ({
+		headers,
+		query,
+		variables,
+	}: {
+		headers: HeadersInit;
+		query: string;
+		variables: unknown;
+	}) => {
+		let res = await getResponse(headers, query, variables);
+		let text = await res.text();
+
+		if (!res.ok) {
+			await sleep({ ms: 10000 });
+			res = await getResponse(headers, query, variables);
+			text = await res.text();
+		}
+
+		if (!res.ok) {
+			console.error({ text, res, query, variables, headers });
+			throw new Error(`HTTP request failed: ${res.status} ${res.statusText}`);
+		}
+
+		let json;
+
+		try {
+			json = JSON.parse(text);
+		} catch (error) {
+			console.error({ error, text, res, query, variables, headers });
+			throw error;
+		}
+
+		if (json.errors) {
+			console.error({
+				query,
+				variables,
+				headers,
+				errors: json.errors,
+			});
+			throw json;
+		}
+
+		return json.data;
+	},
+);
+
 export async function fetchApi<TData>(
 	query: string,
 	{ variables = {} } = {},
@@ -34,38 +83,5 @@ export async function fetchApi<TData>(
 		headers['x-av-session'] = sessionToken;
 	}
 
-	let res = await getResponse(headers, query, variables);
-	let text = await res.text();
-
-	if (!res.ok) {
-		await sleep({ ms: 10000 });
-		res = await getResponse(headers, query, variables);
-		text = await res.text();
-	}
-
-	if (!res.ok) {
-		console.error({ text, res, query, variables, headers });
-		throw new Error(`HTTP request failed: ${res.status} ${res.statusText}`);
-	}
-
-	let json;
-
-	try {
-		json = JSON.parse(text);
-	} catch (error) {
-		console.error({ error, text, res, query, variables, headers });
-		throw error;
-	}
-
-	if (json.errors) {
-		console.error({
-			query,
-			variables,
-			headers,
-			errors: json.errors,
-		});
-		throw json;
-	}
-
-	return json.data;
+	return fetchJson({ headers, query, variables });
 }
