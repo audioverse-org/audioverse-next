@@ -31,12 +31,6 @@ import BookGrid from './bookGrid';
 import BookList from './bookList';
 import styles from './index.module.scss';
 
-// export type Version = NonNullable<
-// 	GetAudiobibleIndexDataQuery['collections']['nodes']
-// >[0];
-// export type Book = NonNullable<Version['sequences']['nodes']>[0];
-// export type Chapter = NonNullable<Book['recordings']['nodes']>[0];
-
 export type Version = PassageNavigationVersionFragment;
 export type Book = PassageNavigationBookFragment;
 export type Chapter = PassageNavigationChapterFragment;
@@ -71,10 +65,10 @@ export default function PassageNavigation({
 		return version.sequences.nodes || [];
 	}, [version.sequences.nodes]);
 
-	const [book, setBook] = useState<Book>(() => {
+	const [book, setBook] = useState<Book | null>(() => {
 		const s = loadedRecording?.sequence;
 		const isBook = s?.contentType === SequenceContentType.BibleBook;
-		if (!isBook) return books[0];
+		if (!isBook) return null;
 		return books.find((b) => b.id === s.id) || books[0];
 	});
 

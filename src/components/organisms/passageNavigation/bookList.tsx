@@ -7,7 +7,7 @@ import ChapterGrid, { ChapterId } from './chapterGrid';
 
 type Props = {
 	books: Array<Book>;
-	selectedBook: Book;
+	selectedBook: Book | null;
 	selectBook: (book: Book) => void;
 	chapterId: ChapterId;
 };
@@ -28,12 +28,12 @@ export default function BookList({
 						<li
 							key={book.id}
 							className={clsx(styles.book, {
-								[styles.active]: book.id === selectedBook.id,
+								[styles.active]: book.id === selectedBook?.id,
 							})}
 						>
 							<button onClick={() => selectBook(book)}>{book.title}</button>
 						</li>
-						{book.id === selectedBook.id && chapters && (
+						{book.id === selectedBook?.id && chapters && (
 							<li>
 								<ChapterGrid chapters={chapters} chapterId={chapterId} />
 							</li>
