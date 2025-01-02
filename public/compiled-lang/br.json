@@ -725,12 +725,6 @@
       "value": "Versão da Bíblia"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 livros"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -741,24 +735,6 @@
     {
       "type": 0,
       "value": "Patrocinador"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Site"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Bíblia"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "A melhor forma de aprender sobre a sã doutrina é por meio da Palavra de Deus. Com as nossas Bíblias em áudio, você poderá ouvir grandes ensinamentos do maior professor de todos."
     }
   ],
   "bible__title": [
@@ -835,38 +811,6 @@
     {
       "type": 0,
       "value": " no AudioVerse"
-    }
-  ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "contar"
-    },
-    {
-      "type": 0,
-      "value": " capítulos"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abreviação"
-    },
-    {
-      "type": 0,
-      "value": " Bíblia"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 livros"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Mostrar todos"
     }
   ],
   "cardCollection__showAll": [
@@ -3879,12 +3823,6 @@
       "value": "Anterior"
     }
   ],
-  "organism-recording__collectionInfoTitle": [
-    {
-      "type": 0,
-      "value": "Bíblia Sagrada"
-    }
-  ],
   "organism-recording__conferenceInfoTitle": [
     {
       "type": 0,
@@ -4125,6 +4063,18 @@
     {
       "type": 0,
       "value": "Nossa História"
+    }
+  ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
     }
   ],
   "personTypeLockup_type": [

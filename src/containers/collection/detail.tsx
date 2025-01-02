@@ -20,11 +20,11 @@ import { BaseColors } from '~lib/constants';
 import { formatDateRange } from '~lib/date';
 import root from '~lib/routes';
 import { useFormattedDuration } from '~lib/time';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import ConferencePresenters from '~src/components/organisms/cardSlider/section/conferencePresenters';
 import ConferenceSeries from '~src/components/organisms/cardSlider/section/conferenceSeries';
 import ConferenceTeachings from '~src/components/organisms/cardSlider/section/conferenceTeachings';
 import AndFailStates from '~src/components/templates/andFailStates';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { GetCollectionDetailPageDataQuery } from './__generated__/detail';

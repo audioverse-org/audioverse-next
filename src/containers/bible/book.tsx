@@ -7,7 +7,6 @@ import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import { PlayerFragment } from '~components/molecules/__generated__/player';
 import { SequenceNavFragment } from '~components/molecules/__generated__/sequenceNav';
-import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
 import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
@@ -18,18 +17,19 @@ import SequenceNav from '~components/molecules/sequenceNav';
 import Tease from '~components/molecules/tease';
 import TeaseRecording from '~components/molecules/teaseRecording';
 import { PlaybackContext } from '~components/templates/andPlaybackContext';
+import { BaseColors } from '~lib/constants';
+import root from '~lib/routes';
+import IconBack from '~public/img/icons/icon-back-light.svg';
+import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
+import { RecordingContentType } from '~src/__generated__/graphql';
+import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
+import AndFailStates from '~src/components/templates/andFailStates';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import {
 	IBibleBook,
 	IBibleBookChapter,
 	IBibleVersion,
-} from '~lib/api/bibleBrain';
-import { BaseColors } from '~lib/constants';
-import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
-import IconBack from '~public/img/icons/icon-back-light.svg';
-import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
-import { RecordingContentType } from '~src/__generated__/graphql';
-import AndFailStates from '~src/components/templates/andFailStates';
+} from '~src/services/fcbh/types';
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
@@ -117,6 +117,8 @@ function BookInner({
 			id: chapter?.id || '',
 			title: chapter?.title || '',
 			canonicalPath: makeCanonicalPath(toRecordingChapterNumber),
+			contentType: RecordingContentType.BibleChapter,
+			recordingContentType: RecordingContentType.BibleChapter,
 			duration: chapter?.duration || 0,
 			audioFiles: [
 				{
@@ -147,7 +149,6 @@ function BookInner({
 			)}`,
 			sequence: null,
 			collection: null,
-			recordingContentType: RecordingContentType.BibleChapter,
 			sponsor: {
 				title: 'Faith Comes By Hearing',
 			},

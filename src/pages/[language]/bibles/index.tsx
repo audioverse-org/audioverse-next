@@ -1,3 +1,4 @@
+// import fs from 'fs';
 import {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
@@ -5,48 +6,45 @@ import {
 } from 'next';
 
 import { IBaseProps } from '~containers/base';
-import { getAudiobibleVersionsData } from '~containers/bible/__generated__/versions';
-import Versions, { VersionsProps } from '~containers/bible/versions';
-import { getBibles } from '~lib/api/bibleBrain';
+import Bible, { BibleIndexProps } from '~containers/bible';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
-import getIntl from '~lib/getIntl';
-import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import root from '~lib/routes';
+import getBibles from '~src/lib/getBibles';
+import getIntl from '~src/lib/getIntl';
+import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
-export default Versions;
+export default Bible;
 
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string }>): Promise<
-	GetStaticPropsResult<VersionsProps & IBaseProps>
+	GetStaticPropsResult<BibleIndexProps & IBaseProps>
 > {
-	const response = await getBibles().catch((e) => {
-		console.log(e);
-		return null;
-	});
-	const apiBibles = await getAudiobibleVersionsData({
-		language: getLanguageIdByRoute(params?.language),
-	}).catch(() => ({ collections: { nodes: [] } }));
+	const languageRoute = params?.language || 'en';
+	const languageId = getLanguageIdByRoute(languageRoute);
+	const intl = await getIntl(languageId);
+	const { fcbh, api, all } = await getBibles(languageId);
 
-	if (!apiBibles?.collections.nodes) {
+	if (!api) {
 		return {
 			notFound: true,
 			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 
-	const intl = await getIntl(getLanguageIdByRoute(params?.language));
+	// write `all` to a file
+	// fs.writeFileSync('.temp.bibles.json', JSON.stringify(all, null, 2));
+	// throw new Error('write `all` to a file');
+
 	return {
 		props: {
-			versions: [...(response || []), ...apiBibles.collections.nodes].sort(
-				(a, b) => a.title.localeCompare(b.title),
-			),
+			versions: all,
 			title: intl.formatMessage({
 				id: 'bible__title',
 				defaultMessage: 'Bible',
 			}),
 		},
-		revalidate: response ? REVALIDATE : REVALIDATE_FAILURE,
+		revalidate: fcbh ? REVALIDATE : REVALIDATE_FAILURE,
 	};
 }
 

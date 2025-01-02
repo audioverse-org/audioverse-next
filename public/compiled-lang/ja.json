@@ -725,12 +725,6 @@
       "value": "聖書バージョン"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66巻"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -741,24 +735,6 @@
     {
       "type": 0,
       "value": "主催者"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "聖書"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "確実な教理を学ぶ方法は、神の御言葉を聞くのがベスト。オーディオバイブルを通して最も偉大な教師から最も大切な教え聞くことができます。"
     }
   ],
   "bible__title": [
@@ -835,38 +811,6 @@
     {
       "type": 0,
       "value": " on AudioVerse"
-    }
-  ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": "章"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abbreviation"
-    },
-    {
-      "type": 0,
-      "value": "聖書"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66巻"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Show All"
     }
   ],
   "cardCollection__showAll": [
@@ -3887,12 +3831,6 @@
       "value": "前のに戻る"
     }
   ],
-  "organism-recording__collectionInfoTitle": [
-    {
-      "type": 0,
-      "value": "Parent Bible"
-    }
-  ],
   "organism-recording__conferenceInfoTitle": [
     {
       "type": 0,
@@ -4133,6 +4071,18 @@
     {
       "type": 0,
       "value": "Our Story"
+    }
+  ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
     }
   ],
   "personTypeLockup_type": [

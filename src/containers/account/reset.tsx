@@ -7,9 +7,9 @@ import Button from '~components/molecules/button';
 import Input from '~components/molecules/form/input';
 import { login } from '~lib/api/login';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
-import { useQueryString } from '~lib/useQueryString';
 import LogoLarge from '~public/img/logo-large.svg';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import { useQueryString } from '~src/lib/hooks/useQueryString';
 
 import { useResetPasswordMutation } from './__generated__/reset';
 import styles from './reset.module.scss';

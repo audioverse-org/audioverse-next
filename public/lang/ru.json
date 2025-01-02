@@ -47,20 +47,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "Версия Библии"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66 книг"
-  },
   "bibleVersion__description": {
     "string": "Описание"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Организатор"
-  },
-  "bibleVersions__heading": {
-    "string": "Библия"
-  },
-  "bibleVersions__intro": {
-    "string": "Лучший способ постичь здравое учение Иисеса Христа - слушать Слово Божье. Наша аудио Библия поможет вам в этом."
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -69,15 +60,6 @@
   "blogDetailPage__readingDuration": {
     "comment": "Blog post detail reading duration",
     "string": "{duration} прочитано"
-  },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count} главы"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation} Библия"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66 книг"
   },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
@@ -1648,9 +1630,6 @@
   "bibleBook__typeLabel": {
     "string": "KJV Bible"
   },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
-  },
   "bible__title": {
     "string": "Библия"
   },
@@ -1674,9 +1653,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
   },
   "cardCollection__showAll": {
     "string": "Show All"
@@ -2261,9 +2237,6 @@
   "organism-recording__backToChapterInfo": {
     "string": "Back to Chapter Info"
   },
-  "organism-recording__collectionInfoTitle": {
-    "string": "Parent Bible"
-  },
   "organism-recording__readAlongLabel": {
     "string": "Read Along"
   },
@@ -2744,5 +2717,13 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "passageNavigation__selector-grid": {
+    "comment": "Switch to grid view",
+    "string": "Grid"
+  },
+  "passageNavigation__selector-list": {
+    "comment": "Switch to list view",
+    "string": "List"
   }
 }

@@ -14,21 +14,26 @@ import {
 import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import { BibleIndexProps } from '~src/containers/bible';
+import getBibles from '~src/lib/getBibles';
+import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 
 export default Recording;
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ id: string }>): Promise<
+}: GetStaticPropsContext<{ id: string; language: string }>): Promise<
 	GetStaticPropsResult<
 		{
 			recording: RecordingFragment;
-		} & IBaseProps
+		} & IBaseProps &
+			BibleIndexProps
 	>
 > {
 	const { recording } = await getAudiobibleBookDetailData({
 		id: params?.id || '',
 	});
+
 	if (
 		!recording ||
 		recording.contentType !== RecordingContentType.BibleChapter
@@ -39,12 +44,24 @@ export async function getStaticProps({
 		};
 	}
 
+	const languageRoute = params?.language || 'en';
+	const languageId = getLanguageIdByRoute(languageRoute);
+	const { fcbh, api, all } = await getBibles(languageId);
+
+	if (!api) {
+		return {
+			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
+		};
+	}
+
 	return {
 		props: {
+			versions: all,
 			recording,
 			title: recording?.title,
 		},
-		revalidate: REVALIDATE,
+		revalidate: fcbh ? REVALIDATE : REVALIDATE_FAILURE,
 	};
 }
 

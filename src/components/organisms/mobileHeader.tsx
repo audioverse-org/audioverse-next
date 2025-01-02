@@ -9,9 +9,9 @@ import Mininav from '~components/molecules/mininav';
 import Header from '~components/organisms/header';
 import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
-import { useNavigationItems } from '~lib/useNavigationItems';
 import MoreIcon from '~public/img/icons/icon-more.svg';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import { useNavigationItems } from '~src/lib/hooks/useNavigationItems';
 
 import OpenAppButton from '../molecules/openAppButton';
 import styles from './mobileHeader.module.scss';

@@ -725,12 +725,6 @@
       "value": "Версия Библии"
     }
   ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 книг"
-    }
-  ],
   "bibleVersion__description": [
     {
       "type": 0,
@@ -741,24 +735,6 @@
     {
       "type": 0,
       "value": "Организатор"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Библия"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "Лучший способ постичь здравое учение Иисеса Христа - слушать Слово Божье. Наша аудио Библия поможет вам в этом."
     }
   ],
   "bible__title": [
@@ -835,38 +811,6 @@
     {
       "type": 0,
       "value": " on AudioVerse"
-    }
-  ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": " главы"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abbreviation"
-    },
-    {
-      "type": 0,
-      "value": " Библия"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 книг"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Show All"
     }
   ],
   "cardCollection__showAll": [
@@ -3879,12 +3823,6 @@
       "value": "Предыдущее"
     }
   ],
-  "organism-recording__collectionInfoTitle": [
-    {
-      "type": 0,
-      "value": "Parent Bible"
-    }
-  ],
   "organism-recording__conferenceInfoTitle": [
     {
       "type": 0,
@@ -4125,6 +4063,18 @@
     {
       "type": 0,
       "value": "Our Story"
+    }
+  ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
     }
   ],
   "personTypeLockup_type": [

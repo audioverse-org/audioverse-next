@@ -55,7 +55,7 @@ export async function getPaginatedStaticProps<T, N>(
 	return formatPaginatedStaticProps(data, nodes, count, +pageIndex, extraProps);
 }
 
-export function formatPaginatedStaticProps<T, N>(
+function formatPaginatedStaticProps<T, N>(
 	data: T | null,
 	nodes: N[],
 	count: number,

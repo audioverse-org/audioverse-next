@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 
 import { ConferencePersonFragment } from '~src/components/molecules/card/__generated__/conferencePerson';
 import CardPerson from '~src/components/molecules/card/person';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
 
 import Section from '.';
 import { useInfiniteGetSectionConferencePresentersQuery } from './__generated__/conferencePresenters';

@@ -8,7 +8,7 @@ import Pagination from '~components/molecules/pagination';
 import AboutNav from '~components/organisms/aboutNav';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import { GetTestimoniesPageDataQuery } from './__generated__/testimonies';
 import styles from './testimonies.module.scss';

@@ -9,15 +9,3 @@ export function filterByExpectation<T>(items: T[], expectation: unknown): T[] {
 		return false;
 	});
 }
-
-export function filterExpectations<T, E>(item: T, expectations: E[]): E[] {
-	return expectations.filter((expectation) => {
-		try {
-			expect(item).toEqual(expectation);
-			return true;
-		} catch (_e) {
-			// noop
-		}
-		return false;
-	});
-}

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import Button from '~components/molecules/button';
 import Modal from '~components/organisms/modal';
 import root, { isRedirectRouteAllowed } from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import styles from './buttonGuest.module.scss';
 

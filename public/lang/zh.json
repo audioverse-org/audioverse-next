@@ -47,20 +47,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "圣经版本"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66本书"
-  },
   "bibleVersion__description": {
     "string": "描述"
   },
   "bibleVersion__sponsorLabel": {
     "string": "赞助者"
-  },
-  "bibleVersions__heading": {
-    "string": "圣经"
-  },
-  "bibleVersions__intro": {
-    "string": "学习纯正教义的最佳方式是聆听“上帝的道”。我们的音频圣经让您能够聆听最伟大之教师的重要教导。"
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -69,15 +60,6 @@
   "blogDetailPage__readingDuration": {
     "comment": "Blog post detail reading duration",
     "string": "{duration} 朗读"
-  },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count} 章"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation} 圣经"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66本书"
   },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
@@ -1651,9 +1633,6 @@
   "bibleBook__typeLabel": {
     "string": "KJV Bible"
   },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
-  },
   "bible__title": {
     "string": "圣经"
   },
@@ -1677,9 +1656,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
   },
   "cardCollection__showAll": {
     "string": "Show All"
@@ -2264,9 +2240,6 @@
   "organism-recording__backToChapterInfo": {
     "string": "Back to Chapter Info"
   },
-  "organism-recording__collectionInfoTitle": {
-    "string": "Parent Bible"
-  },
   "organism-recording__readAlongLabel": {
     "string": "Read Along"
   },
@@ -2744,5 +2717,13 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "passageNavigation__selector-grid": {
+    "comment": "Switch to grid view",
+    "string": "Grid"
+  },
+  "passageNavigation__selector-list": {
+    "comment": "Switch to list view",
+    "string": "List"
   }
 }

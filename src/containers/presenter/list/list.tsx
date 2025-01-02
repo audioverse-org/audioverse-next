@@ -8,7 +8,7 @@ import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
 import JumpBar from '~components/molecules/jumpBar';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import {
 	GetPersonListLetterCountsQuery,

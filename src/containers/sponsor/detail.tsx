@@ -23,10 +23,10 @@ import Tease from '~components/molecules/tease';
 import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
 import { CatalogEntityType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { GetSponsorDetailPageDataQuery } from './__generated__/detail';

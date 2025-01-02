@@ -374,23 +374,11 @@
   "bibleVersionTypeLockup__type": {
     "string": "Bible Version"
   },
-  "bibleVersion__booksLabel": {
-    "string": "66 Books"
-  },
   "bibleVersion__description": {
     "string": "Description"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Sponsor"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
-  },
-  "bibleVersions__heading": {
-    "string": "Bible"
-  },
-  "bibleVersions__intro": {
-    "string": "The best way to learn sound doctrine is by listening to the Word of God. Our audio Bibles give you the ability to listen to great teachings from the greatest teacher of all."
   },
   "bible__title": {
     "string": "Bible"
@@ -423,18 +411,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
-  },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count} chapters"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation} Bible"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66 Books"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
   },
   "cardCollection__showAll": {
     "string": "Show All"
@@ -1856,9 +1832,6 @@
     "comment": "recording previous button label",
     "string": "Previous"
   },
-  "organism-recording__collectionInfoTitle": {
-    "string": "Parent Bible"
-  },
   "organism-recording__conferenceInfoTitle": {
     "comment": "Recording conference info title",
     "string": "Parent Conference"
@@ -1982,6 +1955,14 @@
   },
   "ourStory__title": {
     "string": "Our Story"
+  },
+  "passageNavigation__selector-grid": {
+    "comment": "Switch to grid view",
+    "string": "Grid"
+  },
+  "passageNavigation__selector-list": {
+    "comment": "Switch to list view",
+    "string": "List"
   },
   "personTypeLockup_type": {
     "string": "Presenter"

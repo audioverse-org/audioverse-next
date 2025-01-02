@@ -7,15 +7,19 @@ import videojs from 'video.js';
 import AndMiniplayer from '~components/templates/andMiniplayer';
 import AndPlaybackContext from '~components/templates/andPlaybackContext';
 import { BookProps } from '~containers/bible/book';
-import * as bibleBrain from '~lib/api/bibleBrain';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '~pages/[language]/bibles/[id]/[book]/[chapter]';
+import * as bibleBrain from '~src/services/fcbh/getBible';
+import { getBibleBookChapters } from '~src/services/fcbh/getBibleBookChapters';
+import { getBibles } from '~src/services/fcbh/getBibles';
+import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
 
-jest.mock('~lib/api/bibleBrain');
+jest.mock('~services/fcbh/getBibles');
+jest.mock('~services/fcbh/getBibleBookChapters');
 jest.mock('video.js');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
@@ -47,8 +51,8 @@ function loadPageData() {
 				},
 			},
 		],
-	} as bibleBrain.IBibleVersion);
-	jest.spyOn(bibleBrain, 'getBibleBookChapters').mockResolvedValue([
+	} as IBibleVersion);
+	jest.mocked(getBibleBookChapters).mockResolvedValue([
 		{
 			id: 'GEN/1',
 			duration: 123,
@@ -56,21 +60,24 @@ function loadPageData() {
 			title: 'the_chapter_title',
 			url: 'https://example.com',
 		},
-	] as bibleBrain.IBibleBookChapter[]);
+	] as IBibleBookChapter[]);
 }
 
 describe('Bible book detail page', () => {
 	let scrollToProto: any;
+
 	beforeAll(() => {
 		scrollToProto = Element.prototype.scrollTo;
 		Element.prototype.scrollTo = () => void 0;
 	});
+
 	afterAll(() => {
 		Element.prototype.scrollTo = scrollToProto;
 	});
 
 	beforeEach(() => {
 		setPlayerMock();
+
 		__loadRouter({
 			asPath: '/en/bibles/ENGESVC/Gen/1',
 			query: {
@@ -78,6 +85,10 @@ describe('Bible book detail page', () => {
 				book: 'the_book_shortname',
 				chapter: '1',
 			},
+		});
+
+		window.fetch = jest.fn().mockReturnValueOnce({
+			catch: () => undefined,
 		});
 	});
 
@@ -88,7 +99,7 @@ describe('Bible book detail page', () => {
 	});
 
 	it('generates paths', async () => {
-		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
+		jest.mocked(getBibles).mockResolvedValue([
 			{
 				id: 'the_version_id',
 				abbreviation: 'KJV',
@@ -103,7 +114,7 @@ describe('Bible book detail page', () => {
 						chapters: [1],
 					},
 				],
-			} as bibleBrain.IBibleVersion,
+			} as IBibleVersion,
 		]);
 
 		const { paths } = await getStaticPaths();
@@ -147,10 +158,6 @@ describe('Bible book detail page', () => {
 	});
 
 	it('includes player', async () => {
-		window.fetch = jest.fn().mockReturnValueOnce({
-			catch: () => undefined,
-		});
-
 		loadPageData();
 
 		const { getAllByLabelText } = await renderPage();

@@ -4,3 +4,4 @@
 /graphql-codegen/dist
 /node_modules
 schema.graphql
+**/*.graphql
