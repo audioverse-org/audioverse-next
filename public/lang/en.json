@@ -1832,9 +1832,6 @@
     "comment": "recording previous button label",
     "string": "Previous"
   },
-  "organism-recording__collectionInfoTitle": {
-    "string": "Parent Bible"
-  },
   "organism-recording__conferenceInfoTitle": {
     "comment": "Recording conference info title",
     "string": "Parent Conference"

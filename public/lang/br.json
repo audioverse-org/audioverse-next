@@ -1521,9 +1521,6 @@
     "comment": "gravando a etiqueta do botão anterior",
     "string": "Anterior"
   },
-  "organism-recording__collectionInfoTitle": {
-    "string": "Bíblia Sagrada"
-  },
   "organism-recording__conferenceInfoTitle": {
     "comment": "Título da Conferencia de gravação",
     "string": "Conferencia principal"

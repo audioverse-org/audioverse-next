@@ -245,14 +245,9 @@ function RecordingInner({
 			),
 		});
 	}
-	if (collection) {
+	if (collection && !isBibleChapter) {
 		details.push({
-			term: isBibleChapter ? (
-				<FormattedMessage
-					id="organism-recording__collectionInfoTitle"
-					defaultMessage="Parent Bible"
-				/>
-			) : (
+			term: (
 				<FormattedMessage
 					id="organism-recording__conferenceInfoTitle"
 					defaultMessage="Parent Conference"

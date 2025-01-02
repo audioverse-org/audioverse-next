@@ -2237,9 +2237,6 @@
   "organism-recording__backToChapterInfo": {
     "string": "Back to Chapter Info"
   },
-  "organism-recording__collectionInfoTitle": {
-    "string": "Parent Bible"
-  },
   "organism-recording__readAlongLabel": {
     "string": "Read Along"
   },
