@@ -48,6 +48,22 @@ $button-height: 31px;
 	}
 }
 
+.superHero {
+	font-weight: 700;
+	font-size: 18px;
+	&,
+	&:hover {
+		color: $ts-white;
+	}
+	background: $ts-red;
+	border: 1px solid $ts-red;
+	box-shadow: $ts-shadow-small-default;
+	&:focus {
+		border: 1px solid $ts-dark;
+		outline: none;
+	}
+}
+
 .primary,
 .primaryInverse {
 	box-shadow: $ts-shadow-small-default;
@@ -114,6 +130,7 @@ $button-height: 31px;
 }
 
 .super,
+.superHero,
 .primary,
 .primaryInverse,
 .secondary,

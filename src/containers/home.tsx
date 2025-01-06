@@ -20,7 +20,6 @@ import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import IconForward from '~public/img/icons/icon-forward-light.svg';
 import ImagePlayers from '~public/img/players.jpeg';
-import useIsLoggedIn from '~src/lib/hooks/useIsLoggedIn';
 
 import { GetHomeStaticPropsQuery } from './__generated__/home';
 import styles from './home.module.scss';
@@ -33,7 +32,7 @@ export type HomeProps = {
 export default function Home({ data }: HomeProps): JSX.Element {
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
-	const isLoggedIn = useIsLoggedIn();
+	
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
@@ -49,52 +48,40 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<>
 							<Heading1 className={styles.tagline}>
 								<FormattedMessage
-									id="homePage__soundDoctrineTitle"
-									defaultMessage="Sound Doctrine"
-									description="home: Sound Doctrine section title"
+									id="homePage__newDevotionalTitle"
+									defaultMessage="New Devotional"
+									description="home: New Devotional section title"
 								/>
 							</Heading1>
 							<p className={styles.paragraph}>
 								<FormattedMessage
-									id="homePage__soundDoctrineText"
-									defaultMessage="AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
-									description="home page sound doctrine text"
+									id="homePage__newDevotionalText"
+									defaultMessage="Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+									description="home page new devotional text"
 								/>
 							</p>
 							<div className={styles.primaryCtas}>
 								<Button
-									type="super"
-									href={root.lang(languageRoute).discover.get()}
+									type="superHero"
+									href="https://devotionals.audioverse.org/"
 									text={
 										<FormattedMessage
-											id="homePage__DiscoverAudioButtonLabel"
-											defaultMessage="Discover Audio"
+											id="homePage__newDevotionalButtonLabel"
+											defaultMessage="Sign Up"
 										/>
 									}
 								/>
-								{!isLoggedIn && (
-									<Button
-										type="primaryInverse"
-										href={root.lang(languageRoute).account.register.get()}
-										text={
-											<FormattedMessage
-												id="homePage__CreateAccountButtonLabel"
-												defaultMessage="Create an Account"
-											/>
-										}
-									/>
-								)}
 							</div>
 						</>
 					}
 					media={
 						<div className={styles.bannerImage}>
 							<Image
-								src="/img/hero-av.jpg"
+								src="/img/hero-devotional.png"
 								alt={intl.formatMessage({
 									id: 'homePage__bannerImageAlt',
 									defaultMessage:
-										'Young woman with headphones listening to music and reading a book.',
+										'Young woman with phone and reading a book.',
 									description: 'home page banner image alt',
 								})}
 								layout="fill"

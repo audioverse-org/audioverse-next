@@ -7,6 +7,7 @@ import styles from './button.module.scss';
 
 export type IButtonType =
 	| 'super'
+	| 'superHero'
 	| 'primary'
 	| 'primaryInverse'
 	| 'secondary'
