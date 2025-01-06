@@ -32,7 +32,7 @@ export type HomeProps = {
 export default function Home({ data }: HomeProps): JSX.Element {
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
-	
+
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
@@ -80,8 +80,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								src="/img/hero-devotional.png"
 								alt={intl.formatMessage({
 									id: 'homePage__bannerImageAlt',
-									defaultMessage:
-										'Young woman with phone and reading a book.',
+									defaultMessage: 'Young woman with phone and reading a book.',
 									description: 'home page banner image alt',
 								})}
 								layout="fill"

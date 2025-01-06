@@ -310,14 +310,6 @@
     "comment": "home page recent posts section title",
     "string": "最新博客文章"
   },
-  "homePage__soundDoctrineText": {
-    "comment": "home page sound doctrine text",
-    "string": "AudioVerse是一个策划发布复临信徒最佳音频内容的平台。通过歌曲、讲道、有声书和圣经阅读，接受挑战与启迪，增进你与耶稣的关系。"
-  },
-  "homePage__soundDoctrineTitle": {
-    "comment": "home: Sound Doctrine section title",
-    "string": "纯正教义"
-  },
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
     "string": "捐赠"
@@ -2127,12 +2119,6 @@
   "helpWidget__buttonLabel": {
     "string": "Help"
   },
-  "homePage__CreateAccountButtonLabel": {
-    "string": "Create an Account"
-  },
-  "homePage__DiscoverAudioButtonLabel": {
-    "string": "探索音频"
-  },
   "homePage__bannerImageAlt": {
     "comment": "home page banner image alt",
     "string": "Young woman with headphones listening to music and reading a book."
@@ -2744,5 +2730,16 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "homePage__newDevotionalButtonLabel": {
+    "string": "创建账户"
+  },
+  "homePage__newDevotionalText": {
+    "comment": "home page new devotional text",
+    "string": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+  },
+  "homePage__newDevotionalTitle": {
+    "comment": "home: New Devotional section title",
+    "string": "New Devotional"
   }
 }

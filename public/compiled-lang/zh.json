@@ -2725,18 +2725,6 @@
       "value": "Help"
     }
   ],
-  "homePage__CreateAccountButtonLabel": [
-    {
-      "type": 0,
-      "value": "Create an Account"
-    }
-  ],
-  "homePage__DiscoverAudioButtonLabel": [
-    {
-      "type": 0,
-      "value": "探索音频"
-    }
-  ],
   "homePage__bannerImageAlt": [
     {
       "type": 0,
@@ -2787,6 +2775,24 @@
       "value": "Latest Content"
     }
   ],
+  "homePage__newDevotionalButtonLabel": [
+    {
+      "type": 0,
+      "value": "创建账户"
+    }
+  ],
+  "homePage__newDevotionalText": [
+    {
+      "type": 0,
+      "value": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+    }
+  ],
+  "homePage__newDevotionalTitle": [
+    {
+      "type": 0,
+      "value": "New Devotional"
+    }
+  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -2815,18 +2821,6 @@
     {
       "type": 0,
       "value": "See All Blog Posts"
-    }
-  ],
-  "homePage__soundDoctrineText": [
-    {
-      "type": 0,
-      "value": "AudioVerse是一个策划发布复临信徒最佳音频内容的平台。通过歌曲、讲道、有声书和圣经阅读，接受挑战与启迪，增进你与耶稣的关系。"
-    }
-  ],
-  "homePage__soundDoctrineTitle": [
-    {
-      "type": 0,
-      "value": "纯正教义"
     }
   ],
   "homePage__supportSectionCTA": [

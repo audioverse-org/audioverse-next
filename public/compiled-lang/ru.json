@@ -2721,18 +2721,6 @@
       "value": "Help"
     }
   ],
-  "homePage__CreateAccountButtonLabel": [
-    {
-      "type": 0,
-      "value": "Create an Account"
-    }
-  ],
-  "homePage__DiscoverAudioButtonLabel": [
-    {
-      "type": 0,
-      "value": "Открыть аудио"
-    }
-  ],
   "homePage__bannerImageAlt": [
     {
       "type": 0,
@@ -2783,6 +2771,24 @@
       "value": "Latest Content"
     }
   ],
+  "homePage__newDevotionalButtonLabel": [
+    {
+      "type": 0,
+      "value": "Создать учетную запись"
+    }
+  ],
+  "homePage__newDevotionalText": [
+    {
+      "type": 0,
+      "value": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+    }
+  ],
+  "homePage__newDevotionalTitle": [
+    {
+      "type": 0,
+      "value": "New Devotional"
+    }
+  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -2811,18 +2817,6 @@
     {
       "type": 0,
       "value": "See All Blog Posts"
-    }
-  ],
-  "homePage__soundDoctrineText": [
-    {
-      "type": 0,
-      "value": "AudioVerse - это платформа, на которой собраны лучшие адвентистские аудиоматериалы. Разберитесь в сложных библейских темах, вдохновляйтесь и развивайте отношения с Богом с помощью песн, проповедей, аудиокниг и библейских чтений."
-    }
-  ],
-  "homePage__soundDoctrineTitle": [
-    {
-      "type": 0,
-      "value": "Здравое библейское учение"
     }
   ],
   "homePage__supportSectionCTA": [

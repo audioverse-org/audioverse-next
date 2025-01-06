@@ -1085,12 +1085,6 @@
   "helpWidget__buttonLabel": {
     "string": "Ajuda"
   },
-  "homePage__CreateAccountButtonLabel": {
-    "string": "Criar uma conta"
-  },
-  "homePage__DiscoverAudioButtonLabel": {
-    "string": "Explorar áudios"
-  },
   "homePage__downloadAppSectionText": {
     "comment": "página inicial de download do texto da seção do aplicativo",
     "string": "Se você tem um smartphone, baixe o aplicativo para levar o AudioVerse com você aonde quer que você vá. Transmita ensinamentos de qualquer lugar ou baixe em seu dispositivo. Novo aplicativo chegando em 2022."
@@ -1125,14 +1119,6 @@
   },
   "homePage__recentPostsSeeAll": {
     "string": "Ver todas as postagens do blog"
-  },
-  "homePage__soundDoctrineText": {
-    "comment": "página inicial texto de sã doutrina",
-    "string": "O AudioVerse é uma plataforma com o melhor conteúdo de áudio Adventista. Se desafie e inspire-se a crescer em seu relacionamento com Jesus por meio de canções, sermões, audiolivros e leituras bíblicas."
-  },
-  "homePage__soundDoctrineTitle": {
-    "comment": "Página principal: Título da seção Sã doutrina",
-    "string": "Sã doutrina"
   },
   "homePage__supportSectionCTA": {
     "comment": "página inicial seção de suporte cta",
@@ -2744,5 +2730,16 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "homePage__newDevotionalButtonLabel": {
+    "string": "Criar conta"
+  },
+  "homePage__newDevotionalText": {
+    "comment": "home page new devotional text",
+    "string": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+  },
+  "homePage__newDevotionalTitle": {
+    "comment": "home: New Devotional section title",
+    "string": "New Devotional"
   }
 }

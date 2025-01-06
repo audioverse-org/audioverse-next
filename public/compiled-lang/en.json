@@ -2717,22 +2717,10 @@
       "value": "Help"
     }
   ],
-  "homePage__CreateAccountButtonLabel": [
-    {
-      "type": 0,
-      "value": "Create an Account"
-    }
-  ],
-  "homePage__DiscoverAudioButtonLabel": [
-    {
-      "type": 0,
-      "value": "Discover Audio"
-    }
-  ],
   "homePage__bannerImageAlt": [
     {
       "type": 0,
-      "value": "Young woman with headphones listening to music and reading a book."
+      "value": "Young woman with phone and reading a book."
     }
   ],
   "homePage__downloadAppImageAlt": [
@@ -2779,6 +2767,24 @@
       "value": "Latest Content"
     }
   ],
+  "homePage__newDevotionalButtonLabel": [
+    {
+      "type": 0,
+      "value": "Sign Up"
+    }
+  ],
+  "homePage__newDevotionalText": [
+    {
+      "type": 0,
+      "value": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+    }
+  ],
+  "homePage__newDevotionalTitle": [
+    {
+      "type": 0,
+      "value": "New Devotional"
+    }
+  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -2807,18 +2813,6 @@
     {
       "type": 0,
       "value": "See All Blog Posts"
-    }
-  ],
-  "homePage__soundDoctrineText": [
-    {
-      "type": 0,
-      "value": "AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
-    }
-  ],
-  "homePage__soundDoctrineTitle": [
-    {
-      "type": 0,
-      "value": "Sound Doctrine"
     }
   ],
   "homePage__supportSectionCTA": [

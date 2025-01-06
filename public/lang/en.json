@@ -1270,15 +1270,9 @@
   "helpWidget__buttonLabel": {
     "string": "Help"
   },
-  "homePage__CreateAccountButtonLabel": {
-    "string": "Create an Account"
-  },
-  "homePage__DiscoverAudioButtonLabel": {
-    "string": "Discover Audio"
-  },
   "homePage__bannerImageAlt": {
     "comment": "home page banner image alt",
-    "string": "Young woman with headphones listening to music and reading a book."
+    "string": "Young woman with phone and reading a book."
   },
   "homePage__downloadAppImageAlt": {
     "comment": "home page download app image alt",
@@ -1300,6 +1294,17 @@
     "comment": "home page latest content section title",
     "string": "Latest Content"
   },
+  "homePage__newDevotionalButtonLabel": {
+    "string": "Sign Up"
+  },
+  "homePage__newDevotionalText": {
+    "comment": "home page new devotional text",
+    "string": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+  },
+  "homePage__newDevotionalTitle": {
+    "comment": "home: New Devotional section title",
+    "string": "New Devotional"
+  },
   "homePage__newsletterSectionText": {
     "comment": "home page newsletter section text",
     "string": "Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
@@ -1318,14 +1323,6 @@
   },
   "homePage__recentPostsSeeAll": {
     "string": "See All Blog Posts"
-  },
-  "homePage__soundDoctrineText": {
-    "comment": "home page sound doctrine text",
-    "string": "AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
-  },
-  "homePage__soundDoctrineTitle": {
-    "comment": "home: Sound Doctrine section title",
-    "string": "Sound Doctrine"
   },
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",

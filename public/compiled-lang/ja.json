@@ -2729,18 +2729,6 @@
       "value": "Help"
     }
   ],
-  "homePage__CreateAccountButtonLabel": [
-    {
-      "type": 0,
-      "value": "Create an Account"
-    }
-  ],
-  "homePage__DiscoverAudioButtonLabel": [
-    {
-      "type": 0,
-      "value": "ディスカバー オーディオ"
-    }
-  ],
   "homePage__bannerImageAlt": [
     {
       "type": 0,
@@ -2791,6 +2779,24 @@
       "value": "Latest Content"
     }
   ],
+  "homePage__newDevotionalButtonLabel": [
+    {
+      "type": 0,
+      "value": "アカウントを作成"
+    }
+  ],
+  "homePage__newDevotionalText": [
+    {
+      "type": 0,
+      "value": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+    }
+  ],
+  "homePage__newDevotionalTitle": [
+    {
+      "type": 0,
+      "value": "New Devotional"
+    }
+  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -2819,18 +2825,6 @@
     {
       "type": 0,
       "value": "See All Blog Posts"
-    }
-  ],
-  "homePage__soundDoctrineText": [
-    {
-      "type": 0,
-      "value": "AudioVerseはセブンスデー アドベンチストのとっておきのオーディオコンテンツを提供するサイトです。歌、説教、オーディオブックス、聖書の朗読を通して、イエスとの関係を深めるために挑戦され、刺激を受けてください。"
-    }
-  ],
-  "homePage__soundDoctrineTitle": [
-    {
-      "type": 0,
-      "value": "確実な教理"
     }
   ],
   "homePage__supportSectionCTA": [

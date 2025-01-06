@@ -2721,18 +2721,6 @@
       "value": "Ajuda"
     }
   ],
-  "homePage__CreateAccountButtonLabel": [
-    {
-      "type": 0,
-      "value": "Criar uma conta"
-    }
-  ],
-  "homePage__DiscoverAudioButtonLabel": [
-    {
-      "type": 0,
-      "value": "Explorar áudios"
-    }
-  ],
   "homePage__bannerImageAlt": [
     {
       "type": 0,
@@ -2783,6 +2771,24 @@
       "value": "Conteúdo mais recente"
     }
   ],
+  "homePage__newDevotionalButtonLabel": [
+    {
+      "type": 0,
+      "value": "Criar conta"
+    }
+  ],
+  "homePage__newDevotionalText": [
+    {
+      "type": 0,
+      "value": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+    }
+  ],
+  "homePage__newDevotionalTitle": [
+    {
+      "type": 0,
+      "value": "New Devotional"
+    }
+  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -2811,18 +2817,6 @@
     {
       "type": 0,
       "value": "Ver todas as postagens do blog"
-    }
-  ],
-  "homePage__soundDoctrineText": [
-    {
-      "type": 0,
-      "value": "O AudioVerse é uma plataforma com o melhor conteúdo de áudio Adventista. Se desafie e inspire-se a crescer em seu relacionamento com Jesus por meio de canções, sermões, audiolivros e leituras bíblicas."
-    }
-  ],
-  "homePage__soundDoctrineTitle": [
-    {
-      "type": 0,
-      "value": "Sã doutrina"
     }
   ],
   "homePage__supportSectionCTA": [

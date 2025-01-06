@@ -310,14 +310,6 @@
     "comment": "home page mensajes recientes título de la sección",
     "string": "Entradas recientes del blog"
   },
-  "homePage__soundDoctrineText": {
-    "comment": "home page doctrina sana texto",
-    "string": "AudioVerse es una plataforma que reúne lo mejor del contenido adventista en audio. Desafíese e inspírese para crecer en su relación con Jesús por medio de cantos, sermones, audiolibros y lecturas bíblicas."
-  },
-  "homePage__soundDoctrineTitle": {
-    "comment": "inicio: Sana Doctrina título de la sección",
-    "string": "La sana doctrina"
-  },
   "homePage__supportSectionCTA": {
     "comment": "página de inicio sección de soporte cta",
     "string": "Haga una donación"
@@ -2127,12 +2119,6 @@
   "helpWidget__buttonLabel": {
     "string": "Help"
   },
-  "homePage__CreateAccountButtonLabel": {
-    "string": "Create an Account"
-  },
-  "homePage__DiscoverAudioButtonLabel": {
-    "string": "Encontrar audio"
-  },
   "homePage__bannerImageAlt": {
     "comment": "home page banner image alt",
     "string": "Young woman with headphones listening to music and reading a book."
@@ -2744,5 +2730,16 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "homePage__newDevotionalButtonLabel": {
+    "string": "Crear cuenta"
+  },
+  "homePage__newDevotionalText": {
+    "comment": "home page new devotional text",
+    "string": "Begin each day with uplifting daily audio devotionals. Strengthen your faith, deepen your connection with God, and focus your heart as you start the year with inspiring messages."
+  },
+  "homePage__newDevotionalTitle": {
+    "comment": "home: New Devotional section title",
+    "string": "New Devotional"
   }
 }
