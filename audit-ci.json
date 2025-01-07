@@ -35,6 +35,7 @@
 		"GHSA-pxg6-pf52-xh8x|express>cookie", // Used by lighthouse CI, not at runtime
 		"GHSA-3xgq-45jj-v275", // cross-spawn is used by @next/eslint-plugin-next,  audit-ci, cross-env, eslint, and jest. It is not used at runtime
 		"GHSA-7gfc-8cq8-jh5f", // If your Next.js application is hosted on Vercel, this vulnerability has been automatically mitigated, regardless of Next.js version
-		"GHSA-mwcw-c2x4-8c55" // Not used at runtime
+		"GHSA-mwcw-c2x4-8c55", // Not used at runtime
+		"GHSA-7m27-7ghc-44w9" // This vulnerability affects only Next.js deployments using Server Actions. We are not using Server Actions
 	]
 }
