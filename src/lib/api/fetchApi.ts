@@ -74,5 +74,11 @@ export async function fetchApi<TData>(
 		headers['x-av-session'] = sessionToken;
 	}
 
-	return fetchJson({ headers, query, variables });
+	try {
+		return fetchJson({ headers, query, variables });
+	} catch (e) {
+		console.error(`Error fetching from API`);
+		console.log({ query, variables });
+		throw e;
+	}
 }
