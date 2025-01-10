@@ -1,5 +1,6 @@
 import pMemoize from 'p-memoize';
 import pThrottle from 'p-throttle';
+import pTimeout from 'p-timeout';
 
 const API_URL = 'https://4.dbt.io/api';
 const API_KEY = process.env.BIBLE_BRAIN_KEY;
@@ -9,9 +10,12 @@ const throttle = pThrottle({ limit: 50, interval: 1000 });
 async function getResponse<T extends Record<string, unknown>>(
 	route: string,
 ): Promise<T | null> {
-	const result = await fetch(`${API_URL}${route}&v=4&key=${API_KEY}`, {
-		method: 'GET',
-	});
+	const result = await pTimeout(
+		fetch(`${API_URL}${route}&v=4&key=${API_KEY}`, {
+			method: 'GET',
+		}),
+		{ milliseconds: 5000 },
+	);
 
 	const text = await result.text();
 
