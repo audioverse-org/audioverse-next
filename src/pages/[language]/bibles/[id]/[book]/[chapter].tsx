@@ -14,6 +14,11 @@ import { getBibles } from '~src/services/fcbh/getBibles';
 
 export default Book;
 
+const notFound = {
+	notFound: true,
+	revalidate: REVALIDATE_FAILURE,
+} satisfies GetStaticPropsResult<BookProps & IBaseProps>;
+
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{
@@ -28,23 +33,18 @@ export async function getStaticProps({
 		console.log(e);
 		return null;
 	});
-	if (!version) {
-		return {
-			notFound: true,
-			revalidate: REVALIDATE_FAILURE,
-		};
-	}
+
+	if (!version) return notFound;
 
 	const bibleBook = version.books.find(
 		({ book_id }) => `${id}/${book}` === book_id,
 	);
-	if (!bibleBook) {
-		return {
-			notFound: true,
-			revalidate: REVALIDATE_FAILURE,
-		};
-	}
+
+	if (!bibleBook) return notFound;
+
 	const chapters = await getBibleBookChapters(id, bibleBook.testament, book);
+
+	if (!chapters.length) return notFound;
 
 	return {
 		props: {
