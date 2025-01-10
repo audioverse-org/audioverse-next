@@ -16,16 +16,16 @@ export default function ChapterGrid({ chapters, chapterId }: Props) {
 	return (
 		<ul className={styles.chapters}>
 			{chapters?.map((chapter) => {
-				const n = Number(chapter.title.split(' ').pop())
-					.toString()
-					.padStart(2, '0');
+				const n = Number(chapter.title.split(' ').pop());
+				const d = isFinite(n) ? n : 1;
+				const s = d.toString().padStart(2, '0');
 				return (
-					<li key={n} className={styles.chapter}>
+					<li key={s} className={styles.chapter}>
 						<Link
 							className={chapter.id === chapterId ? styles.active : ''}
 							href={`${chapter.canonicalPath}?autoplay`}
 						>
-							{n}
+							{s}
 						</Link>
 					</li>
 				);
