@@ -1,3 +1,4 @@
+import pLimit from 'p-limit';
 import pMemoize from 'p-memoize';
 import pThrottle from 'p-throttle';
 import pTimeout from 'p-timeout';
@@ -10,6 +11,7 @@ const API_URL =
 	'https://graphql-staging.audioverse.org/graphql';
 
 const throttle = pThrottle({ limit: 10, interval: 1000 });
+const limit = pLimit(1);
 
 const getResponse = throttle(
 	async (headers: HeadersInit, query: string, variables: unknown) => {
@@ -42,7 +44,7 @@ const fetchJson = pMemoize(
 		query: string;
 		variables: unknown;
 	}) => {
-		const res = await getResponse(headers, query, variables);
+		const res = await limit(() => getResponse(headers, query, variables));
 
 		if (!res.ok) {
 			console.error({ text: await res.text(), res, query, variables, headers });
