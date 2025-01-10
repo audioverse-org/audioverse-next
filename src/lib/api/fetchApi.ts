@@ -13,17 +13,20 @@ const throttle = pThrottle({ limit: 10, interval: 1000 });
 
 const getResponse = throttle(
 	async (headers: HeadersInit, query: string, variables: unknown) => {
+		const body = JSON.stringify({
+			query,
+			variables,
+		});
+
 		return pTimeout(
 			fetch(API_URL, {
 				method: 'POST',
 				headers,
-				body: JSON.stringify({
-					query,
-					variables,
-				}),
+				body,
 			}),
 			{
 				milliseconds: 5000,
+				message: `Timeout fetching from GraphQL API. Request body: ${body}`,
 			},
 		);
 	},
