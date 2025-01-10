@@ -77,9 +77,9 @@ export async function fetchApi<TData>(
 
 	try {
 		return fetchJson({ headers, query, variables });
-	} catch (e) {
-		console.error(`Error fetching from API`);
-		console.log({ query, variables });
+	} catch (previousError) {
+		const e = new Error('Error fetching from API');
+		Object.assign(e, { query, variables, previousError });
 		throw e;
 	}
 }
