@@ -1,4 +1,5 @@
 import pMemoize from 'p-memoize';
+import pThrottle from 'p-throttle';
 import pTimeout from 'p-timeout';
 
 import { getCurrentRequest } from '~lib/api/storeRequest';
@@ -8,25 +9,25 @@ const API_URL =
 	process.env.NEXT_PUBLIC_API_URL ||
 	'https://graphql-staging.audioverse.org/graphql';
 
-async function getResponse(
-	headers: HeadersInit,
-	query: string,
-	variables: unknown,
-) {
-	return pTimeout(
-		fetch(API_URL, {
-			method: 'POST',
-			headers,
-			body: JSON.stringify({
-				query,
-				variables,
+const throttle = pThrottle({ limit: 10, interval: 1000 });
+
+const getResponse = throttle(
+	async (headers: HeadersInit, query: string, variables: unknown) => {
+		return pTimeout(
+			fetch(API_URL, {
+				method: 'POST',
+				headers,
+				body: JSON.stringify({
+					query,
+					variables,
+				}),
 			}),
-		}),
-		{
-			milliseconds: 5000,
-		},
-	);
-}
+			{
+				milliseconds: 5000,
+			},
+		);
+	},
+);
 
 const fetchJson = pMemoize(
 	async ({
