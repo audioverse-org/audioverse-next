@@ -1,8 +1,8 @@
 import pMemoize from 'p-memoize';
+import pTimeout from 'p-timeout';
 
 import { getCurrentRequest } from '~lib/api/storeRequest';
 import { getSessionToken } from '~lib/cookies';
-import { sleep } from '~lib/sleep';
 
 const API_URL =
 	process.env.NEXT_PUBLIC_API_URL ||
@@ -13,14 +13,19 @@ async function getResponse(
 	query: string,
 	variables: unknown,
 ) {
-	return fetch(API_URL, {
-		method: 'POST',
-		headers,
-		body: JSON.stringify({
-			query,
-			variables,
+	return pTimeout(
+		fetch(API_URL, {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
+				query,
+				variables,
+			}),
 		}),
-	});
+		{
+			milliseconds: 5000,
+		},
+	);
 }
 
 const fetchJson = pMemoize(
@@ -33,28 +38,14 @@ const fetchJson = pMemoize(
 		query: string;
 		variables: unknown;
 	}) => {
-		let res = await getResponse(headers, query, variables);
-		let text = await res.text();
+		const res = await getResponse(headers, query, variables);
 
 		if (!res.ok) {
-			await sleep({ ms: 10000 });
-			res = await getResponse(headers, query, variables);
-			text = await res.text();
-		}
-
-		if (!res.ok) {
-			console.error({ text, res, query, variables, headers });
+			console.error({ text: await res.text(), res, query, variables, headers });
 			throw new Error(`HTTP request failed: ${res.status} ${res.statusText}`);
 		}
 
-		let json;
-
-		try {
-			json = JSON.parse(text);
-		} catch (error) {
-			console.error({ error, text, res, query, variables, headers });
-			throw error;
-		}
+		const json = await res.json();
 
 		if (json.errors) {
 			console.error({
