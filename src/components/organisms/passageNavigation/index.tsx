@@ -156,7 +156,9 @@ export default function PassageNavigation({
 						<>
 							<BookGrid
 								books={books.filter((book) =>
-									BIBLE_BOOKS.slice(0, 39).includes(book.title),
+									BIBLE_BOOKS.slice(0, 39).find(
+										(b) => b.toLowerCase() === book.title.toLowerCase(),
+									),
 								)}
 								selectedBook={book}
 								selectBook={setBook}
@@ -165,7 +167,9 @@ export default function PassageNavigation({
 							<BookGrid
 								className={styles.nt}
 								books={books.filter((book) =>
-									BIBLE_BOOKS.slice(39).includes(book.title),
+									BIBLE_BOOKS.slice(39).find(
+										(b) => b.toLowerCase() === book.title.toLowerCase(),
+									),
 								)}
 								selectedBook={book}
 								selectBook={setBook}
