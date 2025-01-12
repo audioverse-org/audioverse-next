@@ -2010,10 +2010,10 @@
     "string": "As ideias nesta gravação são as de seus colaboradores e podem não necessariamente refletir a visão do AudioVerse."
   },
   "sermonDetailPage__openGraphDescription_audiobook": {
-    "string": "Audiobook fornecido por {patrocinadorNome}"
+    "string": "Audiobook fornecido por {sponsorName}"
   },
   "sermonDetailPage__openGraphDescription_bibleChapter": {
-    "string": "Capítulo da Bíblia fornecido pelo {patrocinadorNome}"
+    "string": "Capítulo da Bíblia fornecido pelo {sponsorName}"
   },
   "sermonDetailPage__openGraphDescription_music": {
     "string": "Música por {speakerName}"
@@ -2130,7 +2130,7 @@
     "string": "Sermões por {nome}"
   },
   "sponsorsConferences__title": {
-    "string": "Conferencias por {patrocinadorNome}"
+    "string": "Conferencias por {sponsorName}"
   },
   "sponsorsList__title": {
     "string": "Todos patrocinadores"

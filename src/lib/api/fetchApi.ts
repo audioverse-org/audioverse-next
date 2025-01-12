@@ -6,24 +6,24 @@ const API_URL =
 	process.env.NEXT_PUBLIC_API_URL ||
 	'https://graphql-staging.audioverse.org/graphql';
 
-const getResponse = async (
-	headers: HeadersInit,
-	query: string,
-	variables: unknown,
-): Promise<Response> => {
-	const body = JSON.stringify({
-		query,
-		variables,
-	});
+const getResponse = manageAsyncFunction(
+	(
+		headers: HeadersInit,
+		query: string,
+		variables: unknown,
+	): Promise<Response> => {
+		const body = JSON.stringify({
+			query,
+			variables,
+		});
 
-	return fetch(API_URL, {
-		method: 'POST',
-		headers,
-		body,
-	});
-};
-
-const wrappedGetResponse = manageAsyncFunction(getResponse);
+		return fetch(API_URL, {
+			method: 'POST',
+			headers,
+			body,
+		});
+	},
+);
 
 const fetchJson = async ({
 	headers,
@@ -34,7 +34,7 @@ const fetchJson = async ({
 	query: string;
 	variables: unknown;
 }) => {
-	const res = await wrappedGetResponse(headers, query, variables);
+	const res = await getResponse(headers, query, variables);
 
 	if (!res.ok) {
 		console.error({ text: await res.text(), res, query, variables, headers });

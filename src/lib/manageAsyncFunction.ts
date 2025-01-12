@@ -38,14 +38,20 @@ export function manageAsyncFunction<
 	const throttledFn = throttle(fn);
 	const limitedFn = (...args: Parameters<T>) =>
 		limit(() => throttledFn(...args));
-	const retriedFn = (...args: Parameters<T>) =>
-		pRetry(() => limitedFn(...args), {
-			retries: opts.retries,
-		});
 	const timedFn = (...args: Parameters<T>) =>
-		pTimeout(retriedFn(...args), {
+		pTimeout(limitedFn(...args), {
 			milliseconds: opts.timeoutMs,
+			message: `Function timed out after ${opts.timeoutMs}ms. Args: ${JSON.stringify(args)}`,
+		});
+	const retriedFn = (...args: Parameters<T>) =>
+		pRetry(() => timedFn(...args), {
+			retries: opts.retries,
+			onFailedAttempt: (error) => {
+				console.log(
+					`Attempt ${error.attemptNumber} failed. There are ${error.retriesLeft} retries left.`,
+				);
+			},
 		});
 
-	return pMemoize(timedFn) as ManagedAsyncFunction<T>;
+	return pMemoize(retriedFn) as ManagedAsyncFunction<T>;
 }

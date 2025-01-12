@@ -5166,7 +5166,7 @@
     },
     {
       "type": 1,
-      "value": "patrocinadorNome"
+      "value": "sponsorName"
     }
   ],
   "sermonDetailPage__openGraphDescription_bibleChapter": [
@@ -5176,7 +5176,7 @@
     },
     {
       "type": 1,
-      "value": "patrocinadorNome"
+      "value": "sponsorName"
     }
   ],
   "sermonDetailPage__openGraphDescription_music": [
@@ -5452,7 +5452,7 @@
     },
     {
       "type": 1,
-      "value": "patrocinadorNome"
+      "value": "sponsorName"
     }
   ],
   "sponsorsListAll__all": [
