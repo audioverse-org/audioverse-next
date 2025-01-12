@@ -61,6 +61,7 @@
         "normalize.css": "^8.0.1",
         "p-limit": "^6.2.0",
         "p-memoize": "^7.1.1",
+        "p-retry": "^6.2.1",
         "p-throttle": "^7.0.0",
         "p-timeout": "^6.1.4",
         "react": "^18.3.1",

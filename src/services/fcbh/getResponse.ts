@@ -1,31 +1,24 @@
-import pMemoize from 'p-memoize';
-import pThrottle from 'p-throttle';
-import pTimeout from 'p-timeout';
+import { manageAsyncFunction } from '~src/lib/manageAsyncFunction';
 
 const API_URL = 'https://4.dbt.io/api';
 const API_KEY = process.env.BIBLE_BRAIN_KEY;
 
-const throttle = pThrottle({ limit: 10, interval: 1000 });
+const doFetch = manageAsyncFunction((route: string) =>
+	fetch(`${API_URL}${route}&v=4&key=${API_KEY}`, {
+		method: 'GET',
+	}),
+);
 
-async function getResponse<T extends Record<string, unknown>>(
+export default async function getResponse<T extends Record<string, unknown>>(
 	route: string,
-): Promise<T | null> {
-	const result = await pTimeout(
-		fetch(`${API_URL}${route}&v=4&key=${API_KEY}`, {
-			method: 'GET',
-		}),
-		{ milliseconds: 5000 },
-	);
+): Promise<T> {
+	const result = await doFetch(route);
 
-	const text = await result.text();
-
-	try {
-		return JSON.parse(text);
-	} catch (e) {
-		console.error(e);
-		console.log(text);
-		return null;
+	if (!result.ok) {
+		throw new Error(
+			`FCBH request failed: ${result.status} ${result.statusText}`,
+		);
 	}
-}
 
-export default pMemoize(throttle(getResponse));
+	return result.json();
+}
