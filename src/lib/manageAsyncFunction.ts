@@ -19,9 +19,9 @@ const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
 	throttleLimit: 3,
 	throttleIntervalMs: 1000,
 	timeoutMs: 7000,
-	retries: 2,
-	retryMinTimeoutMs: 7500,
-	retryMaxTimeoutMs: 15000,
+	retries: 3,
+	retryMinTimeoutMs: 1000,
+	retryMaxTimeoutMs: 10000,
 };
 
 type ManagedAsyncFunction<T extends (...args: unknown[]) => Promise<unknown>> =
