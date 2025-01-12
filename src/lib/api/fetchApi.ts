@@ -6,55 +6,55 @@ const API_URL =
 	process.env.NEXT_PUBLIC_API_URL ||
 	'https://graphql-staging.audioverse.org/graphql';
 
-const getResponse = manageAsyncFunction(
-	(
-		headers: HeadersInit,
-		query: string,
-		variables: unknown,
-	): Promise<Response> => {
-		const body = JSON.stringify({
-			query,
-			variables,
-		});
+const getResponse = (
+	headers: HeadersInit,
+	query: string,
+	variables: unknown,
+): Promise<Response> => {
+	const body = JSON.stringify({
+		query,
+		variables,
+	});
 
-		return fetch(API_URL, {
-			method: 'POST',
-			headers,
-			body,
-		});
+	return fetch(API_URL, {
+		method: 'POST',
+		headers,
+		body,
+	});
+};
+
+const fetchJson = manageAsyncFunction(
+	async ({
+		headers,
+		query,
+		variables,
+	}: {
+		headers: HeadersInit;
+		query: string;
+		variables: unknown;
+	}) => {
+		const res = await getResponse(headers, query, variables);
+
+		if (!res.ok) {
+			console.error({ res, query, variables, headers });
+			throw new Error(`HTTP request failed: ${res.status} ${res.statusText}`);
+		}
+
+		const json = await res.json();
+
+		if (json.errors) {
+			console.error({
+				query,
+				variables,
+				headers,
+				errors: json.errors,
+			});
+			throw json;
+		}
+
+		return json.data;
 	},
 );
-
-const fetchJson = async ({
-	headers,
-	query,
-	variables,
-}: {
-	headers: HeadersInit;
-	query: string;
-	variables: unknown;
-}) => {
-	const res = await getResponse(headers, query, variables);
-
-	if (!res.ok) {
-		console.error({ text: await res.text(), res, query, variables, headers });
-		throw new Error(`HTTP request failed: ${res.status} ${res.statusText}`);
-	}
-
-	const json = await res.json();
-
-	if (json.errors) {
-		console.error({
-			query,
-			variables,
-			headers,
-			errors: json.errors,
-		});
-		throw json;
-	}
-
-	return json.data;
-};
 
 export async function fetchApi<TData>(
 	query: string,

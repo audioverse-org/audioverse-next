@@ -10,18 +10,22 @@ interface PromiseWrapperOptions {
 	throttleIntervalMs?: number;
 	timeoutMs?: number;
 	retries?: number;
+	retryMinTimeoutMs?: number;
 }
 
 const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
 	concurrencyLimit: 1,
-	throttleLimit: 10,
+	throttleLimit: 3,
 	throttleIntervalMs: 1000,
-	timeoutMs: 5000,
-	retries: 3,
+	timeoutMs: 7000,
+	retries: 4,
+	retryMinTimeoutMs: 2000,
 };
 
 type ManagedAsyncFunction<T extends (...args: unknown[]) => Promise<unknown>> =
-	(...args: Parameters<T>) => ClearablePromise<Awaited<ReturnType<T>>>;
+	<R extends Awaited<ReturnType<T>>>(
+		...args: Parameters<T>
+	) => ClearablePromise<R>;
 
 export function manageAsyncFunction<
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,6 +50,8 @@ export function manageAsyncFunction<
 	const retriedFn = (...args: Parameters<T>) =>
 		pRetry(() => timedFn(...args), {
 			retries: opts.retries,
+			minTimeout: opts.retryMinTimeoutMs,
+			randomize: true,
 			onFailedAttempt: (error) => {
 				console.log(
 					`Attempt ${error.attemptNumber} failed. There are ${error.retriesLeft} retries left.`,
