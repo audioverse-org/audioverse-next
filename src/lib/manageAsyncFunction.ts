@@ -11,6 +11,7 @@ interface PromiseWrapperOptions {
 	timeoutMs?: number;
 	retries?: number;
 	retryMinTimeoutMs?: number;
+	retryMaxTimeoutMs?: number;
 }
 
 const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
@@ -18,8 +19,9 @@ const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
 	throttleLimit: 3,
 	throttleIntervalMs: 1000,
 	timeoutMs: 7000,
-	retries: 4,
-	retryMinTimeoutMs: 2000,
+	retries: 2,
+	retryMinTimeoutMs: 7500,
+	retryMaxTimeoutMs: 15000,
 };
 
 type ManagedAsyncFunction<T extends (...args: unknown[]) => Promise<unknown>> =
@@ -39,18 +41,19 @@ export function manageAsyncFunction<
 	});
 	const limit = pLimit(opts.concurrencyLimit);
 
-	const throttledFn = throttle(fn);
-	const limitedFn = (...args: Parameters<T>) =>
-		limit(() => throttledFn(...args));
 	const timedFn = (...args: Parameters<T>) =>
-		pTimeout(limitedFn(...args), {
+		pTimeout(fn(...args), {
 			milliseconds: opts.timeoutMs,
 			message: `Function timed out after ${opts.timeoutMs}ms. Args: ${JSON.stringify(args)}`,
 		});
+	const throttledFn = throttle(timedFn);
+	const limitedFn = (...args: Parameters<T>) =>
+		limit(() => throttledFn(...args));
 	const retriedFn = (...args: Parameters<T>) =>
-		pRetry(() => timedFn(...args), {
+		pRetry(() => limitedFn(...args), {
 			retries: opts.retries,
 			minTimeout: opts.retryMinTimeoutMs,
+			maxTimeout: opts.retryMaxTimeoutMs,
 			randomize: true,
 			onFailedAttempt: (error) => {
 				console.log(
