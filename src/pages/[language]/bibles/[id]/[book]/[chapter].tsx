@@ -60,18 +60,24 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const response = await getBibles();
+	const langs = Object.values(LANGUAGES).map(({ base_urls }) => base_urls[0]);
 	return {
 		paths: (response || [])
-			.map((version) =>
-				(version.books || []).map(({ book_id }) =>
-					root
-						.lang(LANGUAGES.ENGLISH.base_urls[0])
-						.bibles.bookId(book_id)
-						.chapterNumber(1)
-						.get(),
-				),
-			)
-			.flat(2),
+			.map((version) => {
+				const books = version.books || [];
+				return books.map(({ book_id, chapters }) => {
+					return chapters.map((chapter) => {
+						return langs.map((lang) => {
+							return root
+								.lang(lang)
+								.bibles.bookId(book_id)
+								.chapterNumber(chapter)
+								.get();
+						});
+					});
+				});
+			})
+			.flat(4),
 		fallback: 'blocking',
 	};
 }

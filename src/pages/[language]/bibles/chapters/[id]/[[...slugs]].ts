@@ -70,5 +70,8 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		getAudiobibleBookPathsData,
 		(d) => d.recordings.nodes,
 		(l, { canonicalPath }) => canonicalPath,
+		{
+			prerenderLimit: Infinity,
+		},
 	);
 }

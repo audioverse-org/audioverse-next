@@ -9,5 +9,8 @@ query getAudiobibleBookPathsData($language: Language!, $first: Int) {
 		nodes {
 			canonicalPath(useFuturePath: true)
 		}
+		pageInfo {
+			hasNextPage
+		}
 	}
 }
