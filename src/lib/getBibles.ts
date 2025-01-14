@@ -1,91 +1,17 @@
+import fs from 'fs';
 import pMemoize from 'p-memoize';
 
-import { CollectionContentType, Language } from '~src/__generated__/graphql';
+import { Language } from '~src/__generated__/graphql';
 import { BibleIndexProps } from '~src/containers/bible';
 import { getAudiobibleIndexData } from '~src/containers/bible/__generated__';
-import { BOOK_ID_MAP } from '~src/services/fcbh/constants';
-import { getBibleBookChapters } from '~src/services/fcbh/getBibleBookChapters';
 import { getBibles as _getFcbhBibles } from '~src/services/fcbh/getBibles';
-import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
-
-import root from './routes';
 
 type ApiBible = BibleIndexProps['versions'][0];
-type ApiBook = NonNullable<ApiBible['sequences']['nodes']>[0];
-type ApiChapter = NonNullable<ApiBook['recordings']['nodes']>[0];
 
-async function transform(
-	languageRoute: string,
-	bible: IBibleVersion,
-): Promise<ApiBible> {
-	const books = Object.keys(BOOK_ID_MAP).map(
-		async (bookId, i): Promise<ApiBook> => {
-			const testament = i < 39 ? 'OT' : 'NT';
-			const bbChapters = await getBibleBookChapters(
-				bible.id,
-				testament,
-				bookId,
-			);
-			const title = bbChapters[0].book_name;
+function getFcbhBibles(languageRoute: string): ApiBible[] | null {
+	if (languageRoute !== 'en') return null;
 
-			if (!title) {
-				console.log({ bible, testament, bookId, bbChapters });
-				throw new Error(
-					`Could not determine book title: ${bible.id} ${testament} ${bookId}`,
-				);
-			}
-
-			const chapters = bbChapters.map(
-				(bbChapter: IBibleBookChapter): ApiChapter => {
-					return {
-						id: bbChapter.id,
-						title: bbChapter.title,
-						canonicalPath: root
-							.lang(languageRoute)
-							.bibles.versionId(bible.id)
-							.bookId(bookId)
-							.chapterNumber(bbChapter.number)
-							.get(),
-						collection: {
-							id: bible.id,
-							contentType: CollectionContentType.BibleVersion,
-						},
-					};
-				},
-			);
-
-			return {
-				id: bookId,
-				title,
-				recordings: {
-					nodes: chapters,
-				},
-			};
-		},
-	);
-	return {
-		...bible,
-		sequences: {
-			nodes: await Promise.all(books),
-		},
-	};
-}
-
-async function getFcbhBibles(
-	languageRoute: string,
-): Promise<ApiBible[] | null> {
-	try {
-		const response = await _getFcbhBibles();
-
-		if (!response) {
-			return null;
-		}
-
-		return Promise.all(response.map((b) => transform(languageRoute, b)));
-	} catch (e) {
-		console.log(e);
-		return null;
-	}
+	return JSON.parse(fs.readFileSync('fcbh-bibles.json', 'utf8'));
 }
 
 async function getApiBibles(languageId: Language): Promise<ApiBible[] | null> {
@@ -113,7 +39,7 @@ const getBibles = pMemoize(
 		api: ApiBible[] | null;
 		all: ApiBible[];
 	}> => {
-		const fcbh = await getFcbhBibles(languageId);
+		const fcbh = getFcbhBibles(languageId);
 		const api = await getApiBibles(languageId);
 		const all = concatBibles(fcbh, api);
 
