@@ -32,7 +32,8 @@
         "svgo": "svgo -f ./public/img/icons-raw -o ./public/img/icons",
         "pa11y": "pa11y-ci --sitemap http://localhost:3000/sitemap-0.xml --sitemap-find https://www.audioverse.org --sitemap-replace http://localhost:3000 --sitemap-exclude 'https?:\\/\\/[\\w\\.-]+\\/(?!en)\\w\\w\\/'",
         "prepare": "husky",
-        "knip": "knip"
+        "knip": "knip",
+        "fcbh": "tsx ./scripts/save-fcbh-meta.ts"
     },
     "dependencies": {
         "@emotion/styled": "^11.13.0",
@@ -115,6 +116,7 @@
         "@typescript-eslint/parser": "^8.6.0",
         "audit-ci": "^7.1.0",
         "concurrently": "^9.1.0",
+        "dotenv": "^16.4.7",
         "eslint": "^8.57.1",
         "eslint-config-next": "^14.2.13",
         "eslint-plugin-formatjs": "^4.13.3",
