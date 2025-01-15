@@ -480,6 +480,11 @@ export default function AndPlaybackContext({
 						addButtonToControlBar: true, // Use custom designed button
 					},
 				},
+				html5: {
+					audio: {
+						nativeAudioTracks: true,
+					},
+				},
 			};
 
 			if (playerRef.current) {
