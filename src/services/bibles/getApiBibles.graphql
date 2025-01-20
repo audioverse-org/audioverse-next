@@ -1,0 +1,23 @@
+query getApiBibles($language: Language!) {
+	collections(
+		language: $language
+		contentType: BIBLE_VERSION
+		first: 10
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
+		nodes {
+			id
+			title
+			description
+			sponsor {
+				website
+				title
+			}
+			sequences(first: 66, orderBy: [{ field: ID, direction: ASC }]) {
+				nodes {
+					...passageNavigationBook
+				}
+			}
+		}
+	}
+}

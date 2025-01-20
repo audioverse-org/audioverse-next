@@ -5,8 +5,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '~components/atoms/heading1';
 import LineHeading from '~components/atoms/lineHeading';
 import Link from '~components/atoms/linkWithoutPrefetch';
-import { PlayerFragment } from '~components/molecules/__generated__/player';
-import { SequenceNavFragment } from '~components/molecules/__generated__/sequenceNav';
 import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
@@ -25,30 +23,39 @@ import { RecordingContentType } from '~src/__generated__/graphql';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import {
-	IBibleBook,
-	IBibleBookChapter,
-	IBibleVersion,
-} from '~src/services/fcbh/types';
+import { ApiBible } from '~src/services/bibles/getApiBibles';
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
 
+type ApiBibleBook = NonNullable<ApiBible['sequences']['nodes']>[0];
+type ApiBibleChapter = NonNullable<ApiBibleBook['recordings']['nodes']>[0];
+
 export interface BookProps {
-	version: IBibleVersion;
-	book: IBibleBook;
-	chapters: IBibleBookChapter[];
+	version: ApiBible;
+	book: ApiBibleBook;
+	chapters: ApiBibleChapter[];
 	chapterNumber: string | number;
+}
+
+function parseApiBibleChapterNumber(chapter: ApiBibleChapter): number {
+	return +chapter.title.split(' ')[1] || 1;
 }
 
 const Book = (params: Must<BookProps>) => {
 	const chapter = params.chapters.find(
-		({ number }) => number === +params.chapterNumber,
+		(c) => parseApiBibleChapterNumber(c) === +params.chapterNumber,
 	);
-	const currentChapterNumber = chapter?.number || 1;
+
+	if (!chapter) {
+		throw new Error('Chapter not found');
+	}
+
+	const currentChapterNumber = parseApiBibleChapterNumber(chapter);
 	const playbackContext = useContext(PlaybackContext);
 	const currentRecordingId = playbackContext.getRecording()?.id;
 	const router = useRouter();
+
 	useEffect(() => {
 		if (!currentRecordingId || !(currentRecordingId + '').includes('/')) {
 			return;
@@ -72,18 +79,21 @@ function BookInner({
 }: Must<BookProps>): JSX.Element {
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
-	const chapter = chapters.find(({ number }) => number === +chapterNumber);
+	const chapter = chapters.find(
+		(c) => parseApiBibleChapterNumber(c) === +chapterNumber,
+	);
 	const intl = useIntl();
 
-	const makeCanonicalPath = (n: number) =>
-		root.lang(languageRoute).bibles.bookId(book.book_id).chapterNumber(n).get();
+	if (!chapter) {
+		throw new Error('Chapter not found');
+	}
 
-	const currentChapterNumber = chapter?.number || 1;
-
+	const currentChapterNumber = parseApiBibleChapterNumber(chapter);
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
 	const [scrollPosition, setScrollPosition] = useState(0);
+
 	useEffect(() => {
 		if (!scrollRef.current || !currentRef.current) {
 			return;
@@ -97,68 +107,11 @@ function BookInner({
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [currentChapterNumber]);
 
-	// TODO: Remove this transformation when the API returns Recording type
-	function chapterToRecording(chapter: IBibleBookChapter | undefined): Omit<
-		PlayerFragment & SequenceNavFragment,
-		'sequence'
-	> & {
-		sequence: null;
-	} {
-		const toRecordingChapterNumber = chapter?.number as number;
-		let fakeAlias = 'KJV';
-		try {
-			const urlPathnameComponents =
-				new URL(chapter?.url || '').pathname.match(/(\d+)_([^_]+)/i) || [];
-			fakeAlias = `KJV_${urlPathnameComponents[2]}_${urlPathnameComponents[1]}`;
-		} catch (e) {
-			console.log(e);
-		}
-		return {
-			id: chapter?.id || '',
-			title: chapter?.title || '',
-			canonicalPath: makeCanonicalPath(toRecordingChapterNumber),
-			contentType: RecordingContentType.BibleChapter,
-			recordingContentType: RecordingContentType.BibleChapter,
-			duration: chapter?.duration || 0,
-			audioFiles: [
-				{
-					url: chapter?.url || '',
-					mimeType: 'audio/mpeg',
-					filesize: 'unknown',
-					duration: chapter?.duration || 0,
-					logUrl: `https://www.audioverse.org/en/download/audiobible/${fakeAlias}/filename.mp3`,
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				} as any,
-			],
-			sequencePreviousRecording:
-				toRecordingChapterNumber > 1
-					? { canonicalPath: makeCanonicalPath(toRecordingChapterNumber - 1) }
-					: null,
-			sequenceNextRecording:
-				toRecordingChapterNumber < book.chapters.length
-					? { canonicalPath: makeCanonicalPath(toRecordingChapterNumber + 1) }
-					: null,
-			isDownloadAllowed: false,
-			speakers: [],
-			videoDownloads: [],
-			videoFiles: [],
-			videoStreams: [],
-			audioDownloads: [],
-			shareUrl: `https://www.audioverse.org${makeCanonicalPath(
-				toRecordingChapterNumber,
-			)}`,
-			sequence: null,
-			collection: null,
-			sponsor: {
-				title: 'Faith Comes By Hearing',
-			},
-		};
-	}
-
-	const recording = chapterToRecording(chapter);
-	const recordings = chapters.map((c) => chapterToRecording(c));
+	const recording = chapter;
+	const recordings = chapters;
 
 	const details: IDefinitionListTerm[] = [];
+
 	if (description) {
 		details.push({
 			term: (
@@ -170,26 +123,33 @@ function BookInner({
 			definition: <p>{description}</p>,
 		});
 	}
-	details.push({
-		term: (
-			<FormattedMessage
-				id="bibleVersion__sponsorLabel"
-				defaultMessage="Sponsor"
-			/>
-		),
-		definition: (
-			<p>
-				<a
-					href={sponsor.website}
-					target="_blank"
-					className="decorated hover--salmon"
-					rel="noreferrer"
-				>
-					{sponsor.title}
-				</a>
-			</p>
-		),
-	});
+
+	if (sponsor) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="bibleVersion__sponsorLabel"
+					defaultMessage="Sponsor"
+				/>
+			),
+			definition: (
+				<p>
+					{sponsor.website ? (
+						<a
+							href={sponsor.website}
+							target="_blank"
+							className="decorated hover--salmon"
+							rel="noreferrer"
+						>
+							{sponsor.title}
+						</a>
+					) : (
+						sponsor.title
+					)}
+				</p>
+			),
+		});
+	}
 
 	return (
 		<Tease>
@@ -206,7 +166,7 @@ function BookInner({
 							defaultMessage: 'KJV Bible',
 						})}
 					/>
-					<h4>{book.name}</h4>
+					<h4>{book.title}</h4>
 				</a>
 			</Link>
 			<div className={styles.content}>
@@ -229,7 +189,9 @@ function BookInner({
 							<ContentWidthLimiter>
 								<div
 									className={styles.chapterText}
-									dangerouslySetInnerHTML={{ __html: chapter?.text || '' }}
+									dangerouslySetInnerHTML={{
+										__html: chapter?.transcript?.text || '',
+									}}
 								/>
 							</ContentWidthLimiter>
 						</>
@@ -239,16 +201,14 @@ function BookInner({
 							<div className={styles.sequenceNav}>
 								<SequenceNav recording={recording} useInverse={false} />
 							</div>
-							{chapter?.url && (
-								<Player
-									recording={recording as PlayerFragment}
-									playlistRecordings={recordings.slice(
-										chapters.findIndex((c) => c.id === chapter?.id),
-									)}
-									backgroundColor={BaseColors.BIBLE_B}
-									disableUserFeatures
-								/>
-							)}
+							<Player
+								recording={recording}
+								playlistRecordings={recordings.slice(
+									chapters.findIndex((c) => c.id === chapter?.id),
+								)}
+								backgroundColor={BaseColors.BIBLE_B}
+								disableUserFeatures
+							/>
 							<div className={styles.definitions}>
 								<DefinitionList terms={details} textColor={BaseColors.DARK} />
 							</div>
@@ -294,14 +254,14 @@ function BookInner({
 									className={styles.item}
 									key={chapter.id}
 									ref={
-										chapter.number === currentChapterNumber
+										parseApiBibleChapterNumber(chapter) === currentChapterNumber
 											? currentRef
 											: undefined
 									}
 								>
 									<TeaseRecording
 										recording={{
-											...chapterToRecording(chapter),
+											...recording,
 											recordingContentType: RecordingContentType.BibleChapter,
 											sequenceIndex: null,
 											speakers: [],
@@ -331,7 +291,7 @@ const WithFailStates = (props: Parameters<typeof Book>[0]) => (
 	<AndFailStates
 		Component={Book}
 		componentProps={props}
-		options={{ should404: ({ chapters }: BookProps) => !chapters.length }}
+		options={{ should404: (props: BookProps) => !props.chapters.length }}
 	/>
 );
 export default WithFailStates;

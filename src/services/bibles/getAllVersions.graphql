@@ -1,0 +1,12 @@
+query getApiVersions($language: Language!) {
+	collections(
+		language: $language
+		contentType: BIBLE_VERSION
+		first: 10
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
+		nodes {
+			...passageNavigationVersion
+		}
+	}
+}

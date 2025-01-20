@@ -10,17 +10,17 @@ import { BookProps } from '~containers/bible/book';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
-	getStaticPaths,
 	getStaticProps,
-} from '~pages/[language]/bibles/[id]/[book]/[chapter]';
-import * as bibleBrain from '~src/services/fcbh/getBible';
-import { getBibleBookChapters } from '~src/services/fcbh/getBibleBookChapters';
-import { getBibles } from '~src/services/fcbh/getBibles';
-import { IBibleBookChapter, IBibleVersion } from '~src/services/fcbh/types';
+} from '~pages/[language]/bibles/[version]/[book]/[chapter]';
+import getAnyBible from '~src/services/bibles/getAnyBible';
+import { getBibleBookChapters } from '~src/services/bibles/getBibleBookChapters';
+import { IBibleBookChapter } from '~src/services/bibles/types';
 
-jest.mock('~services/fcbh/getBibles');
-jest.mock('~services/fcbh/getBibleBookChapters');
+jest.mock('~services/bibles/getFcbhBibles');
+jest.mock('~services/bibles/getBibleBookChapters');
+jest.mock('~services/bibles/getAnyBible');
 jest.mock('video.js');
+jest.mock('p-timeout');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
 	return (
@@ -33,25 +33,73 @@ const renderPage = buildStaticRenderer((props: BookProps) => {
 }, getStaticProps);
 
 function loadPageData() {
-	jest.spyOn(bibleBrain, 'getBible').mockResolvedValue({
+	jest.mocked(getAnyBible).mockResolvedValue({
 		id: 'the_version_id',
-		abbreviation: 'KJV',
 		title: 'the_version_title',
+		description: 'the_version_description',
 		sponsor: {
 			title: 'the_sponsor_name',
 			website: 'the_sponsor_url',
 		},
-		books: [
-			{
-				book_id: 'the_version_id/the_book_shortname',
-				name: 'Genesis',
-				chapters: [50],
-				bible: {
-					abbreviation: 'ESV',
+		sequences: {
+			nodes: [
+				{
+					id: 'the_sequence_id',
+					title: 'the_book_shortname',
+					recordings: {
+						nodes: [
+							{
+								id: 'the_recording_id',
+								title: 'the_chapter_title',
+								canonicalPath: 'the_recording_path',
+								description: null,
+								recordingDate: null,
+								sequenceIndex: null,
+								canonicalUrl: '',
+								copyrightYear: null,
+								contentType: 'AUDIOBOOK_TRACK',
+								duration: 0,
+								isDownloadAllowed: false,
+								shareUrl: '',
+								recordingContentType: 'AUDIOBOOK_TRACK',
+								collection: null,
+								writers: [],
+								attachments: [],
+								imageWithFallback: {
+									__typename: undefined,
+									url: '',
+								},
+								recordingTags: {
+									__typename: undefined,
+									nodes: null,
+								},
+								sponsor: null,
+								sequence: null,
+								transcript: null,
+								sequencePreviousRecording: null,
+								sequenceNextRecording: null,
+								distributionAgreement: null,
+								speakers: [],
+								audioFiles: [
+									{
+										url: 'sample.mp3',
+										filesize: '',
+										mimeType: '',
+										duration: 0,
+									},
+								],
+								videoFiles: [],
+								videoStreams: [],
+								videoDownloads: [],
+								audioDownloads: [],
+							},
+						],
+					},
 				},
-			},
-		],
-	} as IBibleVersion);
+			],
+		},
+	});
+
 	jest.mocked(getBibleBookChapters).mockResolvedValue([
 		{
 			id: 'GEN/1',
@@ -98,30 +146,6 @@ describe('Bible book detail page', () => {
 		await renderPage();
 	});
 
-	it('generates paths', async () => {
-		jest.mocked(getBibles).mockResolvedValue([
-			{
-				id: 'the_version_id',
-				abbreviation: 'KJV',
-				title: 'the_version_title',
-				sponsor: {
-					title: 'FCBH',
-					website: '',
-				},
-				books: [
-					{
-						book_id: 'ENGESVC/Gen',
-						chapters: [1],
-					},
-				],
-			} as IBibleVersion,
-		]);
-
-		const { paths } = await getStaticPaths();
-
-		expect(paths).toContain('/en/bibles/ENGESVC/Gen/1');
-	});
-
 	it('displays chapter title', async () => {
 		loadPageData();
 
@@ -165,7 +189,5 @@ describe('Bible book detail page', () => {
 		await userEvent.click(getAllByLabelText('play')[0]);
 
 		await waitFor(() => expect(videojs).toBeCalled());
-
-		expect(window.fetch).toBeCalled();
 	});
 });

@@ -10,6 +10,11 @@ jest.mock('@silvermine/videojs-chromecast');
 jest.mock('next/image');
 jest.mock('next/legacy/image');
 jest.mock('video.js');
+jest.mock('p-limit');
+jest.mock('p-retry');
+jest.mock('p-throttle');
+jest.mock('p-timeout');
+jest.mock('p-memoize');
 
 jest.mock('next/navigation', () => ({
 	useSearchParams: jest.fn(() => new URL('http://example.com').searchParams),

@@ -35,7 +35,7 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
-import { BibleIndexProps } from '~src/containers/bible';
+import { VersionProps } from '~src/containers/bible/version';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
 import isServerSide from '~src/lib/isServerSide';
@@ -59,7 +59,7 @@ export function Recording({
 	recording,
 	overrideSequence,
 	...props
-}: (RecordingProps & BibleIndexProps) | RecordingProps): JSX.Element {
+}: (RecordingProps & VersionProps) | RecordingProps): JSX.Element {
 	const intl = useIntl();
 	const { id, imageWithFallback, contentType, sponsor, speakers, writers } =
 		recording;
@@ -135,8 +135,12 @@ export function Recording({
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
 
-			{'versions' in props ? (
-				<PassageNavigation versions={props.versions} chapter={recording}>
+			{'versions' in props && 'version' in props ? (
+				<PassageNavigation
+					version={props.version}
+					versions={props.versions}
+					chapter={recording}
+				>
 					<RecordingInner
 						recording={recording}
 						overrideSequence={overrideSequence}

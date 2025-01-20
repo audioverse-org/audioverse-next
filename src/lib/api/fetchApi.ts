@@ -49,7 +49,7 @@ const fetchJson = manageAsyncFunction(
 				headers,
 				errors: json.errors,
 			});
-			throw json;
+			throw new Error(JSON.stringify(json));
 		}
 
 		return json.data;
@@ -72,6 +72,7 @@ export async function fetchApi<TData>(
 	try {
 		return fetchJson({ headers, query, variables });
 	} catch (previousError) {
+		console.error(previousError);
 		const e = new Error('Error fetching from API');
 		Object.assign(e, { query, variables, previousError });
 		throw e;

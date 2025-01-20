@@ -6,6 +6,7 @@ fragment passageNavigationChapter on Recording {
 		id
 		contentType
 	}
+	...recording
 }
 
 fragment passageNavigationBook on Sequence {
@@ -18,7 +19,7 @@ fragment passageNavigationBook on Sequence {
 	}
 }
 
-fragment passageNavigationVersion on Collection {
+fragment passageNavigationVersionFull on Collection {
 	id
 	title
 	sequences {
@@ -26,4 +27,9 @@ fragment passageNavigationVersion on Collection {
 			...passageNavigationBook
 		}
 	}
+}
+
+fragment passageNavigationVersion on Collection {
+	id
+	title
 }

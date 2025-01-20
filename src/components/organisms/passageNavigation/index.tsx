@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import React, {
 	ReactNode,
 	useContext,
@@ -10,7 +11,6 @@ import { FormattedMessage } from 'react-intl';
 
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import {
-	CollectionContentType,
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
@@ -21,28 +21,33 @@ import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
 import { BIBLE_BOOKS } from '~src/lib/constants';
 import { getBibleAcronym } from '~src/lib/getBibleAcronym';
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
+import root from '~src/lib/routes';
 
 import {
 	PassageNavigationBookFragment,
 	PassageNavigationChapterFragment,
 	PassageNavigationVersionFragment,
+	PassageNavigationVersionFullFragment,
 } from './__generated__';
 import BookGrid from './bookGrid';
 import BookList from './bookList';
 import styles from './index.module.scss';
 
 export type Version = PassageNavigationVersionFragment;
+export type VersionFull = PassageNavigationVersionFullFragment;
 export type Book = PassageNavigationBookFragment;
 export type Chapter = PassageNavigationChapterFragment;
 
 type Props = {
 	versions: Array<Version>;
+	version: VersionFull;
 	chapter?: Chapter;
 	children?: ReactNode;
 };
 
 export default function PassageNavigation({
 	versions,
+	version,
 	chapter,
 	children,
 }: Props): ReactNode {
@@ -53,13 +58,7 @@ export default function PassageNavigation({
 		'passageNavLayout',
 		'grid',
 	);
-
-	const [version, setVersion] = useState<Version>(() => {
-		const c = chapter?.collection || loadedRecording?.collection;
-		const isVersion = c?.contentType === CollectionContentType.BibleVersion;
-		if (!isVersion) return versions[0];
-		return versions.find((v) => v.id === c.id) || versions[0];
-	});
+	const router = useRouter();
 
 	const books = useMemo(() => {
 		return version.sequences.nodes || [];
@@ -108,7 +107,15 @@ export default function PassageNavigation({
 									<Button
 										type="tertiary"
 										onClick={(e) => {
-											setVersion(v);
+											const path = chapter
+												? root
+														.lang('en')
+														.bibles.versionId(v.id)
+														.bookId('') // TODO
+														.chapterNumber('') // TODO
+														.get()
+												: root.lang('en').bibles.versionId(v.id).get();
+											router.push(path);
 											handleClose(e);
 										}}
 										text={getBibleAcronym(v.title)}

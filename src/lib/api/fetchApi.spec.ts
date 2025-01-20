@@ -10,7 +10,8 @@ jest.unmock('~lib/api/fetchApi');
 
 const mockFetchResponse = () => {
 	(global.fetch as jest.Mock).mockResolvedValue({
-		text: () => Promise.resolve(JSON.stringify('result')),
+		text: () => Promise.resolve(JSON.stringify({})),
+		json: () => Promise.resolve({}),
 		ok: true,
 	});
 };
