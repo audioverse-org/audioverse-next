@@ -1,0 +1,16 @@
+query getApiBible($collection_id: ID!) {
+	collection(id: $collection_id) {
+		id
+		title
+		description
+		sponsor {
+			website
+			title
+		}
+		sequences(first: 66, orderBy: [{ field: ID, direction: ASC }]) {
+			nodes {
+				...passageNavigationBook
+			}
+		}
+	}
+}

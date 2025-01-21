@@ -1,6 +1,4 @@
-import { Language } from '~src/__generated__/graphql';
-
-import { ApiBible, getApiBibles } from './getApiBibles';
+import getApiBible, { ApiBible } from './getApiBible';
 import { getFcbhBibles } from './getFcbhBibles';
 
 const fcbhBibles = getFcbhBibles('en');
@@ -14,7 +12,7 @@ export default async function getAnyBible(
 		return fcbhMatch;
 	}
 
-	const apiBibles = await getApiBibles(Language.English);
+	const apiMatch = await getApiBible(versionId);
 
-	return apiBibles?.find((bible) => bible.id === versionId);
+	return apiMatch || undefined;
 }

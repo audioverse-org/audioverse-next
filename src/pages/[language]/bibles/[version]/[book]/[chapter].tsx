@@ -52,6 +52,11 @@ export async function getStaticProps({
 		return notFound;
 	}
 
+	// TODO:
+	// Query for books separate from getAnyBible to simplify getAnyBible query
+	// Query for chapters separate from getAnyBible to simplify getAnyBible query
+	// Query for current chapter separate from getAnyBible and chapters query to simplify other queries
+
 	return {
 		props: {
 			version,

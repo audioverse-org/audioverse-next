@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { ApiBible } from './getApiBibles';
+import { ApiBible } from './getApiBible';
 
 export function getFcbhBibles(languageRoute: string): ApiBible[] | null {
 	if (languageRoute !== 'en') return null;

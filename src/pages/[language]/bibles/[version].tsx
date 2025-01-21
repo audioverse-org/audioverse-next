@@ -6,7 +6,7 @@ import {
 } from 'next';
 
 import { IBaseProps } from '~containers/base';
-import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import root from '~lib/routes';
 import Bible, { VersionProps } from '~src/containers/bible/version';
 import getIntl from '~src/lib/getIntl';
@@ -49,8 +49,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+	const allVersions = await getAllVersions();
 	return {
-		paths: [root.lang(LANGUAGES.ENGLISH.base_urls[0]).bibles.get()],
+		paths: allVersions.map((v) => root.lang('en').bibles.versionId(v.id).get()),
 		fallback: false,
 	};
 }

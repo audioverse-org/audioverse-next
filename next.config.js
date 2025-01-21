@@ -272,18 +272,18 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/bibles',
+					destination: '/:lang/bibles/ENGKJV2/',
+					permanent: false,
+				},
+				{
 					source: '/:lang/audiobibles/:path*',
 					destination: '/:lang/bibles/',
 					permanent: true,
 				},
 				{
-					source: '/:lang/bibles/:id',
-					destination: '/:lang/bibles/',
-					permanent: true,
-				},
-				{
 					source: '/:lang/bibles/ENGKJV1/:path*',
-					destination: '/:lang/bibles/',
+					destination: '/:lang/bibles/ENGKJV1',
 					permanent: false,
 				},
 				{

@@ -5,7 +5,7 @@ import {
 import root from '~src/lib/routes';
 
 import { BOOK_ID_MAP } from './constants';
-import { ApiBible } from './getApiBibles';
+import { ApiBible } from './getApiBible';
 import { getBibleBookChapters } from './getBibleBookChapters';
 import { IBibleBookChapter, IBibleVersion } from './types';
 

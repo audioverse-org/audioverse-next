@@ -23,7 +23,7 @@ import { RecordingContentType } from '~src/__generated__/graphql';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import { ApiBible } from '~src/services/bibles/getApiBibles';
+import { ApiBible } from '~src/services/bibles/getApiBible';
 import { Must } from '~src/types/types';
 
 import styles from './book.module.scss';
