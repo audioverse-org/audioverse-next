@@ -8,7 +8,7 @@ class MyDocument extends Document {
 		return (
 			<Html lang={this.props.__NEXT_DATA__.query.language as string}>
 				<Head>
-					<link rel="stylesheet" href="https://use.typekit.net/bgc2sqi.css" />
+					<link rel="stylesheet" href="https://use.typekit.net/vgz0bjm.css" />
 				</Head>
 				<body>
 					<Main />

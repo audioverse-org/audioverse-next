@@ -50,7 +50,6 @@ jobs:
             ${{github.event.deployment_status.target_url}}/en/bibles
             ${{github.event.deployment_status.target_url}}/en/presenters/1309/amanda-anguish
           runs: 3
-          uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Add comment
         uses: actions/github-script@v5
