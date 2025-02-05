@@ -51,7 +51,16 @@ export interface IBibleBookChapter {
 	url: string;
 	duration: number;
 	text: string;
+	bookName: string;
+	bookId: string;
+	testament: string;
 }
+
+export const bibleFCBHJKVDramatized = {
+	id: 'ENGKJV',
+	fileSetId: 'ENGKJVO2DA',
+	name: 'King James Version (Dramatized)',
+};
 
 export async function getBibles(): Promise<IBibleVersion[] | null> {
 	const response = await getResponse<{ data: IBible }>('/bibles/ENGKJV?');
@@ -155,6 +164,12 @@ const bookIdMap: { [k: string]: string } = {
 	REV: 'Rev',
 };
 
+export const getFileSetId = (fileSetId: string, testament: string) => {
+	return testament === 'OT'
+		? fileSetId.replace(/^(.{6})./, '$1O')
+		: fileSetId.replace(/^(.{6})./, '$1N');
+};
+
 export async function getBibleBookChapters(
 	bibleId: string,
 	testament: string,
@@ -189,13 +204,22 @@ export async function getBibleBookChapters(
 	filesets.sort((a, b) => a.chapter_start - b.chapter_start);
 
 	return filesets.map(
-		({ book_id, book_name, chapter_start, path, duration }) => ({
-			id: `${book_id}/${chapter_start}`,
-			number: chapter_start,
-			title: `${book_name} ${chapter_start}`,
-			url: path,
-			duration,
-			text: textByChapterNumber[chapter_start],
-		}),
+		({ book_id, book_name, chapter_start, path, duration }) => {
+			// Take into account accents in the regex
+			const bookName = book_name
+				.toLowerCase()
+				.replace(/(?:^|\s)\S/g, (char) => char.toUpperCase());
+			return {
+				id: `${filesetId}/${book_id}/${chapter_start}`,
+				number: chapter_start,
+				title: `${bookName} ${chapter_start}`,
+				url: path,
+				duration,
+				text: textByChapterNumber[chapter_start],
+				bookName,
+				bookId: book_id,
+				testament,
+			};
+		},
 	);
 }
