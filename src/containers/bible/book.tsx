@@ -19,6 +19,8 @@ import Tease from '~components/molecules/tease';
 import TeaseRecording from '~components/molecules/teaseRecording';
 import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import {
+	bibleFCBHJKVDramatized,
+	getFileSetId,
 	IBibleBook,
 	IBibleBookChapter,
 	IBibleVersion,
@@ -28,11 +30,92 @@ import root from '~lib/routes';
 import useLanguageRoute from '~lib/useLanguageRoute';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
-import { RecordingContentType } from '~src/__generated__/graphql';
+import {
+	RecordingContentType,
+	SequenceContentType,
+} from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
 import { Must } from '~src/types/types';
+import { gtmPushEvent } from '~src/utils/gtm';
 
 import styles from './book.module.scss';
+
+// TODO: Remove this transformation when the API returns Recording type
+function chapterToRecording(
+	chapter: IBibleBookChapter | undefined,
+	languageRoute: string,
+	book: IBibleBook,
+): PlayerFragment &
+	SequenceNavFragment & {
+		collection: { id: string | number };
+		sequence: { id: string | number };
+		sponsor: { id: string | number };
+	} {
+	const makeCanonicalPath = (n: number) =>
+		root.lang(languageRoute).bibles.bookId(book.book_id).chapterNumber(n).get();
+
+	const toRecordingChapterNumber = chapter?.number as number;
+	let fakeAlias = 'KJV';
+	try {
+		const urlPathnameComponents =
+			new URL(chapter?.url || '').pathname.match(/(\d+)_([^_]+)/i) || [];
+		fakeAlias = `KJV_${urlPathnameComponents[2]}_${urlPathnameComponents[1]}`;
+	} catch (e) {
+		console.log(e);
+	}
+	return {
+		id: chapter?.id || '',
+		title: chapter?.title || '',
+		canonicalPath: makeCanonicalPath(toRecordingChapterNumber),
+		duration: chapter?.duration || 0,
+		audioFiles: [
+			{
+				url: chapter?.url || '',
+				mimeType: 'audio/mpeg',
+				filesize: 'unknown',
+				duration: chapter?.duration || 0,
+				logUrl: `https://www.audioverse.org/en/download/audiobible/${fakeAlias}/filename.mp3`,
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			} as any,
+		],
+		sequencePreviousRecording:
+			toRecordingChapterNumber > 1
+				? { canonicalPath: makeCanonicalPath(toRecordingChapterNumber - 1) }
+				: null,
+		sequenceNextRecording:
+			toRecordingChapterNumber < book.chapters.length
+				? { canonicalPath: makeCanonicalPath(toRecordingChapterNumber + 1) }
+				: null,
+		isDownloadAllowed: false,
+		speakers: [],
+		videoDownloads: [],
+		videoFiles: [],
+		videoStreams: [],
+		audioDownloads: [],
+		shareUrl: `https://www.audioverse.org${makeCanonicalPath(
+			toRecordingChapterNumber,
+		)}`,
+		sequence: {
+			__typename: 'Sequence',
+			id: chapter
+				? getFileSetId(bibleFCBHJKVDramatized.fileSetId, chapter.testament)
+				: '',
+			contentType: SequenceContentType.BibleBook,
+			title: chapter?.bookName || '',
+		},
+		collection: {
+			__typename: 'Collection',
+			id: bibleFCBHJKVDramatized.id,
+			title: bibleFCBHJKVDramatized.name,
+		},
+		recordingContentType: RecordingContentType.BibleChapter,
+		sponsor: {
+			__typename: 'Sponsor',
+			id: 1,
+			title: 'Faith Comes By Hearing',
+		},
+	};
+}
 
 export interface BookProps {
 	version: IBibleVersion;
@@ -53,7 +136,7 @@ const Book = (params: Must<BookProps>) => {
 		if (!currentRecordingId || !(currentRecordingId + '').includes('/')) {
 			return;
 		}
-		const currentRecordingIdChapter = (currentRecordingId + '').split('/')[1];
+		const currentRecordingIdChapter = (currentRecordingId + '').split('/')[2];
 		if (+currentRecordingIdChapter !== currentChapterNumber) {
 			router.replace(router.asPath.replace(/\d+$/, currentRecordingIdChapter));
 		}
@@ -75,9 +158,6 @@ function BookInner({
 	const chapter = chapters.find(({ number }) => number === +chapterNumber);
 	const intl = useIntl();
 
-	const makeCanonicalPath = (n: number) =>
-		root.lang(languageRoute).bibles.bookId(book.book_id).chapterNumber(n).get();
-
 	const currentChapterNumber = chapter?.number || 1;
 
 	const [showingText, setShowingText] = useState(false);
@@ -97,65 +177,25 @@ function BookInner({
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [currentChapterNumber]);
 
-	// TODO: Remove this transformation when the API returns Recording type
-	function chapterToRecording(chapter: IBibleBookChapter | undefined): Omit<
-		PlayerFragment & SequenceNavFragment,
-		'sequence'
-	> & {
-		sequence: null;
-	} {
-		const toRecordingChapterNumber = chapter?.number as number;
-		let fakeAlias = 'KJV';
-		try {
-			const urlPathnameComponents =
-				new URL(chapter?.url || '').pathname.match(/(\d+)_([^_]+)/i) || [];
-			fakeAlias = `KJV_${urlPathnameComponents[2]}_${urlPathnameComponents[1]}`;
-		} catch (e) {
-			console.log(e);
-		}
-		return {
-			id: chapter?.id || '',
-			title: chapter?.title || '',
-			canonicalPath: makeCanonicalPath(toRecordingChapterNumber),
-			duration: chapter?.duration || 0,
-			audioFiles: [
-				{
-					url: chapter?.url || '',
-					mimeType: 'audio/mpeg',
-					filesize: 'unknown',
-					duration: chapter?.duration || 0,
-					logUrl: `https://www.audioverse.org/en/download/audiobible/${fakeAlias}/filename.mp3`,
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				} as any,
-			],
-			sequencePreviousRecording:
-				toRecordingChapterNumber > 1
-					? { canonicalPath: makeCanonicalPath(toRecordingChapterNumber - 1) }
-					: null,
-			sequenceNextRecording:
-				toRecordingChapterNumber < book.chapters.length
-					? { canonicalPath: makeCanonicalPath(toRecordingChapterNumber + 1) }
-					: null,
-			isDownloadAllowed: false,
-			speakers: [],
-			videoDownloads: [],
-			videoFiles: [],
-			videoStreams: [],
-			audioDownloads: [],
-			shareUrl: `https://www.audioverse.org${makeCanonicalPath(
-				toRecordingChapterNumber,
-			)}`,
-			sequence: null,
-			collection: null,
-			recordingContentType: RecordingContentType.BibleChapter,
-			sponsor: {
-				title: 'Faith Comes By Hearing',
-			},
-		};
-	}
+	const recording = useMemo(
+		() => chapterToRecording(chapter, languageRoute, book),
+		[chapter, languageRoute, book],
+	);
 
-	const recording = chapterToRecording(chapter);
-	const recordings = chapters.map((c) => chapterToRecording(c));
+	useEffect(() => {
+		gtmPushEvent('recording_view', {
+			content_type: recording.recordingContentType,
+			item_id: recording.id,
+			title: recording.title,
+			presenter: recording.speakers.map((item) => item.name).join(';'),
+			sponsor: recording.sponsor?.title,
+			conference: recording.collection?.title,
+			series: recording.sequence?.title,
+		});
+	}, [recording]);
+	const recordings = chapters.map((c) =>
+		chapterToRecording(c, languageRoute, book),
+	);
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -300,10 +340,9 @@ function BookInner({
 								>
 									<TeaseRecording
 										recording={{
-											...chapterToRecording(chapter),
-											recordingContentType: RecordingContentType.BibleChapter,
+											...chapterToRecording(chapter, languageRoute, book),
+											sequence: null,
 											sequenceIndex: null,
-											speakers: [],
 										}}
 										playlistRecordings={recordings.slice(
 											chapters.findIndex((c) => c.id === chapter.id),
