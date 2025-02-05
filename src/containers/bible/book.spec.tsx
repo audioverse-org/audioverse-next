@@ -50,7 +50,7 @@ function loadPageData() {
 	} as bibleBrain.IBibleVersion);
 	jest.spyOn(bibleBrain, 'getBibleBookChapters').mockResolvedValue([
 		{
-			id: 'GEN/1',
+			id: 'filesetid/GEN/1',
 			duration: 123,
 			number: 1,
 			title: 'the_chapter_title',
