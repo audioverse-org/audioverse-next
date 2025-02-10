@@ -23,35 +23,29 @@ import { RecordingContentType } from '~src/__generated__/graphql';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import { ApiBible } from '~src/services/bibles/getApiBible';
 import { Must } from '~src/types/types';
 
+import {
+	BibleBookDetailBookFragment,
+	BibleBookDetailChapterFullFragment,
+	BibleBookDetailChapterPartialFragment,
+	BibleBookDetailVersionFragment,
+} from './__generated__/book';
 import styles from './book.module.scss';
 
-type ApiBibleBook = NonNullable<ApiBible['sequences']['nodes']>[0];
-type ApiBibleChapter = NonNullable<ApiBibleBook['recordings']['nodes']>[0];
-
 export interface BookProps {
-	version: ApiBible;
-	book: ApiBibleBook;
-	chapters: ApiBibleChapter[];
-	chapterNumber: string | number;
+	version: BibleBookDetailVersionFragment;
+	book: BibleBookDetailBookFragment;
+	chapters: BibleBookDetailChapterPartialFragment[];
+	chapter: BibleBookDetailChapterFullFragment;
 }
 
-function parseApiBibleChapterNumber(chapter: ApiBibleChapter): number {
+function parseApiBibleChapterNumber(chapter: { title: string }): number {
 	return +chapter.title.split(' ')[1] || 1;
 }
 
 const Book = (params: Must<BookProps>) => {
-	const chapter = params.chapters.find(
-		(c) => parseApiBibleChapterNumber(c) === +params.chapterNumber,
-	);
-
-	if (!chapter) {
-		throw new Error('Chapter not found');
-	}
-
-	const currentChapterNumber = parseApiBibleChapterNumber(chapter);
+	const currentChapterNumber = parseApiBibleChapterNumber(params.chapter);
 	const playbackContext = useContext(PlaybackContext);
 	const currentRecordingId = playbackContext.getRecording()?.id;
 	const router = useRouter();
@@ -75,19 +69,11 @@ function BookInner({
 	version,
 	book,
 	chapters,
-	chapterNumber,
+	chapter,
 }: Must<BookProps>): JSX.Element {
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
-	const chapter = chapters.find(
-		(c) => parseApiBibleChapterNumber(c) === +chapterNumber,
-	);
 	const intl = useIntl();
-
-	if (!chapter) {
-		throw new Error('Chapter not found');
-	}
-
 	const currentChapterNumber = parseApiBibleChapterNumber(chapter);
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
@@ -106,9 +92,6 @@ function BookInner({
 		scroller.addEventListener('scroll', saveScrollPosition);
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [currentChapterNumber]);
-
-	const recording = chapter;
-	const recordings = chapters;
 
 	const details: IDefinitionListTerm[] = [];
 
@@ -199,11 +182,11 @@ function BookInner({
 						<>
 							<Heading1>{chapter?.title}</Heading1>
 							<div className={styles.sequenceNav}>
-								<SequenceNav recording={recording} useInverse={false} />
+								<SequenceNav recording={chapter} useInverse={false} />
 							</div>
 							<Player
-								recording={recording}
-								playlistRecordings={recordings.slice(
+								recording={chapter}
+								playlistRecordings={chapters.slice(
 									chapters.findIndex((c) => c.id === chapter?.id),
 								)}
 								backgroundColor={BaseColors.BIBLE_B}
@@ -261,12 +244,12 @@ function BookInner({
 								>
 									<TeaseRecording
 										recording={{
-											...recording,
+											...chapter,
 											recordingContentType: RecordingContentType.BibleChapter,
 											sequenceIndex: null,
 											speakers: [],
 										}}
-										playlistRecordings={recordings.slice(
+										playlistRecordings={chapters.slice(
 											chapters.findIndex((c) => c.id === chapter.id),
 										)}
 										theme="chapter"

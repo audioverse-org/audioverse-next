@@ -1,12 +1,6 @@
 fragment passageNavigationChapter on Recording {
 	id
 	title
-	canonicalPath(useFuturePath: true)
-	collection {
-		id
-		contentType
-	}
-	...recording
 }
 
 fragment passageNavigationBook on Sequence {

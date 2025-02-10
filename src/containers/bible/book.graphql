@@ -1,7 +1,31 @@
-query getAudiobibleBookDetailData($id: ID!) {
-	recording(id: $id) {
-		...recording
+fragment bibleBookDetailVersion on Collection {
+	id
+	description
+	sponsor {
+		title
+		website
 	}
+}
+
+fragment bibleBookDetailBook on Sequence {
+	id
+	title
+}
+
+fragment bibleBookDetailChapterPartial on Recording {
+	id
+	title
+	...andMiniplayer
+	...teaseRecording
+}
+
+fragment bibleBookDetailChapterFull on Recording {
+	title
+	transcript {
+		text
+	}
+	...sequenceNav
+	...player
 }
 
 query getAudiobibleBookPathsData($language: Language!, $first: Int) {

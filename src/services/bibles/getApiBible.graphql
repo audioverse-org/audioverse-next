@@ -1,5 +1,5 @@
-query getApiBible($collection_id: ID!) {
-	collection(id: $collection_id) {
+query getApiBible($collectionId: ID!) {
+	collection(id: $collectionId) {
 		id
 		title
 		description

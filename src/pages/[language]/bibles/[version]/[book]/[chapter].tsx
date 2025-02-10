@@ -8,6 +8,8 @@ import { IBaseProps } from '~containers/base';
 import Book, { BookProps } from '~containers/bible/book';
 import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import getAnyBible from '~src/services/bibles/getAnyBible';
+import getAnyBibleBookChapter from '~src/services/bibles/getAnyBibleBookChapter';
+import getAnyBibleBookChapters from '~src/services/bibles/getAnyBibleBookChapters';
 
 export default Book;
 
@@ -15,6 +17,10 @@ const notFound = {
 	notFound: true,
 	revalidate: REVALIDATE_FAILURE,
 } satisfies GetStaticPropsResult<BookProps & IBaseProps>;
+
+// TODO:
+// Query for book separate from getAnyBible to simplify getAnyBible query
+// Query for current chapter separate from getAnyBible and chapters query to simplify other queries
 
 export async function getStaticProps({
 	params,
@@ -36,34 +42,31 @@ export async function getStaticProps({
 		return notFound;
 	}
 
-	const bibleBook = version.sequences.nodes?.find(
-		({ title }) => bookName === title,
-	);
-
-	if (!bibleBook) {
-		console.log('bible book not found:', bookName);
-		return notFound;
-	}
-
-	const chapters = bibleBook.recordings.nodes;
+	const chapters = await getAnyBibleBookChapters(versionId, bookName);
 
 	if (!chapters?.length) {
 		console.log('chapters not found');
 		return notFound;
 	}
 
-	// TODO:
-	// Query for books separate from getAnyBible to simplify getAnyBible query
-	// Query for chapters separate from getAnyBible to simplify getAnyBible query
-	// Query for current chapter separate from getAnyBible and chapters query to simplify other queries
+	const chapter = await getAnyBibleBookChapter(
+		versionId,
+		bookName,
+		chapterNumber,
+	);
+
+	if (!chapter) {
+		console.log('chapter not found');
+		return notFound;
+	}
 
 	return {
 		props: {
 			version,
-			book: bibleBook,
+			book: { id: bookName, title: bookName },
 			chapters,
-			chapterNumber,
-			title: bibleBook.title,
+			chapter,
+			title: bookName,
 		},
 		revalidate: REVALIDATE,
 	};

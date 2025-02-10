@@ -111,7 +111,7 @@ export default function PassageNavigation({
 												? root
 														.lang('en')
 														.bibles.versionId(v.id)
-														.bookId('') // TODO
+														.bookName('') // TODO
 														.chapterNumber('') // TODO
 														.get()
 												: root.lang('en').bibles.versionId(v.id).get();
@@ -158,6 +158,7 @@ export default function PassageNavigation({
 							selectedBook={book}
 							selectBook={setBook}
 							chapterId={chapterId}
+							versionId={version.id}
 						/>
 					) : (
 						<>
@@ -170,6 +171,7 @@ export default function PassageNavigation({
 								selectedBook={book}
 								selectBook={setBook}
 								chapterId={chapterId}
+								versionId={version.id}
 							/>
 							<BookGrid
 								className={styles.nt}
@@ -181,6 +183,7 @@ export default function PassageNavigation({
 								selectedBook={book}
 								selectBook={setBook}
 								chapterId={chapterId}
+								versionId={version.id}
 							/>
 						</>
 					)}

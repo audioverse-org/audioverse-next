@@ -10,6 +10,7 @@ type Props = {
 	selectedBook: Book | null;
 	selectBook: (book: Book) => void;
 	chapterId: ChapterId;
+	versionId: string | number;
 };
 
 export default function BookList({
@@ -17,6 +18,7 @@ export default function BookList({
 	selectedBook,
 	selectBook,
 	chapterId,
+	versionId,
 }: Props) {
 	return (
 		<ul className={clsx(styles.books)}>
@@ -35,7 +37,12 @@ export default function BookList({
 						</li>
 						{book.id === selectedBook?.id && chapters && (
 							<li>
-								<ChapterGrid chapters={chapters} chapterId={chapterId} />
+								<ChapterGrid
+									chapters={chapters}
+									chapterId={chapterId}
+									bookName={book.title}
+									versionId={versionId}
+								/>
 							</li>
 						)}
 					</>

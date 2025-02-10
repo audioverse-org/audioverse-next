@@ -1,0 +1,13 @@
+query getApiBibleBook($collectionId: ID!, $bookSearch: String!) {
+	sequences(
+		language: ENGLISH
+		contentType: BIBLE_BOOK
+		collectionId: $collectionId
+		search: $bookSearch
+		first: 1
+	) {
+		nodes {
+			...bibleBookDetailBook
+		}
+	}
+}

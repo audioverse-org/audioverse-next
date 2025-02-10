@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
+import { Language } from '~src/__generated__/graphql';
+import root from '~src/lib/routes';
 
 import { Chapter } from '.';
 import styles from './chapterGrid.module.scss';
@@ -10,20 +12,34 @@ export type ChapterId = Chapter['id'] | null;
 type Props = {
 	chapters: Array<Chapter>;
 	chapterId: ChapterId;
+	bookName: string;
+	versionId: string | number;
 };
 
-export default function ChapterGrid({ chapters, chapterId }: Props) {
+export default function ChapterGrid({
+	chapters,
+	chapterId,
+	bookName,
+	versionId,
+}: Props) {
 	return (
 		<ul className={styles.chapters}>
 			{chapters?.map((chapter) => {
 				const n = Number(chapter.title.split(' ').pop());
 				const d = isFinite(n) ? n : 1;
 				const s = d.toString().padStart(2, '0');
+				const baseUrl = root
+					.lang(Language.English)
+					.bibles.versionId(versionId)
+					.bookName(bookName)
+					.chapterNumber(n)
+					.get();
+
 				return (
 					<li key={s} className={styles.chapter}>
 						<Link
 							className={chapter.id === chapterId ? styles.active : ''}
-							href={`${chapter.canonicalPath}?autoplay`}
+							href={`${baseUrl}?autoplay`}
 						>
 							{s}
 						</Link>

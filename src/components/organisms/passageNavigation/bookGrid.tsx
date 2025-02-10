@@ -11,6 +11,7 @@ type Props = {
 	selectBook: (book: Book) => void;
 	chapterId: ChapterId;
 	className?: string;
+	versionId: string | number;
 };
 
 export default function BookGrid({
@@ -19,6 +20,7 @@ export default function BookGrid({
 	selectBook,
 	chapterId,
 	className,
+	versionId,
 }: Props) {
 	return (
 		<ul className={clsx(className, styles.books, styles.grid)}>
@@ -39,7 +41,12 @@ export default function BookGrid({
 						</li>
 						{book.id === selectedBook?.id && chapters && (
 							<li className={styles.drawer}>
-								<ChapterGrid chapters={chapters} chapterId={chapterId} />
+								<ChapterGrid
+									chapters={chapters}
+									chapterId={chapterId}
+									bookName={book.title}
+									versionId={versionId}
+								/>
 							</li>
 						)}
 					</>

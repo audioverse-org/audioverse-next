@@ -1,0 +1,13 @@
+query getApiBibleBookChapter($collectionId: ID!, $titleSearch: String!) {
+	recordings(
+		language: ENGLISH
+		contentType: BIBLE_CHAPTER
+		collectionId: $collectionId
+		search: $titleSearch
+		first: 1
+	) {
+		nodes {
+			...bibleBookDetailChapterFull
+		}
+	}
+}

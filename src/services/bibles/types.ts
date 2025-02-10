@@ -48,6 +48,7 @@ interface IBBBook {
 	name: string;
 	name_short: string;
 	chapters: number[];
+	chapters_full: IBibleBookChapter[];
 	book_seq: string;
 	testament: string;
 }

@@ -6,6 +6,6 @@ import {
 export type ApiBible = NonNullable<GetApiBibleQuery['collection']>;
 
 export default async function getApiBible(id: string) {
-	const { collection } = await _getApiBible({ collection_id: id });
+	const { collection } = await _getApiBible({ collectionId: id });
 	return collection;
 }
