@@ -2,7 +2,10 @@ import { z } from 'zod';
 
 import { BibleBookDetailChapterPartialFragment } from '~src/containers/bible/__generated__/book';
 
-import { getApiBibleBookChapters } from './__generated__/getAnyBibleBookChapters';
+import {
+	getApiBibleBookChapters,
+	searchBibleBooks,
+} from './__generated__/getAnyBibleBookChapters';
 import getFcbhBible from './getFcbhBible';
 import { chapterPartialSchema } from './schemas/chapterPartial';
 
@@ -28,13 +31,26 @@ export default async function getAnyBibleBookChapters(
 		return chaptersSchema.parse(book.chapters_full);
 	}
 
-	const result = await getApiBibleBookChapters({
+	const { sequences } = await searchBibleBooks({
 		collectionId: Number(versionId),
 		bookSearch: bookName,
+	}).catch((e) => {
+		console.error(e);
+		return { sequences: null };
+	});
+
+	const sequence = sequences?.nodes?.find((s) => s.title === bookName);
+
+	if (!sequence) {
+		throw new Error(`Sequence not found for book: ${bookName}`);
+	}
+
+	const result = await getApiBibleBookChapters({
+		sequenceId: sequence.id,
 	}).catch((e) => {
 		console.error(e);
 		return null;
 	});
 
-	return result?.sequences.nodes?.[0]?.recordings.nodes ?? undefined;
+	return result?.recordings.nodes ?? undefined;
 }
