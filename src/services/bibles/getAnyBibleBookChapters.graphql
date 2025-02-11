@@ -13,11 +13,7 @@ query searchBibleBooks($collectionId: ID!, $bookSearch: String!) {
 }
 
 query getApiBibleBookChapters($sequenceId: ID!) {
-	recordings(
-		language: ENGLISH,
-		sequenceId: $sequenceId,
-		first: 66
-	) {
+	recordings(language: ENGLISH, sequenceId: $sequenceId, first: 66) {
 		nodes {
 			...bibleBookDetailChapterPartial
 		}
