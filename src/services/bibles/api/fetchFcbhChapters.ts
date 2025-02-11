@@ -6,6 +6,7 @@ import fetchResponse from './fetchResponse';
 
 export async function fetchFcbhChapters(
 	bibleId: string,
+	bibleName: string,
 	testament: string,
 	bookId: string,
 ): Promise<IBibleBookChapter[]> {
@@ -55,6 +56,8 @@ export async function fetchFcbhChapters(
 			duration,
 			text: textByChapterNumber[chapter_start],
 			book_name,
+			version_id: bibleId,
+			version_name: bibleName,
 		}),
 	);
 }

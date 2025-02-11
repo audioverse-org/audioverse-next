@@ -31,7 +31,12 @@ describe('fetchFcbhChapters', () => {
 	});
 
 	it('sorts chapters', async () => {
-		const result = await fetchFcbhChapters('ENGKJV', 'OLD', 'GEN');
+		const result = await fetchFcbhChapters(
+			'ENGKJV',
+			'King James Version (Dramatized)',
+			'OLD',
+			'GEN',
+		);
 
 		expect(result[0].number).toBe(1);
 		expect(result[1].number).toBe(2);

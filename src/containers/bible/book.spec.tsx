@@ -74,6 +74,8 @@ describe('Bible book detail page', () => {
 							url: 'https://example.com',
 							text: '',
 							book_name: '',
+							version_id: 'ENGKJV',
+							version_name: 'King James Version (Dramatized)',
 						},
 					],
 					bible: {

@@ -67,4 +67,6 @@ export interface IBibleBookChapter {
 	duration: number;
 	text: string;
 	book_name: string;
+	version_id?: string;
+	version_name?: string;
 }

@@ -32,6 +32,7 @@ describe('fetchFcbhBibles', () => {
 
 		expect(fetchFcbhChapters).toBeCalledWith(
 			FCBH_VERSIONS[0].id,
+			FCBH_VERSIONS[0].title,
 			'the_testament',
 			'the_book_id',
 		);

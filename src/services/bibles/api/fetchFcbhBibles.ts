@@ -31,6 +31,7 @@ export async function fetchFcbhBibles(): Promise<IBibleVersion[] | null> {
 						bible: { abbreviation: v.abbreviation },
 						chapters_full: await fetchFcbhChapters(
 							v.id,
+							v.title,
 							b.testament,
 							b.book_id,
 						),

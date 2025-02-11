@@ -24,12 +24,22 @@ export const chapterPartialSchema: SchemaType = z
 		duration: z.number(),
 		text: z.string(),
 		book_name: z.string(),
+		version_id: z.string().optional(),
+		version_name: z.string().optional(),
 	})
 	.transform(
 		(val: IBibleBookChapter): BibleBookDetailChapterPartialFragment => {
+			if (!val.version_id) {
+				throw new Error('version_id is required');
+			}
+
+			if (!val.version_name) {
+				throw new Error('version_name is required');
+			}
+
 			const canonicalPath = root
 				.lang('en')
-				.bibles.versionId('TODO')
+				.bibles.versionId(val.version_id)
 				.bookName(val.book_name)
 				.chapterNumber(val.number)
 				.get();
@@ -41,8 +51,8 @@ export const chapterPartialSchema: SchemaType = z
 				duration: val.duration,
 				recordingContentType: RecordingContentType.BibleChapter,
 				collection: {
-					id: 'TODO',
-					title: 'TODO',
+					id: val.version_id,
+					title: val.version_name,
 					contentType: CollectionContentType.BibleVersion,
 				},
 				speakers: [],
