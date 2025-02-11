@@ -18,10 +18,6 @@ const notFound = {
 	revalidate: REVALIDATE_FAILURE,
 } satisfies GetStaticPropsResult<BookProps & IBaseProps>;
 
-// TODO:
-// Query for book separate from getAnyBible to simplify getAnyBible query
-// Query for current chapter separate from getAnyBible and chapters query to simplify other queries
-
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{
@@ -33,19 +29,19 @@ export async function getStaticProps({
 	const bookName = params?.book as string;
 	const chapterNumber = params?.chapter as string;
 	const version = await getAnyBible(versionId).catch((e) => {
-		console.log(e);
+		console.error(e);
 		return null;
 	});
 
 	if (!version) {
-		console.log('version not found');
+		console.error('version not found');
 		return notFound;
 	}
 
 	const chapters = await getAnyBibleBookChapters(versionId, bookName);
 
 	if (!chapters?.length) {
-		console.log('chapters not found');
+		console.error('chapters not found');
 		return notFound;
 	}
 
@@ -56,7 +52,7 @@ export async function getStaticProps({
 	);
 
 	if (!chapter) {
-		console.log('chapter not found');
+		console.error('chapter not found');
 		return notFound;
 	}
 

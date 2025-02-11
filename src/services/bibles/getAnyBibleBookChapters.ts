@@ -30,9 +30,9 @@ export default async function getAnyBibleBookChapters(
 
 	const result = await getApiBibleBookChapters({
 		collectionId: Number(versionId),
-		bookSearch: `"${bookName}"`,
+		bookSearch: bookName,
 	}).catch((e) => {
-		console.log(e);
+		console.error(e);
 		return null;
 	});
 
