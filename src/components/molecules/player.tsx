@@ -85,9 +85,8 @@ const Player = ({
 
 	useEffect(() => {
 		if (isServerSide() || !params.has('autoplay')) return;
-		console.log('autoplaying');
 		session.play();
-	}, [recording]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const iconColor = isBackgroundColorDark(backgroundColor)
 		? BaseColors.WHITE
