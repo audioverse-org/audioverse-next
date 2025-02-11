@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
@@ -14,7 +13,6 @@ import Player from '~components/molecules/player';
 import SequenceNav from '~components/molecules/sequenceNav';
 import Tease from '~components/molecules/tease';
 import TeaseRecording from '~components/molecules/teaseRecording';
-import { PlaybackContext } from '~components/templates/andPlaybackContext';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import IconBack from '~public/img/icons/icon-back-light.svg';
@@ -44,33 +42,7 @@ function parseApiBibleChapterNumber(chapter: { title: string }): number {
 	return +chapter.title.split(' ')[1] || 1;
 }
 
-const Book = (params: Must<BookProps>) => {
-	const currentChapterNumber = parseApiBibleChapterNumber(params.chapter);
-	const playbackContext = useContext(PlaybackContext);
-	const currentRecordingId = playbackContext.getRecording()?.id;
-	const router = useRouter();
-
-	useEffect(() => {
-		if (!currentRecordingId || !(currentRecordingId + '').includes('/')) {
-			return;
-		}
-		const currentRecordingIdChapter = (currentRecordingId + '').split('/')[1];
-		if (+currentRecordingIdChapter !== currentChapterNumber) {
-			router.replace(router.asPath.replace(/\d+$/, currentRecordingIdChapter));
-		}
-	}, [currentChapterNumber, currentRecordingId, router]);
-
-	return useMemo(() => {
-		return <BookInner {...params} />;
-	}, [params]);
-};
-
-function BookInner({
-	version,
-	book,
-	chapters,
-	chapter,
-}: Must<BookProps>): JSX.Element {
+const Book = ({ version, book, chapters, chapter }: Must<BookProps>) => {
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
 	const intl = useIntl();
@@ -232,32 +204,43 @@ function BookInner({
 						</LineHeading>
 
 						<div className={styles.chaptersItems}>
-							{chapters.map((chapter) => (
-								<div
-									className={styles.item}
-									key={chapter.id}
-									ref={
-										parseApiBibleChapterNumber(chapter) === currentChapterNumber
-											? currentRef
-											: undefined
-									}
-								>
-									<TeaseRecording
-										recording={{
-											...chapter,
-											recordingContentType: RecordingContentType.BibleChapter,
-											sequenceIndex: null,
-											speakers: [],
-										}}
-										playlistRecordings={chapters.slice(
-											chapters.findIndex((c) => c.id === chapter.id),
-										)}
-										theme="chapter"
-										unpadded
-										disableUserFeatures
-									/>
-								</div>
-							))}
+							{chapters.map((chapter) => {
+								const number = parseApiBibleChapterNumber(chapter);
+								return (
+									<div
+										className={styles.item}
+										key={chapter.id}
+										ref={
+											number === currentChapterNumber ? currentRef : undefined
+										}
+									>
+										<TeaseRecording
+											recording={{
+												...chapter,
+												recordingContentType: RecordingContentType.BibleChapter,
+												sequenceIndex: null,
+												speakers: [],
+												canonicalPath: root
+													.lang(languageRoute)
+													.bibles.versionId(version.id)
+													.bookName(book.title)
+													.chapterNumber(number)
+													.get({
+														params: {
+															autoplay: 'true',
+														},
+													}),
+											}}
+											playlistRecordings={chapters.slice(
+												chapters.findIndex((c) => c.id === chapter.id),
+											)}
+											theme="chapter"
+											unpadded
+											disableUserFeatures
+										/>
+									</div>
+								);
+							})}
 						</div>
 					</div>
 					<div
@@ -268,7 +251,7 @@ function BookInner({
 			</div>
 		</Tease>
 	);
-}
+};
 
 const WithFailStates = (props: Parameters<typeof Book>[0]) => (
 	<AndFailStates
