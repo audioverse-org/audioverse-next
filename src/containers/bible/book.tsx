@@ -21,6 +21,7 @@ import { RecordingContentType } from '~src/__generated__/graphql';
 import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import { parseChapterNumber } from '~src/services/bibles/utils';
 import { Must } from '~src/types/types';
 
 import {
@@ -38,15 +39,11 @@ export interface BookProps {
 	chapter: BibleBookDetailChapterFullFragment;
 }
 
-function parseApiBibleChapterNumber(chapter: { title: string }): number {
-	return +chapter.title.split(' ')[1] || 1;
-}
-
 const Book = ({ version, book, chapters, chapter }: Must<BookProps>) => {
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
 	const intl = useIntl();
-	const currentChapterNumber = parseApiBibleChapterNumber(chapter);
+	const currentChapterNumber = parseChapterNumber(chapter.title);
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
@@ -205,7 +202,7 @@ const Book = ({ version, book, chapters, chapter }: Must<BookProps>) => {
 
 						<div className={styles.chaptersItems}>
 							{chapters.map((chapter) => {
-								const number = parseApiBibleChapterNumber(chapter);
+								const number = parseChapterNumber(chapter.title);
 								return (
 									<div
 										className={styles.item}
