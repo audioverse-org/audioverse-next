@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import startCase from 'lodash/startCase';
 import Head from 'next/head';
-import { useSearchParams } from 'next/navigation';
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -37,8 +36,6 @@ import {
 } from '~src/__generated__/graphql';
 import { VersionProps } from '~src/containers/bible/version';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
-import isServerSide from '~src/lib/isServerSide';
 
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
@@ -63,13 +60,6 @@ export function Recording({
 	const intl = useIntl();
 	const { id, imageWithFallback, contentType, sponsor, speakers, writers } =
 		recording;
-	const session = usePlaybackSession(recording ?? null);
-	const params = useSearchParams();
-
-	useEffect(() => {
-		if (isServerSide() || !params.has('autoplay')) return;
-		session.play();
-	}, [recording]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<Tease className={clsx(styles.base, styles[contentType])}>

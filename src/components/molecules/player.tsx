@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
+import { useSearchParams } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -23,6 +24,7 @@ import IconPlay from '~public/img/icons/icon-play-large.svg';
 import useGlobalSpaceDown from '~src/lib/hooks/useGlobalSpaceDown';
 import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
+import isServerSide from '~src/lib/isServerSide';
 
 import { PlaybackContext } from '../templates/andPlaybackContext';
 import { PlayerFragment } from './__generated__/player';
@@ -65,6 +67,8 @@ const Player = ({
 	const [posterHovered, setPosterHovered] = useState(false);
 	const [browser, setBrowser] = useState<string | null>(null);
 
+	const params = useSearchParams();
+
 	useGlobalSpaceDown(() => {
 		session.isPaused ? session.play() : session.pause();
 	});
@@ -78,6 +82,12 @@ const Player = ({
 			setBrowser(null);
 		}
 	}, []);
+
+	useEffect(() => {
+		if (isServerSide() || !params.has('autoplay')) return;
+		console.log('autoplaying');
+		session.play();
+	}, [recording]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const iconColor = isBackgroundColorDark(backgroundColor)
 		? BaseColors.WHITE
