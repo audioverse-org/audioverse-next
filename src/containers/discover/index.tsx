@@ -42,9 +42,14 @@ export default function Discover(): JSX.Element {
 	const language = useLanguageId();
 	const [topSection, setTopSection] = useState('nothing');
 	const { isUserLoggedIn, isFetching } = useIsAuthenticated();
-	const { data, isLoading: isLoadingCount } = useGetDiscoverPageDataQuery({
-		language,
-	});
+	const { data, isLoading: isLoadingCount } = useGetDiscoverPageDataQuery(
+		{
+			language,
+		},
+		{
+			enabled: isUserLoggedIn,
+		},
+	);
 
 	useEffect(() => {
 		const newTopSection = getTopSection({
