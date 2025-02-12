@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import Button from '~components/molecules/button';
 import IconQuestionCircle from '~public/img/icons/icon-question-circle.svg';
 import useHelpScoutLabels from '~src/lib/hooks/useHelpScoutLabels';
+import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 
 import { Beacon } from '../../types/window';
 import { useGetHelpWidgetDataQuery } from './__generated__/helpWidget';
@@ -14,7 +15,8 @@ const BEACON_ID = 'e73e9329-30be-4766-99bb-6bfdd739e316';
 
 export default function HelpWidget(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const { data } = useGetHelpWidgetDataQuery();
+	const { isUserLoggedIn } = useIsAuthenticated();
+	const { data } = useGetHelpWidgetDataQuery({}, { enabled: isUserLoggedIn });
 	const router = useRouter();
 	const labels = useHelpScoutLabels();
 	const [didLoad, setDidLoad] = useState<boolean>(false);
