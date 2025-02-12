@@ -12,11 +12,11 @@ import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
 	getStaticProps,
 } from '~pages/[language]/bibles/[version]/[book]/[chapter]';
-import getFcbhBible from '~src/services/bibles/getFcbhBible';
+import getFcbhBible from '~src/services/bibles/fcbh/getFcbhBible';
 
-jest.mock('~services/bibles/getFcbhBibles');
-jest.mock('~services/bibles/api/fetchFcbhChapters');
-jest.mock('~services/bibles/getFcbhBible');
+jest.mock('~services/bibles/fcbh/getFcbhBibles');
+jest.mock('~services/bibles/fcbh/fetchFcbhChapters');
+jest.mock('~services/bibles/fcbh/getFcbhBible');
 jest.mock('video.js');
 jest.mock('p-timeout');
 

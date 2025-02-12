@@ -1,12 +1,12 @@
 import fs from 'fs';
 
-import { fetchFcbhBibles } from '~src/services/bibles/api/fetchFcbhBibles';
-import { fetchFcbhChapters } from '~src/services/bibles/api/fetchFcbhChapters';
+import { fetchFcbhBibles } from '~src/services/bibles/fcbh/fetchFcbhBibles';
+import { fetchFcbhChapters } from '~src/services/bibles/fcbh/fetchFcbhChapters';
 
 import main from './save-fcbh-meta.main';
 
-jest.mock('../src/services/bibles/api/fetchFcbhBibles');
-jest.mock('../src/services/bibles/api/fetchFcbhChapters');
+jest.mock('../src/services/bibles/fcbh/fetchFcbhBibles');
+jest.mock('../src/services/bibles/fcbh/fetchFcbhChapters');
 jest.mock('fs');
 
 describe('save-fcbh-meta', () => {

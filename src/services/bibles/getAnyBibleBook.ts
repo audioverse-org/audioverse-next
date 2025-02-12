@@ -1,7 +1,7 @@
 import { BibleBookDetailBookFragment } from '~src/containers/bible/__generated__/book';
 
 import { getApiBibleBook } from './__generated__/getAnyBibleBook';
-import getFcbhBible from './getFcbhBible';
+import getFcbhBible from './fcbh/getFcbhBible';
 import { bookSchema } from './schemas/book';
 
 export default async function getAnyBibleBook(

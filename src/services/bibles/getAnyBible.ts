@@ -1,5 +1,5 @@
+import getFcbhBible from './fcbh/getFcbhBible';
 import getApiBible, { ApiBible } from './getApiBible';
-import getFcbhBible from './getFcbhBible';
 import { versionSchema } from './schemas/version';
 
 export default async function getAnyBible(

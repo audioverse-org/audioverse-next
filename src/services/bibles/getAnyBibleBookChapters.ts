@@ -6,7 +6,7 @@ import {
 	getApiBibleBookChapters,
 	searchBibleBooks,
 } from './__generated__/getAnyBibleBookChapters';
-import getFcbhBible from './getFcbhBible';
+import getFcbhBible from './fcbh/getFcbhBible';
 import { chapterPartialSchema } from './schemas/chapterPartial';
 
 const chaptersSchema = z.array(chapterPartialSchema);

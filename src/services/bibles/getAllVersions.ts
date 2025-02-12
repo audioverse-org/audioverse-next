@@ -4,7 +4,7 @@ import {
 	getApiVersions,
 	GetApiVersionsQuery,
 } from './__generated__/getAllVersions';
-import { FCBH_VERSIONS } from './api/fetchFcbhBibles';
+import { FCBH_VERSIONS } from './fcbh/fetchFcbhBibles';
 
 type Version = NonNullable<GetApiVersionsQuery['collections']['nodes']>[0];
 

@@ -1,5 +1,5 @@
+import { IBibleVersion } from '../types';
 import { getFcbhBibles } from './getFcbhBibles';
-import { IBibleVersion } from './types';
 
 const fcbhBibles = getFcbhBibles('en');
 

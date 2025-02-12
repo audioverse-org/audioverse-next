@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { fetchFcbhBibles } from '~src/services/bibles/api/fetchFcbhBibles';
+import { fetchFcbhBibles } from '~src/services/bibles/fcbh/fetchFcbhBibles';
 
 export default async function main() {
 	const bibles = await fetchFcbhBibles();

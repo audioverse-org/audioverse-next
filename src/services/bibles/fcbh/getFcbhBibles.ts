@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { IBibleVersion } from './types';
+import { IBibleVersion } from '../types';
 
 export function getFcbhBibles(languageRoute: string): IBibleVersion[] | null {
 	if (languageRoute !== 'en') return null;
