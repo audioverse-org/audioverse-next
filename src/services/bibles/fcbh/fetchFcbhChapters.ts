@@ -23,7 +23,8 @@ export async function fetchFcbhChapters(
 		return [];
 	}
 
-	const bookPrefix = BOOK_ID_MAP[bookId];
+	const shortId = bookId.split('/').pop() ?? '';
+	const bookPrefix = BOOK_ID_MAP[shortId];
 
 	if (!bookPrefix) {
 		throw new Error(`Book prefix not found for ${bookId}`);
@@ -43,7 +44,7 @@ export async function fetchFcbhChapters(
 		},
 		{},
 	);
-	const filesets = response.data?.filter(({ book_id }) => book_id === bookId);
+	const filesets = response.data?.filter(({ book_id }) => book_id === shortId);
 
 	filesets.sort((a, b) => a.chapter_start - b.chapter_start);
 

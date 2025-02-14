@@ -35,7 +35,7 @@ describe('fetchFcbhChapters', () => {
 			'ENGKJV',
 			'King James Version (Dramatized)',
 			'OT',
-			'GEN',
+			'ENGKJV2/GEN',
 		);
 
 		expect(result[0].number).toBe(1);
