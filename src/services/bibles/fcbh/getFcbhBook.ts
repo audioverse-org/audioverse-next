@@ -16,6 +16,8 @@ export default async function getFcbhBook(versionId: string, bookName: string) {
 		throw new Error(`Book ${bookName} not found in ${versionId}`);
 	}
 
+	// WORKAROUND: FCBH media URLs expire, so we need to re-fetch
+	// the chapters here to make sure the URLs are valid.
 	book.chapters_full = await fetchFcbhChapters(
 		versionId,
 		fcbhBible.title,
