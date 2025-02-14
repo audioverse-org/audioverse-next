@@ -14,12 +14,10 @@ export default async function getAnyBibleBookChapter(
 	const fcbhChapter = await getFcbhChapter(versionId, bookName, chapterNumber);
 
 	if (fcbhChapter) {
-		return chapterSchema
-			.transform(transformChapterFull)
-			.parse({
-				...fcbhChapter,
-				text: await fetchChapterText(versionId, bookName, chapterNumber),
-			});
+		return chapterSchema.transform(transformChapterFull).parse({
+			...fcbhChapter,
+			text: await fetchChapterText(bookName, chapterNumber),
+		});
 	}
 
 	const result = await getApiBibleBookChapter({

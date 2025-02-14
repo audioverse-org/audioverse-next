@@ -1,4 +1,3 @@
-import { BOOK_ID_MAP } from '../constants';
 import { IBBFileset, IBibleBookChapter } from '../types';
 import fetchResponse from './fetchResponse';
 
@@ -21,14 +20,8 @@ export async function fetchFcbhChapters(
 		return [];
 	}
 
-	const shortId = bookId.split('/').pop() ?? '';
-	const bookPrefix = BOOK_ID_MAP[shortId];
-
-	if (!bookPrefix) {
-		throw new Error(`Book prefix not found for ${bookId}`);
-	}
-
-	const filesets = response.data?.filter(({ book_id }) => book_id === shortId);
+	const fcbhId = bookId.split('/').pop() ?? '';
+	const filesets = response.data?.filter(({ book_id }) => book_id === fcbhId);
 
 	filesets.sort((a, b) => a.chapter_start - b.chapter_start);
 
