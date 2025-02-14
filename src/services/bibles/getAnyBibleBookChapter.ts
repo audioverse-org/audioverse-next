@@ -11,7 +11,11 @@ export default async function getAnyBibleBookChapter(
 	bookName: string,
 	chapterNumber: number,
 ): Promise<BibleBookDetailChapterFullFragment | undefined> {
-	const fcbhChapter = await getFcbhChapter(versionId, bookName, chapterNumber);
+	const fcbhChapter = await getFcbhChapter(
+		versionId,
+		bookName,
+		chapterNumber,
+	).catch(() => null);
 
 	if (fcbhChapter) {
 		return chapterSchema.transform(transformChapterFull).parse({

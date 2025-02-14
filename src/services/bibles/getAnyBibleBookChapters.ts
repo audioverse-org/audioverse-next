@@ -14,7 +14,7 @@ export default async function getAnyBibleBookChapters(
 	versionId: string,
 	bookName: string,
 ): Promise<BibleBookDetailChapterPartialFragment[] | undefined> {
-	const fcbhBook = await getFcbhBook(versionId, bookName);
+	const fcbhBook = await getFcbhBook(versionId, bookName).catch(() => null);
 
 	if (fcbhBook) {
 		if (!fcbhBook.chapters_full.length) {
