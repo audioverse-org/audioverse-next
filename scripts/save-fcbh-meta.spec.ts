@@ -1,18 +1,19 @@
 import fs from 'fs';
 
 import { fetchFcbhBibles } from '~src/services/bibles/fcbh/fetchFcbhBibles';
-import { fetchFcbhChapters } from '~src/services/bibles/fcbh/fetchFcbhChapters';
 
 import main from './save-fcbh-meta.main';
 
 jest.mock('../src/services/bibles/fcbh/fetchFcbhBibles');
-jest.mock('../src/services/bibles/fcbh/fetchFcbhChapters');
 jest.mock('fs');
 
 describe('save-fcbh-meta', () => {
 	beforeEach(() => {
-		jest.mocked(fetchFcbhBibles).mockResolvedValue([{} as any]);
-		jest.mocked(fetchFcbhChapters).mockResolvedValue([{} as any]);
+		jest
+			.mocked(fetchFcbhBibles)
+			.mockResolvedValue([
+				{ books: [{ chapters_full: [{ url: 'the_url' }] }] } as any,
+			]);
 	});
 
 	it('gets fcbh bibles', async () => {
@@ -31,5 +32,14 @@ describe('save-fcbh-meta', () => {
 		await main();
 
 		expect(fs.writeFileSync).toHaveBeenCalled();
+	});
+
+	it('strips chapter urls', async () => {
+		await main();
+
+		expect(fs.writeFileSync).not.toHaveBeenCalledWith(
+			expect.anything(),
+			expect.stringContaining('the_url'),
+		);
 	});
 });

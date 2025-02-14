@@ -40,10 +40,11 @@ export interface BookProps {
 }
 
 const Book = ({ version, book, chapters, chapter }: Must<BookProps>) => {
+	const c = chapter;
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
 	const intl = useIntl();
-	const currentChapterNumber = parseChapterNumber(chapter.title);
+	const currentChapterNumber = parseChapterNumber(c.title);
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
@@ -137,26 +138,26 @@ const Book = ({ version, book, chapters, chapter }: Must<BookProps>) => {
 								onClick={() => setShowingText(false)}
 								className={styles.backButton}
 							/>
-							<Heading1>{chapter?.title}</Heading1>
+							<Heading1>{c?.title}</Heading1>
 							<ContentWidthLimiter>
 								<div
 									className={styles.chapterText}
 									dangerouslySetInnerHTML={{
-										__html: chapter?.transcript?.text || '',
+										__html: c?.transcript?.text || '',
 									}}
 								/>
 							</ContentWidthLimiter>
 						</>
 					) : (
 						<>
-							<Heading1>{chapter?.title}</Heading1>
+							<Heading1>{c?.title}</Heading1>
 							<div className={styles.sequenceNav}>
-								<SequenceNav recording={chapter} useInverse={false} />
+								<SequenceNav recording={c} useInverse={false} />
 							</div>
 							<Player
-								recording={chapter}
+								recording={c}
 								playlistRecordings={chapters.slice(
-									chapters.findIndex((c) => c.id === chapter?.id),
+									chapters.findIndex((_c) => _c.id === c?.id),
 								)}
 								backgroundColor={BaseColors.BIBLE_B}
 								disableUserFeatures
@@ -254,7 +255,7 @@ const WithFailStates = (props: Parameters<typeof Book>[0]) => (
 	<AndFailStates
 		Component={Book}
 		componentProps={props}
-		options={{ should404: (props: BookProps) => !props.chapters.length }}
+		options={{ should404: (props: BookProps) => !props.chapter }}
 	/>
 );
 export default WithFailStates;

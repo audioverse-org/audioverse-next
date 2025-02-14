@@ -7,7 +7,7 @@ import fetchResponse from './fetchResponse';
 export async function fetchFcbhChapters(
 	bibleId: string,
 	bibleName: string,
-	testament: string,
+	testament: 'OT' | 'NT',
 	bookId: string,
 ): Promise<IBibleBookChapter[]> {
 	if (!bookId) {

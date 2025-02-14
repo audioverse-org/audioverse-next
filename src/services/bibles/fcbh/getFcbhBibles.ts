@@ -1,9 +1,9 @@
-import fs from 'fs';
+import { data } from '~/fcbh-bibles';
 
 import { IBibleVersion } from '../types';
 
 export function getFcbhBibles(languageRoute: string): IBibleVersion[] | null {
 	if (languageRoute !== 'en') return null;
 
-	return JSON.parse(fs.readFileSync('fcbh-bibles.json', 'utf8'));
+	return JSON.parse(data);
 }

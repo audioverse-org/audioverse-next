@@ -17,7 +17,7 @@ export const bookSchema: SchemaType = z
 		name_short: z.string(),
 		chapters: z.array(z.number()),
 		book_seq: z.string(),
-		testament: z.string(),
+		testament: z.enum(['OT', 'NT']),
 		bible: z.object({
 			abbreviation: z.string(),
 		}),

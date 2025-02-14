@@ -1,12 +1,7 @@
-import {
-	GetStaticPathsResult,
-	GetStaticPropsContext,
-	GetStaticPropsResult,
-} from 'next';
+import { GetServerSidePropsResult, GetStaticPropsContext } from 'next';
 
 import { IBaseProps } from '~containers/base';
 import Book, { BookProps } from '~containers/bible/book';
-import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import getAnyBible from '~src/services/bibles/getAnyBible';
 import getAnyBibleBookChapter from '~src/services/bibles/getAnyBibleBookChapter';
 import getAnyBibleBookChapters from '~src/services/bibles/getAnyBibleBookChapters';
@@ -15,16 +10,15 @@ export default Book;
 
 const notFound = {
 	notFound: true,
-	revalidate: REVALIDATE_FAILURE,
-} satisfies GetStaticPropsResult<BookProps & IBaseProps>;
+} satisfies GetServerSidePropsResult<BookProps & IBaseProps>;
 
-export async function getStaticProps({
+export async function getServerSideStaticProps({
 	params,
 }: GetStaticPropsContext<{
 	version: string;
 	book: string;
 	chapter: string;
-}>): Promise<GetStaticPropsResult<BookProps & IBaseProps>> {
+}>): Promise<GetServerSidePropsResult<BookProps & IBaseProps>> {
 	const versionId = params?.version as string;
 	const bookName = params?.book as string;
 	const chapterNumber = params?.chapter as string;
@@ -48,7 +42,7 @@ export async function getStaticProps({
 	const chapter = await getAnyBibleBookChapter(
 		versionId,
 		bookName,
-		chapterNumber,
+		Number(chapterNumber),
 	);
 
 	if (!chapter) {
@@ -64,13 +58,5 @@ export async function getStaticProps({
 			chapter,
 			title: bookName,
 		},
-		revalidate: REVALIDATE,
-	};
-}
-
-export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	return {
-		paths: [],
-		fallback: 'blocking',
 	};
 }

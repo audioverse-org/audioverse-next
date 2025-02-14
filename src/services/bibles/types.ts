@@ -50,7 +50,7 @@ interface IBBBook {
 	chapters: number[];
 	chapters_full: IBibleBookChapter[];
 	book_seq: string;
-	testament: string;
+	testament: 'OT' | 'NT';
 }
 
 export interface IBibleBook extends IBBBook {
@@ -63,7 +63,7 @@ export interface IBibleBookChapter {
 	id: string;
 	number: number;
 	title: string;
-	url: string;
+	url?: string;
 	duration: number;
 	text: string;
 	book_name: string;

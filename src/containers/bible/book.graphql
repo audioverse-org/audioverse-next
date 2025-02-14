@@ -1,5 +1,6 @@
 fragment bibleBookDetailVersion on Collection {
 	id
+	title
 	description
 	sponsor {
 		title

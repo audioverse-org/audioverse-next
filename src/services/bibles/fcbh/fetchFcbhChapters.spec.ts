@@ -34,7 +34,7 @@ describe('fetchFcbhChapters', () => {
 		const result = await fetchFcbhChapters(
 			'ENGKJV',
 			'King James Version (Dramatized)',
-			'OLD',
+			'OT',
 			'GEN',
 		);
 

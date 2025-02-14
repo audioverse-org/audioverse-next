@@ -10,12 +10,21 @@ import { BookProps } from '~containers/bible/book';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
-	getStaticProps,
+	getServerSideStaticProps,
 } from '~pages/[language]/bibles/[version]/[book]/[chapter]';
-import getFcbhBible from '~src/services/bibles/fcbh/getFcbhBible';
+import {
+	CollectionContentType,
+	RecordingContentType,
+} from '~src/__generated__/graphql';
+import getAnyBible from '~src/services/bibles/getAnyBible';
+import getAnyBibleBookChapter from '~src/services/bibles/getAnyBibleBookChapter';
+import getAnyBibleBookChapters from '~src/services/bibles/getAnyBibleBookChapters';
 
 jest.mock('~services/bibles/fcbh/getFcbhBibles');
+jest.mock('~services/bibles/getAnyBible');
 jest.mock('~services/bibles/fcbh/fetchFcbhChapters');
+jest.mock('~services/bibles/getAnyBibleBookChapter');
+jest.mock('~services/bibles/getAnyBibleBookChapters');
 jest.mock('~services/bibles/fcbh/getFcbhBible');
 jest.mock('video.js');
 jest.mock('p-timeout');
@@ -28,7 +37,7 @@ const renderPage = buildStaticRenderer((props: BookProps) => {
 			</AndMiniplayer>
 		</AndPlaybackContext>
 	);
-}, getStaticProps);
+}, getServerSideStaticProps);
 
 describe('Bible book detail page', () => {
 	let scrollToProto: any;
@@ -58,41 +67,78 @@ describe('Bible book detail page', () => {
 			catch: () => undefined,
 		});
 
-		jest.mocked(getFcbhBible).mockReturnValue({
-			id: 'test-bible',
-			title: 'Test Bible',
-			abbreviation: 'TEST',
-			books: [
-				{
-					name: 'the_book_name',
-					chapters_full: [
-						{
-							id: 'GEN/1',
-							duration: 123,
-							number: 1,
-							title: 'the_chapter_title',
-							url: 'https://example.com',
-							text: '',
-							book_name: '',
-							version_id: 'ENGKJV',
-							version_name: 'King James Version (Dramatized)',
-						},
-					],
-					bible: {
-						abbreviation: '',
-					},
-					book_id: '',
-					name_short: 'the_book_shortname',
-					chapters: [],
-					book_seq: '',
-					testament: '',
-				},
-			],
+		jest.mocked(getAnyBible).mockResolvedValue({
+			id: 'ENGKJV',
+			title: 'King James Version',
+			description: 'The Bible in English',
 			sponsor: {
-				title: 'the_sponsor_name',
+				title: 'Faith Comes By Hearing',
 				website: 'the_sponsor_url',
 			},
+			sequences: { nodes: [] },
 		});
+
+		jest.mocked(getAnyBibleBookChapter).mockResolvedValue({
+			id: 'GEN/1',
+			title: 'the_chapter_title',
+			contentType: RecordingContentType.BibleChapter,
+			canonicalPath: '/en/bibles/ENGKJV/Gen/1',
+			duration: 123,
+			isDownloadAllowed: false,
+			shareUrl: 'https://www.audioverse.org/en/bibles/ENGKJV/Gen/1',
+			recordingContentType: RecordingContentType.BibleChapter,
+			collection: {
+				id: 'ENGKJV',
+				title: 'King James Version (Dramatized)',
+				contentType: CollectionContentType.BibleVersion,
+			},
+			speakers: [],
+			sponsor: {
+				title: 'Faith Comes By Hearing',
+			},
+			sequence: null,
+			audioFiles: [
+				{
+					url: 'https://example.com',
+					mimeType: 'audio/mpeg',
+					filesize: 'unknown',
+					duration: 123,
+				},
+			],
+			videoFiles: [],
+			videoStreams: [],
+			transcript: {
+				text: '',
+			},
+			videoDownloads: [],
+			audioDownloads: [],
+			sequencePreviousRecording: null,
+			sequenceNextRecording: null,
+		});
+
+		jest.mocked(getAnyBibleBookChapters).mockResolvedValue([
+			{
+				id: 'GEN/1',
+				title: 'the_chapter_title',
+				canonicalPath: '/en/bibles/ENGKJV/Gen/1',
+				duration: 123,
+				sequenceIndex: null,
+				recordingContentType: RecordingContentType.BibleChapter,
+				sequence: null,
+				speakers: [],
+				sponsor: {
+					title: 'Faith Comes By Hearing',
+				},
+				collection: {
+					id: 'ENGKJV',
+					title: 'King James Version',
+					contentType: CollectionContentType.BibleVersion,
+				},
+				audioFiles: [],
+				videoFiles: [],
+				videoStreams: [],
+			},
+		]);
 	});
 
 	it('displays chapter title', async () => {
@@ -110,13 +156,13 @@ describe('Bible book detail page', () => {
 	it('displays sponsor name', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_sponsor_name')).toBeInTheDocument();
+		expect(getByText('Faith Comes By Hearing')).toBeInTheDocument();
 	});
 
 	it('displays sponsor url', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_sponsor_name')).toHaveAttribute(
+		expect(getByText('Faith Comes By Hearing')).toHaveAttribute(
 			'href',
 			'the_sponsor_url',
 		);

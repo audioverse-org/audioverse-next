@@ -29,7 +29,8 @@
 			"~containers/*": ["src/containers/*"],
 			"~pages/*": ["src/pages/*"],
 			"~public/*": ["public/*"],
-			"~services/*": ["src/services/*"]
+			"~services/*": ["src/services/*"],
+			"~/*": ["./*"]
 		},
 		"incremental": true
 	},

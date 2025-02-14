@@ -36,6 +36,10 @@ export const chapterSchema: SchemaType = z
 			throw new Error('Version name is required');
 		}
 
+		if (!val.url) {
+			throw new Error('URL is required');
+		}
+
 		const canonicalPath = root
 			.lang('en')
 			.bibles.versionId(val.version_id)

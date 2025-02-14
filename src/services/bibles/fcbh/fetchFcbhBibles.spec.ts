@@ -9,7 +9,7 @@ describe('fetchFcbhBibles', () => {
 	beforeEach(() => {
 		jest.mocked(fetchResponse).mockResolvedValue({
 			data: {
-				books: [{ book_id: 'the_book_id', testament: 'the_testament' }],
+				books: [{ book_id: 'the_book_id', testament: 'NT' }],
 				id: 'the_version_id',
 			},
 		});
@@ -33,7 +33,7 @@ describe('fetchFcbhBibles', () => {
 		expect(fetchFcbhChapters).toBeCalledWith(
 			FCBH_VERSIONS[0].id,
 			FCBH_VERSIONS[0].title,
-			'the_testament',
+			'NT',
 			'the_book_id',
 		);
 	});

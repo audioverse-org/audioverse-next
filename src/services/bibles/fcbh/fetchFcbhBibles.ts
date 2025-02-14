@@ -32,7 +32,7 @@ export async function fetchFcbhBibles(): Promise<IBibleVersion[] | null> {
 						chapters_full: await fetchFcbhChapters(
 							v.id,
 							v.title,
-							b.testament,
+							b.testament === 'OT' ? 'OT' : 'NT',
 							b.book_id,
 						),
 					};

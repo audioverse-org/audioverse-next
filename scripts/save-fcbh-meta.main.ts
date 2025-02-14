@@ -9,5 +9,18 @@ export default async function main() {
 		throw new Error('No Bibles found');
 	}
 
-	fs.writeFileSync('fcbh-bibles.json', JSON.stringify(bibles));
+	const biblesWithoutUrls = bibles.map((b) => ({
+		...b,
+		books: b.books.map((b) => ({
+			...b,
+			chapters_full: b.chapters_full.map((c) => ({ ...c, url: undefined })),
+		})),
+	}));
+
+	fs.writeFileSync(
+		'fcbh-bibles.ts',
+		`export const data = \`
+${JSON.stringify(biblesWithoutUrls, null, 2)}
+\`;`,
+	);
 }
