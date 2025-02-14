@@ -12,7 +12,7 @@ const notFound = {
 	notFound: true,
 } satisfies GetServerSidePropsResult<BookProps & IBaseProps>;
 
-export async function getServerSideStaticProps({
+export async function getServerSideProps({
 	params,
 }: GetStaticPropsContext<{
 	version: string;

@@ -10,7 +10,7 @@ import { BookProps } from '~containers/bible/book';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
-	getServerSideStaticProps,
+	getServerSideProps,
 } from '~pages/[language]/bibles/[version]/[book]/[chapter]';
 import {
 	CollectionContentType,
@@ -37,7 +37,7 @@ const renderPage = buildStaticRenderer((props: BookProps) => {
 			</AndMiniplayer>
 		</AndPlaybackContext>
 	);
-}, getServerSideStaticProps);
+}, getServerSideProps);
 
 describe('Bible book detail page', () => {
 	let scrollToProto: any;
