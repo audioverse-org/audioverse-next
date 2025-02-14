@@ -65,7 +65,7 @@ export interface IBibleBookChapter {
 	title: string;
 	url?: string;
 	duration: number;
-	text: string;
+	text?: string;
 	book_name: string;
 	version_id?: string;
 	version_name?: string;

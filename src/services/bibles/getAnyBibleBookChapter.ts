@@ -1,26 +1,25 @@
 import { BibleBookDetailChapterFullFragment } from '~src/containers/bible/__generated__/book';
 
 import { getApiBibleBookChapter } from './__generated__/getAnyBibleBookChapter';
-import getFcbhBook from './fcbh/getFcbhBook';
+import getFcbhChapter from './fcbh/getFcbhChapter';
+import fetchChapterText from './graphql/fetchChapterText';
 import { chapterSchema } from './schemas/chapter';
+import { transformChapterFull } from './transforms/chapterTransforms';
 
 export default async function getAnyBibleBookChapter(
 	versionId: string,
 	bookName: string,
 	chapterNumber: number,
 ): Promise<BibleBookDetailChapterFullFragment | undefined> {
-	const fcbhBook = await getFcbhBook(versionId, bookName);
+	const fcbhChapter = await getFcbhChapter(versionId, bookName, chapterNumber);
 
-	if (fcbhBook) {
-		if (!fcbhBook.chapters_full.length) {
-			throw new Error(`Chapters not found for book: ${bookName}`);
-		}
-
-		const chapter = fcbhBook.chapters_full.find(
-			(c) => c.number === Number(chapterNumber),
-		);
-
-		return chapterSchema.parse(chapter);
+	if (fcbhChapter) {
+		return chapterSchema
+			.transform(transformChapterFull)
+			.parse({
+				...fcbhChapter,
+				text: await fetchChapterText(versionId, bookName, chapterNumber),
+			});
 	}
 
 	const result = await getApiBibleBookChapter({

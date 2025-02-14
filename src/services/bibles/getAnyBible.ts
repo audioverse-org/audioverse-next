@@ -2,6 +2,7 @@ import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import getFcbhBible from './fcbh/getFcbhBible';
 import getApiBible, { ApiBible } from './getApiBible';
 import { versionSchema } from './schemas/version';
+import { transformVersion } from './transforms/versionTransforms';
 
 export default async function getAnyBible(
 	versionId: string,
@@ -19,7 +20,7 @@ export default async function getAnyBible(
 				);
 			}),
 		);
-		return versionSchema.parse(fcbhMatch);
+		return versionSchema.transform(transformVersion).parse(fcbhMatch);
 	}
 
 	const apiMatch = await getApiBible(versionId);

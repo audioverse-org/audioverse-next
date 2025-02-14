@@ -1,7 +1,9 @@
 import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import getAnyBibleBookChapter from './getAnyBibleBookChapter';
+import fetchChapterText from './graphql/fetchChapterText';
 
 jest.mock('./fcbh/fetchFcbhChapters');
+jest.mock('./graphql/fetchChapterText');
 
 describe('getAnyBibleBookChapter', () => {
 	beforeEach(() => {
@@ -11,13 +13,14 @@ describe('getAnyBibleBookChapter', () => {
 				number: 1,
 				title: 'Genesis 1',
 				duration: 123,
-				text: 'In the beginning...',
 				url: 'https://example.com/audio.mp3',
 				book_name: 'Genesis',
 				version_id: 'ENGKJV2',
 				version_name: 'King James Version',
 			},
 		]);
+
+		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
 	});
 
 	it('looks up book case insensitively', async () => {

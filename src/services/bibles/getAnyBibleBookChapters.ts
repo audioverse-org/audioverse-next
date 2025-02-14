@@ -7,9 +7,8 @@ import {
 	searchBibleBooks,
 } from './__generated__/getAnyBibleBookChapters';
 import getFcbhBook from './fcbh/getFcbhBook';
-import { chapterPartialSchema } from './schemas/chapterPartial';
-
-const chaptersSchema = z.array(chapterPartialSchema);
+import { chapterSchema } from './schemas/chapter';
+import { transformChapterPartial } from './transforms/chapterTransforms';
 
 export default async function getAnyBibleBookChapters(
 	versionId: string,
@@ -22,7 +21,9 @@ export default async function getAnyBibleBookChapters(
 			throw new Error(`Chapters not found for book: ${bookName}`);
 		}
 
-		return chaptersSchema.parse(fcbhBook.chapters_full);
+		return z
+			.array(chapterSchema.transform(transformChapterPartial))
+			.parse(fcbhBook.chapters_full);
 	}
 
 	const { sequences } = await searchBibleBooks({

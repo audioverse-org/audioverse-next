@@ -1,11 +1,7 @@
-import { GetBibleBookContentDocument } from '../../../lib/api/__generated__/bibleContent';
-import { buildLoader } from '../../../lib/test/buildLoader';
 import { fetchFcbhChapters } from './fetchFcbhChapters';
 import fetchResponse from './fetchResponse';
 
 jest.mock('./fetchResponse');
-
-const loadData = buildLoader(GetBibleBookContentDocument, {});
 
 describe('fetchFcbhChapters', () => {
 	beforeEach(() => {
@@ -27,7 +23,6 @@ describe('fetchFcbhChapters', () => {
 				},
 			],
 		});
-		loadData();
 	});
 
 	it('sorts chapters', async () => {

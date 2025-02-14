@@ -3,6 +3,7 @@ import { BibleBookDetailBookFragment } from '~src/containers/bible/__generated__
 import { getApiBibleBook } from './__generated__/getAnyBibleBook';
 import getFcbhBook from './fcbh/getFcbhBook';
 import { bookSchema } from './schemas/book';
+import { transformBook } from './transforms/bookTransforms';
 
 export default async function getAnyBibleBook(
 	versionId: string,
@@ -11,7 +12,7 @@ export default async function getAnyBibleBook(
 	const book = await getFcbhBook(versionId, bookName).catch(() => null);
 
 	if (book) {
-		return bookSchema.parse(book);
+		return bookSchema.transform(transformBook).parse(book);
 	}
 
 	const result = await getApiBibleBook({

@@ -1,5 +1,3 @@
-import { getBibleBookContent } from '~src/lib/api/__generated__/bibleContent';
-
 import { BOOK_ID_MAP } from '../constants';
 import { IBBFileset, IBibleBookChapter } from '../types';
 import fetchResponse from './fetchResponse';
@@ -30,20 +28,6 @@ export async function fetchFcbhChapters(
 		throw new Error(`Book prefix not found for ${bookId}`);
 	}
 
-	const result = await getBibleBookContent({
-		bibleId: 'ENGKJVC',
-		bookId: `ENGKJVC-${bookPrefix}`,
-	});
-	const chapters = result.audiobible?.book.chapters || [];
-	const textByChapterNumber = chapters.reduce<Record<number, string>>(
-		(carry, { text, id }) => {
-			const matches = text.match(/<p>.+<\/p>/) || [];
-			const key = +id.toString().split('-')[2];
-			carry[key] = matches[0] || '';
-			return carry;
-		},
-		{},
-	);
 	const filesets = response.data?.filter(({ book_id }) => book_id === shortId);
 
 	filesets.sort((a, b) => a.chapter_start - b.chapter_start);
@@ -55,7 +39,6 @@ export async function fetchFcbhChapters(
 			title: `${book_name} ${chapter_start}`,
 			url: path,
 			duration,
-			text: textByChapterNumber[chapter_start],
 			book_name,
 			version_id: bibleId,
 			version_name: bibleName,
