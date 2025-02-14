@@ -1,6 +1,7 @@
 import { BibleBookDetailBookFragment } from '~src/containers/bible/__generated__/book';
 
 import { getApiBibleBook } from './__generated__/getAnyBibleBook';
+import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import getFcbhBible from './fcbh/getFcbhBible';
 import { bookSchema } from './schemas/book';
 
@@ -11,7 +12,22 @@ export default async function getAnyBibleBook(
 	const fcbhBible = getFcbhBible(versionId);
 
 	if (fcbhBible) {
-		return bookSchema.parse(fcbhBible.books.find((b) => b.name === bookName));
+		const book = fcbhBible.books.find(
+			(b) => b.name.toLowerCase() === bookName.toLowerCase(),
+		);
+
+		if (!book) {
+			throw new Error(`Book ${bookName} not found in ${versionId}`);
+		}
+
+		book.chapters_full = await fetchFcbhChapters(
+			versionId,
+			fcbhBible.title,
+			book.testament,
+			book.book_id,
+		);
+
+		return bookSchema.parse(book);
 	}
 
 	const result = await getApiBibleBook({

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
-import { Language } from '~src/__generated__/graphql';
 import root from '~src/lib/routes';
 import { parseChapterNumber } from '~src/services/bibles/utils';
 
@@ -29,7 +28,7 @@ export default function ChapterGrid({
 				const n = parseChapterNumber(chapter.title);
 				const s = n.toString().padStart(2, '0');
 				const baseUrl = root
-					.lang(Language.English)
+					.lang('en')
 					.bibles.versionId(versionId)
 					.bookName(bookName)
 					.chapterNumber(n)
