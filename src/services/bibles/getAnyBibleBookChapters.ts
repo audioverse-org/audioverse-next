@@ -6,7 +6,7 @@ import {
 	getApiBibleBookChapters,
 	searchBibleBooks,
 } from './__generated__/getAnyBibleBookChapters';
-import getFcbhBible from './fcbh/getFcbhBible';
+import getFcbhBook from './fcbh/getFcbhBook';
 import { chapterPartialSchema } from './schemas/chapterPartial';
 
 const chaptersSchema = z.array(chapterPartialSchema);
@@ -15,20 +15,14 @@ export default async function getAnyBibleBookChapters(
 	versionId: string,
 	bookName: string,
 ): Promise<BibleBookDetailChapterPartialFragment[] | undefined> {
-	const fcbhBible = getFcbhBible(versionId);
+	const fcbhBook = await getFcbhBook(versionId, bookName);
 
-	if (fcbhBible) {
-		const book = fcbhBible.books.find((b) => b.name === bookName);
-
-		if (!book) {
-			throw new Error(`Book not found: ${bookName}`);
-		}
-
-		if (!book.chapters_full.length) {
+	if (fcbhBook) {
+		if (!fcbhBook.chapters_full.length) {
 			throw new Error(`Chapters not found for book: ${bookName}`);
 		}
 
-		return chaptersSchema.parse(book.chapters_full);
+		return chaptersSchema.parse(fcbhBook.chapters_full);
 	}
 
 	const { sequences } = await searchBibleBooks({

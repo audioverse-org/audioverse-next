@@ -1,8 +1,7 @@
 import { BibleBookDetailChapterFullFragment } from '~src/containers/bible/__generated__/book';
 
 import { getApiBibleBookChapter } from './__generated__/getAnyBibleBookChapter';
-import { fetchFcbhChapterMediaUrl } from './fcbh/fetchFcbhChapterMediaUrl';
-import getFcbhBible from './fcbh/getFcbhBible';
+import getFcbhBook from './fcbh/getFcbhBook';
 import { chapterSchema } from './schemas/chapter';
 
 export default async function getAnyBibleBookChapter(
@@ -10,31 +9,18 @@ export default async function getAnyBibleBookChapter(
 	bookName: string,
 	chapterNumber: number,
 ): Promise<BibleBookDetailChapterFullFragment | undefined> {
-	const fcbhBible = getFcbhBible(versionId);
+	const fcbhBook = await getFcbhBook(versionId, bookName);
 
-	if (fcbhBible) {
-		const book = fcbhBible.books.find((b) => b.name === bookName);
-
-		if (!book) {
-			throw new Error(`Book not found: ${bookName}`);
-		}
-
-		if (!book.chapters_full.length) {
+	if (fcbhBook) {
+		if (!fcbhBook.chapters_full.length) {
 			throw new Error(`Chapters not found for book: ${bookName}`);
 		}
 
-		const chapter = book.chapters_full.find(
+		const chapter = fcbhBook.chapters_full.find(
 			(c) => c.number === Number(chapterNumber),
 		);
 
-		const url = await fetchFcbhChapterMediaUrl(
-			versionId,
-			book.testament,
-			book.book_id,
-			chapterNumber,
-		);
-
-		return chapterSchema.parse({ ...chapter, url });
+		return chapterSchema.parse(chapter);
 	}
 
 	const result = await getApiBibleBookChapter({
