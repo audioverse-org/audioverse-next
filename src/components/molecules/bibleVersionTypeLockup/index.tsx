@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { BaseColors } from '~lib/constants';
 import BibleIcon from '~public/img/icons/fa-bible.svg';
 
-import TypeLockup from './typeLockup';
+import TypeLockup from '../typeLockup';
 
 type Props = {
 	label?: JSX.Element | string;
