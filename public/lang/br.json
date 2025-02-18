@@ -320,9 +320,6 @@
   "bibleBook__readAlong": {
     "string": "Leia junto"
   },
-  "bibleBook__typeLabel": {
-    "string": "Bíblia versão King James"
-  },
   "bibleVersionTypeLockup__type": {
     "string": "Versão da Bíblia"
   },

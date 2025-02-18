@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import LineHeading from '~components/atoms/lineHeading';
@@ -43,7 +43,6 @@ const Book = ({ version, book, chapters, chapter }: Must<BookProps>) => {
 	const c = chapter;
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
-	const intl = useIntl();
 	const currentChapterNumber = parseChapterNumber(c.title);
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
@@ -111,14 +110,7 @@ const Book = ({ version, book, chapters, chapter }: Must<BookProps>) => {
 				legacyBehavior
 			>
 				<a className={styles.hat}>
-					<BibleVersionTypeLockup
-						unpadded={true}
-						label={intl.formatMessage({
-							id: 'bibleBook__typeLabel',
-							// TODO: Make dynamic?
-							defaultMessage: 'KJV Bible',
-						})}
-					/>
+					<BibleVersionTypeLockup unpadded={true} label={version.title} />
 					<h4>{book.title}</h4>
 				</a>
 			</Link>

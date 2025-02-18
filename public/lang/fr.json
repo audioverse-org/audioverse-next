@@ -1630,9 +1630,6 @@
   "bibleBook__readAlong": {
     "string": "Read Along"
   },
-  "bibleBook__typeLabel": {
-    "string": "KJV Bible"
-  },
   "bible__title": {
     "string": "Bible"
   },

@@ -16,6 +16,8 @@ AudioVerse Next is a web application for serving audio content. Built with Next.
 ### Testing
 
 - Write tests for new features
+- Do not run builds to test changes - they take too long
+- Instead rely on TypeScript, tests, and linting
 
 ### Internationalization
 

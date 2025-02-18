@@ -368,9 +368,6 @@
   "bibleBook__readAlong": {
     "string": "Read Along"
   },
-  "bibleBook__typeLabel": {
-    "string": "KJV Bible"
-  },
   "bibleVersionTypeLockup__type": {
     "string": "Bible Version"
   },
