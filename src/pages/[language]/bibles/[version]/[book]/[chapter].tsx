@@ -2,6 +2,7 @@ import { GetServerSidePropsResult, GetStaticPropsContext } from 'next';
 
 import { IBaseProps } from '~containers/base';
 import Book, { BookProps } from '~containers/bible/book';
+import getAllVersions from '~src/services/bibles/getAllVersions';
 import getAnyBible from '~src/services/bibles/getAnyBible';
 import getAnyBibleBookChapter from '~src/services/bibles/getAnyBibleBookChapter';
 import getAnyBibleBookChapters from '~src/services/bibles/getAnyBibleBookChapters';
@@ -50,12 +51,15 @@ export async function getServerSideProps({
 		return notFound;
 	}
 
+	const versions = await getAllVersions();
+
 	return {
 		props: {
 			version,
 			book: { id: bookName, title: bookName },
 			chapters,
 			chapter,
+			versions,
 			title: bookName,
 		},
 	};

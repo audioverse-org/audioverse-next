@@ -16,6 +16,7 @@ import {
 	CollectionContentType,
 	RecordingContentType,
 } from '~src/__generated__/graphql';
+import getAllVersions from '~src/services/bibles/getAllVersions';
 import getAnyBible from '~src/services/bibles/getAnyBible';
 import getAnyBibleBookChapter from '~src/services/bibles/getAnyBibleBookChapter';
 import getAnyBibleBookChapters from '~src/services/bibles/getAnyBibleBookChapters';
@@ -28,6 +29,7 @@ jest.mock('~services/bibles/getAnyBibleBookChapters');
 jest.mock('~services/bibles/fcbh/getFcbhBible');
 jest.mock('video.js');
 jest.mock('p-timeout');
+jest.mock('~services/bibles/getAllVersions');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
 	return (
@@ -66,6 +68,14 @@ describe('Bible book detail page', () => {
 		window.fetch = jest.fn().mockReturnValueOnce({
 			catch: () => undefined,
 		});
+
+		jest.mocked(getAllVersions).mockResolvedValue([
+			{
+				__typename: 'Collection',
+				id: 'ENGKJV',
+				title: 'King James Version',
+			},
+		]);
 
 		jest.mocked(getAnyBible).mockResolvedValue({
 			id: 'ENGKJV',
@@ -147,10 +157,17 @@ describe('Bible book detail page', () => {
 		expect(getAllByText('the_chapter_title')[0]).toBeInTheDocument();
 	});
 
-	it('displays version abbreviation', async () => {
-		const { getAllByText } = await renderPage();
+	it('displays book title', async () => {
+		const { getByText } = await renderPage();
 
-		expect(getAllByText('KJV Bible')[0]).toBeInTheDocument();
+		expect(getByText('the_book_name')).toBeInTheDocument();
+	});
+
+	it('displays version title', async () => {
+		const { getByRole } = await renderPage();
+
+		const versionButton = getByRole('button', { name: /KJV/ });
+		expect(versionButton).toBeInTheDocument();
 	});
 
 	it('displays sponsor name', async () => {
