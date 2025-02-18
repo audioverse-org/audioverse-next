@@ -1,4 +1,4 @@
-import { BibleBookDetailBookFragment } from '~src/containers/bible/__generated__/book';
+import { BibleChapterDetailBookFragment } from '~src/containers/bible/__generated__/chapter';
 
 import { getGraphqlBook } from './__generated__/getBook';
 import getFcbhBook from './fcbh/getFcbhBook';
@@ -8,7 +8,7 @@ import { transformBook } from './transforms/bookTransforms';
 export default async function getBook(
 	versionId: string,
 	bookName: string,
-): Promise<BibleBookDetailBookFragment | undefined> {
+): Promise<BibleChapterDetailBookFragment | undefined> {
 	const book = await getFcbhBook(versionId, bookName).catch(() => null);
 
 	if (book) {

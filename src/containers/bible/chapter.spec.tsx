@@ -6,7 +6,7 @@ import videojs from 'video.js';
 
 import AndMiniplayer from '~components/templates/andMiniplayer';
 import AndPlaybackContext from '~components/templates/andPlaybackContext';
-import { BookProps } from '~containers/bible/book';
+import { ChapterProps } from '~containers/bible/chapter';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
@@ -31,7 +31,7 @@ jest.mock('~services/bibles/getVersions');
 jest.mock('p-timeout');
 jest.mock('video.js');
 
-const renderPage = buildStaticRenderer((props: BookProps) => {
+const renderPage = buildStaticRenderer((props: ChapterProps) => {
 	return (
 		<AndPlaybackContext>
 			<AndMiniplayer>

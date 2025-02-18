@@ -1,4 +1,4 @@
-fragment bibleBookDetailVersion on Collection {
+fragment bibleChapterDetailVersion on Collection {
 	id
 	title
 	description
@@ -8,19 +8,19 @@ fragment bibleBookDetailVersion on Collection {
 	}
 }
 
-fragment bibleBookDetailBook on Sequence {
+fragment bibleChapterDetailBook on Sequence {
 	id
 	title
 }
 
-fragment bibleBookDetailChapterPartial on Recording {
+fragment bibleChapterDetailChapterPartial on Recording {
 	id
 	title
 	...andMiniplayer
 	...teaseRecording
 }
 
-fragment bibleBookDetailChapterFull on Recording {
+fragment bibleChapterDetailChapterFull on Recording {
 	title
 	transcript {
 		text
@@ -29,7 +29,7 @@ fragment bibleBookDetailChapterFull on Recording {
 	...player
 }
 
-query getAudiobibleBookPathsData($language: Language!, $first: Int) {
+query getBibleChapterPathsData($language: Language!, $first: Int) {
 	recordings(language: $language, first: $first, contentType: BIBLE_CHAPTER) {
 		nodes {
 			canonicalPath(useFuturePath: true)

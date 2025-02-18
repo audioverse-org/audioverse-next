@@ -1,7 +1,7 @@
 import { GetServerSidePropsResult, GetStaticPropsContext } from 'next';
 
 import { IBaseProps } from '~containers/base';
-import Book, { BookProps } from '~containers/bible/book';
+import Book, { ChapterProps } from '~src/containers/bible/chapter';
 import getBible from '~src/services/bibles/getBible';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
@@ -11,7 +11,7 @@ export default Book;
 
 const notFound = {
 	notFound: true,
-} satisfies GetServerSidePropsResult<BookProps & IBaseProps>;
+} satisfies GetServerSidePropsResult<ChapterProps & IBaseProps>;
 
 export async function getServerSideProps({
 	params,
@@ -19,7 +19,7 @@ export async function getServerSideProps({
 	version: string;
 	book: string;
 	chapter: string;
-}>): Promise<GetServerSidePropsResult<BookProps & IBaseProps>> {
+}>): Promise<GetServerSidePropsResult<ChapterProps & IBaseProps>> {
 	const versionId = params?.version as string;
 	const bookName = params?.book as string;
 	const chapterNumber = params?.chapter as string;

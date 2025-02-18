@@ -15,7 +15,7 @@ query searchBibleBooks($collectionId: ID!, $bookSearch: String!) {
 query getGraphqlChapters($sequenceId: ID!) {
 	recordings(language: ENGLISH, sequenceId: $sequenceId, first: 66) {
 		nodes {
-			...bibleBookDetailChapterPartial
+			...bibleChapterDetailChapterPartial
 		}
 	}
 }

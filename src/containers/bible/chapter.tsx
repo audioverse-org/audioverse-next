@@ -26,30 +26,30 @@ import { parseChapterNumber } from '~src/services/bibles/utils';
 import { Must } from '~src/types/types';
 
 import {
-	BibleBookDetailBookFragment,
-	BibleBookDetailChapterFullFragment,
-	BibleBookDetailChapterPartialFragment,
-	BibleBookDetailVersionFragment,
-} from './__generated__/book';
+	BibleChapterDetailBookFragment,
+	BibleChapterDetailChapterFullFragment,
+	BibleChapterDetailChapterPartialFragment,
+	BibleChapterDetailVersionFragment,
+} from './__generated__/chapter';
 import styles from './book.module.scss';
 
 type Version = NonNullable<GetGraphqlVersionsQuery['collections']['nodes']>[0];
 
-export interface BookProps {
-	version: BibleBookDetailVersionFragment;
-	book: BibleBookDetailBookFragment;
-	chapters: BibleBookDetailChapterPartialFragment[];
-	chapter: BibleBookDetailChapterFullFragment;
+export interface ChapterProps {
+	version: BibleChapterDetailVersionFragment;
+	book: BibleChapterDetailBookFragment;
+	chapters: BibleChapterDetailChapterPartialFragment[];
+	chapter: BibleChapterDetailChapterFullFragment;
 	versions: Version[];
 }
 
-const Book = ({
+const Chapter = ({
 	version,
 	book,
 	chapters,
 	chapter,
 	versions,
-}: Must<BookProps>) => {
+}: Must<ChapterProps>) => {
 	const c = chapter;
 	const { description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
@@ -258,11 +258,11 @@ const Book = ({
 	);
 };
 
-const WithFailStates = (props: Parameters<typeof Book>[0]) => (
+const WithFailStates = (props: Parameters<typeof Chapter>[0]) => (
 	<AndFailStates
-		Component={Book}
+		Component={Chapter}
 		componentProps={props}
-		options={{ should404: (props: BookProps) => !props.chapter }}
+		options={{ should404: (props: ChapterProps) => !props.chapter }}
 	/>
 );
 export default WithFailStates;

@@ -3,9 +3,9 @@
 	RecordingContentType,
 } from '~src/__generated__/graphql';
 import {
-	BibleBookDetailChapterFullFragment,
-	BibleBookDetailChapterPartialFragment,
-} from '~src/containers/bible/__generated__/book';
+	BibleChapterDetailChapterFullFragment,
+	BibleChapterDetailChapterPartialFragment,
+} from '~src/containers/bible/__generated__/chapter';
 import root from '~src/lib/routes';
 
 import { IBibleBookChapter } from '../types';
@@ -21,7 +21,7 @@ function buildCanonicalPath(chapter: IBibleBookChapter): string {
 
 export function transformChapterFull(
 	chapter: IBibleBookChapter,
-): BibleBookDetailChapterFullFragment {
+): BibleChapterDetailChapterFullFragment {
 	if (!chapter.version_id) {
 		throw new Error('Version ID is required');
 	}
@@ -75,7 +75,7 @@ export function transformChapterFull(
 
 export function transformChapterPartial(
 	chapter: IBibleBookChapter,
-): BibleBookDetailChapterPartialFragment {
+): BibleChapterDetailChapterPartialFragment {
 	if (!chapter.version_id) {
 		throw new Error('version_id is required');
 	}

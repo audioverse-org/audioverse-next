@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { BibleBookDetailChapterPartialFragment } from '~src/containers/bible/__generated__/book';
+import { BibleChapterDetailChapterPartialFragment } from '~src/containers/bible/__generated__/chapter';
 
 import {
 	getGraphqlChapters,
@@ -13,7 +13,7 @@ import { transformChapterPartial } from './transforms/chapterTransforms';
 export default async function getChapters(
 	versionId: string,
 	bookName: string,
-): Promise<BibleBookDetailChapterPartialFragment[] | undefined> {
+): Promise<BibleChapterDetailChapterPartialFragment[] | undefined> {
 	const fcbhBook = await getFcbhBook(versionId, bookName).catch(() => null);
 
 	if (fcbhBook) {

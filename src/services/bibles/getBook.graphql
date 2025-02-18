@@ -7,7 +7,7 @@ query getGraphqlBook($collectionId: ID!, $bookSearch: String!) {
 		first: 1
 	) {
 		nodes {
-			...bibleBookDetailBook
+			...bibleChapterDetailBook
 		}
 	}
 }
