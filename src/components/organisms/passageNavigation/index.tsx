@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
 import React, {
 	ReactNode,
 	useContext,
@@ -9,17 +8,15 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
+import BibleVersionTophat from '~components/molecules/bibleVersionTophat';
+import { BibleVersionTophatFragment } from '~components/molecules/bibleVersionTophat/__generated__';
 import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
-import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
-import Button from '~src/components/molecules/button';
-import Dropdown from '~src/components/molecules/dropdown';
 import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
 import { BIBLE_BOOKS } from '~src/lib/constants';
-import { getBibleAcronym } from '~src/lib/getBibleAcronym';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 import root from '~src/lib/routes';
 
@@ -58,7 +55,6 @@ export default function PassageNavigation({
 		'passageNavLayout',
 		'grid',
 	);
-	const router = useRouter();
 
 	const books = useMemo(() => {
 		return version.sequences.nodes || [];
@@ -80,53 +76,23 @@ export default function PassageNavigation({
 		return loadedRecording.id;
 	}, [loadedRecording, chapter]);
 
+	const languageRoute = useLanguageRoute();
+
+	const getVersionUrl = (v: BibleVersionTophatFragment) =>
+		root.lang(languageRoute).bibles.versionId(v.id).get();
+
 	useEffect(() => {
 		setOpen(false);
 	}, [chapter]);
 
 	return (
 		<div className={clsx(styles.base, { [styles.hasChildren]: !!children })}>
-			<div className={styles.hat} onClick={() => setOpen(!open)}>
-				<BibleVersionTypeLockup unpadded label={chapter?.title || 'Bible'} />
-				<Dropdown
-					id="booksMenu"
-					trigger={(props) => (
-						<Button
-							type="tertiary"
-							text={getBibleAcronym(version.title)}
-							IconRight={IconDisclosure}
-							className={styles.dropdownButton}
-							{...props}
-						/>
-					)}
-				>
-					{(handleClose) => (
-						<div className={styles.dropdownContainer}>
-							{versions.map((v) => (
-								<p key={v.id} data-key={v.id}>
-									<Button
-										type="tertiary"
-										onClick={(e) => {
-											const path = chapter
-												? root
-														.lang('en')
-														.bibles.versionId(v.id)
-														.bookName('') // TODO
-														.chapterNumber('') // TODO
-														.get()
-												: root.lang('en').bibles.versionId(v.id).get();
-											router.push(path);
-											handleClose(e);
-										}}
-										text={getBibleAcronym(v.title)}
-									/>
-								</p>
-							))}
-						</div>
-					)}
-				</Dropdown>
-			</div>
-
+			<BibleVersionTophat
+				version={version}
+				versions={versions}
+				label={chapter?.title || 'Bible'}
+				getVersionUrl={getVersionUrl}
+			/>
 			{open || !children ? (
 				<div className={styles.content}>
 					<div className={styles.switch}>

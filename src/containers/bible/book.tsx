@@ -3,23 +3,22 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import LineHeading from '~components/atoms/lineHeading';
+import BibleVersionTophat from '~components/molecules/bibleVersionTophat';
+import { BibleVersionTophatFragment } from '~components/molecules/bibleVersionTophat/__generated__';
 import Button from '~components/molecules/button';
 import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '~components/molecules/definitionList';
-import Dropdown from '~components/molecules/dropdown';
 import Player from '~components/molecules/player';
 import SequenceNav from '~components/molecules/sequenceNav';
 import Tease from '~components/molecules/tease';
 import TeaseRecording from '~components/molecules/teaseRecording';
 import { BaseColors } from '~lib/constants';
-import { getBibleAcronym } from '~lib/getBibleAcronym';
 import root from '~lib/routes';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
-import BibleVersionTypeLockup from '~src/components/molecules/bibleVersionTypeLockup';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { GetApiVersionsQuery } from '~src/services/bibles/__generated__/getAllVersions';
@@ -59,6 +58,14 @@ const Book = ({
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
 	const [scrollPosition, setScrollPosition] = useState(0);
+
+	const getVersionUrl = (v: BibleVersionTophatFragment) =>
+		root
+			.lang(languageRoute)
+			.bibles.versionId(v.id)
+			.bookName(book.title)
+			.chapterNumber(currentChapterNumber)
+			.get({ params: { autoplay: 'true' } });
 
 	useEffect(() => {
 		if (!scrollRef.current || !currentRef.current) {
@@ -116,45 +123,12 @@ const Book = ({
 
 	return (
 		<Tease>
-			<div className={styles.hat}>
-				<div className={styles.hatLeft}>
-					<BibleVersionTypeLockup unpadded={true} label={book.title} />
-				</div>
-				<div className={styles.hatRight}>
-					<Dropdown
-						id="version-selector"
-						trigger={({ onClick, 'aria-controls': ariaControls }) => (
-							<button
-								onClick={onClick}
-								aria-controls={ariaControls}
-								className={styles.versionSelectorBtn}
-							>
-								{getBibleAcronym(version.title)}
-								<span className={styles.dropdownArrow}>▼</span>
-							</button>
-						)}
-					>
-						{() => (
-							<ul className={styles.versionDropdownList}>
-								{versions.map((v) => (
-									<li key={v.id}>
-										<a
-											href={root
-												.lang(languageRoute)
-												.bibles.versionId(v.id)
-												.bookName(book.title)
-												.chapterNumber(currentChapterNumber)
-												.get({ params: { autoplay: 'true' } })}
-										>
-											{v.title}
-										</a>
-									</li>
-								))}
-							</ul>
-						)}
-					</Dropdown>
-				</div>
-			</div>
+			<BibleVersionTophat
+				version={version}
+				versions={versions}
+				label={book.title}
+				getVersionUrl={getVersionUrl}
+			/>
 			<div className={styles.content}>
 				<div className={styles.main}>
 					{showingText ? (

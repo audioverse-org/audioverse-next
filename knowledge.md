@@ -54,6 +54,23 @@ Components are organized into a hierarchy based on their complexity and composit
 - Often provide context or state to child components
 - May handle routing or page-level concerns
 
+### Component Patterns
+
+#### URL Generation
+- Components that need to generate URLs should accept a URL generator function prop
+- This allows the parent to control URL structure while keeping the component reusable
+- Example:
+  ```typescript
+  interface Props {
+    getVersionUrl: (version: VersionFragment) => string;
+  }
+  ```
+- Benefits:
+  - Components remain context-agnostic
+  - Same component can generate different URL patterns based on context
+  - Makes testing easier as URL generation can be mocked
+  - Avoids hardcoding route structure in reusable components
+
 ### Component Structure
 
 Each component should have its own directory if it needs additional files:
@@ -101,11 +118,13 @@ Each component should have its own directory if it needs additional files:
 The project follows a depth-first approach to GraphQL data requirements:
 
 1. Leaf Components
+
    - Define fragments for their exact data needs
    - Live in `.graphql` files alongside component
    - Example: A Card component defines what fields it needs to render
 
 2. Parent Components
+
    - Compose child fragments into larger fragments
    - Add any additional fields they need
    - Example: A CardList composes multiple Card fragments plus pagination fields
@@ -123,6 +142,7 @@ The project follows a depth-first approach to GraphQL data requirements:
      - Example: `src/components/organisms/preferencesForm.graphql`
 
 Benefits:
+
 - Components are self-contained with their data requirements
 - Types flow naturally up the component tree
 - Easier to maintain as data needs change

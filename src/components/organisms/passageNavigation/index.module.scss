@@ -11,53 +11,8 @@
 	--bibleWavesColor: #{$ts-lightTone};
 }
 
-.hat {
-	background-color: var(--bibleHatBackground);
-	padding: 0 24px;
-	height: 48px;
-	display: flex;
-	text-decoration: none;
-	color: var(--bibleHatTextColor, --bibleTextColor);
-	gap: 10px;
-	align-items: center;
-	justify-content: space-between;
-
-	h6 {
-		margin: 0;
-		font-size: 10px;
-		color: $ts-salmon;
-	}
-}
-
 .hasChildren .hat {
 	cursor: pointer;
-}
-
-.dropdownButton {
-	text-decoration: none;
-	font-size: 10px;
-}
-
-.dropdownButton:hover,
-.dropdownButton:focus,
-.dropdownButton:active {
-	color: $ts-salmon;
-}
-
-.dropdownContainer {
-	padding: 0px 16px;
-}
-
-.dropdownContainer p {
-	margin: 0;
-}
-
-.dropdownContainer button {
-	text-decoration: none;
-	font-size: 12px;
-	line-height: 15px;
-	padding: 8px 0;
-	width: 100%;
 }
 
 .content {

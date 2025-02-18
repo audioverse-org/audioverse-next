@@ -1,0 +1,5 @@
+fragment BibleVersionTophat on Collection {
+  ...BibleVersionTypeLockup
+  id
+  title
+}

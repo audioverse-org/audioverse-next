@@ -1,0 +1,4 @@
+fragment BibleVersionTypeLockup on Collection {
+  id
+  title
+}
