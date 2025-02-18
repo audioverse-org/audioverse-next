@@ -12,7 +12,7 @@ import {
 	PlaylistRecordingRemoveDocument,
 	PlaylistRecordingRemoveMutation,
 	PlaylistRecordingRemoveMutationVariables,
-} from '../mutations/__generated__/recordingPlaylist';
+} from './__generated__/useRecordingPlaylist';
 
 export function useRecordingPlaylist(
 	playlist?: Pick<UserPlaylist, 'id'>,

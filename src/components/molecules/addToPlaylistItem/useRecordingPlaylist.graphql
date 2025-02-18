@@ -1,7 +1,7 @@
-mutation playlistRecordingAdd($playlistId: ID!, $recordingId: ID!) {
+mutation PlaylistRecordingAdd($playlistId: ID!, $recordingId: ID!) {
 	playlistRecordingAdd(playlistId: $playlistId, recordingId: $recordingId)
 }
 
-mutation playlistRecordingRemove($playlistId: ID!, $recordingId: ID!) {
+mutation PlaylistRecordingRemove($playlistId: ID!, $recordingId: ID!) {
 	playlistRecordingRemove(playlistId: $playlistId, recordingId: $recordingId)
 }

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { CardPlaylistFragment } from '~src/components/molecules/card/__generated__/playlist';
 
-import { useRecordingPlaylist } from '../constants/mutations/useRecordingPlaylist';
-import PlaylistItem from './PlaylistItem';
+import PlaylistItem from '../PlaylistItem';
+import { useRecordingPlaylist } from './useRecordingPlaylist';
 
 type Props = {
 	item: CardPlaylistFragment;
