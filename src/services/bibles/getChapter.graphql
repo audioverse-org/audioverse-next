@@ -7,7 +7,7 @@ query getGraphqlChapter($collectionId: ID!, $titleSearch: String!) {
 		first: 1
 	) {
 		nodes {
-			...bibleChapterDetailChapterFull 
+			...bibleChapterDetailChapterFull
 		}
 	}
 }
