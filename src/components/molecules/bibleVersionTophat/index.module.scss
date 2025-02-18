@@ -1,12 +1,35 @@
 @import '../../../styles/common.scss';
 
+.base {
+	--bibleAccent: #{$ts-red};
+	--bibleBackground: #{$ts-bibleB};
+	--bibleTextColor: #{$ts-dark};
+	--bibleTextSecondaryColor: #{$ts-midTone};
+	--bibleWavesColor: #{$ts-lightTone};
+	--bibleHatTextColor: #{$ts-white};
+	--bibleHatBackground: #{$ts-bibleH};
+	--bibleHatHover: #{$ts-darkened-bibleH};
+}
+
+.dark {
+	--bibleHatTextColor: #{$ts-white};
+	--bibleHatBackground: #{$ts-bibleH};
+	--bibleHatHover: #{$ts-darkened-bibleH};
+}
+
+.light {
+	--bibleHatTextColor: #{$ts-dark};
+	--bibleHatBackground: #{$ts-white};
+	--bibleHatHover: #{$ts-cream};
+}
+
 .hat {
 	background-color: var(--bibleHatBackground);
 	padding: 0 24px;
 	height: 48px;
 	display: flex;
 	text-decoration: none;
-	color: var(--bibleHatTextColor, --bibleTextColor);
+	color: var(--bibleHatTextColor);
 	gap: 10px;
 	align-items: center;
 	justify-content: space-between;

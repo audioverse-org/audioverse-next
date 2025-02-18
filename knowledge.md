@@ -57,12 +57,13 @@ Components are organized into a hierarchy based on their complexity and composit
 ### Component Patterns
 
 #### URL Generation
+
 - Components that need to generate URLs should accept a URL generator function prop
 - This allows the parent to control URL structure while keeping the component reusable
 - Example:
   ```typescript
   interface Props {
-    getVersionUrl: (version: VersionFragment) => string;
+  	getVersionUrl: (version: VersionFragment) => string;
   }
   ```
 - Benefits:
@@ -70,6 +71,39 @@ Components are organized into a hierarchy based on their complexity and composit
   - Same component can generate different URL patterns based on context
   - Makes testing easier as URL generation can be mocked
   - Avoids hardcoding route structure in reusable components
+
+#### Theme Management
+
+- Components that need different visual themes should:
+
+  - Own their theme-specific CSS variables
+  - Accept a theme prop with clear options (e.g. 'light' | 'dark')
+  - Use CSS classes to switch between themes
+  - Define base variables shared across themes
+  - Define theme-specific variables in theme classes
+
+  ```scss
+  .base {
+  	// Shared variables
+  	--accent: #{$color};
+  }
+
+  .light {
+  	--background: #{$white};
+  	--text: #{$dark};
+  }
+
+  .dark {
+  	--background: #{$dark};
+  	--text: #{$white};
+  }
+  ```
+
+- Benefits:
+  - Component remains self-contained
+  - Themes are explicit and type-safe
+  - Easy to add new themes
+  - CSS variables provide clean override mechanism
 
 ### Component Structure
 

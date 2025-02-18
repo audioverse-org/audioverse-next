@@ -21,34 +21,36 @@ export default function BibleVersionTophat({
 	getVersionUrl,
 }: Props): JSX.Element {
 	return (
-		<div className={styles.hat}>
-			<div className={styles.hatLeft}>
-				<BibleVersionTypeLockup unpadded label={label} />
-			</div>
-			<div className={styles.hatRight}>
-				<Dropdown
-					id="version-selector"
-					trigger={({ onClick, 'aria-controls': ariaControls }) => (
-						<button
-							onClick={onClick}
-							aria-controls={ariaControls}
-							className={styles.versionSelectorBtn}
-						>
-							{getBibleAcronym(version.title)}
-							<span className={styles.dropdownArrow}>▼</span>
-						</button>
-					)}
-				>
-					{() => (
-						<ul className={styles.versionDropdownList}>
-							{versions.map((v) => (
-								<li key={v.id}>
-									<a href={getVersionUrl(v)}>{v.title}</a>
-								</li>
-							))}
-						</ul>
-					)}
-				</Dropdown>
+		<div className={styles.base}>
+			<div className={styles.hat}>
+				<div className={styles.hatLeft}>
+					<BibleVersionTypeLockup unpadded label={label} />
+				</div>
+				<div className={styles.hatRight}>
+					<Dropdown
+						id="version-selector"
+						trigger={({ onClick, 'aria-controls': ariaControls }) => (
+							<button
+								onClick={onClick}
+								aria-controls={ariaControls}
+								className={styles.versionSelectorBtn}
+							>
+								{getBibleAcronym(version.title)}
+								<span className={styles.dropdownArrow}>▼</span>
+							</button>
+						)}
+					>
+						{() => (
+							<ul className={styles.versionDropdownList}>
+								{versions.map((v) => (
+									<li key={v.id}>
+										<a href={getVersionUrl(v)}>{v.title}</a>
+									</li>
+								))}
+							</ul>
+						)}
+					</Dropdown>
+				</div>
 			</div>
 		</div>
 	);
