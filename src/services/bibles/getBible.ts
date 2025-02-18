@@ -1,10 +1,10 @@
 import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import getFcbhBible from './fcbh/getFcbhBible';
-import getApiBible, { ApiBible } from './getApiBible';
+import fetchGraphqlBible, { ApiBible } from './graphql/fetchGraphqlBible';
 import { versionSchema } from './schemas/version';
 import { transformVersion } from './transforms/versionTransforms';
 
-export default async function getAnyBible(
+export default async function getBible(
 	versionId: string,
 ): Promise<ApiBible | undefined> {
 	const fcbhMatch = getFcbhBible(versionId);
@@ -23,7 +23,7 @@ export default async function getAnyBible(
 		return versionSchema.transform(transformVersion).parse(fcbhMatch);
 	}
 
-	const apiMatch = await getApiBible(versionId);
+	const apiMatch = await fetchGraphqlBible(versionId);
 
 	return apiMatch || undefined;
 }

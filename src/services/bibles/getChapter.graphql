@@ -1,4 +1,4 @@
-query getApiBibleBookChapter($collectionId: ID!, $titleSearch: String!) {
+query getGraphqlChapter($collectionId: ID!, $titleSearch: String!) {
 	recordings(
 		language: ENGLISH
 		contentType: BIBLE_CHAPTER

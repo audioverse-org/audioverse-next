@@ -1,11 +1,11 @@
 import { BibleBookDetailBookFragment } from '~src/containers/bible/__generated__/book';
 
-import { getApiBibleBook } from './__generated__/getAnyBibleBook';
+import { getGraphqlBook } from './__generated__/getBook';
 import getFcbhBook from './fcbh/getFcbhBook';
 import { bookSchema } from './schemas/book';
 import { transformBook } from './transforms/bookTransforms';
 
-export default async function getAnyBibleBook(
+export default async function getBook(
 	versionId: string,
 	bookName: string,
 ): Promise<BibleBookDetailBookFragment | undefined> {
@@ -15,7 +15,7 @@ export default async function getAnyBibleBook(
 		return bookSchema.transform(transformBook).parse(book);
 	}
 
-	const result = await getApiBibleBook({
+	const result = await getGraphqlBook({
 		collectionId: Number(versionId),
 		bookSearch: `"${bookName}"`,
 	}).catch((e) => {

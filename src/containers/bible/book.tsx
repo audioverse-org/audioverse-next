@@ -21,7 +21,7 @@ import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import { GetApiVersionsQuery } from '~src/services/bibles/__generated__/getAllVersions';
+import { GetGraphqlVersionsQuery } from '~src/services/bibles/__generated__/getVersions';
 import { parseChapterNumber } from '~src/services/bibles/utils';
 import { Must } from '~src/types/types';
 
@@ -33,7 +33,7 @@ import {
 } from './__generated__/book';
 import styles from './book.module.scss';
 
-type Version = NonNullable<GetApiVersionsQuery['collections']['nodes']>[0];
+type Version = NonNullable<GetGraphqlVersionsQuery['collections']['nodes']>[0];
 
 export interface BookProps {
 	version: BibleBookDetailVersionFragment;

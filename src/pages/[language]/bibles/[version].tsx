@@ -11,8 +11,8 @@ import root from '~lib/routes';
 import Bible, { VersionProps } from '~src/containers/bible/version';
 import getIntl from '~src/lib/getIntl';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
-import getAllVersions from '~src/services/bibles/getAllVersions';
-import getAnyBible from '~src/services/bibles/getAnyBible';
+import getBible from '~src/services/bibles/getBible';
+import getVersions from '~src/services/bibles/getVersions';
 
 export default Bible;
 
@@ -25,8 +25,8 @@ export async function getStaticProps({
 	const languageId = getLanguageIdByRoute(languageRoute);
 	const intl = await getIntl(languageId);
 	const versionId = params?.version as string;
-	const version = await getAnyBible(versionId);
-	const allVersions = await getAllVersions();
+	const version = await getBible(versionId);
+	const allVersions = await getVersions();
 
 	if (!version) {
 		return {
@@ -49,7 +49,7 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const allVersions = await getAllVersions();
+	const allVersions = await getVersions();
 	return {
 		paths: allVersions.map((v) => root.lang('en').bibles.versionId(v.id).get()),
 		fallback: false,

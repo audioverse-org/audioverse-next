@@ -1,4 +1,4 @@
-query getApiVersions($language: Language!) {
+query getGraphqlVersions($language: Language!) {
 	collections(
 		language: $language
 		contentType: BIBLE_VERSION

@@ -1,4 +1,4 @@
-query getApiBible($collectionId: ID!) {
+query doFetchGraphqlBible($collectionId: ID!) {
 	collection(id: $collectionId) {
 		id
 		title

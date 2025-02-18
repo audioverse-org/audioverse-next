@@ -1,4 +1,4 @@
-query getApiBibleBook($collectionId: ID!, $bookSearch: String!) {
+query getGraphqlBook($collectionId: ID!, $bookSearch: String!) {
 	sequences(
 		language: ENGLISH
 		contentType: BIBLE_BOOK

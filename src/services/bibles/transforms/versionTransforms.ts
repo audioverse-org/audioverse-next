@@ -3,7 +3,7 @@ import {
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 
-import { ApiBible } from '../getApiBible';
+import { ApiBible } from '../graphql/fetchGraphqlBible';
 import { IBibleVersion } from '../types';
 
 export function transformVersion(val: IBibleVersion): ApiBible {

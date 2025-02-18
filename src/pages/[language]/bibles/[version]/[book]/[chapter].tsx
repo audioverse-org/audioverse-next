@@ -2,10 +2,10 @@ import { GetServerSidePropsResult, GetStaticPropsContext } from 'next';
 
 import { IBaseProps } from '~containers/base';
 import Book, { BookProps } from '~containers/bible/book';
-import getAllVersions from '~src/services/bibles/getAllVersions';
-import getAnyBible from '~src/services/bibles/getAnyBible';
-import getAnyBibleBookChapter from '~src/services/bibles/getAnyBibleBookChapter';
-import getAnyBibleBookChapters from '~src/services/bibles/getAnyBibleBookChapters';
+import getBible from '~src/services/bibles/getBible';
+import getChapter from '~src/services/bibles/getChapter';
+import getChapters from '~src/services/bibles/getChapters';
+import getVersions from '~src/services/bibles/getVersions';
 
 export default Book;
 
@@ -23,7 +23,7 @@ export async function getServerSideProps({
 	const versionId = params?.version as string;
 	const bookName = params?.book as string;
 	const chapterNumber = params?.chapter as string;
-	const version = await getAnyBible(versionId).catch((e) => {
+	const version = await getBible(versionId).catch((e) => {
 		console.error(e);
 		return null;
 	});
@@ -33,25 +33,21 @@ export async function getServerSideProps({
 		return notFound;
 	}
 
-	const chapters = await getAnyBibleBookChapters(versionId, bookName);
+	const chapters = await getChapters(versionId, bookName);
 
 	if (!chapters?.length) {
 		console.error('chapters not found');
 		return notFound;
 	}
 
-	const chapter = await getAnyBibleBookChapter(
-		versionId,
-		bookName,
-		Number(chapterNumber),
-	);
+	const chapter = await getChapter(versionId, bookName, Number(chapterNumber));
 
 	if (!chapter) {
 		console.error('chapter not found');
 		return notFound;
 	}
 
-	const versions = await getAllVersions();
+	const versions = await getVersions();
 
 	return {
 		props: {

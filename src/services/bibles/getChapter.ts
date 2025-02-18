@@ -1,12 +1,12 @@
 import { BibleBookDetailChapterFullFragment } from '~src/containers/bible/__generated__/book';
 
-import { getApiBibleBookChapter } from './__generated__/getAnyBibleBookChapter';
+import { getGraphqlChapter } from './__generated__/getChapter';
 import getFcbhChapter from './fcbh/getFcbhChapter';
 import fetchChapterText from './graphql/fetchChapterText';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterFull } from './transforms/chapterTransforms';
 
-export default async function getAnyBibleBookChapter(
+export default async function getChapter(
 	versionId: string,
 	bookName: string,
 	chapterNumber: number,
@@ -24,7 +24,7 @@ export default async function getAnyBibleBookChapter(
 		});
 	}
 
-	const result = await getApiBibleBookChapter({
+	const result = await getGraphqlChapter({
 		collectionId: Number(versionId),
 		titleSearch: `"${bookName} ${chapterNumber}"`,
 	}).catch((e) => {

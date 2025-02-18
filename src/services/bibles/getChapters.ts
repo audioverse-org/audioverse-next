@@ -3,14 +3,14 @@ import { z } from 'zod';
 import { BibleBookDetailChapterPartialFragment } from '~src/containers/bible/__generated__/book';
 
 import {
-	getApiBibleBookChapters,
+	getGraphqlChapters,
 	searchBibleBooks,
-} from './__generated__/getAnyBibleBookChapters';
+} from './__generated__/getChapters';
 import getFcbhBook from './fcbh/getFcbhBook';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterPartial } from './transforms/chapterTransforms';
 
-export default async function getAnyBibleBookChapters(
+export default async function getChapters(
 	versionId: string,
 	bookName: string,
 ): Promise<BibleBookDetailChapterPartialFragment[] | undefined> {
@@ -40,7 +40,7 @@ export default async function getAnyBibleBookChapters(
 		throw new Error(`Sequence not found for book: ${bookName}`);
 	}
 
-	const result = await getApiBibleBookChapters({
+	const result = await getGraphqlChapters({
 		sequenceId: sequence.id,
 	}).catch((e) => {
 		console.error(e);

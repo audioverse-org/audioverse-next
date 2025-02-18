@@ -16,20 +16,20 @@ import {
 	CollectionContentType,
 	RecordingContentType,
 } from '~src/__generated__/graphql';
-import getAllVersions from '~src/services/bibles/getAllVersions';
-import getAnyBible from '~src/services/bibles/getAnyBible';
-import getAnyBibleBookChapter from '~src/services/bibles/getAnyBibleBookChapter';
-import getAnyBibleBookChapters from '~src/services/bibles/getAnyBibleBookChapters';
+import getBible from '~src/services/bibles/getBible';
+import getChapter from '~src/services/bibles/getChapter';
+import getChapters from '~src/services/bibles/getChapters';
+import getVersions from '~src/services/bibles/getVersions';
 
-jest.mock('~services/bibles/fcbh/getFcbhBibles');
-jest.mock('~services/bibles/getAnyBible');
 jest.mock('~services/bibles/fcbh/fetchFcbhChapters');
-jest.mock('~services/bibles/getAnyBibleBookChapter');
-jest.mock('~services/bibles/getAnyBibleBookChapters');
 jest.mock('~services/bibles/fcbh/getFcbhBible');
-jest.mock('video.js');
+jest.mock('~services/bibles/fcbh/getFcbhBibles');
+jest.mock('~services/bibles/getBible');
+jest.mock('~services/bibles/getChapter');
+jest.mock('~services/bibles/getChapters');
+jest.mock('~services/bibles/getVersions');
 jest.mock('p-timeout');
-jest.mock('~services/bibles/getAllVersions');
+jest.mock('video.js');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
 	return (
@@ -69,7 +69,7 @@ describe('Bible book detail page', () => {
 			catch: () => undefined,
 		});
 
-		jest.mocked(getAllVersions).mockResolvedValue([
+		jest.mocked(getVersions).mockResolvedValue([
 			{
 				__typename: 'Collection',
 				id: 'ENGKJV',
@@ -77,7 +77,7 @@ describe('Bible book detail page', () => {
 			},
 		]);
 
-		jest.mocked(getAnyBible).mockResolvedValue({
+		jest.mocked(getBible).mockResolvedValue({
 			id: 'ENGKJV',
 			title: 'King James Version',
 			description: 'The Bible in English',
@@ -88,7 +88,7 @@ describe('Bible book detail page', () => {
 			sequences: { nodes: [] },
 		});
 
-		jest.mocked(getAnyBibleBookChapter).mockResolvedValue({
+		jest.mocked(getChapter).mockResolvedValue({
 			id: 'GEN/1',
 			title: 'the_chapter_title',
 			contentType: RecordingContentType.BibleChapter,
@@ -126,7 +126,7 @@ describe('Bible book detail page', () => {
 			sequenceNextRecording: null,
 		});
 
-		jest.mocked(getAnyBibleBookChapters).mockResolvedValue([
+		jest.mocked(getChapters).mockResolvedValue([
 			{
 				id: 'GEN/1',
 				title: 'the_chapter_title',

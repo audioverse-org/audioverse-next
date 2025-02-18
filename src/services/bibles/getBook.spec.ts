@@ -1,15 +1,15 @@
 import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
-import getAnyBibleBook from './getAnyBibleBook';
+import getBook from './getBook';
 
 jest.mock('./fcbh/fetchFcbhChapters');
 
-describe('getAnyBibleBook', () => {
+describe('getBook', () => {
 	beforeEach(() => {
 		jest.mocked(fetchFcbhChapters).mockResolvedValue([]);
 	});
 
 	it('finds fcbh book case insensitive', async () => {
-		const book = await getAnyBibleBook('ENGKJV2', 'genesis');
+		const book = await getBook('ENGKJV2', 'genesis');
 
 		expect(book).toBeDefined();
 	});
