@@ -13,6 +13,58 @@ AudioVerse Next is a web application for serving audio content. Built with Next.
 - Keep components simple and focused
 - Use React hooks for state management
 
+### Component Organization
+
+Components are organized into a hierarchy based on their complexity and composition:
+
+#### Atoms
+- Smallest building blocks of the interface
+- Single-purpose, highly reusable
+- No dependencies on other components
+- Examples: buttons, inputs, icons, labels, headings
+- Should be completely self-contained
+- May have their own state but it should be simple
+
+#### Molecules
+- Combinations of atoms to form more complex components
+- Reusable across different contexts
+- May depend on atoms but not on organisms
+- Examples: search bars, form fields with labels, cards
+- Can maintain their own state
+- Should be focused on a single responsibility
+
+#### Organisms
+- Complex UI components composed of molecules and/or atoms
+- May be specific to a certain context or reusable
+- Can depend on molecules and atoms
+- Examples: navigation bars, forms, content sections
+- Often maintain complex state
+- May integrate with external services or APIs
+- May coordinate between multiple sub-components
+
+#### Templates
+- Page-level components that arrange organisms
+- Define the structure of a page or major section
+- Can depend on any other component type
+- Examples: layouts, page shells, authentication wrappers
+- Often provide context or state to child components
+- May handle routing or page-level concerns
+
+### Component Structure
+
+Each component should have its own directory if it needs additional files:
+- `index.tsx` - Component implementation
+- `index.module.scss` - Scoped styles
+- `index.graphql` - GraphQL fragments for typing
+
+### Component Guidelines
+
+- Extract shared UI patterns into appropriate level based on complexity
+- Use GraphQL fragments for typing when interfacing with API data
+- Keep components focused and single-purpose
+- Consider moving components to a lower level (e.g. organism to molecule) if they become more general purpose
+- Place page-specific components in `/src/containers`
+
 ### Testing
 
 - Write tests for new features
