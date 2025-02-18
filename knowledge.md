@@ -18,6 +18,7 @@ AudioVerse Next is a web application for serving audio content. Built with Next.
 Components are organized into a hierarchy based on their complexity and composition:
 
 #### Atoms
+
 - Smallest building blocks of the interface
 - Single-purpose, highly reusable
 - No dependencies on other components
@@ -26,6 +27,7 @@ Components are organized into a hierarchy based on their complexity and composit
 - May have their own state but it should be simple
 
 #### Molecules
+
 - Combinations of atoms to form more complex components
 - Reusable across different contexts
 - May depend on atoms but not on organisms
@@ -34,6 +36,7 @@ Components are organized into a hierarchy based on their complexity and composit
 - Should be focused on a single responsibility
 
 #### Organisms
+
 - Complex UI components composed of molecules and/or atoms
 - May be specific to a certain context or reusable
 - Can depend on molecules and atoms
@@ -43,6 +46,7 @@ Components are organized into a hierarchy based on their complexity and composit
 - May coordinate between multiple sub-components
 
 #### Templates
+
 - Page-level components that arrange organisms
 - Define the structure of a page or major section
 - Can depend on any other component type
@@ -53,6 +57,7 @@ Components are organized into a hierarchy based on their complexity and composit
 ### Component Structure
 
 Each component should have its own directory if it needs additional files:
+
 - `index.tsx` - Component implementation
 - `index.module.scss` - Scoped styles
 - `index.graphql` - GraphQL fragments for typing
@@ -90,6 +95,39 @@ Each component should have its own directory if it needs additional files:
 - Use npm as package manager
 - Keep dependencies up to date
 - Run `npm audit` to check for vulnerabilities
+
+### GraphQL Data Flow
+
+The project follows a depth-first approach to GraphQL data requirements:
+
+1. Leaf Components
+   - Define fragments for their exact data needs
+   - Live in `.graphql` files alongside component
+   - Example: A Card component defines what fields it needs to render
+
+2. Parent Components
+   - Compose child fragments into larger fragments
+   - Add any additional fields they need
+   - Example: A CardList composes multiple Card fragments plus pagination fields
+
+3. Query Composition
+   - Server-Side Queries:
+     - Live alongside page containers
+     - Compose fragments from organisms and templates
+     - Used in getServerSideProps/getStaticProps
+     - Example: `src/containers/blog.graphql`
+   - Client-Side Queries:
+     - Live alongside the component using the data
+     - Compose fragments needed by that component tree
+     - Used with auto-generated Tanstack Query hooks
+     - Example: `src/components/organisms/preferencesForm.graphql`
+
+Benefits:
+- Components are self-contained with their data requirements
+- Types flow naturally up the component tree
+- Easier to maintain as data needs change
+- Prevents over-fetching by being explicit
+- Enables efficient query composition
 
 ## Project Structure
 
