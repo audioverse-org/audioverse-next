@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import hasVideo from '~lib/hasVideo';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
 
-import { PlayerFragment } from './__generated__/player';
 import styles from './mediaFormatSwitcher.module.scss';
+import { PlayerFragment } from './player/__generated__';
 
 export default function MediaFormatSwitcher({
 	recording,

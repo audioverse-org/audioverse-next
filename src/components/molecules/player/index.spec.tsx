@@ -25,7 +25,7 @@ import renderWithProviders from '~lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '~lib/test/setPlayerMock';
 import { SequenceContentType } from '~src/__generated__/graphql';
 
-import { PlayerFragment } from './__generated__/player';
+import { PlayerFragment } from './__generated__/index';
 
 jest.mock('video.js');
 jest.mock('~lib/api/recordingIsFavorited');

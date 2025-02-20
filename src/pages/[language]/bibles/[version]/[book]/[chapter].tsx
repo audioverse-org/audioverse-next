@@ -1,7 +1,12 @@
-import { GetServerSidePropsResult, GetStaticPropsContext } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import { IBaseProps } from '~containers/base';
 import Book, { ChapterProps } from '~src/containers/bible/chapter';
+import { REVALIDATE } from '~src/lib/constants';
 import getBible from '~src/services/bibles/getBible';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
@@ -11,15 +16,15 @@ export default Book;
 
 const notFound = {
 	notFound: true,
-} satisfies GetServerSidePropsResult<ChapterProps & IBaseProps>;
+} satisfies GetStaticPropsResult<ChapterProps & IBaseProps>;
 
-export async function getServerSideProps({
+export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{
 	version: string;
 	book: string;
 	chapter: string;
-}>): Promise<GetServerSidePropsResult<ChapterProps & IBaseProps>> {
+}>): Promise<GetStaticPropsResult<ChapterProps & IBaseProps>> {
 	const versionId = params?.version as string;
 	const bookName = params?.book as string;
 	const chapterNumber = params?.chapter as string;
@@ -58,5 +63,13 @@ export async function getServerSideProps({
 			versions,
 			title: bookName,
 		},
+		revalidate: REVALIDATE,
+	};
+}
+
+export function getStaticPaths(): GetStaticPathsResult {
+	return {
+		paths: [],
+		fallback: 'blocking',
 	};
 }

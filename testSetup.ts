@@ -4,17 +4,23 @@ import 'jest-canvas-mock';
 import { resetAllWhenMocks } from 'jest-when';
 
 import getIntlMessages from '~src/lib/getIntlMessages';
+import fetchResponse from '~src/services/bibles/fcbh/fetchResponse';
 
 jest.mock('@silvermine/videojs-airplay');
 jest.mock('@silvermine/videojs-chromecast');
+jest.mock('~/src/services/bibles/fcbh/fetchResponse');
+jest.mock('~lib/api/fetchApi');
+jest.mock('~lib/getIntlMessages');
+jest.mock('~lib/makeQueryClient');
+jest.mock('~lib/swiper');
 jest.mock('next/image');
 jest.mock('next/legacy/image');
-jest.mock('video.js');
 jest.mock('p-limit');
+jest.mock('p-memoize');
 jest.mock('p-retry');
 jest.mock('p-throttle');
 jest.mock('p-timeout');
-jest.mock('p-memoize');
+jest.mock('video.js');
 
 jest.mock('next/navigation', () => ({
 	useSearchParams: jest.fn(() => new URL('http://example.com').searchParams),
@@ -38,11 +44,6 @@ jest.mock('@segment/analytics-next', () => {
 		},
 	};
 });
-
-jest.mock('~lib/api/fetchApi');
-jest.mock('~lib/getIntlMessages');
-jest.mock('~lib/makeQueryClient');
-jest.mock('~lib/swiper');
 
 interface CustomMatchers<R = unknown> {
 	toAppearBefore: (argument: HTMLElement) => R;
@@ -88,6 +89,7 @@ beforeEach(() => {
 	jest.clearAllMocks();
 	resetAllWhenMocks();
 
+	jest.mocked(fetchResponse).mockResolvedValue({});
 	jest.mocked(getIntlMessages).mockResolvedValue({});
 
 	window.IntersectionObserver = jest.fn(

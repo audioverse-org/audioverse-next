@@ -31,7 +31,7 @@ import {
 	BibleChapterDetailChapterPartialFragment,
 	BibleChapterDetailVersionFragment,
 } from './__generated__/chapter';
-import styles from './book.module.scss';
+import styles from './chapter.module.scss';
 
 type Version = NonNullable<GetGraphqlVersionsQuery['collections']['nodes']>[0];
 

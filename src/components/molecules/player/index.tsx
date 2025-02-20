@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import { useSearchParams } from 'next/navigation';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { PlaybackContext } from '~/src/components/templates/andPlaybackContext';
 import ButtonDownload from '~components/molecules/buttonDownload';
 import ButtonNudge from '~components/molecules/buttonNudge';
 import ButtonPlay, {
@@ -26,12 +27,12 @@ import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
 import isServerSide from '~src/lib/isServerSide';
 
-import { PlaybackContext } from '../templates/andPlaybackContext';
-import { PlayerFragment } from './__generated__/player';
-import ButtonAddToPlaylist from './buttonAddToPlaylist';
-import ButtonDownloadBlank from './buttonDownloadBlank';
-import CircleButton from './circleButton';
-import styles from './player.module.scss';
+import ButtonAddToPlaylist from '../buttonAddToPlaylist';
+import ButtonDownloadBlank from '../buttonDownloadBlank';
+import CircleButton from '../circleButton';
+import { PlayerFragment } from './__generated__/index';
+import styles from './index.module.scss';
+import { useAudioUrlRefresh } from './useAudioUrlRefresh';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
@@ -52,10 +53,24 @@ const Player = ({
 }: PlayerProps): JSX.Element => {
 	useContext(PlaybackContext);
 	const intl = useIntl();
-	const session = usePlaybackSession(recording, {
+	const audioUrl = useAudioUrlRefresh(recording);
+
+	// Override the recording's audio URL with our refreshed URL
+	const recordingWithRefreshedUrl = useMemo(
+		() => ({
+			...recording,
+			audioFiles: recording.audioFiles?.map((file, i) =>
+				i === 0 ? { ...file, url: audioUrl } : file,
+			) || [],
+		}),
+		[audioUrl, recording],
+	);
+
+	const session = usePlaybackSession(recordingWithRefreshedUrl, {
 		playlistRecordings,
 		prefersAudio,
 	});
+
 	const shouldShowPoster =
 		hasVideo(recording) &&
 		!prefersAudio &&
@@ -147,7 +162,7 @@ const Player = ({
 				<div className={styles.controls}>
 					<ButtonPlay
 						{...{
-							recording,
+							recording: recordingWithRefreshedUrl,
 							playlistRecordings,
 							backgroundColor,
 							prefersAudio,

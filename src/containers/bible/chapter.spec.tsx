@@ -10,7 +10,7 @@ import { ChapterProps } from '~containers/bible/chapter';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
 import Book, {
-	getServerSideProps,
+	getStaticProps,
 } from '~pages/[language]/bibles/[version]/[book]/[chapter]';
 import {
 	CollectionContentType,
@@ -39,7 +39,7 @@ const renderPage = buildStaticRenderer((props: ChapterProps) => {
 			</AndMiniplayer>
 		</AndPlaybackContext>
 	);
-}, getServerSideProps);
+}, getStaticProps);
 
 describe('Bible book detail page', () => {
 	let scrollToProto: any;
@@ -59,7 +59,7 @@ describe('Bible book detail page', () => {
 		__loadRouter({
 			asPath: '/en/bibles/ENGESVC/Gen/1',
 			query: {
-				id: 'the_version_id',
+				version: 'the_version_id',
 				book: 'the_book_name',
 				chapter: '1',
 			},
