@@ -11,22 +11,25 @@ export default async function getChapter(
 	bookName: string,
 	chapterNumber: number,
 ): Promise<BibleChapterDetailChapterFullFragment | undefined> {
+	// Decode the book name since it comes from the URL
+	const decodedBookName = decodeURIComponent(bookName);
+
 	const fcbhChapter = await getFcbhChapter(
 		versionId,
-		bookName,
+		decodedBookName,
 		chapterNumber,
 	).catch(() => null);
 
 	if (fcbhChapter) {
 		return chapterSchema.transform(transformChapterFull).parse({
 			...fcbhChapter,
-			text: await fetchChapterText(bookName, chapterNumber),
+			text: await fetchChapterText(decodedBookName, chapterNumber),
 		});
 	}
 
 	const result = await getGraphqlChapter({
 		collectionId: Number(versionId),
-		titleSearch: `"${bookName} ${chapterNumber}"`,
+		titleSearch: `"${decodedBookName} ${chapterNumber}"`,
 	}).catch((e) => {
 		console.log(e);
 		return null;

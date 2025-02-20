@@ -183,6 +183,50 @@ Benefits:
 - Prevents over-fetching by being explicit
 - Enables efficient query composition
 
+### API URL Handling
+
+When making API requests that need to work in both server and client contexts:
+
+- Use URL constructor to properly parse and join URLs
+- Handle server-side base URL (localhost) vs client-side (window.location)
+- Clean URL paths by removing duplicate slashes and empty segments
+- Use proper URL joining with base URLs and endpoints
+
+### Bible API Integration
+
+When working with the FCBH Bible API:
+
+- Use BIBLE_BOOK_METAS to map book names to FCBH book IDs (e.g., "1 Samuel" -> "1SA")
+- Append "DA" to Bible version IDs for fileset IDs (e.g., "ENGKJV2" -> "ENGKJVO2DA")
+  - For multi-digit version numbers, only use last digit (e.g., "SPNRV95" -> "SPNRVO5DA")
+- Include v=4 parameter in all API requests
+- Book IDs must use FCBH format (e.g., "1SA", "GEN") not full names
+- Always decode URL-encoded book names (e.g., "1%20Samuel" -> "1 Samuel") before looking up FCBH IDs
+- API endpoints:
+  - List filesets: `/bibles/filesets/{filesetId}`
+  - Get chapter audio: `/bibles/filesets/{filesetId}/{bookId}/{chapter}`
+- Media URLs from the API expire, so they need to be refreshed periodically
+
+### Code Organization
+
+When working with external APIs:
+
+- Extract ID mapping/construction into dedicated helper functions
+- Keep API request functions focused on making the request
+- Separate concerns:
+  - ID/parameter mapping (e.g., bookMetadata.ts)
+  - ID construction (e.g., filesetId.ts)
+  - API requests (e.g., fetchFcbhChapterMediaUrl.ts)
+  - Response handling
+
+### File Structure
+
+- Colocate tests with their source files in the same directory
+  - Example: `src/lib/getFoo.ts` and `src/lib/getFoo.spec.ts`
+- Name files after their single exported function
+  - Example: Function `getFcbhBookId` lives in `getFcbhBookId.ts`
+- Tests use `.spec.ts` suffix
+
 ## Project Structure
 
 - `/src` - Application source code
@@ -212,3 +256,25 @@ Benefits:
 4. Code quality:
    - `npm run lint` - Run ESLint
    - `npm run format:fix` - Fix formatting with Prettier
+
+### Video Player Implementation
+
+#### URL Refresh Patterns
+
+When refreshing media URLs (e.g. for Bible audio):
+
+- Use functional state updates to compare old/new URLs before updating
+- Only trigger URL updates when URLs actually differ to prevent videojs feedback loops
+- Track current media ID to prevent stale updates from race conditions
+- Maintain initial URL while fetching fresh URL to prevent playback interruption
+
+## Video Player Implementation
+
+#### URL Refresh Patterns
+
+When refreshing media URLs (e.g. for Bible audio):
+
+- Use functional state updates to compare old/new URLs before updating
+- Only trigger URL updates when URLs actually differ to prevent videojs feedback loops
+- Track current media ID to prevent stale updates from race conditions
+- Maintain initial URL while fetching fresh URL to prevent playback interruption

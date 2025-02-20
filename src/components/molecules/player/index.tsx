@@ -59,9 +59,10 @@ const Player = ({
 	const recordingWithRefreshedUrl = useMemo(
 		() => ({
 			...recording,
-			audioFiles: recording.audioFiles?.map((file, i) =>
-				i === 0 ? { ...file, url: audioUrl } : file,
-			) || [],
+			audioFiles:
+				recording.audioFiles?.map((file, i) =>
+					i === 0 ? { ...file, url: audioUrl } : file,
+				) || [],
 		}),
 		[audioUrl, recording],
 	);

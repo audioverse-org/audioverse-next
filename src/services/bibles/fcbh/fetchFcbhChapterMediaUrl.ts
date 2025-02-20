@@ -1,5 +1,7 @@
 import { IBBFilesetBookChapter } from '../types';
 import fetchResponse from './fetchResponse';
+import { getFcbhBookId } from './getFcbhBookId';
+import { getFcbhFilesetId } from './getFcbhFilesetId';
 
 export async function fetchFcbhChapterMediaUrl(
 	bibleId: string,
@@ -7,10 +9,25 @@ export async function fetchFcbhChapterMediaUrl(
 	bookId: string,
 	chapterNumber: number,
 ): Promise<string> {
-	const filesetId = `${bibleId.substring(0, bibleId.length - 1)}${testament === 'OT' ? 'O' : 'N'}${bibleId.substring(bibleId.length - 1)}DA`;
+	const filesetId = getFcbhFilesetId(bibleId);
+	const fcbhBookId = getFcbhBookId(bookId);
+
+	console.debug('Fetching FCBH chapter media URL:', {
+		bibleId,
+		filesetId,
+		bookId,
+		fcbhBookId,
+		chapterNumber,
+		testament,
+	});
+
 	const response = await fetchResponse<{ data: IBBFilesetBookChapter }>(
-		`/bibles/filesets/${filesetId}/${bookId}/${chapterNumber}?`,
+		`bibles/filesets/${filesetId}/${fcbhBookId}/${chapterNumber}`,
 	);
+
+	if (!response?.data?.path) {
+		throw new Error('No media path returned from FCBH API');
+	}
 
 	return response.data.path;
 }
