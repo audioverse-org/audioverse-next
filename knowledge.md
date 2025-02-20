@@ -147,6 +147,10 @@ Each component should have its own directory if it needs additional files:
     - 404 error handling tests
     - API error tests
     - Tests that trigger AndFailStates component
+- Test naming and organization:
+  - "renders" tests should verify successful component rendering
+  - Error cases should be in separate tests like "renders 404"
+  - Don't mock console in "renders" tests unless explicitly testing error paths
 - Colocate tests with their source files
 
 ### Internationalization

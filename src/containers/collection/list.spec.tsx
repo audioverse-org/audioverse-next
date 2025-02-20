@@ -57,11 +57,7 @@ describe('conference list page', () => {
 	});
 
 	it('renders', async () => {
-		// Mock console for expected error
-		const consoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
-		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+		loadData();
 
 		await renderPage();
 
@@ -72,9 +68,6 @@ describe('conference list page', () => {
 				offset: 0,
 			},
 		});
-
-		consoleError.mockRestore();
-		consoleLog.mockRestore();
 	});
 
 	it('lists conferences', async () => {
