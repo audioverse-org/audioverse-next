@@ -1,3 +1,4 @@
+import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { loadSermonListData } from '~containers/sermon/list.all.spec';
@@ -53,5 +54,22 @@ describe('sermon audio list page', () => {
 		const link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/teachings/audio');
+	});
+
+	it('renders 404', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+		when(fetchApi)
+			.calledWith(GetSermonListPageDataDocument, expect.anything())
+			.mockRejectedValue('oops');
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Sorry!')).toBeInTheDocument();
+
+		consoleError.mockRestore();
+		consoleLog.mockRestore();
 	});
 });

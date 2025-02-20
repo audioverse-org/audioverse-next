@@ -1,9 +1,7 @@
-import { __loadQuery, __mockedRouter } from 'next/router';
+import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
-import {
-	loadSermonListData,
-	loadSermonListPagePathsData,
-} from '~containers/sermon/list.all.spec';
+import { loadSermonListData, loadSermonListPagePathsData } from '~containers/sermon/list.all.spec';
 import { fetchApi } from '~lib/api/fetchApi';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import SermonList, {
@@ -69,5 +67,22 @@ describe('sermon video list page', () => {
 		const link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/teachings/video');
+	});
+
+	it('renders 404', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+		when(fetchApi)
+			.calledWith(GetSermonListPageDataDocument, expect.anything())
+			.mockRejectedValue('oops');
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Sorry!')).toBeInTheDocument();
+
+		consoleError.mockRestore();
+		consoleLog.mockRestore();
 	});
 });

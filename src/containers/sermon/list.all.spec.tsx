@@ -144,6 +144,10 @@ describe('sermons list page', () => {
 	});
 
 	it('renders 404 on api error', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
 		when(fetchApi)
 			.calledWith(GetSermonListPageDataDocument, expect.anything())
@@ -152,15 +156,25 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Sorry!')).toBeInTheDocument();
+
+		consoleError.mockRestore();
+		consoleLog.mockRestore();
 	});
 
 	it('returns 404 on empty data', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+		
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
 		loadSermonListData({ nodes: [] });
 
 		await renderPage();
 
 		expect(await screen.findByText('Sorry!')).toBeInTheDocument();
+		
+		consoleError.mockRestore();
+		consoleLog.mockRestore();
 	});
 
 	it('includes pagination', async () => {

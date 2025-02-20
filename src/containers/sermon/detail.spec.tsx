@@ -152,28 +152,36 @@ describe('sermon detail page', () => {
 		const result = await getStaticPaths();
 
 		expect(result.paths).toContain('/es/teachings/sermon_id');
-	});
-
-	it('catches API errors', async () => {
+	});	it('catches API errors', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		
 		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
-
+	
 		const result = (await getStaticProps({
 			params: { language: 'en', id: '1' },
 		})) as any;
-
+	
 		expect(result.notFound).toBe(true);
-	});
-
-	it('renders 404 on missing sermon', async () => {
+		
+		consoleError.mockRestore();
+	});	it('renders 404 on missing sermon', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+		
 		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
-
+	
 		const { getByText } = await renderPage();
-
+	
 		expect(getByText('Sorry!')).toBeInTheDocument();
+		
+		consoleError.mockRestore();
+		consoleLog.mockRestore();
 	});
 
 	it('shows loading screen', async () => {
@@ -712,6 +720,10 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on fetch error', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+
 		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('oops');
@@ -719,6 +731,9 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Sorry!')).toBeInTheDocument();
+
+		consoleError.mockRestore();
+		consoleLog.mockRestore();
 	});
 
 	it('renders part number', async () => {

@@ -76,6 +76,10 @@ describe('song book detail page', () => {
 	});
 
 	it('renders 404', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+
 		when(fetchApi)
 			.calledWith(GetSongBooksDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
@@ -83,5 +87,8 @@ describe('song book detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Sorry!')).toBeInTheDocument();
+
+		consoleError.mockRestore();
+		consoleLog.mockRestore();
 	});
 });

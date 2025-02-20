@@ -55,6 +55,10 @@ describe('presenter list page', () => {
 	});
 
 	it('renders 404', async () => {
+		// Mock console for expected error
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+
 		when(fetchApi)
 			.calledWith(GetPresenterListLetterPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
@@ -62,6 +66,9 @@ describe('presenter list page', () => {
 		await renderPage();
 
 		expect(screen.getByText('Sorry!')).toBeInTheDocument();
+
+		consoleError.mockRestore();
+		consoleLog.mockRestore();
 	});
 
 	it('lists presenters', async () => {
