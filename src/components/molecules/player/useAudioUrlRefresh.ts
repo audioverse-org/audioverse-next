@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FCBH_VERSIONS } from '~services/bibles/fcbh/fetchFcbhBibles';
 import { fetchFcbhChapterMediaUrl } from '~services/bibles/fcbh/fetchFcbhChapterMediaUrl';
@@ -79,7 +79,13 @@ export function useAudioUrlRefresh(recording: PlayerFragment): string {
 					console.error('Failed to refresh FCBH URL:', err?.message || err);
 				});
 		}
-	}, [recording.id, recording.canonicalPath, recording.recordingContentType, recording.collection, recording.audioFiles]);
+	}, [
+		recording.id,
+		recording.canonicalPath,
+		recording.recordingContentType,
+		recording.collection,
+		recording.audioFiles,
+	]);
 
 	return audioUrl;
 }

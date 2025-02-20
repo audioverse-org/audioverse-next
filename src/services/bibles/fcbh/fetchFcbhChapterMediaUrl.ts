@@ -21,13 +21,13 @@ export async function fetchFcbhChapterMediaUrl(
 		testament,
 	});
 
-	const response = await fetchResponse<{ data: IBBFilesetBookChapter }>(
+	const response = await fetchResponse<{ data: IBBFilesetBookChapter[] }>(
 		`bibles/filesets/${filesetId}/${fcbhBookId}/${chapterNumber}`,
 	);
 
-	if (!response?.data?.path) {
+	if (!response?.data?.[0]?.path) {
 		throw new Error('No media path returned from FCBH API');
 	}
 
-	return response.data.path;
+	return response.data[0].path;
 }
