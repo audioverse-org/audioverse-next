@@ -126,6 +126,13 @@ Each component should have its own directory if it needs additional files:
 - Write tests for new features
 - Do not run builds to test changes - they take too long
 - Instead rely on TypeScript, tests, and linting
+- Keep test support code in test files
+  - Don't add code to production files just to support tests
+  - Instead, mock or stub in the test files themselves
+- Colocate tests with their source files
+- Console output is mocked globally in testSetup.ts
+  - Prevents noise from expected errors/logs in test output
+  - Individual tests can override if needed
 
 ### Internationalization
 
