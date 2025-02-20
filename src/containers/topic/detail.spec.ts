@@ -83,7 +83,9 @@ describe('Topic', () => {
 
 	it('renders', async () => {
 		// Mock console for expected error
-		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleError = jest
+			.spyOn(console, 'error')
+			.mockImplementation(() => {});
 		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 		await render();

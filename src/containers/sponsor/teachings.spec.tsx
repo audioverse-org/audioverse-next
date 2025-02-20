@@ -102,7 +102,9 @@ describe('sponsor teachings page', () => {
 
 	it('renders 404', async () => {
 		// Mock console for expected error
-		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleError = jest
+			.spyOn(console, 'error')
+			.mockImplementation(() => {});
 		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 		when(fetchApi)

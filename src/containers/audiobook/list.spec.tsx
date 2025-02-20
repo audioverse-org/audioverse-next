@@ -56,7 +56,9 @@ function loadData(data: Partial<GetAudiobookListPageDataQuery> = {}) {
 describe('audiobook list page', () => {
 	it('renders', async () => {
 		// Mock console for expected error
-		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleError = jest
+			.spyOn(console, 'error')
+			.mockImplementation(() => {});
 		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 		await renderPage();
@@ -127,7 +129,9 @@ describe('audiobook list page', () => {
 
 	it('renders 404', async () => {
 		// Mock console for expected error
-		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleError = jest
+			.spyOn(console, 'error')
+			.mockImplementation(() => {});
 		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 		await renderPage();

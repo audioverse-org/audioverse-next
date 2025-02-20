@@ -135,7 +135,9 @@ Each component should have its own directory if it needs additional files:
   - Always restore mocks after test completes
   - Example:
     ```typescript
-    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleError = jest
+    	.spyOn(console, 'error')
+    	.mockImplementation(() => {});
     const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
     // ... test code ...
     consoleError.mockRestore();

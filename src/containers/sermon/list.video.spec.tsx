@@ -1,7 +1,10 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { loadSermonListData, loadSermonListPagePathsData } from '~containers/sermon/list.all.spec';
+import {
+	loadSermonListData,
+	loadSermonListPagePathsData,
+} from '~containers/sermon/list.all.spec';
 import { fetchApi } from '~lib/api/fetchApi';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import SermonList, {
@@ -71,7 +74,9 @@ describe('sermon video list page', () => {
 
 	it('renders 404', async () => {
 		// Mock console for expected error
-		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleError = jest
+			.spyOn(console, 'error')
+			.mockImplementation(() => {});
 		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 		when(fetchApi)

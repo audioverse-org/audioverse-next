@@ -9,7 +9,9 @@ jest.mock('next/router');
 describe('AndFailStates HOC', () => {
 	it('supports no should404 prop', async () => {
 		// Mock console for expected error
-		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const consoleError = jest
+			.spyOn(console, 'error')
+			.mockImplementation(() => {});
 		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
 
 		jest.mocked(useRouter).mockReturnValue({ isFallback: false } as any);
