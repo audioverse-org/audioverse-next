@@ -12,6 +12,10 @@ AudioVerse Next is a web application for serving audio content. Built with Next.
 - Follow ESLint and Prettier configurations
 - Keep components simple and focused
 - Use React hooks for state management
+- Prefer clear variable/function names over comments
+  - Good: `const isValidBiblePath = pathParts.length >= 6`
+  - Bad: `// Check if path has enough parts for bible path`
+  - Exception: Document complex business logic that can't be made obvious through naming
 
 ### Component Organization
 
