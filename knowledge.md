@@ -152,6 +152,9 @@ Each component should have its own directory if it needs additional files:
   - Error cases should be in separate tests like "renders 404"
   - Don't mock console in "renders" tests unless explicitly testing error paths
 - Colocate tests with their source files
+- When testing async effects in hooks:
+  - Use act() to wrap state updates
+  - Use waitFor() to wait for async effects to complete
 
 ### Internationalization
 

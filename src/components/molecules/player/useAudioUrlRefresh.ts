@@ -14,7 +14,12 @@ export function useAudioUrlRefresh(recording: PlayerFragment): string {
 	useEffect(() => {
 		// Set the default audio URL on recording changes
 		const initialUrl = recording.audioFiles?.[0]?.url ?? '';
-		setAudioUrl(initialUrl);
+		setAudioUrl((prev) => {
+			if (prev !== initialUrl) {
+				return initialUrl;
+			}
+			return prev;
+		});
 
 		// Only refresh URL for FCBH Bible chapters
 		if (
