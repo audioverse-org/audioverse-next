@@ -6,6 +6,7 @@ import {
 	CollectionContentType,
 	RecordingContentType,
 } from '~src/__generated__/graphql';
+import loadControlledPromise from '~src/lib/test/loadControlledPromise';
 
 import { PlayerFragment } from './__generated__';
 import { useAudioUrlRefresh } from './useAudioUrlRefresh';
@@ -91,16 +92,16 @@ describe('useAudioUrlRefresh', () => {
 			}),
 		);
 
-		// Initial URL
 		expect(result.current).toBe('initial-url');
 
-		// Should have triggered refresh
-		expect(mockFetchFcbhChapterMediaUrl).toHaveBeenCalledWith(
-			'ENGKJV2',
-			'OT',
-			'Genesis',
-			1,
-		);
+		await waitFor(() => {
+			expect(mockFetchFcbhChapterMediaUrl).toHaveBeenCalledWith(
+				'ENGKJV2',
+				'OT',
+				'Genesis',
+				1,
+			);
+		});
 	});
 
 	it('handles invalid canonical paths', () => {
@@ -219,11 +220,7 @@ describe('useAudioUrlRefresh', () => {
 	});
 
 	it('updates URL after successful refresh', async () => {
-		let resolvePromise: (value: string) => void;
-		const promise = new Promise<string>((resolve) => {
-			resolvePromise = resolve;
-		});
-		mockFetchFcbhChapterMediaUrl.mockImplementation(() => promise);
+		const { resolve } = loadControlledPromise(mockFetchFcbhChapterMediaUrl);
 
 		const recording: PlayerFragment = {
 			...baseRecording,
@@ -249,8 +246,7 @@ describe('useAudioUrlRefresh', () => {
 		expect(result.current).toBe('initial-url');
 
 		await act(async () => {
-			resolvePromise!('refreshed-url');
-			console.log('Promise resolved');
+			resolve('refreshed-url');
 		});
 
 		await waitFor(() => {
