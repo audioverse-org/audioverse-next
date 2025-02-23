@@ -2,12 +2,12 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '~lib/api/fetchApi';
-import { ENTRIES_PER_PAGE } from '~lib/constants';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import CollectionList, {
 	getStaticPaths,
 	getStaticProps,
 } from '~pages/[language]/conferences/page/[i]';
+import { ENTRIES_PER_PAGE } from '~src/lib/constants';
 
 import {
 	GetCollectionListPageDataDocument,
@@ -114,12 +114,6 @@ describe('conference list page', () => {
 	});
 
 	it('renders 404', async () => {
-		// Mock console for expected error
-		const consoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
-		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
-
 		when(fetchApi)
 			.calledWith(GetCollectionListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
@@ -127,9 +121,6 @@ describe('conference list page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Sorry!')).toBeInTheDocument();
-
-		consoleError.mockRestore();
-		consoleLog.mockRestore();
 	});
 
 	it('renders page title', async () => {

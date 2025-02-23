@@ -100,21 +100,12 @@ describe('story detail page', () => {
 	});
 
 	it('catches fetch error and renders 404', async () => {
-		// Mock console for expected error
-		const consoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
-		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
-
 		when(fetchApi)
 			.calledWith(GetStoryDetailDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+			.mockRejectedValue('Oops!');
 
 		const { getByText } = await renderPage();
 
 		expect(getByText('Sorry!')).toBeInTheDocument();
-
-		consoleError.mockRestore();
-		consoleLog.mockRestore();
 	});
 });

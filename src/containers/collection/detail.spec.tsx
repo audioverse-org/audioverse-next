@@ -143,12 +143,6 @@ describe('collection detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		// Mock console for expected error
-		const consoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
-		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
-
 		when(fetchApi)
 			.calledWith(GetCollectionDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
@@ -156,9 +150,6 @@ describe('collection detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Sorry!')).toBeInTheDocument();
-
-		consoleError.mockRestore();
-		consoleLog.mockRestore();
 	});
 
 	it('renders conference dates', async () => {

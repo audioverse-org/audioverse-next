@@ -133,31 +133,12 @@ Each component should have its own directory if it needs additional files:
 - Keep test support code in test files
   - Don't add code to production files just to support tests
   - Instead, mock or stub in the test files themselves
-- Only mock console output in tests where logs are expected
-  - Let unexpected logs fail the test
-  - Mock console.error/log only in tests that trigger known error paths
-  - Always restore mocks after test completes
-  - Example:
-    ```typescript
-    const consoleError = jest
-    	.spyOn(console, 'error')
-    	.mockImplementation(() => {});
-    const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
-    // ... test code ...
-    consoleError.mockRestore();
-    consoleLog.mockRestore();
-    ```
-  - Common cases requiring console mocks:
-    - 404 error handling tests
-    - API error tests
-    - Tests that trigger AndFailStates component
 - Test naming and organization:
   - "renders" tests should verify successful component rendering
   - Error cases should be in separate tests like "renders 404"
-  - Don't mock console in "renders" tests unless explicitly testing error paths
 - Colocate tests with their source files
 - When testing async effects in hooks:
-  - Use act() to wrap state updates
+  - Use act() to wrap state updates not handled via react-testing-library
   - Use waitFor() to wait for async effects to complete
 
 ### Internationalization

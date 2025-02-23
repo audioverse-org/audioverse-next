@@ -88,21 +88,12 @@ describe('sponsor list page', () => {
 	});
 
 	it('renders 404', async () => {
-		// Mock console for expected error
-		const consoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
-		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
-
 		when(fetchApi)
 			.calledWith(GetSponsorListLetterPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
-
-		consoleError.mockRestore();
-		consoleLog.mockRestore();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });

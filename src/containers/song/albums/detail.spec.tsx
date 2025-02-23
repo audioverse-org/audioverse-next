@@ -25,12 +25,6 @@ describe('song album detail page', () => {
 	});
 
 	it('renders', async () => {
-		// Mock console for expected error
-		const consoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
-		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
-
 		when(fetchApi)
 			.calledWith(GetSongAlbumsDetailPageDataDocument, expect.anything())
 			.mockResolvedValue({
@@ -61,9 +55,6 @@ describe('song album detail page', () => {
 				id: 'the_album_id',
 			},
 		});
-
-		consoleError.mockRestore();
-		consoleLog.mockRestore();
 	});
 
 	it('generates static paths', async () => {
@@ -85,12 +76,6 @@ describe('song album detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		// Mock console for expected error
-		const consoleError = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
-		const consoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
-
 		when(fetchApi)
 			.calledWith(GetSongAlbumsDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
@@ -98,8 +83,5 @@ describe('song album detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Sorry!')).toBeInTheDocument();
-
-		consoleError.mockRestore();
-		consoleLog.mockRestore();
 	});
 });
