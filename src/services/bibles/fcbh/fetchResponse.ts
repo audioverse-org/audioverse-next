@@ -4,24 +4,24 @@ const FCBH_API_BASE = 'https://4.dbt.io/api';
 
 const fetchResponse = manageAsyncFunction(
 	async <T extends Record<string, unknown>>(route: string): Promise<T> => {
-		// Clean up the route by removing query params and normalizing slashes
 		const cleanRoute = route
 			.split('?')[0] // Remove query string
 			.replace(/\/+/g, '/') // Replace multiple slashes with single slash
 			.replace(/^\//, ''); // Remove leading slash
 
-		// During SSR/build, use FCBH API directly. In browser, proxy through Next.js API
-		const baseUrl = typeof window === 'undefined' ? FCBH_API_BASE : '/api/fcbh';
-
-		// Construct URL without using URL constructor to avoid path normalization
+		const shouldProxy = typeof window !== 'undefined';
+		const baseUrl = shouldProxy ? '/api/fcbh' : FCBH_API_BASE;
 		const url = baseUrl.replace(/\/$/, '') + '/' + cleanRoute;
+		const headers: HeadersInit = shouldProxy
+			? {}
+			: {
+					v: '4',
+					key: process.env.FCBH_API_KEY || '',
+				};
 
 		const result = await fetch(url, {
 			method: 'GET',
-			headers: typeof window === 'undefined' ? {
-				'v': '4',
-				'key': process.env.FCBH_API_KEY || '',
-			} : {},
+			headers,
 		});
 
 		if (!result.ok) {
@@ -30,8 +30,7 @@ const fetchResponse = manageAsyncFunction(
 			);
 		}
 
-		const data = await result.json();
-		return data as T;
+		return result.json() as Promise<T>;
 	},
 );
 
