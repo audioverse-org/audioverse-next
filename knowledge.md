@@ -140,6 +140,10 @@ Each component should have its own directory if it needs additional files:
 - When testing async effects in hooks:
   - Use act() to wrap state updates not handled via react-testing-library
   - Use waitFor() to wait for async effects to complete
+- When testing modules that are globally mocked:
+  - Use jest.requireActual() to get the unmocked version in specific tests
+  - Example: `const { default: MyModule } = jest.requireActual('./myModule')`
+  - This allows testing the actual implementation while still mocking dependencies
 
 ### Internationalization
 
@@ -220,6 +224,9 @@ When working with the FCBH Bible API:
   - List filesets: `/bibles/filesets/{filesetId}`
   - Get chapter audio: `/bibles/filesets/{filesetId}/{bookId}/{chapter}`
 - Media URLs from the API expire, so they need to be refreshed periodically
+- Base URL: https://4.dbt.io/api
+- During SSR/build, make requests directly to FCBH API with API key
+- In browser, proxy requests through Next.js API to protect API key
 
 ### Code Organization
 

@@ -1,5 +1,7 @@
 import { manageAsyncFunction } from '~src/lib/manageAsyncFunction';
 
+const FCBH_API_BASE = 'https://4.dbt.io/api';
+
 const fetchResponse = manageAsyncFunction(
 	async <T extends Record<string, unknown>>(route: string): Promise<T> => {
 		// Clean up the route by removing query params and normalizing slashes
@@ -8,16 +10,18 @@ const fetchResponse = manageAsyncFunction(
 			.replace(/\/+/g, '/') // Replace multiple slashes with single slash
 			.replace(/^\//, ''); // Remove leading slash
 
-		// Ensure we have a complete URL with protocol and host
-		const baseUrl =
-			typeof window === 'undefined'
-				? 'http://localhost:3000' // Server-side
-				: window.location.origin; // Client-side
+		// During SSR/build, use FCBH API directly. In browser, proxy through Next.js API
+		const baseUrl = typeof window === 'undefined' ? FCBH_API_BASE : '/api/fcbh';
 
-		const url = new URL(`/api/fcbh/${cleanRoute}`, baseUrl).toString();
+		// Construct URL without using URL constructor to avoid path normalization
+		const url = baseUrl.replace(/\/$/, '') + '/' + cleanRoute;
 
 		const result = await fetch(url, {
 			method: 'GET',
+			headers: typeof window === 'undefined' ? {
+				'v': '4',
+				'key': process.env.FCBH_API_KEY || '',
+			} : {},
 		});
 
 		if (!result.ok) {
@@ -26,7 +30,8 @@ const fetchResponse = manageAsyncFunction(
 			);
 		}
 
-		return result.json();
+		const data = await result.json();
+		return data as T;
 	},
 );
 
