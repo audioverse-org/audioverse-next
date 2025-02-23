@@ -16,7 +16,7 @@ const fetchResponse = manageAsyncFunction(
 			? {}
 			: {
 					v: '4',
-					key: process.env.FCBH_API_KEY || '',
+					key: process.env.BIBLE_BRAIN_KEY || '',
 				};
 
 		const result = await fetch(url, {
