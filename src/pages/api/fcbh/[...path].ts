@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { FCBH_API_BASE } from '~src/services/bibles/constants';
+
 export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse,
 ) {
 	const { path } = req.query;
 	const pathArray = Array.isArray(path) ? path : [path];
-	const apiUrl = 'https://4.dbt.io/api';
+	const apiUrl = FCBH_API_BASE;
 	const apiKey = process.env.BIBLE_BRAIN_KEY;
 
 	try {

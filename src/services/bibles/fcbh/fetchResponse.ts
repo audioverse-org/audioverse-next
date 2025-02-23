@@ -1,6 +1,6 @@
 import { manageAsyncFunction } from '~src/lib/manageAsyncFunction';
 
-const FCBH_API_BASE = 'https://4.dbt.io/api';
+import { FCBH_API_BASE } from '../constants';
 
 const fetchResponse = manageAsyncFunction(
 	async <T extends Record<string, unknown>>(route: string): Promise<T> => {

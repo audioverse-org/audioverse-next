@@ -1,3 +1,5 @@
+export const FCBH_API_BASE = 'https://4.dbt.io/api';
+
 type BibleBookMeta = {
 	fcbhId: string;
 	shortName: string;

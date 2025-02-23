@@ -1,8 +1,8 @@
+import { FCBH_API_BASE } from '../constants';
+
 const { default: fetchResponse } = jest.requireActual(
 	'~src/services/bibles/fcbh/fetchResponse',
 );
-
-const FCBH_API_BASE = 'https://4.dbt.io/api';
 
 // Mock manageAsyncFunction to return the inner function
 jest.mock('~src/lib/manageAsyncFunction', () => ({
@@ -44,7 +44,7 @@ describe('fetchResponse', () => {
 		const result = await fetchResponse('///path//to//resource?param=value');
 
 		expect(mockFetch).toHaveBeenCalledWith(
-			'https://4.dbt.io/api/path/to/resource',
+			`${FCBH_API_BASE}/path/to/resource`,
 			{
 				method: 'GET',
 				headers: {
@@ -67,7 +67,7 @@ describe('fetchResponse', () => {
 
 		const result = await fetchResponse('test/path');
 
-		expect(mockFetch).toHaveBeenCalledWith('https://4.dbt.io/api/test/path', {
+		expect(mockFetch).toHaveBeenCalledWith(`${FCBH_API_BASE}/test/path`, {
 			method: 'GET',
 			headers: {
 				v: '4',
