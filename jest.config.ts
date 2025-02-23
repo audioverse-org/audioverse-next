@@ -21,6 +21,7 @@ const config: Config.InitialOptions = {
 	},
 	setupFiles: ['jest-date-mock'],
 	setupFilesAfterEnv: ['<rootDir>/testSetup.ts'],
+	watchPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/dist/'],
 };
 
 export default config;
