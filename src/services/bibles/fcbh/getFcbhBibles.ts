@@ -1,4 +1,4 @@
-import { data } from '~/fcbh-bibles';
+import { data } from '~/../fcbh-bibles';
 
 import { IBibleVersion } from '../types';
 

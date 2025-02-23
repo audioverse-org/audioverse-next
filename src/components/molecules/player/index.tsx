@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { PlaybackContext } from '~/src/components/templates/andPlaybackContext';
+import { PlaybackContext } from '~/components/templates/andPlaybackContext';
 import ButtonDownload from '~components/molecules/buttonDownload';
 import ButtonNudge from '~components/molecules/buttonNudge';
 import ButtonPlay, {

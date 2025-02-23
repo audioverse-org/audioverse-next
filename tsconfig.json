@@ -30,7 +30,7 @@
 			"~pages/*": ["src/pages/*"],
 			"~public/*": ["public/*"],
 			"~services/*": ["src/services/*"],
-			"~/*": ["./*"]
+			"~/*": ["./src/*"]
 		},
 		"incremental": true
 	},

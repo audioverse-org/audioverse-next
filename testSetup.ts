@@ -8,7 +8,7 @@ import fetchResponse from '~src/services/bibles/fcbh/fetchResponse';
 
 jest.mock('@silvermine/videojs-airplay');
 jest.mock('@silvermine/videojs-chromecast');
-jest.mock('~/src/services/bibles/fcbh/fetchResponse');
+jest.mock('~/services/bibles/fcbh/fetchResponse');
 jest.mock('~lib/api/fetchApi');
 jest.mock('~lib/getIntlMessages');
 jest.mock('~lib/makeQueryClient');

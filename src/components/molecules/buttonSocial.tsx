@@ -5,7 +5,7 @@ import Link from '~components/atoms/linkWithoutPrefetch';
 
 import styles from './button.module.scss';
 
-export type IButtonType =
+type IButtonType =
 	| 'super'
 	| 'primary'
 	| 'primaryInverse'

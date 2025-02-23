@@ -16,7 +16,7 @@ export interface PaginatedProps<N, T = null> {
 	data: T | null;
 }
 
-export interface PaginatedStaticProps<T, N> {
+interface PaginatedStaticProps<T, N> {
 	props: PaginatedProps<N, T>;
 	revalidate: number;
 }

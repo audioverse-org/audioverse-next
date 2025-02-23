@@ -12,7 +12,7 @@ import { filterByExpectation } from '~src/lib/test/expectations';
 import { GetHelpWidgetDataDocument } from './__generated__/helpWidget';
 
 jest.mock('next/script');
-jest.mock('~/src/lib/hooks/useIsAuthenticated');
+jest.mock('~/lib/hooks/useIsAuthenticated');
 
 const mockBeacon = jest.fn();
 

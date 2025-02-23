@@ -8,7 +8,7 @@ import { Must } from '~src/types/types';
 
 import { GetBookSongDetailDataQuery } from './__generated__/track';
 
-export type SongTrack = NonNullable<GetBookSongDetailDataQuery['musicTrack']>;
+type SongTrack = NonNullable<GetBookSongDetailDataQuery['musicTrack']>;
 
 export interface SongBookTrackProps {
 	book: string;
