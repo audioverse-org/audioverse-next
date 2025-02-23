@@ -2,8 +2,8 @@ import { Scalars } from '~src/__generated__/graphql';
 
 import node from './primatives/node';
 
-const bookName = (r: string) => (bookName: Scalars['ID']['output']) =>
-	node(`${r}/${encodeURIComponent(bookName)}`, (r) => ({
+const bookName = (r: string) => (bookName: string) =>
+	node(`${r}/${encodeURIComponent(bookName.toLowerCase())}`, (r) => ({
 		chapterNumber: (chapterNumber: Scalars['ID']['output']) =>
 			node(`${r}/${chapterNumber}`),
 	}));

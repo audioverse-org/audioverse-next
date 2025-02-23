@@ -27,7 +27,7 @@ export async function getStaticProps({
 }>): Promise<GetStaticPropsResult<ChapterProps & IBaseProps>> {
 	try {
 		const versionId = params?.version as string;
-		const bookName = params?.book as string;
+		const bookName = decodeURIComponent(params?.book as string);
 		const chapterNumber = params?.chapter as string;
 
 		if (!versionId || !bookName || !chapterNumber) {

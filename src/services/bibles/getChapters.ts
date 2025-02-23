@@ -10,20 +10,27 @@ import getFcbhBook from './fcbh/getFcbhBook';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterPartial } from './transforms/chapterTransforms';
 
+// SOURCE: https://stackoverflow.com/a/196991
+function toTitleCase(str: string) {
+	return str.replace(
+		/\w\S*/g,
+		(text: string) =>
+			text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
+	);
+}
+
 export default async function getChapters(
 	versionId: string,
 	bookName: string,
 ): Promise<BibleChapterDetailChapterPartialFragment[] | undefined> {
-	// Decode the book name since it comes from the URL
-	const decodedBookName = decodeURIComponent(bookName);
-
-	const fcbhBook = await getFcbhBook(versionId, decodedBookName).catch(
+	const formattedName = toTitleCase(bookName);
+	const fcbhBook = await getFcbhBook(versionId, formattedName).catch(
 		() => null,
 	);
 
 	if (fcbhBook) {
 		if (!fcbhBook.chapters_full.length) {
-			throw new Error(`Chapters not found for book: ${decodedBookName}`);
+			throw new Error(`Chapters not found for book: ${formattedName}`);
 		}
 
 		return z
@@ -33,16 +40,16 @@ export default async function getChapters(
 
 	const { sequences } = await searchBibleBooks({
 		collectionId: Number(versionId),
-		bookSearch: decodedBookName,
+		bookSearch: formattedName,
 	}).catch((e) => {
 		console.error(e);
 		return { sequences: null };
 	});
 
-	const sequence = sequences?.nodes?.find((s) => s.title === decodedBookName);
+	const sequence = sequences?.nodes?.find((s) => s.title === formattedName);
 
 	if (!sequence) {
-		throw new Error(`Sequence not found for book: ${decodedBookName}`);
+		throw new Error(`Sequence not found for book: ${formattedName}`);
 	}
 
 	const result = await getGraphqlChapters({
