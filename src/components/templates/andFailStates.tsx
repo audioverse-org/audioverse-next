@@ -33,8 +33,6 @@ const AndFailStates = <P,>({
 	const isLoading = _isLoading(componentProps);
 
 	if (!isFallback && should404) {
-		console.error('404 via AndFailStates');
-		console.log({ Component, componentProps, options });
 		return <NotFound {...(componentProps as Must<P>)} />;
 	}
 
