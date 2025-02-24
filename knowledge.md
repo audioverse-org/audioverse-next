@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-AudioVerse Next is a web application for serving audio content. Built with Next.js and TypeScript.
+AudioVerse Next is a web application for serving audio and video content. Built with Next.js and TypeScript.
 
 ## Development Guidelines
 
@@ -52,29 +52,13 @@ Components are organized into a hierarchy based on their complexity and composit
 #### Templates
 
 - Page-level components that arrange organisms
-- Define the structure of a page or major section
+- Define the structure of a page
 - Can depend on any other component type
 - Examples: layouts, page shells, authentication wrappers
 - Often provide context or state to child components
 - May handle routing or page-level concerns
 
 ### Component Patterns
-
-#### URL Generation
-
-- Components that need to generate URLs should accept a URL generator function prop
-- This allows the parent to control URL structure while keeping the component reusable
-- Example:
-  ```typescript
-  interface Props {
-  	getVersionUrl: (version: VersionFragment) => string;
-  }
-  ```
-- Benefits:
-  - Components remain context-agnostic
-  - Same component can generate different URL patterns based on context
-  - Makes testing easier as URL generation can be mocked
-  - Avoids hardcoding route structure in reusable components
 
 #### Theme Management
 
@@ -182,6 +166,7 @@ The project follows a depth-first approach to GraphQL data requirements:
    - Example: A CardList composes multiple Card fragments plus pagination fields
 
 3. Query Composition
+
    - Server-Side Queries:
      - Live alongside page containers
      - Compose fragments from organisms and templates
@@ -216,7 +201,6 @@ When working with the FCBH Bible API:
 
 - Use BIBLE_BOOK_METAS to map book names to FCBH book IDs (e.g., "1 Samuel" -> "1SA")
 - Append "DA" to Bible version IDs for fileset IDs (e.g., "ENGKJV2" -> "ENGKJVO2DA")
-  - For multi-digit version numbers, only use last digit (e.g., "SPNRV95" -> "SPNRVO5DA")
 - Include v=4 parameter in all API requests
 - Book IDs must use FCBH format (e.g., "1SA", "GEN") not full names
 - Always decode URL-encoded book names (e.g., "1%20Samuel" -> "1 Samuel") before looking up FCBH IDs
@@ -289,13 +273,3 @@ When refreshing media URLs (e.g. for Bible audio):
 - Track current media ID to prevent stale updates from race conditions
 - Maintain initial URL while fetching fresh URL to prevent playback interruption
 
-## Video Player Implementation
-
-#### URL Refresh Patterns
-
-When refreshing media URLs (e.g. for Bible audio):
-
-- Use functional state updates to compare old/new URLs before updating
-- Only trigger URL updates when URLs actually differ to prevent videojs feedback loops
-- Track current media ID to prevent stale updates from race conditions
-- Maintain initial URL while fetching fresh URL to prevent playback interruption
