@@ -1,17 +1,18 @@
-import { IBBFileset, IBibleBookChapter } from '../types';
+import { IBBFileset, IBibleBookChapter, Testament } from '../types';
 import fetchResponse from './fetchResponse';
+import { getFcbhFilesetId } from './getFcbhFilesetId';
 
 export async function fetchFcbhChapters(
 	bibleId: string,
 	bibleName: string,
-	testament: 'OT' | 'NT',
+	testament: Testament,
 	bookId: string,
 ): Promise<IBibleBookChapter[]> {
 	if (!bookId) {
 		throw new Error('Book ID is required');
 	}
 
-	const filesetId = `${bibleId.substring(0, bibleId.length - 1)}${testament === 'OT' ? 'O' : 'N'}${bibleId.substring(bibleId.length - 1)}DA`;
+	const filesetId = getFcbhFilesetId(bibleId, testament);
 	const response = await fetchResponse<{ data: IBBFileset[] }>(
 		`/bibles/filesets/${filesetId}?`,
 	);

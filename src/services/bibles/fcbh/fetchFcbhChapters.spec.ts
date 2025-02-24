@@ -27,7 +27,7 @@ describe('fetchFcbhChapters', () => {
 
 	it('sorts chapters', async () => {
 		const result = await fetchFcbhChapters(
-			'ENGKJV',
+			'ENGKJV2',
 			'King James Version (Dramatized)',
 			'OT',
 			'ENGKJV2/GEN',
@@ -35,5 +35,29 @@ describe('fetchFcbhChapters', () => {
 
 		expect(result[0].number).toBe(1);
 		expect(result[1].number).toBe(2);
+	});
+
+	it('uses correct fileset ID format', async () => {
+		await fetchFcbhChapters(
+			'ENGKJV2',
+			'King James Version (Dramatized)',
+			'OT',
+			'ENGKJV2/GEN'
+		);
+
+		expect(fetchResponse).toHaveBeenCalledWith(
+			'/bibles/filesets/ENGKJVO2DA?'
+		);
+
+		await fetchFcbhChapters(
+			'ENGKJV2',
+			'King James Version (Dramatized)', 
+			'NT',
+			'ENGKJV2/MAT'
+		);
+
+		expect(fetchResponse).toHaveBeenCalledWith(
+			'/bibles/filesets/ENGKJVN2DA?'
+		);
 	});
 });
