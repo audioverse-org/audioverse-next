@@ -2,9 +2,9 @@ import React from 'react';
 
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
 import Dropdown from '~components/molecules/dropdown';
-import { getBibleAcronym } from '~lib/getBibleAcronym';
 
 import { BibleVersionTophatFragment } from './__generated__';
+import { getBibleAcronym } from './getBibleAcronym';
 import styles from './index.module.scss';
 
 interface Props {
