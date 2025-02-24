@@ -1,9 +1,9 @@
 import { renderHook } from '@testing-library/react';
 
-import isServerSide from '../isServerSide';
+import isServerSide from '../../../lib/isServerSide';
 import { useLocalStorage } from './useLocalStorage';
 
-jest.mock('../isServerSide');
+jest.mock('~/lib/isServerSide');
 
 describe('useLocalStorage', () => {
 	beforeEach(() => {

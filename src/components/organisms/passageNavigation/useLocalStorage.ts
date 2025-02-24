@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import isServerSide from '../isServerSide';
+import isServerSide from '../../../lib/isServerSide';
 
 function getLocalValue(key: string) {
 	if (isServerSide()) return;

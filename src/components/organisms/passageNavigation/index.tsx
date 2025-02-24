@@ -14,10 +14,10 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
+import { useLocalStorage } from '~src/components/organisms/passageNavigation/useLocalStorage';
 import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
 import { BIBLE_BOOKS } from '~src/lib/constants';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import { useLocalStorage } from '~src/lib/hooks/useLocalStorage';
 import root from '~src/lib/routes';
 
 import {
