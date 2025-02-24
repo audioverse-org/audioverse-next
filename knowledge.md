@@ -272,4 +272,3 @@ When refreshing media URLs (e.g. for Bible audio):
 - Only trigger URL updates when URLs actually differ to prevent videojs feedback loops
 - Track current media ID to prevent stale updates from race conditions
 - Maintain initial URL while fetching fresh URL to prevent playback interruption
-

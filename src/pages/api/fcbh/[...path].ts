@@ -12,20 +12,12 @@ export default async function handler(
 	const apiKey = process.env.BIBLE_BRAIN_KEY;
 
 	try {
-		// Clean up the path array and join with single slashes
-		const cleanPath = pathArray
-			.filter(Boolean) // Remove empty segments
-			.join('/');
+		const cleanPath = pathArray.filter(Boolean).join('/');
 
-		// Ensure v=4 parameter is included
 		const url = new URL(`${apiUrl}/${cleanPath}`);
+
 		url.searchParams.set('v', '4');
 		url.searchParams.set('key', apiKey || '');
-
-		console.debug(
-			'FCBH API request:',
-			url.toString().replace(apiKey || '', '[REDACTED]'),
-		);
 
 		const result = await fetch(url, { method: 'GET' });
 
