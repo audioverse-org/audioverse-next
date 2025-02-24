@@ -1,6 +1,5 @@
 import { Language } from '~src/__generated__/graphql';
 
-import { DETAIL_PRERENDER_LIMIT } from './constants';
 import { getDetailStaticPaths } from './getDetailStaticPaths';
 
 const languageCount = Object.values(Language).filter(
