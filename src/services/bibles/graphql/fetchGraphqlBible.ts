@@ -5,7 +5,9 @@ import {
 
 export type GraphqlBible = NonNullable<DoFetchGraphqlBibleQuery['collection']>;
 
-export default async function fetchGraphqlBible(id: string) {
+export default async function fetchGraphqlBible(
+	id: string,
+): Promise<GraphqlBible | null> {
 	const { collection } = await doFetchGraphqlBible({ collectionId: id });
 	return collection;
 }
