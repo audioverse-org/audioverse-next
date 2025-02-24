@@ -9,15 +9,7 @@ import {
 import getFcbhBook from './fcbh/getFcbhBook';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterPartial } from './transforms/chapterTransforms';
-
-// SOURCE: https://stackoverflow.com/a/196991
-function toTitleCase(str: string) {
-	return str.replace(
-		/\w\S*/g,
-		(text: string) =>
-			text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
-	);
-}
+import { toTitleCase } from './utils';
 
 export default async function getChapters(
 	versionId: string,

@@ -1,3 +1,6 @@
+import { fetchApi } from '~lib/api/fetchApi';
+
+import { GetGraphqlChapterDocument } from './__generated__/getChapter';
 import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import getChapter from './getChapter';
 import fetchChapterText from './graphql/fetchChapterText';
@@ -28,5 +31,20 @@ describe('getChapter', () => {
 
 		expect(result).toBeDefined();
 		expect(result?.id).toBe('GEN/1');
+	});
+
+	it('converts book name to title case', async () => {
+		jest.mocked(fetchFcbhChapters).mockRejectedValue(new Error('Not found'));
+
+		await getChapter('ENGKJV2', 'genesis', 1);
+
+		expect(fetchApi).toHaveBeenCalledWith(
+			GetGraphqlChapterDocument,
+			expect.objectContaining({
+				variables: expect.objectContaining({
+					titleSearch: expect.stringContaining('Genesis'),
+				}),
+			}),
+		);
 	});
 });

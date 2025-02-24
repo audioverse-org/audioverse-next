@@ -5,31 +5,31 @@ import getFcbhChapter from './fcbh/getFcbhChapter';
 import fetchChapterText from './graphql/fetchChapterText';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterFull } from './transforms/chapterTransforms';
+import { toTitleCase } from './utils';
 
 export default async function getChapter(
 	versionId: string,
 	bookName: string,
 	chapterNumber: number,
 ): Promise<BibleChapterDetailChapterFullFragment | undefined> {
-	// Decode the book name since it comes from the URL
-	const decodedBookName = decodeURIComponent(bookName);
+	const formattedName = toTitleCase(bookName);
 
 	const fcbhChapter = await getFcbhChapter(
 		versionId,
-		decodedBookName,
+		formattedName,
 		chapterNumber,
 	).catch(() => null);
 
 	if (fcbhChapter) {
 		return chapterSchema.transform(transformChapterFull).parse({
 			...fcbhChapter,
-			text: await fetchChapterText(decodedBookName, chapterNumber),
+			text: await fetchChapterText(formattedName, chapterNumber),
 		});
 	}
 
 	const result = await getGraphqlChapter({
 		collectionId: Number(versionId),
-		titleSearch: `"${decodedBookName} ${chapterNumber}"`,
+		titleSearch: `"${formattedName} ${chapterNumber}"`,
 	}).catch((e) => {
 		console.log(e);
 		return null;
