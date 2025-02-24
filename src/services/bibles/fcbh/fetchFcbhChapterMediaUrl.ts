@@ -12,15 +12,6 @@ export async function fetchFcbhChapterMediaUrl(
 	const filesetId = getFcbhFilesetId(bibleId, testament);
 	const fcbhBookId = getFcbhBookId(bookId);
 
-	console.debug('Fetching FCBH chapter media URL:', {
-		bibleId,
-		filesetId,
-		bookId,
-		fcbhBookId,
-		chapterNumber,
-		testament,
-	});
-
 	const response = await fetchResponse<{ data: IBBFilesetBookChapter[] }>(
 		`bibles/filesets/${filesetId}/${fcbhBookId}/${chapterNumber}`,
 	);

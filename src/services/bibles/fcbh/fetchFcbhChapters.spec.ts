@@ -42,22 +42,18 @@ describe('fetchFcbhChapters', () => {
 			'ENGKJV2',
 			'King James Version (Dramatized)',
 			'OT',
-			'ENGKJV2/GEN'
+			'ENGKJV2/GEN',
 		);
 
-		expect(fetchResponse).toHaveBeenCalledWith(
-			'/bibles/filesets/ENGKJVO2DA?'
-		);
+		expect(fetchResponse).toHaveBeenCalledWith('/bibles/filesets/ENGKJVO2DA?');
 
 		await fetchFcbhChapters(
 			'ENGKJV2',
-			'King James Version (Dramatized)', 
+			'King James Version (Dramatized)',
 			'NT',
-			'ENGKJV2/MAT'
+			'ENGKJV2/MAT',
 		);
 
-		expect(fetchResponse).toHaveBeenCalledWith(
-			'/bibles/filesets/ENGKJVN2DA?'
-		);
+		expect(fetchResponse).toHaveBeenCalledWith('/bibles/filesets/ENGKJVN2DA?');
 	});
 });
