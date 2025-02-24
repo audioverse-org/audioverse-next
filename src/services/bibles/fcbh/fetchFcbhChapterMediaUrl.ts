@@ -9,7 +9,7 @@ export async function fetchFcbhChapterMediaUrl(
 	bookId: string,
 	chapterNumber: number,
 ): Promise<string> {
-	const filesetId = getFcbhFilesetId(bibleId);
+	const filesetId = getFcbhFilesetId(bibleId, testament);
 	const fcbhBookId = getFcbhBookId(bookId);
 
 	console.debug('Fetching FCBH chapter media URL:', {

@@ -1,3 +1,5 @@
+export type Testament = 'OT' | 'NT';
+
 export interface IBibleVersion {
 	id: string;
 	title: string;
@@ -9,6 +11,7 @@ export interface IBibleVersion {
 		website: string;
 	};
 }
+
 export interface IBible {
 	abbr: string;
 	name: string;
@@ -18,6 +21,7 @@ export interface IBible {
 	date: number | null;
 	books: IBibleBook[];
 }
+
 export interface IBBFileset {
 	book_id: string;
 	book_name: string;
