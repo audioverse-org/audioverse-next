@@ -54,8 +54,6 @@ const Player = ({
 	useContext(PlaybackContext);
 	const intl = useIntl();
 	const audioUrl = useAudioUrlRefresh(recording);
-
-	// Override the recording's audio URL with our refreshed URL
 	const recordingWithRefreshedUrl = useMemo(
 		() => ({
 			...recording,
@@ -82,7 +80,6 @@ const Player = ({
 	const video = session.getVideo();
 	const [posterHovered, setPosterHovered] = useState(false);
 	const [browser, setBrowser] = useState<string | null>(null);
-
 	const params = useSearchParams();
 
 	useGlobalSpaceDown(() => {
