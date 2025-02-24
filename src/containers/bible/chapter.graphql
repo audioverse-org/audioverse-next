@@ -28,14 +28,3 @@ fragment bibleChapterDetailChapterFull on Recording {
 	...sequenceNav
 	...player
 }
-
-query getBibleChapterPathsData($language: Language!, $first: Int) {
-	recordings(language: $language, first: $first, contentType: BIBLE_CHAPTER) {
-		nodes {
-			canonicalPath(useFuturePath: true)
-		}
-		pageInfo {
-			hasNextPage
-		}
-	}
-}
