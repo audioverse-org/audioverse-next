@@ -39,7 +39,6 @@ import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
-import PassageNavigation from './passageNavigation';
 import styles from './recording.module.scss';
 
 interface RecordingProps {
@@ -55,7 +54,6 @@ interface RecordingProps {
 export function Recording({
 	recording,
 	overrideSequence,
-	...props
 }: (RecordingProps & VersionProps) | RecordingProps): JSX.Element {
 	const intl = useIntl();
 	const { id, imageWithFallback, contentType, sponsor, speakers, writers } =
@@ -124,24 +122,10 @@ export function Recording({
 				/>
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
-
-			{'versions' in props && 'version' in props ? (
-				<PassageNavigation
-					version={props.version}
-					versions={props.versions}
-					chapter={recording}
-				>
-					<RecordingInner
-						recording={recording}
-						overrideSequence={overrideSequence}
-					/>
-				</PassageNavigation>
-			) : (
-				<RecordingInner
-					recording={recording}
-					overrideSequence={overrideSequence}
-				/>
-			)}
+			<RecordingInner
+				recording={recording}
+				overrideSequence={overrideSequence}
+			/>
 		</Tease>
 	);
 }

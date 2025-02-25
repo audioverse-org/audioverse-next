@@ -1,11 +1,5 @@
 import clsx from 'clsx';
-import React, {
-	ReactNode,
-	useContext,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react';
+import React, { ReactNode, useContext, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import BibleVersionTophat from '~components/molecules/bibleVersionTophat';
@@ -39,18 +33,15 @@ type Props = {
 	versions: Array<Version>;
 	version: VersionFull;
 	chapter?: Chapter;
-	children?: ReactNode;
 };
 
 export default function PassageNavigation({
 	versions,
 	version,
 	chapter,
-	children,
 }: Props): ReactNode {
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
-	const [open, setOpen] = useState<boolean>(!children);
 	const [view, setView] = useLocalStorage<'grid' | 'list'>(
 		'passageNavLayout',
 		'grid',
@@ -89,82 +80,75 @@ export default function PassageNavigation({
 	const getVersionUrl = (v: BibleVersionTophatFragment) =>
 		root.lang(languageRoute).bibles.versionId(v.id).get();
 
-	useEffect(() => {
-		setOpen(false);
-	}, [chapter]);
-
 	return (
-		<div className={clsx(styles.base, { [styles.hasChildren]: !!children })}>
+		<div className={clsx(styles.base)}>
 			<BibleVersionTophat
 				version={version}
 				versions={versions}
 				label={chapter?.title || 'Bible'}
 				getVersionUrl={getVersionUrl}
 			/>
-			{open || !children ? (
-				<div className={styles.content}>
-					<div className={styles.switch}>
-						<button
-							className={clsx({ [styles.active]: view === 'grid' })}
-							onClick={() => setView('grid')}
-						>
-							<FormattedMessage
-								id="passageNavigation__selector-grid"
-								defaultMessage="Grid"
-								description="Switch to grid view"
-							/>
-						</button>
-						<button
-							className={clsx({ [styles.active]: view === 'list' })}
-							onClick={() => setView('list')}
-						>
-							<FormattedMessage
-								id="passageNavigation__selector-list"
-								defaultMessage="List"
-								description="Switch to list view"
-							/>
-						</button>
-					</div>
 
-					{view === 'list' ? (
-						<BookList
-							books={books}
+			<div className={styles.content}>
+				<div className={styles.switch}>
+					<button
+						className={clsx({ [styles.active]: view === 'grid' })}
+						onClick={() => setView('grid')}
+					>
+						<FormattedMessage
+							id="passageNavigation__selector-grid"
+							defaultMessage="Grid"
+							description="Switch to grid view"
+						/>
+					</button>
+					<button
+						className={clsx({ [styles.active]: view === 'list' })}
+						onClick={() => setView('list')}
+					>
+						<FormattedMessage
+							id="passageNavigation__selector-list"
+							defaultMessage="List"
+							description="Switch to list view"
+						/>
+					</button>
+				</div>
+
+				{view === 'list' ? (
+					<BookList
+						books={books}
+						selectedBook={book}
+						selectBook={toggleBook}
+						chapterId={chapterId}
+						versionId={version.id}
+					/>
+				) : (
+					<>
+						<BookGrid
+							books={books.filter((book) =>
+								BIBLE_BOOKS.slice(0, 39).find(
+									(b) => b.toLowerCase() === book.title.toLowerCase(),
+								),
+							)}
 							selectedBook={book}
 							selectBook={toggleBook}
 							chapterId={chapterId}
 							versionId={version.id}
 						/>
-					) : (
-						<>
-							<BookGrid
-								books={books.filter((book) =>
-									BIBLE_BOOKS.slice(0, 39).find(
-										(b) => b.toLowerCase() === book.title.toLowerCase(),
-									),
-								)}
-								selectedBook={book}
-								selectBook={toggleBook}
-								chapterId={chapterId}
-								versionId={version.id}
-							/>
-							<BookGrid
-								className={styles.nt}
-								books={books.filter((book) =>
-									BIBLE_BOOKS.slice(39).find(
-										(b) => b.toLowerCase() === book.title.toLowerCase(),
-									),
-								)}
-								selectedBook={book}
-								selectBook={toggleBook}
-								chapterId={chapterId}
-								versionId={version.id}
-							/>
-						</>
-					)}
-				</div>
-			) : (
-				children
-			)}
+						<BookGrid
+							className={styles.nt}
+							books={books.filter((book) =>
+								BIBLE_BOOKS.slice(39).find(
+									(b) => b.toLowerCase() === book.title.toLowerCase(),
+								),
+							)}
+							selectedBook={book}
+							selectBook={toggleBook}
+							chapterId={chapterId}
+							versionId={version.id}
+						/>
+					</>
+				)}
+			</div>
 		</div>
 	);
 }
