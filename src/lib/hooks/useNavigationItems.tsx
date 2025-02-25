@@ -1,11 +1,13 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useContext, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import DownloadAppButton from '~components/molecules/downloadAppButton';
 import LanguageButton from '~components/molecules/languageButton';
 import root from '~lib/routes';
+import { CollectionContentType } from '~src/__generated__/graphql';
+import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 export type INavigationItem = {
@@ -155,6 +157,20 @@ export function useNavigationItems(): INavigationItem[] {
 	const router = useRouter();
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
+	const context = useContext(PlaybackContext);
+	const loadedRecording = context.getRecording();
+
+	const collectionId = useMemo(() => {
+		const c = loadedRecording?.collection;
+		const isVersion = c?.contentType === CollectionContentType.BibleVersion;
+		if (!isVersion) return null;
+		return c.id;
+	}, [loadedRecording?.collection]);
+
+	const biblesUrl = useMemo(() => {
+		if (!collectionId) return root.lang(languageRoute).bibles.get();
+		return root.lang(languageRoute).bibles.versionId(collectionId).get();
+	}, [collectionId, languageRoute]);
 
 	return [
 		{
@@ -265,7 +281,7 @@ export function useNavigationItems(): INavigationItem[] {
 			? [
 					{
 						key: 'bibles',
-						href: root.lang(languageRoute).bibles.get(),
+						href: biblesUrl,
 						Icon: iconMap.icon_bible,
 						label: intl.formatMessage({
 							id: `header__navItemBible`,
