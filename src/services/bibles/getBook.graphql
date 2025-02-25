@@ -4,7 +4,6 @@ query getGraphqlBook($collectionId: ID!, $bookSearch: String!) {
 		contentType: BIBLE_BOOK
 		collectionId: $collectionId
 		search: $bookSearch
-		first: 1
 	) {
 		nodes {
 			...bibleChapterDetailBook

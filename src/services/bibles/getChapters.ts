@@ -53,18 +53,18 @@ export default async function getChapters(
 	});
 
 	const chapters = result?.recordings.nodes;
-	
+
 	if (chapters && chapters.length > 0) {
-		return chapters.map(chapter => {
+		return chapters.map((chapter) => {
 			const chapterNumber = parseChapterNumber(chapter.title);
-			
+
 			const canonicalPath = root
 				.lang('en')
 				.bibles.versionId(versionId)
 				.bookName(formattedName)
 				.chapterNumber(chapterNumber)
 				.get();
-				
+
 			return {
 				...chapter,
 				canonicalPath,

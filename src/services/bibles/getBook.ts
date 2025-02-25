@@ -17,11 +17,13 @@ export default async function getBook(
 
 	const result = await getGraphqlBook({
 		collectionId: Number(versionId),
-		bookSearch: `"${bookName}"`,
+		bookSearch: bookName,
 	}).catch((e) => {
 		console.log(e);
 		return null;
 	});
 
-	return result?.sequences.nodes?.[0];
+	return result?.sequences.nodes?.find((b) =>
+		b.title.toLowerCase().includes(bookName.toLowerCase()),
+	);
 }
