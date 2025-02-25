@@ -67,6 +67,14 @@ export default function PassageNavigation({
 		return books.find((b) => b.id === s.id) || books[0];
 	});
 
+	const toggleBook = (selectedBook: Book) => {
+		if (book && book.id === selectedBook.id) {
+			setBook(null);
+		} else {
+			setBook(selectedBook);
+		}
+	};
+
 	const chapterId = useMemo(() => {
 		if (chapter) return chapter.id;
 		const r = loadedRecording;
@@ -92,6 +100,7 @@ export default function PassageNavigation({
 				versions={versions}
 				label={chapter?.title || 'Bible'}
 				getVersionUrl={getVersionUrl}
+				hatUrl={getVersionUrl(version)}
 			/>
 			{open || !children ? (
 				<div className={styles.content}>
@@ -122,7 +131,7 @@ export default function PassageNavigation({
 						<BookList
 							books={books}
 							selectedBook={book}
-							selectBook={setBook}
+							selectBook={toggleBook}
 							chapterId={chapterId}
 							versionId={version.id}
 						/>
@@ -135,7 +144,7 @@ export default function PassageNavigation({
 									),
 								)}
 								selectedBook={book}
-								selectBook={setBook}
+								selectBook={toggleBook}
 								chapterId={chapterId}
 								versionId={version.id}
 							/>
@@ -147,7 +156,7 @@ export default function PassageNavigation({
 									),
 								)}
 								selectedBook={book}
-								selectBook={setBook}
+								selectBook={toggleBook}
 								chapterId={chapterId}
 								versionId={version.id}
 							/>
