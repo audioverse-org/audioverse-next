@@ -4,6 +4,7 @@ import root from '~src/lib/routes';
 import { getGraphqlChapter } from './__generated__/getChapter';
 import getFcbhChapter from './fcbh/getFcbhChapter';
 import fetchChapterText from './graphql/fetchChapterText';
+import { fetchGraphqlChapterId } from './graphql/graphqlVersionIndex';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterFull } from './transforms/chapterTransforms';
 import { toTitleCase } from './utils';
@@ -12,7 +13,7 @@ export default async function getChapter(
 	versionId: string,
 	bookName: string,
 	chapterNumber: number,
-): Promise<BibleChapterDetailChapterFullFragment | undefined> {
+): Promise<BibleChapterDetailChapterFullFragment> {
 	const formattedName = toTitleCase(bookName);
 
 	const fcbhChapter = await getFcbhChapter(
@@ -28,33 +29,34 @@ export default async function getChapter(
 		});
 	}
 
-	const titleSearch = `${formattedName} ${chapterNumber}`;
+	const chapterId = await fetchGraphqlChapterId(
+		versionId,
+		formattedName,
+		chapterNumber,
+	);
 
 	const result = await getGraphqlChapter({
-		collectionId: Number(versionId),
-		titleSearch,
+		chapterId,
 	}).catch((e) => {
 		console.log(e);
 		return null;
 	});
 
-	const chapter = result?.recordings.nodes?.find(
-		(r) => r.title === titleSearch,
-	);
+	const chapter = result?.recording;
 
-	if (chapter) {
-		const canonicalPath = root
-			.lang('en')
-			.bibles.versionId(versionId)
-			.bookName(formattedName)
-			.chapterNumber(chapterNumber)
-			.get();
-
-		return {
-			...chapter,
-			canonicalPath,
-		};
+	if (!chapter) {
+		throw new Error(`Chapter not found: ${formattedName} ${chapterNumber}`);
 	}
 
-	return undefined;
+	const canonicalPath = root
+		.lang('en')
+		.bibles.versionId(versionId)
+		.bookName(formattedName)
+		.chapterNumber(chapterNumber)
+		.get();
+
+	return {
+		...chapter,
+		canonicalPath,
+	};
 }

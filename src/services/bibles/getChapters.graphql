@@ -1,17 +1,3 @@
-query searchBibleBooks($collectionId: ID!, $bookSearch: String!) {
-	sequences(
-		language: ENGLISH
-		contentType: BIBLE_BOOK
-		collectionId: $collectionId
-		search: $bookSearch
-	) {
-		nodes {
-			id
-			title
-		}
-	}
-}
-
 query getGraphqlChapters($sequenceId: ID!) {
 	recordings(language: ENGLISH, sequenceId: $sequenceId, first: 66) {
 		nodes {

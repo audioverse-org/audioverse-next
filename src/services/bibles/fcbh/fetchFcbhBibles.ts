@@ -22,7 +22,6 @@ export async function fetchFcbhBibles(): Promise<IBibleVersion[] | null> {
 			const books = await Promise.all(
 				(response.data?.books || []).map(async (b) => {
 					if (!b.book_id) {
-						console.log({ b });
 						throw new Error('Book ID is required');
 					}
 					return {

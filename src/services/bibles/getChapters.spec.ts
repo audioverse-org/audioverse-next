@@ -3,15 +3,14 @@ import { when } from 'jest-when';
 import { fetchApi } from '~lib/api/fetchApi';
 import root from '~src/lib/routes';
 
-import {
-	GetGraphqlChaptersDocument,
-	SearchBibleBooksDocument,
-} from './__generated__/getChapters';
+import { GetGraphqlChaptersDocument } from './__generated__/getChapters';
 import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import fetchResponse from './fcbh/fetchResponse';
 import getChapters from './getChapters';
+import { fetchGraphqlBookId } from './graphql/graphqlVersionIndex';
 
 jest.mock('./fcbh/fetchFcbhChapters');
+jest.mock('./graphql/graphqlVersionIndex');
 
 describe('getChapters', () => {
 	beforeEach(() => {
@@ -28,14 +27,6 @@ describe('getChapters', () => {
 				version_name: 'King James Version',
 			},
 		]);
-
-		when(fetchApi)
-			.calledWith(SearchBibleBooksDocument, expect.anything())
-			.mockResolvedValue({
-				sequences: {
-					nodes: [],
-				},
-			});
 
 		when(fetchApi)
 			.calledWith(GetGraphqlChaptersDocument, expect.anything())
@@ -57,31 +48,12 @@ describe('getChapters', () => {
 
 		await getChapters('472', 'genesis').catch(() => null);
 
-		expect(fetchApi).toHaveBeenCalledWith(
-			SearchBibleBooksDocument,
-			expect.objectContaining({
-				variables: expect.objectContaining({
-					bookSearch: 'Genesis',
-				}),
-			}),
-		);
+		expect(fetchGraphqlBookId).toHaveBeenCalledWith('472', 'Genesis');
 	});
 
 	it('sets canonicalPath for GraphQL-retrieved chapters', async () => {
 		jest.mocked(fetchResponse).mockRejectedValue(new Error('Not found'));
-
-		when(fetchApi)
-			.calledWith(SearchBibleBooksDocument, expect.anything())
-			.mockResolvedValue({
-				sequences: {
-					nodes: [
-						{
-							id: 'sequence-123',
-							title: 'Genesis',
-						},
-					],
-				},
-			});
+		jest.mocked(fetchGraphqlBookId).mockResolvedValue('graphql-123');
 
 		when(fetchApi)
 			.calledWith(GetGraphqlChaptersDocument, expect.anything())

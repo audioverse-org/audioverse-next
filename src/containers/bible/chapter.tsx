@@ -50,7 +50,6 @@ const Chapter = ({
 	chapter,
 	versions,
 }: Must<ChapterProps>) => {
-	console.log({ chapter });
 	const c = chapter;
 	const { description, sponsor } = version;
 	const languageRoute = useLanguageRoute();

@@ -3,11 +3,9 @@ import { z } from 'zod';
 import { BibleChapterDetailChapterPartialFragment } from '~src/containers/bible/__generated__/chapter';
 import root from '~src/lib/routes';
 
-import {
-	getGraphqlChapters,
-	searchBibleBooks,
-} from './__generated__/getChapters';
+import { getGraphqlChapters } from './__generated__/getChapters';
 import getFcbhBook from './fcbh/getFcbhBook';
+import { fetchGraphqlBookId } from './graphql/graphqlVersionIndex';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterPartial } from './transforms/chapterTransforms';
 import { parseChapterNumber, toTitleCase } from './utils';
@@ -31,22 +29,10 @@ export default async function getChapters(
 			.parse(fcbhBook.chapters_full);
 	}
 
-	const { sequences } = await searchBibleBooks({
-		collectionId: Number(versionId),
-		bookSearch: formattedName,
-	}).catch((e) => {
-		console.error(e);
-		return { sequences: null };
-	});
-
-	const sequence = sequences?.nodes?.find((s) => s.title === formattedName);
-
-	if (!sequence) {
-		throw new Error(`Sequence not found for book: ${formattedName}`);
-	}
+	const sequenceId = await fetchGraphqlBookId(versionId, formattedName);
 
 	const result = await getGraphqlChapters({
-		sequenceId: sequence.id,
+		sequenceId,
 	}).catch((e) => {
 		console.error(e);
 		return null;

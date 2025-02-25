@@ -1,12 +1,7 @@
-query getGraphqlBook($collectionId: ID!, $bookSearch: String!) {
-	sequences(
-		language: ENGLISH
-		contentType: BIBLE_BOOK
-		collectionId: $collectionId
-		search: $bookSearch
+query getGraphqlBook($bookId: ID!) {
+	sequence(
+		id: $bookId
 	) {
-		nodes {
-			...bibleChapterDetailBook
-		}
+		...bibleChapterDetailBook
 	}
 }

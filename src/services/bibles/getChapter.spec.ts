@@ -1,13 +1,14 @@
 import { fetchApi } from '~lib/api/fetchApi';
 import root from '~src/lib/routes';
 
-import { GetGraphqlChapterDocument } from './__generated__/getChapter';
 import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import getChapter from './getChapter';
 import fetchChapterText from './graphql/fetchChapterText';
+import { fetchGraphqlChapterId } from './graphql/graphqlVersionIndex';
 
 jest.mock('./fcbh/fetchFcbhChapters');
 jest.mock('./graphql/fetchChapterText');
+jest.mock('./graphql/graphqlVersionIndex');
 
 const chapterFixture = {
 	id: 'graphql-123',
@@ -52,10 +53,10 @@ describe('getChapter', () => {
 
 		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
 
+		jest.mocked(fetchGraphqlChapterId).mockResolvedValue('graphql-123');
+
 		jest.mocked(fetchApi).mockResolvedValue({
-			recordings: {
-				nodes: [chapterFixture],
-			},
+			recording: chapterFixture,
 		});
 	});
 
@@ -71,14 +72,7 @@ describe('getChapter', () => {
 
 		await getChapter('ENGKJV2', 'genesis', 1);
 
-		expect(fetchApi).toHaveBeenCalledWith(
-			GetGraphqlChapterDocument,
-			expect.objectContaining({
-				variables: expect.objectContaining({
-					titleSearch: expect.stringContaining('Genesis'),
-				}),
-			}),
-		);
+		expect(fetchGraphqlChapterId).toHaveBeenCalledWith('ENGKJV2', 'Genesis', 1);
 	});
 
 	it('sets canonicalPath using the routes format for GraphQL chapters', async () => {
@@ -94,19 +88,5 @@ describe('getChapter', () => {
 			.get();
 
 		expect(result?.canonicalPath).toBe(expectedPath);
-	});
-
-	it('finds graphql chapter by title', async () => {
-		jest.mocked(fetchFcbhChapters).mockRejectedValue(new Error('Not found'));
-
-		jest.mocked(fetchApi).mockResolvedValue({
-			recordings: {
-				nodes: [{ title: 'A 1' }, { title: 'B 1' }],
-			},
-		});
-
-		const result = await getChapter('456', 'b', 1);
-
-		expect(result?.title).toBe('B 1');
 	});
 });

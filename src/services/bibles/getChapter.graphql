@@ -1,12 +1,7 @@
-query getGraphqlChapter($collectionId: ID!, $titleSearch: String!) {
-	recordings(
-		language: ENGLISH
-		contentType: BIBLE_CHAPTER
-		collectionId: $collectionId
-		search: $titleSearch
+query getGraphqlChapter($chapterId: ID!) {
+	recording(
+		id: $chapterId
 	) {
-		nodes {
-			...bibleChapterDetailChapterFull
-		}
+		...bibleChapterDetailChapterFull
 	}
 }
