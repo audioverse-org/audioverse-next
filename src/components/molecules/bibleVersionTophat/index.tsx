@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
@@ -12,6 +13,11 @@ interface Props {
 	versions: BibleVersionTophatFragment[];
 	label: string;
 	getVersionUrl: (version: BibleVersionTophatFragment) => string;
+	/**
+	 * Optional URL to navigate to when clicking on the hat area.
+	 * If not provided, the hat area will not be clickable.
+	 */
+	hatUrl?: string;
 }
 
 export default function BibleVersionTophat({
@@ -19,10 +25,28 @@ export default function BibleVersionTophat({
 	versions,
 	label,
 	getVersionUrl,
+	hatUrl,
 }: Props): JSX.Element {
+	const router = useRouter();
+
+	const handleHatClick = (e: React.MouseEvent<HTMLDivElement>) => {
+		if (!hatUrl) return;
+
+		const t = e.target as HTMLElement;
+		const isVersionSelector = t.closest(`.${styles.versionSelectorBtn}`);
+
+		if (isVersionSelector) return;
+
+		router.push(hatUrl);
+	};
+
 	return (
 		<div className={styles.base}>
-			<div className={styles.hat}>
+			<div
+				className={styles.hat}
+				onClick={handleHatClick}
+				style={{ cursor: hatUrl ? 'pointer' : 'default' }}
+			>
 				<div className={styles.hatLeft}>
 					<BibleVersionTypeLockup unpadded label={label} />
 				</div>

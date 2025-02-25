@@ -67,6 +67,11 @@ const Chapter = ({
 			.chapterNumber(currentChapterNumber)
 			.get({ params: { autoplay: 'true' } });
 
+	const versionDetailUrl = root
+		.lang(languageRoute)
+		.bibles.versionId(version.id)
+		.get();
+
 	useEffect(() => {
 		if (!scrollRef.current || !currentRef.current) {
 			return;
@@ -128,6 +133,7 @@ const Chapter = ({
 				versions={versions}
 				label={book.title}
 				getVersionUrl={getVersionUrl}
+				hatUrl={versionDetailUrl}
 			/>
 			<div className={styles.content}>
 				<div className={styles.main}>
