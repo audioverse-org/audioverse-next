@@ -28,15 +28,19 @@ export default async function getChapter(
 		});
 	}
 
+	const titleSearch = `${formattedName} ${chapterNumber}`;
+
 	const result = await getGraphqlChapter({
 		collectionId: Number(versionId),
-		titleSearch: `"${formattedName} ${chapterNumber}"`,
+		titleSearch,
 	}).catch((e) => {
 		console.log(e);
 		return null;
 	});
 
-	const chapter = result?.recordings.nodes?.[0];
+	const chapter = result?.recordings.nodes?.find(
+		(r) => r.title === titleSearch,
+	);
 
 	if (chapter) {
 		const canonicalPath = root
@@ -52,5 +56,5 @@ export default async function getChapter(
 		};
 	}
 
-	return chapter;
+	return undefined;
 }

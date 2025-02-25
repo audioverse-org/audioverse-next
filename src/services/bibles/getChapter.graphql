@@ -4,7 +4,6 @@ query getGraphqlChapter($collectionId: ID!, $titleSearch: String!) {
 		contentType: BIBLE_CHAPTER
 		collectionId: $collectionId
 		search: $titleSearch
-		first: 1
 	) {
 		nodes {
 			...bibleChapterDetailChapterFull

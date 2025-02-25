@@ -9,6 +9,32 @@ import fetchChapterText from './graphql/fetchChapterText';
 jest.mock('./fcbh/fetchFcbhChapters');
 jest.mock('./graphql/fetchChapterText');
 
+const chapterFixture = {
+	id: 'graphql-123',
+	title: 'Genesis 1',
+	contentType: 'BIBLE_CHAPTER',
+	duration: 123,
+	isDownloadAllowed: true,
+	shareUrl: 'https://example.com/share',
+	recordingContentType: 'BIBLE_CHAPTER',
+	collection: {
+		id: '456',
+		title: 'KJV',
+		contentType: 'BIBLE_VERSION',
+	},
+	speakers: [],
+	sponsor: { title: 'Example Sponsor' },
+	sequence: null,
+	audioFiles: [
+		{
+			url: 'https://example.com/audio.mp3',
+			mimeType: 'audio/mpeg',
+			filesize: '1MB',
+			duration: 123,
+		},
+	],
+};
+
 describe('getChapter', () => {
 	beforeEach(() => {
 		jest.mocked(fetchFcbhChapters).mockResolvedValue([
@@ -25,6 +51,12 @@ describe('getChapter', () => {
 		]);
 
 		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
+
+		jest.mocked(fetchApi).mockResolvedValue({
+			recordings: {
+				nodes: [chapterFixture],
+			},
+		});
 	});
 
 	it('looks up book case insensitively', async () => {
@@ -52,45 +84,6 @@ describe('getChapter', () => {
 	it('sets canonicalPath using the routes format for GraphQL chapters', async () => {
 		jest.mocked(fetchFcbhChapters).mockRejectedValue(new Error('Not found'));
 
-		jest.mocked(fetchApi).mockResolvedValueOnce({
-			recordings: {
-				nodes: [
-					{
-						id: 'graphql-123',
-						title: 'Genesis 1',
-						contentType: 'BIBLE_CHAPTER',
-						duration: 123,
-						isDownloadAllowed: true,
-						shareUrl: 'https://example.com/share',
-						recordingContentType: 'BIBLE_CHAPTER',
-						collection: {
-							id: '456',
-							title: 'KJV',
-							contentType: 'BIBLE_VERSION',
-						},
-						speakers: [],
-						sponsor: { title: 'Example Sponsor' },
-						sequence: null,
-						audioFiles: [
-							{
-								url: 'https://example.com/audio.mp3',
-								mimeType: 'audio/mpeg',
-								filesize: '1MB',
-								duration: 123,
-							},
-						],
-						videoFiles: [],
-						videoStreams: [],
-						transcript: { text: 'In the beginning...' },
-						videoDownloads: [],
-						audioDownloads: [],
-						sequencePreviousRecording: null,
-						sequenceNextRecording: null,
-					},
-				],
-			},
-		});
-
 		const result = await getChapter('456', 'Genesis', 1);
 
 		const expectedPath = root
@@ -101,5 +94,19 @@ describe('getChapter', () => {
 			.get();
 
 		expect(result?.canonicalPath).toBe(expectedPath);
+	});
+
+	it('finds graphql chapter by title', async () => {
+		jest.mocked(fetchFcbhChapters).mockRejectedValue(new Error('Not found'));
+
+		jest.mocked(fetchApi).mockResolvedValue({
+			recordings: {
+				nodes: [{ title: 'A 1' }, { title: 'B 1' }],
+			},
+		});
+
+		const result = await getChapter('456', 'b', 1);
+
+		expect(result?.title).toBe('B 1');
 	});
 });
