@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useCallback } from 'react';
 
+import Link from '~/components/atoms/linkWithoutPrefetch';
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
-import Dropdown from '~components/molecules/dropdown';
+import Dropdown, { Trigger } from '~components/molecules/dropdown';
 
 import { BibleVersionTophatFragment } from './__generated__';
 import { getBibleAcronym } from './getBibleAcronym';
@@ -40,6 +41,20 @@ export default function BibleVersionTophat({
 		router.push(hatUrl);
 	};
 
+	const trigger = useCallback<Trigger>(
+		({ onClick, 'aria-controls': ariaControls }) => (
+			<button
+				onClick={onClick}
+				aria-controls={ariaControls}
+				className={styles.versionSelectorBtn}
+			>
+				{getBibleAcronym(version.title)}
+				<span className={styles.dropdownArrow}>▼</span>
+			</button>
+		),
+		[version.title],
+	);
+
 	return (
 		<div className={styles.base}>
 			<div
@@ -51,24 +66,12 @@ export default function BibleVersionTophat({
 					<BibleVersionTypeLockup unpadded label={label} />
 				</div>
 				<div className={styles.hatRight}>
-					<Dropdown
-						id="version-selector"
-						trigger={({ onClick, 'aria-controls': ariaControls }) => (
-							<button
-								onClick={onClick}
-								aria-controls={ariaControls}
-								className={styles.versionSelectorBtn}
-							>
-								{getBibleAcronym(version.title)}
-								<span className={styles.dropdownArrow}>▼</span>
-							</button>
-						)}
-					>
+					<Dropdown id="version-selector" trigger={trigger}>
 						{() => (
 							<ul className={styles.versionDropdownList}>
 								{versions.map((v) => (
 									<li key={v.id}>
-										<a href={getVersionUrl(v)}>{v.title}</a>
+										<Link href={getVersionUrl(v)}>{v.title}</Link>
 									</li>
 								))}
 							</ul>

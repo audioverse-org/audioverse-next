@@ -3,13 +3,15 @@ import React, { MouseEvent, ReactNode } from 'react';
 
 import styles from './dropdown.module.scss';
 
+export type Trigger = (props: {
+	onClick: (event: MouseEvent) => void;
+	['aria-controls']: string;
+	isOpen: boolean;
+}) => JSX.Element;
+
 type Props = {
 	id: string;
-	trigger: (props: {
-		onClick: (event: MouseEvent) => void;
-		['aria-controls']: string;
-		isOpen: boolean;
-	}) => JSX.Element;
+	trigger: Trigger;
 	alignment?: 'left' | 'right';
 	children?:
 		| ReactNode
