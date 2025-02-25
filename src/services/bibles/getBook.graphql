@@ -1,7 +1,5 @@
 query getGraphqlBook($bookId: ID!) {
-	sequence(
-		id: $bookId
-	) {
+	sequence(id: $bookId) {
 		...bibleChapterDetailBook
 	}
 }

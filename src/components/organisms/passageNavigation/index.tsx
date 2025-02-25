@@ -100,7 +100,6 @@ export default function PassageNavigation({
 				versions={versions}
 				label={chapter?.title || 'Bible'}
 				getVersionUrl={getVersionUrl}
-				hatUrl={getVersionUrl(version)}
 			/>
 			{open || !children ? (
 				<div className={styles.content}>
