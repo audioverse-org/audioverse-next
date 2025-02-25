@@ -1,6 +1,7 @@
 import { when } from 'jest-when';
 
 import { fetchApi } from '~lib/api/fetchApi';
+import root from '~src/lib/routes';
 
 import {
 	GetGraphqlChaptersDocument,
@@ -64,5 +65,69 @@ describe('getChapters', () => {
 				}),
 			}),
 		);
+	});
+
+	it('sets canonicalPath for GraphQL-retrieved chapters', async () => {
+		jest.mocked(fetchResponse).mockRejectedValue(new Error('Not found'));
+
+		when(fetchApi)
+			.calledWith(SearchBibleBooksDocument, expect.anything())
+			.mockResolvedValue({
+				sequences: {
+					nodes: [
+						{
+							id: 'sequence-123',
+							title: 'Genesis',
+						},
+					],
+				},
+			});
+
+		when(fetchApi)
+			.calledWith(GetGraphqlChaptersDocument, expect.anything())
+			.mockResolvedValue({
+				recordings: {
+					nodes: [
+						{
+							id: 'recording-123',
+							title: 'Genesis 1',
+							canonicalPath: '/old/path',
+							duration: 123,
+							recordingContentType: 'BIBLE_CHAPTER',
+							collection: {
+								id: '456',
+								title: 'KJV',
+								contentType: 'BIBLE_VERSION',
+							},
+							speakers: [],
+							sponsor: { title: 'Example Sponsor' },
+							sequence: null,
+							sequenceIndex: null,
+							audioFiles: [
+								{
+									url: 'https://example.com/audio.mp3',
+									mimeType: 'audio/mpeg',
+									filesize: '1MB',
+									duration: 123,
+								},
+							],
+							videoFiles: [],
+							videoStreams: [],
+						},
+					],
+				},
+			});
+
+		const result = await getChapters('456', 'Genesis');
+		const chapter = result?.[0];
+
+		const expectedPath = root
+			.lang('en')
+			.bibles.versionId('456')
+			.bookName('Genesis')
+			.chapterNumber(1)
+			.get();
+
+		expect(chapter?.canonicalPath).toBe(expectedPath);
 	});
 });

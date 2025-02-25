@@ -37,7 +37,7 @@ export default async function getChapter(
 	});
 
 	const chapter = result?.recordings.nodes?.[0];
-	
+
 	if (chapter) {
 		const canonicalPath = root
 			.lang('en')
@@ -45,12 +45,12 @@ export default async function getChapter(
 			.bookName(formattedName)
 			.chapterNumber(chapterNumber)
 			.get();
-			
+
 		return {
 			...chapter,
 			canonicalPath,
 		};
 	}
-	
+
 	return chapter;
 }

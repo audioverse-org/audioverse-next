@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { BibleChapterDetailChapterPartialFragment } from '~src/containers/bible/__generated__/chapter';
+import root from '~src/lib/routes';
 
 import {
 	getGraphqlChapters,
@@ -9,7 +10,7 @@ import {
 import getFcbhBook from './fcbh/getFcbhBook';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterPartial } from './transforms/chapterTransforms';
-import { toTitleCase } from './utils';
+import { parseChapterNumber, toTitleCase } from './utils';
 
 export default async function getChapters(
 	versionId: string,
@@ -51,5 +52,25 @@ export default async function getChapters(
 		return null;
 	});
 
-	return result?.recordings.nodes ?? undefined;
+	const chapters = result?.recordings.nodes;
+	
+	if (chapters && chapters.length > 0) {
+		return chapters.map(chapter => {
+			const chapterNumber = parseChapterNumber(chapter.title);
+			
+			const canonicalPath = root
+				.lang('en')
+				.bibles.versionId(versionId)
+				.bookName(formattedName)
+				.chapterNumber(chapterNumber)
+				.get();
+				
+			return {
+				...chapter,
+				canonicalPath,
+			};
+		});
+	}
+
+	return chapters ?? undefined;
 }
