@@ -1,4 +1,5 @@
 import { BibleChapterDetailChapterFullFragment } from '~src/containers/bible/__generated__/chapter';
+import root from '~src/lib/routes';
 
 import { getGraphqlChapter } from './__generated__/getChapter';
 import getFcbhChapter from './fcbh/getFcbhChapter';
@@ -35,5 +36,21 @@ export default async function getChapter(
 		return null;
 	});
 
-	return result?.recordings.nodes?.[0];
+	const chapter = result?.recordings.nodes?.[0];
+	
+	if (chapter) {
+		const canonicalPath = root
+			.lang('en')
+			.bibles.versionId(versionId)
+			.bookName(formattedName)
+			.chapterNumber(chapterNumber)
+			.get();
+			
+		return {
+			...chapter,
+			canonicalPath,
+		};
+	}
+	
+	return chapter;
 }
