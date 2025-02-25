@@ -3809,6 +3809,12 @@
       "value": "Précédent"
     }
   ],
+  "organism-recording__collectionInfoTitle": [
+    {
+      "type": 0,
+      "value": "Parent Bible"
+    }
+  ],
   "organism-recording__conferenceInfoTitle": [
     {
       "type": 0,

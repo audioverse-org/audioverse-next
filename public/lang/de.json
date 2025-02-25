@@ -2722,5 +2722,8 @@
   "passageNavigation__selector-list": {
     "comment": "Switch to list view",
     "string": "List"
+  },
+  "organism-recording__collectionInfoTitle": {
+    "string": "Parent Bible"
   }
 }
