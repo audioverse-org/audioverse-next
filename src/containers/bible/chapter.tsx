@@ -22,6 +22,7 @@ import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { GetGraphqlVersionsQuery } from '~src/services/bibles/__generated__/getVersions';
+import { FCBH_VERSIONS } from '~src/services/bibles/fcbh/fetchFcbhBibles';
 import { parseChapterNumber } from '~src/services/bibles/utils';
 import { Must } from '~src/types/types';
 
@@ -58,6 +59,7 @@ const Chapter = ({
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
 	const [scrollPosition, setScrollPosition] = useState(0);
+	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version.id);
 
 	const getVersionUrl = (v: BibleVersionTophatFragment) =>
 		root
@@ -173,17 +175,19 @@ const Chapter = ({
 									chapters.findIndex((_c) => _c.id === c?.id),
 								)}
 								backgroundColor={BaseColors.BIBLE_B}
-								disableUserFeatures
+								disableUserFeatures={isFcbhVersion}
 							/>
 							<div className={styles.definitions}>
 								<DefinitionList terms={details} textColor={BaseColors.DARK} />
 							</div>
-							<div className={styles.disclaimer}>
-								<FormattedMessage
-									id="bibleBook__disclaimer"
-									defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
-								/>
-							</div>
+							{isFcbhVersion && (
+								<div className={styles.disclaimer}>
+									<FormattedMessage
+										id="bibleBook__disclaimer"
+										defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+									/>
+								</div>
+							)}
 							<div className={styles.readAlong}>
 								<Button
 									type="secondary"
@@ -247,7 +251,7 @@ const Chapter = ({
 											)}
 											theme="chapter"
 											unpadded
-											disableUserFeatures
+											disableUserFeatures={isFcbhVersion}
 										/>
 									</div>
 								);
