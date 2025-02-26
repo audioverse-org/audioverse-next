@@ -33,7 +33,8 @@
         "pa11y": "pa11y-ci --sitemap http://localhost:3000/sitemap-0.xml --sitemap-find https://www.audioverse.org --sitemap-replace http://localhost:3000 --sitemap-exclude 'https?:\\/\\/[\\w\\.-]+\\/(?!en)\\w\\w\\/'",
         "prepare": "husky",
         "knip": "knip --no-gitignore",
-        "fcbh": "tsx ./scripts/save-fcbh-meta.ts"
+        "fcbh": "tsx ./scripts/save-fcbh-meta.ts",
+        "save-graphql-indices": "tsx ./scripts/save-graphql-version-indices.ts"
     },
     "dependencies": {
         "@emotion/styled": "^11.13.0",

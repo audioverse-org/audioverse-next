@@ -71,14 +71,14 @@ export async function getStaticProps({
 		return notFound;
 	}
 
-	const versionIds = allVersions.map((v) => v.id);
+	const versionIds = allVersions.map(v => v.id);
 	const versionAvailability = await batchCheckVersionsWithChapter(
 		versionIds,
 		bookName,
-		chapterNumber,
+		chapterNumber
 	);
 
-	const versions = allVersions.map((v) => ({
+	const versions = allVersions.map(v => ({
 		...v,
 		disabled: !versionAvailability[v.id],
 	}));
