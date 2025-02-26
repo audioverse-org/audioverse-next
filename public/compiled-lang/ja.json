@@ -3319,6 +3319,12 @@
       "value": "Volume"
     }
   ],
+  "molecule-bibleVersionTophat__disabledTooltip": [
+    {
+      "type": 0,
+      "value": "The displayed chapter is unavailable in this version"
+    }
+  ],
   "molecule-button-SignUp": [
     {
       "type": 0,

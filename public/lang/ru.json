@@ -2725,5 +2725,8 @@
   },
   "organism-recording__collectionInfoTitle": {
     "string": "Parent Bible"
+  },
+  "molecule-bibleVersionTophat__disabledTooltip": {
+    "string": "The displayed chapter is unavailable in this version"
   }
 }
