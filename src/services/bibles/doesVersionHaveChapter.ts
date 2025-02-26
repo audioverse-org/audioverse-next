@@ -1,8 +1,17 @@
+import pMemoize from 'p-memoize';
+
 import doesFcbhVersionHaveChapter from './fcbh/doesFcbhVersionHaveChapter';
 import { fetchGraphqlChapterId } from './graphql/graphqlVersionIndex';
 import { toTitleCase } from './utils';
 
-export default async function doesVersionHaveChapter(
+/**
+ * Checks if a Bible version has a specific chapter
+ * @param versionId The version ID to check
+ * @param bookName The book name
+ * @param chapterNumber The chapter number
+ * @returns True if the version has the chapter, false otherwise
+ */
+async function _doesVersionHaveChapter(
 	versionId: string | number,
 	bookName: string,
 	chapterNumber: number,
@@ -26,3 +35,5 @@ export default async function doesVersionHaveChapter(
 
 	return !!graphqlChapterId;
 }
+
+export default pMemoize(_doesVersionHaveChapter);
