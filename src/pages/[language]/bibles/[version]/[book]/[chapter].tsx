@@ -26,72 +26,67 @@ export async function getStaticProps({
 	book: string;
 	chapter: string;
 }>): Promise<GetStaticPropsResult<ChapterProps & IBaseProps>> {
-	try {
-		const versionId = params?.version as string;
-		const bookName = decodeURIComponent(params?.book as string);
-		const chapterNumber = Number(params?.chapter);
+	const versionId = params?.version as string;
+	const bookName = decodeURIComponent(params?.book as string);
+	const chapterNumber = Number(params?.chapter);
 
-		if (!versionId || !bookName || !chapterNumber) {
-			console.error('Missing required parameters', {
-				versionId,
-				bookName,
-				chapterNumber,
-			});
-			return notFound;
-		}
-
-		const version = await getBible(versionId).catch((e) => {
-			console.error('Failed to get Bible:', e);
-			return null;
+	if (!versionId || !bookName || !chapterNumber) {
+		console.error('Missing required parameters', {
+			versionId,
+			bookName,
+			chapterNumber,
 		});
-
-		if (!version) {
-			console.error('Version not found:', versionId);
-			return notFound;
-		}
-
-		const chapters = await getChapters(versionId, bookName);
-
-		if (!chapters?.length) {
-			console.error('Chapters not found for book:', bookName);
-			return notFound;
-		}
-
-		const chapter = await getChapter(versionId, bookName, chapterNumber);
-
-		if (!chapter) {
-			console.error('Chapter not found:', { bookName, chapterNumber });
-			return notFound;
-		}
-
-		const versions = await getVersions().then((v) =>
-			Promise.all(
-				v.map(async (v) => ({
-					...v,
-					disabled: !(await doesVersionHaveChapter(
-						v.id,
-						bookName,
-						chapterNumber,
-					)),
-				})),
-			),
-		);
-
-		return {
-			props: {
-				version,
-				book: { id: bookName, title: bookName },
-				chapters,
-				chapter,
-				versions,
-				title: bookName,
-			},
-			revalidate: REVALIDATE,
-		};
-	} catch (error) {
-		console.error('Error in getStaticProps:', error);
 		return notFound;
 	}
+
+	const version = await getBible(versionId).catch((e) => {
+		console.error('Failed to get Bible:', e);
+		return null;
+	});
+
+	if (!version) {
+		console.error('Version not found:', versionId);
+		return notFound;
+	}
+
+	const chapters = await getChapters(versionId, bookName);
+
+	if (!chapters?.length) {
+		console.error('Chapters not found for book:', bookName);
+		return notFound;
+	}
+
+	const chapter = await getChapter(versionId, bookName, chapterNumber);
+
+	if (!chapter) {
+		console.error('Chapter not found:', { bookName, chapterNumber });
+		return notFound;
+	}
+
+	const versions = await getVersions().then((v) =>
+		Promise.all(
+			v.map(async (v) => ({
+				...v,
+				disabled: !(await doesVersionHaveChapter(
+					v.id,
+					bookName,
+					chapterNumber,
+				)),
+			})),
+		),
+	);
+
+	return {
+		props: {
+			version,
+			book: { id: bookName, title: bookName },
+			chapters,
+			chapter,
+			versions,
+			title: bookName,
+		},
+		revalidate: REVALIDATE,
+	};
 }
 
 export function getStaticPaths(): GetStaticPathsResult {
