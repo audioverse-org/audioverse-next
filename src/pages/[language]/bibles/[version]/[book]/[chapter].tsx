@@ -7,6 +7,7 @@ import {
 import { IBaseProps } from '~containers/base';
 import Book, { ChapterProps } from '~src/containers/bible/chapter';
 import { REVALIDATE } from '~src/lib/constants';
+import doesVersionHaveChapter from '~src/services/bibles/doesVersionHaveChapter';
 import getBible from '~src/services/bibles/getBible';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
@@ -28,7 +29,7 @@ export async function getStaticProps({
 	try {
 		const versionId = params?.version as string;
 		const bookName = decodeURIComponent(params?.book as string);
-		const chapterNumber = params?.chapter as string;
+		const chapterNumber = Number(params?.chapter);
 
 		if (!versionId || !bookName || !chapterNumber) {
 			console.error('Missing required parameters', {
@@ -56,18 +57,25 @@ export async function getStaticProps({
 			return notFound;
 		}
 
-		const chapter = await getChapter(
-			versionId,
-			bookName,
-			Number(chapterNumber),
-		);
+		const chapter = await getChapter(versionId, bookName, chapterNumber);
 
 		if (!chapter) {
 			console.error('Chapter not found:', { bookName, chapterNumber });
 			return notFound;
 		}
 
-		const versions = await getVersions();
+		const versions = await getVersions().then((v) =>
+			Promise.all(
+				v.map(async (v) => ({
+					...v,
+					disabled: !(await doesVersionHaveChapter(
+						v.id,
+						bookName,
+						chapterNumber,
+					)),
+				})),
+			),
+		);
 
 		return {
 			props: {

@@ -34,7 +34,11 @@ import {
 } from './__generated__/chapter';
 import styles from './chapter.module.scss';
 
-type Version = NonNullable<GetGraphqlVersionsQuery['collections']['nodes']>[0];
+type Version = NonNullable<
+	GetGraphqlVersionsQuery['collections']['nodes']
+>[0] & {
+	disabled?: boolean;
+};
 
 export interface ChapterProps {
 	version: BibleChapterDetailVersionFragment;

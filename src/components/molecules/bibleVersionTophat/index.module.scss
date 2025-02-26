@@ -88,5 +88,17 @@
 				background: $ts-cream;
 			}
 		}
+
+		&.disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		.disabledLink {
+			color: $ts-midTone;
+			display: block;
+			padding: 8px 16px;
+			white-space: nowrap;
+		}
 	}
 }

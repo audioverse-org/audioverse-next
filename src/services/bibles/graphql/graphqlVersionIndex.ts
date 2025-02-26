@@ -22,7 +22,7 @@ export async function fetchGraphqlBookId(
 }
 
 export async function fetchGraphqlChapterId(
-	versionId: string,
+	versionId: string | number,
 	bookName: string,
 	chapterNumber: number,
 ): Promise<string | number> {

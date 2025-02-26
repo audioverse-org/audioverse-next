@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
+import { useIntl } from 'react-intl';
 
 import Link from '~/components/atoms/linkWithoutPrefetch';
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
@@ -11,7 +12,7 @@ import styles from './index.module.scss';
 
 interface Props {
 	version: BibleVersionTophatFragment;
-	versions: BibleVersionTophatFragment[];
+	versions: (BibleVersionTophatFragment & { disabled?: boolean })[];
 	label: string;
 	getVersionUrl: (version: BibleVersionTophatFragment) => string;
 	/**
@@ -29,6 +30,7 @@ export default function BibleVersionTophat({
 	hatUrl,
 }: Props): JSX.Element {
 	const router = useRouter();
+	const intl = useIntl();
 
 	const handleHatClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (!hatUrl) return;
@@ -69,16 +71,29 @@ export default function BibleVersionTophat({
 					<Dropdown id="version-selector" trigger={trigger}>
 						{(handleClose) => (
 							<ul className={styles.versionDropdownList}>
-								{versions.map((v) => (
-									<li key={v.id}>
-										<Link 
-											href={getVersionUrl(v)} 
-											onClick={handleClose}
-										>
-											{v.title}
-										</Link>
-									</li>
-								))}
+								{versions.map((v) => {
+									const disabled = v.disabled ?? false;
+									return (
+										<li key={v.id} className={disabled ? styles.disabled : ''}>
+											{!disabled ? (
+												<Link href={getVersionUrl(v)} onClick={handleClose}>
+													{v.title}
+												</Link>
+											) : (
+												<span
+													className={styles.disabledLink}
+													title={intl.formatMessage({
+														id: 'molecule-bibleVersionTophat__disabledTooltip',
+														defaultMessage:
+															'The displayed chapter is unavailable in this version',
+													})}
+												>
+													{v.title}
+												</span>
+											)}
+										</li>
+									);
+								})}
 							</ul>
 						)}
 					</Dropdown>
