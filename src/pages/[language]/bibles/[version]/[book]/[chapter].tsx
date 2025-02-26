@@ -7,7 +7,7 @@ import {
 import { IBaseProps } from '~containers/base';
 import Book, { ChapterProps } from '~src/containers/bible/chapter';
 import { REVALIDATE } from '~src/lib/constants';
-import doesVersionHaveChapter from '~src/services/bibles/doesVersionHaveChapter';
+import { batchCheckVersionsWithChapter } from '~src/services/bibles/batchCheckVersionsWithChapter';
 import getBible from '~src/services/bibles/getBible';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
@@ -39,42 +39,49 @@ export async function getStaticProps({
 		return notFound;
 	}
 
-	const version = await getBible(versionId).catch((e) => {
-		console.error('Failed to get Bible:', e);
-		return null;
-	});
+	const [versionPromise, chaptersPromise, chapterPromise, versionsPromise] = [
+		getBible(versionId).catch((e) => {
+			console.error('Failed to get Bible:', e);
+			return null;
+		}),
+		getChapters(versionId, bookName).catch(() => null),
+		getChapter(versionId, bookName, chapterNumber).catch(() => null),
+		getVersions(),
+	];
+
+	const [version, chapters, chapter, allVersions] = await Promise.all([
+		versionPromise,
+		chaptersPromise,
+		chapterPromise,
+		versionsPromise,
+	]);
 
 	if (!version) {
 		console.error('Version not found:', versionId);
 		return notFound;
 	}
 
-	const chapters = await getChapters(versionId, bookName);
-
 	if (!chapters?.length) {
 		console.error('Chapters not found for book:', bookName);
 		return notFound;
 	}
-
-	const chapter = await getChapter(versionId, bookName, chapterNumber);
 
 	if (!chapter) {
 		console.error('Chapter not found:', { bookName, chapterNumber });
 		return notFound;
 	}
 
-	const versions = await getVersions().then((v) =>
-		Promise.all(
-			v.map(async (v) => ({
-				...v,
-				disabled: !(await doesVersionHaveChapter(
-					v.id,
-					bookName,
-					chapterNumber,
-				)),
-			})),
-		),
+	const versionIds = allVersions.map((v) => v.id);
+	const versionAvailability = await batchCheckVersionsWithChapter(
+		versionIds,
+		bookName,
+		chapterNumber,
 	);
+
+	const versions = allVersions.map((v) => ({
+		...v,
+		disabled: !versionAvailability[v.id],
+	}));
 
 	return {
 		props: {
