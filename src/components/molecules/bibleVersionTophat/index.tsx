@@ -67,11 +67,16 @@ export default function BibleVersionTophat({
 				</div>
 				<div className={styles.hatRight}>
 					<Dropdown id="version-selector" trigger={trigger}>
-						{() => (
+						{(handleClose) => (
 							<ul className={styles.versionDropdownList}>
 								{versions.map((v) => (
 									<li key={v.id}>
-										<Link href={getVersionUrl(v)}>{v.title}</Link>
+										<Link 
+											href={getVersionUrl(v)} 
+											onClick={handleClose}
+										>
+											{v.title}
+										</Link>
 									</li>
 								))}
 							</ul>
