@@ -1,12 +1,9 @@
-import {
-	GetStaticPathsResult,
-	GetStaticPropsContext,
-	GetStaticPropsResult,
-} from 'next';
+import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
 
 import { IBaseProps } from '~containers/base';
 import Book, { ChapterProps } from '~src/containers/bible/chapter';
 import { REVALIDATE } from '~src/lib/constants';
+import { makeGetStaticProps } from '~src/lib/makeGetStaticProps';
 import doesVersionHaveChapter from '~src/services/bibles/doesVersionHaveChapter';
 import getBible from '~src/services/bibles/getBible';
 import getChapter from '~src/services/bibles/getChapter';
@@ -19,13 +16,14 @@ const notFound = {
 	notFound: true,
 } satisfies GetStaticPropsResult<ChapterProps & IBaseProps>;
 
-export async function getStaticProps({
-	params,
-}: GetStaticPropsContext<{
-	version: string;
-	book: string;
-	chapter: string;
-}>): Promise<GetStaticPropsResult<ChapterProps & IBaseProps>> {
+export const getStaticProps = makeGetStaticProps<
+	ChapterProps & IBaseProps,
+	{
+		version: string;
+		book: string;
+		chapter: string;
+	}
+>(async ({ params }) => {
 	const versionId = params?.version as string;
 	const bookName = decodeURIComponent(params?.book as string);
 	const chapterNumber = Number(params?.chapter);
@@ -87,7 +85,7 @@ export async function getStaticProps({
 		},
 		revalidate: REVALIDATE,
 	};
-}
+});
 
 export function getStaticPaths(): GetStaticPathsResult {
 	return {

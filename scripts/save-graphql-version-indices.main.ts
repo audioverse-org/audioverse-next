@@ -2,7 +2,7 @@ import fs from 'fs';
 
 import { FCBH_VERSIONS } from '~src/services/bibles/fcbh/fetchFcbhBibles';
 import getVersions from '~src/services/bibles/getVersions';
-import { getGraphqlVersionIndex } from '~src/services/bibles/graphql/__generated__/graphqlVersionIndex';
+import { getGraphqlVersionIndex } from '~src/services/bibles/graphql/__generated__/graphqlVersionIndices';
 
 export default async function main() {
 	// Get all versions
@@ -63,6 +63,7 @@ export default async function main() {
 	fs.writeFileSync(
 		'src/services/bibles/graphql/graphqlVersionIndices.ts',
 		`// This file is auto-generated. Do not edit manually.
+// Use \`npm run indices\` to update.
 export const graphqlVersionIndices = ${JSON.stringify(indices, null, 2)};
 `,
 	);

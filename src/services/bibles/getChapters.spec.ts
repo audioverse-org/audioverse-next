@@ -7,10 +7,10 @@ import { GetGraphqlChaptersDocument } from './__generated__/getChapters';
 import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import fetchResponse from './fcbh/fetchResponse';
 import getChapters from './getChapters';
-import { fetchGraphqlBookId } from './graphql/graphqlVersionIndex';
+import { getGraphqlBookId } from './graphql/getGraphqlBookId';
 
 jest.mock('./fcbh/fetchFcbhChapters');
-jest.mock('./graphql/graphqlVersionIndex');
+jest.mock('./graphql/getGraphqlBookId');
 
 describe('getChapters', () => {
 	beforeEach(() => {
@@ -48,12 +48,12 @@ describe('getChapters', () => {
 
 		await getChapters('472', 'genesis').catch(() => null);
 
-		expect(fetchGraphqlBookId).toHaveBeenCalledWith('472', 'Genesis');
+		expect(getGraphqlBookId).toHaveBeenCalledWith('472', 'Genesis');
 	});
 
 	it('sets canonicalPath for GraphQL-retrieved chapters', async () => {
 		jest.mocked(fetchResponse).mockRejectedValue(new Error('Not found'));
-		jest.mocked(fetchGraphqlBookId).mockResolvedValue('graphql-123');
+		jest.mocked(getGraphqlBookId).mockReturnValue('graphql-123');
 
 		when(fetchApi)
 			.calledWith(GetGraphqlChaptersDocument, expect.anything())

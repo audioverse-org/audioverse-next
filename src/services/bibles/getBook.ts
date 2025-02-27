@@ -2,7 +2,7 @@ import { BibleChapterDetailBookFragment } from '~src/containers/bible/__generate
 
 import { getGraphqlBook } from './__generated__/getBook';
 import getFcbhBook from './fcbh/getFcbhBook';
-import { fetchGraphqlBookId } from './graphql/graphqlVersionIndex';
+import { getGraphqlBookId } from './graphql/getGraphqlBookId';
 import { bookSchema } from './schemas/book';
 import { transformBook } from './transforms/bookTransforms';
 
@@ -16,7 +16,12 @@ export default async function getBook(
 		return bookSchema.transform(transformBook).parse(book);
 	}
 
-	const bookId = await fetchGraphqlBookId(versionId, bookName);
+	const bookId = getGraphqlBookId(versionId, bookName);
+
+	if (!bookId) {
+		throw new Error(`Book not found: ${bookName}`);
+	}
+
 	const result = await getGraphqlBook({
 		bookId,
 	}).catch((e) => {

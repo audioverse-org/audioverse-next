@@ -4,11 +4,11 @@ import root from '~src/lib/routes';
 import { fetchFcbhChapters } from './fcbh/fetchFcbhChapters';
 import getChapter from './getChapter';
 import fetchChapterText from './graphql/fetchChapterText';
-import { fetchGraphqlChapterId } from './graphql/graphqlVersionIndex';
+import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 
 jest.mock('./fcbh/fetchFcbhChapters');
 jest.mock('./graphql/fetchChapterText');
-jest.mock('./graphql/graphqlVersionIndex');
+jest.mock('./graphql/getGraphqlChapterId');
 
 const chapterFixture = {
 	id: 'graphql-123',
@@ -53,7 +53,7 @@ describe('getChapter', () => {
 
 		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
 
-		jest.mocked(fetchGraphqlChapterId).mockResolvedValue('graphql-123');
+		jest.mocked(getGraphqlChapterId).mockReturnValue('graphql-123');
 
 		jest.mocked(fetchApi).mockResolvedValue({
 			recording: chapterFixture,
@@ -72,7 +72,7 @@ describe('getChapter', () => {
 
 		await getChapter('ENGKJV2', 'genesis', 1);
 
-		expect(fetchGraphqlChapterId).toHaveBeenCalledWith('ENGKJV2', 'Genesis', 1);
+		expect(getGraphqlChapterId).toHaveBeenCalledWith('ENGKJV2', 'Genesis', 1);
 	});
 
 	it('sets canonicalPath using the routes format for GraphQL chapters', async () => {

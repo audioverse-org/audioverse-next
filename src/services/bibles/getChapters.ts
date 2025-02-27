@@ -5,7 +5,7 @@ import root from '~src/lib/routes';
 
 import { getGraphqlChapters } from './__generated__/getChapters';
 import getFcbhBook from './fcbh/getFcbhBook';
-import { fetchGraphqlBookId } from './graphql/graphqlVersionIndex';
+import { getGraphqlBookId } from './graphql/getGraphqlBookId';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterPartial } from './transforms/chapterTransforms';
 import { parseChapterNumber, toTitleCase } from './utils';
@@ -29,7 +29,11 @@ export default async function getChapters(
 			.parse(fcbhBook.chapters_full);
 	}
 
-	const sequenceId = await fetchGraphqlBookId(versionId, formattedName);
+	const sequenceId = getGraphqlBookId(versionId, formattedName);
+
+	if (!sequenceId) {
+		throw new Error(`Sequence not found for book: ${formattedName}`);
+	}
 
 	const result = await getGraphqlChapters({
 		sequenceId,

@@ -34,7 +34,7 @@
         "prepare": "husky",
         "knip": "knip --no-gitignore",
         "fcbh": "tsx ./scripts/save-fcbh-meta.ts",
-        "save-graphql-indices": "tsx ./scripts/save-graphql-version-indices.ts"
+        "indices": "tsx ./scripts/save-graphql-version-indices.ts"
     },
     "dependencies": {
         "@emotion/styled": "^11.13.0",

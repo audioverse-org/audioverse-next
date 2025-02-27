@@ -1,7 +1,7 @@
 import pMemoize from 'p-memoize';
 
 import doesFcbhVersionHaveChapter from './fcbh/doesFcbhVersionHaveChapter';
-import { getCachedGraphqlChapterId } from './graphql/getCachedGraphqlVersionIndex';
+import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 import { toTitleCase } from './utils';
 
 /**
@@ -26,7 +26,7 @@ async function _doesVersionHaveChapter(
 		return true;
 	}
 
-	const graphqlChapterId = getCachedGraphqlChapterId(
+	const graphqlChapterId = getGraphqlChapterId(
 		versionId,
 		toTitleCase(bookName),
 		chapterNumber,

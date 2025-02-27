@@ -4,7 +4,7 @@ import root from '~src/lib/routes';
 import { getGraphqlChapter } from './__generated__/getChapter';
 import getFcbhChapter from './fcbh/getFcbhChapter';
 import fetchChapterText from './graphql/fetchChapterText';
-import { fetchGraphqlChapterId } from './graphql/graphqlVersionIndex';
+import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterFull } from './transforms/chapterTransforms';
 import { toTitleCase } from './utils';
@@ -29,11 +29,15 @@ export default async function getChapter(
 		});
 	}
 
-	const chapterId = await fetchGraphqlChapterId(
+	const chapterId = getGraphqlChapterId(
 		versionId,
 		formattedName,
 		chapterNumber,
 	);
+
+	if (!chapterId) {
+		throw new Error(`Chapter not found: ${formattedName} ${chapterNumber}`);
+	}
 
 	const result = await getGraphqlChapter({
 		chapterId,
