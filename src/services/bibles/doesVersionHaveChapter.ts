@@ -1,7 +1,7 @@
 import pMemoize from 'p-memoize';
 
 import doesFcbhVersionHaveChapter from './fcbh/doesFcbhVersionHaveChapter';
-import { fetchGraphqlChapterId } from './graphql/graphqlVersionIndex';
+import { getCachedGraphqlChapterId } from './graphql/getCachedGraphqlVersionIndex';
 import { toTitleCase } from './utils';
 
 /**
@@ -26,12 +26,11 @@ async function _doesVersionHaveChapter(
 		return true;
 	}
 
-	const formattedName = toTitleCase(bookName);
-	const graphqlChapterId = await fetchGraphqlChapterId(
+	const graphqlChapterId = getCachedGraphqlChapterId(
 		versionId,
-		formattedName,
+		toTitleCase(bookName),
 		chapterNumber,
-	).catch(() => null);
+	);
 
 	return !!graphqlChapterId;
 }

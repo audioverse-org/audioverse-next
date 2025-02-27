@@ -36,19 +36,12 @@ const fetchJson = manageAsyncFunction(
 		const res = await getResponse(headers, query, variables);
 
 		if (!res.ok) {
-			console.error({ res, query, variables, headers });
 			throw new Error(`HTTP request failed: ${res.status} ${res.statusText}`);
 		}
 
 		const json = await res.json();
 
 		if (json.errors) {
-			console.error({
-				query,
-				variables,
-				headers,
-				errors: json.errors,
-			});
 			throw new Error(JSON.stringify(json));
 		}
 
@@ -65,16 +58,10 @@ export async function fetchApi<TData>(
 	};
 
 	const sessionToken = getSessionToken(getCurrentRequest());
+
 	if (sessionToken) {
 		headers['x-av-session'] = sessionToken;
 	}
 
-	try {
-		return fetchJson({ headers, query, variables });
-	} catch (previousError) {
-		console.error(previousError);
-		const e = new Error('Error fetching from API');
-		Object.assign(e, { query, variables, previousError });
-		throw e;
-	}
+	return fetchJson({ headers, query, variables });
 }

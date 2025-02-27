@@ -1,4 +1,5 @@
 import { IBBFilesetBookChapter } from '../types';
+import { toTitleCase } from '../utils';
 import fetchResponse from './fetchResponse';
 import { getFcbhBookId } from './getFcbhBookId';
 import { getFcbhFilesetId } from './getFcbhFilesetId';
@@ -6,11 +7,12 @@ import { getFcbhFilesetId } from './getFcbhFilesetId';
 export async function fetchFcbhChapterMediaUrl(
 	bibleId: string,
 	testament: 'OT' | 'NT',
-	bookId: string,
+	bookName: string,
 	chapterNumber: number,
 ): Promise<string> {
+	const formattedBookName = toTitleCase(bookName);
 	const filesetId = getFcbhFilesetId(bibleId, testament);
-	const fcbhBookId = getFcbhBookId(bookId);
+	const fcbhBookId = getFcbhBookId(formattedBookName);
 
 	const response = await fetchResponse<{ data: IBBFilesetBookChapter[] }>(
 		`bibles/filesets/${filesetId}/${fcbhBookId}/${chapterNumber}`,

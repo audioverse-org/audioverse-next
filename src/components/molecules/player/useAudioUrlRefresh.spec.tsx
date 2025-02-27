@@ -19,11 +19,11 @@ const baseRecording = {
 	id: '123',
 	title: 'Test Recording',
 	contentType: RecordingContentType.Sermon,
-	canonicalPath: '/test/path',
 	duration: 100,
 	isDownloadAllowed: true,
 	shareUrl: 'share-url',
 	recordingContentType: RecordingContentType.Sermon,
+	canonicalPath: '/en/bibles/ENGKJV2/Genesis/1',
 	speakers: [],
 	sponsor: null,
 	sequence: null,
@@ -37,6 +37,7 @@ const baseRecording = {
 describe('useAudioUrlRefresh', () => {
 	beforeEach(() => {
 		mockFetchFcbhChapterMediaUrl.mockReset();
+		mockFetchFcbhChapterMediaUrl.mockResolvedValue('refreshed-url');
 	});
 
 	it('returns initial audio URL', () => {
@@ -251,6 +252,70 @@ describe('useAudioUrlRefresh', () => {
 
 		await waitFor(() => {
 			expect(result.current).toBe('refreshed-url');
+		});
+	});
+
+	it('correctly determines the testament', async () => {
+		const recording: PlayerFragment = {
+			...baseRecording,
+			recordingContentType: RecordingContentType.BibleChapter,
+			canonicalPath: '/en/bibles/ENGKJV2/Exodus/1',
+			collection: {
+				id: FCBH_VERSIONS[0].id,
+				title: 'King James Version',
+				contentType: CollectionContentType.BibleVersion,
+			},
+			audioFiles: [
+				{
+					url: 'initial-url',
+					mimeType: 'audio/mp3',
+					filesize: '1000',
+					duration: 100,
+				},
+			],
+		};
+
+		renderHook(() => useAudioUrlRefresh(recording));
+
+		await waitFor(() => {
+			expect(mockFetchFcbhChapterMediaUrl).toHaveBeenCalledWith(
+				'ENGKJV2',
+				'OT',
+				'Exodus',
+				1,
+			);
+		});
+	});
+
+	it('determines the testament case insentively', async () => {
+		const recording: PlayerFragment = {
+			...baseRecording,
+			recordingContentType: RecordingContentType.BibleChapter,
+			canonicalPath: '/en/bibles/ENGKJV2/exodus/1',
+			collection: {
+				id: FCBH_VERSIONS[0].id,
+				title: 'King James Version',
+				contentType: CollectionContentType.BibleVersion,
+			},
+			audioFiles: [
+				{
+					url: 'initial-url',
+					mimeType: 'audio/mp3',
+					filesize: '1000',
+					duration: 100,
+				},
+			],
+		};
+
+		renderHook(() => useAudioUrlRefresh(recording));
+
+		await waitFor(() => {
+			expect(mockFetchFcbhChapterMediaUrl).toHaveBeenCalledWith(
+				'ENGKJV2',
+				'OT',
+				'exodus',
+				1,
+			);
 		});
 	});
 });

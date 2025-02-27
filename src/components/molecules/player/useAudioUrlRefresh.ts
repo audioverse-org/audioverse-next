@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { FCBH_VERSIONS } from '~services/bibles/fcbh/fetchFcbhBibles';
 import { fetchFcbhChapterMediaUrl } from '~services/bibles/fcbh/fetchFcbhChapterMediaUrl';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import { BIBLE_BOOK_METAS } from '~src/services/bibles/constants';
 
 import { PlayerFragment } from './__generated__/index';
 
@@ -30,29 +31,40 @@ export function useAudioUrlRefresh(recording: PlayerFragment): string {
 				}
 
 				const versionId = pathParts[3];
-				const bookId = pathParts[4];
+				const bookName = pathParts[4];
 				const chapterNumber = Number(pathParts[5]);
 
-				if (!versionId || !bookId || isNaN(chapterNumber)) {
+				if (!versionId || !bookName || isNaN(chapterNumber)) {
 					console.error(
 						'Failed to refresh FCBH URL: Missing or invalid path parameters',
 						{
 							versionId,
-							bookId,
+							bookId: bookName,
 							chapterNumber,
 						},
 					);
 					return;
 				}
 
-				const testament = bookId === 'Genesis' ? 'OT' : 'NT';
+				const testament = BIBLE_BOOK_METAS.find(
+					(b) => b.fullName.toLowerCase() === bookName.toLowerCase(),
+				)?.testament;
+
+				if (!testament) {
+					console.error(
+						'Failed to refresh FCBH URL: Invalid book ID',
+						bookName,
+					);
+					return;
+				}
+
 				const currentRecordingId = recording.id;
 
 				try {
 					const freshUrl = await fetchFcbhChapterMediaUrl(
 						versionId,
 						testament,
-						bookId,
+						bookName,
 						chapterNumber,
 					);
 

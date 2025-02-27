@@ -165,3 +165,5 @@ export enum BaseColors {
 	PLAYLIST_B = 'playlistB',
 	SMART_PLAYLIST_H = 'smartPlaylistH',
 }
+
+export const LOG_NETWORK_REQUESTS = process.env.LOG_NETWORK_REQUESTS === 'true';
