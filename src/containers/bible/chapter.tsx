@@ -48,6 +48,13 @@ export interface ChapterProps {
 	versions: Version[];
 }
 
+const versionWebId = 538;
+const versionKjvAvId = 552;
+const allowedDownloadVersions: (string | number)[] = [
+	versionWebId,
+	versionKjvAvId,
+];
+
 const Chapter = ({
 	version,
 	book,
@@ -64,6 +71,7 @@ const Chapter = ({
 	const currentRef = useRef<HTMLDivElement>(null);
 	const [scrollPosition, setScrollPosition] = useState(0);
 	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version.id);
+	const shouldAllowDownload = allowedDownloadVersions.includes(version.id);
 
 	const getVersionUrl = (v: BibleVersionTophatFragment) =>
 		root
@@ -179,7 +187,7 @@ const Chapter = ({
 									chapters.findIndex((_c) => _c.id === c?.id),
 								)}
 								backgroundColor={BaseColors.BIBLE_B}
-								disableUserFeatures={isFcbhVersion}
+								disableUserFeatures={shouldAllowDownload}
 							/>
 							<div className={styles.definitions}>
 								<DefinitionList terms={details} textColor={BaseColors.DARK} />
