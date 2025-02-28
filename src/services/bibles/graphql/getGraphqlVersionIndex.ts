@@ -10,6 +10,7 @@ function isKey(
 ): key is keyof typeof graphqlVersionIndices {
 	return typeof key === 'string' && key in graphqlVersionIndices;
 }
+
 /**
  * Gets the version index for a given version ID
  * @param versionId The version ID

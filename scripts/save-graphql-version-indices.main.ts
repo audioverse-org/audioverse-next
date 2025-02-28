@@ -9,10 +9,8 @@ import { getGraphqlVersionIndex } from './__generated__/save-graphql-version-ind
 const outpath = 'src/services/bibles/graphql/__generated__/indices.ts';
 
 export default async function main() {
-	// Get all versions
 	const allVersions = await getVersions();
 
-	// Filter out FCBH versions (we already have those cached)
 	const graphqlVersions = allVersions.filter(
 		(v) => !v.id.toString().startsWith('FCBH_'),
 	);
@@ -21,7 +19,6 @@ export default async function main() {
 		`Fetching indices for ${graphqlVersions.length} GraphQL versions...`,
 	);
 
-	// Fetch indices for all GraphQL versions
 	const indices: Record<string, unknown> = {};
 	let count = 0;
 

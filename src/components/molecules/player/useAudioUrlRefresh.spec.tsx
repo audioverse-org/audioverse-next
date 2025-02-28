@@ -206,7 +206,6 @@ describe('useAudioUrlRefresh', () => {
 			}),
 		);
 
-		// Need to wait for the effect to run and error to be logged
 		await act(async () => {
 			await new Promise((resolve) => setTimeout(resolve, 0));
 		});
