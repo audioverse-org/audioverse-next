@@ -2,10 +2,6 @@ import { getCurrentRequest } from '~lib/api/storeRequest';
 import { getSessionToken } from '~lib/cookies';
 import { manageAsyncFunction } from '~src/lib/manageAsyncFunction';
 
-const API_URL =
-	process.env.NEXT_PUBLIC_API_URL ||
-	'https://graphql-staging.audioverse.org/graphql';
-
 const getResponse = (
 	headers: HeadersInit,
 	query: string,
@@ -16,7 +12,11 @@ const getResponse = (
 		variables,
 	});
 
-	return fetch(API_URL, {
+	const apiUrl =
+		process.env.NEXT_PUBLIC_API_URL ||
+		'https://graphql-staging.audioverse.org/graphql';
+
+	return fetch(apiUrl, {
 		method: 'POST',
 		headers,
 		body,

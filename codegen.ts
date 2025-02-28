@@ -6,7 +6,7 @@ dotenv.config({ path: ['.env', '.env.local'] });
 const config: CodegenConfig = {
 	overwrite: true,
 	schema: process.env.NEXT_PUBLIC_API_URL,
-	documents: ['src/**/*.graphql'],
+	documents: ['src/**/*.graphql', 'scripts/**/*.graphql'],
 	generates: {
 		'./schema.graphql': {
 			plugins: [

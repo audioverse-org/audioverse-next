@@ -1,6 +1,9 @@
 import fs from 'fs';
+import { dirname } from 'path';
 
 import { fetchFcbhBibles } from '~src/services/bibles/fcbh/fetchFcbhBibles';
+
+const outpath = 'src/services/bibles/fcbh/__generated__/metadata.ts';
 
 export default async function main() {
 	const bibles = await fetchFcbhBibles();
@@ -17,8 +20,10 @@ export default async function main() {
 		})),
 	}));
 
+	fs.mkdirSync(dirname(outpath), { recursive: true });
+
 	fs.writeFileSync(
-		'fcbh-bibles.ts',
+		outpath,
 		`export const data = \`
 ${JSON.stringify(biblesWithoutUrls, null, 2)}
 \`;`,

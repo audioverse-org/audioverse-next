@@ -1,8 +1,12 @@
 import fs from 'fs';
+import { dirname } from 'path';
 
 import { FCBH_VERSIONS } from '~src/services/bibles/fcbh/fetchFcbhBibles';
 import getVersions from '~src/services/bibles/getVersions';
-import { getGraphqlVersionIndex } from '~src/services/bibles/graphql/__generated__/graphqlVersionIndices';
+
+import { getGraphqlVersionIndex } from './__generated__/save-graphql-version-indices';
+
+const outpath = 'src/services/bibles/graphql/__generated__/indices.ts';
 
 export default async function main() {
 	// Get all versions
@@ -60,8 +64,10 @@ export default async function main() {
 
 	console.log(`Successfully fetched indices for ${count} versions.`);
 
+	fs.mkdirSync(dirname(outpath), { recursive: true });
+
 	fs.writeFileSync(
-		'src/services/bibles/graphql/graphqlVersionIndices.ts',
+		outpath,
 		`// This file is auto-generated. Do not edit manually.
 // Use \`npm run indices\` to update.
 export const graphqlVersionIndices = ${JSON.stringify(indices, null, 2)};

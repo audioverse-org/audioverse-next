@@ -1,4 +1,4 @@
-import { graphqlVersionIndices } from './graphqlVersionIndices';
+import { graphqlVersionIndices } from './__generated__/indices';
 
 /**
  * Checks if a version ID is a valid key in the graphqlVersionIndices object

@@ -11,8 +11,8 @@ function isOperation(def: DefinitionNode): def is OperationDefinitionNode {
 }
 
 const getQueries = (doc: Types.DocumentFile) => {
-	const root = path.dirname(path.dirname(__dirname));
-	const dir = doc.location && path.relative(root, path.dirname(doc.location));
+	const src = path.dirname(__dirname);
+	const dir = doc.location && path.relative(src, path.dirname(doc.location));
 	const filename = doc.location && path.basename(doc.location, '.graphql');
 	const operations = doc.document?.definitions.filter(isOperation) ?? [];
 	const queries = operations.filter((op) => op.operation === 'query');
@@ -21,7 +21,7 @@ const getQueries = (doc: Types.DocumentFile) => {
 		.filter((n): n is string => n !== undefined && !!n.length);
 
 	return {
-		source: `~${dir}/__generated__/${filename}`,
+		source: `~/${dir}/__generated__/${filename}`,
 		queries: queryNames.map((n) => ({
 			functionName: `build${capitalize(n)}Loader`,
 			dataType: `${capitalize(n)}Query`,
