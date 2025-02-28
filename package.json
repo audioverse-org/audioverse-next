@@ -3,11 +3,12 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "predev": "concurrently \"npx update-browserslist-db@latest\" \"npm:graphql:codegen\"",
+        "predev": "npm run prebuild",
         "dev": "concurrently \"npm:graphql:codegen:watch\" \"next dev\"",
+        "prebuild": "concurrently \"npx update-browserslist-db@latest\" \"npm:graphql:codegen\" \"npm:cache\"",
         "build": "NODE_ICU_DATA=node_modules/full-icu next build",
         "postbuild": "next-sitemap",
-        "build:dev": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu next build --debug",
+        "build:dev": "ENV_OVERRIDE=development npm run build -- --debug",
         "build:webpack-only": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu ./next-build-webpack-only.js",
         "audit": "audit-ci --config audit-ci.json",
         "checkTs": "tsc --noEmit",
@@ -22,7 +23,7 @@
         "test:strict": "TZ=UTC jest --config=jest.config.strict.ts --runInBand",
         "intl": "tsx ./scripts/lang-extract.ts && formatjs compile-folder --ast public/lang public/compiled-lang --format lang-formatter.js",
         "precommit": "concurrently --max-processes=50% \"npm:format:fix\" \"npm:lint:fix\" \"npm:checkTs\" \"npm:intl\"",
-        "graphql:codegen": "tsc -p ./graphql-codegen/tsconfig.json && graphql-codegen --config .graphqlrc.yml",
+        "graphql:codegen": "tsc -p ./graphql-codegen/tsconfig.json && graphql-codegen",
         "graphql:codegen:watch": "npm run graphql:codegen -- --watch",
         "graphql:purge": "find . -type d -name __generated__ -exec rm -r '{}' \\; -prune",
         "lighthouse": "npx lhci autorun",
@@ -34,7 +35,8 @@
         "prepare": "husky",
         "knip": "knip --no-gitignore",
         "fcbh": "tsx ./scripts/save-fcbh-meta.ts",
-        "indices": "tsx ./scripts/save-graphql-version-indices.ts"
+        "indices": "tsx ./scripts/save-graphql-version-indices.ts",
+        "cache": "concurrently \"npm:fcbh\" \"npm:indices\""
     },
     "dependencies": {
         "@emotion/styled": "^11.13.0",
