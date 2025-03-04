@@ -37,7 +37,7 @@ jobs:
       - name: Delete default configuration
         run: rm .lighthouserc.yaml
       - name: Run Lighthouse
-        uses: treosh/lighthouse-ci-action@v9
+        uses: treosh/lighthouse-ci-action@v12
         id: lighthouse
         with:
           urls: |
