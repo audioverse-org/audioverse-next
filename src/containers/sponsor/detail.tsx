@@ -135,7 +135,10 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 						emailSubject={title}
 						light
 						triggerClassName={styles.iconButton}
-						rssUrl={root.lang(languageRoute).sponsors.id(id).feed.get()}
+						rssUrl={root
+							.lang(languageRoute)
+							.sponsors.id(id)
+							.teachings.feed.get()}
 						contentType={CatalogEntityType.Sponsor}
 						id={id}
 						title={title}
