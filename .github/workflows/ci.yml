@@ -2,6 +2,7 @@ name: CI
 on: pull_request
 env:
   NEXT_PUBLIC_API_URL: 'https://graphql-staging.audioverse.org/graphql'
+  BIBLE_BRAIN_KEY: ${{ secrets.BIBLE_BRAIN_KEY }}
 jobs:
   audit:
     runs-on: ubuntu-latest
