@@ -9,6 +9,7 @@ import Book, { ChapterProps } from '~src/containers/bible/chapter';
 import { REVALIDATE } from '~src/lib/constants';
 import doesVersionHaveChapter from '~src/services/bibles/doesVersionHaveChapter';
 import getBible from '~src/services/bibles/getBible';
+import getBookName from '~src/services/bibles/getBookName';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
 import getVersions from '~src/services/bibles/getVersions';
@@ -25,7 +26,7 @@ export async function getStaticProps({
 	GetStaticPropsResult<ChapterProps & IBaseProps>
 > {
 	const versionId = params?.version as string;
-	const bookName = decodeURIComponent(params?.book as string);
+	const bookName = getBookName(decodeURIComponent(params?.book as string));
 	const chapterNumber = Number(params?.chapter);
 
 	if (!versionId || !bookName || !chapterNumber) {

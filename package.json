@@ -32,7 +32,7 @@
         "prepare": "husky",
         "knip": "knip --no-gitignore",
         "codegen": "npm run codegen:graphql",
-        "codegen:watch": "npm run codegen && npm run graphql -- --watch",
+        "codegen:watch": "npm run codegen && npm run codegen:graphql -- --watch",
         "codegen:purge": "find . -type d -name __generated__ -exec rm -r '{}' \\; -prune",
         "codegen:graphql": "tsc -p ./graphql-codegen/tsconfig.json && graphql-codegen"
     },

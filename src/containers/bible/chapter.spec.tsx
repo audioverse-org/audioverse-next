@@ -61,7 +61,7 @@ describe('Bible chapter detail page', () => {
 			asPath: '/en/bibles/ENGESVC/Gen/1',
 			query: {
 				version: 'the_version_id',
-				book: 'the_book_name',
+				book: 'Genesis',
 				chapter: '1',
 			},
 		});
@@ -161,7 +161,7 @@ describe('Bible chapter detail page', () => {
 	it('displays book title', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_book_name')).toBeInTheDocument();
+		expect(getByText('Genesis')).toBeInTheDocument();
 	});
 
 	it('displays version title', async () => {
