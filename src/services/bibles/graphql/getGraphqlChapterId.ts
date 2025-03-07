@@ -1,7 +1,7 @@
 import { getGraphqlVersionIndex } from './getGraphqlVersionIndex';
 
 /**
- * Gets a chapter ID from the cached GraphQL version indices
+ * Gets the graphql recording ID for a chapter
  * @param versionId The version ID
  * @param bookName The book name
  * @param chapterNumber The chapter number
