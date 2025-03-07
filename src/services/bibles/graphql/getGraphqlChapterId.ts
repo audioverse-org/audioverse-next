@@ -8,24 +8,26 @@ import { getGraphqlVersionIndex } from './getGraphqlVersionIndex';
  * @returns The chapter ID or null if not found
  */
 
-export function getGraphqlChapterId(
+export async function getGraphqlChapterId(
 	versionId: string | number,
 	bookName: string,
 	chapterNumber: number,
-): string | number | null {
-	const versionIndex = getGraphqlVersionIndex(versionId);
+): Promise<string | number | null> {
+	const versionIndex = await getGraphqlVersionIndex(versionId);
 
 	if (!versionIndex) {
 		return null;
 	}
 
-	const sequence = versionIndex.find((s) => s.title === bookName);
+	const sequence = versionIndex.sequences.nodes?.find(
+		(s) => s.title === bookName,
+	);
 
 	if (!sequence) {
 		return null;
 	}
 
-	const recording = sequence.recordings.find(
+	const recording = sequence.recordings.nodes?.find(
 		(r) => r.title === `${bookName} ${chapterNumber}`,
 	);
 

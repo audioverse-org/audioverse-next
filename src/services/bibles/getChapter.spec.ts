@@ -53,7 +53,7 @@ describe('getChapter', () => {
 
 		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
 
-		jest.mocked(getGraphqlChapterId).mockReturnValue('graphql-123');
+		jest.mocked(getGraphqlChapterId).mockResolvedValue('graphql-123');
 
 		jest.mocked(fetchApi).mockResolvedValue({
 			recording: chapterFixture,

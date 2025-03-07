@@ -6,17 +6,18 @@ import { getGraphqlVersionIndex } from './getGraphqlVersionIndex';
  * @param bookName The book name
  * @returns The book ID or null if not found
  */
-
-export function getGraphqlBookId(
+export async function getGraphqlBookId(
 	versionId: string | number,
 	bookName: string,
-): string | number | null {
-	const versionIndex = getGraphqlVersionIndex(versionId);
+): Promise<string | number | null> {
+	const versionIndex = await getGraphqlVersionIndex(versionId);
 
 	if (!versionIndex) {
 		return null;
 	}
 
-	const sequence = versionIndex.find((s) => s.title === bookName);
+	const sequence = versionIndex.sequences.nodes?.find(
+		(s) => s.title === bookName,
+	);
 	return sequence?.id || null;
 }

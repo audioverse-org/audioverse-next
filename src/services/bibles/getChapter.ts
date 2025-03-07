@@ -29,7 +29,7 @@ export default async function getChapter(
 		});
 	}
 
-	const chapterId = getGraphqlChapterId(
+	const chapterId = await getGraphqlChapterId(
 		versionId,
 		formattedName,
 		chapterNumber,

@@ -16,7 +16,7 @@ export default async function getBook(
 		return bookSchema.transform(transformBook).parse(book);
 	}
 
-	const bookId = getGraphqlBookId(versionId, bookName);
+	const bookId = await getGraphqlBookId(versionId, bookName);
 
 	if (!bookId) {
 		throw new Error(`Book not found: ${bookName}`);

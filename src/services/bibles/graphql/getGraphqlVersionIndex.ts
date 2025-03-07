@@ -1,25 +1,15 @@
-import { graphqlVersionIndices } from './__generated__/indices';
+import { manageAsyncFunction } from '~src/lib/manageAsyncFunction';
 
-/**
- * Checks if a version ID is a valid key in the graphqlVersionIndices object
- * @param key The version ID to check
- * @returns True if the version ID is a valid key, false otherwise
- */
-function isKey(
-	key: string | number,
-): key is keyof typeof graphqlVersionIndices {
-	return typeof key === 'string' && key in graphqlVersionIndices;
-}
+import { doGetGraphqlVersionIndex } from './__generated__/getGraphqlVersionIndex';
 
 /**
  * Gets the version index for a given version ID
  * @param versionId The version ID
  * @returns The version index or null if not found
  */
-export function getGraphqlVersionIndex(versionId: string | number) {
-	if (!isKey(versionId)) {
-		return null;
-	}
-
-	return graphqlVersionIndices[versionId];
-}
+export const getGraphqlVersionIndex = manageAsyncFunction(
+	async (versionId: string | number) => {
+		const result = await doGetGraphqlVersionIndex({ collectionId: versionId });
+		return result.collection;
+	},
+);

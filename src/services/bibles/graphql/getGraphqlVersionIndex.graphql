@@ -1,4 +1,4 @@
-query getGraphqlVersionIndex($collectionId: ID!) {
+query doGetGraphqlVersionIndex($collectionId: ID!) {
 	collection(id: $collectionId) {
 		id
 		title

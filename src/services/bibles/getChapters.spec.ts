@@ -53,7 +53,7 @@ describe('getChapters', () => {
 
 	it('sets canonicalPath for GraphQL-retrieved chapters', async () => {
 		jest.mocked(fetchResponse).mockRejectedValue(new Error('Not found'));
-		jest.mocked(getGraphqlBookId).mockReturnValue('graphql-123');
+		jest.mocked(getGraphqlBookId).mockResolvedValue('graphql-123');
 
 		when(fetchApi)
 			.calledWith(GetGraphqlChaptersDocument, expect.anything())

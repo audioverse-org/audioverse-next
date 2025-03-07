@@ -29,7 +29,7 @@ export default async function getChapters(
 			.parse(fcbhBook.chapters_full);
 	}
 
-	const sequenceId = getGraphqlBookId(versionId, formattedName);
+	const sequenceId = await getGraphqlBookId(versionId, formattedName);
 
 	if (!sequenceId) {
 		throw new Error(`Sequence not found for book: ${formattedName}`);

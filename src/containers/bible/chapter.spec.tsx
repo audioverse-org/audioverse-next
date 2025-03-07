@@ -9,7 +9,7 @@ import AndPlaybackContext from '~components/templates/andPlaybackContext';
 import { ChapterProps } from '~containers/bible/chapter';
 import { buildStaticRenderer } from '~lib/test/buildStaticRenderer';
 import setPlayerMock from '~lib/test/setPlayerMock';
-import Book, {
+import Chapter, {
 	getStaticProps,
 } from '~pages/[language]/bibles/[version]/[book]/[chapter]';
 import {
@@ -28,6 +28,7 @@ jest.mock('~services/bibles/getBible');
 jest.mock('~services/bibles/getChapter');
 jest.mock('~services/bibles/getChapters');
 jest.mock('~services/bibles/getVersions');
+jest.mock('~services/bibles/graphql/getGraphqlVersionIndex');
 jest.mock('p-timeout');
 jest.mock('video.js');
 
@@ -35,13 +36,13 @@ const renderPage = buildStaticRenderer((props: ChapterProps) => {
 	return (
 		<AndPlaybackContext>
 			<AndMiniplayer>
-				<Book {...props} />
+				<Chapter {...props} />
 			</AndMiniplayer>
 		</AndPlaybackContext>
 	);
 }, getStaticProps);
 
-describe('Bible book detail page', () => {
+describe('Bible chapter detail page', () => {
 	let scrollToProto: any;
 
 	beforeAll(() => {
