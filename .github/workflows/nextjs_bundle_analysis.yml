@@ -18,10 +18,10 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
 
@@ -29,7 +29,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Restore next build
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: restore-build-cache
         env:
           cache-name: cache-next-build
@@ -38,7 +38,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Run codegen
-        run: npm run graphql:codegen
+        run: npm run codegen
 
       - name: Build next.js app
         run: npm run build:webpack-only

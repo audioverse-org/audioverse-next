@@ -15,7 +15,7 @@ jobs:
           sparse-checkout: |
             pa11y-ci.json
           sparse-checkout-cone-mode: false
-      - uses: narthur/pa11y-ratchet@v2
+      - uses: narthur/pa11y-ratchet@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           sitemap-url: ${{github.event.deployment_status.target_url}}/sitemap-0.xml
@@ -33,11 +33,11 @@ jobs:
       pull-requests: write
     steps:
       # WORKAROUND: https://github.com/treosh/lighthouse-ci-action/issues/21
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Delete default configuration
         run: rm .lighthouserc.yaml
       - name: Run Lighthouse
-        uses: treosh/lighthouse-ci-action@v9
+        uses: treosh/lighthouse-ci-action@v12
         id: lighthouse
         with:
           urls: |
