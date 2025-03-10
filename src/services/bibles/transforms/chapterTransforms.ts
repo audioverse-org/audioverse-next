@@ -35,9 +35,6 @@ export function transformChapterFull(
 	if (!chapter.version_name) {
 		throw new Error('Version name is required');
 	}
-	if (!chapter.url) {
-		throw new Error('URL is required');
-	}
 	if (!chapter.text) {
 		throw new Error('Text is required');
 	}
@@ -64,7 +61,7 @@ export function transformChapterFull(
 		sequence: null,
 		audioFiles: [
 			{
-				url: chapter.url,
+				url: chapter.url || '',
 				mimeType: 'audio/mpeg',
 				filesize: 'unknown',
 				duration: chapter.duration,
