@@ -12,14 +12,14 @@ export type ChapterId = Chapter['id'] | null;
 type Props = {
 	chapters: Array<Chapter>;
 	chapterId: ChapterId;
-	bookName: string;
+	bookId: string;
 	versionId: string | number;
 };
 
 export default function ChapterGrid({
 	chapters,
 	chapterId,
-	bookName,
+	bookId,
 	versionId,
 }: Props) {
 	return (
@@ -30,7 +30,7 @@ export default function ChapterGrid({
 				const baseUrl = root
 					.lang('en')
 					.bibles.versionId(versionId)
-					.bookName(bookName)
+					.fcbhId(bookId)
 					.chapterNumber(n)
 					.get({
 						params: {

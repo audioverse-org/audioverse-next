@@ -1,6 +1,6 @@
-import getBookName from './getBookName';
+import getBookMeta from './getBookName';
 
-describe('getBookName', () => {
+describe('getBookMeta', () => {
 	const testCases: { input: string; expected: string | undefined }[] = [
 		{
 			input: 'Genesis',
@@ -34,6 +34,7 @@ describe('getBookName', () => {
 
 	test.each(testCases)(
 		'returns "$expected" for input "$input"',
-		({ input, expected }) => expect(getBookName(input)).toBe(expected),
+		({ input, expected }) =>
+			expect(getBookMeta(input)?.fullName).toBe(expected),
 	);
 });

@@ -38,17 +38,9 @@ describe('getChapters', () => {
 	});
 
 	it('returns book chapters case insensitive', async () => {
-		const result = await getChapters('ENGKJV2', 'genesis');
+		const result = await getChapters('ENGKJV2', 'gen');
 
 		expect(result?.length).toBeGreaterThan(0);
-	});
-
-	it('converts book name to title case', async () => {
-		jest.mocked(fetchResponse).mockRejectedValue(new Error('Not found'));
-
-		await getChapters('472', 'genesis').catch(() => null);
-
-		expect(getGraphqlBookId).toHaveBeenCalledWith('472', 'Genesis');
 	});
 
 	it('sets canonicalPath for GraphQL-retrieved chapters', async () => {
@@ -90,13 +82,13 @@ describe('getChapters', () => {
 				},
 			});
 
-		const result = await getChapters('456', 'Genesis');
+		const result = await getChapters('456', 'GEN');
 		const chapter = result?.[0];
 
 		const expectedPath = root
 			.lang('en')
 			.bibles.versionId('456')
-			.bookName('Genesis')
+			.fcbhId('GEN')
 			.chapterNumber(1)
 			.get();
 

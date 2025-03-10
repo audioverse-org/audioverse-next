@@ -5,23 +5,21 @@ import root from '~src/lib/routes';
 
 import { getGraphqlChapters } from './__generated__/getChapters';
 import getFcbhBook from './fcbh/getFcbhBook';
+import getBookMeta from './getBookName';
 import { getGraphqlBookId } from './graphql/getGraphqlBookId';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterPartial } from './transforms/chapterTransforms';
-import { parseChapterNumber, toTitleCase } from './utils';
+import { parseChapterNumber } from './utils';
 
 export default async function getChapters(
 	versionId: string,
-	bookName: string,
+	bookId: string,
 ): Promise<BibleChapterDetailChapterPartialFragment[] | undefined> {
-	const formattedName = toTitleCase(bookName);
-	const fcbhBook = await getFcbhBook(versionId, formattedName).catch(
-		() => null,
-	);
+	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (fcbhBook) {
 		if (!fcbhBook.chapters_full.length) {
-			throw new Error(`Chapters not found for book: ${formattedName}`);
+			throw new Error(`Chapters not found for book: ${bookId}`);
 		}
 
 		return z
@@ -29,10 +27,16 @@ export default async function getChapters(
 			.parse(fcbhBook.chapters_full);
 	}
 
-	const sequenceId = await getGraphqlBookId(versionId, formattedName);
+	const bookMeta = getBookMeta(bookId);
+
+	if (!bookMeta) {
+		throw new Error(`Book not found: ${bookId}`);
+	}
+
+	const sequenceId = await getGraphqlBookId(versionId, bookMeta.fullName);
 
 	if (!sequenceId) {
-		throw new Error(`Sequence not found for book: ${formattedName}`);
+		throw new Error(`Sequence not found for book: ${bookId}`);
 	}
 
 	const result = await getGraphqlChapters({
@@ -51,7 +55,7 @@ export default async function getChapters(
 			const canonicalPath = root
 				.lang('en')
 				.bibles.versionId(versionId)
-				.bookName(formattedName)
+				.fcbhId(bookId)
 				.chapterNumber(chapterNumber)
 				.get();
 

@@ -1,18 +1,26 @@
+import getBookMeta from '../getBookName';
 import { getGraphqlVersionIndex } from './getGraphqlVersionIndex';
 
 /**
  * Gets the graphql recording ID for a chapter
  * @param versionId The version ID
- * @param bookName The book name
+ * @param bookId The book ID
  * @param chapterNumber The chapter number
  * @returns The chapter ID or null if not found
  */
 
 export async function getGraphqlChapterId(
 	versionId: string | number,
-	bookName: string,
+	bookId: string,
 	chapterNumber: number,
 ): Promise<string | number | null> {
+	const meta = getBookMeta(bookId);
+
+	if (!meta) {
+		return null;
+	}
+
+	const bookName = meta.fullName;
 	const versionIndex = await getGraphqlVersionIndex(versionId);
 
 	if (!versionIndex) {

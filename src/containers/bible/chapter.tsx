@@ -77,7 +77,7 @@ const Chapter = ({
 		root
 			.lang(languageRoute)
 			.bibles.versionId(v.id)
-			.bookName(book.title)
+			.fcbhId(book.id.toString())
 			.chapterNumber(currentChapterNumber)
 			.get({ params: { autoplay: 'true' } });
 
@@ -250,7 +250,7 @@ const Chapter = ({
 												canonicalPath: root
 													.lang(languageRoute)
 													.bibles.versionId(version.id)
-													.bookName(book.title)
+													.fcbhId(book.id.toString())
 													.chapterNumber(number)
 													.get({
 														params: {

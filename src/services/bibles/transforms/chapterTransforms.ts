@@ -8,13 +8,20 @@ import {
 } from '~src/containers/bible/__generated__/chapter';
 import root from '~src/lib/routes';
 
+import getBookMeta from '../getBookName';
 import { IBibleBookChapter } from '../types';
 
 function buildCanonicalPath(chapter: IBibleBookChapter): string {
+	const meta = getBookMeta(chapter.book_name);
+
+	if (!meta) {
+		throw new Error('Book meta not found');
+	}
+
 	return root
 		.lang('en')
 		.bibles.versionId(chapter.version_id!)
-		.bookName(chapter.book_name)
+		.fcbhId(meta.fcbhId)
 		.chapterNumber(chapter.number)
 		.get();
 }

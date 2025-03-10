@@ -9,15 +9,15 @@ function unwrapText(raw: string) {
 }
 
 export default async function fetchChapterText(
-	bookName: string, // Genesis
+	bookId: string, // GEN
 	chapterNumber: number,
 ) {
 	const m = BIBLE_BOOK_METAS.find(
-		(b) => b.fullName.toLowerCase() === bookName.toLowerCase(),
+		(b) => b.fcbhId.toLowerCase() === bookId.toLowerCase(),
 	);
 
 	if (!m) {
-		throw new Error(`Book meta not found for ${bookName}`);
+		throw new Error(`Book meta not found for ${bookId}`);
 	}
 
 	const result = await doFetchChapterText({

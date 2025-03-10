@@ -1,23 +1,21 @@
 import { fetchFcbhChapters } from './fetchFcbhChapters';
 import getFcbhBible from './getFcbhBible';
-import { getFcbhBookId } from './getFcbhBookId';
 
-export default async function getFcbhBook(versionId: string, bookName: string) {
+export default async function getFcbhBook(versionId: string, bookId: string) {
 	const fcbhBible = getFcbhBible(versionId);
 
 	if (!fcbhBible) {
 		throw new Error(`Bible ${versionId} not found`);
 	}
 
-	const decodedBookName = decodeURIComponent(bookName);
-	const fcbhBookId = getFcbhBookId(bookName);
+	const book = fcbhBible.books.find((b) => {
+		const id = b.book_id.split('/')[1];
 
-	const book = fcbhBible.books.find(
-		(b) => b.name.toLowerCase() === decodedBookName.toLowerCase(),
-	);
+		return id.toLowerCase() === bookId.toLowerCase();
+	});
 
 	if (!book) {
-		throw new Error(`Book ${decodedBookName} not found in ${versionId}`);
+		throw new Error(`Book ${bookId} not found in ${versionId}`);
 	}
 
 	// WORKAROUND: FCBH media URLs expire, so we need to re-fetch
@@ -26,7 +24,7 @@ export default async function getFcbhBook(versionId: string, bookName: string) {
 		versionId,
 		fcbhBible.title,
 		book.testament,
-		fcbhBookId,
+		bookId,
 	);
 
 	return book;

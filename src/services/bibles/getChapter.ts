@@ -3,40 +3,40 @@ import root from '~src/lib/routes';
 
 import { getGraphqlChapter } from './__generated__/getChapter';
 import getFcbhChapter from './fcbh/getFcbhChapter';
+import getBookMeta from './getBookName';
 import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 import { chapterSchema } from './schemas/chapter';
 import { transformChapterFull } from './transforms/chapterTransforms';
-import { toTitleCase } from './utils';
 
 export default async function getChapter(
 	versionId: string,
-	bookName: string,
+	bookId: string,
 	chapterNumber: number,
 ): Promise<BibleChapterDetailChapterFullFragment> {
-	const formattedName = toTitleCase(bookName);
-
 	const fcbhChapter = await getFcbhChapter(
 		versionId,
-		formattedName,
+		bookId,
 		chapterNumber,
 	).catch(() => null);
 
 	if (fcbhChapter) {
 		return chapterSchema.transform(transformChapterFull).parse({
 			...fcbhChapter,
-			text: await fetchChapterText(formattedName, chapterNumber),
+			text: await fetchChapterText(bookId, chapterNumber),
 		});
 	}
 
-	const chapterId = await getGraphqlChapterId(
-		versionId,
-		formattedName,
-		chapterNumber,
-	);
+	const bookMeta = getBookMeta(bookId);
+
+	if (!bookMeta) {
+		throw new Error(`Book not found: ${bookId}`);
+	}
+
+	const chapterId = await getGraphqlChapterId(versionId, bookId, chapterNumber);
 
 	if (!chapterId) {
-		throw new Error(`Chapter not found: ${formattedName} ${chapterNumber}`);
+		throw new Error(`Chapter not found: ${bookId} ${chapterNumber}`);
 	}
 
 	const result = await getGraphqlChapter({
@@ -49,13 +49,13 @@ export default async function getChapter(
 	const chapter = result?.recording;
 
 	if (!chapter) {
-		throw new Error(`Chapter not found: ${formattedName} ${chapterNumber}`);
+		throw new Error(`Chapter not found: ${bookId} ${chapterNumber}`);
 	}
 
 	const canonicalPath = root
 		.lang('en')
 		.bibles.versionId(versionId)
-		.bookName(formattedName)
+		.fcbhId(bookId)
 		.chapterNumber(chapterNumber)
 		.get();
 

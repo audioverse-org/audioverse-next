@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import getBookMeta from '~src/services/bibles/getBookName';
+
 import { Book } from '.';
 import styles from './bookGrid.module.scss';
 import ChapterGrid, { ChapterId } from './chapterGrid';
@@ -26,6 +28,11 @@ export default function BookGrid({
 		<ul className={clsx(className, styles.books, styles.grid)}>
 			{books.map((book) => {
 				const chapters = book.recordings.nodes;
+				const bookMeta = getBookMeta(book.title);
+
+				if (!bookMeta) {
+					throw new Error(`Book not found: ${book.title}`);
+				}
 
 				return (
 					<>
@@ -44,7 +51,7 @@ export default function BookGrid({
 								<ChapterGrid
 									chapters={chapters}
 									chapterId={chapterId}
-									bookName={book.title}
+									bookId={bookMeta.fcbhId}
 									versionId={versionId}
 								/>
 							</li>

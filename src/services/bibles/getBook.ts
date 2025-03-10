@@ -2,24 +2,21 @@ import { BibleChapterDetailBookFragment } from '~src/containers/bible/__generate
 
 import { getGraphqlBook } from './__generated__/getBook';
 import getFcbhBook from './fcbh/getFcbhBook';
-import { getGraphqlBookId } from './graphql/getGraphqlBookId';
 import { bookSchema } from './schemas/book';
 import { transformBook } from './transforms/bookTransforms';
 
 export default async function getBook(
 	versionId: string,
-	bookName: string,
+	bookId: string,
 ): Promise<BibleChapterDetailBookFragment> {
-	const book = await getFcbhBook(versionId, bookName).catch(() => null);
+	const book = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (book) {
 		return bookSchema.transform(transformBook).parse(book);
 	}
 
-	const bookId = await getGraphqlBookId(versionId, bookName);
-
 	if (!bookId) {
-		throw new Error(`Book not found: ${bookName}`);
+		throw new Error(`Book not found: ${bookId}`);
 	}
 
 	const result = await getGraphqlBook({
@@ -30,7 +27,7 @@ export default async function getBook(
 	});
 
 	if (!result?.sequence) {
-		throw new Error(`Book not found: ${bookName}`);
+		throw new Error(`Book not found: ${bookId}`);
 	}
 
 	return result.sequence;
