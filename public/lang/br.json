@@ -308,18 +308,6 @@
   "audiobookList__heading": {
     "string": "Todos Audiolivros"
   },
-  "bibleBook__backToChapter": {
-    "string": "Voltar para as informações do capítulo"
-  },
-  "bibleBook__chapterListTitle": {
-    "string": "Outros capítulos do livro"
-  },
-  "bibleBook__disclaimer": {
-    "string": "Os termos e condições do uso das Bíblias em aúdio da “Faith Comes By Hearing” impedem a opção de download e a integração de certos recursos em nossa plataforma."
-  },
-  "bibleBook__readAlong": {
-    "string": "Leia junto"
-  },
   "bibleVersionTypeLockup__type": {
     "string": "Versão da Bíblia"
   },
@@ -2728,5 +2716,20 @@
   },
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
+  },
+  "bibleChapter__backToChapter": {
+    "string": "Back to Chapter Info"
+  },
+  "bibleChapter__chapterListTitle": {
+    "string": "Other Chapters in Book"
+  },
+  "bibleChapter__disclaimer": {
+    "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+  },
+  "bibleChapter__loading": {
+    "string": "Loading..."
+  },
+  "bibleChapter__readAlong": {
+    "string": "Read Along"
   }
 }

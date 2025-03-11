@@ -5,7 +5,7 @@ describe('transformChapterFull', () => {
 	it('capitalizes first letter of each word in title', () => {
 		const input: IBibleBook = {
 			bible: {
-				abbreviation: 'SongOfSolomon',
+				abbreviation: 'KJV',
 			},
 			book_id: 'ENGKJV2/SNG',
 			name: 'Song of Solomon',

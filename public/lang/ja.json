@@ -41,9 +41,6 @@
   "audiobookList__heading": {
     "string": "全てのオーディオブック"
   },
-  "bibleBook__chapterListTitle": {
-    "string": "この本の中の他の章"
-  },
   "bibleVersionTypeLockup__type": {
     "string": "聖書バージョン"
   },
@@ -1095,9 +1092,6 @@
   "app__features5Kicker": {
     "string": "項目を任意のデバイスにダウンロードして、電波がない時でも、データーの容量を節約したい時にでも視聴できる。"
   },
-  "bibleBook__disclaimer": {
-    "string": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
-  },
   "cardPost__typeLabel": {
     "string": "ブログ"
   },
@@ -1623,12 +1617,6 @@
   "app__features5ImageAlt": {
     "comment": "Image alt text for the fifth feature",
     "string": "The download button on a sermon by Don Mackintosh"
-  },
-  "bibleBook__backToChapter": {
-    "string": "Back to Chapter Info"
-  },
-  "bibleBook__readAlong": {
-    "string": "Read Along"
   },
   "bible__title": {
     "string": "聖書"
@@ -2728,5 +2716,20 @@
   },
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
+  },
+  "bibleChapter__backToChapter": {
+    "string": "Back to Chapter Info"
+  },
+  "bibleChapter__chapterListTitle": {
+    "string": "Other Chapters in Book"
+  },
+  "bibleChapter__disclaimer": {
+    "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+  },
+  "bibleChapter__loading": {
+    "string": "Loading..."
+  },
+  "bibleChapter__readAlong": {
+    "string": "Read Along"
   }
 }

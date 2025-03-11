@@ -5,7 +5,7 @@ import {
 } from 'next';
 
 import { IBaseProps } from '~containers/base';
-import Book, { ChapterProps } from '~src/containers/bible/chapter';
+import Chapter, { ChapterProps } from '~src/containers/bible/chapter';
 import { REVALIDATE } from '~src/lib/constants';
 import doesVersionHaveChapter from '~src/services/bibles/doesVersionHaveChapter';
 import getBible from '~src/services/bibles/getBible';
@@ -14,7 +14,7 @@ import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
 import getVersions from '~src/services/bibles/getVersions';
 
-export default Book;
+export default Chapter;
 
 const notFound = {
 	notFound: true,

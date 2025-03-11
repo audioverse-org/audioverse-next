@@ -17,12 +17,6 @@ function shouldRefreshRecording(recording: RefreshableFragment): boolean {
 		(v) => v.id === recording.collection?.id,
 	);
 
-	console.log({
-		isBibleChapter,
-		hasCollection,
-		isFcbhVersion,
-	});
-
 	return isBibleChapter && hasCollection && isFcbhVersion;
 }
 
@@ -122,7 +116,6 @@ export function useRefreshedRecordings<T extends RefreshableFragment>(
 			return;
 		}
 
-		console.log('refreshing');
 		getRefreshedRecordings(recordings).then((v) => setRefreshed(v));
 	}, [recordings]);
 

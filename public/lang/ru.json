@@ -41,9 +41,6 @@
   "audiobookList__heading": {
     "string": "Все аудиокниги"
   },
-  "bibleBook__chapterListTitle": {
-    "string": "Другие главы в книге"
-  },
   "bibleVersionTypeLockup__type": {
     "string": "Версия Библии"
   },
@@ -1092,9 +1089,6 @@
   "app__features5Kicker": {
     "string": "Скачайте материал на свое устройство, чтобы слушать офлайн или же просто, чтобы не использовать сотовые данные."
   },
-  "bibleBook__disclaimer": {
-    "string": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
-  },
   "cardPost__typeLabel": {
     "string": "Блог"
   },
@@ -1620,12 +1614,6 @@
   "app__features5ImageAlt": {
     "comment": "Image alt text for the fifth feature",
     "string": "The download button on a sermon by Don Mackintosh"
-  },
-  "bibleBook__backToChapter": {
-    "string": "Back to Chapter Info"
-  },
-  "bibleBook__readAlong": {
-    "string": "Read Along"
   },
   "bible__title": {
     "string": "Библия"
@@ -2728,5 +2716,20 @@
   },
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
+  },
+  "bibleChapter__backToChapter": {
+    "string": "Back to Chapter Info"
+  },
+  "bibleChapter__chapterListTitle": {
+    "string": "Other Chapters in Book"
+  },
+  "bibleChapter__disclaimer": {
+    "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+  },
+  "bibleChapter__loading": {
+    "string": "Loading..."
+  },
+  "bibleChapter__readAlong": {
+    "string": "Read Along"
   }
 }

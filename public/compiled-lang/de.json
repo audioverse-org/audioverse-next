@@ -689,25 +689,31 @@
       "value": "Alle Hörbücher"
     }
   ],
-  "bibleBook__backToChapter": [
+  "bibleChapter__backToChapter": [
     {
       "type": 0,
       "value": "Back to Chapter Info"
     }
   ],
-  "bibleBook__chapterListTitle": [
+  "bibleChapter__chapterListTitle": [
     {
       "type": 0,
-      "value": "Andere Kapitel im Buch"
+      "value": "Other Chapters in Book"
     }
   ],
-  "bibleBook__disclaimer": [
+  "bibleChapter__disclaimer": [
     {
       "type": 0,
-      "value": "Die allgemeinen Geschäftsbedingungen für die Nutzung der Audiobibeln von Faith Comes By Hearing unterbinden das Herunterladen sowie die Integration bestimmter Funktionen auf unserer Plattform."
+      "value": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
     }
   ],
-  "bibleBook__readAlong": [
+  "bibleChapter__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
+  "bibleChapter__readAlong": [
     {
       "type": 0,
       "value": "Read Along"

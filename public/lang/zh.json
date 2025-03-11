@@ -41,9 +41,6 @@
   "audiobookList__heading": {
     "string": "全部有声书"
   },
-  "bibleBook__chapterListTitle": {
-    "string": "本书其它章节"
-  },
   "bibleVersionTypeLockup__type": {
     "string": "圣经版本"
   },
@@ -1095,9 +1092,6 @@
   "app__features5Kicker": {
     "string": "将内容下载至你的设备，随时聆听，无需消耗流量。"
   },
-  "bibleBook__disclaimer": {
-    "string": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
-  },
   "cardPost__typeLabel": {
     "string": "博客"
   },
@@ -1623,12 +1617,6 @@
   "app__features5ImageAlt": {
     "comment": "Image alt text for the fifth feature",
     "string": "The download button on a sermon by Don Mackintosh"
-  },
-  "bibleBook__backToChapter": {
-    "string": "Back to Chapter Info"
-  },
-  "bibleBook__readAlong": {
-    "string": "Read Along"
   },
   "bible__title": {
     "string": "圣经"
@@ -2728,5 +2716,20 @@
   },
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
+  },
+  "bibleChapter__backToChapter": {
+    "string": "Back to Chapter Info"
+  },
+  "bibleChapter__chapterListTitle": {
+    "string": "Other Chapters in Book"
+  },
+  "bibleChapter__disclaimer": {
+    "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+  },
+  "bibleChapter__loading": {
+    "string": "Loading..."
+  },
+  "bibleChapter__readAlong": {
+    "string": "Read Along"
   }
 }

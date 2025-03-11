@@ -25,6 +25,7 @@ import IconPlay from '~public/img/icons/icon-play-large.svg';
 import useGlobalSpaceDown from '~src/lib/hooks/useGlobalSpaceDown';
 import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
+import isServerSide from '~src/lib/isServerSide';
 
 import ButtonAddToPlaylist from '../buttonAddToPlaylist';
 import ButtonDownloadBlank from '../buttonDownloadBlank';
@@ -57,7 +58,9 @@ const Player = ({
 		prefersAudio,
 	});
 	const shouldShowPoster =
-		!prefersAudio && (!session.isLoaded || session.isPaused);
+		hasVideo(recording) &&
+		!prefersAudio &&
+		(!session.isLoaded || session.isPaused);
 	const shouldShowAudioControls =
 		!hasVideo(recording) || session.isAudioLoaded || prefersAudio;
 	const shouldShowVideoControls = !shouldShowAudioControls;
@@ -80,9 +83,9 @@ const Player = ({
 	}, []);
 
 	useEffect(() => {
-		if (recording && !params.has('autoplay')) {
-			return;
-		}
+		if (isServerSide()) return;
+		if (!recording) return;
+		if (!params.has('autoplay')) return;
 		session.play();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recording]);
