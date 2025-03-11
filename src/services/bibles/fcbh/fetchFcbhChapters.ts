@@ -28,7 +28,7 @@ export async function fetchFcbhChapters(
 
 	return filesets.map(
 		({ book_id, book_name, chapter_start, path, duration }) => ({
-			id: `${book_id}/${chapter_start}`,
+			id: `${filesetId}/${book_id}/${chapter_start}`,
 			number: chapter_start,
 			title: `${book_name} ${chapter_start}`,
 			url: path,
