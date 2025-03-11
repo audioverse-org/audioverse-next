@@ -42,10 +42,13 @@ export function transformChapterFull(
 
 	const canonicalPath = buildCanonicalPath(chapter);
 	const canonicalUrl = `https://www.audioverse.org${canonicalPath}`;
+	const bookName = chapter.book_name
+		.toLowerCase()
+		.replace(/\b\w/g, (char) => char.toUpperCase());
 
 	return {
 		id: chapter.id,
-		title: chapter.title,
+		title: `${bookName} ${chapter.number}`,
 		contentType: RecordingContentType.BibleChapter,
 		canonicalPath,
 		duration: chapter.duration,
