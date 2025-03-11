@@ -1,6 +1,7 @@
 ﻿import {
 	CollectionContentType,
 	RecordingContentType,
+	SequenceContentType,
 } from '~src/__generated__/graphql';
 import {
 	BibleChapterDetailChapterFullFragment,
@@ -58,7 +59,11 @@ export function transformChapterFull(
 		},
 		speakers: [],
 		sponsor: { title: 'Faith Comes By Hearing' },
-		sequence: null,
+		sequence: {
+			id: '',
+			title: chapter.book_name,
+			contentType: SequenceContentType.BibleBook,
+		},
 		audioFiles: [
 			{
 				url: chapter.url || '',
