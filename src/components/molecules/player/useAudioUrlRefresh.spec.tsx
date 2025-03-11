@@ -1,12 +1,12 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 
-import { FCBH_VERSIONS } from '~services/bibles/fcbh/fetchFcbhBibles';
 import { fetchFcbhChapterMediaUrl } from '~services/bibles/fcbh/fetchFcbhChapterMediaUrl';
 import {
 	CollectionContentType,
 	RecordingContentType,
 } from '~src/__generated__/graphql';
 import loadControlledPromise from '~src/lib/test/loadControlledPromise';
+import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 
 import { PlayerFragment } from './__generated__';
 import { useAudioUrlRefresh } from './useAudioUrlRefresh';

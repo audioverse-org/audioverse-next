@@ -22,7 +22,7 @@ import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { GetGraphqlVersionsQuery } from '~src/services/bibles/__generated__/getVersions';
-import { FCBH_VERSIONS } from '~src/services/bibles/fcbh/fetchFcbhBibles';
+import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 import { parseChapterNumber } from '~src/services/bibles/utils';
 import { Must } from '~src/types/types';
 

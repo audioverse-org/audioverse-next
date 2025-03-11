@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { FCBH_VERSIONS } from '~services/bibles/fcbh/fetchFcbhBibles';
 import { fetchFcbhChapterMediaUrl } from '~services/bibles/fcbh/fetchFcbhChapterMediaUrl';
 import { RecordingContentType } from '~src/__generated__/graphql';
-import { BIBLE_BOOK_METAS } from '~src/services/bibles/constants';
+import {
+	BIBLE_BOOK_METAS,
+	FCBH_VERSIONS,
+} from '~src/services/bibles/constants';
 
 import { PlayerFragment } from './__generated__/index';
 

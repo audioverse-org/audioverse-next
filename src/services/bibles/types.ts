@@ -12,16 +12,6 @@ export interface IBibleVersion {
 	};
 }
 
-export interface IBible {
-	abbr: string;
-	name: string;
-	vname: string;
-	language: string;
-	iso: string;
-	date: number | null;
-	books: IBibleBook[];
-}
-
 export interface IBBFileset {
 	book_id: string;
 	book_name: string;

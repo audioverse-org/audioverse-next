@@ -4,7 +4,7 @@ import {
 	getGraphqlVersions,
 	GetGraphqlVersionsQuery,
 } from './__generated__/getVersions';
-import { FCBH_VERSIONS } from './fcbh/fetchFcbhBibles';
+import { FCBH_VERSIONS } from './constants';
 
 type Version = NonNullable<GetGraphqlVersionsQuery['collections']['nodes']>[0];
 

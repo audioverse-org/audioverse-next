@@ -1,5 +1,13 @@
 export const FCBH_API_BASE = 'https://4.dbt.io/api';
 
+export const FCBH_VERSIONS = [
+	{
+		id: 'ENGKJV2',
+		title: 'King James Version (Dramatized)',
+		abbreviation: 'KJV',
+	},
+];
+
 type BibleBookMeta = {
 	fcbhId: string;
 	shortName: string;
