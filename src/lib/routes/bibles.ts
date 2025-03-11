@@ -3,14 +3,15 @@ import { BIBLE_BOOK_METAS } from '~src/services/bibles/constants';
 
 import node from './primatives/node';
 
-const fcbhIds = BIBLE_BOOK_METAS.map((m) => m.fcbhId.toLocaleLowerCase());
+const fcbhIds = BIBLE_BOOK_METAS.map((m) => m.fcbhId);
 
 const fcbhId = (r: string) => (fcbhId: string) => {
-	if (!fcbhIds.includes(fcbhId.toLowerCase())) {
+	const id = fcbhId.toUpperCase();
+	if (!fcbhIds.includes(id)) {
 		throw new Error(`Invalid fcbhId: ${fcbhId}`);
 	}
 
-	return node(`${r}/${encodeURIComponent(fcbhId.toLowerCase())}`, (r) => ({
+	return node(`${r}/${encodeURIComponent(id)}`, (r) => ({
 		chapterNumber: (chapterNumber: Scalars['ID']['output']) =>
 			node(`${r}/${chapterNumber}`),
 	}));
