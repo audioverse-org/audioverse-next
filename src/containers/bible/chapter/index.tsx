@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
@@ -20,6 +20,7 @@ import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
+import { useRefreshedRecordings } from '~src/containers/bible/chapter/useAudioUrlRefresh';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { GetGraphqlVersionsQuery } from '~src/services/bibles/__generated__/getVersions';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
@@ -32,8 +33,8 @@ import {
 	BibleChapterDetailChapterFullFragment,
 	BibleChapterDetailChapterPartialFragment,
 	BibleChapterDetailVersionFragment,
-} from './__generated__/chapter';
-import styles from './chapter.module.scss';
+} from './__generated__/index';
+import styles from './index.module.scss';
 
 type Version = NonNullable<
 	GetGraphqlVersionsQuery['collections']['nodes']
@@ -44,8 +45,8 @@ type Version = NonNullable<
 export interface ChapterProps {
 	version: BibleChapterDetailVersionFragment;
 	book: BibleChapterDetailBookFragment;
-	chapters: BibleChapterDetailChapterPartialFragment[];
-	chapter: BibleChapterDetailChapterFullFragment;
+	chapters: BibleChapterDetailChapterPartialFragment[] | null;
+	chapter: BibleChapterDetailChapterFullFragment | null;
 	versions: Version[];
 }
 
@@ -162,7 +163,7 @@ const Chapter = ({
 								type="secondary"
 								text={
 									<FormattedMessage
-										id="bibleBook__backToChapter"
+										id="bibleChapter__backToChapter"
 										defaultMessage="Back to Chapter Info"
 									/>
 								}
@@ -200,7 +201,7 @@ const Chapter = ({
 							{isFcbhVersion && (
 								<div className={styles.disclaimer}>
 									<FormattedMessage
-										id="bibleBook__disclaimer"
+										id="bibleChapter__disclaimer"
 										defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
 									/>
 								</div>
@@ -210,7 +211,7 @@ const Chapter = ({
 									type="secondary"
 									text={
 										<FormattedMessage
-											id="bibleBook__readAlong"
+											id="bibleChapter__readAlong"
 											defaultMessage="Read Along"
 										/>
 									}
@@ -230,7 +231,7 @@ const Chapter = ({
 							className={styles.chapterHeading}
 						>
 							<FormattedMessage
-								id="bibleBook__chapterListTitle"
+								id="bibleChapter__chapterListTitle"
 								defaultMessage="Other Chapters in Book"
 							/>
 						</LineHeading>
@@ -285,11 +286,42 @@ const Chapter = ({
 	);
 };
 
-const WithFailStates = (props: Parameters<typeof Chapter>[0]) => (
+const WithFailStates = (props: ChapterProps) => (
 	<AndFailStates
 		Component={Chapter}
 		componentProps={props}
-		options={{ should404: (props: ChapterProps) => !props.chapter }}
+		options={{
+			isLoading: (props: ChapterProps) => {
+				return props.chapter === null || props.chapters === null;
+			},
+			Loading: () => (
+				<div>
+					<FormattedMessage
+						id="bibleChapter__loading"
+						defaultMessage="Loading..."
+					/>
+				</div>
+			),
+		}}
 	/>
 );
-export default WithFailStates;
+
+const WithRefreshedRecordings = ({
+	chapter,
+	chapters,
+	...rest
+}: ChapterProps) => {
+	const chapterRefreshInput = useMemo(
+		() => (chapter ? [chapter] : undefined),
+		[chapter],
+	);
+	const chapterRefreshOutput = useRefreshedRecordings(chapterRefreshInput);
+	const _chapters = useRefreshedRecordings(chapters || undefined);
+	const _chapter = useMemo(
+		() => chapterRefreshOutput?.[0] ?? null,
+		[chapterRefreshOutput],
+	);
+	return <WithFailStates {...rest} chapter={_chapter} chapters={_chapters} />;
+};
+
+export default WithRefreshedRecordings;

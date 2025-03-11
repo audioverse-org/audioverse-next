@@ -48,7 +48,10 @@ export async function getStaticProps({
 		return notFound;
 	}
 
-	const chapters = await getChapters(versionId, bookMeta.fcbhId);
+	const chapters = await getChapters(versionId, bookMeta.fcbhId).catch((e) => {
+		console.error('Failed to get chapters:', e);
+		return null;
+	});
 
 	if (!chapters?.length) {
 		console.error('Chapters not found for book:', bookMeta.fcbhId);
@@ -68,7 +71,7 @@ export async function getStaticProps({
 				...v,
 				disabled: !(await doesVersionHaveChapter(
 					v.id,
-					bookMeta.fullName,
+					bookMeta.fcbhId,
 					chapterNumber,
 				)),
 			})),

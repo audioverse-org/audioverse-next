@@ -33,7 +33,7 @@ export default function ButtonPlay({
 	prefersAudio,
 	className,
 }: {
-	recording: AndMiniplayerFragment;
+	recording: AndMiniplayerFragment | null;
 	backgroundColor: BaseColors;
 	playlistRecordings?: AndMiniplayerFragment[];
 	large?: boolean;

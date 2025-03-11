@@ -16,7 +16,7 @@ export enum PlaySource {
 	Other = 'Other',
 }
 
-interface PlaybackSessionInfo {
+export interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
 	setProgress: (percent: number) => void;
 	pause: () => void;
@@ -41,12 +41,14 @@ interface PlaybackSessionInfo {
 	supportsFullscreen: boolean;
 }
 
+export type PlaybackSessionOptions = {
+	playlistRecordings?: AndMiniplayerFragment[];
+	prefersAudio?: boolean;
+};
+
 export default function usePlaybackSession(
 	recording: AndMiniplayerFragment | null,
-	options: {
-		playlistRecordings?: AndMiniplayerFragment[];
-		prefersAudio?: boolean;
-	} = {},
+	options: PlaybackSessionOptions = {},
 ): PlaybackSessionInfo {
 	const { playlistRecordings } = options;
 	const context = useContext(PlaybackContext);

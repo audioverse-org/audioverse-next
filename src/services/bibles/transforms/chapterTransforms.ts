@@ -6,9 +6,10 @@
 import {
 	BibleChapterDetailChapterFullFragment,
 	BibleChapterDetailChapterPartialFragment,
-} from '~src/containers/bible/__generated__/chapter';
+} from '~src/containers/bible/chapter/__generated__/index';
 import root from '~src/lib/routes';
 
+import { FCBH_VERSIONS } from '../constants';
 import getBookMeta from '../getBookName';
 import { IBibleBook } from '../types';
 
@@ -33,6 +34,18 @@ function getBookName(book: IBibleBook): string {
 	return book.name.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
+function getVersion(book: IBibleBook) {
+	const version = FCBH_VERSIONS.find(
+		(v) => v.abbreviation === book.bible.abbreviation,
+	);
+
+	if (!version) {
+		throw new Error('Version not found');
+	}
+
+	return version;
+}
+
 export function transformChapterFull(
 	book: IBibleBook,
 	chapter: number,
@@ -40,6 +53,7 @@ export function transformChapterFull(
 	const canonicalPath = getCanonicalPath(book, chapter);
 	const canonicalUrl = `https://www.audioverse.org${canonicalPath}`;
 	const bookName = getBookName(book);
+	const version = getVersion(book);
 
 	return {
 		id: `${book.book_id}/${chapter}`,
@@ -51,8 +65,8 @@ export function transformChapterFull(
 		shareUrl: canonicalUrl,
 		recordingContentType: RecordingContentType.BibleChapter,
 		collection: {
-			id: book.bible.abbreviation,
-			title: book.bible.abbreviation,
+			id: version.id,
+			title: version.title,
 			contentType: CollectionContentType.BibleVersion,
 		},
 		speakers: [],
@@ -78,6 +92,7 @@ export function transformChapterPartial(
 	chapter: number,
 ): BibleChapterDetailChapterPartialFragment {
 	const canonicalPath = getCanonicalPath(book, chapter);
+	const version = getVersion(book);
 
 	return {
 		id: `${book.book_id}/${chapter}`,
@@ -86,8 +101,8 @@ export function transformChapterPartial(
 		duration: 0,
 		recordingContentType: RecordingContentType.BibleChapter,
 		collection: {
-			id: book.bible.abbreviation,
-			title: book.bible.abbreviation,
+			id: version.id,
+			title: version.title,
 			contentType: CollectionContentType.BibleVersion,
 		},
 		speakers: [],

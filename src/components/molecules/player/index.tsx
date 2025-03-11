@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import { useSearchParams } from 'next/navigation';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { PlaybackContext } from '~/components/templates/andPlaybackContext';
@@ -25,14 +25,12 @@ import IconPlay from '~public/img/icons/icon-play-large.svg';
 import useGlobalSpaceDown from '~src/lib/hooks/useGlobalSpaceDown';
 import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
-import isServerSide from '~src/lib/isServerSide';
 
 import ButtonAddToPlaylist from '../buttonAddToPlaylist';
 import ButtonDownloadBlank from '../buttonDownloadBlank';
 import CircleButton from '../circleButton';
 import { PlayerFragment } from './__generated__/index';
 import styles from './index.module.scss';
-import { useAudioUrlRefresh } from './useAudioUrlRefresh';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
@@ -53,34 +51,19 @@ const Player = ({
 }: PlayerProps): JSX.Element => {
 	useContext(PlaybackContext);
 	const intl = useIntl();
-	const audioUrl = useAudioUrlRefresh(recording);
-	const recordingWithRefreshedUrl = useMemo(
-		() => ({
-			...recording,
-			audioFiles:
-				recording.audioFiles?.map((file, i) =>
-					i === 0 ? { ...file, url: audioUrl } : file,
-				) || [],
-		}),
-		[audioUrl, recording],
-	);
-
-	const session = usePlaybackSession(recordingWithRefreshedUrl, {
+	const params = useSearchParams();
+	const session = usePlaybackSession(recording, {
 		playlistRecordings,
 		prefersAudio,
 	});
-
 	const shouldShowPoster =
-		hasVideo(recording) &&
-		!prefersAudio &&
-		(!session.isLoaded || session.isPaused);
+		!prefersAudio && (!session.isLoaded || session.isPaused);
 	const shouldShowAudioControls =
 		!hasVideo(recording) || session.isAudioLoaded || prefersAudio;
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
 	const [posterHovered, setPosterHovered] = useState(false);
 	const [browser, setBrowser] = useState<string | null>(null);
-	const params = useSearchParams();
 
 	useGlobalSpaceDown(() => {
 		session.isPaused ? session.play() : session.pause();
@@ -97,9 +80,12 @@ const Player = ({
 	}, []);
 
 	useEffect(() => {
-		if (isServerSide() || !params.has('autoplay')) return;
+		if (recording && !params.has('autoplay')) {
+			return;
+		}
 		session.play();
-	}, [recording]); // eslint-disable-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [recording]);
 
 	const iconColor = isBackgroundColorDark(backgroundColor)
 		? BaseColors.WHITE
@@ -160,7 +146,7 @@ const Player = ({
 				<div className={styles.controls}>
 					<ButtonPlay
 						{...{
-							recording: recordingWithRefreshedUrl,
+							recording,
 							playlistRecordings,
 							backgroundColor,
 							prefersAudio,

@@ -1,4 +1,4 @@
-import { BibleChapterDetailBookFragment } from '~src/containers/bible/__generated__/chapter';
+import { BibleChapterDetailBookFragment } from '~src/containers/bible/chapter/__generated__/index';
 
 import { IBibleBook } from '../types';
 

@@ -1,4 +1,4 @@
-import { BibleChapterDetailChapterFullFragment } from '~src/containers/bible/__generated__/chapter';
+import { BibleChapterDetailChapterFullFragment } from '~src/containers/bible/chapter/__generated__/index';
 import root from '~src/lib/routes';
 
 import { getGraphqlChapter } from './__generated__/getChapter';

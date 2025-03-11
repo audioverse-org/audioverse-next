@@ -1,0 +1,11 @@
+fragment Refreshable on Recording {
+	id
+	audioFiles {
+		url
+	}
+	recordingContentType: contentType
+	collection {
+		id
+	}
+	canonicalPath
+}

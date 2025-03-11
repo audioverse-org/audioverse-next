@@ -1,4 +1,4 @@
-import { BibleChapterDetailBookFragment } from '~src/containers/bible/__generated__/chapter';
+import { BibleChapterDetailBookFragment } from '~src/containers/bible/chapter/__generated__/index';
 
 import { getGraphqlBook } from './__generated__/getBook';
 import getFcbhBook from './fcbh/getFcbhBook';
