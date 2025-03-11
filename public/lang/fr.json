@@ -2721,10 +2721,10 @@
     "string": "Back to Chapter Info"
   },
   "bibleChapter__chapterListTitle": {
-    "string": "Other Chapters in Book"
+    "string": "Autres chapitres du livre"
   },
   "bibleChapter__disclaimer": {
-    "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+    "string": "Les conditions contractuelles d'usage des Bibles audio issues de Faith Comes By Hearing empêchent qu'elles soient disponibles au téléchargement et limitent leur intégration à certaines fonctionnalités de notre plate-forme."
   },
   "bibleChapter__loading": {
     "string": "Loading..."

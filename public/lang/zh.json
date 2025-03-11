@@ -2721,10 +2721,10 @@
     "string": "Back to Chapter Info"
   },
   "bibleChapter__chapterListTitle": {
-    "string": "Other Chapters in Book"
+    "string": "本书其它章节"
   },
   "bibleChapter__disclaimer": {
-    "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+    "string": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
   },
   "bibleChapter__loading": {
     "string": "Loading..."

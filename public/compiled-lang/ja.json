@@ -698,13 +698,13 @@
   "bibleChapter__chapterListTitle": [
     {
       "type": 0,
-      "value": "Other Chapters in Book"
+      "value": "この本の中の他の章"
     }
   ],
   "bibleChapter__disclaimer": [
     {
       "type": 0,
-      "value": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+      "value": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
     }
   ],
   "bibleChapter__loading": [

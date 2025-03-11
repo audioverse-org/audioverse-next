@@ -698,13 +698,13 @@
   "bibleChapter__chapterListTitle": [
     {
       "type": 0,
-      "value": "Other Chapters in Book"
+      "value": "Другие главы в книге"
     }
   ],
   "bibleChapter__disclaimer": [
     {
       "type": 0,
-      "value": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+      "value": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
     }
   ],
   "bibleChapter__loading": [

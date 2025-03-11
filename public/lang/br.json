@@ -2718,18 +2718,18 @@
     "string": "The displayed chapter is unavailable in this version"
   },
   "bibleChapter__backToChapter": {
-    "string": "Back to Chapter Info"
+    "string": "Voltar para as informações do capítulo"
   },
   "bibleChapter__chapterListTitle": {
-    "string": "Other Chapters in Book"
+    "string": "Outros capítulos do livro"
   },
   "bibleChapter__disclaimer": {
-    "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+    "string": "Os termos e condições do uso das Bíblias em aúdio da “Faith Comes By Hearing” impedem a opção de download e a integração de certos recursos em nossa plataforma."
   },
   "bibleChapter__loading": {
-    "string": "Loading..."
+    "string": "Carregando..."
   },
   "bibleChapter__readAlong": {
-    "string": "Read Along"
+    "string": "Leia junto"
   }
 }
