@@ -2,7 +2,7 @@ import { BIBLE_BOOK_METAS } from './constants';
 
 export default function getBookMeta(bookIdentifier: string) {
 	const meta = BIBLE_BOOK_METAS.find((m) => {
-		const s = bookIdentifier.toLowerCase();
+		const s = bookIdentifier.split('/').pop()?.toLowerCase();
 		return (
 			m.fullName.toLowerCase() === s ||
 			m.fcbhId.toLowerCase() === s ||

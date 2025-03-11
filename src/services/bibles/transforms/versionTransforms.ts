@@ -24,12 +24,12 @@ export function transformVersion(val: IBibleVersion): GraphqlBible {
 				title: book.name,
 				contentType: SequenceContentType.BibleBook,
 				recordings: {
-					nodes: book.chapters_full.map((chapter) => ({
+					nodes: book.chapters.map((n) => ({
 						__typename: 'Recording',
-						id: chapter.id,
-						title: chapter.title,
+						id: `${book.book_id}/${n}`,
+						title: `${book.name} ${n}`,
 						contentType: RecordingContentType.BibleChapter,
-						duration: chapter.duration,
+						duration: 0,
 					})),
 				},
 			})),

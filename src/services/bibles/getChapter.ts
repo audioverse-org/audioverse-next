@@ -2,11 +2,10 @@ import { BibleChapterDetailChapterFullFragment } from '~src/containers/bible/__g
 import root from '~src/lib/routes';
 
 import { getGraphqlChapter } from './__generated__/getChapter';
-import getFcbhChapter from './fcbh/getFcbhChapter';
+import getFcbhBook from './fcbh/getFcbhBook';
 import getBookMeta from './getBookName';
 import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
-import { chapterSchema } from './schemas/chapter';
 import { transformChapterFull } from './transforms/chapterTransforms';
 
 export default async function getChapter(
@@ -14,17 +13,17 @@ export default async function getChapter(
 	bookId: string,
 	chapterNumber: number,
 ): Promise<BibleChapterDetailChapterFullFragment> {
-	const fcbhChapter = await getFcbhChapter(
-		versionId,
-		bookId,
-		chapterNumber,
-	).catch(() => null);
+	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
-	if (fcbhChapter) {
-		return chapterSchema.transform(transformChapterFull).parse({
-			...fcbhChapter,
-			text: await fetchChapterText(bookId, chapterNumber),
-		});
+	if (fcbhBook) {
+		const full = transformChapterFull(fcbhBook, chapterNumber);
+
+		return {
+			...full,
+			transcript: {
+				text: await fetchChapterText(bookId, chapterNumber),
+			},
+		};
 	}
 
 	const bookMeta = getBookMeta(bookId);

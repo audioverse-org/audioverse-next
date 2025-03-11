@@ -10,74 +10,62 @@ import {
 import root from '~src/lib/routes';
 
 import getBookMeta from '../getBookName';
-import { IBibleBookChapter } from '../types';
+import { IBibleBook } from '../types';
 
-function buildCanonicalPath(chapter: IBibleBookChapter): string {
-	const meta = getBookMeta(chapter.book_name);
+function getCanonicalPath(book: IBibleBook, chapter: number): string {
+	const meta = getBookMeta(book.book_id);
 
 	if (!meta) {
 		throw new Error('Book meta not found');
 	}
 
+	const versionId = book.book_id.split('/')[0];
+
 	return root
 		.lang('en')
-		.bibles.versionId(chapter.version_id!)
+		.bibles.versionId(versionId)
 		.fcbhId(meta.fcbhId)
-		.chapterNumber(chapter.number)
+		.chapterNumber(chapter)
 		.get();
 }
 
-export function transformChapterFull(
-	chapter: IBibleBookChapter,
-): BibleChapterDetailChapterFullFragment {
-	if (!chapter.version_id) {
-		throw new Error('Version ID is required');
-	}
-	if (!chapter.version_name) {
-		throw new Error('Version name is required');
-	}
-	if (!chapter.text) {
-		throw new Error('Text is required');
-	}
+function getBookName(book: IBibleBook): string {
+	return book.name.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+}
 
-	const canonicalPath = buildCanonicalPath(chapter);
+export function transformChapterFull(
+	book: IBibleBook,
+	chapter: number,
+): BibleChapterDetailChapterFullFragment {
+	const canonicalPath = getCanonicalPath(book, chapter);
 	const canonicalUrl = `https://www.audioverse.org${canonicalPath}`;
-	const bookName = chapter.book_name
-		.toLowerCase()
-		.replace(/\b\w/g, (char) => char.toUpperCase());
+	const bookName = getBookName(book);
 
 	return {
-		id: chapter.id,
-		title: `${bookName} ${chapter.number}`,
+		id: `${book.book_id}/${chapter}`,
+		title: `${bookName} ${chapter}`,
 		contentType: RecordingContentType.BibleChapter,
 		canonicalPath,
-		duration: chapter.duration,
+		duration: 0,
 		isDownloadAllowed: false,
 		shareUrl: canonicalUrl,
 		recordingContentType: RecordingContentType.BibleChapter,
 		collection: {
-			id: chapter.version_id,
-			title: chapter.version_name,
+			id: book.bible.abbreviation,
+			title: book.bible.abbreviation,
 			contentType: CollectionContentType.BibleVersion,
 		},
 		speakers: [],
 		sponsor: { title: 'Faith Comes By Hearing' },
 		sequence: {
 			id: '',
-			title: chapter.book_name,
+			title: bookName,
 			contentType: SequenceContentType.BibleBook,
 		},
-		audioFiles: [
-			{
-				url: chapter.url || '',
-				mimeType: 'audio/mpeg',
-				filesize: 'unknown',
-				duration: chapter.duration,
-			},
-		],
+		audioFiles: [],
 		videoFiles: [],
 		videoStreams: [],
-		transcript: { text: chapter.text },
+		transcript: { text: '' },
 		videoDownloads: [],
 		audioDownloads: [],
 		sequencePreviousRecording: null,
@@ -86,43 +74,27 @@ export function transformChapterFull(
 }
 
 export function transformChapterPartial(
-	chapter: IBibleBookChapter,
+	book: IBibleBook,
+	chapter: number,
 ): BibleChapterDetailChapterPartialFragment {
-	if (!chapter.version_id) {
-		throw new Error('version_id is required');
-	}
-	if (!chapter.version_name) {
-		throw new Error('version_name is required');
-	}
-	if (!chapter.url) {
-		throw new Error('url is required');
-	}
-
-	const canonicalPath = buildCanonicalPath(chapter);
+	const canonicalPath = getCanonicalPath(book, chapter);
 
 	return {
-		id: chapter.id,
-		title: chapter.title,
+		id: `${book.book_id}/${chapter}`,
+		title: `${getBookName(book)} ${chapter}`,
 		canonicalPath,
-		duration: chapter.duration,
+		duration: 0,
 		recordingContentType: RecordingContentType.BibleChapter,
 		collection: {
-			id: chapter.version_id,
-			title: chapter.version_name,
+			id: book.bible.abbreviation,
+			title: book.bible.abbreviation,
 			contentType: CollectionContentType.BibleVersion,
 		},
 		speakers: [],
 		sponsor: { title: 'Faith Comes By Hearing' },
 		sequence: null,
 		sequenceIndex: null,
-		audioFiles: [
-			{
-				url: chapter.url,
-				mimeType: 'audio/mpeg',
-				filesize: 'unknown',
-				duration: chapter.duration,
-			},
-		],
+		audioFiles: [],
 		videoFiles: [],
 		videoStreams: [],
 	};

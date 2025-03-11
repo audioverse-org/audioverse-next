@@ -30,6 +30,10 @@ describe('getBookMeta', () => {
 			input: 'Exod',
 			expected: 'Exodus',
 		},
+		{
+			input: 'ENGKJV2/GEN',
+			expected: 'Genesis',
+		},
 	];
 
 	test.each(testCases)(

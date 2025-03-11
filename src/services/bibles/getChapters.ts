@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 import { BibleChapterDetailChapterPartialFragment } from '~src/containers/bible/__generated__/chapter';
 import root from '~src/lib/routes';
 
@@ -7,7 +5,6 @@ import { getGraphqlChapters } from './__generated__/getChapters';
 import getFcbhBook from './fcbh/getFcbhBook';
 import getBookMeta from './getBookName';
 import { getGraphqlBookId } from './graphql/getGraphqlBookId';
-import { chapterSchema } from './schemas/chapter';
 import { transformChapterPartial } from './transforms/chapterTransforms';
 import { parseChapterNumber } from './utils';
 
@@ -18,13 +15,9 @@ export default async function getChapters(
 	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (fcbhBook) {
-		if (!fcbhBook.chapters_full.length) {
-			throw new Error(`Chapters not found for book: ${bookId}`);
-		}
-
-		return z
-			.array(chapterSchema.transform(transformChapterPartial))
-			.parse(fcbhBook.chapters_full);
+		return fcbhBook.chapters.map((chapter) =>
+			transformChapterPartial(fcbhBook, chapter),
+		);
 	}
 
 	const bookMeta = getBookMeta(bookId);

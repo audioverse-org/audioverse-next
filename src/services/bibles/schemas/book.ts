@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 import { IBibleBook } from '../types';
-import { chapterSchema } from './chapter';
 
 export const bookSchema: z.ZodType<IBibleBook> = z.object({
 	book_id: z.string(),
@@ -13,5 +12,4 @@ export const bookSchema: z.ZodType<IBibleBook> = z.object({
 	bible: z.object({
 		abbreviation: z.string(),
 	}),
-	chapters_full: z.array(chapterSchema),
 });

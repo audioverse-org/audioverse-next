@@ -1,20 +1,21 @@
-import { IBibleBookChapter } from '../types';
+import { IBibleBook } from '../types';
 import { transformChapterFull } from './chapterTransforms';
 
 describe('transformChapterFull', () => {
 	it('capitalizes first letter of each word in title', () => {
-		const input: IBibleBookChapter = {
-			id: '1',
-			number: 1,
-			title: 'the_chapter_title',
-			duration: 100,
-			book_name: 'Song of Solomon',
-			version_id: '1',
-			version_name: 'Version 1',
-			text: 'the_chapter_text',
+		const input: IBibleBook = {
+			bible: {
+				abbreviation: 'SongOfSolomon',
+			},
+			book_id: 'ENGKJV2/SNG',
+			name: 'Song of Solomon',
+			name_short: 'Song of Solomon',
+			chapters: [],
+			book_seq: '',
+			testament: 'OT',
 		};
 
-		const chapter = transformChapterFull(input);
+		const chapter = transformChapterFull(input, 1);
 
 		expect(chapter.title).toBe('Song Of Solomon 1');
 	});

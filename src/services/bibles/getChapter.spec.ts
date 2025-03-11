@@ -64,7 +64,7 @@ describe('getChapter', () => {
 		const result = await getChapter('ENGKJV2', 'gen', 1);
 
 		expect(result).toBeDefined();
-		expect(result?.id).toBe('GEN/1');
+		expect(result?.id).toBe('ENGKJV2/GEN/1');
 	});
 
 	it('sets canonicalPath using the routes format for GraphQL chapters', async () => {
@@ -80,5 +80,13 @@ describe('getChapter', () => {
 			.get();
 
 		expect(result?.canonicalPath).toBe(expectedPath);
+	});
+
+	it('sets chapter text', async () => {
+		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
+
+		const result = await getChapter('ENGKJV2', 'GEN', 1);
+
+		expect(result?.transcript?.text).toBe('In the beginning...');
 	});
 });
