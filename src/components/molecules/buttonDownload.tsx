@@ -6,7 +6,7 @@ import { BaseColors } from '~lib/constants';
 import { readableBytes } from '~lib/readableBytes';
 import iconDownloadAudio from '~public/img/icons/download-audio.svg';
 import iconDownloadVedio from '~public/img/icons/download-video.svg';
-import { gtmPushEvent } from '~src/utils/gtm';
+import { gtmPushEvent } from '~src/services/gtm';
 
 import { ButtonDownloadFragment } from './__generated__/buttonDownload';
 import styles from './buttonDownload.module.scss';

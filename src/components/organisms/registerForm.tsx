@@ -5,7 +5,7 @@ import Button from '~components/molecules/button';
 import Input from '~components/molecules/form/input';
 import { useRegisterMutation } from '~containers/account/__generated__/register';
 import { setSessionTokenAndUserId } from '~lib/cookies';
-import { gtmPushEvent } from '~src/utils/gtm';
+import { gtmPushEvent } from '~src/services/gtm';
 
 import { analytics } from '../../lib/analytics';
 import styles from './registerForm.module.scss';

@@ -36,7 +36,7 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
-import { gtmPushEvent } from '~src/utils/gtm';
+import { gtmPushRecordingView } from '~src/services/gtm';
 
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
@@ -85,16 +85,7 @@ export function Recording({
 		const saveScrollPosition = (e: Event) => {
 			setScrollPosition((e.target as HTMLElement).scrollTop);
 		};
-		scroller.addEventListener('scroll', saveScrollPosition);
-		gtmPushEvent('recording_view', {
-			content_type: recording.contentType,
-			item_id: recording.id,
-			title: recording.title,
-			presenter: recording.speakers.map((item) => item.name).join(';'),
-			sponsor: recording.sponsor?.title,
-			conference: recording.collection?.title,
-			series: recording.sequence?.title,
-		});
+		gtmPushRecordingView(recording);
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [recording]);
 	const languageRoute = useLanguageRoute();

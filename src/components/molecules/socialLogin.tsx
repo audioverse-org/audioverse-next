@@ -17,7 +17,7 @@ import { analytics } from '~src/lib/analytics';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 import useDidUnmount from '~src/lib/hooks/useDidUnmount';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import { gtmPushEvent } from '~src/utils/gtm';
+import { gtmPushEvent } from '~src/services/gtm';
 
 import Button from './buttonSocial';
 import styles from './socialLogin.module.scss';

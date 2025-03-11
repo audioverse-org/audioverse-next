@@ -12,8 +12,8 @@ import Select from '~components/molecules/form/select';
 import Textarea from '~components/molecules/form/textarea';
 import { PageContactRecipient } from '~src/__generated__/graphql';
 import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import { gtmPushEvent } from '~src/services/gtm';
 import { Must } from '~src/types/types';
-import { gtmPushEvent } from '~src/utils/gtm';
 
 import { useSubmitContactPageMutation } from './__generated__/contact';
 import styles from './contact.module.scss';

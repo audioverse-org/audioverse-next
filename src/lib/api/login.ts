@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 
 import { setSessionTokenAndUserId } from '~lib/cookies';
-import { gtmPushEvent } from '~src/utils/gtm';
+import { gtmPushEvent } from '~src/services/gtm';
 
 import { analytics } from '../analytics';
 import { login as _login } from './__generated__/login';

@@ -24,6 +24,7 @@ import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { GetGraphqlVersionsQuery } from '~src/services/bibles/__generated__/getVersions';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 import { parseChapterNumber } from '~src/services/bibles/utils';
+import { gtmPushRecordingView } from '~src/services/gtm';
 import { Must } from '~src/types/types';
 
 import {
@@ -98,6 +99,10 @@ const Chapter = ({
 		scroller.addEventListener('scroll', saveScrollPosition);
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [currentChapterNumber]);
+
+	useEffect(() => {
+		gtmPushRecordingView(c);
+	}, [c]);
 
 	const details: IDefinitionListTerm[] = [];
 
