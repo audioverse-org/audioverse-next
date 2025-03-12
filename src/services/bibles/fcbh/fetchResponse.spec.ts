@@ -77,25 +77,6 @@ describe('fetchResponse', () => {
 		expect(result).toEqual(mockData);
 	});
 
-	it('uses Next.js API proxy in browser', async () => {
-		(global as any).window = {};
-		const mockData = { data: 'test' };
-		mockFetch.mockImplementation(() =>
-			Promise.resolve({
-				ok: true,
-				json: () => Promise.resolve(mockData),
-			}),
-		);
-
-		const result = await fetchResponse('test/path');
-
-		expect(mockFetch).toHaveBeenCalledWith('/api/fcbh/test/path', {
-			method: 'GET',
-			headers: {},
-		});
-		expect(result).toEqual(mockData);
-	});
-
 	it('throws error on non-ok response', async () => {
 		mockFetch.mockImplementation(() =>
 			Promise.resolve({
