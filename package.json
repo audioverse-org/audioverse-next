@@ -104,6 +104,8 @@
         "zod": "^3.24.1"
     },
     "devDependencies": {
+        "@babel/helpers": "^7.26.10",
+        "@babel/runtime": "^7.26.10",
         "@calm/eslint-plugin-react-intl": "^1.4.1",
         "@formatjs/cli": "^6.2.12",
         "@lhci/cli": "^0.14.0",
