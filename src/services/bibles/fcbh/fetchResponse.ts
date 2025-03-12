@@ -9,15 +9,11 @@ const fetchResponse = manageAsyncFunction(
 			.replace(/\/+/g, '/') // Replace multiple slashes with single slash
 			.replace(/^\//, ''); // Remove leading slash
 
-		const shouldProxy = typeof window !== 'undefined';
-		const baseUrl = shouldProxy ? '/api/fcbh' : FCBH_API_BASE;
-		const url = baseUrl.replace(/\/$/, '') + '/' + cleanRoute;
-		const headers: HeadersInit = shouldProxy
-			? {}
-			: {
-					v: '4',
-					key: process.env.BIBLE_BRAIN_KEY || '',
-				};
+		const url = FCBH_API_BASE.replace(/\/$/, '') + '/' + cleanRoute;
+		const headers: HeadersInit = {
+			v: '4',
+			key: process.env.BIBLE_BRAIN_KEY || '',
+		};
 
 		const result = await fetch(url, {
 			method: 'GET',
