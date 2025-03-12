@@ -16,7 +16,7 @@ permissions:
 
 env:
   NEXT_PUBLIC_API_URL: 'https://graphql-staging.audioverse.org/graphql'
-  BIBLE_BRAIN_KEY: ${{ secrets.BIBLE_BRAIN_KEY }}
+  NEXT_PUBLIC_BIBLE_BRAIN_KEY: ${{ secrets.BIBLE_BRAIN_KEY }}
 
 jobs:
   analyze:
