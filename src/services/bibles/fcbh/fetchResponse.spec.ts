@@ -22,7 +22,7 @@ describe('fetchResponse', () => {
 		mockFetch = jest.fn();
 		global.fetch = mockFetch;
 		delete (global as any).window;
-		process.env = { ...process.env, BIBLE_BRAIN_KEY: 'test-key' };
+		process.env = { ...process.env, NEXT_PUBLIC_BIBLE_BRAIN_KEY: 'test-key' };
 	});
 
 	afterEach(() => {

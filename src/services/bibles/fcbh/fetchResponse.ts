@@ -9,16 +9,8 @@ const fetchResponse = manageAsyncFunction(
 			.replace(/\/+/g, '/') // Replace multiple slashes with single slash
 			.replace(/^\//, ''); // Remove leading slash
 
-		const url = FCBH_API_BASE.replace(/\/$/, '') + '/' + cleanRoute;
-		const headers: HeadersInit = {
-			v: '4',
-			key: process.env.BIBLE_BRAIN_KEY || '',
-		};
-
-		const result = await fetch(url, {
-			method: 'GET',
-			headers,
-		});
+		const url = `${FCBH_API_BASE}/${cleanRoute}?v=4&key=${process.env.NEXT_PUBLIC_BIBLE_BRAIN_KEY}`;
+		const result = await fetch(url);
 
 		if (!result.ok) {
 			throw new Error(
