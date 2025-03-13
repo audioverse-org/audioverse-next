@@ -1,11 +1,11 @@
-fragment Refreshable on Recording {
+fragment refreshable on Recording {
 	id
 	audioFiles {
-		url
+		url(requestType: STREAM)
 	}
 	recordingContentType: contentType
 	collection {
 		id
 	}
-	canonicalPath
+	canonicalPath(useFuturePath: true)
 }
