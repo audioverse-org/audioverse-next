@@ -22,7 +22,7 @@ const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
 	throttleLimit: 3,
 	throttleIntervalMs: 1000,
 	timeoutMs: 30000,
-	retries: 1,
+	retries: 4,
 	retryMinTimeoutMs: 1000,
 	retryMaxTimeoutMs: 10000,
 };
