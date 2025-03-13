@@ -37,6 +37,7 @@
 		"GHSA-7gfc-8cq8-jh5f", // If your Next.js application is hosted on Vercel, this vulnerability has been automatically mitigated, regardless of Next.js version
 		"GHSA-mwcw-c2x4-8c55", // Not used at runtime
 		"GHSA-7m27-7ghc-44w9", // Not used
-		"GHSA-76p7-773f-r4q5" // TODO: remove next-pwa: https://audioverse7.atlassian.net/browse/AV-1513
+		"GHSA-76p7-773f-r4q5", // TODO: remove next-pwa: https://audioverse7.atlassian.net/browse/AV-1513
+		"GHSA-968p-4wvh-cqc8"
 	]
 }
