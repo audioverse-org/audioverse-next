@@ -1,6 +1,6 @@
 import { fetchFcbhChapterMediaUrl } from '~src/services/bibles/fcbh/fetchFcbhChapterMediaUrl';
 
-import { RefreshableFragment } from './__generated__/useAudioUrlRefresh';
+import { RefreshableFragment } from './__generated__/useRefreshedRecordings';
 
 export async function getRefreshedUrl(
 	recording: RefreshableFragment,

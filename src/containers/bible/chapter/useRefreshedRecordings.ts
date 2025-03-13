@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import { RecordingContentType } from '~src/__generated__/graphql';
+import isServerSide from '~src/lib/isServerSide';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 
-import { RefreshableFragment } from './__generated__/useAudioUrlRefresh';
+import { RefreshableFragment } from './__generated__/useRefreshedRecordings';
 import { getRefreshedUrl } from './getRefreshedUrl';
 
 function shouldRefreshRecording(recording: RefreshableFragment): boolean {
@@ -47,6 +48,10 @@ export function useRefreshedRecordings<T extends RefreshableFragment>(
 	const [refreshed, setRefreshed] = useState<T[]>();
 
 	useEffect(() => {
+		if (isServerSide()) {
+			return;
+		}
+
 		if (!recordings) {
 			return;
 		}

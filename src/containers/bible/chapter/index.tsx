@@ -20,7 +20,7 @@ import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
-import { useRefreshedRecordings } from '~src/containers/bible/chapter/useAudioUrlRefresh';
+import { useRefreshedRecordings } from '~src/containers/bible/chapter/useRefreshedRecordings';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { GetGraphqlVersionsQuery } from '~src/services/bibles/__generated__/getVersions';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
