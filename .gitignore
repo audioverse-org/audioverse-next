@@ -6,6 +6,7 @@
 **/__generated__
 **/__generated__/**
 .temp*
+*.log
 
 # next-pwa
 /public/sw.js

@@ -5,6 +5,7 @@ import pThrottle from 'p-throttle';
 import pTimeout, { ClearablePromise } from 'p-timeout';
 
 import { LOG_NETWORK_REQUESTS } from './constants';
+import { logToFile } from './logToFile';
 
 interface PromiseWrapperOptions {
 	concurrencyLimit?: number;
@@ -47,6 +48,31 @@ function getCallerFileName() {
 	return 'Unknown';
 }
 
+const logFile = 'network.log';
+
+const logger = {
+	log: function (...args: unknown[]) {
+		if (!LOG_NETWORK_REQUESTS) return;
+		console.log(...args);
+		logToFile(logFile, ...args);
+	},
+	dir: function (...args: unknown[]) {
+		if (!LOG_NETWORK_REQUESTS) return;
+		console.dir(...args);
+		logToFile(logFile, ...args);
+	},
+	warn: function (...args: unknown[]) {
+		if (!LOG_NETWORK_REQUESTS) return;
+		console.warn(...args);
+		logToFile(logFile, ...args);
+	},
+	error: function (...args: unknown[]) {
+		if (!LOG_NETWORK_REQUESTS) return;
+		console.error(...args);
+		logToFile(logFile, ...args);
+	},
+};
+
 export function manageAsyncFunction<
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	T extends (...args: any[]) => Promise<unknown>,
@@ -56,8 +82,8 @@ export function manageAsyncFunction<
 
 	if (LOG_NETWORK_REQUESTS) {
 		const callerFileName = getCallerFileName();
-		console.log(`Registered managed async function`);
-		console.dir({ managedFunctionId, callerFileName, opts }, { depth: null });
+		logger.log(`Registered managed async function`);
+		logger.dir({ managedFunctionId, callerFileName, opts }, { depth: null });
 	}
 
 	const throttle = pThrottle({
@@ -80,7 +106,7 @@ export function manageAsyncFunction<
 		const startTime = performance.now();
 		try {
 			if (LOG_NETWORK_REQUESTS) {
-				console.dir(
+				logger.dir(
 					{ managedFunctionId, requestId, args, opts },
 					{ depth: null },
 				);
@@ -93,7 +119,7 @@ export function manageAsyncFunction<
 				randomize: true,
 				onFailedAttempt: (error) => {
 					if (!LOG_NETWORK_REQUESTS) return;
-					console.log(
+					logger.log(
 						`${fullId}: Attempt ${error.attemptNumber}/${opts.retries} failed`,
 					);
 				},
@@ -102,19 +128,19 @@ export function manageAsyncFunction<
 			if (LOG_NETWORK_REQUESTS) {
 				const endTime = performance.now();
 				const duration = Math.round(endTime - startTime);
-				console.log(`${fullId} completed in ${duration}ms`);
+				logger.log(`${fullId} completed in ${duration}ms`);
 
 				if (duration > DURATION_WARNING_THRESHOLD) {
-					console.warn(`WARNING: ${fullId} took ${duration}ms to complete`);
-					console.warn('This may result in timeouts in production');
+					logger.warn(`WARNING: ${fullId} took ${duration}ms to complete`);
+					logger.warn('This may result in timeouts in production');
 				}
 			}
 
 			return result;
 		} catch (e) {
 			if (LOG_NETWORK_REQUESTS) {
-				console.error(`${fullId} failed`);
-				console.error(e);
+				logger.error(`${fullId} failed`);
+				logger.error(e);
 			}
 			throw e;
 		}
