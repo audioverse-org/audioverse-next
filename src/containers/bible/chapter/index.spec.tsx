@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
 import React from 'react';
@@ -89,7 +89,7 @@ describe('Bible chapter detail page', () => {
 		});
 
 		jest.mocked(getChapter).mockResolvedValue({
-			id: 'GEN/1',
+			id: 'ENGKJVO2DA/GEN/1',
 			title: 'the_chapter_title',
 			contentType: RecordingContentType.BibleChapter,
 			canonicalPath: '/en/bibles/ENGKJV/Gen/1',
@@ -128,7 +128,7 @@ describe('Bible chapter detail page', () => {
 
 		jest.mocked(getChapters).mockResolvedValue([
 			{
-				id: 'GEN/1',
+				id: 'ENGKJVO2DA/GEN/1',
 				title: 'the_chapter_title',
 				canonicalPath: '/en/bibles/ENGKJV/Gen/1',
 				duration: 123,
@@ -186,9 +186,12 @@ describe('Bible chapter detail page', () => {
 	});
 
 	it('includes player', async () => {
-		const { getAllByLabelText } = await renderPage();
+		await renderPage();
 
-		await userEvent.click(getAllByLabelText('play')[0]);
+		const player = screen.getByLabelText('player');
+		const button = within(player).getByRole('button', { name: 'play' });
+
+		await userEvent.click(button);
 
 		await waitFor(() => expect(videojs).toBeCalled());
 	});

@@ -49,7 +49,7 @@ describe('getChapter', () => {
 		const result = await getChapter('ENGKJV2', 'gen', 1);
 
 		expect(result).toBeDefined();
-		expect(result?.id).toBe('ENGKJV2/GEN/1');
+		expect(result?.id).toBe('ENGKJVO2DA/GEN/1');
 	});
 
 	it('sets canonicalPath using the routes format for GraphQL chapters', async () => {

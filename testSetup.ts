@@ -4,11 +4,13 @@ import 'jest-canvas-mock';
 import { resetAllWhenMocks } from 'jest-when';
 
 import getIntlMessages from '~src/lib/getIntlMessages';
+import { fetchFcbhChapterMediaUrl } from '~src/services/bibles/fcbh/fetchFcbhChapterMediaUrl';
 import fetchResponse from '~src/services/bibles/fcbh/fetchResponse';
 
 jest.mock('@silvermine/videojs-airplay');
 jest.mock('@silvermine/videojs-chromecast');
 jest.mock('~/services/bibles/fcbh/fetchResponse');
+jest.mock('~services/bibles/fcbh/fetchFcbhChapterMediaUrl');
 jest.mock('~lib/api/fetchApi');
 jest.mock('~lib/getIntlMessages');
 jest.mock('~lib/makeQueryClient');
@@ -91,6 +93,7 @@ beforeEach(() => {
 
 	jest.mocked(fetchResponse).mockResolvedValue({});
 	jest.mocked(getIntlMessages).mockResolvedValue({});
+	jest.mocked(fetchFcbhChapterMediaUrl).mockResolvedValue('http://example.com');
 
 	window.IntersectionObserver = jest.fn(
 		() =>

@@ -18,9 +18,7 @@ export default function doesFcbhVersionHaveChapter(
 		return false;
 	}
 
-	const book = fcbhBible.books.find(
-		(b) => b.book_id === `${versionId}/${bookId}`,
-	);
+	const book = fcbhBible.books.find((b) => b.book_id === bookId);
 
 	if (!book) {
 		return false;

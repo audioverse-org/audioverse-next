@@ -6,7 +6,7 @@ export const data: IBibleVersion[] = [
 			'The King James Version, commonly known as the Authorized Version or King James Bible, is an English translation of the Christian Bible for the Church of England begun in 1604 and completed in 1611.',
 		books: [
 			{
-				book_id: 'ENGKJV2/GEN',
+				book_id: 'GEN',
 				name: 'GENESIS',
 				name_short: 'GENESIS',
 				chapters: [
@@ -21,7 +21,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/EXO',
+				book_id: 'EXO',
 				name: 'EXODUS',
 				name_short: 'EXODUS',
 				chapters: [
@@ -36,7 +36,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/LEV',
+				book_id: 'LEV',
 				name: 'LEVITICUS',
 				name_short: 'LEVITICUS',
 				chapters: [
@@ -50,7 +50,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/NUM',
+				book_id: 'NUM',
 				name: 'NUMBERS',
 				name_short: 'NUMBERS',
 				chapters: [
@@ -64,7 +64,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/DEU',
+				book_id: 'DEU',
 				name: 'DEUTERONOMY',
 				name_short: 'DEUTERONOMY',
 				chapters: [
@@ -78,7 +78,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JOS',
+				book_id: 'JOS',
 				name: 'JOSHUA',
 				name_short: 'JOSHUA',
 				chapters: [
@@ -92,7 +92,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JDG',
+				book_id: 'JDG',
 				name: 'JUDGES',
 				name_short: 'JUDGES',
 				chapters: [
@@ -106,7 +106,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/RUT',
+				book_id: 'RUT',
 				name: 'RUTH',
 				name_short: 'RUTH',
 				chapters: [1, 2, 3, 4],
@@ -117,7 +117,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/1SA',
+				book_id: '1SA',
 				name: '1 SAMUEL',
 				name_short: '1 SAMUEL',
 				chapters: [
@@ -131,7 +131,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/2SA',
+				book_id: '2SA',
 				name: '2 SAMUEL',
 				name_short: '2 SAMUEL',
 				chapters: [
@@ -145,7 +145,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/1KI',
+				book_id: '1KI',
 				name: '1 KINGS',
 				name_short: '1 KINGS',
 				chapters: [
@@ -159,7 +159,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/2KI',
+				book_id: '2KI',
 				name: '2 KINGS',
 				name_short: '2 KINGS',
 				chapters: [
@@ -173,7 +173,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/1CH',
+				book_id: '1CH',
 				name: '1 CHRONICLES',
 				name_short: '1 CHRONICLES',
 				chapters: [
@@ -187,7 +187,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/2CH',
+				book_id: '2CH',
 				name: '2 CHRONICLES',
 				name_short: '2 CHRONICLES',
 				chapters: [
@@ -201,7 +201,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/EZR',
+				book_id: 'EZR',
 				name: 'EZRA',
 				name_short: 'EZRA',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -212,7 +212,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/NEH',
+				book_id: 'NEH',
 				name: 'NEHEMIAH',
 				name_short: 'NEHEMIAH',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
@@ -223,7 +223,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/EST',
+				book_id: 'EST',
 				name: 'ESTHER',
 				name_short: 'ESTHER',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -234,7 +234,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JOB',
+				book_id: 'JOB',
 				name: 'JOB',
 				name_short: 'JOB',
 				chapters: [
@@ -249,7 +249,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/PSA',
+				book_id: 'PSA',
 				name: 'PSALMS',
 				name_short: 'PSALMS',
 				chapters: [
@@ -271,7 +271,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/PRO',
+				book_id: 'PRO',
 				name: 'PROVERBS',
 				name_short: 'PROVERBS',
 				chapters: [
@@ -285,7 +285,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/ECC',
+				book_id: 'ECC',
 				name: 'ECCLESIASTES',
 				name_short: 'ECCLESIASTES',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -296,7 +296,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/SNG',
+				book_id: 'SNG',
 				name: 'SONG OF SOLOMON',
 				name_short: 'SONG OF SOLOMON',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -307,7 +307,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/ISA',
+				book_id: 'ISA',
 				name: 'ISAIAH',
 				name_short: 'ISAIAH',
 				chapters: [
@@ -323,7 +323,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JER',
+				book_id: 'JER',
 				name: 'JEREMIAH',
 				name_short: 'JEREMIAH',
 				chapters: [
@@ -338,7 +338,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/LAM',
+				book_id: 'LAM',
 				name: 'LAMENTATIONS',
 				name_short: 'LAMENTATIONS',
 				chapters: [1, 2, 3, 4, 5],
@@ -349,7 +349,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/EZK',
+				book_id: 'EZK',
 				name: 'EZEKIEL',
 				name_short: 'EZEKIEL',
 				chapters: [
@@ -364,7 +364,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/DAN',
+				book_id: 'DAN',
 				name: 'DANIEL',
 				name_short: 'DANIEL',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -375,7 +375,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/HOS',
+				book_id: 'HOS',
 				name: 'HOSEA',
 				name_short: 'HOSEA',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
@@ -386,7 +386,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JOL',
+				book_id: 'JOL',
 				name: 'JOEL',
 				name_short: 'JOEL',
 				chapters: [1, 2, 3],
@@ -397,7 +397,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/AMO',
+				book_id: 'AMO',
 				name: 'AMOS',
 				name_short: 'AMOS',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -408,7 +408,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/OBA',
+				book_id: 'OBA',
 				name: 'OBADIAH',
 				name_short: 'OBADIAH',
 				chapters: [1],
@@ -419,7 +419,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JON',
+				book_id: 'JON',
 				name: 'JONAH',
 				name_short: 'JONAH',
 				chapters: [1, 2, 3, 4],
@@ -430,7 +430,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/MIC',
+				book_id: 'MIC',
 				name: 'MICAH',
 				name_short: 'MICAH',
 				chapters: [1, 2, 3, 4, 5, 6, 7],
@@ -441,7 +441,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/NAM',
+				book_id: 'NAM',
 				name: 'NAHUM',
 				name_short: 'NAHUM',
 				chapters: [1, 2, 3],
@@ -452,7 +452,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/HAB',
+				book_id: 'HAB',
 				name: 'HABAKKUK',
 				name_short: 'HABAKKUK',
 				chapters: [1, 2, 3],
@@ -463,7 +463,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/ZEP',
+				book_id: 'ZEP',
 				name: 'ZEPHANIAH',
 				name_short: 'ZEPHANIAH',
 				chapters: [1, 2, 3],
@@ -474,7 +474,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/HAG',
+				book_id: 'HAG',
 				name: 'HAGGAI',
 				name_short: 'HAGGAI',
 				chapters: [1, 2],
@@ -485,7 +485,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/ZEC',
+				book_id: 'ZEC',
 				name: 'ZECHARIAH',
 				name_short: 'ZECHARIAH',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
@@ -496,7 +496,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/MAL',
+				book_id: 'MAL',
 				name: 'MALACHI',
 				name_short: 'MALACHI',
 				chapters: [1, 2, 3, 4],
@@ -507,7 +507,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/MAT',
+				book_id: 'MAT',
 				name: 'MATTHEW',
 				name_short: 'MATTHEW',
 				chapters: [
@@ -521,7 +521,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/MRK',
+				book_id: 'MRK',
 				name: 'MARK',
 				name_short: 'MARK',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
@@ -532,7 +532,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/LUK',
+				book_id: 'LUK',
 				name: 'LUKE',
 				name_short: 'LUKE',
 				chapters: [
@@ -546,7 +546,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JHN',
+				book_id: 'JHN',
 				name: 'JOHN',
 				name_short: 'JOHN',
 				chapters: [
@@ -560,7 +560,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/ACT',
+				book_id: 'ACT',
 				name: 'ACTS',
 				name_short: 'ACTS',
 				chapters: [
@@ -574,7 +574,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/ROM',
+				book_id: 'ROM',
 				name: 'ROMANS',
 				name_short: 'ROMANS',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
@@ -585,7 +585,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/1CO',
+				book_id: '1CO',
 				name: '1 CORINTHIANS',
 				name_short: '1 CORINTHIANS',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
@@ -596,7 +596,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/2CO',
+				book_id: '2CO',
 				name: '2 CORINTHIANS',
 				name_short: '2 CORINTHIANS',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
@@ -607,7 +607,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/GAL',
+				book_id: 'GAL',
 				name: 'GALATIANS',
 				name_short: 'GALATIANS',
 				chapters: [1, 2, 3, 4, 5, 6],
@@ -618,7 +618,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/EPH',
+				book_id: 'EPH',
 				name: 'EPHESIANS',
 				name_short: 'EPHESIANS',
 				chapters: [1, 2, 3, 4, 5, 6],
@@ -629,7 +629,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/PHP',
+				book_id: 'PHP',
 				name: 'PHILIPPIANS',
 				name_short: 'PHILIPPIANS',
 				chapters: [1, 2, 3, 4],
@@ -640,7 +640,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/COL',
+				book_id: 'COL',
 				name: 'COLOSSIANS',
 				name_short: 'COLOSSIANS',
 				chapters: [1, 2, 3, 4],
@@ -651,7 +651,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/1TH',
+				book_id: '1TH',
 				name: '1 THESSALONIANS',
 				name_short: '1 THESSALONIANS',
 				chapters: [1, 2, 3, 4, 5],
@@ -662,7 +662,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/2TH',
+				book_id: '2TH',
 				name: '2 THESSALONIANS',
 				name_short: '2 THESSALONIANS',
 				chapters: [1, 2, 3],
@@ -673,7 +673,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/1TI',
+				book_id: '1TI',
 				name: '1 TIMOTHY',
 				name_short: '1 TIMOTHY',
 				chapters: [1, 2, 3, 4, 5, 6],
@@ -684,7 +684,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/2TI',
+				book_id: '2TI',
 				name: '2 TIMOTHY',
 				name_short: '2 TIMOTHY',
 				chapters: [1, 2, 3, 4],
@@ -695,7 +695,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/TIT',
+				book_id: 'TIT',
 				name: 'TITUS',
 				name_short: 'TITUS',
 				chapters: [1, 2, 3],
@@ -706,7 +706,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/PHM',
+				book_id: 'PHM',
 				name: 'PHILEMON',
 				name_short: 'PHILEMON',
 				chapters: [1],
@@ -717,7 +717,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/HEB',
+				book_id: 'HEB',
 				name: 'HEBREWS',
 				name_short: 'HEBREWS',
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
@@ -728,7 +728,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JAS',
+				book_id: 'JAS',
 				name: 'JAMES',
 				name_short: 'JAMES',
 				chapters: [1, 2, 3, 4, 5],
@@ -739,7 +739,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/1PE',
+				book_id: '1PE',
 				name: '1 PETER',
 				name_short: '1 PETER',
 				chapters: [1, 2, 3, 4, 5],
@@ -750,7 +750,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/2PE',
+				book_id: '2PE',
 				name: '2 PETER',
 				name_short: '2 PETER',
 				chapters: [1, 2, 3],
@@ -761,7 +761,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/1JN',
+				book_id: '1JN',
 				name: '1 JOHN',
 				name_short: '1 JOHN',
 				chapters: [1, 2, 3, 4, 5],
@@ -772,7 +772,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/2JN',
+				book_id: '2JN',
 				name: '2 JOHN',
 				name_short: '2 JOHN',
 				chapters: [1],
@@ -783,7 +783,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/3JN',
+				book_id: '3JN',
 				name: '3 JOHN',
 				name_short: '3 JOHN',
 				chapters: [1],
@@ -794,7 +794,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/JUD',
+				book_id: 'JUD',
 				name: 'JUDE',
 				name_short: 'JUDE',
 				chapters: [1],
@@ -805,7 +805,7 @@ export const data: IBibleVersion[] = [
 				},
 			},
 			{
-				book_id: 'ENGKJV2/REV',
+				book_id: 'REV',
 				name: 'REVELATION',
 				name_short: 'REVELATION',
 				chapters: [

@@ -10,6 +10,7 @@ import {
 import root from '~src/lib/routes';
 
 import { FCBH_VERSIONS } from '../constants';
+import { getFcbhFilesetId } from '../fcbh/getFcbhFilesetId';
 import getBookMeta from '../getBookName';
 import { IBibleBook } from '../types';
 
@@ -46,6 +47,13 @@ function getVersion(book: IBibleBook) {
 	return version;
 }
 
+function getChapterId(book: IBibleBook, chapter: number) {
+	const version = getVersion(book);
+	const filesetId = getFcbhFilesetId(version.id, book.testament);
+
+	return `${filesetId}/${book.book_id}/${chapter}`;
+}
+
 export function transformChapterFull(
 	book: IBibleBook,
 	chapter: number,
@@ -56,7 +64,7 @@ export function transformChapterFull(
 	const version = getVersion(book);
 
 	return {
-		id: `${book.book_id}/${chapter}`,
+		id: getChapterId(book, chapter),
 		title: `${bookName} ${chapter}`,
 		contentType: RecordingContentType.BibleChapter,
 		canonicalPath,
@@ -95,7 +103,7 @@ export function transformChapterPartial(
 	const version = getVersion(book);
 
 	return {
-		id: `${book.book_id}/${chapter}`,
+		id: getChapterId(book, chapter),
 		title: `${getBookName(book)} ${chapter}`,
 		canonicalPath,
 		duration: 0,

@@ -8,7 +8,7 @@ const fcbhBookFixture: IBibleBook = {
 	bible: {
 		abbreviation: 'KJV',
 	},
-	book_id: 'ENGKJV2/SNG',
+	book_id: 'SNG',
 	name: 'Song of Solomon',
 	name_short: 'Song of Solomon',
 	chapters: [],
@@ -22,6 +22,12 @@ describe('transformChapterFull', () => {
 
 		expect(chapter.title).toBe('Song Of Solomon 1');
 	});
+
+	it('includes fileset id in id', () => {
+		const chapter = transformChapterFull(fcbhBookFixture, 1);
+
+		expect(chapter.id).toBe('ENGKJVO2DA/SNG/1');
+	});
 });
 
 describe('transformChapterPartial', () => {
@@ -29,5 +35,11 @@ describe('transformChapterPartial', () => {
 		const chapter = transformChapterPartial(fcbhBookFixture, 1);
 
 		expect(chapter.sequence?.title).toBe('Song Of Solomon');
+	});
+
+	it('includes fileset id in id', () => {
+		const chapter = transformChapterPartial(fcbhBookFixture, 1);
+
+		expect(chapter.id).toBe('ENGKJVO2DA/SNG/1');
 	});
 });

@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import { useSearchParams } from 'next/navigation';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { PlaybackContext } from '~/components/templates/andPlaybackContext';
 import ButtonDownload from '~components/molecules/buttonDownload';
 import ButtonNudge from '~components/molecules/buttonNudge';
 import ButtonPlay, {
@@ -50,7 +49,6 @@ const Player = ({
 	prefersAudio,
 	compact,
 }: PlayerProps): JSX.Element => {
-	useContext(PlaybackContext);
 	const intl = useIntl();
 	const params = useSearchParams();
 	const session = usePlaybackSession(recording, {
