@@ -1,7 +1,4 @@
-import { LOG_NETWORK_REQUESTS } from './constants';
-
 export async function logToFile(path: string, ...args: unknown[]) {
-	if (!LOG_NETWORK_REQUESTS) return;
 	if (typeof window !== 'undefined') return;
 
 	try {
