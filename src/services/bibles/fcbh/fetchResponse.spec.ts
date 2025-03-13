@@ -4,7 +4,6 @@ const { default: fetchResponse } = jest.requireActual(
 	'~src/services/bibles/fcbh/fetchResponse',
 );
 
-// Mock manageAsyncFunction to return the inner function
 jest.mock('~src/lib/manageAsyncFunction', () => ({
 	manageAsyncFunction: (fn: unknown) => fn,
 }));
@@ -44,14 +43,7 @@ describe('fetchResponse', () => {
 		const result = await fetchResponse('///path//to//resource?param=value');
 
 		expect(mockFetch).toHaveBeenCalledWith(
-			`${FCBH_API_BASE}/path/to/resource`,
-			{
-				method: 'GET',
-				headers: {
-					v: '4',
-					key: 'test-key',
-				},
-			},
+			`${FCBH_API_BASE}/path/to/resource?v=4&key=test-key`,
 		);
 		expect(result).toEqual(mockData);
 	});
@@ -67,13 +59,9 @@ describe('fetchResponse', () => {
 
 		const result = await fetchResponse('test/path');
 
-		expect(mockFetch).toHaveBeenCalledWith(`${FCBH_API_BASE}/test/path`, {
-			method: 'GET',
-			headers: {
-				v: '4',
-				key: 'test-key',
-			},
-		});
+		expect(mockFetch).toHaveBeenCalledWith(
+			`${FCBH_API_BASE}/test/path?v=4&key=test-key`,
+		);
 		expect(result).toEqual(mockData);
 	});
 
