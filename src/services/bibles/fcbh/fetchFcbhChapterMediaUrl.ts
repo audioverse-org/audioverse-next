@@ -7,12 +7,15 @@ export async function fetchFcbhChapterMediaUrl(
 	chapterNumber: number,
 ): Promise<string> {
 	const response = await fetchResponse<{ data: IBBFilesetBookChapter[] }>(
-		`bibles/filesets/${filesetId}/${bookId}/${chapterNumber}`,
+		`bibles/filesets/${filesetId}`,
+	);
+	const file = response.data.find(
+		(f) => f.book_id === bookId && f.chapter_start === chapterNumber,
 	);
 
-	if (!response?.data?.[0]?.path) {
-		throw new Error('No media path returned from FCBH API');
+	if (!file) {
+		throw new Error('No file found for book and chapter');
 	}
 
-	return response.data[0].path;
+	return file.path;
 }
