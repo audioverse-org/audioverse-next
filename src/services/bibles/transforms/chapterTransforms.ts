@@ -107,7 +107,16 @@ export function transformChapterPartial(
 		},
 		speakers: [],
 		sponsor: { title: 'Faith Comes By Hearing' },
-		sequence: null,
+		sequence: {
+			id: '',
+			title: getBookName(book),
+			contentType: SequenceContentType.BibleBook,
+			recordings: {
+				aggregate: {
+					count: book.chapters.length,
+				},
+			},
+		},
 		sequenceIndex: null,
 		audioFiles: [],
 		videoFiles: [],

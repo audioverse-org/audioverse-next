@@ -16,6 +16,9 @@ fragment bibleChapterDetailBook on Sequence {
 fragment bibleChapterDetailChapterPartial on Recording {
 	id
 	title
+	sequence {
+		title
+	}
 	...andMiniplayer
 	...teaseRecording
 }
