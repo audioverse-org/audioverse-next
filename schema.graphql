@@ -1763,6 +1763,28 @@ type Mutation {
   userUpdate(input: UserUpdateInput!, userId: ID!): UserPayload!
 }
 
+type NewBible implements Node {
+  active: Boolean!
+  externalFileSetsIds: String
+  externalId: String
+  id: ID!
+  lang: String!
+  order: Float
+  title: String!
+}
+
+type NewBibleConnection {
+  aggregate: Aggregate
+  edges: [NewBibleEdge!]
+  nodes: [NewBible!]
+  pageInfo: PageInfo!
+}
+
+type NewBibleEdge {
+  cursor: String!
+  node: NewBible!
+}
+
 interface Node {
   id: ID!
 }
@@ -2431,6 +2453,18 @@ type Query {
     sponsorId: ID
     sponsorIds: [ID!]
   ): SequenceConnection!
+  bible(id: ID!): NewBible
+  bibles(
+    """Return the elements that come after the specified cursor."""
+    after: String
+
+    """Return up to the first `n` elements from the list."""
+    first: Int
+    language: Language!
+
+    """Return the elements that come after the specified offset."""
+    offset: Int
+  ): NewBibleConnection!
   blogPost(id: ID!): BlogPost
   blogPosts(
     """Return the elements that come after the specified cursor."""
