@@ -79,12 +79,7 @@ export function manageAsyncFunction<
 >(fn: T, options: PromiseWrapperOptions = {}): ManagedAsyncFunction<T> {
 	const opts = { ...DEFAULT_OPTIONS, ...options };
 	const managedFunctionId = Math.random().toString(36).substring(2, 15);
-
-	if (LOG_NETWORK_REQUESTS) {
-		const callerFileName = getCallerFileName();
-		logger.log(`Registered managed async function`);
-		logger.dir({ managedFunctionId, callerFileName, opts }, { depth: null });
-	}
+	const source = getCallerFileName();
 
 	const throttle = pThrottle({
 		limit: opts.throttleLimit,
@@ -107,7 +102,7 @@ export function manageAsyncFunction<
 		try {
 			if (LOG_NETWORK_REQUESTS) {
 				logger.dir(
-					{ managedFunctionId, requestId, args, opts },
+					{ managedFunctionId, requestId, args, opts, source },
 					{ depth: null },
 				);
 			}
