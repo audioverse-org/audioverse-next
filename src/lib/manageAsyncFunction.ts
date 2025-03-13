@@ -4,7 +4,7 @@ import pRetry from 'p-retry';
 import pThrottle from 'p-throttle';
 import pTimeout, { ClearablePromise } from 'p-timeout';
 
-import { LOG_NETWORK_REQUESTS } from './constants';
+import { DISABLE_NETWORK_MEMOIZATION, LOG_NETWORK_REQUESTS } from './constants';
 import { logToFile } from './logToFile';
 
 interface PromiseWrapperOptions {
@@ -59,7 +59,7 @@ const logger = {
 	dir: function (...args: unknown[]) {
 		if (!LOG_NETWORK_REQUESTS) return;
 		console.dir(...args);
-		logToFile(logFile, ...args);
+		logToFile(logFile, args[0]);
 	},
 	warn: function (...args: unknown[]) {
 		if (!LOG_NETWORK_REQUESTS) return;
@@ -95,6 +95,7 @@ export function manageAsyncFunction<
 	const throttledFn = throttle(timedFn);
 	const limitedFn = (...args: Parameters<T>) =>
 		limit(() => throttledFn(...args));
+
 	const retriedFn = async (...args: Parameters<T>) => {
 		const requestId = Math.random().toString(36).substring(2, 15);
 		const fullId = `${managedFunctionId}-${requestId}`;
@@ -140,6 +141,10 @@ export function manageAsyncFunction<
 			throw e;
 		}
 	};
+
+	if (DISABLE_NETWORK_MEMOIZATION) {
+		return retriedFn as ManagedAsyncFunction<T>;
+	}
 
 	return pMemoize(retriedFn) as ManagedAsyncFunction<T>;
 }

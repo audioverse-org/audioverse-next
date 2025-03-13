@@ -21,7 +21,6 @@ import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
 import getVersions from '~src/services/bibles/getVersions';
 
-jest.mock('~services/bibles/fcbh/fetchFcbhChapters');
 jest.mock('~services/bibles/fcbh/getFcbhBible');
 jest.mock('~services/bibles/fcbh/getFcbhBibles');
 jest.mock('~services/bibles/getBible');

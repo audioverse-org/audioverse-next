@@ -12,14 +12,6 @@ export interface IBibleVersion {
 	};
 }
 
-export interface IBBFileset {
-	book_id: string;
-	book_name: string;
-	chapter_start: number;
-	path: string;
-	duration: number;
-}
-
 export interface IBBFilesetBookChapter {
 	book_id: string;
 	book_name: string;
@@ -50,16 +42,4 @@ export interface IBibleBook extends IBBBook {
 	bible: {
 		abbreviation: string;
 	};
-}
-
-export interface IBibleBookChapter {
-	id: string;
-	number: number;
-	title: string;
-	url?: string;
-	duration: number;
-	text?: string;
-	book_name: string;
-	version_id?: string;
-	version_name?: string;
 }

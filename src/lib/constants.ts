@@ -167,3 +167,5 @@ export enum BaseColors {
 }
 
 export const LOG_NETWORK_REQUESTS = process.env.LOG_NETWORK_REQUESTS === 'true';
+export const DISABLE_NETWORK_MEMOIZATION =
+	process.env.DISABLE_NETWORK_MEMOIZATION === 'true';

@@ -10,7 +10,8 @@ const withBundleAnalyzer =
 		? require('@next/bundle-analyzer')()
 		: (x) => x;
 
-module.exports = withBundleAnalyzer(
+/** @type {import('next').NextConfig} */
+const nextConfig = withBundleAnalyzer(
 	withPWA({
 		headers() {
 			return [
@@ -617,6 +618,13 @@ module.exports = withBundleAnalyzer(
 					'@formatjs/icu-messageformat-parser/no-parser';
 			}
 
+			if (!isServer) {
+				// Don't attempt to load node-specific modules on the client-side
+				config.resolve.fallback = {
+					fs: false,
+				};
+			}
+
 			return config;
 		},
 		images: {
@@ -624,3 +632,5 @@ module.exports = withBundleAnalyzer(
 		},
 	}),
 );
+
+module.exports = nextConfig;
