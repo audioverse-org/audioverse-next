@@ -1,0 +1,16 @@
+{
+	"project": ["src/**/*.tsx", "src/**/*.ts"],
+	"ignore": [
+		"src/**/__generated__/**/*.ts",
+		"src/**/__mocks__/**/*.ts",
+		"src/**/__mocks__/**/*.tsx"
+	],
+	"ignoreDependencies": ["full-icu", "inter-ui", "normalize.css"],
+	"jest": {
+		"entry": [
+			"**/__tests__/**/*.[jt]s?(x)",
+			"**/?(*.)+(spec|test).[jt]s?(x)",
+			"**/__mocks__/**/*.[jt]s?(x)"
+		]
+	}
+}

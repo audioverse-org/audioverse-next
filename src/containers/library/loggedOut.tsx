@@ -6,7 +6,7 @@ import Heading2 from '~components/atoms/heading2';
 import Button from '~components/molecules/button';
 import LibraryNav from '~components/organisms/libraryNav';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import baseStyles from './base.module.scss';
 import styles from './loggedOut.module.scss';

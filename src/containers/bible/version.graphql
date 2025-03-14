@@ -1,18 +1,17 @@
-query getAudiobibleVersionData($id: ID!) {
-	collection(id: $id) {
-		id
-		title
-		description
-		contentType
-		canonicalPath(useFuturePath: true)
-		sponsor {
-			canonicalPath(useFuturePath: true)
+query getAudiobibleIndexData($language: Language!) {
+	collections(
+		language: $language
+		contentType: BIBLE_VERSION
+		first: 10
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
+		nodes {
+			id
 			title
-			website
-		}
-		sequences(first: 66, orderBy: [{ field: ID, direction: ASC }]) {
-			nodes {
-				...cardSequence
+			sequences(first: 66, orderBy: [{ field: ID, direction: ASC }]) {
+				nodes {
+					...passageNavigationBook
+				}
 			}
 		}
 	}

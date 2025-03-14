@@ -1,0 +1,17 @@
+fragment GtmRecordingView on Recording {
+	contentType
+	id
+	title
+	speakers: persons(role: SPEAKER) {
+		name
+	}
+	sponsor {
+		title
+	}
+	collection {
+		title
+	}
+	sequence {
+		title
+	}
+}

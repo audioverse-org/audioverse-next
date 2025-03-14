@@ -1,0 +1,7 @@
+query getGraphqlChapters($sequenceId: ID!) {
+	recordings(language: ENGLISH, sequenceId: $sequenceId, first: 66) {
+		nodes {
+			...bibleChapterDetailChapterPartial
+		}
+	}
+}

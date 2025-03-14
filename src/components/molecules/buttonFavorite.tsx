@@ -5,7 +5,7 @@ import { BaseColors } from '~lib/constants';
 import IconLike from '~public/img/icons/icon-like.svg';
 import IconLikeActive from '~public/img/icons/icon-like-active.svg';
 import IconLikeLight from '~public/img/icons/icon-like-light.svg';
-import { gtmPushEvent } from '~src/utils/gtm';
+import { gtmPushEvent } from '~src/services/gtm';
 
 import { analytics } from '../../lib/analytics';
 import { isBackgroundColorDark } from './buttonPlay';

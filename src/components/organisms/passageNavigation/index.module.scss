@@ -1,0 +1,76 @@
+@import '../../../styles/common.scss';
+
+.base {
+	--bibleAccent: #{$ts-red};
+	--bibleBackground: #{$ts-bibleB};
+	--bibleTextColor: #{$ts-dark};
+	--bibleTextSecondaryColor: #{$ts-midTone};
+	--bibleWavesColor: #{$ts-lightTone};
+}
+
+.hasChildren .hat {
+	cursor: pointer;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+
+	p {
+		margin-top: 8px;
+		margin-bottom: 16px;
+	}
+}
+
+.content {
+	background-color: $ts-bibleVersionH;
+	padding: 12px 24px;
+}
+
+.content ul {
+	margin: 0;
+	padding: 0;
+}
+
+.content button {
+	background: none;
+	border: none;
+	padding: 18px 0px;
+	cursor: pointer;
+}
+
+.content li,
+.content li button,
+.content li a {
+	color: $ts-lightTone;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19.2px;
+	text-transform: uppercase;
+	list-style-type: none;
+}
+
+.switch {
+	border-bottom: 1px solid $ts-midTone;
+}
+
+.switch > button.active {
+	color: $ts-salmon;
+}
+
+.content {
+	width: 100%;
+}
+
+.switch > button {
+	color: $ts-lightTone;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 14.4px;
+	text-transform: uppercase;
+	padding-right: 12px;
+}
+
+.nt {
+	border-top: 1px solid $ts-midTone;
+}

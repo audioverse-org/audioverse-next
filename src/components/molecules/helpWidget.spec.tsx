@@ -6,11 +6,13 @@ import Script from 'next/script';
 import HelpWidget from '~components/molecules/helpWidget';
 import { buildLoader } from '~lib/test/buildLoader';
 import { buildRenderer } from '~lib/test/buildRenderer';
+import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
 import { filterByExpectation } from '~src/lib/test/expectations';
 
 import { GetHelpWidgetDataDocument } from './__generated__/helpWidget';
 
 jest.mock('next/script');
+jest.mock('~/lib/hooks/useIsAuthenticated');
 
 const mockBeacon = jest.fn();
 
@@ -53,7 +55,6 @@ const loadData = buildLoader(GetHelpWidgetDataDocument, {
 			image: {
 				url: 'the_image_url',
 			},
-
 			address1: 'the_address1',
 			address2: 'the_address2',
 			autoplay: true,
@@ -75,6 +76,15 @@ describe('help widget', () => {
 	beforeEach(() => {
 		__loadRouter();
 		window.Beacon = mockBeacon;
+
+		jest.mocked(useIsAuthenticated).mockReturnValue({
+			isUserLoggedIn: true,
+			isFetching: false,
+			user: {
+				name: 'the_name',
+				email: 'the_email',
+			},
+		});
 	});
 
 	it('opens widget on click', async () => {

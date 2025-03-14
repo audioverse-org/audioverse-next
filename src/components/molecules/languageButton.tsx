@@ -4,10 +4,10 @@ import React from 'react';
 import { LANGUAGES } from '~lib/constants';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import getLanguageIds from '~lib/getLanguageIds';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import IconLanguage from '~public/img/icons/icon-language-light.svg';
 import { Language } from '~src/__generated__/graphql';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import Button, { IButtonType } from './button';
 import Dropdown from './dropdown';
@@ -51,7 +51,7 @@ export default function LanguageButton({
 							<a
 								onClick={(e) => {
 									e.preventDefault();
-									handleClose();
+									handleClose(e);
 									onClick(LANGUAGES[id].base_urls[0]);
 								}}
 							>

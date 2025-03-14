@@ -5,7 +5,7 @@ import AndFailStates from '~src/components/templates/andFailStates';
 
 import { GetSongDetailDataQuery } from './__generated__/detail';
 
-export type SongTrack = NonNullable<GetSongDetailDataQuery['musicTrack']>;
+type SongTrack = NonNullable<GetSongDetailDataQuery['musicTrack']>;
 
 export interface SongDetailProps {
 	recording: SongTrack | null | undefined;

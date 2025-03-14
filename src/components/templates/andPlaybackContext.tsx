@@ -17,7 +17,7 @@ import { SourceObject } from 'video.js/dist/types/tech/tech';
 import { getSessionToken } from '~lib/cookies';
 import hasVideo from '~lib/hasVideo';
 import { Scalars } from '~src/__generated__/graphql';
-import { PlaySource } from '~src/lib/usePlaybackSession';
+import { PlaySource } from '~src/lib/hooks/usePlaybackSession';
 
 import { analytics } from '../../lib/analytics';
 import {

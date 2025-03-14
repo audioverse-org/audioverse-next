@@ -18,8 +18,8 @@ import ButtonShare from '~src/components/molecules/buttonShare';
 import IconButton from '~src/components/molecules/iconButton';
 import PlaylistTypeLockup from '~src/components/molecules/playlistTypeLockup';
 import AndFailStates from '~src/components/templates/andFailStates';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import ShareIcon from '../../../../public/img/icons/share-alt-light.svg';

@@ -3,7 +3,7 @@ import React from 'react';
 
 import AndOnboarding from '~components/templates/andOnboarding';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import LoginForm from './loginForm';
 import SocialLogin from './socialLogin';

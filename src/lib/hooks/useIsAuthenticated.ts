@@ -1,3 +1,4 @@
+import { getSessionToken } from '../cookies';
 import { useGetIsAuthenticatedQuery } from './__generated__/useIsAuthenticated';
 
 export default function useIsAuthenticated(): {
@@ -5,7 +6,11 @@ export default function useIsAuthenticated(): {
 	isFetching: boolean;
 	user?: { name: string; email: string };
 } {
-	const { data, isFetching } = useGetIsAuthenticatedQuery({}, { retry: false });
+	const hasSessionToken = !!getSessionToken();
+	const { data, isFetching } = useGetIsAuthenticatedQuery(
+		{},
+		{ retry: false, enabled: hasSessionToken },
+	);
 
 	return {
 		isUserLoggedIn: !!data?.me?.user.email,

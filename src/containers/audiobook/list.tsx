@@ -14,7 +14,7 @@ export type AudiobooksListProps = PaginatedProps<
 	GetAudiobookListPageDataQuery
 >;
 
-export function AudiobooksList({
+function AudiobooksList({
 	nodes,
 	pagination,
 }: AudiobooksListProps): JSX.Element {

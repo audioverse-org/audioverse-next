@@ -12,12 +12,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useRegisterSocialMutation } from '~containers/account/__generated__/register';
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '~lib/constants';
 import { setSessionTokenAndUserId } from '~lib/cookies';
-import useDidUnmount from '~lib/useDidUnmount';
 import { UserSocialServiceName } from '~src/__generated__/graphql';
 import { analytics } from '~src/lib/analytics';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
-import { gtmPushEvent } from '~src/utils/gtm';
+import useDidUnmount from '~src/lib/hooks/useDidUnmount';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import { gtmPushEvent } from '~src/services/gtm';
 
 import Button from './buttonSocial';
 import styles from './socialLogin.module.scss';

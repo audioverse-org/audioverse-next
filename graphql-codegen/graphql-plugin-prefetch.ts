@@ -10,59 +10,13 @@ type FileQueries = {
 };
 
 const template = (imports: string[], functions: string[]) => {
-	return `
-import { QueryClient } from '@tanstack/react-query';
-import makeQueryClient from '~lib/makeQueryClient';
-
-${imports.join('\n')}
+	return `${imports.join('\n')}
 
 type Fn<T> = (vars: T) => Promise<unknown>;
-type Key = keyof typeof fns;
-type Vars = {
-	[K in Key]?: Parameters<typeof fns[K]>[0];
-};
 
-const options = {
-    cacheTime: 24 * 60 * 60 * 1000,
-};
-
-async function doPrefetch<T extends Key>(k: T, v: Vars[T], client: QueryClient) {
-	const r = await fns[k](v as any);
-
-	const hasVars = Object.keys(v as any).length > 0;
-	const queryKey = hasVars ? [k, v] : [k];
-	const infiniteQueryKey = hasVars ? [\`\${k}.infinite\`, v] : [\`\${k}.infinite\`];
-
-    await client.prefetchQuery({
-        queryKey,
-        queryFn: () => r,
-        ...options
-    });
-    await client.prefetchInfiniteQuery({
-        queryKey: infiniteQueryKey,
-        queryFn: () => r,
-        initialPageParam: null,
-        ...options
-    });
-}
-
-export async function prefetchQueries(
-	vars: Vars,
-	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const queries = Object.keys(vars) as Key[];
-
-	await Promise.all(
-		queries.map(k => doPrefetch(k, vars[k], client))
-	);
-	
-	return client;
-}
-
-const fns = {
+export const fns = {
 	${functions.join('\n\t')}
-};
-`;
+};`;
 };
 
 function capitalize(string: string) {
@@ -74,8 +28,8 @@ function isOperation(def: DefinitionNode): def is OperationDefinitionNode {
 }
 
 const getQueries = (doc: Types.DocumentFile): FileQueries => {
-	const root = path.dirname(path.dirname(__dirname));
-	const dir = doc.location && path.relative(root, path.dirname(doc.location));
+	const src = path.dirname(__dirname);
+	const dir = doc.location && path.relative(src, path.dirname(doc.location));
 	const filename = doc.location && path.basename(doc.location, '.graphql');
 	const operations = doc.document?.definitions.filter(isOperation) ?? [];
 	const queries = operations.filter((op) => op.operation === 'query');
@@ -85,7 +39,7 @@ const getQueries = (doc: Types.DocumentFile): FileQueries => {
 		.filter((n) => !n.includes('Paths'));
 
 	return {
-		source: `~${dir}/__generated__/${filename}`,
+		source: `~/${dir}/__generated__/${filename}`,
 		queries: queryNames.map((n) => ({
 			name: n,
 			type: `${capitalize(n)}QueryVariables`,

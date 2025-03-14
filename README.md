@@ -30,10 +30,8 @@ machine-readable files in `public/compiled-lang`.
 ## GraphQL Code Generation
 
 ```bash
-npm run graphql:codegen
+npm run codegen
 ```
-
-Compiles to `src/lib/generated/graphql.ts`
 
 ## Eslint
 

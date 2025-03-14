@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Mininav from '~components/molecules/mininav';
-import { useNavigationItems } from '~lib/useNavigationItems';
+import { useNavigationItems } from '~src/lib/hooks/useNavigationItems';
 
 import styles from './aboutNav.module.scss';
 

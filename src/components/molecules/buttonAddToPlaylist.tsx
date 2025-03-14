@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BaseColors } from '~src/lib/constants';
 import { getSessionToken } from '~src/lib/cookies';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import NewPlaylist from '~src/pages/[language]/library/playlists/new';
 
 import AddToPlaylistIcon from '../../../public/img/icons/in-queue.svg';

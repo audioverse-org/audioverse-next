@@ -3,12 +3,12 @@ import { FormattedMessage } from 'react-intl';
 
 import { Language } from '~src/__generated__/graphql';
 import Loader from '~src/components/atoms/Loader';
+import AddToPlaylistItem from '~src/components/molecules/addToPlaylistItem';
 
 import {
 	GetLibraryPlaylistsDataQueryVariables,
 	useGetLibraryPlaylistsDataQuery,
 } from '../../containers/library/playlist/__generated__/list';
-import AddToPlaylistItem from './AddToPlaylistItem';
 import styles from './PlaylistList.module.scss';
 
 type Props = {

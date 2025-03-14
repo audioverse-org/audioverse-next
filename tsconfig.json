@@ -28,10 +28,12 @@
 			"~components/*": ["src/components/*"],
 			"~containers/*": ["src/containers/*"],
 			"~pages/*": ["src/pages/*"],
-			"~public/*": ["public/*"]
+			"~public/*": ["public/*"],
+			"~services/*": ["src/services/*"],
+			"~/*": ["./src/*"]
 		},
 		"incremental": true
 	},
-	"exclude": ["./*.js"],
+	"exclude": ["./*.js", "**/*.graphql"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

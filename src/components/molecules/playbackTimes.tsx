@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useFormattedTime } from '~lib/time';
-import usePlaybackSession from '~lib/usePlaybackSession';
+import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
 
-import { PlayerFragment } from './__generated__/player';
 import styles from './playbackTimes.module.scss';
+import { PlayerFragment } from './player/__generated__';
 
 export default function PlaybackTimes({
 	recording,

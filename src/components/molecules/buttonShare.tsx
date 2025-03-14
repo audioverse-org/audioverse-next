@@ -12,7 +12,7 @@ import {
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 import { analytics } from '~src/lib/analytics';
-import { gtmPushEvent } from '~src/utils/gtm';
+import { gtmPushEvent } from '~src/services/gtm';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonShare.module.scss';

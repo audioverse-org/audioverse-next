@@ -55,6 +55,8 @@ function loadData(data: Partial<GetAudiobookListPageDataQuery> = {}) {
 
 describe('audiobook list page', () => {
 	it('renders', async () => {
+		loadData();
+
 		await renderPage();
 
 		expect(fetchApi).toBeCalledWith(GetAudiobookListPageDataDocument, {

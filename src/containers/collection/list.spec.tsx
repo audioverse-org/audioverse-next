@@ -7,6 +7,7 @@ import CollectionList, {
 	getStaticPaths,
 	getStaticProps,
 } from '~pages/[language]/conferences/page/[i]';
+import { ENTRIES_PER_PAGE } from '~src/lib/constants';
 
 import {
 	GetCollectionListPageDataDocument,
@@ -56,12 +57,17 @@ describe('conference list page', () => {
 	});
 
 	it('renders', async () => {
+		loadData();
+
 		await renderPage();
 
-		expect(fetchApi).toBeCalledWith(
-			GetCollectionListPageDataDocument,
-			expect.anything(),
-		);
+		expect(fetchApi).toBeCalledWith(GetCollectionListPageDataDocument, {
+			variables: {
+				language: 'ENGLISH',
+				first: ENTRIES_PER_PAGE,
+				offset: 0,
+			},
+		});
 	});
 
 	it('lists conferences', async () => {

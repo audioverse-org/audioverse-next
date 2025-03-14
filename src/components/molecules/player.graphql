@@ -1,5 +1,0 @@
-fragment player on Recording {
-	...andMiniplayer
-	...buttonDownload
-	...buttonShareRecording
-}

@@ -689,46 +689,40 @@
       "value": "Alle Hörbücher"
     }
   ],
-  "bibleBook__backToChapter": [
+  "bibleChapter__backToChapter": [
     {
       "type": 0,
       "value": "Back to Chapter Info"
     }
   ],
-  "bibleBook__chapterListTitle": [
+  "bibleChapter__chapterListTitle": [
     {
       "type": 0,
       "value": "Andere Kapitel im Buch"
     }
   ],
-  "bibleBook__disclaimer": [
+  "bibleChapter__disclaimer": [
     {
       "type": 0,
       "value": "Die allgemeinen Geschäftsbedingungen für die Nutzung der Audiobibeln von Faith Comes By Hearing unterbinden das Herunterladen sowie die Integration bestimmter Funktionen auf unserer Plattform."
     }
   ],
-  "bibleBook__readAlong": [
+  "bibleChapter__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
+  "bibleChapter__readAlong": [
     {
       "type": 0,
       "value": "Read Along"
-    }
-  ],
-  "bibleBook__typeLabel": [
-    {
-      "type": 0,
-      "value": "KJV Bible"
     }
   ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
       "value": "Bibelversion"
-    }
-  ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 Bücher"
     }
   ],
   "bibleVersion__description": [
@@ -741,24 +735,6 @@
     {
       "type": 0,
       "value": "Sponsor"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Bibel"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "Gesunde Lehre wird am besten durch das Hören von Gottes Wort erlernt. Mit unseren Hörbuch-Bibeln kannst du den wertvollen Lektionen des größten Lehrers aller Zeiten lauschen."
     }
   ],
   "bible__title": [
@@ -835,38 +811,6 @@
     {
       "type": 0,
       "value": " on AudioVerse"
-    }
-  ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": " Kapitel"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abbreviation"
-    },
-    {
-      "type": 0,
-      "value": " Bibel"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 Bücher"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Show All"
     }
   ],
   "cardCollection__showAll": [
@@ -3373,6 +3317,12 @@
       "value": "Volume"
     }
   ],
+  "molecule-bibleVersionTophat__disabledTooltip": [
+    {
+      "type": 0,
+      "value": "The displayed chapter is unavailable in this version"
+    }
+  ],
   "molecule-button-SignUp": [
     {
       "type": 0,
@@ -4125,6 +4075,18 @@
     {
       "type": 0,
       "value": "Our Story"
+    }
+  ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
     }
   ],
   "personTypeLockup_type": [

@@ -51,18 +51,26 @@ const recordingAudio: Partial<RecordingFragment> = {
 			duration: 1234,
 		},
 	],
+	videoFiles: [],
+	videoStreams: [],
 	speakers: [],
 	writers: [],
 	attachments: [],
 	imageWithFallback: { url: '' },
+	isDownloadAllowed: true,
+	audioDownloads: [],
+	videoDownloads: [],
+	shareUrl: 'https://example.com/audio',
+	recordingContentType: RecordingContentType.Sermon,
+	collection: null,
+	sponsor: null,
+	transcript: null,
+	sequencePreviousRecording: null,
+	sequenceNextRecording: null,
 };
 
 const recordingVideo: Partial<RecordingFragment> = {
-	id: 'the_sermon_id',
-	title: 'the_sermon_title',
-	contentType: RecordingContentType.Sermon,
-	canonicalPath: 'the_sermon_path',
-	sequence,
+	...recordingAudio,
 	videoFiles: [
 		{
 			url: 'the_source_src',
@@ -71,18 +79,11 @@ const recordingVideo: Partial<RecordingFragment> = {
 			duration: 1234,
 		},
 	],
-	speakers: [],
-	writers: [],
-	attachments: [],
-	imageWithFallback: { url: '' },
+	audioFiles: [],
 };
 
 const recordingAudioVideo: Partial<RecordingFragment> = {
-	id: 'the_sermon_id',
-	title: 'the_sermon_title',
-	contentType: RecordingContentType.Sermon,
-	canonicalPath: 'the_sermon_path',
-	sequence,
+	...recordingAudio,
 	videoFiles: [
 		{
 			url: 'video_source_src',
@@ -99,10 +100,6 @@ const recordingAudioVideo: Partial<RecordingFragment> = {
 			duration: 1234,
 		},
 	],
-	speakers: [],
-	writers: [],
-	attachments: [],
-	imageWithFallback: { url: '' },
 };
 
 const Page = ({
@@ -149,7 +146,16 @@ const renderApp = async (
 };
 
 describe('app media playback', () => {
-	beforeEach(() => setPlayerMock());
+	let mockPlayer: any;
+
+	beforeEach(() => {
+		mockPlayer = setPlayerMock();
+	});
+
+	afterEach(() => {
+		mockPlayer?.dispose?.();
+		jest.clearAllMocks();
+	});
 
 	it('moves video to and from miniplayer', async () => {
 		const result = await renderApp(true, recordingVideo);

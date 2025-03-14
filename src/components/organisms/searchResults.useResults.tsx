@@ -8,7 +8,7 @@ import { useDebounce } from 'use-debounce';
 
 import { InferrableEntity } from '~components/molecules/card/inferred';
 import { fetchApi } from '~lib/api/fetchApi';
-import { useLanguageId } from '~lib/useLanguageId';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 
 import { EntityFilter, EntityFilterId, filters } from './searchResults.filters';
 

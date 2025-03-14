@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import InfoBox from '~components/atoms/infoBox';
 import { getLanguageId, setLanguageId } from '~lib/cookies';
 import isServerSide from '~lib/isServerSide';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import styles from './languageAlternativesAlert.module.scss';
 import LanguageButton from './languageButton';

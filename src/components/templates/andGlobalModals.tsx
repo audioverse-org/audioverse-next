@@ -9,7 +9,7 @@ import { UnreachableCaseError } from '~lib/typeHelpers';
 
 import styles from './andGlobalModals.module.scss';
 
-export type GlobalModalsContextType = {
+type GlobalModalsContextType = {
 	challengeAuth: (onConfirm: () => unknown) => void;
 	confirmRemoveFavorite: (onConfirm: () => unknown) => void;
 };

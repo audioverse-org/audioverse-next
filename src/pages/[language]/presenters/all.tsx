@@ -10,7 +10,7 @@ import { REVALIDATE } from '~lib/constants';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '~lib/getLanguageRoutes';
 import root from '~lib/routes';
-import { prefetchQueries } from '~src/__generated__/prefetch';
+import { prefetchQueries } from '~src/lib/prefetchQueries';
 import serializableDehydrate from '~src/lib/serializableDehydrate';
 
 export default All;

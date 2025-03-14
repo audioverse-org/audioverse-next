@@ -1,0 +1,29 @@
+fragment passageNavigationChapter on Recording {
+	id
+	title
+}
+
+fragment passageNavigationBook on Sequence {
+	id
+	title
+	recordings(first: 150) {
+		nodes {
+			...passageNavigationChapter
+		}
+	}
+}
+
+fragment passageNavigationVersionFull on Collection {
+	id
+	title
+	sequences {
+		nodes {
+			...passageNavigationBook
+		}
+	}
+}
+
+fragment passageNavigationVersion on Collection {
+	id
+	title
+}

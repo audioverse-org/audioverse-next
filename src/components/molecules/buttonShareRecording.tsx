@@ -4,9 +4,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading6 from '~components/atoms/heading6';
 import { BaseColors } from '~lib/constants';
 
-import { PlayerFragment } from './__generated__/player';
 import ButtonShare from './buttonShare';
 import styles from './buttonShareRecording.module.scss';
+import { PlayerFragment } from './player/__generated__';
 
 export default function ButtonShareRecording({
 	recording,

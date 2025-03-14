@@ -15,7 +15,7 @@ import { Must } from '~src/types/types';
 import { GetBlogDetailDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';
 
-export type BlogPost = NonNullable<GetBlogDetailDataQuery['blogPost']>;
+type BlogPost = NonNullable<GetBlogDetailDataQuery['blogPost']>;
 
 export interface BlogPostDetailProps {
 	blogPost: BlogPost | null;

@@ -37,7 +37,10 @@ export const getNumberedStaticPaths = async <T>(
 ): Promise<GetStaticPathsResult> => {
 	const keys = getLanguageIds();
 	const pathSetPromises = keys.map((k) =>
-		makeLanguagePaths(k, innerSegment, getter, parseCount),
+		makeLanguagePaths(k, innerSegment, getter, parseCount).catch((e) => {
+			console.log(`Failed to get some paths for language ${k}`, e);
+			return [];
+		}),
 	);
 	const pathSets = await Promise.all(pathSetPromises);
 	const paths = pathSets.flat();
