@@ -1,6 +1,6 @@
 import pLimit from 'p-limit';
 import pMemoize from 'p-memoize';
-import pRetry from 'p-retry';
+import pRetry, { FailedAttemptError } from 'p-retry';
 import pThrottle from 'p-throttle';
 import pTimeout, { ClearablePromise } from 'p-timeout';
 
@@ -48,30 +48,27 @@ function getCallerFileName() {
 	return 'Unknown';
 }
 
-const logFile = 'network.log';
+function log(...args: unknown[]) {
+	if (!LOG_NETWORK_REQUESTS) return;
+	logToFile('network.log', ...args);
+}
 
-const logger = {
-	log: function (...args: unknown[]) {
-		if (!LOG_NETWORK_REQUESTS) return;
-		console.log(...args);
-		logToFile(logFile, ...args);
-	},
-	dir: function (...args: unknown[]) {
-		if (!LOG_NETWORK_REQUESTS) return;
-		console.dir(...args);
-		logToFile(logFile, args[0]);
-	},
-	warn: function (...args: unknown[]) {
-		if (!LOG_NETWORK_REQUESTS) return;
-		console.warn(...args);
-		logToFile(logFile, ...args);
-	},
-	error: function (...args: unknown[]) {
-		if (!LOG_NETWORK_REQUESTS) return;
-		console.error(...args);
-		logToFile(logFile, ...args);
-	},
-};
+function retry<T extends (...args: unknown[]) => Promise<unknown>>(
+	fn: (...args: Parameters<T>) => Promise<unknown>,
+	args: Parameters<T>,
+	opts: Required<PromiseWrapperOptions>,
+	onFailedAttempt: (error: FailedAttemptError) => void,
+) {
+	if (opts.retries === 0) return fn(...args);
+
+	return pRetry(() => fn(...args), {
+		retries: opts.retries,
+		minTimeout: opts.retryMinTimeoutMs,
+		maxTimeout: opts.retryMaxTimeoutMs,
+		randomize: true,
+		onFailedAttempt,
+	});
+}
 
 export function manageAsyncFunction<
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -101,43 +98,25 @@ export function manageAsyncFunction<
 		const fullId = `${managedFunctionId}-${requestId}`;
 		const startTime = performance.now();
 		try {
-			if (LOG_NETWORK_REQUESTS) {
-				logger.dir(
-					{ managedFunctionId, requestId, args, opts, source },
-					{ depth: null },
-				);
-			}
+			log({ managedFunctionId, requestId, args, opts, source });
 
-			const result = await pRetry(() => limitedFn(...args), {
-				retries: opts.retries,
-				minTimeout: opts.retryMinTimeoutMs,
-				maxTimeout: opts.retryMaxTimeoutMs,
-				randomize: true,
-				onFailedAttempt: (error) => {
-					if (!LOG_NETWORK_REQUESTS) return;
-					logger.log(
-						`${fullId}: Attempt ${error.attemptNumber}/${opts.retries} failed`,
-					);
-				},
+			const result = await retry(limitedFn, args, opts, (error) => {
+				log(`${fullId}: Attempt ${error.attemptNumber}/${opts.retries} failed`);
 			});
+			const endTime = performance.now();
+			const duration = Math.round(endTime - startTime);
 
-			if (LOG_NETWORK_REQUESTS) {
-				const endTime = performance.now();
-				const duration = Math.round(endTime - startTime);
-				logger.log(`${fullId} completed in ${duration}ms`);
+			log(`${fullId} completed in ${duration}ms`);
 
-				if (duration > DURATION_WARNING_THRESHOLD) {
-					logger.warn(`WARNING: ${fullId} took ${duration}ms to complete`);
-					logger.warn('This may result in timeouts in production');
-				}
+			if (duration > DURATION_WARNING_THRESHOLD) {
+				log(`WARNING: ${fullId} took ${duration}ms to complete`);
+				log('This may result in timeouts in production');
 			}
 
 			return result;
 		} catch (e) {
-			if (LOG_NETWORK_REQUESTS) {
-				logger.error(`${fullId} failed`);
-				logger.error(e);
-			}
+			log(`${fullId} failed`);
+			log(e);
 			throw e;
 		}
 	};
