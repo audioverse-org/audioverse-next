@@ -41,23 +41,25 @@ async function doPrefetch<T extends Key>(
 	});
 }
 
-async function doPrefetchQueries(
+const doPrefetchQueries = manageAsyncFunction(
+	async (vars: Vars, client: QueryClient): Promise<QueryClient> => {
+		const keys = Object.keys(vars) as Key[];
+
+		await Promise.all(keys.map((k) => doPrefetch(k, vars[k], client)));
+
+		return client;
+	},
+	{
+		retries: 0,
+	},
+);
+
+export function prefetchQueries(
 	vars: Vars,
 	client: QueryClient = makeQueryClient(),
-): Promise<QueryClient> {
-	const queries = Object.keys(vars) as Key[];
-
-	await Promise.all(
-		queries.map((k) =>
-			doPrefetch(k, vars[k], client).catch((e) => {
-				console.log(`Failed to prefetch query ${k}`, e);
-			}),
-		),
-	);
-
-	return client;
+) {
+	return doPrefetchQueries(vars, client).catch((e) => {
+		console.log('Failed to prefetch queries', e);
+		return client;
+	});
 }
-
-export const prefetchQueries = manageAsyncFunction(doPrefetchQueries, {
-	retries: 0,
-});
