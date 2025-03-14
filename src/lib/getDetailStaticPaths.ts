@@ -74,16 +74,19 @@ export async function getDetailStaticPaths<DATA, NODE>(
 	const first =
 		prerenderLimit === Infinity ? DETAIL_PRERENDER_LIMIT : prerenderLimit;
 
-	const pathSetPromises = languages.map(async (language) => {
-		return getPathsForLanguage<DATA, NODE>({
+	const pathSetPromises = languages.map((language) =>
+		getPathsForLanguage<DATA, NODE>({
 			getter,
 			first,
 			parseNodes,
 			pathMapper,
 			parseHasNextPage,
 			language,
-		});
-	});
+		}).catch((e) => {
+			console.log(`Failed to get some paths for language ${language}`, e);
+			return [];
+		}),
+	);
 
 	const pathSets = await Promise.all(pathSetPromises);
 
