@@ -13,7 +13,7 @@ import {
 
 import styles from './index.module.scss';
 
-const PRELOAD_COUNT = 3;
+const PRELOAD_COUNT = 1;
 
 export type SectionNode<T> = T & {
 	canonicalPath: string;
