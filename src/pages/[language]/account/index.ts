@@ -3,7 +3,7 @@ import { GetServerSidePropsContext } from 'next';
 import Account from '~containers/account/index';
 import { storeRequest } from '~lib/api/storeRequest';
 import getDehydratedProps, { DehydratedProps } from '~lib/getDehydratedProps';
-import { prefetchQueries } from '~src/__generated__/prefetch';
+import { prefetchQueries } from '~src/lib/prefetchQueries';
 
 export default Account;
 

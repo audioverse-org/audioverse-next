@@ -11,8 +11,8 @@ import getIntl from '~lib/getIntl';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '~lib/getLanguageRoutes';
 import root from '~lib/routes';
-import { prefetchQueries } from '~src/__generated__/prefetch';
 import Discover from '~src/containers/discover';
+import { prefetchQueries } from '~src/lib/prefetchQueries';
 import serializableDehydrate from '~src/lib/serializableDehydrate';
 
 export default Discover;
