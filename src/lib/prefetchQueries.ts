@@ -3,6 +3,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { fns } from '~src/__generated__/prefetch';
 
 import makeQueryClient from './makeQueryClient';
+import { manageAsyncFunction } from './manageAsyncFunction';
 
 type Key = keyof typeof fns;
 type Vars = {
@@ -40,7 +41,7 @@ async function doPrefetch<T extends Key>(
 	});
 }
 
-export async function prefetchQueries(
+async function doPrefetchQueries(
 	vars: Vars,
 	client: QueryClient = makeQueryClient(),
 ): Promise<QueryClient> {
@@ -56,3 +57,7 @@ export async function prefetchQueries(
 
 	return client;
 }
+
+export const prefetchQueries = manageAsyncFunction(doPrefetchQueries, {
+	retries: 0,
+});
