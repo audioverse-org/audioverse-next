@@ -26,26 +26,18 @@ async function doPrefetch<T extends Key>(
 	const queryKey = hasVars ? [k, v] : [k];
 	const infiniteQueryKey = hasVars ? [`${k}.infinite`, v] : [`${k}.infinite`];
 
-	await client
-		.prefetchQuery({
-			queryKey,
-			queryFn: () => r,
-			...options,
-		})
-		.catch((e) => {
-			console.error(`Error prefetching query ${k}`, e);
-		});
+	await client.prefetchQuery({
+		queryKey,
+		queryFn: () => r,
+		...options,
+	});
 
-	await client
-		.prefetchInfiniteQuery({
-			queryKey: infiniteQueryKey,
-			queryFn: () => r,
-			initialPageParam: null,
-			...options,
-		})
-		.catch((e) => {
-			console.error(`Error prefetching infinite query ${k}`, e);
-		});
+	await client.prefetchInfiniteQuery({
+		queryKey: infiniteQueryKey,
+		queryFn: () => r,
+		initialPageParam: null,
+		...options,
+	});
 }
 
 export async function prefetchQueries(
@@ -54,7 +46,13 @@ export async function prefetchQueries(
 ): Promise<QueryClient> {
 	const queries = Object.keys(vars) as Key[];
 
-	await Promise.all(queries.map((k) => doPrefetch(k, vars[k], client)));
+	await Promise.all(
+		queries.map((k) =>
+			doPrefetch(k, vars[k], client).catch((e) => {
+				console.log(`Failed to prefetch query ${k}`, e);
+			}),
+		),
+	);
 
 	return client;
 }
