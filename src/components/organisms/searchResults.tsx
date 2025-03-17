@@ -10,7 +10,6 @@ import CardInferred, {
 import CardGroup from '~components/molecules/cardGroup';
 import LoadingCards from '~components/molecules/loadingCards';
 import ForwardIcon from '~public/img/icons/icon-forward-light.svg';
-import { useQueryString } from '~src/lib/hooks/useQueryString';
 
 import EmptyState from './emptyState';
 import { EntityFilterId } from './searchResults.filters';
