@@ -1,9 +1,12 @@
 import { renderHook } from '@testing-library/react';
 
+import isServerSide from '~src/lib/isServerSide';
+
 import { useBibleVersionIndicesQuery } from './__generated__/useChapterAvailability';
 import useChapterAvailability from './useChapterAvailability';
 
 jest.mock('./__generated__/useChapterAvailability');
+jest.mock('~src/lib/isServerSide');
 
 function loadIndices() {
 	jest.mocked(useBibleVersionIndicesQuery).mockReturnValue({
@@ -31,6 +34,8 @@ function loadIndices() {
 			},
 		},
 	} as any);
+
+	jest.mocked(isServerSide).mockReturnValue(false);
 }
 
 describe('useChapterAvailability', () => {
@@ -64,5 +69,16 @@ describe('useChapterAvailability', () => {
 		const { result } = renderHook(() => useChapterAvailability('Genesis', 1));
 
 		expect(result.current?.['ENGKJV2']).toBeTruthy();
+	});
+
+	it('does not query data on server side', () => {
+		jest.mocked(isServerSide).mockReturnValue(true);
+
+		renderHook(() => useChapterAvailability('Genesis', 1));
+
+		expect(useBibleVersionIndicesQuery).toHaveBeenCalledWith(
+			expect.anything(),
+			expect.objectContaining({ enabled: false }),
+		);
 	});
 });

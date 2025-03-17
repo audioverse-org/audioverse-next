@@ -1,9 +1,12 @@
 import { renderHook, waitFor } from '@testing-library/react';
 
+import isServerSide from '~src/lib/isServerSide';
+
 import { useBooksQuery, useChaptersQuery } from './__generated__/useChapters';
 import useChapters from './useChapters';
 
 jest.mock('./__generated__/useChapters');
+jest.mock('~src/lib/isServerSide');
 
 describe('useChapters', () => {
 	beforeEach(() => {
@@ -18,6 +21,8 @@ describe('useChapters', () => {
 				recordings: { nodes: [{ id: 'the_chapter_id', title: 'Genesis 1' }] },
 			},
 		} as any);
+
+		jest.mocked(isServerSide).mockReturnValue(false);
 	});
 
 	it('returns graphql chapters', () => {
@@ -53,5 +58,28 @@ describe('useChapters', () => {
 			}),
 			expect.anything(),
 		);
+	});
+
+	it('does not query data on server side', () => {
+		jest.mocked(isServerSide).mockReturnValue(true);
+
+		renderHook(() => useChapters('1', 'GEN'));
+
+		expect(useBooksQuery).toHaveBeenCalledWith(
+			expect.objectContaining({
+				collectionId: expect.anything(),
+			}),
+			expect.objectContaining({
+				enabled: false,
+			}),
+		);
+	});
+
+	it('does not query fcbh on server side', () => {
+		jest.mocked(isServerSide).mockReturnValue(true);
+
+		const { result } = renderHook(() => useChapters('ENGKJV2', 'GEN'));
+
+		expect(result.current).toBeUndefined();
 	});
 });

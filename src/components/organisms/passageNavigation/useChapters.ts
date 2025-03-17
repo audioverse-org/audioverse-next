@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
+import isServerSide from '~src/lib/isServerSide';
 import {
 	BIBLE_BOOK_METAS,
 	FCBH_VERSIONS,
@@ -27,7 +28,7 @@ export default function useChapters(
 			collectionId: versionId,
 		},
 		{
-			enabled: !isFcbhVersion,
+			enabled: !isFcbhVersion && !isServerSide(),
 		},
 	);
 
@@ -50,7 +51,7 @@ export default function useChapters(
 			sequenceId: sequenceId ?? '',
 		},
 		{
-			enabled: !isFcbhVersion && !!sequenceId,
+			enabled: !isFcbhVersion && !!sequenceId && !isServerSide(),
 		},
 	);
 
@@ -58,6 +59,8 @@ export default function useChapters(
 
 	useEffect(() => {
 		(async () => {
+			if (isServerSide()) return;
+
 			if (!isFcbhVersion) {
 				setChapters(chaptersData?.recordings.nodes || undefined);
 				return;

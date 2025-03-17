@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import isServerSide from '~src/lib/isServerSide';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 
 import { useBibleVersionIndicesQuery } from './__generated__/useChapterAvailability';
@@ -10,7 +11,12 @@ export default function useChapterAvailability(
 	bookName?: string,
 	chapterNumber?: number,
 ): Availability | null {
-	const indices = useBibleVersionIndicesQuery();
+	const indices = useBibleVersionIndicesQuery(
+		{},
+		{
+			enabled: !isServerSide(),
+		},
+	);
 
 	const availabilities = useMemo(() => {
 		if (!bookName || !chapterNumber || !indices.data?.collections.nodes)
