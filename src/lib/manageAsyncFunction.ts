@@ -1,3 +1,4 @@
+import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 import pLimit from 'p-limit';
 import pMemoize from 'p-memoize';
 import pRetry, { FailedAttemptError } from 'p-retry';
@@ -21,7 +22,7 @@ const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
 	concurrencyLimit: 1,
 	throttleLimit: 3,
 	throttleIntervalMs: 1000,
-	timeoutMs: 30000,
+	timeoutMs: process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD ? 30000 : 5000,
 	retries: 4,
 	retryMinTimeoutMs: 1000,
 	retryMaxTimeoutMs: 10000,
