@@ -6,22 +6,21 @@ import { parseChapterNumber } from '~src/services/bibles/utils';
 
 import { Chapter } from '.';
 import styles from './chapterGrid.module.scss';
+import useChapters from './useChapters';
 
 export type ChapterId = Chapter['id'] | null;
 
 type Props = {
-	chapters: Array<Chapter>;
 	chapterId: ChapterId;
 	bookId: string;
 	versionId: string | number;
 };
 
-export default function ChapterGrid({
-	chapters,
-	chapterId,
-	bookId,
-	versionId,
-}: Props) {
+export default function ChapterGrid({ chapterId, bookId, versionId }: Props) {
+	const chapters = useChapters(versionId, bookId);
+
+	if (!chapters) return;
+
 	return (
 		<ul className={styles.chapters}>
 			{chapters?.map((chapter) => {

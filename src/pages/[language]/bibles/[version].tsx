@@ -8,13 +8,13 @@ import {
 import { IBaseProps } from '~containers/base';
 import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
 import root from '~lib/routes';
-import Bible, { VersionProps } from '~src/containers/bible/version';
+import Version, { VersionProps } from '~src/containers/bible/version';
 import getIntl from '~src/lib/getIntl';
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
 import getBible from '~src/services/bibles/getBible';
 import getVersions from '~src/services/bibles/getVersions';
 
-export default Bible;
+export default Version;
 
 export async function getStaticProps({
 	params,

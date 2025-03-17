@@ -27,7 +27,6 @@ export default function BookGrid({
 	return (
 		<ul className={clsx(className, styles.books, styles.grid)}>
 			{books.map((book) => {
-				const chapters = book.recordings.nodes;
 				const bookMeta = getBookMeta(book.title);
 
 				if (!bookMeta) {
@@ -46,10 +45,9 @@ export default function BookGrid({
 								{book.title.replace(' ', '').substring(0, 3)}
 							</button>
 						</li>
-						{book.id === selectedBook?.id && chapters && (
+						{book.id === selectedBook?.id && (
 							<li className={styles.drawer}>
 								<ChapterGrid
-									chapters={chapters}
 									chapterId={chapterId}
 									bookId={bookMeta.fcbhId}
 									versionId={versionId}

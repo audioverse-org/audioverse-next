@@ -25,7 +25,6 @@ export default function BookList({
 	return (
 		<ul className={clsx(styles.books)}>
 			{books.map((book) => {
-				const chapters = book.recordings.nodes;
 				const bookMeta = getBookMeta(book.title);
 
 				if (!bookMeta) {
@@ -42,10 +41,9 @@ export default function BookList({
 						>
 							<button onClick={() => selectBook(book)}>{book.title}</button>
 						</li>
-						{book.id === selectedBook?.id && chapters && (
+						{book.id === selectedBook?.id && (
 							<li>
 								<ChapterGrid
-									chapters={chapters}
 									chapterId={chapterId}
 									bookId={bookMeta.fcbhId}
 									versionId={versionId}

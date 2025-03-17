@@ -1,6 +1,10 @@
-export function parseChapterNumber(title: string): number {
-	const d = Number(title.split(' ').pop());
+export function parseChapterNumber(chapterTitle: string): number {
+	const d = Number(chapterTitle.split(' ').pop());
 	return isNaN(d) ? 1 : d;
+}
+
+export function parseBookName(chapterTitle: string): string {
+	return chapterTitle.split(' ').slice(0, -1).join(' ');
 }
 
 // SOURCE: https://stackoverflow.com/a/196991

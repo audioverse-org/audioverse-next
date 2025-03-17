@@ -7,7 +7,6 @@ import {
 import { IBaseProps } from '~containers/base';
 import Chapter, { ChapterProps } from '~src/containers/bible/chapter';
 import { REVALIDATE } from '~src/lib/constants';
-import doesVersionHaveChapter from '~src/services/bibles/doesVersionHaveChapter';
 import getBible from '~src/services/bibles/getBible';
 import getBookMeta from '~src/services/bibles/getBookName';
 import getChapter from '~src/services/bibles/getChapter';
@@ -65,18 +64,7 @@ export async function getStaticProps({
 		return notFound;
 	}
 
-	const versions = await getVersions().then((v) =>
-		Promise.all(
-			v.map(async (v) => ({
-				...v,
-				disabled: !(await doesVersionHaveChapter(
-					v.id,
-					bookMeta.fcbhId,
-					chapterNumber,
-				)),
-			})),
-		),
-	);
+	const versions = await getVersions();
 
 	return {
 		props: {

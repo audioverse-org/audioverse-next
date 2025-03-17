@@ -9,10 +9,11 @@ import Dropdown, { Trigger } from '~components/molecules/dropdown';
 import { BibleVersionTophatFragment } from './__generated__';
 import { getBibleAcronym } from './getBibleAcronym';
 import styles from './index.module.scss';
+import useChapterAvailability from './useChapterAvailability';
 
 interface Props {
 	version: BibleVersionTophatFragment;
-	versions: (BibleVersionTophatFragment & { disabled?: boolean })[];
+	versions: BibleVersionTophatFragment[];
 	label: string;
 	getVersionUrl: (version: BibleVersionTophatFragment) => string;
 	/**
@@ -20,6 +21,8 @@ interface Props {
 	 * If not provided, the hat area will not be clickable.
 	 */
 	hatUrl?: string;
+	bookName?: string;
+	chapterNumber?: number;
 }
 
 export default function BibleVersionTophat({
@@ -28,9 +31,12 @@ export default function BibleVersionTophat({
 	label,
 	getVersionUrl,
 	hatUrl,
+	bookName,
+	chapterNumber,
 }: Props): JSX.Element {
 	const router = useRouter();
 	const intl = useIntl();
+	const availability = useChapterAvailability(bookName, chapterNumber);
 
 	const handleHatClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (!hatUrl) return;
@@ -72,7 +78,7 @@ export default function BibleVersionTophat({
 						{(handleClose) => (
 							<ul className={styles.versionDropdownList}>
 								{versions.map((v) => {
-									const disabled = v.disabled ?? false;
+									const disabled = availability ? !availability?.[v.id] : false;
 									return (
 										<li key={v.id} className={disabled ? styles.disabled : ''}>
 											{!disabled ? (

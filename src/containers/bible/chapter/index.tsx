@@ -36,11 +36,7 @@ import {
 } from './__generated__/index';
 import styles from './index.module.scss';
 
-type Version = NonNullable<
-	GetGraphqlVersionsQuery['collections']['nodes']
->[0] & {
-	disabled?: boolean;
-};
+type Version = NonNullable<GetGraphqlVersionsQuery['collections']['nodes']>[0];
 
 export interface ChapterProps {
 	version: BibleChapterDetailVersionFragment;
@@ -154,6 +150,8 @@ const Chapter = ({
 				label={book.title}
 				getVersionUrl={getVersionUrl}
 				hatUrl={versionDetailUrl}
+				bookName={book.title}
+				chapterNumber={currentChapterNumber}
 			/>
 			<div className={styles.content}>
 				<div className={styles.main}>

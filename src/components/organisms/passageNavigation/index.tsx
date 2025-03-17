@@ -13,6 +13,7 @@ import { PlaybackContext } from '~src/components/templates/andPlaybackContext';
 import { BIBLE_BOOKS } from '~src/lib/constants';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
+import { parseBookName, parseChapterNumber } from '~src/services/bibles/utils';
 
 import {
 	PassageNavigationBookFragment,
@@ -87,6 +88,8 @@ export default function PassageNavigation({
 				versions={versions}
 				label={chapter?.title || 'Bible'}
 				getVersionUrl={getVersionUrl}
+				bookName={chapter && parseBookName(chapter.title)}
+				chapterNumber={chapter && parseChapterNumber(chapter.title)}
 			/>
 
 			<div className={styles.content}>

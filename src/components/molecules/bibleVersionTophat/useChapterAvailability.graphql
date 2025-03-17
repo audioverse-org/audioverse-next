@@ -1,0 +1,20 @@
+query bibleVersionIndices {
+	collections(language: ENGLISH, contentType: BIBLE_VERSION) {
+		nodes {
+			id
+			title
+			sequences(first: 66) {
+				nodes {
+					id
+					title
+					recordings(first: 150) { 
+						nodes {
+							id
+							title
+						}
+					}
+				}
+			}
+		}
+	}
+}
