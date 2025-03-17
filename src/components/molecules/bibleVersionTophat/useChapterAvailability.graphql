@@ -7,7 +7,7 @@ query bibleVersionIndices {
 				nodes {
 					id
 					title
-					recordings(first: 150) { 
+					recordings(first: 150) {
 						nodes {
 							id
 							title
