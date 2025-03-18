@@ -21,11 +21,17 @@ function getCanonicalPath(book: IBibleBook, chapter: number): string {
 		throw new Error('Book meta not found');
 	}
 
-	const versionId = book.book_id.split('/')[0];
+	const version = FCBH_VERSIONS.find(
+		(v) => v.abbreviation === book.bible.abbreviation,
+	);
+
+	if (!version) {
+		throw new Error('Version not found');
+	}
 
 	return root
 		.lang('en')
-		.bibles.versionId(versionId)
+		.bibles.versionId(version.id)
 		.fcbhId(meta.fcbhId)
 		.chapterNumber(chapter)
 		.get();

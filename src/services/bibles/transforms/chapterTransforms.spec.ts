@@ -28,6 +28,12 @@ describe('transformChapterFull', () => {
 
 		expect(chapter.id).toBe('ENGKJVO2DA/SNG/1');
 	});
+
+	it('sets canonicalPath', () => {
+		const chapter = transformChapterFull(fcbhBookFixture, 1);
+
+		expect(chapter.canonicalPath).toBe('/en/bibles/ENGKJV2/SNG/1');
+	});
 });
 
 describe('transformChapterPartial', () => {
