@@ -689,12 +689,6 @@
       "value": "Books"
     }
   ],
-  "bibleChapter__backToChapter": [
-    {
-      "type": 0,
-      "value": "Back to Chapter Info"
-    }
-  ],
   "bibleChapter__chapterListTitle": [
     {
       "type": 0,
@@ -705,12 +699,6 @@
     {
       "type": 0,
       "value": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
-    }
-  ],
-  "bibleChapter__readAlong": [
-    {
-      "type": 0,
-      "value": "Read Along"
     }
   ],
   "bibleVersionTypeLockup__type": [

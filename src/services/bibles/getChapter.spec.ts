@@ -2,10 +2,8 @@ import { fetchApi } from '~lib/api/fetchApi';
 import root from '~src/lib/routes';
 
 import getChapter from './getChapter';
-import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 
-jest.mock('./graphql/fetchChapterText');
 jest.mock('./graphql/getGraphqlChapterId');
 
 const chapterFixture = {
@@ -36,8 +34,6 @@ const chapterFixture = {
 
 describe('getChapter', () => {
 	beforeEach(() => {
-		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
-
 		jest.mocked(getGraphqlChapterId).mockResolvedValue('graphql-123');
 
 		jest.mocked(fetchApi).mockResolvedValue({

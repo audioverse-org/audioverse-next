@@ -689,12 +689,6 @@
       "value": "全部有声书"
     }
   ],
-  "bibleChapter__backToChapter": [
-    {
-      "type": 0,
-      "value": "Back to Chapter Info"
-    }
-  ],
   "bibleChapter__chapterListTitle": [
     {
       "type": 0,
@@ -705,12 +699,6 @@
     {
       "type": 0,
       "value": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
-    }
-  ],
-  "bibleChapter__readAlong": [
-    {
-      "type": 0,
-      "value": "Read Along"
     }
   ],
   "bibleVersionTypeLockup__type": [

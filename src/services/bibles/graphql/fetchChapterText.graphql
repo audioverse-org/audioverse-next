@@ -1,9 +1,0 @@
-query doFetchChapterText($bibleId: ID!, $bookId: ID!, $chapterId: ID!) {
-	audiobible(id: $bibleId) {
-		book(id: $bookId) {
-			chapter(id: $chapterId) {
-				text
-			}
-		}
-	}
-}

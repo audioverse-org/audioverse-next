@@ -2717,17 +2717,11 @@
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
   },
-  "bibleChapter__backToChapter": {
-    "string": "Back to Chapter Info"
-  },
   "bibleChapter__chapterListTitle": {
     "string": "本书其它章节"
   },
   "bibleChapter__disclaimer": {
     "string": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
-  },
-  "bibleChapter__readAlong": {
-    "string": "Read Along"
   },
   "container-version__loading": {
     "string": "Loading..."
