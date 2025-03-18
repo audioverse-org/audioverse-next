@@ -51,7 +51,7 @@ const Chapter = ({
 		});
 
 	const languageRoute = useLanguageRoute();
-	const currentChapterNumber = parseChapterNumber(chapter?.title || '');
+	const currentChapterNumber = chapter ? parseChapterNumber(chapter.title) : -1;
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
 	const [scrollPosition, setScrollPosition] = useState(0);

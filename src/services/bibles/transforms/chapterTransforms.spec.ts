@@ -17,34 +17,34 @@ const fcbhBookFixture: IBibleBook = {
 };
 
 describe('transformChapterFull', () => {
-	it('capitalizes first letter of each word in title', () => {
-		const chapter = transformChapterFull(fcbhBookFixture, 1);
+	it('capitalizes first letter of each word in title', async () => {
+		const chapter = await transformChapterFull(fcbhBookFixture, 1);
 
 		expect(chapter.title).toBe('Song Of Solomon 1');
 	});
 
-	it('includes fileset id in id', () => {
-		const chapter = transformChapterFull(fcbhBookFixture, 1);
+	it('includes fileset id in id', async () => {
+		const chapter = await transformChapterFull(fcbhBookFixture, 1);
 
 		expect(chapter.id).toBe('ENGKJVO2DA/SNG/1');
 	});
 
-	it('sets canonicalPath', () => {
-		const chapter = transformChapterFull(fcbhBookFixture, 1);
+	it('sets canonicalPath', async () => {
+		const chapter = await transformChapterFull(fcbhBookFixture, 1);
 
 		expect(chapter.canonicalPath).toBe('/en/bibles/ENGKJV2/SNG/1');
 	});
 });
 
 describe('transformChapterPartial', () => {
-	it('includes sequence title', () => {
-		const chapter = transformChapterPartial(fcbhBookFixture, 1);
+	it('includes sequence title', async () => {
+		const chapter = await transformChapterPartial(fcbhBookFixture, 1);
 
 		expect(chapter.sequence?.title).toBe('Song Of Solomon');
 	});
 
-	it('includes fileset id in id', () => {
-		const chapter = transformChapterPartial(fcbhBookFixture, 1);
+	it('includes fileset id in id', async () => {
+		const chapter = await transformChapterPartial(fcbhBookFixture, 1);
 
 		expect(chapter.id).toBe('ENGKJVO2DA/SNG/1');
 	});

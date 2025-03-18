@@ -1,4 +1,4 @@
-﻿import {
+import {
 	CollectionContentType,
 	RecordingContentType,
 	SequenceContentType,
@@ -10,6 +10,7 @@ import {
 import root from '~src/lib/routes';
 
 import { FCBH_VERSIONS } from '../constants';
+import { fetchFcbhChapterMediaUrl } from '../fcbh/fetchFcbhChapterMediaUrl';
 import { getFcbhFilesetId } from '../fcbh/getFcbhFilesetId';
 import getBookMeta from '../getBookName';
 import { IBibleBook } from '../types';
@@ -60,10 +61,24 @@ function getChapterId(book: IBibleBook, chapter: number) {
 	return `${filesetId}/${book.book_id}/${chapter}`;
 }
 
-export function transformChapterFull(
+async function getAudioFiles(book: IBibleBook, chapter: number) {
+	const version = getVersion(book);
+	const filesetId = getFcbhFilesetId(version.id, book.testament);
+	const mediaUrl = await fetchFcbhChapterMediaUrl(
+		filesetId,
+		book.book_id,
+		chapter,
+	);
+
+	return [
+		{ url: mediaUrl, duration: 0, mimeType: 'audio/mpeg', filesize: 'unknown' },
+	];
+}
+
+export async function transformChapterFull(
 	book: IBibleBook,
 	chapter: number,
-): BibleChapterDetailChapterFullFragment {
+): Promise<BibleChapterDetailChapterFullFragment> {
 	const canonicalPath = getCanonicalPath(book, chapter);
 	const canonicalUrl = `https://www.audioverse.org${canonicalPath}`;
 	const bookName = getBookName(book);
@@ -90,7 +105,7 @@ export function transformChapterFull(
 			title: bookName,
 			contentType: SequenceContentType.BibleBook,
 		},
-		audioFiles: [],
+		audioFiles: await getAudioFiles(book, chapter),
 		videoFiles: [],
 		videoStreams: [],
 		videoDownloads: [],
@@ -100,10 +115,10 @@ export function transformChapterFull(
 	};
 }
 
-export function transformChapterPartial(
+export async function transformChapterPartial(
 	book: IBibleBook,
 	chapter: number,
-): BibleChapterDetailChapterPartialFragment {
+): Promise<BibleChapterDetailChapterPartialFragment> {
 	const canonicalPath = getCanonicalPath(book, chapter);
 	const version = getVersion(book);
 
@@ -131,7 +146,7 @@ export function transformChapterPartial(
 			},
 		},
 		sequenceIndex: null,
-		audioFiles: [],
+		audioFiles: await getAudioFiles(book, chapter),
 		videoFiles: [],
 		videoStreams: [],
 	};

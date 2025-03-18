@@ -15,8 +15,10 @@ export default async function getChapters(
 	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (fcbhBook) {
-		return fcbhBook.chapters.map((chapter) =>
-			transformChapterPartial(fcbhBook, chapter),
+		return Promise.all(
+			fcbhBook.chapters.map((chapter) =>
+				transformChapterPartial(fcbhBook, chapter),
+			),
 		);
 	}
 
