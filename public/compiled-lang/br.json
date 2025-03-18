@@ -1287,6 +1287,12 @@
       "value": "Contato"
     }
   ],
+  "container-version__loading": [
+    {
+      "type": 0,
+      "value": "Carregando..."
+    }
+  ],
   "create": [
     {
       "type": 0,

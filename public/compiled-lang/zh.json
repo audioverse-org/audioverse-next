@@ -1291,6 +1291,12 @@
       "value": "联系"
     }
   ],
+  "container-version__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "create": [
     {
       "type": 0,

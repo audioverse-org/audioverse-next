@@ -1307,6 +1307,12 @@
       "value": "お問い合わせ"
     }
   ],
+  "container-version__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
   "create": [
     {
       "type": 0,

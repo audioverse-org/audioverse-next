@@ -2731,5 +2731,8 @@
   },
   "bibleChapter__readAlong": {
     "string": "Read Along"
+  },
+  "container-version__loading": {
+    "string": "Loading..."
   }
 }

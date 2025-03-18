@@ -615,6 +615,9 @@
   "contact_footer": {
     "string": "Contact"
   },
+  "container-version__loading": {
+    "string": "Loading..."
+  },
   "create": {
     "string": "Create"
   },

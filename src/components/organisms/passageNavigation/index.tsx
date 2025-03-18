@@ -25,8 +25,9 @@ import BookGrid from './bookGrid';
 import BookList from './bookList';
 import styles from './index.module.scss';
 
-export type Version = PassageNavigationVersionFragment;
-export type VersionFull = PassageNavigationVersionFullFragment;
+type Version = PassageNavigationVersionFragment;
+type VersionFull = PassageNavigationVersionFullFragment;
+
 export type Book = PassageNavigationBookFragment;
 export type Chapter = PassageNavigationChapterFragment;
 
