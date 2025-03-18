@@ -2726,13 +2726,13 @@
   "bibleChapter__disclaimer": {
     "string": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
   },
-  "bibleChapter__loading": {
-    "string": "Loading..."
-  },
   "bibleChapter__readAlong": {
     "string": "Read Along"
   },
   "container-version__loading": {
     "string": "Loading..."
+  },
+  "container-version__notFound": {
+    "string": "Chapter not found"
   }
 }

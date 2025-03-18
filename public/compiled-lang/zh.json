@@ -707,12 +707,6 @@
       "value": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
     }
   ],
-  "bibleChapter__loading": [
-    {
-      "type": 0,
-      "value": "Loading..."
-    }
-  ],
   "bibleChapter__readAlong": [
     {
       "type": 0,
@@ -1295,6 +1289,12 @@
     {
       "type": 0,
       "value": "Loading..."
+    }
+  ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Chapter not found"
     }
   ],
   "create": [

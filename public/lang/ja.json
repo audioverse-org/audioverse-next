@@ -2726,13 +2726,13 @@
   "bibleChapter__disclaimer": {
     "string": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
   },
-  "bibleChapter__loading": {
-    "string": "Loading..."
-  },
   "bibleChapter__readAlong": {
     "string": "Read Along"
   },
   "container-version__loading": {
     "string": "Loading..."
+  },
+  "container-version__notFound": {
+    "string": "Chapter not found"
   }
 }

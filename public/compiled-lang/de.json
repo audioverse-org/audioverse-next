@@ -707,12 +707,6 @@
       "value": "Die allgemeinen Geschäftsbedingungen für die Nutzung der Audiobibeln von Faith Comes By Hearing unterbinden das Herunterladen sowie die Integration bestimmter Funktionen auf unserer Plattform."
     }
   ],
-  "bibleChapter__loading": [
-    {
-      "type": 0,
-      "value": "Loading..."
-    }
-  ],
   "bibleChapter__readAlong": [
     {
       "type": 0,
@@ -1291,6 +1285,12 @@
     {
       "type": 0,
       "value": "Loading..."
+    }
+  ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Chapter not found"
     }
   ],
   "create": [

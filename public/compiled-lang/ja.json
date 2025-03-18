@@ -707,12 +707,6 @@
       "value": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
     }
   ],
-  "bibleChapter__loading": [
-    {
-      "type": 0,
-      "value": "Loading..."
-    }
-  ],
   "bibleChapter__readAlong": [
     {
       "type": 0,
@@ -1311,6 +1305,12 @@
     {
       "type": 0,
       "value": "Loading..."
+    }
+  ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Chapter not found"
     }
   ],
   "create": [

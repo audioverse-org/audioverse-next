@@ -2726,13 +2726,13 @@
   "bibleChapter__disclaimer": {
     "string": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
   },
-  "bibleChapter__loading": {
-    "string": "Loading..."
-  },
   "bibleChapter__readAlong": {
     "string": "Read Along"
   },
   "container-version__loading": {
     "string": "Loading..."
+  },
+  "container-version__notFound": {
+    "string": "Chapter not found"
   }
 }

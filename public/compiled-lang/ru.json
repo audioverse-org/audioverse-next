@@ -707,12 +707,6 @@
       "value": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
     }
   ],
-  "bibleChapter__loading": [
-    {
-      "type": 0,
-      "value": "Loading..."
-    }
-  ],
   "bibleChapter__readAlong": [
     {
       "type": 0,
@@ -1291,6 +1285,12 @@
     {
       "type": 0,
       "value": "Loading..."
+    }
+  ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Chapter not found"
     }
   ],
   "create": [

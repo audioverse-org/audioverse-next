@@ -21,6 +21,7 @@ import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import isServerSide from '~src/lib/isServerSide';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 import { parseChapterNumber } from '~src/services/bibles/utils';
 import { gtmPushRecordingView } from '~src/services/gtm';
@@ -84,7 +85,7 @@ const Chapter = ({
 
 	const details: IDefinitionListTerm[] = [];
 
-	if (isLoading) {
+	if (isLoading || isServerSide()) {
 		return (
 			<div>
 				<FormattedMessage

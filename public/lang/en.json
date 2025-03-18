@@ -365,9 +365,6 @@
   "bibleChapter__disclaimer": {
     "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
   },
-  "bibleChapter__loading": {
-    "string": "Loading..."
-  },
   "bibleChapter__readAlong": {
     "string": "Read Along"
   },
@@ -617,6 +614,9 @@
   },
   "container-version__loading": {
     "string": "Loading..."
+  },
+  "container-version__notFound": {
+    "string": "Chapter not found"
   },
   "create": {
     "string": "Create"

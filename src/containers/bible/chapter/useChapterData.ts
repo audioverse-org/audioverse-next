@@ -31,7 +31,8 @@ export function useChapterData(params: {
 	const chapter = useQuery({
 		queryKey: ['bibleChapter', versionId, bookMeta?.fcbhId, chapterNumber],
 		queryFn: () => getChapter(versionId, bookMeta?.fcbhId || '', chapterNumber),
-		enabled: !!versionId && !!bookMeta?.fcbhId && !!chapterNumber && !isServerSide(),
+		enabled:
+			!!versionId && !!bookMeta?.fcbhId && !!chapterNumber && !isServerSide(),
 	});
 
 	const versions = useQuery({
@@ -46,6 +47,10 @@ export function useChapterData(params: {
 		chapters: chapters.data || null,
 		chapter: chapter.data || null,
 		versions: versions.data || [],
-		isLoading: version.isLoading || chapters.isLoading || chapter.isLoading || versions.isLoading,
+		isLoading:
+			version.isLoading ||
+			chapters.isLoading ||
+			chapter.isLoading ||
+			versions.isLoading,
 	};
 }
