@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
@@ -20,30 +20,18 @@ import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
-import { useRefreshedRecordings } from '~src/containers/bible/chapter/useRefreshedRecordings';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
-import { GetGraphqlVersionsQuery } from '~src/services/bibles/__generated__/getVersions';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 import { parseChapterNumber } from '~src/services/bibles/utils';
 import { gtmPushRecordingView } from '~src/services/gtm';
-import { Must } from '~src/types/types';
 
-import {
-	BibleChapterDetailBookFragment,
-	BibleChapterDetailChapterFullFragment,
-	BibleChapterDetailChapterPartialFragment,
-	BibleChapterDetailVersionFragment,
-} from './__generated__/index';
 import styles from './index.module.scss';
-
-type Version = NonNullable<GetGraphqlVersionsQuery['collections']['nodes']>[0];
+import { useChapterData } from './useChapterData';
 
 export interface ChapterProps {
-	version: BibleChapterDetailVersionFragment;
-	book: BibleChapterDetailBookFragment;
-	chapters: BibleChapterDetailChapterPartialFragment[] | null;
-	chapter: BibleChapterDetailChapterFullFragment | null;
-	versions: Version[];
+	versionId: string;
+	bookId: string;
+	chapterNumber: number;
 }
 
 const versionWebId = 538;
@@ -54,35 +42,27 @@ const allowedDownloadVersions: (string | number)[] = [
 ];
 
 const Chapter = ({
-	version,
-	book,
-	chapters,
-	chapter,
-	versions,
-}: Must<ChapterProps>) => {
-	const c = chapter;
-	const { description, sponsor } = version;
+	versionId,
+	bookId,
+	chapterNumber,
+}: ChapterProps): JSX.Element => {
+	const { version, book, chapters, chapter, versions, isLoading } =
+		useChapterData({
+			versionId,
+			bookId,
+			chapterNumber,
+		});
+
 	const languageRoute = useLanguageRoute();
-	const currentChapterNumber = parseChapterNumber(c.title);
+	const currentChapterNumber = parseChapterNumber(chapter?.title || '');
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
 	const [scrollPosition, setScrollPosition] = useState(0);
-	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version.id);
-	const shouldAllowDownload = allowedDownloadVersions.includes(version.id);
-
-	const getVersionUrl = (v: BibleVersionTophatFragment) =>
-		root
-			.lang(languageRoute)
-			.bibles.versionId(v.id)
-			.fcbhId(book.id.toString())
-			.chapterNumber(currentChapterNumber)
-			.get({ params: { autoplay: 'true' } });
-
-	const versionDetailUrl = root
-		.lang(languageRoute)
-		.bibles.versionId(version.id)
-		.get();
+	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version?.id);
+	const shouldAllowDownload = allowedDownloadVersions.includes(
+		version?.id || 0,
+	);
 
 	useEffect(() => {
 		if (!scrollRef.current || !currentRef.current) {
@@ -98,12 +78,35 @@ const Chapter = ({
 	}, [currentChapterNumber]);
 
 	useEffect(() => {
-		gtmPushRecordingView(c);
-	}, [c]);
+		if (!chapter) return;
+		gtmPushRecordingView(chapter);
+	}, [chapter]);
 
 	const details: IDefinitionListTerm[] = [];
 
-	if (description) {
+	if (isLoading) {
+		return (
+			<div>
+				<FormattedMessage
+					id="container-version__loading"
+					defaultMessage="Loading..."
+				/>
+			</div>
+		);
+	}
+
+	if (!version || !book || !chapters || !chapter) {
+		return (
+			<div>
+				<FormattedMessage
+					id="container-version__notFound"
+					defaultMessage="Chapter not found"
+				/>
+			</div>
+		);
+	}
+
+	if (version?.description) {
 		details.push({
 			term: (
 				<FormattedMessage
@@ -111,11 +114,11 @@ const Chapter = ({
 					defaultMessage="Description"
 				/>
 			),
-			definition: <p>{description}</p>,
+			definition: <p>{version.description}</p>,
 		});
 	}
 
-	if (sponsor) {
+	if (version?.sponsor) {
 		details.push({
 			term: (
 				<FormattedMessage
@@ -125,17 +128,17 @@ const Chapter = ({
 			),
 			definition: (
 				<p>
-					{sponsor.website ? (
+					{version.sponsor.website ? (
 						<a
-							href={sponsor.website}
+							href={version.sponsor.website}
 							target="_blank"
 							className="decorated hover--salmon"
 							rel="noreferrer"
 						>
-							{sponsor.title}
+							{version.sponsor.title}
 						</a>
 					) : (
-						sponsor.title
+						version.sponsor.title
 					)}
 				</p>
 			),
@@ -148,8 +151,15 @@ const Chapter = ({
 				version={version}
 				versions={versions}
 				label={book.title}
-				getVersionUrl={getVersionUrl}
-				hatUrl={versionDetailUrl}
+				getVersionUrl={(v: BibleVersionTophatFragment) =>
+					root
+						.lang(languageRoute)
+						.bibles.versionId(v.id)
+						.fcbhId(book.id.toString())
+						.chapterNumber(currentChapterNumber)
+						.get({ params: { autoplay: 'true' } })
+				}
+				hatUrl={root.lang(languageRoute).bibles.versionId(version.id).get()}
 				bookName={book.title}
 				chapterNumber={currentChapterNumber}
 			/>
@@ -169,26 +179,26 @@ const Chapter = ({
 								onClick={() => setShowingText(false)}
 								className={styles.backButton}
 							/>
-							<Heading1>{c?.title}</Heading1>
+							<Heading1>{chapter?.title}</Heading1>
 							<ContentWidthLimiter>
 								<div
 									className={styles.chapterText}
 									dangerouslySetInnerHTML={{
-										__html: c?.transcript?.text || '',
+										__html: chapter?.transcript?.text || '',
 									}}
 								/>
 							</ContentWidthLimiter>
 						</>
 					) : (
 						<>
-							<Heading1>{c?.title}</Heading1>
+							<Heading1>{chapter?.title}</Heading1>
 							<div className={styles.sequenceNav}>
-								<SequenceNav recording={c} useInverse={false} />
+								<SequenceNav recording={chapter} useInverse={false} />
 							</div>
 							<Player
-								recording={c}
+								recording={chapter}
 								playlistRecordings={chapters.slice(
-									chapters.findIndex((_c) => _c.id === c?.id),
+									chapters.findIndex((_c) => _c.id === chapter?.id),
 								)}
 								backgroundColor={BaseColors.BIBLE_B}
 								disableUserFeatures={shouldAllowDownload}
@@ -285,41 +295,7 @@ const Chapter = ({
 };
 
 const WithFailStates = (props: ChapterProps) => (
-	<AndFailStates
-		Component={Chapter}
-		componentProps={props}
-		options={{
-			isLoading: (props: ChapterProps) => {
-				return props.chapter === null || props.chapters === null;
-			},
-			Loading: () => (
-				<div>
-					<FormattedMessage
-						id="bibleChapter__loading"
-						defaultMessage="Loading..."
-					/>
-				</div>
-			),
-		}}
-	/>
+	<AndFailStates Component={Chapter} componentProps={props} />
 );
 
-const WithRefreshedRecordings = ({
-	chapter,
-	chapters,
-	...rest
-}: ChapterProps) => {
-	const chapterRefreshInput = useMemo(
-		() => (chapter ? [chapter] : undefined),
-		[chapter],
-	);
-	const chapterRefreshOutput = useRefreshedRecordings(chapterRefreshInput);
-	const _chapters = useRefreshedRecordings(chapters || undefined);
-	const _chapter = useMemo(
-		() => chapterRefreshOutput?.[0] ?? null,
-		[chapterRefreshOutput],
-	);
-	return <WithFailStates {...rest} chapter={_chapter} chapters={_chapters} />;
-};
-
-export default WithRefreshedRecordings;
+export default WithFailStates;

@@ -158,28 +158,31 @@ describe('Bible chapter detail page', () => {
 	});
 
 	it('displays book title', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Genesis')).toBeInTheDocument();
+		expect(await screen.findByText('Genesis')).toBeInTheDocument();
 	});
 
 	it('displays version title', async () => {
-		const { getByRole } = await renderPage();
+		await renderPage();
 
-		const versionButton = getByRole('button', { name: /KJV/ });
+		const versionButton = await screen.findByRole('button', { name: /KJV/ });
+
 		expect(versionButton).toBeInTheDocument();
 	});
 
 	it('displays sponsor name', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Faith Comes By Hearing')).toBeInTheDocument();
+		expect(
+			await screen.findByText('Faith Comes By Hearing'),
+		).toBeInTheDocument();
 	});
 
 	it('displays sponsor url', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Faith Comes By Hearing')).toHaveAttribute(
+		expect(await screen.findByText('Faith Comes By Hearing')).toHaveAttribute(
 			'href',
 			'the_sponsor_url',
 		);
@@ -188,7 +191,7 @@ describe('Bible chapter detail page', () => {
 	it('includes player', async () => {
 		await renderPage();
 
-		const player = screen.getByLabelText('player');
+		const player = await screen.findByLabelText('player');
 		const button = within(player).getByRole('button', { name: 'play' });
 
 		await userEvent.click(button);
