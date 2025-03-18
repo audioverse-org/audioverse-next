@@ -23,7 +23,7 @@ const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
 	throttleLimit: 3,
 	throttleIntervalMs: 1000,
 	timeoutMs: process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD ? 30000 : 5000,
-	retries: 4,
+	retries: 1,
 	retryMinTimeoutMs: 1000,
 	retryMaxTimeoutMs: 10000,
 };
