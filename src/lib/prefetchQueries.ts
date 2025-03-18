@@ -1,4 +1,5 @@
 import { QueryClient } from '@tanstack/react-query';
+import pTimeout from 'p-timeout';
 
 import { fns } from '~src/__generated__/prefetch';
 
@@ -45,8 +46,12 @@ const doPrefetchQueries = async (
 	client: QueryClient,
 ): Promise<QueryClient> => {
 	const keys = Object.keys(vars) as Key[];
+	const timeout = 10000;
 
-	await Promise.all(keys.map((k) => doPrefetch(k, vars[k], client)));
+	await pTimeout(Promise.all(keys.map((k) => doPrefetch(k, vars[k], client))), {
+		milliseconds: timeout,
+		message: `Prefetch queries timed out after ${timeout}ms`,
+	});
 
 	return client;
 };
