@@ -64,12 +64,4 @@ describe('getChapter', () => {
 
 		expect(result?.canonicalPath).toBe(expectedPath);
 	});
-
-	it('sets chapter text', async () => {
-		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
-
-		const result = await getChapter('ENGKJV2', 'GEN', 1);
-
-		expect(result?.transcript?.text).toBe('In the beginning...');
-	});
 });

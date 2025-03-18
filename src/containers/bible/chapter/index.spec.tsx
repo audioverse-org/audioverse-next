@@ -117,9 +117,6 @@ describe('Bible chapter detail page', () => {
 			],
 			videoFiles: [],
 			videoStreams: [],
-			transcript: {
-				text: '',
-			},
 			videoDownloads: [],
 			audioDownloads: [],
 			sequencePreviousRecording: null,

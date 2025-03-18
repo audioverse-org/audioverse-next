@@ -25,9 +25,6 @@ fragment bibleChapterDetailChapterPartial on Recording {
 
 fragment bibleChapterDetailChapterFull on Recording {
 	title
-	transcript {
-		text
-	}
 	...sequenceNav
 	...player
 }

@@ -5,8 +5,6 @@ import Heading1 from '~components/atoms/heading1';
 import LineHeading from '~components/atoms/lineHeading';
 import BibleVersionTophat from '~components/molecules/bibleVersionTophat';
 import { BibleVersionTophatFragment } from '~components/molecules/bibleVersionTophat/__generated__';
-import Button from '~components/molecules/button';
-import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '~components/molecules/definitionList';
@@ -16,8 +14,6 @@ import Tease from '~components/molecules/tease';
 import TeaseRecording from '~components/molecules/teaseRecording';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
-import IconBack from '~public/img/icons/icon-back-light.svg';
-import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
@@ -56,7 +52,6 @@ const Chapter = ({
 
 	const languageRoute = useLanguageRoute();
 	const currentChapterNumber = parseChapterNumber(chapter?.title || '');
-	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
 	const [scrollPosition, setScrollPosition] = useState(0);
@@ -166,69 +161,28 @@ const Chapter = ({
 			/>
 			<div className={styles.content}>
 				<div className={styles.main}>
-					{showingText ? (
-						<>
-							<Button
-								type="secondary"
-								text={
-									<FormattedMessage
-										id="bibleChapter__backToChapter"
-										defaultMessage="Back to Chapter Info"
-									/>
-								}
-								IconLeft={IconBack}
-								onClick={() => setShowingText(false)}
-								className={styles.backButton}
+					<Heading1>{chapter?.title}</Heading1>
+					<div className={styles.sequenceNav}>
+						<SequenceNav recording={chapter} useInverse={false} />
+					</div>
+					<Player
+						recording={chapter}
+						playlistRecordings={chapters.slice(
+							chapters.findIndex((_c) => _c.id === chapter?.id),
+						)}
+						backgroundColor={BaseColors.BIBLE_B}
+						disableUserFeatures={shouldAllowDownload}
+					/>
+					<div className={styles.definitions}>
+						<DefinitionList terms={details} textColor={BaseColors.DARK} />
+					</div>
+					{isFcbhVersion && (
+						<div className={styles.disclaimer}>
+							<FormattedMessage
+								id="bibleChapter__disclaimer"
+								defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
 							/>
-							<Heading1>{chapter?.title}</Heading1>
-							<ContentWidthLimiter>
-								<div
-									className={styles.chapterText}
-									dangerouslySetInnerHTML={{
-										__html: chapter?.transcript?.text || '',
-									}}
-								/>
-							</ContentWidthLimiter>
-						</>
-					) : (
-						<>
-							<Heading1>{chapter?.title}</Heading1>
-							<div className={styles.sequenceNav}>
-								<SequenceNav recording={chapter} useInverse={false} />
-							</div>
-							<Player
-								recording={chapter}
-								playlistRecordings={chapters.slice(
-									chapters.findIndex((_c) => _c.id === chapter?.id),
-								)}
-								backgroundColor={BaseColors.BIBLE_B}
-								disableUserFeatures={shouldAllowDownload}
-							/>
-							<div className={styles.definitions}>
-								<DefinitionList terms={details} textColor={BaseColors.DARK} />
-							</div>
-							{isFcbhVersion && (
-								<div className={styles.disclaimer}>
-									<FormattedMessage
-										id="bibleChapter__disclaimer"
-										defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
-									/>
-								</div>
-							)}
-							<div className={styles.readAlong}>
-								<Button
-									type="secondary"
-									text={
-										<FormattedMessage
-											id="bibleChapter__readAlong"
-											defaultMessage="Read Along"
-										/>
-									}
-									IconLeft={IconBlog}
-									onClick={() => setShowingText(!showingText)}
-								/>
-							</div>
-						</>
+						</div>
 					)}
 				</div>
 

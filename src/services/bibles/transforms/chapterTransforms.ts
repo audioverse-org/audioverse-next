@@ -93,7 +93,6 @@ export function transformChapterFull(
 		audioFiles: [],
 		videoFiles: [],
 		videoStreams: [],
-		transcript: { text: '' },
 		videoDownloads: [],
 		audioDownloads: [],
 		sequencePreviousRecording: null,
