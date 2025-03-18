@@ -21,7 +21,6 @@ fragment bibleChapterDetailChapterPartial on Recording {
 	}
 	...andMiniplayer
 	...teaseRecording
-	...refreshable
 }
 
 fragment bibleChapterDetailChapterFull on Recording {
@@ -31,5 +30,4 @@ fragment bibleChapterDetailChapterFull on Recording {
 	}
 	...sequenceNav
 	...player
-	...refreshable
 }
