@@ -46,7 +46,7 @@ jobs:
             ${{github.event.deployment_status.target_url}}/en/discover
             ${{github.event.deployment_status.target_url}}/en/teachings/all/page/1
             ${{github.event.deployment_status.target_url}}/en/teachings/300
-            ${{github.event.deployment_status.target_url}}/en/bibles
+            ${{github.event.deployment_status.target_url}}/en/bibles/ENGKJV2
             ${{github.event.deployment_status.target_url}}/en/presenters/1309/amanda-anguish
           runs: 3
           temporaryPublicStorage: true
