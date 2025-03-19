@@ -29,6 +29,28 @@ function loadData() {
 				writers: [],
 				attachments: [],
 				imageWithFallback: { url: '' },
+				canonicalPath: 'the_story_path',
+				audioFiles: [
+					{
+						url: 'the_audio_url',
+						mimeType: 'audio/mpeg',
+						filesize: 'unknown',
+						duration: 123,
+					},
+				],
+				videoFiles: [],
+				videoStreams: [],
+				isDownloadAllowed: true,
+				audioDownloads: [],
+				videoDownloads: [],
+				shareUrl: 'https://example.com/story',
+				recordingContentType: RecordingContentType.Story,
+				collection: null,
+				sequence: null,
+				sponsor: null,
+				transcript: null,
+				sequencePreviousRecording: null,
+				sequenceNextRecording: null,
 			},
 		});
 }

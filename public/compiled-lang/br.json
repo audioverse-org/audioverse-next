@@ -689,46 +689,22 @@
       "value": "Todos Audiolivros"
     }
   ],
-  "bibleBook__backToChapter": [
-    {
-      "type": 0,
-      "value": "Voltar para as informações do capítulo"
-    }
-  ],
-  "bibleBook__chapterListTitle": [
+  "bibleChapter__chapterListTitle": [
     {
       "type": 0,
       "value": "Outros capítulos do livro"
     }
   ],
-  "bibleBook__disclaimer": [
+  "bibleChapter__disclaimer": [
     {
       "type": 0,
       "value": "Os termos e condições do uso das Bíblias em aúdio da “Faith Comes By Hearing” impedem a opção de download e a integração de certos recursos em nossa plataforma."
-    }
-  ],
-  "bibleBook__readAlong": [
-    {
-      "type": 0,
-      "value": "Leia junto"
-    }
-  ],
-  "bibleBook__typeLabel": [
-    {
-      "type": 0,
-      "value": "Bíblia versão King James"
     }
   ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
       "value": "Versão da Bíblia"
-    }
-  ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 livros"
     }
   ],
   "bibleVersion__description": [
@@ -741,24 +717,6 @@
     {
       "type": 0,
       "value": "Patrocinador"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Site"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Bíblia"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "A melhor forma de aprender sobre a sã doutrina é por meio da Palavra de Deus. Com as nossas Bíblias em áudio, você poderá ouvir grandes ensinamentos do maior professor de todos."
     }
   ],
   "bible__title": [
@@ -835,38 +793,6 @@
     {
       "type": 0,
       "value": " no AudioVerse"
-    }
-  ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "contar"
-    },
-    {
-      "type": 0,
-      "value": " capítulos"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abreviação"
-    },
-    {
-      "type": 0,
-      "value": " Bíblia"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 livros"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Mostrar todos"
     }
   ],
   "cardCollection__showAll": [
@@ -1341,6 +1267,18 @@
     {
       "type": 0,
       "value": "Contato"
+    }
+  ],
+  "container-version__loading": [
+    {
+      "type": 0,
+      "value": "Carregando..."
+    }
+  ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Chapter not found"
     }
   ],
   "create": [
@@ -3373,6 +3311,12 @@
       "value": "Volume"
     }
   ],
+  "molecule-bibleVersionTophat__disabledTooltip": [
+    {
+      "type": 0,
+      "value": "The displayed chapter is unavailable in this version"
+    }
+  ],
   "molecule-button-SignUp": [
     {
       "type": 0,
@@ -3882,7 +3826,7 @@
   "organism-recording__collectionInfoTitle": [
     {
       "type": 0,
-      "value": "Bíblia Sagrada"
+      "value": "Parent Bible"
     }
   ],
   "organism-recording__conferenceInfoTitle": [
@@ -4125,6 +4069,18 @@
     {
       "type": 0,
       "value": "Nossa História"
+    }
+  ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
     }
   ],
   "personTypeLockup_type": [
@@ -5216,7 +5172,7 @@
     },
     {
       "type": 1,
-      "value": "patrocinadorNome"
+      "value": "sponsorName"
     }
   ],
   "sermonDetailPage__openGraphDescription_bibleChapter": [
@@ -5226,7 +5182,7 @@
     },
     {
       "type": 1,
-      "value": "patrocinadorNome"
+      "value": "sponsorName"
     }
   ],
   "sermonDetailPage__openGraphDescription_music": [
@@ -5502,7 +5458,7 @@
     },
     {
       "type": 1,
-      "value": "patrocinadorNome"
+      "value": "sponsorName"
     }
   ],
   "sponsorsListAll__all": [

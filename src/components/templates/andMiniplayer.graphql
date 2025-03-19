@@ -1,6 +1,7 @@
 fragment andMiniplayer on Recording {
 	id
 	title
+	recordingContentType: contentType
 	canonicalPath(useFuturePath: true)
 	duration
 	recordingContentType: contentType
@@ -11,11 +12,14 @@ fragment andMiniplayer on Recording {
 		title
 	}
 	sequence {
+		id
 		title
 		contentType
 	}
 	collection {
+		id
 		title
+		contentType
 	}
 	audioFiles {
 		url(requestType: STREAM)

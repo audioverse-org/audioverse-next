@@ -689,46 +689,22 @@
       "value": "全部有声书"
     }
   ],
-  "bibleBook__backToChapter": [
-    {
-      "type": 0,
-      "value": "Back to Chapter Info"
-    }
-  ],
-  "bibleBook__chapterListTitle": [
+  "bibleChapter__chapterListTitle": [
     {
       "type": 0,
       "value": "本书其它章节"
     }
   ],
-  "bibleBook__disclaimer": [
+  "bibleChapter__disclaimer": [
     {
       "type": 0,
       "value": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
-    }
-  ],
-  "bibleBook__readAlong": [
-    {
-      "type": 0,
-      "value": "Read Along"
-    }
-  ],
-  "bibleBook__typeLabel": [
-    {
-      "type": 0,
-      "value": "KJV Bible"
     }
   ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
       "value": "圣经版本"
-    }
-  ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66本书"
     }
   ],
   "bibleVersion__description": [
@@ -741,24 +717,6 @@
     {
       "type": 0,
       "value": "赞助者"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "圣经"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "学习纯正教义的最佳方式是聆听“上帝的道”。我们的音频圣经让您能够聆听最伟大之教师的重要教导。"
     }
   ],
   "bible__title": [
@@ -835,38 +793,6 @@
     {
       "type": 0,
       "value": " on AudioVerse"
-    }
-  ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": " 章"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abbreviation"
-    },
-    {
-      "type": 0,
-      "value": " 圣经"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66本书"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Show All"
     }
   ],
   "cardCollection__showAll": [
@@ -1345,6 +1271,18 @@
     {
       "type": 0,
       "value": "联系"
+    }
+  ],
+  "container-version__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Chapter not found"
     }
   ],
   "create": [
@@ -3377,6 +3315,12 @@
       "value": "Volume"
     }
   ],
+  "molecule-bibleVersionTophat__disabledTooltip": [
+    {
+      "type": 0,
+      "value": "The displayed chapter is unavailable in this version"
+    }
+  ],
   "molecule-button-SignUp": [
     {
       "type": 0,
@@ -4141,6 +4085,18 @@
     {
       "type": 0,
       "value": "Our Story"
+    }
+  ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
     }
   ],
   "personTypeLockup_type": [

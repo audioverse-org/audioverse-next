@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '~lib/api/fetchApi';
 import {
 	RecordingContentType,
 	SequenceContentType,
@@ -82,7 +83,15 @@ describe('Topic', () => {
 	});
 
 	it('renders', async () => {
+		loadData();
+
 		await render();
+
+		expect(fetchApi).toBeCalledWith(GetTopicDetailDataDocument, {
+			variables: {
+				id: 'the_topic_id',
+			},
+		});
 	});
 
 	it('generates static paths', async () => {

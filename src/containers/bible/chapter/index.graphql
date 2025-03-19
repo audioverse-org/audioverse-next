@@ -1,0 +1,30 @@
+fragment bibleChapterDetailVersion on Collection {
+	id
+	title
+	description
+	sponsor {
+		title
+		website
+	}
+}
+
+fragment bibleChapterDetailBook on Sequence {
+	id
+	title
+}
+
+fragment bibleChapterDetailChapterPartial on Recording {
+	id
+	title
+	sequence {
+		title
+	}
+	...andMiniplayer
+	...teaseRecording
+}
+
+fragment bibleChapterDetailChapterFull on Recording {
+	title
+	...sequenceNav
+	...player
+}

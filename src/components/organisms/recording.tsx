@@ -26,8 +26,8 @@ import TeaseRecording from '~components/molecules/teaseRecording';
 import Transcript from '~components/molecules/transcript';
 import { formatLongDateTime, parseRelativeDate } from '~lib/date';
 import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
+import useLanguageRoute from '~lib/hooks/useLanguageRoute';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlogLight from '~public/img/icons/icon-blog-light-small.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
@@ -36,7 +36,7 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '~src/__generated__/graphql';
-import { gtmPushEvent } from '~src/utils/gtm';
+import { gtmPushRecordingView } from '~src/services/gtm';
 
 import PlaylistTypeLockup from '../molecules/playlistTypeLockup';
 import { RecordingFragment } from './__generated__/recording';
@@ -85,16 +85,7 @@ export function Recording({
 		const saveScrollPosition = (e: Event) => {
 			setScrollPosition((e.target as HTMLElement).scrollTop);
 		};
-		scroller.addEventListener('scroll', saveScrollPosition);
-		gtmPushEvent('recording_view', {
-			content_type: recording.contentType,
-			item_id: recording.id,
-			title: recording.title,
-			presenter: recording.speakers.map((item) => item.name).join(';'),
-			sponsor: recording.sponsor?.title,
-			conference: recording.collection?.title,
-			series: recording.sequence?.title,
-		});
+		gtmPushRecordingView(recording);
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [recording]);
 	const languageRoute = useLanguageRoute();

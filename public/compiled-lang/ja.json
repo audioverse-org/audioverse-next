@@ -689,46 +689,22 @@
       "value": "全てのオーディオブック"
     }
   ],
-  "bibleBook__backToChapter": [
-    {
-      "type": 0,
-      "value": "Back to Chapter Info"
-    }
-  ],
-  "bibleBook__chapterListTitle": [
+  "bibleChapter__chapterListTitle": [
     {
       "type": 0,
       "value": "この本の中の他の章"
     }
   ],
-  "bibleBook__disclaimer": [
+  "bibleChapter__disclaimer": [
     {
       "type": 0,
       "value": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
-    }
-  ],
-  "bibleBook__readAlong": [
-    {
-      "type": 0,
-      "value": "Read Along"
-    }
-  ],
-  "bibleBook__typeLabel": [
-    {
-      "type": 0,
-      "value": "KJV Bible"
     }
   ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
       "value": "聖書バージョン"
-    }
-  ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66巻"
     }
   ],
   "bibleVersion__description": [
@@ -741,24 +717,6 @@
     {
       "type": 0,
       "value": "主催者"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "聖書"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "確実な教理を学ぶ方法は、神の御言葉を聞くのがベスト。オーディオバイブルを通して最も偉大な教師から最も大切な教え聞くことができます。"
     }
   ],
   "bible__title": [
@@ -835,38 +793,6 @@
     {
       "type": 0,
       "value": " on AudioVerse"
-    }
-  ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": "章"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 1,
-      "value": "abbreviation"
-    },
-    {
-      "type": 0,
-      "value": "聖書"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66巻"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Show All"
     }
   ],
   "cardCollection__showAll": [
@@ -1361,6 +1287,18 @@
     {
       "type": 0,
       "value": "お問い合わせ"
+    }
+  ],
+  "container-version__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Chapter not found"
     }
   ],
   "create": [
@@ -3381,6 +3319,12 @@
       "value": "Volume"
     }
   ],
+  "molecule-bibleVersionTophat__disabledTooltip": [
+    {
+      "type": 0,
+      "value": "The displayed chapter is unavailable in this version"
+    }
+  ],
   "molecule-button-SignUp": [
     {
       "type": 0,
@@ -4133,6 +4077,18 @@
     {
       "type": 0,
       "value": "Our Story"
+    }
+  ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
     }
   ],
   "personTypeLockup_type": [

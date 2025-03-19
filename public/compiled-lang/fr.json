@@ -689,46 +689,22 @@
       "value": "Tous les livres audio"
     }
   ],
-  "bibleBook__backToChapter": [
-    {
-      "type": 0,
-      "value": "Back to Chapter Info"
-    }
-  ],
-  "bibleBook__chapterListTitle": [
+  "bibleChapter__chapterListTitle": [
     {
       "type": 0,
       "value": "Autres chapitres du livre"
     }
   ],
-  "bibleBook__disclaimer": [
+  "bibleChapter__disclaimer": [
     {
       "type": 0,
       "value": "Les conditions contractuelles d'usage des Bibles audio issues de Faith Comes By Hearing empêchent qu'elles soient disponibles au téléchargement et limitent leur intégration à certaines fonctionnalités de notre plate-forme."
-    }
-  ],
-  "bibleBook__readAlong": [
-    {
-      "type": 0,
-      "value": "Read Along"
-    }
-  ],
-  "bibleBook__typeLabel": [
-    {
-      "type": 0,
-      "value": "KJV Bible"
     }
   ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
       "value": "Version de la Bible"
-    }
-  ],
-  "bibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 livres"
     }
   ],
   "bibleVersion__description": [
@@ -741,24 +717,6 @@
     {
       "type": 0,
       "value": "Sponsor"
-    }
-  ],
-  "bibleVersion__websiteLabel": [
-    {
-      "type": 0,
-      "value": "Website"
-    }
-  ],
-  "bibleVersions__heading": [
-    {
-      "type": 0,
-      "value": "Bible"
-    }
-  ],
-  "bibleVersions__intro": [
-    {
-      "type": 0,
-      "value": "La meilleure façon d'apprendre la saine doctrine est en écoutant la Parole de Dieu. Nos bibles audio vous donne la possibilité d'écouter de grands enseignements donnés par le plus grand enseignant de tous les temps."
     }
   ],
   "bible__title": [
@@ -835,38 +793,6 @@
     {
       "type": 0,
       "value": " on AudioVerse"
-    }
-  ],
-  "cardBibleBook__chaptersLabel": [
-    {
-      "type": 1,
-      "value": "count"
-    },
-    {
-      "type": 0,
-      "value": " chapitres"
-    }
-  ],
-  "cardBibleBook__typeLabel": [
-    {
-      "type": 0,
-      "value": "Bible "
-    },
-    {
-      "type": 1,
-      "value": "abbreviation"
-    }
-  ],
-  "cardBibleVersion__booksLabel": [
-    {
-      "type": 0,
-      "value": "66 livres"
-    }
-  ],
-  "cardBibleVersion__showAll": [
-    {
-      "type": 0,
-      "value": "Show All"
     }
   ],
   "cardCollection__showAll": [
@@ -1341,6 +1267,18 @@
     {
       "type": 0,
       "value": "Contact"
+    }
+  ],
+  "container-version__loading": [
+    {
+      "type": 0,
+      "value": "Loading..."
+    }
+  ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Chapter not found"
     }
   ],
   "create": [
@@ -3365,6 +3303,12 @@
       "value": "Volume"
     }
   ],
+  "molecule-bibleVersionTophat__disabledTooltip": [
+    {
+      "type": 0,
+      "value": "The displayed chapter is unavailable in this version"
+    }
+  ],
   "molecule-button-SignUp": [
     {
       "type": 0,
@@ -4117,6 +4061,18 @@
     {
       "type": 0,
       "value": "Our Story"
+    }
+  ],
+  "passageNavigation__selector-grid": [
+    {
+      "type": 0,
+      "value": "Grid"
+    }
+  ],
+  "passageNavigation__selector-list": [
+    {
+      "type": 0,
+      "value": "List"
     }
   ],
   "personTypeLockup_type": [

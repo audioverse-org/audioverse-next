@@ -1,0 +1,16 @@
+query doFetchGraphqlVersion($collectionId: ID!) {
+	collection(id: $collectionId) {
+		id
+		title
+		description
+		sponsor {
+			website
+			title
+		}
+		sequences(first: 66, orderBy: [{ field: ID, direction: ASC }]) {
+			nodes {
+				...passageNavigationBook
+			}
+		}
+	}
+}

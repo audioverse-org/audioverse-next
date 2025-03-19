@@ -15,9 +15,7 @@ export type RendererResult<T> = Omit<RenderResult, 'rerender'> & {
 	rerender: (rerenderProps?: PartialDeepRecursive<T>) => void;
 };
 
-export type Renderer<T> = (
-	options?: RendererOptions<T>,
-) => Promise<RendererResult<T>>;
+type Renderer<T> = (options?: RendererOptions<T>) => Promise<RendererResult<T>>;
 
 export function buildRenderer<T extends Record<string, any>>(
 	Component: ComponentType<T>,

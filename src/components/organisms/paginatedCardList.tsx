@@ -7,7 +7,7 @@ import { PaginationData } from '~lib/getPaginatedStaticProps';
 
 import styles from './paginatedCardList.module.scss';
 
-export interface PaginatedCardListProps {
+interface PaginatedCardListProps {
 	pagination: PaginationData;
 	heading: string | JSX.Element;
 	makeRoute: (languageRoute: string, pageIndex: number) => string;

@@ -17,13 +17,16 @@ import {
 	setSessionTokenAndUserId,
 } from '~lib/cookies';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
-import { INavigationItem, useNavigationItems } from '~lib/useNavigationItems';
 import IconUser from '~public/img/icons/fa-user-heavy.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure-light-small.svg';
 import IconExit from '~public/img/icons/icon-exit.svg';
 import { BaseColors } from '~src/lib/constants';
 import useIsAuthenticated from '~src/lib/hooks/useIsAuthenticated';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
+import {
+	INavigationItem,
+	useNavigationItems,
+} from '~src/lib/hooks/useNavigationItems';
 
 import { analytics } from '../../lib/analytics';
 import IconButton from '../molecules/iconButton';

@@ -7,8 +7,8 @@ import RssAlternate from '~components/molecules/rssAlternate';
 import PaginatedCardList from '~components/organisms/paginatedCardList';
 import { PaginatedProps } from '~lib/getPaginatedStaticProps';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import AndFailStates from '~src/components/templates/andFailStates';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import { GetSermonListPageDataQuery } from './__generated__/list';
 

@@ -1,0 +1,160 @@
+@import '../../../styles/common';
+
+.videoWrapper {
+	position: relative;
+	width: 100%;
+	padding-top: 55.95%;
+	background: $ts-dark;
+	> div,
+	:global(.video-js) {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.poster {
+	position: relative;
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	height: 100%;
+	> div {
+		display: block !important;
+	}
+}
+
+.posterPlay {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	top: calc(50% - 28px);
+	left: 0;
+	right: 0;
+	text-align: center;
+	color: $ts-salmon;
+	opacity: 0;
+	transition: opacity $transition-medium;
+}
+
+.posterPlayShown .posterPlay {
+	opacity: 1;
+}
+@media (hover: hover) {
+	.poster:hover .posterPlay {
+		opacity: 1;
+	}
+}
+
+.controls {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 16px;
+	.controlGrow {
+		flex-grow: 1;
+		margin-left: 8px;
+	}
+}
+.play {
+	margin-top: -8px;
+	margin-left: -8px;
+}
+
+.waves {
+	flex-grow: 1;
+	position: relative;
+	background: linear-gradient(
+		90deg,
+		var(--recordingWavesColor) var(--buffered),
+		transparent var(--buffered)
+	);
+	-webkit-mask-image: url('/img/waves.svg');
+	mask-image: url('/img/waves.svg');
+	height: 49px;
+	margin-bottom: 8px;
+	input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 500;
+		margin: 0;
+		opacity: 0;
+		cursor: pointer;
+	}
+	&:before,
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		z-index: 100;
+		-webkit-mask-image: url('/img/waves.svg');
+		mask-image: url('/img/waves.svg');
+		pointer-events: none;
+	}
+	&:before {
+		right: 0;
+		background: linear-gradient(
+			180deg,
+			transparent 92%,
+			var(--recordingWavesColor) 92%
+		);
+	}
+	&:after {
+		width: var(--progress, 0%);
+		background-color: var(--recordingAccent);
+	}
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	div {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+	button {
+		background: none;
+		border: none;
+		cursor: pointer;
+	}
+}
+
+.leftButtons > * {
+	@media (min-width: $breakpoint-sm) {
+		margin-right: 24px;
+	}
+}
+.leftButtonsCompact > * {
+	margin-right: 8px;
+}
+
+.rightButtons > *:not(:first-child) {
+	margin-left: 8px;
+	@media (min-width: $breakpoint-sm) {
+		margin-left: 16px;
+	}
+}
+
+.videoProgress {
+	--visualHeight: 4px;
+	--barColor: #{$ts-midTone};
+	--progressColor: #{$ts-red};
+	position: relative;
+	top: -14px;
+}

@@ -3,15 +3,19 @@ import React, { MouseEvent, ReactNode } from 'react';
 
 import styles from './dropdown.module.scss';
 
+export type Trigger = (props: {
+	onClick: (event: MouseEvent) => void;
+	['aria-controls']: string;
+	isOpen: boolean;
+}) => JSX.Element;
+
 type Props = {
 	id: string;
-	trigger: (props: {
-		onClick: (event: MouseEvent) => void;
-		['aria-controls']: string;
-		isOpen: boolean;
-	}) => JSX.Element;
+	trigger: Trigger;
 	alignment?: 'left' | 'right';
-	children?: ReactNode | ((handleClose: () => void) => ReactNode);
+	children?:
+		| ReactNode
+		| ((handleClose: (event: MouseEvent) => void) => ReactNode);
 };
 
 const LazyMenu = dynamic(() => import('@mui/material/Menu'));
@@ -25,10 +29,12 @@ export default function Dropdown({
 	const [anchorEl, setAnchorEl] = React.useState<Element | null>(null);
 
 	const handleClick = (event: MouseEvent) => {
+		event.stopPropagation();
 		setAnchorEl(event.currentTarget);
 	};
 
-	const handleClose = () => {
+	const handleClose = (event: MouseEvent) => {
+		event?.stopPropagation();
 		setAnchorEl(null);
 	};
 

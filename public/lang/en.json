@@ -356,41 +356,20 @@
   "audiobookList__heading": {
     "string": "Books"
   },
-  "bibleBook__backToChapter": {
-    "string": "Back to Chapter Info"
-  },
-  "bibleBook__chapterListTitle": {
+  "bibleChapter__chapterListTitle": {
     "string": "Other Chapters in Book"
   },
-  "bibleBook__disclaimer": {
+  "bibleChapter__disclaimer": {
     "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
-  },
-  "bibleBook__readAlong": {
-    "string": "Read Along"
-  },
-  "bibleBook__typeLabel": {
-    "string": "KJV Bible"
   },
   "bibleVersionTypeLockup__type": {
     "string": "Bible Version"
-  },
-  "bibleVersion__booksLabel": {
-    "string": "66 Books"
   },
   "bibleVersion__description": {
     "string": "Description"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Sponsor"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
-  },
-  "bibleVersions__heading": {
-    "string": "Bible"
-  },
-  "bibleVersions__intro": {
-    "string": "The best way to learn sound doctrine is by listening to the Word of God. Our audio Bibles give you the ability to listen to great teachings from the greatest teacher of all."
   },
   "bible__title": {
     "string": "Bible"
@@ -423,18 +402,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
-  },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count} chapters"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation} Bible"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66 Books"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
   },
   "cardCollection__showAll": {
     "string": "Show All"
@@ -638,6 +605,12 @@
   },
   "contact_footer": {
     "string": "Contact"
+  },
+  "container-version__loading": {
+    "string": "Loading..."
+  },
+  "container-version__notFound": {
+    "string": "Chapter not found"
   },
   "create": {
     "string": "Create"
@@ -1603,6 +1576,9 @@
   "miniplayer__volume": {
     "string": "Volume"
   },
+  "molecule-bibleVersionTophat__disabledTooltip": {
+    "string": "The displayed chapter is unavailable in this version"
+  },
   "molecule-button-SignUp": {
     "string": "Sign Up with Email"
   },
@@ -1982,6 +1958,14 @@
   },
   "ourStory__title": {
     "string": "Our Story"
+  },
+  "passageNavigation__selector-grid": {
+    "comment": "Switch to grid view",
+    "string": "Grid"
+  },
+  "passageNavigation__selector-list": {
+    "comment": "Switch to list view",
+    "string": "List"
   },
   "personTypeLockup_type": {
     "string": "Presenter"

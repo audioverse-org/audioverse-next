@@ -11,7 +11,7 @@ import CardHatSermon from './hat/sermon';
 import CardHatSong from './hat/song';
 import CardHatStory from './hat/story';
 
-export interface Props {
+interface Props {
 	sequence: CardRecordingStackFragment;
 }
 

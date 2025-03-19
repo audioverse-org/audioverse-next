@@ -100,6 +100,7 @@ describe('series detail page', () => {
 	});
 
 	it('gets static path data', async () => {
+		loadPathsData();
 		await getStaticPaths();
 
 		expect(fetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
@@ -111,6 +112,7 @@ describe('series detail page', () => {
 	});
 
 	it('gets static path data for all languages', async () => {
+		loadPathsData();
 		await getStaticPaths();
 
 		expect(fetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {

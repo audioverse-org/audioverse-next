@@ -1,6 +1,6 @@
 import { NextParsedUrlQuery } from 'next/dist/server/request-meta';
 
-export type GetterOptions = {
+type GetterOptions = {
 	params?: NextParsedUrlQuery;
 };
 

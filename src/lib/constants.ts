@@ -10,7 +10,7 @@ export interface LanguageConfiguration {
 
 export type SupportedLanguages = Language;
 
-export type LanguageConfigurations = {
+type LanguageConfigurations = {
 	[key in SupportedLanguages]: LanguageConfiguration;
 };
 
@@ -62,10 +62,10 @@ export const LANGUAGES: LanguageConfigurations = {
 	},
 };
 
-export const IS_DEVELOPMENT =
+const IS_DEVELOPMENT =
 	process.env.NODE_ENV === 'development' ||
 	process.env.ENV_OVERRIDE === 'development';
-export const IS_PRODUCTION_DEPLOYMENT = process.env.VERCEL_ENV === 'production';
+const IS_PRODUCTION_DEPLOYMENT = process.env.VERCEL_ENV === 'production';
 export const DETAIL_PRERENDER_LIMIT = IS_PRODUCTION_DEPLOYMENT ? 25 : 2;
 export const LIST_PRERENDER_LIMIT = IS_PRODUCTION_DEPLOYMENT ? 10 : 1;
 export const REVALIDATE = 4 * 60 * 60;
@@ -162,7 +162,10 @@ export enum BaseColors {
 	STORY_B = 'storyB',
 	STORY_H = 'storyH',
 	TOPIC_B = 'topicB',
-	PLAYLIST_H = 'playlistH',
 	PLAYLIST_B = 'playlistB',
 	SMART_PLAYLIST_H = 'smartPlaylistH',
 }
+
+export const LOG_NETWORK_REQUESTS = process.env.LOG_NETWORK_REQUESTS === 'true';
+export const DISABLE_NETWORK_MEMOIZATION =
+	process.env.DISABLE_NETWORK_MEMOIZATION === 'true';

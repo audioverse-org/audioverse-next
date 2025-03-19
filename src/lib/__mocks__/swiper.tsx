@@ -3,7 +3,7 @@ import * as swiper from 'swiper';
 import { SwiperEvents } from 'swiper/types';
 import { ValueOf } from 'type-fest';
 
-import { HTMLSwiperElement, SwiperProps } from '~lib/swiper';
+import { HTMLSwiperElement, SwiperProps } from '~/lib/swiper';
 
 declare module '~lib/swiper' {
 	export const __eventHandlers: EventHandlers;

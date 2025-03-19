@@ -13,9 +13,9 @@ import Tease from '~components/molecules/tease';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
 import { useFormattedDuration } from '~lib/time';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import { SequenceContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import { GetSongBooksDetailPageDataQuery } from './__generated__/detail';
 import styles from './detail.module.scss';

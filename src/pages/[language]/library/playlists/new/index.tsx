@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 
 import { getLanguageIdByRoute } from '~src/lib/getLanguageIdByRoute';
-import useLanguageRoute from '~src/lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import PlaylistForm, {
 	PlaylistProps,

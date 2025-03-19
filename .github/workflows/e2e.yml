@@ -3,8 +3,7 @@ on: [deployment_status]
 jobs:
   accessibility:
     if: github.event.deployment_status.state == 'success'
-    # WORKAROUND: https://github.com/pa11y/pa11y/issues/651
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     permissions:
       checks: read
       pull-requests: write
@@ -47,7 +46,7 @@ jobs:
             ${{github.event.deployment_status.target_url}}/en/discover
             ${{github.event.deployment_status.target_url}}/en/teachings/all/page/1
             ${{github.event.deployment_status.target_url}}/en/teachings/300
-            ${{github.event.deployment_status.target_url}}/en/bibles
+            ${{github.event.deployment_status.target_url}}/en/bibles/ENGKJV2
             ${{github.event.deployment_status.target_url}}/en/presenters/1309/amanda-anguish
           runs: 3
           temporaryPublicStorage: true

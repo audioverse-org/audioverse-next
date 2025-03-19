@@ -308,41 +308,14 @@
   "audiobookList__heading": {
     "string": "Todos Audiolivros"
   },
-  "bibleBook__backToChapter": {
-    "string": "Voltar para as informações do capítulo"
-  },
-  "bibleBook__chapterListTitle": {
-    "string": "Outros capítulos do livro"
-  },
-  "bibleBook__disclaimer": {
-    "string": "Os termos e condições do uso das Bíblias em aúdio da “Faith Comes By Hearing” impedem a opção de download e a integração de certos recursos em nossa plataforma."
-  },
-  "bibleBook__readAlong": {
-    "string": "Leia junto"
-  },
-  "bibleBook__typeLabel": {
-    "string": "Bíblia versão King James"
-  },
   "bibleVersionTypeLockup__type": {
     "string": "Versão da Bíblia"
-  },
-  "bibleVersion__booksLabel": {
-    "string": "66 livros"
   },
   "bibleVersion__description": {
     "string": "Descrição"
   },
   "bibleVersion__sponsorLabel": {
     "string": "Patrocinador"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Site"
-  },
-  "bibleVersions__heading": {
-    "string": "Bíblia"
-  },
-  "bibleVersions__intro": {
-    "string": "A melhor forma de aprender sobre a sã doutrina é por meio da Palavra de Deus. Com as nossas Bíblias em áudio, você poderá ouvir grandes ensinamentos do maior professor de todos."
   },
   "bible__title": {
     "string": "Bíblia"
@@ -366,18 +339,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{assunto} no AudioVerse"
-  },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{contar} capítulos"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abreviação} Bíblia"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66 livros"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Mostrar todos"
   },
   "cardCollection__showAll": {
     "string": "Mostrar todos"
@@ -1545,9 +1506,6 @@
     "comment": "gravando a etiqueta do botão anterior",
     "string": "Anterior"
   },
-  "organism-recording__collectionInfoTitle": {
-    "string": "Bíblia Sagrada"
-  },
   "organism-recording__conferenceInfoTitle": {
     "comment": "Título da Conferencia de gravação",
     "string": "Conferencia principal"
@@ -2037,10 +1995,10 @@
     "string": "As ideias nesta gravação são as de seus colaboradores e podem não necessariamente refletir a visão do AudioVerse."
   },
   "sermonDetailPage__openGraphDescription_audiobook": {
-    "string": "Audiobook fornecido por {patrocinadorNome}"
+    "string": "Audiobook fornecido por {sponsorName}"
   },
   "sermonDetailPage__openGraphDescription_bibleChapter": {
-    "string": "Capítulo da Bíblia fornecido pelo {patrocinadorNome}"
+    "string": "Capítulo da Bíblia fornecido pelo {sponsorName}"
   },
   "sermonDetailPage__openGraphDescription_music": {
     "string": "Música por {speakerName}"
@@ -2157,7 +2115,7 @@
     "string": "Sermões por {nome}"
   },
   "sponsorsConferences__title": {
-    "string": "Conferencias por {patrocinadorNome}"
+    "string": "Conferencias por {sponsorName}"
   },
   "sponsorsList__title": {
     "string": "Todos patrocinadores"
@@ -2744,5 +2702,31 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "passageNavigation__selector-grid": {
+    "comment": "Switch to grid view",
+    "string": "Grid"
+  },
+  "passageNavigation__selector-list": {
+    "comment": "Switch to list view",
+    "string": "List"
+  },
+  "organism-recording__collectionInfoTitle": {
+    "string": "Parent Bible"
+  },
+  "molecule-bibleVersionTophat__disabledTooltip": {
+    "string": "The displayed chapter is unavailable in this version"
+  },
+  "bibleChapter__chapterListTitle": {
+    "string": "Outros capítulos do livro"
+  },
+  "bibleChapter__disclaimer": {
+    "string": "Os termos e condições do uso das Bíblias em aúdio da “Faith Comes By Hearing” impedem a opção de download e a integração de certos recursos em nossa plataforma."
+  },
+  "container-version__loading": {
+    "string": "Carregando..."
+  },
+  "container-version__notFound": {
+    "string": "Chapter not found"
   }
 }

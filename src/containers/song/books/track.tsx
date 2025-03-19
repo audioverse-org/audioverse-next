@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Recording } from '~components/organisms/recording';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
 import AndFailStates from '~src/components/templates/andFailStates';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import { Must } from '~src/types/types';
 
 import { GetBookSongDetailDataQuery } from './__generated__/track';
 
-export type SongTrack = NonNullable<GetBookSongDetailDataQuery['musicTrack']>;
+type SongTrack = NonNullable<GetBookSongDetailDataQuery['musicTrack']>;
 
 export interface SongBookTrackProps {
 	book: string;

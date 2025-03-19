@@ -1,0 +1,24 @@
+fragment passageNavigationChapter on Recording {
+	id
+	title
+}
+
+fragment passageNavigationBook on Sequence {
+	id
+	title
+}
+
+fragment passageNavigationVersionFull on Collection {
+	id
+	title
+	sequences {
+		nodes {
+			...passageNavigationBook
+		}
+	}
+}
+
+fragment passageNavigationVersion on Collection {
+	id
+	title
+}

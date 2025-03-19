@@ -1,0 +1,5 @@
+query getGraphqlChapter($chapterId: ID!) {
+	recording(id: $chapterId) {
+		...bibleChapterDetailChapterFull
+	}
+}

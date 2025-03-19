@@ -41,26 +41,14 @@
   "audiobookList__heading": {
     "string": "全てのオーディオブック"
   },
-  "bibleBook__chapterListTitle": {
-    "string": "この本の中の他の章"
-  },
   "bibleVersionTypeLockup__type": {
     "string": "聖書バージョン"
-  },
-  "bibleVersion__booksLabel": {
-    "string": "66巻"
   },
   "bibleVersion__description": {
     "string": "内容詳細"
   },
   "bibleVersion__sponsorLabel": {
     "string": "主催者"
-  },
-  "bibleVersions__heading": {
-    "string": "聖書"
-  },
-  "bibleVersions__intro": {
-    "string": "確実な教理を学ぶ方法は、神の御言葉を聞くのがベスト。オーディオバイブルを通して最も偉大な教師から最も大切な教え聞くことができます。"
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -69,15 +57,6 @@
   "blogDetailPage__readingDuration": {
     "comment": "Blog post detail reading duration",
     "string": "{duration}分"
-  },
-  "cardBibleBook__chaptersLabel": {
-    "string": "{count}章"
-  },
-  "cardBibleBook__typeLabel": {
-    "string": "{abbreviation}聖書"
-  },
-  "cardBibleVersion__booksLabel": {
-    "string": "66巻"
   },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
@@ -1113,9 +1092,6 @@
   "app__features5Kicker": {
     "string": "項目を任意のデバイスにダウンロードして、電波がない時でも、データーの容量を節約したい時にでも視聴できる。"
   },
-  "bibleBook__disclaimer": {
-    "string": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
-  },
   "cardPost__typeLabel": {
     "string": "ブログ"
   },
@@ -1642,18 +1618,6 @@
     "comment": "Image alt text for the fifth feature",
     "string": "The download button on a sermon by Don Mackintosh"
   },
-  "bibleBook__backToChapter": {
-    "string": "Back to Chapter Info"
-  },
-  "bibleBook__readAlong": {
-    "string": "Read Along"
-  },
-  "bibleBook__typeLabel": {
-    "string": "KJV Bible"
-  },
-  "bibleVersion__websiteLabel": {
-    "string": "Website"
-  },
   "bible__title": {
     "string": "聖書"
   },
@@ -1677,9 +1641,6 @@
   },
   "buttonShare__emailSubjectSuffix": {
     "string": "{subject} on AudioVerse"
-  },
-  "cardBibleVersion__showAll": {
-    "string": "Show All"
   },
   "cardCollection__showAll": {
     "string": "Show All"
@@ -2264,9 +2225,6 @@
   "organism-recording__backToChapterInfo": {
     "string": "Back to Chapter Info"
   },
-  "organism-recording__collectionInfoTitle": {
-    "string": "Parent Bible"
-  },
   "organism-recording__readAlongLabel": {
     "string": "Read Along"
   },
@@ -2744,5 +2702,31 @@
   },
   "organismSection_TeachingsPrevious": {
     "string": "Previous Teachings"
+  },
+  "passageNavigation__selector-grid": {
+    "comment": "Switch to grid view",
+    "string": "Grid"
+  },
+  "passageNavigation__selector-list": {
+    "comment": "Switch to list view",
+    "string": "List"
+  },
+  "organism-recording__collectionInfoTitle": {
+    "string": "Parent Bible"
+  },
+  "molecule-bibleVersionTophat__disabledTooltip": {
+    "string": "The displayed chapter is unavailable in this version"
+  },
+  "bibleChapter__chapterListTitle": {
+    "string": "この本の中の他の章"
+  },
+  "bibleChapter__disclaimer": {
+    "string": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
+  },
+  "container-version__loading": {
+    "string": "Loading..."
+  },
+  "container-version__notFound": {
+    "string": "Chapter not found"
   }
 }

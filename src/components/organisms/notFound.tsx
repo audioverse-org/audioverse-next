@@ -8,7 +8,7 @@ import Button from '~components/molecules/button';
 import CardRecording from '~components/molecules/card/recording';
 import CardGroup from '~components/molecules/cardGroup';
 import root from '~lib/routes';
-import useLanguageRoute from '~lib/useLanguageRoute';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 
 import { GetNotFoundPageDataQuery } from './__generated__/notFound';
 import styles from './notFound.module.scss';

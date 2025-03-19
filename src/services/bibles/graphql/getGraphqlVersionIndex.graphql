@@ -1,0 +1,18 @@
+query doGetGraphqlVersionIndex($collectionId: ID!) {
+	collection(id: $collectionId) {
+		id
+		title
+		sequences(first: 66) {
+			nodes {
+				id
+				title
+				recordings(first: 150) {
+					nodes {
+						id
+						title
+					}
+				}
+			}
+		}
+	}
+}

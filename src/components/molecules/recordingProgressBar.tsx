@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
-import usePlaybackSession from '~lib/usePlaybackSession';
+import usePlaybackSession from '~src/lib/hooks/usePlaybackSession';
 
 import ProgressBar from '../atoms/progressBar';
 

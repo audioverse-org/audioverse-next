@@ -3,7 +3,7 @@ import { FormattedMessage, IntlShape } from 'react-intl';
 
 import root from '~lib/routes';
 
-export type IAppFeature = {
+type IAppFeature = {
 	heading: JSX.Element;
 	kicker: JSX.Element;
 	cta: JSX.Element;

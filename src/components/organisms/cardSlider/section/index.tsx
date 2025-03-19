@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import LineHeading from '~components/atoms/lineHeading';
 import CardSlider from '~components/organisms/cardSlider';
 import { BaseColors } from '~src/lib/constants';
-import { useLanguageId } from '~src/lib/useLanguageId';
+import { useLanguageId } from '~src/lib/hooks/useLanguageId';
 import {
 	GraphqlInfiniteQuery,
 	InferGraphqlInfiniteQueryType,
@@ -13,7 +13,7 @@ import {
 
 import styles from './index.module.scss';
 
-const PRELOAD_COUNT = 3;
+const PRELOAD_COUNT = 1;
 
 export type SectionNode<T> = T & {
 	canonicalPath: string;
