@@ -10,4 +10,3 @@ generated
 /.lighthouseci
 **/__generated__/**/*
 schema.graphql
-fcbh-bibles.json
