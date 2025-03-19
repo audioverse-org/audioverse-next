@@ -62,7 +62,9 @@ function getChapterId(book: IBibleBook, chapter: number) {
 }
 
 function getLogUrl(bookName: string, chapter: number) {
-	return `https://www.audioverse.org/en/download/audiobible/KJV_${bookName.replace(/ /g, '')}_${chapter}/filename.mp3`;
+	const b = bookName.replace(/ /g, '');
+	const d = String(chapter).padStart(2, '0');
+	return `https://www.audioverse.org/en/download/audiobible/KJV_${b}_${d}/filename.mp3`;
 }
 
 interface AudioFile {
