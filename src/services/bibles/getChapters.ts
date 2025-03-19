@@ -44,7 +44,7 @@ export default async function getChapters(
 	const chapters = result?.recordings.nodes;
 
 	if (chapters && chapters.length > 0) {
-		return chapters.map((chapter) => {
+		return chapters.map((chapter): BibleChapterDetailChapterPartialFragment => {
 			const chapterNumber = parseChapterNumber(chapter.title);
 
 			const canonicalPath = root
