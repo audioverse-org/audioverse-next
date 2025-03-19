@@ -34,6 +34,22 @@ describe('transformChapterFull', () => {
 
 		expect(chapter.canonicalPath).toBe('/en/bibles/ENGKJV2/SNG/1');
 	});
+
+	it('sets logUrl in correct format', async () => {
+		const chapter = await transformChapterFull(fcbhBookFixture, 1);
+
+		expect(chapter.audioFiles[0].logUrl).toMatch(
+			/^https:\/\/www\.audioverse\.org\/en\/download\/audiobible\/KJV_[^_]+_\d+\/filename\.mp3$/,
+		);
+	});
+
+	it('encodes book name in log url', async () => {
+		const chapter = await transformChapterFull(fcbhBookFixture, 1);
+
+		expect(chapter.audioFiles[0].logUrl).toMatch(
+			/^https:\/\/www\.audioverse\.org\/en\/download\/audiobible\/KJV_SongOfSolomon_1\/filename\.mp3$/,
+		);
+	});
 });
 
 describe('transformChapterPartial', () => {
