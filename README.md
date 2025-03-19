@@ -19,13 +19,15 @@ Open [http://localhost:3000](http://localhost:3000) in browser.
 
 ## Translation
 
-Extract all translatable strings to `public/lang/en.json` using
-`npm run extract`.
+Extract and compile all translatable strings using:
 
-Modify and add files in `public/lang` to translate strings.
+```bash
+npm run intl
+```
 
-Run `npm run compile` to compile translated strings into
-machine-readable files in `public/compiled-lang`.
+Modify files in `public/lang` to translate strings.
+
+The compiled translations will be available in `public/compiled-lang`.
 
 ## GraphQL Code Generation
 

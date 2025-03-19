@@ -132,7 +132,7 @@ Each component should have its own directory if it needs additional files:
 ### Internationalization
 
 - Use react-intl for translations
-- Extract strings with `npm run intl`
+- Run `npm run intl` to extract and compile translations
 - Support multiple languages defined in `src/lib/constants.ts`
 - Always provide default English messages
 
