@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import getBookMeta from '~src/services/bibles/getBookName';
+import getBookMeta from '~src/services/bibles/getBookMeta';
 
 import { Book } from '.';
 import styles from './bookGrid.module.scss';

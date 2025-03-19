@@ -12,7 +12,7 @@ import root from '~src/lib/routes';
 import { FCBH_VERSIONS } from '../constants';
 import { fetchFcbhChapterMediaUrl } from '../fcbh/fetchFcbhChapterMediaUrl';
 import { getFcbhFilesetId } from '../fcbh/getFcbhFilesetId';
-import getBookMeta from '../getBookName';
+import getBookMeta from '../getBookMeta';
 import { IBibleBook } from '../types';
 
 function getCanonicalPath(book: IBibleBook, chapter: number): string {

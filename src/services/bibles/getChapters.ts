@@ -3,7 +3,7 @@ import root from '~src/lib/routes';
 
 import { getGraphqlChapters } from './__generated__/getChapters';
 import getFcbhBook from './fcbh/getFcbhBook';
-import getBookMeta from './getBookName';
+import getBookMeta from './getBookMeta';
 import { getGraphqlBookId } from './graphql/getGraphqlBookId';
 import { transformChapterPartial } from './transforms/chapterTransforms';
 import { parseChapterNumber } from './utils';

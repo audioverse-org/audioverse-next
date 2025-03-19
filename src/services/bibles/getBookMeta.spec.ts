@@ -1,4 +1,4 @@
-import getBookMeta from './getBookName';
+import getBookMeta from './getBookMeta';
 
 describe('getBookMeta', () => {
 	const testCases: { input: string; expected: string | undefined }[] = [

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import isServerSide from '~src/lib/isServerSide';
-import getBookMeta from '~src/services/bibles/getBookName';
+import getBookMeta from '~src/services/bibles/getBookMeta';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
 import getVersion from '~src/services/bibles/getVersion';

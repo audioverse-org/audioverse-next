@@ -1,4 +1,4 @@
-import getBookMeta from '../getBookName';
+import getBookMeta from '../getBookMeta';
 import { getGraphqlVersionIndex } from './getGraphqlVersionIndex';
 
 /**
