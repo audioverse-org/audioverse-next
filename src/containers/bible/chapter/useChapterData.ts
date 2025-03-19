@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
 import isServerSide from '~src/lib/isServerSide';
-import getBible from '~src/services/bibles/getBible';
 import getBookMeta from '~src/services/bibles/getBookName';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
+import getVersion from '~src/services/bibles/getVersion';
 import getVersions from '~src/services/bibles/getVersions';
 
 export function useChapterData(params: {
@@ -18,7 +18,7 @@ export function useChapterData(params: {
 
 	const version = useQuery({
 		queryKey: ['bibleVersion', versionId],
-		queryFn: () => getBible(versionId),
+		queryFn: () => getVersion(versionId),
 		enabled: !!versionId && !isServerSide(),
 	});
 

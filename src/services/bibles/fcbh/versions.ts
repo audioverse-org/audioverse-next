@@ -1,6 +1,6 @@
 import { IBibleVersion } from '../types';
 
-export const data: IBibleVersion[] = [
+const versions: IBibleVersion[] = [
 	{
 		description:
 			'The King James Version, commonly known as the Authorized Version or King James Bible, is an English translation of the Christian Bible for the Church of England begun in 1604 and completed in 1611.',
@@ -828,3 +828,5 @@ export const data: IBibleVersion[] = [
 		abbreviation: 'KJV',
 	},
 ];
+
+export default versions;

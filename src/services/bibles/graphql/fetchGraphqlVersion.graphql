@@ -1,4 +1,4 @@
-query doFetchGraphqlBible($collectionId: ID!) {
+query doFetchGraphqlVersion($collectionId: ID!) {
 	collection(id: $collectionId) {
 		id
 		title

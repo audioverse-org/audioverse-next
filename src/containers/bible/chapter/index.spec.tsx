@@ -16,16 +16,15 @@ import {
 	CollectionContentType,
 	RecordingContentType,
 } from '~src/__generated__/graphql';
-import getBible from '~src/services/bibles/getBible';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
+import getVersion from '~src/services/bibles/getVersion';
 import getVersions from '~src/services/bibles/getVersions';
 
-jest.mock('~services/bibles/fcbh/getFcbhBible');
-jest.mock('~services/bibles/fcbh/getFcbhBibles');
-jest.mock('~services/bibles/getBible');
+jest.mock('~services/bibles/fcbh/getFcbhVersion');
 jest.mock('~services/bibles/getChapter');
 jest.mock('~services/bibles/getChapters');
+jest.mock('~services/bibles/getVersion');
 jest.mock('~services/bibles/getVersions');
 jest.mock('~services/bibles/graphql/getGraphqlVersionIndex');
 jest.mock('p-timeout');
@@ -77,7 +76,7 @@ describe('Bible chapter detail page', () => {
 			},
 		]);
 
-		jest.mocked(getBible).mockResolvedValue({
+		jest.mocked(getVersion).mockResolvedValue({
 			id: 'ENGKJV',
 			title: 'King James Version',
 			description: 'The Bible in English',

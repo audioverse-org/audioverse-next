@@ -3,10 +3,10 @@ import {
 	SequenceContentType,
 } from '~src/__generated__/graphql';
 
-import { GraphqlBible } from '../graphql/fetchGraphqlBible';
+import { GraphqlVersion } from '../graphql/fetchGraphqlVersion';
 import { IBibleVersion } from '../types';
 
-export function transformVersion(val: IBibleVersion): GraphqlBible {
+export function transformVersion(val: IBibleVersion): GraphqlVersion {
 	return {
 		__typename: 'Collection',
 		id: val.id,

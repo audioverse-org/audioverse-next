@@ -1,4 +1,4 @@
-import getFcbhBible from './getFcbhBible';
+import getFcbhVersion from './getFcbhVersion';
 
 /**
  * Checks if an FCBH Bible version has a specific chapter
@@ -12,7 +12,7 @@ export default function doesFcbhVersionHaveChapter(
 	bookId: string,
 	chapterNumber: number,
 ): boolean {
-	const fcbhBible = getFcbhBible(versionId);
+	const fcbhBible = getFcbhVersion(versionId);
 
 	if (!fcbhBible) {
 		return false;

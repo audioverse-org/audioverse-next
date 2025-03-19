@@ -1,11 +1,11 @@
 import { IBibleBook } from '../types';
-import getFcbhBible from './getFcbhBible';
+import getFcbhVersion from './getFcbhVersion';
 
 export default async function getFcbhBook(
 	versionId: string,
 	bookId: string,
 ): Promise<IBibleBook> {
-	const fcbhBible = getFcbhBible(versionId);
+	const fcbhBible = getFcbhVersion(versionId);
 
 	if (!fcbhBible) {
 		throw new Error(`Bible ${versionId} not found`);
