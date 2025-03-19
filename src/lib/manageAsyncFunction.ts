@@ -18,13 +18,15 @@ interface PromiseWrapperOptions {
 	retryMaxTimeoutMs?: number;
 }
 
+const isBuild = process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD;
+
 const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
 	concurrencyLimit: 1,
 	throttleLimit: 3,
 	throttleIntervalMs: 1000,
-	timeoutMs: process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD ? 30000 : 5000,
+	timeoutMs: isBuild ? 30000 : 5000,
 	retries: 1,
-	retryMinTimeoutMs: 1000,
+	retryMinTimeoutMs: isBuild ? 10000 : 1000,
 	retryMaxTimeoutMs: 10000,
 };
 
