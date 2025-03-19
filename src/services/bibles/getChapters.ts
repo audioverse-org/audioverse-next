@@ -57,6 +57,7 @@ export default async function getChapters(
 			return {
 				...chapter,
 				canonicalPath,
+				shareUrl: canonicalPath,
 			};
 		});
 	}
