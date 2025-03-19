@@ -19,23 +19,22 @@ async function doPrefetch<T extends Key>(
 	v: Vars[T],
 	client: QueryClient,
 ) {
+	// WORKAROUND: TypeScript cannot infer the correct parameter type for the union of functions in fns.
+	// The type assertion is necessary because each function in fns has its own specific parameter type,
+	// and TypeScript cannot narrow down the union type correctly in this context.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const r = await fns[k](v as any);
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const hasVars = Object.keys(v as any).length > 0;
-	const queryKey = hasVars ? [k, v] : [k];
-	const infiniteQueryKey = hasVars ? [`${k}.infinite`, v] : [`${k}.infinite`];
+	const result = await fns[k](v as any);
+	const hasVars = Object.keys(v as Record<string, unknown>).length > 0;
 
 	await client.prefetchQuery({
-		queryKey,
-		queryFn: () => r,
+		queryKey: hasVars ? [k, v] : [k],
+		queryFn: () => result,
 		...options,
 	});
 
 	await client.prefetchInfiniteQuery({
-		queryKey: infiniteQueryKey,
-		queryFn: () => r,
+		queryKey: hasVars ? [`${k}.infinite`, v] : [`${k}.infinite`],
+		queryFn: () => result,
 		initialPageParam: null,
 		...options,
 	});
