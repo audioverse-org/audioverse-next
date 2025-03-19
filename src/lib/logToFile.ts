@@ -2,6 +2,8 @@ export async function logToFile(path: string, ...args: unknown[]) {
 	if (typeof window !== 'undefined') return;
 
 	try {
+		// WORKAROUND: `fs` isn't guaranteed to be available, so we need to require
+		// it dynamically to allow us to fail gracefully.
 		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		const fs = require('fs');
 
