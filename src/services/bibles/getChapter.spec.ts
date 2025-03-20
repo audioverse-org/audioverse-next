@@ -2,8 +2,10 @@ import { fetchApi } from '~lib/api/fetchApi';
 import root from '~src/lib/routes';
 
 import getChapter from './getChapter';
+import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 
+jest.mock('./graphql/fetchChapterText');
 jest.mock('./graphql/getGraphqlChapterId');
 
 const chapterFixture = {
@@ -30,10 +32,18 @@ const chapterFixture = {
 			duration: 123,
 		},
 	],
+	sequencePreviousRecording: {
+		canonicalPath: 'graphql_previous',
+	},
+	sequenceNextRecording: {
+		canonicalPath: 'graphql_next',
+	},
 };
 
 describe('getChapter', () => {
 	beforeEach(() => {
+		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
+
 		jest.mocked(getGraphqlChapterId).mockResolvedValue('graphql-123');
 
 		jest.mocked(fetchApi).mockResolvedValue({
@@ -59,5 +69,65 @@ describe('getChapter', () => {
 			.get();
 
 		expect(result?.canonicalPath).toBe(expectedPath);
+	});
+
+	it('sets chapter text', async () => {
+		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
+
+		const result = await getChapter('ENGKJV2', 'GEN', 1);
+
+		expect(result?.transcript?.text).toBe('In the beginning...');
+	});
+
+	it('returns FCBH chapter with audio files', async () => {
+		const result = await getChapter('ENGKJV2', 'GEN', 1);
+
+		expect(result?.audioFiles).toBeDefined();
+		expect(result?.audioFiles?.length).toBe(1);
+	});
+
+	it('sets sequencePreviousRecording and sequenceNextRecording', async () => {
+		const result = await getChapter('ENGKJV2', 'GEN', 2);
+
+		expect(result?.sequencePreviousRecording).toBeTruthy();
+		expect(result?.sequenceNextRecording).toBeTruthy();
+	});
+
+	it('does not set sequencePreviousRecording for the first chapter', async () => {
+		const result = await getChapter('ENGKJV2', 'GEN', 1);
+
+		expect(result?.sequencePreviousRecording).toBeNull();
+	});
+
+	it('does not set sequenceNextRecording for the last chapter', async () => {
+		const result = await getChapter('ENGKJV2', 'GEN', 50);
+
+		expect(result?.sequenceNextRecording).toBeNull();
+	});
+
+	it('sets sequencePreviousRecording and sequenceNextRecording for a GraphQL chapter', async () => {
+		const result = await getChapter('456', 'GEN', 2);
+
+		expect(result?.sequencePreviousRecording).toBeTruthy();
+		expect(result?.sequenceNextRecording).toBeTruthy();
+	});
+
+	it('does not set sequencePreviousRecording if GraphQL chapter is first chapter', async () => {
+		const result = await getChapter('456', 'GEN', 1);
+
+		expect(result?.sequencePreviousRecording).toBeNull();
+	});
+
+	it('does not set sequenceNextRecording if GraphQL chapter is last chapter', async () => {
+		jest.mocked(fetchApi).mockResolvedValue({
+			recording: {
+				...chapterFixture,
+				sequenceNextRecording: null,
+			},
+		});
+
+		const result = await getChapter('456', 'GEN', 50);
+
+		expect(result?.sequenceNextRecording).toBeNull();
 	});
 });

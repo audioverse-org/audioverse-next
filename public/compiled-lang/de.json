@@ -689,6 +689,12 @@
       "value": "Alle Hörbücher"
     }
   ],
+  "bibleChapter__backToChapter": [
+    {
+      "type": 0,
+      "value": "Back to Chapter Info"
+    }
+  ],
   "bibleChapter__chapterListTitle": [
     {
       "type": 0,
@@ -699,6 +705,12 @@
     {
       "type": 0,
       "value": "Die allgemeinen Geschäftsbedingungen für die Nutzung der Audiobibeln von Faith Comes By Hearing unterbinden das Herunterladen sowie die Integration bestimmter Funktionen auf unserer Plattform."
+    }
+  ],
+  "bibleChapter__readAlong": [
+    {
+      "type": 0,
+      "value": "Read Along"
     }
   ],
   "bibleVersionTypeLockup__type": [

@@ -5,6 +5,8 @@ import Heading1 from '~components/atoms/heading1';
 import LineHeading from '~components/atoms/lineHeading';
 import BibleVersionTophat from '~components/molecules/bibleVersionTophat';
 import { BibleVersionTophatFragment } from '~components/molecules/bibleVersionTophat/__generated__';
+import Button from '~components/molecules/button';
+import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '~components/molecules/definitionList';
@@ -14,6 +16,8 @@ import Tease from '~components/molecules/tease';
 import TeaseRecording from '~components/molecules/teaseRecording';
 import { BaseColors } from '~lib/constants';
 import root from '~lib/routes';
+import IconBack from '~public/img/icons/icon-back-light.svg';
+import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
@@ -51,27 +55,13 @@ const Chapter = ({
 		});
 
 	const languageRoute = useLanguageRoute();
-	const currentChapterNumber = chapter ? parseChapterNumber(chapter.title) : -1;
+	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
-	const [scrollPosition, setScrollPosition] = useState(0);
 	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version?.id);
 	const shouldAllowDownload = allowedDownloadVersions.includes(
 		version?.id || 0,
 	);
-
-	useEffect(() => {
-		if (!scrollRef.current || !currentRef.current) {
-			return;
-		}
-		const scroller = scrollRef.current;
-		scroller.scrollTo({ top: currentRef.current.offsetTop - 32 });
-		const saveScrollPosition = (e: Event) => {
-			setScrollPosition((e.target as HTMLElement).scrollTop);
-		};
-		scroller.addEventListener('scroll', saveScrollPosition);
-		return () => scroller.removeEventListener('scroll', saveScrollPosition);
-	}, [currentChapterNumber]);
 
 	useEffect(() => {
 		if (!chapter) return;
@@ -152,37 +142,80 @@ const Chapter = ({
 						.lang(languageRoute)
 						.bibles.versionId(v.id)
 						.fcbhId(book.id.toString())
-						.chapterNumber(currentChapterNumber)
+						.chapterNumber(chapterNumber)
 						.get({ params: { autoplay: 'true' } })
 				}
 				hatUrl={root.lang(languageRoute).bibles.versionId(version.id).get()}
 				bookName={book.title}
-				chapterNumber={currentChapterNumber}
+				chapterNumber={chapterNumber}
 			/>
 			<div className={styles.content}>
 				<div className={styles.main}>
-					<Heading1>{chapter?.title}</Heading1>
-					<div className={styles.sequenceNav}>
-						<SequenceNav recording={chapter} useInverse={false} />
-					</div>
-					<Player
-						recording={chapter}
-						playlistRecordings={chapters.slice(
-							chapters.findIndex((_c) => _c.id === chapter?.id),
-						)}
-						backgroundColor={BaseColors.BIBLE_B}
-						disableUserFeatures={shouldAllowDownload}
-					/>
-					<div className={styles.definitions}>
-						<DefinitionList terms={details} textColor={BaseColors.DARK} />
-					</div>
-					{isFcbhVersion && (
-						<div className={styles.disclaimer}>
-							<FormattedMessage
-								id="bibleChapter__disclaimer"
-								defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+					{showingText ? (
+						<>
+							<Button
+								type="secondary"
+								text={
+									<FormattedMessage
+										id="bibleChapter__backToChapter"
+										defaultMessage="Back to Chapter Info"
+									/>
+								}
+								IconLeft={IconBack}
+								onClick={() => setShowingText(false)}
+								className={styles.backButton}
 							/>
-						</div>
+							<Heading1>{chapter?.title}</Heading1>
+							<ContentWidthLimiter>
+								<div
+									className={styles.chapterText}
+									dangerouslySetInnerHTML={{
+										__html: chapter?.transcript?.text || '',
+									}}
+								/>
+							</ContentWidthLimiter>
+						</>
+					) : (
+						<>
+							<Heading1>{chapter?.title}</Heading1>
+							<div className={styles.sequenceNav}>
+								<SequenceNav recording={chapter} useInverse={false} />
+							</div>
+							<Player
+								recording={chapter}
+								playlistRecordings={chapters.slice(
+									chapters.findIndex((_c) => _c.id === chapter?.id),
+								)}
+								backgroundColor={BaseColors.BIBLE_B}
+								disableUserFeatures={shouldAllowDownload}
+							/>
+							<div className={styles.definitions}>
+								<DefinitionList terms={details} textColor={BaseColors.DARK} />
+							</div>
+							{isFcbhVersion && (
+								<div className={styles.disclaimer}>
+									<FormattedMessage
+										id="bibleChapter__disclaimer"
+										defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+									/>
+								</div>
+							)}
+							{chapter.transcript && (
+								<div className={styles.readAlong}>
+									<Button
+										type="secondary"
+										text={
+											<FormattedMessage
+												id="bibleChapter__readAlong"
+												defaultMessage="Read Along"
+											/>
+										}
+										IconLeft={IconBlog}
+										onClick={() => setShowingText(!showingText)}
+									/>
+								</div>
+							)}
+						</>
 					)}
 				</div>
 
@@ -206,9 +239,7 @@ const Chapter = ({
 									<div
 										className={styles.item}
 										key={chapter.id}
-										ref={
-											number === currentChapterNumber ? currentRef : undefined
-										}
+										ref={number === chapterNumber ? currentRef : undefined}
 									>
 										<TeaseRecording
 											recording={{
@@ -239,10 +270,6 @@ const Chapter = ({
 							})}
 						</div>
 					</div>
-					<div
-						className={styles.overflowShadow}
-						style={{ opacity: Math.min(1, scrollPosition / 100) }}
-					/>
 				</div>
 			</div>
 		</Tease>

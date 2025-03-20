@@ -4,18 +4,30 @@ import root from '~src/lib/routes';
 import { getGraphqlChapter } from './__generated__/getChapter';
 import getFcbhBook from './fcbh/getFcbhBook';
 import getBookMeta from './getBookMeta';
+import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 import { transformChapterFull } from './transforms/chapterTransforms';
+
+type ChapterWithTranscript = BibleChapterDetailChapterFullFragment & {
+	transcript?: { text: string };
+};
 
 export default async function getChapter(
 	versionId: string,
 	bookId: string,
 	chapterNumber: number,
-): Promise<BibleChapterDetailChapterFullFragment> {
+): Promise<ChapterWithTranscript> {
 	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (fcbhBook) {
-		return transformChapterFull(fcbhBook, chapterNumber);
+		const full = await transformChapterFull(fcbhBook, chapterNumber);
+
+		return {
+			...full,
+			transcript: {
+				text: await fetchChapterText(bookId, chapterNumber),
+			},
+		};
 	}
 
 	const bookMeta = getBookMeta(bookId);
@@ -43,16 +55,35 @@ export default async function getChapter(
 		throw new Error(`Chapter not found: ${bookId} ${chapterNumber}`);
 	}
 
-	const canonicalPath = root
-		.lang('en')
-		.bibles.versionId(versionId)
-		.fcbhId(bookId)
-		.chapterNumber(chapterNumber)
-		.get();
+	function getCanonicalPath(bookId: string, chapterNumber: number) {
+		return root
+			.lang('en')
+			.bibles.versionId(versionId)
+			.fcbhId(bookId)
+			.chapterNumber(chapterNumber)
+			.get();
+	}
+
+	const canonicalPath = getCanonicalPath(bookId, chapterNumber);
+	const previousPath =
+		chapterNumber > 1 ? getCanonicalPath(bookId, chapterNumber - 1) : null;
+	const nextPath = chapter.sequenceNextRecording
+		? getCanonicalPath(bookId, chapterNumber + 1)
+		: null;
 
 	return {
 		...chapter,
 		canonicalPath,
 		shareUrl: `https://www.audioverse.org${canonicalPath}`,
+		sequencePreviousRecording: previousPath
+			? {
+					canonicalPath: previousPath,
+				}
+			: null,
+		sequenceNextRecording: nextPath
+			? {
+					canonicalPath: nextPath,
+				}
+			: null,
 	};
 }
