@@ -55,16 +55,35 @@ export default async function getChapter(
 		throw new Error(`Chapter not found: ${bookId} ${chapterNumber}`);
 	}
 
-	const canonicalPath = root
-		.lang('en')
-		.bibles.versionId(versionId)
-		.fcbhId(bookId)
-		.chapterNumber(chapterNumber)
-		.get();
+	function getCanonicalPath(bookId: string, chapterNumber: number) {
+		return root
+			.lang('en')
+			.bibles.versionId(versionId)
+			.fcbhId(bookId)
+			.chapterNumber(chapterNumber)
+			.get();
+	}
+
+	const canonicalPath = getCanonicalPath(bookId, chapterNumber);
+	const previousPath =
+		chapterNumber > 1 ? getCanonicalPath(bookId, chapterNumber - 1) : null;
+	const nextPath = chapter.sequenceNextRecording
+		? getCanonicalPath(bookId, chapterNumber + 1)
+		: null;
 
 	return {
 		...chapter,
 		canonicalPath,
 		shareUrl: `https://www.audioverse.org${canonicalPath}`,
+		sequencePreviousRecording: previousPath
+			? {
+					canonicalPath: previousPath,
+				}
+			: null,
+		sequenceNextRecording: nextPath
+			? {
+					canonicalPath: nextPath,
+				}
+			: null,
 	};
 }

@@ -32,6 +32,12 @@ const chapterFixture = {
 			duration: 123,
 		},
 	],
+	sequencePreviousRecording: {
+		canonicalPath: 'graphql_previous',
+	},
+	sequenceNextRecording: {
+		canonicalPath: 'graphql_next',
+	},
 };
 
 describe('getChapter', () => {
@@ -78,5 +84,50 @@ describe('getChapter', () => {
 
 		expect(result?.audioFiles).toBeDefined();
 		expect(result?.audioFiles?.length).toBe(1);
+	});
+
+	it('sets sequencePreviousRecording and sequenceNextRecording', async () => {
+		const result = await getChapter('ENGKJV2', 'GEN', 2);
+
+		expect(result?.sequencePreviousRecording).toBeTruthy();
+		expect(result?.sequenceNextRecording).toBeTruthy();
+	});
+
+	it('does not set sequencePreviousRecording for the first chapter', async () => {
+		const result = await getChapter('ENGKJV2', 'GEN', 1);
+
+		expect(result?.sequencePreviousRecording).toBeNull();
+	});
+
+	it('does not set sequenceNextRecording for the last chapter', async () => {
+		const result = await getChapter('ENGKJV2', 'GEN', 50);
+
+		expect(result?.sequenceNextRecording).toBeNull();
+	});
+
+	it('sets sequencePreviousRecording and sequenceNextRecording for a GraphQL chapter', async () => {
+		const result = await getChapter('456', 'GEN', 2);
+
+		expect(result?.sequencePreviousRecording).toBeTruthy();
+		expect(result?.sequenceNextRecording).toBeTruthy();
+	});
+
+	it('does not set sequencePreviousRecording if GraphQL chapter is first chapter', async () => {
+		const result = await getChapter('456', 'GEN', 1);
+
+		expect(result?.sequencePreviousRecording).toBeNull();
+	});
+
+	it('does not set sequenceNextRecording if GraphQL chapter is last chapter', async () => {
+		jest.mocked(fetchApi).mockResolvedValue({
+			recording: {
+				...chapterFixture,
+				sequenceNextRecording: null,
+			},
+		});
+
+		const result = await getChapter('456', 'GEN', 50);
+
+		expect(result?.sequenceNextRecording).toBeNull();
 	});
 });

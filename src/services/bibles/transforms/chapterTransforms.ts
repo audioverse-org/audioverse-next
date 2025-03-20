@@ -110,6 +110,10 @@ export async function transformChapterFull(
 	const bookName = getBookName(book);
 	const version = getVersion(book);
 
+	const previousPath = chapter > 1 ? getCanonicalPath(book, chapter - 1) : null;
+	const nextPath =
+		chapter < book.chapters.length ? getCanonicalPath(book, chapter + 1) : null;
+
 	return {
 		id: getChapterId(book, chapter),
 		title: `${bookName} ${chapter}`,
@@ -136,8 +140,16 @@ export async function transformChapterFull(
 		videoStreams: [],
 		videoDownloads: [],
 		audioDownloads: [],
-		sequencePreviousRecording: null,
-		sequenceNextRecording: null,
+		sequencePreviousRecording: previousPath
+			? {
+					canonicalPath: previousPath,
+				}
+			: null,
+		sequenceNextRecording: nextPath
+			? {
+					canonicalPath: nextPath,
+				}
+			: null,
 	};
 }
 
