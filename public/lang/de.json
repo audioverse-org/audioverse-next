@@ -2717,17 +2717,11 @@
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
   },
-  "bibleChapter__backToChapter": {
-    "string": "Back to Chapter Info"
-  },
   "bibleChapter__chapterListTitle": {
     "string": "Andere Kapitel im Buch"
   },
   "bibleChapter__disclaimer": {
     "string": "Die allgemeinen Geschäftsbedingungen für die Nutzung der Audiobibeln von Faith Comes By Hearing unterbinden das Herunterladen sowie die Integration bestimmter Funktionen auf unserer Plattform."
-  },
-  "bibleChapter__readAlong": {
-    "string": "Read Along"
   },
   "container-version__loading": {
     "string": "Loading..."

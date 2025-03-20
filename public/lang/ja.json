@@ -2717,17 +2717,11 @@
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
   },
-  "bibleChapter__backToChapter": {
-    "string": "Back to Chapter Info"
-  },
   "bibleChapter__chapterListTitle": {
     "string": "この本の中の他の章"
   },
   "bibleChapter__disclaimer": {
     "string": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
-  },
-  "bibleChapter__readAlong": {
-    "string": "Read Along"
   },
   "container-version__loading": {
     "string": "Loading..."

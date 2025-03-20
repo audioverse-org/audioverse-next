@@ -689,12 +689,6 @@
       "value": "Все аудиокниги"
     }
   ],
-  "bibleChapter__backToChapter": [
-    {
-      "type": 0,
-      "value": "Back to Chapter Info"
-    }
-  ],
   "bibleChapter__chapterListTitle": [
     {
       "type": 0,
@@ -705,12 +699,6 @@
     {
       "type": 0,
       "value": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
-    }
-  ],
-  "bibleChapter__readAlong": [
-    {
-      "type": 0,
-      "value": "Read Along"
     }
   ],
   "bibleVersionTypeLockup__type": [
