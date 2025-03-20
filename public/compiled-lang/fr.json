@@ -689,6 +689,12 @@
       "value": "Tous les livres audio"
     }
   ],
+  "bibleChapter__backToChapter": [
+    {
+      "type": 0,
+      "value": "Back to Chapter Info"
+    }
+  ],
   "bibleChapter__chapterListTitle": [
     {
       "type": 0,
@@ -699,6 +705,12 @@
     {
       "type": 0,
       "value": "Les conditions contractuelles d'usage des Bibles audio issues de Faith Comes By Hearing empêchent qu'elles soient disponibles au téléchargement et limitent leur intégration à certaines fonctionnalités de notre plate-forme."
+    }
+  ],
+  "bibleChapter__readAlong": [
+    {
+      "type": 0,
+      "value": "Read Along"
     }
   ],
   "bibleVersionTypeLockup__type": [

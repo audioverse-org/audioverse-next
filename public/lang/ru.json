@@ -2717,11 +2717,17 @@
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
   },
+  "bibleChapter__backToChapter": {
+    "string": "Back to Chapter Info"
+  },
   "bibleChapter__chapterListTitle": {
     "string": "Другие главы в книге"
   },
   "bibleChapter__disclaimer": {
     "string": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
+  },
+  "bibleChapter__readAlong": {
+    "string": "Read Along"
   },
   "container-version__loading": {
     "string": "Loading..."
