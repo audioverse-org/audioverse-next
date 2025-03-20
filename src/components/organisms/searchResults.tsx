@@ -15,6 +15,7 @@ import EmptyState from './emptyState';
 import { EntityFilterId } from './searchResults.filters';
 import styles from './searchResults.module.scss';
 import useSearch, { AugmentedFilter } from './searchResults.useResults';
+import { useQueryString } from '~src/lib/hooks/useQueryString';
 
 function SearchHead({ term }: { term?: string }): JSX.Element {
 	const intl = useIntl();
