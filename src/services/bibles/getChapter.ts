@@ -4,6 +4,7 @@ import root from '~src/lib/routes';
 import { getGraphqlChapter } from './__generated__/getChapter';
 import getFcbhBook from './fcbh/getFcbhBook';
 import getBookMeta from './getBookMeta';
+import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 import { transformChapterFull } from './transforms/chapterTransforms';
 
@@ -15,7 +16,14 @@ export default async function getChapter(
 	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (fcbhBook) {
-		return transformChapterFull(fcbhBook, chapterNumber);
+		const full = transformChapterFull(fcbhBook, chapterNumber);
+
+		return {
+			...full,
+			transcript: {
+				text: await fetchChapterText(bookId, chapterNumber),
+			},
+		};
 	}
 
 	const bookMeta = getBookMeta(bookId);
