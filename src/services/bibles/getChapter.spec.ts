@@ -72,4 +72,11 @@ describe('getChapter', () => {
 
 		expect(result?.transcript?.text).toBe('In the beginning...');
 	});
+
+	it('returns FCBH chapter with audio files', async () => {
+		const result = await getChapter('ENGKJV2', 'GEN', 1);
+
+		expect(result?.audioFiles).toBeDefined();
+		expect(result?.audioFiles?.length).toBe(1);
+	});
 });

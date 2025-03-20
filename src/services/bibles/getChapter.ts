@@ -8,15 +8,19 @@ import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 import { transformChapterFull } from './transforms/chapterTransforms';
 
+type ChapterWithTranscript = BibleChapterDetailChapterFullFragment & {
+	transcript?: { text: string };
+};
+
 export default async function getChapter(
 	versionId: string,
 	bookId: string,
 	chapterNumber: number,
-): Promise<BibleChapterDetailChapterFullFragment> {
+): Promise<ChapterWithTranscript> {
 	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (fcbhBook) {
-		const full = transformChapterFull(fcbhBook, chapterNumber);
+		const full = await transformChapterFull(fcbhBook, chapterNumber);
 
 		return {
 			...full,

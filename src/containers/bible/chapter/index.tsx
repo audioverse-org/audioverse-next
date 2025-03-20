@@ -55,28 +55,13 @@ const Chapter = ({
 		});
 
 	const languageRoute = useLanguageRoute();
-	const currentChapterNumber = chapter ? parseChapterNumber(chapter.title) : -1;
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
-	const [scrollPosition, setScrollPosition] = useState(0);
 	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version?.id);
 	const shouldAllowDownload = allowedDownloadVersions.includes(
 		version?.id || 0,
 	);
-
-	useEffect(() => {
-		if (!scrollRef.current || !currentRef.current) {
-			return;
-		}
-		const scroller = scrollRef.current;
-		scroller.scrollTo({ top: currentRef.current.offsetTop - 32 });
-		const saveScrollPosition = (e: Event) => {
-			setScrollPosition((e.target as HTMLElement).scrollTop);
-		};
-		scroller.addEventListener('scroll', saveScrollPosition);
-		return () => scroller.removeEventListener('scroll', saveScrollPosition);
-	}, [currentChapterNumber]);
 
 	useEffect(() => {
 		if (!chapter) return;
@@ -157,12 +142,12 @@ const Chapter = ({
 						.lang(languageRoute)
 						.bibles.versionId(v.id)
 						.fcbhId(book.id.toString())
-						.chapterNumber(currentChapterNumber)
+						.chapterNumber(chapterNumber)
 						.get({ params: { autoplay: 'true' } })
 				}
 				hatUrl={root.lang(languageRoute).bibles.versionId(version.id).get()}
 				bookName={book.title}
-				chapterNumber={currentChapterNumber}
+				chapterNumber={chapterNumber}
 			/>
 			<div className={styles.content}>
 				<div className={styles.main}>
@@ -215,19 +200,21 @@ const Chapter = ({
 									/>
 								</div>
 							)}
-							<div className={styles.readAlong}>
-								<Button
-									type="secondary"
-									text={
-										<FormattedMessage
-											id="bibleChapter__readAlong"
-											defaultMessage="Read Along"
-										/>
-									}
-									IconLeft={IconBlog}
-									onClick={() => setShowingText(!showingText)}
-								/>
-							</div>
+							{chapter.transcript && (
+								<div className={styles.readAlong}>
+									<Button
+										type="secondary"
+										text={
+											<FormattedMessage
+												id="bibleChapter__readAlong"
+												defaultMessage="Read Along"
+											/>
+										}
+										IconLeft={IconBlog}
+										onClick={() => setShowingText(!showingText)}
+									/>
+								</div>
+							)}
 						</>
 					)}
 				</div>
@@ -252,9 +239,7 @@ const Chapter = ({
 									<div
 										className={styles.item}
 										key={chapter.id}
-										ref={
-											number === currentChapterNumber ? currentRef : undefined
-										}
+										ref={number === chapterNumber ? currentRef : undefined}
 									>
 										<TeaseRecording
 											recording={{
@@ -285,10 +270,6 @@ const Chapter = ({
 							})}
 						</div>
 					</div>
-					<div
-						className={styles.overflowShadow}
-						style={{ opacity: Math.min(1, scrollPosition / 100) }}
-					/>
 				</div>
 			</div>
 		</Tease>

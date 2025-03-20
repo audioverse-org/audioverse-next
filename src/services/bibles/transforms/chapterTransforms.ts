@@ -134,7 +134,6 @@ export async function transformChapterFull(
 		audioFiles: await getAudioFiles(book, chapter),
 		videoFiles: [],
 		videoStreams: [],
-		transcript: { text: '' },
 		videoDownloads: [],
 		audioDownloads: [],
 		sequencePreviousRecording: null,
