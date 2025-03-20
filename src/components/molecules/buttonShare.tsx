@@ -3,8 +3,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading6 from '~components/atoms/heading6';
 import { BaseColors } from '~lib/constants';
-import ShareIcon from '~public/img/icons/share-alt.svg';
-import ShareIconLight from '~public/img/icons/share-alt-light.svg';
+import ShareIcon from '~public/img/icons/icon-share.svg';
+import ShareIconLight from '~public/img/icons/icon-share-light.svg';
 import {
 	CatalogEntityType,
 	CollectionContentType,
