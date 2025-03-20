@@ -42,6 +42,7 @@ export default function AndNavigation({
 
 	useEffect(() => {
 		const fn = () => {
+			if (term) setTerm(undefined);
 			if (scrollRef.current) scrollRef.current.scrollTop = 0;
 		};
 
@@ -50,7 +51,7 @@ export default function AndNavigation({
 		return () => {
 			Router.events.off('routeChangeComplete', fn);
 		};
-	}, []);
+	}, [term]);
 
 	return (
 		<div className={styles.base}>
