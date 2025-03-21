@@ -1,9 +1,9 @@
 query getRecordingRoute($recordingId: ID!) {
-  recording(id: $recordingId) {
-    id
-    title
-    collection {
-      id
-    }
-  }
+	recording(id: $recordingId) {
+		id
+		title
+		collection {
+			id
+		}
+	}
 }
