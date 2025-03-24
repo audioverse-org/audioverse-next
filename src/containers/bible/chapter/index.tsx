@@ -148,7 +148,11 @@ const Chapter = ({
 						.chapterNumber(chapterNumber)
 						.get({ params: { autoplay: 'true' } })
 				}
-				hatUrl={root.lang(languageRoute).bibles.versionId(version.id).get()}
+				hatUrl={root
+					.lang(languageRoute)
+					.bibles.versionId(version.id)
+					.versionTitle(version.title)
+					.get()}
 				bookName={book.title}
 				chapterNumber={chapterNumber}
 			/>

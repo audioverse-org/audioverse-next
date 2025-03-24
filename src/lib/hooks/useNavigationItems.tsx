@@ -160,17 +160,21 @@ export function useNavigationItems(): INavigationItem[] {
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
 
-	const collectionId = useMemo(() => {
+	const [collectionId, collectionTitle] = useMemo(() => {
 		const c = loadedRecording?.collection;
 		const isVersion = c?.contentType === CollectionContentType.BibleVersion;
-		if (!isVersion) return null;
-		return c.id;
+		if (!isVersion) return [null, null];
+		return [c.id, c.title];
 	}, [loadedRecording?.collection]);
 
 	const biblesUrl = useMemo(() => {
 		if (!collectionId) return root.lang(languageRoute).bibles.get();
-		return root.lang(languageRoute).bibles.versionId(collectionId).get();
-	}, [collectionId, languageRoute]);
+		return root
+			.lang(languageRoute)
+			.bibles.versionId(collectionId)
+			.versionTitle(collectionTitle)
+			.get();
+	}, [collectionId, collectionTitle, languageRoute]);
 
 	return [
 		{
