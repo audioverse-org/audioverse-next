@@ -37,9 +37,23 @@ export interface PlayerProps {
 	backgroundColor: BaseColors;
 	playlistRecordings?: AndMiniplayerFragment[];
 	disableUserFeatures?: boolean;
+	disableDownload?: boolean;
 	prefersAudio?: boolean;
 	compact?: boolean;
 }
+
+const DownloadButton = ({
+	recording,
+	backgroundColor,
+}: PlayerProps): JSX.Element => {
+	const { isUserLoggedIn } = useIsAuthenticated();
+
+	return isUserLoggedIn ? (
+		<ButtonDownload backgroundColor={backgroundColor} recording={recording} />
+	) : (
+		<ButtonDownloadBlank backgroundColor={backgroundColor} />
+	);
+};
 
 const Player = ({
 	recording,
@@ -48,6 +62,7 @@ const Player = ({
 	playlistRecordings,
 	prefersAudio,
 	compact,
+	disableDownload,
 }: PlayerProps): JSX.Element => {
 	const intl = useIntl();
 	const params = useSearchParams();
@@ -91,8 +106,6 @@ const Player = ({
 	const iconColor = isBackgroundColorDark(backgroundColor)
 		? BaseColors.WHITE
 		: BaseColors.DARK;
-
-	const { isUserLoggedIn } = useIsAuthenticated();
 
 	return (
 		<div
@@ -244,10 +257,9 @@ const Player = ({
 					)}
 
 					<ButtonSpeed {...{ recording, backgroundColor }} />
-					{isUserLoggedIn ? (
-						<ButtonDownload {...{ recording, backgroundColor }} />
-					) : (
-						<ButtonDownloadBlank backgroundColor={backgroundColor} />
+
+					{!disableDownload && (
+						<DownloadButton {...{ recording, backgroundColor }} />
 					)}
 
 					<ButtonShareRecording
