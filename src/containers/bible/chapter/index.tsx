@@ -66,8 +66,6 @@ const Chapter = ({
 	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version?.id);
 	const allowDownload = useShouldAllowDownload(version?.id);
 
-	console.log({ shouldAllowDownload: allowDownload });
-
 	useEffect(() => {
 		if (!chapter) return;
 		gtmPushRecordingView(chapter);
