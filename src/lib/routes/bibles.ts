@@ -17,9 +17,20 @@ const fcbhId = (r: string) => (fcbhId: string) => {
 	}));
 };
 
+const versionTitle = (r: string) => (title: string) => {
+	const t = title
+		.toLowerCase()
+		.replace(/ /g, '-')
+		.replace(/[^a-z0-9-]/g, '');
+	return node(`${r}/${t}`);
+};
+
 const bibles = (r: string) => ({
 	versionId: (versionId: Scalars['ID']['output']) =>
-		node(`${r}/${versionId}`, (r) => ({ fcbhId: fcbhId(`${r}`) })),
+		node(`${r}/${versionId}`, (r) => ({
+			fcbhId: fcbhId(`${r}`),
+			versionTitle: versionTitle(`${r}`),
+		})),
 });
 
 export default bibles;

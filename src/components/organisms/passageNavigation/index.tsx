@@ -80,7 +80,7 @@ export default function PassageNavigation({
 	const languageRoute = useLanguageRoute();
 
 	const getVersionUrl = (v: BibleVersionTophatFragment) =>
-		root.lang(languageRoute).bibles.versionId(v.id).get();
+		root.lang(languageRoute).bibles.versionId(v.id).versionTitle(v.title).get();
 
 	return (
 		<div className={clsx(styles.base)}>

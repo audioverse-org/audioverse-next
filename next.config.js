@@ -273,18 +273,13 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/bibles',
-					destination: '/:lang/bibles/ENGKJV2/',
+					destination: '/:lang/bibles/ENGKJV2',
 					permanent: false,
 				},
 				{
 					source: '/:lang/audiobibles/:path*',
 					destination: '/:lang/bibles/',
 					permanent: true,
-				},
-				{
-					source: '/:lang/bibles/:bibleCode/:bookCode([\\w\\d]\\w+)',
-					destination: '/:lang/bibles/:bibleCode/:bookCode/1',
-					permanent: false,
 				},
 				{
 					source: '/:lang/audiobooks/books',
@@ -492,10 +487,6 @@ module.exports = withBundleAnalyzer(
 				{
 					source: '/:lang/blog',
 					destination: '/:lang/blog/page/1',
-				},
-				{
-					source: '/:lang/bibles',
-					destination: '/:lang/bibles/',
 				},
 				{
 					source: '/:lang/books',

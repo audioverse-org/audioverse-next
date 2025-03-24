@@ -1,4 +1,3 @@
-// import fs from 'fs';
 import {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
@@ -38,9 +37,11 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const allVersions = await getVersions();
+	const versions = await getVersions();
 	return {
-		paths: allVersions.map((v) => root.lang('en').bibles.versionId(v.id).get()),
-		fallback: false,
+		paths: versions.map((v) =>
+			root.lang('en').bibles.versionId(v.id).versionTitle(v.title).get(),
+		),
+		fallback: 'blocking',
 	};
 }
