@@ -110,7 +110,11 @@ $button-height: 31px;
 }
 .tertiary:hover,
 .tertiary:focus {
-	color: $ts-red;
+	/*
+	Was $ts-red. Changed to satisfy contrast requirements.
+	https://app.contrast-finder.org/result.html?foreground=ff224a&background=white&ratio=4.5&isBackgroundTested=false&algo=Rgb&lang=en
+	*/
+	color: #e91742;
 }
 
 .super,

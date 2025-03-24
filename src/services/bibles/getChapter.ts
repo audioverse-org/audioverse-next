@@ -74,7 +74,7 @@ export default async function getChapter(
 	return {
 		...chapter,
 		canonicalPath,
-		shareUrl: `https://www.audioverse.org${canonicalPath}`,
+		shareUrl: `https://www.audioverse.org${chapter.canonicalPath}`,
 		sequencePreviousRecording: previousPath
 			? {
 					canonicalPath: previousPath,
