@@ -194,7 +194,7 @@ const Chapter = ({
 									chapters.findIndex((_c) => _c.id === chapter?.id),
 								)}
 								backgroundColor={BaseColors.BIBLE_B}
-								disableUserFeatures={true}
+								disableUserFeatures={isFcbhVersion}
 								disableDownload={!allowDownload}
 							/>
 							<div className={styles.definitions}>
