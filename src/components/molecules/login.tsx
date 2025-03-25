@@ -14,9 +14,9 @@ export default function Login(): JSX.Element {
 	return (
 		<AndOnboarding>
 			<SocialLogin
-				onSuccess={() => {
-					router.push(root.lang(languageRoute).discover.get());
-				}}
+			// onSuccess={() => {
+			// 	router.push(root.lang(languageRoute).discover.get());
+			// }}
 			/>
 			<LoginForm
 				showRegister={() =>
