@@ -35,12 +35,17 @@ export interface ChapterProps {
 	chapterNumber: number;
 }
 
-const versionWebId = 538;
-const versionKjvAvId = 552;
-const allowedDownloadVersions: (string | number)[] = [
-	versionWebId,
-	versionKjvAvId,
-];
+function useShouldAllowDownload(
+	versionId: string | number | undefined,
+): boolean {
+	if (!versionId) return false;
+
+	const id = versionId.toString();
+	const isWeb = id === '538';
+	const isKjvAv = id === '552';
+
+	return isWeb || isKjvAv;
+}
 
 const Chapter = ({
 	versionId,
@@ -59,9 +64,7 @@ const Chapter = ({
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
 	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version?.id);
-	const shouldAllowDownload = allowedDownloadVersions.includes(
-		version?.id || 0,
-	);
+	const allowDownload = useShouldAllowDownload(version?.id);
 
 	useEffect(() => {
 		if (!chapter) return;
@@ -145,7 +148,11 @@ const Chapter = ({
 						.chapterNumber(chapterNumber)
 						.get({ params: { autoplay: 'true' } })
 				}
-				hatUrl={root.lang(languageRoute).bibles.versionId(version.id).get()}
+				hatUrl={root
+					.lang(languageRoute)
+					.bibles.versionId(version.id)
+					.versionTitle(version.title)
+					.get()}
 				bookName={book.title}
 				chapterNumber={chapterNumber}
 			/>
@@ -187,7 +194,8 @@ const Chapter = ({
 									chapters.findIndex((_c) => _c.id === chapter?.id),
 								)}
 								backgroundColor={BaseColors.BIBLE_B}
-								disableUserFeatures={shouldAllowDownload}
+								disableUserFeatures={true}
+								disableDownload={!allowDownload}
 							/>
 							<div className={styles.definitions}>
 								<DefinitionList terms={details} textColor={BaseColors.DARK} />
