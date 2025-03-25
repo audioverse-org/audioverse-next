@@ -87,6 +87,5 @@ describe('andAuthGuard', () => {
 			});
 
 		await userEvent.click(getByText('Login with Google'));
-
 	});
 });
