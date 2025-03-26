@@ -16,9 +16,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A01',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'EXO',
@@ -31,9 +28,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A02',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'LEV',
@@ -45,9 +39,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A03',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'NUM',
@@ -59,9 +50,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A04',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'DEU',
@@ -73,9 +61,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A05',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JOS',
@@ -87,9 +72,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A06',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JDG',
@@ -101,9 +83,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A07',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'RUT',
@@ -112,9 +91,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4],
 				book_seq: 'A08',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '1SA',
@@ -126,9 +102,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A09',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '2SA',
@@ -140,9 +113,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A10',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '1KI',
@@ -154,9 +124,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A11',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '2KI',
@@ -168,9 +135,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A12',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '1CH',
@@ -182,9 +146,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A13',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '2CH',
@@ -196,9 +157,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A14',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'EZR',
@@ -207,9 +165,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				book_seq: 'A15',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'NEH',
@@ -218,9 +173,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
 				book_seq: 'A16',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'EST',
@@ -229,9 +181,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				book_seq: 'A17',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JOB',
@@ -244,9 +193,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A18',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'PSA',
@@ -266,9 +212,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A19',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'PRO',
@@ -280,9 +223,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A20',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'ECC',
@@ -291,9 +231,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 				book_seq: 'A21',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'SNG',
@@ -302,9 +239,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8],
 				book_seq: 'A22',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'ISA',
@@ -318,9 +252,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A23',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JER',
@@ -333,9 +264,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A24',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'LAM',
@@ -344,9 +272,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5],
 				book_seq: 'A25',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'EZK',
@@ -359,9 +284,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'A26',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'DAN',
@@ -370,9 +292,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 				book_seq: 'A27',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'HOS',
@@ -381,9 +300,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 				book_seq: 'A28',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JOL',
@@ -392,9 +308,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3],
 				book_seq: 'A29',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'AMO',
@@ -403,9 +316,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 				book_seq: 'A30',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'OBA',
@@ -414,9 +324,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1],
 				book_seq: 'A31',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JON',
@@ -425,9 +332,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4],
 				book_seq: 'A32',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'MIC',
@@ -436,9 +340,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7],
 				book_seq: 'A33',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'NAM',
@@ -447,9 +348,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3],
 				book_seq: 'A34',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'HAB',
@@ -458,9 +356,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3],
 				book_seq: 'A35',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'ZEP',
@@ -469,9 +364,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3],
 				book_seq: 'A36',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'HAG',
@@ -480,9 +372,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2],
 				book_seq: 'A37',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'ZEC',
@@ -491,9 +380,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
 				book_seq: 'A38',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'MAL',
@@ -502,9 +388,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4],
 				book_seq: 'A39',
 				testament: 'OT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'MAT',
@@ -516,9 +399,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'B01',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'MRK',
@@ -527,9 +407,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
 				book_seq: 'B02',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'LUK',
@@ -541,9 +418,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'B03',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JHN',
@@ -555,9 +429,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'B04',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'ACT',
@@ -569,9 +440,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'B05',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'ROM',
@@ -580,9 +448,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
 				book_seq: 'B06',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '1CO',
@@ -591,9 +456,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
 				book_seq: 'B07',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '2CO',
@@ -602,9 +464,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
 				book_seq: 'B08',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'GAL',
@@ -613,9 +472,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6],
 				book_seq: 'B09',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'EPH',
@@ -624,9 +480,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6],
 				book_seq: 'B10',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'PHP',
@@ -635,9 +488,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4],
 				book_seq: 'B11',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'COL',
@@ -646,9 +496,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4],
 				book_seq: 'B12',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '1TH',
@@ -657,9 +504,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5],
 				book_seq: 'B13',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '2TH',
@@ -668,9 +512,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3],
 				book_seq: 'B14',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '1TI',
@@ -679,9 +520,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6],
 				book_seq: 'B15',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '2TI',
@@ -690,9 +528,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4],
 				book_seq: 'B16',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'TIT',
@@ -701,9 +536,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3],
 				book_seq: 'B17',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'PHM',
@@ -712,9 +544,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1],
 				book_seq: 'B18',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'HEB',
@@ -723,9 +552,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
 				book_seq: 'B19',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JAS',
@@ -734,9 +560,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5],
 				book_seq: 'B20',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '1PE',
@@ -745,9 +568,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5],
 				book_seq: 'B21',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '2PE',
@@ -756,9 +576,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3],
 				book_seq: 'B22',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '1JN',
@@ -767,9 +584,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1, 2, 3, 4, 5],
 				book_seq: 'B23',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '2JN',
@@ -778,9 +592,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1],
 				book_seq: 'B24',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: '3JN',
@@ -789,9 +600,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1],
 				book_seq: 'B25',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'JUD',
@@ -800,9 +608,6 @@ const versions: IBibleVersion[] = [
 				chapters: [1],
 				book_seq: 'B26',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 			{
 				book_id: 'REV',
@@ -814,9 +619,6 @@ const versions: IBibleVersion[] = [
 				],
 				book_seq: 'B27',
 				testament: 'NT',
-				bible: {
-					abbreviation: 'KJV',
-				},
 			},
 		],
 		sponsor: {
@@ -825,7 +627,6 @@ const versions: IBibleVersion[] = [
 		},
 		id: 'ENGKJV2',
 		title: 'King James Version (Dramatized)',
-		abbreviation: 'KJV',
 	},
 ];
 
