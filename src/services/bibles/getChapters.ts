@@ -17,7 +17,7 @@ export default async function getChapters(
 	if (fcbhBook) {
 		return Promise.all(
 			fcbhBook.chapters.map((chapter) =>
-				transformChapterPartial(fcbhBook, chapter),
+				transformChapterPartial(versionId, fcbhBook, chapter),
 			),
 		);
 	}

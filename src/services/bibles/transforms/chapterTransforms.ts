@@ -13,18 +13,20 @@ import { FCBH_VERSIONS } from '../constants';
 import { fetchFcbhChapterMediaUrl } from '../fcbh/fetchFcbhChapterMediaUrl';
 import { getFcbhFilesetId } from '../fcbh/getFcbhFilesetId';
 import getBookMeta from '../getBookMeta';
-import { IBibleBook } from '../types';
+import { IBBBook } from '../types';
 
-function getCanonicalPath(book: IBibleBook, chapter: number): string {
+function getCanonicalPath(
+	versionId: string,
+	book: IBBBook,
+	chapter: number,
+): string {
 	const meta = getBookMeta(book.book_id);
 
 	if (!meta) {
 		throw new Error('Book meta not found');
 	}
 
-	const version = FCBH_VERSIONS.find(
-		(v) => v.abbreviation === book.bible.abbreviation,
-	);
+	const version = FCBH_VERSIONS.find((v) => v.id === versionId);
 
 	if (!version) {
 		throw new Error('Version not found');
@@ -38,14 +40,12 @@ function getCanonicalPath(book: IBibleBook, chapter: number): string {
 		.get();
 }
 
-function getBookName(book: IBibleBook): string {
+function getBookName(book: IBBBook): string {
 	return book.name.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-function getVersion(book: IBibleBook) {
-	const version = FCBH_VERSIONS.find(
-		(v) => v.abbreviation === book.bible.abbreviation,
-	);
+function getVersion(versionId: string) {
+	const version = FCBH_VERSIONS.find((v) => v.id === versionId);
 
 	if (!version) {
 		throw new Error('Version not found');
@@ -54,17 +54,10 @@ function getVersion(book: IBibleBook) {
 	return version;
 }
 
-function getChapterId(book: IBibleBook, chapter: number) {
-	const version = getVersion(book);
-	const filesetId = getFcbhFilesetId(version.id, book.testament);
+function getChapterId(versionId: string, book: IBBBook, chapter: number) {
+	const filesetId = getFcbhFilesetId(versionId, book.testament);
 
 	return `${filesetId}/${book.book_id}/${chapter}`;
-}
-
-function getLogUrl(bookName: string, chapter: number) {
-	const b = bookName.replace(/ /g, '');
-	const d = String(chapter).padStart(2, '0');
-	return `https://www.audioverse.org/en/download/audiobible/KJV_${b}_${d}/filename.mp3`;
 }
 
 interface AudioFile {
@@ -76,22 +69,22 @@ interface AudioFile {
 }
 
 async function getAudioFiles(
-	book: IBibleBook,
+	versionId: string,
+	internalVersionId: number,
+	book: IBBBook,
 	chapter: number,
 ): Promise<AudioFile[]> {
-	const version = getVersion(book);
-	const filesetId = getFcbhFilesetId(version.id, book.testament);
+	const filesetId = getFcbhFilesetId(versionId, book.testament);
 	const mediaUrl = await fetchFcbhChapterMediaUrl(
 		filesetId,
 		book.book_id,
 		chapter,
 	);
-	const bookName = getBookName(book);
 
 	return [
 		{
 			url: mediaUrl,
-			logUrl: getLogUrl(bookName, chapter),
+			logUrl: `/en/download/bible/${internalVersionId}/${book.book_id}/${chapter}`,
 			duration: 0,
 			mimeType: 'audio/mpeg',
 			filesize: 'unknown',
@@ -100,22 +93,26 @@ async function getAudioFiles(
 }
 
 export async function transformChapterFull(
-	book: IBibleBook,
+	versionId: string,
+	book: IBBBook,
 	chapter: number,
 ): Promise<
 	BibleChapterDetailChapterFullFragment & { audioFiles: AudioFile[] }
 > {
-	const canonicalPath = getCanonicalPath(book, chapter);
+	const canonicalPath = getCanonicalPath(versionId, book, chapter);
 	const canonicalUrl = `https://www.audioverse.org${canonicalPath}`;
 	const bookName = getBookName(book);
-	const version = getVersion(book);
+	const version = getVersion(versionId);
 
-	const previousPath = chapter > 1 ? getCanonicalPath(book, chapter - 1) : null;
+	const previousPath =
+		chapter > 1 ? getCanonicalPath(versionId, book, chapter - 1) : null;
 	const nextPath =
-		chapter < book.chapters.length ? getCanonicalPath(book, chapter + 1) : null;
+		chapter < book.chapters.length
+			? getCanonicalPath(versionId, book, chapter + 1)
+			: null;
 
 	return {
-		id: getChapterId(book, chapter),
+		id: getChapterId(versionId, book, chapter),
 		title: `${bookName} ${chapter}`,
 		contentType: RecordingContentType.BibleChapter,
 		canonicalPath,
@@ -135,7 +132,12 @@ export async function transformChapterFull(
 			title: bookName,
 			contentType: SequenceContentType.BibleBook,
 		},
-		audioFiles: await getAudioFiles(book, chapter),
+		audioFiles: await getAudioFiles(
+			version.id,
+			version.internalId,
+			book,
+			chapter,
+		),
 		videoFiles: [],
 		videoStreams: [],
 		videoDownloads: [],
@@ -154,16 +156,17 @@ export async function transformChapterFull(
 }
 
 export async function transformChapterPartial(
-	book: IBibleBook,
+	versionId: string,
+	book: IBBBook,
 	chapter: number,
 ): Promise<
 	BibleChapterDetailChapterPartialFragment & { audioFiles: AudioFile[] }
 > {
-	const canonicalPath = getCanonicalPath(book, chapter);
-	const version = getVersion(book);
+	const canonicalPath = getCanonicalPath(versionId, book, chapter);
+	const version = getVersion(versionId);
 
 	return {
-		id: getChapterId(book, chapter),
+		id: getChapterId(versionId, book, chapter),
 		title: `${getBookName(book)} ${chapter}`,
 		canonicalPath,
 		duration: 0,
@@ -186,7 +189,12 @@ export async function transformChapterPartial(
 			},
 		},
 		sequenceIndex: null,
-		audioFiles: await getAudioFiles(book, chapter),
+		audioFiles: await getAudioFiles(
+			version.id,
+			version.internalId,
+			book,
+			chapter,
+		),
 		videoFiles: [],
 		videoStreams: [],
 	};
