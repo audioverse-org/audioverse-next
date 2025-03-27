@@ -13,7 +13,11 @@ export default function Login(): JSX.Element {
 	const router = useRouter();
 	return (
 		<AndOnboarding>
-			<SocialLogin />
+			<SocialLogin
+				onSuccess={() => {
+					router.push(root.lang(languageRoute).discover.get());
+				}}
+			/>
 			<LoginForm
 				showRegister={() =>
 					router.push(
