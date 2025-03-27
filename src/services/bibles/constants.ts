@@ -3,8 +3,8 @@ export const FCBH_API_BASE = 'https://4.dbt.io/api';
 export const FCBH_VERSIONS = [
 	{
 		id: 'ENGKJV2',
+		internalId: 6, // AV DB id
 		title: 'King James Version (Dramatized)',
-		abbreviation: 'KJV',
 	},
 ];
 

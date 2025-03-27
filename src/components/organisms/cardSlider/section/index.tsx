@@ -1,4 +1,5 @@
 import { Maybe } from 'graphql/jsutils/Maybe';
+import router from 'next/router';
 import React, { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -132,12 +133,12 @@ export default function Section<T extends GraphqlInfiniteQuery, V, N>({
 			>
 				<span>{heading}</span>
 				{seeAllUrl && (
-					<a
+					<button
 						className={`${styles.seeAll} ${isDarkBg && styles.seeAlldbg}`}
-						href={seeAllUrl}
+						onClick={() => router.push(seeAllUrl)}
 					>
 						<FormattedMessage id="discover__seeAll" defaultMessage="See All" />
-					</a>
+					</button>
 				)}
 			</LineHeading>
 			<CardSlider

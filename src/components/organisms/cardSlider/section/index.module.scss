@@ -11,12 +11,17 @@
 
 .seeAll {
 	font-size: 12px;
+	font-weight: bold;
 	color: $ts-dark;
 	text-transform: none;
 	letter-spacing: normal;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
 
 	&:hover {
-		text-decoration: none;
+		color: $ts-red;
 	}
 }
 .seeAlldbg {
