@@ -38,6 +38,7 @@
 		"GHSA-mwcw-c2x4-8c55", // Not used at runtime
 		"GHSA-7m27-7ghc-44w9", // Not used
 		"GHSA-76p7-773f-r4q5", // TODO: remove next-pwa: https://audioverse7.atlassian.net/browse/AV-1513
-		"GHSA-968p-4wvh-cqc8" // Not used at runtime
+		"GHSA-968p-4wvh-cqc8", // Not used at runtime
+		"GHSA-f82v-jwr5-mffw" // Not used at runtime
 	]
 }
