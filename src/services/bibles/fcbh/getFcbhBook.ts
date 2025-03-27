@@ -1,10 +1,10 @@
-import { IBibleBook } from '../types';
+import { IBBBook } from '../types';
 import getFcbhVersion from './getFcbhVersion';
 
 export default async function getFcbhBook(
 	versionId: string,
 	bookId: string,
-): Promise<IBibleBook> {
+): Promise<IBBBook> {
 	const fcbhBible = getFcbhVersion(versionId);
 
 	if (!fcbhBible) {
