@@ -1959,6 +1959,12 @@
   "organismSection_sponsorsPrevious": {
     "string": "Previous sponsors"
   },
+  "organisms-passageNavigation__chapterGridError": {
+    "string": "Something went wrong. Please try again later."
+  },
+  "organisms-passageNavigation__chapterGridLoading": {
+    "string": "Loading chapters..."
+  },
   "ourPurpose__title": {
     "string": "Our Purpose"
   },
