@@ -4071,6 +4071,18 @@
       "value": "Patrocinadores Anteriores"
     }
   ],
+  "organisms-passageNavigation__chapterGridError": [
+    {
+      "type": 0,
+      "value": "Something went wrong. Please try again later."
+    }
+  ],
+  "organisms-passageNavigation__chapterGridLoading": [
+    {
+      "type": 0,
+      "value": "Loading chapters..."
+    }
+  ],
   "ourPurpose__title": [
     {
       "type": 0,

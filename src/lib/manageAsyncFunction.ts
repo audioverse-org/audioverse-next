@@ -6,6 +6,7 @@ import pThrottle from 'p-throttle';
 import pTimeout, { ClearablePromise } from 'p-timeout';
 
 import { DISABLE_NETWORK_MEMOIZATION, LOG_NETWORK_REQUESTS } from './constants';
+import isServerSide from './isServerSide';
 import { logToFile } from './logToFile';
 
 interface PromiseWrapperOptions {
@@ -19,12 +20,13 @@ interface PromiseWrapperOptions {
 }
 
 const isBuild = process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD;
+const isRevalidate = isServerSide() && !isBuild;
 
 const DEFAULT_OPTIONS: Required<PromiseWrapperOptions> = {
 	concurrencyLimit: 1,
 	throttleLimit: 3,
 	throttleIntervalMs: 1000,
-	timeoutMs: isBuild ? 30000 : 5000,
+	timeoutMs: isRevalidate ? 5000 : 30000,
 	retries: 1,
 	retryMinTimeoutMs: isBuild ? 10000 : 1000,
 	retryMaxTimeoutMs: 10000,
