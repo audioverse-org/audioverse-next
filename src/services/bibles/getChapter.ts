@@ -20,7 +20,7 @@ export default async function getChapter(
 	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (fcbhBook) {
-		const full = await transformChapterFull(fcbhBook, chapterNumber);
+		const full = await transformChapterFull(versionId, fcbhBook, chapterNumber);
 
 		return {
 			...full,

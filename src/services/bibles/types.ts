@@ -3,9 +3,8 @@ export type Testament = 'OT' | 'NT';
 export interface IBibleVersion {
 	id: string;
 	title: string;
-	abbreviation: string;
 	description?: string;
-	books: IBibleBook[];
+	books: IBBBook[];
 	sponsor: {
 		title: string;
 		website: string;
@@ -29,17 +28,11 @@ export interface IBBFilesetBookChapter {
 	youtube_url: string | null;
 }
 
-interface IBBBook {
+export interface IBBBook {
 	book_id: string;
 	name: string;
 	name_short: string;
 	chapters: number[];
 	book_seq: string;
 	testament: 'OT' | 'NT';
-}
-
-export interface IBibleBook extends IBBBook {
-	bible: {
-		abbreviation: string;
-	};
 }
