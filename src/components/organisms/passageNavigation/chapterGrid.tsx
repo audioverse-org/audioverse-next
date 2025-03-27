@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Link from '~components/atoms/linkWithoutPrefetch';
 import root from '~src/lib/routes';
@@ -17,7 +18,35 @@ type Props = {
 };
 
 export default function ChapterGrid({ chapterId, bookId, versionId }: Props) {
-	const chapters = useChapters(versionId, bookId);
+	const {
+		data: chapters,
+		isLoading,
+		isError,
+		error,
+	} = useChapters(versionId, bookId);
+
+	if (isLoading) {
+		return (
+			<div className={styles.loading}>
+				<FormattedMessage
+					id="organisms-passageNavigation__chapterGridLoading"
+					defaultMessage="Loading chapters..."
+				/>
+			</div>
+		);
+	}
+
+	if (isError) {
+		console.error(error);
+		return (
+			<div className={styles.error}>
+				<FormattedMessage
+					id="organisms-passageNavigation__chapterGridError"
+					defaultMessage="Something went wrong. Please try again later."
+				/>
+			</div>
+		);
+	}
 
 	if (!chapters) return;
 
