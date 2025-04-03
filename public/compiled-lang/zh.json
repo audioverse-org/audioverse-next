@@ -3595,6 +3595,12 @@
       "value": "搜索"
     }
   ],
+  "molecule-searchBar__reSearch": [
+    {
+      "type": 0,
+      "value": "< 回傳結果"
+    }
+  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,

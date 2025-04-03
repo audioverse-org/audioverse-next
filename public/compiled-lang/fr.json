@@ -3583,6 +3583,12 @@
       "value": "Rechercher"
     }
   ],
+  "molecule-searchBar__reSearch": [
+    {
+      "type": 0,
+      "value": "< Retour aux résultats"
+    }
+  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,

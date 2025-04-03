@@ -2735,6 +2735,9 @@
   "bibleChapter__readAlong": {
     "string": "Read Along"
   },
+  "molecule-searchBar__reSearch": {
+    "string": "< Voltar aos resultados"
+  },
   "organisms-passageNavigation__chapterGridError": {
     "string": "Something went wrong. Please try again later."
   },
