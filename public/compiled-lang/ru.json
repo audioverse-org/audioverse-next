@@ -3591,6 +3591,12 @@
       "value": "Поиск"
     }
   ],
+  "molecule-searchBar__reSearch": [
+    {
+      "type": 0,
+      "value": "< Вернуться к результатам"
+    }
+  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,
