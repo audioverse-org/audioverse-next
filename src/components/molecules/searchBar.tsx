@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -41,6 +42,9 @@ export default function SearchBar({
 	const [lastTerm, setLastTerm] = useState(term);
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
+	const router = useRouter();
+	const { searched } = router.query;
+	const searchTerm = Array.isArray(searched) ? searched[0] : searched;
 	const handleSubmit = useCallback(
 		(e: KeyboardEvent) => e.key === 'Enter' && onSubmit?.(),
 		[onSubmit],
@@ -114,12 +118,24 @@ export default function SearchBar({
 					</button>
 				)}
 			</div>
+
 			<button className={styles.cancel} onClick={() => onTermChange(undefined)}>
 				<FormattedMessage
 					id="molecule-searchBar__cancel"
 					defaultMessage="Cancel"
 				/>
 			</button>
+			{searchTerm && !term && (
+				<button
+					className={styles.backToSearch}
+					onClick={() => onTermChange(searchTerm)}
+				>
+					<FormattedMessage
+						id="molecule-searchBar__reSearch"
+						defaultMessage="< Back to Results"
+					/>
+				</button>
+			)}
 			{entityType && onEntityTypeChange && (
 				<Mininav
 					className={clsx(styles.filters, filtersClassName)}

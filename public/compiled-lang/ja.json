@@ -3599,6 +3599,12 @@
       "value": "検索"
     }
   ],
+  "molecule-searchBar__reSearch": [
+    {
+      "type": 0,
+      "value": "< 結果に戻る"
+    }
+  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,
