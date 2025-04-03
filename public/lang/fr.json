@@ -2737,5 +2737,11 @@
   },
   "molecule-searchBar__reSearch": {
     "string": "< Retour aux résultats"
+  },
+  "organisms-passageNavigation__chapterGridError": {
+    "string": "Something went wrong. Please try again later."
+  },
+  "organisms-passageNavigation__chapterGridLoading": {
+    "string": "Loading chapters..."
   }
 }

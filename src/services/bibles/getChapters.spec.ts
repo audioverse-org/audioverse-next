@@ -78,4 +78,31 @@ describe('getChapters', () => {
 
 		expect(chapter?.canonicalPath).toBe(expectedPath);
 	});
+
+	it('sorts chapters by number numerically', async () => {
+		jest.mocked(fetchResponse).mockRejectedValue(new Error('Not found'));
+		jest.mocked(getGraphqlBookId).mockResolvedValue('graphql-123');
+
+		when(fetchApi)
+			.calledWith(GetGraphqlChaptersDocument, expect.anything())
+			.mockResolvedValue({
+				recordings: {
+					nodes: [
+						{
+							id: 'recording-123',
+							title: 'Genesis 10',
+						},
+						{
+							id: 'recording-456',
+							title: 'Genesis 2',
+						},
+					],
+				},
+			});
+
+		const result = await getChapters('456', 'GEN');
+		const chapter = result?.[0];
+
+		expect(chapter?.title).toBe('Genesis 2');
+	});
 });

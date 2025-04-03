@@ -8,10 +8,10 @@ import { getGraphqlBookId } from './graphql/getGraphqlBookId';
 import { transformChapterPartial } from './transforms/chapterTransforms';
 import { parseChapterNumber } from './utils';
 
-export default async function getChapters(
+async function doGetChapters(
 	versionId: string,
 	bookId: string,
-): Promise<BibleChapterDetailChapterPartialFragment[] | undefined> {
+): Promise<BibleChapterDetailChapterPartialFragment[]> {
 	const fcbhBook = await getFcbhBook(versionId, bookId).catch(() => null);
 
 	if (fcbhBook) {
@@ -38,28 +38,45 @@ export default async function getChapters(
 		sequenceId,
 	}).catch((e) => {
 		console.error(e);
-		return null;
+		throw new Error(
+			`Error fetching chapters for book ${bookId} in version ${versionId}`,
+		);
 	});
 
 	const chapters = result?.recordings.nodes;
 
-	if (chapters && chapters.length > 0) {
-		return chapters.map((chapter): BibleChapterDetailChapterPartialFragment => {
-			const chapterNumber = parseChapterNumber(chapter.title);
-
-			const canonicalPath = root
-				.lang('en')
-				.bibles.versionId(versionId)
-				.fcbhId(bookId)
-				.chapterNumber(chapterNumber)
-				.get();
-
-			return {
-				...chapter,
-				canonicalPath,
-			};
-		});
+	if (!chapters?.length) {
+		throw new Error(
+			`No chapters found for book ${bookId} in version ${versionId}`,
+		);
 	}
 
-	return chapters ?? undefined;
+	return chapters.map((chapter): BibleChapterDetailChapterPartialFragment => {
+		const chapterNumber = parseChapterNumber(chapter.title);
+
+		const canonicalPath = root
+			.lang('en')
+			.bibles.versionId(versionId)
+			.fcbhId(bookId)
+			.chapterNumber(chapterNumber)
+			.get();
+
+		return {
+			...chapter,
+			canonicalPath,
+		};
+	});
+}
+
+export default async function getChapters(
+	versionId: string,
+	bookId: string,
+): Promise<BibleChapterDetailChapterPartialFragment[] | undefined> {
+	const chapters = await doGetChapters(versionId, bookId);
+
+	return chapters.sort((a, b) => {
+		const aNumber = parseChapterNumber(a.title);
+		const bNumber = parseChapterNumber(b.title);
+		return aNumber - bNumber;
+	});
 }

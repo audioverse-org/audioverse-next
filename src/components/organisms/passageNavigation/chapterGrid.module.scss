@@ -29,3 +29,11 @@
 .chapters li a.active {
 	color: $ts-salmon;
 }
+
+.loading,
+.error {
+	text-transform: none;
+	font-weight: normal;
+	text-align: center;
+	padding: 24px;
+}

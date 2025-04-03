@@ -46,7 +46,7 @@ export default function BookGrid({
 							</button>
 						</li>
 						{book.id === selectedBook?.id && (
-							<li className={styles.drawer}>
+							<li key={`${book.id}-drawer`} className={styles.drawer}>
 								<ChapterGrid
 									chapterId={chapterId}
 									bookId={bookMeta.fcbhId}
