@@ -23,6 +23,7 @@ export default function AndNavigation({
 		query: { q },
 		pathname,
 	} = useRouter();
+
 	const param = q?.toString();
 	const contextualFilterId = useContextualFilterId();
 	const [term, setTerm] = useState<string | undefined>(param);
@@ -42,7 +43,16 @@ export default function AndNavigation({
 
 	useEffect(() => {
 		const fn = () => {
-			if (term) setTerm(undefined);
+			if (term) {
+				Router.push({
+					pathname: pathname,
+					query: { ...Router.query, searched: term }, // Ensure other query parameters are retained
+				});
+
+				// Clear the term
+				setTerm(undefined);
+			}
+
 			if (scrollRef.current) scrollRef.current.scrollTop = 0;
 		};
 
@@ -51,7 +61,7 @@ export default function AndNavigation({
 		return () => {
 			Router.events.off('routeChangeComplete', fn);
 		};
-	}, [term]);
+	}, [term, pathname]);
 
 	return (
 		<div className={styles.base}>

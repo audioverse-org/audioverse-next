@@ -2734,5 +2734,8 @@
   },
   "bibleChapter__readAlong": {
     "string": "Read Along"
+  },
+  "molecule-searchBar__reSearch": {
+    "string": "< Terug naar Resultaten"
   }
 }
