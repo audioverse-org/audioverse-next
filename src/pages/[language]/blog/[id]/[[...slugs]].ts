@@ -10,7 +10,7 @@ import {
 	getBlogDetailStaticPaths,
 } from '~containers/blog/__generated__/detail';
 import BlogPostDetail, { BlogPostDetailProps } from '~containers/blog/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '~lib/constants';
+import { REVALIDATE_FAILURE } from '~lib/constants';
 import { getDetailStaticPaths } from '~lib/getDetailStaticPaths';
 import { getLanguageIdByRoute } from '~lib/getLanguageIdByRoute';
 
@@ -43,7 +43,6 @@ export async function getStaticProps({
 			title: blogPost?.title,
 			canonicalUrl: blogPost?.canonicalUrl,
 		},
-		revalidate: REVALIDATE,
 	};
 }
 
