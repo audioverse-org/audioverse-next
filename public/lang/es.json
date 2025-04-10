@@ -2740,5 +2740,8 @@
   },
   "organisms-passageNavigation__chapterGridLoading": {
     "string": "Loading chapters..."
+  },
+  "molecule-searchBar__reSearch": {
+    "string": "< Volver a los resultados"
   }
 }
