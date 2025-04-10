@@ -117,6 +117,17 @@ export default function SearchBar({
 						<IconClear />
 					</button>
 				)}
+				{searchTerm && !term && (
+					<button
+						className={styles.backToSearch}
+						onClick={() => onTermChange(searchTerm)}
+					>
+						<FormattedMessage
+							id="molecule-searchBar__reSearch"
+							defaultMessage="< Back to Results"
+						/>
+					</button>
+				)}
 			</div>
 
 			<button className={styles.cancel} onClick={() => onTermChange(undefined)}>
@@ -125,17 +136,7 @@ export default function SearchBar({
 					defaultMessage="Cancel"
 				/>
 			</button>
-			{searchTerm && !term && (
-				<button
-					className={styles.backToSearch}
-					onClick={() => onTermChange(searchTerm)}
-				>
-					<FormattedMessage
-						id="molecule-searchBar__reSearch"
-						defaultMessage="< Back to Results"
-					/>
-				</button>
-			)}
+
 			{entityType && onEntityTypeChange && (
 				<Mininav
 					className={clsx(styles.filters, filtersClassName)}

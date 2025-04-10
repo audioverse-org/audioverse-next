@@ -98,6 +98,13 @@
 		display: none;
 	}
 }
+.backToSearch {
+	@media (max-width: $breakpoint-sm) {
+		display: inline;
+		font-size: 10px;
+		white-space: nowrap;
+	}
+}
 
 .filters {
 	min-width: 0;
