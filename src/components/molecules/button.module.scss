@@ -39,8 +39,8 @@ $button-height: 31px;
 	&:hover {
 		color: $ts-white;
 	}
-	background: $ts-red;
-	border: 1px solid $ts-red;
+	background: $ts-red-under-white;
+	border: 1px solid $ts-red-under-white;
 	box-shadow: $ts-shadow-small-default;
 	&:focus {
 		border: 1px solid $ts-dark;
@@ -110,11 +110,7 @@ $button-height: 31px;
 }
 .tertiary:hover,
 .tertiary:focus {
-	/*
-	Was $ts-red. Changed to satisfy contrast requirements.
-	https://app.contrast-finder.org/result.html?foreground=ff224a&background=white&ratio=4.5&isBackgroundTested=false&algo=Rgb&lang=en
-	*/
-	color: #e91742;
+	color: $ts-red-on-white;
 }
 
 .super,
