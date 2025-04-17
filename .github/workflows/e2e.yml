@@ -4,6 +4,7 @@ jobs:
   accessibility:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
+    needs: lighthouse # Don't run concurrently to reduce chance of rate limiting
     permissions:
       checks: read
       pull-requests: write
@@ -27,7 +28,6 @@ jobs:
   lighthouse:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
-    needs: accessibility # Don't run concurrently to reduce chance of rate limiting
     permissions:
       checks: read
       pull-requests: write
