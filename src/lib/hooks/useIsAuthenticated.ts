@@ -26,8 +26,8 @@ export default function useIsAuthenticated(): {
 		const prefLang: LanguageKey = prefData?.data?.me?.user
 			.language as LanguageKey;
 		const baseLang = LANGUAGES[prefLang]?.base_urls;
-		if (user?.email && router.pathname.includes('[language]')) {
-			const newPath = router.pathname.replace('[language]', baseLang[0]);
+		if (user?.email && router?.pathname?.includes('[language]')) {
+			const newPath = router?.pathname?.replace('[language]', baseLang[0]);
 			const currentPath = router.asPath;
 
 			if (
