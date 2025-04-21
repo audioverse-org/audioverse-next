@@ -1710,6 +1710,9 @@
     "comment": "search bar label",
     "string": "Search"
   },
+  "molecule-searchBar__reSearch": {
+    "string": "< Back to Results"
+  },
   "molecule-teaseRecording__lessPersons": {
     "string": "Show less"
   },
