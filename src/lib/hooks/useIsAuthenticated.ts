@@ -30,7 +30,10 @@ export default function useIsAuthenticated(): {
 			const newPath = router.pathname.replace('[language]', baseLang[0]);
 			const currentPath = router.asPath;
 
-			if (!currentPath.startsWith(`/${baseLang[0]}`) && (!loadedDefault || currentPath.endsWith('/account'))) {
+			if (
+				!currentPath.startsWith(`/${baseLang[0]}`) &&
+				(!loadedDefault || currentPath.endsWith('/account'))
+			) {
 				router.push(newPath);
 				setLoadedDefault(true);
 			}
