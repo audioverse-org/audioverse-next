@@ -75,7 +75,7 @@ const Player = ({
 		!prefersAudio &&
 		(!session.isLoaded || session.isPaused);
 	const shouldShowAudioControls =
-		!hasVideo(recording) || session.isAudioLoaded || prefersAudio;
+		session.prefersAudio || !hasVideo(recording) || session.isAudioLoaded;
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
 	const [posterHovered, setPosterHovered] = useState(false);
