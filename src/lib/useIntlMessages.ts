@@ -13,7 +13,7 @@ export default function useIntlMessages(languageRoute: string): Messages {
 	const lang = getLanguageByBaseUrl(languageRoute, 'en');
 
 	useEffect(() => {
-		if (!lang || lang.base_urls[0] === 'en') return;
+		if (!lang) return;
 
 		getIntlMessages(lang).then((m) => setMessages(m));
 	}, [lang]);

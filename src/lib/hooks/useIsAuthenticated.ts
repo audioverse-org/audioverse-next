@@ -21,12 +21,14 @@ export default function useIsAuthenticated(): {
 		{ retry: false, enabled: hasSessionToken },
 	);
 	const [loadedDefault, setLoadedDefault] = useState(false);
+
 	useEffect(() => {
 		const user = data?.me?.user;
 		const prefLang: LanguageKey = prefData?.data?.me?.user
 			.language as LanguageKey;
 		const baseLang = LANGUAGES[prefLang]?.base_urls;
-		if (user?.email && router?.pathname?.includes('[language]')) {
+
+		if (user?.email && prefLang && router?.pathname?.includes('[language]')) {
 			const newPath = router?.pathname?.replace('[language]', baseLang[0]);
 			const currentPath = router.asPath;
 
@@ -35,8 +37,9 @@ export default function useIsAuthenticated(): {
 				(!loadedDefault || currentPath.endsWith('/account'))
 			) {
 				router.push(newPath);
-				setLoadedDefault(true);
 			}
+
+			setLoadedDefault(true);
 		}
 	}, [data, prefData, loadedDefault]);
 
