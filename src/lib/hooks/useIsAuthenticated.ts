@@ -1,5 +1,5 @@
 import router from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useGetAccountPreferencesDataQuery } from '~src/components/organisms/__generated__/preferencesForm';
 
@@ -20,7 +20,7 @@ export default function useIsAuthenticated(): {
 		{},
 		{ retry: false, enabled: hasSessionToken },
 	);
-	const [loadedDefault, setLoadedDefault] = useState(false);
+	const loadedDefaultRef = useRef(false);
 
 	useEffect(() => {
 		const user = data?.me?.user;
@@ -32,16 +32,18 @@ export default function useIsAuthenticated(): {
 			const newPath = router?.pathname?.replace('[language]', baseLang[0]);
 			const currentPath = router.asPath;
 
-			if (
-				!currentPath.startsWith(`/${baseLang[0]}`) &&
-				(!loadedDefault || currentPath.endsWith('/account'))
-			) {
+			const alreadyCorrect = currentPath.startsWith(`/${baseLang[0]}`);
+			const shouldRedirect =
+				!alreadyCorrect &&
+				(!loadedDefaultRef.current || currentPath.endsWith('/account'));
+
+			if (shouldRedirect) {
 				router.push(newPath);
 			}
 
-			setLoadedDefault(true);
+			loadedDefaultRef.current = true;
 		}
-	}, [data, prefData, loadedDefault]);
+	}, [data, prefData, loadedDefaultRef]);
 
 	return {
 		isUserLoggedIn: !!data?.me?.user.email,
