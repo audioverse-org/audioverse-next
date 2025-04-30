@@ -26,6 +26,10 @@ export async function getServerSideProps({
 		collection: null,
 	}));
 
+	if (result.person && collectionId && result.person.id) {
+		result.person.shareUrl = `https://www.audioverse.org/${params?.language}/conferences/${collectionId}/presenters/${result.person.id}`;
+	}
+
 	return {
 		props: {
 			...result,
