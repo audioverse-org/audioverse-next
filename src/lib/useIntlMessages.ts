@@ -10,13 +10,28 @@ type Messages = ResolvedIntlConfig['messages'];
 
 export default function useIntlMessages(languageRoute: string): Messages {
 	const [messages, setMessages] = useState<Messages>(english);
-	const lang = getLanguageByBaseUrl(languageRoute, 'en');
 
 	useEffect(() => {
-		if (!lang || lang.base_urls[0] === 'en') return;
+		const lang = getLanguageByBaseUrl(languageRoute, 'en');
 
-		getIntlMessages(lang).then((m) => setMessages(m));
-	}, [lang]);
+		if (!lang) return;
+
+		if (lang.base_urls?.[0] === 'en') {
+			setMessages(english);
+			return;
+		}
+
+		const loadMessages = async () => {
+			try {
+				const m = await getIntlMessages(lang);
+				setMessages(m);
+			} catch (error) {
+				console.error('Failed to load intl messages:', error);
+			}
+		};
+
+		loadMessages();
+	}, [languageRoute]);
 
 	return messages;
 }
