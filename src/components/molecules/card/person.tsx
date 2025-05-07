@@ -55,7 +55,7 @@ export default function CardPerson({
 									small={smallinit}
 								/>
 							)}
-							{name}
+							<span>{name}</span>
 						</Heading2>
 					</div>
 					{!compact && (

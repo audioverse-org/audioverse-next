@@ -50,6 +50,14 @@ $like-icon-padding: 8px;
 	display: flex;
 	align-items: center;
 	margin-bottom: 8px;
+
+	span {
+		width: 100%;
+		text-align: center;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 }
 
 .image {
