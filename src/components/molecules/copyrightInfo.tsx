@@ -18,6 +18,10 @@ export default function CopyrightInfo({
 }: CopyrightInfoProps): JSX.Element {
 	const copyrightOwner =
 		recording.distributionAgreement?.sponsor?.title || recording.sponsor?.title;
+	const isWrittenByEGW = recording.writers?.some(
+		(writer) => writer.name === 'Ellen G. White',
+	);
+
 	return (
 		<div className={clsx(styles.text, useInverse && styles.inverse)}>
 			{recording.contentType === RecordingContentType.BibleChapter ? (
@@ -45,12 +49,14 @@ export default function CopyrightInfo({
 							__html: recording.distributionAgreement?.license?.summary || '',
 						}}
 					/>
-					<div>
-						<FormattedMessage
-							id="sermonDetailPage__disclaimer"
-							defaultMessage="The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse."
-						/>
-					</div>
+					{!isWrittenByEGW && (
+						<div>
+							<FormattedMessage
+								id="sermonDetailPage__disclaimer"
+								defaultMessage="The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse."
+							/>
+						</div>
+					)}
 				</>
 			)}
 		</div>
