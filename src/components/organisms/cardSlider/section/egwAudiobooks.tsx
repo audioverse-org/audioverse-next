@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { CardSequenceFragment } from '~src/components/molecules/card/__generated__/sequence';
 import CardSequence from '~src/components/molecules/card/sequence';
-import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
 
 import { useInfiniteGetSectionEgwAudiobooksQuery } from './__generated__/egwAudiobooks';
@@ -15,7 +15,7 @@ interface EgwAudiobooksProps {
 
 const EgwAudiobooks: React.FC<EgwAudiobooksProps> = ({ heading }) => {
 	const intl = useIntl();
-	const lang = useLanguageId();
+	const lang = useLanguageRoute();
 
 	const renderCard = (p: { node: CardSequenceFragment }) => {
 		return <CardSequence sequence={p.node} egw={true} />;

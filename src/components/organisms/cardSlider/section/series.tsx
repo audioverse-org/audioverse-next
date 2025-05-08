@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { CardSequenceFragment } from '~src/components/molecules/card/__generated__/sequence';
 import CardSequence from '~src/components/molecules/card/sequence';
-import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
 
 import Section from '.';
@@ -11,7 +11,7 @@ import { useInfiniteGetSectionSeriesQuery } from './__generated__/series';
 
 export default function Series(): JSX.Element {
 	const intl = useIntl();
-	const lang = useLanguageId();
+	const lang = useLanguageRoute();
 
 	return (
 		<Section

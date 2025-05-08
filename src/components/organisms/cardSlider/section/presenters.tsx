@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { CardPersonFragment } from '~src/components/molecules/card/__generated__/person';
 import CardPerson from '~src/components/molecules/card/person';
-import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
 
 import Section from '.';
@@ -13,7 +13,7 @@ export default function Presenters(props: {
 	heading?: string | JSX.Element;
 }): JSX.Element {
 	const intl = useIntl();
-	const lang = useLanguageId();
+	const lang = useLanguageRoute();
 
 	const {
 		heading = intl.formatMessage({
