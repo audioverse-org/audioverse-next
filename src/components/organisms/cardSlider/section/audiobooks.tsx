@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { CardSequenceFragment } from '~src/components/molecules/card/__generated__/sequence';
 import CardSequence from '~src/components/molecules/card/sequence';
-import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
 
 import { useInfiniteGetSectionAudiobooksQuery } from './__generated__/audiobooks';
@@ -13,7 +13,7 @@ export default function Audiobooks(props: {
 	heading?: string | JSX.Element;
 }): JSX.Element {
 	const intl = useIntl();
-	const lang = useLanguageId();
+	const lang = useLanguageRoute();
 
 	const {
 		heading = intl.formatMessage({
