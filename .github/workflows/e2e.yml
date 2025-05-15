@@ -30,11 +30,18 @@ jobs:
     permissions:
       checks: read
       pull-requests: write
+    env:
+      NODE_OPTIONS: '--max-old-space-size=4096'
     steps:
       # WORKAROUND: https://github.com/treosh/lighthouse-ci-action/issues/21
       - uses: actions/checkout@v4
       - name: Delete default configuration
         run: rm .lighthouserc.yaml
+      - name: Verify Node.js memory settings
+        run: |
+          echo "Node.js version: $(node --version)"
+          echo "NODE_OPTIONS: $NODE_OPTIONS"
+          node -e "console.log('Max heap size:', require('v8').getHeapStatistics().heap_size_limit / 1024 / 1024, 'MB')"
       - name: Run Lighthouse
         uses: treosh/lighthouse-ci-action@v12
         id: lighthouse
