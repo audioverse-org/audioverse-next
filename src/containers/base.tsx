@@ -1,4 +1,3 @@
-// This is just a test line to trigger the pre-commit hook
 import {
 	DehydratedState,
 	HydrationBoundary,
