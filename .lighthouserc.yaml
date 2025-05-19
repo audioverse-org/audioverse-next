@@ -2,6 +2,12 @@ ci:
   collect:
     # collect options here
     startServerCommand: npm run start
+    screenEmulation:
+      mobile: false
+      width: 1350
+      height: 940
+      deviceScaleFactor: 1
+      disabled: false
     url:
       - http://localhost:3000
       - http://localhost:3000/en/teachings/all/page/1
