@@ -43,11 +43,11 @@ jobs:
             ${{github.event.deployment_status.target_url}}/
             ${{github.event.deployment_status.target_url}}/en
             ${{github.event.deployment_status.target_url}}/es
-            ${{github.event.deployment_status.target_url}}/en/discover
             ${{github.event.deployment_status.target_url}}/en/teachings/all/page/1
             ${{github.event.deployment_status.target_url}}/en/teachings/300
             ${{github.event.deployment_status.target_url}}/en/bibles/ENGKJV2
             ${{github.event.deployment_status.target_url}}/en/presenters/1309/amanda-anguish
+          # ${{github.event.deployment_status.target_url}}/en/discover
           runs: 3
           temporaryPublicStorage: true
       - name: Add comment
