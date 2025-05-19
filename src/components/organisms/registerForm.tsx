@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { Alert } from '@mui/material';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '~components/molecules/button';
@@ -61,20 +62,25 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 		}
 	}, [dataRegister, onSuccess, firstName, lastName, email]);
 
-	const onSubmit = (e: React.MouseEvent) => {
+	const onSubmit = (e: FormEvent<HTMLElement>) => {
 		e.preventDefault();
-		const newErrors = [];
-		if (!email.length) {
-			newErrors.push('email is required');
-		}
-		setErrors(newErrors);
-		if (!newErrors.length) {
+		setErrors([]);
+
+		try {
 			mutate({
 				email,
 				password,
 				firstName,
 				lastName,
 			});
+		} catch (e) {
+			setErrors([
+				(e as { message: string } | undefined)?.message ||
+					intl.formatMessage({
+						id: 'registerForm__registerFailureMessage',
+						defaultMessage: 'Register failed',
+					}),
+			]);
 		}
 	};
 
@@ -83,7 +89,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 			<p>
 				<FormattedMessage
 					id="register__loadingMessage"
-					defaultMessage="loading..."
+					defaultMessage="Loading..."
 					description="register loading message"
 				/>
 			</p>
@@ -91,13 +97,14 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 	}
 
 	return (
-		<form className={styles.form}>
-			{/* TODO: show errors inline */}
-			<ul>
-				{errors.map((e) => (
-					<li key={e}>{e}</li>
-				))}
-			</ul>
+		<form className={styles.form} onSubmit={onSubmit}>
+			{!!errors.length && (
+				<Alert severity="error">
+					{errors.map((e) => (
+						<div key={e}>{e}</div>
+					))}
+				</Alert>
+			)}
 
 			<Input
 				label={intl.formatMessage({
@@ -111,6 +118,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 				type="text"
 				value={firstName}
 				setValue={setFirstName}
+				required
 			/>
 			<Input
 				label={intl.formatMessage({
@@ -124,6 +132,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 				type="text"
 				value={lastName}
 				setValue={setLastName}
+				required
 			/>
 			<Input
 				label={intl.formatMessage({
@@ -137,6 +146,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 				type="email"
 				value={email}
 				setValue={setEmail}
+				required
 			/>
 			<Input
 				label={intl.formatMessage({
@@ -150,12 +160,13 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 				type="password"
 				value={password}
 				setValue={setPassword}
+				required
 			/>
 
 			<div className={styles.actions}>
 				<Button
 					type="super"
-					onClick={onSubmit}
+					buttonType="submit"
 					text={
 						<FormattedMessage
 							id="register__submitButton"
