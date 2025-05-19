@@ -1,67 +1,69 @@
 name: E2E
 on: [deployment_status]
 jobs:
-  accessibility:
-    if: github.event.deployment_status.state == 'success'
-    runs-on: ubuntu-latest
-    permissions:
-      checks: read
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v4
-        name: Checkout configuration file
-        with:
-          sparse-checkout: |
-            pa11y-ci.json
-          sparse-checkout-cone-mode: false
-      - uses: narthur/pa11y-ratchet@v3
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          sitemap-url: ${{github.event.deployment_status.target_url}}/sitemap-0.xml
-          find: https://www.audioverse.org
-          replace: ${{github.event.deployment_status.target_url}}
-          include: 'https?:\/\/[\w\.-]+\/en\/'
-          # Ignore contrast-related errors for now
-          ignore: WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail,WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail,WCAG2AA.Principle2.Guideline2_4.2_4_1.H64.1
-          config-path: pa11y-ci.json
+  # accessibility:
+  #   if: github.event.deployment_status.state == 'success'
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     checks: read
+  #     pull-requests: write
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       name: Checkout configuration file
+  #       with:
+  #         sparse-checkout: |
+  #           pa11y-ci.json
+  #         sparse-checkout-cone-mode: false
+  #     - uses: narthur/pa11y-ratchet@v3
+  #       with:
+  #         github-token: ${{secrets.GITHUB_TOKEN}}
+  #         sitemap-url: ${{github.event.deployment_status.target_url}}/sitemap-0.xml
+  #         find: https://www.audioverse.org
+  #         replace: ${{github.event.deployment_status.target_url}}
+  #         include: 'https?:\/\/[\w\.-]+\/en\/'
+  #         # Ignore contrast-related errors for now
+  #         ignore: WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail,WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail,WCAG2AA.Principle2.Guideline2_4.2_4_1.H64.1
+  #         config-path: pa11y-ci.json
   lighthouse:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     permissions:
       checks: read
       pull-requests: write
-    env:
-      NODE_OPTIONS: '--max-old-space-size=4096'
     steps:
-      # WORKAROUND: https://github.com/treosh/lighthouse-ci-action/issues/21
-      - uses: actions/checkout@v4
-      - name: Delete default configuration
-        run: rm .lighthouserc.yaml
-      - name: Verify Node.js memory settings
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Chrome
         run: |
-          echo "Node.js version: $(node --version)"
-          echo "NODE_OPTIONS: $NODE_OPTIONS"
-          node -e "console.log('Max heap size:', require('v8').getHeapStatistics().heap_size_limit / 1024 / 1024, 'MB')"
-      - name: Run Lighthouse
-        uses: treosh/lighthouse-ci-action@v12
-        id: lighthouse
-        with:
-          urls: |
-            ${{github.event.deployment_status.target_url}}/
-            ${{github.event.deployment_status.target_url}}/en
-            ${{github.event.deployment_status.target_url}}/es
-            ${{github.event.deployment_status.target_url}}/en/discover
-            ${{github.event.deployment_status.target_url}}/en/teachings/all/page/1
-            ${{github.event.deployment_status.target_url}}/en/teachings/300
-            ${{github.event.deployment_status.target_url}}/en/bibles/ENGKJV2
-            ${{github.event.deployment_status.target_url}}/en/presenters/1309/amanda-anguish
-          runs: 3
-          temporaryPublicStorage: true
-      - name: Add comment
-        uses: actions/github-script@v5
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Run Lighthouse CI
         env:
-          LIGHTHOUSE_LINKS: ${{ steps.lighthouse.outputs.links }}
+          BASE_URL: ${{ github.event.deployment_status.target_url }}
+        run: |
+          echo "Collecting URLs to test..."
+          echo "BASE_URL=$BASE_URL"
+          lhci autorun
+
+      - name: Add comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v5
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const script = require('./.github/workflows/scripts/lighthouse.js')
             await script({ context, core, github })

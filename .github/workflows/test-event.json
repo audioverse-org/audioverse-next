@@ -1,0 +1,11 @@
+{
+	"deployment_status": {
+		"state": "success",
+		"target_url": "http://localhost:3000",
+		"environment": "Preview"
+	},
+	"env": {
+		"CHROME_PATH": "/usr/bin/google-chrome",
+		"SKIP_UNPRIVILEGED_NS_CHECK": "true"
+	}
+}

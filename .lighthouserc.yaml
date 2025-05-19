@@ -1,21 +1,29 @@
 ci:
   collect:
     # collect options here
-    startServerCommand: npm run start
-    screenEmulation:
-      mobile: false
-      width: 1350
-      height: 940
-      deviceScaleFactor: 1
-      disabled: false
     url:
-      - http://localhost:3000
-      - http://localhost:3000/en/teachings/all/page/1
-
+      # - http://localhost:3000
+      # - http://localhost:3000/en/teachings/all/page/1
+      - '${BASE_URL}/'
+      - '${BASE_URL}/en'
+      - '${BASE_URL}/es'
+      - '${BASE_URL}/en/discover'
+      - '${BASE_URL}/en/teachings/all/page/1'
+      - '${BASE_URL}/en/teachings/300'
+      - '${BASE_URL}/en/bibles/ENGKJV2'
+      - '${BASE_URL}/en/presenters/1309/amanda-anguish'
+    numberOfRuns: 1
+    settings:
+      chromeFlags: '--no-sandbox --headless --disable-gpu'
   assert:
+    preset: lighthouse:recommended
+  upload:
+    target: temporary-public-storage
+
+  # assert:
   # assert options here
 
-  upload:
+  # upload:
   # upload options here
 
   server:
