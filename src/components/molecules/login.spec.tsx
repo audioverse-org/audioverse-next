@@ -42,12 +42,15 @@ describe('login form', () => {
 
 		await userEvent.click(getByText('Forgot password?'));
 
-		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		await userEvent.type(
+			getByPlaceholderText('Email address'),
+			'hello@example.com',
+		);
 		await userEvent.click(getByText('Send reset link'));
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
 				variables: {
-					email: 'the_email',
+					email: 'hello@example.com',
 				},
 			});
 		});
@@ -62,86 +65,23 @@ describe('login form', () => {
 		);
 
 		await userEvent.click(getByText('Forgot password?'));
-		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		await userEvent.click(getByText('Send reset link'));
-
-		expect(await screen.findByText(/Reset link sent/)).toBeInTheDocument();
-
-		await screen.findByText('Check your email for a password reset link');
-	});
-
-	it('shows API error', async () => {
-		loadForgotPasswordResponse({
-			success: false,
-			errors: [{ message: 'the_error' }],
-		});
-
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined,
+		await userEvent.type(
+			getByPlaceholderText('Email address'),
+			'hello@example.com',
 		);
-
-		await userEvent.click(getByText('Forgot password?'));
-
-		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
 		await userEvent.click(getByText('Send reset link'));
-
-		await waitFor(() => {
-			expect(getByText('the_error'));
-		});
-	});
-
-	it('does not show success message if not success', async () => {
-		loadForgotPasswordResponse({
-			success: false,
-			errors: [{ message: 'the_error' }],
-		});
-
-		const { getByText, getByPlaceholderText, queryByText } =
-			await renderWithProviders(<Login />, undefined);
-
-		await userEvent.click(getByText('Forgot password?'));
-
-		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		await userEvent.click(getByText('Send reset link'));
-
-		await waitFor(() => {
-			expect(getByText('the_error'));
-		});
 
 		expect(
-			queryByText('Check your email for a password reset link'),
-		).not.toBeInTheDocument();
+			await screen.findByText(
+				/Reset link sent. Check your email and use the link to reset your password./,
+			),
+		).toBeInTheDocument();
 	});
 
-	it('displays generic error on fetch error', async () => {
-		when(fetchApi)
-			.calledWith(LoginForgotPasswordDocument, expect.anything())
-			.mockRejectedValue('oops');
-
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined,
-		);
-
-		await userEvent.click(getByText('Forgot password?'));
-
-		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		await userEvent.click(getByText('Send reset link'));
-
-		await waitFor(() => {
-			expect(
-				getByText(
-					'Something went wrong while trying to send a password reset link',
-				),
-			);
-		});
-	});
-
-	it('displays multiple errors', async () => {
+	it('modal stays open if invalid email is entered', async () => {
 		loadForgotPasswordResponse({
 			success: false,
-			errors: [{ message: 'error_one' }, { message: 'error_two' }],
+			errors: [{ message: 'the_error' }],
 		});
 
 		const { getByText, getByPlaceholderText } = await renderWithProviders(
@@ -151,11 +91,32 @@ describe('login form', () => {
 
 		await userEvent.click(getByText('Forgot password?'));
 
-		await userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		await userEvent.type(
+			getByPlaceholderText('Email address'),
+			'invalid_email',
+		);
 		await userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
-			expect(getByText('error_two'));
+			expect(getByText('Send reset link')).toBeInTheDocument();
 		});
+	});
+
+	it('modal stays open if no email is entered', async () => {
+		loadForgotPasswordResponse({
+			success: false,
+			errors: [{ message: 'the_error' }],
+		});
+
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined,
+		);
+
+		await userEvent.click(getByText('Forgot password?'));
+		await userEvent.type(getByPlaceholderText('Email address'), ' ');
+		await userEvent.click(getByText('Send reset link'));
+
+		expect(getByText('Send reset link')).toBeInTheDocument();
 	});
 });

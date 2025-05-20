@@ -84,13 +84,25 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 		}
 	};
 
-	if (isSuccess && !errors.length) {
+	if (isPending) {
 		return (
 			<p>
 				<FormattedMessage
 					id="register__loadingMessage"
 					defaultMessage="Loading..."
 					description="register loading message"
+				/>
+			</p>
+		);
+	}
+
+	if (isSuccess && !errors.length) {
+		return (
+			<p>
+				<FormattedMessage
+					id="register__successMessage"
+					defaultMessage="Successfully registered!"
+					description="register success message"
 				/>
 			</p>
 		);
