@@ -44,7 +44,7 @@ describe('login form', () => {
 
 		await userEvent.type(
 			getByPlaceholderText('Email address'),
-			'hello@example.com',
+			'helloo@example.com',
 		);
 		await userEvent.click(getByText('Send reset link'));
 		await waitFor(() => {
