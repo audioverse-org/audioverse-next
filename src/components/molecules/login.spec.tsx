@@ -50,7 +50,7 @@ describe('login form', () => {
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
 				variables: {
-					email: 'hello@example.com',
+					email: 'helloo@example.com',
 				},
 			});
 		});
