@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { CardSponsorFragment } from '~src/components/molecules/card/__generated__/sponsor';
 import CardSponsor from '~src/components/molecules/card/sponsor';
-import { useLanguageId } from '~src/lib/hooks/useLanguageId';
+import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import root from '~src/lib/routes';
 
 import Section from '.';
@@ -11,7 +11,7 @@ import { useInfiniteGetSectionSponsorsQuery } from './__generated__/sponsors';
 
 export default function Sponsors(): JSX.Element {
 	const intl = useIntl();
-	const lang = useLanguageId();
+	const lang = useLanguageRoute();
 
 	return (
 		<Section
