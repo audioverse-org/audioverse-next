@@ -11,4 +11,6 @@ elif command -v asdf >/dev/null 2>&1; then
     asdf shell nodejs $version
 fi
 
-npm run precommit
+# npm run precommit
+echo "Commencing lint-staged"
+npx lint-staged

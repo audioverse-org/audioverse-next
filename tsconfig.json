@@ -34,6 +34,6 @@
 		},
 		"incremental": true
 	},
-	"exclude": ["./*.js", "**/*.graphql"],
+	"exclude": ["./*.js", "**/*.graphql", "node_modules"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
