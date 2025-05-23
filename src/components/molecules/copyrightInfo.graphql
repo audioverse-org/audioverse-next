@@ -15,4 +15,7 @@ fragment copyrightInfo on Recording {
 	sponsor {
 		title
 	}
+	writers: persons(role: WRITER) {
+		name
+	}
 }
