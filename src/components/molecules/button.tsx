@@ -26,6 +26,7 @@ type Props = {
 	'aria-label'?: string;
 	disabled?: boolean;
 	centered?: boolean;
+	buttonType?: 'button' | 'submit' | 'reset';
 };
 
 export default function Button({
@@ -65,7 +66,11 @@ export default function Button({
 			<a {..._props}>{inner}</a>
 		</Link>
 	) : (
-		<button disabled={disabled === true} {..._props}>
+		<button
+			disabled={disabled === true}
+			type={props.buttonType || 'button'}
+			{..._props}
+		>
 			{inner}
 		</button>
 	);
