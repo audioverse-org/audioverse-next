@@ -9,7 +9,7 @@ type InputOptions = {
 	name?: string;
 	type?: string;
 	placeholder?: string;
-};
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 export default function Input({
 	label,
@@ -18,6 +18,7 @@ export default function Input({
 	name,
 	setValue,
 	placeholder,
+	...rest
 }: InputOptions): JSX.Element {
 	return (
 		<div className={styles.container}>
@@ -30,6 +31,7 @@ export default function Input({
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
 					placeholder={placeholder}
+					{...rest}
 				/>
 			</label>
 		</div>

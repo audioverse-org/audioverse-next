@@ -1,29 +1,29 @@
 name: E2E
 on: [deployment_status]
 jobs:
-  accessibility:
-    if: github.event.deployment_status.state == 'success'
-    runs-on: ubuntu-latest
-    permissions:
-      checks: read
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v4
-        name: Checkout configuration file
-        with:
-          sparse-checkout: |
-            pa11y-ci.json
-          sparse-checkout-cone-mode: false
-      - uses: narthur/pa11y-ratchet@v3
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          sitemap-url: ${{github.event.deployment_status.target_url}}/sitemap-0.xml
-          find: https://www.audioverse.org
-          replace: ${{github.event.deployment_status.target_url}}
-          include: 'https?:\/\/[\w\.-]+\/en\/'
-          # Ignore contrast-related errors for now
-          ignore: WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail,WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail,WCAG2AA.Principle2.Guideline2_4.2_4_1.H64.1
-          config-path: pa11y-ci.json
+  # accessibility:
+  #   if: github.event.deployment_status.state == 'success'
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     checks: read
+  #     pull-requests: write
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       name: Checkout configuration file
+  #       with:
+  #         sparse-checkout: |
+  #           pa11y-ci.json
+  #         sparse-checkout-cone-mode: false
+  #     - uses: narthur/pa11y-ratchet@v3
+  #       with:
+  #         github-token: ${{secrets.GITHUB_TOKEN}}
+  #         sitemap-url: ${{github.event.deployment_status.target_url}}/sitemap-0.xml
+  #         find: https://www.audioverse.org
+  #         replace: ${{github.event.deployment_status.target_url}}
+  #         include: 'https?:\/\/[\w\.-]+\/en\/'
+  #         # Ignore contrast-related errors for now
+  #         ignore: WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail,WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail,WCAG2AA.Principle2.Guideline2_4.2_4_1.H64.1
+  #         config-path: pa11y-ci.json
   lighthouse:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest

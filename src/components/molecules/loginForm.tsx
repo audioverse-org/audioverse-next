@@ -1,9 +1,9 @@
+import { Alert } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Alert from '~components/atoms/alert';
 import Modal from '~components/organisms/modal';
 import { login, refetchUserQueries } from '~lib/api/login';
 
@@ -27,7 +27,6 @@ export default function LoginForm({
 
 	const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] =
 		useState(false);
-	const [hasSentPasswordReset, setHasSentPasswordReset] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [resetEmail, setResetEmail] = useState('');
@@ -37,9 +36,15 @@ export default function LoginForm({
 
 	const { mutate } = useLoginForgotPasswordMutation({
 		onSuccess: (data) => {
-			const errors = data.userRecover.errors;
-			if (errors.length) {
-				setErrors(errors.map((e) => e.message));
+			const hasErrors = data.userRecover.errors.length > 0;
+			if (hasErrors) {
+				setErrors([
+					intl.formatMessage({
+						id: 'loginForm__resetPasswordErrorMessage',
+						defaultMessage:
+							'Something went wrong while trying to send a password reset link',
+					}),
+				]);
 			} else {
 				setSuccessMessage(
 					intl.formatMessage({
@@ -65,20 +70,33 @@ export default function LoginForm({
 	const onSubmit = async (e: FormEvent<HTMLElement>) => {
 		e.preventDefault();
 		setIsSubmitting(true);
+		setErrors([]);
+
 		try {
 			await login(email, password);
 			await queryClient.invalidateQueries();
 			await refetchUserQueries(queryClient);
 			onSuccess && onSuccess();
-		} catch (e: unknown) {
+		} catch (e) {
 			setIsSubmitting(false);
 			setErrors([
 				(e as { message: string } | undefined)?.message ||
 					intl.formatMessage({
 						id: 'loginForm__loginFailureMessage',
-						defaultMessage: 'Login failed',
+						defaultMessage: 'Login failed. Please try again.',
 					}),
 			]);
+		}
+	};
+
+	const handleResetPasswordSubmit = (e: FormEvent<HTMLElement>) => {
+		e.preventDefault();
+		console.log('resetEmail', resetEmail);
+
+		if (resetEmail) {
+			mutate({ email: resetEmail });
+			setIsResetPasswordModalOpen(false);
+			setResetEmail('');
 		}
 	};
 
@@ -86,13 +104,21 @@ export default function LoginForm({
 		<>
 			<form onSubmit={onSubmit} data-testid="loginForm" className={styles.form}>
 				{!!errors.length && (
-					<Alert className={styles.errorAlert}>
+					<Alert severity="error">
 						{errors.map((e) => (
 							<div key={e}>{e}</div>
 						))}
 					</Alert>
 				)}
-				{successMessage && <p>{successMessage}</p>}
+
+				{successMessage && (
+					<Alert severity="info">
+						<FormattedMessage
+							id="loginForm-reset__modalParagraphSent"
+							defaultMessage="Reset link sent. Check your email and use the link to reset your password."
+						/>
+					</Alert>
+				)}
 
 				<Input
 					label={intl.formatMessage({
@@ -106,6 +132,7 @@ export default function LoginForm({
 					type="email"
 					value={email}
 					setValue={setEmail}
+					required
 				/>
 				<Input
 					label={intl.formatMessage({
@@ -119,12 +146,14 @@ export default function LoginForm({
 					type="password"
 					value={password}
 					setValue={setPassword}
+					required
+					minLength={6}
 				/>
 
 				<div className={styles.actions}>
 					<Button
 						type="super"
-						onClick={onSubmit}
+						buttontype="submit"
 						text={
 							<FormattedMessage
 								id="loginForm__loginButton"
@@ -151,7 +180,7 @@ export default function LoginForm({
 					</a>
 					<FormattedMessage
 						id="loginForm__signupIntro"
-						defaultMessage="Don’t have an account?"
+						defaultMessage="Don't have an account?"
 					/>
 					<Button
 						type="secondary"
@@ -170,6 +199,7 @@ export default function LoginForm({
 					/>
 				</div>
 			</form>
+
 			<Modal
 				open={isResetPasswordModalOpen}
 				onClose={() => setIsResetPasswordModalOpen(false)}
@@ -179,53 +209,16 @@ export default function LoginForm({
 						defaultMessage="Reset password"
 					/>
 				}
-				actions={
-					hasSentPasswordReset ? (
-						<Button
-							onClick={() => {
-								setIsResetPasswordModalOpen(false);
-								setHasSentPasswordReset(false);
-							}}
-							type="super"
-							text={
-								<FormattedMessage
-									id="loginForm-reset__doneButton"
-									defaultMessage="Done"
-								/>
-							}
-						/>
-					) : (
-						<Button
-							onClick={() => {
-								mutate({ email: resetEmail });
-								setHasSentPasswordReset(true);
-							}}
-							type="super"
-							text={
-								<FormattedMessage
-									id="loginForm-reset__sendLinkButton"
-									defaultMessage="Send reset link"
-								/>
-							}
-						/>
-					)
-				}
 			>
-				<p>
-					{hasSentPasswordReset ? (
-						/* TODO: This may be a lie, since it appears this message is displayed before the mutation has resolved. If the mutation fails, we don't want to show this success message. */
-						<FormattedMessage
-							id="loginForm-reset__modalParagraphSent"
-							defaultMessage="Reset link sent. Check your email and use the link to reset your password."
-						/>
-					) : (
-						<FormattedMessage
-							id="loginForm-reset__modalParagraph"
-							defaultMessage="Enter the email address associated with your account and we’ll send you a password reset link."
-						/>
-					)}
-				</p>
-				{!hasSentPasswordReset && (
+				<form
+					onSubmit={handleResetPasswordSubmit}
+					data-testid="resetPasswordForm"
+				>
+					<FormattedMessage
+						id="loginForm-reset__modalParagraph"
+						defaultMessage="Enter the email address associated with your account and we'll send you a password reset link."
+					/>
+
 					<Input
 						label={intl.formatMessage({
 							id: 'loginForm-reset__emailLabel',
@@ -233,13 +226,25 @@ export default function LoginForm({
 						})}
 						placeholder={intl.formatMessage({
 							id: 'loginForm-reset__emailPlaceholder',
-							defaultMessage: 'Email address',
+							defaultMessage: 'jane@example.com',
 						})}
 						type="email"
 						value={resetEmail}
 						setValue={setResetEmail}
+						required
 					/>
-				)}
+
+					<Button
+						type="super"
+						buttontype="submit"
+						text={
+							<FormattedMessage
+								id="loginForm-reset__sendLinkButton"
+								defaultMessage="Send reset link"
+							/>
+						}
+					/>
+				</form>
 			</Modal>
 		</>
 	);
