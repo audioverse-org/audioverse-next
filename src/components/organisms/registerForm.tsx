@@ -178,7 +178,7 @@ function RegisterForm({ showLogin, onSuccess }: Props): JSX.Element {
 			<div className={styles.actions}>
 				<Button
 					type="super"
-					buttonType="submit"
+					buttontype="submit"
 					text={
 						<FormattedMessage
 							id="register__submitButton"

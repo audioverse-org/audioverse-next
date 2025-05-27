@@ -155,7 +155,7 @@ function Reset(): JSX.Element {
 					required
 				/>
 				<Button
-					buttonType="submit"
+					buttontype="submit"
 					type="super"
 					text={
 						<FormattedMessage id="reset__submitButton" defaultMessage="Login" />

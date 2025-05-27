@@ -153,7 +153,7 @@ export default function LoginForm({
 				<div className={styles.actions}>
 					<Button
 						type="super"
-						buttonType="submit"
+						buttontype="submit"
 						text={
 							<FormattedMessage
 								id="loginForm__loginButton"
@@ -236,7 +236,7 @@ export default function LoginForm({
 
 					<Button
 						type="super"
-						buttonType="submit"
+						buttontype="submit"
 						text={
 							<FormattedMessage
 								id="loginForm-reset__sendLinkButton"
