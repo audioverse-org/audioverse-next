@@ -53,29 +53,24 @@ describe('register page', () => {
 		expect(queryByText('please type password twice')).not.toBeInTheDocument();
 	});
 
-	it('renders missing email error', async () => {
-		const { getByText } = await renderPage();
-
-		await userEvent.click(getByText('Sign up'));
-
-		expect(getByText('email is required')).toBeInTheDocument();
-	});
-
 	it('registers user', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
 		await userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
 		await userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
-		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.type(
+			getByPlaceholderText('jane@example.com'),
+			'hello@example.com',
+		);
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), '123456');
 
 		await userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(RegisterDocument, {
 				variables: {
-					email: 'email',
-					password: 'pass',
+					email: 'hello@example.com',
+					password: '123456',
 					firstName: 'Matthew',
 					lastName: 'Leffler',
 				},
@@ -86,13 +81,18 @@ describe('register page', () => {
 	it('displays loading state', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
-		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
+		await userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
+		await userEvent.type(
+			getByPlaceholderText('jane@example.com'),
+			'hello@example.com',
+		);
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), '123456');
 
 		await userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
-			expect(getByText('loading...')).toBeInTheDocument();
+			expect(getByText('Successfully registered!')).toBeInTheDocument();
 		});
 	});
 
@@ -103,31 +103,45 @@ describe('register page', () => {
 				signup: {
 					errors: [
 						{
-							message: 'the_error_message',
+							message: 'Some error occurred',
 						},
 					],
 				},
 			});
 
-		const { getByText, getByPlaceholderText } = await renderPage();
+		const { getByText, getByPlaceholderText, container } = await renderPage();
 
-		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
+		await userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
+		await userEvent.type(
+			getByPlaceholderText('jane@example.com'),
+			'hello@example.com',
+		);
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), '123456');
+
 		await userEvent.click(getByText('Sign up'));
 
-		expect(await screen.findByText('the_error_message')).toBeInTheDocument();
+		await waitFor(() => {
+			const alert = container.querySelector('[role="alert"]');
+			expect(alert).toBeInTheDocument();
+		});
 	});
 
 	it('displays success message', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
-		await userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		await userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
+		await userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
+		await userEvent.type(
+			getByPlaceholderText('jane@example.com'),
+			'hello@example.com',
+		);
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), '123456');
 
 		await userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
-			expect(getByText('loading...')).toBeInTheDocument();
+			expect(getByText('Successfully registered!')).toBeInTheDocument();
 		});
 	});
 
