@@ -136,6 +136,8 @@ function Reset(): JSX.Element {
 					type="password"
 					value={password}
 					setValue={setPassword}
+					disabled={isPending}
+					required
 				/>
 				<Input
 					label={intl.formatMessage({
@@ -149,8 +151,11 @@ function Reset(): JSX.Element {
 					type="password"
 					value={passwordConfirm}
 					setValue={setPasswordConfirm}
+					disabled={isPending}
+					required
 				/>
 				<Button
+					buttontype="submit"
 					type="super"
 					text={
 						<FormattedMessage id="reset__submitButton" defaultMessage="Login" />

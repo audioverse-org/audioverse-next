@@ -11,14 +11,14 @@ import SocialLogin from './socialLogin';
 export default function Login(): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const router = useRouter();
+
 	return (
 		<AndOnboarding>
 			<SocialLogin
-				onSuccess={() => {
-					router.push(root.lang(languageRoute).discover.get());
-				}}
+				onSuccess={() => router.push(root.lang(languageRoute).discover.get())}
 			/>
 			<LoginForm
+				onSuccess={() => router.push(root.lang(languageRoute).discover.get())}
 				showRegister={() =>
 					router.push(
 						root.lang(languageRoute).account.register.get({

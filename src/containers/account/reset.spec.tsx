@@ -116,27 +116,6 @@ describe('password reset page', () => {
 		});
 	});
 
-	it('requires password input', async () => {
-		const { getByText } = await renderPage();
-
-		await userEvent.click(getByText('Login'));
-
-		await waitFor(() => {
-			expect(getByText('Please type password twice')).toBeInTheDocument();
-		});
-	});
-
-	it('requires password confirm input', async () => {
-		const { getByPlaceholderText, getByText } = await renderPage();
-
-		await userEvent.type(getByPlaceholderText('New password'), 'the_pass');
-		await userEvent.click(getByText('Login'));
-
-		await waitFor(() => {
-			expect(getByText('Please type password twice')).toBeInTheDocument();
-		});
-	});
-
 	it('displays api errors', async () => {
 		loadResetPasswordResponse({
 			success: false,
