@@ -1,7 +1,9 @@
-# robots.txt
-
+# *
 User-agent: *
-Disallow: /*/search
+Allow: /
 
-User-agent: Amazonbot
-Disallow: /
+# Host
+Host: https://www.audioverse.org
+
+# Sitemaps
+Sitemap: https://www.audioverse.org/sitemap.xml
