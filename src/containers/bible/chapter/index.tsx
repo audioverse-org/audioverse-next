@@ -53,19 +53,12 @@ const Chapter = ({
 	bookId,
 	chapterNumber,
 }: ChapterProps): JSX.Element => {
-	const {
-		version,
-		book,
-		chapters,
-		chapter,
-		versions,
-		relatedTeachings,
-		isLoading,
-	} = useChapterData({
-		versionId,
-		bookId,
-		chapterNumber,
-	});
+	const { version, book, chapters, chapter, versions, isLoading } =
+		useChapterData({
+			versionId,
+			bookId,
+			chapterNumber,
+		});
 
 	const languageRoute = useLanguageRoute();
 	const [showingText, setShowingText] = useState(false);
