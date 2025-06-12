@@ -168,6 +168,14 @@
 		background: $ts-bibleB;
 		z-index: 1;
 	}
+	.chapterHeadingTabbed {
+		position: sticky;
+		top: 0;
+		margin-bottom: 0;
+		padding-bottom: 0px;
+		background: $ts-bibleB;
+		z-index: 1;
+	}
 }
 .chaptersItems {
 	@media (min-width: $breakpoint-md) {
