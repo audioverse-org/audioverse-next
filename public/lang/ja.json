@@ -367,9 +367,6 @@
   "loadingCards-ariaLabel": {
     "string": "読み込み中"
   },
-  "loginForm-reset__doneButton": {
-    "string": "終了"
-  },
   "loginForm-reset__emailLabel": {
     "string": "メールアドレス"
   },
@@ -2717,9 +2714,6 @@
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
   },
-  "bibleChapter__chapterListTitle": {
-    "string": "この本の中の他の章"
-  },
   "bibleChapter__disclaimer": {
     "string": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
   },
@@ -2743,5 +2737,12 @@
   },
   "molecule-searchBar__reSearch": {
     "string": "< 結果に戻る"
+  },
+  "registerForm__registerFailureMessage": {
+    "string": "Register failed"
+  },
+  "register__successMessage": {
+    "comment": "register success message",
+    "string": "Successfully registered!"
   }
 }
