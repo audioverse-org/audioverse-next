@@ -53,19 +53,12 @@ const Chapter = ({
 	bookId,
 	chapterNumber,
 }: ChapterProps): JSX.Element => {
-	const {
-		version,
-		book,
-		chapters,
-		chapter,
-		versions,
-		relatedTeachings,
-		isLoading,
-	} = useChapterData({
-		versionId,
-		bookId,
-		chapterNumber,
-	});
+	const { version, book, chapters, chapter, versions, isLoading } =
+		useChapterData({
+			versionId,
+			bookId,
+			chapterNumber,
+		});
 
 	const languageRoute = useLanguageRoute();
 	const [showingText, setShowingText] = useState(false);
@@ -239,27 +232,28 @@ const Chapter = ({
 				<div className={styles.chapters}>
 					<div className={styles.chaptersScroller} ref={scrollRef}>
 						{/* Show two tabs chapters and Sermons */}
-						<MiniNav
-							items={[
-								{
-									id: 'chapters',
-									label: 'Chapters',
-									isActive: currentTab === 'chapters',
-									onClick: () => {
-										setCurrentTab('chapters');
+						<div className={styles.chapterHeadingTabbed}>
+							<MiniNav
+								items={[
+									{
+										id: 'chapters',
+										label: 'Chapters',
+										isActive: currentTab === 'chapters',
+										onClick: () => {
+											setCurrentTab('chapters');
+										},
 									},
-								},
-								{
-									id: 'related',
-									label: 'Related',
-									isActive: currentTab === 'related',
-									onClick: () => {
-										setCurrentTab('related');
+									{
+										id: 'related',
+										label: 'Related',
+										isActive: currentTab === 'related',
+										onClick: () => {
+											setCurrentTab('related');
+										},
 									},
-								},
-							]}
-						/>
-
+								]}
+							/>
+						</div>
 						{currentTab === 'chapters' ? (
 							<>
 								<div className={styles.chaptersItems}>
@@ -304,9 +298,9 @@ const Chapter = ({
 						) : (
 							<>
 								<ol className={styles.recordingItem}>
-									{relatedTeachings?.map((r) => (
+									{chapter.relatedList?.related?.map((r) => (
 										<li className={styles.chaptersItems} key={r.id}>
-											<HorizontalRule color={BaseColors.DARK} />
+											<HorizontalRule color={BaseColors.LIGHT_TONE} />
 											<TeaseRecording recording={r} theme="sermon" unpadded />
 										</li>
 									))}
