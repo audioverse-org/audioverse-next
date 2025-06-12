@@ -695,12 +695,6 @@
       "value": "Back to Chapter Info"
     }
   ],
-  "bibleChapter__chapterListTitle": [
-    {
-      "type": 0,
-      "value": "Other Chapters in Book"
-    }
-  ],
   "bibleChapter__disclaimer": [
     {
       "type": 0,
@@ -3145,12 +3139,6 @@
       "value": "Loading…"
     }
   ],
-  "loginForm-reset__doneButton": [
-    {
-      "type": 0,
-      "value": "Done"
-    }
-  ],
   "loginForm-reset__emailLabel": [
     {
       "type": 0,
@@ -3160,13 +3148,13 @@
   "loginForm-reset__emailPlaceholder": [
     {
       "type": 0,
-      "value": "Email address"
+      "value": "jane@example.com"
     }
   ],
   "loginForm-reset__modalParagraph": [
     {
       "type": 0,
-      "value": "Enter the email address associated with your account and we’ll send you a password reset link."
+      "value": "Enter the email address associated with your account and we'll send you a password reset link."
     }
   ],
   "loginForm-reset__modalParagraphSent": [
@@ -3214,7 +3202,7 @@
   "loginForm__loginFailureMessage": [
     {
       "type": 0,
-      "value": "Login failed"
+      "value": "Login failed. Please try again."
     }
   ],
   "loginForm__passwordLabel": [
@@ -3250,7 +3238,7 @@
   "loginForm__signupIntro": [
     {
       "type": 0,
-      "value": "Don’t have an account?"
+      "value": "Don't have an account?"
     }
   ],
   "loginLanding__title": [
@@ -4643,6 +4631,12 @@
       "value": "Video"
     }
   ],
+  "registerForm__registerFailureMessage": [
+    {
+      "type": 0,
+      "value": "Register failed"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -4682,7 +4676,7 @@
   "register__loadingMessage": [
     {
       "type": 0,
-      "value": "loading..."
+      "value": "Loading..."
     }
   ],
   "register__login": [
@@ -4713,6 +4707,12 @@
     {
       "type": 0,
       "value": "Sign up"
+    }
+  ],
+  "register__successMessage": [
+    {
+      "type": 0,
+      "value": "Successfully registered!"
     }
   ],
   "register__title": [
