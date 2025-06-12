@@ -91,5 +91,8 @@ export default async function getChapter(
 					canonicalPath: nextPath,
 				}
 			: null,
+		relatedList: {
+			related: await getRelatedTeachings(bookId, chapterNumber),
+		},
 	};
 }
