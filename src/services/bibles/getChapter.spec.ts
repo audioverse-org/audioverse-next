@@ -1,12 +1,14 @@
 import { fetchApi } from '~lib/api/fetchApi';
 import root from '~src/lib/routes';
 
+import { getBibleRelatedTeachings } from './__generated__/getRelatedTeachings';
 import getChapter from './getChapter';
 import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 
 jest.mock('./graphql/fetchChapterText');
 jest.mock('./graphql/getGraphqlChapterId');
+jest.mock('./__generated__/getRelatedTeachings');
 
 const chapterFixture = {
 	id: 'graphql-123',
@@ -49,6 +51,12 @@ describe('getChapter', () => {
 		jest.mocked(fetchApi).mockResolvedValue({
 			recording: chapterFixture,
 		});
+
+		jest.mocked(getBibleRelatedTeachings).mockResolvedValue({
+			recordings: {
+				nodes: [],
+			},
+		});
 	});
 
 	it('looks up book case insensitively', async () => {
@@ -74,13 +82,13 @@ describe('getChapter', () => {
 	it('sets chapter text', async () => {
 		jest.mocked(fetchChapterText).mockResolvedValue('In the beginning...');
 
-		const result = await getChapter('ENGKJV2', 'GEN', 1);
+		const result = await getChapter('ENGKJV2', 'gen', 1);
 
 		expect(result?.transcript?.text).toBe('In the beginning...');
 	});
 
 	it('returns FCBH chapter with audio files', async () => {
-		const result = await getChapter('ENGKJV2', 'GEN', 1);
+		const result = await getChapter('ENGKJV2', 'gen', 1);
 
 		expect(result?.audioFiles).toBeDefined();
 		expect(result?.audioFiles?.length).toBe(1);

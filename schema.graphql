@@ -3171,6 +3171,9 @@ type Query {
   recordings(
     """Return the elements that come after the specified cursor."""
     after: String
+
+    """Gets recordings that are linked to this bible reference chapter."""
+    bibleReference: BibleReferenceInput
     bibleReferences: [BibleReferenceRangeInput!]
     collectionId: ID
     collectionIds: [ID!]
@@ -3223,10 +3226,6 @@ type Query {
 
     """Requires `CONTENT_SCREENER` role."""
     screeningContentViewFilter: RecordingScreeningContentViewFilter
-
-    """
-    `search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected.
-    """
     search: String
     sequenceId: ID
     sequenceIds: [ID!]
@@ -5523,6 +5522,19 @@ type User implements Node {
 
   """Whether recordings should autoplay by default."""
   autoplay: Boolean!
+  bibleDownloadHistory(
+    """Return the elements that come after the specified cursor."""
+    after: String
+
+    """Return up to the first `n` elements from the list."""
+    first: Int
+    hasIncompletePlaybackSession: Boolean
+    language: Language!
+
+    """Return the elements that come after the specified offset."""
+    offset: Int
+    orderBy: [UserDownloadHistoryOrder!]
+  ): UserBibleDownloadHistoryConnection!
 
   """The name of the city, district, village, or town."""
   city: String
@@ -5763,6 +5775,29 @@ type User implements Node {
 
   """The user's timezone."""
   timezone: Timezone!
+}
+
+type UserBibleDownloadHistory {
+  bookAbbreviation: String!
+  bookName: String!
+  chapter: String!
+  fileSetId: String!
+  id: String!
+  lang: String!
+  title: String!
+  url: String!
+}
+
+type UserBibleDownloadHistoryConnection {
+  aggregate: Aggregate
+  edges: [UserBibleDownloadHistoryEdge!]
+  nodes: [UserBibleDownloadHistory!]
+  pageInfo: PageInfo!
+}
+
+type UserBibleDownloadHistoryEdge {
+  cursor: String!
+  node: UserBibleDownloadHistory!
 }
 
 type UserConnection {

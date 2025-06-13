@@ -359,9 +359,6 @@
   "bibleChapter__backToChapter": {
     "string": "Back to Chapter Info"
   },
-  "bibleChapter__chapterListTitle": {
-    "string": "Other Chapters in Book"
-  },
   "bibleChapter__disclaimer": {
     "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
   },
@@ -1491,17 +1488,14 @@
   "loadingCards-ariaLabel": {
     "string": "Loading…"
   },
-  "loginForm-reset__doneButton": {
-    "string": "Done"
-  },
   "loginForm-reset__emailLabel": {
     "string": "Email address"
   },
   "loginForm-reset__emailPlaceholder": {
-    "string": "Email address"
+    "string": "jane@example.com"
   },
   "loginForm-reset__modalParagraph": {
-    "string": "Enter the email address associated with your account and we’ll send you a password reset link."
+    "string": "Enter the email address associated with your account and we'll send you a password reset link."
   },
   "loginForm-reset__modalParagraphSent": {
     "string": "Reset link sent. Check your email and use the link to reset your password."
@@ -1527,7 +1521,7 @@
     "string": "Login"
   },
   "loginForm__loginFailureMessage": {
-    "string": "Login failed"
+    "string": "Login failed. Please try again."
   },
   "loginForm__passwordLabel": {
     "string": "Password"
@@ -1547,7 +1541,7 @@
     "string": "Sign up"
   },
   "loginForm__signupIntro": {
-    "string": "Don’t have an account?"
+    "string": "Don't have an account?"
   },
   "loginLanding__title": {
     "string": "Login Landing"
@@ -2247,6 +2241,9 @@
     "comment": "recording has video filter video",
     "string": "Video"
   },
+  "registerForm__registerFailureMessage": {
+    "string": "Register failed"
+  },
   "register__emailLabel": {
     "string": "Email"
   },
@@ -2267,7 +2264,7 @@
   },
   "register__loadingMessage": {
     "comment": "register loading message",
-    "string": "loading..."
+    "string": "Loading..."
   },
   "register__login": {
     "string": "Login"
@@ -2283,6 +2280,10 @@
   },
   "register__submitButton": {
     "string": "Sign up"
+  },
+  "register__successMessage": {
+    "comment": "register success message",
+    "string": "Successfully registered!"
   },
   "register__title": {
     "string": "Register"

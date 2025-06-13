@@ -695,12 +695,6 @@
       "value": "Back to Chapter Info"
     }
   ],
-  "bibleChapter__chapterListTitle": [
-    {
-      "type": 0,
-      "value": "Autres chapitres du livre"
-    }
-  ],
   "bibleChapter__disclaimer": [
     {
       "type": 0,
@@ -3141,12 +3135,6 @@
       "value": "Chargement en cours…"
     }
   ],
-  "loginForm-reset__doneButton": [
-    {
-      "type": 0,
-      "value": "Terminé"
-    }
-  ],
   "loginForm-reset__emailLabel": [
     {
       "type": 0,
@@ -4639,6 +4627,12 @@
       "value": "Vidéo"
     }
   ],
+  "registerForm__registerFailureMessage": [
+    {
+      "type": 0,
+      "value": "Register failed"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -4709,6 +4703,12 @@
     {
       "type": 0,
       "value": "S'inscrire"
+    }
+  ],
+  "register__successMessage": [
+    {
+      "type": 0,
+      "value": "Successfully registered!"
     }
   ],
   "register__title": [

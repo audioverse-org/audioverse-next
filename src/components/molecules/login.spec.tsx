@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
@@ -35,15 +35,13 @@ describe('login form', () => {
 	it('triggers forgot password email', async () => {
 		loadForgotPasswordResponse();
 
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined,
-		);
+		const { getByText } = await renderWithProviders(<Login />, undefined);
 
 		await userEvent.click(getByText('Forgot password?'));
 
+		const resetPasswordForm = screen.getByTestId('resetPasswordForm');
 		await userEvent.type(
-			getByPlaceholderText('Email address'),
+			within(resetPasswordForm).getByPlaceholderText('jane@example.com'),
 			'helloo@example.com',
 		);
 		await userEvent.click(getByText('Send reset link'));
@@ -59,14 +57,12 @@ describe('login form', () => {
 	it('shows forgot password success message', async () => {
 		loadForgotPasswordResponse();
 
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined,
-		);
+		const { getByText } = await renderWithProviders(<Login />, undefined);
 
 		await userEvent.click(getByText('Forgot password?'));
+		const resetPasswordForm = screen.getByTestId('resetPasswordForm');
 		await userEvent.type(
-			getByPlaceholderText('Email address'),
+			within(resetPasswordForm).getByPlaceholderText('jane@example.com'),
 			'hello@example.com',
 		);
 		await userEvent.click(getByText('Send reset link'));
@@ -84,15 +80,13 @@ describe('login form', () => {
 			errors: [{ message: 'the_error' }],
 		});
 
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined,
-		);
+		const { getByText } = await renderWithProviders(<Login />, undefined);
 
 		await userEvent.click(getByText('Forgot password?'));
 
+		const resetPasswordForm = screen.getByTestId('resetPasswordForm');
 		await userEvent.type(
-			getByPlaceholderText('Email address'),
+			within(resetPasswordForm).getByPlaceholderText('jane@example.com'),
 			'invalid_email',
 		);
 		await userEvent.click(getByText('Send reset link'));
@@ -108,13 +102,14 @@ describe('login form', () => {
 			errors: [{ message: 'the_error' }],
 		});
 
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined,
-		);
+		const { getByText } = await renderWithProviders(<Login />, undefined);
 
 		await userEvent.click(getByText('Forgot password?'));
-		await userEvent.type(getByPlaceholderText('Email address'), ' ');
+		const resetPasswordForm = screen.getByTestId('resetPasswordForm');
+		await userEvent.type(
+			within(resetPasswordForm).getByPlaceholderText('jane@example.com'),
+			' ',
+		);
 		await userEvent.click(getByText('Send reset link'));
 
 		expect(getByText('Send reset link')).toBeInTheDocument();

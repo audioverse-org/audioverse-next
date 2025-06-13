@@ -367,9 +367,6 @@
   "loadingCards-ariaLabel": {
     "string": "Cargando…"
   },
-  "loginForm-reset__doneButton": {
-    "string": "Terminado"
-  },
   "loginForm-reset__emailLabel": {
     "string": "Dirección de correo electrónico"
   },
@@ -2717,9 +2714,6 @@
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
   },
-  "bibleChapter__chapterListTitle": {
-    "string": "Otros capítulos del libro"
-  },
   "bibleChapter__disclaimer": {
     "string": "Los términos y condiciones que rigen el uso de Audiobiblias de Faith Comes By Hearing impiden la opción de descarga y la integración de ciertas funciones en nuestra plataforma."
   },
@@ -2743,5 +2737,12 @@
   },
   "molecule-searchBar__reSearch": {
     "string": "< Volver a los resultados"
+  },
+  "registerForm__registerFailureMessage": {
+    "string": "Register failed"
+  },
+  "register__successMessage": {
+    "comment": "register success message",
+    "string": "Successfully registered!"
   }
 }

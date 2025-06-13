@@ -695,12 +695,6 @@
       "value": "Back to Chapter Info"
     }
   ],
-  "bibleChapter__chapterListTitle": [
-    {
-      "type": 0,
-      "value": "Другие главы в книге"
-    }
-  ],
   "bibleChapter__disclaimer": [
     {
       "type": 0,
@@ -3149,12 +3143,6 @@
       "value": "Загрузка...."
     }
   ],
-  "loginForm-reset__doneButton": [
-    {
-      "type": 0,
-      "value": "Выполнено"
-    }
-  ],
   "loginForm-reset__emailLabel": [
     {
       "type": 0,
@@ -4647,6 +4635,12 @@
       "value": "Видео"
     }
   ],
+  "registerForm__registerFailureMessage": [
+    {
+      "type": 0,
+      "value": "Register failed"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -4717,6 +4711,12 @@
     {
       "type": 0,
       "value": "Зарегистрироваться"
+    }
+  ],
+  "register__successMessage": [
+    {
+      "type": 0,
+      "value": "Successfully registered!"
     }
   ],
   "register__title": [

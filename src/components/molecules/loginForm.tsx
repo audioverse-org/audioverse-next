@@ -43,6 +43,7 @@ export default function LoginForm({
 						id: 'loginForm__resetPasswordErrorMessage',
 						defaultMessage:
 							'Something went wrong while trying to send a password reset link',
+						description: 'reset password error message',
 					}),
 				]);
 			} else {

@@ -367,9 +367,6 @@
   "loadingCards-ariaLabel": {
     "string": "正在加载……"
   },
-  "loginForm-reset__doneButton": {
-    "string": "已完成的"
-  },
   "loginForm-reset__emailLabel": {
     "string": "电邮地址"
   },
@@ -2717,9 +2714,6 @@
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
   },
-  "bibleChapter__chapterListTitle": {
-    "string": "本书其它章节"
-  },
   "bibleChapter__disclaimer": {
     "string": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
   },
@@ -2743,5 +2737,12 @@
   },
   "molecule-searchBar__reSearch": {
     "string": "< 回傳結果"
+  },
+  "registerForm__registerFailureMessage": {
+    "string": "Register failed"
+  },
+  "register__successMessage": {
+    "comment": "register success message",
+    "string": "Successfully registered!"
   }
 }
