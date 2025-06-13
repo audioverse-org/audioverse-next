@@ -25,7 +25,7 @@ import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import isServerSide from '~src/lib/isServerSide';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 import { parseChapterNumber } from '~src/services/bibles/utils';
-import { gtmPushRecordingView } from '~src/services/gtm';
+import { gtmPushEvent, gtmPushRecordingView } from '~src/services/gtm';
 
 import styles from './index.module.scss';
 import { useChapterData } from './useChapterData';
@@ -301,7 +301,22 @@ const Chapter = ({
 									{chapter.relatedList?.related?.map((r) => (
 										<li className={styles.chaptersItems} key={r.id}>
 											<HorizontalRule color={BaseColors.LIGHT_TONE} />
-											<TeaseRecording recording={r} theme="sermon" unpadded />
+											<div
+												onClick={() => {
+													gtmPushEvent('navigate', {
+														navigation_type: 'bible_related',
+														from_id: chapter.id,
+														to_id: r.id,
+														from_content_type:
+															RecordingContentType.BibleChapter,
+														to_content_type: r.recordingContentType,
+														from_title: version.title,
+														to_title: r.title,
+													});
+												}}
+											>
+												<TeaseRecording recording={r} theme="sermon" unpadded />
+											</div>
 										</li>
 									))}
 								</ol>
