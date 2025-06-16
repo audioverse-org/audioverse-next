@@ -1,0 +1,7 @@
+query getBibleRelatedTeachings($bibleReference: BibleReferenceInput) {
+	recordings(language: ENGLISH, bibleReference: $bibleReference, first: 20) {
+		nodes {
+			...teaseRecording
+		}
+	}
+}

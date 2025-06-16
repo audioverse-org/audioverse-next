@@ -11,3 +11,10 @@ export default function getBookMeta(bookIdentifier: string) {
 	});
 	return meta;
 }
+
+export function getBookReference(bookIdentifier: string) {
+	const bibleRef = BIBLE_BOOK_METAS.find(
+		(m) => m.fcbhId.toLowerCase() === bookIdentifier.toLocaleLowerCase(),
+	);
+	return bibleRef?.bibleReferenceBook;
+}

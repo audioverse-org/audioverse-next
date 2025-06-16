@@ -695,12 +695,6 @@
       "value": "Back to Chapter Info"
     }
   ],
-  "bibleChapter__chapterListTitle": [
-    {
-      "type": 0,
-      "value": "本书其它章节"
-    }
-  ],
   "bibleChapter__disclaimer": [
     {
       "type": 0,
@@ -3153,12 +3147,6 @@
       "value": "正在加载……"
     }
   ],
-  "loginForm-reset__doneButton": [
-    {
-      "type": 0,
-      "value": "已完成的"
-    }
-  ],
   "loginForm-reset__emailLabel": [
     {
       "type": 0,
@@ -4663,6 +4651,12 @@
       "value": "视频"
     }
   ],
+  "registerForm__registerFailureMessage": [
+    {
+      "type": 0,
+      "value": "Register failed"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -4733,6 +4727,12 @@
     {
       "type": 0,
       "value": "注册"
+    }
+  ],
+  "register__successMessage": [
+    {
+      "type": 0,
+      "value": "Successfully registered!"
     }
   ],
   "register__title": [

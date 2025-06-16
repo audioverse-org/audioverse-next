@@ -367,9 +367,6 @@
   "loadingCards-ariaLabel": {
     "string": "Загрузка...."
   },
-  "loginForm-reset__doneButton": {
-    "string": "Выполнено"
-  },
   "loginForm-reset__emailLabel": {
     "string": "Адрес электронной почты"
   },
@@ -2717,9 +2714,6 @@
   "molecule-bibleVersionTophat__disabledTooltip": {
     "string": "The displayed chapter is unavailable in this version"
   },
-  "bibleChapter__chapterListTitle": {
-    "string": "Другие главы в книге"
-  },
   "bibleChapter__disclaimer": {
     "string": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
   },
@@ -2743,5 +2737,12 @@
   },
   "molecule-searchBar__reSearch": {
     "string": "< Вернуться к результатам"
+  },
+  "registerForm__registerFailureMessage": {
+    "string": "Register failed"
+  },
+  "register__successMessage": {
+    "comment": "register success message",
+    "string": "Successfully registered!"
   }
 }

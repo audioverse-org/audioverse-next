@@ -4,6 +4,7 @@ import isServerSide from '~src/lib/isServerSide';
 import getBookMeta from '~src/services/bibles/getBookMeta';
 import getChapter from '~src/services/bibles/getChapter';
 import getChapters from '~src/services/bibles/getChapters';
+import getRelatedTeachings from '~src/services/bibles/getRelatedTeachings';
 import getVersion from '~src/services/bibles/getVersion';
 import getVersions from '~src/services/bibles/getVersions';
 
@@ -41,16 +42,24 @@ export function useChapterData(params: {
 		enabled: !isServerSide(),
 	});
 
+	const relatedTeachings = useQuery({
+		queryKey: ['relatedTeachings'],
+		queryFn: () => getRelatedTeachings(bookId, chapterNumber),
+		enabled: !isServerSide(),
+	});
+
 	return {
 		version: version.data,
 		book: bookMeta ? { id: bookMeta.fcbhId, title: bookMeta.fullName } : null,
 		chapters: chapters.data || null,
 		chapter: chapter.data || null,
 		versions: versions.data || [],
+		relatedTeachings: relatedTeachings.data || null,
 		isLoading:
 			version.isLoading ||
 			chapters.isLoading ||
 			chapter.isLoading ||
-			versions.isLoading,
+			versions.isLoading ||
+			relatedTeachings.isLoading,
 	};
 }

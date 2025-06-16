@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
-import LineHeading from '~components/atoms/lineHeading';
 import BibleVersionTophat from '~components/molecules/bibleVersionTophat';
 import { BibleVersionTophatFragment } from '~components/molecules/bibleVersionTophat/__generated__';
 import Button from '~components/molecules/button';
@@ -10,6 +9,7 @@ import ContentWidthLimiter from '~components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '~components/molecules/definitionList';
+import MiniNav from '~components/molecules/mininav';
 import Player from '~components/molecules/player';
 import SequenceNav from '~components/molecules/sequenceNav';
 import Tease from '~components/molecules/tease';
@@ -19,12 +19,13 @@ import root from '~lib/routes';
 import IconBack from '~public/img/icons/icon-back-light.svg';
 import IconBlog from '~public/img/icons/icon-blog-light-small.svg';
 import { RecordingContentType } from '~src/__generated__/graphql';
+import HorizontalRule from '~src/components/atoms/horizontalRule';
 import AndFailStates from '~src/components/templates/andFailStates';
 import useLanguageRoute from '~src/lib/hooks/useLanguageRoute';
 import isServerSide from '~src/lib/isServerSide';
 import { FCBH_VERSIONS } from '~src/services/bibles/constants';
 import { parseChapterNumber } from '~src/services/bibles/utils';
-import { gtmPushRecordingView } from '~src/services/gtm';
+import { gtmPushEvent, gtmPushRecordingView } from '~src/services/gtm';
 
 import styles from './index.module.scss';
 import { useChapterData } from './useChapterData';
@@ -65,6 +66,7 @@ const Chapter = ({
 	const currentRef = useRef<HTMLDivElement>(null);
 	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version?.id);
 	const allowDownload = useShouldAllowDownload(version?.id);
+	const [currentTab, setCurrentTab] = useState('chapters');
 
 	useEffect(() => {
 		if (!chapter) return;
@@ -229,54 +231,97 @@ const Chapter = ({
 
 				<div className={styles.chapters}>
 					<div className={styles.chaptersScroller} ref={scrollRef}>
-						<LineHeading
-							small
-							color={BaseColors.RED}
-							className={styles.chapterHeading}
-						>
-							<FormattedMessage
-								id="bibleChapter__chapterListTitle"
-								defaultMessage="Other Chapters in Book"
+						{/* Show two tabs chapters and Sermons */}
+						<div className={styles.chapterHeadingTabbed}>
+							<MiniNav
+								items={[
+									{
+										id: 'chapters',
+										label: 'Chapters',
+										isActive: currentTab === 'chapters',
+										onClick: () => {
+											setCurrentTab('chapters');
+										},
+									},
+									{
+										id: 'related',
+										label: 'Related',
+										isActive: currentTab === 'related',
+										onClick: () => {
+											setCurrentTab('related');
+										},
+									},
+								]}
 							/>
-						</LineHeading>
-
-						<div className={styles.chaptersItems}>
-							{chapters.map((chapter) => {
-								const number = parseChapterNumber(chapter.title);
-								return (
-									<div
-										className={styles.item}
-										key={chapter.id}
-										ref={number === chapterNumber ? currentRef : undefined}
-									>
-										<TeaseRecording
-											recording={{
-												...chapter,
-												recordingContentType: RecordingContentType.BibleChapter,
-												sequenceIndex: null,
-												speakers: [],
-												canonicalPath: root
-													.lang(languageRoute)
-													.bibles.versionId(version.id)
-													.fcbhId(book.id.toString())
-													.chapterNumber(number)
-													.get({
-														params: {
-															autoplay: 'true',
-														},
-													}),
-											}}
-											playlistRecordings={chapters.slice(
-												chapters.findIndex((c) => c.id === chapter.id),
-											)}
-											theme="chapter"
-											unpadded
-											disableUserFeatures={isFcbhVersion}
-										/>
-									</div>
-								);
-							})}
 						</div>
+						{currentTab === 'chapters' ? (
+							<>
+								<div className={styles.chaptersItems}>
+									{chapters.map((chapter) => {
+										const number = parseChapterNumber(chapter.title);
+										return (
+											<div
+												className={styles.item}
+												key={chapter.id}
+												ref={number === chapterNumber ? currentRef : undefined}
+											>
+												<TeaseRecording
+													recording={{
+														...chapter,
+														recordingContentType:
+															RecordingContentType.BibleChapter,
+														sequenceIndex: null,
+														speakers: [],
+														canonicalPath: root
+															.lang(languageRoute)
+															.bibles.versionId(version.id)
+															.fcbhId(book.id.toString())
+															.chapterNumber(number)
+															.get({
+																params: {
+																	autoplay: 'true',
+																},
+															}),
+													}}
+													playlistRecordings={chapters.slice(
+														chapters.findIndex((c) => c.id === chapter.id),
+													)}
+													theme="chapter"
+													unpadded
+													disableUserFeatures={isFcbhVersion}
+												/>
+											</div>
+										);
+									})}
+								</div>
+							</>
+						) : (
+							<>
+								<ol className={styles.recordingItem}>
+									{chapter.relatedList?.related?.map((r) => (
+										<li className={styles.chaptersItems} key={r.id}>
+											<HorizontalRule color={BaseColors.LIGHT_TONE} />
+											<div
+												onClick={() => {
+													gtmPushEvent('navigate', {
+														navigation_type: 'bible_related',
+														from_id: chapter.id,
+														to_id: r.id,
+														from_content_type:
+															RecordingContentType.BibleChapter,
+														to_content_type: r.recordingContentType,
+														from_title: version.title,
+														to_title: r.title,
+													});
+												}}
+											>
+												<TeaseRecording recording={r} theme="sermon" unpadded />
+											</div>
+										</li>
+									))}
+								</ol>
+							</>
+						)}
 					</div>
 				</div>
 			</div>

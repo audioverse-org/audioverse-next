@@ -1,15 +1,18 @@
+import { TeaseRecordingFragment } from '~src/components/molecules/__generated__/teaseRecording';
 import { BibleChapterDetailChapterFullFragment } from '~src/containers/bible/chapter/__generated__/index';
 import root from '~src/lib/routes';
 
 import { getGraphqlChapter } from './__generated__/getChapter';
 import getFcbhBook from './fcbh/getFcbhBook';
 import getBookMeta from './getBookMeta';
+import getRelatedTeachings from './getRelatedTeachings';
 import fetchChapterText from './graphql/fetchChapterText';
 import { getGraphqlChapterId } from './graphql/getGraphqlChapterId';
 import { transformChapterFull } from './transforms/chapterTransforms';
 
 type ChapterWithTranscript = BibleChapterDetailChapterFullFragment & {
 	transcript?: { text: string };
+	relatedList?: { related: TeaseRecordingFragment[] };
 };
 
 export default async function getChapter(
@@ -26,6 +29,9 @@ export default async function getChapter(
 			...full,
 			transcript: {
 				text: await fetchChapterText(bookId, chapterNumber),
+			},
+			relatedList: {
+				related: await getRelatedTeachings(bookId, chapterNumber),
 			},
 		};
 	}
@@ -85,5 +91,8 @@ export default async function getChapter(
 					canonicalPath: nextPath,
 				}
 			: null,
+		relatedList: {
+			related: await getRelatedTeachings(bookId, chapterNumber),
+		},
 	};
 }
