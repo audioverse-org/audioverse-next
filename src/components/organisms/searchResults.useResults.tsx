@@ -4,7 +4,6 @@ import {
 	UseInfiniteQueryResult,
 } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useDebounce } from 'use-debounce';
 
 import { InferrableEntity } from '~components/molecules/card/inferred';
 import { fetchApi } from '~lib/api/fetchApi';
@@ -101,15 +100,13 @@ function useFilterQuery(
 
 function useQueryResults(filter: EntityFilterId, term: string) {
 	const language = useLanguageId();
-	const [_term] = useDebounce(term, 200);
-
 	const vars = useMemo(
 		() => ({
-			term: _term,
+			term,
 			language,
 			first: PAGE_SIZE,
 		}),
-		[_term, language],
+		[term, language],
 	);
 
 	const results: Record<EntityFilterId, QueryResult> = {

@@ -1,5 +1,6 @@
 import Router, { useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 import LanguageAlternativesAlert from '~components/molecules/languageAlternativesAlert';
 import SearchBar from '~components/molecules/searchBar';
@@ -27,6 +28,7 @@ export default function AndNavigation({
 	const param = q?.toString();
 	const contextualFilterId = useContextualFilterId();
 	const [term, setTerm] = useState<string | undefined>(param);
+	const [debouncedTerm] = useDebounce(term, 800);
 	const [entityType, setEntityType] =
 		useState<EntityFilterId>(contextualFilterId);
 	const [showingMenu, setShowingMenu] = useState(false);
@@ -38,15 +40,15 @@ export default function AndNavigation({
 	// prevent losing the user's place when switching tabs.
 	useEffect(() => {
 		if (scrollRef.current) scrollRef.current.scrollTop = 0;
-	}, [term, entityType]);
+	}, [debouncedTerm, entityType]);
 	useEffect(() => setEntityType(contextualFilterId), [contextualFilterId]);
 
 	useEffect(() => {
 		const fn = () => {
-			if (term) {
+			if (debouncedTerm) {
 				Router.push({
 					pathname: pathname,
-					query: { ...Router.query, searched: term }, // Ensure other query parameters are retained
+					query: { ...Router.query, searched: debouncedTerm }, // Ensure other query parameters are retained
 				});
 
 				// Clear the term
@@ -61,7 +63,7 @@ export default function AndNavigation({
 		return () => {
 			Router.events.off('routeChangeComplete', fn);
 		};
-	}, [term, pathname]);
+	}, [debouncedTerm, pathname]);
 
 	return (
 		<div className={styles.base}>
@@ -72,15 +74,15 @@ export default function AndNavigation({
 				<SearchBar
 					className={styles.search}
 					term={term}
-					onTermChange={(v) => setTerm(v)}
+					onTermChange={setTerm}
 					entityType={entityType}
 					onEntityTypeChange={setEntityType}
 				/>
-				{term === undefined ? (
+				{debouncedTerm === undefined ? (
 					children
 				) : (
 					<SearchResults
-						term={term}
+						term={debouncedTerm}
 						entityType={entityType}
 						onEntityTypeChange={setEntityType}
 					/>

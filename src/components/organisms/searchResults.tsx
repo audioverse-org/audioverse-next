@@ -108,6 +108,7 @@ export default function Search({
 	entityType: EntityFilterId;
 	onEntityTypeChange: (entityType: EntityFilterId) => void;
 }): JSX.Element {
+	console.log('Search Input >>>', term);
 	const q = useQueryString('q');
 	const t = term || q || '';
 	const { visible, loadMore, isLoading } = useSearch(entityType, t);
