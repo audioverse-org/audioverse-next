@@ -561,6 +561,11 @@ type Collection implements Node & UniformResourceLocatable {
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
 
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
+
     """Return the elements that come after the specified offset."""
     offset: Int
     orderBy: [SequenceOrder!]
@@ -2127,6 +2132,11 @@ type Person implements Node & UniformResourceLocatable {
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
 
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
+
     """Return the elements that come after the specified offset."""
     offset: Int
     orderBy: [SequenceOrder!]
@@ -2441,6 +2451,11 @@ type Query {
 
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
+
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
     language: Language!
 
     """Return the elements that come after the specified offset."""
@@ -2710,6 +2725,11 @@ type Query {
 
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
+
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
     language: Language!
 
     """Return the elements that come after the specified offset."""
@@ -2846,6 +2866,11 @@ type Query {
 
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
+
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
     language: Language!
 
     """Return the elements that come after the specified offset."""
@@ -3263,6 +3288,11 @@ type Query {
 
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
+
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
     language: Language!
 
     """Return the elements that come after the specified offset."""
@@ -3294,6 +3324,11 @@ type Query {
 
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
+
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
     language: Language!
 
     """Return the elements that come after the specified offset."""
@@ -3528,6 +3563,11 @@ type Query {
 
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
+
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
     language: Language!
 
     """Return the elements that come after the specified offset."""
@@ -4255,6 +4295,7 @@ type Sequence implements Node & UniformResourceLocatable {
   id: ID!
   image: Image
   imageWithFallback: Image!
+  isEGW: Boolean
   isHidden: Boolean
   language: Language!
   logoImage: Image @deprecated(reason: "Sequence.logoImage is replaced with Sequence.image")
@@ -4612,6 +4653,11 @@ type Sponsor implements Node & UniformResourceLocatable {
 
     """Whether to include unpublished sequences. Requires `EDITOR` role."""
     includeUnpublished: Boolean
+
+    """
+    Whether to include Ellen White Series ONLY or Non-Ellen White Series ONLY. To return all sequences, do not use parameter.
+    """
+    isEGW: Boolean
 
     """Return the elements that come after the specified offset."""
     offset: Int
