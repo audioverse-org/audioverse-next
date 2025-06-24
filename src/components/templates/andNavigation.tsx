@@ -28,7 +28,7 @@ export default function AndNavigation({
 	const param = q?.toString();
 	const contextualFilterId = useContextualFilterId();
 	const [term, setTerm] = useState<string | undefined>(param);
-	const [debouncedTerm] = useDebounce(term, 500);
+	const [debouncedTerm] = useDebounce(term, 800);
 	const [entityType, setEntityType] =
 		useState<EntityFilterId>(contextualFilterId);
 	const [showingMenu, setShowingMenu] = useState(false);
