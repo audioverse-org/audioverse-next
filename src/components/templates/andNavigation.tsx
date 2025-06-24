@@ -15,6 +15,8 @@ import SearchResults from '~containers/search';
 
 import styles from './andNavigation.module.scss';
 
+const DEBOUNCE_TIME = 800;
+
 export default function AndNavigation({
 	children,
 }: {
@@ -28,7 +30,7 @@ export default function AndNavigation({
 	const param = q?.toString();
 	const contextualFilterId = useContextualFilterId();
 	const [term, setTerm] = useState<string | undefined>(param);
-	const [debouncedTerm] = useDebounce(term, 800);
+	const [debouncedTerm] = useDebounce(term, DEBOUNCE_TIME);
 	const [entityType, setEntityType] =
 		useState<EntityFilterId>(contextualFilterId);
 	const [showingMenu, setShowingMenu] = useState(false);
