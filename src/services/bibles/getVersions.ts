@@ -15,5 +15,41 @@ export default async function getVersions(): Promise<Version[]> {
 		throw new Error('No API versions found');
 	}
 
-	return [...FCBH_VERSIONS, ...apiVersions.collections.nodes];
+	const bibles = [...FCBH_VERSIONS, ...apiVersions.collections.nodes];
+
+	const orderBiblesNames: string[] = [
+		'King James Version',
+		'King James Version (AudioVerse)',
+		'King James Version (Dramatized)',
+		'King James Version (Thomas Nelson)',
+		'New King James Version',
+		'New King James Version (Thomas Nelson)',
+		'English Standard Version®',
+		'English Standard Version® - Hear the Word Audio Bible',
+		'English Standard Version® (Dramatized)',
+		'New Life Version (Easy to Read)',
+		'New Life Version (Easy to Read) (Dramatized)',
+		"New Living Translation® - her.BIBLE (women's voices)",
+		'New Living Translation®, Holy Sanctuary version',
+		'New Revised Standard Version',
+		'New Revised Standard Version (Dramatized)',
+		'World English Bible',
+	];
+	const orderBiblesNamesSet = new Set(orderBiblesNames);
+
+	const orderedPart = bibles.filter((item) =>
+		orderBiblesNamesSet.has(item.title),
+	);
+	const unorderedPart = bibles.filter(
+		(item) => !orderBiblesNamesSet.has(item.title),
+	);
+
+	orderedPart.sort(
+		(a, b) =>
+			orderBiblesNames.indexOf(a.title) - orderBiblesNames.indexOf(b.title),
+	);
+
+	const orderedBibles = [...orderedPart, ...unorderedPart];
+
+	return orderedBibles;
 }

@@ -8,6 +8,71 @@ export const FCBH_VERSIONS = [
 		internalId: 6, // AV DB id
 		title: 'King James Version (Dramatized)',
 	},
+	{
+		id: 'ENGKJV1',
+		internalId: 5,
+		title: 'King James Version',
+	},
+	{
+		id: 'ENGNKJ1',
+		internalId: 7,
+		title: 'New King James Version',
+	},
+	{
+		id: 'ENGESV1',
+		internalId: 8,
+		title: 'English Standard Version®',
+	},
+	{
+		id: 'ENGESH1',
+		internalId: 9,
+		title: 'English Standard Version® - Hear the Word Audio Bible',
+	},
+	{
+		id: 'ENGESV2',
+		internalId: 10,
+		title: 'English Standard Version® (Dramatized)',
+	},
+	{
+		id: 'ENGNLV1',
+		internalId: 11,
+		title: 'New Life Version (Easy to Read)',
+	},
+	{
+		id: 'ENGNLV2',
+		internalId: 12,
+		title: 'New Life Version (Easy to Read) (Dramatized)',
+	},
+	{
+		id: 'ENGNLH1',
+		internalId: 13,
+		title: "New Living Translation® - her.BIBLE (women's voices)",
+	},
+	{
+		id: 'ENGNLT2',
+		internalId: 14,
+		title: 'New Living Translation®, Holy Sanctuary version',
+	},
+	{
+		id: 'ENGNRS1',
+		internalId: 15,
+		title: 'New Revised Standard Version',
+	},
+	{
+		id: 'ENGNRS2',
+		internalId: 16,
+		title: 'New Revised Standard Version (Dramatized)',
+	},
+	{
+		id: 'EN1WEB2',
+		internalId: 17,
+		title: 'World English Bible - Winfred Henson',
+	},
+	{
+		id: 'ENGWEB2',
+		internalId: 18,
+		title: 'World English Bible (Dramatized)',
+	},
 ];
 
 type BibleBookMeta = {
