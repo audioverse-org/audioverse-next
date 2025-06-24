@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
@@ -80,7 +81,13 @@ export default function BibleVersionTophat({
 								{versions.map((v) => {
 									const disabled = availability ? !availability?.[v.id] : false;
 									return (
-										<li key={v.id} className={disabled ? styles.disabled : ''}>
+										<li
+											key={v.id}
+											className={clsx(
+												disabled ? styles.disabled : '',
+												version.id === v.id && styles.active,
+											)}
+										>
 											{!disabled ? (
 												<Link href={getVersionUrl(v)} onClick={handleClose}>
 													{v.title}
