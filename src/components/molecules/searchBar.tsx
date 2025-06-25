@@ -72,6 +72,10 @@ export default function SearchBar({
 		}
 	}, [term, lastTerm, isFocused, stealFocus]);
 
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		onTermChange(e.target.value);
+	};
+
 	return (
 		<div className={clsx(styles.base, term ?? styles.inactive, className)}>
 			<div
@@ -87,7 +91,7 @@ export default function SearchBar({
 					type="search"
 					autoComplete="off"
 					value={term ?? ''}
-					onChange={({ target }) => onTermChange(target.value)}
+					onChange={handleInputChange}
 					onFocus={() => setIsFocused(true)}
 					aria-label={intl.formatMessage({
 						id: 'molecule-searchBar__ariaLabel',

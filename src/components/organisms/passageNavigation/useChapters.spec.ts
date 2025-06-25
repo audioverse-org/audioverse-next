@@ -13,12 +13,23 @@ describe('useChapters', () => {
 		jest.mocked(getChapters).mockResolvedValue([]);
 	});
 
-	it('returns undefined if still loading chapters', async () => {
+	it('returns undefined data and isLoading true when still loading chapters', async () => {
+		// Mock getChapters to return a promise that never resolves to simulate loading state
+		let resolvePromise: (value: any[]) => void;
+		const neverResolvingPromise = new Promise<any[]>((resolve) => {
+			resolvePromise = resolve;
+		});
+		jest.mocked(getChapters).mockReturnValue(neverResolvingPromise);
+
 		const { result } = await renderHookWithProviders(() =>
 			useChapters('1', 'GEN'),
 		);
 
 		expect(result.current?.data).toBeUndefined();
+		expect(result.current?.isLoading).toBe(true);
+
+		// Clean up by resolving the promise
+		resolvePromise!([]);
 	});
 
 	it('does not query data on server side', () => {
