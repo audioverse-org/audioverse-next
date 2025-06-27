@@ -7,12 +7,9 @@ import Heading6 from '~components/atoms/heading6';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
-import { useIsSponsorFavorited } from '~lib/api/useIsSponsorFavorited';
 import { BaseColors } from '~lib/constants';
 import UserPlusIcon from '~public/img/icons/fa-user-plus.svg';
-import { CatalogEntityType } from '~src/__generated__/graphql';
 
-import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
 import { CardSponsorFragment } from './__generated__/sponsor';
 import styles from './sponsor.module.scss';
@@ -25,17 +22,9 @@ export default function CardSponsor({
 	sponsor,
 }: CardSponsorProps): JSX.Element {
 	const intl = useIntl();
-	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
-	const {
-		id,
-		canonicalPath,
-		image,
-		title,
-		collections,
-		sequences,
-		recordings,
-	} = sponsor;
+	const { canonicalPath, image, title, collections, sequences, recordings } =
+		sponsor;
 
 	return (
 		<Card>
@@ -61,12 +50,7 @@ export default function CardSponsor({
 							{title}
 						</Heading2>
 					</div>
-					<div
-						className={clsx(
-							styles.details,
-							isFavorited && styles.detailsWithLike,
-						)}
-					>
+					<div className={clsx(styles.details, styles.detailsWithLike)}>
 						<Heading6
 							sans
 							unpadded
@@ -101,16 +85,6 @@ export default function CardSponsor({
 					{/* TODO: sub-conferences */}
 				</a>
 			</Link>
-			<ButtonFavorite
-				isFavorited={!!isFavorited}
-				toggleFavorited={toggleFavorited}
-				backgroundColor={BaseColors.LIGHT_TONE}
-				light
-				className={clsx(styles.like, isFavorited && styles.likeActive)}
-				contentType={CatalogEntityType.Sponsor}
-				id={id}
-				title={title}
-			/>
 		</Card>
 	);
 }
