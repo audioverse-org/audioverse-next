@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-import {
-	AndMiniplayerFragment,
-	useGetRecordingPlaybackProgressQuery,
-} from '~components/templates/__generated__/andMiniplayer';
+import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
 import {
 	getSources,
 	PlaybackContext,
 	PlaybackContextType,
-	shouldLoadRecordingPlaybackProgress,
 } from '~components/templates/andPlaybackContext';
+
+import useIsAuthenticated from './useIsAuthenticated';
 
 export enum PlaySource {
 	Tease = 'Tease',
@@ -78,28 +76,18 @@ export default function usePlaybackSession(
 		<div ref={portalContainerRef} data-testid="portal" />,
 	);
 
-	const shouldLoadPlaybackProgress =
-		shouldLoadRecordingPlaybackProgress(recording);
-
-	const { data, isLoading, refetch } = useGetRecordingPlaybackProgressQuery(
-		{
-			id: recording?.id || 0,
-		},
-		{
-			enabled: shouldLoadPlaybackProgress,
-		},
-	);
+	const { user, isFetching } = useIsAuthenticated();
 
 	useEffect(() => {
-		if (data?.recording?.viewerPlaybackSession) {
-			_setProgress(data?.recording?.viewerPlaybackSession.positionPercentage);
+		if (user) {
+			const positionPercentage =
+				user.userPlaybackSessions?.find((item) => {
+					return item.recordingId == recording?.id;
+				})?.progress || 0;
+
+			_setProgress(positionPercentage);
 		}
-	}, [data, isLoading]);
-	useEffect(() => {
-		if (!isLoaded && shouldLoadPlaybackProgress) {
-			refetch();
-		}
-	}, [isLoaded, shouldLoadPlaybackProgress, refetch]);
+	}, [user, recording, isFetching]);
 
 	useEffect(() => {
 		if (!recording || !isLoaded || !isPortalActive) return;

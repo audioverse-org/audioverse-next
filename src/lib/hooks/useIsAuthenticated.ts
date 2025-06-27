@@ -12,7 +12,11 @@ type LanguageKey = keyof typeof LANGUAGES;
 export default function useIsAuthenticated(): {
 	isUserLoggedIn: boolean;
 	isFetching: boolean;
-	user?: { name: string; email: string };
+	user?: {
+		name: string;
+		email: string;
+		userPlaybackSessions?: { recordingId: string | number; progress: number }[];
+	};
 } {
 	const hasSessionToken = !!getSessionToken();
 	const prefData = useGetAccountPreferencesDataQuery();
