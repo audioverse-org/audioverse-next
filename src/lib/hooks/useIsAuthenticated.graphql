@@ -3,6 +3,10 @@ query getIsAuthenticated {
 		user {
 			email
 			name
+			userPlaybackSessions {
+				recordingId
+				progress
+			}
 		}
 	}
 }
