@@ -165,7 +165,9 @@ describe('Bible chapter detail page', () => {
 	it('displays version title', async () => {
 		await renderPage();
 
-		const versionButton = await screen.findByRole('button', { name: /KJV/ });
+		const versionButton = await screen.findByRole('button', {
+			name: /King James Version/,
+		});
 
 		expect(versionButton).toBeInTheDocument();
 	});

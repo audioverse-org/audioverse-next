@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
@@ -7,7 +8,6 @@ import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup
 import Dropdown, { Trigger } from '~components/molecules/dropdown';
 
 import { BibleVersionTophatFragment } from './__generated__';
-import { getBibleAcronym } from './getBibleAcronym';
 import styles from './index.module.scss';
 import useChapterAvailability from './useChapterAvailability';
 
@@ -56,7 +56,7 @@ export default function BibleVersionTophat({
 				aria-controls={ariaControls}
 				className={styles.versionSelectorBtn}
 			>
-				{getBibleAcronym(version.title)}
+				{version.title}
 				<span className={styles.dropdownArrow}>▼</span>
 			</button>
 		),
@@ -80,7 +80,13 @@ export default function BibleVersionTophat({
 								{versions.map((v) => {
 									const disabled = availability ? !availability?.[v.id] : false;
 									return (
-										<li key={v.id} className={disabled ? styles.disabled : ''}>
+										<li
+											key={v.id}
+											className={clsx(
+												disabled ? styles.disabled : '',
+												version.id === v.id && styles.active,
+											)}
+										>
 											{!disabled ? (
 												<Link href={getVersionUrl(v)} onClick={handleClose}>
 													{v.title}
