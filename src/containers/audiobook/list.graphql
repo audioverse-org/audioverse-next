@@ -8,14 +8,7 @@ query getAudiobookListPageData(
 		first: $first
 		offset: $offset
 		orderBy: [{ field: TITLE, direction: ASC }]
-		excludePersons: [
-			{ personId: 128 }
-			{ personId: 381 }
-			{ personId: 445 }
-			{ personId: 506 }
-			{ personId: 1208 }
-			{ personId: 1884 }
-		]
+		isEGW: false
 	) {
 		nodes {
 			...cardSequence
