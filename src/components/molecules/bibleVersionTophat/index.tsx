@@ -8,7 +8,6 @@ import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup
 import Dropdown, { Trigger } from '~components/molecules/dropdown';
 
 import { BibleVersionTophatFragment } from './__generated__';
-import { getBibleAcronym } from './getBibleAcronym';
 import styles from './index.module.scss';
 import useChapterAvailability from './useChapterAvailability';
 
@@ -57,7 +56,7 @@ export default function BibleVersionTophat({
 				aria-controls={ariaControls}
 				className={styles.versionSelectorBtn}
 			>
-				{getBibleAcronym(version.title)}
+				{version.title}
 				<span className={styles.dropdownArrow}>▼</span>
 			</button>
 		),
