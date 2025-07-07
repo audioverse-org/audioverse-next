@@ -15,7 +15,9 @@ export default function useIsAuthenticated(): {
 	user?: {
 		name: string;
 		email: string;
-		userPlaybackSessions?: { recordingId: string | number; progress: number }[];
+		userPlaybackSessions?:
+			| { recordingId: string | number; progress: number }[]
+			| null;
 	};
 } {
 	const hasSessionToken = !!getSessionToken();
