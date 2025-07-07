@@ -5821,7 +5821,7 @@ type User implements Node {
 
   """The user's timezone."""
   timezone: Timezone!
-  userPlaybackSessions: [UserPlaybackSessions!]!
+  userPlaybackSessions: [UserPlaybackSessions!]
 }
 
 type UserBibleDownloadHistory {
