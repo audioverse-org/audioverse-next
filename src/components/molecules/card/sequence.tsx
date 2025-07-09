@@ -5,9 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import Link from '~components/atoms/linkWithoutPrefetch';
-import ProgressBar from '~components/atoms/progressBar';
 import Card from '~components/molecules/card';
-import { useIsSequenceFavorited } from '~lib/api/useIsSequenceFavorited';
 import { BaseColors } from '~lib/constants';
 import { getRecordingTypeTheme } from '~lib/getRecordingTheme';
 import { useFormattedDuration } from '~lib/time';
@@ -18,12 +16,10 @@ import MusicIcon from '~public/img/icons/fa-music-light.svg';
 import SeedlingIcon from '~public/img/icons/fa-seedling.svg';
 import IconClosure from '~public/img/icons/icon-closure.svg';
 import IconDisclosure from '~public/img/icons/icon-disclosure.svg';
-import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { SequenceContentType } from '~src/__generated__/graphql';
 import NameMatcher from '~src/components/atoms/nameMatcher';
 import useHover from '~src/lib/hooks/useHover';
 
-import ButtonFavorite from '../buttonFavorite';
 import PersonLockup from '../personLockup';
 import TeaseRecordingStack from '../teaseRecordingStack';
 import TypeLockup from '../typeLockup';
@@ -42,16 +38,14 @@ export default function CardSequence({
 	recordings,
 	egw,
 }: CardCollectionProps): JSX.Element {
-	const [ref, isHovered] = useHover<HTMLButtonElement>();
+	const [isHovered] = useHover<HTMLButtonElement>();
 	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
 	const intl = useIntl();
-	const { isFavorited, toggleFavorited, playbackCompletedPercentage } =
-		useIsSequenceFavorited(sequence.id);
+
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 	const isBibleBook = sequence.contentType === SequenceContentType.BibleBook;
 
 	const {
-		id,
 		contentType,
 		allRecordings,
 		canonicalPath,
@@ -63,7 +57,7 @@ export default function CardSequence({
 		sequenceWriters: writers,
 	} = sequence;
 
-	const { Icon, accentColor, backgroundColor, textColor, label, labelColor } = (
+	const { Icon, accentColor, textColor, label, labelColor } = (
 		{
 			[SequenceContentType.Audiobook]: {
 				Icon: egw ? FeatherIcon : BookIcon,
@@ -252,27 +246,8 @@ export default function CardSequence({
 					/>
 				)}
 			</Heading6>
-			<div
-				className={clsx(styles.details, isFavorited && styles.detailsWithLike)}
-			>
+			<div className={clsx(styles.details, styles.detailsWithLike)}>
 				<div className={styles.duration}>{useFormattedDuration(duration)}</div>
-				{playbackCompletedPercentage >= 1 && <SuccessIcon />}
-				<div className={styles.progress}>
-					{playbackCompletedPercentage > 0 && (
-						<ProgressBar progress={playbackCompletedPercentage} />
-					)}
-				</div>
-				<ButtonFavorite
-					isFavorited={!!isFavorited}
-					toggleFavorited={toggleFavorited}
-					ref={ref}
-					backgroundColor={backgroundColor}
-					light
-					className={clsx(styles.like, isFavorited && styles.likeActive)}
-					contentType={contentType}
-					id={id}
-					title={title}
-				/>
 			</div>
 			{recordings?.length ? (
 				<div className={styles.subRecordings} ref={subRef}>
