@@ -73,7 +73,8 @@ export default function SocialLogin({
 		const initFacebook = async () => {
 			await FacebookLoginClient.loadSdk(languageId);
 			window.fbAsyncInit = () =>
-				FacebookLoginClient.init({ appId: FACEBOOK_APP_ID, version: 'v16.0' });
+				// @ts-expect-error
+				FacebookLoginClient.init({ appId: FACEBOOK_APP_ID, version: 'v23.0' });
 		};
 
 		initFacebook();

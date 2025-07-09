@@ -5821,6 +5821,7 @@ type User implements Node {
 
   """The user's timezone."""
   timezone: Timezone!
+  userPlaybackSessions: [UserPlaybackSessions!]
 }
 
 type UserBibleDownloadHistory {
@@ -6062,6 +6063,15 @@ input UserLoginSocialInput {
 type UserPayload {
   errors: [InputValidationError!]!
   user: User
+}
+
+type UserPlaybackSessions implements Node {
+  createdAt: DateTime!
+  id: ID!
+  progress: Float!
+  recordingId: ID!
+  updatedAt: DateTime!
+  userId: ID!
 }
 
 type UserPlaylist implements Node {
