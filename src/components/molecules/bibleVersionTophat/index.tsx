@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Link from '~/components/atoms/linkWithoutPrefetch';
 import BibleVersionTypeLockup from '~components/molecules/bibleVersionTypeLockup';
@@ -28,7 +28,6 @@ interface Props {
 export default function BibleVersionTophat({
 	version,
 	versions,
-	label,
 	getVersionUrl,
 	hatUrl,
 	bookName,
@@ -56,7 +55,10 @@ export default function BibleVersionTophat({
 				aria-controls={ariaControls}
 				className={styles.versionSelectorBtn}
 			>
-				{version.title}
+				<FormattedMessage
+					id="bibleVersionTophat__version"
+					defaultMessage="VERSION"
+				/>
 				<span className={styles.dropdownArrow}>▼</span>
 			</button>
 		),
@@ -71,7 +73,7 @@ export default function BibleVersionTophat({
 				style={{ cursor: hatUrl ? 'pointer' : 'default' }}
 			>
 				<div className={styles.hatLeft}>
-					<BibleVersionTypeLockup unpadded label={label} />
+					<BibleVersionTypeLockup unpadded />
 				</div>
 				<div className={styles.hatRight}>
 					<Dropdown id="version-selector" trigger={trigger}>
