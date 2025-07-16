@@ -62,7 +62,7 @@ export default function BibleVersionTophat({
 				<span className={styles.dropdownArrow}>▼</span>
 			</button>
 		),
-		[version.title],
+		[],
 	);
 
 	return (
