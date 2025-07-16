@@ -42,7 +42,7 @@
     "string": "Tous les livres audio"
   },
   "bibleVersionTypeLockup__type": {
-    "string": "Version de la Bible"
+    "string": "Passage"
   },
   "bibleVersion__description": {
     "string": "Description"
@@ -2744,5 +2744,8 @@
   "register__successMessage": {
     "comment": "register success message",
     "string": "Successfully registered!"
+  },
+  "bibleVersionTophat__version": {
+    "string": "VERSION"
   }
 }

@@ -365,8 +365,11 @@
   "bibleChapter__readAlong": {
     "string": "Read Along"
   },
+  "bibleVersionTophat__version": {
+    "string": "VERSION"
+  },
   "bibleVersionTypeLockup__type": {
-    "string": "Bible Version"
+    "string": "Passage"
   },
   "bibleVersion__description": {
     "string": "Description"

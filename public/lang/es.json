@@ -42,7 +42,7 @@
     "string": "Todos los audiolibros"
   },
   "bibleVersionTypeLockup__type": {
-    "string": "Versión bíblica"
+    "string": "Versiculo"
   },
   "bibleVersion__description": {
     "string": "Descripción"
@@ -2744,5 +2744,8 @@
   "register__successMessage": {
     "comment": "register success message",
     "string": "Successfully registered!"
+  },
+  "bibleVersionTophat__version": {
+    "string": "VERSION"
   }
 }

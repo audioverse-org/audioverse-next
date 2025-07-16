@@ -707,10 +707,16 @@
       "value": "Read Along"
     }
   ],
+  "bibleVersionTophat__version": [
+    {
+      "type": 0,
+      "value": "VERSION"
+    }
+  ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
-      "value": "Версия Библии"
+      "value": "библейский стих"
     }
   ],
   "bibleVersion__description": [

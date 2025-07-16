@@ -42,7 +42,7 @@
     "string": "Alle Hörbücher"
   },
   "bibleVersionTypeLockup__type": {
-    "string": "Bibelversion"
+    "string": "Bibelvers"
   },
   "bibleVersion__description": {
     "string": "Beschreibung"
@@ -2744,5 +2744,8 @@
   "register__successMessage": {
     "comment": "register success message",
     "string": "Successfully registered!"
+  },
+  "bibleVersionTophat__version": {
+    "string": "VERSION"
   }
 }
