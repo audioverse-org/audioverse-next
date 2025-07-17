@@ -15,7 +15,7 @@ export default function BibleVersionTypeLockup({
 	label = (
 		<FormattedMessage
 			id="bibleVersionTypeLockup__type"
-			defaultMessage="Bible Version"
+			defaultMessage="Passage"
 		/>
 	),
 	...props

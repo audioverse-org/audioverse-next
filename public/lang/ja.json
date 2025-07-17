@@ -42,7 +42,7 @@
     "string": "全てのオーディオブック"
   },
   "bibleVersionTypeLockup__type": {
-    "string": "聖書バージョン"
+    "string": "聖書の一節"
   },
   "bibleVersion__description": {
     "string": "内容詳細"
@@ -2744,5 +2744,8 @@
   "register__successMessage": {
     "comment": "register success message",
     "string": "Successfully registered!"
+  },
+  "bibleVersionTophat__version": {
+    "string": "バージョン"
   }
 }

@@ -191,9 +191,6 @@
         ],
         "*.{json,scss,graphql}": [
             "prettier --write"
-        ],
-        "public/lang/*.json": [
-            "npm:intl"
         ]
     }
 }

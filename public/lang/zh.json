@@ -42,7 +42,7 @@
     "string": "全部有声书"
   },
   "bibleVersionTypeLockup__type": {
-    "string": "圣经版本"
+    "string": "圣经经文"
   },
   "bibleVersion__description": {
     "string": "描述"
@@ -2744,5 +2744,8 @@
   "register__successMessage": {
     "comment": "register success message",
     "string": "Successfully registered!"
+  },
+  "bibleVersionTophat__version": {
+    "string": "版本"
   }
 }

@@ -42,7 +42,7 @@
     "string": "Все аудиокниги"
   },
   "bibleVersionTypeLockup__type": {
-    "string": "Версия Библии"
+    "string": "библейский стих"
   },
   "bibleVersion__description": {
     "string": "Описание"
@@ -2744,5 +2744,8 @@
   "register__successMessage": {
     "comment": "register success message",
     "string": "Successfully registered!"
+  },
+  "bibleVersionTophat__version": {
+    "string": "версия"
   }
 }

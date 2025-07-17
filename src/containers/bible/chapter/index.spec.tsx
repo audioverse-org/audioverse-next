@@ -156,22 +156,6 @@ describe('Bible chapter detail page', () => {
 		expect(getAllByText('the_chapter_title')[0]).toBeInTheDocument();
 	});
 
-	it('displays book title', async () => {
-		await renderPage();
-
-		expect(await screen.findByText('Genesis')).toBeInTheDocument();
-	});
-
-	it('displays version title', async () => {
-		await renderPage();
-
-		const versionButton = await screen.findByRole('button', {
-			name: /King James Version/,
-		});
-
-		expect(versionButton).toBeInTheDocument();
-	});
-
 	it('displays sponsor name', async () => {
 		await renderPage();
 

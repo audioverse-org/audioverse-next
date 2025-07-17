@@ -707,10 +707,16 @@
       "value": "Read Along"
     }
   ],
+  "bibleVersionTophat__version": [
+    {
+      "type": 0,
+      "value": "版本"
+    }
+  ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
-      "value": "圣经版本"
+      "value": "圣经经文"
     }
   ],
   "bibleVersion__description": [
