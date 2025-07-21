@@ -128,6 +128,7 @@ export default function usePlaybackSession(
 					func(c);
 				},
 				prefersAudio: options.prefersAudio,
+				initialProgress: _progress,
 			},
 			source,
 		);
@@ -165,6 +166,7 @@ export default function usePlaybackSession(
 
 		context.loadRecording(recording, recording.id, {
 			prefersAudio,
+			initialProgress: _progress,
 		});
 	}
 
