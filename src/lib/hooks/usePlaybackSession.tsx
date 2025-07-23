@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-import { AndMiniplayerFragment , useGetRecordingPlaybackProgressQuery } from '~components/templates/__generated__/andMiniplayer';
+import {
+	AndMiniplayerFragment,
+	useGetRecordingPlaybackProgressQuery,
+} from '~components/templates/__generated__/andMiniplayer';
 import {
 	getSources,
 	PlaybackContext,
