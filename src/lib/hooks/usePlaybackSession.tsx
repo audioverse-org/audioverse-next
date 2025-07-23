@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-import { AndMiniplayerFragment } from '~components/templates/__generated__/andMiniplayer';
+import { AndMiniplayerFragment , useGetRecordingPlaybackProgressQuery } from '~components/templates/__generated__/andMiniplayer';
 import {
 	getSources,
 	PlaybackContext,
 	PlaybackContextType,
+	shouldLoadRecordingPlaybackProgress,
 } from '~components/templates/andPlaybackContext';
 
 import useIsAuthenticated from './useIsAuthenticated';
@@ -76,18 +77,25 @@ export default function usePlaybackSession(
 		<div ref={portalContainerRef} data-testid="portal" />,
 	);
 
-	const { user, isFetching } = useIsAuthenticated();
+	const { isUserLoggedIn } = useIsAuthenticated();
+
+	// Use targeted query for individual recording progress instead of bulk fetch
+	const shouldFetchProgress =
+		shouldLoadRecordingPlaybackProgress(recording) && isUserLoggedIn;
+
+	const { data: recordingProgressData } = useGetRecordingPlaybackProgressQuery(
+		{ id: recording?.id || '' },
+		{ enabled: shouldFetchProgress },
+	);
 
 	useEffect(() => {
-		if (user) {
+		if (recordingProgressData?.recording?.viewerPlaybackSession) {
 			const positionPercentage =
-				user.userPlaybackSessions?.find((item) => {
-					return item.recordingId == recording?.id;
-				})?.progress || 0;
-
+				recordingProgressData.recording.viewerPlaybackSession
+					.positionPercentage || 0;
 			_setProgress(positionPercentage);
 		}
-	}, [user, recording, isFetching]);
+	}, [recordingProgressData]);
 
 	useEffect(() => {
 		if (!recording || !isLoaded || !isPortalActive) return;
