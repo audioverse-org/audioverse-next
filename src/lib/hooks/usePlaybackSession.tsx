@@ -78,7 +78,6 @@ export default function usePlaybackSession(
 		<div ref={portalContainerRef} data-testid="portal" />,
 	);
 
-	// const { isUserLoggedIn } = useIsAuthenticated();
 	const shouldLoadPlaybackProgress =
 		shouldLoadRecordingPlaybackProgress(recording);
 
@@ -176,7 +175,9 @@ export default function usePlaybackSession(
 			context.setPrefersAudio(prefersAudio);
 		}
 
-		context.loadRecording(recording, recording.id, { prefersAudio });
+		context.loadRecording(recording, recording.id, {
+			prefersAudio,
+		});
 	}
 
 	function setSpeed(speed: number) {
