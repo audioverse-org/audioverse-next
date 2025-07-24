@@ -11,8 +11,6 @@ import {
 	shouldLoadRecordingPlaybackProgress,
 } from '~components/templates/andPlaybackContext';
 
-import useIsAuthenticated from './useIsAuthenticated';
-
 export enum PlaySource {
 	Tease = 'Tease',
 	Other = 'Other',
@@ -80,25 +78,29 @@ export default function usePlaybackSession(
 		<div ref={portalContainerRef} data-testid="portal" />,
 	);
 
-	const { isUserLoggedIn } = useIsAuthenticated();
+	// const { isUserLoggedIn } = useIsAuthenticated();
+	const shouldLoadPlaybackProgress =
+		shouldLoadRecordingPlaybackProgress(recording);
 
-	// Use targeted query for individual recording progress instead of bulk fetch
-	const shouldFetchProgress =
-		shouldLoadRecordingPlaybackProgress(recording) && isUserLoggedIn;
-
-	const { data: recordingProgressData } = useGetRecordingPlaybackProgressQuery(
-		{ id: recording?.id || '' },
-		{ enabled: shouldFetchProgress },
+	const { data, isLoading, refetch } = useGetRecordingPlaybackProgressQuery(
+		{
+			id: recording?.id || 0,
+		},
+		{
+			enabled: shouldLoadPlaybackProgress,
+		},
 	);
 
 	useEffect(() => {
-		if (recordingProgressData?.recording?.viewerPlaybackSession) {
-			const positionPercentage =
-				recordingProgressData.recording.viewerPlaybackSession
-					.positionPercentage || 0;
-			_setProgress(positionPercentage);
+		if (data?.recording?.viewerPlaybackSession) {
+			_setProgress(data?.recording?.viewerPlaybackSession.positionPercentage);
 		}
-	}, [recordingProgressData]);
+	}, [data, isLoading]);
+	useEffect(() => {
+		if (!isLoaded && shouldLoadPlaybackProgress) {
+			refetch();
+		}
+	}, [isLoaded, shouldLoadPlaybackProgress, refetch]);
 
 	useEffect(() => {
 		if (!recording || !isLoaded || !isPortalActive) return;
@@ -139,7 +141,6 @@ export default function usePlaybackSession(
 					func(c);
 				},
 				prefersAudio: options.prefersAudio,
-				initialProgress: _progress,
 			},
 			source,
 		);
@@ -175,10 +176,7 @@ export default function usePlaybackSession(
 			context.setPrefersAudio(prefersAudio);
 		}
 
-		context.loadRecording(recording, recording.id, {
-			prefersAudio,
-			initialProgress: _progress,
-		});
+		context.loadRecording(recording, recording.id, { prefersAudio });
 	}
 
 	function setSpeed(speed: number) {

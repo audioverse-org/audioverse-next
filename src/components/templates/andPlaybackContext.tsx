@@ -100,7 +100,6 @@ export type PlaybackContextType = {
 		options?: {
 			onLoad?: (c: PlaybackContextType) => void;
 			prefersAudio?: boolean;
-			initialProgress?: number;
 		},
 		source?: PlaySource,
 	) => void;
@@ -131,7 +130,6 @@ export type PlaybackContextType = {
 		recording: AndMiniplayerFragment,
 		prefersAudio?: boolean,
 		source?: PlaySource,
-		initialProgress?: number,
 	) => void;
 };
 
@@ -323,7 +321,7 @@ export default function AndPlaybackContext({
 			options = {},
 			source?: PlaySource,
 		) => {
-			const { onLoad, prefersAudio, initialProgress } = options;
+			const { onLoad, prefersAudio } = options;
 			onLoadRef.current = onLoad;
 			const recordingsArray = Array.isArray(recordingOrRecordings)
 				? recordingOrRecordings
@@ -344,12 +342,7 @@ export default function AndPlaybackContext({
 				playback.unsetVideoHandler(videoHandlerId);
 			}
 
-			playback._setRecording(
-				newRecording,
-				prefersAudio,
-				source,
-				initialProgress,
-			);
+			playback._setRecording(newRecording, prefersAudio, source);
 		},
 		setVideoHandler: (
 			id: Scalars['ID']['output'],
@@ -414,7 +407,6 @@ export default function AndPlaybackContext({
 			recording: AndMiniplayerFragment,
 			prefersAudio: boolean | undefined,
 			source: PlaySource | undefined,
-			initialProgress: number | undefined,
 		) => {
 			const currentVideoEl = videoElRef.current;
 			if (!currentVideoEl) return;
@@ -434,21 +426,14 @@ export default function AndPlaybackContext({
 				}
 
 				setIsPaused(true);
-
-				// Prioritize initialProgress from usePlaybackSession, then fall back to server progress
-				let progress = 0;
-				if (typeof initialProgress === 'number') {
-					progress = initialProgress;
-				} else {
-					const serverProgress =
-						queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
-							'getRecordingPlaybackProgress',
-							{ id: recording.id },
-						]);
-					progress =
-						serverProgress?.recording?.viewerPlaybackSession
-							?.positionPercentage || 0;
-				}
+				const serverProgress =
+					queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
+						'getRecordingPlaybackProgress',
+						{ id: recording.id },
+					]);
+				const progress =
+					serverProgress?.recording?.viewerPlaybackSession
+						?.positionPercentage || 0;
 				_setProgress(progress);
 
 				setBufferedProgress(0);
