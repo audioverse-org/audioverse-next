@@ -6,6 +6,10 @@ mutation login($email: String!, $password: String!) {
 				id
 				givenName
 				surname
+				userPlaybackSessions {
+					recordingId
+					progress
+				}
 			}
 		}
 		errors {

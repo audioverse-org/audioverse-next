@@ -6,17 +6,12 @@ import { FormattedMessage } from 'react-intl';
 import Heading2 from '~components/atoms/heading2';
 import Heading6 from '~components/atoms/heading6';
 import Link from '~components/atoms/linkWithoutPrefetch';
-import ProgressBar from '~components/atoms/progressBar';
 import Card from '~components/molecules/card';
-import { useIsCollectionFavorited } from '~lib/api/useIsCollectionFavorited';
-import { BaseColors } from '~lib/constants';
 import { formatDateRange } from '~lib/date';
 import { useFormattedDuration } from '~lib/time';
-import SuccessIcon from '~public/img/icons/icon-success-light.svg';
 import { CollectionContentType } from '~src/__generated__/graphql';
 import useHover from '~src/lib/hooks/useHover';
 
-import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
 import { CardCollectionFragment } from './__generated__/collection';
 import { CardRecordingFragment } from './__generated__/recording';
@@ -36,9 +31,7 @@ export default function CardCollection({
 	sequences,
 	recordings,
 }: CardCollectionProps): JSX.Element {
-	const { isFavorited, toggleFavorited, playbackCompletedPercentage } =
-		useIsCollectionFavorited(collection.id);
-	const [ref, isHovered] = useHover<HTMLButtonElement>();
+	const [isHovered] = useHover<HTMLButtonElement>();
 	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
 	const {
 		allSequences,
@@ -50,7 +43,6 @@ export default function CardCollection({
 		image,
 		startDate,
 		title,
-		id,
 	} = collection;
 	const heroImage = image?.url && (
 		<div className={styles.imageContainer}>
@@ -117,34 +109,10 @@ export default function CardCollection({
 							/>
 						)}
 					</Heading6>
-					<div
-						className={clsx(
-							styles.details,
-							isFavorited && styles.detailsWithLike,
-						)}
-					>
+					<div className={clsx(styles.details, styles.detailsWithLike)}>
 						<div className={styles.duration}>
 							{useFormattedDuration(duration)}
 						</div>
-						{playbackCompletedPercentage >= 1 && <SuccessIcon />}
-						<div className={styles.progress}>
-							{playbackCompletedPercentage > 0 && (
-								<ProgressBar progress={playbackCompletedPercentage} />
-							)}
-						</div>
-						<ButtonFavorite
-							isFavorited={!!isFavorited}
-							toggleFavorited={toggleFavorited}
-							ref={ref}
-							backgroundColor={
-								isBibleVersion ? BaseColors.BIBLE_H : BaseColors.DARK
-							}
-							light
-							className={clsx(styles.like, isFavorited && styles.likeActive)}
-							contentType={contentType}
-							id={id}
-							title={title}
-						/>
 					</div>
 					{sequences?.length || recordings?.length ? (
 						<>

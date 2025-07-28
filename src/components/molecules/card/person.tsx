@@ -8,11 +8,7 @@ import Heading6 from '~components/atoms/heading6';
 import Link from '~components/atoms/linkWithoutPrefetch';
 import RoundImage from '~components/atoms/roundImage';
 import Card from '~components/molecules/card';
-import { useIsPersonFavorited } from '~lib/api/useIsPersonFavorited';
-import { BaseColors } from '~lib/constants';
-import { CatalogEntityType } from '~src/__generated__/graphql';
 
-import ButtonFavorite from '../buttonFavorite';
 import PersonTypeLockup from '../personTypeLockup';
 import { ConferencePersonFragment } from './__generated__/conferencePerson';
 import { CardPersonFragment } from './__generated__/person';
@@ -33,8 +29,7 @@ export default function CardPerson({
 	midinit = false,
 	smallinit = false,
 }: CardCollectionProps): JSX.Element {
-	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
-	const { canonicalPath, image, name, recordings, id } = person;
+	const { canonicalPath, image, name, recordings } = person;
 
 	return (
 		<Card className={clsx(compact && styles.compact)}>
@@ -59,12 +54,7 @@ export default function CardPerson({
 						</Heading2>
 					</div>
 					{!compact && (
-						<div
-							className={clsx(
-								styles.details,
-								isFavorited && styles.detailsWithLike,
-							)}
-						>
+						<div className={clsx(styles.details, styles.detailsWithLike)}>
 							<Heading6
 								sans
 								unpadded
@@ -83,18 +73,6 @@ export default function CardPerson({
 					)}
 				</a>
 			</Link>
-			{!compact && (
-				<ButtonFavorite
-					isFavorited={!!isFavorited}
-					toggleFavorited={toggleFavorited}
-					backgroundColor={BaseColors.SMART_PLAYLIST_H}
-					light
-					className={clsx(styles.like, isFavorited && styles.likeActive)}
-					contentType={CatalogEntityType.Person}
-					id={id}
-					title={name}
-				/>
-			)}
 		</Card>
 	);
 }
