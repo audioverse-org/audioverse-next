@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -61,9 +62,11 @@ const Chapter = ({
 		});
 
 	const languageRoute = useLanguageRoute();
+	const router = useRouter();
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
+	const hasNavigatedBack = useRef(false);
 	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version?.id);
 	const allowDownload = useShouldAllowDownload(version?.id);
 	const [currentTab, setCurrentTab] = useState('chapters');
@@ -74,6 +77,23 @@ const Chapter = ({
 	}, [chapter]);
 
 	const details: IDefinitionListTerm[] = [];
+
+	const handlBackForInvalid = (missingItem: string) => {
+		if (hasNavigatedBack.current) return;
+		hasNavigatedBack.current = true;
+		window.alert(`${missingItem} not available in selected version.`);
+
+		// Check if there's a valid history entry in the current domain else navigate to discover pag
+		if (
+			window.history.length > 1 &&
+			document.referrer &&
+			document.referrer.includes(window.location.hostname)
+		) {
+			window.history.back();
+		} else {
+			router.push(root.lang(languageRoute).discover.get());
+		}
+	};
 
 	if (isLoading || isServerSide()) {
 		return (
@@ -86,15 +106,24 @@ const Chapter = ({
 		);
 	}
 
-	if (!version || !book || !chapters || !chapter) {
-		return (
-			<div>
-				<FormattedMessage
-					id="container-version__notFound"
-					defaultMessage="Chapter not found"
-				/>
-			</div>
-		);
+	if (!version) {
+		handlBackForInvalid('Version');
+		return <div />;
+	}
+
+	if (!book) {
+		handlBackForInvalid('Book');
+		return <div />;
+	}
+
+	if (!chapters) {
+		handlBackForInvalid('Chapters');
+		return <div />;
+	}
+
+	if (!chapter) {
+		handlBackForInvalid('Chapter');
+		return <div />;
 	}
 
 	if (version?.description) {
