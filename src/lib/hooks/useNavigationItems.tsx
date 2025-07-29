@@ -419,7 +419,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'contact',
-			href: root.lang(languageRoute).contact.get(),
+			href: root.lang(languageRoute).contact.general.get(),
 			Icon: iconMap.icon_contact,
 			label: intl.formatMessage({
 				id: `header__navItemContact`,
