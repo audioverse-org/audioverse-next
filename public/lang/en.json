@@ -615,9 +615,6 @@
   "container-version__loading": {
     "string": "Loading..."
   },
-  "container-version__notFound": {
-    "string": "Version not found"
-  },
   "create": {
     "string": "Create"
   },

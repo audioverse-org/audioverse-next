@@ -2720,9 +2720,6 @@
   "container-version__loading": {
     "string": "Loading..."
   },
-  "container-version__notFound": {
-    "string": "Chapter not found"
-  },
   "bibleChapter__backToChapter": {
     "string": "Back to Chapter Info"
   },
