@@ -23,7 +23,7 @@ import topics from './topics';
 const namespaces = (r: string) => ({
 	about: node(`${r}/about`, about),
 	account: node(`${r}/account`, account),
-	bibles: node(`${r}/bibles`, bibles),
+	bibles: node(`${r}/bibles/ENGKJV2`, bibles),
 	blog: paginatedNode(`${r}/blog`),
 	books: paginatedNode(`${r}/books`, books),
 	egwbooks: paginatedNode(`${r}/egwbooks`, egwbooks),
