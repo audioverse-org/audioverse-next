@@ -1,5 +1,6 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import BibleVersionTophat from '~components/molecules/bibleVersionTophat';
@@ -53,6 +54,7 @@ const Chapter = ({
 	bookId,
 	chapterNumber,
 }: ChapterProps): JSX.Element => {
+	const intl = useIntl();
 	const { version, book, chapters, chapter, versions, isLoading } =
 		useChapterData({
 			versionId,
@@ -61,9 +63,11 @@ const Chapter = ({
 		});
 
 	const languageRoute = useLanguageRoute();
+	const router = useRouter();
 	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
+	const hasNavigatedBack = useRef(false);
 	const isFcbhVersion = FCBH_VERSIONS.some((v) => v.id === version?.id);
 	const allowDownload = useShouldAllowDownload(version?.id);
 	const [currentTab, setCurrentTab] = useState('chapters');
@@ -74,6 +78,29 @@ const Chapter = ({
 	}, [chapter]);
 
 	const details: IDefinitionListTerm[] = [];
+
+	const handlBackForInvalid = () => {
+		if (hasNavigatedBack.current) return;
+		hasNavigatedBack.current = true;
+		const message = intl.formatMessage({
+			id: 'container-version__notFound',
+			defaultMessage: 'Chapter not found.',
+			description: 'Chapter not found.',
+		});
+
+		window.alert(message);
+
+		// Check if there's a valid history entry in the current domain else navigate to discover pag
+		if (
+			window.history.length > 1 &&
+			document.referrer &&
+			document.referrer.includes(window.location.hostname)
+		) {
+			window.history.back();
+		} else {
+			router.push(root.lang(languageRoute).bibles.get());
+		}
+	};
 
 	if (isLoading || isServerSide()) {
 		return (
@@ -87,14 +114,8 @@ const Chapter = ({
 	}
 
 	if (!version || !book || !chapters || !chapter) {
-		return (
-			<div>
-				<FormattedMessage
-					id="container-version__notFound"
-					defaultMessage="Chapter not found"
-				/>
-			</div>
-		);
+		handlBackForInvalid();
+		return <div />;
 	}
 
 	if (version?.description) {

@@ -27,6 +27,7 @@ export function useChapterData(params: {
 		queryKey: ['bibleChapters', versionId, bookMeta?.fcbhId],
 		queryFn: () => getChapters(versionId, bookMeta?.fcbhId || ''),
 		enabled: !!versionId && !!bookMeta?.fcbhId && !isServerSide(),
+		retry: 0, // Reduce from default 3 to 0
 	});
 
 	const chapter = useQuery({
@@ -34,6 +35,7 @@ export function useChapterData(params: {
 		queryFn: () => getChapter(versionId, bookMeta?.fcbhId || '', chapterNumber),
 		enabled:
 			!!versionId && !!bookMeta?.fcbhId && !!chapterNumber && !isServerSide(),
+		retry: 0, // Reduce from default 3 to 0
 	});
 
 	const versions = useQuery({

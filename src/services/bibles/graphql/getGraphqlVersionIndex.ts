@@ -12,4 +12,5 @@ export const getGraphqlVersionIndex = manageAsyncFunction(
 		const result = await doGetGraphqlVersionIndex({ collectionId: versionId });
 		return result.collection;
 	},
+	{ retries: 0 }, // Remove retries for this specific function
 );
