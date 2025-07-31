@@ -615,6 +615,10 @@
   "container-version__loading": {
     "string": "Loading..."
   },
+  "container-version__notFound": {
+    "comment": "Chapter not found.",
+    "string": "Chapter not found."
+  },
   "create": {
     "string": "Create"
   },

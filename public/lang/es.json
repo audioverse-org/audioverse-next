@@ -2744,5 +2744,9 @@
   },
   "bibleVersionTophat__version": {
     "string": "VERSION"
+  },
+  "container-version__notFound": {
+    "comment": "Chapter not available in selected version.",
+    "string": "Capítulo não encontrado."
   }
 }

@@ -1307,6 +1307,12 @@
       "value": "Loading..."
     }
   ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "章が見つかりません"
+    }
+  ],
   "create": [
     {
       "type": 0,

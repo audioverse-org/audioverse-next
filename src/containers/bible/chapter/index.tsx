@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '~components/atoms/heading1';
 import BibleVersionTophat from '~components/molecules/bibleVersionTophat';
@@ -54,6 +54,7 @@ const Chapter = ({
 	bookId,
 	chapterNumber,
 }: ChapterProps): JSX.Element => {
+	const intl = useIntl();
 	const { version, book, chapters, chapter, versions, isLoading } =
 		useChapterData({
 			versionId,
@@ -78,10 +79,16 @@ const Chapter = ({
 
 	const details: IDefinitionListTerm[] = [];
 
-	const handlBackForInvalid = (missingItem: string) => {
+	const handlBackForInvalid = () => {
 		if (hasNavigatedBack.current) return;
 		hasNavigatedBack.current = true;
-		window.alert(`${missingItem} not available in selected version.`);
+		const message = intl.formatMessage({
+			id: 'container-version__notFound',
+			defaultMessage: 'Chapter not found.',
+			description: 'Chapter not found.',
+		});
+
+		window.alert(message);
 
 		// Check if there's a valid history entry in the current domain else navigate to discover pag
 		if (
@@ -106,23 +113,8 @@ const Chapter = ({
 		);
 	}
 
-	if (!version) {
-		handlBackForInvalid('Version');
-		return <div />;
-	}
-
-	if (!book) {
-		handlBackForInvalid('Book');
-		return <div />;
-	}
-
-	if (!chapters) {
-		handlBackForInvalid('Chapters');
-		return <div />;
-	}
-
-	if (!chapter) {
-		handlBackForInvalid('Chapter');
+	if (!version || !book || !chapters || !chapter) {
+		handlBackForInvalid();
 		return <div />;
 	}
 

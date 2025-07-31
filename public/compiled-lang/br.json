@@ -1287,6 +1287,12 @@
       "value": "Carregando..."
     }
   ],
+  "container-version__notFound": [
+    {
+      "type": 0,
+      "value": "Capítulo não encontrado."
+    }
+  ],
   "create": [
     {
       "type": 0,
