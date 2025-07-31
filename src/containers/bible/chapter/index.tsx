@@ -91,7 +91,7 @@ const Chapter = ({
 		) {
 			window.history.back();
 		} else {
-			router.push(root.lang(languageRoute).discover.get());
+			router.push(root.lang(languageRoute).bibles.get());
 		}
 	};
 
