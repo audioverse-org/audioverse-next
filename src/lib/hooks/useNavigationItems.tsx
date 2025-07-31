@@ -168,7 +168,8 @@ export function useNavigationItems(): INavigationItem[] {
 	}, [loadedRecording?.collection]);
 
 	const biblesUrl = useMemo(() => {
-		if (!collectionId) return root.lang(languageRoute).bibles.get();
+		if (!collectionId)
+			return root.lang(languageRoute).bibles.versionId('ENGKJV2').get();
 		return root
 			.lang(languageRoute)
 			.bibles.versionId(collectionId)
@@ -419,7 +420,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'contact',
-			href: root.lang(languageRoute).contact.get(),
+			href: root.lang(languageRoute).contact.general.get(),
 			Icon: iconMap.icon_contact,
 			label: intl.formatMessage({
 				id: `header__navItemContact`,

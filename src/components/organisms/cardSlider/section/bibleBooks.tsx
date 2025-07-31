@@ -34,7 +34,7 @@ export default function BibleBooks(props: {
 				id: 'organismSection__bibleBooksNext',
 				defaultMessage: 'Next Bible books',
 			})}
-			seeAllUrl={root.lang(lang).bibles.get()}
+			seeAllUrl={root.lang(lang).bibles.versionId('ENGKJV2').get()}
 			Card={(p: { node: CardSequenceFragment }) => (
 				<CardSequence sequence={p.node} />
 			)}
